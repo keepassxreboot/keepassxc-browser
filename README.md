@@ -1,4 +1,4 @@
-# keepassxc-chrome
+# chromeKeePassXC
 Chrome extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 This is a heavily forked version of [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
