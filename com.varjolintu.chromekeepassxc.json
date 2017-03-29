@@ -1,0 +1,9 @@
+{
+  "name": "com.varjolintu.chromekeepassxc",
+  "description": "KeepassXC integration with Chrome with Native Messaging support",
+  "path": "<KeePassXC path here>",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://ffojhfbafadajlgddbgadkbbchliloel/"
+  ]
+}

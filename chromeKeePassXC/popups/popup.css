@@ -1,0 +1,74 @@
+body {
+	font-family: sans-serif;
+	min-width:357px;
+	overflow-x:hidden;
+	background: #eee;
+	font-size: 15px;
+}
+.credentials ul {
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 0;
+	padding-right: 0;
+	list-style-position: inside;
+}
+.credentials li {
+	list-style: none;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 10px;
+	padding-right: 5px;
+	margin-left: 10px;
+	margin-right: 5px;
+}
+.credentials a {
+	cursor: pointer;
+	display: block;
+	color: #336;
+}
+.credentials li:hover {
+	cursor: pointer;
+	background: #ccc;
+}
+
+.settings {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #333;
+	font-size: 90%;
+}
+.settings label {
+	display: block;
+}
+.settings label input {
+	vertical-align: middle;
+}
+.settings .description {
+	margin-top: 3px;
+	font-size: 80%;
+	color: #787878;
+}
+.small {
+	margin-top: 3px;
+	margin-left: 12px;
+	font-size: 80%;
+	color: #787878;
+}
+#update-available {
+	display: none;
+	font-size: 90%;
+	color: #cc0000;
+	font-weight: bold;
+	border-top: 1px solid #333;
+	padding-top: 10px;
+	margin-top: 10px;
+}
+#update-available a:link,
+#update-available a:visited {
+	text-decoration: underline;
+	color: #cc0000;
+}
+#update-available a:hover,
+#update-available a:active {
+	text-decoration: none;
+}

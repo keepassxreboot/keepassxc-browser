@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>KeePassXC - Popup</title>
+		<link rel="stylesheet" href="popup.css" />
+		<link rel="stylesheet" href="../bootstrap-btn.css" />
+		<script type="text/javascript" src="../jquery-1.11.1.min.js"></script>
+		<!--<script type="text/javascript" src="../jquery-3.2.0.min.js">-->
+		<script type="text/javascript" src="popup_functions.js"></script>
+		<script type="text/javascript" src="popup.js"></script>
+	</head>
+	<body>
+		<div id="settings" class="settings">
+			<button id="btn-options" class="b2c-btn b2c-btn-small b2c-btn-warning">Settings</button>
+			<button id="btn-choose-credential-fields" class="b2c-btn b2c-btn-small">Choose own credential fields for this page</button>
+
+			<div id="update-available">
+				You use an old version of KeePassXC.
+				<br />
+				<a target="_blank" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+			</div>
+		</div>
+
+		<div id="initial-state">
+			<p><img style="margin-right: 1em" src="throbber.gif"/> Checking status...</p>
+		</div>
+
+		<div id="not-configured" style="display: none">
+			<p>
+				chromeKeePassXC has not been configured.
+				Press the connect button to register and pair with KeePassXC.
+			</p>
+			<div style="text-align: right">
+				<button id="connect-button" class="b2c-btn b2c-btn-primary">Connect</button>
+			</div>
+		</div>
+
+		<div id="need-reconfigure" style="display: none">
+			<p>
+				chromeKeePassXC has been disconnected from KeePassXC.
+			</p>
+			<code id="need-reconfigure-message"></code>
+			<p>
+				Press the reconnect button to establish a new connection.
+			</p>
+			<div style="text-align: right">
+				<button id="reconnect-button" class="b2c-btn b2c-btn-primary">Reconnect</button>
+			</div>
+		</div>
+
+		<div id="configured-not-associated" style="display: none">
+			<p>
+				chromeKeePassXC has been configured using the identifier
+				<em id="unassociated-identifier"></em> and has not yet
+				connected to KeePassXC.
+			</p>
+		</div>
+
+		<div id="configured-and-associated" style="display: none">
+			<p>
+				chromeKeePassXC has been configured using the identifier
+				"<em id="associated-identifier"></em>" and is successfully
+				connected to KeePassXC.
+			</p>
+			<div style="text-align: right">
+				<button id="redetect-fields-button" class="b2c-btn">Redetect credential fields</button>
+			</div>
+		</div>
+
+		<div id="error-encountered" style="display: none">
+			<p>
+				chromeKeePassXC has encountered an error:
+			</p>
+			<p style="margin-left: 1em">
+				<code id="error-message"></code>
+			</p>
+			<div style="text-align: right">
+				<button id="reload-status-button" class="b2c-btn">Reload</button>
+			</div>
+		</div>
+	</body>
+</html>

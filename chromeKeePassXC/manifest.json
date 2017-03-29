@@ -1,0 +1,85 @@
+{
+	"name": "chromeKeePassXC",
+	"version": "0.1.0",
+    "manifest_version": 2,
+	"description": "KeePassXC integration for Chrome",
+	"icons": {
+		"16": "icons/keepassxc_16x16.png",
+		"48": "icons/keepassxc_48x48.png",
+		"128": "icons/keepassxc_128x128.png"
+	},
+
+	"browser_action": {
+		"default_icon": {
+		  "19": "icons/keepassxc_19x19.png",
+		  "38": "icons/keepassxc_38x38.png"
+		},
+		"default_title": "chromeKeePassXC",
+		"default_popup": "popups/popup.html"
+	},
+
+	"options_page": "options/options.html",
+	"background": {
+		"scripts": [
+			"background/aes.js",
+			"background/cryptoHelpers.js",
+			"background/nacl.min.js",
+			"background/nacl-util.js",
+			"background/utf8.js",
+			"background/keepass.js",
+			"background/httpauth.js",
+			"background/browserAction.js",
+			"background/page.js",
+			"background/event.js",
+			"background/init.js"
+			]
+		},
+	"content_scripts": [
+		{
+			"matches":
+				[
+					"http://*/*",
+					"https://*/*"
+				],
+			"js": 
+				[
+					"jquery-1.11.1.min.js",
+					"jquery-ui-1.10.2.custom.min.js",
+					"chromekeepassxc.js"
+				],
+			"css": 
+				[
+					"jquery-ui-1.10.2.custom.min.css",
+					"bootstrap-btn.css",
+					"chromekeepassxc.css"
+				],
+			"run_at": "document_idle",
+			"all_frames": true
+		}
+	],
+	"web_accessible_resources": [
+		"jquery.min.map",
+		"icons/key_16x16.png",
+		"icons/key_24x24.png",
+		"images/ui-bg_flat_0_aaaaaa_40x100.png",
+		"images/ui-bg_flat_0_aaaaaa_40x100.png",
+		"images/ui-bg_flat_75_ffffff_40x100.png",
+		"images/ui-bg_glass_55_fbf9ee_1x400.png",
+		"images/ui-bg_glass_65_ffffff_1x400.png",
+		"images/ui-bg_glass_75_dadada_1x400.png",
+		"images/ui-bg_glass_75_e6e6e6_1x400.png",
+		"images/ui-bg_glass_95_fef1ec_1x400.png",
+		"images/ui-bg_highlight-soft_75_cccccc_1x100.png"
+	],
+	"permissions": [
+		"contextMenus",
+		"clipboardWrite",
+		"nativeMessaging",
+		"tabs",
+		"webRequest",
+		"webRequestBlocking",
+		"https://*/*",
+		"http://*/*",
+		"https://raw.github.com/"
+	]
+}

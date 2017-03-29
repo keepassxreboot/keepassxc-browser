@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>KeePassXC - Popup</title>
+		<link rel="stylesheet" href="popup.css" />
+		<link rel="stylesheet" href="../bootstrap-btn.css" />
+		<script type="text/javascript" src="../jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="popup_functions.js"></script>
+		<script type="text/javascript" src="popup_login.js"></script>
+	</head>
+	<body>
+		<div id="settings" class="settings">
+			<button id="btn-options" class="b2c-btn b2c-btn-small b2c-btn-warning">Settings</button>
+			<button id="btn-choose-credential-fields" class="b2c-btn b2c-btn-small">Choose own credential fields for this page</button>
+
+			<div id="update-available">
+				You use an old version of KeePassXC.
+				<br />
+				<a target="_blank" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+			</div>
+		</div>
+
+		<div class="credentials">
+			<p>
+				Select the login information you would like to get entered into the page:
+			</p>
+			<ul id="login-list"></ul>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,172 @@
+.cip-ui-autocomplete li.cip-ui-menu-item {
+	text-align: left !important;
+	font-size: 12px !important;
+	font-weight: normal !important;
+	font-style: normal !important;
+	font-family: Verdana, Arial, sans-serif !important;
+	color: #222222 !important;
+}
+.cip-ui-dialog-titlebar-close {
+	visibility: hidden !important;
+}
+.cip-ui-widget-overlay {
+	background: none !important;
+	z-index: 2147483601 !important;
+}
+.cip-ui-dialog {
+	z-index: 2147483602 !important;
+}
+.cip-ui-dialog .cip-ui-dialog-title {
+	font-size:.8em !important;
+}
+.cip-ui-dialog .cip-ui-dialog-titlebar {
+	padding:.1em .5em !important;
+}
+.cip-ui-dialog-content {
+	font-size: .8em !important;
+}
+
+#cip-genpw-dialog {
+	text-align: left !important;
+}
+#cip-genpw-dialog button {
+	height: 26px !important;
+}
+.cip-genpw-clearfix:after {
+	clear: both;
+	line-height: 0;
+	content: "";
+	display: table;
+}
+.cip-genpw-icon {
+	position: absolute;
+	cursor: pointer;
+}
+.cip-genpw-icon.cip-icon-key-small {
+	width: 16px;
+	height: 16px;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/icons/key_16x16.png);
+}
+.cip-genpw-icon.cip-icon-key-big {
+	width: 24px;
+	height: 24px;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/icons/key_24x24.png);
+}
+.cip-genpw-password-frame {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}
+.cip-genpw-password-frame > * {
+	height: 20px !important;
+	font-size: 11px !important;
+}
+.cip-genpw-textfield {
+	background: none !important;
+	font-size: 11px !important;
+	display: inline !important;
+	border: 1px solid rgb(170, 170, 170) !important;
+	padding: 1px 2px !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	font-size: 1em !important;
+	width: 240px !important;
+	padding-left: 5px !important;
+}
+#cip-genpw-quality {
+	width: 50px !important;
+	padding-top: 1px !important;
+	padding-bottom: 1px !important;
+}
+.cip-genpw-label {
+	display: block !important;
+	margin: 5px 0 !important;
+}
+.cip-genpw-checkbox {
+	vertical-align: middle !important;
+}
+#cip-genpw-btn-fillin {
+	margin-right: 5px;
+}
+
+.b2c-modal-backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483645;
+}
+.b2c-modal-backdrop:after {
+	content:'';
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #000000;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+#b2c-cipDefine-fields {
+	z-index: 2147483646;
+}
+#b2c-cipDefine-description {
+	z-index: 2147483646;
+	color: #efefef;
+	border: 2px solid #555555;
+	padding: 7px 5px;
+	position: absolute;
+	top: 100px;
+	left: 150px;
+	text-align: left;
+	cursor: pointer;
+	background-color:rgba(255,255,255,0.3);
+	font-size: 15px;
+}
+#b2c-cipDefine-description div:first-of-type {
+	margin-top: 0;
+	padding-top: 0;
+	text-align: left;
+	color: #efefef;
+	padding-bottom: 8px;
+	font-weight: bold;
+	font-size: 160%;
+}
+#b2c-cipDefine-description p {
+	margin-top: 10px;
+	padding-top: 10px;
+	color: #efefef;
+	border-top: 2px solid #666666;
+	line-height: 110%;
+}
+#b2c-help {
+	margin-bottom: 3px;
+}
+.b2c-fixed-field {
+	position: absolute;
+	border: 2px solid #efefef;
+	cursor: pointer;
+	z-index: 2147483646;
+	text-align: left;
+	font-weight: bold;
+	background-color:rgba(239,239,239,0.4);
+}
+.b2c-fixed-hover-field {
+	border: 2px solid orange;
+	background-color:rgba(255,165,239,0.4);
+}
+.b2c-fixed-password-field {
+	border: 2px solid red;
+	color: #efefef;
+	background-color:rgba(255,0,0,0.4);
+}
+.b2c-fixed-username-field {
+	border: 2px solid limegreen;
+	color: #efefef;
+	background-color:rgba(50,205,50,0.4);
+}
+.b2c-fixed-string-field {
+	border: 2px solid deepskyblue;
+	color: #efefef;
+	background-color:rgba(30,144,255,0.4);
+}
