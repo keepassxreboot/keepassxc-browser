@@ -11,7 +11,7 @@ keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) == 'undefined') 
 keepass.requiredKeePassXC = 212;
 keepass.nativeHostName = "com.varjolintu.chromekeepassxc";
 keepass.nativePort = null;
-keepass.keySize = 8; // wtf? stupid cryptoHelpers
+keepass.keySize = 8;
 keepass.latestVersionUrl = "https://raw.githubusercontent.com/keepassxreboot/keepassxc/develop/CHANGELOG";
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = "no-hash"; //no-hash = keepasshttp is too old and does not return a hash value
@@ -139,32 +139,16 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 
 // Handles the replies with callback provided
 keepass.handleReply = function (msg) {
-	var reply;
+	// Specific callback handling. Needed?
+	/*var reply;
 	if (msg.action == "generate-reply") {
-		console.log("Handling generate-reply");
-		var a = [];
-		var response = JSON.stringify({ login: (msg.password.length * 8), password: msg.password });
-		keepass.updateLastUsed(keepass.databaseHash);
-		a.push(response);
-		reply = a;
+		
 	}
-	/*else if (msg.action == "get-logins-reply") {
-		console.log("Handling get-logins-reply");
-		if (msg.count) {
-			var a = [];
-			for (var i = 0; i < msg.count; i++) {
-				var response = JSON.stringify({ login: msg.entries[i].login, name: msg.entries[i].name, password: msg.entries[i].password });
-				keepass.updateLastUsed(keepass.databaseHash);
-				console.log(response);
-				a.push(response);
-			}
-			reply = a;
-		}
-	}*/
 	else {
 		reply = msg;
 	}
-	return reply;
+	return reply;*/
+	return msg;
 }
 
 // Redirects the callback to a listener (handleReply())
@@ -202,7 +186,34 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 
 	var passwords = [];
 	message = { "action": "generate-password" };
-	keepass.callbackOnId(keepass.nativePort.onMessage, "generate-reply", callback);
+	var verifier = keepass.setVerifier(message);
+	var id = verifier[0];
+	var key = verifier[1];
+
+	keepass.callbackOnId(keepass.nativePort.onMessage, "generate-reply", function(response) {
+		console.log("Handling generate-reply");
+		keepass.setcurrentKeePassXCVersion(response.version);
+		var passwords = [];
+
+		if (keepass.verifyResponse(response, key, id)) {
+			var rIv = response.nonce;
+
+			if(response.entries) {
+				for (var i = 0; i < response.entries.length; i++) {
+					keepass.decryptEntry(response.entries[i], key, rIv);
+				}
+				passwords = response.entries;
+				keepass.updateLastUsed(keepass.databaseHash);
+			}
+			else {
+				console.log("No entries returned. Is KeePassHttp up-to-date?");
+			}
+		}
+		else {
+			console.log("GeneratePassword rejected");
+		}
+		callback(passwords);
+	});
 	keepass.nativePort.postMessage(message);
 }
 
@@ -239,7 +250,7 @@ keepass.associate = function(callback, tab) {
 
 	var rawKey = nacl.randomBytes(keepass.keySize * 2);
 	//var rawKey = [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56]; // This is just for testing with the test client. KSorLC0uLzAxMjM0NTY3OA== )*+,-./012345678
-	console.log(rawKey);
+	//console.log(rawKey);
 	var key = keepass.b64e(rawKey);
 
 	var request = {
@@ -546,11 +557,8 @@ keepass.setVerifier = function(request, inputKey) {
 		request.id = id;
 	}
 
-	//var iv = cryptoHelpers.generateSharedKey(keepass.keySize);
 	var nonce = nacl.randomBytes(keepass.keySize * 2);
 	request.nonce = keepass.b64e(nonce);
-
-	//var decodedKey = keepass.b64d(key);
 	request.verifier = keepass.encrypt(request.nonce, key, request.nonce);
 
 	var test = keepass.encrypt("Aeh9maerCjE5v5V8Tz2YxA==", key, "Aeh9maerCjE5v5V8Tz2YxA==");
@@ -584,13 +592,13 @@ keepass.verifyResponse = function(response, key, id) {
 }
 
 keepass.b64e = function(d) {
-	//return nacl.util.encodeBase64(d);
-	return btoa(keepass.to_s(d));
+	//return btoa(keepass.to_s(d));
+	return nacl.util.encodeBase64(d);
 }
 
 keepass.b64d = function(d) {
-	//return nacl.util.decodeBase64(d);
-	return keepass.to_b(atob(d));
+	//return keepass.to_b(atob(d));
+	return nacl.util.decodeBase64(d);
 }
 
 keepass.getCryptoKey = function() {

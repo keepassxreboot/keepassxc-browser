@@ -424,19 +424,18 @@ cipPassword.callbackPasswordCopied = function(bool) {
 cipPassword.callbackGeneratedPassword = function(entries) {
 	if(entries && entries.length >= 1) {
 		console.log(entries[0]);
-		var res = JSON.parse(entries[0]);
 		cIPJQ("#cip-genpw-btn-clipboard:first").removeClass("b2c-btn-success");
-		cIPJQ("input#cip-genpw-textfield-password:first").val(res.password);
-		if(isNaN(res.login)) {
+		cIPJQ("input#cip-genpw-textfield-password:first").val(entries[0].password);
+		if(isNaN(entries[0].login)) {
 			cIPJQ("#cip-genpw-quality:first").text("??? Bits");
 		}
 		else {
-			cIPJQ("#cip-genpw-quality:first").text(res.login + " Bits");
+			cIPJQ("#cip-genpw-quality:first").text(entries[0].login + " Bits");
 		}
 	}
 	else {
 		if(cIPJQ("div#cip-genpw-error:first").length == 0) {
-			cIPJQ("button#cip-genpw-btn-generate:first").after("<div style='block' id='cip-genpw-error'>Cannot receive generated password.<br />Is your version of KeePassXC up-to-date?<br /><br /><a href='https://keepassxc.org'>Please visit the KeePassXC homepage</a></div>");
+			cIPJQ("button#cip-genpw-btn-generate:first").after("<div style='block' id='cip-genpw-error'>Cannot receive generated password.<br />Is your version of KeePassHttp up-to-date?<br /><br /><a href='https://github.com/pfn/keepasshttp/'>Please visit the KeePassHttp homepage</a></div>");
 			cIPJQ("input#cip-genpw-textfield-password:first").parent().hide();
 			cIPJQ("input#cip-genpw-checkbox-next-field:first").parent("label").hide();
 			cIPJQ("button#cip-genpw-btn-generate").hide();
@@ -1253,11 +1252,10 @@ cip.preparePageForMultipleCredentials = function(credentials) {
 	cipAutocomplete.elements = [];
 	var visibleLogin;
 	for(var i = 0; i < credentials.length; i++) {
-		var res = JSON.parse(credentials[i]);
-		visibleLogin = (res.login.length > 0) ? res.login : "- no username -";
-		usernames.push(visibleLogin + " (" + res.name + ")");
+		visibleLogin = (credentials[i].login.length > 0) ? credentials[i].login : "- no username -";
+		usernames.push(visibleLogin + " (" + credentials[i].name + ")");
 		var item = {
-			"label": visibleLogin + " (" + res.name + ")",
+			"label": visibleLogin + " (" + credentials[i].name + ")",
 			"value": credentials[i].login,
 			"loginId": i
 		};
@@ -1451,7 +1449,7 @@ cip.setValueWithChange = function(field, value) {
 	field[0].dispatchEvent(new Event('change', {'bubbles': true}));
 }
 
-cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
+ip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 	// no credentials available
 	if (cip.credentials.length == 0 && !suppressWarnings) {
 		var message = "No logins found.";
@@ -1467,24 +1465,20 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 
 	// exactly one pair of credentials available
 	if (cip.credentials.length == 1) {
-		var res = JSON.parse(cip.credentials[0]);
 		var filledIn = false;
 		if(uField && !onlyPassword) {
-			//cip.setValueWithChange(uField, cip.credentials[0].Login);
-			cip.setValueWithChange(uField, res.login);
+			cip.setValueWithChange(uField, cip.credentials[0].login);
 			filledIn = true;
 		}
 		if(pField) {
 			pField.attr("type", "password");
-			//cip.setValueWithChange(pField, cip.credentials[0].Password);
-			cip.setValueWithChange(pField, res.password);
+			cip.setValueWithChange(pField, cip.credentials[0].password);
 			pField.data("unchanged", true);
 			filledIn = true;
 		}
 
         var list = {};
-		//if(cip.fillInStringFields(combination.fields, cip.credentials[0].StringFields, list)) {
-		if(cip.fillInStringFields(combination.fields, res.StringFields, list)) {
+		if(cip.fillInStringFields(combination.fields, cip.credentials[0].StringFields, list)) {
             cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
             filledIn = true;
         }
@@ -1501,24 +1495,20 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 	}
 	// specific login id given
 	else if(combination.loginId != undefined && cip.credentials[combination.loginId]) {
-		var res = JSON.parse(cip.credentials[combination.loginId]);
 		var filledIn = false;
 		if(uField) {
-			//cip.setValueWithChange(uField, cip.credentials[combination.loginId].Login);
-			cip.setValueWithChange(uField, res.login);
+			cip.setValueWithChange(uField, cip.credentials[combination.loginId].login);
 			filledIn = true;
 		}
 
 		if(pField) {
-			//cip.setValueWithChange(pField, cip.credentials[combination.loginId].Password);
-			cip.setValueWithChange(pField, res.password);
+			cip.setValueWithChange(pField, cip.credentials[combination.loginId].password);
 			pField.data("unchanged", true);
 			filledIn = true;
 		}
 
         var list = {};
-		//if(cip.fillInStringFields(combination.fields, cip.credentials[combination.loginId].StringFields, list)) {
-		if(cip.fillInStringFields(combination.fields, res.StringFields, list)) {
+		if(cip.fillInStringFields(combination.fields, cip.credentials[combination.loginId].StringFields, list)) {
             cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
             filledIn = true;
         }
@@ -1578,8 +1568,8 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			// user has to select correct credentials by himself
 			if(countPasswords > 1) {
 				if(!suppressWarnings) {
-					var message = "Error #105\nMore than one login was found in KeePassXC!\n" +
-					"Press the chromeKeePassXC icon for more options.";
+					var message = "Error #105\nMore than one login was found in KeePass!\n" +
+					"Press the chromeIPass icon for more options.";
 					chrome.extension.sendMessage({
 						action: 'alert',
 						args: [message]
@@ -1598,8 +1588,8 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 		}
 		else {
 			if(!suppressWarnings) {
-					var message = "Error #104\nMore than one login was found in KeePassXC!\n" +
-					"Press the chromeKeePassXC icon for more options.";
+					var message = "Error #104\nMore than one login was found in KeePass!\n" +
+					"Press the chromeIPass icon for more options.";
 				chrome.extension.sendMessage({
 					action: 'alert',
 					args: [message]
