@@ -248,8 +248,8 @@ keepass.associate = function(callback, tab) {
 
 	page.tabs[tab.id].errorMessage = null;
 
-	var rawKey = nacl.randomBytes(keepass.keySize * 2);
-	//var rawKey = [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56]; // This is just for testing with the test client. KSorLC0uLzAxMjM0NTY3OA== )*+,-./012345678
+	//var rawKey = nacl.randomBytes(keepass.keySize * 2);
+	var rawKey = [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56]; // This is just for testing with the test client. KSorLC0uLzAxMjM0NTY3OA== )*+,-./012345678
 	//console.log(rawKey);
 	var key = keepass.b64e(rawKey);
 

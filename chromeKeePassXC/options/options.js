@@ -1,5 +1,5 @@
-if(cIPJQ) {
-	var $ = cIPJQ.noConflict(true);
+if (jQuery) {
+	var $ = jQuery.noConflict(true);
 }
 
 $(function() {
@@ -79,46 +79,7 @@ options.initGeneralSettings = function() {
 	$("#blinkMinTimeout").val(options.settings["blinkMinTimeout"]);
 	$("#allowedRedirect").val(options.settings["allowedRedirect"]);
 
-	$("#portButton").click(function() {
-		var port = $.trim($("#port").val());
-		var portNumber = parseInt(port);
-		if(isNaN(port) || portNumber < 1025 || portNumber > 99999) {
-			$("#port").closest(".control-group").addClass("error");
-			alert("The port number has to be in range 1025 - 99999.\nNothing saved!");
-			return;
-		}
-
-		options.settings["port"] = portNumber.toString();
-		$("#port").closest(".control-group").removeClass("error").addClass("success");
-		setTimeout(function() {$("#port").closest(".control-group").removeClass("success")}, 2500);
-
-		localStorage.settings = JSON.stringify(options.settings);
-
-		chrome.extension.sendMessage({
-			action: 'load_settings'
-		});
-	});
-
-	$("#hostnameButton").click(function() {
-		var hostname = $("#hostname").val();
-		if($.trim(hostname) == "") {
-			$("#hostname").closest(".control-group").addClass("error");
-			alert("Hostname cannot be empty.\nNothing saved!");
-			return;
-		}
-
-		options.settings["hostname"] = hostname;
-		$("#hostname").closest(".control-group").removeClass("error").addClass("success");
-		setTimeout(function() {$("#hostname").closest(".control-group").removeClass("success")}, 2500);
-
-		localStorage.settings = JSON.stringify(options.settings);
-
-		chrome.extension.sendMessage({
-			action: 'load_settings'
-		});
-	});
-
-		$("#blinkTimeoutButton").click(function(){
+	$("#blinkTimeoutButton").click(function(){
 		var blinkTimeout = $.trim($("#blinkTimeout").val());
 		var blinkTimeoutval = parseInt(blinkTimeout);
 		
@@ -249,6 +210,7 @@ options.initConnectedDatabases = function() {
 	else {
 		$("#tab-connected-databases table tbody:first tr.empty:first").show();
 	}
+
 	$("#connect-button").click(function() {
 		chrome.extension.sendMessage({
 			action: "associate"

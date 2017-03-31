@@ -1,4 +1,4 @@
-var $ = cIPJQ.noConflict(true);
+var $ = jQuery.noConflict(true);
 var _settings = typeof(localStorage.settings)=='undefined' ? {} : JSON.parse(localStorage.settings);
 //var global = chrome.extension.getBackgroundPage();
 

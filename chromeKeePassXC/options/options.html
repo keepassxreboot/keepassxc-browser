@@ -3,121 +3,24 @@
 	<head>
 		<title>Settings | chromeKeePassXC</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../bootstrap-btn.css" />
-		<link href="bootstrap-responsive.min.css" rel="stylesheet" />
-		<script type="text/javascript" src="../jquery-1.11.1.min.js"></script>
-		<!--<script type="text/javascript" src="../jquery-3.2.0.min.js"></script>-->
+		<link rel="stylesheet" href="bootstrap.min.css" />
+		<link rel="stylesheet" href="options.css" />
+		<script type="text/javascript" src="../jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="bootstrap.min.js"></script>
 		<script type="text/javascript" src="options.js"></script>
-		<style type="text/css">
-			body {
-				padding-top: 20px;
-				padding-bottom: 60px;
-			}
-
-			/* Custom container */
-			.container {
-				margin: 0 auto;
-				max-width: 1000px;
-			}
-			.container > hr {
-				margin: 30px 0;
-			}
-
-			/* Customize the navbar links to be fill the entire space of the .navbar */
-			.navbar .navbar-inner {
-				padding: 0;
-				margin-bottom: 40px;
-			}
-			.navbar .nav {
-				margin: 0;
-				display: table;
-				width: 100%;
-			}
-			.navbar .nav li {
-				display: table-cell;
-				width: 1%;
-				float: none;
-			}
-			.navbar .nav li a {
-				font-weight: bold;
-				text-align: center;
-				border-left: 1px solid rgba(255,255,255,.75);
-				border-right: 1px solid rgba(0,0,0,.1);
-			}
-			.navbar .nav li:first-child a {
-				border-left: 0;
-				border-radius: 3px 0 0 3px;
-			}
-			.navbar .nav li:last-child a {
-				border-right: 0;
-				border-radius: 0 3px 3px 0;
-			}
-			.tab {
-				display: none;
-			}
-			h2+hr {
-				margin-top: 0;
-			}
-
-			#tab-connected-databases .color.dropdown .dropdown-menu {
-				width: 180px;
-				padding: 7px 10px;
-				line-height: 175%;
-			}
-			#tab-connected-databases .color.dropdown .dropdown-menu a {
-				margin-right: 3px;
-			}
-			#tab-connected-databases .color.dropdown a.dropdown-toggle img {
-				margin-right: 5px;
-			}
-			tr.clone {
-				display: none;
-			}
-			td.last-used,
-			td.created {
-				white-space: nowrap;
-			}
-			.bold {
-				font-weight: bold;
-			}
-			.radio.inline,
-			.checkbox.inline {
-				display: inline-block;
-				white-space: nowrap;
-			}
-			.radio.inline + .radio.inline,
-			.checkbox.inline + .checkbox.inline {
-				margin-left: 40px;
-			}
-
-			.checkUpdateKeePassXC {
-				margin-left: 40px;
-			}
-
-			#dangerousSettings {
-				display: none;
-			}
-		</style>
 	</head>
 	<body>
 		<div class="container">
-			<div class="masthead">
-				<h3 class="muted"><img src="/icons/keepassxc_48x48.png" alt="logo" /> chromeKeePassXC</h3>
-				<div class="navbar">
-					<div class="navbar-inner">
-						<div class="container">
-							<ul class="nav">
-								<li class="active"><a href="#general-settings">General</a></li>
-								<li><a href="#connected-databases">Connected Databases</a></li>
-								<li><a href="#specified-fields">Specified credential fields</a></li>
-								<li><a href="#about">About</a></li>
-							</ul>
-						</div>
-					</div>
-				</div><!-- /.navbar -->
-			</div>
+			<h3 class="muted"><img src="/icons/keepassxc_48x48.png" alt="logo" /> chromeKeePassXC</h3>
+
+			<nav class="navbar navbar-default">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#general-settings">General</a></li>
+					<li><a href="#connected-databases">Connected Databases</a></li>
+					<li><a href="#specified-fields">Specified credential fields</a></li>
+					<li><a href="#about">About</a></li>
+				</ul>
+			</nav>
 
 			<!-- General Settings -->
 			<div class="tab" id="tab-general-settings">
@@ -129,86 +32,100 @@
 					If you only want to insert the password, just press Ctrl + Shift + P.
 				</p>
 				<p>
-					<label for="blinkTimeout">Blink Time:</label>
-					<div class="control-group">
-					<div class="input-append">
-						<input type="number" id="blinkTimeout" placeholder="7500" value="7500" />
-						<button class="btn" id="blinkTimeoutButton" type="button">Save</button>
+					<div class="form-group">
+						<label for="blinkTimeout">Blink Time:</label>
+						<div class="control-group">
+							<div class="input-append">
+								<input type="number" id="blinkTimeout" placeholder="7500" value="7500" />
+								<button class="btn btn-sm" id="blinkTimeoutButton" type="button">Save</button>
+							</div>
+						</div>
+						<span class="help-inline">
+							What is the maximum time (ms) the icon should blink after detecting new credentials
+							<br />
+							Default: 7500
+						</span>
 					</div>
-					<span class="help-inline">
-						What is the maximum time (ms) the icon should blink after detecting new credentials
-						<br />
-						Default: 7500
-					</span>
+				</p>
+				<p>
+					<div class="form-group">
+						<label for="blinkMinTimeout">Redirect Offset:</label>
+						<div class="control-group">
+							<div class="input-append">
+								<input type="number" id="blinkMinTimeout" placeholder="2000" value="2000" />
+								<button class="btn btn-sm" id="blinkMinTimeoutButton" type="button">Save</button>
+							</div>
+						</div>
+						<span class="help-inline">
+							What is the minimum time (ms) the icon should blink before deactivating due to page redirects.
+							<br />
+							-1 to only use <i>Blink Time</i> ignoring Redirect Allowance (old behavior)
+							<br />
+							Default: -1, Recommended: 2000
+						</span>
 					</div>
-					</p>
-					<p>
-					<label for="blinkMinTimeout">Redirect Offset:</label>
-					<div class="control-group">
-					<div class="input-append">
-						<input type="number" id="blinkMinTimeout" placeholder="2000" value="2000" />
-						<button class="btn" id="blinkMinTimeoutButton" type="button">Save</button>
-					</div>
-					<span class="help-inline">
-						What is the minimum time (ms) the icon should blink before deactivating due to page redirects.
-						<br />
-						-1 to only use <i>Blink Time</i> ignoring Redirect Allowance (old behavior)
-						<br />
-						Default: -1, Recommended: 2000
-					</span>
-					</div>
-					</p>
-					<p>
-					<label for="allowedRedirect">Redirect Allowance:</label>
-					<div class="control-group">
-					<div class="input-append">
-						<input type="number" id="allowedRedirect" placeholder="1" value="1" />
-						<button class="btn" id="allowedRedirectButton" type="button">Save</button>
-					</div>
-					<span class="help-inline">
-						How many pages should the tab cycle through after the redirect offset before deactivating the icon
-						<br />
-						Default: 1
-					</span>
+				</p>
+				<p>
+					<div class="form-group">
+						<label for="allowedRedirect">Redirect Allowance:</label>
+						<div class="control-group">
+							<div class="input-append">
+								<input type="number" id="allowedRedirect" placeholder="1" value="1" />
+								<button class="btn btn-sm" id="allowedRedirectButton" type="button">Save</button>
+							</div>
+						</div>
+						<span class="help-inline">
+							How many pages should the tab cycle through after the redirect offset before deactivating the icon
+							<br />
+							Default: 1
+						</span>
 					</div>
 				</p>
 				<hr />
 				<p>
-					<label class="checkbox">
-						<input type="checkbox" name="usePasswordGenerator" value="1" /> Activate password generator.
-					</label>
-					<span class="help-block">For all password-fields there will be an icon added to generate a new password.<br />
-						It is generated by KeePassXC with the profile for automatically generated passwords for new entries.</span>
+					<div class="checkbox">
+						<label class="checkbox">
+							<input type="checkbox" name="usePasswordGenerator" value="1" /> Activate password generator.
+						</label>
+						<span class="help-block">For all password-fields there will be an icon added to generate a new password.<br />
+							It is generated by KeePassXC with the profile for automatically generated passwords for new entries.</span>
+					</div>
 				</p>
 				<hr />
 				<p>
-					<label class="checkbox">
-						<input type="checkbox" name="autoRetrieveCredentials" value="1" /> Automatically retrieve credentials.
-					</label>
-					<span class="help-block">chromeKeePassXC will immediately retrieve the credentials when the tab is activated.</span>
+					<div class="checkbox">
+						<label class="checkbox">
+							<input type="checkbox" name="autoRetrieveCredentials" value="1" /> Automatically retrieve credentials.
+						</label>
+						<span class="help-block">chromeKeePassXC will immediately retrieve the credentials when the tab is activated.</span>
+					</div>
 				</p>
 				<hr />
 				<p>
-					<label class="checkbox">
-						<input type="checkbox" name="autoFillSingleEntry" value="1" /> Automatically fill-in single credentials entry.
-					</label>
-					<span class="help-block">If chromeKeePassXC does only receive a single entry from KeePassXC it automatically fills this credentials into the found credential fields.</span>
+					<div class="checkbox">
+						<label class="checkbox">
+							<input type="checkbox" name="autoFillSingleEntry" value="1" /> Automatically fill-in single credentials entry.
+						</label>
+						<span class="help-block">If chromeKeePassXC does only receive a single entry from KeePassXC it automatically fills this credentials into the found credential fields.</span>
+					</div>
 				</p>
 				<hr />
 				<p>
-					<label class="checkbox">
-						<input type="checkbox" name="autoCompleteUsernames" value="1" /> Activate autocomplete for username fields.
-					</label>
-					<span class="help-block">For all username fields on a page a dropdown list appears which contains all available credentials.</span>
+					<div class="checkbox">
+						<label class="checkbox">
+							<input type="checkbox" name="autoCompleteUsernames" value="1" /> Activate autocomplete for username fields.
+						</label>
+						<span class="help-block">For all username fields on a page a dropdown list appears which contains all available credentials.</span>
+					</div>
 				</p>
 				<hr />
 				<p>
 					Check for updates of KeePassXC:
 					<br />
-					<label class="radio inline"><input type="radio" name="checkUpdateKeePassXC" value="3" /> every 3 days</label>
-					<label class="radio inline"><input type="radio" name="checkUpdateKeePassXC" value="7" /> every week</label>
-					<label class="radio inline"><input type="radio" name="checkUpdateKeePassXC" value="30" /> every month</label>
-					<label class="radio inline"><input type="radio" name="checkUpdateKeePassXC" value="0" /> never</label>
+					<label class="radio-inline"><input type="radio" name="checkUpdateKeePassXC" value="3" /> every 3 days</label>
+					<label class="radio-inline"><input type="radio" name="checkUpdateKeePassXC" value="7" /> every week</label>
+					<label class="radio-inline"><input type="radio" name="checkUpdateKeePassXC" value="30" /> every month</label>
+					<label class="radio-inline"><input type="radio" name="checkUpdateKeePassXC" value="0" /> never</label>
 				</p>
 				<div class="help-block kphVersion">
 					chromeKeePassXC needs KeePassXC to retrieve credentials.
@@ -216,25 +133,26 @@
 					You can download the latest stable version from here: <a target="_blank" href="https://keepassxc.org/">https://keepassxc.org/</a>
 					<br />
 					<br />
-					<div class="row">
-						<div class="span3">Your running version of KeePassXC:</div>
-						<div class="span6"><em class="yourVersion"></em></div>
+					<div>
+						Your running version of KeePassXC: <em class="yourVersion"></em>
 					</div>
-					<div class="row">
-						<div class="span3">Latest available version of KeePassXC:</div>
-						<div class="span6"><em class="latestVersion"></em><button class="btn btn-mini checkUpdateKeePassXC">Check for updates</button></div>
+					<div>
+						Latest available version of KeePassXC: <em class="latestVersion"></em>
+						<button class="btn btn-sm checkUpdateKeePassXC">Check for updates</button>
 					</div>
 				</div>
 				<hr />
 				<p>
-					<label class="checkbox">
-						<input type="checkbox" name="autoFillAndSend" value="1" /> Auto fill HTTP Auth dialogs and send them.
-					</label>
-					<span class="help-block">
-						If credentials are found for a page and the login-type is an HTTP Auth request, chromeKeePassXC tries to login with the first given credentials.
-						<br />
-						An HTTP Auth dialog looks like this:
-					</span>
+					<div class="checkbox">
+						<label class="checkbox">
+							<input type="checkbox" name="autoFillAndSend" value="1" /> Auto fill HTTP Auth dialogs and send them.
+						</label>
+						<span class="help-block">
+							If credentials are found for a page and the login-type is an HTTP Auth request, chromeKeePassXC tries to login with the first given credentials.
+							<br />
+							An HTTP Auth dialog looks like this:
+						</span>
+					</div>
 					<img src="/options/http-auth-dialog.png" alt="http-auth-dialog" />
 				</p>
 				<hr />
@@ -252,11 +170,11 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th class="span5">Identifier</th>
-							<th class="span2">Icon</th>
-							<th class="span2">Last used</th>
-							<th class="span2">Created</th>
-							<th class="span1">Delete</th>
+							<th>Identifier</th>
+							<th>Icon</th>
+							<th>Last used</th>
+							<th>Created</th>
+							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -273,20 +191,25 @@
 					</tbody>
 				</table>
 				<div style="text-align: right">
-					<button id="connect-button" class="b2c-btn b2c-btn-primary">Connect</button>
-					</div>
-				<div id="dialogDeleteConnectedDatabase" class="modal hide" tabindex="-1" role="dialog">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3 id="myModalLabel">Remove identifier from Chrome?</h3>
-					</div>
-					<div class="modal-body">
-						<p>Do you really want to remove the identifier <span class="bold"></span> from Chrome?</p>
-						<p class="help-block">You can reconnect your database at any time.</p>
-					</div>
-					<div class="modal-footer">
-						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-						<button class="btn yes btn-primary">Yes, remove now</button>
+					<button id="connect-button" class="btn btn-primary">Connect</button>
+				</div>
+
+				<div id="dialogDeleteConnectedDatabase" class="modal fade" tabindex="-1" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h3 class="modal-title" id="myModalLabel">Remove identifier from Chrome?</h3>
+							</div>
+							<div class="modal-body">
+								<p>Do you really want to remove the identifier <span class="bold"></span> from Chrome?</p>
+								<p class="help-block">You can reconnect your database at any time.</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+								<button class="btn yes btn-primary">Yes, remove now</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -305,8 +228,8 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th class="span10">Page URL</th>
-							<th class="span2">Delete</th>
+							<th>Page URL</th>
+							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -319,18 +242,22 @@
 						</tr>
 					</tbody>
 				</table>
-				<div id="dialogDeleteSpecifiedCredentialFields" class="modal hide" tabindex="-1" role="dialog">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3 id="myModalLabel">Remove specified credential fields?</h3>
-					</div>
-					<div class="modal-body">
-						<p>Do you really want to remove the specified credential fields on the page <strong></strong>?</p>
-						<p class="help-block">chromeKeePassXC will automatically detect the credential fields the next time you visit this page.</p>
-					</div>
-					<div class="modal-footer">
-						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-						<button class="btn yes btn-primary">Yes, remove now</button>
+				<div id="dialogDeleteSpecifiedCredentialFields" class="modal fade" tabindex="-1" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h3 id="myModalLabel">Remove specified credential fields?</h3>
+							</div>
+							<div class="modal-body">
+								<p>Do you really want to remove the specified credential fields on the page <strong></strong>?</p>
+								<p class="help-block">chromeKeePassXC will automatically detect the credential fields the next time you visit this page.</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+								<button class="btn yes btn-primary">Yes, remove now</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -350,14 +277,12 @@
 					<a target="_blank" href="https://github.com/varjolintu/chromeKeePassXC">Visit project's page in GitHub</a>.
 				</p>
 				<hr />
-				<div class="row">
-					<div class="span2">chromeKeePassXC Version:</div>
-					<div class="span6"><em class="versionCIP"></em></div>
-				</div>
-				<div class="row">
-					<div class="span2">KeePassXC Version:</div>
-					<div class="span6"><em class="versionKPH"></em></div>
-				</div>
+				<p>
+					chromeKeePassXC Version: <em class="versionCIP"></em>
+				</p>
+				<p>
+					KeePassXC Version: <em class="versionKPH"></em>
+				</p>
 			</div>
 			<hr>
 			<div class="footer">

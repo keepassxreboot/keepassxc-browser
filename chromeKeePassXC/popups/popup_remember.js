@@ -11,7 +11,7 @@ function _initialize(tab) {
 
 	// no existing credentials to update --> disable update-button
 	if(_tab.credentials.list.length == 0) {
-		$("#btn-update").attr("disabled", true).removeClass("b2c-btn-warning");
+		$("#btn-update").attr("disabled", true).removeClass("btn-warning");
 	}
 
 	var url = _tab.credentials.url;
@@ -33,7 +33,7 @@ function _initialize(tab) {
 		if(_tab.credentials.list.length == 1) {
 			chrome.extension.sendMessage({
 				action: 'update_credentials',
-				args: [_tab.credentials.list[0].Uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
+				args: [_tab.credentials.list[0].uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
 			}, _verifyResult);
 		}
 		else {
@@ -52,17 +52,17 @@ function _initialize(tab) {
 			for(var i = 0; i < _tab.credentials.list.length; i++) {
 				var $a = $("<a>")
 					.attr("href", "#")
-					.text(_tab.credentials.list[i].Login + " (" + _tab.credentials.list[i].Name + ")")
+					.text(_tab.credentials.list[i].Login + " (" + _tab.credentials.list[i].name + ")")
 					.data("entryId", i)
 					.click(function(e) {
 						e.preventDefault();
 						chrome.extension.sendMessage({
 							action: 'update_credentials',
-							args: [_tab.credentials.list[$(this).data("entryId")].Uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
+							args: [_tab.credentials.list[$(this).data("entryId")].uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
 						}, _verifyResult);
 					});
 
-				if(_tab.credentials.usernameExists && _tab.credentials.username == _tab.credentials.list[i].Login) {
+				if(_tab.credentials.usernameExists && _tab.credentials.username == _tab.credentials.list[i].login) {
 					$a.css("font-weight", "bold");
 				}
 

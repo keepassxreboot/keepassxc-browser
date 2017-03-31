@@ -79,12 +79,12 @@ window.addEventListener("keydown", function(e) {
 }, false);
 
 function _f(fieldId) {
-	var field = (fieldId) ? cIPJQ("input[data-cip-id='"+fieldId+"']:first") : [];
+	var field = (fieldId) ? jQuery("input[data-cip-id='"+fieldId+"']:first") : [];
 	return (field.length > 0) ? field : null;
 }
 
 function _fs(fieldId) {
-	var field = (fieldId) ? cIPJQ("input[data-cip-id='"+fieldId+"']:first,select[data-cip-id='"+fieldId+"']:first").first() : [];
+	var field = (fieldId) ? jQuery("input[data-cip-id='"+fieldId+"']:first,select[data-cip-id='"+fieldId+"']:first").first() : [];
 	return (field.length > 0) ? field : null;
 }
 
@@ -115,17 +115,17 @@ cipAutocomplete.init = function(field) {
 }
 
 cipAutocomplete.onClick = function() {
-	cIPJQ(this).autocomplete("search", cIPJQ(this).val());
+	jQuery(this).autocomplete("search", jQuery(this).val());
 }
 
 cipAutocomplete.onOpen = function(event, ui) {
 	// NOT BEAUTIFUL!
 	// modifies ALL ui-autocomplete menus of class .cip-ui-menu
-	cIPJQ("ul.cip-ui-autocomplete.cip-ui-menu").css("z-index", 2147483636);
+	jQuery("ul.cip-ui-autocomplete.cip-ui-menu").css("z-index", 2147483636);
 }
 
 cipAutocomplete.onSource = function (request, callback) {
-	var matches = cIPJQ.map( cipAutocomplete.elements, function(tag) {
+	var matches = jQuery.map( cipAutocomplete.elements, function(tag) {
 		if ( tag.label.toUpperCase().indexOf(request.term.toUpperCase()) === 0 ) {
 			return tag;
 		}
@@ -135,32 +135,32 @@ cipAutocomplete.onSource = function (request, callback) {
 
 cipAutocomplete.onSelect = function (e, ui) {
 	e.preventDefault();
-	cip.setValueWithChange(cIPJQ(this), ui.item.value);
-	var fieldId = cipFields.prepareId(cIPJQ(this).attr("data-cip-id"));
+	cip.setValueWithChange(jQuery(this), ui.item.value);
+	var fieldId = cipFields.prepareId(jQuery(this).attr("data-cip-id"));
 	var combination = cipFields.getCombination("username", fieldId);
 	combination.loginId = ui.item.loginId;
 	cip.fillInCredentials(combination, true, false);
-	cIPJQ(this).data("fetched", true);
+	jQuery(this).data("fetched", true);
 }
 
 cipAutocomplete.onBlur = function() {
-	if(cIPJQ(this).data("fetched") == true) {
-		cIPJQ(this).data("fetched", false);
+	if(jQuery(this).data("fetched") == true) {
+		jQuery(this).data("fetched", false);
 	}
 	else {
-		var fieldId = cipFields.prepareId(cIPJQ(this).attr("data-cip-id"));
+		var fieldId = cipFields.prepareId(jQuery(this).attr("data-cip-id"));
 		var fields = cipFields.getCombination("username", fieldId);
-		if(_f(fields.password) && _f(fields.password).data("unchanged") != true && cIPJQ(this).val() != "") {
+		if(_f(fields.password) && _f(fields.password).data("unchanged") != true && jQuery(this).val() != "") {
 			cip.fillInCredentials(fields, true, true);
 		}
 	}
 }
 
 cipAutocomplete.onFocus = function() {
-	cip.u = cIPJQ(this);
+	cip.u = jQuery(this);
 
-	if(cIPJQ(this).val() == "") {
-		cIPJQ(this).autocomplete("search", "");
+	if(jQuery(this).val() == "") {
+		jQuery(this).autocomplete("search", "");
 	}
 }
 
@@ -218,16 +218,16 @@ cipPassword.createDialog = function() {
 
 	_called.passwordCreateDialog = true;
 
-	var $dialog = cIPJQ("<div>")
+	var $dialog = jQuery("<div>")
 		.attr("id", "cip-genpw-dialog");
 
-	var $divFloat = cIPJQ("<div>").addClass("cip-genpw-clearfix");
-	var $btnGenerate = cIPJQ("<button>")
+	var $divFloat = jQuery("<div>").addClass("cip-genpw-clearfix");
+	var $btnGenerate = jQuery("<button>")
 		.text("Generate")
 		.attr("id", "cip-genpw-btn-generate")
-		.addClass("b2c-btn")
-		.addClass("b2c-btn-primary")
-		.addClass("b2c-btn-small")
+		.addClass("btn")
+		.addClass("btn-primary")
+		.addClass("btn-sm")
 		.css("float", "left")
 		.click(function(e) {
 			e.preventDefault();
@@ -237,78 +237,78 @@ cipPassword.createDialog = function() {
 		});
 	$divFloat.append($btnGenerate);
 
-	var $btnClipboard = cIPJQ("<button>")
+	var $btnClipboard = jQuery("<button>")
 		.text("Copy to clipboard")
 		.attr("id", "cip-genpw-btn-clipboard")
-		.addClass("b2c-btn")
-		.addClass("b2c-btn-small")
+		.addClass("btn")
+		.addClass("btn-sm")
 		.css("float", "right")
 		.click(function(e) {
 			e.preventDefault();
 
 			chrome.extension.sendMessage({
 				action: "copy_password",
-				args: [cIPJQ("input#cip-genpw-textfield-password").val()]
+				args: [jQuery("input#cip-genpw-textfield-password").val()]
 			}, cipPassword.callbackPasswordCopied);
 		});
 	$divFloat.append($btnClipboard);
 
 	$dialog.append($divFloat);
 
-	var $textfieldPassword = cIPJQ("<input>")
+	var $textfieldPassword = jQuery("<input>")
 		.attr("id", "cip-genpw-textfield-password")
 		.attr("type", "text")
 		.addClass("cip-genpw-textfield")
 		.on('change keypress paste textInput input', function() {
-			cIPJQ("#cip-genpw-btn-clipboard:first").removeClass("b2c-btn-success");
+			jQuery("#cip-genpw-btn-clipboard:first").removeClass("btn-success");
 		});
-	var $quality = cIPJQ("<span>")
+	var $quality = jQuery("<span>")
 		.addClass("b2c-add-on")
 		.attr("id", "cip-genpw-quality")
 		.text("123 Bits");
-	var $frameInputAppend = cIPJQ("<div>")
+	var $frameInputAppend = jQuery("<div>")
 		.addClass("b2c-input-append")
 		.addClass("cip-genpw-password-frame");
 	$frameInputAppend.append($textfieldPassword).append($quality);
 	$dialog.append($frameInputAppend);
 
-	var $checkboxNextField = cIPJQ("<input>")
+	var $checkboxNextField = jQuery("<input>")
 		.attr("id", "cip-genpw-checkbox-next-field")
 		.attr("type", "checkbox")
 		.addClass("cip-genpw-checkbox");
-	var $labelNextField = cIPJQ("<label>")
+	var $labelNextField = jQuery("<label>")
 		.append($checkboxNextField)
 		.addClass("cip-genpw-label")
 		.append(" also fill in the next password-field");
 	$dialog.append($labelNextField);
 
-	var $btnFillIn = cIPJQ("<button>")
+	var $btnFillIn = jQuery("<button>")
 		.text("Fill in & copy to clipboard")
 		.attr("id", "cip-genpw-btn-fillin")
-		.addClass("b2c-btn")
-		.addClass("b2c-btn-small")
+		.addClass("btn")
+		.addClass("btn-sm")
 		.click(function(e) {
 			e.preventDefault();
 
-			var fieldId = cIPJQ("#cip-genpw-dialog:first").data("cip-genpw-field-id");
-			var field = cIPJQ("input[data-cip-id='"+fieldId+"']:first");
+			var fieldId = jQuery("#cip-genpw-dialog:first").data("cip-genpw-field-id");
+			var field = jQuery("input[data-cip-id='"+fieldId+"']:first");
 			if(field.length == 1) {
-				var $password = cIPJQ("input#cip-genpw-textfield-password:first").val();
+				var $password = jQuery("input#cip-genpw-textfield-password:first").val();
 
 				if(field.attr("maxlength")) {
 					if($password.length > field.attr("maxlength")) {
 						$password = $password.substring(0, field.attr("maxlength"));
-						cIPJQ("input#cip-genpw-textfield-password:first").val($password);
-						cIPJQ("#cip-genpw-btn-clipboard:first").removeClass("b2c-btn-success");
+						jQuery("input#cip-genpw-textfield-password:first").val($password);
+						jQuery("#cip-genpw-btn-clipboard:first").removeClass("b2c-btn-success");
 						alert("The generated password is longer than the allowed length!\nIt has been cut to fit the length.\n\nPlease remember the new password!");
 					}
 				}
 
 				field.val($password);
-				if(cIPJQ("input#cip-genpw-checkbox-next-field:checked").length == 1) {
+				if(jQuery("input#cip-genpw-checkbox-next-field:checked").length == 1) {
 					if(field.data("cip-genpw-next-field-exists")) {
 						var nextFieldId = field.data("cip-genpw-next-field-id");
-						var nextField = cIPJQ("input[data-cip-id='"+nextFieldId+"']:first");
+						var nextField = jQuery("input[data-cip-id='"+nextFieldId+"']:first");
 						if(nextField.length == 1) {
 							nextField.val($password);
 						}
@@ -325,7 +325,7 @@ cipPassword.createDialog = function() {
 	$dialog.append($btnFillIn);
 
 	$dialog.hide();
-	cIPJQ("body").append($dialog);
+	jQuery("body").append($dialog);
 	$dialog.dialog({
 		closeText: "×",
 		autoOpen: false,
@@ -334,12 +334,12 @@ cipPassword.createDialog = function() {
 		minWidth: 340,
 		title: "Password Generator",
 		open: function(event, ui) {
-			cIPJQ(".cip-ui-widget-overlay").click(function() {
-				cIPJQ("#cip-genpw-dialog:first").dialog("close");
+			jQuery(".cip-ui-widget-overlay").click(function() {
+				jQuery("#cip-genpw-dialog:first").dialog("close");
 			});
 
-			if(cIPJQ("input#cip-genpw-textfield-password:first").val() == "") {
-				cIPJQ("button#cip-genpw-btn-generate:first").click();
+			if(jQuery("input#cip-genpw-textfield-password:first").val() == "") {
+				jQuery("button#cip-genpw-btn-generate:first").click();
 			}
 		}
 	});
@@ -372,7 +372,7 @@ cipPassword.createIcon = function(field) {
 	}
 	$zIndex += 1;
 
-	var $icon = cIPJQ("<div>").addClass("cip-genpw-icon")
+	var $icon = jQuery("<div>").addClass("cip-genpw-icon")
 		.addClass($className)
 		.css("z-index", $zIndex)
 		.data("size", $size)
@@ -388,17 +388,17 @@ cipPassword.createIcon = function(field) {
 			return;
 		}
 
-		var $dialog = cIPJQ("#cip-genpw-dialog");
+		var $dialog = jQuery("#cip-genpw-dialog");
 		if($dialog.dialog("isOpen")) {
 			$dialog.dialog("close");
 		}
-		$dialog.dialog("option", "position", { my: "left-10px top", at: "center bottom", of: cIPJQ(this) });
+		$dialog.dialog("option", "position", { my: "left-10px top", at: "center bottom", of: jQuery(this) });
 		$dialog.data("cip-genpw-field-id", field.data("cip-id"));
 		$dialog.data("cip-genpw-next-field-id", field.data("cip-genpw-next-field-id"));
 		$dialog.data("cip-genpw-next-is-password-field", field.data("cip-genpw-next-is-password-field"));
 
 		var $bool = Boolean(field.data("cip-genpw-next-field-exists"));
-		cIPJQ("input#cip-genpw-checkbox-next-field:first")
+		jQuery("input#cip-genpw-checkbox-next-field:first")
 			.attr("checked", $bool)
 			.attr("disabled", !$bool);
 
@@ -407,7 +407,7 @@ cipPassword.createIcon = function(field) {
 
 	cipPassword.observedIcons.push($icon);
 
-	cIPJQ("body").append($icon);
+	jQuery("body").append($icon);
 }
 
 cipPassword.setIconPosition = function($icon, $field) {
@@ -417,30 +417,30 @@ cipPassword.setIconPosition = function($icon, $field) {
 
 cipPassword.callbackPasswordCopied = function(bool) {
 	if(bool) {
-		cIPJQ("#cip-genpw-btn-clipboard").addClass("b2c-btn-success");
+		jQuery("#cip-genpw-btn-clipboard").addClass("btn-success");
 	}
 }
 
 cipPassword.callbackGeneratedPassword = function(entries) {
 	if(entries && entries.length >= 1) {
 		console.log(entries[0]);
-		cIPJQ("#cip-genpw-btn-clipboard:first").removeClass("b2c-btn-success");
-		cIPJQ("input#cip-genpw-textfield-password:first").val(entries[0].password);
+		jQuery("#cip-genpw-btn-clipboard:first").removeClass("btn-success");
+		jQuery("input#cip-genpw-textfield-password:first").val(entries[0].password);
 		if(isNaN(entries[0].login)) {
-			cIPJQ("#cip-genpw-quality:first").text("??? Bits");
+			jQuery("#cip-genpw-quality:first").text("??? Bits");
 		}
 		else {
-			cIPJQ("#cip-genpw-quality:first").text(entries[0].login + " Bits");
+			jQuery("#cip-genpw-quality:first").text(entries[0].login + " Bits");
 		}
 	}
 	else {
-		if(cIPJQ("div#cip-genpw-error:first").length == 0) {
-			cIPJQ("button#cip-genpw-btn-generate:first").after("<div style='block' id='cip-genpw-error'>Cannot receive generated password.<br />Is your version of KeePassHttp up-to-date?<br /><br /><a href='https://github.com/pfn/keepasshttp/'>Please visit the KeePassHttp homepage</a></div>");
-			cIPJQ("input#cip-genpw-textfield-password:first").parent().hide();
-			cIPJQ("input#cip-genpw-checkbox-next-field:first").parent("label").hide();
-			cIPJQ("button#cip-genpw-btn-generate").hide();
-			cIPJQ("button#cip-genpw-btn-clipboard").hide();
-			cIPJQ("button#cip-genpw-btn-fillin").hide();
+		if(jQuery("div#cip-genpw-error:first").length == 0) {
+			jQuery("button#cip-genpw-btn-generate:first").after("<div style='block' id='cip-genpw-error'>Cannot receive generated password.<br />Is your version of KeePassXC up-to-date?<br /><br /><a href='https://keepassxc.org'>Please visit the KeePassXC homepage</a></div>");
+			jQuery("input#cip-genpw-textfield-password:first").parent().hide();
+			jQuery("input#cip-genpw-checkbox-next-field:first").parent("label").hide();
+			jQuery("button#cip-genpw-btn-generate").hide();
+			jQuery("button#cip-genpw-btn-clipboard").hide();
+			jQuery("button#cip-genpw-btn-fillin").hide();
 		}
 	}
 }
@@ -457,10 +457,10 @@ cipPassword.checkObservedElements = function() {
 	}
 
 	cipPassword.observingLock = true;
-	cIPJQ.each(cipPassword.observedIcons, function(index, iconField) {
+	jQuery.each(cipPassword.observedIcons, function(index, iconField) {
 		if(iconField && iconField.length == 1) {
 			var fieldId = iconField.data("cip-genpw-field-id");
-			var field = cIPJQ("input[data-cip-id='"+fieldId+"']:first");
+			var field = jQuery("input[data-cip-id='"+fieldId+"']:first");
 			if(!field || field.length != 1) {
 				iconField.remove();
 				cipPassword.observedIcons.splice(index, 1);
@@ -505,8 +505,8 @@ cipForm.destroy = function(form, credentialFields) {
 		}
     }
 
-    if(form && cIPJQ(form).length > 0) {
-        cIPJQ(form).unbind('submit', cipForm.onSubmit);
+    if(form && jQuery(form).length > 0) {
+        jQuery(form).unbind('submit', cipForm.onSubmit);
     }
 }
 
@@ -516,8 +516,8 @@ cipForm.setInputFields = function(form, credentialFields) {
 }
 
 cipForm.onSubmit = function() {
-	var usernameId = cIPJQ(this).data("cipUsername");
-	var passwordId = cIPJQ(this).data("cipPassword");
+	var usernameId = jQuery(this).data("cipUsername");
+	var passwordId = jQuery(this).data("cipPassword");
 
 	var usernameValue = "";
 	var passwordValue = "";
@@ -547,13 +547,13 @@ cipDefine.selection = {
 cipDefine.eventFieldClick = null;
 
 cipDefine.init = function () {
-	var $backdrop = cIPJQ("<div>").attr("id", "b2c-backdrop").addClass("b2c-modal-backdrop");
-	cIPJQ("body").append($backdrop);
+	var $backdrop = jQuery("<div>").attr("id", "b2c-backdrop").addClass("b2c-modal-backdrop");
+	jQuery("body").append($backdrop);
 
-	var $chooser = cIPJQ("<div>").attr("id", "b2c-cipDefine-fields");
-	cIPJQ("body").append($chooser);
+	var $chooser = jQuery("<div>").attr("id", "b2c-cipDefine-fields");
+	jQuery("body").append($chooser);
 
-	var $description = cIPJQ("<div>").attr("id", "b2c-cipDefine-description");
+	var $description = jQuery("<div>").attr("id", "b2c-cipDefine-description");
 	$backdrop.append($description);
 
 	cipFields.getAllFields();
@@ -567,44 +567,44 @@ cipDefine.init = function () {
 }
 
 cipDefine.initDescription = function() {
-	var $description = cIPJQ("div#b2c-cipDefine-description");
-	var $h1 = cIPJQ("<div>").addClass("b2c-chooser-headline");
+	var $description = jQuery("div#b2c-cipDefine-description");
+	var $h1 = jQuery("<div>").addClass("b2c-chooser-headline");
 	$description.append($h1);
-	var $help = cIPJQ("<div>").addClass("b2c-chooser-help").attr("id", "b2c-help");
+	var $help = jQuery("<div>").addClass("b2c-chooser-help").attr("id", "b2c-help");
 	$description.append($help);
 
-	var $btnDismiss = cIPJQ("<button>").text("Dismiss").attr("id", "b2c-btn-dismiss")
-		.addClass("b2c-btn").addClass("b2c-btn-danger")
+	var $btnDismiss = jQuery("<button>").text("Dismiss").attr("id", "b2c-btn-dismiss")
+		.addClass("btn").addClass("btn-danger")
 		.click(function(e) {
-			cIPJQ("div#b2c-backdrop").remove();
-			cIPJQ("div#b2c-cipDefine-fields").remove();
+			jQuery("div#b2c-backdrop").remove();
+			jQuery("div#b2c-cipDefine-fields").remove();
 		});
-	var $btnSkip = cIPJQ("<button>").text("Skip").attr("id", "b2c-btn-skip")
-		.addClass("b2c-btn").addClass("b2c-btn-info")
+	var $btnSkip = jQuery("<button>").text("Skip").attr("id", "b2c-btn-skip")
+		.addClass("btn").addClass("btn-info")
 		.css("margin-right", "5px")
 		.click(function() {
-			if(cIPJQ(this).data("step") == 1) {
+			if(jQuery(this).data("step") == 1) {
 				cipDefine.selection.username = null;
 				cipDefine.prepareStep2();
-				cipDefine.markAllPasswordFields(cIPJQ("#b2c-cipDefine-fields"));
+				cipDefine.markAllPasswordFields(jQuery("#b2c-cipDefine-fields"));
 			}
-			else if(cIPJQ(this).data("step") == 2) {
+			else if(jQuery(this).data("step") == 2) {
 				cipDefine.selection.password = null;
 				cipDefine.prepareStep3();
-				cipDefine.markAllStringFields(cIPJQ("#b2c-cipDefine-fields"));
+				cipDefine.markAllStringFields(jQuery("#b2c-cipDefine-fields"));
 			}
 		});
-	var $btnAgain = cIPJQ("<button>").text("Again").attr("id", "b2c-btn-again")
-		.addClass("b2c-btn").addClass("b2c-btn-warning")
+	var $btnAgain = jQuery("<button>").text("Again").attr("id", "b2c-btn-again")
+		.addClass("btn").addClass("btn-warning")
 		.css("margin-right", "5px")
 		.click(function(e) {
 			cipDefine.resetSelection();
 			cipDefine.prepareStep1();
-			cipDefine.markAllUsernameFields(cIPJQ("#b2c-cipDefine-fields"));
+			cipDefine.markAllUsernameFields(jQuery("#b2c-cipDefine-fields"));
 		})
 		.hide();
-	var $btnConfirm = cIPJQ("<button>").text("Confirm").attr("id", "b2c-btn-confirm")
-		.addClass("b2c-btn").addClass("b2c-btn-primary")
+	var $btnConfirm = jQuery("<button>").text("Confirm").attr("id", "b2c-btn-confirm")
+		.addClass("btn").addClass("btn-primary")
 		.css("margin-right", "15px")
 		.click(function(e) {
 			if(!cip.settings["defined-credential-fields"]) {
@@ -615,7 +615,7 @@ cipDefine.initDescription = function() {
 				cipDefine.selection.username = cipFields.prepareId(cipDefine.selection.username);
 			}
 
-			var passwordId = cIPJQ("div#b2c-cipDefine-fields").data("password");
+			var passwordId = jQuery("div#b2c-cipDefine-fields").data("password");
 			if(cipDefine.selection.password) {
 				cipDefine.selection.password = cipFields.prepareId(cipDefine.selection.password);
 			}
@@ -637,7 +637,7 @@ cipDefine.initDescription = function() {
 				args: [cip.settings]
 			});
 
-			cIPJQ("button#b2c-btn-dismiss").click();
+			jQuery("button#b2c-btn-dismiss").click();
 		})
 		.hide();
 
@@ -647,14 +647,14 @@ cipDefine.initDescription = function() {
 	$description.append($btnDismiss);
 
 	if(cip.settings["defined-credential-fields"] && cip.settings["defined-credential-fields"][document.location.origin]) {
-		var $p = cIPJQ("<p>").html("For this page credential fields are already selected and will be overwritten.<br />");
-		var $btnDiscard = cIPJQ("<button>")
-			.attr("id", "b2c-btn-discard")
+		var $p = jQuery("<p>").html("For this page credential fields are already selected and will be overwritten.<br />");
+		var $btnDiscard = jQuery("<button>")
+			.attr("id", "btn-warning")
 			.text("Discard selection")
 			.css("margin-top", "5px")
-			.addClass("b2c-btn")
-			.addClass("b2c-btn-small")
-			.addClass("b2c-btn-danger")
+			.addClass("btn")
+			.addClass("btn-sm")
+			.addClass("btn-danger")
 			.click(function(e) {
 				delete cip.settings["defined-credential-fields"][document.location.origin];
 
@@ -667,13 +667,13 @@ cipDefine.initDescription = function() {
 					action: 'load_settings'
 				});
 
-				cIPJQ(this).parent("p").remove();
+				jQuery(this).parent("p").remove();
 			});
 		$p.append($btnDiscard);
 		$description.append($p);
 	}
 
-	cIPJQ("div#b2c-cipDefine-description").draggable();
+	jQuery("div#b2c-cipDefine-description").draggable();
 }
 
 cipDefine.resetSelection = function() {
@@ -694,52 +694,52 @@ cipDefine.isFieldSelected = function($cipId) {
 
 cipDefine.markAllUsernameFields = function($chooser) {
 	cipDefine.eventFieldClick = function(e) {
-		cipDefine.selection.username = cIPJQ(this).data("cip-id");
-		cIPJQ(this).addClass("b2c-fixed-username-field").text("Username").unbind("click");
+		cipDefine.selection.username = jQuery(this).data("cip-id");
+		jQuery(this).addClass("b2c-fixed-username-field").text("Username").unbind("click");
 		cipDefine.prepareStep2();
-		cipDefine.markAllPasswordFields(cIPJQ("#b2c-cipDefine-fields"));
+		cipDefine.markAllPasswordFields(jQuery("#b2c-cipDefine-fields"));
 	};
 	cipDefine.markFields($chooser, cipFields.inputQueryPattern);
 }
 
 cipDefine.markAllPasswordFields = function($chooser) {
 	cipDefine.eventFieldClick = function(e) {
-		cipDefine.selection.password = cIPJQ(this).data("cip-id");
-		cIPJQ(this).addClass("b2c-fixed-password-field").text("Password").unbind("click");
+		cipDefine.selection.password = jQuery(this).data("cip-id");
+		jQuery(this).addClass("b2c-fixed-password-field").text("Password").unbind("click");
 		cipDefine.prepareStep3();
-		cipDefine.markAllStringFields(cIPJQ("#b2c-cipDefine-fields"));
+		cipDefine.markAllStringFields(jQuery("#b2c-cipDefine-fields"));
 	};
 	cipDefine.markFields($chooser, "input[type='password']");
 }
 
 cipDefine.markAllStringFields = function($chooser) {
 	cipDefine.eventFieldClick = function(e) {
-		cipDefine.selection.fields[cIPJQ(this).data("cip-id")] = true;
+		cipDefine.selection.fields[jQuery(this).data("cip-id")] = true;
 		var count = Object.keys(cipDefine.selection.fields).length;
-		cIPJQ(this).addClass("b2c-fixed-string-field").text("String field #"+count.toString()).unbind("click");
+		jQuery(this).addClass("b2c-fixed-string-field").text("String field #"+count.toString()).unbind("click");
 
-		cIPJQ("button#b2c-btn-confirm:first").addClass("b2c-btn-primary").attr("disabled", false);
+		jQuery("button#b2c-btn-confirm:first").addClass("b2c-btn-primary").attr("disabled", false);
 	};
 	cipDefine.markFields($chooser, cipFields.inputQueryPattern + ", select");
 }
 
 cipDefine.markFields = function ($chooser, $pattern) {
 	//var $found = false;
-	cIPJQ($pattern).each(function() {
-		if(cipDefine.isFieldSelected(cIPJQ(this).data("cip-id"))) {
+	jQuery($pattern).each(function() {
+		if(cipDefine.isFieldSelected(jQuery(this).data("cip-id"))) {
 			//continue
 			return true;
 		}
 
-		if(cIPJQ(this).is(":visible") && cIPJQ(this).css("visibility") != "hidden" && cIPJQ(this).css("visibility") != "collapsed") {
-			var $field = cIPJQ("<div>").addClass("b2c-fixed-field")
-				.css("top", cIPJQ(this).offset().top)
-				.css("left", cIPJQ(this).offset().left)
-				.css("width", cIPJQ(this).outerWidth())
-				.css("height", cIPJQ(this).outerHeight())
-				.attr("data-cip-id", cIPJQ(this).attr("data-cip-id"))
+		if(jQuery(this).is(":visible") && jQuery(this).css("visibility") != "hidden" && jQuery(this).css("visibility") != "collapsed") {
+			var $field = jQuery("<div>").addClass("b2c-fixed-field")
+				.css("top", jQuery(this).offset().top)
+				.css("left", jQuery(this).offset().left)
+				.css("width", jQuery(this).outerWidth())
+				.css("height", jQuery(this).outerHeight())
+				.attr("data-cip-id", jQuery(this).attr("data-cip-id"))
 				.click(cipDefine.eventFieldClick)
-				.hover(function() {cIPJQ(this).addClass("b2c-fixed-hover-field");}, function() {cIPJQ(this).removeClass("b2c-fixed-hover-field");});
+				.hover(function() {jQuery(this).addClass("b2c-fixed-hover-field");}, function() {jQuery(this).removeClass("b2c-fixed-hover-field");});
 			$chooser.append($field);
 			//$found = true;
 		}
@@ -748,48 +748,48 @@ cipDefine.markFields = function ($chooser, $pattern) {
 	/* skip step if no entry was found
 	if(!$found) {
 		alert("No username field found.\nContinue with choosing a password field.");
-		cIPJQ("button#b2c-btn-skip").click();
+		jQuery("button#b2c-btn-skip").click();
 	}
 	*/
 }
 
 cipDefine.prepareStep1 = function() {
-	cIPJQ("div#b2c-help").text("").css("margin-bottom", 0);
-	cIPJQ("div#b2c-cipDefine-fields").removeData("username");
-	cIPJQ("div#b2c-cipDefine-fields").removeData("password");
-	cIPJQ("div.b2c-fixed-field", cIPJQ("div#b2c-cipDefine-fields")).remove();
-	cIPJQ("div:first", cIPJQ("div#b2c-cipDefine-description")).text("1. Choose a username field");
-	cIPJQ("button#b2c-btn-skip:first").data("step", "1").show();
-	cIPJQ("button#b2c-btn-confirm:first").hide();
-	cIPJQ("button#b2c-btn-again:first").hide();
+	jQuery("div#b2c-help").text("").css("margin-bottom", 0);
+	jQuery("div#b2c-cipDefine-fields").removeData("username");
+	jQuery("div#b2c-cipDefine-fields").removeData("password");
+	jQuery("div.b2c-fixed-field", jQuery("div#b2c-cipDefine-fields")).remove();
+	jQuery("div:first", jQuery("div#b2c-cipDefine-description")).text("1. Choose a username field");
+	jQuery("button#b2c-btn-skip:first").data("step", "1").show();
+	jQuery("button#b2c-btn-confirm:first").hide();
+	jQuery("button#b2c-btn-again:first").hide();
 }
 
 cipDefine.prepareStep2 = function() {
-	cIPJQ("div#b2c-help").text("").css("margin-bottom", 0);
-	cIPJQ("div.b2c-fixed-field:not(.b2c-fixed-username-field)", cIPJQ("div#b2c-cipDefine-fields")).remove();
-	cIPJQ("div:first", cIPJQ("div#b2c-cipDefine-description")).text("2. Now choose a password field");
-	cIPJQ("button#b2c-btn-skip:first").data("step", "2");
-	cIPJQ("button#b2c-btn-again:first").show();
+	jQuery("div#b2c-help").text("").css("margin-bottom", 0);
+	jQuery("div.b2c-fixed-field:not(.b2c-fixed-username-field)", jQuery("div#b2c-cipDefine-fields")).remove();
+	jQuery("div:first", jQuery("div#b2c-cipDefine-description")).text("2. Now choose a password field");
+	jQuery("button#b2c-btn-skip:first").data("step", "2");
+	jQuery("button#b2c-btn-again:first").show();
 }
 
 cipDefine.prepareStep3 = function() {
 	/* skip step if no entry was found
-	if(!cIPJQ("div#b2c-cipDefine-fields").data("username") && !cIPJQ("div#b2c-cipDefine-fields").data("password")) {
+	if(!jQuery("div#b2c-cipDefine-fields").data("username") && !jQuery("div#b2c-cipDefine-fields").data("password")) {
 		alert("Neither an username field nor a password field were selected.\nNothing will be changed and chooser will be closed now.");
-		cIPJQ("button#b2c-btn-dismiss").click();
+		jQuery("button#b2c-btn-dismiss").click();
 		return;
 	}
 	 */
 
 	if(!cipDefine.selection.username && !cipDefine.selection.password) {
-		cIPJQ("button#b2c-btn-confirm:first").removeClass("b2c-btn-primary").attr("disabled", true);
+		jQuery("button#b2c-btn-confirm:first").removeClass("b2c-btn-primary").attr("disabled", true);
 	}
 
-	cIPJQ("div#b2c-help").html("Please confirm your selection or choose more fields as <em>String fields</em>.").css("margin-bottom", "5px");
-	cIPJQ("div.b2c-fixed-field:not(.b2c-fixed-password-field,.b2c-fixed-username-field)", cIPJQ("div#b2c-cipDefine-fields")).remove();
-	cIPJQ("button#b2c-btn-confirm:first").show();
-	cIPJQ("button#b2c-btn-skip:first").data("step", "3").hide();
-	cIPJQ("div:first", cIPJQ("div#b2c-cipDefine-description")).text("3. Confirm selection");
+	jQuery("div#b2c-help").html("Please confirm your selection or choose more fields as <em>String fields</em>.").css("margin-bottom", "5px");
+	jQuery("div.b2c-fixed-field:not(.b2c-fixed-password-field,.b2c-fixed-username-field)", jQuery("div#b2c-cipDefine-fields")).remove();
+	jQuery("button#b2c-btn-confirm:first").show();
+	jQuery("button#b2c-btn-skip:first").data("step", "3").hide();
+	jQuery("div:first", jQuery("div#b2c-cipDefine-description")).text("3. Confirm selection");
 }
 
 
@@ -808,7 +808,7 @@ cipFields.setUniqueId = function(field) {
 		// yes, it should be, but there are many bad developers outside...
 		var fieldId = field.attr("id");
 		if(fieldId) {
-			var foundIds = cIPJQ("input#" + cipFields.prepareId(fieldId));
+			var foundIds = jQuery("input#" + cipFields.prepareId(fieldId));
 			if(foundIds.length == 1) {
 				field.attr("data-cip-id", fieldId);
 				return;
@@ -817,7 +817,7 @@ cipFields.setUniqueId = function(field) {
 
 		// create own ID if no ID is set for this field
 		cipFields.uniqueNumber += 1;
-		field.attr("data-cip-id", "cIPJQ"+String(cipFields.uniqueNumber));
+		field.attr("data-cip-id", "jQuery"+String(cipFields.uniqueNumber));
 	}
 }
 
@@ -830,10 +830,10 @@ cipFields.prepareId = function(id) {
 cipFields.getAllFields = function() {
 	var fields = [];
 	// get all input fields which are text, email or password and visible
-	cIPJQ(cipFields.inputQueryPattern).each(function() {
-		if(cIPJQ(this).is(":visible") && cIPJQ(this).css("visibility") != "hidden" && cIPJQ(this).css("visibility") != "collapsed") {
-			cipFields.setUniqueId(cIPJQ(this));
-			fields.push(cIPJQ(this));
+	jQuery(cipFields.inputQueryPattern).each(function() {
+		if(jQuery(this).is(":visible") && jQuery(this).css("visibility") != "hidden" && jQuery(this).css("visibility") != "collapsed") {
+			cipFields.setUniqueId(jQuery(this));
+			fields.push(jQuery(this));
 		}
 	});
 
@@ -841,9 +841,9 @@ cipFields.getAllFields = function() {
 }
 
 cipFields.prepareVisibleFieldsWithID = function($pattern) {
-	cIPJQ($pattern).each(function() {
-		if(cIPJQ(this).is(":visible") && cIPJQ(this).css("visibility") != "hidden" && cIPJQ(this).css("visibility") != "collapsed") {
-			cipFields.setUniqueId(cIPJQ(this));
+	jQuery($pattern).each(function() {
+		if(jQuery(this).is(":visible") && jQuery(this).css("visibility") != "hidden" && jQuery(this).css("visibility") != "collapsed") {
+			cipFields.setUniqueId(jQuery(this));
 		}
 	});
 }
@@ -956,19 +956,19 @@ cipFields.getUsernameField = function(passwordId, checkDisabled) {
 
 	// search all inputs on this one form
 	if(form) {
-		cIPJQ(cipFields.inputQueryPattern, form).each(function() {
-			cipFields.setUniqueId(cIPJQ(this));
-			if(cIPJQ(this).attr("data-cip-id") == passwordId) {
+		jQuery(cipFields.inputQueryPattern, form).each(function() {
+			cipFields.setUniqueId(jQuery(this));
+			if(jQuery(this).attr("data-cip-id") == passwordId) {
 				// break
 				return false;
 			}
 
-			if(cIPJQ(this).attr("type") && cIPJQ(this).attr("type").toLowerCase() == "password") {
+			if(jQuery(this).attr("type") && jQuery(this).attr("type").toLowerCase() == "password") {
 				// continue
 				return true;
 			}
 
-			usernameField = cIPJQ(this);
+			usernameField = jQuery(this);
 		});
 	}
 	// search all inputs on page
@@ -1018,7 +1018,7 @@ cipFields.getPasswordField = function(usernameId, checkDisabled) {
 
 	// search all inputs on this one form
 	if(form) {
-		passwordField = cIPJQ("input[type='password']:first", form);
+		passwordField = jQuery("input[type='password']:first", form);
 		if(passwordField.length < 1) {
 			passwordField = null;
 		}
@@ -1038,7 +1038,7 @@ cipFields.getPasswordField = function(usernameId, checkDisabled) {
 			if(inputs[i].attr("data-cip-id") == usernameId) {
 				active = true;
 			}
-			if(active && cIPJQ(inputs[i]).attr("type") && cIPJQ(inputs[i]).attr("type").toLowerCase() == "password") {
+			if(active && jQuery(inputs[i]).attr("type") && jQuery(inputs[i]).attr("type").toLowerCase() == "password") {
 				passwordField = inputs[i];
 				break;
 			}
@@ -1068,7 +1068,7 @@ cipFields.prepareCombinations = function(combinations) {
 		if(pwField && !pwField.data("cipFields-onChange")) {
 			pwField.data("cipFields-onChange", true);
 			pwField.change(function() {
-				cIPJQ(this).data("unchanged", false);
+				jQuery(this).data("unchanged", false);
 			});
 		}
 
@@ -1129,7 +1129,7 @@ cip.submitUrl = null;
 // received credentials from KeePassXC
 cip.credentials = [];
 
-cIPJQ(function() {
+jQuery(function() {
 	cip.init();
 });
 
@@ -1350,8 +1350,8 @@ cip.fillInFromActiveElement = function(suppressWarnings) {
 		return;
 	}
 
-	cipFields.setUniqueId(cIPJQ(el));
-	var fieldId = cipFields.prepareId(cIPJQ(el).attr("data-cip-id"));
+	cipFields.setUniqueId(jQuery(el));
+	var fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
 	var combination = null;
 	if(el.type && el.type.toLowerCase() == "password") {
 		combination = cipFields.getCombination("password", fieldId);
@@ -1373,8 +1373,8 @@ cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 		return;
 	}
 
-	cipFields.setUniqueId(cIPJQ(el));
-	var fieldId = cipFields.prepareId(cIPJQ(el).attr("data-cip-id"));
+	cipFields.setUniqueId(jQuery(el));
+	var fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
 	var combination = null;
 	if(el.type && el.type.toLowerCase() == "password") {
 		combination = cipFields.getCombination("password", fieldId);
@@ -1400,9 +1400,9 @@ cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 cip.setValue = function(field, value) {
 	if(field.is("select")) {
 		value = value.toLowerCase().trim();
-		cIPJQ("option", field).each(function() {
-			if(cIPJQ(this).text().toLowerCase().trim() == value) {
-				cip.setValueWithChange(field, cIPJQ(this).val());
+		jQuery("option", field).each(function() {
+			if(jQuery(this).text().toLowerCase().trim() == value) {
+				cip.setValueWithChange(field, jQuery(this).val());
 				return false;
 			}
 		});
@@ -1605,8 +1605,8 @@ cip.contextMenuRememberCredentials = function() {
 		return;
 	}
 
-	cipFields.setUniqueId(cIPJQ(el));
-	var fieldId = cipFields.prepareId(cIPJQ(el).attr("data-cip-id"));
+	cipFields.setUniqueId(jQuery(el));
+	var fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
 	var combination = null;
 	if(el.type && el.type.toLowerCase() == "password") {
 		combination = cipFields.getCombination("password", fieldId);
@@ -1672,7 +1672,7 @@ cip.rememberCredentials = function(usernameValue, passwordValue) {
 			});
 		}
 
-		var url = cIPJQ(this)[0].action;
+		var url = jQuery(this)[0].action;
 		if(!url) {
 			url = document.location.href;
 			if(url.indexOf("?") > 0) {

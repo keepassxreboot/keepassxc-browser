@@ -2,8 +2,9 @@ body {
 	font-family: sans-serif;
 	min-width:357px;
 	overflow-x:hidden;
-	background: #eee;
+	background-color: #eee;
 	font-size: 15px;
+	padding: 8px;
 }
 .credentials ul {
 	margin-left: 0;

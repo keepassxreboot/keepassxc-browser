@@ -43,14 +43,13 @@
 				],
 			"js": 
 				[
-					"jquery-1.11.1.min.js",
-					"jquery-ui-1.10.2.custom.min.js",
+					"jquery-3.2.0.min.js",
+					"jquery-ui.min.js",
 					"chromekeepassxc.js"
 				],
 			"css": 
 				[
-					"jquery-ui-1.10.2.custom.min.css",
-					"bootstrap-btn.css",
+					"jquery-ui.min.css",
 					"chromekeepassxc.css"
 				],
 			"run_at": "document_idle",

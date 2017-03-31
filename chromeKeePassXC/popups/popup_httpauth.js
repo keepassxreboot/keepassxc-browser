@@ -8,9 +8,9 @@ $(function() {
 		for (var i = 0; i < data.logins.length; i++) {
 			var li = document.createElement("li");
 			var a = document.createElement("a");
-			a.textContent = data.logins[i].Login + " (" + data.logins[i].Name + ")";
+			a.textContent = data.logins[i].login + " (" + data.logins[i].name + ")";
 			li.appendChild(a);
-			$(a).data("url", data.url.replace(/:\/\//g, "://" + data.logins[i].Login + ":" + data.logins[i].Password + "@"));
+			$(a).data("url", data.url.replace(/:\/\//g, "://" + data.logins[i].login + ":" + data.logins[i].password + "@"));
 			$(a).click(function() {
 				chrome.tabs.update(tab.id, {"url": $(this).data("url")});
 				close();
