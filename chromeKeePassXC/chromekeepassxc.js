@@ -17,7 +17,7 @@ chrome.extension.onMessage.addListener(function(req, sender, callback) {
 				}
 
                 var list = {};
-				if(cip.fillInStringFields(combination.fields, cip.credentials[req.id].StringFields, list)) {
+				if(cip.fillInStringFields(combination.fields, cip.credentials[req.id].stringFields, list)) {
                     cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
                 }
 			}
@@ -1229,7 +1229,7 @@ cip.prepareFieldsForCredentials = function(autoFillInForSingle) {
 
 		if(combination) {
 			var list = {};
-			if(cip.fillInStringFields(combination.fields, cip.credentials[0].StringFields, list)) {
+			if(cip.fillInStringFields(combination.fields, cip.credentials[0].stringFields, list)) {
 				cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
 			}
 		}
@@ -1449,7 +1449,7 @@ cip.setValueWithChange = function(field, value) {
 	field[0].dispatchEvent(new Event('change', {'bubbles': true}));
 }
 
-ip.fillIn = function(combination, onlyPassword, suppressWarnings) {
+cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 	// no credentials available
 	if (cip.credentials.length == 0 && !suppressWarnings) {
 		var message = "No logins found.";
@@ -1478,7 +1478,7 @@ ip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 		}
 
         var list = {};
-		if(cip.fillInStringFields(combination.fields, cip.credentials[0].StringFields, list)) {
+		if(cip.fillInStringFields(combination.fields, cip.credentials[0].stringFields, list)) {
             cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
             filledIn = true;
         }
@@ -1508,7 +1508,7 @@ ip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 		}
 
         var list = {};
-		if(cip.fillInStringFields(combination.fields, cip.credentials[combination.loginId].StringFields, list)) {
+		if(cip.fillInStringFields(combination.fields, cip.credentials[combination.loginId].stringFields, list)) {
             cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
             filledIn = true;
         }
@@ -1540,7 +1540,7 @@ ip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 					countPasswords += 1;
 					valPassword = cip.credentials[i].password;
 					valUsername = cip.credentials[i].login;
-					valStringFields = cip.credentials[i].StringFields;
+					valStringFields = cip.credentials[i].stringFields;
 				}
 			}
 
