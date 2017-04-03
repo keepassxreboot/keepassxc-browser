@@ -6,7 +6,6 @@ function status_response(r) {
 	$('#configured-and-associated').hide();
 	$('#configured-not-associated').hide();
 
-
 	if(!r.keePassXCAvailable || r.databaseClosed) {
 		$('#error-message').html(r.error);
 		$('#error-encountered').show();

@@ -6,7 +6,6 @@ keepass.serverPublicKey = "";
 keepass.isConnected = false;
 keepass.isDatabaseClosed = false;
 keepass.isKeePassXCAvailable = false;
-keepass.useBox = false;
 keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = {"version": 0, "versionParsed": 0};
 keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) == 'undefined') ? {"version": 0, "versionParsed": 0, "lastChecked": null} : JSON.parse(localStorage.latestKeePassXC);
@@ -36,7 +35,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 	page.tabs[tab.id].errorMessage = null;
 
 	// is browser associated to keepass?
-	if(!keepass.testAssociation(tab)) {
+	if (!keepass.testAssociation(tab)) {
 		browserAction.showDefault(null, tab);
 		callback("error");
 		return;
@@ -97,7 +96,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 	page.debug("keepass.retrieveCredentials(callback, {1}, {2}, {3}, {4})", tab.id, url, submiturl, forceCallback);
 
 	// is browser associated to keepass?
-	if(!keepass.testAssociation(tab)) {
+	if (!keepass.testAssociation(tab)) {
 		browserAction.showDefault(null, tab);
 		callback("error");
 		return;
@@ -203,13 +202,13 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 	}
 
 	// is browser associated to keepass?
-	if(!keepass.testAssociation(tab)) {
+	if (!keepass.testAssociation(tab)) {
 		browserAction.showDefault(null, tab);
 		callback("error");
 		return;
 	}
 
-	if(keepass.currentKeePassXC.versionParsed < keepass.requiredKeePassXC) {
+	if (keepass.currentKeePassXC.versionParsed < keepass.requiredKeePassXC) {
 		callback([]);
 		return;
 	}
@@ -247,7 +246,7 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 					var rIv = response.nonce;
 
 					// var response = JSON.stringify({ Login: (msg.password.length * 8), Password: msg.password });
-					if(parsed.entries) {
+					if (parsed.entries) {
 						passwords = parsed.entries;
 						keepass.updateLastUsed(keepass.databaseHash);
 					}
@@ -268,7 +267,7 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 keepass.copyPassword = function(callback, tab, password) {
 	var bg = chrome.extension.getBackgroundPage();
 	var c2c = bg.document.getElementById("copy2clipboard");
-	if(!c2c) {
+	if (!c2c) {
 		var input = document.createElement('input');
 		input.type = "text";
 		input.id = "copy2clipboard";
@@ -284,13 +283,13 @@ keepass.copyPassword = function(callback, tab, password) {
 }
 
 keepass.associate = function(callback, tab) {
-	if(keepass.isAssociated()) {
+	if (keepass.isAssociated()) {
 		return;
 	}
 
 	keepass.getDatabaseHash(callback, tab);
 
-	if(keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
+	if (keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
 		return;
 	}
 
@@ -330,7 +329,7 @@ keepass.associate = function(callback, tab) {
 				}
 
 				var id = parsed.id;
-				if(!keepass.verifyResponse(parsed, response.nonce)) {
+				if (!keepass.verifyResponse(parsed, response.nonce)) {
 					page.tabs[tab.id].errorMessage = "KeePassXC association failed, try again.";
 				}
 				else {
@@ -350,11 +349,11 @@ keepass.associate = function(callback, tab) {
 keepass.testAssociation = function (tab, triggerUnlock) {
 	keepass.getDatabaseHash(null, tab, triggerUnlock);
 
-	if(keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
+	if (keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
 		return false;
 	}
 
-	if(keepass.isAssociated()) {
+	if (keepass.isAssociated()) {
 		return true;
 	}
 
@@ -394,7 +393,7 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 
 				var id = parsed.id;
 				keepass.isEncryptionKeyUnrecognized = false;
-				if(!keepass.verifyResponse(parsed, response.nonce)) {
+				if (!keepass.verifyResponse(parsed, response.nonce)) {
 					var hash = response.hash || 0;
 					keepass.deleteKey(hash);
 					keepass.isEncryptionKeyUnrecognized = true;
@@ -403,15 +402,19 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 					keepass.associated.value = false;
 					keepass.associated.hash = null;
 				}
-				else if(!keepass.isAssociated()) {
+				else if (!keepass.isAssociated()) {
 					console.log("Association was not successful");
 					page.tabs[tab.id].errorMessage = "Association was not successful.";
+				}
+				else {
+					if (tab && page.tabs[tab.id]) {
+						delete page.tabs[tab.id].errorMessage;
+					}
 				}
 			}
 		}
 	});
 	keepass.nativePort.postMessage(request);
-
 	return keepass.isAssociated();
 }
 
@@ -427,9 +430,13 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 		keepass.setcurrentKeePassXCVersion(response.version);
 		keepass.databaseHash = response.hash || "no-hash";
 
-		if(oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
+		if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
 			keepass.associated.value = false;
 			keepass.associated.hash = null;
+		}
+
+		if (tab && page.tabs[tab.id]) {
+			delete page.tabs[tab.id].errorMessage;
 		}
 
 		statusOK();
@@ -463,7 +470,7 @@ keepass.changePublicKeys = function() {
 		}
 
 		var id = response.id;
-		if(!keepass.verifyKeyResponse(response, key, nonce)) {
+		if (!keepass.verifyKeyResponse(response, key, nonce)) {
 			console.log("Error");
 		}
 		else {
@@ -488,7 +495,7 @@ keepass.generateNewKeyPair = function() {
 }
 
 keepass.isConfigured = function() {
-	if(typeof(keepass.databaseHash) == "undefined") {
+	if (typeof(keepass.databaseHash) == "undefined") {
 		keepass.getDatabaseHash();
 	}
 	return (keepass.databaseHash in keepass.keyRing);
@@ -504,27 +511,27 @@ keepass.checkStatus = function (status, tab) {
 	keepass.isDatabaseClosed = false;
 	keepass.isKeePassXCAvailable = true;
 
-	if(tab && page.tabs[tab.id]) {
+	if (tab && page.tabs[tab.id]) {
 		delete page.tabs[tab.id].errorMessage;
 	}
 	if (!success) {
 		keepass.associated.value = false;
 		keepass.associated.hash = null;
-		if(tab && page.tabs[tab.id]) {
+		if (tab && page.tabs[tab.id]) {
 			page.tabs[tab.id].errorMessage = "Unknown error: " + status;
 		}
 		console.log("Error: "+ status);
 		if (status == 503) {
 			keepass.isDatabaseClosed = true;
 			console.log("KeePass database is not opened");
-			if(tab && page.tabs[tab.id]) {
+			if (tab && page.tabs[tab.id]) {
 				page.tabs[tab.id].errorMessage = "KeePass database is not opened.";
 			}
 		}
 		else if (status == 0) {
 			keepass.isKeePassXCAvailable = false;
 			console.log("Could not connect to keepass");
-			if(tab && page.tabs[tab.id]) {
+			if (tab && page.tabs[tab.id]) {
 				page.tabs[tab.id].errorMessage = "Is KeePassXC installed and running?";
 			}
 		}
@@ -536,7 +543,7 @@ keepass.checkStatus = function (status, tab) {
 }
 
 keepass.convertKeyToKeyRing = function() {
-	if(keepass.keyId in localStorage && keepass.keyBody in localStorage && !("keyRing" in localStorage)) {
+	if (keepass.keyId in localStorage && keepass.keyBody in localStorage && !("keyRing" in localStorage)) {
 		keepass.getDatabaseHash(function(hash) {
 			keepass.saveKey(hash, localStorage[keepass.keyId], localStorage[keepass.keyBody]);
 		}, null);
@@ -549,7 +556,7 @@ keepass.convertKeyToKeyRing = function() {
 }
 
 keepass.saveKey = function(hash, id, key) {
-	if(!(hash in keepass.keyRing)) {
+	if (!(hash in keepass.keyRing)) {
 		keepass.keyRing[hash] = {
 			"id": id,
 			//"key": key,
@@ -568,7 +575,7 @@ keepass.saveKey = function(hash, id, key) {
 }
 
 keepass.updateLastUsed = function(hash) {
-	if((hash in keepass.keyRing)) {
+	if ((hash in keepass.keyRing)) {
 		keepass.keyRing[hash].lastUsed = new Date();
 		localStorage.keyRing = JSON.stringify(keepass.keyRing);
 	}
@@ -584,7 +591,7 @@ keepass.getIconColor = function() {
 }
 
 keepass.setcurrentKeePassXCVersion = function(version) {
-	if(version) {
+	if (version) {
 		keepass.currentKeePassXC = {
 			"version": version,
 			"versionParsed": parseInt(version.replace(/\./g,""))
@@ -593,10 +600,10 @@ keepass.setcurrentKeePassXCVersion = function(version) {
 }
 
 keepass.keePassXCUpdateAvailable = function() {
-	if(page.settings.checkUpdateKeePassXC && page.settings.checkUpdateKeePassXC > 0) {
+	if (page.settings.checkUpdateKeePassXC && page.settings.checkUpdateKeePassXC > 0) {
 		var lastChecked = (keepass.latestKeePassXC.lastChecked) ? new Date(keepass.latestKeePassXC.lastChecked) : new Date("11/21/1986");
 		var daysSinceLastCheck = Math.floor(((new Date()).getTime()-lastChecked.getTime())/86400000);
-		if(daysSinceLastCheck >= page.settings.checkUpdateKeePassXC) {
+		if (daysSinceLastCheck >= page.settings.checkUpdateKeePassXC) {
 			keepass.checkForNewKeePassXCVersion();
 		}
 	}
@@ -611,7 +618,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var $version = xhr.responseText;
-				if($version.substring(0, 1) == "2") {			
+				if ($version.substring(0, 1) == "2") {			
 					$version = $version.substring(0, $version.indexOf(" "));
 					keepass.latestKeePassXC.version = $version;
 					keepass.latestKeePassXC.versionParsed = parseInt($version.replace(/\./g,""));
@@ -622,7 +629,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 			}
 		}
 
-		if($version != -1) {
+		if ($version != -1) {
 			localStorage.latestKeePassXC = JSON.stringify(keepass.latestKeePassXC);
 		}
 	};
@@ -668,7 +675,7 @@ keepass.setVerifier = function(request, inputKey) {
 	var key = inputKey || null;
 	var id = null;
 
-	if(!key) {
+	if (!key) {
 		var info = keepass.getCryptoKey();
 		if (info == null) {
 			return null;
@@ -677,7 +684,7 @@ keepass.setVerifier = function(request, inputKey) {
 		key = info[1];
 	}
 
-	if(id) {
+	if (id) {
 		request.id = id;
 	}
 
@@ -725,7 +732,7 @@ keepass.verifyResponse = function(response, nonce, id) {
 
 	keepass.associated.value = (response.nonce == nonce);
 
-	if(id) {
+	if (id) {
 		keepass.associated.value = (keepass.associated.value && id == response.id);
 	}
 
@@ -744,14 +751,14 @@ keepass.b64d = function(d) {
 }
 
 keepass.getCryptoKey = function() {
-	if(!(keepass.databaseHash in keepass.keyRing)) {
+	if (!(keepass.databaseHash in keepass.keyRing)) {
 		return null;
 	}
 
 	var id = keepass.keyRing[keepass.databaseHash].id;
 	var key = null;
 
-	if(id) {
+	if (id) {
 		//key = keepass.keyRing[keepass.databaseHash].key;
 		key = keepass.b64e(keepass.keyPair.publicKey);
 	}

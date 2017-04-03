@@ -73,8 +73,6 @@ options.initGeneralSettings = function() {
         $("#dangerousSettings").toggle();
 	});
 
-	$("#hostname").val(options.settings["hostname"]);
-	$("#port").val(options.settings["port"]);
 	$("#blinkTimeout").val(options.settings["blinkTimeout"]);
 	$("#blinkMinTimeout").val(options.settings["blinkMinTimeout"]);
 	$("#allowedRedirect").val(options.settings["allowedRedirect"]);
@@ -172,20 +170,6 @@ options.initConnectedDatabases = function() {
 
 	$("#tab-connected-databases tr.clone:first .dropdown-menu:first").width("230px");
 
-	$("#tab-connected-databases tr.clone:first .color.dropdown .dropdown-menu a").click(function(e) {
-		e.preventDefault();
-		var $icon = $(this).attr("href").substring(1);
-		var $hash = $(this).closest("tr").data("hash");
-
-		$(this).parent().parent().find("a.dropdown-toggle:first").find("img:first").attr("src", "/icons/19x19/icon_normal_" + $icon + "_19x19.png");
-
-		options.keyRing[$hash].icon = $icon;
-		localStorage.keyRing = JSON.stringify(options.keyRing);
-        chrome.extension.sendMessage({
-            action: 'load_keyring'
-        });
-	});
-
 	var $trClone = $("#tab-connected-databases table tr.clone:first").clone(true);
 	$trClone.removeClass("clone");
 	for(var hash in options.keyRing) {
@@ -197,6 +181,7 @@ options.initConnectedDatabases = function() {
 		$("a.dropdown-toggle:first img:first", $tr).attr("src", "/icons/19x19/icon_normal_" + $icon + "_19x19.png");
 
 		$tr.children("td:first").text(options.keyRing[hash].id);
+		$tr.children("td:eq(1)").text(hash);
 		var lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : "unknown";
 		$tr.children("td:eq(2)").text(lastUsed);
 		var date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : "unknown";

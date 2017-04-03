@@ -107,6 +107,7 @@
 							<input type="checkbox" name="autoFillSingleEntry" value="1" /> Automatically fill-in single credentials entry.
 						</label>
 						<span class="help-block">If chromeKeePassXC does only receive a single entry from KeePassXC it automatically fills this credentials into the found credential fields.</span>
+						<span class="bg-danger">Warning! Using auto-fill is not safe. Use at your own risk.</span>
 					</div>
 				</p>
 				<hr />
@@ -162,15 +163,13 @@
 				<h2>Connected Databases</h2>
 				<hr />
 				<p>
-					If you are using several KeePass databases you can define a specific icon-color to each of them.
-					<br />
-					This will help you to easily determine from which database the credentials are retrieved.
+					The following KeePassXC databases are connected to chromeKeePassXC.
 				</p>
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>Identifier</th>
-							<th>Icon</th>
+							<th>Hash</th>
 							<th>Last used</th>
 							<th>Created</th>
 							<th>Delete</th>

@@ -5,7 +5,7 @@ event.onMessage = function(request, sender, callback) {
 	if (request.action in event.messageHandlers) {
 		//console.log("onMessage(" + request.action + ") for #" + sender.tab.id);
 
-		if(!sender.hasOwnProperty('tab') || sender.tab.id < 1) {
+		if (!sender.hasOwnProperty('tab') || sender.tab.id < 1) {
 			sender.tab = {};
 			sender.tab.id = page.currentTabId;
 		}
@@ -14,7 +14,7 @@ event.onMessage = function(request, sender, callback) {
 
 		// onMessage closes channel for callback automatically
 		// if this method does not return true
-		if(callback) {
+		if (callback) {
 			return true;
 		}
 	}
@@ -32,11 +32,11 @@ event.onMessage = function(request, sender, callback) {
  * @returns null (asynchronous)
  */
 event.invoke = function(handler, callback, senderTabId, args, secondTime) {
-	if(senderTabId < 1) {
+	if (senderTabId < 1) {
 		return;
 	}
 
-	if(!page.tabs[senderTabId]) {
+	if (!page.tabs[senderTabId]) {
 		page.createTabEntry(senderTabId);
 	}
 
@@ -49,7 +49,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 		//	return; // For example: only the background devtools or a popup are opened
 		//var tab = tabs[0];
 
-		if(!tab) {
+		if (!tab) {
 			return;
 		}
 
@@ -64,7 +64,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 			return;
 		}
 
-		if(!page.tabs[tab.id]) {
+		if (!page.tabs[tab.id]) {
 			page.createTabEntry(tab.id);
 		}
 
@@ -73,7 +73,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 		args.unshift(tab);
 		args.unshift(callback);
 
-		if(handler) {
+		if (handler) {
 			handler.apply(this, args);
 		}
 		else {
@@ -84,7 +84,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 
 
 event.onShowAlert = function(callback, tab, message) {
-	if( page.settings.supressAlerts ){ console.log(message); }
+	if (page.settings.supressAlerts) { console.log(message); }
 	else { alert(message); }
 }
 
@@ -94,7 +94,7 @@ event.onLoadSettings = function(callback, tab) {
 
 event.onLoadKeyRing = function(callback, tab) {
 	keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.parse(localStorage.keyRing);
-	if(keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
+	if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
 		keepass.associated = {
 			"value": false,
 			"hash": null
@@ -122,7 +122,7 @@ event.onGetStatus = function(callback, tab) {
 	}
 
 	browserAction.showDefault(null, tab);
-
+	console.log(page.tabs[tab.id].errorMessage);
 	callback({
 		identifier: keyId,
 		configured: configured,
@@ -153,7 +153,7 @@ event.onGetConnectedDatabase = function(callback, tab) {
 }
 
 event.onGetKeePassXCVersions = function(callback, tab) {
-	if(keepass.currentKeePassXC.version == 0) {
+	if (keepass.currentKeePassXC.version == 0) {
 		keepass.getDatabaseHash(tab);
 	}
 	callback({"current": keepass.currentKeePassXC.version, "latest": keepass.latestKeePassXC.version});
