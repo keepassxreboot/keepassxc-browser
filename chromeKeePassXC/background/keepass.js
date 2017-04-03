@@ -357,6 +357,11 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 		return true;
 	}
 
+	if (keepass.serverPublicKey.length == 0) {
+		page.tabs[tab.id].errorMessage = "No KeePassXC public key available.";
+		return false;
+	}
+
 	var key = keepass.b64e(keepass.keyPair.publicKey);
 	var nonce = nacl.randomBytes(keepass.keySize);
 
@@ -425,27 +430,34 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 
 	message = { "action": "get-databasehash" };
 	keepass.callbackOnId(keepass.nativePort.onMessage, "hash", function(response) {
-		console.log("hash reply received: "+ response.hash);
-		var oldDatabaseHash = keepass.databaseHash;
-		keepass.setcurrentKeePassXCVersion(response.version);
-		keepass.databaseHash = response.hash || "no-hash";
+		if (response.hash)
+		{
+			console.log("hash reply received: "+ response.hash);
+			var oldDatabaseHash = keepass.databaseHash;
+			keepass.setcurrentKeePassXCVersion(response.version);
+			keepass.databaseHash = response.hash || "no-hash";
 
-		if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
-			keepass.associated.value = false;
-			keepass.associated.hash = null;
+			if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
+				keepass.associated.value = false;
+				keepass.associated.hash = null;
+			}
+
+			if (tab && page.tabs[tab.id]) {
+				delete page.tabs[tab.id].errorMessage;
+			}
+
+			statusOK();
+			return keepass.databaseHash;
 		}
-
-		if (tab && page.tabs[tab.id]) {
-			delete page.tabs[tab.id].errorMessage;
+		else
+		{
+			page.tabs[tab.id].errorMessage = "Database hash not received.";
 		}
-
-		statusOK();
-		return keepass.databaseHash;
 	});
 	keepass.nativePort.postMessage(message);
 }
 
-keepass.changePublicKeys = function() {
+keepass.changePublicKeys = function(tab) {
 	if (!keepass.isConnected || !keepass.databaseHash || keepass.databaseHash !== "no-hash") {
 		return;
 	}
@@ -471,7 +483,7 @@ keepass.changePublicKeys = function() {
 
 		var id = response.id;
 		if (!keepass.verifyKeyResponse(response, key, nonce)) {
-			console.log("Error");
+			page.tabs[tab.id].errorMessage = "Key change was not successful.";
 		}
 		else {
 			console.log("Server public key: " + keepass.b64e(keepass.serverPublicKey));
