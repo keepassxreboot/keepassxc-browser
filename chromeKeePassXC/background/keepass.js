@@ -299,7 +299,8 @@ keepass.associate = function(callback, tab) {
 	var nonce = nacl.randomBytes(keepass.keySize);
 
 	var messageData = {
-		action: "associate"
+		action: "associate",
+		key: key
 	};
 
 	var request = {
@@ -333,7 +334,7 @@ keepass.associate = function(callback, tab) {
 					page.tabs[tab.id].errorMessage = "KeePassXC association failed, try again.";
 				}
 				else {
-					keepass.setCryptoKey(id, key);
+					keepass.setCryptoKey(id, key);	// Save the current public key as id key for the database
 					keepass.associated.value = true;
 					keepass.associated.hash = parsed.hash || 0;
 				}
@@ -342,7 +343,6 @@ keepass.associate = function(callback, tab) {
 			}
 		}		
 	});
-	
 	keepass.nativePort.postMessage(request);
 }
 
@@ -364,9 +364,11 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 
 	var key = keepass.b64e(keepass.keyPair.publicKey);
 	var nonce = nacl.randomBytes(keepass.keySize);
+	var idkey = keepass.getCryptoKey();
 
 	var messageData = {
-		"action": "test-associate",
+		action: "test-associate",
+		key: idkey
 	};
 	
 	var request = {
@@ -417,6 +419,7 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 					}
 				}
 			}
+			return keepass.isAssociated();
 		}
 	});
 	keepass.nativePort.postMessage(request);
@@ -571,7 +574,7 @@ keepass.saveKey = function(hash, id, key) {
 	if (!(hash in keepass.keyRing)) {
 		keepass.keyRing[hash] = {
 			"id": id,
-			//"key": key,
+			"key": key,
 			"hash": hash,
 			"icon": "blue",
 			"created": new Date(),
@@ -580,7 +583,7 @@ keepass.saveKey = function(hash, id, key) {
 	}
 	else {
 		keepass.keyRing[hash].id = id;
-		//keepass.keyRing[hash].key = key;
+		keepass.keyRing[hash].key = key;
 		keepass.keyRing[hash].hash = hash;
 	}
 	localStorage.keyRing = JSON.stringify(keepass.keyRing);
@@ -732,7 +735,7 @@ keepass.verifyKeyResponse = function(response, key, nonce) {
 
 keepass.verifyResponse = function(response, nonce, id) {
 	keepass.associated.value = response.success;
-	if (!response.success) {
+	if (response.success != "true") {
 		keepass.associated.hash = null;
 		return false;
 	}
@@ -771,11 +774,11 @@ keepass.getCryptoKey = function() {
 	var key = null;
 
 	if (id) {
-		//key = keepass.keyRing[keepass.databaseHash].key;
-		key = keepass.b64e(keepass.keyPair.publicKey);
+		key = keepass.keyRing[keepass.databaseHash].key;
 	}
 
-	return key ? [id, key] : null;
+	//return key ? [id, key] : null;
+	return key ? key : null;
 }
 
 keepass.setCryptoKey = function(id, key) {

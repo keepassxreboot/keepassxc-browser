@@ -28,7 +28,7 @@ Now the requests are encrypted by [TweetNaCl.js](https://github.com/dchest/tweet
 3. All messages (excluding get-databasehash) are now encrypted.
 4. When chromeKeePassXC sends a message it is encrypted with KeePassXC's public key, a random generated nonce and chromeKeePassXC's secret key.
 5. When KeePassXC sends a message it is encrypted with chromeKeePassXC's public key etc.
-6. Databases are stored based on the database hash instead of the key because a new key pair is generated each time chromeKeePassXC is launched.
+6. Databases are stored based on the current public key used with `associate`. A new key pair for data transfer is generated each time chromeKeePassXC is launched.
 
 Encrypted messages are built with these JSON parameters:
 - action - `test-associate`, `associate`, `get-logins`, `get-logins-count`, `set-login`...
@@ -56,7 +56,8 @@ Response (success):
 Unencrypted message:
 ```javascript
 {
-	"action": "associate"
+	"action": "associate",
+	"key": "<current public key>"
 }
 ```
 
@@ -84,7 +85,8 @@ Response message data (success, decrypted):
 Unencrypted message:
 ```javascript
 {
-	"action": "test-associate"
+	"action": "test-associate",
+	"key": "<saved database public key>"
 }
 ```
 
