@@ -61,8 +61,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 	var request = {
 		action: "set-login",
 		message: keepass.encrypt(messageData, nonce),
-		//nonce: keepass.b64e(nonce)
-		nonce: "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"	// Hard-coded test nonce
+		nonce: keepass.b64e(nonce)
 	};
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, "set-login", function(response) {
@@ -125,8 +124,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 	var request = {
 		action: "get-logins",
 		message: keepass.encrypt(messageData, nonce),
-		//nonce: keepass.b64e(nonce)
-		nonce: "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"	// Hard-coded test nonce
+		nonce: keepass.b64e(nonce)
 	};
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, "get-logins", function(response) {
@@ -224,8 +222,7 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 	var request = {
 		action: "generate-password",
 		message: keepass.encrypt(messageData, nonce),
-		//nonce: keepass.b64e(nonce)
-		nonce: "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"	// Hard-coded test nonce
+		nonce: keepass.b64e(nonce)
 	};
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, "generate-password", function(response) {
@@ -306,8 +303,7 @@ keepass.associate = function(callback, tab) {
 	var request = {
 		action: "associate",
 		message: keepass.encrypt(messageData, nonce),
-		//nonce: keepass.b64e(nonce)
-		nonce: "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"	// Hard-coded test nonce
+		nonce: keepass.b64e(nonce)
 	};
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, "associate", function(response) {
@@ -374,10 +370,10 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 	var request = {
 		action: "test-associate",
 		message: keepass.encrypt(messageData, nonce),
-		//nonce: keepass.b64e(nonce)
-		nonce: "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"	// Hard-coded test nonce
+		nonce: keepass.b64e(nonce)
 	};
 
+	// TODO: Fix the return value via async(?)
 	keepass.callbackOnId(keepass.nativePort.onMessage, "test-associate", function(response) {
 		if (response.message && response.nonce) {
 			var res = keepass.decrypt(response.message, response.nonce);
@@ -419,10 +415,10 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 					}
 				}
 			}
-			return keepass.isAssociated();
 		}
 	});
 	keepass.nativePort.postMessage(request);
+	console.log("IsAssociated: " + keepass.isAssociated() ? "true" : "false");
 	return keepass.isAssociated();
 }
 
@@ -432,7 +428,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	}
 
 	message = { "action": "get-databasehash" };
-	keepass.callbackOnId(keepass.nativePort.onMessage, "hash", function(response) {
+	keepass.callbackOnId(keepass.nativePort.onMessage, "get-databasehash", function(response) {
 		if (response.hash)
 		{
 			console.log("hash reply received: "+ response.hash);
@@ -500,12 +496,7 @@ keepass.generateNewKeyPair = function() {
 	if (keepass.keyPair.publicKey !== null && keepass.keyPair.secretKey !== null)
 		return;
 
-	// For debugging (server public: w5vx7v7rPv/SWnyeyeSztvdGMinYr0q+bBwLMTeDrzo=   server secret: 8AUkW7LBxx0Na32nWPVLq8U8xOCeC0Xya1NTcRrd7f4=)
-	keepass.keyPair.publicKey = keepass.b64d("dIPmlz7CutTJwb4c7pgGuflE2xfISVpI0YAyeyXHhU8=");
-	keepass.keyPair.secretKey = keepass.b64d("XjrUmGhhECdnSbRZbfAhb8jqGB2uK50d/HPRJG/OcFk=");
-
-	// The real key pair
-	//keepass.keyPair = nacl.box.keyPair();
+	keepass.keyPair = nacl.box.keyPair();
 	console.log(keepass.b64e(keepass.keyPair.publicKey) + " " + keepass.b64e(keepass.keyPair.secretKey));
 }
 
