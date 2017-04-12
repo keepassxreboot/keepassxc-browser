@@ -111,18 +111,10 @@ Response message data (success, decrypted):
 ```
 
 ### generate-password
-Unencrypted message:
-```javascript
-{
-	"action": "generate-password"
-}
-```
-
 Request:
 ```javascript
 {
 	"action": "generate-password",
-	"message": encryptedMessage
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```

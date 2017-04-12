@@ -215,13 +215,8 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 	var key = keepass.b64e(keepass.keyPair.publicKey);
 	var nonce = nacl.randomBytes(keepass.keySize);
 
-	var messageData = {
-		action: "generate-password"
-	};
-
 	var request = {
 		action: "generate-password",
-		message: keepass.encrypt(messageData, nonce),
 		nonce: keepass.b64e(nonce)
 	};
 
