@@ -169,7 +169,7 @@ keepass.handleReply = function (msg) {
 	// Specific callback handling. Needed?
 	/*var reply;
 	if (msg.action == "generate-password") {
-		
+
 	}
 	else {
 		reply = msg;
@@ -185,7 +185,7 @@ keepass.callbackOnId = function (ev, id, callback) {
 			if(msg.action == id) {
 				var reply = keepass.handleReply(msg);
 				ev.removeListener(handler);
-				callback(reply);				
+				callback(reply);
 			}
 		}
 		return handler;
@@ -332,7 +332,7 @@ keepass.associate = function(callback, tab) {
 
 				browserAction.show(callback, tab);
 			}
-		}		
+		}
 	});
 	keepass.nativePort.postMessage(request);
 }
@@ -355,27 +355,29 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 
 	var key = keepass.b64e(keepass.keyPair.publicKey);
 	var nonce = nacl.randomBytes(keepass.keySize);
-	var idkey = keepass.getCryptoKey();
+	var dbkeys = keepass.getCryptoKey();
+	var id = dbkeys[0];
+	var idkey = dbkeys[1];
+	console.log("ID: " + id);
+	console.log("Key: " + idkey);
 
 	var messageData = {
 		action: "test-associate",
 		key: idkey
 	};
-	
+
 	var request = {
 		action: "test-associate",
 		message: keepass.encrypt(messageData, nonce),
 		nonce: keepass.b64e(nonce)
 	};
 
-	// TODO: Fix the return value via async(?)
+	// TODO: Fix the return value via async
 	keepass.callbackOnId(keepass.nativePort.onMessage, "test-associate", function(response) {
 		if (response.message && response.nonce) {
 			var res = keepass.decrypt(response.message, response.nonce);
-		  	if (res == false)
-		  	{
+	  	if (res == false) {
 				console.log("Failed to decrypt message");
-
 			}
 			else
 			{
@@ -419,6 +421,7 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 
 keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	if (!keepass.isConnected) {
+		page.tabs[tab.id].errorMessage = "Not connected with KeePassXC.";
 		return;
 	}
 
@@ -468,7 +471,7 @@ keepass.changePublicKeys = function(tab) {
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, "change-public-keys", function(response) {
 		console.log("change-public-keys reply received");
-		if(response.version) {
+		if (response.version) {
 			keepass.currentKeePassXC = {
 				"version": response.version,
 				"versionParsed": parseInt(response.version.replace(/\./g,""))
@@ -619,7 +622,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var $version = xhr.responseText;
-				if ($version.substring(0, 1) == "2") {			
+				if ($version.substring(0, 1) == "2") {
 					$version = $version.substring(0, $version.indexOf(" "));
 					keepass.latestKeePassXC.version = $version;
 					keepass.latestKeePassXC.versionParsed = parseInt($version.replace(/\./g,""));
@@ -639,7 +642,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 		console.log("checkForNewKeePassXCVersion error: " + e);
 	}
 
-	xhr.send();	
+	xhr.send();
 	keepass.latestKeePassXC.lastChecked = new Date();
 }
 
@@ -763,8 +766,8 @@ keepass.getCryptoKey = function() {
 		key = keepass.keyRing[keepass.databaseHash].key;
 	}
 
-	//return key ? [id, key] : null;
-	return key ? key : null;
+	return key ? [id, key] : null;
+	//return key ? key : null;
 }
 
 keepass.setCryptoKey = function(id, key) {
