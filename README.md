@@ -86,7 +86,7 @@ Unencrypted message:
 ```javascript
 {
 	"action": "test-associate",
-	"id": "saved database identifier>",
+	"id": "<saved database identifier>",
 	"key": "<saved database public key>"
 }
 ```
