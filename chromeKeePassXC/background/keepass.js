@@ -41,18 +41,21 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		return;
 	}
 
+	var dbkeys = keepass.getCryptoKey();
+	var id = dbkeys[0];
+
 	// build request
 	var messageData = {
-		action: "set-login"
+		action: "set-login",
+		id: id,
+		login: username,
+		password: password,
+		url: url,
+		submitUrl: url
 	};
 
 	var key = keepass.b64e(keepass.keyPair.publicKey);
 	var nonce = nacl.randomBytes(keepass.keySize);
-
-	messageData.login = username;
-	messageData.password = password;
-	messageData.url = url;
-	messageData.submitUrl = url;
 
 	if (entryId) {
 		messageData.uuid = entryId;
@@ -81,6 +84,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 				if (keepass.verifyResponse(parsed, response.nonce)) {
 					code = "success";
 				}
+				callback(code);
 			}
 		}
 		else {
@@ -88,7 +92,6 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		}
 	});
 	keepass.nativePort.postMessage(request);
-	callback(code);
 }
 
 keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCallback, triggerUnlock) {
@@ -358,11 +361,10 @@ keepass.testAssociation = function (tab, triggerUnlock) {
 	var dbkeys = keepass.getCryptoKey();
 	var id = dbkeys[0];
 	var idkey = dbkeys[1];
-	console.log("ID: " + id);
-	console.log("Key: " + idkey);
 
 	var messageData = {
 		action: "test-associate",
+		id: id,
 		key: idkey
 	};
 
@@ -442,13 +444,20 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 			if (tab && page.tabs[tab.id]) {
 				delete page.tabs[tab.id].errorMessage;
 			}
+			
+			console.log("Public key available: " + keepass.serverPublicKey ? "true" : "false");
+			if (!keepass.serverPublicKey) {
+				console.log("retrieve new keys");
+				keepass.changePublicKeys();
+			}
 
 			statusOK();
 			return keepass.databaseHash;
 		}
 		else
 		{
-			page.tabs[tab.id].errorMessage = "Database hash not received.";
+			if (tab && tab.id)
+				page.tabs[tab.id].errorMessage = "Database hash not received.";
 		}
 	});
 	keepass.nativePort.postMessage(message);
