@@ -155,7 +155,9 @@ event.onGetConnectedDatabase = function(callback, tab) {
 
 event.onGetKeePassXCVersions = function(callback, tab) {
 	if (keepass.currentKeePassXC.version == 0) {
-		keepass.getDatabaseHash(tab);
+		keepass.getDatabaseHash(function(response) {
+			callback({"current": keepass.currentKeePassXC.version, "latest": keepass.latestKeePassXC.version});
+		}, tab);
 	}
 	callback({"current": keepass.currentKeePassXC.version, "latest": keepass.latestKeePassXC.version});
 }

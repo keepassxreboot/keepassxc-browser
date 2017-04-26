@@ -70,18 +70,20 @@ browserAction.showDefault = function(callback, tab) {
 		iconType: "normal",
 		popup: "popup.html"
 	}
-	if(!keepass.isConfigured() || keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable || page.tabs[tab.id].errorMessage) {
-		stackData.iconType = "cross";
-	}
+	keepass.isConfigured(function(response) {
+		if (!response || keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable || page.tabs[tab.id].errorMessage) {
+			stackData.iconType = "cross";
+		}
 
-    if(page.tabs[tab.id].loginList.length > 0) {
-        stackData.iconType = "questionmark";
-        stackData.popup = "popup_login.html";
-    }
+		if(page.tabs[tab.id].loginList.length > 0) {
+	        stackData.iconType = "questionmark";
+	        stackData.popup = "popup_login.html";
+	    }
 
-	browserAction.stackUnshift(stackData, tab.id);
+		browserAction.stackUnshift(stackData, tab.id);
 
-	browserAction.show(null, tab);
+		browserAction.show(null, tab);
+	});
 }
 
 browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visibleForMilliSeconds, visibleForPageUpdates, redirectOffset,  dontShow) {

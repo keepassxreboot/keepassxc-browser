@@ -7,8 +7,11 @@ page.initOpenedTabs();
 // initial connection with KeePassXC
 keepass.connectToNative();
 keepass.generateNewKeyPair();
-keepass.getDatabaseHash(null, null);
-keepass.changePublicKeys();
+//keepass.getDatabaseHash(null, null);
+//keepass.changePublicKeys();
+keepass.getDatabaseHash(function(res) {
+	keepass.changePublicKeys();
+}, null);
 // set initial tab-ID
 chrome.tabs.query({"active": true, "windowId": chrome.windows.WINDOW_ID_CURRENT}, function(tabs) {
 	if (tabs.length === 0)

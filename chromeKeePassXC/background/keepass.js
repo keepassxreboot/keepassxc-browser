@@ -353,7 +353,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		}
 
 		if (keepass.serverPublicKey.length == 0) {
-			if (tab && tab.id) {
+			if (tab && page.tabs[tab.id]) {
 				var errorMessage = "No KeePassXC public key available.";
 				page.tabs[tab.id].errorMessage = errorMessage;
 				console.log(errorMessage);
@@ -446,18 +446,26 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 				keepass.associated.hash = null;
 			}
 
-			if (tab && page.tabs[tab.id]) {
-				delete page.tabs[tab.id].errorMessage;
-			}
-			
 			statusOK();
 			callback(response.hash);
 		}
+		else if (response.errorCode)
+		{
+			keepass.databaseHash = "no-hash";
+			keepass.isDatabaseClosed = true;
+			console.log("Error: KeePass database is not opened.");
+			if (tab && page.tabs[tab.id]) {
+				page.tabs[tab.id].errorMessage = "KeePass database is not opened.";
+			}
+			callback(keepass.databaseHash);
+		}
 		else
 		{
-			if (tab && tab.id) {
+			keepass.databaseHash = "no-hash";
+			if (tab && page.tabs[tab.id]) {
 				page.tabs[tab.id].errorMessage = "Database hash not received.";
 			}
+			callback(keepass.databaseHash);
 		}
 	});
 	keepass.nativePort.postMessage(message);
@@ -489,7 +497,7 @@ keepass.changePublicKeys = function(tab) {
 
 		var id = response.id;
 		if (!keepass.verifyKeyResponse(response, key, nonce)) {
-			if (tab && tab.id) {
+			if (tab && page.tabs[tab.id]) {
 				page.tabs[tab.id].errorMessage = "Key change was not successful.";
 				console.log("Key change was not successful.");
 			}
@@ -515,6 +523,10 @@ keepass.isConfigured = function(callback) {
 		keepass.getDatabaseHash(function(dbHash) {
 			callback(keepass.databaseHash in keepass.keyRing);
 		}, null);
+	}
+	else
+	{
+		callback(keepass.databaseHash in keepass.keyRing);
 	}
 }
 
@@ -675,9 +687,11 @@ keepass.onNativeMessage = function (response) {
 }
 
 function onDisconnected() {
-  console.log("Failed to connect: " + chrome.runtime.lastError.message);
-  keepass.nativePort = null;
-  keepass.isConnected = false;
+	console.log("Failed to connect: " + chrome.runtime.lastError.message);
+	keepass.nativePort = null;
+	keepass.isConnected = false;
+	keepass.isDatabaseClosed = true;
+	keepass.isKeePassXCAvailable = false;
 }
 
 keepass.nativeConnect = function() {
