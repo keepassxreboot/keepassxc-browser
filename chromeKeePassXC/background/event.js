@@ -113,25 +113,26 @@ event.onSaveSettings = function(callback, tab, settings) {
 }
 
 event.onGetStatus = function(callback, tab) {
-	keepass.testAssociation(tab);
+	keepass.testAssociation(function(response) {
+		keepass.isConfigured(function(configured) {
+			var keyId = null;
+			if (configured) {
+				keyId = keepass.keyRing[keepass.databaseHash].id;
+			}
 
-	var configured = keepass.isConfigured();
-	var keyId = null;
-	if (configured) {
-		keyId = keepass.keyRing[keepass.databaseHash].id;
-	}
-
-	browserAction.showDefault(null, tab);
-	console.log(page.tabs[tab.id].errorMessage);
-	callback({
-		identifier: keyId,
-		configured: configured,
-		databaseClosed: keepass.isDatabaseClosed,
-		keePassXCAvailable: keepass.isKeePassXCAvailable,
-		encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
-		associated: keepass.isAssociated(),
-		error: page.tabs[tab.id].errorMessage
-	});
+			browserAction.showDefault(null, tab);
+			console.log(page.tabs[tab.id].errorMessage);
+			callback({
+				identifier: keyId,
+				configured: configured,
+				databaseClosed: keepass.isDatabaseClosed,
+				keePassXCAvailable: keepass.isKeePassXCAvailable,
+				encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
+				associated: keepass.isAssociated(),
+				error: page.tabs[tab.id].errorMessage
+			});
+		});
+	}, tab);
 }
 
 event.onPopStack = function(callback, tab) {
