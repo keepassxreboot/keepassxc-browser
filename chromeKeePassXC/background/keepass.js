@@ -19,8 +19,6 @@ keepass.databaseHash = "no-hash"; //no-hash = keepasshttp is too old and does no
 keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 keepass.keyId = "chromekeepassxc-cryptokey-name";
 keepass.keyBody = "chromekeepassxc-key";
-keepass.to_s = cryptoHelpers.convertByteArrayToString;
-keepass.to_b = cryptoHelpers.convertStringToByteArray;
 
 
 keepass.addCredentials = function(callback, tab, username, password, url) {
@@ -365,6 +363,16 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		var key = keepass.b64e(keepass.keyPair.publicKey);
 		var nonce = nacl.randomBytes(keepass.keySize);
 		var dbkeys = keepass.getCryptoKey();
+		if (dbkeys == null) {
+			if (tab && page.tabs[tab.id]) {
+				var errorMessage = "No saved databases found.";
+				page.tabs[tab.id].errorMessage = errorMessage;
+				console.log(errorMessage);
+			}
+			callback(false);
+			return false;
+		}
+
 		var id = dbkeys[0];
 		var idkey = dbkeys[1];
 

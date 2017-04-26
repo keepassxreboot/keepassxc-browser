@@ -21,11 +21,8 @@
 	"options_page": "options/options.html",
 	"background": {
 		"scripts": [
-			"background/aes.js",
-			"background/cryptoHelpers.js",
 			"background/nacl.min.js",
 			"background/nacl-util.js",
-			"background/utf8.js",
 			"background/keepass.js",
 			"background/httpauth.js",
 			"background/browserAction.js",
