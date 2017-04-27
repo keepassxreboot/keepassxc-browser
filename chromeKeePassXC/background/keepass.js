@@ -480,7 +480,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 }
 
 keepass.changePublicKeys = function(tab) {
-	if (!keepass.isConnected || !keepass.databaseHash || keepass.databaseHash !== "no-hash") {
+	if (!keepass.isConnected || keepass.serverPublicKey) {
 		return;
 	}
 

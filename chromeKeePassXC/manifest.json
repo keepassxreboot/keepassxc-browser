@@ -1,6 +1,6 @@
 {
 	"name": "chromeKeePassXC",
-	"version": "0.1.0",
+	"version": "0.1.1",
     "manifest_version": 2,
 	"description": "KeePassXC integration for Chrome",
 	"icons": {
@@ -53,6 +53,22 @@
 			"all_frames": true
 		}
 	],
+	"commands": {
+		"fill-username-password": {
+			"description": "Insert username + password",
+			"suggested_key": {
+				"default": "Ctrl+Shift+U",
+				"mac": "Command+Shift+U"
+			}
+		},
+		"fill-password": {
+			"description": "Insert a password",
+			"suggested_key": {
+				"default": "Ctrl+Shift+P",
+				"mac": "Command+Shift+P"
+			}
+		}
+	},
 	"web_accessible_resources": [
 		"jquery.min.map",
 		"icons/key_16x16.png",
