@@ -9,7 +9,7 @@ keepass.isKeePassXCAvailable = false;
 keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = {"version": 0, "versionParsed": 0};
 keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) == 'undefined') ? {"version": 0, "versionParsed": 0, "lastChecked": null} : JSON.parse(localStorage.latestKeePassXC);
-keepass.requiredKeePassXC = 212;
+keepass.requiredKeePassXC = 214;
 keepass.nativeHostName = "com.varjolintu.chromekeepassxc";
 keepass.nativePort = null;
 keepass.keySize = 24;
@@ -802,7 +802,6 @@ keepass.getCryptoKey = function() {
 	}
 
 	return key ? [id, key] : null;
-	//return key ? key : null;
 }
 
 keepass.setCryptoKey = function(id, key) {
