@@ -22,7 +22,7 @@ page.initSettings = function() {
 		page.settings.usePasswordGenerator = 1;
 	}
 	if(!("autoFillSingleEntry" in page.settings)) {
-		page.settings.autoFillSingleEntry = 1;
+		page.settings.autoFillSingleEntry = 0;
 	}
 	if(!("autoRetrieveCredentials" in page.settings)) {
 		page.settings.autoRetrieveCredentials = 1;
