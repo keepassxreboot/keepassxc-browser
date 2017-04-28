@@ -119,16 +119,19 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		var entries = [];
 		var key = keepass.b64e(keepass.keyPair.publicKey);
 		var nonce = nacl.randomBytes(keepass.keySize);
+		var dbkeys = keepass.getCryptoKey();
+		var id = dbkeys[0];
 
 		var messageData = {
 			action: "get-logins",
+			id: id,
 			url: url
 		};
 
 		if (submiturl) {
 			messageData.submitUrl = submiturl;
 		}
-
+		console.log(messageData);
 		var request = {
 			action: "get-logins",
 			message: keepass.encrypt(messageData, nonce),
@@ -276,62 +279,62 @@ keepass.associate = function(callback, tab) {
 		return;
 	}
 
-	keepass.getDatabaseHash(callback, tab);
-
-	if (keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
-		return;
-	}
-
-	page.tabs[tab.id].errorMessage = null;
-
-	var key = keepass.b64e(keepass.keyPair.publicKey);
-	var nonce = nacl.randomBytes(keepass.keySize);
-
-	var messageData = {
-		action: "associate",
-		key: key
-	};
-
-	var request = {
-		action: "associate",
-		message: keepass.encrypt(messageData, nonce),
-		nonce: keepass.b64e(nonce)
-	};
-
-	keepass.callbackOnId(keepass.nativePort.onMessage, "associate", function(response) {
-		if (response.message && response.nonce) {
-			var res = keepass.decrypt(response.message, response.nonce);
-		  	if (res == false)
-		  	{
-				console.log("Failed to decrypt message");
-			}
-			else
-			{
-				var message = nacl.util.encodeUTF8(res);
-				var parsed = JSON.parse(message);
-				console.log(parsed);
-
-				if (parsed.version) {
-					keepass.currentKeePassXC = {
-						"version": parsed.version,
-						"versionParsed": parseInt(parsed.version.replace(/\./g,""))};
-				}
-
-				var id = parsed.id;
-				if (!keepass.verifyResponse(parsed, response.nonce)) {
-					page.tabs[tab.id].errorMessage = "KeePassXC association failed, try again.";
-				}
-				else {
-					keepass.setCryptoKey(id, key);	// Save the current public key as id key for the database
-					keepass.associated.value = true;
-					keepass.associated.hash = parsed.hash || 0;
-				}
-
-				browserAction.show(callback, tab);
-			}
+	keepass.getDatabaseHash(function(res) {
+		if (keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
+			return;
 		}
-	});
-	keepass.nativePort.postMessage(request);
+
+		page.tabs[tab.id].errorMessage = null;
+
+		var key = keepass.b64e(keepass.keyPair.publicKey);
+		var nonce = nacl.randomBytes(keepass.keySize);
+
+		var messageData = {
+			action: "associate",
+			key: key
+		};
+
+		var request = {
+			action: "associate",
+			message: keepass.encrypt(messageData, nonce),
+			nonce: keepass.b64e(nonce)
+		};
+
+		keepass.callbackOnId(keepass.nativePort.onMessage, "associate", function(response) {
+			if (response.message && response.nonce) {
+				var res = keepass.decrypt(response.message, response.nonce);
+			  	if (res == false)
+			  	{
+					console.log("Failed to decrypt message");
+				}
+				else
+				{
+					var message = nacl.util.encodeUTF8(res);
+					var parsed = JSON.parse(message);
+					console.log(parsed);
+
+					if (parsed.version) {
+						keepass.currentKeePassXC = {
+							"version": parsed.version,
+							"versionParsed": parseInt(parsed.version.replace(/\./g,""))};
+					}
+
+					var id = parsed.id;
+					if (!keepass.verifyResponse(parsed, response.nonce)) {
+						page.tabs[tab.id].errorMessage = "KeePassXC association failed, try again.";
+					}
+					else {
+						keepass.setCryptoKey(id, key);	// Save the current public key as id key for the database
+						keepass.associated.value = true;
+						keepass.associated.hash = parsed.hash || 0;
+					}
+
+					browserAction.show(callback, tab);
+				}
+			}
+		});
+		keepass.nativePort.postMessage(request);
+	}, tab);
 }
 
 keepass.testAssociation = function (callback, tab, triggerUnlock) {
@@ -350,7 +353,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 			return true;
 		}
 
-		if (keepass.serverPublicKey.length == 0) {
+		if (!keepass.serverPublicKey) {
 			if (tab && page.tabs[tab.id]) {
 				var errorMessage = "No KeePassXC public key available.";
 				page.tabs[tab.id].errorMessage = errorMessage;
@@ -381,7 +384,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 			id: id,
 			key: idkey
 		};
-
+		console.log(messageData);
 		var request = {
 			action: "test-associate",
 			message: keepass.encrypt(messageData, nonce),
@@ -440,6 +443,10 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 		return;
 	}
 
+	if (!keepass.serverPublicKey) {
+		keepass.changePublicKeys(tab, null);
+	}
+
 	message = { "action": "get-databasehash" };
 	keepass.callbackOnId(keepass.nativePort.onMessage, "get-databasehash", function(response) {
 		if (response.hash)
@@ -479,7 +486,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	keepass.nativePort.postMessage(message);
 }
 
-keepass.changePublicKeys = function(tab) {
+keepass.changePublicKeys = function(tab, callback) {
 	if (!keepass.isConnected || keepass.serverPublicKey) {
 		return;
 	}
@@ -503,16 +510,17 @@ keepass.changePublicKeys = function(tab) {
 			};
 		}
 
-		var id = response.id;
 		if (!keepass.verifyKeyResponse(response, key, nonce)) {
 			if (tab && page.tabs[tab.id]) {
 				page.tabs[tab.id].errorMessage = "Key change was not successful.";
 				console.log("Key change was not successful.");
+				callback(false);
 			}
 		}
 		else {
 			console.log("Server public key: " + keepass.b64e(keepass.serverPublicKey));
 		}
+		callback(true);
 
 	});
 	keepass.nativePort.postMessage(message);
@@ -542,47 +550,15 @@ keepass.isAssociated = function() {
 	return (keepass.associated.value && keepass.associated.hash && keepass.associated.hash == keepass.databaseHash);
 }
 
-// Needed?
-keepass.checkStatus = function (status, tab) {
-	var success = (status >= 200 && status <= 299);
-	keepass.isDatabaseClosed = false;
-	keepass.isKeePassXCAvailable = true;
-
-	if (tab && page.tabs[tab.id]) {
-		delete page.tabs[tab.id].errorMessage;
-	}
-	if (!success) {
-		keepass.associated.value = false;
-		keepass.associated.hash = null;
-		if (tab && page.tabs[tab.id]) {
-			page.tabs[tab.id].errorMessage = "Unknown error: " + status;
-		}
-		console.log("Error: "+ status);
-		if (status == 503) {
-			keepass.isDatabaseClosed = true;
-			console.log("KeePass database is not opened");
-			if (tab && page.tabs[tab.id]) {
-				page.tabs[tab.id].errorMessage = "KeePass database is not opened.";
-			}
-		}
-		else if (status == 0) {
-			keepass.isKeePassXCAvailable = false;
-			console.log("Could not connect to keepass");
-			if (tab && page.tabs[tab.id]) {
-				page.tabs[tab.id].errorMessage = "Is KeePassXC installed and running?";
-			}
-		}
-	}
-
-	page.debug("keepass.checkStatus({1}, [tabID]) => {2}", status, success);
-
-	return success;
-}
-
 keepass.convertKeyToKeyRing = function() {
 	if (keepass.keyId in localStorage && keepass.keyBody in localStorage && !("keyRing" in localStorage)) {
 		keepass.getDatabaseHash(function(hash) {
 			keepass.saveKey(hash, localStorage[keepass.keyId], localStorage[keepass.keyBody]);
+
+			if ("keyRing" in localStorage) {
+				delete localStorage[keepass.keyId];
+				delete localStorage[keepass.keyBody];
+			}
 		}, null);
 	}
 
@@ -708,30 +684,6 @@ keepass.nativeConnect = function() {
 	keepass.nativePort.onMessage.addListener(keepass.onNativeMessage);
 	keepass.nativePort.onDisconnect.addListener(onDisconnected);
 	keepass.isConnected = true;
-}
-
-keepass.setVerifier = function(request, inputKey) {
-	var key = inputKey || null;
-	var id = null;
-
-	if (!key) {
-		var info = keepass.getCryptoKey();
-		if (info == null) {
-			return null;
-		}
-		id = info[0];
-		key = info[1];
-	}
-
-	if (id) {
-		request.id = id;
-	}
-
-	var nonce = nacl.randomBytes(keepass.keySize);
-	request.nonce = keepass.b64e(nonce);
-	request.publicKey = key;
-
-	return [id, key];
 }
 
 keepass.verifyKeyResponse = function(response, key, nonce) {

@@ -35,6 +35,26 @@ Encrypted messages are built with these JSON parameters:
 - message - Encrypted message, base64 encoded
 - nonce - 24 bytes long random data, base64 encoded. This must be the same when responding to a request.
 
+### change-public-keys
+Request:
+```javascript
+{
+	"action": "change-public-keys",
+	"publicKey": "<current public key>",
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+}
+```
+
+Response (success):
+```javascript
+{
+	"action": "change-public-keys",
+	"version": "2.1.2",
+	"publicKey": "<host public key>",
+	"success": "true"
+}
+```
+
 ### get-databasehash
 Request:
 ```javascript
