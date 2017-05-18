@@ -6,7 +6,7 @@
 	font-family: Verdana, Arial, sans-serif !important;
 	color: #222222 !important;
 }
-.cip-ui-dialog-titlebar-close {
+.ui-dialog-titlebar-close {
 	visibility: hidden !important;
 }
 .cip-ui-widget-overlay {
@@ -169,4 +169,38 @@
 	border: 2px solid deepskyblue;
 	color: #efefef;
 	background-color:rgba(30,144,255,0.4);
+}
+
+
+.b2c-input-append {
+  display: inline-block;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.b2c-input-append input,
+.b2c-input-append select,
+.b2c-input-append .b2c-uneditable-input,
+.b2c-input-append .b2c-dropdown-menu,
+.b2c-input-append .b2c-popover {
+  font-size: 14px;
+}
+
+.b2c-input-append input,
+.b2c-input-append select,
+.b2c-input-append .b2c-uneditable-input {
+  position: relative;
+  margin-bottom: 0;
+  *margin-left: 0;
+  vertical-align: top;
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.b2c-input-append input:focus,
+.b2c-input-append select:focus,
+.b2c-input-append .b2c-b2c-uneditable-input:focus {
+  z-index: 2;
 }

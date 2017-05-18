@@ -1,3 +1,10 @@
+// This quick method Copyright (c) 2016 David Rousset
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();
+
 var event = {};
 
 
@@ -43,8 +50,8 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 	// remove information from no longer existing tabs
 	page.removePageInformationFromNotExistingTabs();
 
-	chrome.tabs.get(senderTabId, function(tab) {
-	//chrome.tabs.query({"active": true, "windowId": chrome.windows.WINDOW_ID_CURRENT}, function(tabs) {
+	browser.tabs.get(senderTabId, function(tab) {
+	//browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
 		//if (tabs.length === 0)
 		//	return; // For example: only the background devtools or a popup are opened
 		//var tab = tabs[0];

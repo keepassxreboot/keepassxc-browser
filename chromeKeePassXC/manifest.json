@@ -1,8 +1,9 @@
 {
+	"manifest_version": 2,
 	"name": "chromeKeePassXC",
-	"version": "0.1.1",
-    "manifest_version": 2,
-	"description": "KeePassXC integration for Chrome",
+	"version": "0.1.2",
+	"description": "KeePassXC integration for modern web browsers",
+	"author": "Sami Vänttinen",
 	"icons": {
 		"16": "icons/keepassxc_16x16.png",
 		"48": "icons/keepassxc_48x48.png",
@@ -33,22 +34,9 @@
 		},
 	"content_scripts": [
 		{
-			"matches":
-				[
-					"http://*/*",
-					"https://*/*"
-				],
-			"js": 
-				[
-					"jquery-3.2.0.min.js",
-					"jquery-ui.min.js",
-					"chromekeepassxc.js"
-				],
-			"css": 
-				[
-					"jquery-ui.min.css",
-					"chromekeepassxc.css"
-				],
+			"matches": [ "http://*/*", "https://*/*" ],
+			"js": [ "jquery-3.2.1.min.js", "jquery-ui.min.js", "chromekeepassxc.js" ],
+			"css": [ "jquery-ui.min.css", "chromekeepassxc.css" ],
 			"run_at": "document_idle",
 			"all_frames": true
 		}
@@ -70,18 +58,9 @@
 		}
 	},
 	"web_accessible_resources": [
-		"jquery.min.map",
+		"jquery-3.2.1.min.map",
 		"icons/key_16x16.png",
-		"icons/key_24x24.png",
-		"images/ui-bg_flat_0_aaaaaa_40x100.png",
-		"images/ui-bg_flat_0_aaaaaa_40x100.png",
-		"images/ui-bg_flat_75_ffffff_40x100.png",
-		"images/ui-bg_glass_55_fbf9ee_1x400.png",
-		"images/ui-bg_glass_65_ffffff_1x400.png",
-		"images/ui-bg_glass_75_dadada_1x400.png",
-		"images/ui-bg_glass_75_e6e6e6_1x400.png",
-		"images/ui-bg_glass_95_fef1ec_1x400.png",
-		"images/ui-bg_highlight-soft_75_cccccc_1x100.png"
+		"icons/key_24x24.png"
 	],
 	"permissions": [
 		"contextMenus",
@@ -93,5 +72,11 @@
 		"https://*/*",
 		"http://*/*",
 		"https://raw.github.com/"
-	]
+	],
+	"applications": {
+       "gecko": {
+           "id": "chromeKeePassXC@sami.vanttinen",
+           "strict_min_version": "53.0"
+       }
+   }
 }

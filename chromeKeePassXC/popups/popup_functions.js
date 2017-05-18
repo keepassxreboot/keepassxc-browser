@@ -1,6 +1,13 @@
+// This quick method Copyright (c) 2016 David Rousset
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();
+
 var $ = jQuery.noConflict(true);
 var _settings = typeof(localStorage.settings)=='undefined' ? {} : JSON.parse(localStorage.settings);
-//var global = chrome.extension.getBackgroundPage();
+//var global = browser.runtime.getBackgroundPage();
 
 function updateAvailableResponse(available) {
 	if(available) {
@@ -14,17 +21,18 @@ function updateAvailableResponse(available) {
 function initSettings() {
 	$("#settings #btn-options").click(function() {
 		close();
-		chrome.tabs.create({
+		browser.tabs.create({
 			url: "../options/options.html"
 		})
 	});
 
 	$("#settings #btn-choose-credential-fields").click(function() {
-		var global = chrome.extension.getBackgroundPage();
-		chrome.tabs.sendMessage(global.page.currentTabId, {
-			action: "choose_credential_fields"
+		browser.runtime.getBackgroundPage(function(global) {
+			browser.tabs.sendMessage(global.page.currentTabId, {
+				action: "choose_credential_fields"
+			});
+			close();
 		});
-		close();
 	});
 }
 
@@ -32,7 +40,7 @@ function initSettings() {
 $(function() {
 	initSettings();
 
-	chrome.extension.sendMessage({
+	browser.runtime.sendMessage({
 		action: "update_available_keepassxc"
 	}, updateAvailableResponse);
 });

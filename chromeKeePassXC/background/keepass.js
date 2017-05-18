@@ -20,6 +20,12 @@ keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.pars
 keepass.keyId = "chromekeepassxc-cryptokey-name";
 keepass.keyBody = "chromekeepassxc-key";
 
+// This quick method Copyright (c) 2016 David Rousset
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();
 
 keepass.addCredentials = function(callback, tab, username, password, url) {
 	keepass.updateCredentials(callback, tab, null, username, password, url);
@@ -257,21 +263,22 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 }
 
 keepass.copyPassword = function(callback, tab, password) {
-	var bg = chrome.extension.getBackgroundPage();
-	var c2c = bg.document.getElementById("copy2clipboard");
-	if (!c2c) {
-		var input = document.createElement('input');
-		input.type = "text";
-		input.id = "copy2clipboard";
-		bg.document.getElementsByTagName('body')[0].appendChild(input);
-		c2c = bg.document.getElementById("copy2clipboard");
-	}
+	browser.runtime.getBackgroundPage(function(bg) {
+		var c2c = bg.document.getElementById("copy2clipboard");
+		if (!c2c) {
+			var input = document.createElement('input');
+			input.type = "text";
+			input.id = "copy2clipboard";
+			bg.document.getElementsByTagName('body')[0].appendChild(input);
+			c2c = bg.document.getElementById("copy2clipboard");
+		}
 
-	c2c.value = password;
-	c2c.select();
-	document.execCommand("copy");
-	c2c.value = "";
-	callback(true);
+		c2c.value = password;
+		c2c.select();
+		document.execCommand("copy");
+		c2c.value = "";
+		callback(true);
+	});
 }
 
 keepass.associate = function(callback, tab) {
@@ -447,7 +454,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 		keepass.changePublicKeys(tab, null);
 	}
 
-	message = { "action": "get-databasehash" };
+	var message = { "action": "get-databasehash" };
 	keepass.callbackOnId(keepass.nativePort.onMessage, "get-databasehash", function(response) {
 		if (response.hash)
 		{
@@ -495,7 +502,7 @@ keepass.changePublicKeys = function(tab, callback) {
 	var nonce = nacl.randomBytes(keepass.keySize);
 	nonce = keepass.b64e(nonce);
 
-	message = {
+	var message = {
 		"action": "change-public-keys",
 		"publicKey": key,
 		"nonce": nonce
@@ -671,7 +678,7 @@ keepass.onNativeMessage = function (response) {
 }
 
 function onDisconnected() {
-	console.log("Failed to connect: " + chrome.runtime.lastError.message);
+	console.log("Failed to connect: " + browser.runtime.lastError.message);
 	keepass.nativePort = null;
 	keepass.isConnected = false;
 	keepass.isDatabaseClosed = true;
@@ -680,7 +687,7 @@ function onDisconnected() {
 
 keepass.nativeConnect = function() {
 	console.log("Connecting to native messaging host " + keepass.nativeHostName)
-	keepass.nativePort = chrome.runtime.connectNative(keepass.nativeHostName);
+	keepass.nativePort = browser.runtime.connectNative(keepass.nativeHostName);
 	keepass.nativePort.onMessage.addListener(keepass.onNativeMessage);
 	keepass.nativePort.onDisconnect.addListener(onDisconnected);
 	keepass.isConnected = true;

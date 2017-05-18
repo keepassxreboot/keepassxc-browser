@@ -1,3 +1,10 @@
+// This quick method Copyright (c) 2016 David Rousset
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();
+
 if (jQuery) {
 	var $ = jQuery.noConflict(true);
 }
@@ -36,7 +43,7 @@ options.initGeneralSettings = function() {
 		options.settings[$(this).attr("name")] = $(this).is(':checked');
 		localStorage.settings = JSON.stringify(options.settings);
 
-        chrome.extension.sendMessage({
+        browser.runtime.sendMessage({
             action: 'load_settings'
         });
 	});
@@ -51,19 +58,19 @@ options.initGeneralSettings = function() {
 		options.settings[$(this).attr("name")] = $(this).val();
 		localStorage.settings = JSON.stringify(options.settings);
 
-        chrome.extension.sendMessage({
+        browser.runtime.sendMessage({
             action: 'load_settings'
         });
 	});
 
-	chrome.extension.sendMessage({
+	browser.runtime.sendMessage({
 		action: "get_keepassxc_versions"
 	}, options.showKeePassXCVersions);
 
 	$("#tab-general-settings button.checkUpdateKeePassXC:first").click(function(e) {
 		e.preventDefault();
 		$(this).attr("disabled", true);
-		chrome.extension.sendMessage({
+		browser.runtime.sendMessage({
 			action: "check_update_keepassxc"
 		}, options.showKeePassXCVersions);
 	});
@@ -87,7 +94,7 @@ options.initGeneralSettings = function() {
 
 		localStorage.settings = JSON.stringify(options.settings);
 
-		chrome.extension.sendMessage({
+		browser.runtime.sendMessage({
 			action: 'load_settings'
 		});
 	});
@@ -102,7 +109,7 @@ options.initGeneralSettings = function() {
 
 		localStorage.settings = JSON.stringify(options.settings);
 
-		chrome.extension.sendMessage({
+		browser.runtime.sendMessage({
 			action: 'load_settings'
 		});
 	});
@@ -117,7 +124,7 @@ options.initGeneralSettings = function() {
 
 		localStorage.settings = JSON.stringify(options.settings);
 
-		chrome.extension.sendMessage({
+		browser.runtime.sendMessage({
 			action: 'load_settings'
 		});
 	});
@@ -156,7 +163,7 @@ options.initConnectedDatabases = function() {
 		delete options.keyRing[$hash];
 		localStorage.keyRing = JSON.stringify(options.keyRing);
 
-        chrome.extension.sendMessage({
+        browser.runtime.sendMessage({
             action: 'load_keyring'
         });
 
@@ -197,7 +204,7 @@ options.initConnectedDatabases = function() {
 	}
 
 	$("#connect-button").click(function() {
-		chrome.extension.sendMessage({
+		browser.runtime.sendMessage({
 			action: "associate"
 		});
 	});
@@ -223,7 +230,7 @@ options.initSpecifiedCredentialFields = function() {
 		delete options.settings["defined-credential-fields"][$url];
 		localStorage.settings = JSON.stringify(options.settings);
 
-        chrome.extension.sendMessage({
+        browser.runtime.sendMessage({
             action: 'load_settings'
         });
 
@@ -257,5 +264,5 @@ options.initSpecifiedCredentialFields = function() {
 }
 
 options.initAbout = function() {
-	$("#tab-about em.versionCIP").text(chrome.app.getDetails().version);
+	$("#tab-about em.versionCIP").text(browser.app.getDetails().version);
 }

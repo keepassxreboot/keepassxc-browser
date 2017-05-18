@@ -49,8 +49,8 @@ httpAuth.loginOrShowCredentials = function(logins) {
 		if(page.settings.autoFillAndSend) {
 			httpAuth.callback({
 				authCredentials: {
-					username: logins[0].Login,
-					password: logins[0].Password
+					username: logins[0].login,
+					password: logins[0].password
 				}
 			});
 		}

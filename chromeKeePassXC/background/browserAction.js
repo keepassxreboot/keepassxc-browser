@@ -1,3 +1,10 @@
+// This quick method Copyright (c) 2016 David Rousset
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();
+
 var browserAction = {};
 
 var BLINK_TIMEOUT_DEFAULT = 7500;
@@ -14,13 +21,13 @@ browserAction.show = function(callback, tab) {
 		data = page.tabs[tab.id].stack[page.tabs[tab.id].stack.length - 1];
 	}
 
-	chrome.browserAction.setIcon({
+	browser.browserAction.setIcon({
 		tabId: tab.id,
 		path: "/icons/19x19/" + browserAction.generateIconName(data.iconType, data.icon)
 	});
 
 	if(data.popup) {
-		chrome.browserAction.setPopup({
+		browser.browserAction.setPopup({
 			tabId: tab.id,
 			popup: "popups/" + data.popup
 		});
@@ -57,7 +64,7 @@ browserAction.update = function(interval) {
 			data.intervalIcon.index = 0;
 		}
 
-		chrome.browserAction.setIcon({
+		browser.browserAction.setIcon({
 			tabId: page.currentTabId,
 			path: "/icons/19x19/" + browserAction.generateIconName(null, data.intervalIcon.icons[data.intervalIcon.index])
 		});
