@@ -20,7 +20,6 @@ keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.pars
 keepass.keyId = "chromekeepassxc-cryptokey-name";
 keepass.keyBody = "chromekeepassxc-key";
 
-// This quick method Copyright (c) 2016 David Rousset
 window.browser = (function () {
   return window.msBrowser ||
     window.browser ||
@@ -447,11 +446,12 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	if (!keepass.isConnected) {
 		page.tabs[tab.id].errorMessage = "Not connected with KeePassXC.";
+		callback([]);
 		return;
 	}
 
 	if (!keepass.serverPublicKey) {
-		keepass.changePublicKeys(tab, null);
+		keepass.changePublicKeys(tab, function(res) {});
 	}
 
 	var message = { "action": "get-databasehash" };

@@ -1,4 +1,3 @@
-// This quick method Copyright (c) 2016 David Rousset
 window.browser = (function () {
   return window.msBrowser ||
     window.browser ||

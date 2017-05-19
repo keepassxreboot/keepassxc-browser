@@ -1,4 +1,3 @@
-// This quick method Copyright (c) 2016 David Rousset
 window.browser = (function () {
   return window.msBrowser ||
     window.browser ||
@@ -25,12 +24,10 @@ function status_response(r) {
 		$('#need-reconfigure-message').html(r.error);
 	}
 	else if(!r.associated) {
-		//$('#configured-not-associated').show();
-		//$('#unassociated-identifier').html(r.identifier);
 		$('#need-reconfigure').show();
 		$('#need-reconfigure-message').html(r.error);
 	}
-	else if(typeof(r.error) != "undefined") {
+	else if(typeof(r.error) != "undefined" || r.error != null) {
 		$('#error-encountered').show();
 		$('#error-message').html(r.error);
 	}
