@@ -1,3 +1,8 @@
+var isFirefox = false;
+if (typeof browser !== 'undefined') {
+	isFirefox = true;
+}
+
 window.browser = (function () {
   return window.msBrowser ||
     window.browser ||
@@ -332,7 +337,7 @@ cipPassword.createDialog = function() {
 }
 
 cipPassword.createIcon = function(field) {
-	var $className = (field.outerHeight() > 28) ? "cip-icon-key-big" : "cip-icon-key-small";
+	var $className = (field.outerHeight() > 28) ? (isFirefox ? "cip-icon-key-big-moz" : "cip-icon-key-big") : (isFirefox ? "cip-icon-key-small-moz" : "cip-icon-key-small");
 	var $size = (field.outerHeight() > 28) ? 24 : 16;
 	var $offset = Math.floor((field.outerHeight() - $size) / 3);
 	$offset = ($offset < 0) ? 0 : $offset;
@@ -780,7 +785,7 @@ cipDefine.prepareStep3 = function() {
 
 
 
-cipFields = {}
+var cipFields = {}
 
 cipFields.inputQueryPattern = "input[type='text'], input[type='email'], input[type='password'], input[type='tel'], input[type='number'], input:not([type])";
 // unique number as new IDs for input fields
@@ -1682,7 +1687,7 @@ cip.rememberCredentials = function(usernameValue, passwordValue) {
 
 
 
-cipEvents = {};
+var cipEvents = {};
 
 cipEvents.clearCredentials = function() {
 	cip.credentials = [];

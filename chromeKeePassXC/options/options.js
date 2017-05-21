@@ -263,5 +263,5 @@ options.initSpecifiedCredentialFields = function() {
 }
 
 options.initAbout = function() {
-	$("#tab-about em.versionCIP").text(browser.app.getDetails().version);
+	$("#tab-about em.versionCIP").text(browser.runtime.getManifest().version);
 }

@@ -52,6 +52,16 @@
 	height: 24px;
 	background-image: url(chrome-extension://__MSG_@@extension_id__/icons/key_24x24.png);
 }
+.cip-genpw-icon.cip-icon-key-small-moz {
+	width: 16px;
+	height: 16px;
+	background-image: url(moz-extension://__MSG_@@extension_id__/icons/key_16x16.png);
+}
+.cip-genpw-icon.cip-icon-key-big-moz {
+	width: 24px;
+	height: 24px;
+	background-image: url(moz-extension://__MSG_@@extension_id__/icons/key_24x24.png);
+}
 .cip-genpw-password-frame {
 	margin-top: 5px !important;
 	margin-bottom: 5px !important;

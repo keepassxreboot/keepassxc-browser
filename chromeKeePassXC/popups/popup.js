@@ -70,7 +70,7 @@ $(function() {
 		});
 	});
 
-	browser.runtime.sendMessage({
+	chrome.runtime.sendMessage({
 		action: "get_status"
 	}, status_response);
 });

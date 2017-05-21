@@ -19,10 +19,8 @@ function updateAvailableResponse(available) {
 
 function initSettings() {
 	$("#settings #btn-options").click(function() {
+		browser.runtime.openOptionsPage();
 		close();
-		browser.tabs.create({
-			url: "../options/options.html"
-		})
 	});
 
 	$("#settings #btn-choose-credential-fields").click(function() {
