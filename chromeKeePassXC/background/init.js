@@ -105,7 +105,7 @@ browser.runtime.onMessage.addListener(event.onMessage);
  * Add context menu entry for filling in username + password
  */
 browser.contextMenus.create({
-	"title": "Fill &User + Pass",
+	"title": "Fill User + Pass",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
@@ -118,7 +118,7 @@ browser.contextMenus.create({
  * Add context menu entry for filling in only password which matches for given username
  */
 browser.contextMenus.create({
-	"title": "Fill &Pass Only",
+	"title": "Fill Pass Only",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
@@ -131,7 +131,7 @@ browser.contextMenus.create({
  * Add context menu entry for creating icon for generate-password dialog
  */
 browser.contextMenus.create({
-	"title": "Show Password &Generator Icons",
+	"title": "Show Password Generator Icons",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
@@ -144,7 +144,7 @@ browser.contextMenus.create({
  * Add context menu entry for creating icon for generate-password dialog
  */
 browser.contextMenus.create({
-	"title": "&Save credentials",
+	"title": "Save credentials",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
