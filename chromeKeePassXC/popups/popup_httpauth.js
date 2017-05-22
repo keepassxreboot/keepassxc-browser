@@ -6,7 +6,7 @@ window.browser = (function () {
 
 $(function() {
 	browser.runtime.getBackgroundPage(function(global) {
-		browser.tabs.getSelected(null, function(tab) {
+		browser.tabs.query(null, function(tab) {
 			//var data = global.tab_httpauth_list["tab" + tab.id];
 			var data = global.page.tabs[tab.id].loginList;
 			var ul = document.getElementById("login-list");

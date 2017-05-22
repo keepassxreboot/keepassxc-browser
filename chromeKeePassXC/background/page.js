@@ -15,22 +15,22 @@ page.blockedTabs = {};
 
 page.initSettings = function() {
 	event.onLoadSettings();
-	if(!("checkUpdateKeePassXC" in page.settings)) {
+	if (!("checkUpdateKeePassXC" in page.settings)) {
 		page.settings.checkUpdateKeePassXC = 3;
 	}
-	if(!("autoCompleteUsernames" in page.settings)) {
+	if (!("autoCompleteUsernames" in page.settings)) {
 		page.settings.autoCompleteUsernames = 1;
 	}
-	if(!("autoFillAndSend" in page.settings)) {
+	if (!("autoFillAndSend" in page.settings)) {
 		page.settings.autoFillAndSend = 1;
 	}
-	if(!("usePasswordGenerator" in page.settings)) {
+	if (!("usePasswordGenerator" in page.settings)) {
 		page.settings.usePasswordGenerator = 1;
 	}
-	if(!("autoFillSingleEntry" in page.settings)) {
+	if (!("autoFillSingleEntry" in page.settings)) {
 		page.settings.autoFillSingleEntry = 0;
 	}
-	if(!("autoRetrieveCredentials" in page.settings)) {
+	if (!("autoRetrieveCredentials" in page.settings)) {
 		page.settings.autoRetrieveCredentials = 1;
 	}
 	localStorage.settings = JSON.stringify(page.settings);
@@ -38,7 +38,7 @@ page.initSettings = function() {
 
 page.initOpenedTabs = function() {
 	browser.tabs.query({}, function(tabs) {
-		for(var i = 0; i < tabs.length; i++) {
+		for (var i = 0; i < tabs.length; i++) {
 			page.createTabEntry(tabs[i].id);
 		}
 	});
@@ -57,14 +57,14 @@ page.switchTab = function(callback, tab) {
 }
 
 page.clearCredentials = function(tabId, complete) {
-	if(!page.tabs[tabId]) {
+	if (!page.tabs[tabId]) {
 		return;
 	}
 
 	page.tabs[tabId].credentials = {};
 	delete page.tabs[tabId].credentials;
 
-    if(complete) {
+    if (complete) {
         page.tabs[tabId].loginList = [];
 
         browser.tabs.sendMessage(tabId, {
@@ -84,17 +84,17 @@ page.createTabEntry = function(tabId) {
 
 page.removePageInformationFromNotExistingTabs = function() {
 	var rand = Math.floor(Math.random()*1001);
-	if(rand == 28) {
+	if (rand == 28) {
 		browser.tabs.query({}, function(tabs) {
 			var $tabIds = {};
 			var $infoIds = Object.keys(page.tabs);
 
-			for(var i = 0; i < tabs.length; i++) {
+			for (var i = 0; i < tabs.length; i++) {
 				$tabIds[tabs[i].id] = true;
 			}
 
-			for(var i = 0; i < $infoIds.length; i++) {
-				if(!($infoIds[i] in $tabIds)) {
+			for (var i = 0; i < $infoIds.length; i++) {
+				if (!($infoIds[i] in $tabIds)) {
 					delete page.tabs[$infoIds[i]];
 				}
 			}
@@ -103,7 +103,7 @@ page.removePageInformationFromNotExistingTabs = function() {
 };
 
 page.debugConsole = function() {
-	if(arguments.length > 1) {
+	if (arguments.length > 1) {
 		console.log(page.sprintf(arguments[0], arguments));
 	}
 	else {
@@ -125,7 +125,7 @@ page.debugDummy = function() {};
 page.debug = page.debugDummy;
 
 page.setDebug = function(bool) {
-	if(bool) {
+	if (bool) {
 		page.debug = page.debugConsole;
 		return "Debug mode enabled";
 	}
