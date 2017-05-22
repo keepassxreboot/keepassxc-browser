@@ -12,7 +12,7 @@ var BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT = 1;
 
 browserAction.show = function(callback, tab) {
 	var data = {};
-	if(!page.tabs[tab.id] || page.tabs[tab.id].stack.length == 0) {
+	if (!page.tabs[tab.id] || page.tabs[tab.id].stack.length == 0) {
 		browserAction.showDefault(callback, tab);
 		return;
 	}
@@ -25,7 +25,7 @@ browserAction.show = function(callback, tab) {
 		path: "/icons/19x19/" + browserAction.generateIconName(data.iconType, data.icon)
 	});
 
-	if(data.popup) {
+	if (data.popup) {
 		browser.browserAction.setPopup({
 			tabId: tab.id,
 			popup: "popups/" + data.popup
@@ -34,13 +34,13 @@ browserAction.show = function(callback, tab) {
 }
 
 browserAction.update = function(interval) {
-	if(!page.tabs[page.currentTabId] || page.tabs[page.currentTabId].stack.length == 0) {
+	if (!page.tabs[page.currentTabId] || page.tabs[page.currentTabId].stack.length == 0) {
 		return;
 	}
 
 	var data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
 
-    if(typeof data.visibleForMilliSeconds != "undefined") {
+    if (typeof data.visibleForMilliSeconds != "undefined") {
 		if(data.visibleForMilliSeconds <= 0) {
 			browserAction.stackPop(page.currentTabId);
 			browserAction.show(null, {"id": page.currentTabId});
@@ -50,7 +50,7 @@ browserAction.update = function(interval) {
 		data.visibleForMilliSeconds -= interval;
 	}
 
-	if(data.intervalIcon) {
+	if (data.intervalIcon) {
 		data.intervalIcon.counter += 1;
 		if(data.intervalIcon.counter < data.intervalIcon.max) {
 			return;
@@ -59,7 +59,7 @@ browserAction.update = function(interval) {
 		data.intervalIcon.counter = 0;
 		data.intervalIcon.index += 1;
 
-		if(data.intervalIcon.index > data.intervalIcon.icons.length - 1) {
+		if (data.intervalIcon.index > data.intervalIcon.icons.length - 1) {
 			data.intervalIcon.index = 0;
 		}
 
@@ -81,7 +81,7 @@ browserAction.showDefault = function(callback, tab) {
 			stackData.iconType = "cross";
 		}
 
-		if(page.tabs[tab.id].loginList.length > 0) {
+		if (page.tabs[tab.id].loginList.length > 0) {
 	        stackData.iconType = "questionmark";
 	        stackData.popup = "popup_login.html";
 	    }
@@ -95,7 +95,7 @@ browserAction.showDefault = function(callback, tab) {
 browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visibleForMilliSeconds, visibleForPageUpdates, redirectOffset,  dontShow) {
 	var id = tab.id || page.currentTabId;
 
-	if(!level) {
+	if (!level) {
 		level = 1;
 	}
 
@@ -104,47 +104,47 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
 		"icon": icon
 	}
 
-	if(popup) {
+	if (popup) {
 		stackData.popup = popup;
 	}
 
-	if(visibleForMilliSeconds) {
+	if (visibleForMilliSeconds) {
 		stackData.visibleForMilliSeconds = visibleForMilliSeconds;
 	}
 
-	if(visibleForPageUpdates) {
+	if (visibleForPageUpdates) {
 		stackData.visibleForPageUpdates = visibleForPageUpdates;
 	}
 
-	if(redirectOffset) {
+	if (redirectOffset) {
 		stackData.redirectOffset = redirectOffset;
 	}
 
-	if(push) {
+	if (push) {
 		browserAction.stackPush(stackData, id);
 	}
 	else {
 		browserAction.stackUnshift(stackData, id);
 	}
 
-	if(!dontShow) {
+	if (!dontShow) {
 		browserAction.show(null, {"id": id});
 	}
 }
 
 
 browserAction.removeLevelFromStack = function(callback, tab, level, type, dontShow) {
-	if(!page.tabs[tab.id]) {
+	if (!page.tabs[tab.id]) {
 		return;
 	}
 
-	if(!type) {
+	if (!type) {
 		type = "<=";
 	}
 
 	var newStack = [];
-	for(var i = 0; i < page.tabs[tab.id].stack.length; i++) {
-		if(
+	for (var i = 0; i < page.tabs[tab.id].stack.length; i++) {
+		if (
 			(type == "<" && page.tabs[tab.id].stack[i].level >= level) ||
 			(type == "<=" && page.tabs[tab.id].stack[i].level > level) ||
 			(type == "=" && page.tabs[tab.id].stack[i].level != level) ||
@@ -159,7 +159,7 @@ browserAction.removeLevelFromStack = function(callback, tab, level, type, dontSh
 
 	page.tabs[tab.id].stack = newStack;
 
-	if(!dontShow) {
+	if (!dontShow) {
 		browserAction.show(callback, tab);
 	}
 }
@@ -186,17 +186,17 @@ browserAction.stackUnshift = function(data, tabId) {
 
 
 browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
-	if(!page.tabs[tab.id]) {
+	if (!page.tabs[tab.id]) {
 		return;
 	}
 
-	if(page.tabs[tab.id].stack.length == 0) {
+	if( page.tabs[tab.id].stack.length == 0) {
         page.clearCredentials(tab.id);
 		return;
 	}
 	var data = page.tabs[tab.id].stack[page.tabs[tab.id].stack.length - 1];
 
-    if(removeImmediately || !isNaN(data.visibleForPageUpdates)) {
+    if (removeImmediately || !isNaN(data.visibleForPageUpdates)) {
 		var currentMS = Date.now();
 		if( removeImmediately || (data.visibleForPageUpdates <= 0 && data.redirectOffset > 0)) {
 			browserAction.stackPop(tab.id);
@@ -261,7 +261,7 @@ function getValueOrDefault(settings, key, defaultVal, min) {
 }
 
 browserAction.generateIconName = function(iconType, icon) {
-	if(icon) {
+	if (icon) {
 		return icon;
 	}
 
