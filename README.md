@@ -3,6 +3,8 @@ Chrome extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 This is a heavily forked version of [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
 
+Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/chromekeepassxc/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/chromekeepassxc/iopaggbpplllidnfmcghoonnokmjoicf).
+
 ## Protocol
 
 Transmitting messages between KeePassXC and chromeKeePassXC is totally rewritten. This is still under development.
