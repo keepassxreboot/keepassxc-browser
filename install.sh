@@ -129,7 +129,11 @@ else
 fi
 
 # Replace path to host
-sed -i "" -e "s/%%replace%%/$ESCAPED_PATH/g" "$TARGET_DIR/$APP_NAME.json"
+if [ $(uname -s) == 'Darwin' ]; then
+  sed -i "" -e "s/%%replace%%/$ESCAPED_PATH/g" "$TARGET_DIR/$APP_NAME.json"
+else
+  sed -i -e "s/%%replace%%/$ESCAPED_PATH/g" "$TARGET_DIR/$APP_NAME.json"
+fi
 
 # Set permissions for the manifest so that all users can read it.
 chmod o+r "$TARGET_DIR/$APP_NAME.json"
