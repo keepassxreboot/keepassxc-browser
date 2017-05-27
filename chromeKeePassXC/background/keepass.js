@@ -76,7 +76,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		keepass.callbackOnId(keepass.nativePort.onMessage, "set-login", function(response) {
 			if (response.message && response.nonce) {
 				var res = keepass.decrypt(response.message, response.nonce);
-			  	if (res == false)
+			  	if (!res)
 			  	{
 					console.log("Failed to decrypt message");
 				}
@@ -146,7 +146,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		keepass.callbackOnId(keepass.nativePort.onMessage, "get-logins", function(response) {
 			if (response.message && response.nonce) {
 				var res = keepass.decrypt(response.message, response.nonce);
-			  	if (res == false)
+			  	if (!res)
 			  	{
 					console.log("Failed to decrypt message");
 				}
@@ -227,7 +227,7 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 		keepass.callbackOnId(keepass.nativePort.onMessage, "generate-password", function(response) {
 			if (response.message && response.nonce) {
 				var res = keepass.decrypt(response.message, response.nonce);
-			  	if (res == false)
+			  	if (!res)
 			  	{
 					console.log("Failed to decrypt message");
 				}
@@ -309,7 +309,7 @@ keepass.associate = function(callback, tab) {
 		keepass.callbackOnId(keepass.nativePort.onMessage, "associate", function(response) {
 			if (response.message && response.nonce) {
 				var res = keepass.decrypt(response.message, response.nonce);
-			  	if (res == false)
+			  	if (!res)
 			  	{
 					console.log("Failed to decrypt message");
 				}
@@ -390,7 +390,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 			id: id,
 			key: idkey
 		};
-		console.log(messageData);
+		
 		var request = {
 			action: "test-associate",
 			message: keepass.encrypt(messageData, nonce),
@@ -400,7 +400,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		keepass.callbackOnId(keepass.nativePort.onMessage, "test-associate", function(response) {
 			if (response.message && response.nonce) {
 				var res = keepass.decrypt(response.message, response.nonce);
-		  		if (res == false) {
+		  		if (!res) {
 					console.log("Failed to decrypt message");
 				}
 				else
@@ -766,6 +766,9 @@ keepass.setCryptoKey = function(id, key) {
 keepass.encrypt = function(input, nonce) {
 	var messageData = nacl.util.decodeUTF8(JSON.stringify(input));
 	var message = nacl.box(messageData, nonce, keepass.serverPublicKey, keepass.keyPair.secretKey);
+	if (!message) {
+		return "";
+	}
 	return keepass.b64e(message);
 }
 

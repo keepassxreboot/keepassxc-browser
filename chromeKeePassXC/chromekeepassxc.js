@@ -9,6 +9,9 @@ window.browser = (function () {
     window.chrome;
 })();
 
+// Initialize autocomplete feature
+$(this.target).find('input').autocomplete();
+
 // contains already called method names
 var _called = {};
 
@@ -87,7 +90,7 @@ var cipAutocomplete = {};
 cipAutocomplete.elements = [];
 
 cipAutocomplete.init = function(field) {
-	if(field.hasClass("ui-autocomplete-input")) {
+	if (field.hasClass("ui-autocomplete-input")) {
 		//_f(credentialInputs[i].username).autocomplete("source", autocompleteSource);
 		field.autocomplete("destroy");
 	}
@@ -256,11 +259,16 @@ cipPassword.createDialog = function() {
 		title: "Password Generator",
 		classes: {"ui-dialog": "ui-corner-all"},
 		buttons: {
-			"Generate": function(e) {
-				e.preventDefault();
-				browser.runtime.sendMessage({
-					action: "generate_password"
-				}, cipPassword.callbackGeneratedPassword);
+			"Generate": 
+			{
+				text: "Generate",
+				id: "cip-genpw-btn-generate",
+				click: function(e) {
+					e.preventDefault();
+					browser.runtime.sendMessage({
+						action: "generate_password"
+					}, cipPassword.callbackGeneratedPassword);
+				}
 			},
 			"Copy": function(e) {
 				e.preventDefault();
