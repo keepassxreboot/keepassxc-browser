@@ -3,7 +3,7 @@
 - Upgraded tweetnacl-js to 1.0.0
 - Upgraded tweetnacl-utils-js to 0.15.0
 - Some code fixes concerning encryption and decryption
-- Redesigned password generator dialog
+- Redesigned simpler password generator dialog
 
 0.1.5 (2017-05-22)
 =========================
