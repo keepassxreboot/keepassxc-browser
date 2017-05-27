@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "chromeKeePassXC",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -25,7 +25,7 @@
 	"background": {
 		"scripts": [
 			"background/nacl.min.js",
-			"background/nacl-util.js",
+			"background/nacl-util.min.js",
 			"background/keepass.js",
 			"background/httpauth.js",
 			"background/browserAction.js",

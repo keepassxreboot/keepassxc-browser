@@ -1,0 +1,9 @@
+{
+  "name": "com.varjolintu.chromekeepassxc",
+  "description": "KeepassXC integration with Firefox with Native Messaging support",
+  "path" : "%%replace%%",
+  "type": "stdio",
+  "allowed_extensions": [
+    "chromeKeePassXC@sami.vanttinen"
+  ]
+}
