@@ -210,59 +210,28 @@ cipPassword.createDialog = function() {
 	_called.passwordCreateDialog = true;
 
 	var $dialog = jQuery("<div>")
+		.addClass("dialog-form")
 		.attr("id", "cip-genpw-dialog");
-
-	var $divFloat = jQuery("<div>").addClass("cip-genpw-clearfix");
-	var $btnGenerate = jQuery("<button>")
-		.text("Generate")
-		.attr("id", "cip-genpw-btn-generate")
-		.addClass("btn")
-		.addClass("btn-primary")
-		.addClass("btn-sm")
-		.css("float", "left")
-		.click(function(e) {
-			e.preventDefault();
-			browser.runtime.sendMessage({
-				action: "generate_password"
-			}, cipPassword.callbackGeneratedPassword);
-		});
-	$divFloat.append($btnGenerate);
-
-	var $btnClipboard = jQuery("<button>")
-		.text("Copy to clipboard")
-		.attr("id", "cip-genpw-btn-clipboard")
-		.addClass("btn")
-		.addClass("btn-sm")
-		.css("float", "right")
-		.click(function(e) {
-			e.preventDefault();
-
-			browser.runtime.sendMessage({
-				action: "copy_password",
-				args: [jQuery("input#cip-genpw-textfield-password").val()]
-			}, cipPassword.callbackPasswordCopied);
-		});
-	$divFloat.append($btnClipboard);
-
-	$dialog.append($divFloat);
-
+	
+	var $inputDiv = jQuery("<div>").addClass("form-group");
+	var $inputGroup = jQuery("<div>").addClass("genpw-input-group");
 	var $textfieldPassword = jQuery("<input>")
 		.attr("id", "cip-genpw-textfield-password")
 		.attr("type", "text")
-		.addClass("cip-genpw-textfield")
+		.attr("aria-describedby", "cip-genpw-quality")
+		.attr("placeholder", "Generated password")
+		.addClass("genpw-text ui-widget-content ui-corner-all")
 		.on('change keypress paste textInput input', function() {
 			jQuery("#cip-genpw-btn-clipboard:first").removeClass("btn-success");
 		});
 	var $quality = jQuery("<span>")
+		.addClass("genpw-input-group-addon")
 		.addClass("b2c-add-on")
 		.attr("id", "cip-genpw-quality")
 		.text("123 Bits");
-	var $frameInputAppend = jQuery("<div>")
-		.addClass("b2c-input-append")
-		.addClass("cip-genpw-password-frame");
-	$frameInputAppend.append($textfieldPassword).append($quality);
-	$dialog.append($frameInputAppend);
-
+	$inputGroup.append($textfieldPassword).append($quality);
+	
+	var $checkGroup = jQuery("<div>").addClass("genpw-input-group");
 	var $checkboxNextField = jQuery("<input>")
 		.attr("id", "cip-genpw-checkbox-next-field")
 		.attr("type", "checkbox")
@@ -271,59 +240,71 @@ cipPassword.createDialog = function() {
 		.append($checkboxNextField)
 		.addClass("cip-genpw-label")
 		.append(" also fill in the next password-field");
-	$dialog.append($labelNextField);
+	$checkGroup.append($labelNextField);
 
-	var $btnFillIn = jQuery("<button>")
-		.text("Fill in & copy to clipboard")
-		.attr("id", "cip-genpw-btn-fillin")
-		.addClass("btn")
-		.addClass("btn-sm")
-		.click(function(e) {
-			e.preventDefault();
-
-			var fieldId = jQuery("#cip-genpw-dialog:first").data("cip-genpw-field-id");
-			var field = jQuery("input[data-cip-id='"+fieldId+"']:first");
-			if (field.length == 1) {
-				var $password = jQuery("input#cip-genpw-textfield-password:first").val();
-
-				if (field.attr("maxlength")) {
-					if ($password.length > field.attr("maxlength")) {
-						$password = $password.substring(0, field.attr("maxlength"));
-						jQuery("input#cip-genpw-textfield-password:first").val($password);
-						jQuery("#cip-genpw-btn-clipboard:first").removeClass("b2c-btn-success");
-						alert("The generated password is longer than the allowed length!\nIt has been cut to fit the length.\n\nPlease remember the new password!");
-					}
-				}
-
-				field.val($password);
-				if (jQuery("input#cip-genpw-checkbox-next-field:checked").length == 1) {
-					if(field.data("cip-genpw-next-field-exists")) {
-						var nextFieldId = field.data("cip-genpw-next-field-id");
-						var nextField = jQuery("input[data-cip-id='"+nextFieldId+"']:first");
-						if(nextField.length == 1) {
-							nextField.val($password);
-						}
-					}
-				}
-
-				// copy password to clipboard
-				browser.runtime.sendMessage({
-					action: "copy_password",
-					args: [$password]
-				}, cipPassword.callbackPasswordCopied);
-			}
-		});
-	$dialog.append($btnFillIn);
+	$inputDiv.append($inputGroup).append($checkGroup);
+	$dialog.append($inputDiv);
 
 	$dialog.hide();
 	jQuery("body").append($dialog);
 	$dialog.dialog({
-		closeText: "×",
 		autoOpen: false,
 		modal: true,
 		resizable: false,
-		minWidth: 340,
+		minWidth: 300,
+		minHeight: 80,
 		title: "Password Generator",
+		classes: {"ui-dialog": "ui-corner-all"},
+		buttons: {
+			"Generate": function(e) {
+				e.preventDefault();
+				browser.runtime.sendMessage({
+					action: "generate_password"
+				}, cipPassword.callbackGeneratedPassword);
+			},
+			"Copy": function(e) {
+				e.preventDefault();
+				browser.runtime.sendMessage({
+					action: "copy_password",
+					args: [jQuery("input#cip-genpw-textfield-password").val()]
+				}, cipPassword.callbackPasswordCopied);
+			},
+			"Fill & copy": function(e) {
+				e.preventDefault();
+
+				var fieldId = jQuery("#cip-genpw-dialog:first").data("cip-genpw-field-id");
+				var field = jQuery("input[data-cip-id='"+fieldId+"']:first");
+				if (field.length == 1) {
+					var $password = jQuery("input#cip-genpw-textfield-password:first").val();
+
+					if (field.attr("maxlength")) {
+						if ($password.length > field.attr("maxlength")) {
+							$password = $password.substring(0, field.attr("maxlength"));
+							jQuery("input#cip-genpw-textfield-password:first").val($password);
+							jQuery("#cip-genpw-btn-clipboard:first").removeClass("b2c-btn-success");
+							alert("The generated password is longer than the allowed length!\nIt has been cut to fit the length.\n\nPlease remember the new password!");
+						}
+					}
+
+					field.val($password);
+					if (jQuery("input#cip-genpw-checkbox-next-field:checked").length == 1) {
+						if(field.data("cip-genpw-next-field-exists")) {
+							var nextFieldId = field.data("cip-genpw-next-field-id");
+							var nextField = jQuery("input[data-cip-id='"+nextFieldId+"']:first");
+							if(nextField.length == 1) {
+								nextField.val($password);
+							}
+						}
+					}
+
+					// Copy password to clipboard
+					browser.runtime.sendMessage({
+						action: "copy_password",
+						args: [$password]
+					}, cipPassword.callbackPasswordCopied);
+				}
+			}
+		},
 		open: function(event, ui) {
 			jQuery(".ui-widget-overlay").click(function() {
 				jQuery("#cip-genpw-dialog:first").dialog("close");

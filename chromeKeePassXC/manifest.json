@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "chromeKeePassXC",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {

@@ -6,38 +6,65 @@
 	font-family: Verdana, Arial, sans-serif !important;
 	color: #222222 !important;
 }
+
 .ui-dialog-titlebar-close {
 	visibility: hidden !important;
 }
-.cip-ui-widget-overlay {
-	background: none !important;
-	z-index: 2147483601 !important;
-}
-.cip-ui-dialog {
-	z-index: 2147483602 !important;
-}
-.cip-ui-dialog .cip-ui-dialog-title {
-	font-size:.8em !important;
-}
-.cip-ui-dialog .cip-ui-dialog-titlebar {
-	padding:.1em .5em !important;
-}
-.cip-ui-dialog-content {
-	font-size: .8em !important;
+
+.ui-dialog {
+	font-size: 12px !important;
 }
 
-#cip-genpw-dialog {
-	text-align: left !important;
+.dialog-form .ui-dialog-content .ui-widget-content {
+	max-height: 80px !important;
 }
-#cip-genpw-dialog button {
-	height: 26px !important;
+
+.ui-dialog-titlebar {
+	background-color: #3a8233;
+	color: #fff;
 }
-.cip-genpw-clearfix:after {
-	clear: both;
-	line-height: 0;
-	content: "";
+
+.ui-dialog .ui-dialog-buttonpane { 
+    text-align: center !important;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
+    float: none !important;
+}
+
+.ui-button .ui-button-text .ui-button {
+	font-size: .10em !important; 
+}
+
+input.genpw-text {
+	font-size: .9em !important;
+	padding: .4em;
+	border-radius: 4px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-collapse: separate;
+	width: 100%;
+}
+.genpw-input-group-addon {
+	font-size: inherit !important;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: .4em;
+	border-radius: 4px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	white-space: nowrap;
+	vertical-align: middle;
+	display: table-cell;
+	border-collapse: separate;
+}
+
+.genpw-input-group {
+	position: relative;
 	display: table;
+	border-collapse: separate;
+	width: 100%;
 }
+
 .cip-genpw-icon {
 	position: absolute;
 	cursor: pointer;
@@ -62,38 +89,7 @@
 	height: 24px;
 	background-image: url(moz-extension://__MSG_@@extension_id__/icons/key_24x24.png);
 }
-.cip-genpw-password-frame {
-	margin-top: 5px !important;
-	margin-bottom: 5px !important;
-}
-.cip-genpw-password-frame > * {
-	height: 20px !important;
-	font-size: 11px !important;
-}
-.cip-genpw-textfield {
-	background: none !important;
-	font-size: 11px !important;
-	display: inline !important;
-	border: 1px solid rgb(170, 170, 170) !important;
-	padding: 1px 2px !important;
-	max-width: none !important;
-	min-width: 0 !important;
-	font-size: 1em !important;
-	width: 240px !important;
-	padding-left: 5px !important;
-}
-#cip-genpw-quality {
-	width: 50px !important;
-	padding-top: 1px !important;
-	padding-bottom: 1px !important;
-}
-.cip-genpw-label {
-	display: block !important;
-	margin: 5px 0 !important;
-}
-.cip-genpw-checkbox {
-	vertical-align: middle !important;
-}
+
 #cip-genpw-btn-fillin {
 	margin-right: 5px;
 }

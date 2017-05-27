@@ -10,7 +10,7 @@ httpAuth.proxyUrl = null;
 
 
 httpAuth.handleRequest = function (details, callback) {
-	if(httpAuth.requestId == details.requestId || !page.tabs[details.tabId]) {
+	if (httpAuth.requestId == details.requestId || !page.tabs[details.tabId]) {
 		callback({});
 	}
 	else {
@@ -26,7 +26,7 @@ httpAuth.processPendingCallbacks = function(details) {
 	httpAuth.url = details.url;
 	httpAuth.isProxy = details.isProxy;
 
-	if(details.challenger){
+	if (details.challenger){
 		httpAuth.proxyUrl = details.challenger.host;
 	}
 
@@ -46,7 +46,7 @@ httpAuth.loginOrShowCredentials = function(logins) {
 		event.onHTTPAuthPopup(null, {"id": httpAuth.tabId}, {"logins": logins, "url": url});
 		//generate popup-list for HTTP Auth usernames + descriptions
 
-		if(page.settings.autoFillAndSend) {
+		if (page.settings.autoFillAndSend) {
 			httpAuth.callback({
 				authCredentials: {
 					username: logins[0].login,

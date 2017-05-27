@@ -606,10 +606,6 @@ keepass.deleteKey = function(hash) {
 	localStorage.keyRing = JSON.stringify(keepass.keyRing);
 }
 
-keepass.getIconColor = function() {
-	return ((keepass.databaseHash in keepass.keyRing) && keepass.keyRing[keepass.databaseHash].icon) ? keepass.keyRing[keepass.databaseHash].icon : "blue";
-}
-
 keepass.setcurrentKeePassXCVersion = function(version) {
 	if (version) {
 		keepass.currentKeePassXC = {

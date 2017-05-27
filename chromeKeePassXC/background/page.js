@@ -19,19 +19,19 @@ page.initSettings = function() {
 		page.settings.checkUpdateKeePassXC = 3;
 	}
 	if (!("autoCompleteUsernames" in page.settings)) {
-		page.settings.autoCompleteUsernames = 1;
+		page.settings.autoCompleteUsernames = true;
 	}
 	if (!("autoFillAndSend" in page.settings)) {
-		page.settings.autoFillAndSend = 1;
+		page.settings.autoFillAndSend = true;
 	}
 	if (!("usePasswordGenerator" in page.settings)) {
-		page.settings.usePasswordGenerator = 1;
+		page.settings.usePasswordGenerator = true;
 	}
 	if (!("autoFillSingleEntry" in page.settings)) {
-		page.settings.autoFillSingleEntry = 0;
+		page.settings.autoFillSingleEntry = false;
 	}
 	if (!("autoRetrieveCredentials" in page.settings)) {
-		page.settings.autoRetrieveCredentials = 1;
+		page.settings.autoRetrieveCredentials = true;
 	}
 	localStorage.settings = JSON.stringify(page.settings);
 }

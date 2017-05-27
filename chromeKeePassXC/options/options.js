@@ -74,11 +74,6 @@ options.initGeneralSettings = function() {
 		}, options.showKeePassXCVersions);
 	});
 
-	$("#showDangerousSettings").click(function() {
-        $('#dangerousSettings').is(":visible") ? $(this).text("Show these settings anyway") : $(this).text("Hide");
-        $("#dangerousSettings").toggle();
-	});
-
 	$("#blinkTimeout").val(options.settings["blinkTimeout"]);
 	$("#blinkMinTimeout").val(options.settings["blinkMinTimeout"]);
 	$("#allowedRedirect").val(options.settings["allowedRedirect"]);
