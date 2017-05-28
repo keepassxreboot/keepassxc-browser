@@ -490,7 +490,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 }
 
 keepass.changePublicKeys = function(tab, callback) {
-	if (!keepass.isConnected || keepass.serverPublicKey) {
+	if (!keepass.isConnected) {
 		return;
 	}
 
@@ -529,9 +529,6 @@ keepass.changePublicKeys = function(tab, callback) {
 }
 
 keepass.generateNewKeyPair = function() {
-	if (keepass.keyPair.publicKey !== null && keepass.keyPair.secretKey !== null)
-		return;
-
 	keepass.keyPair = nacl.box.keyPair();
 	//console.log(keepass.b64e(keepass.keyPair.publicKey) + " " + keepass.b64e(keepass.keyPair.secretKey));
 }

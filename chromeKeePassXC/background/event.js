@@ -141,6 +141,37 @@ event.onGetStatus = function(callback, tab) {
 	}, tab);
 }
 
+event.onReconnect = function(callback, tab) {
+	keepass.connectToNative();
+	keepass.generateNewKeyPair();
+	keepass.changePublicKeys(null, function(pkRes) {
+		keepass.getDatabaseHash(function(gdRes) {
+			if (gdRes) {
+				keepass.testAssociation(function(response) {
+				keepass.isConfigured(function(configured) {
+					var keyId = null;
+					if (configured) {
+						keyId = keepass.keyRing[keepass.databaseHash].id;
+					}
+
+					browserAction.showDefault(null, tab);
+					console.log(page.tabs[tab.id].errorMessage);
+					callback({
+						identifier: keyId,
+						configured: configured,
+						databaseClosed: keepass.isDatabaseClosed,
+						keePassXCAvailable: keepass.isKeePassXCAvailable,
+						encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
+						associated: keepass.isAssociated(),
+						error: page.tabs[tab.id].errorMessage
+					});
+				});
+			}, tab);
+			}
+		}, null);
+	});
+}
+
 event.onPopStack = function(callback, tab) {
 	browserAction.stackPop(tab.id);
 	browserAction.show(null, tab);
@@ -250,5 +281,6 @@ event.messageHandlers = {
 	'stack_add': browserAction.stackAdd,
 	'update_available_keepassxc': event.onUpdateAvailableKeePassXC,
 	'generate_password': keepass.generatePassword,
-	'copy_password': keepass.copyPassword
+	'copy_password': keepass.copyPassword,
+	"reconnect": event.onReconnect
 };

@@ -54,7 +54,7 @@ $(function() {
 
 	$("#reload-status-button").click(function() {
 		browser.runtime.sendMessage({
-			action: "get_status"
+			action: "reconnect"
 		}, status_response);
 	});
 
