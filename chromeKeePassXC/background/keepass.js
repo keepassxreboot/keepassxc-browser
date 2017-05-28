@@ -85,7 +85,6 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 					var message = nacl.util.encodeUTF8(res);
 					var parsed = JSON.parse(message);
 					var code = "error";
-					console.log(parsed);
 
 					if (keepass.verifyResponse(parsed, response.nonce)) {
 						code = "success";
@@ -136,7 +135,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		if (submiturl) {
 			messageData.submitUrl = submiturl;
 		}
-		console.log(messageData);
+
 		var request = {
 			action: "get-logins",
 			message: keepass.encrypt(messageData, nonce),
@@ -154,7 +153,6 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 				{
 					var message = nacl.util.encodeUTF8(res);
 					var parsed = JSON.parse(message);
-					console.log(parsed);
 
 					keepass.setcurrentKeePassXCVersion(parsed.version);
 
@@ -235,7 +233,6 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 				{
 					var message = nacl.util.encodeUTF8(res);
 					var parsed = JSON.parse(message);
-					console.log(parsed);
 
 					keepass.setcurrentKeePassXCVersion(parsed.version);
 					if (keepass.verifyResponse(parsed, response.nonce)) {
@@ -317,7 +314,6 @@ keepass.associate = function(callback, tab) {
 				{
 					var message = nacl.util.encodeUTF8(res);
 					var parsed = JSON.parse(message);
-					console.log(parsed);
 
 					if (parsed.version) {
 						keepass.currentKeePassXC = {
@@ -346,6 +342,7 @@ keepass.associate = function(callback, tab) {
 keepass.testAssociation = function (callback, tab, triggerUnlock) {
 	keepass.getDatabaseHash(function(dbHash) {
 		if (!dbHash) {
+			callback(false);
 			return;
 		}
 
@@ -407,7 +404,6 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 				{
 					var message = nacl.util.encodeUTF8(res);
 					var parsed = JSON.parse(message);
-					console.log(parsed);
 
 					if (parsed.version) {
 						keepass.currentKeePassXC = {
@@ -509,7 +505,6 @@ keepass.changePublicKeys = function(tab, callback) {
 	}
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, "change-public-keys", function(response) {
-		console.log("change-public-keys reply received");
 		if (response.version) {
 			keepass.currentKeePassXC = {
 				"version": response.version,
@@ -538,7 +533,7 @@ keepass.generateNewKeyPair = function() {
 		return;
 
 	keepass.keyPair = nacl.box.keyPair();
-	console.log(keepass.b64e(keepass.keyPair.publicKey) + " " + keepass.b64e(keepass.keyPair.secretKey));
+	//console.log(keepass.b64e(keepass.keyPair.publicKey) + " " + keepass.b64e(keepass.keyPair.secretKey));
 }
 
 keepass.isConfigured = function(callback) {
@@ -670,7 +665,7 @@ function statusOK() {
 }
 
 keepass.onNativeMessage = function (response) {
-	console.log("Received message: " + JSON.stringify(response));
+	//console.log("Received message: " + JSON.stringify(response));
 }
 
 function onDisconnected() {
