@@ -5,6 +5,7 @@ window.browser = (function () {
 })();
 
 function status_response(r) {
+	console.log(r);
 	$('#initial-state').hide();
 	$('#error-encountered').hide();
 	$('#need-reconfigure').hide();
@@ -27,7 +28,7 @@ function status_response(r) {
 		$('#need-reconfigure').show();
 		$('#need-reconfigure-message').html(r.error);
 	}
-	else if(typeof(r.error) != "undefined" || r.error != null) {
+	else if (r.error != null) {
 		$('#error-encountered').show();
 		$('#error-message').html(r.error);
 	}

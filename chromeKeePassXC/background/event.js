@@ -128,6 +128,7 @@ event.onGetStatus = function(callback, tab) {
 
 			browserAction.showDefault(null, tab);
 			console.log(page.tabs[tab.id].errorMessage);
+			console.log("Configured: " + configured + " Key id: " + keyId + " closed: " + keepass.isDatabaseClosed + " avail: " + keepass.isKeePassXCAvailable + " unreg: " + keepass.isEncryptionKeyUnrecognized + " isass: " + keepass.isAssociated());
 			callback({
 				identifier: keyId,
 				configured: configured,
