@@ -33,9 +33,9 @@ var _interval = 250;
  * @param {object} tab
  */
 browser.tabs.onCreated.addListener(function(tab) {
-	if(tab.id > 0) {
+	if (tab.id > 0) {
 		//console.log("browser.tabs.onCreated(" + tab.id+ ")");
-		if(tab.selected) {
+		if (tab.selected) {
 			page.currentTabId = tab.id;
 			event.invoke(page.switchTab, null, tab.id, []);
 		}
@@ -49,7 +49,7 @@ browser.tabs.onCreated.addListener(function(tab) {
  */
 browser.tabs.onRemoved.addListener(function(tabId, removeInfo) {
 	delete page.tabs[tabId];
-	if(page.currentTabId == tabId) {
+	if (page.currentTabId == tabId) {
 		page.currentTabId = -1;
 	}
 });
@@ -66,9 +66,9 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
 
 	browser.tabs.get(activeInfo.tabId, function(info) {
 		//console.log(info.id + ": " + info.url);
-		if(info && info.id) {
+		if (info && info.id) {
 			page.currentTabId = info.id;
-			if(info.status == "complete") {
+			if (info.status == "complete") {
 				//console.log("event.invoke(page.switchTab, null, "+info.id + ", []);");
 				event.invoke(page.switchTab, null, info.id, []);
 			}
@@ -82,7 +82,7 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
  * @param {object} changeInfo
  */
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-	if(changeInfo.status == "complete") {
+	if (changeInfo.status == "complete") {
 		event.invoke(browserAction.removeRememberPopup, null, tabId, []);
 	}
 });

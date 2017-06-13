@@ -15,7 +15,7 @@ keepass.nativePort = null;
 keepass.keySize = 24;
 keepass.latestVersionUrl = "https://raw.githubusercontent.com/keepassxreboot/keepassxc/develop/CHANGELOG";
 keepass.cacheTimeout = 30 * 1000; // milliseconds
-keepass.databaseHash = "no-hash"; //no-hash = keepasshttp is too old and does not return a hash value
+keepass.databaseHash = "no-hash"; //no-hash = KeePassXC is too old and does not return a hash value
 keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 keepass.keyId = "chromekeepassxc-cryptokey-name";
 keepass.keyBody = "chromekeepassxc-key";
@@ -237,8 +237,6 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 					keepass.setcurrentKeePassXCVersion(parsed.version);
 					if (keepass.verifyResponse(parsed, response.nonce)) {
 						var rIv = response.nonce;
-
-						// var response = JSON.stringify({ Login: (msg.password.length * 8), Password: msg.password });
 						if (parsed.entries) {
 							passwords = parsed.entries;
 							keepass.updateLastUsed(keepass.databaseHash);
@@ -490,7 +488,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 }
 
 keepass.changePublicKeys = function(tab, callback) {
-	if (!keepass.isConnected || keepass.serverPublicKey) {
+	if (!keepass.isConnected) {
 		return;
 	}
 
@@ -529,9 +527,6 @@ keepass.changePublicKeys = function(tab, callback) {
 }
 
 keepass.generateNewKeyPair = function() {
-	if (keepass.keyPair.publicKey !== null && keepass.keyPair.secretKey !== null)
-		return;
-
 	keepass.keyPair = nacl.box.keyPair();
 	//console.log(keepass.b64e(keepass.keyPair.publicKey) + " " + keepass.b64e(keepass.keyPair.secretKey));
 }
