@@ -1,6 +1,7 @@
-0.1.8 (2017-05-28)
+0.1.8 (2017-06-13)
 =========================
-- Enable relaunching and reconnecting to KeePassXC
+- Fixed showing wrong status messages
+- Enable relaunching and reconnecting to KeePassXC (create new keys on the fly)
 
 0.1.7 (2017-05-28)
 =========================
