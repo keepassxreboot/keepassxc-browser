@@ -1,5 +1,5 @@
 {
-  "name": "com.varjolintu.keepassxc-browser",
+  "name": "com.varjolintu.keepassxc_browser",
   "description": "KeepassXC integration with Chrome with Native Messaging support",
   "path" : "%%replace%%",
   "type": "stdio",
