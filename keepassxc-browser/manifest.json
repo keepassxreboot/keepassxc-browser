@@ -15,7 +15,7 @@
 		  "19": "icons/keepassxc_19x19.png",
 		  "38": "icons/keepassxc_38x38.png"
 		},
-		"default_title": "chromeKeePassXC",
+		"default_title": "keepassxc-browser",
 		"default_popup": "popups/popup.html"
 	},
 	"options_ui": {
@@ -74,7 +74,7 @@
 	],
 	"applications": {
        "gecko": {
-           "id": "chromeKeePassXC@sami.vanttinen",
+           "id": "keepassxc-browser@sami.vanttinen",
            "strict_min_version": "53.0"
        }
    }

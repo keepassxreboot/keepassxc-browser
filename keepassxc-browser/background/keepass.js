@@ -10,7 +10,7 @@ keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = {"version": 0, "versionParsed": 0};
 keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) == 'undefined') ? {"version": 0, "versionParsed": 0, "lastChecked": null} : JSON.parse(localStorage.latestKeePassXC);
 keepass.requiredKeePassXC = 214;
-keepass.nativeHostName = "com.varjolintu.keepassxc-browser";
+keepass.nativeHostName = "com.varjolintu.keepassxc_browser";
 keepass.nativePort = null;
 keepass.keySize = 24;
 keepass.latestVersionUrl = "https://raw.githubusercontent.com/keepassxreboot/keepassxc/develop/CHANGELOG";

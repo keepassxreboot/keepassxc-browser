@@ -19,7 +19,7 @@
 set -e
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
-APP_NAME="com.varjolintu.keepassxc-browser"
+APP_NAME="com.varjolintu.keepassxc_browser"
 HOST_FILE="$DIR"
 KEEPASSXC_PATH=""
 
