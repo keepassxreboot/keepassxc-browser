@@ -10,15 +10,15 @@ keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = {"version": 0, "versionParsed": 0};
 keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) == 'undefined') ? {"version": 0, "versionParsed": 0, "lastChecked": null} : JSON.parse(localStorage.latestKeePassXC);
 keepass.requiredKeePassXC = 214;
-keepass.nativeHostName = "com.varjolintu.chromekeepassxc";
+keepass.nativeHostName = "com.varjolintu.keepassxc-browser";
 keepass.nativePort = null;
 keepass.keySize = 24;
 keepass.latestVersionUrl = "https://raw.githubusercontent.com/keepassxreboot/keepassxc/develop/CHANGELOG";
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = "no-hash"; //no-hash = KeePassXC is too old and does not return a hash value
 keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.parse(localStorage.keyRing);
-keepass.keyId = "chromekeepassxc-cryptokey-name";
-keepass.keyBody = "chromekeepassxc-key";
+keepass.keyId = "keepassxc-browser-cryptokey-name";
+keepass.keyBody = "keepassxc-browser-key";
 
 window.browser = (function () {
   return window.msBrowser ||
@@ -72,6 +72,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 			message: keepass.encrypt(messageData, nonce),
 			nonce: keepass.b64e(nonce)
 		};
+		console.log(request);
 
 		keepass.callbackOnId(keepass.nativePort.onMessage, "set-login", function(response) {
 			if (response.message && response.nonce) {

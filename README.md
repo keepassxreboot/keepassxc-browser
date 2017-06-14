@@ -1,22 +1,22 @@
-# chromeKeePassXC
+# keepassxc-browser
 Chrome extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 This is a heavily forked version of [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
 For testing purposes, please use following unofficial KeePassXC [release's](https://github.com/varjolintu/keepassxc/releases).
 
-Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/chromekeepassxc/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/chromekeepassxc/iopaggbpplllidnfmcghoonnokmjoicf).
+Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
 
 ## Protocol
 
-Transmitting messages between KeePassXC and chromeKeePassXC is totally rewritten. This is still under development.
+Transmitting messages between KeePassXC and keepassxc-browser is totally rewritten. This is still under development.
 Now the requests are encrypted by [TweetNaCl.js](https://github.com/dchest/tweetnacl-js) box method and does the following:
 
-1. chromeKeePassXC generates a key pair (with public and secret key) and transfers the public key to KeePassXC
-2. When KeePassXC receives the public key it generates its own key pair and transfers the public key to chromeKeePassXC
+1. keepassxc-browser generates a key pair (with public and secret key) and transfers the public key to KeePassXC
+2. When KeePassXC receives the public key it generates its own key pair and transfers the public key to keepassxc-browser
 3. All messages (excluding get-databasehash) are now encrypted.
-4. When chromeKeePassXC sends a message it is encrypted with KeePassXC's public key, a random generated nonce and chromeKeePassXC's secret key.
-5. When KeePassXC sends a message it is encrypted with chromeKeePassXC's public key etc.
-6. Databases are stored based on the current public key used with `associate`. A new key pair for data transfer is generated each time chromeKeePassXC is launched.
+4. When keepassxc-browser sends a message it is encrypted with KeePassXC's public key, a random generated nonce and keepassxc-browser's secret key.
+5. When KeePassXC sends a message it is encrypted with keepassxc-browser's public key etc.
+6. Databases are stored based on the current public key used with `associate`. A new key pair for data transfer is generated each time keepassxc-browser is launched.
 
 Encrypted messages are built with these JSON parameters:
 - action - `test-associate`, `associate`, `get-logins`, `get-logins-count`, `set-login`...

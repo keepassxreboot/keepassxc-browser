@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
-	"name": "chromeKeePassXC",
-	"version": "0.1.8",
+	"name": "keepassxc-browser",
+	"version": "0.1.9",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -37,8 +37,8 @@
 	"content_scripts": [
 		{
 			"matches": [ "http://*/*", "https://*/*" ],
-			"js": [ "jquery-3.2.1.min.js", "jquery-ui.min.js", "chromekeepassxc.js" ],
-			"css": [ "jquery-ui.min.css", "chromekeepassxc.css" ],
+			"js": [ "jquery-3.2.1.min.js", "jquery-ui.min.js", "keepassxc-browser.js" ],
+			"css": [ "jquery-ui.min.css", "keepassxc-browser.css" ],
 			"run_at": "document_idle",
 			"all_frames": true
 		}
@@ -74,7 +74,7 @@
 	],
 	"applications": {
        "gecko": {
-           "id": "chromeKeePassXC@sami.vanttinen",
+           "id": "keepassxc-browser@sami.vanttinen",
            "strict_min_version": "53.0"
        }
    }
