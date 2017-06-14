@@ -1096,7 +1096,7 @@ cipFields.useDefinedCredentialFields = function() {
 
 var cip = {};
 
-// settings of chromeKeePassXC
+// settings of keepassxc-browser
 cip.settings = {};
 // username field which will be set on focus
 cip.u = null;
@@ -1549,7 +1549,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			if (countPasswords > 1) {
 				if (!suppressWarnings) {
 					var message = "Error #105\nMore than one login was found in KeePassXC!\n" +
-					"Press the chromeKeePassXC icon for more options.";
+					"Press the keepassxc-browser icon for more options.";
 					browser.runtime.sendMessage({
 						action: 'alert',
 						args: [message]
@@ -1569,7 +1569,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 		else {
 			if (!suppressWarnings) {
 					var message = "Error #104\nMore than one login was found in KeePassXC!\n" +
-					"Press the chromeKeePassXC icon for more options.";
+					"Press the keepassxc-browser icon for more options.";
 				browser.runtime.sendMessage({
 					action: 'alert',
 					args: [message]

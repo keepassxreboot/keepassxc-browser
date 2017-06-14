@@ -19,7 +19,7 @@
 set -e
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
-APP_NAME="com.varjolintu.chromekeepassxc"
+APP_NAME="com.varjolintu.keepassxc-browser"
 HOST_FILE="$DIR"
 KEEPASSXC_PATH=""
 
@@ -52,9 +52,9 @@ else
   fi
 fi
 
-if [ -e "$DIR/chromeKeePassXC" ]; then
+if [ -e "$DIR/keepassxc-browser" ]; then
   echo "Detected development binary"
-  HOST_FILE="$DIR/chromeKeePassXC"
+  HOST_FILE="$DIR/keepassxc-browser"
 fi
 
 echo ""
@@ -123,9 +123,9 @@ mkdir -p "$TARGET_DIR"
 
 # Copy manifest host config file
 if [ "$BROWSER" == "1" ] || [ "$BROWSER" == "2" ] || [ "$BROWSER" == "4" ]; then
-  cp "$DIR/com.varjolintu.chromekeepassxc-chrome.json" "$TARGET_DIR/$APP_NAME.json"
+  cp "$DIR/com.varjolintu.keepassxc-browser-chrome.json" "$TARGET_DIR/$APP_NAME.json"
 else
-  cp "$DIR/com.varjolintu.chromekeepassxc-firefox.json" "$TARGET_DIR//$APP_NAME.json"
+  cp "$DIR/com.varjolintu.keepassxc-browser-firefox.json" "$TARGET_DIR//$APP_NAME.json"
 fi
 
 # Replace path to host

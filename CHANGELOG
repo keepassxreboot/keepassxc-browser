@@ -1,3 +1,7 @@
+0.1.9 (2017-xx-xx)
+=========================
+- Renamed the project to keepassxc-browser
+
 0.1.8 (2017-06-13)
 =========================
 - Fixed showing wrong status messages
