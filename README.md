@@ -6,6 +6,17 @@ For testing purposes, please use following unofficial KeePassXC [release's](http
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
 
+## How it works
+There are two methods which you can use keepassxc-browser to connect to KeePassXC:
+
+1. keepassxc-browser communicates directly with KeePassXC via stdin/stdout. This method launches KeePassXC every time you start the browser and closes when you exit.
+This can cause unsaved changes not to be saved. If you use this method it's important to enable `Automatically save after every change` from KeePassXC's preferences.
+
+2. keepassxc-browser communicated with KeePassXC through [keepassxc-proxy](https://github.com/varjolintu/keepassxc-proxy). The proxy handles listening stdin/stdout
+and transfers these messages through a localhost UDP port 19700 (configurable) to KeePassXC. This means KeePassXC can be used and started normally without inteference from
+Native Messaging API. keepassxc-browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. keepassxc-proxy
+is still under development. If you want, you are free to write your own proxy that handles the traffic.
+
 ## Protocol
 
 Transmitting messages between KeePassXC and keepassxc-browser is totally rewritten. This is still under development.

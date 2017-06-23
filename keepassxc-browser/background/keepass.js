@@ -13,6 +13,7 @@ keepass.requiredKeePassXC = 214;
 keepass.nativeHostName = "com.varjolintu.keepassxc_browser";
 keepass.nativePort = null;
 keepass.keySize = 24;
+keepass.proxyPort = 19700;
 keepass.latestVersionUrl = "https://raw.githubusercontent.com/keepassxreboot/keepassxc/develop/CHANGELOG";
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = "no-hash"; //no-hash = KeePassXC is too old and does not return a hash value
@@ -500,6 +501,7 @@ keepass.changePublicKeys = function(tab, callback) {
 	var message = {
 		"action": "change-public-keys",
 		"publicKey": key,
+		"proxyPort": keepass.proxyPort,
 		"nonce": nonce
 	}
 
