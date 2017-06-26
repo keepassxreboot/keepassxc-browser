@@ -9,7 +9,7 @@ keepass.isKeePassXCAvailable = false;
 keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = {"version": 0, "versionParsed": 0};
 keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) == 'undefined') ? {"version": 0, "versionParsed": 0, "lastChecked": null} : JSON.parse(localStorage.latestKeePassXC);
-keepass.requiredKeePassXC = 214;
+keepass.requiredKeePassXC = 220;
 keepass.nativeHostName = "com.varjolintu.keepassxc_browser";
 keepass.nativePort = null;
 keepass.keySize = 24;
@@ -94,6 +94,9 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 					callback(code);
 				}
 			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
+			}
 			else {
 				browserAction.showDefault(null, tab);
 			}
@@ -172,6 +175,9 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 					}
 					page.debug("keepass.retrieveCredentials() => entries.length = {1}", entries.length);
 				}
+			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
 			}
 			else {
 				browserAction.showDefault(null, tab);
@@ -253,6 +259,9 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 					callback(passwords);
 				}
 			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
+			}
 		});
 		keepass.nativePort.postMessage(request);
 	}, tab);
@@ -333,6 +342,9 @@ keepass.associate = function(callback, tab) {
 
 					browserAction.show(callback, tab);
 				}
+			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
 			}
 		});
 		keepass.nativePort.postMessage(request);
@@ -432,6 +444,9 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 						}
 					}
 				}
+			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
 			}
 			callback(keepass.isAssociated());
 		});
@@ -725,6 +740,11 @@ keepass.verifyResponse = function(response, nonce, id) {
 
 	return keepass.isAssociated();
 
+}
+
+keepass.handleError = function(tabId, errorMessage, errorCode) {
+	console.log("Received error " + errorCode + ": " + errorMessage);
+	page.tabs[tabId].errorMessage = errorMessage;
 }
 
 keepass.b64e = function(d) {
