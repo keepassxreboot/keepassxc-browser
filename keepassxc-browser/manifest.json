@@ -75,7 +75,7 @@
 	"applications": {
        "gecko": {
            "id": "keepassxc-browser@sami.vanttinen",
-           "strict_min_version": "53.0"
+           "strict_min_version": "56.0"
        }
    }
 }
