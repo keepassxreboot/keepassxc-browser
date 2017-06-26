@@ -14,7 +14,7 @@ keepass.nativeHostName = "com.varjolintu.keepassxc_browser";
 keepass.nativePort = null;
 keepass.keySize = 24;
 keepass.proxyPort = 19700;
-keepass.latestVersionUrl = "https://raw.githubusercontent.com/keepassxreboot/keepassxc/develop/CHANGELOG";
+keepass.latestVersionUrl = "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest";
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = "no-hash"; //no-hash = KeePassXC is too old and does not return a hash value
 keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.parse(localStorage.keyRing);
@@ -622,23 +622,21 @@ keepass.keePassXCUpdateAvailable = function() {
 
 keepass.checkForNewKeePassXCVersion = function() {
 	var xhr = new XMLHttpRequest();
+	var version = -1;
 	xhr.open("GET", keepass.latestVersionUrl, true);
 	xhr.onload = function(e) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var $version = xhr.responseText;
-				if ($version.substring(0, 1) == "2") {
-					$version = $version.substring(0, $version.indexOf(" "));
-					keepass.latestKeePassXC.version = $version;
-					keepass.latestKeePassXC.versionParsed = parseInt($version.replace(/\./g,""));
+				var json = JSON.parse(xhr.responseText);
+				if (json.tag_name) {
+					version = json.tag_name;
+					keepass.latestKeePassXC.version = version;
+					keepass.latestKeePassXC.versionParsed = parseInt(version.replace(/\./g,""));
 				}
-			}
-			else {
-				$version = -1;
 			}
 		}
 
-		if ($version != -1) {
+		if (version != -1) {
 			localStorage.latestKeePassXC = JSON.stringify(keepass.latestKeePassXC);
 		}
 	};
