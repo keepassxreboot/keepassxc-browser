@@ -9,11 +9,12 @@ keepass.isKeePassXCAvailable = false;
 keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = {"version": 0, "versionParsed": 0};
 keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) == 'undefined') ? {"version": 0, "versionParsed": 0, "lastChecked": null} : JSON.parse(localStorage.latestKeePassXC);
-keepass.requiredKeePassXC = 214;
+keepass.requiredKeePassXC = 220;
 keepass.nativeHostName = "com.varjolintu.keepassxc_browser";
 keepass.nativePort = null;
 keepass.keySize = 24;
-keepass.latestVersionUrl = "https://raw.githubusercontent.com/keepassxreboot/keepassxc/develop/CHANGELOG";
+keepass.proxyPort = 19700;
+keepass.latestVersionUrl = "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest";
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = "no-hash"; //no-hash = KeePassXC is too old and does not return a hash value
 keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.parse(localStorage.keyRing);
@@ -93,6 +94,9 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 					callback(code);
 				}
 			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
+			}
 			else {
 				browserAction.showDefault(null, tab);
 			}
@@ -171,6 +175,9 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 					}
 					page.debug("keepass.retrieveCredentials() => entries.length = {1}", entries.length);
 				}
+			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
 			}
 			else {
 				browserAction.showDefault(null, tab);
@@ -252,6 +259,9 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 					callback(passwords);
 				}
 			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
+			}
 		});
 		keepass.nativePort.postMessage(request);
 	}, tab);
@@ -332,6 +342,9 @@ keepass.associate = function(callback, tab) {
 
 					browserAction.show(callback, tab);
 				}
+			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
 			}
 		});
 		keepass.nativePort.postMessage(request);
@@ -432,6 +445,9 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 					}
 				}
 			}
+			else if (response.error && response.errorCode) {
+				keepass.handleError(tab.id, response.error, response.errorCode);
+			}
 			callback(keepass.isAssociated());
 		});
 		keepass.nativePort.postMessage(request);
@@ -500,6 +516,7 @@ keepass.changePublicKeys = function(tab, callback) {
 	var message = {
 		"action": "change-public-keys",
 		"publicKey": key,
+		"proxyPort": keepass.proxyPort,
 		"nonce": nonce
 	}
 
@@ -620,23 +637,21 @@ keepass.keePassXCUpdateAvailable = function() {
 
 keepass.checkForNewKeePassXCVersion = function() {
 	var xhr = new XMLHttpRequest();
+	var version = -1;
 	xhr.open("GET", keepass.latestVersionUrl, true);
 	xhr.onload = function(e) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var $version = xhr.responseText;
-				if ($version.substring(0, 1) == "2") {
-					$version = $version.substring(0, $version.indexOf(" "));
-					keepass.latestKeePassXC.version = $version;
-					keepass.latestKeePassXC.versionParsed = parseInt($version.replace(/\./g,""));
+				var json = JSON.parse(xhr.responseText);
+				if (json.tag_name) {
+					version = json.tag_name;
+					keepass.latestKeePassXC.version = version;
+					keepass.latestKeePassXC.versionParsed = parseInt(version.replace(/\./g,""));
 				}
-			}
-			else {
-				$version = -1;
 			}
 		}
 
-		if ($version != -1) {
+		if (version != -1) {
 			localStorage.latestKeePassXC = JSON.stringify(keepass.latestKeePassXC);
 		}
 	};
@@ -725,6 +740,11 @@ keepass.verifyResponse = function(response, nonce, id) {
 
 	return keepass.isAssociated();
 
+}
+
+keepass.handleError = function(tabId, errorMessage, errorCode) {
+	console.log("Received error " + errorCode + ": " + errorMessage);
+	page.tabs[tabId].errorMessage = errorMessage;
 }
 
 keepass.b64e = function(d) {

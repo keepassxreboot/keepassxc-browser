@@ -1,0 +1,10 @@
+{
+  "name": "com.varjolintu.keepassxc_browser",
+  "description": "KeepassXC integration with Chrome with Native Messaging support",
+  "path" : "keepassxc-proxy.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://iopaggbpplllidnfmcghoonnokmjoicf/",
+    "chrome-extension://fhakpkpdnjecjfceboihdjpfmgajebii/"
+  ]
+}

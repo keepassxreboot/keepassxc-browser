@@ -1,4 +1,11 @@
-0.1.10 (2017-06.14)
+0.2.0 (2017-xx-xx)
+=========================
+- Added JSON install files and script for Windows
+- New version checking function
+- Added error message handling
+- Added support for reloading KeePassXC (or proxy) with new public keys
+
+0.1.10 (2017-06-14)
 =========================
 - Updated manifest and json files up to date
 
