@@ -3,7 +3,7 @@
 - Added JSON install files and script for Windows
 - New version checking function
 - Added error message handling
-- Added reloading KeePassXC with new public key retrieval (with keepassxc-proxy too)
+- Added support for reloading KeePassXC (or proxy) with new public keys
 
 0.1.10 (2017-06-14)
 =========================
