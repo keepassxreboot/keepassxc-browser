@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "keepassxc-browser",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -70,7 +70,7 @@
 		"tabs",
 		"webRequest",
 		"webRequestBlocking",
-		"https://raw.github.com/"
+		"https://api.github.com/"
 	],
 	"applications": {
        "gecko": {
