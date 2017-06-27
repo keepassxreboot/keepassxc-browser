@@ -24,7 +24,7 @@ Now the requests are encrypted by [TweetNaCl.js](https://github.com/dchest/tweet
 
 1. keepassxc-browser generates a key pair (with public and secret key) and transfers the public key to KeePassXC
 2. When KeePassXC receives the public key it generates its own key pair and transfers the public key to keepassxc-browser
-3. All messages (excluding get-databasehash) are now encrypted.
+3. All messages between the browser extension and KeePassXC are now encrypted.
 4. When keepassxc-browser sends a message it is encrypted with KeePassXC's public key, a random generated nonce and keepassxc-browser's secret key.
 5. When KeePassXC sends a message it is encrypted with keepassxc-browser's public key etc.
 6. Databases are stored based on the current public key used with `associate`. A new key pair for data transfer is generated each time keepassxc-browser is launched.
@@ -48,7 +48,7 @@ Response (success):
 ```javascript
 {
 	"action": "change-public-keys",
-	"version": "2.1.2",
+	"version": "2.2.0",
 	"publicKey": "<host public key>",
 	"success": "true"
 }
@@ -62,12 +62,12 @@ Request:
 }
 ```
 
-Response (success):
+Response message data (success, decrypted):
 ```javascript
 {
 	"action": "hash",
 	"hash": "29234e32274a32276e25666a42",
-	"version": "2.1.2"
+	"version": "2.2.0"
 }
 ```
 
@@ -93,7 +93,7 @@ Response message data (success, decrypted):
 ```javascript
 {
 	"hash": "29234e32274a32276e25666a42",
-	"version": "2.1.2",
+	"version": "2.2.0",
 	"success": "true",
 	"id": "testclient",
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
@@ -122,7 +122,7 @@ Request:
 Response message data (success, decrypted):
 ```javascript
 {
-	"version": "2.1.2",
+	"version": "2.2.0",
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
 	"hash": "29234e32274a32276e25666a42",
 	"id": "testclient",
@@ -142,7 +142,7 @@ Request:
 Response message data (success, decrypted):
 ```javascript
 {
-	"version": "2.1.2",
+	"version": "2.2.0",
 	"entries": [
 		{
 			"login": 144,
@@ -191,7 +191,7 @@ Response message data (success, decrypted):
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
 	"success": "true",
 	"hash": "29234e32274a32276e25666a42",
-	"version": "2.1.2"
+	"version": "2.2.0"
 }
 ```
 
@@ -227,7 +227,7 @@ Response message data (success, decrypted):
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
 	"success": "true",
 	"hash": "29234e32274a32276e25666a42",
-	"version": "2.1.2"
+	"version": "2.2.0"
 }
 ```
 
