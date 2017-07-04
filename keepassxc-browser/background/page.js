@@ -33,26 +33,28 @@ page.initSettings = function() {
 	if (!("autoRetrieveCredentials" in page.settings)) {
 		page.settings.autoRetrieveCredentials = true;
 	}
+	if (!("port" in page.settings)) {
+		page.settings.port = "19700";
+	}
 	localStorage.settings = JSON.stringify(page.settings);
 }
 
 page.initOpenedTabs = function() {
-	browser.tabs.query({}, function(tabs) {
-		for (var i = 0; i < tabs.length; i++) {
-			page.createTabEntry(tabs[i].id);
+	browser.tabs.query({}, (tabs) => {
+		for (const i of tabs) {
+			page.createTabEntry(i.id);
 		}
 	});
 }
 
 page.isValidProtocol = function(url) {
-	var protocol = url.substring(0, url.indexOf(":"));
+	let protocol = url.substring(0, url.indexOf(":"));
 	protocol = protocol.toLowerCase();
 	return !(url.indexOf(".") == -1 || (protocol != "http" && protocol != "https" && protocol != "ftp" && protocol != "sftp"));
 }
 
 page.switchTab = function(callback, tab) {
 	browserAction.showDefault(null, tab);
-
 	browser.tabs.sendMessage(tab.id, {action: "activated_tab"});
 }
 
@@ -83,19 +85,19 @@ page.createTabEntry = function(tabId) {
 }
 
 page.removePageInformationFromNotExistingTabs = function() {
-	var rand = Math.floor(Math.random()*1001);
+	let rand = Math.floor(Math.random()*1001);
 	if (rand == 28) {
-		browser.tabs.query({}, function(tabs) {
-			var $tabIds = {};
-			var $infoIds = Object.keys(page.tabs);
+		browser.tabs.query({}, (tabs) => {
+			let $tabIds = {};
+			const $infoIds = Object.keys(page.tabs);
 
-			for (var i = 0; i < tabs.length; i++) {
-				$tabIds[tabs[i].id] = true;
+			for (const t of tabs) {
+				$tabIds[t.id] = true;
 			}
 
-			for (var i = 0; i < $infoIds.length; i++) {
-				if (!($infoIds[i] in $tabIds)) {
-					delete page.tabs[$infoIds[i]];
+			for (const i of $infoIds) {
+				if (!(i in $tabIds)) {
+					delete page.tabs[i];
 				}
 			}
 		});

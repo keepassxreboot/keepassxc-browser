@@ -7,8 +7,8 @@ page.initOpenedTabs();
 // initial connection with KeePassXC
 keepass.connectToNative();
 keepass.generateNewKeyPair();
-keepass.changePublicKeys(null, function(pkRes) {
-	keepass.getDatabaseHash(function(gdRes) {}, null);
+keepass.changePublicKeys(null, (pkRes) => {
+	keepass.getDatabaseHash((gdRes) => {}, null);
 });
 
 window.browser = (function () {
@@ -18,13 +18,13 @@ window.browser = (function () {
 })();
 
 // set initial tab-ID
-browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
+browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
 	if (tabs.length === 0)
 		return; // For example: only the background devtools or a popup are opened
 	page.currentTabId = tabs[0].id;
 });
 // Milliseconds for intervall (e.g. to update browserAction)
-var _interval = 250;
+let _interval = 250;
 
 
 /**
@@ -32,7 +32,7 @@ var _interval = 250;
  * functions if tab is created in foreground
  * @param {object} tab
  */
-browser.tabs.onCreated.addListener(function(tab) {
+browser.tabs.onCreated.addListener((tab) => {
 	if (tab.id > 0) {
 		//console.log("browser.tabs.onCreated(" + tab.id+ ")");
 		if (tab.selected) {
@@ -47,7 +47,7 @@ browser.tabs.onCreated.addListener(function(tab) {
  * @param {integer} tabId
  * @param {object} removeInfo
  */
-browser.tabs.onRemoved.addListener(function(tabId, removeInfo) {
+browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
 	delete page.tabs[tabId];
 	if (page.currentTabId == tabId) {
 		page.currentTabId = -1;
@@ -59,12 +59,12 @@ browser.tabs.onRemoved.addListener(function(tabId, removeInfo) {
  * Invoke functions to retrieve credentials for focused tab
  * @param {object} activeInfo
  */
-browser.tabs.onActivated.addListener(function(activeInfo) {
+browser.tabs.onActivated.addListener((activeInfo) => {
 	// remove possible credentials from old tab information
     page.clearCredentials(page.currentTabId, true);
 	browserAction.removeRememberPopup(null, {"id": page.currentTabId}, true);
 
-	browser.tabs.get(activeInfo.tabId, function(info) {
+	browser.tabs.get(activeInfo.tabId, (info) => {
 		//console.log(info.id + ": " + info.url);
 		if (info && info.id) {
 			page.currentTabId = info.id;
@@ -81,7 +81,7 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
  * @param {integer} tabId
  * @param {object} changeInfo
  */
-browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	if (changeInfo.status == "complete") {
 		event.invoke(browserAction.removeRememberPopup, null, tabId, []);
 	}
@@ -105,7 +105,7 @@ browser.runtime.onMessage.addListener(event.onMessage);
  * Add context menu entry for filling in username + password
  */
 browser.contextMenus.create({
-	"title": "Fill User + Pass",
+	"title": "Fill &User + Pass",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
@@ -118,7 +118,7 @@ browser.contextMenus.create({
  * Add context menu entry for filling in only password which matches for given username
  */
 browser.contextMenus.create({
-	"title": "Fill Pass Only",
+	"title": "Fill &Pass Only",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
@@ -131,7 +131,7 @@ browser.contextMenus.create({
  * Add context menu entry for creating icon for generate-password dialog
  */
 browser.contextMenus.create({
-	"title": "Show Password Generator Icons",
+	"title": "Show Password &Generator Icons",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
@@ -144,7 +144,7 @@ browser.contextMenus.create({
  * Add context menu entry for creating icon for generate-password dialog
  */
 browser.contextMenus.create({
-	"title": "Save credentials",
+	"title": "&Save credentials",
 	"contexts": [ "editable" ],
 	"onclick": function(info, tab) {
 		browser.tabs.sendMessage(tab.id, {
@@ -156,9 +156,9 @@ browser.contextMenus.create({
 /**
  * Listen for keyboard shortcuts specified by user
  */
-browser.commands.onCommand.addListener(function(command) {
+browser.commands.onCommand.addListener((command) => {
 	if (command === "fill-username-password") {
-		browser.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 			if (tabs.length) {
 				browser.tabs.sendMessage(tabs[0].id, { action: "fill_user_pass" });
 			}
@@ -166,7 +166,7 @@ browser.commands.onCommand.addListener(function(command) {
 	}
 
 	if (command === "fill-password") {
-		browser.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 			if (tabs.length) {
 				browser.tabs.sendMessage(tabs[0].id, { action: "fill_pass_only" });
 			}
