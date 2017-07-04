@@ -69,25 +69,49 @@ input.genpw-text {
 	position: absolute;
 	cursor: pointer;
 }
-.cip-genpw-icon.cip-icon-key-small {
+.cip-genpw-icon.small {
 	width: 16px;
 	height: 16px;
 	background-image: url(chrome-extension://__MSG_@@extension_id__/icons/key_16x16.png);
 }
-.cip-genpw-icon.cip-icon-key-big {
+.cip-genpw-icon.big {
 	width: 24px;
 	height: 24px;
 	background-image: url(chrome-extension://__MSG_@@extension_id__/icons/key_24x24.png);
 }
-.cip-genpw-icon.cip-icon-key-small-moz {
+.cip-genpw-icon.small-moz {
 	width: 16px;
 	height: 16px;
 	background-image: url(moz-extension://__MSG_@@extension_id__/icons/key_16x16.png);
 }
-.cip-genpw-icon.cip-icon-key-big-moz {
+.cip-genpw-icon.big-moz {
 	width: 24px;
 	height: 24px;
 	background-image: url(moz-extension://__MSG_@@extension_id__/icons/key_24x24.png);
+}
+.cip-warning-icon {
+	position: absolute;
+	cursor: pointer;
+}
+.cip-warning-icon.small {
+	width: 16px;
+	height: 16px;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/icons/warning_16x16.png);
+}
+.cip-warning-icon.big {
+	width: 24px;
+	height: 24px;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/icons/warning_24x24.png);
+}
+.cip-warning-icon.small-moz {
+	width: 16px;
+	height: 16px;
+	background-image: url(moz-extension://__MSG_@@extension_id__/icons/warning_16x16.png);
+}
+.cip-warning-icon.big-moz {
+	width: 24px;
+	height: 24px;
+	background-image: url(moz-extension://__MSG_@@extension_id__/icons/warning_24x24.png);
 }
 
 #cip-genpw-btn-fillin {

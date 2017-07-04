@@ -6,7 +6,6 @@ window.browser = (function () {
 
 var event = {};
 
-
 event.onMessage = function(request, sender, callback) {
 	if (request.action in event.messageHandlers) {
 		//console.log("onMessage(" + request.action + ") for #" + sender.tab.id);
@@ -49,7 +48,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 	// remove information from no longer existing tabs
 	page.removePageInformationFromNotExistingTabs();
 
-	browser.tabs.get(senderTabId, function(tab) {
+	browser.tabs.get(senderTabId, (tab) => {
 	//browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
 		//if (tabs.length === 0)
 		//	return; // For example: only the background devtools or a popup are opened
@@ -119,8 +118,8 @@ event.onSaveSettings = function(callback, tab, settings) {
 }
 
 event.onGetStatus = function(callback, tab) {
-	keepass.testAssociation(function(response) {
-		keepass.isConfigured(function(configured) {
+	keepass.testAssociation((response) => {
+		keepass.isConfigured((configured) => {
 			var keyId = null;
 			if (configured) {
 				keyId = keepass.keyRing[keepass.databaseHash].id;
@@ -145,11 +144,11 @@ event.onGetStatus = function(callback, tab) {
 event.onReconnect = function(callback, tab) {
 	keepass.connectToNative();
 	keepass.generateNewKeyPair();
-	keepass.changePublicKeys(null, function(pkRes) {
-		keepass.getDatabaseHash(function(gdRes) {
+	keepass.changePublicKeys(null, (pkRes) => {
+		keepass.getDatabaseHash((gdRes) => {
 			if (gdRes) {
-				keepass.testAssociation(function(response) {
-				keepass.isConfigured(function(configured) {
+				keepass.testAssociation((response) => {
+				keepass.isConfigured((configured) => {
 					var keyId = null;
 					if (configured) {
 						keyId = keepass.keyRing[keepass.databaseHash].id;
@@ -179,8 +178,7 @@ event.onPopStack = function(callback, tab) {
 }
 
 event.onGetTabInformation = function(callback, tab) {
-	var id = tab.id || page.currentTabId;
-
+	const id = tab.id || page.currentTabId;
 	callback(page.tabs[id]);
 }
 
@@ -193,7 +191,7 @@ event.onGetConnectedDatabase = function(callback, tab) {
 
 event.onGetKeePassXCVersions = function(callback, tab) {
 	if (keepass.currentKeePassXC.version == 0) {
-		keepass.getDatabaseHash(function(response) {
+		keepass.getDatabaseHash((response) => {
 			callback({"current": keepass.currentKeePassXC.version, "latest": keepass.latestKeePassXC.version});
 		}, tab);
 	}
@@ -210,8 +208,7 @@ event.onUpdateAvailableKeePassXC = function(callback, tab) {
 }
 
 event.onRemoveCredentialsFromTabInformation = function(callback, tab) {
-	var id = tab.id || page.currentTabId;
-
+	const id = tab.id || page.currentTabId;
 	page.clearCredentials(id);
 }
 
@@ -220,39 +217,34 @@ event.onSetRememberPopup = function(callback, tab, username, password, url, user
 }
 
 event.onLoginPopup = function(callback, tab, logins) {
-	var stackData = {
+	let stackData = {
 		level: 1,
 		iconType: "questionmark",
 		popup: "popup_login.html"
 	}
 	browserAction.stackUnshift(stackData, tab.id);
-
 	page.tabs[tab.id].loginList = logins;
-
 	browserAction.show(null, tab);
 }
 
 event.onHTTPAuthPopup = function(callback, tab, data) {
-	var stackData = {
+	let stackData = {
 		level: 1,
 		iconType: "questionmark",
 		popup: "popup_httpauth.html"
 	}
 	browserAction.stackUnshift(stackData, tab.id);
-
 	page.tabs[tab.id].loginList = data;
-
 	browserAction.show(null, tab);
 }
 
 event.onMultipleFieldsPopup = function(callback, tab) {
-	var stackData = {
+	let stackData = {
 		level: 1,
 		iconType: "normal",
 		popup: "popup_multiple-fields.html"
 	}
 	browserAction.stackUnshift(stackData, tab.id);
-
 	browserAction.show(null, tab);
 }
 

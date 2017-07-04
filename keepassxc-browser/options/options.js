@@ -74,13 +74,34 @@ options.initGeneralSettings = function() {
 		}, options.showKeePassXCVersions);
 	});
 
+	$("#port").val(options.settings["port"]);
 	$("#blinkTimeout").val(options.settings["blinkTimeout"]);
 	$("#blinkMinTimeout").val(options.settings["blinkMinTimeout"]);
 	$("#allowedRedirect").val(options.settings["allowedRedirect"]);
 
+	$("#portButton").click(function() {
+		const port = $.trim($("#port").val());
+	 	const portNumber = parseInt(port);
+		if (isNaN(port) || portNumber < 1025 || portNumber > 99999) {
+			$("#port").closest(".control-group").addClass("error");
+			alert("The port number has to be in range 1025 - 99999.\nNothing saved!");
+			return;
+		}
+
+		options.settings["port"] = portNumber.toString();
+		$("#port").closest(".control-group").removeClass("error").addClass("success");
+		setTimeout(function() {$("#port").closest(".control-group").removeClass("success")}, 2500);
+
+		localStorage.settings = JSON.stringify(options.settings);
+
+		chrome.extension.sendMessage({
+			action: 'load_settings'
+		});
+	});
+
 	$("#blinkTimeoutButton").click(function(){
-		var blinkTimeout = $.trim($("#blinkTimeout").val());
-		var blinkTimeoutval = parseInt(blinkTimeout);
+		const blinkTimeout = $.trim($("#blinkTimeout").val());
+		const blinkTimeoutval = parseInt(blinkTimeout);
 		
                 options.settings["blinkTimeout"] = blinkTimeoutval.toString();
 		$("#blinkTimeout").closest(".control-group").removeClass("error").addClass("success");
@@ -94,8 +115,8 @@ options.initGeneralSettings = function() {
 	});
 
 	$("#blinkMinTimeoutButton").click(function(){
-		var blinkMinTimeout = $.trim($("#blinkMinTimeout").val());
-		var blinkMinTimeoutval = parseInt(blinkMinTimeout);
+		const blinkMinTimeout = $.trim($("#blinkMinTimeout").val());
+		const blinkMinTimeoutval = parseInt(blinkMinTimeout);
 		
         options.settings["blinkMinTimeout"] = blinkMinTimeoutval.toString();
 		$("#blinkMinTimeout").closest(".control-group").removeClass("error").addClass("success");
@@ -109,8 +130,8 @@ options.initGeneralSettings = function() {
 	});
 
 	$("#allowedRedirectButton").click(function(){
-		var allowedRedirect = $.trim($("#allowedRedirect").val());
-		var allowedRedirectval = parseInt(allowedRedirect);
+		const allowedRedirect = $.trim($("#allowedRedirect").val());
+		const allowedRedirectval = parseInt(allowedRedirect);
 		
         options.settings["allowedRedirect"] = allowedRedirectval.toString();
 		$("#allowedRedirect").closest(".control-group").removeClass("error").addClass("success");
@@ -125,10 +146,10 @@ options.initGeneralSettings = function() {
 };
 
 options.showKeePassXCVersions = function(response) {
-	if(response.current <= 0) {
+	if (response.current <= 0) {
 		response.current = "unknown";
 	}
-	if(response.latest <= 0) {
+	if (response.latest <= 0) {
 		response.latest = "unknown";
 	}
 	$("#tab-general-settings .kphVersion:first em.yourVersion:first").text(response.current);
@@ -151,7 +172,7 @@ options.initConnectedDatabases = function() {
 	$("#dialogDeleteConnectedDatabase .modal-footer:first button.yes:first").click(function(e) {
 		$("#dialogDeleteConnectedDatabase").modal("hide");
 
-		var $hash = $("#dialogDeleteConnectedDatabase").data("hash");
+		const $hash = $("#dialogDeleteConnectedDatabase").data("hash");
 		$("#tab-connected-databases #tr-cd-" + $hash).remove();
 
 		delete options.keyRing[$hash];
@@ -161,7 +182,7 @@ options.initConnectedDatabases = function() {
             action: 'load_keyring'
         });
 
-		if($("#tab-connected-databases table tbody:first tr").length > 2) {
+		if ($("#tab-connected-databases table tbody:first tr").length > 2) {
 			$("#tab-connected-databases table tbody:first tr.empty:first").hide();
 		}
 		else {
@@ -171,26 +192,26 @@ options.initConnectedDatabases = function() {
 
 	$("#tab-connected-databases tr.clone:first .dropdown-menu:first").width("230px");
 
-	var $trClone = $("#tab-connected-databases table tr.clone:first").clone(true);
+	const $trClone = $("#tab-connected-databases table tr.clone:first").clone(true);
 	$trClone.removeClass("clone");
-	for(var hash in options.keyRing) {
-		var $tr = $trClone.clone(true);
+	for (let hash in options.keyRing) {
+		const $tr = $trClone.clone(true);
 		$tr.data("hash", hash);
 		$tr.attr("id", "tr-cd-" + hash);
 
-		var $icon = options.keyRing[hash].icon || "blue";
+		const $icon = options.keyRing[hash].icon || "blue";
 		$("a.dropdown-toggle:first img:first", $tr).attr("src", "/icons/19x19/icon_normal_" + $icon + "_19x19.png");
 
 		$tr.children("td:first").text(options.keyRing[hash].id);
 		$tr.children("td:eq(1)").text(options.keyRing[hash].key);
-		var lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : "unknown";
+		const lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : "unknown";
 		$tr.children("td:eq(2)").text(lastUsed);
-		var date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : "unknown";
+		const date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : "unknown";
 		$tr.children("td:eq(3)").text(date);
 		$("#tab-connected-databases table tbody:first").append($tr);
 	}
 
-	if($("#tab-connected-databases table tbody:first tr").length > 2) {
+	if ($("#tab-connected-databases table tbody:first tr").length > 2) {
 		$("#tab-connected-databases table tbody:first tr.empty:first").hide();
 	}
 	else {
@@ -217,8 +238,8 @@ options.initSpecifiedCredentialFields = function() {
 	$("#dialogDeleteSpecifiedCredentialFields .modal-footer:first button.yes:first").click(function(e) {
 		$("#dialogDeleteSpecifiedCredentialFields").modal("hide");
 
-		var $url = $("#dialogDeleteSpecifiedCredentialFields").data("url");
-		var $trId = $("#dialogDeleteSpecifiedCredentialFields").data("tr-id");
+		const $url = $("#dialogDeleteSpecifiedCredentialFields").data("url");
+		const $trId = $("#dialogDeleteSpecifiedCredentialFields").data("tr-id");
 		$("#tab-specified-fields #" + $trId).remove();
 
 		delete options.settings["defined-credential-fields"][$url];
@@ -236,11 +257,11 @@ options.initSpecifiedCredentialFields = function() {
 		}
 	});
 
-	var $trClone = $("#tab-specified-fields table tr.clone:first").clone(true);
+	const $trClone = $("#tab-specified-fields table tr.clone:first").clone(true);
 	$trClone.removeClass("clone");
-	var counter = 1;
-	for(var url in options.settings["defined-credential-fields"]) {
-		var $tr = $trClone.clone(true);
+	let counter = 1;
+	for(let url in options.settings["defined-credential-fields"]) {
+		const $tr = $trClone.clone(true);
 		$tr.data("url", url);
 		$tr.attr("id", "tr-scf" + counter);
 		counter += 1;

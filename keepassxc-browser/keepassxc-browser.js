@@ -17,9 +17,9 @@ var _called = {};
 
 browser.runtime.onMessage.addListener(function(req, sender, callback) {
 	if ('action' in req) {
-		if(req.action == "fill_user_pass_with_specific_login") {
-			if(cip.credentials[req.id]) {
-				var combination = null;
+		if (req.action == "fill_user_pass_with_specific_login") {
+			if (cip.credentials[req.id]) {
+				let combination = null;
 				if (cip.u) {
 					cip.setValueWithChange(cip.u, cip.credentials[req.id].login);
 					combination = cipFields.getCombination("username", cip.u);
@@ -30,8 +30,8 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 					combination = cipFields.getCombination("password", cip.p);
 				}
 
-                var list = {};
-				if(cip.fillInStringFields(combination.fields, cip.credentials[req.id].stringFields, list)) {
+                let list = {};
+				if (cip.fillInStringFields(combination.fields, cip.credentials[req.id].stringFields, list)) {
                     cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
                 }
 			}
@@ -64,7 +64,7 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		else if (req.action == "redetect_fields") {
 			browser.runtime.sendMessage({
 				"action": "get_settings",
-			}, function(response) {
+			}, (response) => {
 				cip.settings = response.data;
 				cip.initCredentialFields(true);
 			});
@@ -73,12 +73,12 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 });
 
 function _f(fieldId) {
-	var field = (fieldId) ? jQuery("input[data-cip-id='"+fieldId+"']:first") : [];
+	const field = (fieldId) ? jQuery("input[data-cip-id='"+fieldId+"']:first") : [];
 	return (field.length > 0) ? field : null;
 }
 
 function _fs(fieldId) {
-	var field = (fieldId) ? jQuery("input[data-cip-id='"+fieldId+"']:first,select[data-cip-id='"+fieldId+"']:first").first() : [];
+	const field = (fieldId) ? jQuery("input[data-cip-id='"+fieldId+"']:first,select[data-cip-id='"+fieldId+"']:first").first() : [];
 	return (field.length > 0) ? field : null;
 }
 
@@ -119,7 +119,7 @@ cipAutocomplete.onOpen = function(event, ui) {
 }
 
 cipAutocomplete.onSource = function (request, callback) {
-	var matches = jQuery.map( cipAutocomplete.elements, function(tag) {
+	const matches = jQuery.map(cipAutocomplete.elements, (tag) => {
 		if (tag.label.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
 			return tag;
 		}
@@ -130,8 +130,8 @@ cipAutocomplete.onSource = function (request, callback) {
 cipAutocomplete.onSelect = function (e, ui) {
 	e.preventDefault();
 	cip.setValueWithChange(jQuery(this), ui.item.value);
-	var fieldId = cipFields.prepareId(jQuery(this).attr("data-cip-id"));
-	var combination = cipFields.getCombination("username", fieldId);
+	const fieldId = cipFields.prepareId(jQuery(this).attr("data-cip-id"));
+	const combination = cipFields.getCombination("username", fieldId);
 	combination.loginId = ui.item.loginId;
 	cip.fillInCredentials(combination, true, false);
 	jQuery(this).data("fetched", true);
@@ -142,8 +142,8 @@ cipAutocomplete.onBlur = function() {
 		jQuery(this).data("fetched", false);
 	}
 	else {
-		var fieldId = cipFields.prepareId(jQuery(this).attr("data-cip-id"));
-		var fields = cipFields.getCombination("username", fieldId);
+		const fieldId = cipFields.prepareId(jQuery(this).attr("data-cip-id"));
+		const fields = cipFields.getCombination("username", fieldId);
 		if (_f(fields.password) && _f(fields.password).data("unchanged") != true && jQuery(this).val() != "") {
 			cip.fillInCredentials(fields, true, true);
 		}
@@ -161,7 +161,6 @@ cipAutocomplete.onFocus = function() {
 
 
 var cipPassword = {};
-
 cipPassword.observedIcons = [];
 cipPassword.observingLock = false;
 
@@ -190,9 +189,9 @@ cipPassword.initField = function(field, inputs, pos) {
 	cipPassword.createIcon(field);
 	cipPassword.createDialog();
 
-	var $found = false;
+	let $found = false;
 	if (inputs) {
-		for (var i = pos + 1; i < inputs.length; i++) {
+		for (let i = pos + 1; i < inputs.length; i++) {
 			if (inputs[i] && inputs[i].attr("type") && inputs[i].attr("type").toLowerCase() == "password") {
 				field.data("cip-genpw-next-field-id", inputs[i].data("cip-id"));
 				field.data("cip-genpw-next-is-password-field", (i == 0));
@@ -212,13 +211,13 @@ cipPassword.createDialog = function() {
 
 	_called.passwordCreateDialog = true;
 
-	var $dialog = jQuery("<div>")
+	const $dialog = jQuery("<div>")
 		.addClass("dialog-form")
 		.attr("id", "cip-genpw-dialog");
 	
-	var $inputDiv = jQuery("<div>").addClass("form-group");
-	var $inputGroup = jQuery("<div>").addClass("genpw-input-group");
-	var $textfieldPassword = jQuery("<input>")
+	const $inputDiv = jQuery("<div>").addClass("form-group");
+	const $inputGroup = jQuery("<div>").addClass("genpw-input-group");
+	const $textfieldPassword = jQuery("<input>")
 		.attr("id", "cip-genpw-textfield-password")
 		.attr("type", "text")
 		.attr("aria-describedby", "cip-genpw-quality")
@@ -227,19 +226,19 @@ cipPassword.createDialog = function() {
 		.on('change keypress paste textInput input', function() {
 			jQuery("#cip-genpw-btn-clipboard:first").removeClass("btn-success");
 		});
-	var $quality = jQuery("<span>")
+	const $quality = jQuery("<span>")
 		.addClass("genpw-input-group-addon")
 		.addClass("b2c-add-on")
 		.attr("id", "cip-genpw-quality")
 		.text("123 Bits");
 	$inputGroup.append($textfieldPassword).append($quality);
 	
-	var $checkGroup = jQuery("<div>").addClass("genpw-input-group");
-	var $checkboxNextField = jQuery("<input>")
+	const $checkGroup = jQuery("<div>").addClass("genpw-input-group");
+	const $checkboxNextField = jQuery("<input>")
 		.attr("id", "cip-genpw-checkbox-next-field")
 		.attr("type", "checkbox")
 		.addClass("cip-genpw-checkbox");
-	var $labelNextField = jQuery("<label>")
+	const $labelNextField = jQuery("<label>")
 		.append($checkboxNextField)
 		.addClass("cip-genpw-label")
 		.append(" also fill in the next password-field");
@@ -280,10 +279,10 @@ cipPassword.createDialog = function() {
 			"Fill & copy": function(e) {
 				e.preventDefault();
 
-				var fieldId = jQuery("#cip-genpw-dialog:first").data("cip-genpw-field-id");
-				var field = jQuery("input[data-cip-id='"+fieldId+"']:first");
+				const fieldId = jQuery("#cip-genpw-dialog:first").data("cip-genpw-field-id");
+				const field = jQuery("input[data-cip-id='"+fieldId+"']:first");
 				if (field.length == 1) {
-					var $password = jQuery("input#cip-genpw-textfield-password:first").val();
+					const $password = jQuery("input#cip-genpw-textfield-password:first").val();
 
 					if (field.attr("maxlength")) {
 						if ($password.length > field.attr("maxlength")) {
@@ -297,8 +296,8 @@ cipPassword.createDialog = function() {
 					field.val($password);
 					if (jQuery("input#cip-genpw-checkbox-next-field:checked").length == 1) {
 						if(field.data("cip-genpw-next-field-exists")) {
-							var nextFieldId = field.data("cip-genpw-next-field-id");
-							var nextField = jQuery("input[data-cip-id='"+nextFieldId+"']:first");
+							const nextFieldId = field.data("cip-genpw-next-field-id");
+							const nextField = jQuery("input[data-cip-id='"+nextFieldId+"']:first");
 							if(nextField.length == 1) {
 								nextField.val($password);
 							}
@@ -326,17 +325,17 @@ cipPassword.createDialog = function() {
 }
 
 cipPassword.createIcon = function(field) {
-	var $className = (field.outerHeight() > 28) ? (isFirefox ? "cip-icon-key-big-moz" : "cip-icon-key-big") : (isFirefox ? "cip-icon-key-small-moz" : "cip-icon-key-small");
-	var $size = (field.outerHeight() > 28) ? 24 : 16;
-	var $offset = Math.floor((field.outerHeight() - $size) / 3);
+	const $className = (field.outerHeight() > 28) ? (isFirefox ? "big-moz" : "big") : (isFirefox ? "small-moz" : "small");
+	const $size = (field.outerHeight() > 28) ? 24 : 16;
+	let $offset = Math.floor((field.outerHeight() - $size) / 3);
 	$offset = ($offset < 0) ? 0 : $offset;
 
-	var $zIndex = 0;
-	var $zIndexField = field;
-	var z;
-	var c = 0;
+	let $zIndex = 0;
+	let $zIndexField = field;
+	let z;
+	let c = 0;
 	while ($zIndexField.length > 0) {
-		if( c > 100 || $zIndexField[0].nodeName == "#document") {
+		if (c > 100 || $zIndexField[0].nodeName == "#document") {
 			break;
 		}
 		z = $zIndexField.css("z-index");
@@ -352,8 +351,9 @@ cipPassword.createIcon = function(field) {
 	}
 	$zIndex += 1;
 
-	var $icon = jQuery("<div>").addClass("cip-genpw-icon")
+	const $icon = jQuery("<div>").addClass("cip-genpw-icon")
 		.addClass($className)
+		.attr("title", "Generate password")
 		.css("z-index", $zIndex)
 		.data("size", $size)
 		.data("offset", $offset)
@@ -368,7 +368,7 @@ cipPassword.createIcon = function(field) {
 			return;
 		}
 
-		var $dialog = jQuery("#cip-genpw-dialog");
+		const $dialog = jQuery("#cip-genpw-dialog");
 		if ($dialog.dialog("isOpen")) {
 			$dialog.dialog("close");
 		}
@@ -377,7 +377,7 @@ cipPassword.createIcon = function(field) {
 		$dialog.data("cip-genpw-next-field-id", field.data("cip-genpw-next-field-id"));
 		$dialog.data("cip-genpw-next-is-password-field", field.data("cip-genpw-next-is-password-field"));
 
-		var $bool = Boolean(field.data("cip-genpw-next-field-exists"));
+		const $bool = Boolean(field.data("cip-genpw-next-field-exists"));
 		jQuery("input#cip-genpw-checkbox-next-field:first")
 			.attr("checked", $bool)
 			.attr("disabled", !$bool);
@@ -437,10 +437,10 @@ cipPassword.checkObservedElements = function() {
 	}
 
 	cipPassword.observingLock = true;
-	jQuery.each(cipPassword.observedIcons, function(index, iconField) {
+	jQuery.each(cipPassword.observedIcons, (index, iconField) => {
 		if (iconField && iconField.length == 1) {
-			var fieldId = iconField.data("cip-genpw-field-id");
-			var field = jQuery("input[data-cip-id='"+fieldId+"']:first");
+			const fieldId = iconField.data("cip-genpw-field-id");
+			const field = jQuery("input[data-cip-id='"+fieldId+"']:first");
 			if (!field || field.length != 1) {
 				iconField.remove();
 				cipPassword.observedIcons.splice(index, 1);
@@ -479,8 +479,8 @@ cipForm.init = function(form, credentialFields) {
 
 cipForm.destroy = function(form, credentialFields) {
     if (form === false && credentialFields) {
-        var field = _f(credentialFields.password) || _f(credentialFields.username);
-		if(field) {
+        const field = _f(credentialFields.password) || _f(credentialFields.username);
+		if (field) {
 			form = field.closest("form");
 		}
     }
@@ -496,14 +496,14 @@ cipForm.setInputFields = function(form, credentialFields) {
 }
 
 cipForm.onSubmit = function() {
-	var usernameId = jQuery(this).data("cipUsername");
-	var passwordId = jQuery(this).data("cipPassword");
+	const usernameId = jQuery(this).data("cipUsername");
+	const passwordId = jQuery(this).data("cipPassword");
 
-	var usernameValue = "";
-	var passwordValue = "";
+	let usernameValue = "";
+	let passwordValue = "";
 
-	var usernameField = _f(usernameId);
-	var passwordField = _f(passwordId);
+	const usernameField = _f(usernameId);
+	const passwordField = _f(passwordId);
 
 	if (usernameField) {
 		usernameValue = usernameField.val();
@@ -527,13 +527,13 @@ cipDefine.selection = {
 cipDefine.eventFieldClick = null;
 
 cipDefine.init = function () {
-	var $backdrop = jQuery("<div>").attr("id", "b2c-backdrop").addClass("b2c-modal-backdrop");
+	const $backdrop = jQuery("<div>").attr("id", "b2c-backdrop").addClass("b2c-modal-backdrop");
 	jQuery("body").append($backdrop);
 
-	var $chooser = jQuery("<div>").attr("id", "b2c-cipDefine-fields");
+	const $chooser = jQuery("<div>").attr("id", "b2c-cipDefine-fields");
 	jQuery("body").append($chooser);
 
-	var $description = jQuery("<div>").attr("id", "b2c-cipDefine-description");
+	let $description = jQuery("<div>").attr("id", "b2c-cipDefine-description");
 	$backdrop.append($description);
 
 	cipFields.getAllFields();
@@ -547,19 +547,19 @@ cipDefine.init = function () {
 }
 
 cipDefine.initDescription = function() {
-	var $description = jQuery("div#b2c-cipDefine-description");
-	var $h1 = jQuery("<div>").addClass("b2c-chooser-headline");
+	const $description = jQuery("div#b2c-cipDefine-description");
+	const $h1 = jQuery("<div>").addClass("b2c-chooser-headline");
 	$description.append($h1);
-	var $help = jQuery("<div>").addClass("b2c-chooser-help").attr("id", "b2c-help");
+	const $help = jQuery("<div>").addClass("b2c-chooser-help").attr("id", "b2c-help");
 	$description.append($help);
 
-	var $btnDismiss = jQuery("<button>").text("Dismiss").attr("id", "b2c-btn-dismiss")
+	const $btnDismiss = jQuery("<button>").text("Dismiss").attr("id", "b2c-btn-dismiss")
 		.addClass("btn").addClass("btn-danger")
 		.click(function(e) {
 			jQuery("div#b2c-backdrop").remove();
 			jQuery("div#b2c-cipDefine-fields").remove();
 		});
-	var $btnSkip = jQuery("<button>").text("Skip").attr("id", "b2c-btn-skip")
+	const $btnSkip = jQuery("<button>").text("Skip").attr("id", "b2c-btn-skip")
 		.addClass("btn").addClass("btn-info")
 		.css("margin-right", "5px")
 		.click(function() {
@@ -574,7 +574,7 @@ cipDefine.initDescription = function() {
 				cipDefine.markAllStringFields(jQuery("#b2c-cipDefine-fields"));
 			}
 		});
-	var $btnAgain = jQuery("<button>").text("Again").attr("id", "b2c-btn-again")
+	const $btnAgain = jQuery("<button>").text("Again").attr("id", "b2c-btn-again")
 		.addClass("btn").addClass("btn-warning")
 		.css("margin-right", "5px")
 		.click(function(e) {
@@ -583,7 +583,7 @@ cipDefine.initDescription = function() {
 			cipDefine.markAllUsernameFields(jQuery("#b2c-cipDefine-fields"));
 		})
 		.hide();
-	var $btnConfirm = jQuery("<button>").text("Confirm").attr("id", "b2c-btn-confirm")
+	const $btnConfirm = jQuery("<button>").text("Confirm").attr("id", "b2c-btn-confirm")
 		.addClass("btn").addClass("btn-primary")
 		.css("margin-right", "15px")
 		.click(function(e) {
@@ -595,15 +595,15 @@ cipDefine.initDescription = function() {
 				cipDefine.selection.username = cipFields.prepareId(cipDefine.selection.username);
 			}
 
-			var passwordId = jQuery("div#b2c-cipDefine-fields").data("password");
+			const passwordId = jQuery("div#b2c-cipDefine-fields").data("password");
 			if (cipDefine.selection.password) {
 				cipDefine.selection.password = cipFields.prepareId(cipDefine.selection.password);
 			}
 
-			var fieldIds = [];
-			var fieldKeys = Object.keys(cipDefine.selection.fields);
-			for (var i = 0; i < fieldKeys.length; i++) {
-				fieldIds.push(cipFields.prepareId(fieldKeys[i]));
+			let fieldIds = [];
+			const fieldKeys = Object.keys(cipDefine.selection.fields);
+			for (const i of fieldKeys) {
+				fieldIds.push(cipFields.prepareId(i));
 			}
 
 			cip.settings["defined-credential-fields"][document.location.origin] = {
@@ -627,8 +627,8 @@ cipDefine.initDescription = function() {
 	$description.append($btnDismiss);
 
 	if (cip.settings["defined-credential-fields"] && cip.settings["defined-credential-fields"][document.location.origin]) {
-		var $p = jQuery("<p>").html("For this page credential fields are already selected and will be overwritten.<br />");
-		var $btnDiscard = jQuery("<button>")
+		const $p = jQuery("<p>").html("For this page credential fields are already selected and will be overwritten.<br />");
+		const $btnDiscard = jQuery("<button>")
 			.attr("id", "btn-warning")
 			.text("Discard selection")
 			.css("margin-top", "5px")
@@ -695,9 +695,8 @@ cipDefine.markAllPasswordFields = function($chooser) {
 cipDefine.markAllStringFields = function($chooser) {
 	cipDefine.eventFieldClick = function(e) {
 		cipDefine.selection.fields[jQuery(this).data("cip-id")] = true;
-		var count = Object.keys(cipDefine.selection.fields).length;
+		const count = Object.keys(cipDefine.selection.fields).length;
 		jQuery(this).addClass("b2c-fixed-string-field").text("String field #"+count.toString()).unbind("click");
-
 		jQuery("button#b2c-btn-confirm:first").addClass("b2c-btn-primary").attr("disabled", false);
 	};
 	cipDefine.markFields($chooser, cipFields.inputQueryPattern + ", select");
@@ -712,7 +711,7 @@ cipDefine.markFields = function ($chooser, $pattern) {
 		}
 
 		if (jQuery(this).is(":visible") && jQuery(this).css("visibility") != "hidden" && jQuery(this).css("visibility") != "collapsed") {
-			var $field = jQuery("<div>").addClass("b2c-fixed-field")
+			const $field = jQuery("<div>").addClass("b2c-fixed-field")
 				.css("top", jQuery(this).offset().top)
 				.css("left", jQuery(this).offset().left)
 				.css("width", jQuery(this).outerWidth())
@@ -786,9 +785,9 @@ cipFields.setUniqueId = function(field) {
 	if (field && !field.attr("data-cip-id")) {
 		// use ID of field if it is unique
 		// yes, it should be, but there are many bad developers outside...
-		var fieldId = field.attr("id");
+		const fieldId = field.attr("id");
 		if (fieldId) {
-			var foundIds = jQuery("input#" + cipFields.prepareId(fieldId));
+			const foundIds = jQuery("input#" + cipFields.prepareId(fieldId));
 			if (foundIds.length == 1) {
 				field.attr("data-cip-id", fieldId);
 				return;
@@ -802,13 +801,11 @@ cipFields.setUniqueId = function(field) {
 }
 
 cipFields.prepareId = function(id) {
-	return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) {
-												return "\\"+m
-											});
+	return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return "\\"+m });
 }
 
 cipFields.getAllFields = function() {
-	var fields = [];
+	let fields = [];
 	// get all input fields which are text, email or password and visible
 	jQuery(cipFields.inputQueryPattern).each(function() {
 		if (jQuery(this).is(":visible") && jQuery(this).css("visibility") != "hidden" && jQuery(this).css("visibility") != "collapsed") {
@@ -829,28 +826,27 @@ cipFields.prepareVisibleFieldsWithID = function($pattern) {
 }
 
 cipFields.getAllCombinations = function(inputs) {
-	var fields = [];
-	var uField = null;
-	for (var i = 0; i < inputs.length; i++) {
-		if (!inputs[i] || inputs[i].length < 1) {
-			continue;
-		}
+	let fields = [];
+	let uField = null;
 
-		if (inputs[i].attr("type") && inputs[i].attr("type").toLowerCase() == "password") {
-			var uId = (!uField || uField.length < 1) ? null : cipFields.prepareId(uField.attr("data-cip-id"));
+	for (const i of inputs) {
+		if (i) {
+			if (i.attr("type") && i.attr("type").toLowerCase() == "password") {
+				const uId = (!uField || uField.length < 1) ? null : cipFields.prepareId(uField.attr("data-cip-id"));
 
-			var combination = {
-				"username": uId,
-				"password": cipFields.prepareId(inputs[i].attr("data-cip-id"))
-			};
-			fields.push(combination);
+				const combination = {
+					"username": uId,
+					"password": cipFields.prepareId(i.attr("data-cip-id"))
+				};
+				fields.push(combination);
 
-			// reset selected username field
-			uField = null;
-		}
-		else {
-			// username field
-			uField = inputs[i];
+				// reset selected username field
+				uField = null;
+			}
+			else {
+				// username field
+				uField = i;
+			}
 		}
 	}
 
@@ -859,7 +855,7 @@ cipFields.getAllCombinations = function(inputs) {
 
 cipFields.getCombination = function(givenType, fieldId) {
 	if (cipFields.combinations.length == 0) {
-		if( cipFields.useDefinedCredentialFields()) {
+		if (cipFields.useDefinedCredentialFields()) {
 			return cipFields.combinations[0];
 		}
 	}
@@ -868,22 +864,22 @@ cipFields.getCombination = function(givenType, fieldId) {
 		return cipFields.combinations[0];
 	}
 
-	for (var i = 0; i < cipFields.combinations.length; i++) {
-		if (cipFields.combinations[i][givenType] == fieldId) {
-			return cipFields.combinations[i];
+	for (const c of cipFields.combinations) {
+		if (c[givenType] == fieldId) {
+			return c;
 		}
 	}
 
 	// find new combination
-	var combination = {
+	const combination = {
 		"username": null,
 		"password": null
 	};
 
-    var newCombi = false;
+    let newCombi = false;
 	if (givenType == "username") {
-		var passwordField = cipFields.getPasswordField(fieldId, true);
-		var passwordId = null;
+		const passwordField = cipFields.getPasswordField(fieldId, true);
+		let passwordId = null;
 		if (passwordField && passwordField.length > 0) {
 			passwordId = cipFields.prepareId(passwordField.attr("data-cip-id"));
 		}
@@ -894,8 +890,8 @@ cipFields.getCombination = function(givenType, fieldId) {
         newCombi = true;
 	}
 	else if (givenType == "password") {
-		var usernameField = cipFields.getUsernameField(fieldId, true);
-		var usernameId = null;
+		const usernameField = cipFields.getUsernameField(fieldId, true);
+		let usernameId = null;
 		if (usernameField && usernameField.length > 0) {
 			usernameId = cipFields.prepareId(usernameField.attr("data-cip-id"));
 		}
@@ -926,13 +922,13 @@ cipFields.getCombination = function(givenType, fieldId) {
 * return the username field or null if it not exists
 */
 cipFields.getUsernameField = function(passwordId, checkDisabled) {
-	var passwordField = _f(passwordId);
+	const passwordField = _f(passwordId);
 	if (!passwordField) {
 		return null;
 	}
 
-	var form = passwordField.closest("form")[0];
-	var usernameField = null;
+	const form = passwordField.closest("form")[0];
+	let usernameField = null;
 
 	// search all inputs on this one form
 	if (form) {
@@ -953,26 +949,26 @@ cipFields.getUsernameField = function(passwordId, checkDisabled) {
 	}
 	// search all inputs on page
 	else {
-		var inputs = cipFields.getAllFields();
+		const inputs = cipFields.getAllFields();
 		cip.initPasswordGenerator(inputs);
-		for (var i = 0; i < inputs.length; i++) {
-			if (inputs[i].attr("data-cip-id") == passwordId) {
+		for (const i of inputs) {
+			if (i.attr("data-cip-id") == passwordId) {
 				break;
 			}
 
-			if (inputs[i].attr("type") && inputs[i].attr("type").toLowerCase() == "password") {
+			if (i.attr("type") && i.attr("type").toLowerCase() == "password") {
 				continue;
 			}
 
-			usernameField = inputs[i];
+			usernameField = i;
 		}
 	}
 
 	if (usernameField && !checkDisabled) {
-		var usernameId = usernameField.attr("data-cip-id");
+		const usernameId = usernameField.attr("data-cip-id");
 		// check if usernameField is already used by another combination
-		for (var i = 0; i < cipFields.combinations.length; i++) {
-			if(cipFields.combinations[i].username == usernameId) {
+		for (const c of cipFields.combinations) {
+			if (c.username == usernameId) {
 				usernameField = null;
 				break;
 			}
@@ -980,7 +976,6 @@ cipFields.getUsernameField = function(passwordId, checkDisabled) {
 	}
 
 	cipFields.setUniqueId(usernameField);
-
 	return usernameField;
 }
 
@@ -988,13 +983,13 @@ cipFields.getUsernameField = function(passwordId, checkDisabled) {
 * return the password field or null if it not exists
 */
 cipFields.getPasswordField = function(usernameId, checkDisabled) {
-	var usernameField = _f(usernameId);
+	const usernameField = _f(usernameId);
 	if (!usernameField) {
 		return null;
 	}
 
-	var form = usernameField.closest("form")[0];
-	var passwordField = null;
+	const form = usernameField.closest("form")[0];
+	let passwordField = null;
 
 	// search all inputs on this one form
 	if (form) {
@@ -1010,26 +1005,26 @@ cipFields.getPasswordField = function(usernameId, checkDisabled) {
 	}
 	// search all inputs on page
 	else {
-		var inputs = cipFields.getAllFields();
+		const inputs = cipFields.getAllFields();
 		cip.initPasswordGenerator(inputs);
 
-		var active = false;
-		for (var i = 0; i < inputs.length; i++) {
-			if (inputs[i].attr("data-cip-id") == usernameId) {
+		let active = false;
+		for (const i of inputs) {
+			if (i.attr("data-cip-id") == usernameId) {
 				active = true;
 			}
-			if (active && jQuery(inputs[i]).attr("type") && jQuery(inputs[i]).attr("type").toLowerCase() == "password") {
-				passwordField = inputs[i];
+			if (active && jQuery(i).attr("type") && jQuery(i).attr("type").toLowerCase() == "password") {
+				passwordField = i;
 				break;
 			}
 		}
 	}
 
 	if (passwordField && !checkDisabled) {
-		var passwordId = passwordField.attr("data-cip-id");
+		const passwordId = passwordField.attr("data-cip-id");
 		// check if passwordField is already used by another combination
-		for (var i = 0; i < cipFields.combinations.length; i++) {
-			if (cipFields.combinations[i].password == passwordId) {
+		for (const c of cipFields.combinations) {
+			if (c.password == passwordId) {
 				passwordField = null;
 				break;
 			}
@@ -1042,8 +1037,8 @@ cipFields.getPasswordField = function(usernameId, checkDisabled) {
 }
 
 cipFields.prepareCombinations = function(combinations) {
-	for (var i = 0; i < combinations.length; i++) {
-		var pwField = _f(combinations[i].password);
+	for (const c of combinations) {
+		const pwField = _f(c.password);
 		// needed for auto-complete: don't overwrite manually filled-in password field
 		if (pwField && !pwField.data("cipFields-onChange")) {
 			pwField.data("cipFields-onChange", true);
@@ -1053,12 +1048,12 @@ cipFields.prepareCombinations = function(combinations) {
 		}
 
 		// initialize form-submit for remembering credentials
-		var fieldId = combinations[i].password || combinations[i].username;
-		var field = _f(fieldId);
+		const fieldId = c.password || c.username;
+		const field = _f(fieldId);
 		if (field) {
-			var form = field.closest("form");
+			const form = field.closest("form");
 			if (form && form.length > 0) {
-				cipForm.init(form, combinations[i]);
+				cipForm.init(form, c);
 			}
 		}
 	}
@@ -1066,11 +1061,11 @@ cipFields.prepareCombinations = function(combinations) {
 
 cipFields.useDefinedCredentialFields = function() {
 	if (cip.settings["defined-credential-fields"] && cip.settings["defined-credential-fields"][document.location.origin]) {
-		var creds = cip.settings["defined-credential-fields"][document.location.origin];
+		const creds = cip.settings["defined-credential-fields"][document.location.origin];
 
-		var $found = _f(creds.username) || _f(creds.password);
-		for (var i = 0; i < creds.fields.length; i++) {
-			if (_fs(creds.fields[i])) {
+		let $found = _f(creds.username) || _f(creds.password);
+		for (const i of creds.fields) {
+			if (_fs(i)) {
 				$found = true;
 				break;
 			}
@@ -1116,7 +1111,7 @@ jQuery(function() {
 cip.init = function() {
 	browser.runtime.sendMessage({
 		"action": "get_settings",
-	}, function(response) {
+	}, (response) => {
 		cip.settings = response.data;
 		cip.initCredentialFields();
 	});
@@ -1128,7 +1123,7 @@ cip.initCredentialFields = function(forceCall) {
 	}
 	_called.initCredentialFields = true;
 
-	var inputs = cipFields.getAllFields();
+	const inputs = cipFields.getAllFields();
 	cipFields.prepareVisibleFieldsWithID("select");
 	cip.initPasswordGenerator(inputs);
 
@@ -1160,7 +1155,7 @@ cip.initPasswordGenerator = function(inputs) {
 	if (cip.settings.usePasswordGenerator) {
 		cipPassword.init();
 
-		for (var i = 0; i < inputs.length; i++) {
+		for (let i = 0; i < inputs.length; i++) {
 			if (inputs[i] && inputs[i].attr("type") && inputs[i].attr("type").toLowerCase() == "password") {
 				cipPassword.initField(inputs[i], inputs, i);
 			}
@@ -1183,7 +1178,7 @@ cip.retrieveCredentialsCallback = function (credentials, dontAutoFillIn) {
 		cip.p = _f(cipFields.combinations[0].password);
 	}
 
-	if (credentials.length > 0) {
+	if (credentials && credentials.length > 0) {
 		cip.credentials = credentials;
 		cip.prepareFieldsForCredentials(!Boolean(dontAutoFillIn));
 	}
@@ -1192,7 +1187,7 @@ cip.retrieveCredentialsCallback = function (credentials, dontAutoFillIn) {
 cip.prepareFieldsForCredentials = function(autoFillInForSingle) {
 	// only one login for this site
 	if (autoFillInForSingle && cip.settings.autoFillSingleEntry && cip.credentials.length == 1) {
-		var combination = null;
+		let combination = null;
 		if (!cip.p && !cip.u && cipFields.combinations.length > 0) {
 			cip.u = _f(cipFields.combinations[0].username);
 			cip.p = _f(cipFields.combinations[0].password);
@@ -1208,7 +1203,7 @@ cip.prepareFieldsForCredentials = function(autoFillInForSingle) {
 		}
 
 		if (combination) {
-			var list = {};
+			let list = {};
 			if (cip.fillInStringFields(combination.fields, cip.credentials[0].stringFields, list)) {
 				cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
 			}
@@ -1228,13 +1223,13 @@ cip.prepareFieldsForCredentials = function(autoFillInForSingle) {
 
 cip.preparePageForMultipleCredentials = function(credentials) {
 	// add usernames + descriptions to autocomplete-list and popup-list
-	var usernames = [];
+	let usernames = [];
 	cipAutocomplete.elements = [];
-	var visibleLogin;
-	for (var i = 0; i < credentials.length; i++) {
+	let visibleLogin;
+	for (let i = 0; i < credentials.length; i++) {
 		visibleLogin = (credentials[i].login.length > 0) ? credentials[i].login : "- no username -";
 		usernames.push(visibleLogin + " (" + credentials[i].name + ")");
-		var item = {
+		const item = {
 			"label": visibleLogin + " (" + credentials[i].name + ")",
 			"value": credentials[i].login,
 			"loginId": i
@@ -1250,23 +1245,23 @@ cip.preparePageForMultipleCredentials = function(credentials) {
 
 	// initialize autocomplete for username fields
 	if (cip.settings.autoCompleteUsernames) {
-		for (var i = 0; i < cipFields.combinations.length; i++) {
-			if (_f(cipFields.combinations[i].username)) {
-				cipAutocomplete.init(_f(cipFields.combinations[i].username));
+		for (const i of cipFields.combinations) {
+			if (_f(i.username)) {
+				cipAutocomplete.init(_f(i.username));
 			}
 		}
 	}
 }
 
 cip.getFormActionUrl = function(combination) {
-	var field = _f(combination.password) || _f(combination.username);
+	const field = _f(combination.password) || _f(combination.username);
 
     if (field == null) {
         return null;
     }
 
-	var form = field.closest("form");
-	var action = null;
+	const form = field.closest("form");
+	let action = null;
 
 	if (form && form.length > 0) {
 		action = form[0].action;
@@ -1280,17 +1275,17 @@ cip.getFormActionUrl = function(combination) {
 }
 
 cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
-	var action = cip.getFormActionUrl(combination);
+	const action = cip.getFormActionUrl(combination);
 
-	var u = _f(combination.username);
-	var p = _f(combination.password);
+	const u = _f(combination.username);
+	const p = _f(combination.password);
 
 	if (combination.isNew) {
 		// initialize form-submit for remembering credentials
-		var fieldId = combination.password || combination.username;
-		var field = _f(fieldId);
+		const fieldId = combination.password || combination.username;
+		const field = _f(fieldId);
 		if (field) {
-			var form2 = field.closest("form");
+			const form2 = field.closest("form");
 			if (form2 && form2.length > 0) {
 				cipForm.init(form2, combination);
 			}
@@ -1314,7 +1309,7 @@ cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
 		browser.runtime.sendMessage({
 			'action': 'retrieve_credentials',
 			'args': [ cip.url, cip.submitUrl, false, true ]
-		}, function(credentials) {
+		}, (credentials) => {
 			cip.retrieveCredentialsCallback(credentials, true);
 			cip.fillIn(combination, onlyPassword, suppressWarnings);
 		});
@@ -1322,7 +1317,7 @@ cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
 }
 
 cip.fillInFromActiveElement = function(suppressWarnings) {
-	var el = document.activeElement;
+	const el = document.activeElement;
 	if (el.tagName.toLowerCase() != "input") {
 		if (cipFields.combinations.length > 0) {
 			cip.fillInCredentials(cipFields.combinations[0], false, suppressWarnings);
@@ -1331,8 +1326,8 @@ cip.fillInFromActiveElement = function(suppressWarnings) {
 	}
 
 	cipFields.setUniqueId(jQuery(el));
-	var fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
-	var combination = null;
+	const fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
+	let combination = null;
 	if (el.type && el.type.toLowerCase() == "password") {
 		combination = cipFields.getCombination("password", fieldId);
 	}
@@ -1345,7 +1340,7 @@ cip.fillInFromActiveElement = function(suppressWarnings) {
 }
 
 cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
-	var el = document.activeElement;
+	const el = document.activeElement;
 	if (el.tagName.toLowerCase() != "input") {
 		if (cipFields.combinations.length > 0) {
 			cip.fillInCredentials(cipFields.combinations[0], false, suppressWarnings);
@@ -1354,8 +1349,8 @@ cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 	}
 
 	cipFields.setUniqueId(jQuery(el));
-	var fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
-	var combination = null;
+	const fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
+	let combination = null;
 	if (el.type && el.type.toLowerCase() == "password") {
 		combination = cipFields.getCombination("password", fieldId);
 	}
@@ -1364,7 +1359,7 @@ cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 	}
 
 	if (!_f(combination.password)) {
-		var message = "Unable to find a password field";
+		const message = "Unable to find a password field";
 		browser.runtime.sendMessage({
 			action: 'alert',
 			args: [message]
@@ -1394,12 +1389,12 @@ cip.setValue = function(field, value) {
 }
 
 cip.fillInStringFields = function(fields, StringFields, filledInFields) {
-	var $filledIn = false;
+	let $filledIn = false;
 
     filledInFields.list = [];
 	if (fields && StringFields && fields.length > 0 && StringFields.length > 0) {
-        for (var i = 0; i < fields.length; i++) {
-			var $sf = _fs(fields[i]);
+        for (let i = 0; i < fields.length; i++) {
+			const $sf = _fs(fields[i]);
 			if ($sf && StringFields[i]) {
 				//$sf.val(StringFields[i].Value);
 				cip.setValue($sf, StringFields[i].Value);
@@ -1415,7 +1410,7 @@ cip.fillInStringFields = function(fields, StringFields, filledInFields) {
 cip.setValueWithChange = function(field, value) {
 
 	if (cip.settings.respectMaxLength === true) {
-		var attribute_maxlength = field.attr('maxlength');
+		const attribute_maxlength = field.attr('maxlength');
 		if (typeof attribute_maxlength !== typeof undefined &&
 			$.isNumeric(attribute_maxlength) === true &&
 			attribute_maxlength > 0) {
@@ -1432,7 +1427,7 @@ cip.setValueWithChange = function(field, value) {
 cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 	// no credentials available
 	if (cip.credentials.length == 0 && !suppressWarnings) {
-		var message = "No logins found.";
+		const message = "No logins found.";
 		browser.runtime.sendMessage({
 			action: 'alert',
 			args: [message]
@@ -1440,12 +1435,12 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 		return;
 	}
 
-	var uField = _f(combination.username);
-	var pField = _f(combination.password);
+	const uField = _f(combination.username);
+	const pField = _f(combination.password);
 
 	// exactly one pair of credentials available
 	if (cip.credentials.length == 1) {
-		var filledIn = false;
+		let filledIn = false;
 		if (uField && !onlyPassword) {
 			cip.setValueWithChange(uField, cip.credentials[0].login);
 			filledIn = true;
@@ -1457,7 +1452,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			filledIn = true;
 		}
 
-        var list = {};
+        let list = {};
 		if (cip.fillInStringFields(combination.fields, cip.credentials[0].stringFields, list)) {
             cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
             filledIn = true;
@@ -1465,7 +1460,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 
 		if (!filledIn) {
 			if (!suppressWarnings) {
-				var message = "Error #101\nCannot find fields to fill in.";
+				const message = "Error #101\nCannot find fields to fill in.";
 				browser.runtime.sendMessage({
 					action: 'alert',
 					args: [message]
@@ -1475,7 +1470,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 	}
 	// specific login id given
 	else if (combination.loginId != undefined && cip.credentials[combination.loginId]) {
-		var filledIn = false;
+		let filledIn = false;
 		if (uField) {
 			cip.setValueWithChange(uField, cip.credentials[combination.loginId].login);
 			filledIn = true;
@@ -1487,7 +1482,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			filledIn = true;
 		}
 
-        var list = {};
+        let list = {};
 		if (cip.fillInStringFields(combination.fields, cip.credentials[combination.loginId].stringFields, list)) {
             cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
             filledIn = true;
@@ -1495,7 +1490,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 
 		if (!filledIn) {
 			if (!suppressWarnings) {
-				var message = "Error #102\nCannot find fields to fill in.";
+				const message = "Error #102\nCannot find fields to fill in.";
 				browser.runtime.sendMessage({
 					action: 'alert',
 					args: [message]
@@ -1506,21 +1501,21 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 	// multiple credentials available
 	else {
 		// check if only one password for given username exists
-		var countPasswords = 0;
+		let countPasswords = 0;
 
 		if (uField) {
-			var valPassword = "";
-			var valUsername = "";
-			var valStringFields = [];
-			var valQueryUsername = uField.val().toLowerCase();
+			let valPassword = "";
+			let valUsername = "";
+			let valStringFields = [];
+			const valQueryUsername = uField.val().toLowerCase();
 
 			// find passwords to given username (even those with empty username)
-			for (var i = 0; i < cip.credentials.length; i++) {
-				if (cip.credentials[i].login.toLowerCase() == valQueryUsername) {
+			for (const c of cip.credentials) {
+				if (c.login.toLowerCase() == valQueryUsername) {
 					countPasswords += 1;
-					valPassword = cip.credentials[i].password;
-					valUsername = cip.credentials[i].login;
-					valStringFields = cip.credentials[i].stringFields;
+					valPassword = c.password;
+					valUsername = c.login;
+					valStringFields = c.stringFields;
 				}
 			}
 
@@ -1539,7 +1534,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 					pField.data("unchanged", true);
 				}
 
-                var list = {};
+                let list = {};
 				if (cip.fillInStringFields(combination.fields, valStringFields, list)) {
                     cipForm.destroy(false, {"password": list.list[0], "username": list.list[1]});
                 }
@@ -1548,7 +1543,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			// user has to select correct credentials by himself
 			if (countPasswords > 1) {
 				if (!suppressWarnings) {
-					var message = "Error #105\nMore than one login was found in KeePassXC!\n" +
+					const message = "Error #105\nMore than one login was found in KeePassXC!\n" +
 					"Press the keepassxc-browser icon for more options.";
 					browser.runtime.sendMessage({
 						action: 'alert',
@@ -1558,7 +1553,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			}
 			else if (countPasswords < 1) {
 				if (!suppressWarnings) {
-					var message = "Error #103\nNo credentials for given username found.";
+					const message = "Error #103\nNo credentials for given username found.";
 					browser.runtime.sendMessage({
 						action: 'alert',
 						args: [message]
@@ -1568,7 +1563,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 		}
 		else {
 			if (!suppressWarnings) {
-					var message = "Error #104\nMore than one login was found in KeePassXC!\n" +
+					const message = "Error #104\nMore than one login was found in KeePassXC!\n" +
 					"Press the keepassxc-browser icon for more options.";
 				browser.runtime.sendMessage({
 					action: 'alert',
@@ -1580,14 +1575,14 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 }
 
 cip.contextMenuRememberCredentials = function() {
-	var el = document.activeElement;
+	const el = document.activeElement;
 	if (el.tagName.toLowerCase() != "input") {
 		return;
 	}
 
 	cipFields.setUniqueId(jQuery(el));
-	var fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
-	var combination = null;
+	const fieldId = cipFields.prepareId(jQuery(el).attr("data-cip-id"));
+	let combination = null;
 	if (el.type && el.type.toLowerCase() == "password") {
 		combination = cipFields.getCombination("password", fieldId);
 	}
@@ -1595,11 +1590,11 @@ cip.contextMenuRememberCredentials = function() {
 		combination = cipFields.getCombination("username", fieldId);
 	}
 
-	var usernameValue = "";
-	var passwordValue = "";
+	let usernameValue = "";
+	let passwordValue = "";
 
-	var usernameField = _f(combination.username);
-	var passwordField = _f(combination.password);
+	const usernameField = _f(combination.username);
+	const passwordField = _f(combination.password);
 
 	if (usernameField) {
 		usernameValue = usernameField.val();
@@ -1620,39 +1615,39 @@ cip.rememberCredentials = function(usernameValue, passwordValue) {
 		return false;
 	}
 
-	var usernameExists = false;
+	let usernameExists = false;
+	let nothingChanged = false;
 
-	var nothingChanged = false;
-	for (var i = 0; i < cip.credentials.length; i++) {
-		if (cip.credentials[i].login == usernameValue && cip.credentials[i].password == passwordValue) {
+	for (const c of cip.credentials) {
+		if (c.login == usernameValue && c.password == passwordValue) {
 			nothingChanged = true;
 			break;
 		}
 
-		if (cip.credentials[i].login == usernameValue) {
+		if (c.login == usernameValue) {
 			usernameExists = true;
 		}
 	}
 
 	if (!nothingChanged) {
 		if (!usernameExists) {
-			for (var i = 0; i < cip.credentials.length; i++) {
-				if (cip.credentials[i].login == usernameValue) {
+			for (const c of cip.credentials) {
+				if (c.login == usernameValue) {
 					usernameExists = true;
 					break;
 				}
 			}
 		}
-		var credentialsList = [];
-		for (var i = 0; i < cip.credentials.length; i++) {
+		let credentialsList = [];
+		for (const c of cip.credentials) {
 			credentialsList.push({
-				"Login": cip.credentials[i].login,
-				"Name": cip.credentials[i].name,
-				"Uuid": cip.credentials[i].uuid
+				"Login": c.login,
+				"Name": c.name,
+				"Uuid": c.uuid
 			});
 		}
 
-		var url = jQuery(this)[0].action;
+		let url = jQuery(this)[0].action;
 		if (!url) {
 			url = document.location.href;
 			if (url.indexOf("?") > 0) {
@@ -1683,8 +1678,8 @@ cipEvents.clearCredentials = function() {
 	cipAutocomplete.elements = [];
 
 	if (cip.settings.autoCompleteUsernames) {
-		for (var i = 0; i < cipFields.combinations.length; i++) {
-			var uField = _f(cipFields.combinations[i].username);
+		for (const c of cipFields.combinations) {
+			const uField = _f(c.username);
 			if (uField) {
 				if (uField.hasClass("ui-autocomplete-input")) {
 					uField.autocomplete("destroy");

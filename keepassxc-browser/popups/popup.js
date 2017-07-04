@@ -60,7 +60,7 @@ $(function() {
 	});
 
 	$("#redetect-fields-button").click(function() {
-		browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
+		browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
 			if (tabs.length === 0)
 				return; // For example: only the background devtools or a popup are opened
 			var tab = tabs[0];

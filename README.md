@@ -40,6 +40,7 @@ Request:
 {
 	"action": "change-public-keys",
 	"publicKey": "<current public key>",
+	"proxyPort": "<UDP port for proxy applications>",
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```
