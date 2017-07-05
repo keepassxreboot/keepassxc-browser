@@ -864,14 +864,14 @@ cipFields.getCombination = function(givenType, fieldId) {
 		return cipFields.combinations[0];
 	}
 
-	for (const c of cipFields.combinations) {
+	for (let c of cipFields.combinations) {
 		if (c[givenType] == fieldId) {
 			return c;
 		}
 	}
 
 	// find new combination
-	const combination = {
+	let combination = {
 		"username": null,
 		"password": null
 	};

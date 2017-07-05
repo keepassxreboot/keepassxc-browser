@@ -1,9 +1,14 @@
+0.2.3 (2017-07-05)
+=========================
+- Fixed a few variables
+
 0.2.2 (2017-07-04)
 =========================
 - Some code cleaning and rewriting
 - Fixed displaying 'Database not opened' error message
 - Changed icon color to gray when database is not opened or connected
 - Added support for UDP port selector for proxy applications
+- Fixed strict_min_version for Firefox Nightly
 
 0.2.1 (2017-06-27)
 =========================

@@ -59,7 +59,6 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 			submitUrl: url
 		};
 
-		const key = keepass.b64e(keepass.keyPair.publicKey);
 		const nonce = nacl.randomBytes(keepass.keySize);
 
 		if (entryId) {
@@ -124,7 +123,6 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		}
 
 		let entries = [];
-		const key = keepass.b64e(keepass.keyPair.publicKey);
 		const nonce = nacl.randomBytes(keepass.keySize);
 		const dbkeys = keepass.getCryptoKey();
 		const id = dbkeys[0];
@@ -187,8 +185,8 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 
 // Redirects the callback to a listener (handleReply())
 keepass.callbackOnId = function (ev, id, callback) {
-	let listener = ( function(port, id) {
-		let handler = function(msg) {
+	let listener = ( (port, id) => {
+		let handler = (msg) => {
 			if (msg && msg.action == id) {
 				ev.removeListener(handler);
 				callback(msg);
@@ -220,7 +218,6 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 		}
 
 		let passwords = [];
-		const key = keepass.b64e(keepass.keyPair.publicKey);
 		const nonce = nacl.randomBytes(keepass.keySize);
 
 		const request = {
@@ -381,7 +378,6 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 			return false;
 		}
 
-		const key = keepass.b64e(keepass.keyPair.publicKey);
 		const nonce = nacl.randomBytes(keepass.keySize);
 		const dbkeys = keepass.getCryptoKey();
 		if (dbkeys == null) {
@@ -468,7 +464,6 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 		keepass.changePublicKeys(tab, function(res) {});
 	}
 
-	const key = keepass.b64e(keepass.keyPair.publicKey);
 	const nonce = nacl.randomBytes(keepass.keySize);
 
 	const messageData = {
