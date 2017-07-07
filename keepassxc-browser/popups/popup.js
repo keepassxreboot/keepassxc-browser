@@ -39,39 +39,39 @@ function status_response(r) {
 }
 
 $(function() {
-	$("#connect-button").click(function() {
+	$('#connect-button').click(function() {
 		browser.runtime.sendMessage({
-			action: "associate"
+			action: 'associate'
 		});
 		close();
 	});
 
-	$("#reconnect-button").click(function() {
+	$('#reconnect-button').click(function() {
 		browser.runtime.sendMessage({
-			action: "associate"
+			action: 'associate'
 		});
 		close();
 	});
 
-	$("#reload-status-button").click(function() {
+	$('#reload-status-button').click(function() {
 		browser.runtime.sendMessage({
-			action: "reconnect"
+			action: 'reconnect'
 		}, status_response);
 	});
 
-	$("#redetect-fields-button").click(function() {
-		browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
+	$('#redetect-fields-button').click(function() {
+		browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
 			if (tabs.length === 0)
 				return; // For example: only the background devtools or a popup are opened
 			var tab = tabs[0];
 
 			browser.tabs.sendMessage(tab.id, {
-				action: "redetect_fields"
+				action: 'redetect_fields'
 			});
 		});
 	});
 
-	chrome.runtime.sendMessage({
-		action: "get_status"
+	browser.runtime.sendMessage({
+		action: 'get_status'
 	}, status_response);
 });

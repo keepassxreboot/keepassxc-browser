@@ -9,7 +9,6 @@ var event = {};
 event.onMessage = function(request, sender, callback) {
 	if (request.action in event.messageHandlers) {
 		//console.log("onMessage(" + request.action + ") for #" + sender.tab.id);
-
 		if (!sender.hasOwnProperty('tab') || sender.tab.id < 1) {
 			sender.tab = {};
 			sender.tab.id = page.currentTabId;
@@ -82,7 +81,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 			handler.apply(this, args);
 		}
 		else {
-			console.log("undefined handler for tab " + tab.id);
+			console.log('undefined handler for tab ' + tab.id);
 		}
 	});
 }
@@ -94,15 +93,15 @@ event.onShowAlert = function(callback, tab, message) {
 }
 
 event.onLoadSettings = function(callback, tab) {
-	page.settings = (typeof(localStorage.settings) == 'undefined') ? {} : JSON.parse(localStorage.settings);
+	page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
 }
 
 event.onLoadKeyRing = function(callback, tab) {
-	keepass.keyRing = (typeof(localStorage.keyRing) == 'undefined') ? {} : JSON.parse(localStorage.keyRing);
+	keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 	if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
 		keepass.associated = {
-			"value": false,
-			"hash": null
+			value: false,
+			hash: null
 		};
 	}
 }
@@ -120,14 +119,13 @@ event.onSaveSettings = function(callback, tab, settings) {
 event.onGetStatus = function(callback, tab) {
 	keepass.testAssociation((response) => {
 		keepass.isConfigured((configured) => {
-			var keyId = null;
+			let keyId = null;
 			if (configured) {
 				keyId = keepass.keyRing[keepass.databaseHash].id;
 			}
 
 			browserAction.showDefault(null, tab);
 			console.log(page.tabs[tab.id].errorMessage);
-			console.log("Configured: " + configured + " Key id: " + keyId + " closed: " + keepass.isDatabaseClosed + " avail: " + keepass.isKeePassXCAvailable + " unreg: " + keepass.isEncryptionKeyUnrecognized + " isass: " + keepass.isAssociated());
 			callback({
 				identifier: keyId,
 				configured: configured,
@@ -149,7 +147,7 @@ event.onReconnect = function(callback, tab) {
 			if (gdRes) {
 				keepass.testAssociation((response) => {
 				keepass.isConfigured((configured) => {
-					var keyId = null;
+					let keyId = null;
 					if (configured) {
 						keyId = keepass.keyRing[keepass.databaseHash].id;
 					}
@@ -184,23 +182,23 @@ event.onGetTabInformation = function(callback, tab) {
 
 event.onGetConnectedDatabase = function(callback, tab) {
 	callback({
-		"count": Object.keys(keepass.keyRing).length,
-		"identifier": (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
+		count: Object.keys(keepass.keyRing).length,
+		identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
 	});
 }
 
 event.onGetKeePassXCVersions = function(callback, tab) {
-	if (keepass.currentKeePassXC.version == 0) {
+	if (keepass.currentKeePassXC.version === 0) {
 		keepass.getDatabaseHash((response) => {
-			callback({"current": keepass.currentKeePassXC.version, "latest": keepass.latestKeePassXC.version});
+			callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
 		}, tab);
 	}
-	callback({"current": keepass.currentKeePassXC.version, "latest": keepass.latestKeePassXC.version});
+	callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
 }
 
 event.onCheckUpdateKeePassXC = function(callback, tab) {
 	keepass.checkForNewKeePassXCVersion();
-	callback({"current": keepass.currentKeePassXC.version, "latest": keepass.latestKeePassXC.version});
+	callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
 }
 
 event.onUpdateAvailableKeePassXC = function(callback, tab) {
@@ -219,8 +217,8 @@ event.onSetRememberPopup = function(callback, tab, username, password, url, user
 event.onLoginPopup = function(callback, tab, logins) {
 	let stackData = {
 		level: 1,
-		iconType: "questionmark",
-		popup: "popup_login.html"
+		iconType: 'questionmark',
+		popup: 'popup_login.html'
 	}
 	browserAction.stackUnshift(stackData, tab.id);
 	page.tabs[tab.id].loginList = logins;
@@ -230,8 +228,8 @@ event.onLoginPopup = function(callback, tab, logins) {
 event.onHTTPAuthPopup = function(callback, tab, data) {
 	let stackData = {
 		level: 1,
-		iconType: "questionmark",
-		popup: "popup_httpauth.html"
+		iconType: 'questionmark',
+		popup: 'popup_httpauth.html'
 	}
 	browserAction.stackUnshift(stackData, tab.id);
 	page.tabs[tab.id].loginList = data;
@@ -241,8 +239,8 @@ event.onHTTPAuthPopup = function(callback, tab, data) {
 event.onMultipleFieldsPopup = function(callback, tab) {
 	let stackData = {
 		level: 1,
-		iconType: "normal",
-		popup: "popup_multiple-fields.html"
+		iconType: 'normal',
+		popup: 'popup_multiple-fields.html'
 	}
 	browserAction.stackUnshift(stackData, tab.id);
 	browserAction.show(null, tab);

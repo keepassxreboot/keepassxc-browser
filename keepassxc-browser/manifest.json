@@ -61,7 +61,8 @@
 	},
 	"web_accessible_resources": [
 		"icons/key_16x16.png",
-		"icons/key_24x24.png"
+		"icons/key_24x24.png",
+		"icons/key.svg"
 	],
 	"permissions": [
 		"contextMenus",

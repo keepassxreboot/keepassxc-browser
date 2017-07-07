@@ -22,28 +22,28 @@ browserAction.show = function(callback, tab) {
 
 	browser.browserAction.setIcon({
 		tabId: tab.id,
-		path: "/icons/19x19/" + browserAction.generateIconName(data.iconType, data.icon)
+		path: '/icons/19x19/' + browserAction.generateIconName(data.iconType, data.icon)
 	});
 
 	if (data.popup) {
 		browser.browserAction.setPopup({
 			tabId: tab.id,
-			popup: "popups/" + data.popup
+			popup: 'popups/' + data.popup
 		});
 	}
 }
 
 browserAction.update = function(interval) {
-	if (!page.tabs[page.currentTabId] || page.tabs[page.currentTabId].stack.length == 0) {
+	if (!page.tabs[page.currentTabId] || page.tabs[page.currentTabId].stack.length === 0) {
 		return;
 	}
 
 	let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
 
-    if (typeof data.visibleForMilliSeconds != "undefined") {
+    if (typeof data.visibleForMilliSeconds !== 'undefined') {
 		if (data.visibleForMilliSeconds <= 0) {
 			browserAction.stackPop(page.currentTabId);
-			browserAction.show(null, {"id": page.currentTabId});
+			browserAction.show(null, {'id': page.currentTabId});
 			page.clearCredentials(page.currentTabId);
             return;
 		}
@@ -65,7 +65,7 @@ browserAction.update = function(interval) {
 
 		browser.browserAction.setIcon({
 			tabId: page.currentTabId,
-			path: "/icons/19x19/" + browserAction.generateIconName(null, data.intervalIcon.icons[data.intervalIcon.index])
+			path: '/icons/19x19/' + browserAction.generateIconName(null, data.intervalIcon.icons[data.intervalIcon.index])
 		});
 	}
 }
@@ -73,17 +73,17 @@ browserAction.update = function(interval) {
 browserAction.showDefault = function(callback, tab) {
 	let stackData = {
 		level: 1,
-		iconType: "normal",
-		popup: "popup.html"
+		iconType: 'normal',
+		popup: 'popup.html'
 	}
 	keepass.isConfigured((response) => {
 		if (!response || keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable || page.tabs[tab.id].errorMessage) {
-			stackData.iconType = "cross";
+			stackData.iconType = 'cross';
 		}
 
 		if (page.tabs[tab.id].loginList.length > 0) {
-	        stackData.iconType = "questionmark";
-	        stackData.popup = "popup_login.html";
+	        stackData.iconType = 'questionmark';
+	        stackData.popup = 'popup_login.html';
 	    }
 
 		browserAction.stackUnshift(stackData, tab.id);
@@ -99,8 +99,8 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
 	}
 
 	let stackData = {
-		"level": level,
-		"icon": icon
+		level: level,
+		icon: icon
 	}
 
 	if (popup) {
@@ -127,7 +127,7 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
 	}
 
 	if (!dontShow) {
-		browserAction.show(null, {"id": id});
+		browserAction.show(null, {'id': id});
 	}
 }
 
@@ -138,19 +138,19 @@ browserAction.removeLevelFromStack = function(callback, tab, level, type, dontSh
 	}
 
 	if (!type) {
-		type = "<=";
+		type = '<=';
 	}
 
 	let newStack = [];
 	for (const i of page.tabs[tab.id].stack) {
 		if (
-			(type == "<" && i.level >= level) ||
-			(type == "<=" && i.level > level) ||
-			(type == "=" && i.level != level) ||
-			(type == "==" && i.level != level) ||
-			(type == "!=" && i.level == level) ||
-			(type == ">" && i.level <= level) ||
-			(type == ">=" && i.level < level)
+			(type == '<' && i.level >= level) ||
+			(type == '<=' && i.level > level) ||
+			(type == '=' && i.level != level) ||
+			(type == '==' && i.level != level) ||
+			(type == '!=' && i.level == level) ||
+			(type == '>' && i.level <= level) ||
+			(type == '>=' && i.level < level)
 		) {
 			newStack.push(i);
 		}
@@ -170,13 +170,13 @@ browserAction.stackPop = function(tabId) {
 
 browserAction.stackPush = function(data, tabId) {
 	const id = tabId || page.currentTabId;
-	browserAction.removeLevelFromStack(null, {"id": id}, data.level, "<=", true);
+	browserAction.removeLevelFromStack(null, {'id': id}, data.level, '<=', true);
 	page.tabs[id].stack.push(data);
 };
 
 browserAction.stackUnshift = function(data, tabId) {
 	const id = tabId || page.currentTabId;
-	browserAction.removeLevelFromStack(null, {"id": id}, data.level, "<=", true);
+	browserAction.removeLevelFromStack(null, {'id': id}, data.level, '<=', true);
 	page.tabs[id].stack.unshift(data);
 };
 
@@ -207,16 +207,16 @@ browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
 };
 
 browserAction.setRememberPopup = function(tabId, username, password, url, usernameExists, credentialsList) {
-	const settings = typeof(localStorage.settings)=='undefined' ? {} : JSON.parse(localStorage.settings);
+	const settings = typeof(localStorage.settings) === 'undefined' ? {} : JSON.parse(localStorage.settings);
 	const id = tabId || page.currentTabId;
-	var timeoutMinMillis = parseInt(getValueOrDefault(settings, "blinkMinTimeout", BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT, 0));
+	let timeoutMinMillis = Number(getValueOrDefault(settings, 'blinkMinTimeout', BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT, 0));
 
 	if (timeoutMinMillis > 0) {
 		timeoutMinMillis += Date.now();
 	}
 
-	const blinkTimeout = getValueOrDefault(settings, "blinkTimeout", BLINK_TIMEOUT_DEFAULT, 0);
-	const pageUpdateAllowance = getValueOrDefault(settings, "allowedRedirect", BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT, 0);
+	const blinkTimeout = getValueOrDefault(settings, 'blinkTimeout', BLINK_TIMEOUT_DEFAULT, 0);
+	const pageUpdateAllowance = getValueOrDefault(settings, 'allowedRedirect', BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT, 0);
 
 	const stackData = {
         visibleForMilliSeconds: blinkTimeout,
@@ -227,23 +227,23 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
 			index: 0,
 			counter: 0,
 			max: 2,
-			icons: ["icon_remember_red_background_19x19.png", "icon_remember_red_lock_19x19.png"]
+			icons: ['icon_remember_red_background_19x19.png', 'icon_remember_red_lock_19x19.png']
 		},
-		icon: "icon_remember_red_background_19x19.png",
-		popup: "popup_remember.html"
+		icon: 'icon_remember_red_background_19x19.png',
+		popup: 'popup_remember.html'
 	}
 
 	browserAction.stackPush(stackData, id);
 
 	page.tabs[id].credentials = {
-		"username": username,
-		"password": password,
-		"url": url,
-		"usernameExists": usernameExists,
-		"list": credentialsList
+		username: username,
+		password: password,
+		url: url,
+		usernameExists: usernameExists,
+		list: credentialsList
 	};
 
-	browserAction.show(null, {"id": id});
+	browserAction.show(null, {'id': id});
 }
 
 function getValueOrDefault(settings, key, defaultVal, min) {
@@ -261,10 +261,10 @@ browserAction.generateIconName = function(iconType, icon) {
 		return icon;
 	}
 
-	let name = "icon_";
-	name += (keepass.keePassXCUpdateAvailable()) ? "new_" : "";
-	name += (!iconType || iconType == "normal") ? "normal" : iconType;
-	name += "_19x19.png";
+	let name = 'icon_';
+	name += (keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
+	name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
+	name += '_19x19.png';
 
 	return name;
 }

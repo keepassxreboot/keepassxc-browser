@@ -1,10 +1,6 @@
-// since version 2.0 the extension is using a keyRing instead of a single key-name-pair
 keepass.convertKeyToKeyRing();
-// load settings
 page.initSettings();
-// create tab information structure for every opened tab
 page.initOpenedTabs();
-// initial connection with KeePassXC
 keepass.connectToNative();
 keepass.generateNewKeyPair();
 keepass.changePublicKeys(null, (pkRes) => {
@@ -17,8 +13,8 @@ window.browser = (function () {
     window.chrome;
 })();
 
-// set initial tab-ID
-browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
+// Set initial tab-ID
+browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
 	if (tabs.length === 0)
 		return; // For example: only the background devtools or a popup are opened
 	page.currentTabId = tabs[0].id;
@@ -49,7 +45,7 @@ browser.tabs.onCreated.addListener((tab) => {
  */
 browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
 	delete page.tabs[tabId];
-	if (page.currentTabId == tabId) {
+	if (page.currentTabId === tabId) {
 		page.currentTabId = -1;
 	}
 });
@@ -62,13 +58,13 @@ browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
 browser.tabs.onActivated.addListener((activeInfo) => {
 	// remove possible credentials from old tab information
     page.clearCredentials(page.currentTabId, true);
-	browserAction.removeRememberPopup(null, {"id": page.currentTabId}, true);
+	browserAction.removeRememberPopup(null, {'id': page.currentTabId}, true);
 
 	browser.tabs.get(activeInfo.tabId, (info) => {
 		//console.log(info.id + ": " + info.url);
 		if (info && info.id) {
 			page.currentTabId = info.id;
-			if (info.status == "complete") {
+			if (info.status === 'complete') {
 				//console.log("event.invoke(page.switchTab, null, "+info.id + ", []);");
 				event.invoke(page.switchTab, null, info.id, []);
 			}
@@ -82,101 +78,58 @@ browser.tabs.onActivated.addListener((activeInfo) => {
  * @param {object} changeInfo
  */
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-	if (changeInfo.status == "complete") {
+	if (changeInfo.status === 'complete') {
 		event.invoke(browserAction.removeRememberPopup, null, tabId, []);
 	}
 });
 
-
-/**
- * Retrieve Credentials and try auto-login for HTTPAuth requests
- */
+// Retrieve Credentials and try auto-login for HTTPAuth requests
 browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest,
-	{ urls: ["<all_urls>"] }, ["asyncBlocking"]
+	{ urls: ['<all_urls>'] }, ['asyncBlocking']
 );
 
-/**
- * Interaction between background-script and front-script
- */
 browser.runtime.onMessage.addListener(event.onMessage);
 
+const contextMenuItems = [
+	{title: 'Fill &User + Pass', action: 'fill_user_pass'},
+	{title: 'Fill &Pass Only', action: 'fill_pass_only'},
+	{title: 'Show Password &Generator Icons', action: 'activate_password_generator'},
+	{title: '&Save credentials', action: 'remember_credentials'}
+]
 
-/**
- * Add context menu entry for filling in username + password
- */
-browser.contextMenus.create({
-	"title": "Fill &User + Pass",
-	"contexts": [ "editable" ],
-	"onclick": function(info, tab) {
-		browser.tabs.sendMessage(tab.id, {
-			action: "fill_user_pass"
-		});
-	}
-});
+// Create context menu items
+for (const item of contextMenuItems) {
+	browser.contextMenus.create({
+		title: item.title,
+		contexts: [ 'editable' ],
+		onclick: (info, tab) => {
+			browser.tabs.sendMessage(tab.id, {
+				action: item.action
+			});
+		}
+	});
+}
 
-/**
- * Add context menu entry for filling in only password which matches for given username
- */
-browser.contextMenus.create({
-	"title": "Fill &Pass Only",
-	"contexts": [ "editable" ],
-	"onclick": function(info, tab) {
-		browser.tabs.sendMessage(tab.id, {
-			action: "fill_pass_only"
-		});
-	}
-});
-
-/**
- * Add context menu entry for creating icon for generate-password dialog
- */
-browser.contextMenus.create({
-	"title": "Show Password &Generator Icons",
-	"contexts": [ "editable" ],
-	"onclick": function(info, tab) {
-		browser.tabs.sendMessage(tab.id, {
-			action: "activate_password_generator"
-		});
-	}
-});
-
-/**
- * Add context menu entry for creating icon for generate-password dialog
- */
-browser.contextMenus.create({
-	"title": "&Save credentials",
-	"contexts": [ "editable" ],
-	"onclick": function(info, tab) {
-		browser.tabs.sendMessage(tab.id, {
-			action: "remember_credentials"
-		});
-	}
-});
-
-/**
- * Listen for keyboard shortcuts specified by user
- */
+// Listen for keyboard shortcuts specified by user
 browser.commands.onCommand.addListener((command) => {
-	if (command === "fill-username-password") {
+	if (command === 'fill-username-password') {
 		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 			if (tabs.length) {
-				browser.tabs.sendMessage(tabs[0].id, { action: "fill_user_pass" });
+				browser.tabs.sendMessage(tabs[0].id, { action: 'fill_user_pass' });
 			}
 		});
 	}
 
-	if (command === "fill-password") {
+	if (command === 'fill-password') {
 		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 			if (tabs.length) {
-				browser.tabs.sendMessage(tabs[0].id, { action: "fill_pass_only" });
+				browser.tabs.sendMessage(tabs[0].id, { action: 'fill_pass_only' });
 			}
 		});
 	}
 });
 
-/**
- * Interval which updates the browserAction (e.g. blinking icon)
- */
+// Interval which updates the browserAction (e.g. blinking icon)
 window.setInterval(function() {
 	browserAction.update(_interval);
 }, _interval);
