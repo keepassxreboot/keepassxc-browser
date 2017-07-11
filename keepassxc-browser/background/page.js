@@ -5,8 +5,6 @@ window.browser = (function () {
 })();
 
 var page = {};
-
-// special information for every tab
 page.tabs = {};
 
 page.currentTabId = -1;
@@ -114,7 +112,7 @@ page.debugConsole = function() {
 };
 
 page.sprintf = function(input, args) {
-	return input.replace(/{(\d+)}/g, function(match, number) {
+	return input.replace(/{(\d+)}/g, (match, number) => {
       return typeof args[number] !== 'undefined'
         ? (typeof args[number] === 'object' ? JSON.stringify(args[number]) : args[number])
         : match

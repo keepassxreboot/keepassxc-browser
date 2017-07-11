@@ -141,33 +141,37 @@ event.onGetStatus = function(callback, tab) {
 
 event.onReconnect = function(callback, tab) {
 	keepass.connectToNative();
-	keepass.generateNewKeyPair();
-	keepass.changePublicKeys(null, (pkRes) => {
-		keepass.getDatabaseHash((gdRes) => {
-			if (gdRes) {
-				keepass.testAssociation((response) => {
-				keepass.isConfigured((configured) => {
-					let keyId = null;
-					if (configured) {
-						keyId = keepass.keyRing[keepass.databaseHash].id;
-					}
 
-					browserAction.showDefault(null, tab);
-					console.log(page.tabs[tab.id].errorMessage);
-					callback({
-						identifier: keyId,
-						configured: configured,
-						databaseClosed: keepass.isDatabaseClosed,
-						keePassXCAvailable: keepass.isKeePassXCAvailable,
-						encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
-						associated: keepass.isAssociated(),
-						error: page.tabs[tab.id].errorMessage
-					});
-				});
-			}, tab);
-			}
-		}, null);
-	});
+	// Add a small timeout after reconnecting. Just to make sure. It's not pretty, I know :(
+	setTimeout(() => { 
+		keepass.generateNewKeyPair();
+		keepass.changePublicKeys(tab, (pkRes) => {
+			keepass.getDatabaseHash((gdRes) => {
+				if (gdRes) {
+					keepass.testAssociation((response) => {
+						keepass.isConfigured((configured) => {
+							let keyId = null;
+							if (configured) {
+								keyId = keepass.keyRing[keepass.databaseHash].id;
+							}
+
+							browserAction.showDefault(null, tab);
+							console.log(page.tabs[tab.id].errorMessage);
+							callback({
+								identifier: keyId,
+								configured: configured,
+								databaseClosed: keepass.isDatabaseClosed,
+								keePassXCAvailable: keepass.isKeePassXCAvailable,
+								encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
+								associated: keepass.isAssociated(),
+								error: page.tabs[tab.id].errorMessage
+							});
+						});
+					}, tab);
+				}
+			}, null);
+		});
+	}, 2000);
 }
 
 event.onPopStack = function(callback, tab) {

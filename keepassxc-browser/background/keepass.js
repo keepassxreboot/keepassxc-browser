@@ -188,6 +188,7 @@ keepass.callbackOnId = function (ev, id, callback) {
 
 keepass.generatePassword = function (callback, tab, forceCallback) {
 	if (!keepass.isConnected) {
+		callback([]);
 		return;
 	}
 
@@ -429,7 +430,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	}
 
 	if (!keepass.serverPublicKey) {
-		keepass.changePublicKeys(tab, (res) => {});
+		keepass.changePublicKeys(tab, null);
 	}
 
 	const kpAction = kpActions.GET_DATABASE_HASH;

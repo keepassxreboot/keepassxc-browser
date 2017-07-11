@@ -335,36 +335,17 @@ cipPassword.createDialog = function() {
 }
 
 cipPassword.createIcon = function(field) {
-	const $className = (field.outerHeight() > 28) ? (isFirefox ? 'big-moz' : 'big') : (isFirefox ? 'small-moz' : 'small');
+	const $className = (isFirefox ? 'key-moz' : 'key');
 	const $size = (field.outerHeight() > 28) ? 24 : 16;
 	let $offset = Math.floor((field.outerHeight() - $size) / 3);
 	$offset = ($offset < 0) ? 0 : $offset;
 
-	let $zIndex = 0;
-	let $zIndexField = field;
-	let z;
-	let c = 0;
-	while ($zIndexField.length > 0) {
-		if (c > 100 || $zIndexField[0].nodeName === '#document') {
-			break;
-		}
-		z = $zIndexField.css('z-index');
-		if (!isNaN(z) && Number(z) > $zIndex) {
-			$zIndex = Number(z);
-		}
-		$zIndexField = $zIndexField.parent();
-		c++;
-	}
-
-	if (isNaN($zIndex) || $zIndex < 1) {
-		$zIndex = 1;
-	}
-	$zIndex += 1;
-
 	const $icon = jQuery('<div>').addClass('cip-genpw-icon')
 		.addClass($className)
 		.attr('title', 'Generate password')
-		.css('z-index', $zIndex)
+		.css('z-index', '9999')
+		.css('width', $size)
+		.css('height', $size)
 		.data('size', $size)
 		.data('offset', $offset)
 		.data('cip-genpw-field-id', field.data('cip-id'));
@@ -396,7 +377,6 @@ cipPassword.createIcon = function(field) {
 	});
 
 	cipPassword.observedIcons.push($icon);
-
 	jQuery('body').append($icon);
 }
 
