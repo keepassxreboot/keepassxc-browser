@@ -1,7 +1,7 @@
 var httpAuth = httpAuth || {};
 
 httpAuth.pendingCallbacks = [];
-httpAuth.requestId = "";
+httpAuth.requestId = '';
 httpAuth.callback = null;
 httpAuth.tabId = 0;
 httpAuth.url = null;
@@ -34,16 +34,16 @@ httpAuth.processPendingCallbacks = function(details) {
 	// but in background.js only tab.id is used. To get tabs we could use
 	// chrome.tabs.get(tabId, callback) <-- but what should callback be?
 
-	var url = (httpAuth.isProxy && httpAuth.proxyUrl) ? httpAuth.proxyUrl : httpAuth.url;
+	const url = (httpAuth.isProxy && httpAuth.proxyUrl) ? httpAuth.proxyUrl : httpAuth.url;
 
-	keepass.retrieveCredentials(httpAuth.loginOrShowCredentials, { "id" : details.tabId }, url, url, true);
+	keepass.retrieveCredentials(httpAuth.loginOrShowCredentials, { 'id' : details.tabId }, url, url, true);
 }
 
 httpAuth.loginOrShowCredentials = function(logins) {
 	// at least one login found --> use first to login
 	if (logins.length > 0) {
-		var url = (httpAuth.isProxy && httpAuth.proxyUrl) ? httpAuth.proxyUrl : httpAuth.url;
-		event.onHTTPAuthPopup(null, {"id": httpAuth.tabId}, {"logins": logins, "url": url});
+		const url = (httpAuth.isProxy && httpAuth.proxyUrl) ? httpAuth.proxyUrl : httpAuth.url;
+		event.onHTTPAuthPopup(null, {'id': httpAuth.tabId}, {'logins': logins, 'url': url});
 		//generate popup-list for HTTP Auth usernames + descriptions
 
 		if (page.settings.autoFillAndSend) {

@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "keepassxc-browser",
-	"version": "0.2.3",
+	"version": "0.2.4",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -60,8 +60,7 @@
 		}
 	},
 	"web_accessible_resources": [
-		"icons/key_16x16.png",
-		"icons/key_24x24.png"
+		"icons/key.png"
 	],
 	"permissions": [
 		"contextMenus",
