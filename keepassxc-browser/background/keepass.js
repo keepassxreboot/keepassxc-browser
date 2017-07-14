@@ -359,7 +359,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		const nonce = nacl.randomBytes(keepass.keySize);
 		const {dbid, dbkey} = keepass.getCryptoKey();
 
-		if (dbkey === null) {
+		if (dbkey === null || dbid === null) {
 			if (tab && page.tabs[tab.id]) {
 				const errorMessage = 'No saved databases found.';
 				page.tabs[tab.id].errorMessage = errorMessage;
@@ -395,16 +395,16 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 						const hash = response.hash || 0;
 						keepass.deleteKey(hash);
 						keepass.isEncryptionKeyUnrecognized = true;
-						const errMsg  = 'Encryption key is not recognized!';
-						console.log(errMsg);
-						page.tabs[tab.id].errorMessage = errMsg;
+						const errorMessage  = 'Encryption key is not recognized!';
+						console.log(errorMessage);
+						page.tabs[tab.id].errorMessage = errorMessage;
 						keepass.associated.value = false;
 						keepass.associated.hash = null;
 					}
 					else if (!keepass.isAssociated()) {
-						const errMsg = 'Association was not successful!';
-						console.log(errMsg);
-						page.tabs[tab.id].errorMessage = errMsg;
+						const errorMessage = 'Association was not successful!';
+						console.log(errorMessage);
+						page.tabs[tab.id].errorMessage = errorMessage;
 					}
 					else {
 						if (tab && page.tabs[tab.id]) {
@@ -453,8 +453,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 				const message = nacl.util.encodeUTF8(res);
 				const parsed = JSON.parse(message);
 
-				if (parsed.hash)
-				{
+				if (parsed.hash) {
 					console.log('hash reply received: ' + parsed.hash);
 					const oldDatabaseHash = keepass.databaseHash;
 					keepass.setcurrentKeePassXCVersion(parsed.version);
@@ -469,8 +468,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 					keepass.isKeePassXCAvailable = true;
 					callback(parsed.hash);
 				}
-				else if (parsed.errorCode)
-				{
+				else if (parsed.errorCode) {
 					keepass.databaseHash = 'no-hash';
 					keepass.isDatabaseClosed = true;
 					console.log('Error: KeePass database is not opened.');
@@ -481,8 +479,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 				}	
 			}
 		}
-		else
-		{
+		else {
 			keepass.databaseHash = 'no-hash';
 			if (tab && page.tabs[tab.id]) {
 				page.tabs[tab.id].errorMessage = response.error.length > 0 ? response.error : 'Database hash not received.';
@@ -525,7 +522,6 @@ keepass.changePublicKeys = function(tab, callback) {
 			console.log('Server public key: ' + keepass.b64e(keepass.serverPublicKey));
 		}
 		callback(true);
-
 	});
 	keepass.nativePort.postMessage(message);
 }
@@ -541,8 +537,7 @@ keepass.isConfigured = function(callback) {
 			callback(keepass.databaseHash in keepass.keyRing);
 		}, null);
 	}
-	else
-	{
+	else {
 		callback(keepass.databaseHash in keepass.keyRing);
 	}
 }
@@ -721,7 +716,7 @@ keepass.verifyResponse = function(response, nonce, id) {
 }
 
 keepass.handleError = function(tabId, errorMessage, errorCode) {
-	console.log('Received error ${errorCode}: ${errorMessage}');
+	console.log('Received error ' + errorCode + ': ' + errorMessage);
 	page.tabs[tabId].errorMessage = errorMessage;
 }
 
@@ -734,12 +729,13 @@ keepass.b64d = function(d) {
 }
 
 keepass.getCryptoKey = function() {
+	let dbkey = null;
+	let dbid = null;
 	if (!(keepass.databaseHash in keepass.keyRing)) {
-		return null;
+		return {dbid, dbkey};
 	}
 
-	const dbid = keepass.keyRing[keepass.databaseHash].id;
-	let dbkey = null;
+	dbid = keepass.keyRing[keepass.databaseHash].id;
 
 	if (dbid) {
 		dbkey = keepass.keyRing[keepass.databaseHash].key;
