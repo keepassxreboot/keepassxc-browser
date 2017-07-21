@@ -1,8 +1,14 @@
-window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
-})();
+window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
+
+const defaultSettings = {
+	checkUpdateKeePassXC: 3,
+	autoCompleteUsernames: true,
+	autoFillAndSend: true,
+	usePasswordGenerator: true,
+	autoFillSingleEntry: false,
+	autoRetrieveCredentials: true,
+	proxyPort: '19700'
+}
 
 var page = {};
 page.tabs = {};
@@ -14,25 +20,25 @@ page.blockedTabs = {};
 page.initSettings = function() {
 	event.onLoadSettings();
 	if (!('checkUpdateKeePassXC' in page.settings)) {
-		page.settings.checkUpdateKeePassXC = 3;
+		page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
 	}
 	if (!('autoCompleteUsernames' in page.settings)) {
-		page.settings.autoCompleteUsernames = true;
+		page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
 	}
 	if (!('autoFillAndSend' in page.settings)) {
-		page.settings.autoFillAndSend = true;
+		page.settings.autoFillAndSend = defaultSettings.autoFillAndSend;
 	}
 	if (!('usePasswordGenerator' in page.settings)) {
-		page.settings.usePasswordGenerator = true;
+		page.settings.usePasswordGenerator = defaultSettings.usePasswordGenerator;
 	}
 	if (!('autoFillSingleEntry' in page.settings)) {
-		page.settings.autoFillSingleEntry = false;
+		page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
 	}
 	if (!('autoRetrieveCredentials' in page.settings)) {
-		page.settings.autoRetrieveCredentials = true;
+		page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
 	}
 	if (!('port' in page.settings)) {
-		page.settings.port = '19700';
+		page.settings.port = defaultSettings.proxyPort;
 	}
 	localStorage.settings = JSON.stringify(page.settings);
 }
@@ -74,7 +80,7 @@ page.clearCredentials = function(tabId, complete) {
 }
 
 page.createTabEntry = function(tabId) {
-	//console.log("page.createTabEntry("+tabId+")");
+	//console.log('page.createTabEntry('+tabId+')');
 	page.tabs[tabId] = {
 		'stack': [],
 		'errorMessage': null,

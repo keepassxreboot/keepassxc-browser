@@ -1,3 +1,9 @@
+0.2.5 (2107-07-21)
+=========================
+- Fixed incorrect return value in keepass.getCryptoKey
+- Added a better error message handling
+- Added an error message when Native Messaging is disabled in KeePassXC
+
 0.2.4 (2017-07-11)
 =========================
 - Changed comparison operators to strict ones (and some code cleaning)

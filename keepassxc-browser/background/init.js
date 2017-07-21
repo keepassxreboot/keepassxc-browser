@@ -7,11 +7,7 @@ keepass.changePublicKeys(null, (pkRes) => {
 	keepass.getDatabaseHash((gdRes) => {}, null);
 });
 
-window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
-})();
+window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
 
 // Set initial tab-ID
 browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
@@ -30,7 +26,7 @@ let _interval = 250;
  */
 browser.tabs.onCreated.addListener((tab) => {
 	if (tab.id > 0) {
-		//console.log("browser.tabs.onCreated(" + tab.id+ ")");
+		//console.log('browser.tabs.onCreated(' + tab.id+ ')');
 		if (tab.selected) {
 			page.currentTabId = tab.id;
 			event.invoke(page.switchTab, null, tab.id, []);
@@ -61,11 +57,11 @@ browser.tabs.onActivated.addListener((activeInfo) => {
 	browserAction.removeRememberPopup(null, {'id': page.currentTabId}, true);
 
 	browser.tabs.get(activeInfo.tabId, (info) => {
-		//console.log(info.id + ": " + info.url);
+		//console.log(info.id + ': ' + info.url);
 		if (info && info.id) {
 			page.currentTabId = info.id;
 			if (info.status === 'complete') {
-				//console.log("event.invoke(page.switchTab, null, "+info.id + ", []);");
+				//console.log('event.invoke(page.switchTab, null, '+info.id + ', []);');
 				event.invoke(page.switchTab, null, info.id, []);
 			}
 		}
