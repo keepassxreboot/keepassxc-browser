@@ -1,8 +1,4 @@
-window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
-})();
+window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
 
 if (jQuery) {
 	var $ = jQuery.noConflict(true);

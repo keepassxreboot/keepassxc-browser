@@ -3,11 +3,7 @@ if (typeof browser !== 'undefined') {
 	isFirefox = true;
 }
 
-window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
-})();
+window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
 
 // Initialize autocomplete feature
 $(this.target).find('input').autocomplete();
@@ -91,7 +87,7 @@ cipAutocomplete.elements = [];
 
 cipAutocomplete.init = function(field) {
 	if (field.hasClass('ui-autocomplete-input')) {
-		//_f(credentialInputs[i].username).autocomplete("source", autocompleteSource);
+		//_f(credentialInputs[i].username).autocomplete('source', autocompleteSource);
 		field.autocomplete('destroy');
 	}
 
@@ -144,7 +140,7 @@ cipAutocomplete.onBlur = function() {
 	else {
 		const fieldId = cipFields.prepareId(jQuery(this).attr('data-cip-id'));
 		const fields = cipFields.getCombination('username', fieldId);
-		if (_f(fields.password) && _f(fields.password).data('unchanged') !== true && jQuery(this).val() !== "") {
+		if (_f(fields.password) && _f(fields.password).data('unchanged') !== true && jQuery(this).val() !== '') {
 			cip.fillInCredentials(fields, true, true);
 		}
 	}
@@ -437,7 +433,7 @@ cipPassword.checkObservedElements = function() {
 			}
 			else if (!field.is(':visible')) {
 				iconField.hide();
-				//field.removeData("cip-password-generator");
+				//field.removeData('cip-password-generator');
 			}
 			else if (field.is(':visible')) {
 				iconField.show();
@@ -558,7 +554,7 @@ cipDefine.initDescription = function() {
 				cipDefine.prepareStep2();
 				cipDefine.markAllPasswordFields(jQuery('#b2c-cipDefine-fields'));
 			}
-			else if (jQuery(this).data("step") === 2) {
+			else if (jQuery(this).data('step') === 2) {
 				cipDefine.selection.password = null;
 				cipDefine.prepareStep3();
 				cipDefine.markAllStringFields(jQuery('#b2c-cipDefine-fields'));
@@ -716,8 +712,8 @@ cipDefine.markFields = function ($chooser, $pattern) {
 
 	/* skip step if no entry was found
 	if(!$found) {
-		alert("No username field found.\nContinue with choosing a password field.");
-		jQuery("button#b2c-btn-skip").click();
+		alert('No username field found.\nContinue with choosing a password field.'');
+		jQuery('button#b2c-btn-skip').click();
 	}
 	*/
 }
@@ -743,9 +739,9 @@ cipDefine.prepareStep2 = function() {
 
 cipDefine.prepareStep3 = function() {
 	/* skip step if no entry was found
-	if(!jQuery("div#b2c-cipDefine-fields").data("username") && !jQuery("div#b2c-cipDefine-fields").data("password")) {
-		alert("Neither an username field nor a password field were selected.\nNothing will be changed and chooser will be closed now.");
-		jQuery("button#b2c-btn-dismiss").click();
+	if(!jQuery('div#b2c-cipDefine-fields').data('username') && !jQuery('div#b2c-cipDefine-fields').data('password')) {
+		alert('Neither an username field nor a password field were selected.\nNothing will be changed and chooser will be closed now.'');
+		jQuery('button#b2c-btn-dismiss').click();
 		return;
 	}
 	 */
@@ -791,7 +787,7 @@ cipFields.setUniqueId = function(field) {
 }
 
 cipFields.prepareId = function(id) {
-	return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return "\\"+m });
+	return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return '\\'+m });
 }
 
 cipFields.getAllFields = function() {
@@ -1275,7 +1271,7 @@ cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
 		const fieldId = combination.password || combination.username;
 		const field = _f(fieldId);
 		if (field) {
-			const form2 = field.closest("form");
+			const form2 = field.closest('form');
 			if (form2 && form2.length > 0) {
 				cipForm.init(form2, combination);
 			}

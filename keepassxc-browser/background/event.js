@@ -1,14 +1,10 @@
-window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
-})();
+window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
 
 var event = {};
 
 event.onMessage = function(request, sender, callback) {
 	if (request.action in event.messageHandlers) {
-		//console.log("onMessage(" + request.action + ") for #" + sender.tab.id);
+		//console.log('onMessage(' + request.action + ') for #' + sender.tab.id);
 		if (!sender.hasOwnProperty('tab') || sender.tab.id < 1) {
 			sender.tab = {};
 			sender.tab.id = page.currentTabId;
@@ -48,7 +44,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 	page.removePageInformationFromNotExistingTabs();
 
 	browser.tabs.get(senderTabId, (tab) => {
-	//browser.tabs.query({"active": true, "windowId": browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
+	//browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
 		//if (tabs.length === 0)
 		//	return; // For example: only the background devtools or a popup are opened
 		//var tab = tabs[0];
@@ -92,6 +88,24 @@ event.onShowAlert = function(callback, tab, message) {
 	else { alert(message); }
 }
 
+event.showStatus = function(configured, tab, callback) {
+	let keyId = null;
+	if (configured) {
+		keyId = keepass.keyRing[keepass.databaseHash].id;
+	}
+
+	browserAction.showDefault(null, tab);
+	callback({
+		identifier: keyId,
+		configured: configured,
+		databaseClosed: keepass.isDatabaseClosed,
+		keePassXCAvailable: keepass.isKeePassXCAvailable,
+		encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
+		associated: keepass.isAssociated(),
+		error: page.tabs[tab.id].errorMessage
+	});
+}
+
 event.onLoadSettings = function(callback, tab) {
 	page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
 }
@@ -119,22 +133,7 @@ event.onSaveSettings = function(callback, tab, settings) {
 event.onGetStatus = function(callback, tab) {
 	keepass.testAssociation((response) => {
 		keepass.isConfigured((configured) => {
-			let keyId = null;
-			if (configured) {
-				keyId = keepass.keyRing[keepass.databaseHash].id;
-			}
-
-			browserAction.showDefault(null, tab);
-			console.log(page.tabs[tab.id].errorMessage);
-			callback({
-				identifier: keyId,
-				configured: configured,
-				databaseClosed: keepass.isDatabaseClosed,
-				keePassXCAvailable: keepass.isKeePassXCAvailable,
-				encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
-				associated: keepass.isAssociated(),
-				error: page.tabs[tab.id].errorMessage
-			});
+			event.showStatus(configured, tab, callback);
 		});
 	}, tab);
 }
@@ -150,22 +149,7 @@ event.onReconnect = function(callback, tab) {
 				if (gdRes) {
 					keepass.testAssociation((response) => {
 						keepass.isConfigured((configured) => {
-							let keyId = null;
-							if (configured) {
-								keyId = keepass.keyRing[keepass.databaseHash].id;
-							}
-
-							browserAction.showDefault(null, tab);
-							console.log(page.tabs[tab.id].errorMessage);
-							callback({
-								identifier: keyId,
-								configured: configured,
-								databaseClosed: keepass.isDatabaseClosed,
-								keePassXCAvailable: keepass.isKeePassXCAvailable,
-								encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
-								associated: keepass.isAssociated(),
-								error: page.tabs[tab.id].errorMessage
-							});
+							event.showStatus(configured, tab, callback);
 						});
 					}, tab);
 				}
@@ -277,5 +261,5 @@ event.messageHandlers = {
 	'update_available_keepassxc': event.onUpdateAvailableKeePassXC,
 	'generate_password': keepass.generatePassword,
 	'copy_password': keepass.copyPassword,
-	"reconnect": event.onReconnect
+	'reconnect': event.onReconnect
 };

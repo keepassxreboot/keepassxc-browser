@@ -1,13 +1,9 @@
-window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
-})();
+window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
 
 $(function() {
 	browser.runtime.getBackgroundPage(function(global) {
 		browser.tabs.query(null, (tab) => {
-			//var data = global.tab_httpauth_list["tab" + tab.id];
+			//const data = global.tab_httpauth_list['tab' + tab.id];
 			const data = global.page.tabs[tab.id].loginList;
 			let ul = document.getElementById('login-list');
 			for (let i = 0; i < data.logins.length; i++) {
