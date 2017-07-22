@@ -300,5 +300,5 @@ SOFTWARE.
 ## Donations
 
 Feel free to support this project:
-Donate via [PayPal](https://paypal.me/varjolintu)
-Donate via Bitcoin: 1LHbD69CcmpLW5hjUXs2MGJhw3GxwqLdw3
+- Donate via [PayPal](https://paypal.me/varjolintu)
+- Donate via Bitcoin: 1LHbD69CcmpLW5hjUXs2MGJhw3GxwqLdw3
