@@ -296,3 +296,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Donations
+
+Feel free to support this project:
+Donate via [PayPal](https://paypal.me/varjolintu)
+Donate via Bitcoin: 1LHbD69CcmpLW5hjUXs2MGJhw3GxwqLdw3
