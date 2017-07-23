@@ -334,7 +334,7 @@ keepass.associate = function(callback, tab) {
 					const id = parsed.id;
 
 					if (!keepass.verifyResponse(parsed, response.nonce)) {
-						keepass.handleError(tab, kpErrors.ERROR_KEEPASS_ASSOCIATION_FAILED);
+						keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
 					}
 					else {
 						keepass.setCryptoKey(id, key);	// Save the current public key as id key for the database
@@ -372,7 +372,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 
 		if (!keepass.serverPublicKey) {
 			if (tab && page.tabs[tab.id]) {
-				handleError(tab, kpErrors.ERROR_KEEPASS_PUBLIC_KEY_NOT_FOUND);
+				handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
 			}
 			callback(false);
 			return false;
@@ -384,7 +384,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 
 		if (dbkey === null || dbid === null) {
 			if (tab && page.tabs[tab.id]) {
-				keepass.handleError(tab, kpErrors.ERROR_KEEPASS_NO_SAVED_DATABASES_FOUND);
+				keepass.handleError(tab, kpErrors.NO_SAVED_DATABASES_FOUND);
 			}
 			callback(false);
 			return false;
@@ -416,12 +416,12 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 						const hash = response.hash || 0;
 						keepass.deleteKey(hash);
 						keepass.isEncryptionKeyUnrecognized = true;
-						keepass.handleError(tab, kpErrors.ERROR_KEEPASS_ENCRYPTION_KEY_UNRECOGNIZED);
+						keepass.handleError(tab, kpErrors.ENCRYPTION_KEY_UNRECOGNIZED);
 						keepass.associated.value = false;
 						keepass.associated.hash = null;
 					}
 					else if (!keepass.isAssociated()) {
-						keepass.handleError(tab, kpErrors.ERROR_KEEPASS_ASSOCIATION_FAILED);
+						keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
 					}
 					else {
 						if (tab && page.tabs[tab.id]) {
@@ -441,7 +441,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 
 keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	if (!keepass.isConnected) {
-		keepass.handleError(tab, kpErrors.ERROR_KEEPASS_TIMEOUT_OR_NOT_CONNECTED);
+		keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
 		callback([]);
 		return;
 	}
@@ -459,7 +459,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 
 	const encrypted = keepass.encrypt(messageData, nonce);
 	if (encrypted.length <= 0) {
-		 keepass.handleError(tab, kpErrors.ERROR_KEEPASS_PUBLIC_KEY_NOT_FOUND);
+		 keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
 		 callback(keepass.databaseHash);
 		 return;
 	}
@@ -494,13 +494,14 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 				else if (parsed.errorCode) {
 					keepass.databaseHash = 'no-hash';
 					keepass.isDatabaseClosed = true;
-					keepass.handleError(tab, ERROR_KEEPASS_DATABASE_NOT_OPENED);
+					keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
 					callback(keepass.databaseHash);
 				}	
 			}
 		}
 		else {
 			keepass.databaseHash = 'no-hash';
+			keepass.isDatabaseClosed = true;
 			keepass.handleError(tab, response.errorCode, response.error);
 			callback(keepass.databaseHash);
 		}	
@@ -530,7 +531,7 @@ keepass.changePublicKeys = function(tab, callback) {
 
 		if (!keepass.verifyKeyResponse(response, key, nonce)) {
 			if (tab && page.tabs[tab.id]) {
-				keepass.handleError(tab, kpErrors.ERROR_KEEPASS_KEY_CHANGE_FAILED);
+				keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
 				callback(false);
 			}
 		}
