@@ -273,30 +273,6 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 	}, tab);
 }
 
-keepass.copyPassword = function(callback, tab, password) {
-	browser.runtime.getBackgroundPage((bg) => {
-		let c2c = bg.document.getElementById('copy2clipboard');
-		if (!c2c) {
-			let input = document.createElement('input');
-			input.type = 'text';
-			input.id = 'copy2clipboard';
-			bg.document.getElementsByTagName('body')[0].appendChild(input);
-			c2c = bg.document.getElementById('copy2clipboard');
-		}
-
-		c2c.value = password;
-		c2c.select();
-		try {
-			document.execCommand('copy');
-			c2c.value = '';
-			callback(true);
-		}
-		catch (err) {
-			console.log('Could not copy password to clipboard: ' + err);
-		}
-	});
-}
-
 keepass.associate = function(callback, tab) {
 	if (keepass.isAssociated()) {
 		return;
@@ -654,7 +630,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 	};
 
 	xhr.onerror = function(e) {
-		console.log('checkForNewKeePassXCVersion error: ${e}');
+		console.log('checkForNewKeePassXCVersion error:' + e);
 	}
 
 	xhr.send();

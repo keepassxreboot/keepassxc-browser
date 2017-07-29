@@ -36,7 +36,7 @@ options.saveSetting = function(name) {
 
 	localStorage.settings = JSON.stringify(options.settings);
 
-	chrome.extension.sendMessage({
+	browser.runtime.sendMessage({
 		action: 'load_settings'
 	});
 }

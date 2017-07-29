@@ -10,7 +10,9 @@ keepass.changePublicKeys(null, (pkRes) => {
 window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
 
 // Set initial tab-ID
-browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
+//browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
+browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
+//browser.tabs.query({"active": true, "currentWindow": true}).then((tabs) => {
 	if (tabs.length === 0)
 		return; // For example: only the background devtools or a popup are opened
 	page.currentTabId = tabs[0].id;
@@ -80,9 +82,11 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 // Retrieve Credentials and try auto-login for HTTPAuth requests
-browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest,
-	{ urls: ['<all_urls>'] }, ['asyncBlocking']
-);
+if (browser.webRequest.onAuthRequired) {
+	browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest,
+		{ urls: ['<all_urls>'] }, ['asyncBlocking']
+	);
+}
 
 browser.runtime.onMessage.addListener(event.onMessage);
 
