@@ -7,12 +7,6 @@ For testing purposes, please use following unofficial KeePassXC [release's](http
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
 
-If you want to use the extension manually with the latest stable build of Firefox, you can do the following:
-- Install [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly)
-- Download the .crx file from [releases](https://github.com/varjolintu/keepassxc-browser/releases)
-- Drag the .crx to the Firefox's Add-ons page (about:addons)
-- Close Firefox Nightly and start the stable Firefox. The add-on should be now installed
-
 ## How it works
 There are two methods which you can use keepassxc-browser to connect to KeePassXC:
 

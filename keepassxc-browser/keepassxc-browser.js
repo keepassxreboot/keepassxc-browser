@@ -562,12 +562,12 @@ cipDefine.initDescription = function() {
 		.addClass('btn').addClass('btn-info')
 		.css('margin-right', '5px')
 		.click(function() {
-			if (jQuery(this).data('step') === 1) {
+			if (jQuery(this).data('step') === '1') {
 				cipDefine.selection.username = null;
 				cipDefine.prepareStep2();
 				cipDefine.markAllPasswordFields(jQuery('#b2c-cipDefine-fields'));
 			}
-			else if (jQuery(this).data('step') === 2) {
+			else if (jQuery(this).data('step') === '2') {
 				cipDefine.selection.password = null;
 				cipDefine.prepareStep3();
 				cipDefine.markAllStringFields(jQuery('#b2c-cipDefine-fields'));

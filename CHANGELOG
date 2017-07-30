@@ -1,6 +1,7 @@
 0.2.7 (2017-??-??)
 =========================
 - Some Firefox related changes (credits to projectgus)
+- Fixed Skip button function when choosing own credential fields
 
 0.2.6 (2017-07-23)
 =========================

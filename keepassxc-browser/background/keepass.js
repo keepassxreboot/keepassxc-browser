@@ -611,16 +611,14 @@ keepass.keePassXCUpdateAvailable = function() {
 keepass.checkForNewKeePassXCVersion = function() {
 	let xhr = new XMLHttpRequest();
 	let version = -1;
-	xhr.open('GET', keepass.latestVersionUrl, true);
+
 	xhr.onload = function(e) {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 200) {
-				const json = JSON.parse(xhr.responseText);
-				if (json.tag_name) {
-					version = json.tag_name;
-					keepass.latestKeePassXC.version = version;
-					keepass.latestKeePassXC.versionParsed = Number(version.replace(/\./g, ''));
-				}
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			const json = JSON.parse(xhr.responseText);
+			if (json.tag_name) {
+				version = json.tag_name;
+				keepass.latestKeePassXC.version = version;
+				keepass.latestKeePassXC.versionParsed = Number(version.replace(/\./g, ''));
 			}
 		}
 
@@ -633,7 +631,13 @@ keepass.checkForNewKeePassXCVersion = function() {
 		console.log('checkForNewKeePassXCVersion error:' + e);
 	}
 
-	xhr.send();
+	try {
+		xhr.open('GET', keepass.latestVersionUrl, true);
+		xhr.send();
+	}
+	catch (ex) {
+		console.log(ex);
+	}
 	keepass.latestKeePassXC.lastChecked = new Date();
 }
 
