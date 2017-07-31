@@ -82,11 +82,9 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 // Retrieve Credentials and try auto-login for HTTPAuth requests
-if (browser.webRequest.onAuthRequired) {
-	browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest,
-		{ urls: ['<all_urls>'] }, ['asyncBlocking']
-	);
-}
+browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest,
+	{ urls: ['<all_urls>'] }, ['asyncBlocking']
+);
 
 browser.runtime.onMessage.addListener(event.onMessage);
 

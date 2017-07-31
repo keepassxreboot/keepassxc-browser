@@ -90,6 +90,7 @@ event.showStatus = function(configured, tab, callback) {
 	}
 
 	browserAction.showDefault(null, tab);
+	const errorMessage = page.tabs[tab.id].errorMessage;
 	callback({
 		identifier: keyId,
 		configured: configured,
@@ -97,7 +98,7 @@ event.showStatus = function(configured, tab, callback) {
 		keePassXCAvailable: keepass.isKeePassXCAvailable,
 		encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
 		associated: keepass.isAssociated(),
-		error: page.tabs[tab.id].errorMessage
+		error: errorMessage ? errorMessage : null
 	});
 }
 

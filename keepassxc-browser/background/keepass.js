@@ -45,6 +45,7 @@ const kpErrors = {
     KEY_CHANGE_FAILED: 9,
     ENCRYPTION_KEY_UNRECOGNIZED: 10,
     NO_SAVED_DATABASES_FOUND: 11,
+
     errorMessages : {
     	0: { msg: 'Unknown error' },
     	1: { msg: 'Database not opened' },
@@ -58,6 +59,10 @@ const kpErrors = {
 		9: { msg: 'Key change was not successful.' },
 		10: { msg: 'Encryption key is not recognized' },
 		11: { msg: 'No saved databases found.' }
+	},
+
+	getError(errorCode) {
+		return this.errorMessages[errorCode].msg;
 	}
 };
 
@@ -139,6 +144,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		page.tabs[tab.id].errorMessage = null;
 
 		if (!keepass.isConnected) {
+			callback([]);
 			return;
 		}
 
@@ -199,7 +205,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 
 // Redirects the callback to a listener (handleReply())
 keepass.callbackOnId = function (ev, id, callback) {
-	let listener = ( (port, id) => {
+	let listener = ((port, id) => {
 		let handler = (msg) => {
 			if (msg && msg.action === id) {
 				ev.removeListener(handler);
@@ -275,11 +281,13 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 
 keepass.associate = function(callback, tab) {
 	if (keepass.isAssociated()) {
+		callback([]);
 		return;
 	}
 
 	keepass.getDatabaseHash((res) => {
 		if (keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
+			callback([]);
 			return;
 		}
 
@@ -487,6 +495,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 
 keepass.changePublicKeys = function(tab, callback) {
 	if (!keepass.isConnected) {
+		callback([]);
 		return;
 	}
 
@@ -652,11 +661,11 @@ keepass.onNativeMessage = function (response) {
 }
 
 function onDisconnected() {
-	console.log('Failed to connect: ' + browser.runtime.lastError.message);
 	keepass.nativePort = null;
 	keepass.isConnected = false;
 	keepass.isDatabaseClosed = true;
 	keepass.isKeePassXCAvailable = false;
+	console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 
 keepass.nativeConnect = function() {
@@ -714,7 +723,7 @@ keepass.verifyResponse = function(response, nonce, id) {
 
 keepass.handleError = function(tab, errorCode, errorMessage = '') {
 	if (errorMessage.length === 0) {
-		errorMessage = kpErrors.errorMessages[errorCode].msg;
+		errorMessage = kpErrors.getError(errorCode);
 	}
 	console.log('Error ' + errorCode + ': ' + errorMessage);
 	if (tab && page.tabs[tab.id]) {

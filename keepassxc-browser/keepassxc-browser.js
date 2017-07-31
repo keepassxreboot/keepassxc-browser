@@ -79,7 +79,6 @@ function _fs(fieldId) {
 }
 
 
-
 var cipAutocomplete = {};
 
 // objects of username + description for autocomplete
