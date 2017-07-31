@@ -2,7 +2,7 @@ window.browser = (function () { return window.msBrowser || window.browser || win
 
 $(function() {
 	browser.runtime.getBackgroundPage(function(global) {
-		browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
+		browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
 			if (tabs.length === 0)
 				return; // For example: only the background devtools or a popup are opened
 			const tab = tabs[0];

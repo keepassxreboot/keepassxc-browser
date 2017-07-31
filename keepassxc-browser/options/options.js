@@ -1,3 +1,8 @@
+var isFirefox = false;
+if (typeof browser !== 'undefined') {
+	isFirefox = true;
+}
+
 window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
 
 if (jQuery) {
@@ -36,7 +41,7 @@ options.saveSetting = function(name) {
 
 	localStorage.settings = JSON.stringify(options.settings);
 
-	chrome.extension.sendMessage({
+	browser.runtime.sendMessage({
 		action: 'load_settings'
 	});
 }
@@ -257,4 +262,7 @@ options.initSpecifiedCredentialFields = function() {
 
 options.initAbout = function() {
 	$('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
+	if (isFirefox) {
+		$('#chrome-only').remove();
+	}
 }

@@ -55,7 +55,7 @@ $(function() {
 	});
 
 	$('#redetect-fields-button').click(function() {
-		browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
+		browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
 			if (tabs.length === 0)
 				return; // For example: only the background devtools or a popup are opened
 			let tab = tabs[0];

@@ -249,7 +249,9 @@ function getValueOrDefault(settings, key, defaultVal, min) {
 			val = defaultVal;
 		}
 		return val;
-	} catch(e) { return defaultVal; }
+	} catch(e) {
+		return defaultVal;
+	}
 }
 
 browserAction.generateIconName = function(iconType, icon) {

@@ -44,11 +44,6 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 	page.removePageInformationFromNotExistingTabs();
 
 	browser.tabs.get(senderTabId, (tab) => {
-	//browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, function(tabs) {
-		//if (tabs.length === 0)
-		//	return; // For example: only the background devtools or a popup are opened
-		//var tab = tabs[0];
-
 		if (!tab) {
 			return;
 		}
@@ -95,6 +90,7 @@ event.showStatus = function(configured, tab, callback) {
 	}
 
 	browserAction.showDefault(null, tab);
+	const errorMessage = page.tabs[tab.id].errorMessage;
 	callback({
 		identifier: keyId,
 		configured: configured,
@@ -102,7 +98,7 @@ event.showStatus = function(configured, tab, callback) {
 		keePassXCAvailable: keepass.isKeePassXCAvailable,
 		encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
 		associated: keepass.isAssociated(),
-		error: page.tabs[tab.id].errorMessage
+		error: errorMessage ? errorMessage : null
 	});
 }
 
@@ -260,6 +256,5 @@ event.messageHandlers = {
 	'stack_add': browserAction.stackAdd,
 	'update_available_keepassxc': event.onUpdateAvailableKeePassXC,
 	'generate_password': keepass.generatePassword,
-	'copy_password': keepass.copyPassword,
 	'reconnect': event.onReconnect
 };

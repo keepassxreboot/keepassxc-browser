@@ -79,7 +79,6 @@ function _fs(fieldId) {
 }
 
 
-
 var cipAutocomplete = {};
 
 // objects of username + description for autocomplete
@@ -271,10 +270,7 @@ cipPassword.createDialog = function() {
 				id: 'cip-genpw-btn-clipboard',
 				click: (e) => {
 					e.preventDefault();
-					browser.runtime.sendMessage({
-						action: 'copy_password',
-						args: [jQuery('input#cip-genpw-textfield-password').val()]
-					}, cipPassword.callbackPasswordCopied);
+					cipPassword.copyPasswordToClipboard();
 				}
 			},
 			'Fill & copy': 
@@ -309,11 +305,7 @@ cipPassword.createDialog = function() {
 							}
 						}
 
-						// Copy password to clipboard
-						browser.runtime.sendMessage({
-							action: 'copy_password',
-							args: [$password]
-						}, cipPassword.callbackPasswordCopied);
+						cipPassword.copyPasswordToClipboard();
 					}
 				}
 			}
@@ -379,6 +371,26 @@ cipPassword.createIcon = function(field) {
 cipPassword.setIconPosition = function($icon, $field) {
 	$icon.css('top', $field.offset().top + $icon.data('offset') + 1)
 		.css('left', $field.offset().left + $field.outerWidth() - $icon.data('size') - $icon.data('offset'))
+}
+
+cipPassword.copyPasswordToClipboard = function(e) {
+	if (e) {
+		e.preventDefault();
+	}
+
+	const input = jQuery("input#cip-genpw-textfield-password");
+	input.select()
+	try {
+		const success = document.execCommand('copy');
+		if (success) {
+			jQuery("#cip-genpw-btn-clipboard").addClass("b2c-btn-success");
+		}
+		jQuery("#cip-genpw-dialog").select();
+		input.value = '';
+	}
+	catch (err) {
+		console.log('Could not copy password to clipboard: ' + err);
+	}
 }
 
 cipPassword.callbackPasswordCopied = function(bool) {
@@ -549,12 +561,12 @@ cipDefine.initDescription = function() {
 		.addClass('btn').addClass('btn-info')
 		.css('margin-right', '5px')
 		.click(function() {
-			if (jQuery(this).data('step') === 1) {
+			if (jQuery(this).data('step') === '1') {
 				cipDefine.selection.username = null;
 				cipDefine.prepareStep2();
 				cipDefine.markAllPasswordFields(jQuery('#b2c-cipDefine-fields'));
 			}
-			else if (jQuery(this).data('step') === 2) {
+			else if (jQuery(this).data('step') === '2') {
 				cipDefine.selection.password = null;
 				cipDefine.prepareStep3();
 				cipDefine.markAllStringFields(jQuery('#b2c-cipDefine-fields'));

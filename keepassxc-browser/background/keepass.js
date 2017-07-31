@@ -45,6 +45,7 @@ const kpErrors = {
     KEY_CHANGE_FAILED: 9,
     ENCRYPTION_KEY_UNRECOGNIZED: 10,
     NO_SAVED_DATABASES_FOUND: 11,
+
     errorMessages : {
     	0: { msg: 'Unknown error' },
     	1: { msg: 'Database not opened' },
@@ -58,6 +59,10 @@ const kpErrors = {
 		9: { msg: 'Key change was not successful.' },
 		10: { msg: 'Encryption key is not recognized' },
 		11: { msg: 'No saved databases found.' }
+	},
+
+	getError(errorCode) {
+		return this.errorMessages[errorCode].msg;
 	}
 };
 
@@ -139,6 +144,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		page.tabs[tab.id].errorMessage = null;
 
 		if (!keepass.isConnected) {
+			callback([]);
 			return;
 		}
 
@@ -199,7 +205,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 
 // Redirects the callback to a listener (handleReply())
 keepass.callbackOnId = function (ev, id, callback) {
-	let listener = ( (port, id) => {
+	let listener = ((port, id) => {
 		let handler = (msg) => {
 			if (msg && msg.action === id) {
 				ev.removeListener(handler);
@@ -273,37 +279,15 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 	}, tab);
 }
 
-keepass.copyPassword = function(callback, tab, password) {
-	browser.runtime.getBackgroundPage((bg) => {
-		let c2c = bg.document.getElementById('copy2clipboard');
-		if (!c2c) {
-			let input = document.createElement('input');
-			input.type = 'text';
-			input.id = 'copy2clipboard';
-			bg.document.getElementsByTagName('body')[0].appendChild(input);
-			c2c = bg.document.getElementById('copy2clipboard');
-		}
-
-		c2c.value = password;
-		c2c.select();
-		try {
-			document.execCommand('copy');
-			c2c.value = '';
-			callback(true);
-		}
-		catch (err) {
-			console.log('Could not copy password to clipboard: ' + err);
-		}
-	});
-}
-
 keepass.associate = function(callback, tab) {
 	if (keepass.isAssociated()) {
+		callback([]);
 		return;
 	}
 
 	keepass.getDatabaseHash((res) => {
 		if (keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
+			callback([]);
 			return;
 		}
 
@@ -511,6 +495,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 
 keepass.changePublicKeys = function(tab, callback) {
 	if (!keepass.isConnected) {
+		callback([]);
 		return;
 	}
 
@@ -635,16 +620,14 @@ keepass.keePassXCUpdateAvailable = function() {
 keepass.checkForNewKeePassXCVersion = function() {
 	let xhr = new XMLHttpRequest();
 	let version = -1;
-	xhr.open('GET', keepass.latestVersionUrl, true);
+
 	xhr.onload = function(e) {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 200) {
-				const json = JSON.parse(xhr.responseText);
-				if (json.tag_name) {
-					version = json.tag_name;
-					keepass.latestKeePassXC.version = version;
-					keepass.latestKeePassXC.versionParsed = Number(version.replace(/\./g, ''));
-				}
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			const json = JSON.parse(xhr.responseText);
+			if (json.tag_name) {
+				version = json.tag_name;
+				keepass.latestKeePassXC.version = version;
+				keepass.latestKeePassXC.versionParsed = Number(version.replace(/\./g, ''));
 			}
 		}
 
@@ -654,10 +637,16 @@ keepass.checkForNewKeePassXCVersion = function() {
 	};
 
 	xhr.onerror = function(e) {
-		console.log('checkForNewKeePassXCVersion error: ${e}');
+		console.log('checkForNewKeePassXCVersion error:' + e);
 	}
 
-	xhr.send();
+	try {
+		xhr.open('GET', keepass.latestVersionUrl, true);
+		xhr.send();
+	}
+	catch (ex) {
+		console.log(ex);
+	}
 	keepass.latestKeePassXC.lastChecked = new Date();
 }
 
@@ -672,11 +661,11 @@ keepass.onNativeMessage = function (response) {
 }
 
 function onDisconnected() {
-	console.log('Failed to connect: ' + browser.runtime.lastError.message);
 	keepass.nativePort = null;
 	keepass.isConnected = false;
 	keepass.isDatabaseClosed = true;
 	keepass.isKeePassXCAvailable = false;
+	console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 
 keepass.nativeConnect = function() {
@@ -734,7 +723,7 @@ keepass.verifyResponse = function(response, nonce, id) {
 
 keepass.handleError = function(tab, errorCode, errorMessage = '') {
 	if (errorMessage.length === 0) {
-		errorMessage = kpErrors.errorMessages[errorCode].msg;
+		errorMessage = kpErrors.getError(errorCode);
 	}
 	console.log('Error ' + errorCode + ': ' + errorMessage);
 	if (tab && page.tabs[tab.id]) {

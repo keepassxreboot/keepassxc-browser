@@ -1,3 +1,12 @@
+0.2.7 (2017-07-31)
+=========================
+- Some Firefox related changes (credits to projectgus)
+- Fixed Skip button function when choosing own credential fields
+- Adjusted some callbacks
+- Fixed showing an error message on the same tab when KeePassXC is instantly closed
+- Added null checking for onDisconnected()
+- Any Chrome related stuff is now disabled on options pages when using Firefox
+
 0.2.6 (2017-07-23)
 =========================
 - Fixed error message variables
