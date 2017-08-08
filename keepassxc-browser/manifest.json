@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "keepassxc-browser",
-	"version": "0.2.7",
+	"version": "0.2.8",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -84,7 +84,7 @@
 	"applications": {
        "gecko": {
            "id": "keepassxc-browser@sami.vanttinen",
-           "strict_min_version": "56.0a1"
+           "strict_min_version": "55.0"
        }
    }
 }
