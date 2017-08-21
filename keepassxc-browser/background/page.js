@@ -1,5 +1,3 @@
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 const defaultSettings = {
 	checkUpdateKeePassXC: 3,
 	autoCompleteUsernames: true,

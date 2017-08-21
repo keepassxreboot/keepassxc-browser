@@ -1,5 +1,3 @@
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 $(function() {
 	browser.runtime.getBackgroundPage(function(global) {
 		browser.tabs.query({"active": true, "currentWindow": true}, (tab) => {

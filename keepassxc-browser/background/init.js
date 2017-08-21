@@ -7,8 +7,6 @@ keepass.changePublicKeys(null, (pkRes) => {
 	keepass.getDatabaseHash((gdRes) => {}, null);
 });
 
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 // Set initial tab-ID
 //browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
 browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {

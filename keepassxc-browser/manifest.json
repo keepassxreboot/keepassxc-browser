@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "keepassxc-browser",
-	"version": "0.2.8",
+	"version": "0.2.9",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -24,6 +24,7 @@
 	},
 	"background": {
 		"scripts": [
+			"global.js",
 			"background/nacl.min.js",
 			"background/nacl-util.min.js",
 			"background/keepass.js",
@@ -41,6 +42,7 @@
 				"https://*/*"
 			],
 			"js": [ 
+				"global.js",
 				"jquery-3.2.1.min.js",
 				"jquery-ui.min.js",
 				"keepassxc-browser.js"

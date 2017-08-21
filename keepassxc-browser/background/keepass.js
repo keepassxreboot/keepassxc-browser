@@ -20,8 +20,6 @@ keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.par
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 const kpActions = {
 	SET_LOGIN: 'set-login',
 	GET_LOGINS: 'get-logins',

@@ -1,5 +1,3 @@
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 var browserAction = {};
 
 const BLINK_TIMEOUT_DEFAULT = 7500;

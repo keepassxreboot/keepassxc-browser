@@ -1,8 +1,5 @@
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 var $ = jQuery.noConflict(true);
 var _settings = typeof(localStorage.settings) ==='undefined' ? {} : JSON.parse(localStorage.settings);
-//var global = browser.runtime.getBackgroundPage();
 
 function updateAvailableResponse(available) {
 	if (available) {
