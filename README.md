@@ -7,7 +7,9 @@ For testing purposes, please use following unofficial KeePassXC [release's](http
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
 
-The extension is supported with Firefox 56.0a1 and newer. If you want to load it as a temporary plugin with Firefox 54 you can just change the minimum version from the manifest file before loading it.
+The extension is supported with Firefox 55 and newer. If you want to load it as a temporary plugin with Firefox 54 you can just change the minimum version from the manifest file before loading it.
+
+Please thee this [wiki page](https://github.com/varjolintu/keepassxc-browser/wiki/Connecting-the-database-with-current-beta-build) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
 
 ## How it works
 There are two methods which you can use keepassxc-browser to connect to KeePassXC:
