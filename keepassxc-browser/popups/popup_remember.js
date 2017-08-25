@@ -1,5 +1,3 @@
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 var _tab;
 
 function _initialize(tab) {

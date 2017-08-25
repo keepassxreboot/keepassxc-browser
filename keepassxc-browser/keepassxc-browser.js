@@ -1,10 +1,3 @@
-var isFirefox = false;
-if (typeof browser !== 'undefined') {
-	isFirefox = true;
-}
-
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();
-
 // Initialize autocomplete feature
 $(this.target).find('input').autocomplete();
 
@@ -804,6 +797,7 @@ cipFields.prepareId = function(id) {
 
 cipFields.getAllFields = function() {
 	let fields = [];
+
 	// get all input fields which are text, email or password and visible
 	jQuery(cipFields.inputQueryPattern).each(function() {
 		if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed') {
