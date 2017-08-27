@@ -2,12 +2,12 @@ var httpAuth = httpAuth || {};
 
 httpAuth.pendingCallbacks = [];
 httpAuth.requestId = '';
-httpAuth.callback = null;
 httpAuth.tabId = 0;
 httpAuth.url = null;
 httpAuth.isProxy = false;
 httpAuth.proxyUrl = null;
-
+httpAuth.resolve = null;
+httpAuth.reject = null;
 
 httpAuth.handleRequest = function (details, callback) {
 	if (httpAuth.requestId == details.requestId || !page.tabs[details.tabId]) {

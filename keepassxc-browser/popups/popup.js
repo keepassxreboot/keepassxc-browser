@@ -6,18 +6,22 @@ function status_response(r) {
 	$('#configured-and-associated').hide();
 	$('#configured-not-associated').hide();
 
-	if(!r.keePassXCAvailable || r.databaseClosed) {
+	if (!r.keePassXCAvailable) {
 		$('#error-message').html(r.error);
 		$('#error-encountered').show();
 	}
-	else if(!r.configured) {
+	else if (r.keePassXCAvailable && r.databaseClosed) {
+		$('#database-error-message').html(r.error);
+		$('#database-not-opened').show();
+	}
+	else if (!r.configured) {
 		$('#not-configured').show();
 	}
-	else if(r.encryptionKeyUnrecognized) {
+	else if (r.encryptionKeyUnrecognized) {
 		$('#need-reconfigure').show();
 		$('#need-reconfigure-message').html(r.error);
 	}
-	else if(!r.associated) {
+	else if (!r.associated) {
 		$('#need-reconfigure').show();
 		$('#need-reconfigure-message').html(r.error);
 	}
@@ -50,6 +54,13 @@ $(function() {
 		browser.runtime.sendMessage({
 			action: 'reconnect'
 		}, status_response);
+	});
+
+	$('#reopen-database-button').click(function() {
+		browser.runtime.sendMessage({
+			action: 'get_status'
+		}, status_response);
+		close();
 	});
 
 	$('#redetect-fields-button').click(function() {
