@@ -8,13 +8,12 @@ keepass.changePublicKeys(null, (pkRes) => {
 });
 
 // Set initial tab-ID
-//browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT}, (tabs) => {
 browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
-//browser.tabs.query({"active": true, "currentWindow": true}).then((tabs) => {
 	if (tabs.length === 0)
 		return; // For example: only the background devtools or a popup are opened
 	page.currentTabId = tabs[0].id;
 });
+
 // Milliseconds for intervall (e.g. to update browserAction)
 let _interval = 250;
 

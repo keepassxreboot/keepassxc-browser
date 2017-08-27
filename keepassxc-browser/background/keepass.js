@@ -336,6 +336,10 @@ keepass.associate = function(callback, tab) {
 }
 
 keepass.testAssociation = function (callback, tab, triggerUnlock) {
+	if (tab && page.tabs[tab.id]) {
+		page.tabs[tab.id].errorMessage = null;
+	}
+
 	keepass.getDatabaseHash((dbHash) => {
 		if (!dbHash) {
 			callback(false);
@@ -519,6 +523,7 @@ keepass.changePublicKeys = function(tab, callback) {
 			}
 		}
 		else {
+			keepass.isKeePassXCAvailable = true;
 			console.log('Server public key: ' + keepass.b64e(keepass.serverPublicKey));
 		}
 		callback(true);
@@ -663,6 +668,8 @@ function onDisconnected() {
 	keepass.isConnected = false;
 	keepass.isDatabaseClosed = true;
 	keepass.isKeePassXCAvailable = false;
+	keepass.associated.value = false;
+	keepass.associated.hash = null;
 	console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 

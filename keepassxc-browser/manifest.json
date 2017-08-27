@@ -81,6 +81,8 @@
 		"tabs",
 		"webRequest",
 		"webRequestBlocking",
+		"https://*/*",
+		"http://*/*",
 		"https://api.github.com/"
 	],
 	"applications": {
