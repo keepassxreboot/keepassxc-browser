@@ -1,3 +1,4 @@
+/*
 keepass.convertKeyToKeyRing();
 page.initSettings();
 page.initOpenedTabs();
@@ -6,12 +7,30 @@ keepass.generateNewKeyPair();
 keepass.changePublicKeys(null, (pkRes) => {
 	keepass.getDatabaseHash((gdRes) => {}, null);
 });
+*/
 
-// Set initial tab-ID
-browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
-	if (tabs.length === 0)
-		return; // For example: only the background devtools or a popup are opened
-	page.currentTabId = tabs[0].id;
+// since version 2.0 the extension is using a keyRing instead of a single key-name-pair
+keepass.migrateKeyRing().then(() => {
+	// load settings
+	page.initSettings().then(() => {
+		// initial connection with KeePassHttp
+		keepass.connectToNative();
+		keepass.generateNewKeyPair();
+		keepass.changePublicKeys(null, (pkRes) => {
+			keepass.getDatabaseHash((gdRes) => {
+				// create tab information structure for every opened tab
+				page.initOpenedTabs();
+
+				// set initial tab-ID
+				browser.tabs.query({"active": true, "currentWindow": true}).then(function(tabs) {
+					if (tabs.length === 0)
+						return; // For example: only the background devtools or a popup are opened
+					page.currentTabId = tabs[0].id;
+					browserAction.show(null, tabs[0]);
+				});
+			}, null);
+		});
+	});
 });
 
 // Milliseconds for intervall (e.g. to update browserAction)
@@ -55,8 +74,7 @@ browser.tabs.onActivated.addListener((activeInfo) => {
     page.clearCredentials(page.currentTabId, true);
 	browserAction.removeRememberPopup(null, {'id': page.currentTabId}, true);
 
-	browser.tabs.get(activeInfo.tabId, (info) => {
-		//console.log(info.id + ': ' + info.url);
+	browser.tabs.get(activeInfo.tabId).then((info) => {
 		if (info && info.id) {
 			page.currentTabId = info.id;
 			if (info.status === 'complete') {
@@ -79,9 +97,16 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 // Retrieve Credentials and try auto-login for HTTPAuth requests
-browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest,
-	{ urls: ['<all_urls>'] }, ['asyncBlocking']
-);
+if (browser.webRequest.onAuthRequired) {
+	if (isFirefox) {
+		browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest, 
+			{ urls: ["<all_urls>"] }, ["blocking"]);
+	}
+	else {
+		browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequestChrome, 
+			{ urls: ["<all_urls>"] }, ["asyncBlocking"]);
+	}
+}
 
 browser.runtime.onMessage.addListener(event.onMessage);
 
@@ -100,7 +125,7 @@ for (const item of contextMenuItems) {
 		onclick: (info, tab) => {
 			browser.tabs.sendMessage(tab.id, {
 				action: item.action
-			});
+			}).catch((e) => {console.log(e);});
 		}
 	});
 }

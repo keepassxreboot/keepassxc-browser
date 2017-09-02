@@ -1,6 +1,6 @@
 $(function() {
-	browser.runtime.getBackgroundPage(function(global) {
-		browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
+	browser.runtime.getBackgroundPage().then((global) => {
+		browser.tabs.query({"active": true, "currentWindow": true}).then((tabs) => {
 			if (tabs.length === 0)
 				return; // For example: only the background devtools or a popup are opened
 			const tab = tabs[0];
@@ -14,7 +14,7 @@ $(function() {
 				li.appendChild(a);
 				a.setAttribute('id', '' + i);
 				a.addEventListener('click', (e) => {
-					var id = e.target.id;
+					const id = e.target.id;
 					browser.tabs.sendMessage(tab.id, {
 						action: 'fill_user_pass_with_specific_login',
 						id: id

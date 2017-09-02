@@ -23,7 +23,7 @@ function _initialize(tab) {
 		browser.runtime.sendMessage({
 			action: 'add_credentials',
 			args: [_tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
-		}, _verifyResult);
+		}).then(_verifyResult);
 	});
 
 	$('#btn-update').click(function(e) {
@@ -34,7 +34,7 @@ function _initialize(tab) {
 			browser.runtime.sendMessage({
 				action: 'update_credentials',
 				args: [_tab.credentials.list[0].uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
-			}, _verifyResult);
+			}).then(_verifyResult);
 		}
 		else {
 			$('.credentials:first .username-new:first strong:first').text(_tab.credentials.username);
@@ -59,7 +59,7 @@ function _initialize(tab) {
 						browser.runtime.sendMessage({
 							action: 'update_credentials',
 							args: [_tab.credentials.list[$(this).data('entryId')].uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
-						}, _verifyResult);
+						}).then(_verifyResult);
 					});
 
 				if (_tab.credentials.usernameExists && _tab.credentials.username === _tab.credentials.list[i].login) {
@@ -116,9 +116,9 @@ $(function() {
 
 	browser.runtime.sendMessage({
 		action: 'get_tab_information'
-	}, _initialize);
+	}).then(_initialize);
 
 	browser.runtime.sendMessage({
 		action: 'get_connected_database'
-	}, _connected_database);
+	}).then(_connected_database);
 });

@@ -41,7 +41,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 	// remove information from no longer existing tabs
 	page.removePageInformationFromNotExistingTabs();
 
-	browser.tabs.get(senderTabId, (tab) => {
+	browser.tabs.get(senderTabId).then((tab) => {
 		if (!tab) {
 			return;
 		}
@@ -101,27 +101,32 @@ event.showStatus = function(configured, tab, callback) {
 }
 
 event.onLoadSettings = function(callback, tab) {
-	page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
+	browser.storage.local.get({'settings': {}}).then((item) => {
+		callback(item.settings);
+	}, (err) => {
+		console.log('error loading settings: ' + err);
+	});
 }
 
 event.onLoadKeyRing = function(callback, tab) {
-	keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
-	if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
-		keepass.associated = {
-			value: false,
-			hash: null
-		};
-	}
-}
-
-event.onGetSettings = function(callback, tab) {
-	event.onLoadSettings();
-	callback({ data: page.settings });
+	browser.storage.local.get({'keyRing': {}}).then(function(item) {
+		keepass.keyRing = item.keyRing;
+		if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
+			keepass.associated = {
+				"value": false,
+				"hash": null
+			};
+		}
+		callback(item.keyRing);
+	}, (err) => {
+		console.log('error loading keyRing: ' + err);
+	});
 }
 
 event.onSaveSettings = function(callback, tab, settings) {
-	localStorage.settings = JSON.stringify(settings);
-	event.onLoadSettings();
+	browser.storage.local.set({'settings': settings}).then(function() {
+		event.onLoadSettings();
+	});
 }
 
 event.onGetStatus = function(callback, tab) {
@@ -237,7 +242,6 @@ event.messageHandlers = {
 	'check_update_keepassxc': event.onCheckUpdateKeePassXC,
 	'get_connected_database': event.onGetConnectedDatabase,
 	'get_keepassxc_versions': event.onGetKeePassXCVersions,
-	'get_settings': event.onGetSettings,
 	'get_status': event.onGetStatus,
 	'get_tab_information': event.onGetTabInformation,
 	'load_keyring': event.onLoadKeyRing,

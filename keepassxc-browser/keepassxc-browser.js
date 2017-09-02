@@ -52,9 +52,9 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		}
 		else if (req.action === 'redetect_fields') {
 			browser.runtime.sendMessage({
-				action: 'get_settings',
-			}, (response) => {
-				cip.settings = response.data;
+				action: 'load_settings',
+			}).then((settings) => {
+				cip.settings = settings;
 				cip.initCredentialFields(true);
 			});
 		}
@@ -254,7 +254,7 @@ cipPassword.createDialog = function() {
 					e.preventDefault();
 					browser.runtime.sendMessage({
 						action: 'generate_password'
-					}, cipPassword.callbackGeneratedPassword);
+					}).then(cipPassword.callbackGeneratedPassword);
 				}
 			},
 			'Copy':
@@ -419,7 +419,7 @@ cipPassword.callbackGeneratedPassword = function(entries) {
 cipPassword.onRequestPassword = function() {
 	browser.runtime.sendMessage({
 		action: 'generate_password'
-	}, cipPassword.callbackGeneratedPassword);
+	}).then(cipPassword.callbackGeneratedPassword);
 }
 
 cipPassword.checkObservedElements = function() {
@@ -1102,9 +1102,9 @@ jQuery(function() {
 
 cip.init = function() {
 	browser.runtime.sendMessage({
-		action: 'get_settings',
-	}, (response) => {
-		cip.settings = response.data;
+		action: 'load_settings',
+	}).then((settings) => {
+		cip.settings = settings;
 		cip.initCredentialFields();
 	});
 }
@@ -1139,7 +1139,7 @@ cip.initCredentialFields = function(forceCall) {
     	browser.runtime.sendMessage({
     		action: 'retrieve_credentials',
     		args: [ cip.url, cip.submitUrl ]
-		}, cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback);
 	}
 } // end function init
 
@@ -1160,11 +1160,11 @@ cip.receiveCredentialsIfNecessary = function () {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl ]
-		}, cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback);
 	}
 }
 
-cip.retrieveCredentialsCallback = function (credentials, dontAutoFillIn) {
+cip.retrieveCredentialsCallback = function(credentials, dontAutoFillIn) {
 	if (cipFields.combinations.length > 0) {
 		cip.u = _f(cipFields.combinations[0].username);
 		cip.p = _f(cipFields.combinations[0].password);
@@ -1301,7 +1301,7 @@ cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl, false, true ]
-		}, (credentials) => {
+		}).then((credentials) => {
 			cip.retrieveCredentialsCallback(credentials, true);
 			cip.fillIn(combination, onlyPassword, suppressWarnings);
 		});
@@ -1692,6 +1692,6 @@ cipEvents.triggerActivatedTab = function() {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl ]
-		}, cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback);
 	}
 }

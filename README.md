@@ -2,7 +2,7 @@
 Chrome extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 This is a heavily forked version of [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
-Some changes merged also from [projectgus'](https://github.com/projectgus/passifox) fork.
+Some changes merged also from [projectgus'](https://github.com/projectgus/passifox) and [smorks'](https://github.com/smorks/passifox) fork.
 For testing purposes, please use following unofficial KeePassXC [release's](https://github.com/varjolintu/keepassxc/releases).
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
@@ -269,41 +269,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
-The following quick method to determine which browser is used with API calls by [David Rousset](https://github.com/davrous):
-```javascript
-window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
-})();
-```
-
-```
-MIT License
-
-Copyright (c) 2016 David Rousset
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 ## Donations
 
 Feel free to support this project:
 - Donate via [PayPal](https://paypal.me/varjolintu)
 - Donate via Bitcoin: 1LHbD69CcmpLW5hjUXs2MGJhw3GxwqLdw3
+
+Also consider donating to [KeePassXC](https://flattr.com/submit/auto?fid=x7yqz0&url=https%3A%2F%2Fkeepassxc.org) and passifox teams [(1)](https://github.com/smorks/passifox),[(2)](https://github.com/projectgus/passifox),[(3)](https://github.com/pfn/passifox). They are doing great job.

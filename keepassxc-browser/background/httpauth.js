@@ -9,7 +9,21 @@ httpAuth.proxyUrl = null;
 httpAuth.resolve = null;
 httpAuth.reject = null;
 
-httpAuth.handleRequest = function (details, callback) {
+httpAuth.handleRequest = function(details) {
+	return new Promise((resolve, reject) => {
+		if (httpAuth.requestId == details.requestId || !page.tabs[details.tabId]) {
+			reject({});
+		}
+		else {
+			httpAuth.requestId = details.requestId;
+			httpAuth.resolve = resolve;
+			httpAuth.reject = reject;
+			httpAuth.processPendingCallbacks(details);
+		}
+	});
+}
+
+httpAuth.handleRequestChrome = function(details, callback) {
 	if (httpAuth.requestId == details.requestId || !page.tabs[details.tabId]) {
 		callback({});
 	}
@@ -21,12 +35,14 @@ httpAuth.handleRequest = function (details, callback) {
 }
 
 httpAuth.processPendingCallbacks = function(details) {
-	httpAuth.callback = httpAuth.pendingCallbacks.pop();
+	if (!isFirefox) {
+		httpAuth.callback = httpAuth.pendingCallbacks.pop();
+	}
 	httpAuth.tabId = details.tabId;
 	httpAuth.url = details.url;
 	httpAuth.isProxy = details.isProxy;
 
-	if (details.challenger){
+	if (details.challenger) {
 		httpAuth.proxyUrl = details.challenger.host;
 	}
 
@@ -35,8 +51,7 @@ httpAuth.processPendingCallbacks = function(details) {
 	// chrome.tabs.get(tabId, callback) <-- but what should callback be?
 
 	const url = (httpAuth.isProxy && httpAuth.proxyUrl) ? httpAuth.proxyUrl : httpAuth.url;
-
-	keepass.retrieveCredentials(httpAuth.loginOrShowCredentials, { 'id' : details.tabId }, url, url, true);
+	keepass.retrieveCredentials(httpAuth.loginOrShowCredentials, { "id" : details.tabId }, url, url, true);
 }
 
 httpAuth.loginOrShowCredentials = function(logins) {
@@ -47,19 +62,29 @@ httpAuth.loginOrShowCredentials = function(logins) {
 		//generate popup-list for HTTP Auth usernames + descriptions
 
 		if (page.settings.autoFillAndSend) {
-			httpAuth.callback({
-				authCredentials: {
-					username: logins[0].login,
-					password: logins[0].password
-				}
-			});
+			if (isFirefox) {
+				httpAuth.resolve({
+					authCredentials: {
+						username: logins[0].login,
+						password: logins[0].password
+					}
+				});
+			}
+			else {
+				httpAuth.callback({
+					authCredentials: {
+						username: logins[0].login,
+						password: logins[0].password
+					}
+				});
+			}
 		}
 		else {
-			httpAuth.callback({});
+			isFirefox ? httpAuth.reject({}) : httpAuth.callback({});
 		}
 	}
 	// no logins found
 	else {
-		httpAuth.callback({});
+		isFirefox ? httpAuth.reject({}) : httpAuth.callback({});
 	}
 }

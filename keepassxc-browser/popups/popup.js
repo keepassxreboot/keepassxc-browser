@@ -53,18 +53,17 @@ $(function() {
 	$('#reload-status-button').click(function() {
 		browser.runtime.sendMessage({
 			action: 'reconnect'
-		}, status_response);
+		}).then(status_response);
 	});
 
 	$('#reopen-database-button').click(function() {
 		browser.runtime.sendMessage({
 			action: 'get_status'
-		}, status_response);
-		close();
+		}).then(status_response);
 	});
 
 	$('#redetect-fields-button').click(function() {
-		browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
+		browser.tabs.query({"active": true, "currentWindow": true}).then((tabs) => {
 			if (tabs.length === 0)
 				return; // For example: only the background devtools or a popup are opened
 			let tab = tabs[0];
@@ -77,5 +76,5 @@ $(function() {
 
 	browser.runtime.sendMessage({
 		action: 'get_status'
-	}, status_response);
+	}).then(status_response);
 });

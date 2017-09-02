@@ -1,3 +1,10 @@
+0.3.0 (2017-??-??)
+=========================
+- Added Mozilla's browser-polyfill
+- Merged changes from the latest passifox (credits to smorks):
+- HTTP auth works with all browsers
+- TODO: Automatic detectal of div's with forms that are non-hidden by user interaction
+
 0.2.9 (2017-08-27)
 =========================
 - Code cleaning, global functions moved to global.js

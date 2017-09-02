@@ -3,17 +3,34 @@ if (jQuery) {
 }
 
 $(function() {
-	options.initMenu();
-	options.initGeneralSettings();
-	options.initConnectedDatabases();
-	options.initSpecifiedCredentialFields();
-	options.initAbout();
+	browser.runtime.sendMessage({ action: 'load_settings' }).then((settings) => {
+		options.settings = settings;
+		browser.runtime.sendMessage({ action: 'load_keyring' }).then((keyRing) => {
+			options.keyRing = keyRing;
+			options.initMenu();
+			options.initGeneralSettings();
+			options.initConnectedDatabases();
+			options.initSpecifiedCredentialFields();
+			options.initAbout();
+		});
+	});
 });
 
 var options = options || {};
 
-options.settings = typeof(localStorage.settings) === 'undefined' ? {} : JSON.parse(localStorage.settings);
-options.keyRing = typeof(localStorage.keyRing) === 'undefined' ? {} : JSON.parse(localStorage.keyRing);
+options.saveSettings = function() {
+	browser.storage.local.set({'settings': options.settings});
+	browser.runtime.sendMessage({
+		action: 'load_settings'
+	});
+};
+
+options.saveKeyRing = function() {
+	browser.storage.local.set({'keyRing': options.keyRing});
+	browser.runtime.sendMessage({
+		action: 'load_keyring'
+	});
+};
 
 options.initMenu = function() {
 	$('.navbar:first ul.nav:first li a').click(function(e) {
@@ -31,12 +48,7 @@ options.saveSetting = function(name) {
 	const $id = '#' + name;
 	$($id).closest('.control-group').removeClass('error').addClass('success');
 	setTimeout(() => { $($id).closest('.control-group').removeClass('success') }, 2500);
-
-	localStorage.settings = JSON.stringify(options.settings);
-
-	browser.runtime.sendMessage({
-		action: 'load_settings'
-	});
+	options.saveSettings();
 }
 
 options.initGeneralSettings = function() {
@@ -46,38 +58,30 @@ options.initGeneralSettings = function() {
 
 	$('#tab-general-settings input[type=checkbox]').change(function() {
 		options.settings[$(this).attr('name')] = $(this).is(':checked');
-		localStorage.settings = JSON.stringify(options.settings);
-
-        browser.runtime.sendMessage({
-            action: 'load_settings'
-        });
+		options.saveSettings();
 	});
 
 	$('#tab-general-settings input[type=radio]').each(function() {
-		if($(this).val() === options.settings[$(this).attr('name')]) {
+		if ($(this).val() === options.settings[$(this).attr('name')]) {
 			$(this).attr('checked', options.settings[$(this).attr('name')]);
 		}
 	});
 
 	$('#tab-general-settings input[type=radio]').change(function() {
 		options.settings[$(this).attr('name')] = $(this).val();
-		localStorage.settings = JSON.stringify(options.settings);
-
-        browser.runtime.sendMessage({
-            action: 'load_settings'
-        });
+		options.saveSettings();
 	});
 
 	browser.runtime.sendMessage({
 		action: 'get_keepassxc_versions'
-	}, options.showKeePassXCVersions);
+	}).then(options.showKeePassXCVersions);
 
 	$('#tab-general-settings button.checkUpdateKeePassXC:first').click(function(e) {
 		e.preventDefault();
 		$(this).attr('disabled', true);
 		browser.runtime.sendMessage({
 			action: 'check_update_keepassxc'
-		}, options.showKeePassXCVersions);
+		}).then(options.showKeePassXCVersions);
 	});
 
 	$('#port').val(options.settings['port']);
@@ -152,11 +156,7 @@ options.initConnectedDatabases = function() {
 		$('#tab-connected-databases #tr-cd-' + $hash).remove();
 
 		delete options.keyRing[$hash];
-		localStorage.keyRing = JSON.stringify(options.keyRing);
-
-        browser.runtime.sendMessage({
-            action: 'load_keyring'
-        });
+		options.saveKeyRing();
 
 		if ($('#tab-connected-databases table tbody:first tr').length > 2) {
 			$('#tab-connected-databases table tbody:first tr.empty:first').hide();
@@ -218,11 +218,7 @@ options.initSpecifiedCredentialFields = function() {
 		$('#tab-specified-fields #' + $trId).remove();
 
 		delete options.settings['defined-credential-fields'][$url];
-		localStorage.settings = JSON.stringify(options.settings);
-
-        browser.runtime.sendMessage({
-            action: 'load_settings'
-        });
+		options.saveSettings();
 
 		if($('#tab-specified-fields table tbody:first tr').length > 2) {
 			$('#tab-specified-fields table tbody:first tr.empty:first').hide();
@@ -235,7 +231,7 @@ options.initSpecifiedCredentialFields = function() {
 	const $trClone = $('#tab-specified-fields table tr.clone:first').clone(true);
 	$trClone.removeClass('clone');
 	let counter = 1;
-	for(let url in options.settings['defined-credential-fields']) {
+	for (let url in options.settings['defined-credential-fields']) {
 		const $tr = $trClone.clone(true);
 		$tr.data('url', url);
 		$tr.attr('id', 'tr-scf' + counter);
@@ -245,7 +241,7 @@ options.initSpecifiedCredentialFields = function() {
 		$('#tab-specified-fields table tbody:first').append($tr);
 	}
 
-	if($('#tab-specified-fields table tbody:first tr').length > 2) {
+	if ($('#tab-specified-fields table tbody:first tr').length > 2) {
 		$('#tab-specified-fields table tbody:first tr.empty:first').hide();
 	}
 	else {

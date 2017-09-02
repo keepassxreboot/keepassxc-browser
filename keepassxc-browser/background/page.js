@@ -15,34 +15,56 @@ page.currentTabId = -1;
 page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
 page.blockedTabs = {};
 
+page.migrateSettings = () => {
+	return new Promise((resolve, reject) => {
+		const old = localStorage.getItem('settings');
+		if (old) {
+			const settings = JSON.parse(old);
+			browser.storage.local.set({'settings': settings}).then(() => {
+				localStorage.removeItem('settings');
+				resolve(obj);
+			});
+		} else {
+			event.onLoadSettings((settings) => {
+				resolve(settings);
+			});
+		}
+	});
+};
+
 page.initSettings = function() {
-	event.onLoadSettings();
-	if (!('checkUpdateKeePassXC' in page.settings)) {
-		page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
-	}
-	if (!('autoCompleteUsernames' in page.settings)) {
-		page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
-	}
-	if (!('autoFillAndSend' in page.settings)) {
-		page.settings.autoFillAndSend = defaultSettings.autoFillAndSend;
-	}
-	if (!('usePasswordGenerator' in page.settings)) {
-		page.settings.usePasswordGenerator = defaultSettings.usePasswordGenerator;
-	}
-	if (!('autoFillSingleEntry' in page.settings)) {
-		page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
-	}
-	if (!('autoRetrieveCredentials' in page.settings)) {
-		page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
-	}
-	if (!('port' in page.settings)) {
-		page.settings.port = defaultSettings.proxyPort;
-	}
-	localStorage.settings = JSON.stringify(page.settings);
+	return new Promise((resolve, reject) => {
+		page.migrateSettings().then((settings) => {
+			page.settings = settings;
+			if (!('checkUpdateKeePassXC' in page.settings)) {
+				page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
+			}
+			if (!('autoCompleteUsernames' in page.settings)) {
+				page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
+			}
+			if (!('autoFillAndSend' in page.settings)) {
+				page.settings.autoFillAndSend = defaultSettings.autoFillAndSend;
+			}
+			if (!('usePasswordGenerator' in page.settings)) {
+				page.settings.usePasswordGenerator = defaultSettings.usePasswordGenerator;
+			}
+			if (!('autoFillSingleEntry' in page.settings)) {
+				page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
+			}
+			if (!('autoRetrieveCredentials' in page.settings)) {
+				page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
+			}
+			if (!('port' in page.settings)) {
+				page.settings.port = defaultSettings.proxyPort;
+			}
+			browser.storage.local.set({'settings': page.settings});
+			resolve();
+		});
+	});
 }
 
 page.initOpenedTabs = function() {
-	browser.tabs.query({}, (tabs) => {
+	browser.tabs.query({}).then((tabs) => {
 		for (const i of tabs) {
 			page.createTabEntry(i.id);
 		}
@@ -57,7 +79,7 @@ page.isValidProtocol = function(url) {
 
 page.switchTab = function(callback, tab) {
 	browserAction.showDefault(null, tab);
-	browser.tabs.sendMessage(tab.id, {action: 'activated_tab'});
+	browser.tabs.sendMessage(tab.id, {action: 'activated_tab'}).catch((e) => {console.log(e);});
 }
 
 page.clearCredentials = function(tabId, complete) {
@@ -73,7 +95,7 @@ page.clearCredentials = function(tabId, complete) {
 
         browser.tabs.sendMessage(tabId, {
             action: 'clear_credentials'
-        });
+        }).catch((e) => {console.log(e);});
     }
 }
 
