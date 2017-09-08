@@ -1697,3 +1697,14 @@ cipEvents.triggerActivatedTab = function() {
 		}).then(cip.retrieveCredentialsCallback);
 	}
 }
+
+// Detect div's that include forms and are visible
+$(function() {
+	const divDetect = setInterval(function() {
+		const fields = cipFields.getAllFields();
+		if (fields.length > 0) {
+			cip.initCredentialFields(true);
+			clearInterval(divDetect);
+		}
+	}, 1000);
+});
