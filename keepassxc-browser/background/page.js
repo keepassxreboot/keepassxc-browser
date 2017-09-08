@@ -91,12 +91,16 @@ page.clearCredentials = function(tabId, complete) {
 	delete page.tabs[tabId].credentials;
 
     if (complete) {
-        page.tabs[tabId].loginList = [];
+        page.clearLogins(tabId);
 
         browser.tabs.sendMessage(tabId, {
             action: 'clear_credentials'
         }).catch((e) => {console.log(e);});
     }
+}
+
+page.clearLogins = function(tabId) {
+	page.tabs[tabId].loginList = [];
 }
 
 page.createTabEntry = function(tabId) {

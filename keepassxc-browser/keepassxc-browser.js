@@ -1115,32 +1115,34 @@ cip.initCredentialFields = function(forceCall) {
 	}
 	_called.initCredentialFields = true;
 
-	const inputs = cipFields.getAllFields();
-	cipFields.prepareVisibleFieldsWithID('select');
-	cip.initPasswordGenerator(inputs);
+	browser.runtime.sendMessage({ 'action': 'page_clear_logins' }).then(() => {
+		const inputs = cipFields.getAllFields();
+		cipFields.prepareVisibleFieldsWithID('select');
+		cip.initPasswordGenerator(inputs);
 
-	if (!cipFields.useDefinedCredentialFields()) {
-		// get all combinations of username + password fields
-		cipFields.combinations = cipFields.getAllCombinations(inputs);
-	}
-	cipFields.prepareCombinations(cipFields.combinations);
+		if (!cipFields.useDefinedCredentialFields()) {
+			// get all combinations of username + password fields
+			cipFields.combinations = cipFields.getAllCombinations(inputs);
+		}
+		cipFields.prepareCombinations(cipFields.combinations);
 
-	if (cipFields.combinations.length === 0) {
-		browser.runtime.sendMessage({
-			action: 'show_default_browseraction'
-		});
-		return;
-	}
+		if (cipFields.combinations.length === 0) {
+			browser.runtime.sendMessage({
+				action: 'show_default_browseraction'
+			});
+			return;
+		}
 
-	cip.url = document.location.origin;
-	cip.submitUrl = cip.getFormActionUrl(cipFields.combinations[0]);
+		cip.url = document.location.origin;
+		cip.submitUrl = cip.getFormActionUrl(cipFields.combinations[0]);
 
-	if (cip.settings.autoRetrieveCredentials) {
-    	browser.runtime.sendMessage({
-    		action: 'retrieve_credentials',
-    		args: [ cip.url, cip.submitUrl ]
-		}).then(cip.retrieveCredentialsCallback);
-	}
+		if (cip.settings.autoRetrieveCredentials) {
+	    	browser.runtime.sendMessage({
+	    		action: 'retrieve_credentials',
+	    		args: [ cip.url, cip.submitUrl ]
+			}).then(cip.retrieveCredentialsCallback);
+		}
+	});
 } // end function init
 
 cip.initPasswordGenerator = function(inputs) {

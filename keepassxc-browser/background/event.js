@@ -233,6 +233,10 @@ event.onMultipleFieldsPopup = function(callback, tab) {
 	browserAction.show(null, tab);
 }
 
+event.onPageClearLogins = function(callback, tab) {
+	page.clearLogins(tab.id);
+	callback();
+}
 
 // all methods named in this object have to be declared BEFORE this!
 event.messageHandlers = {
@@ -246,6 +250,7 @@ event.messageHandlers = {
 	'get_tab_information': event.onGetTabInformation,
 	'load_keyring': event.onLoadKeyRing,
 	'load_settings': event.onLoadSettings,
+	'page_clear_logins': event.onPageClearLogins,
 	'pop_stack': event.onPopStack,
 	'popup_login': event.onLoginPopup,
 	'popup_multiple-fields': event.onMultipleFieldsPopup,
