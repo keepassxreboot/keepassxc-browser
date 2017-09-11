@@ -12,7 +12,6 @@ var page = {};
 page.tabs = {};
 
 page.currentTabId = -1;
-page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
 page.blockedTabs = {};
 
 page.migrateSettings = () => {
@@ -64,10 +63,23 @@ page.initSettings = function() {
 }
 
 page.initOpenedTabs = function() {
-	browser.tabs.query({}).then((tabs) => {
-		for (const i of tabs) {
-			page.createTabEntry(i.id);
-		}
+	return new Promise((resolve, reject) => {
+		browser.tabs.query({}).then(function (tabs) {
+			for (var i = 0; i < tabs.length; i++) {
+				page.createTabEntry(tabs[i].id);
+			}
+
+			// set initial tab-ID
+			browser.tabs.query({ "active": true, "currentWindow": true }).then(function (tabs) {
+				if (tabs.length === 0) {
+					resolve();
+					return; // For example: only the background devtools or a popup are opened
+				}
+				page.currentTabId = tabs[0].id;
+				browserAction.show(null, tabs[0]);
+				resolve();
+			});
+		});
 	});
 }
 

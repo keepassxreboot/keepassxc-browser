@@ -1098,6 +1098,15 @@ cip.credentials = [];
 
 jQuery(function() {
 	cip.init();
+
+	// Detect div's that include forms and are visible
+	const divDetect = setInterval(function() {
+		const fields = cipFields.getAllFields();
+		if (fields.length > 0) {
+			cip.initCredentialFields(true);
+			clearInterval(divDetect);
+		}
+	}, 1000);
 });
 
 cip.init = function() {
@@ -1697,22 +1706,3 @@ cipEvents.triggerActivatedTab = function() {
 		}).then(cip.retrieveCredentialsCallback);
 	}
 }
-
-// Detect div's that include forms and are visible
-$(function() {
-	const divDetect = setInterval(function() {
-		/*browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-			const fields = cipFields.getAllFields();
-			if (fields.length > 0) {
-				cip.initCredentialFields(true);
-				clearInterval(divDetect);
-			}
-		});*/
-		const fields = cipFields.getAllFields();
-		if (fields.length > 0) {
-			cip.initCredentialFields(true);
-			clearInterval(divDetect);
-		}
-		console.log("Check..");
-	}, 1000);
-});
