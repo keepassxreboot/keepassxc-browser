@@ -11,7 +11,7 @@ keepass.migrateKeyRing().then(() => {
 				page.initOpenedTabs();
 
 				// set initial tab-ID
-				browser.tabs.query({"active": true, "currentWindow": true}).then(function(tabs) {
+				browser.tabs.query({"active": true, "currentWindow": true}).then((tabs) => {
 					if (tabs.length === 0)
 						return; // For example: only the background devtools or a popup are opened
 					page.currentTabId = tabs[0].id;
@@ -126,7 +126,7 @@ for (const item of contextMenuItems) {
 // Listen for keyboard shortcuts specified by user
 browser.commands.onCommand.addListener((command) => {
 	if (command === 'fill-username-password') {
-		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+		browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
 			if (tabs.length) {
 				browser.tabs.sendMessage(tabs[0].id, { action: 'fill_user_pass' });
 			}
@@ -134,7 +134,7 @@ browser.commands.onCommand.addListener((command) => {
 	}
 
 	if (command === 'fill-password') {
-		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+		browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
 			if (tabs.length) {
 				browser.tabs.sendMessage(tabs[0].id, { action: 'fill_pass_only' });
 			}

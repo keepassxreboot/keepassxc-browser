@@ -26,7 +26,7 @@ options.saveSettings = function() {
 };
 
 options.saveKeyRing = function() {
-	browser.storage.local.set({'keyRing': options.keyRing});
+	browser.storage.local.set({'keyRing': JSON.stringify(options.keyRing)});
 	browser.runtime.sendMessage({
 		action: 'load_keyring'
 	});

@@ -1701,10 +1701,18 @@ cipEvents.triggerActivatedTab = function() {
 // Detect div's that include forms and are visible
 $(function() {
 	const divDetect = setInterval(function() {
+		/*browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+			const fields = cipFields.getAllFields();
+			if (fields.length > 0) {
+				cip.initCredentialFields(true);
+				clearInterval(divDetect);
+			}
+		});*/
 		const fields = cipFields.getAllFields();
 		if (fields.length > 0) {
 			cip.initCredentialFields(true);
 			clearInterval(divDetect);
 		}
+		console.log("Check..");
 	}, 1000);
 });

@@ -110,14 +110,14 @@ event.onLoadSettings = function(callback, tab) {
 
 event.onLoadKeyRing = function(callback, tab) {
 	browser.storage.local.get({'keyRing': {}}).then(function(item) {
-		keepass.keyRing = item.keyRing;
+		keepass.keyRing = JSON.parse(item.keyRing);
 		if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
 			keepass.associated = {
 				"value": false,
 				"hash": null
 			};
 		}
-		callback(item.keyRing);
+		callback(JSON.parse(item.keyRing));
 	}, (err) => {
 		console.log('error loading keyRing: ' + err);
 	});

@@ -68,8 +68,8 @@ browser.storage.local.get({
 	'latestKeePassXC': {'version': 0, 'versionParsed': 0, 'lastChecked': null},
 	'keyRing': {}})
 	.then((item) => {
-		keepass.latestKeePassHttp = item.latestKeePassHttp;
-		keepass.keyRing = item.keyRing;
+		keepass.latestKeePassXC = item.latestKeePassXC;
+		keepass.keyRing = JSON.parse(item.keyRing);
 });
 
 keepass.addCredentials = function(callback, tab, username, password, url) {
@@ -562,17 +562,17 @@ keepass.isAssociated = function() {
 keepass.migrateKeyRing = () => {
 	return new Promise((resolve, reject) => {
 		browser.storage.local.get('keyRing').then((item) => {
-			var keyring = item.keyRing;
+			let keyring = item.keyRing;
 			if ('keyRing' in localStorage) {
 				if (!keyring) {
 					keyring = JSON.parse(localStorage['keyRing']);
-					browser.storage.local.set({'keyRing': keyring});
+					browser.storage.local.set({'keyRing': JSON.stringify(keyring)});
 				}
 				delete localStorage['keyRing'];
 			}
 			if (keepass.keyId in localStorage && keepass.keyBody in localStorage) {
 				if (!keyring) {
-					var hash = keepass.getDatabaseHash(null);
+					const hash = keepass.getDatabaseHash(null);
 					keepass.saveKey(hash, localStorage[keepass.keyId], localStorage[keepass.keyBody]);
 				}
 				delete localStorage[keepass.keyId];
@@ -598,19 +598,19 @@ keepass.saveKey = function(hash, id, key) {
 		keepass.keyRing[hash].key = key;
 		keepass.keyRing[hash].hash = hash;
 	}
-	browser.storage.local.set({'keyRing': keepass.keyRing});
+	browser.storage.local.set({'keyRing': JSON.stringify(keepass.keyRing)});
 }
 
 keepass.updateLastUsed = function(hash) {
 	if ((hash in keepass.keyRing)) {
 		keepass.keyRing[hash].lastUsed = new Date();
-		browser.storage.local.set({'keyRing': keepass.keyRing});
+		browser.storage.local.set({'keyRing': JSON.stringify(keepass.keyRing)});
 	}
 }
 
 keepass.deleteKey = function(hash) {
 	delete keepass.keyRing[hash];
-	browser.storage.local.set({'keyRing': keepass.keyRing});
+	browser.storage.local.set({'keyRing': JSON.stringify(keepass.keyRing)});
 }
 
 keepass.setcurrentKeePassXCVersion = function(version) {
