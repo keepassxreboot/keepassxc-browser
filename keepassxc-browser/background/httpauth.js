@@ -1,90 +1,62 @@
 var httpAuth = httpAuth || {};
 
+httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];
-httpAuth.requestId = '';
-httpAuth.tabId = 0;
-httpAuth.url = null;
-httpAuth.isProxy = false;
-httpAuth.proxyUrl = null;
-httpAuth.resolve = null;
-httpAuth.reject = null;
 
-httpAuth.handleRequest = function(details) {
+httpAuth.requestCompleted = function(details) {
+	let index = httpAuth.requests.indexOf(details.requestId);
+	if (index > -1) {
+		httpAuth.requests.splice(index, 1);
+	}
+}
+
+httpAuth.handleRequestPromise = function(details) {
 	return new Promise((resolve, reject) => {
-		if (httpAuth.requestId == details.requestId || !page.tabs[details.tabId]) {
-			reject({});
-		}
-		else {
-			httpAuth.requestId = details.requestId;
-			httpAuth.resolve = resolve;
-			httpAuth.reject = reject;
-			httpAuth.processPendingCallbacks(details);
-		}
+		httpAuth.processPendingCallbacks(details, resolve, reject);
 	});
 }
 
-httpAuth.handleRequestChrome = function(details, callback) {
-	if (httpAuth.requestId == details.requestId || !page.tabs[details.tabId]) {
-		callback({});
-	}
-	else {
-		httpAuth.requestId = details.requestId;
-		httpAuth.pendingCallbacks.push(callback);
-		httpAuth.processPendingCallbacks(details);
-	}
+httpAuth.handleRequestCallback = function(details, callback) {
+	httpAuth.processPendingCallbacks(details, callback, callback);
 }
 
-httpAuth.processPendingCallbacks = function(details) {
-	if (!isFirefox) {
-		httpAuth.callback = httpAuth.pendingCallbacks.pop();
+httpAuth.processPendingCallbacks = function(details, resolve, reject) {
+	if (httpAuth.requests.indexOf(details.requestId) >= 0 || !page.tabs[details.tabId]) {
+		reject({});
 	}
-	httpAuth.tabId = details.tabId;
-	httpAuth.url = details.url;
-	httpAuth.isProxy = details.isProxy;
+
+	httpAuth.requests.push(details.requestId);
 
 	if (details.challenger) {
-		httpAuth.proxyUrl = details.challenger.host;
+		details.proxyUrl = details.challenger.host;
 	}
 
-	// WORKAROUND: second parameter should be tab, but is an own object with tab-id
-	// but in background.js only tab.id is used. To get tabs we could use
-	// chrome.tabs.get(tabId, callback) <-- but what should callback be?
+	details.searchUrl = (details.isProxy && details.proxyUrl) ? details.proxyUrl : details.url;
 
-	const url = (httpAuth.isProxy && httpAuth.proxyUrl) ? httpAuth.proxyUrl : httpAuth.url;
-	keepass.retrieveCredentials(httpAuth.loginOrShowCredentials, { "id" : details.tabId }, url, url, true);
+	keepass.retrieveCredentials((logins) => {
+		httpAuth.loginOrShowCredentials(logins, details, resolve, reject);
+	}, { "id": details.tabId }, details.searchUrl, details.searchUrl, true);
 }
 
-httpAuth.loginOrShowCredentials = function(logins) {
+httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
 	// at least one login found --> use first to login
 	if (logins.length > 0) {
-		const url = (httpAuth.isProxy && httpAuth.proxyUrl) ? httpAuth.proxyUrl : httpAuth.url;
-		event.onHTTPAuthPopup(null, {'id': httpAuth.tabId}, {'logins': logins, 'url': url});
+		event.onHTTPAuthPopup(null, { "id": details.tabId }, { "logins": logins, "url": details.searchUrl });
 		//generate popup-list for HTTP Auth usernames + descriptions
 
 		if (page.settings.autoFillAndSend) {
-			if (isFirefox) {
-				httpAuth.resolve({
-					authCredentials: {
-						username: logins[0].login,
-						password: logins[0].password
-					}
-				});
-			}
-			else {
-				httpAuth.callback({
-					authCredentials: {
-						username: logins[0].login,
-						password: logins[0].password
-					}
-				});
-			}
-		}
-		else {
-			isFirefox ? httpAuth.reject({}) : httpAuth.callback({});
+			resolve({
+				authCredentials: {
+					username: logins[0].login,
+					password: logins[0].password
+				}
+			});
+		} else {
+			reject({});
 		}
 	}
 	// no logins found
 	else {
-		isFirefox ? httpAuth.reject({}) : httpAuth.callback({});
+		reject({});
 	}
 }

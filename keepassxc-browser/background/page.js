@@ -104,7 +104,6 @@ page.clearLogins = function(tabId) {
 }
 
 page.createTabEntry = function(tabId) {
-	//console.log('page.createTabEntry('+tabId+')');
 	page.tabs[tabId] = {
 		'stack': [],
 		'errorMessage': null,

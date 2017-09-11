@@ -1,14 +1,3 @@
-/*
-keepass.convertKeyToKeyRing();
-page.initSettings();
-page.initOpenedTabs();
-keepass.connectToNative();
-keepass.generateNewKeyPair();
-keepass.changePublicKeys(null, (pkRes) => {
-	keepass.getDatabaseHash((gdRes) => {}, null);
-});
-*/
-
 // since version 2.0 the extension is using a keyRing instead of a single key-name-pair
 keepass.migrateKeyRing().then(() => {
 	// load settings
@@ -98,14 +87,18 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 // Retrieve Credentials and try auto-login for HTTPAuth requests
 if (browser.webRequest.onAuthRequired) {
-	if (isFirefox) {
-		browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest, 
-			{ urls: ["<all_urls>"] }, ["blocking"]);
+	let handleReq = httpAuth.handleRequestPromise;
+	let reqType = 'blocking';
+	let opts = { urls: ['<all_urls>'] };
+
+	if (!isFirefox) {
+		handleReq = httpAuth.handleRequestCallback;
+		reqType = 'asyncBlocking';
 	}
-	else {
-		browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequestChrome, 
-			{ urls: ["<all_urls>"] }, ["asyncBlocking"]);
-	}
+
+	browser.webRequest.onAuthRequired.addListener(handleReq, opts, [reqType]);
+	browser.webRequest.onCompleted.addListener(httpAuth.requestCompleted, opts);
+	browser.webRequest.onErrorOccurred.addListener(httpAuth.requestCompleted, opts);
 }
 
 browser.runtime.onMessage.addListener(event.onMessage);
