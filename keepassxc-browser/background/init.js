@@ -1,20 +1,12 @@
-// since version 2.0 the extension is using a keyRing instead of a single key-name-pair
-keepass.migrateKeyRing().then(() => {
-	// load settings
-	page.initSettings().then(() => {
-		// initial connection with KeePassHttp
-		keepass.connectToNative();
-		keepass.generateNewKeyPair();
-		keepass.changePublicKeys(null, (pkRes) => {
-			// create tab information structure for every opened tab
-			page.initOpenedTabs().then(() => {
-				keepass.getDatabaseHash((gdRes) => {
-					
-				}, null);
-			});
-		});
-	});
+keepass.convertKeyToKeyRing();
+page.initSettings();
+page.initOpenedTabs();
+keepass.connectToNative();
+keepass.generateNewKeyPair();
+keepass.changePublicKeys(null, (pkRes) => {
+	keepass.getDatabaseHash((gdRes) => {}, null);
 });
+
 
 // Milliseconds for intervall (e.g. to update browserAction)
 let _interval = 250;

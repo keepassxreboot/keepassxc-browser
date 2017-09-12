@@ -64,14 +64,6 @@ const kpErrors = {
 	}
 };
 
-browser.storage.local.get({
-	'latestKeePassXC': {'version': 0, 'versionParsed': 0, 'lastChecked': null},
-	'keyRing': {}})
-	.then((item) => {
-		keepass.latestKeePassXC = item.latestKeePassXC;
-		keepass.keyRing = JSON.parse(item.keyRing);
-});
-
 keepass.addCredentials = function(callback, tab, username, password, url) {
 	keepass.updateCredentials(callback, tab, null, username, password, url);
 }
@@ -376,7 +368,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		const nonce = nacl.randomBytes(keepass.keySize);
 		const {dbid, dbkey} = keepass.getCryptoKey();
 
-		if (dbkey === null || dbid === null) {
+		if (dbkey === null || dbid === null) {
 			if (tab && page.tabs[tab.id]) {
 				keepass.handleError(tab, kpErrors.NO_SAVED_DATABASES_FOUND);
 			}
@@ -559,29 +551,23 @@ keepass.isAssociated = function() {
 	return (keepass.associated.value && keepass.associated.hash && keepass.associated.hash === keepass.databaseHash);
 }
 
-keepass.migrateKeyRing = () => {
-	return new Promise((resolve, reject) => {
-		browser.storage.local.get('keyRing').then((item) => {
-			let keyring = item.keyRing;
+keepass.convertKeyToKeyRing = function() {
+	if (keepass.keyId in localStorage && keepass.keyBody in localStorage && !('keyRing' in localStorage)) {
+		keepass.getDatabaseHash((hash) => {
+			keepass.saveKey(hash, localStorage[keepass.keyId], localStorage[keepass.keyBody]);
+
 			if ('keyRing' in localStorage) {
-				if (!keyring) {
-					keyring = JSON.parse(localStorage['keyRing']);
-					browser.storage.local.set({'keyRing': JSON.stringify(keyring)});
-				}
-				delete localStorage['keyRing'];
-			}
-			if (keepass.keyId in localStorage && keepass.keyBody in localStorage) {
-				if (!keyring) {
-					const hash = keepass.getDatabaseHash(null);
-					keepass.saveKey(hash, localStorage[keepass.keyId], localStorage[keepass.keyBody]);
-				}
 				delete localStorage[keepass.keyId];
 				delete localStorage[keepass.keyBody];
 			}
-			resolve();
-		});
-	});
-};
+		}, null);
+	}
+
+	if ('keyRing' in localStorage) {
+		delete localStorage[keepass.keyId];
+		delete localStorage[keepass.keyBody];
+	}
+}
 
 keepass.saveKey = function(hash, id, key) {
 	if (!(hash in keepass.keyRing)) {
@@ -598,19 +584,19 @@ keepass.saveKey = function(hash, id, key) {
 		keepass.keyRing[hash].key = key;
 		keepass.keyRing[hash].hash = hash;
 	}
-	browser.storage.local.set({'keyRing': JSON.stringify(keepass.keyRing)});
+	localStorage.keyRing = JSON.stringify(keepass.keyRing);
 }
 
 keepass.updateLastUsed = function(hash) {
 	if ((hash in keepass.keyRing)) {
 		keepass.keyRing[hash].lastUsed = new Date();
-		browser.storage.local.set({'keyRing': JSON.stringify(keepass.keyRing)});
+		localStorage.keyRing = JSON.stringify(keepass.keyRing);
 	}
 }
 
 keepass.deleteKey = function(hash) {
 	delete keepass.keyRing[hash];
-	browser.storage.local.set({'keyRing': JSON.stringify(keepass.keyRing)});
+	localStorage.keyRing = JSON.stringify(keepass.keyRing);
 }
 
 keepass.setcurrentKeePassXCVersion = function(version) {
@@ -649,7 +635,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 		}
 
 		if (version !== -1) {
-			browser.storage.local.set({'latestKeePassXC': keepass.latestKeePassXC});
+			localStorage.latestKeePassXC = JSON.stringify(keepass.latestKeePassXC);
 		}
 	};
 

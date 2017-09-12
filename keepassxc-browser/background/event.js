@@ -101,32 +101,27 @@ event.showStatus = function(configured, tab, callback) {
 }
 
 event.onLoadSettings = function(callback, tab) {
-	browser.storage.local.get({'settings': {}}).then((item) => {
-		callback(item.settings);
-	}, (err) => {
-		console.log('error loading settings: ' + err);
-	});
+	page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
 }
 
 event.onLoadKeyRing = function(callback, tab) {
-	browser.storage.local.get({'keyRing': {}}).then(function(item) {
-		keepass.keyRing = JSON.parse(item.keyRing);
-		if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
-			keepass.associated = {
-				"value": false,
-				"hash": null
-			};
-		}
-		callback(JSON.parse(item.keyRing));
-	}, (err) => {
-		console.log('error loading keyRing: ' + err);
-	});
+	keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
+	if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
+		keepass.associated = {
+			value: false,
+			hash: null
+		};
+	}
+}
+
+event.onGetSettings = function(callback, tab) {
+	event.onLoadSettings();
+	callback({ data: page.settings });
 }
 
 event.onSaveSettings = function(callback, tab, settings) {
-	browser.storage.local.set({'settings': settings}).then(function() {
-		event.onLoadSettings();
-	});
+	localStorage.settings = JSON.stringify(settings);
+	event.onLoadSettings();
 }
 
 event.onGetStatus = function(callback, tab) {
@@ -233,10 +228,11 @@ event.onMultipleFieldsPopup = function(callback, tab) {
 	browserAction.show(null, tab);
 }
 
-event.onPageClearLogins = function(callback, tab) {
+event.pageClearLogins = function(callback, tab) {
 	page.clearLogins(tab.id);
 	callback();
 }
+
 
 // all methods named in this object have to be declared BEFORE this!
 event.messageHandlers = {
@@ -246,11 +242,12 @@ event.messageHandlers = {
 	'check_update_keepassxc': event.onCheckUpdateKeePassXC,
 	'get_connected_database': event.onGetConnectedDatabase,
 	'get_keepassxc_versions': event.onGetKeePassXCVersions,
+	'get_settings': event.onGetSettings,
 	'get_status': event.onGetStatus,
 	'get_tab_information': event.onGetTabInformation,
 	'load_keyring': event.onLoadKeyRing,
 	'load_settings': event.onLoadSettings,
-	'page_clear_logins': event.onPageClearLogins,
+	'page_clear_logins': event.pageClearLogins,
 	'pop_stack': event.onPopStack,
 	'popup_login': event.onLoginPopup,
 	'popup_multiple-fields': event.onMultipleFieldsPopup,

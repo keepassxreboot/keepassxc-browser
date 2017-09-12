@@ -3,34 +3,17 @@ if (jQuery) {
 }
 
 $(function() {
-	browser.runtime.sendMessage({ action: 'load_settings' }).then((settings) => {
-		options.settings = settings;
-		browser.runtime.sendMessage({ action: 'load_keyring' }).then((keyRing) => {
-			options.keyRing = keyRing;
-			options.initMenu();
-			options.initGeneralSettings();
-			options.initConnectedDatabases();
-			options.initSpecifiedCredentialFields();
-			options.initAbout();
-		});
-	});
+	options.initMenu();
+	options.initGeneralSettings();
+	options.initConnectedDatabases();
+	options.initSpecifiedCredentialFields();
+	options.initAbout();
 });
 
 var options = options || {};
 
-options.saveSettings = function() {
-	browser.storage.local.set({'settings': options.settings});
-	browser.runtime.sendMessage({
-		action: 'load_settings'
-	});
-};
-
-options.saveKeyRing = function() {
-	browser.storage.local.set({'keyRing': JSON.stringify(options.keyRing)});
-	browser.runtime.sendMessage({
-		action: 'load_keyring'
-	});
-};
+options.settings = typeof(localStorage.settings) === 'undefined' ? {} : JSON.parse(localStorage.settings);
+options.keyRing = typeof(localStorage.keyRing) === 'undefined' ? {} : JSON.parse(localStorage.keyRing);
 
 options.initMenu = function() {
 	$('.navbar:first ul.nav:first li a').click(function(e) {
@@ -48,7 +31,26 @@ options.saveSetting = function(name) {
 	const $id = '#' + name;
 	$($id).closest('.control-group').removeClass('error').addClass('success');
 	setTimeout(() => { $($id).closest('.control-group').removeClass('success') }, 2500);
-	options.saveSettings();
+
+	localStorage.settings = JSON.stringify(options.settings);
+
+	browser.runtime.sendMessage({
+		action: 'load_settings'
+	});
+}
+
+options.saveSettings = function() {
+	localStorage.settings = JSON.stringify(options.settings);
+	browser.runtime.sendMessage({
+		action: 'load_settings'
+	});
+}
+
+options.saveKeyRing = function() {
+	localStorage.keyRing = JSON.stringify(options.keyRing);
+	browser.runtime.sendMessage({
+		action: 'load_keyring'
+	});
 }
 
 options.initGeneralSettings = function() {
@@ -220,7 +222,7 @@ options.initSpecifiedCredentialFields = function() {
 		delete options.settings['defined-credential-fields'][$url];
 		options.saveSettings();
 
-		if($('#tab-specified-fields table tbody:first tr').length > 2) {
+		if ($('#tab-specified-fields table tbody:first tr').length > 2) {
 			$('#tab-specified-fields table tbody:first tr.empty:first').hide();
 		}
 		else {

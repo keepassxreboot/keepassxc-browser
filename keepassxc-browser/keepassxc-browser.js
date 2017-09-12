@@ -52,9 +52,9 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		}
 		else if (req.action === 'redetect_fields') {
 			browser.runtime.sendMessage({
-				action: 'load_settings',
-			}).then((settings) => {
-				cip.settings = settings;
+				action: 'get_settings',
+			}).then((response) => {
+				cip.settings = response.data;
 				cip.initCredentialFields(true);
 			});
 		}
@@ -1111,9 +1111,9 @@ jQuery(function() {
 
 cip.init = function() {
 	browser.runtime.sendMessage({
-		action: 'load_settings',
-	}).then((settings) => {
-		cip.settings = settings;
+		action: 'get_settings',
+	}).then((response) => {
+		cip.settings = response.data;
 		cip.initCredentialFields();
 	});
 }
@@ -1175,7 +1175,7 @@ cip.receiveCredentialsIfNecessary = function () {
 	}
 }
 
-cip.retrieveCredentialsCallback = function(credentials, dontAutoFillIn) {
+cip.retrieveCredentialsCallback = function (credentials, dontAutoFillIn) {
 	if (cipFields.combinations.length > 0) {
 		cip.u = _f(cipFields.combinations[0].username);
 		cip.p = _f(cipFields.combinations[0].password);
