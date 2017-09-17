@@ -8,17 +8,17 @@ httpAuth.requestCompleted = function(details) {
 	if (index > -1) {
 		httpAuth.requests.splice(index, 1);
 	}
-}
+};
 
 httpAuth.handleRequestPromise = function(details) {
 	return new Promise((resolve, reject) => {
 		httpAuth.processPendingCallbacks(details, resolve, reject);
 	});
-}
+};
 
 httpAuth.handleRequestCallback = function(details, callback) {
 	httpAuth.processPendingCallbacks(details, callback, callback);
-}
+};
 
 httpAuth.processPendingCallbacks = function(details, resolve, reject) {
 	if (httpAuth.requests.indexOf(details.requestId) >= 0 || !page.tabs[details.tabId]) {
@@ -36,7 +36,7 @@ httpAuth.processPendingCallbacks = function(details, resolve, reject) {
 	keepass.retrieveCredentials((logins) => {
 		httpAuth.loginOrShowCredentials(logins, details, resolve, reject);
 	}, { "id": details.tabId }, details.searchUrl, details.searchUrl, true);
-}
+};
 
 httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
 	// at least one login found --> use first to login
@@ -59,4 +59,4 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
 	else {
 		reject({});
 	}
-}
+};

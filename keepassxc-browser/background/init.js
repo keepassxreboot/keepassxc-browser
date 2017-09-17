@@ -94,7 +94,7 @@ const contextMenuItems = [
 	{title: 'Fill &Pass Only', action: 'fill_pass_only'},
 	{title: 'Show Password &Generator Icons', action: 'activate_password_generator'},
 	{title: '&Save credentials', action: 'remember_credentials'}
-]
+];
 
 // Create context menu items
 for (const item of contextMenuItems) {

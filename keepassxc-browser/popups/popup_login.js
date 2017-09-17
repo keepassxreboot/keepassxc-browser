@@ -1,8 +1,9 @@
 $(function() {
 	browser.runtime.getBackgroundPage().then((global) => {
 		browser.tabs.query({"active": true, "currentWindow": true}).then((tabs) => {
-			if (tabs.length === 0)
+			if (tabs.length === 0) {
 				return; // For example: only the background devtools or a popup are opened
+			}
 			const tab = tabs[0];
 
 			const logins = global.page.tabs[tab.id].loginList;

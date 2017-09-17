@@ -6,7 +6,7 @@ const defaultSettings = {
 	autoFillSingleEntry: false,
 	autoRetrieveCredentials: true,
 	proxyPort: '19700'
-}
+};
 
 var page = {};
 page.tabs = {};
@@ -39,7 +39,7 @@ page.initSettings = function() {
 		page.settings.port = defaultSettings.proxyPort;
 	}
 	localStorage.settings = JSON.stringify(page.settings);
-}
+};
 
 page.initOpenedTabs = function() {
 	browser.tabs.query({}).then((tabs) => {
@@ -56,18 +56,18 @@ page.initOpenedTabs = function() {
 			browserAction.show(null, tabs[0]);
 		});
 	});
-}
+};
 
 page.isValidProtocol = function(url) {
 	let protocol = url.substring(0, url.indexOf(':'));
 	protocol = protocol.toLowerCase();
 	return !(url.indexOf('.') === -1 || (protocol !== 'http' && protocol !== 'https' && protocol !== 'ftp' && protocol !== 'sftp'));
-}
+};
 
 page.switchTab = function(callback, tab) {
 	browserAction.showDefault(null, tab);
 	browser.tabs.sendMessage(tab.id, {action: 'activated_tab'}).catch((e) => {console.log(e);});
-}
+};
 
 page.clearCredentials = function(tabId, complete) {
 	if (!page.tabs[tabId]) {
@@ -84,11 +84,11 @@ page.clearCredentials = function(tabId, complete) {
             action: 'clear_credentials'
         }).catch((e) => {console.log(e);});
     }
-}
+};
 
 page.clearLogins = function(tabId) {
 	page.tabs[tabId].loginList = [];
-}
+};
 
 page.createTabEntry = function(tabId) {
 	page.tabs[tabId] = {
@@ -96,7 +96,7 @@ page.createTabEntry = function(tabId) {
 		'errorMessage': null,
 		'loginList': {}
 	};
-}
+};
 
 page.removePageInformationFromNotExistingTabs = function() {
 	let rand = Math.floor(Math.random()*1001);
@@ -129,12 +129,9 @@ page.debugConsole = function() {
 
 page.sprintf = function(input, args) {
 	return input.replace(/{(\d+)}/g, (match, number) => {
-      return typeof args[number] !== 'undefined'
-        ? (typeof args[number] === 'object' ? JSON.stringify(args[number]) : args[number])
-        : match
-      ;
+      return typeof args[number] !== 'undefined' ? (typeof args[number] === 'object' ? JSON.stringify(args[number]) : args[number]) : match;
     });
-}
+};
 
 page.debugDummy = function() {};
 

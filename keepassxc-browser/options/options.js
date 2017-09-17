@@ -25,33 +25,33 @@ options.initMenu = function() {
 	});
 
 	$('div.tab:first').show();
-}
+};
 
 options.saveSetting = function(name) {
 	const $id = '#' + name;
 	$($id).closest('.control-group').removeClass('error').addClass('success');
-	setTimeout(() => { $($id).closest('.control-group').removeClass('success') }, 2500);
+	setTimeout(() => { $($id).closest('.control-group').removeClass('success'); }, 2500);
 
 	localStorage.settings = JSON.stringify(options.settings);
 
 	browser.runtime.sendMessage({
 		action: 'load_settings'
 	});
-}
+};
 
 options.saveSettings = function() {
 	localStorage.settings = JSON.stringify(options.settings);
 	browser.runtime.sendMessage({
 		action: 'load_settings'
 	});
-}
+};
 
 options.saveKeyRing = function() {
 	localStorage.keyRing = JSON.stringify(options.keyRing);
 	browser.runtime.sendMessage({
 		action: 'load_keyring'
 	});
-}
+};
 
 options.initGeneralSettings = function() {
 	$('#tab-general-settings input[type=checkbox]').each(function() {
@@ -140,7 +140,7 @@ options.showKeePassXCVersions = function(response) {
 	$('#tab-general-settings .kphVersion:first em.latestVersion:first').text(response.latest);
 	$('#tab-about em.versionKPH').text(response.current);
 	$('#tab-general-settings button.checkUpdateKeePassXC:first').attr('disabled', false);
-}
+};
 
 options.initConnectedDatabases = function() {
 	$('#dialogDeleteConnectedDatabase').modal({keyboard: true, show: false, backdrop: true});
@@ -200,7 +200,7 @@ options.initConnectedDatabases = function() {
 			action: 'associate'
 		});
 	});
-}
+};
 
 options.initSpecifiedCredentialFields = function() {
 	$('#dialogDeleteSpecifiedCredentialFields').modal({keyboard: true, show: false, backdrop: true});
@@ -249,11 +249,11 @@ options.initSpecifiedCredentialFields = function() {
 	else {
 		$('#tab-specified-fields table tbody:first tr.empty:first').show();
 	}
-}
+};
 
 options.initAbout = function() {
 	$('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
 	if (isFirefox) {
 		$('#chrome-only').remove();
 	}
-}
+};

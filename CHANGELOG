@@ -5,6 +5,7 @@
 - HTTP auth works with all browsers
 - Fixed showing credentials from previous logins in the popup (credits to smorks/passifox)
 - Automatic detection of div's with forms that are non-hidden by user interaction
+- Verified the source code via JSHint
 
 0.2.9 (2017-08-27)
 =========================

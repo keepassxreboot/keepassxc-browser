@@ -1,6 +1,6 @@
 $(function() {
 	browser.runtime.getBackgroundPage().then((global) => {
-		browser.tabs.query({"active": true, "currentWindow": true}.then((tab) => {
+		browser.tabs.query({"active": true, "currentWindow": true}).then((tab) => {
 			const data = global.page.tabs[tab.id].loginList;
 			let ul = document.getElementById('login-list');
 			for (let i = 0; i < data.logins.length; i++) {

@@ -16,7 +16,7 @@ event.onMessage = function(request, sender, callback) {
 			return true;
 		}
 	}
-}
+};
 
 /**
  * Get interesting information about the given tab.
@@ -73,13 +73,12 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 			console.log('undefined handler for tab ' + tab.id);
 		}
 	});
-}
-
+};
 
 event.onShowAlert = function(callback, tab, message) {
 	if (page.settings.supressAlerts) { console.log(message); }
 	else { alert(message); }
-}
+};
 
 event.showStatus = function(configured, tab, callback) {
 	let keyId = null;
@@ -98,11 +97,11 @@ event.showStatus = function(configured, tab, callback) {
 		associated: keepass.isAssociated(),
 		error: errorMessage ? errorMessage : null
 	});
-}
+};
 
 event.onLoadSettings = function(callback, tab) {
 	page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
-}
+};
 
 event.onLoadKeyRing = function(callback, tab) {
 	keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
@@ -112,17 +111,17 @@ event.onLoadKeyRing = function(callback, tab) {
 			hash: null
 		};
 	}
-}
+};
 
 event.onGetSettings = function(callback, tab) {
 	event.onLoadSettings();
 	callback({ data: page.settings });
-}
+};
 
 event.onSaveSettings = function(callback, tab, settings) {
 	localStorage.settings = JSON.stringify(settings);
 	event.onLoadSettings();
-}
+};
 
 event.onGetStatus = function(callback, tab) {
 	keepass.testAssociation((response) => {
@@ -130,7 +129,7 @@ event.onGetStatus = function(callback, tab) {
 			event.showStatus(configured, tab, callback);
 		});
 	}, tab);
-}
+};
 
 event.onReconnect = function(callback, tab) {
 	keepass.connectToNative();
@@ -150,24 +149,24 @@ event.onReconnect = function(callback, tab) {
 			}, null);
 		});
 	}, 2000);
-}
+};
 
 event.onPopStack = function(callback, tab) {
 	browserAction.stackPop(tab.id);
 	browserAction.show(null, tab);
-}
+};
 
 event.onGetTabInformation = function(callback, tab) {
 	const id = tab.id || page.currentTabId;
 	callback(page.tabs[id]);
-}
+};
 
 event.onGetConnectedDatabase = function(callback, tab) {
 	callback({
 		count: Object.keys(keepass.keyRing).length,
 		identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
 	});
-}
+};
 
 event.onGetKeePassXCVersions = function(callback, tab) {
 	if (keepass.currentKeePassXC.version === 0) {
@@ -176,62 +175,62 @@ event.onGetKeePassXCVersions = function(callback, tab) {
 		}, tab);
 	}
 	callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
-}
+};
 
 event.onCheckUpdateKeePassXC = function(callback, tab) {
 	keepass.checkForNewKeePassXCVersion();
 	callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
-}
+};
 
 event.onUpdateAvailableKeePassXC = function(callback, tab) {
 	callback(keepass.keePassXCUpdateAvailable());
-}
+};
 
 event.onRemoveCredentialsFromTabInformation = function(callback, tab) {
 	const id = tab.id || page.currentTabId;
 	page.clearCredentials(id);
-}
+};
 
 event.onSetRememberPopup = function(callback, tab, username, password, url, usernameExists, credentialsList) {
 	browserAction.setRememberPopup(tab.id, username, password, url, usernameExists, credentialsList);
-}
+};
 
 event.onLoginPopup = function(callback, tab, logins) {
 	let stackData = {
 		level: 1,
 		iconType: 'questionmark',
 		popup: 'popup_login.html'
-	}
+	};
 	browserAction.stackUnshift(stackData, tab.id);
 	page.tabs[tab.id].loginList = logins;
 	browserAction.show(null, tab);
-}
+};
 
 event.onHTTPAuthPopup = function(callback, tab, data) {
 	let stackData = {
 		level: 1,
 		iconType: 'questionmark',
 		popup: 'popup_httpauth.html'
-	}
+	};
 	browserAction.stackUnshift(stackData, tab.id);
 	page.tabs[tab.id].loginList = data;
 	browserAction.show(null, tab);
-}
+};
 
 event.onMultipleFieldsPopup = function(callback, tab) {
 	let stackData = {
 		level: 1,
 		iconType: 'normal',
 		popup: 'popup_multiple-fields.html'
-	}
+	};
 	browserAction.stackUnshift(stackData, tab.id);
 	browserAction.show(null, tab);
-}
+};
 
 event.pageClearLogins = function(callback, tab) {
 	page.clearLogins(tab.id);
 	callback();
-}
+};
 
 
 // all methods named in this object have to be declared BEFORE this!
