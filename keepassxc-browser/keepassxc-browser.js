@@ -810,7 +810,6 @@ cipFields.getAllFields = function() {
 
 cipFields.getHiddenFieldCount = function() {
 	let count = 0;
-
 	jQuery(cipFields.inputQueryPattern).each(function() {
 		if (jQuery(this).is(':hidden')) {
 			count++;
@@ -1122,17 +1121,18 @@ cip.init = function() {
 };
 
 cip.detectNewActiveFields = function() {
-	const hiddenFields = cipFields.getHiddenFieldCount();
+	//const hiddenFields = cipFields.getHiddenFieldCount();
 
-	if (hiddenFields > 0) {
+	//if (hiddenFields > 0) {
 		const divDetect = setInterval(function() {
 			const fields = cipFields.getAllFields();
-			if (fields.length > 0) {
+			console.log(fields.length);
+			if (fields.length > 1) {
 				cip.initCredentialFields(true);
 				clearInterval(divDetect);
 			}
 		}, 1000);
-	}
+	//}
 };
 
 cip.initCredentialFields = function(forceCall) {
