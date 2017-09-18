@@ -1,9 +1,9 @@
-0.3.0 (2017-??-??)
+0.3.0 (2017-09-18)
 =========================
-- Added Mozilla's browser-polyfill
-- Merged changes from the latest passifox (credits to smorks/passifox)
-- HTTP auth works with all browsers
-- Fixed showing credentials from previous logins in the popup (credits to smorks/passifox)
+- Added Mozilla's browser-polyfill for making WebExtension compatibility easier
+- Merged changes from the latest passifox (credits to smorks/keepasshttp-connector)
+- HTTP auth works with all browsers (credits to smorks/keepasshttp-connector)
+- Fixed showing credentials from previous logins in the popup (credits to smorks/keepasshttp-connector)
 - Automatic detection of div's with forms that are non-hidden by user interaction
 - Verified the source code via JSHint
 

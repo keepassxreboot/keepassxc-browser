@@ -1092,18 +1092,11 @@ cipFields.useDefinedCredentialFields = function() {
 
 
 var cip = {};
-
-// settings of keepassxc-browser
 cip.settings = {};
-// username field which will be set on focus
 cip.u = null;
-// password field which will be set on focus
 cip.p = null;
-// document.location
 cip.url = null;
-// request-url of the form in which the field is located
 cip.submitUrl = null;
-// received credentials from KeePassXC
 cip.credentials = [];
 
 jQuery(function() {
@@ -1121,8 +1114,9 @@ cip.init = function() {
 };
 
 cip.detectNewActiveFields = function() {
-	//const hiddenFields = cipFields.getHiddenFieldCount();
+	const hiddenFields = cipFields.getHiddenFieldCount();
 
+	// If hidden fields aren't detected, setInterval is being looped in each frame of the page
 	//if (hiddenFields > 0) {
 		const divDetect = setInterval(function() {
 			const fields = cipFields.getAllFields();
