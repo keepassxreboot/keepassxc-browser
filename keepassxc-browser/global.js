@@ -1,6 +1,4 @@
 var isFirefox = false;
-if (typeof browser !== 'undefined') {
+if (!(/Chrome/.test(navigator.userAgent) && /Google/.test(navigator.vendor))) {
 	isFirefox = true;
 }
-
-window.browser = (function () { return window.msBrowser || window.browser || window.chrome; })();

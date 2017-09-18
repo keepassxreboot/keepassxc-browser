@@ -25,19 +25,33 @@ options.initMenu = function() {
 	});
 
 	$('div.tab:first').show();
-}
+};
 
 options.saveSetting = function(name) {
 	const $id = '#' + name;
 	$($id).closest('.control-group').removeClass('error').addClass('success');
-	setTimeout(() => { $($id).closest('.control-group').removeClass('success') }, 2500);
+	setTimeout(() => { $($id).closest('.control-group').removeClass('success'); }, 2500);
 
 	localStorage.settings = JSON.stringify(options.settings);
 
 	browser.runtime.sendMessage({
 		action: 'load_settings'
 	});
-}
+};
+
+options.saveSettings = function() {
+	localStorage.settings = JSON.stringify(options.settings);
+	browser.runtime.sendMessage({
+		action: 'load_settings'
+	});
+};
+
+options.saveKeyRing = function() {
+	localStorage.keyRing = JSON.stringify(options.keyRing);
+	browser.runtime.sendMessage({
+		action: 'load_keyring'
+	});
+};
 
 options.initGeneralSettings = function() {
 	$('#tab-general-settings input[type=checkbox]').each(function() {
@@ -46,38 +60,30 @@ options.initGeneralSettings = function() {
 
 	$('#tab-general-settings input[type=checkbox]').change(function() {
 		options.settings[$(this).attr('name')] = $(this).is(':checked');
-		localStorage.settings = JSON.stringify(options.settings);
-
-        browser.runtime.sendMessage({
-            action: 'load_settings'
-        });
+		options.saveSettings();
 	});
 
 	$('#tab-general-settings input[type=radio]').each(function() {
-		if($(this).val() === options.settings[$(this).attr('name')]) {
+		if ($(this).val() === options.settings[$(this).attr('name')]) {
 			$(this).attr('checked', options.settings[$(this).attr('name')]);
 		}
 	});
 
 	$('#tab-general-settings input[type=radio]').change(function() {
 		options.settings[$(this).attr('name')] = $(this).val();
-		localStorage.settings = JSON.stringify(options.settings);
-
-        browser.runtime.sendMessage({
-            action: 'load_settings'
-        });
+		options.saveSettings();
 	});
 
 	browser.runtime.sendMessage({
 		action: 'get_keepassxc_versions'
-	}, options.showKeePassXCVersions);
+	}).then(options.showKeePassXCVersions);
 
 	$('#tab-general-settings button.checkUpdateKeePassXC:first').click(function(e) {
 		e.preventDefault();
 		$(this).attr('disabled', true);
 		browser.runtime.sendMessage({
 			action: 'check_update_keepassxc'
-		}, options.showKeePassXCVersions);
+		}).then(options.showKeePassXCVersions);
 	});
 
 	$('#port').val(options.settings['port']);
@@ -134,7 +140,7 @@ options.showKeePassXCVersions = function(response) {
 	$('#tab-general-settings .kphVersion:first em.latestVersion:first').text(response.latest);
 	$('#tab-about em.versionKPH').text(response.current);
 	$('#tab-general-settings button.checkUpdateKeePassXC:first').attr('disabled', false);
-}
+};
 
 options.initConnectedDatabases = function() {
 	$('#dialogDeleteConnectedDatabase').modal({keyboard: true, show: false, backdrop: true});
@@ -152,11 +158,7 @@ options.initConnectedDatabases = function() {
 		$('#tab-connected-databases #tr-cd-' + $hash).remove();
 
 		delete options.keyRing[$hash];
-		localStorage.keyRing = JSON.stringify(options.keyRing);
-
-        browser.runtime.sendMessage({
-            action: 'load_keyring'
-        });
+		options.saveKeyRing();
 
 		if ($('#tab-connected-databases table tbody:first tr').length > 2) {
 			$('#tab-connected-databases table tbody:first tr.empty:first').hide();
@@ -198,7 +200,7 @@ options.initConnectedDatabases = function() {
 			action: 'associate'
 		});
 	});
-}
+};
 
 options.initSpecifiedCredentialFields = function() {
 	$('#dialogDeleteSpecifiedCredentialFields').modal({keyboard: true, show: false, backdrop: true});
@@ -218,13 +220,9 @@ options.initSpecifiedCredentialFields = function() {
 		$('#tab-specified-fields #' + $trId).remove();
 
 		delete options.settings['defined-credential-fields'][$url];
-		localStorage.settings = JSON.stringify(options.settings);
+		options.saveSettings();
 
-        browser.runtime.sendMessage({
-            action: 'load_settings'
-        });
-
-		if($('#tab-specified-fields table tbody:first tr').length > 2) {
+		if ($('#tab-specified-fields table tbody:first tr').length > 2) {
 			$('#tab-specified-fields table tbody:first tr.empty:first').hide();
 		}
 		else {
@@ -235,7 +233,7 @@ options.initSpecifiedCredentialFields = function() {
 	const $trClone = $('#tab-specified-fields table tr.clone:first').clone(true);
 	$trClone.removeClass('clone');
 	let counter = 1;
-	for(let url in options.settings['defined-credential-fields']) {
+	for (let url in options.settings['defined-credential-fields']) {
 		const $tr = $trClone.clone(true);
 		$tr.data('url', url);
 		$tr.attr('id', 'tr-scf' + counter);
@@ -245,17 +243,17 @@ options.initSpecifiedCredentialFields = function() {
 		$('#tab-specified-fields table tbody:first').append($tr);
 	}
 
-	if($('#tab-specified-fields table tbody:first tr').length > 2) {
+	if ($('#tab-specified-fields table tbody:first tr').length > 2) {
 		$('#tab-specified-fields table tbody:first tr.empty:first').hide();
 	}
 	else {
 		$('#tab-specified-fields table tbody:first tr.empty:first').show();
 	}
-}
+};
 
 options.initAbout = function() {
 	$('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
 	if (isFirefox) {
 		$('#chrome-only').remove();
 	}
-}
+};

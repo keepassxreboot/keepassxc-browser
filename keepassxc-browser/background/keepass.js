@@ -3,6 +3,7 @@ var keepass = {};
 keepass.associated = {'value': false, 'hash': null};
 keepass.keyPair = {publicKey: null, secretKey: null};
 keepass.serverPublicKey = '';
+keepass.clientID = '';
 keepass.isConnected = false;
 keepass.isDatabaseClosed = false;
 keepass.isKeePassXCAvailable = false;
@@ -66,7 +67,7 @@ const kpErrors = {
 
 keepass.addCredentials = function(callback, tab, username, password, url) {
 	keepass.updateCredentials(callback, tab, null, username, password, url);
-}
+};
 
 keepass.updateCredentials = function(callback, tab, entryId, username, password, url) {
 	page.debug('keepass.updateCredentials(callback, {1}, {2}, {3}, [password], {4})', tab.id, entryId, username, url);
@@ -76,9 +77,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		if (!response)
 		{
 			browserAction.showDefault(null, tab);
-			if (forceCallback) {
-				callback([]);
-			}
+			callback([]);
 			return;
 		}
 
@@ -102,7 +101,8 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce)
+			nonce: keepass.b64e(nonce),
+			clientID: keepass.clientID
 		};
 		console.log(request);
 
@@ -124,7 +124,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		});
 		keepass.nativePort.postMessage(request);
 	});
-}
+};
 
 keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCallback, triggerUnlock) {
 	page.debug('keepass.retrieveCredentials(callback, {1}, {2}, {3}, {4})', tab.id, url, submiturl, forceCallback);
@@ -164,7 +164,8 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce)
+			nonce: keepass.b64e(nonce),
+			clientID: keepass.clientID
 		};
 
 		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, (response) => {
@@ -199,7 +200,7 @@ keepass.retrieveCredentials = function (callback, tab, url, submiturl, forceCall
 		});
 		keepass.nativePort.postMessage(request);
 	}, tab);
-}
+};
 
 // Redirects the callback to a listener (handleReply())
 keepass.callbackOnId = function (ev, id, callback) {
@@ -209,11 +210,11 @@ keepass.callbackOnId = function (ev, id, callback) {
 				ev.removeListener(handler);
 				callback(msg);
 			}
-		}
+		};
 		return handler;
 	})(ev, id, callback);
 	ev.addListener(listener);
-}
+};
 
 keepass.generatePassword = function (callback, tab, forceCallback) {
 	if (!keepass.isConnected) {
@@ -242,7 +243,8 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 
 		const request = {
 			action: kpAction,
-			nonce: keepass.b64e(nonce)
+			nonce: keepass.b64e(nonce),
+			clientID: keepass.clientID
 		};
 
 		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, (response) => {
@@ -254,7 +256,6 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 					keepass.setcurrentKeePassXCVersion(parsed.version);
 
 					if (keepass.verifyResponse(parsed, response.nonce)) {
-						const rIv = response.nonce;
 						if (parsed.entries) {
 							passwords = parsed.entries;
 							keepass.updateLastUsed(keepass.databaseHash);
@@ -275,7 +276,7 @@ keepass.generatePassword = function (callback, tab, forceCallback) {
 		});
 		keepass.nativePort.postMessage(request);
 	}, tab);
-}
+};
 
 keepass.associate = function(callback, tab) {
 	if (keepass.isAssociated()) {
@@ -303,7 +304,8 @@ keepass.associate = function(callback, tab) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce)
+			nonce: keepass.b64e(nonce),
+			clientID: keepass.clientID
 		};
 
 		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, (response) => {
@@ -333,7 +335,7 @@ keepass.associate = function(callback, tab) {
 		});
 		keepass.nativePort.postMessage(request);
 	}, tab);
-}
+};
 
 keepass.testAssociation = function (callback, tab, triggerUnlock) {
 	if (tab && page.tabs[tab.id]) {
@@ -358,7 +360,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 
 		if (!keepass.serverPublicKey) {
 			if (tab && page.tabs[tab.id]) {
-				handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
+				keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
 			}
 			callback(false);
 			return false;
@@ -368,7 +370,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		const nonce = nacl.randomBytes(keepass.keySize);
 		const {dbid, dbkey} = keepass.getCryptoKey();
 
-		if (dbkey === null || dbid === null) {
+		if (dbkey === null || dbid === null) {
 			if (tab && page.tabs[tab.id]) {
 				keepass.handleError(tab, kpErrors.NO_SAVED_DATABASES_FOUND);
 			}
@@ -385,7 +387,8 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce)
+			nonce: keepass.b64e(nonce),
+			clientID: keepass.clientID
 		};
 
 		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, (response) => {
@@ -395,7 +398,6 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 					const message = nacl.util.encodeUTF8(res);
 					const parsed = JSON.parse(message);
 					keepass.setcurrentKeePassXCVersion(parsed.version);
-					const id = parsed.id;
 					keepass.isEncryptionKeyUnrecognized = false;
 
 					if (!keepass.verifyResponse(parsed, response.nonce)) {
@@ -423,7 +425,7 @@ keepass.testAssociation = function (callback, tab, triggerUnlock) {
 		});
 		keepass.nativePort.postMessage(request);
 	}, tab, triggerUnlock);
-}
+};
 
 keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	if (!keepass.isConnected) {
@@ -453,7 +455,8 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 	const request = {
 		action: kpAction,
 		message: encrypted,
-		nonce: keepass.b64e(nonce)
+		nonce: keepass.b64e(nonce),
+		clientID: keepass.clientID
 	};
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, (response) => {
@@ -493,7 +496,7 @@ keepass.getDatabaseHash = function (callback, tab, triggerUnlock) {
 		}	
 	});
 	keepass.nativePort.postMessage(request);
-}
+};
 
 keepass.changePublicKeys = function(tab, callback) {
 	if (!keepass.isConnected) {
@@ -504,14 +507,16 @@ keepass.changePublicKeys = function(tab, callback) {
 	const kpAction = kpActions.CHANGE_PUBLIC_KEYS;
 	const key = keepass.b64e(keepass.keyPair.publicKey);
 	let nonce = nacl.randomBytes(keepass.keySize);
-	nonce = keepass.b64e(nonce)
+	nonce = keepass.b64e(nonce);
+	keepass.clientID = keepass.b64e(nacl.randomBytes(keepass.keySize));
 
 	const message = {
 		action: kpAction,
 		publicKey: key,
 		proxyPort: (page.settings.port ? page.settings.port : 19700),
-		nonce: nonce
-	}
+		nonce: nonce,
+		clientID: keepass.clientID
+	};
 
 	keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, (response) => {
 		keepass.setcurrentKeePassXCVersion(response.version);
@@ -529,12 +534,12 @@ keepass.changePublicKeys = function(tab, callback) {
 		callback(true);
 	});
 	keepass.nativePort.postMessage(message);
-}
+};
 
 keepass.generateNewKeyPair = function() {
 	keepass.keyPair = nacl.box.keyPair();
 	//console.log(keepass.b64e(keepass.keyPair.publicKey) + ' ' + keepass.b64e(keepass.keyPair.secretKey));
-}
+};
 
 keepass.isConfigured = function(callback) {
 	if (typeof(keepass.databaseHash) === 'undefined') {
@@ -545,11 +550,11 @@ keepass.isConfigured = function(callback) {
 	else {
 		callback(keepass.databaseHash in keepass.keyRing);
 	}
-}
+};
 
 keepass.isAssociated = function() {
 	return (keepass.associated.value && keepass.associated.hash && keepass.associated.hash === keepass.databaseHash);
-}
+};
 
 keepass.convertKeyToKeyRing = function() {
 	if (keepass.keyId in localStorage && keepass.keyBody in localStorage && !('keyRing' in localStorage)) {
@@ -567,7 +572,7 @@ keepass.convertKeyToKeyRing = function() {
 		delete localStorage[keepass.keyId];
 		delete localStorage[keepass.keyBody];
 	}
-}
+};
 
 keepass.saveKey = function(hash, id, key) {
 	if (!(hash in keepass.keyRing)) {
@@ -577,7 +582,7 @@ keepass.saveKey = function(hash, id, key) {
 			hash: hash,
 			created: new Date(),
 			lastUsed: new Date()
-		}
+		};
 	}
 	else {
 		keepass.keyRing[hash].id = id;
@@ -585,19 +590,19 @@ keepass.saveKey = function(hash, id, key) {
 		keepass.keyRing[hash].hash = hash;
 	}
 	localStorage.keyRing = JSON.stringify(keepass.keyRing);
-}
+};
 
 keepass.updateLastUsed = function(hash) {
 	if ((hash in keepass.keyRing)) {
 		keepass.keyRing[hash].lastUsed = new Date();
 		localStorage.keyRing = JSON.stringify(keepass.keyRing);
 	}
-}
+};
 
 keepass.deleteKey = function(hash) {
 	delete keepass.keyRing[hash];
 	localStorage.keyRing = JSON.stringify(keepass.keyRing);
-}
+};
 
 keepass.setcurrentKeePassXCVersion = function(version) {
 	if (version) {
@@ -606,7 +611,7 @@ keepass.setcurrentKeePassXCVersion = function(version) {
 			versionParsed: Number(version.replace(/\./g, ''))
 		};
 	}
-}
+};
 
 keepass.keePassXCUpdateAvailable = function() {
 	if (page.settings.checkUpdateKeePassXC && page.settings.checkUpdateKeePassXC > 0) {
@@ -618,7 +623,7 @@ keepass.keePassXCUpdateAvailable = function() {
 	}
 
 	return (keepass.currentKeePassXC.versionParsed > 0 && keepass.currentKeePassXC.versionParsed < keepass.latestKeePassXC.versionParsed);
-}
+};
 
 keepass.checkForNewKeePassXCVersion = function() {
 	let xhr = new XMLHttpRequest();
@@ -641,7 +646,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 
 	xhr.onerror = function(e) {
 		console.log('checkForNewKeePassXCVersion error:' + e);
-	}
+	};
 
 	try {
 		xhr.open('GET', keepass.latestVersionUrl, true);
@@ -651,17 +656,17 @@ keepass.checkForNewKeePassXCVersion = function() {
 		console.log(ex);
 	}
 	keepass.latestKeePassXC.lastChecked = new Date();
-}
+};
 
 keepass.connectToNative = function() {
 	if (!keepass.isConnected) {
 		keepass.nativeConnect();
 	}
-}
+};
 
 keepass.onNativeMessage = function (response) {
 	//console.log('Received message: ' + JSON.stringify(response));
-}
+};
 
 function onDisconnected() {
 	keepass.nativePort = null;
@@ -674,12 +679,12 @@ function onDisconnected() {
 }
 
 keepass.nativeConnect = function() {
-	console.log('Connecting to native messaging host ' + keepass.nativeHostName)
+	console.log('Connecting to native messaging host ' + keepass.nativeHostName);
 	keepass.nativePort = browser.runtime.connectNative(keepass.nativeHostName);
 	keepass.nativePort.onMessage.addListener(keepass.onNativeMessage);
 	keepass.nativePort.onDisconnect.addListener(onDisconnected);
 	keepass.isConnected = true;
-}
+};
 
 keepass.verifyKeyResponse = function(response, key, nonce) {
 	if (!response.success || !response.publicKey) {
@@ -699,8 +704,7 @@ keepass.verifyKeyResponse = function(response, key, nonce) {
 	}
 
 	return reply;
-
-}
+};
 
 keepass.verifyResponse = function(response, nonce, id) {
 	keepass.associated.value = response.success;
@@ -723,8 +727,7 @@ keepass.verifyResponse = function(response, nonce, id) {
 	keepass.associated.hash = (keepass.associated.value) ? keepass.databaseHash : null;
 
 	return keepass.isAssociated();
-
-}
+};
 
 keepass.handleError = function(tab, errorCode, errorMessage = '') {
 	if (errorMessage.length === 0) {
@@ -734,15 +737,15 @@ keepass.handleError = function(tab, errorCode, errorMessage = '') {
 	if (tab && page.tabs[tab.id]) {
 		page.tabs[tab.id].errorMessage = errorMessage;
 	}
-}
+};
 
 keepass.b64e = function(d) {
 	return nacl.util.encodeBase64(d);
-}
+};
 
 keepass.b64d = function(d) {
 	return nacl.util.decodeBase64(d);
-}
+};
 
 keepass.getCryptoKey = function() {
 	let dbkey = null;
@@ -758,11 +761,11 @@ keepass.getCryptoKey = function() {
 	}
 
 	return {dbid, dbkey};
-}
+};
 
 keepass.setCryptoKey = function(id, key) {
 	keepass.saveKey(keepass.databaseHash, id, key);
-}
+};
 
 keepass.encrypt = function(input, nonce) {
 	const messageData = nacl.util.decodeUTF8(JSON.stringify(input));
@@ -774,11 +777,11 @@ keepass.encrypt = function(input, nonce) {
 		}
 	}
 	return '';
-}
+};
 
 keepass.decrypt = function(input, nonce, toStr) {
 	const m = keepass.b64d(input);
 	const n = keepass.b64d(nonce);
 	const res = nacl.box.open(m, n, keepass.serverPublicKey, keepass.keyPair.secretKey);
 	return res;
-}
+};

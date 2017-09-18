@@ -27,7 +27,7 @@ browserAction.show = function(callback, tab) {
 			popup: 'popups/' + data.popup
 		});
 	}
-}
+};
 
 browserAction.update = function(interval) {
 	if (!page.tabs[page.currentTabId] || page.tabs[page.currentTabId].stack.length === 0) {
@@ -79,14 +79,14 @@ browserAction.update = function(interval) {
 			path: '/icons/19x19/' + browserAction.generateIconName(null, data.intervalIcon.icons[data.intervalIcon.index])
 		});
 	}
-}
+};
 
 browserAction.showDefault = function(callback, tab) {
 	let stackData = {
 		level: 1,
 		iconType: 'normal',
 		popup: 'popup.html'
-	}
+	};
 	keepass.isConfigured((response) => {
 		if (!response || keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable || page.tabs[tab.id].errorMessage) {
 			stackData.iconType = 'cross';
@@ -100,7 +100,7 @@ browserAction.showDefault = function(callback, tab) {
 		browserAction.stackUnshift(stackData, tab.id);
 		browserAction.show(null, tab);
 	});
-}
+};
 
 browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visibleForMilliSeconds, visibleForPageUpdates, redirectOffset,  dontShow) {
 	const id = tab.id || page.currentTabId;
@@ -112,7 +112,7 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
 	let stackData = {
 		level: level,
 		icon: icon
-	}
+	};
 
 	if (popup) {
 		stackData.popup = popup;
@@ -140,8 +140,7 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
 	if (!dontShow) {
 		browserAction.show(null, {'id': id});
 	}
-}
-
+};
 
 browserAction.removeLevelFromStack = function(callback, tab, level, type, dontShow) {
 	if (!page.tabs[tab.id]) {
@@ -172,7 +171,7 @@ browserAction.removeLevelFromStack = function(callback, tab, level, type, dontSh
 	if (!dontShow) {
 		browserAction.show(callback, tab);
 	}
-}
+};
 
 browserAction.stackPop = function(tabId) {
 	const id = tabId || page.currentTabId;
@@ -242,7 +241,7 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
 		},
 		icon: 'icon_remember_red_background_19x19.png',
 		popup: 'popup_remember.html'
-	}
+	};
 
 	browserAction.stackPush(stackData, id);
 
@@ -255,7 +254,7 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
 	};
 
 	browserAction.show(null, {'id': id});
-}
+};
 
 function getValueOrDefault(settings, key, defaultVal, min) {
 	try {
@@ -280,4 +279,4 @@ browserAction.generateIconName = function(iconType, icon) {
 	name += '_19x19.png';
 
 	return name;
-}
+};

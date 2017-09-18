@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "keepassxc-browser",
-	"version": "0.2.9",
+	"version": "0.3.0",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -24,6 +24,7 @@
 	},
 	"background": {
 		"scripts": [
+			"browser-polyfill.min.js",
 			"global.js",
 			"background/nacl.min.js",
 			"background/nacl-util.min.js",
@@ -38,10 +39,10 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"http://*/*",
-				"https://*/*"
+				"<all_urls>"
 			],
 			"js": [ 
+				"browser-polyfill.min.js",
 				"global.js",
 				"jquery-3.2.1.min.js",
 				"jquery-ui.min.js",
@@ -75,9 +76,11 @@
 		"icons/key.png"
 	],
 	"permissions": [
+		"activeTab",
 		"contextMenus",
 		"clipboardWrite",
 		"nativeMessaging",
+		"storage",
 		"tabs",
 		"webRequest",
 		"webRequestBlocking",

@@ -53,7 +53,7 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		else if (req.action === 'redetect_fields') {
 			browser.runtime.sendMessage({
 				action: 'get_settings',
-			}, (response) => {
+			}).then((response) => {
 				cip.settings = response.data;
 				cip.initCredentialFields(true);
 			});
@@ -94,17 +94,17 @@ cipAutocomplete.init = function(field) {
 		.click(cipAutocomplete.onClick)
 		.blur(cipAutocomplete.onBlur)
 		.focus(cipAutocomplete.onFocus);
-}
+};
 
 cipAutocomplete.onClick = function() {
 	jQuery(this).autocomplete('search', jQuery(this).val());
-}
+};
 
 cipAutocomplete.onOpen = function(event, ui) {
 	// NOT BEAUTIFUL!
 	// modifies ALL ui-autocomplete menus of class .cip-ui-menu
 	jQuery('ul.ui-autocomplete.ui-menu').css('z-index', 2147483636);
-}
+};
 
 cipAutocomplete.onSource = function (request, callback) {
 	const matches = jQuery.map(cipAutocomplete.elements, (tag) => {
@@ -113,7 +113,7 @@ cipAutocomplete.onSource = function (request, callback) {
 		}
 	});
 	callback(matches);
-}
+};
 
 cipAutocomplete.onSelect = function (e, ui) {
 	e.preventDefault();
@@ -123,7 +123,7 @@ cipAutocomplete.onSelect = function (e, ui) {
 	combination.loginId = ui.item.loginId;
 	cip.fillInCredentials(combination, true, false);
 	jQuery(this).data('fetched', true);
-}
+};
 
 cipAutocomplete.onBlur = function() {
 	if (jQuery(this).data('fetched') === true) {
@@ -136,7 +136,7 @@ cipAutocomplete.onBlur = function() {
 			cip.fillInCredentials(fields, true, true);
 		}
 	}
-}
+};
 
 cipAutocomplete.onFocus = function() {
 	cip.u = jQuery(this);
@@ -144,7 +144,7 @@ cipAutocomplete.onFocus = function() {
 	if (jQuery(this).val() === '') {
 		jQuery(this).autocomplete('search', '');
 	}
-}
+};
 
 
 
@@ -162,7 +162,7 @@ cipPassword.init = function() {
 	window.setInterval(function() {
 		cipPassword.checkObservedElements();
 	}, 400);
-}
+};
 
 cipPassword.initField = function(field, inputs, pos) {
 	if (!field || field.length !== 1) {
@@ -190,7 +190,7 @@ cipPassword.initField = function(field, inputs, pos) {
 	}
 
 	field.data('cip-genpw-next-field-exists', $found);
-}
+};
 
 cipPassword.createDialog = function() {
 	if ('passwordCreateDialog' in _called) {
@@ -254,7 +254,7 @@ cipPassword.createDialog = function() {
 					e.preventDefault();
 					browser.runtime.sendMessage({
 						action: 'generate_password'
-					}, cipPassword.callbackGeneratedPassword);
+					}).then(cipPassword.callbackGeneratedPassword);
 				}
 			},
 			'Copy':
@@ -276,7 +276,7 @@ cipPassword.createDialog = function() {
 					const fieldId = jQuery('#cip-genpw-dialog:first').data('cip-genpw-field-id');
 					const field = jQuery('input[data-cip-id=\''+fieldId+'\']:first');
 					if (field.length === 1) {
-						const $password = jQuery('input#cip-genpw-textfield-password:first').val();
+						let $password = jQuery('input#cip-genpw-textfield-password:first').val();
 
 						if (field.attr('maxlength')) {
 							if ($password.length > field.attr('maxlength')) {
@@ -313,7 +313,7 @@ cipPassword.createDialog = function() {
 			}
 		}
 	});
-}
+};
 
 cipPassword.createIcon = function(field) {
 	const $className = (isFirefox ? 'key-moz' : 'key');
@@ -359,12 +359,12 @@ cipPassword.createIcon = function(field) {
 
 	cipPassword.observedIcons.push($icon);
 	jQuery('body').append($icon);
-}
+};
 
 cipPassword.setIconPosition = function($icon, $field) {
 	$icon.css('top', $field.offset().top + $icon.data('offset') + 1)
-		.css('left', $field.offset().left + $field.outerWidth() - $icon.data('size') - $icon.data('offset'))
-}
+		.css('left', $field.offset().left + $field.outerWidth() - $icon.data('size') - $icon.data('offset'));
+};
 
 cipPassword.copyPasswordToClipboard = function(e) {
 	if (e) {
@@ -372,7 +372,7 @@ cipPassword.copyPasswordToClipboard = function(e) {
 	}
 
 	const input = jQuery("input#cip-genpw-textfield-password");
-	input.select()
+	input.select();
 	try {
 		const success = document.execCommand('copy');
 		if (success) {
@@ -384,13 +384,13 @@ cipPassword.copyPasswordToClipboard = function(e) {
 	catch (err) {
 		console.log('Could not copy password to clipboard: ' + err);
 	}
-}
+};
 
 cipPassword.callbackPasswordCopied = function(bool) {
 	if (bool) {
 		jQuery('#cip-genpw-btn-clipboard').addClass('btn-success');
 	}
-}
+};
 
 cipPassword.callbackGeneratedPassword = function(entries) {
 	if (entries && entries.length >= 1) {
@@ -414,13 +414,13 @@ cipPassword.callbackGeneratedPassword = function(entries) {
 			jQuery('button#cip-genpw-btn-fillin').hide();
 		}
 	}
-}
+};
 
 cipPassword.onRequestPassword = function() {
 	browser.runtime.sendMessage({
 		action: 'generate_password'
-	}, cipPassword.callbackGeneratedPassword);
-}
+	}).then(cipPassword.callbackGeneratedPassword);
+};
 
 cipPassword.checkObservedElements = function() {
 	if (cipPassword.observingLock) {
@@ -451,7 +451,7 @@ cipPassword.checkObservedElements = function() {
 		}
 	});
 	cipPassword.observingLock = false;
-}
+};
 
 
 
@@ -466,7 +466,7 @@ cipForm.init = function(form, credentialFields) {
 		cipForm.setInputFields(form, credentialFields);
 		form.submit(cipForm.onSubmit);
 	}
-}
+};
 
 cipForm.destroy = function(form, credentialFields) {
     if (form === false && credentialFields) {
@@ -479,12 +479,12 @@ cipForm.destroy = function(form, credentialFields) {
     if (form && jQuery(form).length > 0) {
         jQuery(form).unbind('submit', cipForm.onSubmit);
     }
-}
+};
 
 cipForm.setInputFields = function(form, credentialFields) {
 	form.data('cipUsername', credentialFields.username);
 	form.data('cipPassword', credentialFields.password);
-}
+};
 
 cipForm.onSubmit = function() {
 	const usernameId = jQuery(this).data('cipUsername');
@@ -535,7 +535,7 @@ cipDefine.init = function () {
 	cipDefine.resetSelection();
 	cipDefine.prepareStep1();
 	cipDefine.markAllUsernameFields($chooser);
-}
+};
 
 cipDefine.initDescription = function() {
 	const $description = jQuery('div#b2c-cipDefine-description');
@@ -586,7 +586,6 @@ cipDefine.initDescription = function() {
 				cipDefine.selection.username = cipFields.prepareId(cipDefine.selection.username);
 			}
 
-			const passwordId = jQuery('div#b2c-cipDefine-fields').data('password');
 			if (cipDefine.selection.password) {
 				cipDefine.selection.password = cipFields.prepareId(cipDefine.selection.password);
 			}
@@ -645,7 +644,7 @@ cipDefine.initDescription = function() {
 	}
 
 	jQuery('div#b2c-cipDefine-description').draggable();
-}
+};
 
 cipDefine.resetSelection = function() {
 	cipDefine.selection = {
@@ -653,7 +652,7 @@ cipDefine.resetSelection = function() {
 		password: null,
 		fields: {}
 	};
-}
+};
 
 cipDefine.isFieldSelected = function($cipId) {
 	return (
@@ -661,7 +660,7 @@ cipDefine.isFieldSelected = function($cipId) {
 		$cipId === cipDefine.selection.password ||
 		$cipId in cipDefine.selection.fields
 	);
-}
+};
 
 cipDefine.markAllUsernameFields = function($chooser) {
 	cipDefine.eventFieldClick = function(e) {
@@ -671,7 +670,7 @@ cipDefine.markAllUsernameFields = function($chooser) {
 		cipDefine.markAllPasswordFields(jQuery('#b2c-cipDefine-fields'));
 	};
 	cipDefine.markFields($chooser, cipFields.inputQueryPattern);
-}
+};
 
 cipDefine.markAllPasswordFields = function($chooser) {
 	cipDefine.eventFieldClick = function(e) {
@@ -681,7 +680,7 @@ cipDefine.markAllPasswordFields = function($chooser) {
 		cipDefine.markAllStringFields(jQuery('#b2c-cipDefine-fields'));
 	};
 	cipDefine.markFields($chooser, 'input[type=\'password\']');
-}
+};
 
 cipDefine.markAllStringFields = function($chooser) {
 	cipDefine.eventFieldClick = function(e) {
@@ -691,7 +690,7 @@ cipDefine.markAllStringFields = function($chooser) {
 		jQuery('button#b2c-btn-confirm:first').addClass('b2c-btn-primary').attr('disabled', false);
 	};
 	cipDefine.markFields($chooser, cipFields.inputQueryPattern + ', select');
-}
+};
 
 cipDefine.markFields = function ($chooser, $pattern) {
 	//var $found = false;
@@ -721,7 +720,7 @@ cipDefine.markFields = function ($chooser, $pattern) {
 		jQuery('button#b2c-btn-skip').click();
 	}
 	*/
-}
+};
 
 cipDefine.prepareStep1 = function() {
 	jQuery('div#b2c-help').text('').css('margin-bottom', 0);
@@ -732,7 +731,7 @@ cipDefine.prepareStep1 = function() {
 	jQuery('button#b2c-btn-skip:first').data('step', '1').show();
 	jQuery('button#b2c-btn-confirm:first').hide();
 	jQuery('button#b2c-btn-again:first').hide();
-}
+};
 
 cipDefine.prepareStep2 = function() {
 	jQuery('div#b2c-help').text('').css('margin-bottom', 0);
@@ -740,7 +739,7 @@ cipDefine.prepareStep2 = function() {
 	jQuery('div:first', jQuery('div#b2c-cipDefine-description')).text('2. Now choose a password field');
 	jQuery('button#b2c-btn-skip:first').data('step', '2');
 	jQuery('button#b2c-btn-again:first').show();
-}
+};
 
 cipDefine.prepareStep3 = function() {
 	/* skip step if no entry was found
@@ -760,11 +759,11 @@ cipDefine.prepareStep3 = function() {
 	jQuery('button#b2c-btn-confirm:first').show();
 	jQuery('button#b2c-btn-skip:first').data('step', '3').hide();
 	jQuery('div:first', jQuery('div#b2c-cipDefine-description')).text('3. Confirm selection');
-}
+};
 
 
 
-var cipFields = {}
+var cipFields = {};
 
 cipFields.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input:not([type])';
 // unique number as new IDs for input fields
@@ -789,11 +788,11 @@ cipFields.setUniqueId = function(field) {
 		cipFields.uniqueNumber += 1;
 		field.attr('data-cip-id', 'jQuery'+String(cipFields.uniqueNumber));
 	}
-}
+};
 
 cipFields.prepareId = function(id) {
-	return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return '\\'+m });
-}
+	return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return '\\'+m; });
+};
 
 cipFields.getAllFields = function() {
 	let fields = [];
@@ -807,7 +806,18 @@ cipFields.getAllFields = function() {
 	});
 
 	return fields;
-}
+};
+
+cipFields.getHiddenFieldCount = function() {
+	let count = 0;
+	jQuery(cipFields.inputQueryPattern).each(function() {
+		if (jQuery(this).is(':hidden')) {
+			count++;
+		}
+	});
+
+	return count;
+};
 
 cipFields.prepareVisibleFieldsWithID = function($pattern) {
 	jQuery($pattern).each(function() {
@@ -815,7 +825,7 @@ cipFields.prepareVisibleFieldsWithID = function($pattern) {
 			cipFields.setUniqueId(jQuery(this));
 		}
 	});
-}
+};
 
 cipFields.getAllCombinations = function(inputs) {
 	let fields = [];
@@ -843,7 +853,7 @@ cipFields.getAllCombinations = function(inputs) {
 	}
 
 	return fields;
-}
+};
 
 cipFields.getCombination = function(givenType, fieldId) {
 	if (cipFields.combinations.length === 0) {
@@ -908,7 +918,7 @@ cipFields.getCombination = function(givenType, fieldId) {
         combination.isNew = true;
     }
 	return combination;
-}
+};
 
 /**
 * return the username field or null if it not exists
@@ -969,7 +979,7 @@ cipFields.getUsernameField = function(passwordId, checkDisabled) {
 
 	cipFields.setUniqueId(usernameField);
 	return usernameField;
-}
+};
 
 /**
 * return the password field or null if it not exists
@@ -1026,7 +1036,7 @@ cipFields.getPasswordField = function(usernameId, checkDisabled) {
 	cipFields.setUniqueId(passwordField);
 
 	return passwordField;
-}
+};
 
 cipFields.prepareCombinations = function(combinations) {
 	for (const c of combinations) {
@@ -1049,7 +1059,7 @@ cipFields.prepareCombinations = function(combinations) {
 			}
 		}
 	}
-}
+};
 
 cipFields.useDefinedCredentialFields = function() {
 	if (cip.settings['defined-credential-fields'] && cip.settings['defined-credential-fields'][document.location.origin]) {
@@ -1077,37 +1087,47 @@ cipFields.useDefinedCredentialFields = function() {
 	}
 
 	return false;
-}
+};
 
 
 
 var cip = {};
-
-// settings of keepassxc-browser
 cip.settings = {};
-// username field which will be set on focus
 cip.u = null;
-// password field which will be set on focus
 cip.p = null;
-// document.location
 cip.url = null;
-// request-url of the form in which the field is located
 cip.submitUrl = null;
-// received credentials from KeePassXC
 cip.credentials = [];
 
 jQuery(function() {
 	cip.init();
+	cip.detectNewActiveFields();
 });
 
 cip.init = function() {
 	browser.runtime.sendMessage({
 		action: 'get_settings',
-	}, (response) => {
+	}).then((response) => {
 		cip.settings = response.data;
 		cip.initCredentialFields();
 	});
-}
+};
+
+cip.detectNewActiveFields = function() {
+	const hiddenFields = cipFields.getHiddenFieldCount();
+
+	// If hidden fields aren't detected, setInterval is being looped in each frame of the page
+	//if (hiddenFields > 0) {
+		const divDetect = setInterval(function() {
+			const fields = cipFields.getAllFields();
+			console.log(fields.length);
+			if (fields.length > 1) {
+				cip.initCredentialFields(true);
+				clearInterval(divDetect);
+			}
+		}, 1000);
+	//}
+};
 
 cip.initCredentialFields = function(forceCall) {
 	if (_called.initCredentialFields && !forceCall) {
@@ -1115,33 +1135,35 @@ cip.initCredentialFields = function(forceCall) {
 	}
 	_called.initCredentialFields = true;
 
-	const inputs = cipFields.getAllFields();
-	cipFields.prepareVisibleFieldsWithID('select');
-	cip.initPasswordGenerator(inputs);
+	browser.runtime.sendMessage({ 'action': 'page_clear_logins' }).then(() => {
+		const inputs = cipFields.getAllFields();
+		cipFields.prepareVisibleFieldsWithID('select');
+		cip.initPasswordGenerator(inputs);
 
-	if (!cipFields.useDefinedCredentialFields()) {
-		// get all combinations of username + password fields
-		cipFields.combinations = cipFields.getAllCombinations(inputs);
-	}
-	cipFields.prepareCombinations(cipFields.combinations);
+		if (!cipFields.useDefinedCredentialFields()) {
+			// get all combinations of username + password fields
+			cipFields.combinations = cipFields.getAllCombinations(inputs);
+		}
+		cipFields.prepareCombinations(cipFields.combinations);
 
-	if (cipFields.combinations.length === 0) {
-		browser.runtime.sendMessage({
-			action: 'show_default_browseraction'
-		});
-		return;
-	}
+		if (cipFields.combinations.length === 0) {
+			browser.runtime.sendMessage({
+				action: 'show_default_browseraction'
+			});
+			return;
+		}
 
-	cip.url = document.location.origin;
-	cip.submitUrl = cip.getFormActionUrl(cipFields.combinations[0]);
+		cip.url = document.location.origin;
+		cip.submitUrl = cip.getFormActionUrl(cipFields.combinations[0]);
 
-	if (cip.settings.autoRetrieveCredentials) {
-    	browser.runtime.sendMessage({
-    		action: 'retrieve_credentials',
-    		args: [ cip.url, cip.submitUrl ]
-		}, cip.retrieveCredentialsCallback);
-	}
-} // end function init
+		if (cip.settings.autoRetrieveCredentials) {
+	    	browser.runtime.sendMessage({
+	    		action: 'retrieve_credentials',
+	    		args: [ cip.url, cip.submitUrl ]
+			}).then(cip.retrieveCredentialsCallback);
+		}
+	});
+};
 
 cip.initPasswordGenerator = function(inputs) {
 	if (cip.settings.usePasswordGenerator) {
@@ -1153,16 +1175,16 @@ cip.initPasswordGenerator = function(inputs) {
 			}
 		}
 	}
-}
+};
 
 cip.receiveCredentialsIfNecessary = function () {
 	if (cip.credentials.length === 0) {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl ]
-		}, cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback);
 	}
-}
+};
 
 cip.retrieveCredentialsCallback = function (credentials, dontAutoFillIn) {
 	if (cipFields.combinations.length > 0) {
@@ -1174,7 +1196,7 @@ cip.retrieveCredentialsCallback = function (credentials, dontAutoFillIn) {
 		cip.credentials = credentials;
 		cip.prepareFieldsForCredentials(!Boolean(dontAutoFillIn));
 	}
-}
+};
 
 cip.prepareFieldsForCredentials = function(autoFillInForSingle) {
 	// only one login for this site
@@ -1211,7 +1233,7 @@ cip.prepareFieldsForCredentials = function(autoFillInForSingle) {
 	else if (cip.credentials.length > 1 || (cip.credentials.length > 0 && (!cip.settings.autoFillSingleEntry || !autoFillInForSingle))) {
 		cip.preparePageForMultipleCredentials(cip.credentials);
 	}
-}
+};
 
 cip.preparePageForMultipleCredentials = function(credentials) {
 	// add usernames + descriptions to autocomplete-list and popup-list
@@ -1243,7 +1265,7 @@ cip.preparePageForMultipleCredentials = function(credentials) {
 			}
 		}
 	}
-}
+};
 
 cip.getFormActionUrl = function(combination) {
 	const field = _f(combination.password) || _f(combination.username);
@@ -1264,7 +1286,7 @@ cip.getFormActionUrl = function(combination) {
 	}
 
 	return action;
-}
+};
 
 cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
 	const action = cip.getFormActionUrl(combination);
@@ -1301,12 +1323,12 @@ cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl, false, true ]
-		}, (credentials) => {
+		}).then((credentials) => {
 			cip.retrieveCredentialsCallback(credentials, true);
 			cip.fillIn(combination, onlyPassword, suppressWarnings);
 		});
 	}
-}
+};
 
 cip.fillInFromActiveElement = function(suppressWarnings) {
 	const el = document.activeElement;
@@ -1329,7 +1351,7 @@ cip.fillInFromActiveElement = function(suppressWarnings) {
 	delete combination.loginId;
 
 	cip.fillInCredentials(combination, false, suppressWarnings);
-}
+};
 
 cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 	const el = document.activeElement;
@@ -1362,7 +1384,7 @@ cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 	delete combination.loginId;
 
 	cip.fillInCredentials(combination, true, suppressWarnings);
-}
+};
 
 cip.setValue = function(field, value) {
 	if (field.is('select')) {
@@ -1378,7 +1400,7 @@ cip.setValue = function(field, value) {
 		cip.setValueWithChange(field, value);
 		field.trigger('input');
 	}
-}
+};
 
 cip.fillInStringFields = function(fields, StringFields, filledInFields) {
 	let $filledIn = false;
@@ -1397,7 +1419,7 @@ cip.fillInStringFields = function(fields, StringFields, filledInFields) {
 	}
 
 	return $filledIn;
-}
+};
 
 cip.setValueWithChange = function(field, value) {
 
@@ -1414,7 +1436,7 @@ cip.setValueWithChange = function(field, value) {
 	field.val(value);
 	field[0].dispatchEvent(new Event('input', {'bubbles': true}));
 	field[0].dispatchEvent(new Event('change', {'bubbles': true}));
-}
+};
 
 cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 	// no credentials available
@@ -1565,7 +1587,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			}
 		}
 	}
-}
+};
 
 cip.contextMenuRememberCredentials = function() {
 	const el = document.activeElement;
@@ -1680,7 +1702,7 @@ cipEvents.clearCredentials = function() {
 			}
 		}
 	}
-}
+};
 
 cipEvents.triggerActivatedTab = function() {
 	// doesn't run a second time because of _called.initCredentialFields set to true
@@ -1692,6 +1714,6 @@ cipEvents.triggerActivatedTab = function() {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl ]
-		}, cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback);
 	}
-}
+};

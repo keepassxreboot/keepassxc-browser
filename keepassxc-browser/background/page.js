@@ -6,7 +6,7 @@ const defaultSettings = {
 	autoFillSingleEntry: false,
 	autoRetrieveCredentials: true,
 	proxyPort: '19700'
-}
+};
 
 var page = {};
 page.tabs = {};
@@ -39,26 +39,35 @@ page.initSettings = function() {
 		page.settings.port = defaultSettings.proxyPort;
 	}
 	localStorage.settings = JSON.stringify(page.settings);
-}
+};
 
 page.initOpenedTabs = function() {
-	browser.tabs.query({}, (tabs) => {
+	browser.tabs.query({}).then((tabs) => {
 		for (const i of tabs) {
 			page.createTabEntry(i.id);
 		}
+
+		// set initial tab-ID
+		browser.tabs.query({ "active": true, "currentWindow": true }).then((tabs) => {
+			if (tabs.length === 0) {
+				return; // For example: only the background devtools or a popup are opened
+			}
+			page.currentTabId = tabs[0].id;
+			browserAction.show(null, tabs[0]);
+		});
 	});
-}
+};
 
 page.isValidProtocol = function(url) {
 	let protocol = url.substring(0, url.indexOf(':'));
 	protocol = protocol.toLowerCase();
 	return !(url.indexOf('.') === -1 || (protocol !== 'http' && protocol !== 'https' && protocol !== 'ftp' && protocol !== 'sftp'));
-}
+};
 
 page.switchTab = function(callback, tab) {
 	browserAction.showDefault(null, tab);
-	browser.tabs.sendMessage(tab.id, {action: 'activated_tab'});
-}
+	browser.tabs.sendMessage(tab.id, {action: 'activated_tab'}).catch((e) => {console.log(e);});
+};
 
 page.clearCredentials = function(tabId, complete) {
 	if (!page.tabs[tabId]) {
@@ -69,22 +78,25 @@ page.clearCredentials = function(tabId, complete) {
 	delete page.tabs[tabId].credentials;
 
     if (complete) {
-        page.tabs[tabId].loginList = [];
+        page.clearLogins(tabId);
 
         browser.tabs.sendMessage(tabId, {
             action: 'clear_credentials'
-        });
+        }).catch((e) => {console.log(e);});
     }
-}
+};
+
+page.clearLogins = function(tabId) {
+	page.tabs[tabId].loginList = [];
+};
 
 page.createTabEntry = function(tabId) {
-	//console.log('page.createTabEntry('+tabId+')');
 	page.tabs[tabId] = {
 		'stack': [],
 		'errorMessage': null,
 		'loginList': {}
 	};
-}
+};
 
 page.removePageInformationFromNotExistingTabs = function() {
 	let rand = Math.floor(Math.random()*1001);
@@ -117,12 +129,9 @@ page.debugConsole = function() {
 
 page.sprintf = function(input, args) {
 	return input.replace(/{(\d+)}/g, (match, number) => {
-      return typeof args[number] !== 'undefined'
-        ? (typeof args[number] === 'object' ? JSON.stringify(args[number]) : args[number])
-        : match
-      ;
+      return typeof args[number] !== 'undefined' ? (typeof args[number] === 'object' ? JSON.stringify(args[number]) : args[number]) : match;
     });
-}
+};
 
 page.debugDummy = function() {};
 

@@ -7,12 +7,6 @@ keepass.changePublicKeys(null, (pkRes) => {
 	keepass.getDatabaseHash((gdRes) => {}, null);
 });
 
-// Set initial tab-ID
-browser.tabs.query({"active": true, "currentWindow": true}, (tabs) => {
-	if (tabs.length === 0)
-		return; // For example: only the background devtools or a popup are opened
-	page.currentTabId = tabs[0].id;
-});
 
 // Milliseconds for intervall (e.g. to update browserAction)
 let _interval = 250;
@@ -55,8 +49,7 @@ browser.tabs.onActivated.addListener((activeInfo) => {
     page.clearCredentials(page.currentTabId, true);
 	browserAction.removeRememberPopup(null, {'id': page.currentTabId}, true);
 
-	browser.tabs.get(activeInfo.tabId, (info) => {
-		//console.log(info.id + ': ' + info.url);
+	browser.tabs.get(activeInfo.tabId).then((info) => {
 		if (info && info.id) {
 			page.currentTabId = info.id;
 			if (info.status === 'complete') {
@@ -79,9 +72,20 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 // Retrieve Credentials and try auto-login for HTTPAuth requests
-browser.webRequest.onAuthRequired.addListener(httpAuth.handleRequest,
-	{ urls: ['<all_urls>'] }, ['asyncBlocking']
-);
+if (browser.webRequest.onAuthRequired) {
+	let handleReq = httpAuth.handleRequestPromise;
+	let reqType = 'blocking';
+	let opts = { urls: ['<all_urls>'] };
+
+	if (!isFirefox) {
+		handleReq = httpAuth.handleRequestCallback;
+		reqType = 'asyncBlocking';
+	}
+
+	browser.webRequest.onAuthRequired.addListener(handleReq, opts, [reqType]);
+	browser.webRequest.onCompleted.addListener(httpAuth.requestCompleted, opts);
+	browser.webRequest.onErrorOccurred.addListener(httpAuth.requestCompleted, opts);
+}
 
 browser.runtime.onMessage.addListener(event.onMessage);
 
@@ -90,7 +94,7 @@ const contextMenuItems = [
 	{title: 'Fill &Pass Only', action: 'fill_pass_only'},
 	{title: 'Show Password &Generator Icons', action: 'activate_password_generator'},
 	{title: '&Save credentials', action: 'remember_credentials'}
-]
+];
 
 // Create context menu items
 for (const item of contextMenuItems) {
@@ -100,7 +104,7 @@ for (const item of contextMenuItems) {
 		onclick: (info, tab) => {
 			browser.tabs.sendMessage(tab.id, {
 				action: item.action
-			});
+			}).catch((e) => {console.log(e);});
 		}
 	});
 }
@@ -108,7 +112,7 @@ for (const item of contextMenuItems) {
 // Listen for keyboard shortcuts specified by user
 browser.commands.onCommand.addListener((command) => {
 	if (command === 'fill-username-password') {
-		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+		browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
 			if (tabs.length) {
 				browser.tabs.sendMessage(tabs[0].id, { action: 'fill_user_pass' });
 			}
@@ -116,7 +120,7 @@ browser.commands.onCommand.addListener((command) => {
 	}
 
 	if (command === 'fill-password') {
-		browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+		browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
 			if (tabs.length) {
 				browser.tabs.sendMessage(tabs[0].id, { action: 'fill_pass_only' });
 			}
