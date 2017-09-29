@@ -253,7 +253,7 @@ options.initSpecifiedCredentialFields = function() {
 
 options.initAbout = function() {
 	$('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
-	if (isFirefox) {
+	if (isFirefox()) {
 		$('#chrome-only').remove();
 	}
 };

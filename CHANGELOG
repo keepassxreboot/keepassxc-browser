@@ -1,3 +1,7 @@
+0.3.1 (2017-09-29)
+=========================
+- Added timeout handling for postMessage(). Allows proxy application to be reloaded.
+
 0.3.0 (2017-09-18)
 =========================
 - Added Mozilla's browser-polyfill for making WebExtension compatibility easier
@@ -117,13 +121,11 @@
 
 0.1.1 (2017-04-28)
 =========================
-
 - This version works with the KeePassXC fork
 - Upgraded JavaScripts to work asynchronously
 
 0.1.0 (2017-04-12)
 =========================
-
 - Replaced crypto libraries with tweetnacl-js
 - New application and popup icons
 - Upgraded bootstrap to version 3.3.7

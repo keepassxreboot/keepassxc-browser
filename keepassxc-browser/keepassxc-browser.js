@@ -316,7 +316,7 @@ cipPassword.createDialog = function() {
 };
 
 cipPassword.createIcon = function(field) {
-	const $className = (isFirefox ? 'key-moz' : 'key');
+	const $className = (isFirefox() ? 'key-moz' : 'key');
 	const $size = (field.outerHeight() > 28) ? 24 : 16;
 	let $offset = Math.floor((field.outerHeight() - $size) / 3);
 	$offset = ($offset < 0) ? 0 : $offset;
