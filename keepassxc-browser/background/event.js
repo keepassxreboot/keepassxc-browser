@@ -128,7 +128,7 @@ event.onGetStatus = function(callback, tab) {
 		keepass.isConfigured((configured) => {
 			event.showStatus(configured, tab, callback);
 		});
-	}, tab);
+	}, tab, true);
 };
 
 event.onReconnect = function(callback, tab) {
