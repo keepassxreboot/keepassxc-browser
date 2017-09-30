@@ -127,7 +127,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 	});
 };
 
-keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallback, triggerUnlock) {
+keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallback) {
 	page.debug('keepass.retrieveCredentials(callback, {1}, {2}, {3}, {4})', tab.id, url, submiturl, forceCallback);
 
 	keepass.testAssociation((response) => {
@@ -204,12 +204,15 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 };
 
 // Redirects the callback to a listener (handleReply())
-keepass.callbackOnId = function(ev, action, tab, callback) {
+keepass.callbackOnId = function(ev, action, tab, callback, enableTimeout = false) {
+	let timeout;
 	let listener = ((port, action) => {
 		let handler = (msg) => {
 			if (msg && msg.action === action) {
 				ev.removeListener(handler);
-				clearTimeout(timeout);
+				if (enableTimeout) {
+					clearTimeout(timeout);	
+				}
 				callback(msg);
 			}
 		};
@@ -218,16 +221,18 @@ keepass.callbackOnId = function(ev, action, tab, callback) {
 	ev.addListener(listener);
 
 	// Handle timeouts
-	let timeout = setTimeout(() => {
-		const errorMessage = {
-			action: action,
-			error: kpErrors.getError(5),
-			errorCode: 5
-		};
-		keepass.isKeePassXCAvailable = false;
-		callback(errorMessage);
-		ev.removeListener(listener.handler);
-	}, keepass.messageTimeout);
+	if (enableTimeout) {
+		timeout = setTimeout(() => {
+			const errorMessage = {
+				action: action,
+				error: kpErrors.getError(5),
+				errorCode: 5
+			};
+			keepass.isKeePassXCAvailable = false;
+			callback(errorMessage);
+			ev.removeListener(listener.handler);
+		}, keepass.messageTimeout);
+	}
 };
 
 keepass.generatePassword = function(callback, tab, forceCallback) {
@@ -351,7 +356,7 @@ keepass.associate = function(callback, tab) {
 	}, tab);
 };
 
-keepass.testAssociation = function(callback, tab, triggerUnlock) {
+keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 	if (tab && page.tabs[tab.id]) {
 		page.tabs[tab.id].errorMessage = null;
 	}
@@ -438,10 +443,10 @@ keepass.testAssociation = function(callback, tab, triggerUnlock) {
 			callback(keepass.isAssociated());
 		});
 		keepass.nativePort.postMessage(request);
-	}, tab, triggerUnlock);
+	}, tab, enableTimeout);
 };
 
-keepass.getDatabaseHash = function(callback, tab, triggerUnlock) {
+keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 	if (!keepass.isConnected) {
 		keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
 		callback([]);
@@ -505,10 +510,16 @@ keepass.getDatabaseHash = function(callback, tab, triggerUnlock) {
 		else {
 			keepass.databaseHash = 'no-hash';
 			keepass.isDatabaseClosed = true;
-			keepass.handleError(tab, response.errorCode, response.error);
+			if (response.message === "") {
+				keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
+			}
+			else {
+				keepass.handleError(tab, response.errorCode, response.error);
+			}
+			//keepass.handleError(tab, response.errorCode, response.error);
 			callback(keepass.databaseHash);
 		}	
-	});
+	}, enableTimeout);
 	keepass.nativePort.postMessage(request);
 };
 

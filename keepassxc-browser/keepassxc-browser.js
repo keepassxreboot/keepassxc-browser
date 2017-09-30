@@ -1120,7 +1120,6 @@ cip.detectNewActiveFields = function() {
 	//if (hiddenFields > 0) {
 		const divDetect = setInterval(function() {
 			const fields = cipFields.getAllFields();
-			console.log(fields.length);
 			if (fields.length > 1) {
 				cip.initCredentialFields(true);
 				clearInterval(divDetect);

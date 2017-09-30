@@ -1,3 +1,7 @@
+0.3.2 (2017-09-30)
+=========================
+- Improved timeout handling
+
 0.3.1 (2017-09-29)
 =========================
 - Added timeout handling for postMessage(). Allows proxy application to be reloaded.
