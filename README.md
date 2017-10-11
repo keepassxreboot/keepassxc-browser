@@ -38,6 +38,7 @@ Encrypted messages are built with these JSON parameters:
 - action - `test-associate`, `associate`, `get-logins`, `get-logins-count`, `set-login`...
 - message - Encrypted message, base64 encoded
 - nonce - 24 bytes long random data, base64 encoded. This must be the same when responding to a request.
+- clientID - 24 bytes long random data, base64 encoded. This is used to identify different browsers if multiple are used with proxy application.
 
 ### change-public-keys
 Request:
@@ -46,7 +47,8 @@ Request:
 	"action": "change-public-keys",
 	"publicKey": "<current public key>",
 	"proxyPort": "<UDP port for proxy applications>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
@@ -61,7 +63,7 @@ Response (success):
 ```
 
 ### get-databasehash
-Request:
+Request (unencrypted):
 ```javascript
 {
 	"action": "get-databasehash"
@@ -91,7 +93,8 @@ Request:
 {
 	"action": "associate",
 	"message": encryptedMessage
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
@@ -112,7 +115,8 @@ Unencrypted message:
 {
 	"action": "test-associate",
 	"id": "<saved database identifier>",
-	"key": "<saved database public key>"
+	"key": "<saved database public key>",
+	"clientID": "<clientID>"
 }
 ```
 
@@ -141,7 +145,8 @@ Request:
 ```javascript
 {
 	"action": "generate-password",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
@@ -175,7 +180,8 @@ Request:
 {
 	"action": "get-logins",
 	"message": encryptedMessage
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
@@ -220,7 +226,8 @@ Request:
 {
 	"action": "set-login",
 	"message": encryptedMessage
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
