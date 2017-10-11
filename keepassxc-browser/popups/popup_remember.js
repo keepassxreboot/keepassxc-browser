@@ -66,7 +66,7 @@ function _initialize(tab) {
 					$a.css('font-weight', 'bold');
 				}
 
-				const $li = $('<li>').append($a);
+				const $li = $('<li class=\"list-group-item\">').append($a);
 				$('ul#list').append($li);
 			}
 

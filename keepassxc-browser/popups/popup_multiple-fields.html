@@ -11,23 +11,25 @@
 		<script type="text/javascript" src="popup_functions.js"></script>
 	</head>
 	<body>
-		<div id="settings" class="settings">
-			<button id="btn-options" class="btn btn-sm btn-warning">Settings</button>
-			<button id="btn-choose-credential-fields" class="btn btn-sm">Choose own credential fields for this page</button>
+		<div class="container">
+			<div id="settings" class="settings">
+				<button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span> Settings</button>
+				<button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> Choose own credential fields for this page</button>
 
-			<div id="update-available">
-				You use an old version of KeePassXC.
-				<br />
-				<a target="_blank" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+				<div id="update-available" class="alert alert-danger">
+					You use an old version of KeePassXC.
+					<br />
+					<a target="_blank" class="alert-link" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+				</div>
 			</div>
-		</div>
 
-		<div>
-			<p>
-				keepassxc-browser found more than one password field on this page. To enter your
-				logins, right-click on one of the password fields, and choose either the
-				"<code>Fill User + Pass</code>" or "<code>Fill Pass Only</code>" command.
-			</p>
+			<div>
+				<p>
+					keepassxc-browser found more than one password field on this page. To enter your
+					logins, right-click on one of the password fields, and choose either the
+					"<code>Fill User + Pass</code>" or "<code>Fill Pass Only</code>" command.
+				</p>
+			</div>
 		</div>
 	</body>
 </html>
