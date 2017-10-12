@@ -12,6 +12,7 @@ $(function() {
 				const li = document.createElement('li');
 				const a = document.createElement('a');
 				a.textContent = logins[i];
+				li.setAttribute('class', 'list-group-item');
 				li.appendChild(a);
 				a.setAttribute('id', '' + i);
 				a.addEventListener('click', (e) => {
@@ -25,5 +26,5 @@ $(function() {
 				ul.appendChild(li);
 			}
 		});
-	});	
+	});
 });

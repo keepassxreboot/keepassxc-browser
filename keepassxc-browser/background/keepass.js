@@ -211,7 +211,7 @@ keepass.callbackOnId = function(ev, action, tab, callback, enableTimeout = false
 			if (msg && msg.action === action) {
 				ev.removeListener(handler);
 				if (enableTimeout) {
-					clearTimeout(timeout);	
+					clearTimeout(timeout);
 				}
 				callback(msg);
 			}
@@ -402,7 +402,7 @@ keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 			id: dbid,
 			key: dbkey
 		};
-		
+
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
@@ -504,21 +504,21 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 					keepass.isDatabaseClosed = true;
 					keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
 					callback(keepass.databaseHash);
-				}	
+				}
 			}
 		}
 		else {
 			keepass.databaseHash = 'no-hash';
 			keepass.isDatabaseClosed = true;
+			keepass.isKeePassXCAvailable = false;
 			if (response.message === "") {
 				keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
 			}
 			else {
 				keepass.handleError(tab, response.errorCode, response.error);
 			}
-			//keepass.handleError(tab, response.errorCode, response.error);
 			callback(keepass.databaseHash);
-		}	
+		}
 	}, enableTimeout);
 	keepass.nativePort.postMessage(request);
 };

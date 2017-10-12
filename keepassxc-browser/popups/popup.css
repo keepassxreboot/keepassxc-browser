@@ -1,7 +1,8 @@
 body {
 	font-family: sans-serif;
-	min-width:357px;
-	overflow-x:hidden;
+	min-width: 400px;
+	max-width: 400px;
+	overflow-x: hidden;
 	background-color: #eee;
 	font-size: 15px;
 	padding: 8px;
@@ -17,19 +18,20 @@ body {
 	list-style: none;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	padding-left: 10px;
+	padding-left: 5px;
 	padding-right: 5px;
 	margin-left: 10px;
 	margin-right: 5px;
 }
 .credentials a {
-	cursor: pointer;
-	display: block;
-	color: #336;
+	color: #333;
+}
+.credentials a:hover {
+	text-decoration: none;
 }
 .credentials li:hover {
 	cursor: pointer;
-	background: #ccc;
+	background: #ddd;
 }
 
 .settings {
@@ -37,6 +39,7 @@ body {
 	margin-bottom: 10px;
 	border-bottom: 1px solid #333;
 	font-size: 90%;
+	text-align: left;
 }
 .settings label {
 	display: block;
@@ -56,20 +59,13 @@ body {
 	color: #787878;
 }
 #update-available {
-	display: none;
-	font-size: 90%;
-	color: #cc0000;
-	font-weight: bold;
-	border-top: 1px solid #333;
 	padding-top: 10px;
 	margin-top: 10px;
-}
-#update-available a:link,
-#update-available a:visited {
-	text-decoration: underline;
-	color: #cc0000;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	text-align: left;
 }
 #update-available a:hover,
 #update-available a:active {
-	text-decoration: none;
+	text-decoration: underline;
 }
