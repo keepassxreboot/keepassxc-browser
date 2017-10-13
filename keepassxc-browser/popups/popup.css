@@ -35,6 +35,8 @@ body {
 }
 
 .settings {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
 	border-bottom: 1px solid #333;
 	font-size: 90%;
 	text-align: left;
@@ -59,6 +61,8 @@ body {
 #update-available {
 	padding-top: 10px;
 	margin-top: 10px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 	text-align: left;
 }
 #update-available a:hover,

@@ -1,7 +1,7 @@
-0.3.3 (11-10-2017)
+0.3.3 (12-10-2017)
 =========================
 - Fixed database reloading when KeePassXC has restarted and database is opened
-- New buttons
+- New buttons with glyphicons
 
 0.3.2 (30-09-2017)
 =========================
