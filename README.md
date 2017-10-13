@@ -244,6 +244,26 @@ Response message data (success, decrypted):
 }
 ```
 
+### lock-database
+Request:
+```javascript
+{
+	"action": "lock-database",
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
+}
+```
+
+Response message data (success always returns an error, decrypted):
+```javascript
+{
+	"action": "lock-database",
+	"errorCode": 1,
+	"error": "Database not opened",
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+}
+```
+
 ## Licenses
 
 ```
