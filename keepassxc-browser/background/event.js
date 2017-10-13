@@ -135,7 +135,7 @@ event.onReconnect = function(callback, tab) {
 	keepass.connectToNative();
 
 	// Add a small timeout after reconnecting. Just to make sure. It's not pretty, I know :(
-	setTimeout(() => { 
+	setTimeout(() => {
 		keepass.generateNewKeyPair();
 		keepass.changePublicKeys(tab, (pkRes) => {
 			keepass.getDatabaseHash((gdRes) => {
@@ -149,6 +149,12 @@ event.onReconnect = function(callback, tab) {
 			}, null);
 		});
 	}, 2000);
+};
+
+event.lockDatabase = function(callback, tab) {
+	keepass.lockDatabase((response) => {
+		event.showStatus(true, tab, callback);
+	}, tab);
 };
 
 event.onPopStack = function(callback, tab) {
@@ -259,5 +265,6 @@ event.messageHandlers = {
 	'stack_add': browserAction.stackAdd,
 	'update_available_keepassxc': event.onUpdateAvailableKeePassXC,
 	'generate_password': keepass.generatePassword,
-	'reconnect': event.onReconnect
+	'reconnect': event.onReconnect,
+	'lock-database': event.lockDatabase
 };

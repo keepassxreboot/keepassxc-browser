@@ -27,4 +27,10 @@ $(function() {
 			}
 		});
 	});
+
+	$('#lock-database-button').click(function() {
+		browser.runtime.sendMessage({
+			action: 'lock-database'
+		});
+	});
 });
