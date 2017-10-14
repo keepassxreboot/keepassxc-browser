@@ -1,6 +1,7 @@
-0.3.4 (??-??-2017)
+0.3.4 (14-10-2017)
 =========================
 - Added support for Lock Database button
+- Fixed some error message handling
 
 0.3.3 (12-10-2017)
 =========================
