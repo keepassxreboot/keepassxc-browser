@@ -1,7 +1,7 @@
 body {
 	font-family: sans-serif;
-	min-width: 400px;
-	max-width: 400px;
+	min-width: 440px;
+	max-width: 440px;
 	overflow-x: hidden;
 	background-color: #eee;
 	font-size: 15px;
@@ -68,4 +68,7 @@ body {
 #update-available a:hover,
 #update-available a:active {
 	text-decoration: underline;
+}
+#lock-database-button {
+	float: right;
 }

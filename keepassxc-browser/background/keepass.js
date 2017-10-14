@@ -29,22 +29,26 @@ const kpActions = {
 	ASSOCIATE: 'associate',
 	TEST_ASSOCIATE: 'test-associate',
 	GET_DATABASE_HASH: 'get-databasehash',
-	CHANGE_PUBLIC_KEYS: 'change-public-keys'
+	CHANGE_PUBLIC_KEYS: 'change-public-keys',
+	LOCK_DATABASE: 'lock-database'
 };
 
 const kpErrors = {
 	UNKNOWN_ERROR: 0,
 	DATABASE_NOT_OPENED: 1,
-    DATABASE_HASH_NOT_RECEIVED: 2,
-    CLIENT_PUBLIC_KEY_NOT_RECEIVED: 3,
-    CANNOT_DECRYPT_MESSAGE: 4,
-    TIMEOUT_OR_NOT_CONNECTED: 5,
-    ACTION_CANCELLED_OR_DENIED: 6,
-    PUBLIC_KEY_NOT_FOUND: 7,
-    ASSOCIATION_FAILED: 8,
-    KEY_CHANGE_FAILED: 9,
-    ENCRYPTION_KEY_UNRECOGNIZED: 10,
-    NO_SAVED_DATABASES_FOUND: 11,
+	DATABASE_HASH_NOT_RECEIVED: 2,
+	CLIENT_PUBLIC_KEY_NOT_RECEIVED: 3,
+	CANNOT_DECRYPT_MESSAGE: 4,
+	TIMEOUT_OR_NOT_CONNECTED: 5,
+	ACTION_CANCELLED_OR_DENIED: 6,
+	PUBLIC_KEY_NOT_FOUND: 7,
+	ASSOCIATION_FAILED: 8,
+	KEY_CHANGE_FAILED: 9,
+	ENCRYPTION_KEY_UNRECOGNIZED: 10,
+	NO_SAVED_DATABASES_FOUND: 11,
+	INCORRECT_ACTION: 12,
+	EMPTY_MESSAGE_RECEIVED: 13,
+	NO_URL_PROVIDED: 14,
 
     errorMessages : {
     	0: { msg: 'Unknown error' },
@@ -58,7 +62,10 @@ const kpErrors = {
 		8: { msg: 'KeePassXC association failed, try again.' },
 		9: { msg: 'Key change was not successful.' },
 		10: { msg: 'Encryption key is not recognized' },
-		11: { msg: 'No saved databases found.' }
+		11: { msg: 'No saved databases found.' },
+		12: { msg: 'Incorrect action.' },
+		13: { msg: 'Empty message received.' },
+		14: { msg: 'No URL provided.' }
 	},
 
 	getError(errorCode) {
@@ -117,7 +124,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 				}
 			}
 			else if (response.error && response.errorCode) {
-				keepass.handleError(tab, response.error, response.errorCode);
+				keepass.handleError(tab, response.errorCode, response.error);
 			}
 			else {
 				browserAction.showDefault(null, tab);
@@ -193,7 +200,7 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 				}
 			}
 			else if (response.error && response.errorCode) {
-				keepass.handleError(tab, response.error, response.errorCode);
+				keepass.handleError(tab, response.errorCode, response.error);
 			}
 			else {
 				browserAction.showDefault(null, tab);
@@ -290,7 +297,7 @@ keepass.generatePassword = function(callback, tab, forceCallback) {
 				}
 			}
 			else if (response.error && response.errorCode) {
-				keepass.handleError(tab, response.error, response.errorCode);
+				keepass.handleError(tab, response.errorCode, response.error);
 			}
 		});
 		keepass.nativePort.postMessage(request);
@@ -349,7 +356,7 @@ keepass.associate = function(callback, tab) {
 				}
 			}
 			else if (response.error && response.errorCode) {
-				keepass.handleError(tab, response.error, response.errorCode);
+				keepass.handleError(tab, response.errorCode, response.error);
 			}
 		});
 		keepass.nativePort.postMessage(request);
@@ -438,7 +445,7 @@ keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 				}
 			}
 			else if (response.error && response.errorCode) {
-				keepass.handleError(tab, response.error, response.errorCode);
+				keepass.handleError(tab, response.errorCode, response.error);
 			}
 			callback(keepass.isAssociated());
 		});
@@ -559,6 +566,50 @@ keepass.changePublicKeys = function(tab, callback) {
 		callback(true);
 	});
 	keepass.nativePort.postMessage(message);
+};
+
+keepass.lockDatabase = function(callback, tab, forceCallback) {
+	if (!keepass.isConnected) {
+		keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
+		callback([]);
+		return;
+	}
+
+	const kpAction = kpActions.LOCK_DATABASE;
+	const nonce = nacl.randomBytes(keepass.keySize);
+
+	const messageData = {
+		action: kpAction
+	};
+
+	const request = {
+		action: kpAction,
+		message: keepass.encrypt(messageData, nonce),
+		nonce: keepass.b64e(nonce),
+		clientID: keepass.clientID
+	};
+
+	keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
+		if (response.message && response.nonce) {
+			const res = keepass.decrypt(response.message, response.nonce);
+		  	if (res) {
+				const message = nacl.util.encodeUTF8(res);
+				const parsed = JSON.parse(message);
+				keepass.setcurrentKeePassXCVersion(parsed.version);
+
+				if (keepass.verifyResponse(parsed, response.nonce)) {
+					keepass.isDatabaseClosed = true;
+					keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
+					callback(false);
+				}
+			}
+		}
+		else if (response.error && response.errorCode) {
+			keepass.handleError(tab, response.errorCode, response.error);
+		}
+		callback(false);
+	});
+	keepass.nativePort.postMessage(request);
 };
 
 keepass.generateNewKeyPair = function() {

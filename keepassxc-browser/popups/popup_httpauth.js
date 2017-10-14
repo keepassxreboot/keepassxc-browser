@@ -18,4 +18,10 @@ $(function() {
 			}
 		});
 	});
+
+	$('#lock-database-button').click(function() {
+		browser.runtime.sendMessage({
+			action: 'lock-database'
+		}).then(status_response);
+	});
 });
