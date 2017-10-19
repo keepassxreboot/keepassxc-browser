@@ -1,3 +1,5 @@
+'use strict';
+
 var keepass = {};
 
 keepass.associated = {'value': false, 'hash': null};
@@ -20,7 +22,7 @@ keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not 
 keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
-keepass.messageTimeout = 1000; // milliseconds
+keepass.messageTimeout = 500; // milliseconds
 
 const kpActions = {
 	SET_LOGIN: 'set-login',

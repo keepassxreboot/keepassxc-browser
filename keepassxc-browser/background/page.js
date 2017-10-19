@@ -16,7 +16,7 @@ page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.pars
 page.blockedTabs = {};
 
 page.initSettings = function() {
-	event.onLoadSettings();
+	kpxcEvent.onLoadSettings();
 	if (!('checkUpdateKeePassXC' in page.settings)) {
 		page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
 	}

@@ -22,7 +22,7 @@ browser.tabs.onCreated.addListener((tab) => {
 		//console.log('browser.tabs.onCreated(' + tab.id+ ')');
 		if (tab.selected) {
 			page.currentTabId = tab.id;
-			event.invoke(page.switchTab, null, tab.id, []);
+			kpxcEvent.invoke(page.switchTab, null, tab.id, []);
 		}
 	}
 });
@@ -53,8 +53,8 @@ browser.tabs.onActivated.addListener((activeInfo) => {
 		if (info && info.id) {
 			page.currentTabId = info.id;
 			if (info.status === 'complete') {
-				//console.log('event.invoke(page.switchTab, null, '+info.id + ', []);');
-				event.invoke(page.switchTab, null, info.id, []);
+				//console.log('kpxcEvent.invoke(page.switchTab, null, '+info.id + ', []);');
+				kpxcEvent.invoke(page.switchTab, null, info.id, []);
 			}
 		}
 	});
@@ -67,7 +67,7 @@ browser.tabs.onActivated.addListener((activeInfo) => {
  */
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	if (changeInfo.status === 'complete') {
-		event.invoke(browserAction.removeRememberPopup, null, tabId, []);
+		kpxcEvent.invoke(browserAction.removeRememberPopup, null, tabId, []);
 	}
 });
 
@@ -87,7 +87,7 @@ if (browser.webRequest.onAuthRequired) {
 	browser.webRequest.onErrorOccurred.addListener(httpAuth.requestCompleted, opts);
 }
 
-browser.runtime.onMessage.addListener(event.onMessage);
+browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 
 const contextMenuItems = [
 	{title: 'Fill &User + Pass', action: 'fill_user_pass'},
