@@ -202,7 +202,7 @@ cipPassword.createDialog = function() {
 	const $dialog = jQuery('<div>')
 		.addClass('dialog-form')
 		.attr('id', 'cip-genpw-dialog');
-	
+
 	const $inputDiv = jQuery('<div>').addClass('form-group');
 	const $inputGroup = jQuery('<div>').addClass('genpw-input-group');
 	const $textfieldPassword = jQuery('<input>')
@@ -220,7 +220,7 @@ cipPassword.createDialog = function() {
 		.attr('id', 'cip-genpw-quality')
 		.text('123 Bits');
 	$inputGroup.append($textfieldPassword).append($quality);
-	
+
 	const $checkGroup = jQuery('<div>').addClass('genpw-input-group');
 	const $checkboxNextField = jQuery('<input>')
 		.attr('id', 'cip-genpw-checkbox-next-field')
@@ -246,7 +246,7 @@ cipPassword.createDialog = function() {
 		title: 'Password Generator',
 		classes: {'ui-dialog': 'ui-corner-all'},
 		buttons: {
-			'Generate': 
+			'Generate':
 			{
 				text: 'Generate',
 				id: 'cip-genpw-btn-generate',
@@ -266,7 +266,7 @@ cipPassword.createDialog = function() {
 					cipPassword.copyPasswordToClipboard();
 				}
 			},
-			'Fill & copy': 
+			'Fill & copy':
 			{
 				text: 'Fill & copy',
 				id: 'cip-genpw-btn-fillin',
@@ -1102,6 +1102,7 @@ cip.credentials = [];
 jQuery(function() {
 	cip.init();
 	cip.detectNewActiveFields();
+	cip.detectDatabaseChange();
 });
 
 cip.init = function() {
@@ -1126,6 +1127,37 @@ cip.detectNewActiveFields = function() {
 			}
 		}, 1000);
 	//}
+};
+
+// Switch credentials if database is changed or closed
+cip.detectDatabaseChange = function() {
+	const dbDetectInterval = setInterval(function() {
+		browser.runtime.sendMessage({
+			action: 'check_databasehash'
+		}).then((response) => {
+			if (response.new === 'no-hash') {
+				cipEvents.clearCredentials();
+
+				browser.runtime.sendMessage({
+					action: 'page_clear_logins'
+				});
+
+				// Switch back to default popup
+				browser.runtime.sendMessage({
+					action: 'get_status'
+				});
+			} else {
+				if (response.new !== 'no-hash' && response.new !== response.old) {
+					browser.runtime.sendMessage({
+						action: 'get_settings',
+					}).then((response) => {
+						cip.settings = response.data;
+						cip.initCredentialFields(true);
+					});
+				}
+			}
+		});
+	}, 1000);
 };
 
 cip.initCredentialFields = function(forceCall) {

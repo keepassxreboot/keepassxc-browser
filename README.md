@@ -22,6 +22,19 @@ and transfers these messages through a localhost UDP port 19700 (configurable) t
 Native Messaging API. keepassxc-browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. keepassxc-proxy
 is still under development. If you want, you are free to write your own proxy that handles the traffic.
 
+## Improvements
+The following improvements and features have been made after the fork. At this point some features are only available with the KeePassXC fork:
+- Real-time detection of database status (locked/unlocked)
+- Credentials on a page are cleared or received automatically again if database is locked or changed to another
+- It is possible to lock the active database from the popup (using the red lock icon)
+- Input forms are detected even if the login div has been hidden or is created after the page was loaded
+- It is possible to use the active database from multiple browsers at the same time with [keepassxc-proxy](https://github.com/varjolintu/keepassxc-proxy) application.
+- Deprecated JavaScript functions are removed and everything is asynchronous
+- Updated Bootstrap to version 3.3.7 and jQuery to version 3.2.1
+- New buttons, icons and settings page graphics
+- Redesigned password generator dialog
+- Password generator supports diceware passphrases and extended ASCII characters
+
 ## Protocol
 
 Transmitting messages between KeePassXC and keepassxc-browser is totally rewritten. This is still under development.

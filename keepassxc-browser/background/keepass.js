@@ -1,3 +1,5 @@
+'use strict';
+
 var keepass = {};
 
 keepass.associated = {'value': false, 'hash': null};
@@ -20,7 +22,7 @@ keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not 
 keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
-keepass.messageTimeout = 1000; // milliseconds
+keepass.messageTimeout = 500; // milliseconds
 
 const kpActions = {
 	SET_LOGIN: 'set-login',
@@ -30,7 +32,9 @@ const kpActions = {
 	TEST_ASSOCIATE: 'test-associate',
 	GET_DATABASE_HASH: 'get-databasehash',
 	CHANGE_PUBLIC_KEYS: 'change-public-keys',
-	LOCK_DATABASE: 'lock-database'
+	LOCK_DATABASE: 'lock-database',
+	DATABASE_LOCKED: 'database-locked',
+	DATABASE_UNLOCKED: 'database-unlocked'
 };
 
 const kpErrors = {
@@ -742,6 +746,17 @@ keepass.connectToNative = function() {
 
 keepass.onNativeMessage = function(response) {
 	//console.log('Received message: ' + JSON.stringify(response));
+
+	// Handle database lock/unlock status
+	if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
+		keepass.testAssociation((response) => {
+			keepass.isConfigured((configured) => {
+				let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
+				data.iconType = configured ? 'normal' : 'cross';
+				browserAction.show(null, {'id': page.currentTabId});
+			});
+		}, null);
+	}
 };
 
 function onDisconnected() {
