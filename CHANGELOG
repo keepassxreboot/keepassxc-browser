@@ -1,4 +1,4 @@
-0.3.5 (??-??-2017)
+0.3.5 (19-10-2017)
 =========================
 - Removed database locked/unlocked status polling and replaced it with message handling from KeePassXC signals
 - Clear or change page credentials if a database is changed or locked
