@@ -5,6 +5,7 @@ function status_response(r) {
 	$('#not-configured').hide();
 	$('#configured-and-associated').hide();
 	$('#configured-not-associated').hide();
+	$('#lock-database-button').hide();
 
 	if (!r.keePassXCAvailable) {
 		$('#error-message').html(r.error);
@@ -32,6 +33,7 @@ function status_response(r) {
 	else {
 		$('#configured-and-associated').show();
 		$('#associated-identifier').html(r.identifier);
+		$('#lock-database-button').show();
 	}
 }
 
@@ -72,6 +74,12 @@ $(function() {
 				action: 'redetect_fields'
 			});
 		});
+	});
+
+	$('#lock-database-button').click(function() {
+		browser.runtime.sendMessage({
+			action: 'lock-database'
+		}).then(status_response);
 	});
 
 	browser.runtime.sendMessage({

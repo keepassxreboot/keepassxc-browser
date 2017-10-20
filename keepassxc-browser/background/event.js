@@ -1,14 +1,14 @@
-var event = {};
+var kpxcEvent = {};
 
-event.onMessage = function(request, sender, callback) {
-	if (request.action in event.messageHandlers) {
+kpxcEvent.onMessage = function(request, sender, callback) {
+	if (request.action in kpxcEvent.messageHandlers) {
 		//console.log('onMessage(' + request.action + ') for #' + sender.tab.id);
 		if (!sender.hasOwnProperty('tab') || sender.tab.id < 1) {
 			sender.tab = {};
 			sender.tab.id = page.currentTabId;
 		}
 
-		event.invoke(event.messageHandlers[request.action], callback, sender.tab.id, request.args);
+		kpxcEvent.invoke(kpxcEvent.messageHandlers[request.action], callback, sender.tab.id, request.args);
 
 		// onMessage closes channel for callback automatically
 		// if this method does not return true
@@ -29,7 +29,7 @@ event.onMessage = function(request, sender, callback) {
  * @param {bool} secondTime
  * @returns null (asynchronous)
  */
-event.invoke = function(handler, callback, senderTabId, args, secondTime) {
+kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
 	if (senderTabId < 1) {
 		return;
 	}
@@ -51,7 +51,7 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 			// using window.open()
 			if (!secondTime) {
 				window.setTimeout(function() {
-					event.invoke(handler, callback, senderTabId, args, true);
+					kpxcEvent.invoke(handler, callback, senderTabId, args, true);
 				}, 250);
 			}
 			return;
@@ -75,12 +75,12 @@ event.invoke = function(handler, callback, senderTabId, args, secondTime) {
 	});
 };
 
-event.onShowAlert = function(callback, tab, message) {
+kpxcEvent.onShowAlert = function(callback, tab, message) {
 	if (page.settings.supressAlerts) { console.log(message); }
 	else { alert(message); }
 };
 
-event.showStatus = function(configured, tab, callback) {
+kpxcEvent.showStatus = function(configured, tab, callback) {
 	let keyId = null;
 	if (configured) {
 		keyId = keepass.keyRing[keepass.databaseHash].id;
@@ -99,11 +99,11 @@ event.showStatus = function(configured, tab, callback) {
 	});
 };
 
-event.onLoadSettings = function(callback, tab) {
+kpxcEvent.onLoadSettings = function(callback, tab) {
 	page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
 };
 
-event.onLoadKeyRing = function(callback, tab) {
+kpxcEvent.onLoadKeyRing = function(callback, tab) {
 	keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 	if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
 		keepass.associated = {
@@ -113,36 +113,36 @@ event.onLoadKeyRing = function(callback, tab) {
 	}
 };
 
-event.onGetSettings = function(callback, tab) {
-	event.onLoadSettings();
+kpxcEvent.onGetSettings = function(callback, tab) {
+	kpxcEvent.onLoadSettings();
 	callback({ data: page.settings });
 };
 
-event.onSaveSettings = function(callback, tab, settings) {
+kpxcEvent.onSaveSettings = function(callback, tab, settings) {
 	localStorage.settings = JSON.stringify(settings);
-	event.onLoadSettings();
+	kpxcEvent.onLoadSettings();
 };
 
-event.onGetStatus = function(callback, tab) {
+kpxcEvent.onGetStatus = function(callback, tab) {
 	keepass.testAssociation((response) => {
 		keepass.isConfigured((configured) => {
-			event.showStatus(configured, tab, callback);
+			kpxcEvent.showStatus(configured, tab, callback);
 		});
 	}, tab, true);
 };
 
-event.onReconnect = function(callback, tab) {
+kpxcEvent.onReconnect = function(callback, tab) {
 	keepass.connectToNative();
 
 	// Add a small timeout after reconnecting. Just to make sure. It's not pretty, I know :(
-	setTimeout(() => { 
+	setTimeout(() => {
 		keepass.generateNewKeyPair();
 		keepass.changePublicKeys(tab, (pkRes) => {
 			keepass.getDatabaseHash((gdRes) => {
 				if (gdRes) {
 					keepass.testAssociation((response) => {
 						keepass.isConfigured((configured) => {
-							event.showStatus(configured, tab, callback);
+							kpxcEvent.showStatus(configured, tab, callback);
 						});
 					}, tab);
 				}
@@ -151,24 +151,30 @@ event.onReconnect = function(callback, tab) {
 	}, 2000);
 };
 
-event.onPopStack = function(callback, tab) {
+kpxcEvent.lockDatabase = function(callback, tab) {
+	keepass.lockDatabase((response) => {
+		kpxcEvent.showStatus(true, tab, callback);
+	}, tab);
+};
+
+kpxcEvent.onPopStack = function(callback, tab) {
 	browserAction.stackPop(tab.id);
 	browserAction.show(null, tab);
 };
 
-event.onGetTabInformation = function(callback, tab) {
+kpxcEvent.onGetTabInformation = function(callback, tab) {
 	const id = tab.id || page.currentTabId;
 	callback(page.tabs[id]);
 };
 
-event.onGetConnectedDatabase = function(callback, tab) {
+kpxcEvent.onGetConnectedDatabase = function(callback, tab) {
 	callback({
 		count: Object.keys(keepass.keyRing).length,
 		identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
 	});
 };
 
-event.onGetKeePassXCVersions = function(callback, tab) {
+kpxcEvent.onGetKeePassXCVersions = function(callback, tab) {
 	if (keepass.currentKeePassXC.version === 0) {
 		keepass.getDatabaseHash((response) => {
 			callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
@@ -177,25 +183,25 @@ event.onGetKeePassXCVersions = function(callback, tab) {
 	callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
 };
 
-event.onCheckUpdateKeePassXC = function(callback, tab) {
+kpxcEvent.onCheckUpdateKeePassXC = function(callback, tab) {
 	keepass.checkForNewKeePassXCVersion();
 	callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
 };
 
-event.onUpdateAvailableKeePassXC = function(callback, tab) {
+kpxcEvent.onUpdateAvailableKeePassXC = function(callback, tab) {
 	callback(keepass.keePassXCUpdateAvailable());
 };
 
-event.onRemoveCredentialsFromTabInformation = function(callback, tab) {
+kpxcEvent.onRemoveCredentialsFromTabInformation = function(callback, tab) {
 	const id = tab.id || page.currentTabId;
 	page.clearCredentials(id);
 };
 
-event.onSetRememberPopup = function(callback, tab, username, password, url, usernameExists, credentialsList) {
+kpxcEvent.onSetRememberPopup = function(callback, tab, username, password, url, usernameExists, credentialsList) {
 	browserAction.setRememberPopup(tab.id, username, password, url, usernameExists, credentialsList);
 };
 
-event.onLoginPopup = function(callback, tab, logins) {
+kpxcEvent.onLoginPopup = function(callback, tab, logins) {
 	let stackData = {
 		level: 1,
 		iconType: 'questionmark',
@@ -206,7 +212,7 @@ event.onLoginPopup = function(callback, tab, logins) {
 	browserAction.show(null, tab);
 };
 
-event.onHTTPAuthPopup = function(callback, tab, data) {
+kpxcEvent.onHTTPAuthPopup = function(callback, tab, data) {
 	let stackData = {
 		level: 1,
 		iconType: 'questionmark',
@@ -217,7 +223,7 @@ event.onHTTPAuthPopup = function(callback, tab, data) {
 	browserAction.show(null, tab);
 };
 
-event.onMultipleFieldsPopup = function(callback, tab) {
+kpxcEvent.onMultipleFieldsPopup = function(callback, tab) {
 	let stackData = {
 		level: 1,
 		iconType: 'normal',
@@ -227,37 +233,46 @@ event.onMultipleFieldsPopup = function(callback, tab) {
 	browserAction.show(null, tab);
 };
 
-event.pageClearLogins = function(callback, tab) {
+kpxcEvent.pageClearLogins = function(callback, tab) {
 	page.clearLogins(tab.id);
 	callback();
 };
 
+kpxcEvent.oldDatabaseHash = 'no-hash';
+kpxcEvent.checkDatabaseHash = function(callback, tab) {
+	keepass.getDatabaseHash((response) => {
+		callback({old: kpxcEvent.oldDatabaseHash, new: response});
+		kpxcEvent.oldDatabaseHash = response;
+	});
+};
 
 // all methods named in this object have to be declared BEFORE this!
-event.messageHandlers = {
+kpxcEvent.messageHandlers = {
 	'add_credentials': keepass.addCredentials,
-	'alert': event.onShowAlert,
+	'alert': kpxcEvent.onShowAlert,
 	'associate': keepass.associate,
-	'check_update_keepassxc': event.onCheckUpdateKeePassXC,
-	'get_connected_database': event.onGetConnectedDatabase,
-	'get_keepassxc_versions': event.onGetKeePassXCVersions,
-	'get_settings': event.onGetSettings,
-	'get_status': event.onGetStatus,
-	'get_tab_information': event.onGetTabInformation,
-	'load_keyring': event.onLoadKeyRing,
-	'load_settings': event.onLoadSettings,
-	'page_clear_logins': event.pageClearLogins,
-	'pop_stack': event.onPopStack,
-	'popup_login': event.onLoginPopup,
-	'popup_multiple-fields': event.onMultipleFieldsPopup,
-	'remove_credentials_from_tab_information': event.onRemoveCredentialsFromTabInformation,
+	'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
+	'get_connected_database': kpxcEvent.onGetConnectedDatabase,
+	'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
+	'get_settings': kpxcEvent.onGetSettings,
+	'get_status': kpxcEvent.onGetStatus,
+	'get_tab_information': kpxcEvent.onGetTabInformation,
+	'load_keyring': kpxcEvent.onLoadKeyRing,
+	'load_settings': kpxcEvent.onLoadSettings,
+	'page_clear_logins': kpxcEvent.pageClearLogins,
+	'pop_stack': kpxcEvent.onPopStack,
+	'popup_login': kpxcEvent.onLoginPopup,
+	'popup_multiple-fields': kpxcEvent.onMultipleFieldsPopup,
+	'remove_credentials_from_tab_information': kpxcEvent.onRemoveCredentialsFromTabInformation,
 	'retrieve_credentials': keepass.retrieveCredentials,
 	'show_default_browseraction': browserAction.showDefault,
 	'update_credentials': keepass.updateCredentials,
-	'save_settings': event.onSaveSettings,
-	'set_remember_credentials': event.onSetRememberPopup,
+	'save_settings': kpxcEvent.onSaveSettings,
+	'set_remember_credentials': kpxcEvent.onSetRememberPopup,
 	'stack_add': browserAction.stackAdd,
-	'update_available_keepassxc': event.onUpdateAvailableKeePassXC,
+	'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC,
 	'generate_password': keepass.generatePassword,
-	'reconnect': event.onReconnect
+	'reconnect': kpxcEvent.onReconnect,
+	'lock-database': kpxcEvent.lockDatabase,
+	'check_databasehash': kpxcEvent.checkDatabaseHash
 };

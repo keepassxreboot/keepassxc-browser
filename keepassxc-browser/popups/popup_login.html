@@ -12,22 +12,25 @@
 		<script type="text/javascript" src="popup_login.js"></script>
 	</head>
 	<body>
-		<div id="settings" class="settings">
-			<button id="btn-options" class="btn btn-sm btn-success">Settings</button>
-			<button id="btn-choose-credential-fields" class="btn btn-sm btn-default">Choose own credential fields for this page</button>
+		<div class="container">
+			<div id="settings" class="settings">
+				<button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span> Settings</button>
+				<button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> Choose own credential fields for this page</button>
+				<button id="lock-database-button" class="btn btn-danger" title="Lock database"><span class="glyphicon glyphicon-lock"></span></button>
 
-			<div id="update-available">
-				You use an old version of KeePassXC.
-				<br />
-				<a target="_blank" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+				<div id="update-available" class="alert alert-danger">
+					You use an old version of KeePassXC.
+					<br />
+					<a target="_blank" class="alert-link" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+				</div>
 			</div>
-		</div>
 
-		<div class="credentials">
-			<p>
-				Select the login information you would like to get entered into the page:
-			</p>
-			<ul id="login-list"></ul>
+			<div class="credentials">
+				<p>
+					Select the login information you would like to get entered into the page:
+				</p>
+				<ul id="login-list"></ul>
+			</div>
 		</div>
 	</body>
 </html>

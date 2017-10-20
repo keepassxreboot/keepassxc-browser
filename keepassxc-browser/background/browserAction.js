@@ -3,8 +3,6 @@ var browserAction = {};
 const BLINK_TIMEOUT_DEFAULT = 7500;
 const BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT = -1;
 const BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT = 1;
-const MAXIMUM_POLL_COUNT = 8; // _interval (250 ms) * 8 = 2 sec
-let databasePollCount = 0;
 
 browserAction.show = function(callback, tab) {
 	let data = {};
@@ -35,21 +33,6 @@ browserAction.update = function(interval) {
 	}
 
 	let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
-
-	// Poll the database if it's open or closed
-	if (databasePollCount >= MAXIMUM_POLL_COUNT) {
-		if (keepass.isKeePassXCAvailable) {
-			keepass.testAssociation((response) => {
-				keepass.isConfigured((configured) => {
-						data.iconType = configured ? 'normal' : 'cross';
-						browserAction.show(null, {'id': page.currentTabId});
-				});
-			}, null);
-		}
-		databasePollCount = 0;
-	} else {
-		databasePollCount += 1;
-	}
 
     if (typeof data.visibleForMilliSeconds !== 'undefined') {
 		if (data.visibleForMilliSeconds <= 0) {

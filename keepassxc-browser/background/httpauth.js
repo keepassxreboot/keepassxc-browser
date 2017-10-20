@@ -41,7 +41,7 @@ httpAuth.processPendingCallbacks = function(details, resolve, reject) {
 httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
 	// at least one login found --> use first to login
 	if (logins.length > 0) {
-		event.onHTTPAuthPopup(null, { "id": details.tabId }, { "logins": logins, "url": details.searchUrl });
+		kpxcEvent.onHTTPAuthPopup(null, { "id": details.tabId }, { "logins": logins, "url": details.searchUrl });
 		//generate popup-list for HTTP Auth usernames + descriptions
 
 		if (page.settings.autoFillAndSend) {

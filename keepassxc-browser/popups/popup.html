@@ -12,84 +12,87 @@
 		<script type="text/javascript" src="popup.js" /></script>
 	</head>
 	<body>
-		<div id="settings" class="settings">
-			<button id="btn-options" class="btn btn-sm btn-success">Settings</button>
-			<button id="btn-choose-credential-fields" class="btn btn-sm btn-default">Choose own credential fields for this page</button>
+		<div class="container">
+			<div id="settings" class="settings">
+				<button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span> Settings</button>
+				<button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> Choose own credential fields for this page</button>
+				<button id="lock-database-button" class="btn btn-danger" title="Lock database"><span class="glyphicon glyphicon-lock"></span></button>
 
-			<div id="update-available">
-				You use an old version of KeePassXC.
-				<br />
-				<a target="_blank" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+				<div id="update-available" class="alert alert-danger">
+					You use an old version of KeePassXC.
+					<br />
+					<a target="_blank" class="alert-link" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+				</div>
 			</div>
-		</div>
 
-		<div id="initial-state">
-			<p><img style="margin-right: 1em" src="throbber.gif"/> Checking status...</p>
-		</div>
-
-		<div id="not-configured" style="display: none">
-			<p>
-				keepassxc-browser has not been configured.
-				Press the connect button to register and pair with KeePassXC.
-			</p>
-			<div style="text-align: right">
-				<button id="connect-button" class="btn btn-primary">Connect</button>
+			<div id="initial-state">
+				<p><img style="margin-right: 1em" src="throbber.gif"/> Checking status...</p>
 			</div>
-		</div>
 
-		<div id="need-reconfigure" style="display: none">
-			<p>
-				keepassxc-browser has been disconnected from KeePassXC.
-			</p>
-			<code id="need-reconfigure-message"></code>
-			<p>
-				Press the reconnect button to establish a new connection.
-			</p>
-			<div style="text-align: right">
-				<button id="reconnect-button" class="btn btn-primary">Reconnect</button>
+			<div id="not-configured" style="display: none">
+				<p>
+					keepassxc-browser has not been configured.
+					Press the connect button to register and pair with KeePassXC.
+				</p>
+				<div style="text-align: right">
+					<button id="connect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-link"></span> Connect</button>
+				</div>
 			</div>
-		</div>
 
-		<div id="configured-not-associated" style="display: none">
-			<p>
-				keepassxc-browser has been configured using the identifier
-				<em id="unassociated-identifier"></em> and has not yet
-				connected to KeePassXC.
-			</p>
-		</div>
-
-		<div id="configured-and-associated" style="display: none">
-			<p>
-				keepassxc-browser has been configured using the identifier
-				"<em id="associated-identifier"></em>" and is successfully
-				connected to KeePassXC.
-			</p>
-			<div style="text-align: right">
-				<button id="redetect-fields-button" class="btn btn-default">Redetect credential fields</button>
+			<div id="need-reconfigure" style="display: none">
+				<p>
+					keepassxc-browser has been disconnected from KeePassXC.
+				</p>
+				<code id="need-reconfigure-message"></code>
+				<p>
+					Press the reconnect button to establish a new connection.
+				</p>
+				<div style="text-align: right">
+					<button id="reconnect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span> Reconnect</button>
+				</div>
 			</div>
-		</div>
 
-		<div id="error-encountered" style="display: none">
-			<p>
-				keepassxc-browser has encountered an error:
-			</p>
-			<p style="margin-left: 1em">
-				<code id="error-message"></code>
-			</p>
-			<div style="text-align: right">
-				<button id="reload-status-button" class="btn btn-primary">Reload</button>
+			<div id="configured-not-associated" style="display: none">
+				<p>
+					keepassxc-browser has been configured using the identifier
+					<em id="unassociated-identifier"></em> and has not yet
+					connected to KeePassXC.
+				</p>
 			</div>
-		</div>
 
-		<div id="database-not-opened" style="display: none">
-			<p>
-				keepassxc-browser has encountered an error:
-			</p>
-			<p style="margin-left: 1em">
-				<code id="database-error-message"></code>
-			</p>
-			<div style="text-align: right">
-				<button id="reopen-database-button" class="btn btn-primary">Reopen database</button>
+			<div id="configured-and-associated" style="display: none">
+				<p>
+					keepassxc-browser has been configured using the identifier
+					"<em id="associated-identifier"></em>" and is successfully
+					connected to KeePassXC.
+				</p>
+				<div style="text-align: right">
+					<button id="redetect-fields-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-list-alt"></span> Redetect credential fields</button>
+				</div>
+			</div>
+
+			<div id="error-encountered" style="display: none">
+				<p>
+					keepassxc-browser has encountered an error:
+				</p>
+				<p style="margin-left: 1em">
+					<code id="error-message"></code>
+				</p>
+				<div style="text-align: right">
+					<button id="reload-status-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span> Reload</button>
+				</div>
+			</div>
+
+			<div id="database-not-opened" style="display: none">
+				<p>
+					keepassxc-browser has encountered an error:
+				</p>
+				<p style="margin-left: 1em">
+					<code id="database-error-message"></code>
+				</p>
+				<div style="text-align: right">
+					<button id="reopen-database-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-lock"></span> Reopen database</button>
+				</div>
 			</div>
 		</div>
 	</body>
