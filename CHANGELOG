@@ -1,3 +1,7 @@
+0.3.6 (20-10-2017)
+=========================
+- Restricted page credentials polling to active tab
+
 0.3.5 (19-10-2017)
 =========================
 - Removed database locked/unlocked status polling and replaced it with message handling from KeePassXC signals

@@ -1132,32 +1132,34 @@ cip.detectNewActiveFields = function() {
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function() {
 	const dbDetectInterval = setInterval(function() {
-		browser.runtime.sendMessage({
-			action: 'check_databasehash'
-		}).then((response) => {
-			if (response.new === 'no-hash') {
-				cipEvents.clearCredentials();
+		if (document.visibilityState !== 'hidden') {
+			browser.runtime.sendMessage({
+				action: 'check_databasehash'
+			}).then((response) => {
+				if (response.new === 'no-hash') {
+					cipEvents.clearCredentials();
 
-				browser.runtime.sendMessage({
-					action: 'page_clear_logins'
-				});
-
-				// Switch back to default popup
-				browser.runtime.sendMessage({
-					action: 'get_status'
-				});
-			} else {
-				if (response.new !== 'no-hash' && response.new !== response.old) {
 					browser.runtime.sendMessage({
-						action: 'get_settings',
-					}).then((response) => {
-						cip.settings = response.data;
-						cip.initCredentialFields(true);
+						action: 'page_clear_logins'
 					});
+
+					// Switch back to default popup
+					browser.runtime.sendMessage({
+						action: 'get_status'
+					});
+				} else {
+					if (response.new !== 'no-hash' && response.new !== response.old) {
+						browser.runtime.sendMessage({
+							action: 'get_settings',
+						}).then((response) => {
+							cip.settings = response.data;
+							cip.initCredentialFields(true);
+						});
+					}
 				}
-			}
-		});
-	}, 1000);
+			});
+		}
+	}, 2000);
 };
 
 cip.initCredentialFields = function(forceCall) {
