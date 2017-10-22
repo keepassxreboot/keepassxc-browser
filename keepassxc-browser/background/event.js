@@ -72,7 +72,7 @@ kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
 		else {
 			console.log('undefined handler for tab ' + tab.id);
 		}
-	});
+	}).catch((e) => {console.log(e);});
 };
 
 kpxcEvent.onShowAlert = function(callback, tab, message) {
@@ -240,7 +240,7 @@ kpxcEvent.pageClearLogins = function(callback, tab) {
 
 kpxcEvent.oldDatabaseHash = 'no-hash';
 kpxcEvent.checkDatabaseHash = function(callback, tab) {
-	keepass.getDatabaseHash((response) => {
+	keepass.checkDatabaseHash((response) => {
 		callback({old: kpxcEvent.oldDatabaseHash, new: response});
 		kpxcEvent.oldDatabaseHash = response;
 	});

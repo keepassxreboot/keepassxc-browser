@@ -66,7 +66,7 @@ page.isValidProtocol = function(url) {
 
 page.switchTab = function(callback, tab) {
 	browserAction.showDefault(null, tab);
-	browser.tabs.sendMessage(tab.id, {action: 'activated_tab'}).catch((e) => {console.log(e);});
+	browser.tabs.sendMessage(tab.id, {action: 'activated_tab'}).catch((e) => {});
 };
 
 page.clearCredentials = function(tabId, complete) {
@@ -82,7 +82,7 @@ page.clearCredentials = function(tabId, complete) {
 
         browser.tabs.sendMessage(tabId, {
             action: 'clear_credentials'
-        }).catch((e) => {console.log(e);});
+        }).catch((e) => {});
     }
 };
 
@@ -101,7 +101,7 @@ page.createTabEntry = function(tabId) {
 page.removePageInformationFromNotExistingTabs = function() {
 	let rand = Math.floor(Math.random()*1001);
 	if (rand === 28) {
-		browser.tabs.query({}, (tabs) => {
+		browser.tabs.query({}).then(function(tabs) {
 			let $tabIds = {};
 			const $infoIds = Object.keys(page.tabs);
 

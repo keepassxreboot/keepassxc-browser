@@ -46,9 +46,11 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		}
 		else if (req.action === 'clear_credentials') {
 			cipEvents.clearCredentials();
+			callback();
 		}
 		else if (req.action === 'activated_tab') {
 			cipEvents.triggerActivatedTab();
+			callback();
 		}
 		else if (req.action === 'redetect_fields') {
 			browser.runtime.sendMessage({
@@ -254,7 +256,7 @@ cipPassword.createDialog = function() {
 					e.preventDefault();
 					browser.runtime.sendMessage({
 						action: 'generate_password'
-					}).then(cipPassword.callbackGeneratedPassword);
+					}).then(cipPassword.callbackGeneratedPassword).catch((e) => {console.log(e);});
 				}
 			},
 			'Copy':
@@ -1129,34 +1131,37 @@ cip.detectNewActiveFields = function() {
 	//}
 };
 
+// Try to do this in a way that database value if checked without polling the KeePassXC.. too many messages jumping around
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function() {
 	const dbDetectInterval = setInterval(function() {
-		browser.runtime.sendMessage({
-			action: 'check_databasehash'
-		}).then((response) => {
-			if (response.new === 'no-hash') {
-				cipEvents.clearCredentials();
+		if (document.visibilityState !== 'hidden') {
+			browser.runtime.sendMessage({
+				action: 'check_databasehash'
+			}).then((response) => {
+				if (response.new === 'no-hash') {
+					cipEvents.clearCredentials();
 
-				browser.runtime.sendMessage({
-					action: 'page_clear_logins'
-				});
-
-				// Switch back to default popup
-				browser.runtime.sendMessage({
-					action: 'get_status'
-				});
-			} else {
-				if (response.new !== 'no-hash' && response.new !== response.old) {
 					browser.runtime.sendMessage({
-						action: 'get_settings',
-					}).then((response) => {
-						cip.settings = response.data;
-						cip.initCredentialFields(true);
+						action: 'page_clear_logins'
 					});
+
+					// Switch back to default popup
+					browser.runtime.sendMessage({
+						action: 'get_status'
+					});
+				} else {
+					if (response.new !== 'no-hash' && response.new !== response.old) {
+						browser.runtime.sendMessage({
+							action: 'get_settings',
+						}).then((response) => {
+							cip.settings = response.data;
+							cip.initCredentialFields(true);
+						});
+					}
 				}
-			}
-		});
+			}).catch((e) => {console.log(e);});
+		}
 	}, 1000);
 };
 
@@ -1191,7 +1196,7 @@ cip.initCredentialFields = function(forceCall) {
 	    	browser.runtime.sendMessage({
 	    		action: 'retrieve_credentials',
 	    		args: [ cip.url, cip.submitUrl ]
-			}).then(cip.retrieveCredentialsCallback);
+			}).then(cip.retrieveCredentialsCallback).catch((e) => {console.log(e);});
 		}
 	});
 };
@@ -1745,6 +1750,6 @@ cipEvents.triggerActivatedTab = function() {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl ]
-		}).then(cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback).catch((e) => {console.log(e);});
 	}
 };
