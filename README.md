@@ -37,7 +37,7 @@ The following improvements and features have been made after the fork. At this p
 
 ## Protocol
 
-The details about the messaging protocol used with the browser extension and KeePassXC can be found [here](https://github.com/varjolintu/keepassxc-browser/blob/master/keepassxc-protocol.md).
+The details about the messaging protocol used with the browser extension and KeePassXC can be found [here](keepassxc-protocol.md).
 
 ## Licenses
 
