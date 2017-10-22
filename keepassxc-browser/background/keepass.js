@@ -632,6 +632,10 @@ keepass.isConfigured = function(callback) {
 	}
 };
 
+keepass.checkDatabaseHash = function(callback, tab) {
+	callback(keepass.databaseHash);
+};
+
 keepass.isAssociated = function() {
 	return (keepass.associated.value && keepass.associated.hash && keepass.associated.hash === keepass.databaseHash);
 };

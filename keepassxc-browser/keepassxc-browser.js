@@ -46,9 +46,11 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		}
 		else if (req.action === 'clear_credentials') {
 			cipEvents.clearCredentials();
+			callback();
 		}
 		else if (req.action === 'activated_tab') {
 			cipEvents.triggerActivatedTab();
+			callback();
 		}
 		else if (req.action === 'redetect_fields') {
 			browser.runtime.sendMessage({
@@ -254,7 +256,7 @@ cipPassword.createDialog = function() {
 					e.preventDefault();
 					browser.runtime.sendMessage({
 						action: 'generate_password'
-					}).then(cipPassword.callbackGeneratedPassword);
+					}).then(cipPassword.callbackGeneratedPassword).catch((e) => {console.log(e);});
 				}
 			},
 			'Copy':
@@ -1129,6 +1131,7 @@ cip.detectNewActiveFields = function() {
 	//}
 };
 
+// Try to do this in a way that database value if checked without polling the KeePassXC.. too many messages jumping around
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function() {
 	const dbDetectInterval = setInterval(function() {
@@ -1157,9 +1160,9 @@ cip.detectDatabaseChange = function() {
 						});
 					}
 				}
-			});
+			}).catch((e) => {console.log(e);});
 		}
-	}, 2000);
+	}, 1000);
 };
 
 cip.initCredentialFields = function(forceCall) {
@@ -1193,7 +1196,7 @@ cip.initCredentialFields = function(forceCall) {
 	    	browser.runtime.sendMessage({
 	    		action: 'retrieve_credentials',
 	    		args: [ cip.url, cip.submitUrl ]
-			}).then(cip.retrieveCredentialsCallback);
+			}).then(cip.retrieveCredentialsCallback).catch((e) => {console.log(e);});
 		}
 	});
 };
@@ -1747,6 +1750,6 @@ cipEvents.triggerActivatedTab = function() {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl ]
-		}).then(cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback).catch((e) => {console.log(e);});
 	}
 };
