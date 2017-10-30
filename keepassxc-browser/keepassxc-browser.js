@@ -54,7 +54,7 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		}
 		else if (req.action === 'redetect_fields') {
 			browser.runtime.sendMessage({
-				action: 'get_settings',
+				action: 'load_settings',
 			}).then((response) => {
 				cip.settings = response.data;
 				cip.initCredentialFields(true);
@@ -1109,9 +1109,9 @@ jQuery(function() {
 
 cip.init = function() {
 	browser.runtime.sendMessage({
-		action: 'get_settings',
+		action: 'load_settings',
 	}).then((response) => {
-		cip.settings = response.data;
+		cip.settings = response;
 		cip.initCredentialFields();
 	});
 };
@@ -1134,7 +1134,7 @@ cip.detectNewActiveFields = function() {
 // Try to do this in a way that database value if checked without polling the KeePassXC.. too many messages jumping around
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function() {
-	const dbDetectInterval = setInterval(function() {
+	let dbDetectInterval = setInterval(function() {
 		if (document.visibilityState !== 'hidden') {
 			browser.runtime.sendMessage({
 				action: 'check_databasehash'
@@ -1153,9 +1153,9 @@ cip.detectDatabaseChange = function() {
 				} else {
 					if (response.new !== 'no-hash' && response.new !== response.old) {
 						browser.runtime.sendMessage({
-							action: 'get_settings',
+							action: 'load_settings',
 						}).then((response) => {
-							cip.settings = response.data;
+							cip.settings = response;
 							cip.initCredentialFields(true);
 						});
 					}

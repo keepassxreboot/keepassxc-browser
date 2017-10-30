@@ -100,32 +100,37 @@ kpxcEvent.showStatus = function(configured, tab, callback) {
 };
 
 kpxcEvent.onLoadSettings = function(callback, tab) {
-	page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
+	browser.storage.local.get({'settings': {}}).then((item) => {
+		callback(item.settings);
+	}, (err) => {
+		console.log('error loading settings: ' + err);
+	});
 };
 
 kpxcEvent.onLoadKeyRing = function(callback, tab) {
-	keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
-	if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
-		keepass.associated = {
-			value: false,
-			hash: null
-		};
-	}
-};
-
-kpxcEvent.onGetSettings = function(callback, tab) {
-	kpxcEvent.onLoadSettings();
-	callback({ data: page.settings });
+	browser.storage.local.get({'keyRing': {}}).then(function(item) {
+		keepass.keyRing = item.keyRing;
+		if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
+			keepass.associated = {
+				"value": false,
+				"hash": null
+			};
+		}
+		callback(item.keyRing);
+	}, (err) => {
+		console.log('error loading keyRing: ' + err);
+	});
 };
 
 kpxcEvent.onSaveSettings = function(callback, tab, settings) {
-	localStorage.settings = JSON.stringify(settings);
-	kpxcEvent.onLoadSettings();
+	browser.storage.local.set({'settings': settings}).then(function() {
+		kpxcEvent.onLoadSettings();
+	});
 };
 
 kpxcEvent.onGetStatus = function(callback, tab) {
 	keepass.testAssociation((response) => {
-		keepass.isConfigured((configured) => {
+		keepass.isConfigured().then((configured) => {
 			kpxcEvent.showStatus(configured, tab, callback);
 		});
 	}, tab, true);
@@ -141,7 +146,7 @@ kpxcEvent.onReconnect = function(callback, tab) {
 			keepass.getDatabaseHash((gdRes) => {
 				if (gdRes) {
 					keepass.testAssociation((response) => {
-						keepass.isConfigured((configured) => {
+						keepass.isConfigured().then((configured) => {
 							kpxcEvent.showStatus(configured, tab, callback);
 						});
 					}, tab);
@@ -175,12 +180,13 @@ kpxcEvent.onGetConnectedDatabase = function(callback, tab) {
 };
 
 kpxcEvent.onGetKeePassXCVersions = function(callback, tab) {
-	if (keepass.currentKeePassXC.version === 0) {
-		keepass.getDatabaseHash((response) => {
-			callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
-		}, tab);
-	}
-	callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
+	if(keepass.currentKeePassXC.version == 0) {
+		keepass.getDatabaseHash(tab).then(() => {
+			callback({"current": keepass.currentKeePassXC.version, "latest": keepass.currentKeePassXC.version});
+		});
+	} else {
+		callback({"current": keepass.currentKeePassXC.version, "latest": keepass.currentKeePassXC.version});
+}
 };
 
 kpxcEvent.onCheckUpdateKeePassXC = function(callback, tab) {
@@ -254,7 +260,6 @@ kpxcEvent.messageHandlers = {
 	'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
 	'get_connected_database': kpxcEvent.onGetConnectedDatabase,
 	'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
-	'get_settings': kpxcEvent.onGetSettings,
 	'get_status': kpxcEvent.onGetStatus,
 	'get_tab_information': kpxcEvent.onGetTabInformation,
 	'load_keyring': kpxcEvent.onLoadKeyRing,
