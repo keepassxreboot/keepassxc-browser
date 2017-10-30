@@ -148,7 +148,7 @@ kpxcEvent.onReconnect = function(callback, tab) {
 					keepass.testAssociation((response) => {
 						keepass.isConfigured().then((configured) => {
 							kpxcEvent.showStatus(configured, tab, callback);
-						});
+						}).catch((e) => {console.log(e);});
 					}, tab);
 				}
 			}, null);
