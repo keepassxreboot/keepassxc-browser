@@ -83,6 +83,48 @@ browser.storage.local.get({
 		keepass.keyRing = item.keyRing;
 });
 
+keepass.sendNativeMessage = function(request, enableTimeout = false) {
+	return new Promise((resolve, reject) => {
+		let timeout;
+		let action = request.action;
+		let ev = keepass.nativePort.onMessage;
+
+		let listener = ((port, action) => {
+			let handler = (msg) => {
+				if (msg && msg.action === action) {
+					port.removeListener(handler);
+					if (enableTimeout) {
+						clearTimeout(timeout);
+					}
+					resolve(msg);
+				}
+			};
+			return handler;
+		})(ev, action);
+		ev.addListener(listener);
+
+
+		// Handle timeouts
+		if (enableTimeout) {
+			timeout = setTimeout(() => {
+				const errorMessage = {
+					action: action,
+					error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
+					errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
+				};
+				keepass.isKeePassXCAvailable = false;
+				ev.removeListener(listener.handler);
+				resolve(errorMessage);
+			}, keepass.messageTimeout);
+		}
+
+		// Send the request
+		if (keepass.nativePort) {
+			keepass.nativePort.postMessage(request);
+		}
+	});
+};
+
 keepass.addCredentials = function(callback, tab, username, password, url) {
 	keepass.updateCredentials(callback, tab, null, username, password, url);
 };
@@ -215,46 +257,6 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 			}
 		});
 	}, tab);
-};
-
-keepass.sendNativeMessage = function(request, enableTimeout = false) {
-	return new Promise((resolve, reject) => {
-		let timeout;
-		let action = request.action;
-		let ev = keepass.nativePort.onMessage;
-
-		let listener = ((port, action) => {
-			let handler = (msg) => {
-				if (msg && msg.action === action) {
-					port.removeListener(handler);
-					if (enableTimeout) {
-						clearTimeout(timeout);
-					}
-					resolve(msg);
-				}
-			};
-			return handler;
-		})(ev, action);
-		ev.addListener(listener);
-
-
-		// Handle timeouts
-		if (enableTimeout) {
-			timeout = setTimeout(() => {
-				const errorMessage = {
-					action: action,
-					error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
-					errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
-				};
-				keepass.isKeePassXCAvailable = false;
-				ev.removeListener(listener.handler);
-				resolve(errorMessage);
-			}, keepass.messageTimeout);
-		}
-
-		// Send the request
-		keepass.nativePort.postMessage(request);
-	});
 };
 
 keepass.generatePassword = function(callback, tab, forceCallback) {
@@ -763,9 +765,6 @@ keepass.checkForNewKeePassXCVersion = function() {
 };
 
 keepass.connectToNative = function() {
-	/*if (!keepass.isConnected) {
-		keepass.nativeConnect();
-	}*/
 	if (keepass.nativePort) {
 		keepass.nativePort.disconnect();
 	}
