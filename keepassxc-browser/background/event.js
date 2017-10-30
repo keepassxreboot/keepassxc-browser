@@ -142,7 +142,7 @@ kpxcEvent.onReconnect = function(callback, tab) {
 	// Add a small timeout after reconnecting. Just to make sure. It's not pretty, I know :(
 	setTimeout(() => {
 		keepass.generateNewKeyPair();
-		keepass.changePublicKeys(tab, (pkRes) => {
+		keepass.changePublicKeys(tab).then((pkRes) => {
 			keepass.getDatabaseHash((gdRes) => {
 				if (gdRes) {
 					keepass.testAssociation((response) => {
@@ -157,9 +157,9 @@ kpxcEvent.onReconnect = function(callback, tab) {
 };
 
 kpxcEvent.lockDatabase = function(callback, tab) {
-	keepass.lockDatabase((response) => {
+	keepass.lockDatabase(tab).then((response => {
 		kpxcEvent.showStatus(true, tab, callback);
-	}, tab);
+	}));
 };
 
 kpxcEvent.onPopStack = function(callback, tab) {

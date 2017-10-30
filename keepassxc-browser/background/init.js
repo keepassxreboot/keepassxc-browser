@@ -3,7 +3,7 @@ keepass.migrateKeyRing().then(() => {
 		page.initOpenedTabs().then(() => {
 			keepass.connectToNative();
 			keepass.generateNewKeyPair();
-			keepass.changePublicKeys(null, (pkRes) => {
+			keepass.changePublicKeys(null, keepass.messageTimeout).then((pkRes) => {
 				keepass.getDatabaseHash((gdRes) => {}, null);
 			});
 		});
