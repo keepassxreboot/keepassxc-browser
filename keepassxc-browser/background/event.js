@@ -181,9 +181,9 @@ kpxcEvent.onGetConnectedDatabase = function(callback, tab) {
 
 kpxcEvent.onGetKeePassXCVersions = function(callback, tab) {
 	if(keepass.currentKeePassXC.version == 0) {
-		keepass.getDatabaseHash(tab).then(() => {
+		keepass.getDatabaseHash((res) => {
 			callback({"current": keepass.currentKeePassXC.version, "latest": keepass.currentKeePassXC.version});
-		});
+		}, tab);
 	} else {
 		callback({"current": keepass.currentKeePassXC.version, "latest": keepass.currentKeePassXC.version});
 }

@@ -18,7 +18,6 @@ keepass.keySize = 24;
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not return a hash value
-keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 keepass.messageTimeout = 500; // milliseconds
@@ -633,8 +632,8 @@ keepass.generateNewKeyPair = function() {
 
 keepass.isConfigured = function() {
 	return new Promise((resolve, reject) => {
-		if (typeof(keepass.databaseHash) === 'undefined') {
-			keepass.getDatabaseHash().then((hash) => {
+		if (typeof(keepass.databaseHash) === 'undefined' || keepass.databaseHash === 'no-hash') {
+			keepass.getDatabaseHash((hash) => {
 				resolve(hash in keepass.keyRing);
 			});
 		} else {
