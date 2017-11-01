@@ -1,4 +1,4 @@
-0.3.8 (??-??-2017)
+0.3.8 (01-11-2017)
 =========================
 - Use browser.local.storage instead of localStorage
 - Switched some functions to promise
