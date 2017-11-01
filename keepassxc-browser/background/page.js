@@ -10,50 +10,56 @@ const defaultSettings = {
 
 var page = {};
 page.tabs = {};
-
 page.currentTabId = -1;
-page.settings = (typeof(localStorage.settings) === 'undefined') ? {} : JSON.parse(localStorage.settings);
 page.blockedTabs = {};
 
 page.initSettings = function() {
-	kpxcEvent.onLoadSettings();
-	if (!('checkUpdateKeePassXC' in page.settings)) {
-		page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
-	}
-	if (!('autoCompleteUsernames' in page.settings)) {
-		page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
-	}
-	if (!('autoFillAndSend' in page.settings)) {
-		page.settings.autoFillAndSend = defaultSettings.autoFillAndSend;
-	}
-	if (!('usePasswordGenerator' in page.settings)) {
-		page.settings.usePasswordGenerator = defaultSettings.usePasswordGenerator;
-	}
-	if (!('autoFillSingleEntry' in page.settings)) {
-		page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
-	}
-	if (!('autoRetrieveCredentials' in page.settings)) {
-		page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
-	}
-	if (!('port' in page.settings)) {
-		page.settings.port = defaultSettings.proxyPort;
-	}
-	localStorage.settings = JSON.stringify(page.settings);
+	return new Promise((resolve, reject) => {
+		kpxcEvent.onLoadSettings((settings) => {
+			page.settings = settings;
+			if (!('checkUpdateKeePassXC' in page.settings)) {
+				page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
+			}
+			if (!('autoCompleteUsernames' in page.settings)) {
+				page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
+			}
+			if (!('autoFillAndSend' in page.settings)) {
+				page.settings.autoFillAndSend = defaultSettings.autoFillAndSend;
+			}
+			if (!('usePasswordGenerator' in page.settings)) {
+				page.settings.usePasswordGenerator = defaultSettings.usePasswordGenerator;
+			}
+			if (!('autoFillSingleEntry' in page.settings)) {
+				page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
+			}
+			if (!('autoRetrieveCredentials' in page.settings)) {
+				page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
+			}
+			if (!('port' in page.settings)) {
+				page.settings.port = defaultSettings.proxyPort;
+			}
+			browser.storage.local.set({'settings': page.settings});
+			resolve();
+		});
+	});
 };
 
 page.initOpenedTabs = function() {
-	browser.tabs.query({}).then((tabs) => {
-		for (const i of tabs) {
-			page.createTabEntry(i.id);
-		}
-
-		// set initial tab-ID
-		browser.tabs.query({ "active": true, "currentWindow": true }).then((tabs) => {
-			if (tabs.length === 0) {
-				return; // For example: only the background devtools or a popup are opened
+	return new Promise((resolve, reject) => {
+		browser.tabs.query({}).then((tabs) => {
+			for (const i of tabs) {
+				page.createTabEntry(i.id);
 			}
-			page.currentTabId = tabs[0].id;
-			browserAction.show(null, tabs[0]);
+
+			// set initial tab-ID
+			browser.tabs.query({ "active": true, "currentWindow": true }).then((tabs) => {
+				if (tabs.length === 0) {
+					return; // For example: only the background devtools or a popup are opened
+				}
+				page.currentTabId = tabs[0].id;
+				browserAction.show(null, tabs[0]);
+				resolve();
+			});
 		});
 	});
 };

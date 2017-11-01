@@ -1,12 +1,14 @@
-keepass.convertKeyToKeyRing();
-page.initSettings();
-page.initOpenedTabs();
-keepass.connectToNative();
-keepass.generateNewKeyPair();
-keepass.changePublicKeys(null, (pkRes) => {
-	keepass.getDatabaseHash((gdRes) => {}, null);
+keepass.migrateKeyRing().then(() => {
+	page.initSettings().then(() => {
+		page.initOpenedTabs().then(() => {
+			keepass.connectToNative();
+			keepass.generateNewKeyPair();
+			keepass.changePublicKeys(null, keepass.messageTimeout).then((pkRes) => {
+				keepass.getDatabaseHash((gdRes) => {}, null);
+			});
+		});
+	});
 });
-
 
 // Milliseconds for intervall (e.g. to update browserAction)
 let _interval = 250;

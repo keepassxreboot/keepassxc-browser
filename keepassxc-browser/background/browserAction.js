@@ -70,7 +70,7 @@ browserAction.showDefault = function(callback, tab) {
 		iconType: 'normal',
 		popup: 'popup.html'
 	};
-	keepass.isConfigured((response) => {
+	keepass.isConfigured().then((response) => {
 		if (!response || keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable || page.tabs[tab.id].errorMessage) {
 			stackData.iconType = 'cross';
 		}

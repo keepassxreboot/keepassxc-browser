@@ -1,3 +1,8 @@
+0.3.8 (??-??-2017)
+=========================
+- Use browser.local.storage instead of localStorage
+- Switched some functions to promise
+
 0.3.7 (22-10-2017)
 =========================
 - Improved credentials check (does not use protocol requests for polling)

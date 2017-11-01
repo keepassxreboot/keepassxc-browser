@@ -11,7 +11,6 @@ keepass.isDatabaseClosed = false;
 keepass.isKeePassXCAvailable = false;
 keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = {'version': 0, 'versionParsed': 0};
-keepass.latestKeePassXC = (typeof(localStorage.latestKeePassXC) === 'undefined') ? {'version': 0, 'versionParsed': 0, 'lastChecked': null} : JSON.parse(localStorage.latestKeePassXC);
 keepass.requiredKeePassXC = 220;
 keepass.nativeHostName = 'com.varjolintu.keepassxc_browser';
 keepass.nativePort = null;
@@ -19,7 +18,6 @@ keepass.keySize = 24;
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not return a hash value
-keepass.keyRing = (typeof(localStorage.keyRing) === 'undefined') ? {} : JSON.parse(localStorage.keyRing);
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 keepass.messageTimeout = 500; // milliseconds
@@ -77,6 +75,55 @@ const kpErrors = {
 	}
 };
 
+browser.storage.local.get({
+	'latestKeePassXC': {'version': 0, 'versionParsed': 0, 'lastChecked': null},
+	'keyRing': {}}).then((item) => {
+		keepass.latestKeePassXC = item.latestKeePassXC;
+		keepass.keyRing = item.keyRing;
+});
+
+keepass.sendNativeMessage = function(request, enableTimeout = false) {
+	return new Promise((resolve, reject) => {
+		let timeout;
+		let action = request.action;
+		let ev = keepass.nativePort.onMessage;
+
+		let listener = ((port, action) => {
+			let handler = (msg) => {
+				if (msg && msg.action === action) {
+					port.removeListener(handler);
+					if (enableTimeout) {
+						clearTimeout(timeout);
+					}
+					resolve(msg);
+				}
+			};
+			return handler;
+		})(ev, action);
+		ev.addListener(listener);
+
+
+		// Handle timeouts
+		if (enableTimeout) {
+			timeout = setTimeout(() => {
+				const errorMessage = {
+					action: action,
+					error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
+					errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
+				};
+				keepass.isKeePassXCAvailable = false;
+				ev.removeListener(listener.handler);
+				resolve(errorMessage);
+			}, keepass.messageTimeout);
+		}
+
+		// Send the request
+		if (keepass.nativePort) {
+			keepass.nativePort.postMessage(request);
+		}
+	});
+};
+
 keepass.addCredentials = function(callback, tab, username, password, url) {
 	keepass.updateCredentials(callback, tab, null, username, password, url);
 };
@@ -116,9 +163,8 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 			nonce: keepass.b64e(nonce),
 			clientID: keepass.clientID
 		};
-		console.log(request);
 
-		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
+		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
 			  	if (res) {
@@ -134,7 +180,6 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 				browserAction.showDefault(null, tab);
 			}
 		});
-		keepass.nativePort.postMessage(request);
 	});
 };
 
@@ -180,7 +225,7 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 			clientID: keepass.clientID
 		};
 
-		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
+		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
 			  	if (res) {
@@ -210,40 +255,7 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 				browserAction.showDefault(null, tab);
 			}
 		});
-		keepass.nativePort.postMessage(request);
 	}, tab);
-};
-
-// Redirects the callback to a listener (handleReply())
-keepass.callbackOnId = function(ev, action, tab, callback, enableTimeout = false) {
-	let timeout;
-	let listener = ((port, action) => {
-		let handler = (msg) => {
-			if (msg && msg.action === action) {
-				ev.removeListener(handler);
-				if (enableTimeout) {
-					clearTimeout(timeout);
-				}
-				callback(msg);
-			}
-		};
-		return handler;
-	})(ev, action, tab, callback);
-	ev.addListener(listener);
-
-	// Handle timeouts
-	if (enableTimeout) {
-		timeout = setTimeout(() => {
-			const errorMessage = {
-				action: action,
-				error: kpErrors.getError(5),
-				errorCode: 5
-			};
-			keepass.isKeePassXCAvailable = false;
-			callback(errorMessage);
-			ev.removeListener(listener.handler);
-		}, keepass.messageTimeout);
-	}
 };
 
 keepass.generatePassword = function(callback, tab, forceCallback) {
@@ -277,10 +289,10 @@ keepass.generatePassword = function(callback, tab, forceCallback) {
 			clientID: keepass.clientID
 		};
 
-		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
+		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
-			  	if (res) {
+				if (res) {
 					const message = nacl.util.encodeUTF8(res);
 					const parsed = JSON.parse(message);
 					keepass.setcurrentKeePassXCVersion(parsed.version);
@@ -304,7 +316,6 @@ keepass.generatePassword = function(callback, tab, forceCallback) {
 				keepass.handleError(tab, response.errorCode, response.error);
 			}
 		});
-		keepass.nativePort.postMessage(request);
 	}, tab);
 };
 
@@ -338,7 +349,7 @@ keepass.associate = function(callback, tab) {
 			clientID: keepass.clientID
 		};
 
-		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
+		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
 			  	if (res) {
@@ -363,7 +374,6 @@ keepass.associate = function(callback, tab) {
 				keepass.handleError(tab, response.errorCode, response.error);
 			}
 		});
-		keepass.nativePort.postMessage(request);
 	}, tab);
 };
 
@@ -421,7 +431,7 @@ keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 			clientID: keepass.clientID
 		};
 
-		keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
+		keepass.sendNativeMessage(request, enableTimeout).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
 		  		if (res) {
@@ -453,7 +463,6 @@ keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 			}
 			callback(keepass.isAssociated());
 		});
-		keepass.nativePort.postMessage(request);
 	}, tab, enableTimeout);
 };
 
@@ -465,7 +474,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 	}
 
 	if (!keepass.serverPublicKey) {
-		keepass.changePublicKeys(tab, null);
+		keepass.changePublicKeys(tab);
 	}
 
 	const kpAction = kpActions.GET_DATABASE_HASH;
@@ -489,7 +498,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 		clientID: keepass.clientID
 	};
 
-	keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
+	keepass.sendNativeMessage(request, enableTimeout).then((response) => {
 		if (response.message && response.nonce) {
 			const res = keepass.decrypt(response.message, response.nonce);
 		  	if (res) {
@@ -521,8 +530,8 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 		else {
 			keepass.databaseHash = 'no-hash';
 			keepass.isDatabaseClosed = true;
-			keepass.isKeePassXCAvailable = false;
-			if (response.message === "") {
+			if (response.message === '') {
+				keepass.isKeePassXCAvailable = false;
 				keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
 			}
 			else {
@@ -530,90 +539,90 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 			}
 			callback(keepass.databaseHash);
 		}
-	}, enableTimeout);
-	keepass.nativePort.postMessage(request);
-};
-
-keepass.changePublicKeys = function(tab, callback) {
-	if (!keepass.isConnected) {
-		callback([]);
-		return;
-	}
-
-	const kpAction = kpActions.CHANGE_PUBLIC_KEYS;
-	const key = keepass.b64e(keepass.keyPair.publicKey);
-	let nonce = nacl.randomBytes(keepass.keySize);
-	nonce = keepass.b64e(nonce);
-	keepass.clientID = keepass.b64e(nacl.randomBytes(keepass.keySize));
-
-	const message = {
-		action: kpAction,
-		publicKey: key,
-		proxyPort: (page.settings.port ? page.settings.port : 19700),
-		nonce: nonce,
-		clientID: keepass.clientID
-	};
-
-	keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
-		keepass.setcurrentKeePassXCVersion(response.version);
-
-		if (!keepass.verifyKeyResponse(response, key, nonce)) {
-			if (tab && page.tabs[tab.id]) {
-				keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
-				callback(false);
-			}
-		}
-		else {
-			keepass.isKeePassXCAvailable = true;
-			console.log('Server public key: ' + keepass.b64e(keepass.serverPublicKey));
-		}
-		callback(true);
 	});
-	keepass.nativePort.postMessage(message);
 };
 
-keepass.lockDatabase = function(callback, tab, forceCallback) {
-	if (!keepass.isConnected) {
-		keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
-		callback([]);
-		return;
-	}
+keepass.changePublicKeys = function(tab, enableTimeout = false) {
+	return new Promise((resolve, reject) => {
+		if (!keepass.isConnected) {
+			reject(false);
+		}
 
-	const kpAction = kpActions.LOCK_DATABASE;
-	const nonce = nacl.randomBytes(keepass.keySize);
+		const kpAction = kpActions.CHANGE_PUBLIC_KEYS;
+		const key = keepass.b64e(keepass.keyPair.publicKey);
+		let nonce = nacl.randomBytes(keepass.keySize);
+		nonce = keepass.b64e(nonce);
+		keepass.clientID = keepass.b64e(nacl.randomBytes(keepass.keySize));
 
-	const messageData = {
-		action: kpAction
-	};
+		const request = {
+			action: kpAction,
+			publicKey: key,
+			proxyPort: (page.settings.port ? page.settings.port : 19700),
+			nonce: nonce,
+			clientID: keepass.clientID
+		};
 
-	const request = {
-		action: kpAction,
-		message: keepass.encrypt(messageData, nonce),
-		nonce: keepass.b64e(nonce),
-		clientID: keepass.clientID
-	};
+		keepass.sendNativeMessage(request, enableTimeout).then((response) => {
+			keepass.setcurrentKeePassXCVersion(response.version);
 
-	keepass.callbackOnId(keepass.nativePort.onMessage, kpAction, tab, (response) => {
-		if (response.message && response.nonce) {
-			const res = keepass.decrypt(response.message, response.nonce);
-		  	if (res) {
-				const message = nacl.util.encodeUTF8(res);
-				const parsed = JSON.parse(message);
-				keepass.setcurrentKeePassXCVersion(parsed.version);
-
-				if (keepass.verifyResponse(parsed, response.nonce)) {
-					keepass.isDatabaseClosed = true;
-					keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
-					callback(false);
+			if (!keepass.verifyKeyResponse(response, key, nonce)) {
+				if (tab && page.tabs[tab.id]) {
+					keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
+					reject(false);
 				}
 			}
-		}
-		else if (response.error && response.errorCode) {
-			keepass.handleError(tab, response.errorCode, response.error);
-		}
-		callback(false);
+			else {
+				keepass.isKeePassXCAvailable = true;
+				console.log('Server public key: ' + keepass.b64e(keepass.serverPublicKey));
+			}
+			resolve(true);
+		});
 	});
-	keepass.nativePort.postMessage(request);
+};
+
+keepass.lockDatabase = function(tab) {
+	return new Promise((resolve, reject) => {
+		if (!keepass.isConnected) {
+			keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
+			reject(false);
+		}
+
+		const kpAction = kpActions.LOCK_DATABASE;
+		const nonce = nacl.randomBytes(keepass.keySize);
+
+		const messageData = {
+			action: kpAction
+		};
+
+		const request = {
+			action: kpAction,
+			message: keepass.encrypt(messageData, nonce),
+			nonce: keepass.b64e(nonce),
+			clientID: keepass.clientID
+		};
+
+		keepass.sendNativeMessage(request).then((response) => {
+			if (response.message && response.nonce) {
+				const res = keepass.decrypt(response.message, response.nonce);
+			  	if (res) {
+					const message = nacl.util.encodeUTF8(res);
+					const parsed = JSON.parse(message);
+					keepass.setcurrentKeePassXCVersion(parsed.version);
+
+					if (keepass.verifyResponse(parsed, response.nonce)) {
+						keepass.isDatabaseClosed = true;
+						keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
+						resolve(false);
+					}
+				}
+			}
+			else if (response.error && response.errorCode) {
+				keepass.isDatabaseClosed = true;
+				keepass.handleError(tab, response.errorCode, response.error);
+			}
+			resolve(false);
+		});
+	});
 };
 
 keepass.generateNewKeyPair = function() {
@@ -621,15 +630,16 @@ keepass.generateNewKeyPair = function() {
 	//console.log(keepass.b64e(keepass.keyPair.publicKey) + ' ' + keepass.b64e(keepass.keyPair.secretKey));
 };
 
-keepass.isConfigured = function(callback) {
-	if (typeof(keepass.databaseHash) === 'undefined') {
-		keepass.getDatabaseHash((dbHash) => {
-			callback(keepass.databaseHash in keepass.keyRing);
-		}, null);
-	}
-	else {
-		callback(keepass.databaseHash in keepass.keyRing);
-	}
+keepass.isConfigured = function() {
+	return new Promise((resolve, reject) => {
+		if (typeof(keepass.databaseHash) === 'undefined' || keepass.databaseHash === 'no-hash') {
+			keepass.getDatabaseHash((hash) => {
+				resolve(hash in keepass.keyRing);
+			});
+		} else {
+			resolve(keepass.databaseHash in keepass.keyRing);
+		}
+	});
 };
 
 keepass.checkDatabaseHash = function(callback, tab) {
@@ -640,22 +650,33 @@ keepass.isAssociated = function() {
 	return (keepass.associated.value && keepass.associated.hash && keepass.associated.hash === keepass.databaseHash);
 };
 
-keepass.convertKeyToKeyRing = function() {
-	if (keepass.keyId in localStorage && keepass.keyBody in localStorage && !('keyRing' in localStorage)) {
-		keepass.getDatabaseHash((hash) => {
-			keepass.saveKey(hash, localStorage[keepass.keyId], localStorage[keepass.keyBody]);
-
-			if ('keyRing' in localStorage) {
-				delete localStorage[keepass.keyId];
-				delete localStorage[keepass.keyBody];
+keepass.migrateKeyRing = function() {
+	return new Promise((resolve, reject) => {
+		browser.storage.local.get('keyRing').then((item) => {
+		 	const keyring = item.keyRing;
+			// Change dates to numbers, for compatibilty with Chromium based browsers
+			if (keyring) {
+				let num = 0;
+				for (let keyHash in keyring) {
+					let key = keyring[keyHash];
+					['created', 'lastUsed'].forEach((fld) => {
+						let v = key[fld];
+						if (v instanceof Date && v.valueOf() >= 0) {
+							key[fld] = v.valueOf();
+							num++;
+						} else if (typeof v !== 'number') {
+							key[fld] = Date.now().valueOf();
+							num++;
+						}
+					});
+				}
+				if (num > 0) {
+					browser.storage.local.set({ keyRing: keyring });
+				}
 			}
-		}, null);
-	}
-
-	if ('keyRing' in localStorage) {
-		delete localStorage[keepass.keyId];
-		delete localStorage[keepass.keyBody];
-	}
+			resolve();
+		});
+	});
 };
 
 keepass.saveKey = function(hash, id, key) {
@@ -664,8 +685,8 @@ keepass.saveKey = function(hash, id, key) {
 			id: id,
 			key: key,
 			hash: hash,
-			created: new Date(),
-			lastUsed: new Date()
+			created: new Date().valueOf(),
+			lastUsed: new Date().valueOf()
 		};
 	}
 	else {
@@ -673,19 +694,19 @@ keepass.saveKey = function(hash, id, key) {
 		keepass.keyRing[hash].key = key;
 		keepass.keyRing[hash].hash = hash;
 	}
-	localStorage.keyRing = JSON.stringify(keepass.keyRing);
+	browser.storage.local.set({'keyRing': keepass.keyRing});
 };
 
 keepass.updateLastUsed = function(hash) {
 	if ((hash in keepass.keyRing)) {
-		keepass.keyRing[hash].lastUsed = new Date();
-		localStorage.keyRing = JSON.stringify(keepass.keyRing);
+		keepass.keyRing[hash].lastUsed = new Date().valueOf();
+		browser.storage.local.set({'keyRing': keepass.keyRing});
 	}
 };
 
 keepass.deleteKey = function(hash) {
 	delete keepass.keyRing[hash];
-	localStorage.keyRing = JSON.stringify(keepass.keyRing);
+	browser.storage.local.set({'keyRing': keepass.keyRing});
 };
 
 keepass.setcurrentKeePassXCVersion = function(version) {
@@ -699,7 +720,7 @@ keepass.setcurrentKeePassXCVersion = function(version) {
 
 keepass.keePassXCUpdateAvailable = function() {
 	if (page.settings.checkUpdateKeePassXC && page.settings.checkUpdateKeePassXC > 0) {
-		const lastChecked = (keepass.latestKeePassXC.lastChecked) ? new Date(keepass.latestKeePassXC.lastChecked) : new Date('11/21/1986');
+		const lastChecked = (keepass.latestKeePassXC.lastChecked) ? new Date(keepass.latestKeePassXC.lastChecked) : new Date(1986, 11, 21);
 		const daysSinceLastCheck = Math.floor(((new Date()).getTime()-lastChecked.getTime())/86400000);
 		if (daysSinceLastCheck >= page.settings.checkUpdateKeePassXC) {
 			keepass.checkForNewKeePassXCVersion();
@@ -724,7 +745,7 @@ keepass.checkForNewKeePassXCVersion = function() {
 		}
 
 		if (version !== -1) {
-			localStorage.latestKeePassXC = JSON.stringify(keepass.latestKeePassXC);
+			browser.storage.local.set({'latestKeePassXC': keepass.latestKeePassXC});
 		}
 	};
 
@@ -739,13 +760,14 @@ keepass.checkForNewKeePassXCVersion = function() {
 	catch (ex) {
 		console.log(ex);
 	}
-	keepass.latestKeePassXC.lastChecked = new Date();
+	keepass.latestKeePassXC.lastChecked = new Date().valueOf();
 };
 
 keepass.connectToNative = function() {
-	if (!keepass.isConnected) {
-		keepass.nativeConnect();
+	if (keepass.nativePort) {
+		keepass.nativePort.disconnect();
 	}
+	keepass.nativeConnect();
 };
 
 keepass.onNativeMessage = function(response) {
@@ -754,7 +776,7 @@ keepass.onNativeMessage = function(response) {
 	// Handle database lock/unlock status
 	if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
 		keepass.testAssociation((response) => {
-			keepass.isConfigured((configured) => {
+			keepass.isConfigured().then((configured) => {
 				let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
 				data.iconType = configured ? 'normal' : 'cross';
 				browserAction.show(null, {'id': page.currentTabId});
