@@ -130,6 +130,11 @@ kpxcEvent.onSaveSettings = function(callback, tab, settings) {
 
 kpxcEvent.onGetStatus = function(callback, tab) {
 	keepass.testAssociation((response) => {
+		if (!response) {
+			kpxcEvent.showStatus(false, tab, callback);
+			return;
+		}
+
 		keepass.isConfigured().then((configured) => {
 			kpxcEvent.showStatus(configured, tab, callback);
 		});
