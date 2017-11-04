@@ -1,6 +1,10 @@
+0.3.9 (04-11-2017)
+=========================
+- Removed incorrect timeout waiting on init
+
 0.3.8 (01-11-2017)
 =========================
-- Use browser.local.storage instead of localStorage
+- Use browser.storage.local instead of localStorage
 - Switched some functions to promise
 
 0.3.7 (22-10-2017)
