@@ -9,7 +9,7 @@ Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/k
 
 The extension is supported with Firefox 55 and newer. If you want to load it as a temporary plugin with Firefox 54 you can just change the minimum version from the manifest file before loading it.
 
-Please thee this [wiki page](https://github.com/varjolintu/keepassxc-browser/wiki/Connecting-the-database-with-current-beta-build) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
+Please thee this [wiki page](hhttps://github.com/varjolintu/keepassxc-browser/wiki/Connecting-the-database-with-keepassxc-browser) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
 
 ## How it works
 There are two methods which you can use keepassxc-browser to connect to KeePassXC:
@@ -18,7 +18,7 @@ There are two methods which you can use keepassxc-browser to connect to KeePassX
 This can cause unsaved changes not to be saved. If you use this method it's important to enable `Automatically save after every change` from KeePassXC's preferences.
 
 2. keepassxc-browser communicated with KeePassXC through [keepassxc-proxy](https://github.com/varjolintu/keepassxc-proxy) or [keepassxc-proxy-rust](https://github.com/varjolintu/keepassxc-proxy-rust). The proxy handles listening stdin/stdout
-and transfers these messages through a localhost UDP port 19700 (configurable) to KeePassXC. This means KeePassXC can be used and started normally without inteference from
+and transfers these messages through Unix domain sockets / named pipes to KeePassXC. This means KeePassXC can be used and started normally without inteference from
 Native Messaging API. keepassxc-browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. keepassxc-proxy
 is still under development. If you want, you are free to write your own proxy that handles the traffic.
 
