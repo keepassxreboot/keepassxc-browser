@@ -88,23 +88,9 @@ options.initGeneralSettings = function() {
 		}).then(options.showKeePassXCVersions);
 	});
 
-	$('#port').val(options.settings['port']);
 	$('#blinkTimeout').val(options.settings['blinkTimeout']);
 	$('#blinkMinTimeout').val(options.settings['blinkMinTimeout']);
 	$('#allowedRedirect').val(options.settings['allowedRedirect']);
-
-	$('#portButton').click(function() {
-		const port = $.trim($('#port').val());
-	 	const portNumber = Number(port);
-		if (isNaN(port) || portNumber < 1025 || portNumber > 99999) {
-			$('#port').closest('.control-group').addClass('error');
-			alert('The port number has to be in range 1025 - 99999.\nNothing saved!');
-			return;
-		}
-
-		options.settings['port'] = String(portNumber);
-		options.saveSetting('port');
-	});
 
 	$('#blinkTimeoutButton').click(function(){
 		const blinkTimeout = $.trim($('#blinkTimeout').val());
