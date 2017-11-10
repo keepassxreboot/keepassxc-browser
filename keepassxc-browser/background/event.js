@@ -128,17 +128,24 @@ kpxcEvent.onSaveSettings = function(callback, tab, settings) {
 	});
 };
 
-kpxcEvent.onGetStatus = function(callback, tab) {
-	keepass.testAssociation((response) => {
-		if (!response) {
-			kpxcEvent.showStatus(false, tab, callback);
-			return;
-		}
+kpxcEvent.onGetStatus = function(callback, tab, internalPoll = false) {
+	// When internalPoll is true the event is triggered from content script in intervals -> don't poll KeePassXC
+	if (!internalPoll) {
+		keepass.testAssociation((response) => {
+			if (!response) {
+				kpxcEvent.showStatus(false, tab, callback);
+				return;
+			}
 
+			keepass.isConfigured().then((configured) => {
+				kpxcEvent.showStatus(configured, tab, callback);
+			});
+		}, tab, true);
+	} else {
 		keepass.isConfigured().then((configured) => {
 			kpxcEvent.showStatus(configured, tab, callback);
 		});
-	}, tab, true);
+	}
 };
 
 kpxcEvent.onReconnect = function(callback, tab) {

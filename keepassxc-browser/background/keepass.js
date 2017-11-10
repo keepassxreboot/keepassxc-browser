@@ -631,7 +631,7 @@ keepass.generateNewKeyPair = function() {
 
 keepass.isConfigured = function() {
 	return new Promise((resolve, reject) => {
-		if (typeof(keepass.databaseHash) === 'undefined' || keepass.databaseHash === 'no-hash') {
+		if (typeof(keepass.databaseHash) === 'undefined') {
 			keepass.getDatabaseHash((hash) => {
 				resolve(hash in keepass.keyRing);
 			});
