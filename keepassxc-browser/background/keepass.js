@@ -545,6 +545,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 keepass.changePublicKeys = function(tab, enableTimeout = false) {
 	return new Promise((resolve, reject) => {
 		if (!keepass.isConnected) {
+			keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
 			reject(false);
 		}
 
