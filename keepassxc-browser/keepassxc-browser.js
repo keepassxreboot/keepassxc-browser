@@ -396,7 +396,6 @@ cipPassword.callbackPasswordCopied = function(bool) {
 
 cipPassword.callbackGeneratedPassword = function(entries) {
 	if (entries && entries.length >= 1) {
-		console.log(entries[0]);
 		jQuery('#cip-genpw-btn-clipboard:first').removeClass('btn-success');
 		jQuery('input#cip-genpw-textfield-password:first').val(entries[0].password);
 		if (isNaN(entries[0].login)) {
@@ -408,7 +407,7 @@ cipPassword.callbackGeneratedPassword = function(entries) {
 	}
 	else {
 		if (jQuery('div#cip-genpw-error:first').length === 0) {
-			jQuery('button#cip-genpw-btn-generate:first').after('<div style=\'block\' id=\'cip-genpw-error\'>Cannot receive generated password.<br />Is your version of KeePassXC up-to-date?<br /><br /><a href=\'https://keepassxc.org\'>Please visit the KeePassXC homepage</a></div>');
+			jQuery('button#cip-genpw-btn-generate:first').after('<div style=\'block\' id=\'cip-genpw-error\'>Cannot receive generated password.<br />Is KeePassXC opened?<br /></div>');
 			jQuery('input#cip-genpw-textfield-password:first').parent().hide();
 			jQuery('input#cip-genpw-checkbox-next-field:first').parent('label').hide();
 			jQuery('button#cip-genpw-btn-generate').hide();
@@ -1117,21 +1116,15 @@ cip.init = function() {
 };
 
 cip.detectNewActiveFields = function() {
-	const hiddenFields = cipFields.getHiddenFieldCount();
-
-	// If hidden fields aren't detected, setInterval is being looped in each frame of the page
-	//if (hiddenFields > 0) {
-		const divDetect = setInterval(function() {
-			const fields = cipFields.getAllFields();
-			if (fields.length > 1) {
-				cip.initCredentialFields(true);
-				clearInterval(divDetect);
-			}
-		}, 1000);
-	//}
+	const divDetect = setInterval(function() {
+		const fields = cipFields.getAllFields();
+		if (fields.length > 1) {
+			cip.initCredentialFields(true);
+			clearInterval(divDetect);
+		}
+	}, 1000);
 };
 
-// Try to do this in a way that database value if checked without polling the KeePassXC.. too many messages jumping around
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function() {
 	let dbDetectInterval = setInterval(function() {
@@ -1148,7 +1141,8 @@ cip.detectDatabaseChange = function() {
 
 					// Switch back to default popup
 					browser.runtime.sendMessage({
-						action: 'get_status'
+						action: 'get_status',
+						args: [ true ]	// Set polling to true, this is an internal function call
 					});
 				} else {
 					if (response.new !== 'no-hash' && response.new !== response.old) {

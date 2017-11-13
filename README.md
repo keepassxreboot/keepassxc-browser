@@ -1,13 +1,13 @@
 # keepassxc-browser
-Chrome extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
+Browser extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 This is a heavily forked version of [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
 Some changes merged also from [smorks'](https://github.com/smorks/keepasshttp-connector) KeePassHttp-Connector fork.
-For testing purposes, please use following unofficial KeePassXC [release's](https://github.com/varjolintu/keepassxc/releases).
+For testing purposes, please use only the following unofficial KeePassXC [release's](https://github.com/varjolintu/keepassxc/releases).
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
 
-The extension is supported with Firefox 55 and newer. If you want to load it as a temporary plugin with Firefox 54 you can just change the minimum version from the manifest file before loading it.
+The extension is supported with Firefox 55 and newer. If you want to load it as a temporary plugin with Firefox 54 or ESR you can just change the minimum version from the manifest file before loading it.
 
 Please thee this [wiki page](hhttps://github.com/varjolintu/keepassxc-browser/wiki/Connecting-the-database-with-keepassxc-browser) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
 
@@ -17,10 +17,11 @@ There are two methods which you can use keepassxc-browser to connect to KeePassX
 1. keepassxc-browser communicates directly with KeePassXC via stdin/stdout. This method launches KeePassXC every time you start the browser and closes when you exit.
 This can cause unsaved changes not to be saved. If you use this method it's important to enable `Automatically save after every change` from KeePassXC's preferences.
 
-2. keepassxc-browser communicated with KeePassXC through [keepassxc-proxy](https://github.com/varjolintu/keepassxc-proxy) or [keepassxc-proxy-rust](https://github.com/varjolintu/keepassxc-proxy-rust). The proxy handles listening stdin/stdout
+2. keepassxc-browser communicated with KeePassXC through [keepassxc-proxy](https://github.com/varjolintu/keepassxc-proxy). The proxy handles listening stdin/stdout
 and transfers these messages through Unix domain sockets / named pipes to KeePassXC. This means KeePassXC can be used and started normally without inteference from
 Native Messaging API. keepassxc-browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. keepassxc-proxy
-is still under development. If you want, you are free to write your own proxy that handles the traffic.
+is still under development. If you want, you are free to write your own proxy that handles the traffic. You don't need to install keepassxc-proxy separately. It is 
+included in the latest KeePassXC fork. Use it if you want to make your own proxy or improve/extend it.
 
 ## Improvements
 The following improvements and features have been made after the fork. At this point some features are only available with the KeePassXC fork:
@@ -77,4 +78,4 @@ Feel free to support this project:
 - Donate via [PayPal](https://paypal.me/varjolintu)
 - Donate via Bitcoin: 1LHbD69CcmpLW5hjUXs2MGJhw3GxwqLdw3
 
-Also consider donating to [KeePassXC](https://flattr.com/submit/auto?fid=x7yqz0&url=https%3A%2F%2Fkeepassxc.org) and passifox teams [(1)](https://github.com/smorks/passifox),[(2)](https://github.com/projectgus/passifox),[(3)](https://github.com/pfn/passifox). They are doing great job.
+Also consider donating to [KeePassXC](https://flattr.com/submit/auto?fid=x7yqz0&url=https%3A%2F%2Fkeepassxc.org) and passifox teams [(1)](https://github.com/smorks/passifox),[(2)](https://github.com/pfn/passifox). They are doing great job.

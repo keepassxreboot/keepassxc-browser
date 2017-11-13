@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "keepassxc-browser",
-	"version": "0.3.9",
+	"version": "0.4.0",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {
@@ -41,6 +41,9 @@
 			"matches": [
 				"<all_urls>"
 			],
+			"exclude_matches": [
+				"*://*/*.xml"
+			],
 			"js": [
 				"browser-polyfill.min.js",
 				"global.js",
@@ -67,8 +70,8 @@
 		"fill-password": {
 			"description": "Insert a password",
 			"suggested_key": {
-				"default": "Ctrl+Shift+P",
-				"mac": "Command+Shift+P"
+				"default": "Alt+Shift+P",
+				"mac": "Alt+Shift+P"
 			}
 		}
 	},

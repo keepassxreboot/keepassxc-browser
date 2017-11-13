@@ -4,8 +4,7 @@ const defaultSettings = {
 	autoFillAndSend: true,
 	usePasswordGenerator: true,
 	autoFillSingleEntry: false,
-	autoRetrieveCredentials: true,
-	proxyPort: '19700'
+	autoRetrieveCredentials: true
 };
 
 var page = {};
@@ -34,9 +33,6 @@ page.initSettings = function() {
 			}
 			if (!('autoRetrieveCredentials' in page.settings)) {
 				page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
-			}
-			if (!('port' in page.settings)) {
-				page.settings.port = defaultSettings.proxyPort;
 			}
 			browser.storage.local.set({'settings': page.settings});
 			resolve();

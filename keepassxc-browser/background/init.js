@@ -92,17 +92,23 @@ if (browser.webRequest.onAuthRequired) {
 browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 
 const contextMenuItems = [
-	{title: 'Fill &User + Pass', action: 'fill_user_pass'},
-	{title: 'Fill &Pass Only', action: 'fill_pass_only'},
-	{title: 'Show Password &Generator Icons', action: 'activate_password_generator'},
-	{title: '&Save credentials', action: 'remember_credentials'}
+	{title: 'Fill User + Pass', action: 'fill_user_pass'},
+	{title: 'Fill Pass Only', action: 'fill_pass_only'},
+	{title: 'Show Password Generator Icons', action: 'activate_password_generator'},
+	{title: 'Save credentials', action: 'remember_credentials'}
 ];
+
+let menuContexts = ['editable'];
+
+if (isFirefox()) {
+	menuContexts.push('password');
+}
 
 // Create context menu items
 for (const item of contextMenuItems) {
 	browser.contextMenus.create({
 		title: item.title,
-		contexts: [ 'editable' ],
+		contexts: menuContexts,
 		onclick: (info, tab) => {
 			browser.tabs.sendMessage(tab.id, {
 				action: item.action

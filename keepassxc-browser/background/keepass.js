@@ -160,7 +160,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce),
+			nonce: nacl.util.encodeBase64(nonce),
 			clientID: keepass.clientID
 		};
 
@@ -221,7 +221,7 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce),
+			nonce: nacl.util.encodeBase64(nonce),
 			clientID: keepass.clientID
 		};
 
@@ -285,7 +285,7 @@ keepass.generatePassword = function(callback, tab, forceCallback) {
 
 		const request = {
 			action: kpAction,
-			nonce: keepass.b64e(nonce),
+			nonce: nacl.util.encodeBase64(nonce),
 			clientID: keepass.clientID
 		};
 
@@ -334,7 +334,7 @@ keepass.associate = function(callback, tab) {
 		page.tabs[tab.id].errorMessage = null;
 
 		const kpAction = kpActions.ASSOCIATE;
-		const key = keepass.b64e(keepass.keyPair.publicKey);
+		const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
 		const nonce = nacl.randomBytes(keepass.keySize);
 
 		const messageData = {
@@ -345,7 +345,7 @@ keepass.associate = function(callback, tab) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce),
+			nonce: nacl.util.encodeBase64(nonce),
 			clientID: keepass.clientID
 		};
 
@@ -427,7 +427,7 @@ keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce),
+			nonce: nacl.util.encodeBase64(nonce),
 			clientID: keepass.clientID
 		};
 
@@ -494,7 +494,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 	const request = {
 		action: kpAction,
 		message: encrypted,
-		nonce: keepass.b64e(nonce),
+		nonce: nacl.util.encodeBase64(nonce),
 		clientID: keepass.clientID
 	};
 
@@ -545,19 +545,19 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 keepass.changePublicKeys = function(tab, enableTimeout = false) {
 	return new Promise((resolve, reject) => {
 		if (!keepass.isConnected) {
+			keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
 			reject(false);
 		}
 
 		const kpAction = kpActions.CHANGE_PUBLIC_KEYS;
-		const key = keepass.b64e(keepass.keyPair.publicKey);
+		const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
 		let nonce = nacl.randomBytes(keepass.keySize);
-		nonce = keepass.b64e(nonce);
-		keepass.clientID = keepass.b64e(nacl.randomBytes(keepass.keySize));
+		nonce = nacl.util.encodeBase64(nonce);
+		keepass.clientID = nacl.util.encodeBase64(nacl.randomBytes(keepass.keySize));
 
 		const request = {
 			action: kpAction,
 			publicKey: key,
-			proxyPort: (page.settings.port ? page.settings.port : 19700),
 			nonce: nonce,
 			clientID: keepass.clientID
 		};
@@ -573,7 +573,7 @@ keepass.changePublicKeys = function(tab, enableTimeout = false) {
 			}
 			else {
 				keepass.isKeePassXCAvailable = true;
-				console.log('Server public key: ' + keepass.b64e(keepass.serverPublicKey));
+				console.log('Server public key: ' + nacl.util.encodeBase64(keepass.serverPublicKey));
 			}
 			resolve(true);
 		});
@@ -597,7 +597,7 @@ keepass.lockDatabase = function(tab) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: keepass.b64e(nonce),
+			nonce: nacl.util.encodeBase64(nonce),
 			clientID: keepass.clientID
 		};
 
@@ -627,12 +627,12 @@ keepass.lockDatabase = function(tab) {
 
 keepass.generateNewKeyPair = function() {
 	keepass.keyPair = nacl.box.keyPair();
-	//console.log(keepass.b64e(keepass.keyPair.publicKey) + ' ' + keepass.b64e(keepass.keyPair.secretKey));
+	//console.log(nacl.util.encodeBase64(keepass.keyPair.publicKey) + ' ' + nacl.util.encodeBase64(keepass.keyPair.secretKey));
 };
 
 keepass.isConfigured = function() {
 	return new Promise((resolve, reject) => {
-		if (typeof(keepass.databaseHash) === 'undefined' || keepass.databaseHash === 'no-hash') {
+		if (typeof(keepass.databaseHash) === 'undefined') {
 			keepass.getDatabaseHash((hash) => {
 				resolve(hash in keepass.keyRing);
 			});
@@ -810,13 +810,14 @@ keepass.verifyKeyResponse = function(response, key, nonce) {
 	}
 
 	let reply = false;
-	if (keepass.b64d(nonce).length !== nacl.secretbox.nonceLength)
+	if (nacl.util.decodeBase64(nonce).length !== nacl.secretbox.nonceLength) {
 		return false;
+	}
 
 	reply = (response.nonce === nonce);
 
 	if (response.publicKey) {
-		keepass.serverPublicKey = keepass.b64d(response.publicKey);
+		keepass.serverPublicKey = nacl.util.decodeBase64(response.publicKey);
 		reply = true;
 	}
 
@@ -832,8 +833,9 @@ keepass.verifyResponse = function(response, nonce, id) {
 
 	keepass.associated.hash = keepass.databaseHash;
 
-	if (keepass.b64d(response.nonce).length !== nacl.secretbox.nonceLength)
+	if (nacl.util.decodeBase64(response.nonce).length !== nacl.secretbox.nonceLength) {
 		return false;
+	}
 
 	keepass.associated.value = (response.nonce === nonce);
 
@@ -854,14 +856,6 @@ keepass.handleError = function(tab, errorCode, errorMessage = '') {
 	if (tab && page.tabs[tab.id]) {
 		page.tabs[tab.id].errorMessage = errorMessage;
 	}
-};
-
-keepass.b64e = function(d) {
-	return nacl.util.encodeBase64(d);
-};
-
-keepass.b64d = function(d) {
-	return nacl.util.decodeBase64(d);
 };
 
 keepass.getCryptoKey = function() {
@@ -890,15 +884,15 @@ keepass.encrypt = function(input, nonce) {
 	if (keepass.serverPublicKey) {
 		const message = nacl.box(messageData, nonce, keepass.serverPublicKey, keepass.keyPair.secretKey);
 		if (message) {
-			return keepass.b64e(message);
+			return nacl.util.encodeBase64(message);
 		}
 	}
 	return '';
 };
 
 keepass.decrypt = function(input, nonce, toStr) {
-	const m = keepass.b64d(input);
-	const n = keepass.b64d(nonce);
+	const m = nacl.util.decodeBase64(input);
+	const n = nacl.util.decodeBase64(nonce);
 	const res = nacl.box.open(m, n, keepass.serverPublicKey, keepass.keyPair.secretKey);
 	return res;
 };
