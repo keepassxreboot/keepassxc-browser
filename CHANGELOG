@@ -1,3 +1,9 @@
+0.4.0 (13-11-2017)
+=========================
+- Fixed showing context menu on password fields with Firefox
+- Ignore XML files on content scripts (Firefox shows them incorrectly)
+- UDP features removed as KeePassXC switched them to Unix domain sockets and named pipes
+
 0.3.9 (04-11-2017)
 =========================
 - Removed incorrect timeout waiting on init
