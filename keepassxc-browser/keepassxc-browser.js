@@ -4,6 +4,9 @@ $(this.target).find('input').autocomplete();
 // contains already called method names
 var _called = {};
 
+// Count of detected form fields on the page
+var _detectedFields = 0;
+
 browser.runtime.onMessage.addListener(function(req, sender, callback) {
 	if ('action' in req) {
 		if (req.action === 'fill_user_pass_with_specific_login') {
@@ -806,6 +809,7 @@ cipFields.getAllFields = function() {
 		}
 	});
 
+	_detectedFields = fields.length;
 	return fields;
 };
 
@@ -1075,7 +1079,7 @@ cipFields.useDefinedCredentialFields = function() {
 		}
 
 		if ($found) {
-			var fields = {
+			let fields = {
 				username: creds.username,
 				password: creds.password,
 				fields: creds.fields
@@ -1111,16 +1115,20 @@ cip.init = function() {
 		action: 'load_settings',
 	}).then((response) => {
 		cip.settings = response;
-		cip.initCredentialFields();
+		cip.initCredentialFields(true);
 	});
 };
 
 cip.detectNewActiveFields = function() {
 	const divDetect = setInterval(function() {
-		const fields = cipFields.getAllFields();
-		if (fields.length > 1) {
-			cip.initCredentialFields(true);
-			clearInterval(divDetect);
+		if (document.visibilityState !== 'hidden') {
+			const fields = cipFields.getAllFields();
+
+			// If only password field is shown it's enough to have one field visible for initCredentialFields
+			if (fields.length > (_detectedFields == 1 ? 0 : 1)) {
+				cip.initCredentialFields(true);
+				clearInterval(divDetect);
+			}
 		}
 	}, 1000);
 };
@@ -1290,8 +1298,16 @@ cip.preparePageForMultipleCredentials = function(credentials) {
 	// initialize autocomplete for username fields
 	if (cip.settings.autoCompleteUsernames) {
 		for (const i of cipFields.combinations) {
-			if (_f(i.username)) {
-				cipAutocomplete.init(_f(i.username));
+			// Both username and password fields are visible
+			if (_detectedFields >= 2) {
+				if (_f(i.username)) {
+					cipAutocomplete.init(_f(i.username));
+				}
+			} else if (_detectedFields == 1) {
+				// If only password field is the visible one
+				if (_f(i.password)) {
+					cipAutocomplete.init(_f(i.password));
+				}
 			}
 		}
 	}

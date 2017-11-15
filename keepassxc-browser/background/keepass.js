@@ -1,6 +1,6 @@
 'use strict';
 
-var keepass = {};
+const keepass = {};
 
 keepass.associated = {'value': false, 'hash': null};
 keepass.keyPair = {publicKey: null, secretKey: null};
