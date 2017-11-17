@@ -83,13 +83,19 @@ var cipAutocomplete = {};
 cipAutocomplete.elements = [];
 
 cipAutocomplete.init = function(field) {
-	if (field.hasClass('ui-autocomplete-input')) {
-		//_f(credentialInputs[i].username).autocomplete('source', autocompleteSource);
+	if (cip.settings.autoFillSingleEntry && cip.credentials.length === 1 && field.hasClass('ui-autocomplete-input')) {
 		field.autocomplete('destroy');
 	}
 
+	let acMenu = jQuery('#kpxc-ac-menu');
+	if (acMenu.length == 0) {
+		jQuery('<div id="kpxc-ac-menu" class="kpxc"></div>').appendTo('body');
+	}
+
 	field
+		.addClass('kpxc')
 		.autocomplete({
+			appendTo: '#kpxc-ac-menu',
 			minLength: 0,
 			source: cipAutocomplete.onSource,
 			select: cipAutocomplete.onSelect,
@@ -106,12 +112,10 @@ cipAutocomplete.onClick = function() {
 };
 
 cipAutocomplete.onOpen = function(event, ui) {
-	// NOT BEAUTIFUL!
-	// modifies ALL ui-autocomplete menus of class .cip-ui-menu
 	jQuery('ul.ui-autocomplete.ui-menu').css('z-index', 2147483636);
 };
 
-cipAutocomplete.onSource = function (request, callback) {
+cipAutocomplete.onSource = function(request, callback) {
 	const matches = jQuery.map(cipAutocomplete.elements, (tag) => {
 		if (tag.label.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
 			return tag;
@@ -120,7 +124,7 @@ cipAutocomplete.onSource = function (request, callback) {
 	callback(matches);
 };
 
-cipAutocomplete.onSelect = function (e, ui) {
+cipAutocomplete.onSelect = function(e, ui) {
 	e.preventDefault();
 	cip.setValueWithChange(jQuery(this), ui.item.value);
 	const fieldId = cipFields.prepareId(jQuery(this).attr('data-cip-id'));
@@ -242,6 +246,7 @@ cipPassword.createDialog = function() {
 
 	$dialog.hide();
 	jQuery('body').append($dialog);
+
 	$dialog.dialog({
 		autoOpen: false,
 		modal: true,
@@ -309,14 +314,20 @@ cipPassword.createDialog = function() {
 			}
 		},
 		open: function(event, ui) {
+			// Dirty hacks for overlay and custom CSS
+			jQuery('.ui-widget-overlay').wrap('<span class="kpxc"></span>');
 			jQuery('.ui-widget-overlay').click(function() {
 				jQuery('#cip-genpw-dialog:first').dialog('close');
+				jQuery('span').remove('.kpxc');
 			});
 
 			if (jQuery('input#cip-genpw-textfield-password:first').val() === '') {
 				jQuery('button#cip-genpw-btn-generate:first').click();
 			}
-		}
+		},
+		create: function(event, ui) {
+	        jQuery('.ui-dialog').wrap('<div class="kpxc"></span>');
+	    }
 	});
 };
 
