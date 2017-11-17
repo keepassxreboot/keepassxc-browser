@@ -1,3 +1,9 @@
+0.4.1 (??-??-2017)
+=========================
+- Added support for the credentials dropdown menu with only password field visible
+- Fixed jQuery overriding with custom scoped CSS
+- Fixed non-necessary destroying of autocomplete on autofill
+
 0.4.0 (13-11-2017)
 =========================
 - Fixed showing context menu on password fields with Firefox
