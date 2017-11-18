@@ -1,38 +1,47 @@
-.cip-ui-autocomplete li.cip-ui-menu-item {
+.kpxc .ui-autocomplete li.ui-menu-item {
 	text-align: left !important;
-	font-size: 12px !important;
+	font-size: .9em !important;
 	font-weight: normal !important;
 	font-style: normal !important;
 	font-family: Verdana, Arial, sans-serif !important;
 	color: #222222 !important;
 }
 
-.ui-dialog-titlebar-close {
+.ui-helper-hidden-accessible {
+	display: none !important;
+}
+
+.kpxc .ui-dialog-titlebar-close {
 	visibility: hidden !important;
 }
 
-.ui-dialog {
+.kpxc .ui-dialog {
 	font-size: 12px !important;
 }
 
-.dialog-form .ui-dialog-content .ui-widget-content {
+.kpxc .ui-widget-overlay {
+    opacity: 0.0 !important;
+}
+
+.kpxc .dialog-form .ui-dialog-content .ui-widget-content {
 	max-height: 80px !important;
 }
 
-.ui-dialog-titlebar {
+.kpxc .ui-dialog-titlebar {
 	background-color: #3a8233;
 	color: #fff;
 }
 
-.ui-dialog .ui-dialog-buttonpane { 
+.kpxc .ui-dialog .ui-dialog-buttonpane {
     text-align: center !important;
 }
-.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
+
+.kpxc .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
     float: none !important;
 }
 
-.ui-button .ui-button-text .ui-button {
-	font-size: .10em !important; 
+.kpxc .ui-button .ui-button-text .ui-button {
+	font-size: .10em !important;
 }
 
 input.genpw-text {
@@ -44,6 +53,7 @@ input.genpw-text {
 	border-collapse: separate;
 	width: 100%;
 }
+
 .genpw-input-group-addon {
 	font-size: inherit !important;
 	background-color: #eee;
@@ -69,10 +79,12 @@ input.genpw-text {
 	position: absolute;
 	cursor: pointer;
 }
+
 .cip-genpw-icon.key {
 	background: url('chrome-extension://__MSG_@@extension_id__/icons/key.png') right no-repeat;
 	background-size: contain;
 }
+
 .cip-genpw-icon.key-moz {
 	background: url('moz-extension://__MSG_@@extension_id__/icons/key.png') right no-repeat;
 	background-size: contain;
@@ -90,6 +102,7 @@ input.genpw-text {
 	left: 0;
 	z-index: 2147483645;
 }
+
 .b2c-modal-backdrop:after {
 	content:'';
 	position: fixed;
@@ -101,9 +114,11 @@ input.genpw-text {
 	opacity: 0.8;
 	filter: alpha(opacity=80);
 }
+
 #b2c-cipDefine-fields {
 	z-index: 2147483646;
 }
+
 #b2c-cipDefine-description {
 	z-index: 2147483646;
 	color: #efefef;
@@ -117,6 +132,7 @@ input.genpw-text {
 	background-color:rgba(255,255,255,0.3);
 	font-size: 15px;
 }
+
 #b2c-cipDefine-description div:first-of-type {
 	margin-top: 0;
 	padding-top: 0;
@@ -126,6 +142,7 @@ input.genpw-text {
 	font-weight: bold;
 	font-size: 160%;
 }
+
 #b2c-cipDefine-description p {
 	margin-top: 10px;
 	padding-top: 10px;
@@ -133,9 +150,11 @@ input.genpw-text {
 	border-top: 2px solid #666666;
 	line-height: 110%;
 }
+
 #b2c-help {
 	margin-bottom: 3px;
 }
+
 .b2c-fixed-field {
 	position: absolute;
 	border: 2px solid #efefef;
@@ -145,26 +164,29 @@ input.genpw-text {
 	font-weight: bold;
 	background-color:rgba(239,239,239,0.4);
 }
+
 .b2c-fixed-hover-field {
 	border: 2px solid orange;
 	background-color:rgba(255,165,239,0.4);
 }
+
 .b2c-fixed-password-field {
 	border: 2px solid red;
 	color: #efefef;
 	background-color:rgba(255,0,0,0.4);
 }
+
 .b2c-fixed-username-field {
 	border: 2px solid limegreen;
 	color: #efefef;
 	background-color:rgba(50,205,50,0.4);
 }
+
 .b2c-fixed-string-field {
 	border: 2px solid deepskyblue;
 	color: #efefef;
 	background-color:rgba(30,144,255,0.4);
 }
-
 
 .b2c-input-append {
   display: inline-block;

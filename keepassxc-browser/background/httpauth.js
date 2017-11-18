@@ -1,4 +1,4 @@
-var httpAuth = httpAuth || {};
+const httpAuth = {};
 
 httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];

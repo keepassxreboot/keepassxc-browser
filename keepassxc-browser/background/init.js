@@ -11,7 +11,7 @@ keepass.migrateKeyRing().then(() => {
 });
 
 // Milliseconds for intervall (e.g. to update browserAction)
-let _interval = 250;
+const _interval = 250;
 
 
 /**

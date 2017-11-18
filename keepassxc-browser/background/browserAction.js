@@ -1,4 +1,4 @@
-var browserAction = {};
+const browserAction = {};
 
 const BLINK_TIMEOUT_DEFAULT = 7500;
 const BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT = -1;

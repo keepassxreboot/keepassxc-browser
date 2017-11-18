@@ -1,4 +1,4 @@
-var kpxcEvent = {};
+const kpxcEvent = {};
 
 kpxcEvent.onMessage = function(request, sender, callback) {
 	if (request.action in kpxcEvent.messageHandlers) {
@@ -124,7 +124,7 @@ kpxcEvent.onLoadKeyRing = function(callback, tab) {
 
 kpxcEvent.onSaveSettings = function(callback, tab, settings) {
 	browser.storage.local.set({'settings': settings}).then(function() {
-		kpxcEvent.onLoadSettings();
+		kpxcEvent.onLoadSettings(callback, tab);
 	});
 };
 
