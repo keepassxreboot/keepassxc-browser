@@ -1,17 +1,25 @@
 $(function() {
 	browser.runtime.getBackgroundPage().then((global) => {
-		browser.tabs.query({"active": true, "currentWindow": true}).then((tab) => {
+		browser.tabs.query({'active': true, 'currentWindow': true}).then((tabs) => {
+			let tab = tabs[0];
 			const data = global.page.tabs[tab.id].loginList;
 			let ul = document.getElementById('login-list');
 			for (let i = 0; i < data.logins.length; i++) {
 				const li = document.createElement('li');
 				const a = document.createElement('a');
-				a.textContent = data.logins[i].login + ' (' + data.logins[i].name + ')';
-				li.setAttribute('class', 'list-group-item');
+				a.textContent = data.logins[i].login + " (" + data.logins[i].name + ")";
 				li.appendChild(a);
-				$(a).data('url', data.url.replace(/:\/\//g, '://' + data.logins[i].login + ':' + data.logins[i].password + '@'));
-				$(a).click(() => {
-					browser.tabs.update(tab.id, {'url': $(this).data('url')});
+				$(a).data('creds', data.logins[i]);
+				$(a).click(function () {
+					if (data.resolve) {
+						const creds = $(this).data('creds');
+						data.resolve({
+							authCredentials: {
+								username: creds.login,
+								password: creds.password
+							}
+						});
+					}
 					close();
 				});
 				ul.appendChild(li);

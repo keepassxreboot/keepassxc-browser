@@ -35,6 +35,7 @@ The following improvements and features have been made after the fork. At this p
 - New buttons, icons and settings page graphics
 - Redesigned password generator dialog
 - Password generator supports diceware passphrases and extended ASCII characters
+- Autocomplete works also when only password fields are visible
 
 ## Protocol
 

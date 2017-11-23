@@ -48,7 +48,7 @@ page.initOpenedTabs = function() {
 			}
 
 			// set initial tab-ID
-			browser.tabs.query({ "active": true, "currentWindow": true }).then((tabs) => {
+			browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
 				if (tabs.length === 0) {
 					resolve();
 					return; // For example: only the background devtools or a popup are opened
