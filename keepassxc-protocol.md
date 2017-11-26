@@ -7,7 +7,7 @@ Now the requests are encrypted by [TweetNaCl.js](https://github.com/dchest/tweet
 2. When KeePassXC receives the public key it generates its own key pair and transfers the public key to keepassxc-browser
 3. All messages between the browser extension and KeePassXC are now encrypted.
 4. When keepassxc-browser sends a message it is encrypted with KeePassXC's public key, a random generated nonce and keepassxc-browser's secret key.
-5. When KeePassXC sends a message it is encrypted with keepassxc-browser's public key etc.
+5. When KeePassXC sends a message it is encrypted with keepassxc-browser's public key and an incremented nonce.
 6. Databases are stored based on the current public key used with `associate`. A new key pair for data transfer is generated each time keepassxc-browser is launched.
 
 Encrypted messages are built with these JSON parameters:

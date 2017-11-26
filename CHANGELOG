@@ -3,7 +3,7 @@
 - Fixed HTTP authentication with multiple credentials (credits to smorks)
 - Fixed error handling when decrypt fails
 - Fixed database-locked response handling
-- TODO: Fixed nonce increment when encrypting messages
+- Fixed nonce increment when encrypting messages
 
 0.4.1 (18-11-2017)
 =========================
