@@ -1,4 +1,4 @@
-0.4.2 (??-??-2017)
+0.4.2 (27-11-2017)
 =========================
 - Fixed HTTP authentication with multiple credentials (credits to smorks)
 - Fixed error handling when decrypt fails
