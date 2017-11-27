@@ -21,6 +21,7 @@ keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not 
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 keepass.messageTimeout = 500; // milliseconds
+keepass.nonce = nacl.util.encodeBase64(nacl.randomBytes(keepass.keySize));
 
 const kpActions = {
 	SET_LOGIN: 'set-login',
@@ -133,8 +134,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 	page.tabs[tab.id].errorMessage = null;
 
 	keepass.testAssociation((response) => {
-		if (!response)
-		{
+		if (!response) {
 			browserAction.showDefault(null, tab);
 			callback([]);
 			return;
@@ -142,7 +142,8 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 
 		const kpAction = kpActions.SET_LOGIN;
 		const {dbid} = keepass.getCryptoKey();
-		const nonce = nacl.randomBytes(keepass.keySize);
+		const nonce = keepass.getNonce();
+		const incrementedNonce = keepass.incrementedNonce(nonce);
 
 		let messageData = {
 			action: kpAction,
@@ -160,18 +161,22 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: nacl.util.encodeBase64(nonce),
+			nonce: nonce,
 			clientID: keepass.clientID
 		};
 
 		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
-			  	if (res) {
-					const message = nacl.util.encodeUTF8(res);
-					const parsed = JSON.parse(message);
-					callback(keepass.verifyResponse(parsed, response.nonce) ? 'success' : 'error');
+				if (!res) {
+					keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+					callback('error');
+					return;
 				}
+
+				const message = nacl.util.encodeUTF8(res);
+				const parsed = JSON.parse(message);
+				callback(keepass.verifyResponse(parsed, incrementedNonce) ? 'success' : 'error');
 			}
 			else if (response.error && response.errorCode) {
 				keepass.handleError(tab, response.errorCode, response.error);
@@ -187,8 +192,7 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 	page.debug('keepass.retrieveCredentials(callback, {1}, {2}, {3}, {4})', tab.id, url, submiturl, forceCallback);
 
 	keepass.testAssociation((response) => {
-		if (!response)
-		{
+		if (!response) {
 			browserAction.showDefault(null, tab);
 			if (forceCallback) {
 				callback([]);
@@ -205,7 +209,8 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 
 		let entries = [];
 		const kpAction = kpActions.GET_LOGINS;
-		const nonce = nacl.randomBytes(keepass.keySize);
+		const nonce = keepass.getNonce();
+		const incrementedNonce = keepass.incrementedNonce(nonce);
 		const {dbid} = keepass.getCryptoKey();
 
 		let messageData = {
@@ -221,32 +226,36 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: nacl.util.encodeBase64(nonce),
+			nonce: nonce,
 			clientID: keepass.clientID
 		};
 
 		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
-			  	if (res) {
-					const message = nacl.util.encodeUTF8(res);
-					const parsed = JSON.parse(message);
-					keepass.setcurrentKeePassXCVersion(parsed.version);
-
-					if (keepass.verifyResponse(parsed, response.nonce)) {
-						entries = parsed.entries;
-						keepass.updateLastUsed(keepass.databaseHash);
-						if (entries.length === 0) {
-							// questionmark-icon is not triggered, so we have to trigger for the normal symbol
-							browserAction.showDefault(null, tab);
-						}
-						callback(entries);
-					}
-					else {
-						console.log('RetrieveCredentials for ' + url + ' rejected');
-					}
-					page.debug('keepass.retrieveCredentials() => entries.length = {1}', entries.length);
+				if (!res) {
+					keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+					callback([]);
+					return;
 				}
+
+				const message = nacl.util.encodeUTF8(res);
+				const parsed = JSON.parse(message);
+				keepass.setcurrentKeePassXCVersion(parsed.version);
+
+				if (keepass.verifyResponse(parsed, incrementedNonce)) {
+					entries = parsed.entries;
+					keepass.updateLastUsed(keepass.databaseHash);
+					if (entries.length === 0) {
+						// questionmark-icon is not triggered, so we have to trigger for the normal symbol
+						browserAction.showDefault(null, tab);
+					}
+					callback(entries);
+				}
+				else {
+					console.log('RetrieveCredentials for ' + url + ' rejected');
+				}
+				page.debug('keepass.retrieveCredentials() => entries.length = {1}', entries.length);
 			}
 			else if (response.error && response.errorCode) {
 				keepass.handleError(tab, response.errorCode, response.error);
@@ -265,8 +274,7 @@ keepass.generatePassword = function(callback, tab, forceCallback) {
 	}
 
 	keepass.testAssociation((taresponse) => {
-		if (!taresponse)
-		{
+		if (!taresponse) {
 			browserAction.showDefault(null, tab);
 			if (forceCallback) {
 				callback([]);
@@ -281,36 +289,41 @@ keepass.generatePassword = function(callback, tab, forceCallback) {
 
 		let passwords = [];
 		const kpAction = kpActions.GENERATE_PASSWORD;
-		const nonce = nacl.randomBytes(keepass.keySize);
+		const nonce = keepass.getNonce();
+		const incrementedNonce = keepass.incrementedNonce(nonce);
 
 		const request = {
 			action: kpAction,
-			nonce: nacl.util.encodeBase64(nonce),
+			nonce: nonce,
 			clientID: keepass.clientID
 		};
 
 		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
-				if (res) {
-					const message = nacl.util.encodeUTF8(res);
-					const parsed = JSON.parse(message);
-					keepass.setcurrentKeePassXCVersion(parsed.version);
+				if (!res) {
+					keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+					callback([]);
+					return;
+				}
 
-					if (keepass.verifyResponse(parsed, response.nonce)) {
-						if (parsed.entries) {
-							passwords = parsed.entries;
-							keepass.updateLastUsed(keepass.databaseHash);
-						}
-						else {
-							console.log('No entries returned. Is KeePassXC up-to-date?');
-						}
+				const message = nacl.util.encodeUTF8(res);
+				const parsed = JSON.parse(message);
+				keepass.setcurrentKeePassXCVersion(parsed.version);
+
+				if (keepass.verifyResponse(parsed, incrementedNonce)) {
+					if (parsed.entries) {
+						passwords = parsed.entries;
+						keepass.updateLastUsed(keepass.databaseHash);
 					}
 					else {
-						console.log('GeneratePassword rejected');
+						console.log('No entries returned. Is KeePassXC up-to-date?');
 					}
-					callback(passwords);
 				}
+				else {
+					console.log('GeneratePassword rejected');
+				}
+				callback(passwords);
 			}
 			else if (response.error && response.errorCode) {
 				keepass.handleError(tab, response.errorCode, response.error);
@@ -335,7 +348,8 @@ keepass.associate = function(callback, tab) {
 
 		const kpAction = kpActions.ASSOCIATE;
 		const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
-		const nonce = nacl.randomBytes(keepass.keySize);
+		const nonce = keepass.getNonce();
+		const incrementedNonce = keepass.incrementedNonce(nonce);
 
 		const messageData = {
 			action: kpAction,
@@ -345,30 +359,33 @@ keepass.associate = function(callback, tab) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: nacl.util.encodeBase64(nonce),
+			nonce: nonce,
 			clientID: keepass.clientID
 		};
 
 		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
-			  	if (res) {
-					const message = nacl.util.encodeUTF8(res);
-					const parsed = JSON.parse(message);
-					keepass.setcurrentKeePassXCVersion(parsed.version);
-					const id = parsed.id;
-
-					if (!keepass.verifyResponse(parsed, response.nonce)) {
-						keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
-					}
-					else {
-						keepass.setCryptoKey(id, key);	// Save the current public key as id key for the database
-						keepass.associated.value = true;
-						keepass.associated.hash = parsed.hash || 0;
-					}
-
-					browserAction.show(callback, tab);
+				if (!res) {
+					keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+					return;
 				}
+
+				const message = nacl.util.encodeUTF8(res);
+				const parsed = JSON.parse(message);
+				keepass.setcurrentKeePassXCVersion(parsed.version);
+				const id = parsed.id;
+
+				if (!keepass.verifyResponse(parsed, incrementedNonce)) {
+					keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
+				}
+				else {
+					keepass.setCryptoKey(id, key);	// Save the current public key as id key for the database
+					keepass.associated.value = true;
+					keepass.associated.hash = parsed.hash || 0;
+				}
+
+				browserAction.show(callback, tab);
 			}
 			else if (response.error && response.errorCode) {
 				keepass.handleError(tab, response.errorCode, response.error);
@@ -407,7 +424,8 @@ keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 		}
 
 		const kpAction = kpActions.TEST_ASSOCIATE;
-		const nonce = nacl.randomBytes(keepass.keySize);
+		const nonce = keepass.getNonce();
+		const incrementedNonce = keepass.incrementedNonce(nonce);
 		const {dbid, dbkey} = keepass.getCryptoKey();
 
 		if (dbkey === null || dbid === null) {
@@ -427,34 +445,38 @@ keepass.testAssociation = function(callback, tab, enableTimeout = false) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: nacl.util.encodeBase64(nonce),
+			nonce: nonce,
 			clientID: keepass.clientID
 		};
 
 		keepass.sendNativeMessage(request, enableTimeout).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
-		  		if (res) {
-					const message = nacl.util.encodeUTF8(res);
-					const parsed = JSON.parse(message);
-					keepass.setcurrentKeePassXCVersion(parsed.version);
-					keepass.isEncryptionKeyUnrecognized = false;
+				if (!res) {
+					keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+					callback(false);
+					return;
+				}
 
-					if (!keepass.verifyResponse(parsed, response.nonce)) {
-						const hash = response.hash || 0;
-						keepass.deleteKey(hash);
-						keepass.isEncryptionKeyUnrecognized = true;
-						keepass.handleError(tab, kpErrors.ENCRYPTION_KEY_UNRECOGNIZED);
-						keepass.associated.value = false;
-						keepass.associated.hash = null;
-					}
-					else if (!keepass.isAssociated()) {
-						keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
-					}
-					else {
-						if (tab && page.tabs[tab.id]) {
-							delete page.tabs[tab.id].errorMessage;
-						}
+				const message = nacl.util.encodeUTF8(res);
+				const parsed = JSON.parse(message);
+				keepass.setcurrentKeePassXCVersion(parsed.version);
+				keepass.isEncryptionKeyUnrecognized = false;
+
+				if (!keepass.verifyResponse(parsed, incrementedNonce)) {
+					const hash = response.hash || 0;
+					keepass.deleteKey(hash);
+					keepass.isEncryptionKeyUnrecognized = true;
+					keepass.handleError(tab, kpErrors.ENCRYPTION_KEY_UNRECOGNIZED);
+					keepass.associated.value = false;
+					keepass.associated.hash = null;
+				}
+				else if (!keepass.isAssociated()) {
+					keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
+				}
+				else {
+					if (tab && page.tabs[tab.id]) {
+						delete page.tabs[tab.id].errorMessage;
 					}
 				}
 			}
@@ -478,7 +500,8 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 	}
 
 	const kpAction = kpActions.GET_DATABASE_HASH;
-	const nonce = nacl.randomBytes(keepass.keySize);
+	const nonce = keepass.getNonce();
+	const incrementedNonce = keepass.incrementedNonce(nonce);
 
 	const messageData = {
 		action: kpAction
@@ -494,37 +517,42 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 	const request = {
 		action: kpAction,
 		message: encrypted,
-		nonce: nacl.util.encodeBase64(nonce),
+		nonce: nonce,
 		clientID: keepass.clientID
 	};
 
 	keepass.sendNativeMessage(request, enableTimeout).then((response) => {
 		if (response.message && response.nonce) {
 			const res = keepass.decrypt(response.message, response.nonce);
-		  	if (res) {
-				const message = nacl.util.encodeUTF8(res);
-				const parsed = JSON.parse(message);
+			if (!res) {
+				keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+				callback('no-hash');
+				return;
+			}
 
-				if (parsed.hash) {
-					const oldDatabaseHash = keepass.databaseHash;
-					keepass.setcurrentKeePassXCVersion(parsed.version);
-					keepass.databaseHash = parsed.hash || 'no-hash';
+			const message = nacl.util.encodeUTF8(res);
+			const parsed = JSON.parse(message);
+			if (parsed.hash) {
+				const oldDatabaseHash = keepass.databaseHash;
+				keepass.setcurrentKeePassXCVersion(parsed.version);
+				keepass.databaseHash = parsed.hash || 'no-hash';
 
-					if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
-						keepass.associated.value = false;
-						keepass.associated.hash = null;
-					}
-
-					keepass.isDatabaseClosed = false;
-					keepass.isKeePassXCAvailable = true;
-					callback(parsed.hash);
+				if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
+					keepass.associated.value = false;
+					keepass.associated.hash = null;
 				}
-				else if (parsed.errorCode) {
-					keepass.databaseHash = 'no-hash';
-					keepass.isDatabaseClosed = true;
-					keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
-					callback(keepass.databaseHash);
-				}
+
+				keepass.isDatabaseClosed = false;
+				keepass.isKeePassXCAvailable = true;
+				callback(parsed.hash);
+				return;
+			}
+			else if (parsed.errorCode) {
+				keepass.databaseHash = 'no-hash';
+				keepass.isDatabaseClosed = true;
+				keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
+				callback(keepass.databaseHash);
+				return;
 			}
 		}
 		else {
@@ -538,6 +566,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false) {
 				keepass.handleError(tab, response.errorCode, response.error);
 			}
 			callback(keepass.databaseHash);
+			return;
 		}
 	});
 };
@@ -551,8 +580,8 @@ keepass.changePublicKeys = function(tab, enableTimeout = false) {
 
 		const kpAction = kpActions.CHANGE_PUBLIC_KEYS;
 		const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
-		let nonce = nacl.randomBytes(keepass.keySize);
-		nonce = nacl.util.encodeBase64(nonce);
+		const nonce = keepass.getNonce();
+		const incrementedNonce = keepass.incrementedNonce(nonce);
 		keepass.clientID = nacl.util.encodeBase64(nacl.randomBytes(keepass.keySize));
 
 		const request = {
@@ -565,7 +594,7 @@ keepass.changePublicKeys = function(tab, enableTimeout = false) {
 		keepass.sendNativeMessage(request, enableTimeout).then((response) => {
 			keepass.setcurrentKeePassXCVersion(response.version);
 
-			if (!keepass.verifyKeyResponse(response, key, nonce)) {
+			if (!keepass.verifyKeyResponse(response, key, incrementedNonce)) {
 				if (tab && page.tabs[tab.id]) {
 					keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
 					reject(false);
@@ -588,7 +617,8 @@ keepass.lockDatabase = function(tab) {
 		}
 
 		const kpAction = kpActions.LOCK_DATABASE;
-		const nonce = nacl.randomBytes(keepass.keySize);
+		const nonce = keepass.getNonce();
+		const incrementedNonce = keepass.incrementedNonce(nonce);
 
 		const messageData = {
 			action: kpAction
@@ -597,23 +627,29 @@ keepass.lockDatabase = function(tab) {
 		const request = {
 			action: kpAction,
 			message: keepass.encrypt(messageData, nonce),
-			nonce: nacl.util.encodeBase64(nonce),
+			nonce: nonce,
 			clientID: keepass.clientID
 		};
 
 		keepass.sendNativeMessage(request).then((response) => {
 			if (response.message && response.nonce) {
 				const res = keepass.decrypt(response.message, response.nonce);
-			  	if (res) {
-					const message = nacl.util.encodeUTF8(res);
-					const parsed = JSON.parse(message);
-					keepass.setcurrentKeePassXCVersion(parsed.version);
+				if (!res) {
+					keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+					resolve(false);
+					return;
+				}
 
-					if (keepass.verifyResponse(parsed, response.nonce)) {
-						keepass.isDatabaseClosed = true;
-						keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
-						resolve(false);
-					}
+				const message = nacl.util.encodeUTF8(res);
+				const parsed = JSON.parse(message);
+				keepass.setcurrentKeePassXCVersion(parsed.version);
+
+				if (keepass.verifyResponse(parsed, incrementedNonce)) {
+					keepass.isDatabaseClosed = true;
+
+					// Display error message in the popup
+					keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
+					resolve(true);
 				}
 			}
 			else if (response.error && response.errorCode) {
@@ -795,6 +831,26 @@ function onDisconnected() {
 	console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 
+keepass.getNonce = function() {
+	return nacl.util.encodeBase64(nacl.randomBytes(keepass.keySize));
+};
+
+keepass.incrementedNonce = function(nonce) {
+	const oldNonce = nacl.util.decodeBase64(nonce);
+	let newNonce = oldNonce.slice(0);
+
+	// from libsodium/utils.c
+	let i = 0;
+	let c = 1;
+	for (; i < newNonce.length; ++i) {
+		c += newNonce[i];
+		newNonce[i] = c;
+		c >>= 8;
+	}
+
+	return nacl.util.encodeBase64(newNonce);
+};
+
 keepass.nativeConnect = function() {
 	console.log('Connecting to native messaging host ' + keepass.nativeHostName);
 	keepass.nativePort = browser.runtime.connectNative(keepass.nativeHostName);
@@ -838,6 +894,9 @@ keepass.verifyResponse = function(response, nonce, id) {
 	}
 
 	keepass.associated.value = (response.nonce === nonce);
+	if (keepass.associated.value === false) {
+		console.log("Compare failed");
+	}
 
 	if (id) {
 		keepass.associated.value = (keepass.associated.value && id === response.id);
@@ -880,9 +939,10 @@ keepass.setCryptoKey = function(id, key) {
 
 keepass.encrypt = function(input, nonce) {
 	const messageData = nacl.util.decodeUTF8(JSON.stringify(input));
+	const messageNonce = nacl.util.decodeBase64(nonce);
 
 	if (keepass.serverPublicKey) {
-		const message = nacl.box(messageData, nonce, keepass.serverPublicKey, keepass.keyPair.secretKey);
+		const message = nacl.box(messageData, messageNonce, keepass.serverPublicKey, keepass.keyPair.secretKey);
 		if (message) {
 			return nacl.util.encodeBase64(message);
 		}
@@ -890,7 +950,7 @@ keepass.encrypt = function(input, nonce) {
 	return '';
 };
 
-keepass.decrypt = function(input, nonce, toStr) {
+keepass.decrypt = function(input, nonce) {
 	const m = nacl.util.decodeBase64(input);
 	const n = nacl.util.decodeBase64(nonce);
 	const res = nacl.box.open(m, n, keepass.serverPublicKey, keepass.keyPair.secretKey);
