@@ -1,4 +1,4 @@
-var browserAction = {};
+const browserAction = {};
 
 const BLINK_TIMEOUT_DEFAULT = 7500;
 const BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT = -1;
@@ -70,7 +70,7 @@ browserAction.showDefault = function(callback, tab) {
 		iconType: 'normal',
 		popup: 'popup.html'
 	};
-	keepass.isConfigured((response) => {
+	keepass.isConfigured().then((response) => {
 		if (!response || keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable || page.tabs[tab.id].errorMessage) {
 			stackData.iconType = 'cross';
 		}

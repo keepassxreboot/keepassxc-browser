@@ -1,11 +1,11 @@
-var httpAuth = httpAuth || {};
+const httpAuth = {};
 
 httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];
 
 httpAuth.requestCompleted = function(details) {
 	let index = httpAuth.requests.indexOf(details.requestId);
-	if (index > -1) {
+	if (index >= 0) {
 		httpAuth.requests.splice(index, 1);
 	}
 };
@@ -23,6 +23,7 @@ httpAuth.handleRequestCallback = function(details, callback) {
 httpAuth.processPendingCallbacks = function(details, resolve, reject) {
 	if (httpAuth.requests.indexOf(details.requestId) >= 0 || !page.tabs[details.tabId]) {
 		reject({});
+		return;
 	}
 
 	httpAuth.requests.push(details.requestId);
@@ -41,10 +42,7 @@ httpAuth.processPendingCallbacks = function(details, resolve, reject) {
 httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
 	// at least one login found --> use first to login
 	if (logins.length > 0) {
-		kpxcEvent.onHTTPAuthPopup(null, { "id": details.tabId }, { "logins": logins, "url": details.searchUrl });
-		//generate popup-list for HTTP Auth usernames + descriptions
-
-		if (page.settings.autoFillAndSend) {
+		if (logins.length == 1 && page.settings.autoFillAndSend) {
 			resolve({
 				authCredentials: {
 					username: logins[0].login,
@@ -52,7 +50,7 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
 				}
 			});
 		} else {
-			reject({});
+			kpxcEvent.onHTTPAuthPopup(null, { 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
 		}
 	}
 	// no logins found

@@ -3,17 +3,20 @@ if (jQuery) {
 }
 
 $(function() {
-	options.initMenu();
-	options.initGeneralSettings();
-	options.initConnectedDatabases();
-	options.initSpecifiedCredentialFields();
-	options.initAbout();
+	browser.runtime.sendMessage({ action: 'load_settings' }).then((settings) => {
+		options.settings = settings;
+		browser.runtime.sendMessage({ action: 'load_keyring' }).then((keyRing) => {
+			options.keyRing = keyRing;
+			options.initMenu();
+			options.initGeneralSettings();
+			options.initConnectedDatabases();
+			options.initSpecifiedCredentialFields();
+			options.initAbout();
+		});
+	});
 });
 
 var options = options || {};
-
-options.settings = typeof(localStorage.settings) === 'undefined' ? {} : JSON.parse(localStorage.settings);
-options.keyRing = typeof(localStorage.keyRing) === 'undefined' ? {} : JSON.parse(localStorage.keyRing);
 
 options.initMenu = function() {
 	$('.navbar:first ul.nav:first li a').click(function(e) {
@@ -32,22 +35,21 @@ options.saveSetting = function(name) {
 	$($id).closest('.control-group').removeClass('error').addClass('success');
 	setTimeout(() => { $($id).closest('.control-group').removeClass('success'); }, 2500);
 
-	localStorage.settings = JSON.stringify(options.settings);
-
+	browser.storage.local.set({'settings': options.settings});
 	browser.runtime.sendMessage({
 		action: 'load_settings'
 	});
 };
 
 options.saveSettings = function() {
-	localStorage.settings = JSON.stringify(options.settings);
+	browser.storage.local.set({'settings': options.settings});
 	browser.runtime.sendMessage({
 		action: 'load_settings'
 	});
 };
 
 options.saveKeyRing = function() {
-	localStorage.keyRing = JSON.stringify(options.keyRing);
+	browser.storage.local.set({'keyRing': options.keyRing});
 	browser.runtime.sendMessage({
 		action: 'load_keyring'
 	});
@@ -86,28 +88,14 @@ options.initGeneralSettings = function() {
 		}).then(options.showKeePassXCVersions);
 	});
 
-	$('#port').val(options.settings['port']);
 	$('#blinkTimeout').val(options.settings['blinkTimeout']);
 	$('#blinkMinTimeout').val(options.settings['blinkMinTimeout']);
 	$('#allowedRedirect').val(options.settings['allowedRedirect']);
 
-	$('#portButton').click(function() {
-		const port = $.trim($('#port').val());
-	 	const portNumber = Number(port);
-		if (isNaN(port) || portNumber < 1025 || portNumber > 99999) {
-			$('#port').closest('.control-group').addClass('error');
-			alert('The port number has to be in range 1025 - 99999.\nNothing saved!');
-			return;
-		}
-
-		options.settings['port'] = String(portNumber);
-		options.saveSetting('port');
-	});
-
 	$('#blinkTimeoutButton').click(function(){
 		const blinkTimeout = $.trim($('#blinkTimeout').val());
 		const blinkTimeoutval = Number(blinkTimeout);
-		
+
         options.settings['blinkTimeout'] = String(blinkTimeoutval);
 		options.saveSetting('blinkTimeout');
 	});
@@ -115,7 +103,7 @@ options.initGeneralSettings = function() {
 	$('#blinkMinTimeoutButton').click(function(){
 		const blinkMinTimeout = $.trim($('#blinkMinTimeout').val());
 		const blinkMinTimeoutval = Number(blinkMinTimeout);
-		
+
         options.settings['blinkMinTimeout'] = String(blinkMinTimeoutval);
 		options.saveSetting('blinkMinTimeout');
 	});
@@ -123,7 +111,7 @@ options.initGeneralSettings = function() {
 	$('#allowedRedirectButton').click(function(){
 		const allowedRedirect = $.trim($('#allowedRedirect').val());
 		const allowedRedirectval = Number(allowedRedirect);
-		
+
         options.settings['allowedRedirect'] = String(allowedRedirectval);
 		options.saveSetting('allowedRedirect');
 	});

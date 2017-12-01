@@ -4,6 +4,9 @@ $(this.target).find('input').autocomplete();
 // contains already called method names
 var _called = {};
 
+// Count of detected form fields on the page
+var _detectedFields = 0;
+
 browser.runtime.onMessage.addListener(function(req, sender, callback) {
 	if ('action' in req) {
 		if (req.action === 'fill_user_pass_with_specific_login') {
@@ -46,13 +49,15 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		}
 		else if (req.action === 'clear_credentials') {
 			cipEvents.clearCredentials();
+			callback();
 		}
 		else if (req.action === 'activated_tab') {
 			cipEvents.triggerActivatedTab();
+			callback();
 		}
 		else if (req.action === 'redetect_fields') {
 			browser.runtime.sendMessage({
-				action: 'get_settings',
+				action: 'load_settings',
 			}).then((response) => {
 				cip.settings = response.data;
 				cip.initCredentialFields(true);
@@ -78,13 +83,19 @@ var cipAutocomplete = {};
 cipAutocomplete.elements = [];
 
 cipAutocomplete.init = function(field) {
-	if (field.hasClass('ui-autocomplete-input')) {
-		//_f(credentialInputs[i].username).autocomplete('source', autocompleteSource);
+	if (cip.settings.autoFillSingleEntry && cip.credentials.length === 1 && field.hasClass('ui-autocomplete-input')) {
 		field.autocomplete('destroy');
 	}
 
+	let acMenu = jQuery('#kpxc-ac-menu');
+	if (acMenu.length == 0) {
+		jQuery('<div id="kpxc-ac-menu" class="kpxc"></div>').appendTo('body');
+	}
+
 	field
+		.addClass('kpxc')
 		.autocomplete({
+			appendTo: '#kpxc-ac-menu',
 			minLength: 0,
 			source: cipAutocomplete.onSource,
 			select: cipAutocomplete.onSelect,
@@ -101,12 +112,10 @@ cipAutocomplete.onClick = function() {
 };
 
 cipAutocomplete.onOpen = function(event, ui) {
-	// NOT BEAUTIFUL!
-	// modifies ALL ui-autocomplete menus of class .cip-ui-menu
 	jQuery('ul.ui-autocomplete.ui-menu').css('z-index', 2147483636);
 };
 
-cipAutocomplete.onSource = function (request, callback) {
+cipAutocomplete.onSource = function(request, callback) {
 	const matches = jQuery.map(cipAutocomplete.elements, (tag) => {
 		if (tag.label.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
 			return tag;
@@ -115,7 +124,7 @@ cipAutocomplete.onSource = function (request, callback) {
 	callback(matches);
 };
 
-cipAutocomplete.onSelect = function (e, ui) {
+cipAutocomplete.onSelect = function(e, ui) {
 	e.preventDefault();
 	cip.setValueWithChange(jQuery(this), ui.item.value);
 	const fieldId = cipFields.prepareId(jQuery(this).attr('data-cip-id'));
@@ -237,6 +246,7 @@ cipPassword.createDialog = function() {
 
 	$dialog.hide();
 	jQuery('body').append($dialog);
+
 	$dialog.dialog({
 		autoOpen: false,
 		modal: true,
@@ -254,7 +264,7 @@ cipPassword.createDialog = function() {
 					e.preventDefault();
 					browser.runtime.sendMessage({
 						action: 'generate_password'
-					}).then(cipPassword.callbackGeneratedPassword);
+					}).then(cipPassword.callbackGeneratedPassword).catch((e) => {console.log(e);});
 				}
 			},
 			'Copy':
@@ -304,14 +314,20 @@ cipPassword.createDialog = function() {
 			}
 		},
 		open: function(event, ui) {
+			// Dirty hacks for overlay and custom CSS
+			jQuery('.ui-widget-overlay').wrap('<span class="kpxc"></span>');
 			jQuery('.ui-widget-overlay').click(function() {
 				jQuery('#cip-genpw-dialog:first').dialog('close');
+				jQuery('span').remove('.kpxc');
 			});
 
 			if (jQuery('input#cip-genpw-textfield-password:first').val() === '') {
 				jQuery('button#cip-genpw-btn-generate:first').click();
 			}
-		}
+		},
+		create: function(event, ui) {
+	        jQuery('.ui-dialog').wrap('<div class="kpxc"></span>');
+	    }
 	});
 };
 
@@ -394,7 +410,6 @@ cipPassword.callbackPasswordCopied = function(bool) {
 
 cipPassword.callbackGeneratedPassword = function(entries) {
 	if (entries && entries.length >= 1) {
-		console.log(entries[0]);
 		jQuery('#cip-genpw-btn-clipboard:first').removeClass('btn-success');
 		jQuery('input#cip-genpw-textfield-password:first').val(entries[0].password);
 		if (isNaN(entries[0].login)) {
@@ -406,7 +421,7 @@ cipPassword.callbackGeneratedPassword = function(entries) {
 	}
 	else {
 		if (jQuery('div#cip-genpw-error:first').length === 0) {
-			jQuery('button#cip-genpw-btn-generate:first').after('<div style=\'block\' id=\'cip-genpw-error\'>Cannot receive generated password.<br />Is your version of KeePassXC up-to-date?<br /><br /><a href=\'https://keepassxc.org\'>Please visit the KeePassXC homepage</a></div>');
+			jQuery('button#cip-genpw-btn-generate:first').after('<div style=\'block\' id=\'cip-genpw-error\'>Cannot receive generated password.<br />Is KeePassXC opened?<br /></div>');
 			jQuery('input#cip-genpw-textfield-password:first').parent().hide();
 			jQuery('input#cip-genpw-checkbox-next-field:first').parent('label').hide();
 			jQuery('button#cip-genpw-btn-generate').hide();
@@ -805,6 +820,7 @@ cipFields.getAllFields = function() {
 		}
 	});
 
+	_detectedFields = fields.length;
 	return fields;
 };
 
@@ -1074,7 +1090,7 @@ cipFields.useDefinedCredentialFields = function() {
 		}
 
 		if ($found) {
-			var fields = {
+			let fields = {
 				username: creds.username,
 				password: creds.password,
 				fields: creds.fields
@@ -1107,31 +1123,30 @@ jQuery(function() {
 
 cip.init = function() {
 	browser.runtime.sendMessage({
-		action: 'get_settings',
+		action: 'load_settings',
 	}).then((response) => {
-		cip.settings = response.data;
-		cip.initCredentialFields();
+		cip.settings = response;
+		cip.initCredentialFields(true);
 	});
 };
 
 cip.detectNewActiveFields = function() {
-	const hiddenFields = cipFields.getHiddenFieldCount();
-
-	// If hidden fields aren't detected, setInterval is being looped in each frame of the page
-	//if (hiddenFields > 0) {
-		const divDetect = setInterval(function() {
+	const divDetect = setInterval(function() {
+		if (document.visibilityState !== 'hidden') {
 			const fields = cipFields.getAllFields();
-			if (fields.length > 1) {
+
+			// If only password field is shown it's enough to have one field visible for initCredentialFields
+			if (fields.length > (_detectedFields == 1 ? 0 : 1)) {
 				cip.initCredentialFields(true);
 				clearInterval(divDetect);
 			}
-		}, 1000);
-	//}
+		}
+	}, 1000);
 };
 
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function() {
-	const dbDetectInterval = setInterval(function() {
+	let dbDetectInterval = setInterval(function() {
 		if (document.visibilityState !== 'hidden') {
 			browser.runtime.sendMessage({
 				action: 'check_databasehash'
@@ -1145,21 +1160,22 @@ cip.detectDatabaseChange = function() {
 
 					// Switch back to default popup
 					browser.runtime.sendMessage({
-						action: 'get_status'
+						action: 'get_status',
+						args: [ true ]	// Set polling to true, this is an internal function call
 					});
 				} else {
 					if (response.new !== 'no-hash' && response.new !== response.old) {
 						browser.runtime.sendMessage({
-							action: 'get_settings',
+							action: 'load_settings',
 						}).then((response) => {
-							cip.settings = response.data;
+							cip.settings = response;
 							cip.initCredentialFields(true);
 						});
 					}
 				}
-			});
+			}).catch((e) => {console.log(e);});
 		}
-	}, 2000);
+	}, 1000);
 };
 
 cip.initCredentialFields = function(forceCall) {
@@ -1193,7 +1209,7 @@ cip.initCredentialFields = function(forceCall) {
 	    	browser.runtime.sendMessage({
 	    		action: 'retrieve_credentials',
 	    		args: [ cip.url, cip.submitUrl ]
-			}).then(cip.retrieveCredentialsCallback);
+			}).then(cip.retrieveCredentialsCallback).catch((e) => {console.log(e);});
 		}
 	});
 };
@@ -1293,8 +1309,16 @@ cip.preparePageForMultipleCredentials = function(credentials) {
 	// initialize autocomplete for username fields
 	if (cip.settings.autoCompleteUsernames) {
 		for (const i of cipFields.combinations) {
-			if (_f(i.username)) {
-				cipAutocomplete.init(_f(i.username));
+			// Both username and password fields are visible
+			if (_detectedFields >= 2) {
+				if (_f(i.username)) {
+					cipAutocomplete.init(_f(i.username));
+				}
+			} else if (_detectedFields == 1) {
+				// If only password field is the visible one
+				if (_f(i.password)) {
+					cipAutocomplete.init(_f(i.password));
+				}
 			}
 		}
 	}
@@ -1747,6 +1771,6 @@ cipEvents.triggerActivatedTab = function() {
 		browser.runtime.sendMessage({
 			action: 'retrieve_credentials',
 			args: [ cip.url, cip.submitUrl ]
-		}).then(cip.retrieveCredentialsCallback);
+		}).then(cip.retrieveCredentialsCallback).catch((e) => {console.log(e);});
 	}
 };

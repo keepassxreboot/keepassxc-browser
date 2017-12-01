@@ -1,3 +1,35 @@
+0.4.2 (27-11-2017)
+=========================
+- Fixed HTTP authentication with multiple credentials (credits to smorks)
+- Fixed error handling when decrypt fails
+- Fixed database-locked response handling
+- Fixed nonce increment when encrypting messages
+
+0.4.1 (18-11-2017)
+=========================
+- Added support for the credentials dropdown menu with only password field visible
+- Fixed jQuery overriding with custom scoped CSS
+- Fixed non-necessary destroying of autocomplete on autofill
+
+0.4.0 (13-11-2017)
+=========================
+- Fixed showing context menu on password fields with Firefox
+- Ignore XML files on content scripts (Firefox shows them incorrectly)
+- UDP features removed as KeePassXC switched them to Unix domain sockets and named pipes
+
+0.3.9 (04-11-2017)
+=========================
+- Removed incorrect timeout waiting on init
+
+0.3.8 (01-11-2017)
+=========================
+- Use browser.storage.local instead of localStorage
+- Switched some functions to promise
+
+0.3.7 (22-10-2017)
+=========================
+- Improved credentials check (does not use protocol requests for polling)
+
 0.3.6 (20-10-2017)
 =========================
 - Restricted page credentials polling to active tab
