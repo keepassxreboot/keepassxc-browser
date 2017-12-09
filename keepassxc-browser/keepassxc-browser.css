@@ -68,7 +68,7 @@ input.genpw-text {
 	border-collapse: separate;
 }
 
-.genpw-input-group {
+.kpxc .genpw-input-group {
 	position: relative;
 	display: table;
 	border-collapse: separate;
@@ -88,6 +88,12 @@ input.genpw-text {
 .cip-genpw-icon.key-moz {
 	background: url('moz-extension://__MSG_@@extension_id__/icons/key.png') right no-repeat;
 	background-size: contain;
+}
+
+.kpxc .cip-genpw-checkbox {
+	-webkit-appearance: checkbox !important;
+	-moz-appearance: checkbox !important;
+	appearance: checkbox !important;
 }
 
 #cip-genpw-btn-fillin {
