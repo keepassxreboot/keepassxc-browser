@@ -1,3 +1,8 @@
+0.4.3 (9-12-2017)
+=========================
+- Create password generator dialog only when clicking the icon
+- Some adjustments to jQuery CSS scope
+
 0.4.2 (27-11-2017)
 =========================
 - Fixed HTTP authentication with multiple credentials (credits to smorks)

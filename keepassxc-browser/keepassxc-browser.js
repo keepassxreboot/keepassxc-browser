@@ -89,7 +89,7 @@ cipAutocomplete.init = function(field) {
 
 	let acMenu = jQuery('#kpxc-ac-menu');
 	if (acMenu.length == 0) {
-		jQuery('<div id="kpxc-ac-menu" class="kpxc"></div>').appendTo('body');
+		jQuery('<div id=\"kpxc-ac-menu\" class=\"kpxc\"></div>').appendTo('body');
 	}
 
 	field
@@ -155,8 +155,6 @@ cipAutocomplete.onFocus = function() {
 	}
 };
 
-
-
 var cipPassword = {};
 cipPassword.observedIcons = [];
 cipPassword.observingLock = false;
@@ -184,7 +182,6 @@ cipPassword.initField = function(field, inputs, pos) {
 	field.data('cip-password-generator', true);
 
 	cipPassword.createIcon(field);
-	cipPassword.createDialog();
 
 	let $found = false;
 	if (inputs) {
@@ -247,7 +244,13 @@ cipPassword.createDialog = function() {
 	$dialog.hide();
 	jQuery('body').append($dialog);
 
+	let $container = jQuery('#kpxc-pw-dialog');
+	if ($container.length === 0) {
+		jQuery('<div id=\"kpxc-pw-dialog\" class=\"kpxc\"></div>').appendTo('body');
+	}
+
 	$dialog.dialog({
+		appendTo: '#kpxc-pw-dialog',
 		autoOpen: false,
 		modal: true,
 		resizable: false,
@@ -314,8 +317,6 @@ cipPassword.createDialog = function() {
 			}
 		},
 		open: function(event, ui) {
-			// Dirty hacks for overlay and custom CSS
-			jQuery('.ui-widget-overlay').wrap('<span class="kpxc"></span>');
 			jQuery('.ui-widget-overlay').click(function() {
 				jQuery('#cip-genpw-dialog:first').dialog('close');
 				jQuery('span').remove('.kpxc');
@@ -324,10 +325,7 @@ cipPassword.createDialog = function() {
 			if (jQuery('input#cip-genpw-textfield-password:first').val() === '') {
 				jQuery('button#cip-genpw-btn-generate:first').click();
 			}
-		},
-		create: function(event, ui) {
-	        jQuery('.ui-dialog').wrap('<div class="kpxc"></span>');
-	    }
+		}
 	});
 };
 
@@ -337,7 +335,9 @@ cipPassword.createIcon = function(field) {
 	let $offset = Math.floor((field.outerHeight() - $size) / 3);
 	$offset = ($offset < 0) ? 0 : $offset;
 
-	const $icon = jQuery('<div>').addClass('cip-genpw-icon')
+	const $icon = jQuery('<div>')
+		.addClass('kpxc')
+		.addClass('cip-genpw-icon')
 		.addClass($className)
 		.attr('title', 'Generate password')
 		.css('z-index', '9999')
@@ -356,10 +356,12 @@ cipPassword.createIcon = function(field) {
 			return;
 		}
 
+		cipPassword.createDialog();
 		const $dialog = jQuery('#cip-genpw-dialog');
 		if ($dialog.dialog('isOpen')) {
 			$dialog.dialog('close');
 		}
+
 		$dialog.dialog('option', 'position', { my: 'left-10px top', at: 'center bottom', of: jQuery(this) });
 		$dialog.data('cip-genpw-field-id', field.data('cip-id'));
 		$dialog.data('cip-genpw-next-field-id', field.data('cip-genpw-next-field-id'));
