@@ -38,6 +38,10 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 			cip.receiveCredentialsIfNecessary();
 			cip.fillInFromActiveElementPassOnly(false);
 		}
+		else if (req.action === 'fill_totp') {
+			cip.receiveCredentialsIfNecessary();
+			cip.fillInFromActiveElementTOTPOnly(false);
+		}
 		else if (req.action === 'activate_password_generator') {
 			cip.initPasswordGenerator(cipFields.getAllFields());
 		}
@@ -1443,6 +1447,26 @@ cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 	delete combination.loginId;
 
 	cip.fillInCredentials(combination, true, suppressWarnings);
+};
+
+cip.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
+	const el = document.activeElement;
+	cipFields.setUniqueId(jQuery(el));
+	const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
+
+
+	if (cip.credentials[0]) {
+		const $sf = _fs(fieldId);
+		if (cip.credentials[0].stringFields && cip.credentials[0].stringFields.length > 0) {
+			const sFields = cip.credentials[0].stringFields;
+			for (const s of sFields) {
+				const val = s["KPH: {TOTP}"];
+				if (val) {
+					cip.setValue($sf, val);
+				}
+			}
+		}
+	}
 };
 
 cip.setValue = function(field, value) {
