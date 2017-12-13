@@ -20,7 +20,7 @@ This can cause unsaved changes not to be saved. If you use this method it's impo
 2. keepassxc-browser communicated with KeePassXC through keepassxc-proxy. The proxy handles listening stdin/stdout
 and transfers these messages through Unix domain sockets / named pipes to KeePassXC. This means KeePassXC can be used and started normally without inteference from
 Native Messaging API. keepassxc-browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. You don't need to install keepassxc-proxy separately. It is included in the latest KeePassXC fork. Use it if you want to make your own proxy or improve/extend it. Alternatively you can use
-[keepassxc-proxy-rust](https://github.com/varjolintu/keepassxc-proxy-rust) as a proxy if you prefer a non-Qt solution. There's also Python and C++ versions available at 
+[keepassxc-proxy-rust](https://github.com/varjolintu/keepassxc-proxy-rust) as a proxy if you prefer a non-Qt solution. There's also Python and C++ versions available at
 [keepassxc-proxy](https://github.com/varjolintu/keepassxc-proxy).
 
 ## Improvements
@@ -36,6 +36,7 @@ The following improvements and features have been made after the fork. At this p
 - Redesigned password generator dialog
 - Password generator supports diceware passphrases and extended ASCII characters
 - Autocomplete works also when only password fields are visible
+- Supports TOTP with custom KHP placeholders
 
 ## Protocol
 
