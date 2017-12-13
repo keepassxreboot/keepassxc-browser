@@ -131,7 +131,9 @@ keepass.addCredentials = function(callback, tab, username, password, url) {
 
 keepass.updateCredentials = function(callback, tab, entryId, username, password, url) {
 	page.debug('keepass.updateCredentials(callback, {1}, {2}, {3}, [password], {4})', tab.id, entryId, username, url);
-	page.tabs[tab.id].errorMessage = null;
+	if (tab && page.tabs[tab.id]) {
+		page.tabs[tab.id].errorMessage = null;
+	}
 
 	keepass.testAssociation((response) => {
 		if (!response) {
@@ -200,7 +202,9 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 			return;
 		}
 
-		page.tabs[tab.id].errorMessage = null;
+		if (tab && page.tabs[tab.id]) {
+			page.tabs[tab.id].errorMessage = null;
+		}
 
 		if (!keepass.isConnected) {
 			callback([]);
@@ -344,7 +348,9 @@ keepass.associate = function(callback, tab) {
 			return;
 		}
 
-		page.tabs[tab.id].errorMessage = null;
+		if (tab && page.tabs[tab.id]) {
+			page.tabs[tab.id].errorMessage = null;
+		}
 
 		const kpAction = kpActions.ASSOCIATE;
 		const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
