@@ -30,6 +30,18 @@ options.initMenu = function() {
 	$('div.tab:first').show();
 };
 
+options.saveSettingsPromise = function() {
+	return new Promise((resolve, reject) => {
+		browser.storage.local.set({'settings': options.settings}).then((item) => {
+			browser.runtime.sendMessage({
+				action: 'load_settings'
+			}).then((settings) => {
+				resolve(settings);
+			});
+		});
+	});
+}
+
 options.saveSetting = function(name) {
 	const $id = '#' + name;
 	$($id).closest('.control-group').removeClass('error').addClass('success');
@@ -61,8 +73,13 @@ options.initGeneralSettings = function() {
 	});
 
 	$('#tab-general-settings input[type=checkbox]').change(function() {
-		options.settings[$(this).attr('name')] = $(this).is(':checked');
-		options.saveSettings();
+		const name = $(this).attr('name');
+		options.settings[name] = $(this).is(':checked');
+		options.saveSettingsPromise().then((x) => {
+			if (name === 'autoFillAndSend') {
+				browser.runtime.sendMessage({action: 'init_http_auth'});
+			}
+		});
 	});
 
 	$('#tab-general-settings input[type=radio]').each(function() {
