@@ -13,7 +13,7 @@ Now the requests are encrypted by [TweetNaCl.js](https://github.com/dchest/tweet
 Encrypted messages are built with these JSON parameters:
 - action - `test-associate`, `associate`, `get-logins`, `get-logins-count`, `set-login`...
 - message - Encrypted message, base64 encoded
-- nonce - 24 bytes long random data, base64 encoded. This must be the same when responding to a request.
+- nonce - 24 bytes long random data, base64 encoded. This is incremented to the response.
 - clientID - 24 bytes long random data, base64 encoded. This is used to identify different browsers if multiple are used with proxy application.
 
 Currently these messages are implemented:
