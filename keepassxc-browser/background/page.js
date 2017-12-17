@@ -14,8 +14,8 @@ page.blockedTabs = {};
 
 page.initSettings = function() {
 	return new Promise((resolve, reject) => {
-		kpxcEvent.onLoadSettings((settings) => {
-			page.settings = settings;
+		browser.storage.local.get({'settings': {}}).then((item) => {
+			page.settings = item.settings;
 			if (!('checkUpdateKeePassXC' in page.settings)) {
 				page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
 			}
@@ -35,7 +35,7 @@ page.initSettings = function() {
 				page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
 			}
 			browser.storage.local.set({'settings': page.settings});
-			resolve();
+			resolve(page.settings);
 		});
 	});
 };

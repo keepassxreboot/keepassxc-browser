@@ -1,6 +1,7 @@
 keepass.migrateKeyRing().then(() => {
 	page.initSettings().then(() => {
 		page.initOpenedTabs().then(() => {
+			httpAuth.init();
 			keepass.connectToNative();
 			keepass.generateNewKeyPair();
 			keepass.changePublicKeys(null).then((pkRes) => {
@@ -73,27 +74,12 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	}
 });
 
-// Retrieve Credentials and try auto-login for HTTPAuth requests
-if (browser.webRequest.onAuthRequired) {
-	let handleReq = httpAuth.handleRequestPromise;
-	let reqType = 'blocking';
-	let opts = { urls: ['<all_urls>'] };
-
-	if (!isFirefox()) {
-		handleReq = httpAuth.handleRequestCallback;
-		reqType = 'asyncBlocking';
-	}
-
-	browser.webRequest.onAuthRequired.addListener(handleReq, opts, [reqType]);
-	browser.webRequest.onCompleted.addListener(httpAuth.requestCompleted, opts);
-	browser.webRequest.onErrorOccurred.addListener(httpAuth.requestCompleted, opts);
-}
-
 browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 
 const contextMenuItems = [
 	{title: 'Fill User + Pass', action: 'fill_user_pass'},
 	{title: 'Fill Pass Only', action: 'fill_pass_only'},
+	{title: 'Fill TOTP', action: 'fill_totp'},
 	{title: 'Show Password Generator Icons', action: 'activate_password_generator'},
 	{title: 'Save credentials', action: 'remember_credentials'}
 ];

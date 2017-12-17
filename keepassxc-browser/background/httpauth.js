@@ -3,6 +3,31 @@ const httpAuth = {};
 httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];
 
+httpAuth.init = function() {
+	let handleReq = httpAuth.handleRequestPromise;
+	let reqType = 'blocking';
+
+	if (!isFirefox()) {
+		handleReq = httpAuth.handleRequestCallback;
+		reqType = 'asyncBlocking';
+	}
+
+	if (browser.webRequest.onAuthRequired.hasListener(handleReq)) {
+		browser.webRequest.onAuthRequired.removeListener(handleReq);
+		browser.webRequest.onCompleted.removeListener(httpAuth.requestCompleted);
+		browser.webRequest.onErrorOccurred.removeListener(httpAuth.requestCompleted);
+	}
+
+	// only intercept http auth requests if the option is turned on.
+	if (page.settings.autoFillAndSend) {
+		const opts = { urls: ['<all_urls>'] };
+
+		browser.webRequest.onAuthRequired.addListener(handleReq, opts, [reqType]);
+		browser.webRequest.onCompleted.addListener(httpAuth.requestCompleted, opts);
+		browser.webRequest.onErrorOccurred.addListener(httpAuth.requestCompleted, opts);
+	}
+};
+
 httpAuth.requestCompleted = function(details) {
 	let index = httpAuth.requests.indexOf(details.requestId);
 	if (index >= 0) {
@@ -41,8 +66,8 @@ httpAuth.processPendingCallbacks = function(details, resolve, reject) {
 
 httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
 	// at least one login found --> use first to login
-	if (logins.length > 0) {
-		if (logins.length == 1 && page.settings.autoFillAndSend) {
+	if (logins.length > 0  && page.settings.autoFillAndSend) {
+		if (logins.length === 1) {
 			resolve({
 				authCredentials: {
 					username: logins[0].login,

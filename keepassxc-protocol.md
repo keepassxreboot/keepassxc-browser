@@ -4,16 +4,16 @@ Transmitting messages between KeePassXC and keepassxc-browser is totally rewritt
 Now the requests are encrypted by [TweetNaCl.js](https://github.com/dchest/tweetnacl-js) box method and does the following:
 
 1. keepassxc-browser generates a key pair (with public and secret key) and transfers the public key to KeePassXC
-2. When KeePassXC receives the public key it generates its own key pair and transfers the public key to keepassxc-browser
+2. When KeePassXC receives the public key it generates its own key pair and transfers the public key to keepassxc-browser. Public key is transferred in plain-text. Secret keys are never transferred or used anywhere except when encrypting/decrypting.
 3. All messages between the browser extension and KeePassXC are now encrypted.
 4. When keepassxc-browser sends a message it is encrypted with KeePassXC's public key, a random generated nonce and keepassxc-browser's secret key.
 5. When KeePassXC sends a message it is encrypted with keepassxc-browser's public key and an incremented nonce.
-6. Databases are stored based on the current public key used with `associate`. A new key pair for data transfer is generated each time keepassxc-browser is launched.
+6. Databases are stored based on the current public key used with `associate`. A new key pair for data transfer is generated each time keepassxc-browser is launched. This saved key is not used again, as it's only used for identification.
 
 Encrypted messages are built with these JSON parameters:
 - action - `test-associate`, `associate`, `get-logins`, `get-logins-count`, `set-login`...
 - message - Encrypted message, base64 encoded
-- nonce - 24 bytes long random data, base64 encoded. This must be the same when responding to a request.
+- nonce - 24 bytes long random data, base64 encoded. This is incremented to the response.
 - clientID - 24 bytes long random data, base64 encoded. This is used to identify different browsers if multiple are used with proxy application.
 
 Currently these messages are implemented:

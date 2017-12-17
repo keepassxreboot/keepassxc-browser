@@ -1,3 +1,9 @@
+0.4.4 (17-12-2017)
+=========================
+- Added support for OTP codes via context menu
+- Fixed HTTP auth
+- General content script code cleaning
+
 0.4.3 (9-12-2017)
 =========================
 - Create password generator dialog only when clicking the icon

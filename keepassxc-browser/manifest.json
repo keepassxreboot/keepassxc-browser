@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "keepassxc-browser",
-	"version": "0.4.3",
+	"version": "0.4.4",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "Sami Vänttinen",
 	"icons": {

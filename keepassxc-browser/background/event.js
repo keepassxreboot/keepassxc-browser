@@ -100,8 +100,8 @@ kpxcEvent.showStatus = function(configured, tab, callback) {
 };
 
 kpxcEvent.onLoadSettings = function(callback, tab) {
-	browser.storage.local.get({'settings': {}}).then((item) => {
-		callback(item.settings);
+	page.initSettings().then((settings) => {
+		callback(settings);
 	}, (err) => {
 		console.log('error loading settings: ' + err);
 	});
@@ -230,6 +230,11 @@ kpxcEvent.onLoginPopup = function(callback, tab, logins) {
 	browserAction.show(null, tab);
 };
 
+kpxcEvent.initHttpAuth = function(callback) {
+	httpAuth.init();
+	callback();
+}
+
 kpxcEvent.onHTTPAuthPopup = function(callback, tab, data) {
 	let stackData = {
 		level: 1,
@@ -274,6 +279,7 @@ kpxcEvent.messageHandlers = {
 	'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
 	'get_status': kpxcEvent.onGetStatus,
 	'get_tab_information': kpxcEvent.onGetTabInformation,
+	'init_http_auth': kpxcEvent.initHttpAuth,
 	'load_keyring': kpxcEvent.onLoadKeyRing,
 	'load_settings': kpxcEvent.onLoadSettings,
 	'page_clear_logins': kpxcEvent.pageClearLogins,
