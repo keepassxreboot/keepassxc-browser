@@ -22,7 +22,7 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 					combination = cipFields.getCombination('password', cip.p);
 				}
 
-                let list = {};
+                let list = [];
 				if (cip.fillInStringFields(combination.fields, cip.credentials[req.id].stringFields, list)) {
                     cipForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
                 }
@@ -36,7 +36,7 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
 		}
 		else if (req.action === 'fill_pass_only') {
 			cip.receiveCredentialsIfNecessary();
-			cip.fillInFromActiveElementPassOnly(false);
+			cip.fillInFromActiveElement(false, true);
 		}
 		else if (req.action === 'fill_totp') {
 			cip.receiveCredentialsIfNecessary();
@@ -534,7 +534,7 @@ var cipDefine = {};
 cipDefine.selection = {
 	username: null,
 	password: null,
-	fields: {}
+	fields: []
 };
 cipDefine.eventFieldClick = null;
 
@@ -671,7 +671,7 @@ cipDefine.resetSelection = function() {
 	cipDefine.selection = {
 		username: null,
 		password: null,
-		fields: {}
+		fields: []
 	};
 };
 
@@ -714,10 +714,8 @@ cipDefine.markAllStringFields = function($chooser) {
 };
 
 cipDefine.markFields = function ($chooser, $pattern) {
-	//var $found = false;
 	jQuery($pattern).each(function() {
 		if (cipDefine.isFieldSelected(jQuery(this).data('cip-id'))) {
-			//continue
 			return true;
 		}
 
@@ -731,16 +729,8 @@ cipDefine.markFields = function ($chooser, $pattern) {
 				.click(cipDefine.eventFieldClick)
 				.hover(function() {jQuery(this).addClass('b2c-fixed-hover-field');}, function() {jQuery(this).removeClass('b2c-fixed-hover-field');});
 			$chooser.append($field);
-			//$found = true;
 		}
 	});
-
-	/* skip step if no entry was found
-	if(!$found) {
-		alert('No username field found.\nContinue with choosing a password field.'');
-		jQuery('button#b2c-btn-skip').click();
-	}
-	*/
 };
 
 cipDefine.prepareStep1 = function() {
@@ -763,14 +753,6 @@ cipDefine.prepareStep2 = function() {
 };
 
 cipDefine.prepareStep3 = function() {
-	/* skip step if no entry was found
-	if(!jQuery('div#b2c-cipDefine-fields').data('username') && !jQuery('div#b2c-cipDefine-fields').data('password')) {
-		alert('Neither an username field nor a password field were selected.\nNothing will be changed and chooser will be closed now.'');
-		jQuery('button#b2c-btn-dismiss').click();
-		return;
-	}
-	 */
-
 	if (!cipDefine.selection.username && !cipDefine.selection.password) {
 		jQuery('button#b2c-btn-confirm:first').removeClass('b2c-btn-primary').attr('disabled', true);
 	}
@@ -1272,7 +1254,7 @@ cip.prepareFieldsForCredentials = function(autoFillInForSingle) {
 		}
 
 		if (combination) {
-			let list = {};
+			let list = [];
 			if (cip.fillInStringFields(combination.fields, cip.credentials[0].stringFields, list)) {
 				cipForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
 			}
@@ -1393,30 +1375,7 @@ cip.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
 	}
 };
 
-cip.fillInFromActiveElement = function(suppressWarnings) {
-	const el = document.activeElement;
-	if (el.tagName.toLowerCase() !== 'input') {
-		if (cipFields.combinations.length > 0) {
-			cip.fillInCredentials(cipFields.combinations[0], false, suppressWarnings);
-		}
-		return;
-	}
-
-	cipFields.setUniqueId(jQuery(el));
-	const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
-	let combination = null;
-	if (el.type && el.type.toLowerCase() === 'password') {
-		combination = cipFields.getCombination('password', fieldId);
-	}
-	else {
-		combination = cipFields.getCombination('username', fieldId);
-	}
-	delete combination.loginId;
-
-	cip.fillInCredentials(combination, false, suppressWarnings);
-};
-
-cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
+cip.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
 	const el = document.activeElement;
 	if (el.tagName.toLowerCase() !== 'input') {
 		if (cipFields.combinations.length > 0) {
@@ -1435,18 +1394,20 @@ cip.fillInFromActiveElementPassOnly = function(suppressWarnings) {
 		combination = cipFields.getCombination('username', fieldId);
 	}
 
-	if (!_f(combination.password)) {
-		const message = 'Unable to find a password field';
-		browser.runtime.sendMessage({
-			action: 'alert',
-			args: [message]
-		});
-		return;
+	if (passOnly) {
+		if (!_f(combination.password)) {
+			const message = 'Unable to find a password field';
+			browser.runtime.sendMessage({
+				action: 'alert',
+				args: [message]
+			});
+			return;
+		}
 	}
 
 	delete combination.loginId;
 
-	cip.fillInCredentials(combination, true, suppressWarnings);
+	cip.fillInCredentials(combination, false, suppressWarnings);
 };
 
 cip.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
@@ -1493,7 +1454,6 @@ cip.fillInStringFields = function(fields, StringFields, filledInFields) {
         for (let i = 0; i < fields.length; i++) {
 			const $sf = _fs(fields[i]);
 			if ($sf && StringFields[i]) {
-				//$sf.val(StringFields[i].Value);
 				cip.setValue($sf, StringFields[i].Value);
                 filledInFields.list.push(fields[i]);
 				$filledIn = true;
@@ -1549,7 +1509,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			filledIn = true;
 		}
 
-        let list = {};
+        let list = [];
 		if (cip.fillInStringFields(combination.fields, cip.credentials[0].stringFields, list)) {
             cipForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
             filledIn = true;
@@ -1579,7 +1539,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 			filledIn = true;
 		}
 
-        let list = {};
+        let list = [];
 		if (cip.fillInStringFields(combination.fields, cip.credentials[combination.loginId].stringFields, list)) {
             cipForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
             filledIn = true;
@@ -1632,7 +1592,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 					pField.data('unchanged', true);
 				}
 
-                let list = {};
+                let list = [];
 				if (cip.fillInStringFields(combination.fields, valStringFields, list)) {
                     cipForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
                 }

@@ -1,9 +1,0 @@
-{
-  "name": "com.varjolintu.keepassxc_browser",
-  "description": "KeepassXC integration with Firefox with Native Messaging support",
-  "path" : "keepassxc-proxy.bat",
-  "type": "stdio",
-  "allowed_extensions": [
-    "keepassxc-browser@sami.vanttinen"
-  ]
-}
