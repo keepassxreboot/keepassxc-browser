@@ -66,8 +66,9 @@ $(function() {
 
 	$('#redetect-fields-button').click(function() {
 		browser.tabs.query({"active": true, "currentWindow": true}).then(function(tabs) {
-			if (tabs.length === 0)
+			if (tabs.length === 0) {
 				return; // For example: only the background devtools or a popup are opened
+			}
 			let tab = tabs[0];
 
 			browser.tabs.sendMessage(tab.id, {

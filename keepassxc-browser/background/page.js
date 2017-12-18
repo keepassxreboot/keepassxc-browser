@@ -105,7 +105,7 @@ page.removePageInformationFromNotExistingTabs = function() {
 	let rand = Math.floor(Math.random()*1001);
 	if (rand === 28) {
 		browser.tabs.query({}).then(function(tabs) {
-			let $tabIds = {};
+			let $tabIds = [];
 			const $infoIds = Object.keys(page.tabs);
 
 			for (const t of tabs) {
