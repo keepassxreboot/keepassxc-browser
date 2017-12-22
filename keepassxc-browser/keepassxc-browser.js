@@ -466,6 +466,8 @@ cipPassword.checkObservedElements = function() {
 				cipPassword.setIconPosition(iconField, field);
 				field.data('cip-password-generator', true);
 			}
+
+
 		}
 		else {
 			cipPassword.observedIcons.splice(index, 1);
@@ -797,12 +799,24 @@ cipFields.prepareId = function(id) {
 	return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return '\\'+m; });
 };
 
+// Check aria-hidden attribute by looping the parent elements of input field
+cipFields.getAriaHidden = function(field) {
+	let $par = jQuery(field).parents();
+	for (p of $par) {
+		const val = $(p).attr('aria-hidden');
+		if (val) {
+			return val;
+		}
+	}
+};
+
 cipFields.getAllFields = function() {
 	let fields = [];
 
 	// get all input fields which are text, email or password and visible
 	jQuery(cipFields.inputQueryPattern).each(function() {
-		if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed') {
+		let ariaHidden = cipFields.getAriaHidden(this);
+		if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed' && ariaHidden === 'false') {
 			cipFields.setUniqueId(jQuery(this));
 			fields.push(jQuery(this));
 		}
@@ -1126,7 +1140,7 @@ cip.detectNewActiveFields = function() {
 			// If only password field is shown it's enough to have one field visible for initCredentialFields
 			if (fields.length > (_detectedFields == 1 ? 0 : 1)) {
 				cip.initCredentialFields(true);
-				clearInterval(divDetect);
+				//clearInterval(divDetect);
 			}
 		}
 	}, 1000);
