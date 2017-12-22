@@ -7,7 +7,7 @@ For testing purposes, please use only the following unofficial KeePassXC [releas
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
 
-Please thee this [wiki page](hhttps://github.com/varjolintu/keepassxc-browser/wiki/Connecting-the-database-with-keepassxc-browser) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
+Please see this [wiki page](https://github.com/varjolintu/keepassxc-browser/wiki/Connecting-the-database-with-keepassxc-browser) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
 
 ## How it works
 There are two methods which you can use keepassxc-browser to connect to KeePassXC:
