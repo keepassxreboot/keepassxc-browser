@@ -808,6 +808,7 @@ cipFields.getAriaHidden = function(field) {
 			return val;
 		}
 	}
+	return 'false';
 };
 
 cipFields.getAllFields = function() {
@@ -1140,7 +1141,7 @@ cip.detectNewActiveFields = function() {
 			// If only password field is shown it's enough to have one field visible for initCredentialFields
 			if (fields.length > (_detectedFields == 1 ? 0 : 1)) {
 				cip.initCredentialFields(true);
-				//clearInterval(divDetect);
+				clearInterval(divDetect);
 			}
 		}
 	}, 1000);
