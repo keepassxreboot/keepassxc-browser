@@ -1483,10 +1483,7 @@ cip.setValueWithChange = function(field, value) {
 
 	if (cip.settings.respectMaxLength === true) {
 		const attribute_maxlength = field.attr('maxlength');
-		if (typeof attribute_maxlength !== typeof undefined &&
-			$.isNumeric(attribute_maxlength) === true &&
-			attribute_maxlength > 0) {
-
+		if (attribute_maxlength && $.isNumeric(attribute_maxlength) === true && attribute_maxlength > 0) {
 			value = value.substr(0, attribute_maxlength);
 		}
 	}
