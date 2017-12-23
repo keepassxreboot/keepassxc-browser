@@ -71,4 +71,5 @@ body {
 }
 #lock-database-button {
 	float: right;
+	height: 30px;
 }
