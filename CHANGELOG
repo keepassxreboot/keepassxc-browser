@@ -1,3 +1,15 @@
+0.4.8 (06-01-2018)
+=========================
+- Changed native messaging host name to org.keepassxc.keepassxc_browser
+- Exclude XSD files from content scripts
+- Switched default keyboard shortcuts to Alt+Shift+U and Alt+Shift+P
+
+0.4.5 (28-12-2017)
+=========================
+- Added support for aria-hidden attribute when checking input field visibility
+- Fixed a bug in redetecting credentials
+- Small CSS fixes
+
 0.4.4 (17-12-2017)
 =========================
 - Added support for OTP codes via context menu
