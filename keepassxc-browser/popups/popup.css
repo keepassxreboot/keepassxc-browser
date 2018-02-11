@@ -1,75 +1,75 @@
 body {
-	font-family: sans-serif;
-	min-width: 440px;
-	max-width: 440px;
-	overflow-x: hidden;
-	background-color: #eee;
-	font-size: 15px;
-	padding: 8px;
+    font-family: sans-serif;
+    min-width: 440px;
+    max-width: 440px;
+    overflow-x: hidden;
+    background-color: #eee;
+    font-size: 15px;
+    padding: 8px;
 }
 .credentials ul {
-	margin-left: 0;
-	margin-right: 0;
-	padding-left: 0;
-	padding-right: 0;
-	list-style-position: inside;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    list-style-position: inside;
 }
 .credentials li {
-	list-style: none;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-left: 10px;
-	margin-right: 5px;
+    list-style: none;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 10px;
+    margin-right: 5px;
 }
 .credentials a {
-	color: #333;
+    color: #333;
 }
 .credentials a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 .credentials li:hover {
-	cursor: pointer;
-	background: #ddd;
+    cursor: pointer;
+    background: #ddd;
 }
 
 .settings {
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #333;
-	font-size: 90%;
-	text-align: left;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    font-size: 90%;
+    text-align: left;
 }
 .settings label {
-	display: block;
+    display: block;
 }
 .settings label input {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 .settings .description {
-	margin-top: 3px;
-	font-size: 80%;
-	color: #787878;
+    margin-top: 3px;
+    font-size: 80%;
+    color: #787878;
 }
 .small {
-	margin-top: 3px;
-	margin-left: 12px;
-	font-size: 80%;
-	color: #787878;
+    margin-top: 3px;
+    margin-left: 12px;
+    font-size: 80%;
+    color: #787878;
 }
 #update-available {
-	padding-top: 10px;
-	margin-top: 10px;
-	padding-bottom: 0px;
-	margin-bottom: 0px;
-	text-align: left;
+    padding-top: 10px;
+    margin-top: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    text-align: left;
 }
 #update-available a:hover,
 #update-available a:active {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 #lock-database-button {
-	float: right;
-	height: 30px;
+    float: right;
+    height: 30px;
 }

@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
-	"name": "keepassxc-browser",
-	"version": "0.4.8",
+	"name": "KeePassXC-Browser",
+	"version": "0.5.0",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "KeePassXC Team",
 	"icons": {
@@ -15,7 +15,7 @@
 		  "19": "icons/keepassxc_19x19.png",
 		  "38": "icons/keepassxc_38x38.png"
 		},
-		"default_title": "keepassxc-browser",
+		"default_title": "KeePassXC-Browser",
 		"default_popup": "popups/popup.html"
 	},
 	"options_ui": {
@@ -65,16 +65,23 @@
 			"description": "Insert username + password",
 			"suggested_key": {
 				"default": "Alt+Shift+U",
-				"mac": "Alt+Shift+U"
+				"mac": "MacCtrl+Shift+U"
 			}
 		},
 		"fill-password": {
 			"description": "Insert a password",
 			"suggested_key": {
 				"default": "Alt+Shift+P",
-				"mac": "Alt+Shift+P"
+				"mac": "MacCtrl+Shift+P"
 			}
-		}
+		},
+        "fill-totp": {
+            "description": "Insert a TOTP",
+            "suggested_key": {
+                "default": "Alt+Shift+T",
+                "mac": "MacCtrl+Shift+T"
+            }
+        }
 	},
 	"web_accessible_resources": [
 		"icons/key.png"
