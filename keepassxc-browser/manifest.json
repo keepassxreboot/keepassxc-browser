@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "KeePassXC-Browser",
-	"version": "0.5.0",
+	"version": "0.5.2",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "KeePassXC Team",
 	"icons": {
@@ -91,6 +91,7 @@
 		"contextMenus",
 		"clipboardWrite",
 		"nativeMessaging",
+        "notifications",
 		"storage",
 		"tabs",
 		"webRequest",

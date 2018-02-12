@@ -200,43 +200,49 @@ browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
 };
 
 browserAction.setRememberPopup = function(tabId, username, password, url, usernameExists, credentialsList) {
-    const settings = typeof(localStorage.settings) === 'undefined' ? {} : JSON.parse(localStorage.settings);
-    const id = tabId || page.currentTabId;
-    let timeoutMinMillis = Number(getValueOrDefault(settings, 'blinkMinTimeout', BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT, 0));
+    browser.storage.local.get({'settings': {}}).then(function(item) {
+        const settings = item.settings;
+        const id = tabId || page.currentTabId;
+        let timeoutMinMillis = Number(getValueOrDefault(settings, 'blinkMinTimeout', BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT, 0));
 
-    if (timeoutMinMillis > 0) {
-        timeoutMinMillis += Date.now();
-    }
+        if (timeoutMinMillis > 0) {
+            timeoutMinMillis += Date.now();
+        }
 
-    const blinkTimeout = getValueOrDefault(settings, 'blinkTimeout', BLINK_TIMEOUT_DEFAULT, 0);
-    const pageUpdateAllowance = getValueOrDefault(settings, 'allowedRedirect', BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT, 0);
+        const blinkTimeout = getValueOrDefault(settings, 'blinkTimeout', BLINK_TIMEOUT_DEFAULT, 0);
+        const pageUpdateAllowance = getValueOrDefault(settings, 'allowedRedirect', BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT, 0);
 
-    const stackData = {
-        visibleForMilliSeconds: blinkTimeout,
-        visibleForPageUpdates: pageUpdateAllowance,
-        redirectOffset: timeoutMinMillis,
-        level: 10,
-        intervalIcon: {
-            index: 0,
-            counter: 0,
-            max: 2,
-            icons: ['icon_remember_red_background_19x19.png', 'icon_remember_red_lock_19x19.png']
-        },
-        icon: 'icon_remember_red_background_19x19.png',
-        popup: 'popup_remember.html'
-    };
+        const stackData = {
+            visibleForMilliSeconds: blinkTimeout,
+            visibleForPageUpdates: pageUpdateAllowance,
+            redirectOffset: timeoutMinMillis,
+            level: 10,
+            intervalIcon: {
+                index: 0,
+                counter: 0,
+                max: 2,
+                icons: ['icon_remember_red_background_19x19.png', 'icon_remember_red_lock_19x19.png']
+            },
+            icon: 'icon_remember_red_background_19x19.png',
+            popup: 'popup_remember.html'
+        };
 
-    browserAction.stackPush(stackData, id);
+        browserAction.stackPush(stackData, id);
 
-    page.tabs[id].credentials = {
-        username: username,
-        password: password,
-        url: url,
-        usernameExists: usernameExists,
-        list: credentialsList
-    };
+        page.tabs[id].credentials = {
+            username: username,
+            password: password,
+            url: url,
+            usernameExists: usernameExists,
+            list: credentialsList
+        };
 
-    browserAction.show(null, {'id': id});
+        browserAction.show(null, {'id': id});
+
+        if (page.settings.showNotifications) {
+            showNotification('Create or modify the credentials by clicking on the extension icon.');
+        }
+    });
 };
 
 function getValueOrDefault(settings, key, defaultVal, min) {

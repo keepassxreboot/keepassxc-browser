@@ -62,7 +62,7 @@ const kpErrors = {
         4: { msg: 'Cannot decrypt message' },
         5: { msg: 'Timeout or not connected to KeePassXC' },
         6: { msg: 'Action cancelled or denied' },
-        7: { msg: 'Cannot encrypt message or public key not found. Is Native Messaging enabled in KeePassXC?' },
+        7: { msg: 'Cannot encrypt message or public key not found. Is native messaging or support for your browser enabled in KeePassXC?' },
         8: { msg: 'KeePassXC association failed, try again.' },
         9: { msg: 'Key change was not successful.' },
         10: { msg: 'Encryption key is not recognized' },
@@ -265,9 +265,11 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
             }
             else if (response.error && response.errorCode) {
                 keepass.handleError(tab, response.errorCode, response.error);
+                callback([]);
             }
             else {
                 browserAction.showDefault(null, tab);
+                callback([]);
             }
         });
     }, tab, false, triggerUnlock);
