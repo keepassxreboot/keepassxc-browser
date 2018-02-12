@@ -45,9 +45,17 @@ httpAuth.handleRequestCallback = function(details, callback) {
     httpAuth.processPendingCallbacks(details, callback, callback);
 };
 
-httpAuth.processPendingCallbacks = function(details, resolve, reject) {
+httpAuth.retrieveCredentials = function(tabId, url, submitUrl, forceCallback) {
+    return new Promise((resolve, reject) => {
+        keepass.retrieveCredentials((logins) => {
+            resolve(logins);
+        }, tabId, url, submitUrl, forceCallback);
+    });
+};
+
+httpAuth.processPendingCallbacks = async function(details, resolve, reject) {
     if (httpAuth.requests.indexOf(details.requestId) >= 0 || !page.tabs[details.tabId]) {
-        reject({});
+        reject({cancel: false});
         return;
     }
 
@@ -59,9 +67,8 @@ httpAuth.processPendingCallbacks = function(details, resolve, reject) {
 
     details.searchUrl = (details.isProxy && details.proxyUrl) ? details.proxyUrl : details.url;
 
-    keepass.retrieveCredentials((logins) => {
-        httpAuth.loginOrShowCredentials(logins, details, resolve, reject);
-    }, { "id": details.tabId }, details.searchUrl, details.searchUrl, true);
+    const logins = await httpAuth.retrieveCredentials({ 'id': details.tabId }, details.searchUrl, details.searchUrl, true);
+    httpAuth.loginOrShowCredentials(logins, details, resolve, reject);
 };
 
 httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
@@ -75,11 +82,14 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
                 }
             });
         } else {
+            if (page.settings.showNotifications) {
+                showNotification('Multiple credentials detected. Click on the extension icon to choose the correct one.');
+            }
             kpxcEvent.onHTTPAuthPopup(null, { 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
         }
     }
     // no logins found
     else {
-        reject({});
+        reject({cancel: false});
     }
 };

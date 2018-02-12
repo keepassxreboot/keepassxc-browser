@@ -1,3 +1,14 @@
+0.5.2 (02-02-2018)
+=========================
+- Choose own credential fields saves the full URL instead of host
+- HTTP Auth no longer gets stuck when there are no credentials available
+- Added option to show notifications (enabled by default)
+- Added notifications for HTTP Auth and saving new credentialsList (new permission needed)
+
+0.5.1 (23-01-2018)
+=========================
+- Fixed unnecessary credential retrieving when input fields are not available
+
 0.5.0 (22-01-2018)
 =========================
 - Fixed an error when filling only a password

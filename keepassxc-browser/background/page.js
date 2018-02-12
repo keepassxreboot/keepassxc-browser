@@ -4,7 +4,8 @@ const defaultSettings = {
     autoFillAndSend: true,
     usePasswordGenerator: true,
     autoFillSingleEntry: false,
-    autoRetrieveCredentials: true
+    autoRetrieveCredentials: true,
+    showNotifications: true
 };
 
 var page = {};
@@ -33,6 +34,9 @@ page.initSettings = function() {
             }
             if (!('autoRetrieveCredentials' in page.settings)) {
                 page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
+            }
+            if (!('showNotifications' in page.settings)) {
+                page.settings.showNotifications = defaultSettings.showNotifications;
             }
             browser.storage.local.set({'settings': page.settings});
             resolve(page.settings);

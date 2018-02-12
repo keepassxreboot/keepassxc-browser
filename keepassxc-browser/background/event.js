@@ -198,7 +198,7 @@ kpxcEvent.onGetKeePassXCVersions = function(callback, tab) {
         }, tab);
     } else {
         callback({"current": keepass.currentKeePassXC.version, "latest": keepass.currentKeePassXC.version});
-}
+    }
 };
 
 kpxcEvent.onCheckUpdateKeePassXC = function(callback, tab) {
