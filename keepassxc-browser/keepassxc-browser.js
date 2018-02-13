@@ -1444,7 +1444,7 @@ cip.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
     let combination = null;
-    if (el.type && el.type.toLowerCase() === 'password') {
+    if ($(el).toType === 'password') {
         combination = cipFields.getCombination('password', fieldId);
     }
     else {
@@ -1521,10 +1521,9 @@ cip.fillInStringFields = function(fields, StringFields, filledInFields) {
 };
 
 cip.setValueWithChange = function(field, value) {
-
     if (cip.settings.respectMaxLength === true) {
         const attribute_maxlength = field.attr('maxlength');
-        if (attribute_maxlength && $.isNumeric(attribute_maxlength) === true && attribute_maxlength > 0) {
+        if (attribute_maxlength && !isNaN(attribute_maxlength) && attribute_maxlength > 0) {
             value = value.substr(0, attribute_maxlength);
         }
     }
@@ -1694,7 +1693,7 @@ cip.contextMenuRememberCredentials = function() {
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
     let combination = null;
-    if (el.type && el.type.toLowerCase() === 'password') {
+    if ($(el).toType === 'password') {
         combination = cipFields.getCombination('password', fieldId);
     }
     else {
