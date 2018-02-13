@@ -7,7 +7,7 @@
       <link rel="stylesheet" href="options.css" />
       <script type="text/javascript" src="../browser-polyfill.min.js"></script>
       <script type="text/javascript" src="../global.js"></script>
-      <script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
       <script type="text/javascript" src="bootstrap.min.js"></script>
       <script type="text/javascript" src="options.js"></script>
   </head>
@@ -29,9 +29,9 @@
         <h2>General Settings</h2>
         <hr />
         <p>
-          If you just want to insert username + password into the fields where your focus is, press <code>Ctrl + Shift + U</code>.
+          If you just want to insert username + password into the fields where your focus is, press <code>Alt + Shift + U</code>.
           <br />
-          If you only want to insert the password, just press <code>Ctrl + Shift + P</code>.
+          If you only want to insert the password, just press <code>Alt + Shift + P</code>.
           <span id="chrome-only">You can customize these shortcuts on <code>chrome://extensions/configureCommands</code> page</span>
         </p>
         <p>
@@ -122,6 +122,15 @@
               <input type="checkbox" name="autoCompleteUsernames" value="true" /> Activate autocomplete for username fields.
             </label>
             <span class="help-block">For all username fields on a page a dropdown list appears which contains all available credentials.</span>
+          </div>
+        </p>
+        <hr />
+        <p>
+          <div class="checkbox">
+            <label class="checkbox">
+              <input type="checkbox" name="showNotifications" value="true" /> Show notifications.
+            </label>
+            <span class="help-block">Allow KeePassXC-Browser to show notifications when user interaction is needed from the extension icon.</span>
           </div>
         </p>
         <hr />

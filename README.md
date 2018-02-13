@@ -29,7 +29,7 @@ The following improvements and features have been made after the fork. At this p
 - Input forms are detected even if the login div has been hidden or is created after the page was loaded
 - It is possible to use the active database from multiple browsers at the same time with keepassxc-proxy option
 - Deprecated JavaScript functions are removed and everything is asynchronous
-- Updated Bootstrap to version 3.3.7 and jQuery to version 3.2.1
+- Updated Bootstrap to version 3.3.7 and jQuery to version 3.3.1
 - New buttons, icons and settings page graphics
 - Redesigned password generator dialog
 - Password generator supports diceware passphrases and extended ASCII characters
