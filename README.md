@@ -11,7 +11,7 @@ Please see this [document](https://keepassxc.org/docs/keepassxc-browser-migratio
 ## How it works
 There are two methods which you can use KeePassXC-Browser to connect to KeePassXC:
 
-1. KeePassXC-Browser communicated with KeePassXC through keepassxc-proxy. The proxy handles listening stdin/stdout
+1. KeePassXC-Browser communicates with KeePassXC through keepassxc-proxy. The proxy handles listening to STDIN/STDOUT
 and transfers these messages through Unix domain sockets / named pipes to KeePassXC. This means KeePassXC can be used and started normally without inteference from
 Native Messaging API. KeePassXC-Browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. You don't need to install keepassxc-proxy separately. It is included in the latest KeePassXC fork. Alternatively you can use
 [keepassxc-proxy-rust](https://github.com/varjolintu/keepassxc-proxy-rust) as a proxy if you prefer a non-Qt solution. There's also Python and C++ versions available at
