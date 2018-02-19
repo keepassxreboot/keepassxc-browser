@@ -14,8 +14,9 @@ body {
 
 /* Custom navbar */
 .navbar-default {
-    background-color: #3a8233;
-    border-color: #01520e;
+    font-family: 'Lato',sans-serif;
+    background-color: #6cac4d;
+    border-color: #3a8233;
     display: inline-block;
     float: none;
     width: 100%;
@@ -42,20 +43,20 @@ body {
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     color: #ffffff;
-    background-color: #01520e;
+    background-color: #3a8233;
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
     color: #ffffff;
-    background-color: #01520e;
+    background-color: #3a8233;
 }
 .navbar-default .navbar-toggle {
-    border-color: #01520e;
+    border-color: #3a8233;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-    background-color: #01520e;
+    background-color: #3a8233;
 }
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #ffffff;
@@ -83,7 +84,7 @@ body {
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #ffffff;
-        background-color: #01520e;
+        background-color: #3a8233;
     }
 }
 

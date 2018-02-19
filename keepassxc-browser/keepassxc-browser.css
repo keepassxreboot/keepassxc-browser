@@ -3,7 +3,7 @@
     font-size: .9em !important;
     font-weight: normal !important;
     font-style: normal !important;
-    font-family: Verdana, Arial, sans-serif !important;
+    font-family: 'Lato',sans-serif !important;
     color: #222222 !important;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .kpxc .ui-dialog-titlebar {
-    background-color: #3a8233;
+    background-color: #6cac4d;
     color: #fff;
 }
 
