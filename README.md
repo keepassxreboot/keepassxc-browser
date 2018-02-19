@@ -3,11 +3,10 @@ Browser extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 This is a heavily forked version of [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
 Some changes merged also from [smorks'](https://github.com/smorks/keepasshttp-connector) KeePassHttp-Connector fork.
-For testing purposes, please use only the following unofficial KeePassXC [release's](https://github.com/varjolintu/keepassxc/releases).
 
-Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/iopaggbpplllidnfmcghoonnokmjoicf).
+Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](hhttps://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk).
 
-Please see this [wiki page](https://github.com/varjolintu/keepassxc-browser/wiki/Connecting-the-database-with-keepassxc-browser) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
+Please see this [document](https://keepassxc.org/docs/keepassxc-browser-migration/) for instructions how to configure this KeePassXC fork in order to connect the database correctly.
 
 ## How it works
 There are two methods which you can use keepassxc-browser to connect to KeePassXC:
