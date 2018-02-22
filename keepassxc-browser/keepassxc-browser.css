@@ -17,6 +17,7 @@
 
 .kpxc .ui-dialog {
     font-size: 12px !important;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
 
 .kpxc .ui-widget-overlay {
@@ -28,6 +29,7 @@
 }
 
 .kpxc .ui-dialog-titlebar {
+    font-family: 'Lato',sans-serif;
     background-color: #6cac4d;
     color: #fff;
 }
