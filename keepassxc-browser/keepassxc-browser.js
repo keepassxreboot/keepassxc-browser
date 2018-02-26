@@ -1,6 +1,7 @@
 // contains already called method names
 var _called = {};
 _called.retrieveCredentials = false;
+_called.clearLogins = false;
 _called.manualFillRequested = 'none';
 
 // Count of detected form fields on the page
@@ -1213,7 +1214,8 @@ cip.initCredentialFields = function(forceCall) {
     }
     _called.initCredentialFields = true;
 
-    browser.runtime.sendMessage({ 'action': 'page_clear_logins' }).then(() => {
+    browser.runtime.sendMessage({ 'action': 'page_clear_logins', args: [_called.clearLogins] }).then(() => {
+        _called.clearLogins = true;
         const inputs = cipFields.getAllFields();
         cipFields.prepareVisibleFieldsWithID('select');
         cip.initPasswordGenerator(inputs);

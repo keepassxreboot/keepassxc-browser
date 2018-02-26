@@ -256,8 +256,10 @@ kpxcEvent.onMultipleFieldsPopup = function(callback, tab) {
     browserAction.show(null, tab);
 };
 
-kpxcEvent.pageClearLogins = function(callback, tab) {
-    page.clearLogins(tab.id);
+kpxcEvent.pageClearLogins = function(callback, tab, alreadyCalled) {
+    if (!alreadyCalled) {
+        page.clearLogins(tab.id);
+    }
     callback();
 };
 
