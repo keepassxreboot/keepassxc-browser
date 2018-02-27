@@ -1,6 +1,6 @@
 $(function() {
     browser.runtime.getBackgroundPage().then((global) => {
-        browser.tabs.query({"active": true, "currentWindow": true}).then((tabs) => {
+        browser.tabs.query({'active': true, 'currentWindow': true}).then((tabs) => {
             if (tabs.length === 0) {
                 return; // For example: only the background devtools or a popup are opened
             }
