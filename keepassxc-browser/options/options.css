@@ -16,7 +16,8 @@ body {
 .navbar-default {
     font-family: 'Lato',sans-serif;
     background-color: #6cac4d;
-    border-color: #3a8233;
+    border: 0px;
+    box-shadow: 0 2px 6px 0;
     display: inline-block;
     float: none;
     width: 100%;
