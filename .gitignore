@@ -1,0 +1,11 @@
+.idea
+
+*.swp
+*~
+*.tmp
+
+*.zip
+*.crx
+.bz
+.bz2
+.xz
