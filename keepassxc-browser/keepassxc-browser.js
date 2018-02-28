@@ -1446,7 +1446,7 @@ cip.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
     let combination = null;
-    if ($(el).toType === 'password') {
+    if ($(el).attr('type') === 'password') {
         combination = cipFields.getCombination('password', fieldId);
     }
     else {
@@ -1695,7 +1695,7 @@ cip.contextMenuRememberCredentials = function() {
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
     let combination = null;
-    if ($(el).toType === 'password') {
+    if ($(el).attr('type') === 'password') {
         combination = cipFields.getCombination('password', fieldId);
     }
     else {
