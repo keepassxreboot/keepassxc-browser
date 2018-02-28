@@ -15,11 +15,16 @@ function initSettings() {
     });
 
     $('#settings #btn-choose-credential-fields').click(function() {
-        browser.runtime.getBackgroundPage().then((global) => {
-            browser.tabs.sendMessage(global.page.currentTabId, {
-                action: 'choose_credential_fields'
+        browser.windows.getCurrent().then((win) => {
+            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
+                const tab = tabs[0];
+                browser.runtime.getBackgroundPage().then((global) => {
+                    browser.tabs.sendMessage(tab.id, {
+                        action: 'choose_credential_fields'
+                    });
+                    close();
+                });
             });
-            close();
         });
     });
 }
