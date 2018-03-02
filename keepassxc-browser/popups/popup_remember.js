@@ -23,8 +23,8 @@ function _initialize(tab) {
 
     let url = _tab.credentials.url;
     url = (url.length > 50) ? url.substring(0, 50) + '...' : url;
-    $('.information-url:first span:first').text(url);
-    $('.information-username:first span:first').text(_tab.credentials.username);
+    $('.information-url:first').text(url);
+    $('.information-username:first').text(_tab.credentials.username);
 
     $('#btn-new').click(function(e) {
         browser.runtime.sendMessage({

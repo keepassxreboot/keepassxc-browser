@@ -14,26 +14,25 @@
   <body>
     <div class="container">
       <div id="settings" class="settings">
-        <button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span> Settings</button>
-        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> Choose custom credential fields for this page</button>
+        <button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span><span data-i18n="popupSettingsText"/></button>
+        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span><span data-i18n="popupChooseCredentialsText"/></button>
         <button id="lock-database-button" class="btn btn-danger" title="Lock database"><span class="glyphicon glyphicon-lock"></span></button>
 
         <div id="update-available" class="alert alert-danger">
-          You use an old version of KeePassXC.
+          <span data-i18n="popupUpdateAvailable"></span>
           <br />
-          <a target="_blank" class="alert-link" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"/></a>.
         </div>
-      </div>
+        </div>
 
       <div class="credentials">
-        <p>
-          Select the login information you would like to get logged in with:
-        </p>
+        <p data-i18n="popupAuthText"></p>
         <div id="login-list" class="list-group"></div>
         <p>
-          <button id="btn-dismiss" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span> Dismiss and show the default authentication dialog</button>
+          <button id="btn-dismiss" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span><span data-i18n="popupButtonDismissHttpAuth"/></button>
         </p>
       </div>
     </div>
+    <script type="text/javascript" src="../translate.js"></script>
   </body>
 </html>

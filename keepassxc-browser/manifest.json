@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
     "version": "1.2.0",
-    "description": "KeePassXC integration for modern web browsers",
+    "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {
         "16": "icons/keepassxc_16x16.png",
@@ -62,21 +62,21 @@
     ],
     "commands": {
         "fill-username-password": {
-            "description": "Insert username + password",
+            "description": "__MSG_contextMenuFillUsernameAndPassword__",
             "suggested_key": {
                 "default": "Alt+Shift+U",
                 "mac": "MacCtrl+Shift+U"
             }
         },
         "fill-password": {
-            "description": "Insert a password",
+            "description": "__MSG_contextMenuFillPassword__",
             "suggested_key": {
                 "default": "Alt+Shift+I",
                 "mac": "MacCtrl+Shift+I"
             }
         },
         "fill-totp": {
-            "description": "Insert a TOTP",
+            "description": "__MSG_contextMenuFillTOTP__",
             "suggested_key": {
                 "default": "Alt+Shift+T",
                 "mac": "MacCtrl+Shift+T"
@@ -105,5 +105,6 @@
             "id": "keepassxc-browser@keepassxc.org",
             "strict_min_version": "52.0"
         }
-    }
+    },
+    "default_locale": "en"
 }

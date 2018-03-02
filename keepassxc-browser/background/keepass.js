@@ -56,22 +56,22 @@ const kpErrors = {
     NO_LOGINS_FOUND: 15,
 
     errorMessages : {
-        0: { msg: 'Unknown error' },
-        1: { msg: 'Database not opened' },
-        2: { msg: 'Database hash not received' },
-        3: { msg: 'Client public key not reveiced' },
-        4: { msg: 'Cannot decrypt message' },
-        5: { msg: 'Timeout or not connected to KeePassXC' },
-        6: { msg: 'Action cancelled or denied' },
-        7: { msg: 'Cannot encrypt message or public key not found. Is native messaging or support for your browser enabled in KeePassXC?' },
-        8: { msg: 'KeePassXC association failed, try again.' },
-        9: { msg: 'Key change was not successful.' },
-        10: { msg: 'Encryption key is not recognized' },
-        11: { msg: 'No saved databases found.' },
-        12: { msg: 'Incorrect action.' },
-        13: { msg: 'Empty message received.' },
-        14: { msg: 'No URL provided.' },
-        15: { msg: 'No logins found.' }
+        0: { msg: tr('errorMessageUnknown') },
+        1: { msg: tr('errorMessageDatabaseNotOpened') },
+        2: { msg: tr('errorMessageDatabaseHash') },
+        3: { msg: tr('errorMessageClientPublicKey') },
+        4: { msg: tr('errorMessageDecrypt') },
+        5: { msg: tr('errorMessageTimeout') },
+        6: { msg: tr('errorMessageCanceled') },
+        7: { msg: tr('errorMessageEncrypt') },
+        8: { msg: tr('errorMessageAssociate') },
+        9: { msg: tr('errorMessageKeyExchange') },
+        10: { msg: tr('errorMessageEncryptionKey') },
+        11: { msg: tr('errorMessageSavedDatabases') },
+        12: { msg: tr('errorMessageIncorrectAction') },
+        13: { msg: tr('errorMessageEmptyMessage') },
+        14: { msg: tr('errorMessageNoURL') },
+        15: { msg: tr('errorMessageNoLogins') }
     },
 
     getError(errorCode) {
