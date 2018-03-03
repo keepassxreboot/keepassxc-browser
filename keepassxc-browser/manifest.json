@@ -104,7 +104,7 @@
 	"applications": {
        "gecko": {
            "id": "keepassxc-browser@keepassxc.org",
-           "strict_min_version": "55.0"
+           "strict_min_version": "52.0"
        }
    }
 }
