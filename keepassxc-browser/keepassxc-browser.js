@@ -148,7 +148,7 @@ cipAutocomplete.onBlur = function() {
     else {
         const fieldId = cipFields.prepareId(jQuery(this).attr('data-cip-id'));
         const fields = cipFields.getCombination('username', fieldId);
-        if (_f(fields.password) && _f(fields.password).data('unchanged') !== true && jQuery(this).val() !== '') {
+        if (_f(fields.password) && _f(fields.password).data('unchanged') !== true && jQuery(this).val() !== '' && _detectedFields > 1) {
             cip.fillInCredentials(fields, true, true);
         }
     }
@@ -1446,7 +1446,7 @@ cip.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
     let combination = null;
-    if ($(el).toType === 'password') {
+    if ($(el).attr('type') === 'password') {
         combination = cipFields.getCombination('password', fieldId);
     }
     else {
@@ -1504,15 +1504,16 @@ cip.setValue = function(field, value) {
     }
 };
 
-cip.fillInStringFields = function(fields, StringFields, filledInFields) {
+cip.fillInStringFields = function(fields, stringFields, filledInFields) {
     let $filledIn = false;
 
     filledInFields.list = [];
-    if (fields && StringFields && fields.length > 0 && StringFields.length > 0) {
+    if (fields && stringFields && fields.length > 0 && stringFields.length > 0) {
         for (let i = 0; i < fields.length; i++) {
             const $sf = _fs(fields[i]);
-            if ($sf && StringFields[i]) {
-                cip.setValue($sf, StringFields[i].Value);
+            const stringFieldValue = Object.values(stringFields[i]);
+            if ($sf && stringFieldValue[0]) {
+                cip.setValue($sf, stringFieldValue[0]);
                 filledInFields.list.push(fields[i]);
                 $filledIn = true;
             }
@@ -1695,7 +1696,7 @@ cip.contextMenuRememberCredentials = function() {
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
     let combination = null;
-    if ($(el).toType === 'password') {
+    if ($(el).attr('type') === 'password') {
         combination = cipFields.getCombination('password', fieldId);
     }
     else {

@@ -1,3 +1,10 @@
+1.0.1 (04-03-2018)
+=========================
+- Don't fill password fields if they already have data
+- Fix custom placeholders
+- Fix input type checks
+- Fix custom input fields with multiple tabs
+
 1.0.0 (27-02-2018)
 =========================
 - First stable release
