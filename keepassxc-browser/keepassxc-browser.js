@@ -1504,15 +1504,16 @@ cip.setValue = function(field, value) {
     }
 };
 
-cip.fillInStringFields = function(fields, StringFields, filledInFields) {
+cip.fillInStringFields = function(fields, stringFields, filledInFields) {
     let $filledIn = false;
 
     filledInFields.list = [];
-    if (fields && StringFields && fields.length > 0 && StringFields.length > 0) {
+    if (fields && stringFields && fields.length > 0 && stringFields.length > 0) {
         for (let i = 0; i < fields.length; i++) {
             const $sf = _fs(fields[i]);
-            if ($sf && StringFields[i]) {
-                cip.setValue($sf, StringFields[i].Value);
+            const stringFieldValue = Object.values(stringFields[i]);
+            if ($sf && stringFieldValue[0]) {
+                cip.setValue($sf, stringFieldValue[0]);
                 filledInFields.list.push(fields[i]);
                 $filledIn = true;
             }
