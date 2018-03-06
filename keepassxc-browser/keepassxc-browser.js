@@ -1656,12 +1656,10 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
             // user has to select correct credentials by himself
             if (countPasswords > 1) {
                 if (!suppressWarnings) {
-                    const message = 'Error #105\nMore than one login was found in KeePassXC!\n' +
-                    'Press the KeePassXC-Browser icon for more options.';
-                    browser.runtime.sendMessage({
-                        action: 'alert',
-                        args: [message]
-                    });
+                    const $target = onlyPassword ? pField : uField;
+                    cipAutocomplete.init($target);
+                    $target.focus();
+                    jQuery($target).autocomplete('search', jQuery($target).val());
                 }
             }
             else if (countPasswords < 1) {
@@ -1676,12 +1674,10 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
         }
         else {
             if (!suppressWarnings) {
-                    const message = 'Error #104\nMore than one login was found in KeePassXC!\n' +
-                    'Press the KeePassXC-Browser icon for more options.';
-                browser.runtime.sendMessage({
-                    action: 'alert',
-                    args: [message]
-                });
+                const $target = onlyPassword ? pField : uField;
+                cipAutocomplete.init($target);
+                $target.focus();
+                jQuery($target).autocomplete('search', jQuery($target).val());
             }
         }
     }
