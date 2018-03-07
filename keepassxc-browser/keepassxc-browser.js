@@ -305,7 +305,11 @@ cipPassword.createDialog = function() {
                                 $password = $password.substring(0, field.attr('maxlength'));
                                 jQuery('input#cip-genpw-textfield-password:first').val($password);
                                 jQuery('#cip-genpw-btn-clipboard:first').removeClass('b2c-btn-success');
-                                alert('The generated password is longer than the allowed length!\nIt has been cut to fit the length.\n\nPlease remember the new password!');
+                                const message = 'Error:\nThe generated password is longer than the allowed length!\nIt has been cut to fit the length.\n\nPlease remember the new password!';
+                                browser.runtime.sendMessage({
+                                    action: 'show_notification',
+                                    args: [message]
+                                });
                             }
                         }
 
@@ -1455,9 +1459,9 @@ cip.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
 
     if (passOnly) {
         if (!_f(combination.password)) {
-            const message = 'Unable to find a password field';
+            const message = 'Error:\nUnable to find a password field';
             browser.runtime.sendMessage({
-                action: 'alert',
+                action: 'show_notification',
                 args: [message]
             });
             return;
@@ -1539,9 +1543,9 @@ cip.setValueWithChange = function(field, value) {
 cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
     // no credentials available
     if (cip.credentials.length === 0 && !suppressWarnings) {
-        const message = 'No logins found.';
+        const message = 'Error:\nNo logins found.';
         browser.runtime.sendMessage({
-            action: 'alert',
+            action: 'show_notification',
             args: [message]
         });
         return;
@@ -1572,9 +1576,9 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 
         if (!filledIn) {
             if (!suppressWarnings) {
-                const message = 'Error #101\nCannot find fields to fill in.';
+                const message = 'Error:\nCannot find fields to fill in.';
                 browser.runtime.sendMessage({
-                    action: 'alert',
+                    action: 'show_notification',
                     args: [message]
                 });
             }
@@ -1602,9 +1606,9 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
 
         if (!filledIn) {
             if (!suppressWarnings) {
-                const message = 'Error #102\nCannot find fields to fill in.';
+                const message = 'Error:\nCannot find fields to fill in.';
                 browser.runtime.sendMessage({
-                    action: 'alert',
+                    action: 'show_notification',
                     args: [message]
                 });
             }
@@ -1631,7 +1635,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
                 }
             }
 
-            // for the correct alert message: 0 = no logins, X > 1 = too many logins
+            // for the correct notification message: 0 = no logins, X > 1 = too many logins
             if (countPasswords === 0) {
                 countPasswords = cip.credentials.length;
             }
@@ -1664,9 +1668,9 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
             }
             else if (countPasswords < 1) {
                 if (!suppressWarnings) {
-                    const message = 'Error #103\nNo credentials for given username found.';
+                    const message = 'Error:\nNo credentials for given username found.';
                     browser.runtime.sendMessage({
-                        action: 'alert',
+                        action: 'show_notification',
                         args: [message]
                     });
                 }
@@ -1713,7 +1717,11 @@ cip.contextMenuRememberCredentials = function() {
     }
 
     if (!cip.rememberCredentials(usernameValue, passwordValue)) {
-        alert('Could not detect changed credentials.');
+        const message = 'Error:\nCould not detect changed credentials.';
+        browser.runtime.sendMessage({
+            action: 'show_notification',
+            args: [message]
+        });
     }
 };
 
