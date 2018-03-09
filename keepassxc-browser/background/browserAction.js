@@ -1,3 +1,5 @@
+'use strict';
+
 const browserAction = {};
 
 const BLINK_TIMEOUT_DEFAULT = 7500;

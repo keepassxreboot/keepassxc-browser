@@ -1,3 +1,5 @@
+'use strict';
+
 function status_response(r) {
     $('#initial-state').hide();
     $('#error-encountered').hide();

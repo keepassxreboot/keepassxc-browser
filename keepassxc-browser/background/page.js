@@ -1,3 +1,5 @@
+'use strict';
+
 const defaultSettings = {
     checkUpdateKeePassXC: 3,
     autoCompleteUsernames: true,
@@ -11,9 +13,9 @@ const defaultSettings = {
 };
 
 var page = {};
-page.tabs = {};
+page.tabs = [];
 page.currentTabId = -1;
-page.blockedTabs = {};
+page.blockedTabs = [];
 
 page.initSettings = function() {
     return new Promise((resolve, reject) => {
@@ -109,7 +111,7 @@ page.createTabEntry = function(tabId) {
     page.tabs[tabId] = {
         'stack': [],
         'errorMessage': null,
-        'loginList': {}
+        'loginList': []
     };
 };
 

@@ -1,3 +1,5 @@
+'use strict';
+
 const kpxcEvent = {};
 
 kpxcEvent.onMessage = function(request, sender, callback) {
@@ -264,19 +266,10 @@ kpxcEvent.pageClearLogins = function(callback, tab, alreadyCalled) {
     callback();
 };
 
-kpxcEvent.oldDatabaseHash = 'no-hash';
-kpxcEvent.checkDatabaseHash = function(callback, tab) {
-    keepass.checkDatabaseHash((response) => {
-        callback({old: kpxcEvent.oldDatabaseHash, new: response});
-        kpxcEvent.oldDatabaseHash = response;
-    });
-};
-
 // all methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
     'associate': keepass.associate,
-    'check_databasehash': kpxcEvent.checkDatabaseHash,
     'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
     'generate_password': keepass.generatePassword,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
