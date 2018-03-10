@@ -5,7 +5,8 @@ const defaultSettings = {
     usePasswordGenerator: true,
     autoFillSingleEntry: false,
     autoRetrieveCredentials: true,
-    showNotifications: true
+    showNotifications: true,
+    showLoginNotifications: true
 };
 
 var page = {};
@@ -37,6 +38,9 @@ page.initSettings = function() {
             }
             if (!('showNotifications' in page.settings)) {
                 page.settings.showNotifications = defaultSettings.showNotifications;
+            }
+            if (!('showLoginNotifications' in page.settings)) {
+                page.settings.showLoginNotifications = defaultSettings.showLoginNotifications;
             }
             browser.storage.local.set({'settings': page.settings});
             resolve(page.settings);
