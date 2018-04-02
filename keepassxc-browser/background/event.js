@@ -72,7 +72,9 @@ kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
         else {
             console.log('undefined handler for tab ' + tab.id);
         }
-    }).catch((e) => {console.log(e);});
+    }).catch((e) => {
+        console.log(e);
+    });
 };
 
 kpxcEvent.onShowNotification = function(callback, tab, message) {
@@ -160,13 +162,18 @@ kpxcEvent.onReconnect = function(callback, tab) {
                 if (gdRes) {
                     keepass.testAssociation((response) => {
                         keepass.isConfigured().then((configured) => {
+                            browser.tabs.sendMessage(tab.id, {
+                                action: 'redetect_fields'
+                            });
                             kpxcEvent.showStatus(configured, tab, callback);
-                        }).catch((e) => {console.log(e);});
+                        }).catch((e) => {
+                            console.log(e);
+                        });
                     }, tab);
                 }
             }, null);
         });
-    }, 2000);
+    }, 500);
 };
 
 kpxcEvent.lockDatabase = function(callback, tab) {
