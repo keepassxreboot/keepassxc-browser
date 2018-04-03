@@ -214,15 +214,24 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
         }
 
         let entries = [];
+        let keys = [];
         const kpAction = kpActions.GET_LOGINS;
         const nonce = keepass.getNonce();
         const incrementedNonce = keepass.incrementedNonce(nonce);
         const {dbid} = keepass.getCryptoKey();
+    
+        for (let keyHash in keepass.keyRing) {
+            keys.push({
+                id: keepass.keyRing[keyHash].id,
+                key: keepass.keyRing[keyHash].key
+            });
+        }
 
         let messageData = {
             action: kpAction,
             id: dbid,
-            url: url
+            url: url,
+            keys: keys
         };
 
         if (submiturl) {
@@ -704,7 +713,7 @@ keepass.isAssociated = function() {
 keepass.migrateKeyRing = function() {
     return new Promise((resolve, reject) => {
         browser.storage.local.get('keyRing').then((item) => {
-             const keyring = item.keyRing;
+            const keyring = item.keyRing;
             // Change dates to numbers, for compatibilty with Chromium based browsers
             if (keyring) {
                 let num = 0;
