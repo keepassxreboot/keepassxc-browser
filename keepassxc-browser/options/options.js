@@ -2,6 +2,12 @@ if (jQuery) {
     var $ = jQuery.noConflict(true);
 }
 
+const defaultSettings = {
+    blinkTimeout: 7500,
+    redirectOffset: -1,
+    redirectAllowance: 1
+};
+
 $(function() {
     browser.runtime.sendMessage({ action: 'load_settings' }).then((settings) => {
         options.settings = settings;
@@ -111,7 +117,7 @@ options.initGeneralSettings = function() {
 
     $('#blinkTimeoutButton').click(function(){
         const blinkTimeout = $.trim($('#blinkTimeout').val());
-        const blinkTimeoutval = Number(blinkTimeout);
+        const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
 
         options.settings['blinkTimeout'] = String(blinkTimeoutval);
         options.saveSetting('blinkTimeout');
@@ -119,7 +125,7 @@ options.initGeneralSettings = function() {
 
     $('#blinkMinTimeoutButton').click(function(){
         const blinkMinTimeout = $.trim($('#blinkMinTimeout').val());
-        const blinkMinTimeoutval = Number(blinkMinTimeout);
+        const blinkMinTimeoutval = blinkMinTimeout !== '' ? Number(blinkMinTimeout) : defaultSettings.redirectOffset;
 
         options.settings['blinkMinTimeout'] = String(blinkMinTimeoutval);
         options.saveSetting('blinkMinTimeout');
@@ -127,7 +133,7 @@ options.initGeneralSettings = function() {
 
     $('#allowedRedirectButton').click(function(){
         const allowedRedirect = $.trim($('#allowedRedirect').val());
-        const allowedRedirectval = Number(allowedRedirect);
+        const allowedRedirectval = allowedRedirect !== '' ? Number(allowedRedirect) : defaultSettings.redirectAllowance;
 
         options.settings['allowedRedirect'] = String(allowedRedirectval);
         options.saveSetting('allowedRedirect');

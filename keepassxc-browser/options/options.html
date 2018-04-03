@@ -39,7 +39,7 @@
             <label for="blinkTimeout">Blink Time:</label>
             <div class="control-group">
               <div class="input-append">
-                <input type="number" id="blinkTimeout" placeholder="7500" value="7500" />
+                <input type="number" id="blinkTimeout" placeholder="7500" value="7500" min="0"/>
                 <button class="btn btn-sm btn-primary" id="blinkTimeoutButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
               </div>
             </div>
@@ -55,7 +55,7 @@
             <label for="blinkMinTimeout">Redirect Offset:</label>
             <div class="control-group">
               <div class="input-append">
-                <input type="number" id="blinkMinTimeout" placeholder="2000" value="2000" />
+                <input type="number" id="blinkMinTimeout" placeholder="2000" value="2000" min="-1"/>
                 <button class="btn btn-sm btn-primary" id="blinkMinTimeoutButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
               </div>
             </div>
@@ -73,7 +73,7 @@
             <label for="allowedRedirect">Redirect Allowance:</label>
             <div class="control-group">
               <div class="input-append">
-                <input type="number" id="allowedRedirect" placeholder="1" value="1" />
+                <input type="number" id="allowedRedirect" placeholder="1" value="1" min="1"/>
                 <button class="btn btn-sm btn-primary" id="allowedRedirectButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
               </div>
             </div>
