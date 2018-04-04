@@ -72,8 +72,8 @@
 		"fill-password": {
 			"description": "Insert a password",
 			"suggested_key": {
-				"default": "Alt+Shift+P",
-				"mac": "MacCtrl+Shift+P"
+				"default": "Alt+Shift+I",
+				"mac": "MacCtrl+Shift+I"
 			}
 		},
         "fill-totp": {

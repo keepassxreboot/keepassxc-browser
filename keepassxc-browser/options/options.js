@@ -261,4 +261,16 @@ options.initAbout = function() {
     if (isFirefox()) {
         $('#chrome-only').remove();
     }
+
+    if (navigator.platform === 'MacIntel') {
+        $('#default-user-shortcut').hide();
+        $('#default-pass-shortcut').hide();
+        $('#mac-user-shortcut').show();
+        $('#mac-pass-shortcut').show();
+    } else {
+        $('#mac-user-shortcut').hide();
+        $('#mac-pass-shortcut').hide();
+        $('#default-user-shortcut').show();
+        $('#default-pass-shortcut').show();
+    }
 };
