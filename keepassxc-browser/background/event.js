@@ -217,7 +217,17 @@ kpxcEvent.onRemoveCredentialsFromTabInformation = function(callback, tab) {
 };
 
 kpxcEvent.onSetRememberPopup = function(callback, tab, username, password, url, usernameExists, credentialsList) {
-    browserAction.setRememberPopup(tab.id, username, password, url, usernameExists, credentialsList);
+    keepass.testAssociation((response) => {
+        if (response) {
+            keepass.isConfigured().then((configured) => {
+                if (configured) {
+                    browserAction.setRememberPopup(tab.id, username, password, url, usernameExists, credentialsList);
+                }
+            }).catch((e) => {
+                console.log(e);
+            });
+        }
+    }, tab);
 };
 
 kpxcEvent.onLoginPopup = function(callback, tab, logins) {
