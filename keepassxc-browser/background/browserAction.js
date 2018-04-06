@@ -202,6 +202,14 @@ browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
 browserAction.setRememberPopup = function(tabId, username, password, url, usernameExists, credentialsList) {
     browser.storage.local.get({'settings': {}}).then(function(item) {
         const settings = item.settings;
+
+        // Don't show anything if the site is in the ignore list
+        for (const site in settings.ignoredSites) {
+            if (site === url) {
+                return;
+            }
+        }
+
         const id = tabId || page.currentTabId;
         let timeoutMinMillis = Number(getValueOrDefault(settings, 'blinkMinTimeout', BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT, 0));
 
@@ -240,7 +248,29 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
         browserAction.show(null, {'id': id});
 
         if (page.settings.showLoginNotifications) {
-            showNotification('Create or modify the credentials by clicking on the extension icon.');
+            const message = 'Create or modify the credentials by clicking on the extension icon.';
+            const buttons = [
+            {
+                'title': 'Close'
+            },
+            {
+                'title': 'Never ask for this page'
+            }];
+
+            browser.notifications.create({
+                'type': 'basic',
+                'iconUrl': browser.extension.getURL('icons/keepassxc_64x64.png'),
+                'title': 'KeePassXC-Browser',
+                'message': message,
+                'buttons': buttons
+            });
+
+            browser.notifications.onButtonClicked.addListener((id, index) => {
+                browser.notifications.clear(id);
+                if (index === 1) {
+                    browserAction.ignoreSite(url);
+                }
+            });
         }
     });
 };
@@ -269,3 +299,21 @@ browserAction.generateIconName = function(iconType, icon) {
 
     return name;
 };
+
+browserAction.ignoreSite = function(url) {
+    browser.windows.getCurrent().then((win) => {
+        // Get current active window
+        browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
+            const tab = tabs[0];
+
+            // Send the message to the current tab's content script
+            browser.runtime.getBackgroundPage().then((global) => {
+                browser.tabs.sendMessage(tab.id, {
+                    action: 'ignore-site',
+                    args: [url]
+                });
+            });
+        });
+    });
+};
+

@@ -20,6 +20,7 @@
           <li class="active"><a href="#general-settings">General</a></li>
           <li><a href="#connected-databases">Connected Databases</a></li>
           <li><a href="#specified-fields">Specified credential fields</a></li>
+          <li><a href="#ignored-sites">Ignored sites</a></li>
           <li><a href="#about">About</a></li>
         </ul>
       </nav>
@@ -278,6 +279,52 @@
               <div class="modal-body">
                 <p>Do you really want to remove the specified credential fields on the page <strong></strong>?</p>
                 <p class="help-block">KeePassXC-Browser will automatically detect the credential fields the next time you visit this page.</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button class="btn yes btn-primary">Yes, remove now</button>
+              </div>
+            </div>
+          </div>
+       </div>
+      </div>
+
+      <!-- Ignored sites -->
+      <div class="tab" id="tab-ignored-sites">
+        <h2>Ignored sites</h2>
+        <hr />
+        <p>
+          Sites in this list are ignored when new credentials are detected.
+          <br />
+          Go to the page with new credentials, click the blinking KeePassXC-Browser icon or the notification and select <em>Never ask for this page</em>.
+        </p>
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Page URL</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="empty">
+              <td colspan="2">No ignored sites found.</td>
+            </tr>
+            <tr class="clone">
+              <td></td>
+              <td><button class="btn delete btn-danger btn"><span class="glyphicon glyphicon-remove-sign"></span> Remove</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="dialogDeleteIgnoredSite" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Remove site?</h3>
+              </div>
+              <div class="modal-body">
+                <p>Do you really want to remove the specified site from the ignore list?</p>
+                <p class="help-block">KeePassXC-Browser will detect new credentials the next time you visit this page.</p>
               </div>
               <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

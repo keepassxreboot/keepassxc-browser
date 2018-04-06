@@ -30,48 +30,41 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
                     cipForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
                 }
             }
-        }
-        else if (req.action === 'fill_user_pass') {
+        } else if (req.action === 'fill_user_pass') {
             _called.manualFillRequested = 'both';
             cip.receiveCredentialsIfNecessary().then((response) => {
                 cip.fillInFromActiveElement(false);
             });
-        }
-        else if (req.action === 'fill_pass_only') {
+        } else if (req.action === 'fill_pass_only') {
             _called.manualFillRequested = 'pass';
             cip.receiveCredentialsIfNecessary().then((response) => {
                 cip.fillInFromActiveElement(false, true); // passOnly to true
             });
-        }
-        else if (req.action === 'fill_totp') {
+        } else if (req.action === 'fill_totp') {
             cip.receiveCredentialsIfNecessary().then((response) => {
                 cip.fillInFromActiveElementTOTPOnly(false);
             });
-        }
-        else if (req.action === 'activate_password_generator') {
+        } else if (req.action === 'activate_password_generator') {
             cip.initPasswordGenerator(cipFields.getAllFields());
-        }
-        else if (req.action === 'remember_credentials') {
+        } else if (req.action === 'remember_credentials') {
             cip.contextMenuRememberCredentials();
-        }
-        else if (req.action === 'choose_credential_fields') {
+        } else if (req.action === 'choose_credential_fields') {
             cipDefine.init();
-        }
-        else if (req.action === 'clear_credentials') {
+        } else if (req.action === 'clear_credentials') {
             cipEvents.clearCredentials();
             callback();
-        }
-        else if (req.action === 'activated_tab') {
+        } else if (req.action === 'activated_tab') {
             cipEvents.triggerActivatedTab();
             callback();
-        }
-        else if (req.action === 'redetect_fields') {
+        } else if (req.action === 'redetect_fields') {
             browser.runtime.sendMessage({
                 action: 'load_settings',
             }).then((response) => {
                 cip.settings = response;
                 cip.initCredentialFields(true);
             });
+        } else if (req.action === 'ignore-site') {
+            cip.ignoreSite(req.args);
         }
     }
 });
@@ -1827,6 +1820,25 @@ cip.rememberCredentials = function(usernameValue, passwordValue) {
     return false;
 };
 
+cip.ignoreSite = function(sites) {
+    if (!sites || sites.length === 0) {
+        return;
+    }
+
+    const site = sites[0];
+    if (!cip.settings['ignoredSites']) {
+        cip.settings['ignoredSites'] = {};
+    }
+
+    cip.settings['ignoredSites'][site] = {
+        url: site
+    };
+
+    browser.runtime.sendMessage({
+        action: 'save_settings',
+        args: [cip.settings]
+    });
+};
 
 
 var cipEvents = {};
