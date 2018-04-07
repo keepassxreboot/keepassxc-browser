@@ -1762,7 +1762,7 @@ cip.rememberCredentials = function(usernameValue, passwordValue) {
 
         let url = jQuery(this)[0].action;
         if (!url) {
-            url = document.location.href;
+            url = cip.settings.saveDomainOnly ? document.location.origin : document.location.href;
             if (url.indexOf('?') > 0) {
                 url = url.substring(0, url.indexOf('?'));
                 if (url.length < document.location.origin.length) {
