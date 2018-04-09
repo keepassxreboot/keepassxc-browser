@@ -1140,7 +1140,34 @@ cipFields.useDefinedCredentialFields = function() {
     return false;
 };
 
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
+// Detects DOM changes in the document
+let observer = new MutationObserver(function(mutations, observer) {
+    if (document.visibilityState === 'hidden') {
+        return;
+    }
+
+    for (const mut of mutations) {
+        if (mut.type === 'childList') {
+            const fields = cipFields.getAllFields();
+
+            // If only password field is shown it's enough to have one field visible for initCredentialFields
+            if (fields.length > (_detectedFields == 1 ? 0 : 1)) {
+                cip.initCredentialFields(true);
+            }
+        }
+    }
+});
+
+// define what element should be observed by the observer
+// and what types of mutations trigger the callback
+observer.observe(document, {
+    subtree: true,
+    attributes: true,
+    childList: true,
+    characterData: true
+});
 
 var cip = {};
 cip.settings = {};
@@ -1152,7 +1179,7 @@ cip.credentials = [];
 
 jQuery(function() {
     cip.init();
-    cip.detectNewActiveFields();
+    cip.detectDatabaseChange();
 });
 
 cip.init = function() {
@@ -1162,20 +1189,6 @@ cip.init = function() {
         cip.settings = response;
         cip.initCredentialFields();
     });
-};
-
-cip.detectNewActiveFields = function() {
-    const divDetect = setInterval(function() {
-        if (document.visibilityState !== 'hidden') {
-            const fields = cipFields.getAllFields();
-
-            // If only password field is shown it's enough to have one field visible for initCredentialFields
-            if (fields.length > (_detectedFields == 1 ? 0 : 1)) {
-                cip.initCredentialFields(true);
-                clearInterval(divDetect);
-            }
-        }
-    }, 1000);
 };
 
 // Switch credentials if database is changed or closed
