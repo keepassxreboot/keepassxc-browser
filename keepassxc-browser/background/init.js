@@ -16,7 +16,6 @@ keepass.migrateKeyRing().then(() => {
 // Milliseconds for intervall (e.g. to update browserAction)
 const _interval = 250;
 
-
 /**
  * Generate information structure for created tab and invoke all needed
  * functions if tab is created in foreground
@@ -71,7 +70,13 @@ browser.tabs.onActivated.addListener((activeInfo) => {
  * @param {object} changeInfo
  */
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    // If the tab URL has changed (e.g. logged in) clear credentials
+    if (changeInfo.url) {
+        page.clearLogins(tabId);
+    }
+
     if (changeInfo.status === 'complete') {
+        browserAction.showDefault(null, tab);
         kpxcEvent.invoke(browserAction.removeRememberPopup, null, tabId, []);
     }
 });
