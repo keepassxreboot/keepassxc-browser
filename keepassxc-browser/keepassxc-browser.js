@@ -3,6 +3,7 @@ var _called = {};
 _called.retrieveCredentials = false;
 _called.clearLogins = false;
 _called.manualFillRequested = 'none';
+let _loginId = -1;
 
 // Count of detected form fields on the page
 var _detectedFields = 0;
@@ -15,10 +16,12 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
                 if (cip.u) {
                     cip.setValueWithChange(cip.u, cip.credentials[req.id].login);
                     combination = cipFields.getCombination('username', cip.u);
+                    _loginId = req.id;
                     cip.u.focus();
                 }
                 if (cip.p) {
                     cip.setValueWithChange(cip.p, cip.credentials[req.id].password);
+                    _loginId = req.id;
                     combination = cipFields.getCombination('password', cip.p);
                 }
 
@@ -1473,17 +1476,21 @@ cip.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
     const el = document.activeElement;
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
+    const pos = _loginId;
 
-    if (cip.credentials[0]) {
+    if (pos >= 0 && cip.credentials[pos]) {
+        // Check the value from stringFields (to be removed)
         const $sf = _fs(fieldId);
-        if (cip.credentials[0].stringFields && cip.credentials[0].stringFields.length > 0) {
-            const sFields = cip.credentials[0].stringFields;
+        if (cip.credentials[pos].stringFields && cip.credentials[pos].stringFields.length > 0) {
+            const sFields = cip.credentials[pos].stringFields;
             for (const s of sFields) {
                 const val = s["KPH: {TOTP}"];
                 if (val) {
                     cip.setValue($sf, val);
                 }
             }
+        } else if (cip.credentials[pos].totp && cip.credentials[pos].totp.length > 0) {
+            cip.setValue($sf, cip.credentials[pos].totp);
         }
     }
 };
@@ -1555,12 +1562,14 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
         let filledIn = false;
         if (uField && !onlyPassword) {
             cip.setValueWithChange(uField, cip.credentials[0].login);
+            _loginId = 0;
             filledIn = true;
         }
         if (pField) {
             pField.attr('type', 'password');
             cip.setValueWithChange(pField, cip.credentials[0].password);
             pField.data('unchanged', true);
+            _loginId = 0;
             filledIn = true;
         }
 
@@ -1585,12 +1594,14 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
         let filledIn = false;
         if (uField) {
             cip.setValueWithChange(uField, cip.credentials[combination.loginId].login);
+            _loginId = combination.loginId;
             filledIn = true;
         }
 
         if (pField) {
             cip.setValueWithChange(pField, cip.credentials[combination.loginId].password);
             pField.data('unchanged', true);
+            _loginId = combination.loginId;
             filledIn = true;
         }
 
