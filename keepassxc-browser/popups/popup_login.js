@@ -9,13 +9,11 @@ $(function() {
             const tab = tabs[0];
 
             const logins = global.page.tabs[tab.id].loginList;
-            let ul = document.getElementById('login-list');
+            let ll = document.getElementById('login-list');
             for (let i = 0; i < logins.length; i++) {
-                const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.textContent = logins[i];
-                li.setAttribute('class', 'list-group-item');
-                li.appendChild(a);
+                a.setAttribute('class', 'list-group-item');
                 a.setAttribute('id', '' + i);
                 a.addEventListener('click', (e) => {
                     const id = e.target.id;
@@ -25,7 +23,7 @@ $(function() {
                     });
                     close();
                 });
-                ul.appendChild(li);
+                ll.appendChild(a);
             }
         });
     });
