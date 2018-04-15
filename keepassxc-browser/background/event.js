@@ -8,7 +8,7 @@ kpxcEvent.onMessage = function(request, sender, callback) {
             sender.tab.id = page.currentTabId;
         }
 
-        kpxcEvent.invoke(kpxcEvent.messageHandlers[request.action], callback, sender.tab.id, request.args);
+        kpxcEvent.invoke(kpxcEvent.messageHandlers[request.action], callback, sender.tab.id, sender.frameId, request.args);
 
         // onMessage closes channel for callback automatically
         // if this method does not return true
@@ -29,7 +29,7 @@ kpxcEvent.onMessage = function(request, sender, callback) {
  * @param {bool} secondTime
  * @returns null (asynchronous)
  */
-kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
+kpxcEvent.invoke = function(handler, callback, senderTabId, senderFrameId, args, secondTime) {
     if (senderTabId < 1) {
         return;
     }
@@ -51,7 +51,7 @@ kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
             // using window.open()
             if (!secondTime) {
                 window.setTimeout(function() {
-                    kpxcEvent.invoke(handler, callback, senderTabId, args, true);
+                    kpxcEvent.invoke(handler, callback, senderTabId, senderFrameId, args, true);
                 }, 250);
             }
             return;
@@ -65,6 +65,7 @@ kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
 
         args.unshift(tab);
         args.unshift(callback);
+        args.push(senderFrameId);
 
         if (handler) {
             handler.apply(this, args);
@@ -271,6 +272,18 @@ kpxcEvent.checkDatabaseHash = function(callback, tab) {
     });
 };
 
+kpxcEvent.onExecuteScript = function (callback, tab, filenames, frameId) {
+    var n = 0;
+    for (var i = 0; i !== filenames.length; ++i) {
+        chrome.tabs.executeScript(tab.id, {file: filenames[i], frameId: frameId}, function () {
+            ++n;
+            if (n === filenames.length) {
+                callback(filenames);
+            }
+        });
+    }
+}
+
 // all methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -278,6 +291,7 @@ kpxcEvent.messageHandlers = {
     'associate': keepass.associate,
     'check_databasehash': kpxcEvent.checkDatabaseHash,
     'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
+    'execute_script': kpxcEvent.onExecuteScript,
     'generate_password': keepass.generatePassword,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
     'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
