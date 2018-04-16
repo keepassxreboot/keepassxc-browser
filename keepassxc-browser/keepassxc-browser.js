@@ -7,8 +7,60 @@ _called.manualFillRequested = 'none';
 // Count of detected form fields on the page
 var _detectedFields = 0;
 
+var jQuery_full = typeof jQuery !== 'undefined' ? jQuery : null;
+var jQuery_lite = Zepto;
+(function (zepto) {  // add missing functionality
+    zepto.outerWidth = function() {
+        var el = this[0];
+        var v = el.offsetWidth;
+        var style = getComputedStyle(el, '');
+        v += parseInt(style.marginLeft) + parseInt(style.marginRight);
+        return v;
+    };
+    zepto.outerHeight = function() {
+        var el = this[0];
+        var v = el.offsetHeight;
+        var style = getComputedStyle(el, '');
+        v += parseInt(style.marginTop) + parseInt(style.marginBottom);
+        return v;
+    };
+    if (!(Symbol.iterator in zepto)) {
+        zepto[Symbol.iterator] = Array.prototype[Symbol.iterator];
+    }
+})(Object.getPrototypeOf(jQuery_lite()));
+window.jQuery = jQuery_lite;
+
+var with_jQuery_full = (function () {
+    var queue = null;
+    return function (func/*, args...*/) {
+        var args = [];
+        for (var i = 0; i !== arguments.length; ++i) {
+            args.push(arguments[i]);
+        }
+        if (jQuery_full === null) {
+            if (queue === null) {
+                queue = [];
+                browser.runtime.sendMessage({
+                    "action": "execute_script",
+                    "args": [["jquery-3.3.1.min.js", "jquery-ui.min.js"]]
+                }).then(function () {
+                    jQuery_full = jQuery;
+                    jQuery = jQuery_lite;
+                    for (var i = 0; i !== queue.length; ++i) {
+                        var callback = queue[i];
+                        callback.func.apply(callback.this_, callback.args);
+                    }
+                });
+            }
+            queue.push({this_: this, func: func, args: args});
+        } else {
+            func.apply(this, args);
+        }
+    };
+})();
+
 browser.runtime.onMessage.addListener(function(req, sender, callback) {
-    if ('action' in req) {
+    if ('action' in req) with_jQuery_full(function () {
         if (req.action === 'fill_user_pass_with_specific_login') {
             if (cip.credentials[req.id]) {
                 let combination = null;
@@ -63,23 +115,24 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
             callback();
         }
         else if (req.action === 'redetect_fields') {
-            browser.runtime.sendMessage({
-                action: 'load_settings',
-            }).then((response) => {
-                cip.settings = response;
-                cip.initCredentialFields(true);
-            });
+            cip.init(true);
         }
-    }
+    });
 });
 
-function _f(fieldId) {
-    const field = (fieldId) ? jQuery('input[data-cip-id=\''+fieldId+'\']:first') : [];
+function _f(fieldId, $) {
+    if (typeof $ === 'undefined') {
+        $ = jQuery;
+    }
+    var field = (fieldId) ? $("input[data-cip-id='"+fieldId+"']:first") : [];
     return (field.length > 0) ? field : null;
 }
 
-function _fs(fieldId) {
-    const field = (fieldId) ? jQuery('input[data-cip-id=\''+fieldId+'\']:first,select[data-cip-id=\''+fieldId+'\']:first').first() : [];
+function _fs(fieldId, $) {
+    if (typeof $ === 'undefined') {
+        $ = jQuery;
+    }
+    const field = (fieldId) ? $('input[data-cip-id=\''+fieldId+'\']:first,select[data-cip-id=\''+fieldId+'\']:first').first() : [];
     return (field.length > 0) ? field : null;
 }
 
@@ -115,7 +168,7 @@ cipAutocomplete.init = function(field) {
 };
 
 cipAutocomplete.onClick = function() {
-    jQuery(this).autocomplete('search', jQuery(this).val());
+    jQuery_full(this).autocomplete('search', jQuery(this).val());
 };
 
 cipAutocomplete.onOpen = function(event, ui) {
@@ -158,7 +211,7 @@ cipAutocomplete.onFocus = function() {
     cip.u = jQuery(this);
 
     if (jQuery(this).val() === '') {
-        jQuery(this).autocomplete('search', '');
+        jQuery_full(this).autocomplete('search', '');
     }
 };
 
@@ -173,9 +226,34 @@ cipPassword.init = function() {
 
     _called.initPasswordGenerator = true;
 
-    window.setInterval(function() {
+    var loader = function () {
         cipPassword.checkObservedElements();
-    }, 400);
+    };
+    (function (this_) {
+        var observer;
+        var observer_target = document.body;
+        var observer_callback = function (mutations) {
+            observer.disconnect();
+            try {
+                if (mutations) {
+                    for (var i = 0; i !== mutations.length; ++i) {
+                        var addedNodes = mutations[i].addedNodes;
+                        for (var j = 0; j !== addedNodes.length; ++j) {
+                            var node = addedNodes[j];
+                            if (node.nodeType === Node.ELEMENT_NODE) {
+                                loader.apply(this_);
+                            }
+                        }
+                    }
+                }
+            } finally {
+                observer.observe(observer_target, {childList: true, subtree: true, attributes: false, characterData: false});
+            }
+        };
+        loader(observer_target);
+        observer = new MutationObserver(observer_callback);
+        observer_callback();
+    })(this);
 };
 
 cipPassword.initField = function(field, inputs, pos) {
@@ -212,7 +290,7 @@ cipPassword.createDialog = function() {
 
     _called.passwordCreateDialog = true;
 
-    const $dialog = jQuery('<div>')
+    const $dialog = jQuery_full('<div>')
         .addClass('dialog-form')
         .attr('id', 'cip-genpw-dialog');
 
@@ -249,7 +327,7 @@ cipPassword.createDialog = function() {
     $dialog.append($inputDiv);
 
     $dialog.hide();
-    jQuery('body').append($dialog);
+    jQuery_full('body').append($dialog);
 
     let $container = jQuery('#kpxc-pw-dialog');
     if ($container.length === 0) {
@@ -295,7 +373,7 @@ cipPassword.createDialog = function() {
                 click: (e) => {
                     e.preventDefault();
 
-                    const fieldId = jQuery('#cip-genpw-dialog:first').data('cip-genpw-field-id');
+                    const fieldId = jQuery_full('#cip-genpw-dialog:first').data('cip-genpw-field-id');
                     const field = jQuery('input[data-cip-id=\''+fieldId+'\']:first');
                     if (field.length === 1) {
                         let $password = jQuery('input#cip-genpw-textfield-password:first').val();
@@ -366,7 +444,7 @@ cipPassword.createIcon = function(field) {
         }
 
         cipPassword.createDialog();
-        const $dialog = jQuery('#cip-genpw-dialog');
+        const $dialog = jQuery_full('#cip-genpw-dialog');
         if ($dialog.dialog('isOpen')) {
             $dialog.dialog('close');
         }
@@ -1136,18 +1214,12 @@ cip.url = null;
 cip.submitUrl = null;
 cip.credentials = [];
 
-jQuery(function() {
-    cip.init();
-    cip.detectNewActiveFields();
-    cip.detectDatabaseChange();
-});
-
-cip.init = function() {
+cip.init = function(force) {
     browser.runtime.sendMessage({
         action: 'load_settings',
     }).then((response) => {
         cip.settings = response;
-        cip.initCredentialFields();
+        cip.initCredentialFields(force);
     });
 };
 
@@ -1217,6 +1289,10 @@ cip.initCredentialFields = function(forceCall) {
     browser.runtime.sendMessage({ 'action': 'page_clear_logins', args: [_called.clearLogins] }).then(() => {
         _called.clearLogins = true;
         const inputs = cipFields.getAllFields();
+        if (!inputs || inputs.length === 0) {
+            return;
+        }
+        with_jQuery_full(function () {
         cipFields.prepareVisibleFieldsWithID('select');
         cip.initPasswordGenerator(inputs);
 
@@ -1244,6 +1320,7 @@ cip.initCredentialFields = function(forceCall) {
                 console.log(e);
             });
         }
+        });
     });
 };
 
@@ -1355,12 +1432,12 @@ cip.preparePageForMultipleCredentials = function(credentials) {
             // Both username and password fields are visible
             if (_detectedFields >= 2) {
                 if (_f(i.username)) {
-                    cipAutocomplete.init(_f(i.username));
+                    cipAutocomplete.init(_f(i.username, jQuery_full));
                 }
             } else if (_detectedFields == 1) {
                 // If only password field is the visible one
                 if (_f(i.password)) {
-                    cipAutocomplete.init(_f(i.password));
+                    cipAutocomplete.init(_f(i.password, jQuery_full));
                 }
             }
         }
@@ -1475,7 +1552,8 @@ cip.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
 
     if (cip.credentials[0]) {
-        const $sf = _fs(fieldId);
+        with_jQuery_full(function () {
+        const $sf = _fs(fieldId, jQuery_full);
         if (cip.credentials[0].stringFields && cip.credentials[0].stringFields.length > 0) {
             const sFields = cip.credentials[0].stringFields;
             for (const s of sFields) {
@@ -1485,6 +1563,7 @@ cip.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
                 }
             }
         }
+        });
     }
 };
 
@@ -1793,7 +1872,7 @@ cipEvents.clearCredentials = function() {
 
     if (cip.settings.autoCompleteUsernames) {
         for (const c of cipFields.combinations) {
-            const uField = _f(c.username);
+            const uField = _f(c.username, jQuery_full);
             if (uField) {
                 if (uField.hasClass('ui-autocomplete-input')) {
                     uField.autocomplete('destroy');
@@ -1819,3 +1898,9 @@ cipEvents.triggerActivatedTab = function() {
         });
     }
 };
+
+jQuery(function() {
+    cip.init();
+    cip.detectNewActiveFields();
+    cip.detectDatabaseChange();
+});

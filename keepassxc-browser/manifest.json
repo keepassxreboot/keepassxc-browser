@@ -49,8 +49,8 @@
 			"js": [
 				"browser-polyfill.min.js",
 				"global.js",
-				"jquery-3.3.1.min.js",
-				"jquery-ui.min.js",
+				"zepto.min.js",
+				"zepto.selector.js",
 				"keepassxc-browser.js"
 			],
 			"css": [
