@@ -838,20 +838,7 @@ keepass.onNativeMessage = function(response) {
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.testAssociation((associationResponse) => {
             keepass.isConfigured().then((configured) => {
-                let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
-                data.iconType = configured ? 'normal' : 'cross';
-                browserAction.show(null, {'id': page.currentTabId});
-
-                // Send message to content script
-                browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-                    if (tabs.length) {
-                        browser.tabs.sendMessage(tabs[0].id, {
-                            action: 'check_database_hash',
-                            hash: {old: kpxcEvent.previousDatabaseHash, new: keepass.databaseHash}
-                        });
-                        keepass.previousDatabaseHash = keepass.databaseHash;
-                    }
-                });
+                keepass.updatePopup(configured ? 'normal' : 'cross');
             });
         }, null);
     }
@@ -864,6 +851,8 @@ function onDisconnected() {
     keepass.isKeePassXCAvailable = false;
     keepass.associated.value = false;
     keepass.associated.hash = null;
+    page.clearCredentials(page.currentTabId, true);
+    keepass.updatePopup('cross');
     console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 
@@ -1016,4 +1005,43 @@ keepass.decrypt = function(input, nonce) {
     const n = nacl.util.decodeBase64(nonce);
     const res = nacl.box.open(m, n, keepass.serverPublicKey, keepass.keyPair.secretKey);
     return res;
+};
+
+keepass.enableAutomaticReconnect = function() {
+    setInterval(() => {
+        if (!keepass.isKeePassXCAvailable) {
+            keepass.connectToNative();
+            keepass.reconnect();
+        }
+    }, 1000);
+};
+
+keepass.reconnect = function(callback, tab) {
+    return new Promise((resolve, reject) => {
+        keepass.generateNewKeyPair();
+        keepass.changePublicKeys(tab).then((pkRes) => {
+            // Database hash should be received if the reconnection succeeded
+            keepass.getDatabaseHash((gdRes) => {
+                if (!gdRes) {
+                    reject(false);
+                    return;
+                }
+               
+                keepass.testAssociation((response) => {
+                    keepass.isConfigured().then((configured) => {
+                        resolve(configured);
+                    }).catch((e) => {
+                        console.log(e);
+                        reject(e);
+                    });
+                }, tab);
+            }, null);
+        });
+    });
+};
+
+keepass.updatePopup = function(iconType) {
+    const data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
+    data.iconType = iconType;
+    browserAction.show(null, {'id': page.currentTabId});
 };
