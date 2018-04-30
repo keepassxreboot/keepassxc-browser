@@ -489,7 +489,7 @@ cipForm.init = function(form, credentialFields) {
     // TODO: could be called multiple times --> update credentialFields
 
     // not already initialized && password-field is not null
-    if (!form.data('cipForm-initialized') && credentialFields.password) {
+    if (!form.data('cipForm-initialized') && (credentialFields.password || credentialFields.username)) {
         form.data('cipForm-initialized', true);
         cipForm.setInputFields(form, credentialFields);
         form.submit(cipForm.onSubmit);
@@ -889,6 +889,15 @@ cipFields.getAllCombinations = function(inputs) {
         }
     }
 
+    // If only username field found, add it to the array
+    if (fields.length === 0 && uField) {
+        const combination = {
+            username: uField[0].getAttribute('data-cip-id'),
+            password: null
+        };
+        fields.push(combination);
+    }
+
     return fields;
 };
 
@@ -1033,7 +1042,7 @@ cipFields.getPasswordField = function(usernameId, checkDisabled) {
     // search all inputs on this one form
     if (form) {
         passwordField = jQuery('input[type=\'password\']:first', form);
-        if (passwordField.length < 1) {
+        if (passwordField && passwordField.length < 1) {
             passwordField = null;
         }
 
@@ -1236,6 +1245,11 @@ cip.initCredentialFields = function(forceCall) {
         cip.url = document.location.origin;
         cip.submitUrl = cip.getFormActionUrl(cipFields.combinations[0]);
 
+        // Get submitUrl for a single input
+        if (!cip.submitUrl && cipFields.combinations.length === 1 && inputs.length === 1) {
+            cip.submitUrl = cip.getFormActionUrlFromSingleInput(inputs[0]);
+        } 
+
         if (cip.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (cip.url && cip.submitUrl)) {
             browser.runtime.sendMessage({
                 action: 'retrieve_credentials',
@@ -1358,7 +1372,9 @@ cip.preparePageForMultipleCredentials = function(credentials) {
                     cipAutocomplete.init(_f(i.username));
                 }
             } else if (_detectedFields == 1) {
-                // If only password field is the visible one
+                if (_f(i.username)) {
+                    cipAutocomplete.init(_f(i.username));
+                }
                 if (_f(i.password)) {
                     cipAutocomplete.init(_f(i.password));
                 }
@@ -1384,6 +1400,20 @@ cip.getFormActionUrl = function(combination) {
     if (form && form.length > 0) {
         action = form[0].action;
     }
+
+    if (typeof(action) !== 'string' || action === '') {
+        action = document.location.origin + document.location.pathname;
+    }
+
+    return action;
+};
+
+cip.getFormActionUrlFromSingleInput = function(field) {
+    if (!field) {
+        return null;
+    }
+
+    let action = field.formAction;
 
     if (typeof(action) !== 'string' || action === '') {
         action = document.location.origin + document.location.pathname;
