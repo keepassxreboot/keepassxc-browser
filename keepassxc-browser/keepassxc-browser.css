@@ -18,6 +18,7 @@
 .kpxc .ui-dialog {
     font-size: 12px !important;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    z-index: 2147483645;
 }
 
 .kpxc .ui-widget-overlay {
@@ -57,10 +58,10 @@ input.genpw-text {
 }
 
 .genpw-input-group-addon {
-    font-size: inherit !important;
+    font-size: .9em !important;
     background-color: #eee;
     border: 1px solid #ccc;
-    padding: .4em;
+    padding: .2em;
     border-radius: 4px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -100,6 +101,10 @@ input.genpw-text {
 
 #cip-genpw-btn-fillin {
     margin-right: 5px;
+}
+
+#cip-genpw-quality {
+    text-align: center;
 }
 
 .b2c-modal-backdrop {

@@ -231,7 +231,7 @@ cipPassword.createDialog = function() {
         .addClass('genpw-input-group-addon')
         .addClass('b2c-add-on')
         .attr('id', 'cip-genpw-quality')
-        .text('123 Bits');
+        .text('??? Bits');
     $inputGroup.append($textfieldPassword).append($quality);
 
     const $checkGroup = jQuery('<div>').addClass('genpw-input-group');
