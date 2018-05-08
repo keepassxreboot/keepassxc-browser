@@ -1176,7 +1176,7 @@ cip.detectDatabaseChange = function() {
             browser.runtime.sendMessage({
                 action: 'check_databasehash'
             }).then((response) => {
-                if (response.new === 'no-hash') {
+                if (response.new === 'no-hash' && response.old !== 'no-hash') {
                     cipEvents.clearCredentials();
 
                     browser.runtime.sendMessage({
