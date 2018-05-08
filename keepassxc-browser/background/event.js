@@ -75,9 +75,10 @@ kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
     }).catch((e) => {console.log(e);});
 };
 
-kpxcEvent.onShowAlert = function(callback, tab, message) {
-    if (page.settings.supressAlerts) { console.log(message); }
-    else { alert(message); }
+kpxcEvent.onShowNotification = function(callback, tab, message) {
+    if (page.settings.showNotifications) {
+        showNotification(message);
+    }
 };
 
 kpxcEvent.showStatus = function(configured, tab, callback) {
@@ -274,7 +275,6 @@ kpxcEvent.checkDatabaseHash = function(callback, tab) {
 // all methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
-    'alert': kpxcEvent.onShowAlert,
     'associate': keepass.associate,
     'check_databasehash': kpxcEvent.checkDatabaseHash,
     'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
@@ -298,6 +298,7 @@ kpxcEvent.messageHandlers = {
     'update_credentials': keepass.updateCredentials,
     'save_settings': kpxcEvent.onSaveSettings,
     'set_remember_credentials': kpxcEvent.onSetRememberPopup,
+    'show_notification': kpxcEvent.onShowNotification,
     'stack_add': browserAction.stackAdd,
     'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC
 };
