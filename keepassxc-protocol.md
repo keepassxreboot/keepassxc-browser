@@ -158,7 +158,14 @@ Unencrypted message:
 {
 	"action": "get-logins",
 	"url": "<snip>",
-	"submitUrl": optional
+	"submitUrl": optional,
+	"keys": [
+		{
+			"id": <connected_id>,
+			"key": <connected_key>
+		},
+		...
+	]
 }
 ```
 
