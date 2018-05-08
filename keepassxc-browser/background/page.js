@@ -6,7 +6,8 @@ const defaultSettings = {
     autoFillSingleEntry: false,
     autoRetrieveCredentials: true,
     showNotifications: true,
-    showLoginNotifications: true
+    showLoginNotifications: true,
+    saveDomainOnly: true
 };
 
 var page = {};
@@ -41,6 +42,9 @@ page.initSettings = function() {
             }
             if (!('showLoginNotifications' in page.settings)) {
                 page.settings.showLoginNotifications = defaultSettings.showLoginNotifications;
+            }
+            if (!('saveDomainOnly' in page.settings)) {
+                page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
             }
             browser.storage.local.set({'settings': page.settings});
             resolve(page.settings);
