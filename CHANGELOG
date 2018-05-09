@@ -1,3 +1,15 @@
+1.1.0 (09-05-2018)
+=========================
+- Allow specifying ignored sites
+- Add new notification options
+- Improve detection of username fields
+- Change conflicting shortcuts
+- Redetect credential fields after reload
+- Don't show popup when database is closed
+- Various password generator fixes
+- Fix various resource leaks
+- Fix searching in all databases
+
 1.0.1 (04-03-2018)
 =========================
 - Don't fill password fields if they already have data
