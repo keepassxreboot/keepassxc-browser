@@ -1,6 +1,14 @@
+'use strict';
+
 if (jQuery) {
     var $ = jQuery.noConflict(true);
 }
+
+const defaultSettings = {
+    blinkTimeout: 7500,
+    redirectOffset: -1,
+    redirectAllowance: 1
+};
 
 $(function() {
     browser.runtime.sendMessage({ action: 'load_settings' }).then((settings) => {
@@ -11,6 +19,7 @@ $(function() {
             options.initGeneralSettings();
             options.initConnectedDatabases();
             options.initSpecifiedCredentialFields();
+            options.initIgnoredSites();
             options.initAbout();
         });
     });
@@ -111,7 +120,7 @@ options.initGeneralSettings = function() {
 
     $('#blinkTimeoutButton').click(function(){
         const blinkTimeout = $.trim($('#blinkTimeout').val());
-        const blinkTimeoutval = Number(blinkTimeout);
+        const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
 
         options.settings['blinkTimeout'] = String(blinkTimeoutval);
         options.saveSetting('blinkTimeout');
@@ -119,7 +128,7 @@ options.initGeneralSettings = function() {
 
     $('#blinkMinTimeoutButton').click(function(){
         const blinkMinTimeout = $.trim($('#blinkMinTimeout').val());
-        const blinkMinTimeoutval = Number(blinkMinTimeout);
+        const blinkMinTimeoutval = blinkMinTimeout !== '' ? Number(blinkMinTimeout) : defaultSettings.redirectOffset;
 
         options.settings['blinkMinTimeout'] = String(blinkMinTimeoutval);
         options.saveSetting('blinkMinTimeout');
@@ -127,7 +136,7 @@ options.initGeneralSettings = function() {
 
     $('#allowedRedirectButton').click(function(){
         const allowedRedirect = $.trim($('#allowedRedirect').val());
-        const allowedRedirectval = Number(allowedRedirect);
+        const allowedRedirectval = allowedRedirect !== '' ? Number(allowedRedirect) : defaultSettings.redirectAllowance;
 
         options.settings['allowedRedirect'] = String(allowedRedirectval);
         options.saveSetting('allowedRedirect');
@@ -167,8 +176,7 @@ options.initConnectedDatabases = function() {
 
         if ($('#tab-connected-databases table tbody:first tr').length > 2) {
             $('#tab-connected-databases table tbody:first tr.empty:first').hide();
-        }
-        else {
+        } else {
             $('#tab-connected-databases table tbody:first tr.empty:first').show();
         }
     });
@@ -195,8 +203,7 @@ options.initConnectedDatabases = function() {
 
     if ($('#tab-connected-databases table tbody:first tr').length > 2) {
         $('#tab-connected-databases table tbody:first tr.empty:first').hide();
-    }
-    else {
+    } else {
         $('#tab-connected-databases table tbody:first tr.empty:first').show();
     }
 
@@ -229,8 +236,7 @@ options.initSpecifiedCredentialFields = function() {
 
         if ($('#tab-specified-fields table tbody:first tr').length > 2) {
             $('#tab-specified-fields table tbody:first tr.empty:first').hide();
-        }
-        else {
+        } else {
             $('#tab-specified-fields table tbody:first tr.empty:first').show();
         }
     });
@@ -242,7 +248,7 @@ options.initSpecifiedCredentialFields = function() {
         const $tr = $trClone.clone(true);
         $tr.data('url', url);
         $tr.attr('id', 'tr-scf' + counter);
-        counter += 1;
+        ++counter;
 
         $tr.children('td:first').text(url);
         $('#tab-specified-fields table tbody:first').append($tr);
@@ -250,9 +256,55 @@ options.initSpecifiedCredentialFields = function() {
 
     if ($('#tab-specified-fields table tbody:first tr').length > 2) {
         $('#tab-specified-fields table tbody:first tr.empty:first').hide();
-    }
-    else {
+    } else {
         $('#tab-specified-fields table tbody:first tr.empty:first').show();
+    }
+};
+
+options.initIgnoredSites = function() {
+    $('#dialogDeleteIgnoredSite').modal({keyboard: true, show: false, backdrop: true});
+    $('#tab-ignored-sites tr.clone:first button.delete:first').click(function(e) {
+        e.preventDefault();
+        $('#dialogDeleteIgnoredSite').data('url', $(this).closest('tr').data('url'));
+        $('#dialogDeleteIgnoredSite').data('tr-id', $(this).closest('tr').attr('id'));
+        $('#dialogDeleteIgnoredSite .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
+        $('#dialogDeleteIgnoredSite').modal('show');
+    });
+
+    $('#dialogDeleteIgnoredSite .modal-footer:first button.yes:first').click(function(e) {
+        $('#dialogDeleteIgnoredSite').modal('hide');
+
+        const $url = $('#dialogDeleteIgnoredSite').data('url');
+        const $trId = $('#dialogDeleteIgnoredSite').data('tr-id');
+        $('#tab-ignored-sites #' + $trId).remove();
+
+        delete options.settings['ignoredSites'][$url];
+        options.saveSettings();
+
+        if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
+            $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
+        } else {
+            $('#tab-ignored-sites table tbody:first tr.empty:first').show();
+        }
+    });
+
+    const $trClone = $('#tab-ignored-sites table tr.clone:first').clone(true);
+    $trClone.removeClass('clone');
+    let counter = 1;
+    for (let url in options.settings['ignoredSites']) {
+        const $tr = $trClone.clone(true);
+        $tr.data('url', url);
+        $tr.attr('id', 'tr-scf' + counter);
+        ++counter;
+
+        $tr.children('td:first').text(url);
+        $('#tab-ignored-sites table tbody:first').append($tr);
+    }
+
+    if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
+        $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
+    } else {
+        $('#tab-ignored-sites table tbody:first tr.empty:first').show();
     }
 };
 
@@ -260,5 +312,17 @@ options.initAbout = function() {
     $('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
     if (isFirefox()) {
         $('#chrome-only').remove();
+    }
+
+    if (navigator.platform === 'MacIntel') {
+        $('#default-user-shortcut').hide();
+        $('#default-pass-shortcut').hide();
+        $('#mac-user-shortcut').show();
+        $('#mac-pass-shortcut').show();
+    } else {
+        $('#mac-user-shortcut').hide();
+        $('#mac-pass-shortcut').hide();
+        $('#default-user-shortcut').show();
+        $('#default-pass-shortcut').show();
     }
 };

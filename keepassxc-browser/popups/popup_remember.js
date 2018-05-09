@@ -1,3 +1,5 @@
+'use strict';
+
 var _tab;
 
 function _initialize(tab) {
@@ -77,6 +79,21 @@ function _initialize(tab) {
     $('#btn-dismiss').click(function(e) {
         e.preventDefault();
         _close();
+    });
+
+    $('#btn-ignore').click(function(e) {
+        browser.windows.getCurrent().then((win) => {
+            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
+                const tab = tabs[0];
+                browser.runtime.getBackgroundPage().then((global) => {
+                    browser.tabs.sendMessage(tab.id, {
+                        action: 'ignore-site',
+                        args: [_tab.credentials.url]
+                    });
+                    _close();
+                });
+            });
+        });
     });
 }
 

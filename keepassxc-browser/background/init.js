@@ -1,3 +1,5 @@
+'use strict';
+
 keepass.migrateKeyRing().then(() => {
     page.initSettings().then(() => {
         page.initOpenedTabs().then(() => {

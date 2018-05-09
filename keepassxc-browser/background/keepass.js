@@ -18,6 +18,7 @@ keepass.keySize = 24;
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not return a hash value
+keepass.previousDatabaseHash = 'no-hash';
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 keepass.messageTimeout = 500; // milliseconds
@@ -214,15 +215,24 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
         }
 
         let entries = [];
+        let keys = [];
         const kpAction = kpActions.GET_LOGINS;
         const nonce = keepass.getNonce();
         const incrementedNonce = keepass.incrementedNonce(nonce);
         const {dbid} = keepass.getCryptoKey();
+    
+        for (let keyHash in keepass.keyRing) {
+            keys.push({
+                id: keepass.keyRing[keyHash].id,
+                key: keepass.keyRing[keyHash].key
+            });
+        }
 
         let messageData = {
             action: kpAction,
             id: dbid,
-            url: url
+            url: url,
+            keys: keys
         };
 
         if (submiturl) {
@@ -704,7 +714,7 @@ keepass.isAssociated = function() {
 keepass.migrateKeyRing = function() {
     return new Promise((resolve, reject) => {
         browser.storage.local.get('keyRing').then((item) => {
-             const keyring = item.keyRing;
+            const keyring = item.keyRing;
             // Change dates to numbers, for compatibilty with Chromium based browsers
             if (keyring) {
                 let num = 0;
@@ -826,11 +836,22 @@ keepass.onNativeMessage = function(response) {
 
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
-        keepass.testAssociation((response) => {
+        keepass.testAssociation((associationResponse) => {
             keepass.isConfigured().then((configured) => {
                 let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
                 data.iconType = configured ? 'normal' : 'cross';
                 browserAction.show(null, {'id': page.currentTabId});
+
+                // Send message to content script
+                browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+                    if (tabs.length) {
+                        browser.tabs.sendMessage(tabs[0].id, {
+                            action: 'check_database_hash',
+                            hash: {old: kpxcEvent.previousDatabaseHash, new: keepass.databaseHash}
+                        });
+                        keepass.previousDatabaseHash = keepass.databaseHash;
+                    }
+                });
             });
         }, null);
     }

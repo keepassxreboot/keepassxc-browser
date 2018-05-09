@@ -1,11 +1,10 @@
+'use strict';
+
 var $ = jQuery.noConflict(true);
 
 function updateAvailableResponse(available) {
     if (available) {
         $('#update-available').show();
-    }
-    else {
-        $('#update-available').hide();
     }
 }
 

@@ -1,3 +1,5 @@
+'use strict';
+
 const defaultSettings = {
     checkUpdateKeePassXC: 3,
     autoCompleteUsernames: true,
@@ -5,13 +7,15 @@ const defaultSettings = {
     usePasswordGenerator: true,
     autoFillSingleEntry: false,
     autoRetrieveCredentials: true,
-    showNotifications: true
+    showNotifications: true,
+    showLoginNotifications: true,
+    saveDomainOnly: true
 };
 
 var page = {};
-page.tabs = {};
+page.tabs = [];
 page.currentTabId = -1;
-page.blockedTabs = {};
+page.blockedTabs = [];
 
 page.initSettings = function() {
     return new Promise((resolve, reject) => {
@@ -37,6 +41,12 @@ page.initSettings = function() {
             }
             if (!('showNotifications' in page.settings)) {
                 page.settings.showNotifications = defaultSettings.showNotifications;
+            }
+            if (!('showLoginNotifications' in page.settings)) {
+                page.settings.showLoginNotifications = defaultSettings.showLoginNotifications;
+            }
+            if (!('saveDomainOnly' in page.settings)) {
+                page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
             }
             browser.storage.local.set({'settings': page.settings});
             resolve(page.settings);
@@ -101,7 +111,7 @@ page.createTabEntry = function(tabId) {
     page.tabs[tabId] = {
         'stack': [],
         'errorMessage': null,
-        'loginList': {}
+        'loginList': []
     };
 };
 

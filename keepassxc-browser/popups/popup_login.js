@@ -1,3 +1,5 @@
+'use strict';
+
 $(function() {
     browser.runtime.getBackgroundPage().then((global) => {
         browser.tabs.query({'active': true, 'currentWindow': true}).then((tabs) => {
