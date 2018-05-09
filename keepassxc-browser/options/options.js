@@ -1,3 +1,5 @@
+'use strict';
+
 if (jQuery) {
     var $ = jQuery.noConflict(true);
 }

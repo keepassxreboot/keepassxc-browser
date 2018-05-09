@@ -1,3 +1,5 @@
+'use strict';
+
 var $ = jQuery.noConflict(true);
 
 function updateAvailableResponse(available) {

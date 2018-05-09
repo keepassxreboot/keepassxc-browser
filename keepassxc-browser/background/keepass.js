@@ -18,6 +18,7 @@ keepass.keySize = 24;
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
 keepass.cacheTimeout = 30 * 1000; // milliseconds
 keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not return a hash value
+keepass.previousDatabaseHash = 'no-hash';
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 keepass.messageTimeout = 500; // milliseconds
@@ -835,11 +836,22 @@ keepass.onNativeMessage = function(response) {
 
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
-        keepass.testAssociation((response) => {
+        keepass.testAssociation((associationResponse) => {
             keepass.isConfigured().then((configured) => {
                 let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
                 data.iconType = configured ? 'normal' : 'cross';
                 browserAction.show(null, {'id': page.currentTabId});
+
+                // Send message to content script
+                browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+                    if (tabs.length) {
+                        browser.tabs.sendMessage(tabs[0].id, {
+                            action: 'check_database_hash',
+                            hash: {old: kpxcEvent.previousDatabaseHash, new: keepass.databaseHash}
+                        });
+                        keepass.previousDatabaseHash = keepass.databaseHash;
+                    }
+                });
             });
         }, null);
     }

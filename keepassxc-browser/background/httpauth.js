@@ -1,3 +1,5 @@
+'use strict';
+
 const httpAuth = {};
 
 httpAuth.requests = [];

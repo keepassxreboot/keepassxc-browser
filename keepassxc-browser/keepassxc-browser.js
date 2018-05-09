@@ -1,3 +1,5 @@
+'use strict';
+
 // contains already called method names
 var _called = {};
 _called.retrieveCredentials = false;
@@ -72,6 +74,9 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
                 cip.settings = response;
                 cip.initCredentialFields(true);
             });
+        }
+        else if (req.action === 'check_database_hash' && 'hash' in req) {
+            cip.detectDatabaseChange(req.hash);
         }
     }
 });
@@ -814,7 +819,7 @@ cipFields.prepareId = function(id) {
 // Check aria-hidden attribute by looping the parent elements of input field
 cipFields.getAriaHidden = function(field) {
     let $par = jQuery(field).parents();
-    for (p of $par) {
+    for (const p of $par) {
         const val = $(p).attr('aria-hidden');
         if (val) {
             return val;
@@ -825,7 +830,7 @@ cipFields.getAriaHidden = function(field) {
 
 cipFields.getOverflowHidden = function(field) {
     let $par = jQuery(field).parents();
-    for (p of $par) {
+    for (const p of $par) {
         const val = $(p).css('overflow');
         if (val === 'hidden') {
             return true;
@@ -1155,7 +1160,6 @@ cip.credentials = [];
 jQuery(function() {
     cip.init();
     cip.detectNewActiveFields();
-    cip.detectDatabaseChange();
 });
 
 cip.init = function() {
@@ -1182,46 +1186,36 @@ cip.detectNewActiveFields = function() {
 };
 
 // Switch credentials if database is changed or closed
-cip.detectDatabaseChange = function() {
-    let dbDetectInterval = setInterval(function() {
-        if (document.visibilityState !== 'hidden') {
+cip.detectDatabaseChange = function(response) {
+    if (document.visibilityState !== 'hidden') {
+        if (response.new === 'no-hash' && response.old !== 'no-hash') {
+            cipEvents.clearCredentials();
+
             browser.runtime.sendMessage({
-                action: 'check_databasehash'
+                action: 'page_clear_logins'
+            });
+
+            // Switch back to default popup
+            browser.runtime.sendMessage({
+                action: 'get_status',
+                args: [ true ]    // Set polling to true, this is an internal function call
+            });
+        } else if (response.new !== 'no-hash' && response.new !== response.old) {
+            browser.runtime.sendMessage({
+                action: 'load_settings',
             }).then((response) => {
-                if (response.new === 'no-hash' && response.old !== 'no-hash') {
-                    cipEvents.clearCredentials();
+                cip.settings = response;
+                cip.initCredentialFields(true);
 
-                    browser.runtime.sendMessage({
-                        action: 'page_clear_logins'
-                    });
-
-                    // Switch back to default popup
-                    browser.runtime.sendMessage({
-                        action: 'get_status',
-                        args: [ true ]    // Set polling to true, this is an internal function call
-                    });
-                } else {
-                    if (response.new !== 'no-hash' && response.new !== response.old) {
-                        browser.runtime.sendMessage({
-                            action: 'load_settings',
-                        }).then((response) => {
-                            cip.settings = response;
-                            cip.initCredentialFields(true);
-
-                            // If user has requested a manual fill through context menu the actual credential filling
-                            // is handled here when the opened database has been regognized. It's not a pretty hack.
-                            if (_called.manualFillRequested && _called.manualFillRequested !== 'none') {
-                                cip.fillInFromActiveElement(false, (_called.manualFillRequested === 'pass' ? true : false));
-                                _called.manualFillRequested = 'none';
-                            }
-                        });
-                    }
+                // If user has requested a manual fill through context menu the actual credential filling
+                // is handled here when the opened database has been regognized. It's not a pretty hack.
+                if (_called.manualFillRequested && _called.manualFillRequested !== 'none') {
+                    cip.fillInFromActiveElement(false, _called.manualFillRequested === 'pass');
+                    _called.manualFillRequested = 'none';
                 }
-            }).catch((e) => {
-                console.log(e);
             });
         }
-    }, 1000);
+    }
 };
 
 cip.initCredentialFields = function(forceCall) {

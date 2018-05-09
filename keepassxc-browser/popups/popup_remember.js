@@ -1,3 +1,5 @@
+'use strict';
+
 var _tab;
 
 function _initialize(tab) {
