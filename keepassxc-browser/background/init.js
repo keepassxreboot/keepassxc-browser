@@ -5,6 +5,7 @@ keepass.migrateKeyRing().then(() => {
         page.initOpenedTabs().then(() => {
             httpAuth.init();
             keepass.connectToNative();
+            keepass.enableAutomaticReconnect();
             keepass.generateNewKeyPair();
             keepass.changePublicKeys(null).then((pkRes) => {
                 keepass.getDatabaseHash((gdRes) => {}, null);
