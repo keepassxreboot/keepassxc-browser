@@ -7,33 +7,15 @@ body {
     font-size: 15px;
     padding: 8px;
 }
-.credentials ul {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-    list-style-position: inside;
+.list-group {
+    font-size: .9em !important;
 }
-.credentials li {
-    list-style: none;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-left: 10px;
-    margin-right: 5px;
+.list-group-item {
+    padding: 5px 10px !important;
 }
-.credentials a {
-    color: #333;
-}
-.credentials a:hover {
-    text-decoration: none;
-}
-.credentials li:hover {
+.list-group-item:hover {
     cursor: pointer;
-    background: #ddd;
 }
-
 .settings {
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -64,6 +46,7 @@ body {
     padding-bottom: 0px;
     margin-bottom: 0px;
     text-align: left;
+    display: none;
 }
 #update-available a:hover,
 #update-available a:active {
