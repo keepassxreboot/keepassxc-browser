@@ -1179,7 +1179,6 @@ cip.credentials = [];
 
 jQuery(function() {
     cip.init();
-    cip.detectDatabaseChange();
 });
 
 cip.init = function() {
