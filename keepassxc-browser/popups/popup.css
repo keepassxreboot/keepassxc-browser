@@ -64,6 +64,7 @@ body {
     padding-bottom: 0px;
     margin-bottom: 0px;
     text-align: left;
+    display: none;
 }
 #update-available a:hover,
 #update-available a:active {
