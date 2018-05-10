@@ -894,15 +894,6 @@ cipFields.getAllCombinations = function(inputs) {
         }
     }
 
-    // If only username field found, add it to the array
-    if (fields.length === 0 && uField) {
-        const combination = {
-            username: uField[0].getAttribute('data-cip-id'),
-            password: null
-        };
-        fields.push(combination);
-    }
-
     return fields;
 };
 
