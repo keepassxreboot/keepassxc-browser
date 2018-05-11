@@ -839,6 +839,17 @@ keepass.onNativeMessage = function(response) {
         keepass.testAssociation((associationResponse) => {
             keepass.isConfigured().then((configured) => {
                 keepass.updatePopup(configured ? 'normal' : 'cross');
+
+                // Send message to content script
+                browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+                    if (tabs.length) {
+                        browser.tabs.sendMessage(tabs[0].id, {
+                            action: 'check_database_hash',
+                            hash: {old: keepass.previousDatabaseHash, new: keepass.databaseHash}
+                        });
+                        keepass.previousDatabaseHash = keepass.databaseHash;
+                    }
+                });
             });
         }, null);
     }
