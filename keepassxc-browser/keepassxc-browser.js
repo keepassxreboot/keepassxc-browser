@@ -10,6 +10,9 @@ let _loginId = -1;
 // Count of detected form fields on the page
 var _detectedFields = 0;
 
+// Element id's containing input fields detected by MutationObserver
+var _observerIds = [];
+
 browser.runtime.onMessage.addListener(function(req, sender, callback) {
     if ('action' in req) {
         if (req.action === 'fill_user_pass_with_specific_login') {
@@ -1140,13 +1143,15 @@ let observer = new MutationObserver(function(mutations, observer) {
     }
 
     for (const mut of mutations) {
-        if (mut.type === 'childList') {
-            const fields = cipFields.getAllFields();
+        // Check if the added element has any inputs
+        const inputs = mut.target.querySelectorAll(cipFields.inputQueryPattern);
 
-            // If only password field is shown it's enough to have one field visible for initCredentialFields
-            if (fields.length > (_detectedFields == 1 ? 0 : 1)) {
-                cip.initCredentialFields(true);
-            }
+        // If only password field is shown it's enough to have one field visible for initCredentialFields
+        const neededLength = _detectedFields === 1 ? 0 : 1;
+        if (inputs.length > neededLength && !_observerIds.includes(mut.target.id)) {
+            // Save target element id for preventing multiple calls to initCredentialsFields()
+            _observerIds.push(mut.target.id);
+            cip.initCredentialFields(true);
         }
     }
 });
@@ -1223,6 +1228,10 @@ cip.initCredentialFields = function(forceCall) {
     browser.runtime.sendMessage({ 'action': 'page_clear_logins', args: [_called.clearLogins] }).then(() => {
         _called.clearLogins = true;
         const inputs = cipFields.getAllFields();
+        if (inputs.length === 0) {
+            return;
+        }
+
         cipFields.prepareVisibleFieldsWithID('select');
         cip.initPasswordGenerator(inputs);
 
@@ -1248,6 +1257,7 @@ cip.initCredentialFields = function(forceCall) {
         } 
 
         if (cip.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (cip.url && cip.submitUrl)) {
+            _called.retrieveCredentials = true;
             browser.runtime.sendMessage({
                 action: 'retrieve_credentials',
                 args: [ cip.url, cip.submitUrl ]
