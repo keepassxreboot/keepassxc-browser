@@ -1143,6 +1143,11 @@ let observer = new MutationObserver(function(mutations, observer) {
     }
 
     for (const mut of mutations) {
+        // skip text nodes
+        if (mut.target.nodeType === Node.TEXT_NODE) {
+            continue;
+        }
+
         // Check if the added element has any inputs
         const inputs = mut.target.querySelectorAll(cipFields.inputQueryPattern);
 
