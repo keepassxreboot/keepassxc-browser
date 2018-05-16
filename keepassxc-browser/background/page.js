@@ -16,6 +16,7 @@ var page = {};
 page.tabs = [];
 page.currentTabId = -1;
 page.blockedTabs = [];
+page.loginId = -1;
 
 page.initSettings = function() {
     return new Promise((resolve, reject) => {
