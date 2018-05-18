@@ -1207,6 +1207,7 @@ cip.detectDatabaseChange = function(response) {
                 args: [ true ]    // Set polling to true, this is an internal function call
             });
         } else if (response.new !== 'no-hash' && response.new !== response.old) {
+            _called.retrieveCredentials = false;
             browser.runtime.sendMessage({
                 action: 'load_settings',
             }).then((response) => {
@@ -1262,7 +1263,6 @@ cip.initCredentialFields = function(forceCall) {
         } 
 
         if (cip.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (cip.url && cip.submitUrl)) {
-            _called.retrieveCredentials = true;
             browser.runtime.sendMessage({
                 action: 'retrieve_credentials',
                 args: [ cip.url, cip.submitUrl ]
