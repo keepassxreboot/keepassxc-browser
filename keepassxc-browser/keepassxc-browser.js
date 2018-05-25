@@ -741,7 +741,7 @@ cipDefine.markFields = function ($chooser, $pattern) {
             return true;
         }
 
-        if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed') {
+        if (cipFields.isVisible(this)) {
             const $field = jQuery('<div>').addClass('b2c-fixed-field')
                 .css('top', jQuery(this).offset().top)
                 .css('left', jQuery(this).offset().left)
@@ -821,9 +821,20 @@ cipFields.prepareId = function(id) {
 
 // Check aria-hidden attribute by looping the parent elements of input field
 cipFields.getAriaHidden = function(field) {
-    let $par = jQuery(field).parents();
-    for (const p of $par) {
-        const val = $(p).attr('aria-hidden');
+    // Check the main element
+    const val = field.getAttribute('aria-hidden');
+    if (val) {
+        return val;
+    }
+
+    // Check parents
+    let parents = [];
+    while (field.parentElement) {
+        parents.push(field = field.parentElement);
+    }
+
+    for (const p of parents) {
+        const val = p.getAttribute('aria-hidden');
         if (val) {
             return val;
         }
@@ -842,18 +853,36 @@ cipFields.getOverflowHidden = function(field) {
     return false;
 };
 
+cipFields.isVisible = function(field) {
+    const rect = field.getBoundingClientRect();
+
+    // Check CSS visibility
+    if (field.style.visibility && (field.style.visibility === 'hidden' || field.style.visibility === 'collapse')) {
+        return false;
+    }
+
+    // Check element position and size
+    if (rect.x < 0 || rect.y < 0 || rect.width < 16 || rect.height < 16) {
+        return false;
+    }
+
+    // Check aria-hidden property
+    if (cipFields.getAriaHidden(field) !== 'false') {
+        return false;
+    }
+
+    return true;
+};
+
 cipFields.getAllFields = function() {
     let fields = [];
     const inputs = cipObserverHelper.getInputs(document);
     for (const i of inputs) {
-        const ariaHidden = cipFields.getAriaHidden(i);
-        const overflowHidden = cipFields.getOverflowHidden(i);
-
-        if (jQuery(i).is(':visible') && jQuery(i).css('visibility') !== 'hidden' && jQuery(i).css('visibility') !== 'collapsed' && ariaHidden === 'false') {
+        if (cipFields.isVisible(i)) {
             cipFields.setUniqueId(jQuery(i));
             fields.push(jQuery(i));
         }
-    }
+    };
 
     _detectedFields = fields.length;
     return fields;
@@ -861,7 +890,7 @@ cipFields.getAllFields = function() {
 
 cipFields.prepareVisibleFieldsWithID = function($pattern) {
     jQuery($pattern).each(function() {
-        if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed') {
+        if (cipField.isVisible(this)) {
             cipFields.setUniqueId(jQuery(this));
         }
     });
