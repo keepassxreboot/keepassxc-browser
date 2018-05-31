@@ -52,9 +52,9 @@ options.saveSettingsPromise = function() {
 }
 
 options.saveSetting = function(name) {
-    const $id = '#' + name;
-    $($id).closest('.control-group').removeClass('error').addClass('success');
-    setTimeout(() => { $($id).closest('.control-group').removeClass('success'); }, 2500);
+    const id = '#' + name;
+    $(id).closest('.control-group').removeClass('error').addClass('success');
+    setTimeout(() => { $(id).closest('.control-group').removeClass('success'); }, 2500);
 
     browser.storage.local.set({'settings': options.settings});
     browser.runtime.sendMessage({
@@ -168,10 +168,10 @@ options.initConnectedDatabases = function() {
     $('#dialogDeleteConnectedDatabase .modal-footer:first button.yes:first').click(function(e) {
         $('#dialogDeleteConnectedDatabase').modal('hide');
 
-        const $hash = $('#dialogDeleteConnectedDatabase').data('hash');
-        $('#tab-connected-databases #tr-cd-' + $hash).remove();
+        const hash = $('#dialogDeleteConnectedDatabase').data('hash');
+        $('#tab-connected-databases #tr-cd-' + hash).remove();
 
-        delete options.keyRing[$hash];
+        delete options.keyRing[hash];
         options.saveKeyRing();
 
         if ($('#tab-connected-databases table tbody:first tr').length > 2) {
@@ -183,22 +183,22 @@ options.initConnectedDatabases = function() {
 
     $('#tab-connected-databases tr.clone:first .dropdown-menu:first').width('230px');
 
-    const $trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
-    $trClone.removeClass('clone');
+    const trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
+    trClone.removeClass('clone');
     for (let hash in options.keyRing) {
-        const $tr = $trClone.clone(true);
-        $tr.data('hash', hash);
-        $tr.attr('id', 'tr-cd-' + hash);
+        const tr = trClone.clone(true);
+        tr.data('hash', hash);
+        tr.attr('id', 'tr-cd-' + hash);
 
-        $('a.dropdown-toggle:first img:first', $tr).attr('src', '/icons/19x19/icon_normal_19x19.png');
+        $('a.dropdown-toggle:first img:first', tr).attr('src', '/icons/19x19/icon_normal_19x19.png');
 
-        $tr.children('td:first').text(options.keyRing[hash].id);
-        $tr.children('td:eq(1)').text(options.keyRing[hash].key);
+        tr.children('td:first').text(options.keyRing[hash].id);
+        tr.children('td:eq(1)').text(options.keyRing[hash].key);
         const lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : 'unknown';
-        $tr.children('td:eq(2)').text(lastUsed);
+        tr.children('td:eq(2)').text(lastUsed);
         const date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : 'unknown';
-        $tr.children('td:eq(3)').text(date);
-        $('#tab-connected-databases table tbody:first').append($tr);
+        tr.children('td:eq(3)').text(date);
+        $('#tab-connected-databases table tbody:first').append(tr);
     }
 
     if ($('#tab-connected-databases table tbody:first tr').length > 2) {
@@ -227,11 +227,11 @@ options.initSpecifiedCredentialFields = function() {
     $('#dialogDeleteSpecifiedCredentialFields .modal-footer:first button.yes:first').click(function(e) {
         $('#dialogDeleteSpecifiedCredentialFields').modal('hide');
 
-        const $url = $('#dialogDeleteSpecifiedCredentialFields').data('url');
-        const $trId = $('#dialogDeleteSpecifiedCredentialFields').data('tr-id');
-        $('#tab-specified-fields #' + $trId).remove();
+        const url = $('#dialogDeleteSpecifiedCredentialFields').data('url');
+        const trId = $('#dialogDeleteSpecifiedCredentialFields').data('tr-id');
+        $('#tab-specified-fields #' + trId).remove();
 
-        delete options.settings['defined-credential-fields'][$url];
+        delete options.settings['defined-credential-fields'][url];
         options.saveSettings();
 
         if ($('#tab-specified-fields table tbody:first tr').length > 2) {
@@ -241,17 +241,17 @@ options.initSpecifiedCredentialFields = function() {
         }
     });
 
-    const $trClone = $('#tab-specified-fields table tr.clone:first').clone(true);
-    $trClone.removeClass('clone');
+    const trClone = $('#tab-specified-fields table tr.clone:first').clone(true);
+    trClone.removeClass('clone');
     let counter = 1;
     for (let url in options.settings['defined-credential-fields']) {
-        const $tr = $trClone.clone(true);
-        $tr.data('url', url);
-        $tr.attr('id', 'tr-scf' + counter);
+        const tr = trClone.clone(true);
+        tr.data('url', url);
+        tr.attr('id', 'tr-scf' + counter);
         ++counter;
 
-        $tr.children('td:first').text(url);
-        $('#tab-specified-fields table tbody:first').append($tr);
+        tr.children('td:first').text(url);
+        $('#tab-specified-fields table tbody:first').append(tr);
     }
 
     if ($('#tab-specified-fields table tbody:first tr').length > 2) {
@@ -271,14 +271,61 @@ options.initIgnoredSites = function() {
         $('#dialogDeleteIgnoredSite').modal('show');
     });
 
+    $('#tab-ignored-sites tr.clone:first input[type=checkbox]:first').change(function() {
+        const url = $(this).closest('tr').data('url');
+        for (let site of options.settings['ignoredSites']) {
+            if (site.url === url) {
+                site.fullIgnore = $(this).is(':checked');
+            }
+        }
+        options.saveSettings();
+    });
+
+    $("#ignoreUrl").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#ignoreManualAddButton").click();
+        }
+    });
+
+    $('#ignoreManualAddButton').click(function(e) {
+        e.preventDefault();
+        const value = $('#ignoreUrl').val();
+        if (value.length > 10 && value.length <= 2000) {
+            if (options.settings['ignoredSites'] === undefined) {
+                options.settings['ignoredSites'] = [];
+            }
+
+            const newValue = options.settings['ignoredSites'].length + 1;
+            const trClone = $('#tab-ignored-sites table tr.clone:first').clone(true);
+            trClone.removeClass('clone');
+
+            const tr = trClone.clone(true);
+            tr.data('url', value);
+            tr.attr('id', 'tr-scf' + newValue);
+            tr.children('td:first').text(value);
+            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', false);
+            $('#tab-ignored-sites table tbody:first').append(tr);
+            $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
+
+            options.settings['ignoredSites'].push({url: value, fullIgnore: false});
+            options.saveSettings();
+
+            $('#ignoreUrl').val('');
+        }
+    });
+
     $('#dialogDeleteIgnoredSite .modal-footer:first button.yes:first').click(function(e) {
         $('#dialogDeleteIgnoredSite').modal('hide');
 
-        const $url = $('#dialogDeleteIgnoredSite').data('url');
-        const $trId = $('#dialogDeleteIgnoredSite').data('tr-id');
-        $('#tab-ignored-sites #' + $trId).remove();
+        const url = $('#dialogDeleteIgnoredSite').data('url');
+        const trId = $('#dialogDeleteIgnoredSite').data('tr-id');
+        $('#tab-ignored-sites #' + trId).remove();
 
-        delete options.settings['ignoredSites'][$url];
+        for (let i = 0; i < options.settings['ignoredSites'].length; ++i) {
+            if (options.settings['ignoredSites'][i].url === url) {
+                options.settings['ignoredSites'].splice(i, 1);
+            }
+        }
         options.saveSettings();
 
         if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
@@ -288,19 +335,22 @@ options.initIgnoredSites = function() {
         }
     });
 
-    const $trClone = $('#tab-ignored-sites table tr.clone:first').clone(true);
-    $trClone.removeClass('clone');
+    const trClone = $('#tab-ignored-sites table tr.clone:first').clone(true);
+    trClone.removeClass('clone');
     let counter = 1;
-    for (let url in options.settings['ignoredSites']) {
-        const $tr = $trClone.clone(true);
-        $tr.data('url', url);
-        $tr.attr('id', 'tr-scf' + counter);
-        ++counter;
+    if (options.settings['ignoredSites']){
+        for (let site of options.settings['ignoredSites']) {
+            const tr = trClone.clone(true);
+            tr.data('url', site.url);
+            tr.attr('id', 'tr-scf' + counter);
+            ++counter;
 
-        $tr.children('td:first').text(url);
-        $('#tab-ignored-sites table tbody:first').append($tr);
+            tr.children('td:first').text(site.url);
+            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', site.fullIgnore);
+            $('#tab-ignored-sites table tbody:first').append(tr);
+        }
     }
-
+    
     if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
         $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
     } else {

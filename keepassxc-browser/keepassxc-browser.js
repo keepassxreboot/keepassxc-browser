@@ -1311,6 +1311,16 @@ cip.initCredentialFields = function(forceCall) {
 
     browser.runtime.sendMessage({ 'action': 'page_clear_logins', args: [_called.clearLogins] }).then(() => {
         _called.clearLogins = true;
+
+        // Ignore sites with full ignore
+        if (cip.settings.ignoredSites) {
+            for (const site of cip.settings.ignoredSites) {
+                if (site.fullIgnore && siteMatch(site.url, document.location.href)) {
+                    return;
+                }
+            }
+        }
+        
         const inputs = cipFields.getAllFields();
         if (inputs.length === 0) {
             return;
@@ -1917,14 +1927,20 @@ cip.ignoreSite = function(sites) {
         return;
     }
 
-    const site = sites[0];
-    if (!cip.settings['ignoredSites']) {
-        cip.settings['ignoredSites'] = {};
+    // Delete previously created Object if it exists. It will be replaced by an Array
+    if (cip.settings['ignoredSites'] !== null && cip.settings['ignoredSites'].constructor === Object) {
+        delete cip.settings['ignoredSites'];
     }
 
-    cip.settings['ignoredSites'][site] = {
-        url: site
-    };
+    const site = sites[0];
+    if (!cip.settings['ignoredSites']) {
+        cip.settings['ignoredSites'] = [];
+    }
+
+    cip.settings['ignoredSites'].push({
+        url: site,
+        fullIgnore: false
+    });
 
     browser.runtime.sendMessage({
         action: 'save_settings',

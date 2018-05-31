@@ -206,8 +206,8 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
         const settings = item.settings;
 
         // Don't show anything if the site is in the ignore list
-        for (const site in settings.ignoredSites) {
-            if (site === url) {
+        for (const site of settings.ignoredSites) {
+            if (siteMatch(site.url, url)) {
                 return;
             }
         }
