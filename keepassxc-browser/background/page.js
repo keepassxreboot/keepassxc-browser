@@ -105,6 +105,10 @@ page.clearCredentials = function(tabId, complete) {
 };
 
 page.clearLogins = function(tabId) {
+    if (!page.tabs[tabId]) {
+        return;
+    }
+
     page.tabs[tabId].loginList = [];
 };
 
