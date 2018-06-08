@@ -8,7 +8,7 @@ const BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT = 1;
 
 browserAction.show = function(callback, tab) {
     let data = {};
-    if (!page.tabs[tab.id] || page.tabs[tab.id].stack.length == 0) {
+    if (!page.tabs[tab.id] || page.tabs[tab.id].stack.length === 0) {
         browserAction.showDefault(callback, tab);
         return;
     }
@@ -36,7 +36,7 @@ browserAction.update = function(interval) {
 
     let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
 
-    if (typeof data.visibleForMilliSeconds !== 'undefined') {
+    if (data.visibleForMilliSeconds !== undefined) {
         if (data.visibleForMilliSeconds <= 0) {
             browserAction.stackPop(page.currentTabId);
             browserAction.show(null, {'id': page.currentTabId});
@@ -87,7 +87,7 @@ browserAction.showDefault = function(callback, tab) {
     });
 };
 
-browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visibleForMilliSeconds, visibleForPageUpdates, redirectOffset,  dontShow) {
+browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visibleForMilliSeconds, visibleForPageUpdates, redirectOffset, dontShow) {
     const id = tab.id || page.currentTabId;
 
     if (!level) {
@@ -103,15 +103,15 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
         stackData.popup = popup;
     }
 
-    if (visibleForMilliSeconds) {
+    if (visibleForMilliSeconds !== undefined) {
         stackData.visibleForMilliSeconds = visibleForMilliSeconds;
     }
 
-    if (visibleForPageUpdates) {
+    if (visibleForPageUpdates !== undefined) {
         stackData.visibleForPageUpdates = visibleForPageUpdates;
     }
 
-    if (redirectOffset) {
+    if (redirectOffset !== undefined) {
         stackData.redirectOffset = redirectOffset;
     }
 
@@ -181,7 +181,7 @@ browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
         return;
     }
 
-    if( page.tabs[tab.id].stack.length == 0) {
+    if (page.tabs[tab.id].stack.length === 0) {
         page.clearCredentials(tab.id);
         return;
     }

@@ -185,6 +185,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
             }
             else if (response.error && response.errorCode) {
                 keepass.handleError(tab, response.errorCode, response.error);
+                callback('error');
             }
             else {
                 browserAction.showDefault(null, tab);

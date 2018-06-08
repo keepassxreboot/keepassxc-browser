@@ -122,7 +122,7 @@ options.initGeneralSettings = function() {
         const blinkTimeout = $.trim($('#blinkTimeout').val());
         const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
 
-        options.settings['blinkTimeout'] = String(blinkTimeoutval);
+        options.settings['blinkTimeout'] = blinkTimeoutval;
         options.saveSetting('blinkTimeout');
     });
 
@@ -130,7 +130,7 @@ options.initGeneralSettings = function() {
         const blinkMinTimeout = $.trim($('#blinkMinTimeout').val());
         const blinkMinTimeoutval = blinkMinTimeout !== '' ? Number(blinkMinTimeout) : defaultSettings.redirectOffset;
 
-        options.settings['blinkMinTimeout'] = String(blinkMinTimeoutval);
+        options.settings['blinkMinTimeout'] = blinkMinTimeoutval;
         options.saveSetting('blinkMinTimeout');
     });
 
@@ -138,7 +138,7 @@ options.initGeneralSettings = function() {
         const allowedRedirect = $.trim($('#allowedRedirect').val());
         const allowedRedirectval = allowedRedirect !== '' ? Number(allowedRedirect) : defaultSettings.redirectAllowance;
 
-        options.settings['allowedRedirect'] = String(allowedRedirectval);
+        options.settings['allowedRedirect'] = allowedRedirectval;
         options.saveSetting('allowedRedirect');
     });
 };
