@@ -899,6 +899,14 @@ cipFields.getAllCombinations = function(inputs) {
         }
     }
 
+    if (fields.length === 0 && uField) {
+        const combination = {
+            username: uField[0].getAttribute('data-cip-id'),
+            password: null
+        };
+        fields.push(combination);
+    }
+
     return fields;
 };
 
@@ -1160,7 +1168,13 @@ let observer = new MutationObserver(function(mutations, observer) {
         if (inputs.length > neededLength && !_observerIds.includes(mut.target.id)) {
             // Save target element id for preventing multiple calls to initCredentialsFields()
             _observerIds.push(mut.target.id);
-            cip.initCredentialFields(true);
+            
+            // Sometimes the settings haven't been loaded before new input fields are detected
+            if (Object.keys(cip.settings).length === 0) {
+                cip.init();
+            } else {
+                cip.initCredentialFields(true);
+            }
         }
     }
 });
@@ -1273,6 +1287,8 @@ cip.initCredentialFields = function(forceCall) {
             }).then(cip.retrieveCredentialsCallback).catch((e) => {
                 console.log(e);
             });
+        } else {
+            cip.preparePageForMultipleCredentials(cip.credentials);
         }
     });
 };
