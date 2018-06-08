@@ -272,6 +272,14 @@ kpxcEvent.pageClearLogins = function(callback, tab, alreadyCalled) {
     callback();
 };
 
+kpxcEvent.pageGetLoginId = function(callback, tab) {
+    callback(page.loginId);
+};
+
+kpxcEvent.pageSetLoginId = function(callback, tab, loginId) {
+    page.loginId = loginId;
+};
+
 // all methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -287,6 +295,8 @@ kpxcEvent.messageHandlers = {
     'load_settings': kpxcEvent.onLoadSettings,
     'lock-database': kpxcEvent.lockDatabase,
     'page_clear_logins': kpxcEvent.pageClearLogins,
+    'page_get_login_id': kpxcEvent.pageGetLoginId,
+    'page_set_login_id': kpxcEvent.pageSetLoginId,
     'pop_stack': kpxcEvent.onPopStack,
     'popup_login': kpxcEvent.onLoginPopup,
     'popup_multiple-fields': kpxcEvent.onMultipleFieldsPopup,

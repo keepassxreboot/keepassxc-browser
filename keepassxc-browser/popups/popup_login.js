@@ -19,7 +19,7 @@ $(function() {
                     const id = e.target.id;
                     browser.tabs.sendMessage(tab.id, {
                         action: 'fill_user_pass_with_specific_login',
-                        id: id
+                        id: Number(id)
                     });
                     close();
                 });
