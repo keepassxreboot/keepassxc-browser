@@ -1,3 +1,14 @@
+1.1.4 (10-06-2018)
+=========================
+- Improve performance of field detection and limit it to 100 fields [#166,#157,185]
+- Improve option to ignore fields [#170]
+- Automatically retrieve credentials after unlocking the database [#153]
+- Fix option to only save the domain name not working as intended [#151]
+- Fix credentials popup not being shown on some websites [#154]
+- Improve detection of username fields [#164]
+- Allow filling of TOTP fields when they are on a separate page [#162]
+- Ignore invisible input fields more strictly [#176]
+
 1.1.3 (11-05-2018)
 =========================
 - Remove autoreconnect to prevent proxy process leakage on Windows [#147]
