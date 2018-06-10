@@ -1180,7 +1180,7 @@ cipObserverHelper.inputTypes = [
 ];
 
 cipObserverHelper.getInputs = function(target) {
-    if (target.nodeType === Node.TEXT_NODE) {
+    if (target.nodeType === Node.TEXT_NODE || target.nodeType === Node.COMMENT_NODE) {
         return [];
     }
 
