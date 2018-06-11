@@ -819,7 +819,22 @@ cipFields.prepareId = function(id) {
     return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return '\\'+m; });
 };
 
-// Check aria-hidden attribute by looping the parent elements of input field
+/**
+ * Returns the first parent element satifying the {@code predicate} mapped by {@code resultFn} or else {@code defaultVal}.
+ * @param {HTMLElement} element     The start element (excluded, starting with the parents)
+ * @param {function} predicate      Matcher for the element to find, type (HTMLElement) => boolean
+ * @param {function} resultFn       Callback function of type (HTMLElement) => {*} called for the first matching element
+ * @param {fun} defaultValFn        Fallback return value supplier, if no element matching the predicate can be found
+ */
+cipFields.traverseParents = function(element, predicate, resultFn = () => true, defaultValFn = () => false) {
+    for (let f = element.parentElement; f !== null; f = f.parentElement) {
+        if (predicate(f)) {
+            return resultFn(f);
+        }
+    }
+    return defaultValFn();
+};
+
 cipFields.getAriaHidden = function(field) {
     // Check the main element
     const val = field.getAttribute('aria-hidden');
@@ -827,29 +842,41 @@ cipFields.getAriaHidden = function(field) {
         return val;
     }
 
-    // Check parents
-    let parents = [];
-    while (field.parentElement) {
-        parents.push(field = field.parentElement);
-    }
-
-    for (const p of parents) {
-        const val = p.getAttribute('aria-hidden');
-        if (val) {
-            return val;
-        }
-    }
-    return 'false';
+    const ariaFunc = f => f.getAttribute('aria-hidden');
+    return cipFields.traverseParents(field, ariaFunc, ariaFunc, () => 'false');
 };
 
 cipFields.getOverflowHidden = function(field) {
-    let $par = jQuery(field).parents();
-    for (const p of $par) {
-        const val = $(p).css('overflow');
-        if (val === 'hidden') {
+    return cipFields.traverseParents(field, f => f.style.overflow === 'hidden');
+};
+
+
+// Checks if input field is a search field. Attributes or form action containing 'search', or parent element holding
+// role="search" will be identified as a search field.
+cipFields.isSearchField = function(target) {
+    const attributes = target.attributes;
+
+    // Check element attributes
+    for (const attr of attributes) {
+        if ((attr.value && (attr.value.toLowerCase().includes('search')) || attr.value === 'q')) {
             return true;
         }
     }
+
+    // Check form action
+    const closestForm = target.closest('form');
+    const formAction = closestForm ? closestForm.getAttribute('action') : null;
+    if (formAction && formAction.includes('search')) {
+        return true;
+    }
+
+    // Check parent elements for role="search"
+    const roleFunc = f => f.getAttribute('role');
+    const roleValue = cipFields.traverseParents(target, roleFunc, roleFunc, () => null);
+    if (roleValue && roleValue === 'search') {
+        return true;
+    }
+
     return false;
 };
 
@@ -878,7 +905,7 @@ cipFields.getAllFields = function() {
     let fields = [];
     const inputs = cipObserverHelper.getInputs(document);
     for (const i of inputs) {
-        if (cipFields.isVisible(i)) {
+        if (cipFields.isVisible(i) && !cipFields.isSearchField(i)) {
             cipFields.setUniqueId(jQuery(i));
             fields.push(jQuery(i));
         }
@@ -890,7 +917,7 @@ cipFields.getAllFields = function() {
 
 cipFields.prepareVisibleFieldsWithID = function($pattern) {
     jQuery($pattern).each(function() {
-        if (cipField.isVisible(this)) {
+        if (cipFields.isVisible(this) && !cipFields.isSearchField(this)) {
             cipFields.setUniqueId(jQuery(this));
         }
     });
