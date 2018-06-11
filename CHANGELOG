@@ -1,3 +1,7 @@
+1.1.5 (11-06-2018)
+=========================
+- Fix search fields being detected as username fields [#189]
+
 1.1.4 (10-06-2018)
 =========================
 - Improve performance of field detection and limit it to 100 fields [#166,#157,185]
