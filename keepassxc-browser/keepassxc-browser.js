@@ -1203,7 +1203,7 @@ cipObserverHelper.inputTypes = [
     'password',
     'tel',
     'number',
-    ''
+    null    // Input field can be without any type. Include these to the list.
 ];
 
 cipObserverHelper.getInputs = function(target) {
