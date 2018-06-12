@@ -1373,6 +1373,7 @@ cip.initCredentialFields = function(forceCall) {
         _called.clearLogins = true;
 
         // Ignore sites with full ignore
+        cip.initializeIgnoredSites();
         if (cip.settings.ignoredSites) {
             for (const site of cip.settings.ignoredSites) {
                 if (site.fullIgnore && siteMatch(site.url, document.location.href)) {
@@ -1998,16 +1999,9 @@ cip.ignoreSite = function(sites) {
         return;
     }
 
-    // Delete previously created Object if it exists. It will be replaced by an Array
-    if (cip.settings['ignoredSites'] !== null && cip.settings['ignoredSites'].constructor === Object) {
-        delete cip.settings['ignoredSites'];
-    }
+    cip.initializeIgnoredSites();
 
     const site = sites[0];
-    if (!cip.settings['ignoredSites']) {
-        cip.settings['ignoredSites'] = [];
-    }
-
     cip.settings['ignoredSites'].push({
         url: site,
         fullIgnore: false
@@ -2019,6 +2013,16 @@ cip.ignoreSite = function(sites) {
     });
 };
 
+ // Delete previously created Object if it exists. It will be replaced by an Array
+cip.initializeIgnoredSites = function() {
+    if (cip.settings['ignoredSites'] !== null && cip.settings['ignoredSites'].constructor === Object) {
+        delete cip.settings['ignoredSites'];
+    }
+
+    if (!cip.settings['ignoredSites']) {
+        cip.settings['ignoredSites'] = [];
+    }
+};
 
 cip.getDocumentLocation = function() {
     return cip.settings.saveDomainOnly ? document.location.origin : document.location.href;
