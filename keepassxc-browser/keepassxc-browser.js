@@ -6,6 +6,7 @@ _called.retrieveCredentials = false;
 _called.clearLogins = false;
 _called.manualFillRequested = 'none';
 let _loginId = -1;
+let _singleInputEnabledForPage = false;
 const _maximumInputs = 100;
 
 // Count of detected form fields on the page
@@ -502,7 +503,7 @@ cipForm.init = function(form, credentialFields) {
     // TODO: could be called multiple times --> update credentialFields
 
     // not already initialized && password-field is not null
-    if (!form.data('cipForm-initialized') && (credentialFields.password || credentialFields.username)) {
+    if (!form.data('cipForm-initialized') && (credentialFields.password || (_singleInputEnabledForPage && credentialFields.username))) {
         form.data('cipForm-initialized', true);
         cipForm.setInputFields(form, credentialFields);
         form.submit(cipForm.onSubmit);
@@ -884,7 +885,8 @@ cipFields.isVisible = function(field) {
     const rect = field.getBoundingClientRect();
 
     // Check CSS visibility
-    if (field.style.visibility && (field.style.visibility === 'hidden' || field.style.visibility === 'collapse')) {
+    const fieldStyle = getComputedStyle(field);
+    if (fieldStyle.visibility && (fieldStyle.visibility === 'hidden' || fieldStyle.visibility === 'collapse')) {
         return false;
     }
 
@@ -948,7 +950,7 @@ cipFields.getAllCombinations = function(inputs) {
         }
     }
 
-    if (fields.length === 0 && uField) {
+    if (_singleInputEnabledForPage && fields.length === 0 && uField) {
         const combination = {
             username: uField[0].getAttribute('data-cip-id'),
             password: null
@@ -1230,6 +1232,10 @@ cipObserverHelper.getId = function(target) {
 };
 
 cipObserverHelper.handleObserverAdd = function(target) {
+    if (target.className && (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
+        return;
+    }
+
     const inputs = cipObserverHelper.getInputs(target);
     if (inputs.length === 0) {
         return;
@@ -1251,6 +1257,10 @@ cipObserverHelper.handleObserverAdd = function(target) {
 };
 
 cipObserverHelper.handleObserverRemove = function(target) {
+    if (target.className && (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
+        return;
+    }
+
     const inputs = cipObserverHelper.getInputs(target);
     if (inputs.length === 0) {
         return;
@@ -1406,9 +1416,9 @@ cip.initCredentialFields = function(forceCall) {
         cip.submitUrl = cip.getFormActionUrl(cipFields.combinations[0]);
 
         // Get submitUrl for a single input
-        if (!cip.submitUrl && cipFields.combinations.length === 1 && inputs.length === 1) {
+        if (_singleInputEnabledForPage && !cip.submitUrl && cipFields.combinations.length === 1 && inputs.length === 1) {
             cip.submitUrl = cip.getFormActionUrlFromSingleInput(inputs[0]);
-        } 
+        }
 
         if (cip.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (cip.url && cip.submitUrl)) {
             browser.runtime.sendMessage({
@@ -1417,8 +1427,6 @@ cip.initCredentialFields = function(forceCall) {
             }).then(cip.retrieveCredentialsCallback).catch((e) => {
                 console.log(e);
             });
-        } else {
-            cip.preparePageForMultipleCredentials(cip.credentials);
         }
     });
 };
