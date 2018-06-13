@@ -31,3 +31,10 @@ The details about the messaging protocol used with the browser extension and Kee
 ## Translations
 
 Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
+
+## Testing
+
+Run `npm install` and then you can use the following commands for testing:
+- `npm run unit-tests`
+- `npm run integration-tests`
+- `npm run all-tests`

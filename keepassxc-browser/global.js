@@ -1,5 +1,11 @@
 'use strict';
 
+// Exports for tests
+if (typeof exports !== 'undefined') {
+    var rewire = require('rewire');
+    var browser = require('sinon-chrome');
+}
+
 const IGNORE_NOTHING = 'ignoreNothing';
 const IGNORE_NORMAL = 'ignoreNormal';
 const IGNORE_FULL = 'ignoreFull';

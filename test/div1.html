@@ -1,0 +1,22 @@
+<html>
+<body>
+
+<button id="toggle">View login form</button>
+<div id="loginForm" style="display: none;">
+    <input placeholder="username" type="text" name="loginField">
+    <input placeholder="password" type="password" name="passwordField">
+</div>
+
+<script>
+document.getElementById('toggle').addEventListener('click', function(e) {
+    const loginForm = document.getElementById('loginForm')
+    if (loginForm.style.display === 'none') {
+        loginForm.style.display = 'block';
+    } else {
+        loginForm.style.display = 'none';
+    }
+});
+</script>
+
+</body>
+</html>
