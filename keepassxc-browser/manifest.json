@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "KeePassXC-Browser",
-	"version": "1.1.6",
-	"version_name": "1.1.6",
+	"version": "1.1.7",
+	"version_name": "1.1.7",
 	"description": "KeePassXC integration for modern web browsers",
 	"author": "KeePassXC Team",
 	"icons": {
