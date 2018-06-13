@@ -2023,7 +2023,7 @@ cip.ignoreSite = function(sites) {
 
  // Delete previously created Object if it exists. It will be replaced by an Array
 cip.initializeIgnoredSites = function() {
-    if (cip.settings['ignoredSites'] !== null && cip.settings['ignoredSites'].constructor === Object) {
+    if (cip.settings['ignoredSites'] !== undefined && cip.settings['ignoredSites'].constructor === Object) {
         delete cip.settings['ignoredSites'];
     }
 
