@@ -19,7 +19,7 @@ $(function() {
             options.initGeneralSettings();
             options.initConnectedDatabases();
             options.initCustomCredentialFields();
-            options.initIgnoredSites();
+            options.initSitePreferences();
             options.initAbout();
         });
     });
@@ -261,100 +261,111 @@ options.initCustomCredentialFields = function() {
     }
 };
 
-options.initIgnoredSites = function() {
-    $('#dialogDeleteIgnoredSite').modal({keyboard: true, show: false, backdrop: true});
-    $('#tab-ignored-sites tr.clone:first button.delete:first').click(function(e) {
+options.initSitePreferences = function() {
+    $('#dialogDeleteSite').modal({keyboard: true, show: false, backdrop: true});
+    $('#tab-site-preferences tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
-        $('#dialogDeleteIgnoredSite').data('url', $(this).closest('tr').data('url'));
-        $('#dialogDeleteIgnoredSite').data('tr-id', $(this).closest('tr').attr('id'));
-        $('#dialogDeleteIgnoredSite .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
-        $('#dialogDeleteIgnoredSite').modal('show');
+        $('#dialogDeleteSite').data('url', $(this).closest('tr').data('url'));
+        $('#dialogDeleteSite').data('tr-id', $(this).closest('tr').attr('id'));
+        $('#dialogDeleteSite .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
+        $('#dialogDeleteSite').modal('show');
     });
 
-    $('#tab-ignored-sites tr.clone:first input[type=checkbox]:first').change(function() {
+    $('#tab-site-preferences tr.clone:first input[type=checkbox]:first').change(function() {
         const url = $(this).closest('tr').data('url');
-        for (let site of options.settings['ignoredSites']) {
+        for (let site of options.settings['sitePreferences']) {
             if (site.url === url) {
-                site.fullIgnore = $(this).is(':checked');
+                site.usernameOnly = $(this).is(':checked');
             }
         }
         options.saveSettings();
     });
 
-    $("#ignoreUrl").keyup(function(event) {
+    $('#tab-site-preferences tr.clone:first select:first').change(function() {
+        const url = $(this).closest('tr').data('url');
+        for (let site of options.settings['sitePreferences']) {
+            if (site.url === url) {
+                site.ignore = $(this).val();
+            }
+        }
+        options.saveSettings();
+    });
+
+    $("#manualUrl").keyup(function(event) {
         if (event.keyCode === 13) {
-            $("#ignoreManualAddButton").click();
+            $("#sitePreferencesManualAdd").click();
         }
     });
 
-    $('#ignoreManualAddButton').click(function(e) {
+    $('#sitePreferencesManualAdd').click(function(e) {
         e.preventDefault();
-        const value = $('#ignoreUrl').val();
+        const value = $('#manualUrl').val();
         if (value.length > 10 && value.length <= 2000) {
-            if (options.settings['ignoredSites'] === undefined) {
-                options.settings['ignoredSites'] = [];
+            if (options.settings['sitePreferences'] === undefined) {
+                options.settings['sitePreferences'] = [];
             }
 
-            const newValue = options.settings['ignoredSites'].length + 1;
-            const trClone = $('#tab-ignored-sites table tr.clone:first').clone(true);
+            const newValue = options.settings['sitePreferences'].length + 1;
+            const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
             trClone.removeClass('clone');
 
             const tr = trClone.clone(true);
             tr.data('url', value);
             tr.attr('id', 'tr-scf' + newValue);
             tr.children('td:first').text(value);
-            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', false);
-            $('#tab-ignored-sites table tbody:first').append(tr);
-            $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
+            tr.children('td:nth-child(2)').children('select').val(IGNORE_NORMAL);
+            $('#tab-site-preferences table tbody:first').append(tr);
+            $('#tab-site-preferences table tbody:first tr.empty:first').hide();
 
-            options.settings['ignoredSites'].push({url: value, fullIgnore: false});
+            options.settings['sitePreferences'].push({url: value, ignore: IGNORE_NORMAL, usernameOnly: false});
             options.saveSettings();
 
-            $('#ignoreUrl').val('');
+            $('#manualUrl').val('');
         }
     });
 
-    $('#dialogDeleteIgnoredSite .modal-footer:first button.yes:first').click(function(e) {
-        $('#dialogDeleteIgnoredSite').modal('hide');
+    $('#dialogDeleteSite .modal-footer:first button.yes:first').click(function(e) {
+        $('#dialogDeleteSite').modal('hide');
 
-        const url = $('#dialogDeleteIgnoredSite').data('url');
-        const trId = $('#dialogDeleteIgnoredSite').data('tr-id');
-        $('#tab-ignored-sites #' + trId).remove();
+        const url = $('#dialogDeleteSite').data('url');
+        const trId = $('#dialogDeleteSite').data('tr-id');
+        $('#tab-site-preferences #' + trId).remove();
 
-        for (let i = 0; i < options.settings['ignoredSites'].length; ++i) {
-            if (options.settings['ignoredSites'][i].url === url) {
-                options.settings['ignoredSites'].splice(i, 1);
+        for (let i = 0; i < options.settings['sitePreferences'].length; ++i) {
+            if (options.settings['sitePreferences'][i].url === url) {
+                options.settings['sitePreferences'].splice(i, 1);
             }
         }
         options.saveSettings();
 
-        if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
-            $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
+        if ($('#tab-site-preferences table tbody:first tr').length > 2) {
+            $('#tab-site-preferences table tbody:first tr.empty:first').hide();
         } else {
-            $('#tab-ignored-sites table tbody:first tr.empty:first').show();
+            $('#tab-site-preferences table tbody:first tr.empty:first').show();
         }
     });
 
-    const trClone = $('#tab-ignored-sites table tr.clone:first').clone(true);
+    const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
     trClone.removeClass('clone');
     let counter = 1;
-    if (options.settings['ignoredSites']){
-        for (let site of options.settings['ignoredSites']) {
+    if (options.settings['sitePreferences']){
+        for (let site of options.settings['sitePreferences']) {
             const tr = trClone.clone(true);
             tr.data('url', site.url);
             tr.attr('id', 'tr-scf' + counter);
             ++counter;
 
             tr.children('td:first').text(site.url);
-            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', site.fullIgnore);
-            $('#tab-ignored-sites table tbody:first').append(tr);
+            tr.children('td:nth-child(2)').children('select').val(site.ignore);
+            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', site.usernameOnly);
+            $('#tab-site-preferences table tbody:first').append(tr);
         }
     }
     
-    if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
-        $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
+    if ($('#tab-site-preferences table tbody:first tr').length > 2) {
+        $('#tab-site-preferences table tbody:first tr.empty:first').hide();
     } else {
-        $('#tab-ignored-sites table tbody:first tr.empty:first').show();
+        $('#tab-site-preferences table tbody:first tr.empty:first').show();
     }
 };
 
