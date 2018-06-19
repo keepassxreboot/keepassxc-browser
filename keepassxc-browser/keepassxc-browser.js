@@ -1208,8 +1208,22 @@ cipObserverHelper.inputTypes = [
     null    // Input field can be without any type. Include these to the list.
 ];
 
+// Ignores all nodes that doesn't contain elements
+cipObserverHelper.ignoredNode = function(target) {
+    if (target.nodeType === Node.ATTRIBUTE_NODE ||
+        target.nodeType === Node.TEXT_NODE || 
+        target.nodeType === Node.CDATA_SECTION_NODE ||
+        target.nodeType === Node.PROCESSING_INSTRUCTION_NODE ||
+        target.nodeType === Node.COMMENT_NODE ||
+        target.nodeType === Node.DOCUMENT_TYPE_NODE ||
+        target.nodeType === Node.NOTATION_NODE) {
+        return true;
+    }
+    return false;
+};
+
 cipObserverHelper.getInputs = function(target) {
-    if (target.nodeType === Node.TEXT_NODE || target.nodeType === Node.COMMENT_NODE) {
+    if (cipObserverHelper.ignoredNode(target)) {
         return [];
     }
 
