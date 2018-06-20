@@ -19,7 +19,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="#general-settings">General</a></li>
           <li><a href="#connected-databases">Connected Databases</a></li>
-          <li><a href="#specified-fields">Specified credential fields</a></li>
+          <li><a href="#custom-fields">Custom credential fields</a></li>
           <li><a href="#ignored-sites">Ignored sites</a></li>
           <li><a href="#about">About</a></li>
         </ul>
@@ -241,16 +241,16 @@
         </div>
       </div>
 
-      <!-- Specified credential fields -->
-      <div class="tab" id="tab-specified-fields">
-        <h2>Specified credential fields</h2>
+      <!-- Custom credential fields -->
+      <div class="tab" id="tab-custom-fields">
+        <h2>Custom credential fields</h2>
         <hr />
         <p>
           If KeePassXC-Browser detects the wrong credential fields, you are able to specify the correct fields by yourself.
           <br />
-          Just go to the page and click on the KeePassXC-Browser-Icon, now select <em>Choose own credential fields for this page</em>.
+          Go to the page and click on the KeePassXC-Browser-Icon, now select <em>Choose custom credential fields for this page</em>.
           <br />
-          On this page you can manage theses specified credential fields.
+          On this page you can manage saved custom credential fields.
         </p>
         <table class="table table-striped table-bordered table-hover">
           <thead>
@@ -261,7 +261,7 @@
           </thead>
           <tbody>
             <tr class="empty">
-              <td colspan="2">No specified credential fields found.</td>
+              <td colspan="2">No saved custom credential fields found.</td>
             </tr>
             <tr class="clone">
               <td></td>
@@ -269,16 +269,16 @@
             </tr>
           </tbody>
         </table>
-        <div id="dialogDeleteSpecifiedCredentialFields" class="modal fade" tabindex="-1" role="dialog">
+        <div id="dialogDeleteCustomCredentialFields" class="modal fade" tabindex="-1" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Remove specified credential fields?</h3>
+                <h3 id="myModalLabel">Remove saved custom credential fields?</h3>
               </div>
               <div class="modal-body">
-                <p>Do you really want to remove the specified credential fields on the page <strong></strong>?</p>
-                <p class="help-block">KeePassXC-Browser will automatically detect the credential fields the next time you visit this page.</p>
+                <p>DDo you really want to remove the saved custom credential fields on the page: <strong></strong>?</p>
+                <p class="help-block">KeePassXC-Browser will automatically detect the credential fields next time you visit this page.</p>
               </div>
               <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
