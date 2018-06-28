@@ -1232,8 +1232,11 @@ cipObserverHelper.getId = function(target) {
 };
 
 cipObserverHelper.ignoredElement = function(target) {
-     // Ignore SVG elements
-    if (target.className && (target.nodeName !== 'svg' || target.parentNode.nodeName !== 'svg')) {
+    // Ignore SVG elements
+    if (target.nodeName === 'svg' || 
+        target.nodeName === 'g' ||
+        (target.parentNode && 
+        (target.parentNode.nodeName === 'svg' || target.parentNode.nodeName === 'g'))) {
         return true;
     }
 
