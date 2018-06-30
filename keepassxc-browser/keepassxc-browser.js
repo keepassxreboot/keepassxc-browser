@@ -1293,7 +1293,7 @@ let observer = new MutationObserver(function(mutations, observer) {
         // Handle attributes only if CSS display is modified
         if (mut.type === 'attributes') {
             const newValue = mut.target.getAttribute(mut.attributeName);
-            if (newValue.includes('display') || newValue.includes('z-index')) {
+            if (newValue && (newValue.includes('display') || newValue.includes('z-index'))) {
                 if (mut.target.style.display !== 'none') {
                     cipObserverHelper.handleObserverAdd(mut.target);
                 } else {
