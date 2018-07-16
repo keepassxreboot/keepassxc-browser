@@ -864,11 +864,22 @@ cipFields.isSearchField = function(target) {
         }
     }
 
-    // Check form action
+    // Check closest form
     const closestForm = target.closest('form');
-    const formAction = closestForm ? closestForm.getAttribute('action') : null;
-    if (formAction && formAction.includes('search')) {
-        return true;
+    if (closestForm) {
+        // Check form action
+        const formAction = closestForm.getAttribute('action');
+        if (formAction && formAction.includes('search')) {
+            return true;
+        }
+
+        // Check form class and id
+        const closestFormId = closestForm.getAttribute('id');
+        const closestFormClass = closestForm.className;
+        if (closestFormClass && (closestForm.className.toLowerCase().includes('search') || 
+            (closestFormId && closestFormId.toLowerCase().includes('search')))) {
+            return true;
+        }
     }
 
     // Check parent elements for role="search"
