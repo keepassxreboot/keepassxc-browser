@@ -1256,8 +1256,25 @@ cipObserverHelper.getId = function(target) {
     return target.classList.length === 0 ? target.id : target.classList;
 };
 
-cipObserverHelper.handleObserverAdd = function(target) {
+cipObserverHelper.ignoredElement = function(target) {
+    // Ignore SVG elements
+    if (target.nodeName === 'svg' || 
+        target.nodeName === 'g' ||
+        (target.parentNode && 
+        (target.parentNode.nodeName === 'svg' || target.parentNode.nodeName === 'g'))) {
+        return true;
+    }
+
+    // Ignore KeePassXC-Browser classes
     if (target.className && (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
+        return true;
+    }
+
+    return false;
+};
+
+cipObserverHelper.handleObserverAdd = function(target) {
+    if (cipObserverHelper.ignoredElement(target)) {
         return;
     }
 
@@ -1282,7 +1299,7 @@ cipObserverHelper.handleObserverAdd = function(target) {
 };
 
 cipObserverHelper.handleObserverRemove = function(target) {
-    if (target.className && (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
+    if (cipObserverHelper.ignoredElement(target)) {
         return;
     }
 
