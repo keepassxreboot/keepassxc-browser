@@ -205,10 +205,10 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
     browser.storage.local.get({'settings': {}}).then(function(item) {
         const settings = item.settings;
 
-        // Don't show anything if the site is in the ignore list
-        if (settings.ignoredSites !== undefined) {
-            for (const site of settings.ignoredSites) {
-                if (siteMatch(site.url, url)) {
+        // Don't show anything if the site is in the ignore 
+        if (settings.sitePreferences !== undefined) {
+            for (const site of settings.sitePreferences) {
+                if (site.ignore === IGNORE_NORMAL && (site.url === url || siteMatch(site.url, url))) {
                     return;
                 }
             }

@@ -1,5 +1,9 @@
 'use strict';
 
+const IGNORE_NOTHING = 'ignoreNothing';
+const IGNORE_NORMAL = 'ignoreNormal';
+const IGNORE_FULL = 'ignoreFull';
+
 var isFirefox = function() {
     if (!(/Chrome/.test(navigator.userAgent) && /Google/.test(navigator.vendor))) {
         return true;

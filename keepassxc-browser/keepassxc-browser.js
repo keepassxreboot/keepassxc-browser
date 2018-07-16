@@ -1424,12 +1424,16 @@ cip.initCredentialFields = function(forceCall) {
     browser.runtime.sendMessage({ 'action': 'page_clear_logins', args: [_called.clearLogins] }).then(() => {
         _called.clearLogins = true;
 
-        // Ignore sites with full ignore
-        cip.initializeIgnoredSites();
-        if (cip.settings.ignoredSites) {
-            for (const site of cip.settings.ignoredSites) {
-                if (site.fullIgnore && siteMatch(site.url, document.location.href)) {
-                    return;
+        // Check site preferences
+        cip.initializeSitePreferences();
+        if (cip.settings.sitePreferences) {
+            for (const site of cip.settings.sitePreferences) {
+                if (site.url === document.location.href || siteMatch(site.url, document.location.href)) {
+                    if (site.ignore === IGNORE_FULL) {
+                        return;
+                    }
+
+                    _singleInputEnabledForPage = site.usernameOnly;
                 }
             }
         }
@@ -1470,6 +1474,8 @@ cip.initCredentialFields = function(forceCall) {
             }).then(cip.retrieveCredentialsCallback).catch((e) => {
                 console.log(e);
             });
+        } else if (_singleInputEnabledForPage) {
+            cip.preparePageForMultipleCredentials(cip.credentials);
         }
     });
 };
@@ -2049,13 +2055,25 @@ cip.ignoreSite = function(sites) {
         return;
     }
 
-    cip.initializeIgnoredSites();
-
     const site = sites[0];
-    cip.settings['ignoredSites'].push({
-        url: site,
-        fullIgnore: false
-    });
+    cip.initializeSitePreferences();
+
+    // Check if the site already exists
+    let siteExists = false;
+    for (const existingSite of cip.settings['sitePreferences']) {
+        if (existingSite.url === site) {
+            existingSite.ignore = IGNORE_NORMAL;
+            siteExists = true;
+        }
+    }
+
+    if (!siteExists) {
+        cip.settings['sitePreferences'].push({
+            url: site,
+            ignore: IGNORE_NORMAL,
+            usernameOnly: false
+        });
+    }
 
     browser.runtime.sendMessage({
         action: 'save_settings',
@@ -2064,13 +2082,13 @@ cip.ignoreSite = function(sites) {
 };
 
  // Delete previously created Object if it exists. It will be replaced by an Array
-cip.initializeIgnoredSites = function() {
-    if (cip.settings['ignoredSites'] !== undefined && cip.settings['ignoredSites'].constructor === Object) {
-        delete cip.settings['ignoredSites'];
+cip.initializeSitePreferences = function() {
+    if (cip.settings['sitePreferences'] !== undefined && cip.settings['sitePreferences'].constructor === Object) {
+        delete cip.settings['sitePreferences'];
     }
 
-    if (!cip.settings['ignoredSites']) {
-        cip.settings['ignoredSites'] = [];
+    if (!cip.settings['sitePreferences']) {
+        cip.settings['sitePreferences'] = [];
     }
 };
 

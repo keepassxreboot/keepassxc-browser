@@ -20,14 +20,14 @@
           <li class="active"><a href="#general-settings">General</a></li>
           <li><a href="#connected-databases">Connected Databases</a></li>
           <li><a href="#custom-fields">Custom credential fields</a></li>
-          <li><a href="#ignored-sites">Ignored sites</a></li>
+          <li><a href="#site-preferences">Site preferences</a></li>
           <li><a href="#about">About</a></li>
         </ul>
       </nav>
 
       <!-- General Settings -->
       <div class="tab" id="tab-general-settings">
-        <h2>General Settings</h2>
+        <h2>General settings</h2>
         <hr />
         <p>
           If you just want to insert username + password into the fields where your focus is, press <code><span id="mac-user-shortcut">Ctrl + Shift + U</span><span id="default-user-shortcut">Alt + Shift + U</span></code>.
@@ -189,7 +189,7 @@
 
       <!-- Connected Databases -->
       <div class="tab" id="tab-connected-databases">
-        <h2>Connected Databases</h2>
+        <h2>Connected databases</h2>
         <hr />
         <p>
           The following KeePassXC databases are connected to KeePassXC-Browser.
@@ -289,24 +289,26 @@
        </div>
       </div>
 
-      <!-- Ignored sites -->
-      <div class="tab" id="tab-ignored-sites">
-        <h2>Ignored sites</h2>
+      <!-- Site preferences -->
+      <div class="tab" id="tab-site-preferences">
+        <h2>Site preferences</h2>
         <hr />
         <p>
-          Sites in this list are ignored when new credentials are detected.
+          Sites on this page have special handling methods associated with them.
           <br />
-          Go to the page with new credentials, click the blinking KeePassXC-Browser icon or the notification and select <em>Never ask for this page</em>.
+          To ignore new/modified credentials on a specific site, add it below or click the blinking KeePassXC-Browser icon and select <em>Never ask for this page</em>.
           <br />
-          If full ignore is enabled, no input fields are detected and no credentials are received for that site.
+          If a site is fully ignored (<em>Disable all features</em> is selected), then the plugin will do nothing when visiting that site.
+          <br />
+          Enabling the <em>Username-Only Detection</em> feature allows KeePassXC-Browser to fill-in pages on sites that do present a separated username and password input.
         </p>
         <hr />
         <div class="form-group">
-          <label for="ignoreManualAdd">Add URL manually:</label>
+          <label for="sitePreferencesManualAdd">Add URL manually:</label>
           <div class="control-group">
             <div class="input-append">
-              <input type="url" id="ignoreUrl"/>
-              <button class="btn btn-sm btn-primary" id="ignoreManualAddButton" type="button"><span class="glyphicon glyphicon-plus-sign"></span> Add</button>
+              <input type="url" id="manualUrl"/>
+              <button class="btn btn-sm btn-primary" id="sitePreferencesManualAdd" type="button"><span class="glyphicon glyphicon-plus-sign"></span> Add</button>
             </div>
           </div>
         </div>
@@ -315,22 +317,30 @@
           <thead>
             <tr>
               <th>Page URL</th>
+              <th>Ignore</th>
+              <th>Username-Only Detection</th>
               <th>Delete</th>
-              <th>Full ignore</th>
             </tr>
           </thead>
           <tbody>
             <tr class="empty">
-              <td colspan="3">No ignored sites found.</td>
+              <td colspan="4">No sites found.</td>
             </tr>
             <tr class="clone">
               <td></td>
+              <td>
+                <select name="ignore">
+                  <option value="ignoreNothing">Enable all features</option>
+                  <option value="ignoreNormal">Disable new/modified credentials</option>
+                  <option value="ignoreFull">Disable all features</option>
+                </select>
+              </td>
+              <td><input type="checkbox" name="usernameOnly" value="false" /></td>
               <td><button class="btn delete btn-danger btn"><span class="glyphicon glyphicon-remove-sign"></span> Remove</button></td>
-              <td><input type="checkbox" name="fullIgnore" value="false" /></td>
             </tr>
           </tbody>
         </table>
-        <div id="dialogDeleteIgnoredSite" class="modal fade" tabindex="-1" role="dialog">
+        <div id="dialogDeleteSite" class="modal fade" tabindex="-1" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -338,8 +348,8 @@
                 <h3 id="myModalLabel">Remove site?</h3>
               </div>
               <div class="modal-body">
-                <p>Do you really want to remove the specified site from the ignore list?</p>
-                <p class="help-block">KeePassXC-Browser will detect new credentials the next time you visit this page.</p>
+                <p>Do you really want to remove the specified site from the list?</p>
+                <p class="help-block">KeePassXC-Browser will enable all features for this site and remove username-only detection.</p>
               </div>
               <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
