@@ -4,6 +4,10 @@ const IGNORE_NOTHING = 'ignoreNothing';
 const IGNORE_NORMAL = 'ignoreNormal';
 const IGNORE_FULL = 'ignoreFull';
 
+var schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
+var hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
+var pathSegment = '(.*)';
+
 var isFirefox = function() {
     if (!(/Chrome/.test(navigator.userAgent) && /Google/.test(navigator.vendor))) {
         return true;
@@ -35,21 +39,18 @@ var matchPatternToRegExp = function(pattern) {
         return (/^(?:http|https|file|ftp|app):\/\//);
     }
 
-    const schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
-    const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
-    const pathSegment = '(.*)';
     const matchPatternRegExp = new RegExp(
         `^${schemeSegment}://${hostSegment}/${pathSegment}$`
     );
 
     let match = matchPatternRegExp.exec(pattern);
     if (!match) {
-         throw new TypeError('"${pattern}" is not a valid MatchPattern');
+        throw new TypeError(pattern + ' is not a valid MatchPattern');
     }
 
     let [, scheme, host, path] = match;
     if (!host) {
-        throw new TypeError('"${pattern}" does not have a valid host');
+        throw new TypeError(pattern + ' does not have a valid host');
     }
 
     let regex = '^';

@@ -299,7 +299,7 @@ options.initSitePreferences = function() {
 
     $('#sitePreferencesManualAdd').click(function(e) {
         e.preventDefault();
-        const value = $('#manualUrl').val();
+        let value = $('#manualUrl').val();
         if (value.length > 10 && value.length <= 2000) {
             if (options.settings['sitePreferences'] === undefined) {
                 options.settings['sitePreferences'] = [];
@@ -308,6 +308,11 @@ options.initSitePreferences = function() {
             const newValue = options.settings['sitePreferences'].length + 1;
             const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
             trClone.removeClass('clone');
+
+            // Fills the last / char if needed. This ensures the compatibility with Match Patterns
+            if (options.slashNeededForUrl(value)) {
+                value += '/';
+            }
 
             const tr = trClone.clone(true);
             tr.data('url', value);
@@ -386,4 +391,10 @@ options.initAbout = function() {
         $('#default-user-shortcut').show();
         $('#default-pass-shortcut').show();
     }
+};
+
+// Checks if URL has only scheme and host without the last / char.
+options.slashNeededForUrl = function(pattern) {
+    const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
+    return matchPattern.exec(pattern);
 };
