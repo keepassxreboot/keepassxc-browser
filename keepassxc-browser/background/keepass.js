@@ -185,6 +185,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
             }
             else if (response.error && response.errorCode) {
                 keepass.handleError(tab, response.errorCode, response.error);
+                callback('error');
             }
             else {
                 browserAction.showDefault(null, tab);
@@ -839,6 +840,17 @@ keepass.onNativeMessage = function(response) {
         keepass.testAssociation((associationResponse) => {
             keepass.isConfigured().then((configured) => {
                 keepass.updatePopup(configured ? 'normal' : 'cross');
+
+                // Send message to content script
+                browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+                    if (tabs.length) {
+                        browser.tabs.sendMessage(tabs[0].id, {
+                            action: 'check_database_hash',
+                            hash: {old: keepass.previousDatabaseHash, new: keepass.databaseHash}
+                        });
+                        keepass.previousDatabaseHash = keepass.databaseHash;
+                    }
+                });
             });
         }, null);
     }
@@ -1041,7 +1053,9 @@ keepass.reconnect = function(callback, tab) {
 };
 
 keepass.updatePopup = function(iconType) {
-    const data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
-    data.iconType = iconType;
-    browserAction.show(null, {'id': page.currentTabId});
+    if (page && page.tabs.length > 0) {
+        const data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
+        data.iconType = iconType;
+        browserAction.show(null, {'id': page.currentTabId});
+    }
 };

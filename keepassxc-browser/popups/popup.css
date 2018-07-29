@@ -1,11 +1,14 @@
 body {
     font-family: sans-serif;
-    min-width: 440px;
-    max-width: 440px;
     overflow-x: hidden;
     background-color: #eee;
     font-size: 15px;
     padding: 8px;
+}
+.container {
+    min-width: 440px;
+    max-width: 460px;
+    width: auto;
 }
 .list-group {
     font-size: .9em !important;

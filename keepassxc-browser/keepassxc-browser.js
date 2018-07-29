@@ -6,6 +6,8 @@ _called.retrieveCredentials = false;
 _called.clearLogins = false;
 _called.manualFillRequested = 'none';
 let _loginId = -1;
+let _singleInputEnabledForPage = false;
+const _maximumInputs = 100;
 
 // Count of detected form fields on the page
 var _detectedFields = 0;
@@ -21,12 +23,16 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
                 if (cip.u) {
                     cip.setValueWithChange(cip.u, cip.credentials[req.id].login);
                     combination = cipFields.getCombination('username', cip.u);
-                    _loginId = req.id;
+                    browser.runtime.sendMessage({
+                        action: 'page_set_login_id', args: [req.id]
+                    });
                     cip.u.focus();
                 }
                 if (cip.p) {
                     cip.setValueWithChange(cip.p, cip.credentials[req.id].password);
-                    _loginId = req.id;
+                    browser.runtime.sendMessage({
+                        action: 'page_set_login_id', args: [req.id]
+                    });
                     combination = cipFields.getCombination('password', cip.p);
                 }
 
@@ -497,7 +503,7 @@ cipForm.init = function(form, credentialFields) {
     // TODO: could be called multiple times --> update credentialFields
 
     // not already initialized && password-field is not null
-    if (!form.data('cipForm-initialized') && (credentialFields.password || credentialFields.username)) {
+    if (!form.data('cipForm-initialized') && (credentialFields.password || (_singleInputEnabledForPage && credentialFields.username))) {
         form.data('cipForm-initialized', true);
         cipForm.setInputFields(form, credentialFields);
         form.submit(cipForm.onSubmit);
@@ -614,8 +620,8 @@ cipDefine.initDescription = function() {
         .addClass('btn').addClass('btn-primary')
         .css('margin-right', '15px')
         .click(function(e) {
-            if (!cip.settings['defined-credential-fields']) {
-                cip.settings['defined-credential-fields'] = {};
+            if (!cip.settings['defined-custom-fields']) {
+                cip.settings['defined-custom-fields'] = {};
             }
 
             if (cipDefine.selection.username) {
@@ -632,7 +638,8 @@ cipDefine.initDescription = function() {
                 fieldIds.push(cipFields.prepareId(i));
             }
 
-            cip.settings['defined-credential-fields'][document.location.href] = {
+            const location = cip.getDocumentLocation();
+            cip.settings['defined-custom-fields'][location] = {
                 username: cipDefine.selection.username,
                 password: cipDefine.selection.password,
                 fields: fieldIds
@@ -652,7 +659,8 @@ cipDefine.initDescription = function() {
     $description.append($btnAgain);
     $description.append($btnDismiss);
 
-    if (cip.settings['defined-credential-fields'] && cip.settings['defined-credential-fields'][document.location.href]) {
+    const location = cip.getDocumentLocation();
+    if (cip.settings['defined-custom-fields'] && cip.settings['defined-custom-fields'][location]) {
         const $p = jQuery('<p>').html('For this page credential fields are already selected and will be overwritten.<br />');
         const $btnDiscard = jQuery('<button>')
             .attr('id', 'btn-warning')
@@ -662,7 +670,7 @@ cipDefine.initDescription = function() {
             .addClass('btn-sm')
             .addClass('btn-danger')
             .click(function(e) {
-                delete cip.settings['defined-credential-fields'][document.location.href];
+                delete cip.settings['defined-custom-fields'][location];
 
                 browser.runtime.sendMessage({
                     action: 'save_settings',
@@ -734,7 +742,7 @@ cipDefine.markFields = function ($chooser, $pattern) {
             return true;
         }
 
-        if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed') {
+        if (cipFields.isVisible(this)) {
             const $field = jQuery('<div>').addClass('b2c-fixed-field')
                 .css('top', jQuery(this).offset().top)
                 .css('left', jQuery(this).offset().left)
@@ -812,61 +820,117 @@ cipFields.prepareId = function(id) {
     return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) { return '\\'+m; });
 };
 
-// Check aria-hidden attribute by looping the parent elements of input field
-cipFields.getAriaHidden = function(field) {
-    let $par = jQuery(field).parents();
-    for (const p of $par) {
-        const val = $(p).attr('aria-hidden');
-        if (val) {
-            return val;
+/**
+ * Returns the first parent element satifying the {@code predicate} mapped by {@code resultFn} or else {@code defaultVal}.
+ * @param {HTMLElement} element     The start element (excluded, starting with the parents)
+ * @param {function} predicate      Matcher for the element to find, type (HTMLElement) => boolean
+ * @param {function} resultFn       Callback function of type (HTMLElement) => {*} called for the first matching element
+ * @param {fun} defaultValFn        Fallback return value supplier, if no element matching the predicate can be found
+ */
+cipFields.traverseParents = function(element, predicate, resultFn = () => true, defaultValFn = () => false) {
+    for (let f = element.parentElement; f !== null; f = f.parentElement) {
+        if (predicate(f)) {
+            return resultFn(f);
         }
     }
-    return 'false';
+    return defaultValFn();
+};
+
+cipFields.getAriaHidden = function(field) {
+    // Check the main element
+    const val = field.getAttribute('aria-hidden');
+    if (val) {
+        return val;
+    }
+
+    const ariaFunc = f => f.getAttribute('aria-hidden');
+    return cipFields.traverseParents(field, ariaFunc, ariaFunc, () => 'false');
 };
 
 cipFields.getOverflowHidden = function(field) {
-    let $par = jQuery(field).parents();
-    for (const p of $par) {
-        const val = $(p).css('overflow');
-        if (val === 'hidden') {
+    return cipFields.traverseParents(field, f => f.style.overflow === 'hidden');
+};
+
+
+// Checks if input field is a search field. Attributes or form action containing 'search', or parent element holding
+// role="search" will be identified as a search field.
+cipFields.isSearchField = function(target) {
+    const attributes = target.attributes;
+
+    // Check element attributes
+    for (const attr of attributes) {
+        if ((attr.value && (attr.value.toLowerCase().includes('search')) || attr.value === 'q')) {
             return true;
         }
     }
+
+    // Check closest form
+    const closestForm = target.closest('form');
+    if (closestForm) {
+        // Check form action
+        const formAction = closestForm.getAttribute('action');
+        if (formAction && formAction.includes('search')) {
+            return true;
+        }
+
+        // Check form class and id
+        const closestFormId = closestForm.getAttribute('id');
+        const closestFormClass = closestForm.className;
+        if (closestFormClass && (closestForm.className.toLowerCase().includes('search') || 
+            (closestFormId && closestFormId.toLowerCase().includes('search')))) {
+            return true;
+        }
+    }
+
+    // Check parent elements for role="search"
+    const roleFunc = f => f.getAttribute('role');
+    const roleValue = cipFields.traverseParents(target, roleFunc, roleFunc, () => null);
+    if (roleValue && roleValue === 'search') {
+        return true;
+    }
+
     return false;
+};
+
+cipFields.isVisible = function(field) {
+    const rect = field.getBoundingClientRect();
+
+    // Check CSS visibility
+    const fieldStyle = getComputedStyle(field);
+    if (fieldStyle.visibility && (fieldStyle.visibility === 'hidden' || fieldStyle.visibility === 'collapse')) {
+        return false;
+    }
+
+    // Check element position and size
+    if (rect.x < 0 || rect.y < 0 || rect.width < 16 || rect.height < 16) {
+        return false;
+    }
+
+    // Check aria-hidden property
+    if (cipFields.getAriaHidden(field) !== 'false') {
+        return false;
+    }
+
+    return true;
 };
 
 cipFields.getAllFields = function() {
     let fields = [];
-
-    // get all input fields which are text, email or password and visible
-    jQuery(cipFields.inputQueryPattern).each(function() {
-        let ariaHidden = cipFields.getAriaHidden(this);
-        let overflowHidden = cipFields.getOverflowHidden(this);
-
-        if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed' && ariaHidden === 'false') {
-            cipFields.setUniqueId(jQuery(this));
-            fields.push(jQuery(this));
+    const inputs = cipObserverHelper.getInputs(document);
+    for (const i of inputs) {
+        if (cipFields.isVisible(i) && !cipFields.isSearchField(i)) {
+            cipFields.setUniqueId(jQuery(i));
+            fields.push(jQuery(i));
         }
-    });
+    };
 
     _detectedFields = fields.length;
     return fields;
 };
 
-cipFields.getHiddenFieldCount = function() {
-    let count = 0;
-    jQuery(cipFields.inputQueryPattern).each(function() {
-        if (jQuery(this).is(':hidden')) {
-            count++;
-        }
-    });
-
-    return count;
-};
-
 cipFields.prepareVisibleFieldsWithID = function($pattern) {
     jQuery($pattern).each(function() {
-        if (jQuery(this).is(':visible') && jQuery(this).css('visibility') !== 'hidden' && jQuery(this).css('visibility') !== 'collapsed') {
+        if (cipFields.isVisible(this) && !cipFields.isSearchField(this)) {
             cipFields.setUniqueId(jQuery(this));
         }
     });
@@ -897,6 +961,14 @@ cipFields.getAllCombinations = function(inputs) {
         }
     }
 
+    if (_singleInputEnabledForPage && fields.length === 0 && uField) {
+        const combination = {
+            username: uField[0].getAttribute('data-cip-id'),
+            password: null
+        };
+        fields.push(combination);
+    }
+
     return fields;
 };
 
@@ -907,7 +979,8 @@ cipFields.getCombination = function(givenType, fieldId) {
         }
     }
     // use defined credential fields (already loaded into combinations)
-    if (cip.settings['defined-credential-fields'] && cip.settings['defined-credential-fields'][document.location.href]) {
+    const location = cip.getDocumentLocation();
+    if (cip.settings['defined-custom-fields'] && cip.settings['defined-custom-fields'][location]) {
         return cipFields.combinations[0];
     }
 
@@ -1107,8 +1180,9 @@ cipFields.prepareCombinations = function(combinations) {
 };
 
 cipFields.useDefinedCredentialFields = function() {
-    if (cip.settings['defined-credential-fields'] && cip.settings['defined-credential-fields'][document.location.href]) {
-        const creds = cip.settings['defined-credential-fields'][document.location.href];
+    const location = cip.getDocumentLocation();
+    if (cip.settings['defined-custom-fields'] && cip.settings['defined-custom-fields'][location]) {
+        const creds = cip.settings['defined-custom-fields'][location];
 
         let $found = _f(creds.username) || _f(creds.password);
         for (const i of creds.fields) {
@@ -1134,6 +1208,116 @@ cipFields.useDefinedCredentialFields = function() {
     return false;
 };
 
+
+var cipObserverHelper = {};
+cipObserverHelper.inputTypes = [
+    'text',
+    'email',
+    'password',
+    'tel',
+    'number',
+    null    // Input field can be without any type. Include these to the list.
+];
+
+// Ignores all nodes that doesn't contain elements
+cipObserverHelper.ignoredNode = function(target) {
+    if (target.nodeType === Node.ATTRIBUTE_NODE ||
+        target.nodeType === Node.TEXT_NODE || 
+        target.nodeType === Node.CDATA_SECTION_NODE ||
+        target.nodeType === Node.PROCESSING_INSTRUCTION_NODE ||
+        target.nodeType === Node.COMMENT_NODE ||
+        target.nodeType === Node.DOCUMENT_TYPE_NODE ||
+        target.nodeType === Node.NOTATION_NODE) {
+        return true;
+    }
+    return false;
+};
+
+cipObserverHelper.getInputs = function(target) {
+    if (cipObserverHelper.ignoredNode(target)) {
+        return [];
+    }
+
+    const input = target.getElementsByTagName('input');
+    if (input.length === 0 || input.length > _maximumInputs) {
+        return [];
+    }
+
+    let inputs = [];
+    for (const i of input) {
+        if (cipObserverHelper.inputTypes.includes(i.getAttribute('type'))) {
+            inputs.push(i);
+        }
+    }
+    return inputs;
+};
+
+cipObserverHelper.getId = function(target) {
+    return target.classList.length === 0 ? target.id : target.classList;
+};
+
+cipObserverHelper.ignoredElement = function(target) {
+    // Ignore SVG elements
+    if (target.nodeName === 'svg' || 
+        target.nodeName === 'g' ||
+        (target.parentNode && 
+        (target.parentNode.nodeName === 'svg' || target.parentNode.nodeName === 'g'))) {
+        return true;
+    }
+
+    // Ignore KeePassXC-Browser classes
+    if (target.className && (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
+        return true;
+    }
+
+    return false;
+};
+
+cipObserverHelper.handleObserverAdd = function(target) {
+    if (cipObserverHelper.ignoredElement(target)) {
+        return;
+    }
+
+    const inputs = cipObserverHelper.getInputs(target);
+    if (inputs.length === 0) {
+        return;
+    }
+
+    const neededLength = _detectedFields === 1 ? 0 : 1;
+    const id = cipObserverHelper.getId(target);
+    if (inputs.length > neededLength && !_observerIds.includes(id)) {
+        // Save target element id for preventing multiple calls to initCredentialsFields()
+        _observerIds.push(id);
+        
+        // Sometimes the settings haven't been loaded before new input fields are detected
+        if (Object.keys(cip.settings).length === 0) {
+            cip.init();
+        } else {
+            cip.initCredentialFields(true);
+        }
+    }
+};
+
+cipObserverHelper.handleObserverRemove = function(target) {
+    if (cipObserverHelper.ignoredElement(target)) {
+        return;
+    }
+
+    const inputs = cipObserverHelper.getInputs(target);
+    if (inputs.length === 0) {
+        return;
+    }
+
+    // Remove target element id from the list
+    const id = cipObserverHelper.getId(target);
+    if (_observerIds.includes(id)) {
+        const index = _observerIds.indexOf(id);
+        if (index >= 0) {
+            _observerIds.splice(index, 1);
+        }
+    }
+};
+
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 // Detects DOM changes in the document
@@ -1143,15 +1327,24 @@ let observer = new MutationObserver(function(mutations, observer) {
     }
 
     for (const mut of mutations) {
-        // Check if the added element has any inputs
-        const inputs = mut.target.querySelectorAll(cipFields.inputQueryPattern);
+        // Skip text nodes
+        if (mut.target.nodeType === Node.TEXT_NODE) {
+            continue;
+        }
 
-        // If only password field is shown it's enough to have one field visible for initCredentialFields
-        const neededLength = _detectedFields === 1 ? 0 : 1;
-        if (inputs.length > neededLength && !_observerIds.includes(mut.target.id)) {
-            // Save target element id for preventing multiple calls to initCredentialsFields()
-            _observerIds.push(mut.target.id);
-            cip.initCredentialFields(true);
+        // Handle attributes only if CSS display is modified
+        if (mut.type === 'attributes') {
+            const newValue = mut.target.getAttribute(mut.attributeName);
+            if (newValue && (newValue.includes('display') || newValue.includes('z-index'))) {
+                if (mut.target.style.display !== 'none') {
+                    cipObserverHelper.handleObserverAdd(mut.target);
+                } else {
+                    cipObserverHelper.handleObserverRemove(mut.target);
+                }
+            }
+        } else if (mut.type === 'childList') {
+            cipObserverHelper.handleObserverAdd((mut.addedNodes.length > 0) ? mut.addedNodes[0] : mut.target);
+            cipObserverHelper.handleObserverRemove((mut.removedNodes.length > 0) ? mut.removedNodes[0] : mut.target);         
         }
     }
 });
@@ -1162,8 +1355,10 @@ observer.observe(document, {
     subtree: true,
     attributes: true,
     childList: true,
-    characterData: true
+    characterData: true,
+    attributeFilter: ['style']
 });
+
 
 var cip = {};
 cip.settings = {};
@@ -1202,6 +1397,7 @@ cip.detectDatabaseChange = function(response) {
                 args: [ true ]    // Set polling to true, this is an internal function call
             });
         } else if (response.new !== 'no-hash' && response.new !== response.old) {
+            _called.retrieveCredentials = false;
             browser.runtime.sendMessage({
                 action: 'load_settings',
             }).then((response) => {
@@ -1227,6 +1423,21 @@ cip.initCredentialFields = function(forceCall) {
 
     browser.runtime.sendMessage({ 'action': 'page_clear_logins', args: [_called.clearLogins] }).then(() => {
         _called.clearLogins = true;
+
+        // Check site preferences
+        cip.initializeSitePreferences();
+        if (cip.settings.sitePreferences) {
+            for (const site of cip.settings.sitePreferences) {
+                if (site.url === document.location.href || siteMatch(site.url, document.location.href)) {
+                    if (site.ignore === IGNORE_FULL) {
+                        return;
+                    }
+
+                    _singleInputEnabledForPage = site.usernameOnly;
+                }
+            }
+        }
+        
         const inputs = cipFields.getAllFields();
         if (inputs.length === 0) {
             return;
@@ -1252,18 +1463,19 @@ cip.initCredentialFields = function(forceCall) {
         cip.submitUrl = cip.getFormActionUrl(cipFields.combinations[0]);
 
         // Get submitUrl for a single input
-        if (!cip.submitUrl && cipFields.combinations.length === 1 && inputs.length === 1) {
+        if (_singleInputEnabledForPage && !cip.submitUrl && cipFields.combinations.length === 1 && inputs.length === 1) {
             cip.submitUrl = cip.getFormActionUrlFromSingleInput(inputs[0]);
-        } 
+        }
 
         if (cip.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (cip.url && cip.submitUrl)) {
-            _called.retrieveCredentials = true;
             browser.runtime.sendMessage({
                 action: 'retrieve_credentials',
                 args: [ cip.url, cip.submitUrl ]
             }).then(cip.retrieveCredentialsCallback).catch((e) => {
                 console.log(e);
             });
+        } else if (_singleInputEnabledForPage) {
+            cip.preparePageForMultipleCredentials(cip.credentials);
         }
     });
 };
@@ -1510,23 +1722,26 @@ cip.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
     const el = document.activeElement;
     cipFields.setUniqueId(jQuery(el));
     const fieldId = cipFields.prepareId(jQuery(el).attr('data-cip-id'));
-    const pos = _loginId;
 
-    if (pos >= 0 && cip.credentials[pos]) {
-        // Check the value from stringFields (to be removed)
-        const $sf = _fs(fieldId);
-        if (cip.credentials[pos].stringFields && cip.credentials[pos].stringFields.length > 0) {
-            const sFields = cip.credentials[pos].stringFields;
-            for (const s of sFields) {
-                const val = s["KPH: {TOTP}"];
-                if (val) {
-                    cip.setValue($sf, val);
+    browser.runtime.sendMessage({
+        action: 'page_get_login_id'
+    }).then((pos) => {
+        if (pos >= 0 && cip.credentials[pos]) {
+            // Check the value from stringFields (to be removed)
+            const currentField = _fs(fieldId);
+            if (cip.credentials[pos].stringFields && cip.credentials[pos].stringFields.length > 0) {
+                const stringFields = cip.credentials[pos].stringFields;
+                for (const s of stringFields) {
+                    const val = s["KPH: {TOTP}"];
+                    if (val) {
+                        cip.setValue(currentField, val);
+                    }
                 }
+            } else if (cip.credentials[pos].totp && cip.credentials[pos].totp.length > 0) {
+                cip.setValue(currentField, cip.credentials[pos].totp);
             }
-        } else if (cip.credentials[pos].totp && cip.credentials[pos].totp.length > 0) {
-            cip.setValue($sf, cip.credentials[pos].totp);
         }
-    }
+    });    
 };
 
 cip.setValue = function(field, value) {
@@ -1546,22 +1761,22 @@ cip.setValue = function(field, value) {
 };
 
 cip.fillInStringFields = function(fields, stringFields, filledInFields) {
-    let $filledIn = false;
+    let filledIn = false;
 
     filledInFields.list = [];
     if (fields && stringFields && fields.length > 0 && stringFields.length > 0) {
         for (let i = 0; i < fields.length; i++) {
-            const $sf = _fs(fields[i]);
+            const currentField = _fs(fields[i]);
             const stringFieldValue = Object.values(stringFields[i]);
-            if ($sf && stringFieldValue[0]) {
-                cip.setValue($sf, stringFieldValue[0]);
+            if (currentField && stringFieldValue[0]) {
+                cip.setValue(currentField, stringFieldValue[0]);
                 filledInFields.list.push(fields[i]);
-                $filledIn = true;
+                filledIn = true;
             }
         }
     }
 
-    return $filledIn;
+    return filledIn;
 };
 
 cip.setValueWithChange = function(field, value) {
@@ -1596,14 +1811,18 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
         let filledIn = false;
         if (uField && !onlyPassword) {
             cip.setValueWithChange(uField, cip.credentials[0].login);
-            _loginId = 0;
+            browser.runtime.sendMessage({
+                action: 'page_set_login_id', args: [0]
+            });
             filledIn = true;
         }
         if (pField) {
             pField.attr('type', 'password');
             cip.setValueWithChange(pField, cip.credentials[0].password);
             pField.data('unchanged', true);
-            _loginId = 0;
+            browser.runtime.sendMessage({
+                action: 'page_set_login_id', args: [0]
+            });
             filledIn = true;
         }
 
@@ -1628,14 +1847,18 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
         let filledIn = false;
         if (uField) {
             cip.setValueWithChange(uField, cip.credentials[combination.loginId].login);
-            _loginId = combination.loginId;
+            browser.runtime.sendMessage({
+                action: 'page_set_login_id', args: [combination.loginId]
+            });
             filledIn = true;
         }
 
         if (pField) {
             cip.setValueWithChange(pField, cip.credentials[combination.loginId].password);
             pField.data('unchanged', true);
-            _loginId = combination.loginId;
+            browser.runtime.sendMessage({
+                action: 'page_set_login_id', args: [combination.loginId]
+            });
             filledIn = true;
         }
 
@@ -1807,7 +2030,7 @@ cip.rememberCredentials = function(usernameValue, passwordValue) {
 
         let url = jQuery(this)[0].action;
         if (!url) {
-            url = cip.settings.saveDomainOnly ? document.location.origin : document.location.href;
+            url = cip.getDocumentLocation();
             if (url.indexOf('?') > 0) {
                 url = url.substring(0, url.indexOf('?'));
                 if (url.length < document.location.origin.length) {
@@ -1833,13 +2056,24 @@ cip.ignoreSite = function(sites) {
     }
 
     const site = sites[0];
-    if (!cip.settings['ignoredSites']) {
-        cip.settings['ignoredSites'] = {};
+    cip.initializeSitePreferences();
+
+    // Check if the site already exists
+    let siteExists = false;
+    for (const existingSite of cip.settings['sitePreferences']) {
+        if (existingSite.url === site) {
+            existingSite.ignore = IGNORE_NORMAL;
+            siteExists = true;
+        }
     }
 
-    cip.settings['ignoredSites'][site] = {
-        url: site
-    };
+    if (!siteExists) {
+        cip.settings['sitePreferences'].push({
+            url: site,
+            ignore: IGNORE_NORMAL,
+            usernameOnly: false
+        });
+    }
 
     browser.runtime.sendMessage({
         action: 'save_settings',
@@ -1847,6 +2081,20 @@ cip.ignoreSite = function(sites) {
     });
 };
 
+ // Delete previously created Object if it exists. It will be replaced by an Array
+cip.initializeSitePreferences = function() {
+    if (cip.settings['sitePreferences'] !== undefined && cip.settings['sitePreferences'].constructor === Object) {
+        delete cip.settings['sitePreferences'];
+    }
+
+    if (!cip.settings['sitePreferences']) {
+        cip.settings['sitePreferences'] = [];
+    }
+};
+
+cip.getDocumentLocation = function() {
+    return cip.settings.saveDomainOnly ? document.location.origin : document.location.href;
+};
 
 var cipEvents = {};
 

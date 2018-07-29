@@ -108,9 +108,10 @@ function _connected_database(db) {
 }
 
 function _verifyResult(code) {
-    if (code === 'success') {
-        _close();
+    if (code === 'error') {
+        showNotification('Error: Credentials cannot be saved or updated.');
     }
+    _close();
 }
 
 function _close() {

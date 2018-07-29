@@ -3,6 +3,10 @@ body {
     padding-bottom: 60px;
 }
 
+table td {
+    width: 100%;
+}
+
 /* Custom container */
 .container {
     margin: 0 auto;
@@ -109,6 +113,10 @@ h2+hr {
 
 #tab-connected-databases .color.dropdown a.dropdown-toggle img {
     margin-right: 5px;
+}
+
+#manualUrl {
+    width: 75%;
 }
 
 tr.clone {

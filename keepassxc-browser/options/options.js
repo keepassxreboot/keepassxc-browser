@@ -18,8 +18,8 @@ $(function() {
             options.initMenu();
             options.initGeneralSettings();
             options.initConnectedDatabases();
-            options.initSpecifiedCredentialFields();
-            options.initIgnoredSites();
+            options.initCustomCredentialFields();
+            options.initSitePreferences();
             options.initAbout();
         });
     });
@@ -52,9 +52,9 @@ options.saveSettingsPromise = function() {
 }
 
 options.saveSetting = function(name) {
-    const $id = '#' + name;
-    $($id).closest('.control-group').removeClass('error').addClass('success');
-    setTimeout(() => { $($id).closest('.control-group').removeClass('success'); }, 2500);
+    const id = '#' + name;
+    $(id).closest('.control-group').removeClass('error').addClass('success');
+    setTimeout(() => { $(id).closest('.control-group').removeClass('success'); }, 2500);
 
     browser.storage.local.set({'settings': options.settings});
     browser.runtime.sendMessage({
@@ -122,7 +122,7 @@ options.initGeneralSettings = function() {
         const blinkTimeout = $.trim($('#blinkTimeout').val());
         const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
 
-        options.settings['blinkTimeout'] = String(blinkTimeoutval);
+        options.settings['blinkTimeout'] = blinkTimeoutval;
         options.saveSetting('blinkTimeout');
     });
 
@@ -130,7 +130,7 @@ options.initGeneralSettings = function() {
         const blinkMinTimeout = $.trim($('#blinkMinTimeout').val());
         const blinkMinTimeoutval = blinkMinTimeout !== '' ? Number(blinkMinTimeout) : defaultSettings.redirectOffset;
 
-        options.settings['blinkMinTimeout'] = String(blinkMinTimeoutval);
+        options.settings['blinkMinTimeout'] = blinkMinTimeoutval;
         options.saveSetting('blinkMinTimeout');
     });
 
@@ -138,7 +138,7 @@ options.initGeneralSettings = function() {
         const allowedRedirect = $.trim($('#allowedRedirect').val());
         const allowedRedirectval = allowedRedirect !== '' ? Number(allowedRedirect) : defaultSettings.redirectAllowance;
 
-        options.settings['allowedRedirect'] = String(allowedRedirectval);
+        options.settings['allowedRedirect'] = allowedRedirectval;
         options.saveSetting('allowedRedirect');
     });
 };
@@ -168,10 +168,10 @@ options.initConnectedDatabases = function() {
     $('#dialogDeleteConnectedDatabase .modal-footer:first button.yes:first').click(function(e) {
         $('#dialogDeleteConnectedDatabase').modal('hide');
 
-        const $hash = $('#dialogDeleteConnectedDatabase').data('hash');
-        $('#tab-connected-databases #tr-cd-' + $hash).remove();
+        const hash = $('#dialogDeleteConnectedDatabase').data('hash');
+        $('#tab-connected-databases #tr-cd-' + hash).remove();
 
-        delete options.keyRing[$hash];
+        delete options.keyRing[hash];
         options.saveKeyRing();
 
         if ($('#tab-connected-databases table tbody:first tr').length > 2) {
@@ -183,22 +183,22 @@ options.initConnectedDatabases = function() {
 
     $('#tab-connected-databases tr.clone:first .dropdown-menu:first').width('230px');
 
-    const $trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
-    $trClone.removeClass('clone');
+    const trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
+    trClone.removeClass('clone');
     for (let hash in options.keyRing) {
-        const $tr = $trClone.clone(true);
-        $tr.data('hash', hash);
-        $tr.attr('id', 'tr-cd-' + hash);
+        const tr = trClone.clone(true);
+        tr.data('hash', hash);
+        tr.attr('id', 'tr-cd-' + hash);
 
-        $('a.dropdown-toggle:first img:first', $tr).attr('src', '/icons/19x19/icon_normal_19x19.png');
+        $('a.dropdown-toggle:first img:first', tr).attr('src', '/icons/19x19/icon_normal_19x19.png');
 
-        $tr.children('td:first').text(options.keyRing[hash].id);
-        $tr.children('td:eq(1)').text(options.keyRing[hash].key);
+        tr.children('td:first').text(options.keyRing[hash].id);
+        tr.children('td:eq(1)').text(options.keyRing[hash].key);
         const lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : 'unknown';
-        $tr.children('td:eq(2)').text(lastUsed);
+        tr.children('td:eq(2)').text(lastUsed);
         const date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : 'unknown';
-        $tr.children('td:eq(3)').text(date);
-        $('#tab-connected-databases table tbody:first').append($tr);
+        tr.children('td:eq(3)').text(date);
+        $('#tab-connected-databases table tbody:first').append(tr);
     }
 
     if ($('#tab-connected-databases table tbody:first tr').length > 2) {
@@ -214,97 +214,163 @@ options.initConnectedDatabases = function() {
     });
 };
 
-options.initSpecifiedCredentialFields = function() {
-    $('#dialogDeleteSpecifiedCredentialFields').modal({keyboard: true, show: false, backdrop: true});
-    $('#tab-specified-fields tr.clone:first button.delete:first').click(function(e) {
+options.initCustomCredentialFields = function() {
+    $('#dialogDeleteCustomCredentialFields').modal({keyboard: true, show: false, backdrop: true});
+    $('#tab-custom-fields tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
-        $('#dialogDeleteSpecifiedCredentialFields').data('url', $(this).closest('tr').data('url'));
-        $('#dialogDeleteSpecifiedCredentialFields').data('tr-id', $(this).closest('tr').attr('id'));
-        $('#dialogDeleteSpecifiedCredentialFields .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
-        $('#dialogDeleteSpecifiedCredentialFields').modal('show');
+        $('#dialogDeleteCustomCredentialFields').data('url', $(this).closest('tr').data('url'));
+        $('#dialogDeleteCustomCredentialFields').data('tr-id', $(this).closest('tr').attr('id'));
+        $('#dialogDeleteCustomCredentialFields .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
+        $('#dialogDeleteCustomCredentialFields').modal('show');
     });
 
-    $('#dialogDeleteSpecifiedCredentialFields .modal-footer:first button.yes:first').click(function(e) {
-        $('#dialogDeleteSpecifiedCredentialFields').modal('hide');
+    $('#dialogDeleteCustomCredentialFields .modal-footer:first button.yes:first').click(function(e) {
+        $('#dialogDeleteCustomCredentialFields').modal('hide');
 
-        const $url = $('#dialogDeleteSpecifiedCredentialFields').data('url');
-        const $trId = $('#dialogDeleteSpecifiedCredentialFields').data('tr-id');
-        $('#tab-specified-fields #' + $trId).remove();
+        const url = $('#dialogDeleteCustomCredentialFields').data('url');
+        const trId = $('#dialogDeleteCustomCredentialFields').data('tr-id');
+        $('#tab-custom-fields #' + trId).remove();
 
-        delete options.settings['defined-credential-fields'][$url];
+        delete options.settings['defined-custom-fields'][url];
         options.saveSettings();
 
-        if ($('#tab-specified-fields table tbody:first tr').length > 2) {
-            $('#tab-specified-fields table tbody:first tr.empty:first').hide();
+        if ($('#tab-custom-fields table tbody:first tr').length > 2) {
+            $('#tab-custom-fields table tbody:first tr.empty:first').hide();
         } else {
-            $('#tab-specified-fields table tbody:first tr.empty:first').show();
+            $('#tab-custom-fields table tbody:first tr.empty:first').show();
         }
     });
 
-    const $trClone = $('#tab-specified-fields table tr.clone:first').clone(true);
-    $trClone.removeClass('clone');
+    const trClone = $('#tab-custom-fields table tr.clone:first').clone(true);
+    trClone.removeClass('clone');
     let counter = 1;
-    for (let url in options.settings['defined-credential-fields']) {
-        const $tr = $trClone.clone(true);
-        $tr.data('url', url);
-        $tr.attr('id', 'tr-scf' + counter);
+    for (let url in options.settings['defined-custom-fields']) {
+        const tr = trClone.clone(true);
+        tr.data('url', url);
+        tr.attr('id', 'tr-scf' + counter);
         ++counter;
 
-        $tr.children('td:first').text(url);
-        $('#tab-specified-fields table tbody:first').append($tr);
+        tr.children('td:first').text(url);
+        $('#tab-custom-fields table tbody:first').append(tr);
     }
 
-    if ($('#tab-specified-fields table tbody:first tr').length > 2) {
-        $('#tab-specified-fields table tbody:first tr.empty:first').hide();
+    if ($('#tab-custom-fields table tbody:first tr').length > 2) {
+        $('#tab-custom-fields table tbody:first tr.empty:first').hide();
     } else {
-        $('#tab-specified-fields table tbody:first tr.empty:first').show();
+        $('#tab-custom-fields table tbody:first tr.empty:first').show();
     }
 };
 
-options.initIgnoredSites = function() {
-    $('#dialogDeleteIgnoredSite').modal({keyboard: true, show: false, backdrop: true});
-    $('#tab-ignored-sites tr.clone:first button.delete:first').click(function(e) {
+options.initSitePreferences = function() {
+    $('#dialogDeleteSite').modal({keyboard: true, show: false, backdrop: true});
+    $('#tab-site-preferences tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
-        $('#dialogDeleteIgnoredSite').data('url', $(this).closest('tr').data('url'));
-        $('#dialogDeleteIgnoredSite').data('tr-id', $(this).closest('tr').attr('id'));
-        $('#dialogDeleteIgnoredSite .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
-        $('#dialogDeleteIgnoredSite').modal('show');
+        $('#dialogDeleteSite').data('url', $(this).closest('tr').data('url'));
+        $('#dialogDeleteSite').data('tr-id', $(this).closest('tr').attr('id'));
+        $('#dialogDeleteSite .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
+        $('#dialogDeleteSite').modal('show');
     });
 
-    $('#dialogDeleteIgnoredSite .modal-footer:first button.yes:first').click(function(e) {
-        $('#dialogDeleteIgnoredSite').modal('hide');
-
-        const $url = $('#dialogDeleteIgnoredSite').data('url');
-        const $trId = $('#dialogDeleteIgnoredSite').data('tr-id');
-        $('#tab-ignored-sites #' + $trId).remove();
-
-        delete options.settings['ignoredSites'][$url];
+    $('#tab-site-preferences tr.clone:first input[type=checkbox]:first').change(function() {
+        const url = $(this).closest('tr').data('url');
+        for (let site of options.settings['sitePreferences']) {
+            if (site.url === url) {
+                site.usernameOnly = $(this).is(':checked');
+            }
+        }
         options.saveSettings();
+    });
 
-        if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
-            $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
-        } else {
-            $('#tab-ignored-sites table tbody:first tr.empty:first').show();
+    $('#tab-site-preferences tr.clone:first select:first').change(function() {
+        const url = $(this).closest('tr').data('url');
+        for (let site of options.settings['sitePreferences']) {
+            if (site.url === url) {
+                site.ignore = $(this).val();
+            }
+        }
+        options.saveSettings();
+    });
+
+    $("#manualUrl").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#sitePreferencesManualAdd").click();
         }
     });
 
-    const $trClone = $('#tab-ignored-sites table tr.clone:first').clone(true);
-    $trClone.removeClass('clone');
+    $('#sitePreferencesManualAdd').click(function(e) {
+        e.preventDefault();
+        let value = $('#manualUrl').val();
+        if (value.length > 10 && value.length <= 2000) {
+            if (options.settings['sitePreferences'] === undefined) {
+                options.settings['sitePreferences'] = [];
+            }
+
+            const newValue = options.settings['sitePreferences'].length + 1;
+            const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
+            trClone.removeClass('clone');
+
+            // Fills the last / char if needed. This ensures the compatibility with Match Patterns
+            if (options.slashNeededForUrl(value)) {
+                value += '/';
+            }
+
+            const tr = trClone.clone(true);
+            tr.data('url', value);
+            tr.attr('id', 'tr-scf' + newValue);
+            tr.children('td:first').text(value);
+            tr.children('td:nth-child(2)').children('select').val(IGNORE_NORMAL);
+            $('#tab-site-preferences table tbody:first').append(tr);
+            $('#tab-site-preferences table tbody:first tr.empty:first').hide();
+
+            options.settings['sitePreferences'].push({url: value, ignore: IGNORE_NORMAL, usernameOnly: false});
+            options.saveSettings();
+
+            $('#manualUrl').val('');
+        }
+    });
+
+    $('#dialogDeleteSite .modal-footer:first button.yes:first').click(function(e) {
+        $('#dialogDeleteSite').modal('hide');
+
+        const url = $('#dialogDeleteSite').data('url');
+        const trId = $('#dialogDeleteSite').data('tr-id');
+        $('#tab-site-preferences #' + trId).remove();
+
+        for (let i = 0; i < options.settings['sitePreferences'].length; ++i) {
+            if (options.settings['sitePreferences'][i].url === url) {
+                options.settings['sitePreferences'].splice(i, 1);
+            }
+        }
+        options.saveSettings();
+
+        if ($('#tab-site-preferences table tbody:first tr').length > 2) {
+            $('#tab-site-preferences table tbody:first tr.empty:first').hide();
+        } else {
+            $('#tab-site-preferences table tbody:first tr.empty:first').show();
+        }
+    });
+
+    const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
+    trClone.removeClass('clone');
     let counter = 1;
-    for (let url in options.settings['ignoredSites']) {
-        const $tr = $trClone.clone(true);
-        $tr.data('url', url);
-        $tr.attr('id', 'tr-scf' + counter);
-        ++counter;
+    if (options.settings['sitePreferences']){
+        for (let site of options.settings['sitePreferences']) {
+            const tr = trClone.clone(true);
+            tr.data('url', site.url);
+            tr.attr('id', 'tr-scf' + counter);
+            ++counter;
 
-        $tr.children('td:first').text(url);
-        $('#tab-ignored-sites table tbody:first').append($tr);
+            tr.children('td:first').text(site.url);
+            tr.children('td:nth-child(2)').children('select').val(site.ignore);
+            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', site.usernameOnly);
+            $('#tab-site-preferences table tbody:first').append(tr);
+        }
     }
-
-    if ($('#tab-ignored-sites table tbody:first tr').length > 2) {
-        $('#tab-ignored-sites table tbody:first tr.empty:first').hide();
+    
+    if ($('#tab-site-preferences table tbody:first tr').length > 2) {
+        $('#tab-site-preferences table tbody:first tr.empty:first').hide();
     } else {
-        $('#tab-ignored-sites table tbody:first tr.empty:first').show();
+        $('#tab-site-preferences table tbody:first tr.empty:first').show();
     }
 };
 
@@ -325,4 +391,10 @@ options.initAbout = function() {
         $('#default-user-shortcut').show();
         $('#default-pass-shortcut').show();
     }
+};
+
+// Checks if URL has only scheme and host without the last / char.
+options.slashNeededForUrl = function(pattern) {
+    const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
+    return matchPattern.exec(pattern);
 };
