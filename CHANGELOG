@@ -1,3 +1,13 @@
+1.2.0 (29-07-2018)
+=========================
+- Replace "Ignored Sites" with new "Site Preferences" settings page [#208]
+- Fix checks throwing errors [#207, #222]
+- Ignore more non-input elements [#212, 210]
+- Fix URL matching when there is a trailing slash [#231]
+- Allow infiting waiting on "Remember Credentials" popup [#232]
+- Minor user interface adjustments [#233, #230, #213]
+- Improve search field detection [#195]
+
 1.1.7 (13-06-2018)
 =========================
 - Fix credential field detection regression [#199]
