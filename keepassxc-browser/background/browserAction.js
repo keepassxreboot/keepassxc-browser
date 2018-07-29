@@ -36,7 +36,7 @@ browserAction.update = function(interval) {
 
     let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
 
-    if (data.visibleForMilliSeconds !== undefined) {
+    if (data.visibleForMilliSeconds !== undefined && data.visibleForMilliSeconds !== -1) {
         if (data.visibleForMilliSeconds <= 0) {
             browserAction.stackPop(page.currentTabId);
             browserAction.show(null, {'id': page.currentTabId});
@@ -215,13 +215,13 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
         }
 
         const id = tabId || page.currentTabId;
-        let timeoutMinMillis = Number(getValueOrDefault(settings, 'blinkMinTimeout', BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT, 0));
+        let timeoutMinMillis = Number(getValueOrDefault(settings, 'blinkMinTimeout', BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT, -1));
 
         if (timeoutMinMillis > 0) {
             timeoutMinMillis += Date.now();
         }
 
-        const blinkTimeout = getValueOrDefault(settings, 'blinkTimeout', BLINK_TIMEOUT_DEFAULT, 0);
+        const blinkTimeout = getValueOrDefault(settings, 'blinkTimeout', BLINK_TIMEOUT_DEFAULT, -1);
         const pageUpdateAllowance = getValueOrDefault(settings, 'allowedRedirect', BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT, 0);
 
         const stackData = {

@@ -40,14 +40,14 @@
             <label for="blinkTimeout">Blink Time:</label>
             <div class="control-group">
               <div class="input-append">
-                <input type="number" id="blinkTimeout" placeholder="7500" value="7500" min="0"/>
+                <input type="number" id="blinkTimeout" placeholder="7500" value="7500" min="-1"/>
                 <button class="btn btn-sm btn-primary" id="blinkTimeoutButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
               </div>
             </div>
             <span class="help-inline">
               What is the maximum time (ms) the icon should blink after detecting new credentials
               <br />
-              Default: 7500
+              Default: 7500, Infinite: -1
             </span>
           </div>
         </p>
