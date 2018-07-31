@@ -1257,16 +1257,14 @@ cipObserverHelper.getId = function(target) {
 };
 
 cipObserverHelper.ignoredElement = function(target) {
-    // Ignore SVG elements
-    if (target.nodeName === 'svg' || 
-        target.nodeName === 'g' ||
-        (target.parentNode && 
-        (target.parentNode.nodeName === 'svg' || target.parentNode.nodeName === 'g'))) {
+    // Ignore elements that do not have a className (including SVG)
+    if (typeof target.className !== 'string') {
         return true;
     }
 
     // Ignore KeePassXC-Browser classes
-    if (target.className && (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
+    if (target.className && target.className !== undefined && 
+        (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
         return true;
     }
 
