@@ -91,3 +91,9 @@ var siteMatch = function(site, url) {
     const rx = matchPatternToRegExp(site);
     return url.match(rx);
 };
+
+// Checks if URL has only scheme and host without the last / char.
+var slashNeededForUrl = function(pattern) {
+    const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
+    return matchPattern.exec(pattern);
+};

@@ -4,6 +4,9 @@ body {
     background-color: #eee;
     font-size: 15px;
     padding: 8px;
+    min-width: 440px;
+    max-width: 460px;
+    width: auto;
 }
 .container {
     min-width: 440px;
