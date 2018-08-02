@@ -2053,8 +2053,12 @@ cip.ignoreSite = function(sites) {
         return;
     }
 
-    const site = sites[0];
+    let site = sites[0];
     cip.initializeSitePreferences();
+
+    if (slashNeededForUrl(site)) {
+        site += '/';
+    }
 
     // Check if the site already exists
     let siteExists = false;

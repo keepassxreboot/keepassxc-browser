@@ -314,7 +314,7 @@ options.initSitePreferences = function() {
             trClone.removeClass('clone');
 
             // Fills the last / char if needed. This ensures the compatibility with Match Patterns
-            if (options.slashNeededForUrl(value)) {
+            if (slashNeededForUrl(value)) {
                 value += '/';
             }
 
@@ -395,10 +395,4 @@ options.initAbout = function() {
         $('#default-user-shortcut').show();
         $('#default-pass-shortcut').show();
     }
-};
-
-// Checks if URL has only scheme and host without the last / char.
-options.slashNeededForUrl = function(pattern) {
-    const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
-    return matchPattern.exec(pattern);
 };
