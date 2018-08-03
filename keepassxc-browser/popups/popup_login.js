@@ -25,6 +25,23 @@ $(function() {
                 });
                 ll.appendChild(a);
             }
+			
+            if (logins.length > 1) {
+                document.getElementById('filter-block').style = '';
+                let filter = document.getElementById('login-filter');
+                filter.addEventListener('keyup', (e) => {
+                    let val = filter.value;
+                    let re = new RegExp(val, 'i');
+                    let links = ll.getElementsByTagName('a');
+                    for (let i in links) {
+                        if (links.hasOwnProperty(i)) {
+                            let found = String(links[i].textContent).match(re) !== null;
+                            links[i].style = found ? '' : 'display: none;';
+                        }
+                    }
+                });
+                filter.focus();
+            }
         });
     });
 
