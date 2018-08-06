@@ -25,7 +25,6 @@
 ## Debug info
 <!--- Please copy/paste the browser's JavaScript console messages and errors here -->
 KeePassXC - {VERSION}
-keepassxc-browser - {VERSION}
+KeePassXC-Browser - {VERSION}
 Operating system: Mac/Win/Linux
 Browser: Chrome/Firefox/Vivaldi/Chromium
-Proxy used: YES/NO
