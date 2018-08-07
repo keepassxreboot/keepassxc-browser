@@ -371,10 +371,13 @@ keepass.associate = function(callback, tab) {
         const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
         const nonce = keepass.getNonce();
         const incrementedNonce = keepass.incrementedNonce(nonce);
+        const idKeyPair = nacl.box.keyPair();
+        const idKey = nacl.util.encodeBase64(idKeyPair.publicKey);
 
         const messageData = {
             action: kpAction,
-            key: key
+            key: key,
+            idKey: idKey
         };
 
         const request = {
@@ -402,7 +405,7 @@ keepass.associate = function(callback, tab) {
                     keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
                 }
                 else {
-                    keepass.setCryptoKey(id, key);    // Save the current public key as id key for the database
+                    keepass.setCryptoKey(id, idKey);    // Save the new identification public key as id key for the database
                     keepass.associated.value = true;
                     keepass.associated.hash = parsed.hash || 0;
                 }
