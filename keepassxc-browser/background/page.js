@@ -3,7 +3,7 @@
 const defaultSettings = {
     checkUpdateKeePassXC: 3,
     autoCompleteUsernames: true,
-    autoFillAndSend: true,
+    autoFillAndSend: false,
     usePasswordGenerator: true,
     autoFillSingleEntry: false,
     autoRetrieveCredentials: true,
