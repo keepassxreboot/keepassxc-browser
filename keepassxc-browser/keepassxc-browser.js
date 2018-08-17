@@ -902,7 +902,7 @@ cipFields.isVisible = function(field) {
     }
 
     // Check element position and size
-    if (rect.x < 0 || rect.y < 0 || rect.width < 16 || rect.height < 16) {
+    if (rect.x < 0 || rect.y < 0 || rect.width < 8 || rect.height < 8) {
         return false;
     }
 
