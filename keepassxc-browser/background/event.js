@@ -206,7 +206,7 @@ kpxcEvent.onCheckUpdateKeePassXC = function(callback, tab) {
 };
 
 kpxcEvent.onUpdateAvailableKeePassXC = function(callback, tab) {
-    callback(keepass.keePassXCUpdateAvailable());
+    callback(page.settings.checkUpdateKeePassXC > 0 ? keepass.keePassXCUpdateAvailable() : false);
 };
 
 kpxcEvent.onRemoveCredentialsFromTabInformation = function(callback, tab) {
