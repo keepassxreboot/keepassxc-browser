@@ -158,7 +158,12 @@ cipAutocomplete.onBlur = function() {
     else {
         const fieldId = cipFields.prepareId(jQuery(this).attr('data-cip-id'));
         const fields = cipFields.getCombination('username', fieldId);
-        if (_f(fields.password) && _f(fields.password).data('unchanged') !== true && jQuery(this).val() !== '' && _detectedFields > 1) {
+        const fieldValue = jQuery(this).val();
+
+        // Check if the manually inserted value is one of the retrieved credentials
+        let fieldFound = cipAutocomplete.elements.some(e => e.value === fieldValue);
+
+        if (_f(fields.password) && _f(fields.password).data('unchanged') !== true && fieldFound && _detectedFields > 1) {
             cip.fillInCredentials(fields, true, true);
         }
     }
