@@ -1812,7 +1812,7 @@ cip.fillIn = function(combination, onlyPassword, suppressWarnings) {
     // exactly one pair of credentials available
     if (cip.credentials.length === 1) {
         let filledIn = false;
-        if (uField && !onlyPassword) {
+        if (uField && (!onlyPassword || _singleInputEnabledForPage)) {
             cip.setValueWithChange(uField, cip.credentials[0].login);
             browser.runtime.sendMessage({
                 action: 'page_set_login_id', args: [0]
