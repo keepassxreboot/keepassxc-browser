@@ -1239,17 +1239,27 @@ cipObserverHelper.ignoredNode = function(target) {
 };
 
 cipObserverHelper.getInputs = function(target) {
+    // Ignores target element if it's not an element node
     if (cipObserverHelper.ignoredNode(target)) {
         return [];
     }
 
-    const input = target.getElementsByTagName('input');
-    if (input.length === 0 || input.length > _maximumInputs) {
+    // Filter out any input fields with type 'hidden' right away
+    let inputFields = [];
+    Array.from(target.getElementsByTagName('input')).forEach(e => { 
+        if (e.type !== 'hidden') {
+            inputFields.push(e);
+        }
+    });
+
+    // Do not allow more visible inputs than _maximumInputs (default value: 100)
+    if (inputFields.length === 0 || inputFields.length > _maximumInputs) {
         return [];
     }
 
+    // Only include input fields that match with cipObserverHelper.inputTypes
     let inputs = [];
-    for (const i of input) {
+    for (const i of inputFields) {
         if (cipObserverHelper.inputTypes.includes(i.getAttribute('type'))) {
             inputs.push(i);
         }
