@@ -97,3 +97,7 @@ var slashNeededForUrl = function(pattern) {
     const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
     return matchPattern.exec(pattern);
 };
+
+function tr(key, params) {
+    return browser.i18n.getMessage(key, params);
+};

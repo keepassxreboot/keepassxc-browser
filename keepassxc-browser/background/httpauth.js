@@ -85,7 +85,7 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
             });
         } else {
             if (page.settings.showNotifications) {
-                showNotification('HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.');
+                showNotification(tr('multipleCredentialsDetected'));
             }
             kpxcEvent.onHTTPAuthPopup(null, { 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
         }

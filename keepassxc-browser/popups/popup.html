@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>KeePassXC - Popup</title>
+    <title data-i18n="popupTitle"></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css" />
     <link rel="stylesheet" href="../options/bootstrap.min.css" />
@@ -14,86 +14,70 @@
   <body>
     <div class="container">
       <div id="settings" class="settings">
-        <button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span> Settings</button>
-        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> Choose custom credential fields for this page</button>
+        <button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span><span data-i18n="popupSettingsText"/></button>
+        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span><span data-i18n="popupChooseCredentialsText"/></button>
         <button id="lock-database-button" class="btn btn-danger" title="Lock database"><span class="glyphicon glyphicon-lock"></span></button>
 
         <div id="update-available" class="alert alert-danger">
-          You use an old version of KeePassXC.
+          <span data-i18n="popupUpdateAvailable"></span>
           <br />
-          <a target="_blank" class="alert-link" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
+          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"/></a>.
         </div>
       </div>
 
       <div id="initial-state">
-        <p><img style="margin-right: 1em" src="throbber.gif"/> Checking status...</p>
+        <p><img style="margin-right: 1em" src="throbber.gif"/><span data-i18n="popupCheckingStatus"/></p>
       </div>
 
       <div id="not-configured" style="display: none">
-        <p>
-          KeePassXC-Browser has not been configured.
-          Press the connect button to register and pair with KeePassXC.
-        </p>
+        <p data-i18n="popupNotConfigured"/>
         <div style="text-align: right">
-          <button id="connect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-link"></span> Connect</button>
+          <button id="connect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-link"></span><span data-i18n="popupConnectButton"/></button>
         </div>
       </div>
 
       <div id="need-reconfigure" style="display: none">
-        <p>
-          KeePassXC-Browser has been disconnected from KeePassXC.
+        <p data-i18n="popupNeedReconfigure"/>
+        <p style="margin-left: 1em">
+          <code id="need-reconfigure-message"></code>
         </p>
-        <code id="need-reconfigure-message"></code>
-        <p>
-          Press the reconnect button to establish a new connection.
-        </p>
+        <p data-i18n="popupNeedReconfigureMessage"/>
         <div style="text-align: right">
-          <button id="reconnect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span> Reconnect</button>
+          <button id="reconnect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span><span data-i18n="popupReconnectButton"/></button>
         </div>
       </div>
 
       <div id="configured-not-associated" style="display: none">
-        <p>
-          KeePassXC-Browser has been configured using the identifier
-          <em id="unassociated-identifier"></em> and has not yet
-          connected to KeePassXC.
-        </p>
+        <span data-i18n="popupConfiguredNotAssociated" i18n-placeholder="<span class='bg-warning' id='unassociated-identifier'></span>"></span>
       </div>
 
       <div id="configured-and-associated" style="display: none">
-        <p>
-          KeePassXC-Browser has been configured using the identifier
-          "<em id="associated-identifier"></em>" and is successfully
-          connected to KeePassXC.
-        </p>
+        <span data-i18n="popupConfiguredAndAssociated" i18n-placeholder="<span class='bg-success' id='associated-identifier'></span>"></span>
         <div style="text-align: right">
-            <button id="redetect-fields-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-list-alt"></span> Redetect credential fields</button>
+          <button id="redetect-fields-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-list-alt"></span><span data-i18n="popupRedetectButton"/></button>
         </div>
       </div>
 
       <div id="error-encountered" style="display: none">
-        <p>
-          KeePassXC-Browser has encountered an error:
-        </p>
+        <p data-i18n="popupErrorEncountered"/>
         <p style="margin-left: 1em">
           <code id="error-message"></code>
         </p>
         <div style="text-align: right">
-          <button id="reload-status-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span> Reload</button>
+          <button id="reload-status-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span><span data-i18n="popupReloadButton"/></button>
         </div>
       </div>
 
       <div id="database-not-opened" style="display: none">
-        <p>
-          KeePassXC-Browser has encountered an error:
-        </p>
+        <p data-i18n="popupErrorEncountered"/>
         <p style="margin-left: 1em">
           <code id="database-error-message"></code>
         </p>
         <div style="text-align: right">
-          <button id="reopen-database-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-lock"></span> Reopen database</button>
+          <button id="reopen-database-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-lock"></span><span data-i18n="popupReopenButton"/></button>
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="../translate.js"></script>
   </body>
 </html>

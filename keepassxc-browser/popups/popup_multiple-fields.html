@@ -1,36 +1,36 @@
 <html>
   <head>
-	<title>KeePassXC-Browser - Popup</title>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="popup.css" />
-	<link rel="stylesheet" href="../options/bootstrap.min.css" />
-	<script type="text/javascript" src="../browser-polyfill.min.js"></script>
-	<script type="text/javascript" src="../global.js"></script>
-	<script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="../options/bootstrap.min.js" /></script>
-	<script type="text/javascript" src="popup_functions.js"></script>
+    <title>KeePassXC-Browser - Popup</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="../options/bootstrap.min.css" />
+    <script type="text/javascript" src="../browser-polyfill.min.js"></script>
+    <script type="text/javascript" src="../global.js"></script>
+    <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../options/bootstrap.min.js" /></script>
+    <script type="text/javascript" src="popup_functions.js"></script>
   </head>
   <body>
-	<div class="container">
-	  <div id="settings" class="settings">
-		<button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span> Settings</button>
-		<button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> Choose custom credential fields for this page</button>
-		<button id="lock-database-button" class="btn btn-danger" title="Lock database"><span class="glyphicon glyphicon-lock"></span></button>
+    <div class="container">
+      <div id="settings" class="settings">
+        <button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span><span data-i18n="popupSettingsText"/></button>
+        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span><span data-i18n="popupChooseCredentialsText"/></button>
+        <button id="lock-database-button" class="btn btn-danger" title="Lock database"><span class="glyphicon glyphicon-lock"></span></button>
 
-		<div id="update-available" class="alert alert-danger">
-		  You use an old version of KeePassXC.
-		  <br />
-		  <a target="_blank" class="alert-link" href="https://keepassxc.org/download">Please download the latest version from keepassxc.org</a>.
-		</div>
-	  </div>
+        <div id="update-available" class="alert alert-danger">
+          <span data-i18n="popupUpdateAvailable"></span>
+          <br />
+          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"/></a>.
+        </div>
+      </div>
 
-	  <div>
-		<p>
-		  KeePassXC-Browser found more than one password field on this page. To enter your
-		  logins, right-click on one of the password fields, and choose either the
-		  "<code>Fill User + Pass</code>" or "<code>Fill Pass Only</code>" command.
-		</p>
-	  </div>
-	</div>
+      <div>
+        <p>
+          <span data-i18n="popupMultiplePasswordFields"></span>
+          "<code><span data-i18n="contextMenuFillUsernameAndPassword"></span></code>", "<code><span data-i18n="contextMenuFillPassword"></span></code>"
+        </p>
+      </div>
+    </div>
+    <script type="text/javascript" src="../translate.js"></script>
   </body>
 </html>
