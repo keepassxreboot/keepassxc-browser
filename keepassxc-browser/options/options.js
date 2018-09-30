@@ -118,6 +118,18 @@ options.initGeneralSettings = function() {
     $('#blinkMinTimeout').val(options.settings['blinkMinTimeout']);
     $('#allowedRedirect').val(options.settings['allowedRedirect']);
 
+    browser.commands.getAll().then(function(commands) {
+        commands.forEach(function(command) {
+            var shortcut = document.getElementById(`${command.name}-shortcut`);
+            if (!shortcut) return;
+            shortcut.textContent = command.shortcut || 'not configured';
+        });
+    });
+
+    $('#configureCommands').click(function(){
+        browser.tabs.create({ url: 'chrome://extensions/configureCommands' });
+    });
+
     $('#blinkTimeoutButton').click(function(){
         const blinkTimeout = $.trim($('#blinkTimeout').val());
         const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
@@ -370,7 +382,7 @@ options.initSitePreferences = function() {
             $('#tab-site-preferences table tbody:first').append(tr);
         }
     }
-    
+
     if ($('#tab-site-preferences table tbody:first tr').length > 2) {
         $('#tab-site-preferences table tbody:first tr.empty:first').hide();
     } else {
@@ -382,17 +394,5 @@ options.initAbout = function() {
     $('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
     if (isFirefox()) {
         $('#chrome-only').remove();
-    }
-
-    if (navigator.platform === 'MacIntel') {
-        $('#default-user-shortcut').hide();
-        $('#default-pass-shortcut').hide();
-        $('#mac-user-shortcut').show();
-        $('#mac-pass-shortcut').show();
-    } else {
-        $('#mac-user-shortcut').hide();
-        $('#mac-pass-shortcut').hide();
-        $('#default-user-shortcut').show();
-        $('#default-pass-shortcut').show();
     }
 };

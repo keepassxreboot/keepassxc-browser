@@ -29,13 +29,13 @@
       <div class="tab" id="tab-general-settings">
         <h2 data-i18n="optionsGeneralSettingsTab"></h2>
         <hr />
+        <h3 data-i18n="optionsKeyboardShortcutsHeader"></h3>
         <p>
-          <span data-i18n="optionsGeneralHelpText" i18n-placeholder="<code><span id='mac-user-shortcut'>Ctrl + Shift + U</span><span id='default-user-shortcut'>Alt + Shift + U</span></code>"></span>.
-          <br />
-          <span data-i18n="optionsGeneralHelpTextSecond" i18n-placeholder="<code><span id='mac-pass-shortcut'>Ctrl + Shift + I</span><span id='default-pass-shortcut'>Alt + Shift + I</span></code>"></span>.
-          <br />
-          <span id="chrome-only"><span data-i18n="optionsCustomizeCommandsHelpText" i18n-placeholder="<code>chrome://extensions/configureCommands</code>"></span></span>
+          <span data-i18n="contextMenuFillUsernameAndPassword"></span>: <span id="fill-username-password-shortcut">error</span><br />
+          <span data-i18n="contextMenuFillPassword"></span>: <span id="fill-password-shortcut">error</span><br />
+          <span data-i18n="contextMenuFillTOTP"></span>: <span id="fill-totp-shortcut">error</span>
         </p>
+        <p id="chrome-only"><button class="btn btn-sm btn-primary" id="configureCommands" type="button"><span class="glyphicon glyphicon-cog"></span><span data-i18n="optionsButtonConfigureShortcuts"/></button></p>
         <p>
           <div class="form-group">
             <label for="blinkTimeout" data-i18n="optionsLabelBlinkTime"></label>

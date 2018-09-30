@@ -12,7 +12,7 @@
         "description": "Context menu item for filling password."
     },
     "contextMenuFillTOTP": {
-        "message": "Insert TOTP",
+        "message": "Fill TOTP",
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
@@ -395,6 +395,10 @@
         "message": "About",
         "description": "About page header."
     },
+    "optionsButtonConfigureShortcuts": {
+        "message": " Configure shortcuts",
+        "description": "Keyboard shortcut button text."
+    },
     "optionsButtonSave": {
         "message": " Save",
         "description": "Save button text."
@@ -487,17 +491,9 @@
         "message": " never",
         "description": "Radio button text."
     },
-    "optionsGeneralHelpText": {
-        "message": "If you just want to insert username and password into the fields where your focus is, press $1",
-        "description": "Context menu help text."
-    },
-    "optionsGeneralHelpTextSecond": {
-        "message": "If you only want to insert the password, just press $1",
-        "description": "Context menu help text."
-    },
-    "optionsCustomizeCommandsHelpText": {
-        "message": "You can customize these shortcuts on page $1",
-        "descriptions": "Shortcut customize help text."
+    "optionsKeyboardShortcutsHeader": {
+        "message": "Keyboard shortcuts",
+        "description": "Keyboard shortcut header text."
     },
     "optionsBlinkTimeHelpText": {
         "message": "Maximum time (ms) the icon should blink after detecting new credentials",
