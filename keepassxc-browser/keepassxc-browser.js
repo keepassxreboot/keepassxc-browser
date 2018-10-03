@@ -665,7 +665,7 @@ cipDefine.initDescription = function() {
     $description.append($btnDismiss);
 
     const location = cip.getDocumentLocation();
-    if (cip.settings['defined-credential-fields'] && cip.settings['defined-custom-fields'][location]) {
+    if (cip.settings['defined-custom-fields'] && cip.settings['defined-custom-fields'][location]) {
         const $p = jQuery('<p>').html(tr('defineAlreadySelected') + '<br />');
         const $btnDiscard = jQuery('<button>')
             .attr('id', 'btn-warning')
