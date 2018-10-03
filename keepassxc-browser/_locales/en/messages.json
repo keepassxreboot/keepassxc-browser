@@ -152,7 +152,7 @@
         "description": "Confirm button text when choosing custom login fields."
     },
     "defineAlreadySelected": {
-        "message": "login fields for this page are already selected and will be overwritten.",
+        "message": "Login fields for this page are already selected and will be overwritten.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
     "defineDiscard": {
