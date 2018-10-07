@@ -17,36 +17,36 @@
       .credentials .username-exists {display: none;}
       .small { font-weight: bold; }
       .small .normal { font-weight: normal; }
+      .info { font-weight: normal; }
     </style>
   </head>
   <body>
     <div class="buttons">
       <p>
-        Username or password changed! Save it?
+        <span data-i18n="popupRememberInfoText"></span>
         <br />
-        <span class="small information-url">Url: <span class="normal"></span></span>
+        <span class="small" data-i18n="popupURL"></span><span class="small info information-url"></span>
         <br />
-        <span class="small information-username">Username: <span class="normal"></span></span>
+        <span class="small" data-i18n="popupUsername"></span><span class="small info information-username"></span>
       </p>
       <p>
-        <button id="btn-new" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-pencil"></span> New</button>
-        <button id="btn-update" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Update</button>
-        <button id="btn-dismiss" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span> Dismiss</button>
-        <button id="btn-ignore" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-remove"></span> Never ask for this page</button>
+        <button id="btn-new" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-pencil"></span><span data-i18n="popupButtonNew"></span></button>
+        <button id="btn-update" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span><span data-i18n="popupButtonUpdate"></span></button>
+        <button id="btn-dismiss" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span><span data-i18n="popupButtonDismiss"></span></button>
+        <button id="btn-ignore" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-remove"></span><span data-i18n="popupButtonIgnore"></span></button> <!--missing-->
       </p>
     </div>
 
     <div class="connected-database">
-      <p>Credentials will be saved in connected database with identifier <em></em>.</p>
+      <p data-i18n="popupRememberSaving" i18n-placeholder="<span></span><em></em>"></p>
     </div>
 
     <div class="credentials">
-      <p class="username-new">The used username <strong></strong> is currently not saved!</p>
-      <p class="username-exists">The credentials with the used username <strong></strong> are marked bold.</p>
-      <p>
-        Please choose the credentials you want to update:
-      </p>
+      <p class="username-new"><span data-i18n="popupRememberNewUsername" i18n-placeholder="<strong></strong>"></span></p>
+      <p class="username-exists"><span data-i18n="popupRememberUsernameExists" i18n-placeholder="<strong></strong>"></span></p>
+      <p data-i18n="popupRememberChooseCredentials"></p>
       <ul id="list"></ul>
     </div>
+    <script type="text/javascript" src="../translate.js"></script>
   </body>
 </html>

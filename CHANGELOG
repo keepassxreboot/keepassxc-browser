@@ -1,3 +1,21 @@
+1.3.0 (07-10-2018)
+=========================
+ - Add support for translations [#37]
+ - Add quick-filter bar to credentials selection popup [#252]
+ - Disable automatic filling and submission of HTTP basic-auth fields by default [#260]
+ - Do not fill password fields if a manually entered username does not match retrieved credentials [#289]
+ - Fix handling of websites with separate pages for username and password [#291]
+ - Improve detection and handling of hidden input fields [#263, #293]
+ - Fix updating credentials from the context menu [#256]
+ - Improve shortcuts and add button to open shortcut settings [#304]
+ - Do not mix pairing IDs across multiple databases within a session [#258]
+ - Ignore certain elements on a page, such as SVGs [#246]
+ - Do not show the full pairing key on the settings page [#242]
+ - Default to checking for updates every 3 days [#239]
+ - Hide update message when updates are turned off [#285]
+ - Fix discard button not being shown when selection custom login fields [#307]
+ - Update webextension polyfill to a newer version, which fixes various errors [#296]
+
 1.2.0 (29-07-2018)
 =========================
 - Replace "Ignored Sites" with new "Site Preferences" settings page [#208]

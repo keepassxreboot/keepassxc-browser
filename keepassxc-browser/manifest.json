@@ -1,109 +1,110 @@
 {
-	"manifest_version": 2,
-	"name": "KeePassXC-Browser",
-	"version": "1.2.0",
-	"description": "KeePassXC integration for modern web browsers",
-	"author": "KeePassXC Team",
-	"icons": {
-		"16": "icons/keepassxc_16x16.png",
-		"48": "icons/keepassxc_48x48.png",
-		"128": "icons/keepassxc_128x128.png"
-	},
+    "manifest_version": 2,
+    "name": "KeePassXC-Browser",
+    "version": "1.3.0",
+    "description": "__MSG_extensionDescription__",
+    "author": "KeePassXC Team",
+    "icons": {
+        "16": "icons/keepassxc_16x16.png",
+        "48": "icons/keepassxc_48x48.png",
+        "128": "icons/keepassxc_128x128.png"
+    },
 
-	"browser_action": {
-		"default_icon": {
-		  "19": "icons/keepassxc_19x19.png",
-		  "38": "icons/keepassxc_38x38.png"
-		},
-		"default_title": "KeePassXC-Browser",
-		"default_popup": "popups/popup.html"
-	},
-	"options_ui": {
-		"page": "options/options.html",
-		"open_in_tab": true
-	},
-	"background": {
-		"scripts": [
-			"browser-polyfill.min.js",
-			"global.js",
-			"background/nacl.min.js",
-			"background/nacl-util.min.js",
-			"background/keepass.js",
-			"background/httpauth.js",
-			"background/browserAction.js",
-			"background/page.js",
-			"background/event.js",
-			"background/init.js"
-			]
-		},
-	"content_scripts": [
-		{
-			"matches": [
-				"<all_urls>"
-			],
-			"exclude_matches": [
-				"*://*/*.xml",
-				"*://*/*.xsd"
-			],
-			"js": [
-				"browser-polyfill.min.js",
-				"global.js",
-				"jquery-3.3.1.min.js",
-				"jquery-ui.min.js",
-				"keepassxc-browser.js"
-			],
-			"css": [
-				"jquery-ui.min.css",
-				"keepassxc-browser.css"
-			],
-			"run_at": "document_idle",
-			"all_frames": true
-		}
-	],
-	"commands": {
-		"fill-username-password": {
-			"description": "Insert username + password",
-			"suggested_key": {
-				"default": "Alt+Shift+U",
-				"mac": "MacCtrl+Shift+U"
-			}
-		},
-		"fill-password": {
-			"description": "Insert a password",
-			"suggested_key": {
-				"default": "Alt+Shift+I",
-				"mac": "MacCtrl+Shift+I"
-			}
-		},
+    "browser_action": {
+        "default_icon": {
+          "19": "icons/keepassxc_19x19.png",
+          "38": "icons/keepassxc_38x38.png"
+        },
+        "default_title": "KeePassXC-Browser",
+        "default_popup": "popups/popup.html"
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab": true
+    },
+    "background": {
+        "scripts": [
+            "browser-polyfill.min.js",
+            "global.js",
+            "background/nacl.min.js",
+            "background/nacl-util.min.js",
+            "background/keepass.js",
+            "background/httpauth.js",
+            "background/browserAction.js",
+            "background/page.js",
+            "background/event.js",
+            "background/init.js"
+         ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "exclude_matches": [
+                "*://*/*.xml",
+                "*://*/*.xsd"
+            ],
+            "js": [
+                "browser-polyfill.min.js",
+                "global.js",
+                "jquery-3.3.1.min.js",
+                "jquery-ui.min.js",
+                "keepassxc-browser.js"
+            ],
+            "css": [
+                "jquery-ui.min.css",
+                "keepassxc-browser.css"
+            ],
+            "run_at": "document_idle",
+            "all_frames": true
+        }
+    ],
+    "commands": {
+        "fill-username-password": {
+            "description": "__MSG_contextMenuFillUsernameAndPassword__",
+            "suggested_key": {
+                "default": "Alt+Shift+U",
+                "mac": "MacCtrl+Shift+U"
+            }
+        },
+        "fill-password": {
+            "description": "__MSG_contextMenuFillPassword__",
+            "suggested_key": {
+                "default": "Alt+Shift+I",
+                "mac": "MacCtrl+Shift+I"
+            }
+        },
         "fill-totp": {
-            "description": "Insert a TOTP",
+            "description": "__MSG_contextMenuFillTOTP__",
             "suggested_key": {
                 "default": "Alt+Shift+T",
                 "mac": "MacCtrl+Shift+T"
             }
         }
-	},
-	"web_accessible_resources": [
-		"icons/key.png"
-	],
-	"permissions": [
-		"activeTab",
-		"contextMenus",
-		"clipboardWrite",
-		"nativeMessaging",
+    },
+    "web_accessible_resources": [
+        "icons/key.png"
+    ],
+    "permissions": [
+        "activeTab",
+        "contextMenus",
+        "clipboardWrite",
+        "nativeMessaging",
         "notifications",
-		"storage",
-		"tabs",
-		"webRequest",
-		"webRequestBlocking",
-		"https://*/*",
-		"http://*/*",
-		"https://api.github.com/"
-	],
-	"applications": {
-       "gecko": {
-           "id": "keepassxc-browser@keepassxc.org",
-           "strict_min_version": "52.0"
-       }
-   }
+        "storage",
+        "tabs",
+        "webRequest",
+        "webRequestBlocking",
+        "https://*/*",
+        "http://*/*",
+        "https://api.github.com/"
+    ],
+    "applications": {
+        "gecko": {
+            "id": "keepassxc-browser@keepassxc.org",
+            "strict_min_version": "52.0"
+        }
+    },
+    "default_locale": "en"
 }

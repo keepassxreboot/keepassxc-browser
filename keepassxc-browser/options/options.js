@@ -118,6 +118,18 @@ options.initGeneralSettings = function() {
     $('#blinkMinTimeout').val(options.settings['blinkMinTimeout']);
     $('#allowedRedirect').val(options.settings['allowedRedirect']);
 
+    browser.commands.getAll().then(function(commands) {
+        commands.forEach(function(command) {
+            var shortcut = document.getElementById(`${command.name}-shortcut`);
+            if (!shortcut) return;
+            shortcut.textContent = command.shortcut || 'not configured';
+        });
+    });
+
+    $('#configureCommands').click(function(){
+        browser.tabs.create({ url: 'chrome://extensions/configureCommands' });
+    });
+
     $('#blinkTimeoutButton').click(function(){
         const blinkTimeout = $.trim($('#blinkTimeout').val());
         const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
@@ -154,6 +166,10 @@ options.showKeePassXCVersions = function(response) {
     $('#tab-general-settings .kphVersion:first em.latestVersion:first').text(response.latest);
     $('#tab-about em.versionKPH').text(response.current);
     $('#tab-general-settings button.checkUpdateKeePassXC:first').attr('disabled', false);
+};
+
+options.getPartiallyHiddenKey = function(key) {
+    return !key ? 'Error' : (key.substr(0, 8) + '*'.repeat(10));
 };
 
 options.initConnectedDatabases = function() {
@@ -193,7 +209,7 @@ options.initConnectedDatabases = function() {
         $('a.dropdown-toggle:first img:first', tr).attr('src', '/icons/19x19/icon_normal_19x19.png');
 
         tr.children('td:first').text(options.keyRing[hash].id);
-        tr.children('td:eq(1)').text(options.keyRing[hash].key);
+        tr.children('td:eq(1)').text(options.getPartiallyHiddenKey(options.keyRing[hash].key));
         const lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : 'unknown';
         tr.children('td:eq(2)').text(lastUsed);
         const date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : 'unknown';
@@ -310,7 +326,7 @@ options.initSitePreferences = function() {
             trClone.removeClass('clone');
 
             // Fills the last / char if needed. This ensures the compatibility with Match Patterns
-            if (options.slashNeededForUrl(value)) {
+            if (slashNeededForUrl(value)) {
                 value += '/';
             }
 
@@ -366,7 +382,7 @@ options.initSitePreferences = function() {
             $('#tab-site-preferences table tbody:first').append(tr);
         }
     }
-    
+
     if ($('#tab-site-preferences table tbody:first tr').length > 2) {
         $('#tab-site-preferences table tbody:first tr.empty:first').hide();
     } else {
@@ -379,22 +395,4 @@ options.initAbout = function() {
     if (isFirefox()) {
         $('#chrome-only').remove();
     }
-
-    if (navigator.platform === 'MacIntel') {
-        $('#default-user-shortcut').hide();
-        $('#default-pass-shortcut').hide();
-        $('#mac-user-shortcut').show();
-        $('#mac-pass-shortcut').show();
-    } else {
-        $('#mac-user-shortcut').hide();
-        $('#mac-pass-shortcut').hide();
-        $('#default-user-shortcut').show();
-        $('#default-pass-shortcut').show();
-    }
-};
-
-// Checks if URL has only scheme and host without the last / char.
-options.slashNeededForUrl = function(pattern) {
-    const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
-    return matchPattern.exec(pattern);
 };
