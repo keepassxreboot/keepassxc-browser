@@ -49,5 +49,15 @@ $(function() {
         browser.runtime.sendMessage({
             action: 'lock-database'
         });
+        $('#credentialsList').hide();
+        $('#database-not-opened').show();
+        $('#database-error-message').html(tr('errorMessageDatabaseNotOpened'));
+    });
+
+    $('#reopen-database-button').click(function() {
+        browser.runtime.sendMessage({
+            action: 'get_status',
+            args: [ false, true ]    // Set forcePopup to true
+        });
     });
 });

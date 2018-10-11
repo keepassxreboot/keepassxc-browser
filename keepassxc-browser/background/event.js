@@ -87,7 +87,7 @@ kpxcEvent.onShowNotification = function(callback, tab, message) {
 
 kpxcEvent.showStatus = function(configured, tab, callback) {
     let keyId = null;
-    if (configured) {
+    if (configured && keepass.databaseHash !== '') {
         keyId = keepass.keyRing[keepass.databaseHash].id;
     }
 

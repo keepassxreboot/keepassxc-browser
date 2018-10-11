@@ -1402,7 +1402,7 @@ cip.init = function() {
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function(response) {
     if (document.visibilityState !== 'hidden') {
-        if (response.new === 'no-hash' && response.old !== 'no-hash') {
+        if (response.new === '' && response.old !== '') {
             cipEvents.clearCredentials();
 
             browser.runtime.sendMessage({
@@ -1414,7 +1414,7 @@ cip.detectDatabaseChange = function(response) {
                 action: 'get_status',
                 args: [ true ]    // Set polling to true, this is an internal function call
             });
-        } else if (response.new !== 'no-hash' && response.new !== response.old) {
+        } else if (response.new !== '' && response.new !== response.old) {
             _called.retrieveCredentials = false;
             browser.runtime.sendMessage({
                 action: 'load_settings',
