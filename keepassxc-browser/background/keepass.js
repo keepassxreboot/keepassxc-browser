@@ -17,8 +17,8 @@ keepass.nativePort = null;
 keepass.keySize = 24;
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
 keepass.cacheTimeout = 30 * 1000; // milliseconds
-keepass.databaseHash = 'no-hash'; //no-hash = KeePassXC is too old and does not return a hash value
-keepass.previousDatabaseHash = 'no-hash';
+keepass.databaseHash = '';
+keepass.previousDatabaseHash = '';
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 keepass.messageTimeout = 500; // milliseconds
@@ -555,7 +555,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
             const res = keepass.decrypt(response.message, response.nonce);
             if (!res) {
                 keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
-                callback('no-hash');
+                callback('');
                 return;
             }
 
@@ -564,7 +564,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
             if (keepass.verifyDatabaseResponse(parsed, incrementedNonce) && parsed.hash) {
                 const oldDatabaseHash = keepass.databaseHash;
                 keepass.setcurrentKeePassXCVersion(parsed.version);
-                keepass.databaseHash = parsed.hash || 'no-hash';
+                keepass.databaseHash = parsed.hash || '';
 
                 if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
                     keepass.associated.value = false;
@@ -577,7 +577,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
                 return;
             }
             else if (parsed.errorCode) {
-                keepass.databaseHash = 'no-hash';
+                keepass.databaseHash = '';
                 keepass.isDatabaseClosed = true;
                 keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
                 callback(keepass.databaseHash);
@@ -585,7 +585,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
             }
         }
         else {
-            keepass.databaseHash = 'no-hash';
+            keepass.databaseHash = '';
             keepass.isDatabaseClosed = true;
             if (response.message && response.message === '') {
                 keepass.isKeePassXCAvailable = false;
@@ -675,6 +675,7 @@ keepass.lockDatabase = function(tab) {
 
                 if (keepass.verifyResponse(parsed, incrementedNonce)) {
                     keepass.isDatabaseClosed = true;
+                    keepass.updateDatabase();
 
                     // Display error message in the popup
                     keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
@@ -840,22 +841,7 @@ keepass.onNativeMessage = function(response) {
 
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
-        keepass.testAssociation((associationResponse) => {
-            keepass.isConfigured().then((configured) => {
-                keepass.updatePopup(configured ? 'normal' : 'cross');
-
-                // Send message to content script
-                browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-                    if (tabs.length) {
-                        browser.tabs.sendMessage(tabs[0].id, {
-                            action: 'check_database_hash',
-                            hash: {old: keepass.previousDatabaseHash, new: keepass.databaseHash}
-                        });
-                        keepass.previousDatabaseHash = keepass.databaseHash;
-                    }
-                });
-            });
-        }, null);
+        keepass.updateDatabase();
     }
 };
 
@@ -965,7 +951,7 @@ keepass.verifyDatabaseResponse = function(response, nonce) {
     }
 
     keepass.associated.hash = response.hash;
-    return response.hash !== 'no-hash' && response.success === 'true';
+    return response.hash !== '' && response.success === 'true';
 };
 
 keepass.checkNonceLength = function(nonce) {
@@ -1061,4 +1047,24 @@ keepass.updatePopup = function(iconType) {
         data.iconType = iconType;
         browserAction.show(null, {'id': page.currentTabId});
     }
+};
+
+// Updates the database hashes to content script
+keepass.updateDatabase = function() {
+    keepass.testAssociation((associationResponse) => {
+        keepass.isConfigured().then((configured) => {
+            keepass.updatePopup(configured ? 'normal' : 'cross');
+
+            // Send message to content script
+            browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+                if (tabs.length) {
+                    browser.tabs.sendMessage(tabs[0].id, {
+                        action: 'check_database_hash',
+                        hash: {old: keepass.previousDatabaseHash, new: keepass.databaseHash}
+                    });
+                    keepass.previousDatabaseHash = keepass.databaseHash;
+                }
+            });
+        });
+    }, null);
 };

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>KeePassXC - Popup</title>
+    <title data-i18n="popupTitle"></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css" />
     <link rel="stylesheet" href="../options/bootstrap.min.css" />
@@ -25,13 +25,23 @@
         </div>
       </div>
 
-      <div class="credentials">
+      <div id="credentialsList" class="credentials">
         <p data-i18n="popupLoginText"></p>
         <div id="filter-block" style="display: none;">
           <label for="login-filter" data-i18n="popupFilterText"></label>
           <input type="text" id="login-filter">
         </div>
         <div id="login-list" class="list-group"></div>
+      </div>
+
+       <div id="database-not-opened" style="display: none">
+        <p data-i18n="popupErrorEncountered"/>
+        <p style="margin-left: 1em">
+          <code id="database-error-message"></code>
+        </p>
+        <div style="text-align: right">
+          <button id="reopen-database-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-lock"></span><span data-i18n="popupReopenButton"/></button>
+        </div>
       </div>
     </div>
     <script type="text/javascript" src="../translate.js"></script>
