@@ -1260,7 +1260,12 @@ cipObserverHelper.getInputs = function(target) {
     // Only include input fields that match with cipObserverHelper.inputTypes
     let inputs = [];
     for (const i of inputFields) {
-        if (cipObserverHelper.inputTypes.includes(i.getAttribute('type'))) {
+        let type = i.getAttribute('type');
+        if (type) {
+            type = type.toLowerCase();
+        }
+
+        if (cipObserverHelper.inputTypes.includes(type)) {
             inputs.push(i);
         }
     }
