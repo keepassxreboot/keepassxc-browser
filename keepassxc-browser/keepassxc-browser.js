@@ -15,7 +15,7 @@ var _detectedFields = 0;
 // Element id's containing input fields detected by MutationObserver
 var _observerIds = [];
 
-browser.runtime.onMessage.addListener(function(req, sender, callback) {
+browser.runtime.onMessage.addListener(function(req, sender) {
     if ('action' in req) {
         if (req.action === 'fill_user_pass_with_specific_login') {
             if (cip.credentials[req.id]) {
@@ -63,10 +63,10 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
             cipDefine.init();
         } else if (req.action === 'clear_credentials') {
             cipEvents.clearCredentials();
-            callback();
+            return Promise.resolve();
         } else if (req.action === 'activated_tab') {
             cipEvents.triggerActivatedTab();
-            callback();
+            return Promise.resolve();
         } else if (req.action === 'redetect_fields') {
             browser.runtime.sendMessage({
                 action: 'load_settings',
