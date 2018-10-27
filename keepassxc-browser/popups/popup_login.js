@@ -13,7 +13,7 @@ $(function() {
             for (let i = 0; i < logins.length; i++) {
                 const a = document.createElement('a');
                 a.textContent = logins[i];
-                a.setAttribute('class', 'list-group-item');
+                a.setAttribute('class', 'list-group-item list-group-item-action');
                 a.setAttribute('id', '' + i);
                 a.addEventListener('click', (e) => {
                     const id = e.target.id;
@@ -25,7 +25,7 @@ $(function() {
                 });
                 ll.appendChild(a);
             }
-			
+
             if (logins.length > 1) {
                 document.getElementById('filter-block').style = '';
                 let filter = document.getElementById('login-filter');

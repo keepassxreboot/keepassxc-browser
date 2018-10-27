@@ -15,7 +15,7 @@ $(function() {
         let ll = document.getElementById('login-list');
         for (let i = 0; i < data.logins.length; ++i) {
             const a = document.createElement('a');
-            a.setAttribute('class', 'list-group-item');
+            a.setAttribute('class', 'list-group-item list-group-item-action');
             a.textContent = data.logins[i].login + " (" + data.logins[i].name + ")";
             $(a).data('creds', data.logins[i]);
             $(a).click(function () {

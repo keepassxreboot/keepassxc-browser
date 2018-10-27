@@ -15,7 +15,6 @@ $(function() {
         options.settings = settings;
         browser.runtime.sendMessage({ action: 'load_keyring' }).then((keyRing) => {
             options.keyRing = keyRing;
-            options.initMenu();
             options.initGeneralSettings();
             options.initConnectedDatabases();
             options.initCustomCredentialFields();
@@ -26,18 +25,6 @@ $(function() {
 });
 
 var options = options || {};
-
-options.initMenu = function() {
-    $('.navbar:first ul.nav:first li a').click(function(e) {
-        e.preventDefault();
-        $('.navbar:first ul.nav:first li').removeClass('active');
-        $(this).parent('li').addClass('active');
-        $('div.tab').hide();
-        $('div.tab#tab-' + $(this).attr('href').substring(1)).fadeIn();
-    });
-
-    $('div.tab:first').show();
-};
 
 options.saveSettingsPromise = function() {
     return new Promise((resolve, reject) => {
@@ -164,8 +151,8 @@ options.showKeePassXCVersions = function(response) {
     if (response.latest <= 0) {
         response.latest = 'unknown';
     }
-    $('#tab-general-settings .kphVersion:first em.yourVersion:first').text(response.current);
-    $('#tab-general-settings .kphVersion:first em.latestVersion:first').text(response.latest);
+    $('#tab-general-settings .yourVersion').text(response.current);
+    $('#tab-general-settings .latestVersion').text(response.latest);
     $('#tab-about em.versionKPH').text(response.current);
     $('#tab-general-settings button.checkUpdateKeePassXC:first').attr('disabled', false);
 };
@@ -179,7 +166,7 @@ options.initConnectedDatabases = function() {
     $('#tab-connected-databases tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
         $('#dialogDeleteConnectedDatabase').data('hash', $(this).closest('tr').data('hash'));
-        $('#dialogDeleteConnectedDatabase .modal-body:first span:first').text($(this).closest('tr').children('td:first').text());
+        $('#dialogDeleteConnectedDatabaseName ').text($(this).closest('tr').children('td:first').text());
         $('#dialogDeleteConnectedDatabase').modal('show');
     });
 
@@ -397,6 +384,6 @@ options.initAbout = function() {
 
     // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
     if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/')+1, 2)) < 60) {
-        $('#chrome-only').remove();
+        $('.chrome-only').remove();
     }
 };
