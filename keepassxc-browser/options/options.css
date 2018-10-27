@@ -8,10 +8,6 @@ table td {
 }
 
 /* Custom container */
-.container {
-    margin: 0 auto;
-    max-width: 1000px;
-}
 .container > hr {
     margin: 30px 0;
 }
@@ -20,10 +16,6 @@ table td {
 .navbar-default {
     font-family: 'Lato',sans-serif;
     background-color: #6cac4d;
-    border: 0px;
-    box-shadow: 0 2px 6px 0;
-    display: inline-block;
-    float: none;
     width: 100%;
 }
 .navbar-default .navbar-brand {

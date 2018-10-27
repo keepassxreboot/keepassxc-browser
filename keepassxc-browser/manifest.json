@@ -100,11 +100,5 @@
         "http://*/*",
         "https://api.github.com/"
     ],
-    "applications": {
-        "gecko": {
-            "id": "keepassxc-browser@keepassxc.org",
-            "strict_min_version": "52.0"
-        }
-    },
     "default_locale": "en"
 }
