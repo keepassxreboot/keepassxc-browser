@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="bootstrap.min.css"/>
     <link rel="stylesheet" href="options.css"/>
-    <link rel="stylesheet" href="../webfonts/font-awesome.all.min.css">
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css">
     <script type="text/javascript" src="../browser-polyfill.min.js"></script>
     <script type="text/javascript" src="../global.js"></script>
     <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
@@ -64,7 +64,7 @@
             <!-- general settings -->
             <div class="card border-success">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-cog"></i> <span data-i18n="optionsGeneralSettingsTab"></span>
+                    <i class="fa fa-cog" aria-hidden="true"></i> <span data-i18n="optionsGeneralSettingsTab"></span>
                 </div>
                 <div class="card-body">
                     <div class="custom-control custom-checkbox">
@@ -92,7 +92,7 @@
             <!-- auto fill-->
             <div class="card mt-4 border-success">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-sign-in-alt"></i> Auto Fill-In
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> Auto Fill-In
                 </div>
                 <div class="card-body">
                     <div class="custom-control custom-checkbox">
@@ -105,7 +105,7 @@
 
                     <div class="custom-control custom-checkbox">
                         <div class="alert alert-warning mt-3" role="alert">
-                            <i class="fas fa-exclamation-triangle"></i> <span
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <span
                                 data-i18n="optionsAutoFillSingleEntryWarning"></span>
                         </div>
 
@@ -139,10 +139,10 @@
                 </div>
             </div>
 
-            <!-- keyboard notifications -->
+            <!-- keyboard shortcuts -->
             <div class="card mt-4 border-success">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-keyboard"></i> <span data-i18n="optionsKeyboardShortcutsHeader"></span>
+                    <i class="fa fa-keyboard-o" aria-hidden="true"></i> <span data-i18n="optionsKeyboardShortcutsHeader"></span>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -159,7 +159,7 @@
                         </li>
                     </ul>
                     <button class="chrome-only mt-3 btn btn-sm btn-primary" id="configureCommands" type="button">
-                        <i class="fas fa-cog"></i> <span data-i18n="optionsConfigureShortcuts"></span>
+                        <i class="fas fa-cog" aria-hidden="true"></i> <span data-i18n="optionsConfigureShortcuts"></span>
                     </button>
                 </div>
             </div>
@@ -167,7 +167,7 @@
             <!-- extension notifications -->
             <div class="card mt-4 border-success">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-sign-in-alt"></i> Notifications
+                    <i class="fa fa-bell" aria-hidden="true"></i> Notifications
                 </div>
                 <div class="card-body">
                     <div class="custom-control custom-checkbox">
@@ -191,7 +191,7 @@
                             <div class="input-append">
                                 <input type="number" id="blinkTimeout" placeholder="7500" value="7500" min="-1"/>
                                 <button class="btn btn-sm btn-primary" id="blinkTimeoutButton" type="button">
-                                    <i class="fas fa-save"></i> <span data-i18n="optionsButtonSave"></span>
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> <span data-i18n="optionsButtonSave"></span>
                                 </button>
                             </div>
                         </div>
@@ -210,7 +210,7 @@
                             <div class="input-append">
                                 <input type="number" id="blinkMinTimeout" placeholder="2000" value="2000" min="-1"/>
                                 <button class="btn btn-sm btn-primary" id="blinkMinTimeoutButton" type="button">
-                                    <i class="fas fa-save"></i> <span data-i18n="optionsButtonSave"></span>
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> <span data-i18n="optionsButtonSave"></span>
                                 </button>
                             </div>
                         </div>
@@ -231,7 +231,7 @@
                             <div class="input-append">
                                 <input type="number" id="allowedRedirect" placeholder="1" value="1" min="1"/>
                                 <button class="btn btn-sm btn-primary" id="allowedRedirectButton" type="button">
-                                    <i class="fas fa-save"></i> <span data-i18n="optionsButtonSave"></span>
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> <span data-i18n="optionsButtonSave"></span>
                                 </button>
                             </div>
                         </div>
@@ -247,11 +247,11 @@
             <!-- keepassxc update notification -->
             <div class="card mt-4 border-success">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-bell"></i> KeePassXC updates notification
+                    <i class="fa fa-bell" aria-hidden="true"></i> KeePassXC updates notification
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info mt-2" role="alert">
-                        <i class="fas fa-info-circle"></i> <span data-i18n="optionsVersionInfoText"></span>
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> <span data-i18n="optionsVersionInfoText"></span>
                         <br/>
                         <span data-i18n="optionsVersionDownload"
                               i18n-placeholder="<a target='_blank' href='https://keepassxc.org/'>https://keepassxc.org/</a>"> </span>
@@ -265,7 +265,7 @@
                               i18n-placeholder="<em class='latestVersion'></em>"></span>
                     </div>
                     <button class="btn btn-sm btn-primary mt-2 checkUpdateKeePassXC">
-                        <i class="fas fa-sync"></i> <span data-i18n="optionsButtonUpdate"></span>
+                        <i class="fa fa-refresh" aria-hidden="true"></i> <span data-i18n="optionsButtonUpdate"></span>
                     </button>
 
 
@@ -324,7 +324,7 @@
                     <td class="created"></td>
                     <td>
                         <button class="btn delete btn-outline-danger">
-                            <i class="fas fa-trash"></i> <span data-i18n="optionsButtonRemove"></span>
+                            <i class="fa fa-trash" aria-hidden="true"></i> <span data-i18n="optionsButtonRemove"></span>
                         </button>
                     </td>
                 </tr>
@@ -332,7 +332,7 @@
             </table>
             <div style="text-align: right">
                 <button id="connect-button" class="btn btn-primary">
-                    <i class="fas fa-link"></i> <span data-i18n="optionsButtonConnect"></span>
+                    <i class="fa fa-link" aria-hidden="true"></i> <span data-i18n="optionsButtonConnect"></span>
                 </button>
             </div>
 
@@ -341,7 +341,7 @@
                     <div class="modal-content">
                         <div class="modal-header bg-danger text-white">
                             <h5 class="modal-title" id="myModalLabel">
-                                <i class="fas fa-exclamation-triangle"></i> <span
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <span
                                     data-i18n="optionsDatabasesRemoveIdentifier"></span>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -352,16 +352,16 @@
                             <p data-i18n="optionsDatabasesRemoveIdentifierConfirmFirst"></p>
                             <strong id="dialogDeleteConnectedDatabaseName" class="mark"></strong>
                             <div class="alert alert-info mt-2">
-                                <i class="fas fa-info-circle"></i> <span
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> <span
                                     data-i18n="optionsDatabasesRemoveIdentifierConfirmSecond"></span>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                <i class="fas fa-times"></i> <span data-i18n="optionsButtonCancel"></span>
+                                <i class="fa fa-times" aria-hidden="true"></i> <span data-i18n="optionsButtonCancel"></span>
                             </button>
                             <button type="button" class="btn btn-outline-danger yes">
-                                <i class="fas fa-trash"></i> <span data-i18n="optionsButtonRemoveNow"></span>
+                                <i class="fa fa-trash" aria-hidden="true"></i> <span data-i18n="optionsButtonRemoveNow"></span>
                             </button>
                         </div>
                     </div>
@@ -396,7 +396,7 @@
                     <td></td>
                     <td>
                         <button class="btn delete btn-danger btn">
-                            <i class="fas fa-trash"></i> <span data-i18n="optionsButtonRemove"></span>
+                            <i class="fa fa-trash" aria-hidden="true"></i> <span data-i18n="optionsButtonRemove"></span>
                         </button>
                     </td>
                 </tr>
@@ -417,9 +417,9 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn" data-dismiss="modal" aria-hidden="true">
-                                <i class="fas fa-trash"></i> <span data-i18n="optionsButtonCancel"></span></button>
+                                <i class="fa fa-trash" aria-hidden="true"></i> <span data-i18n="optionsButtonCancel"></span></button>
                             <button class="btn yes btn-primary">
-                                <i class="fas fa-check-circle"></i> <span data-i18n="optionsButtonRemoveNow"></span>
+                                <i class="fa fa-check-circle" aria-hidden="true"></i> <span data-i18n="optionsButtonRemoveNow"></span>
                             </button>
                         </div>
                     </div>
@@ -448,7 +448,7 @@
                     <div class="input-append">
                         <input type="url" id="manualUrl"/>
                         <button class="btn btn-sm btn-primary" id="sitePreferencesManualAdd" type="button">
-                            <i class="fas fa-plus"></i><span data-i18n="optionsButtonAdd"></span>
+                            <i class="fa fa-plus" aria-hidden="true"></i><span data-i18n="optionsButtonAdd"></span>
                         </button>
                     </div>
                 </div>
@@ -479,7 +479,7 @@
                     <td><input type="checkbox" name="usernameOnly" value="false"/></td>
                     <td>
                         <button class="btn delete btn-danger btn"><span
-                                class="fas fa-trash"></span><span
+                                class="fa fa-trash" aria-hidden="true"></span><span
                                 data-i18n="optionsButtonRemove"></span></button>
                     </td>
                 </tr>
@@ -513,7 +513,7 @@
         <div class="tab-pane" id="tab-about" role="tabpanel" aria-labelledby="about-tab">
             <div class="card border-success">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-desktop"></i> On the Web
+                    <i class="fa fa-desktop" aria-hidden="true"></i> On the Web
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled">
@@ -535,7 +535,7 @@
 
             <div class="card border-success mt-4">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-info-circle"></i> Version information
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Version information
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled">
@@ -549,7 +549,7 @@
 
             <div class="card border-success mt-4">
                 <div class="card-header bg-success text-white">
-                    <i class="fas fa-lightbulb"></i> <span data-i18n="optionsAboutContributors"></span>
+                    <i class="fa fa-users" aria-hidden="true"></i> <span data-i18n="optionsAboutContributors"></span>
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css"/>
     <link rel="stylesheet" href="../options/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../webfonts/font-awesome.all.min.css">
+    <link rel="stylesheet" href="../fonts/font-awesome.all.min.css">
     <script type="text/javascript" src="../browser-polyfill.min.js"></script>
     <script type="text/javascript" src="../global.js"></script>
     <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
@@ -54,13 +54,15 @@
         <span class="small" data-i18n="popupUsername"></span><span class="small info information-username"></span>
     </p>
     <p>
-        <button id="btn-new" class="btn btn-sm btn-success"><span class="fas fa-pencil-alt"></span><span
-                data-i18n="popupButtonNew"></span></button>
-        <button id="btn-update" class="btn btn-sm btn-warning"><span class="fas fa-sync"></span><span
+        <button id="btn-new" class="btn btn-sm btn-success">
+            <span class="fa fa-pencil"></span> <span data-i18n="popupButtonNew"></span>
+        </button>
+        <button id="btn-update" class="btn btn-sm btn-warning"><span class="fa fa-refresh"
+                                                                     aria-hidden="true"></span><span
                 data-i18n="popupButtonUpdate"></span></button>
-        <button id="btn-dismiss" class="btn btn-sm btn-danger"><span class="fas fa-trash"></span><span
+        <button id="btn-dismiss" class="btn btn-sm btn-danger"><span class="fa fa-trash" aria-hidden="true"></span><span
                 data-i18n="popupButtonDismiss"></span></button>
-        <button id="btn-ignore" class="btn btn-sm btn-default"><span class="fas fa-trash"></span><span
+        <button id="btn-ignore" class="btn btn-sm btn-default"><span class="fa fa-trash" aria-hidden="true"></span><span
                 data-i18n="popupButtonIgnore"></span></button>
     </p>
 </div>
