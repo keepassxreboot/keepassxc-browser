@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title data-i18n="popupTitle"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="shortcuts.css" />
+    <link rel="stylesheet" href="../options/bootstrap.min.css" />
+    <script src="../browser-polyfill.min.js"></script>
+    <script src="../jquery-3.3.1.min.js"></script>
+    <script src="../options/bootstrap.min.js" /></script>
+    <script defer src="shortcuts.js"></script>
+    <script defer src="../global.js"></script>
+    <script defer src="../translate.js"></script>
+  </head>
+  <body>
+    <div class="conf-container">
+      <div class="conf-title">
+        <div id="icon">
+          <img src="/icons/keepassxc_19x19.png" alt="logo" />
+        </div>
+        <div id="title">
+          <h5 class="muted"><span data-i18n="optionsConfigureShortcuts"/></h3>
+        </div>
+      </div>
+      <hr />
+      <div class="conf-content">
+        <div id="conf-row">
+          <div><span data-i18n="contextMenuFillUsernameAndPassword"></span></div>
+          <input type="text" id="fill-username-password"/>
+          <button class="btn btn-sm btn-primary" id="buttonSaveUserandPass" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
+          <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonReset"></span></button>
+        </div>
+        <div id="conf-row">
+          <div><span data-i18n="contextMenuFillPassword"></span></div>
+          <input type="text" id="fill-password"/>
+          <button class="btn btn-sm btn-primary" id="buttonSavePass" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
+          <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonReset"></span></button>
+        </div>
+        <div id="conf-row">
+          <div><span data-i18n="contextMenuFillTOTP"></span></div>
+          <input type="text" id="fill-totp"/>
+          <button class="btn btn-sm btn-primary" id="buttonSaveTotp" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
+          <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonReset"></span></button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
