@@ -1,0 +1,53 @@
+body {
+    padding-top: 20px;
+}
+
+.conf-container {
+    margin: 0 auto;
+    width: 680px;
+    max-height: 315px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.conf-container .conf-title {
+    margin: 10px 0 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.conf-title #icon {
+    width: 3em;
+}
+
+.conf-container > hr {
+    margin: 10px 0;
+}
+
+.conf-content { 
+    margin: 10px 0 20px 40px;
+}
+
+#conf-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#conf-row div:first-child {
+    width: 200px;
+    margin: 10px;
+}
+
+#conf-row button {
+    margin-left: 10px;
+}
+
+.alert {
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    margin: 20px auto;
+    width: 680px;
+}

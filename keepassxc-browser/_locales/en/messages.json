@@ -395,9 +395,9 @@
         "message": "About",
         "description": "About page header."
     },
-    "optionsButtonConfigureShortcuts": {
-        "message": "Configure shortcuts",
-        "description": "Keyboard shortcut button text."
+    "optionsConfigureShortcuts": {
+        "message": " Configure shortcuts",
+        "description": "Keyboard shortcut button and title text."
     },
     "optionsButtonSave": {
         "message": "Save",
@@ -426,6 +426,10 @@
     "optionsButtonCancel": {
         "message": "Cancel",
         "description": "Cancel button text when removing database key or custom login fields."
+    },
+     "optionsButtonReset": {
+        "message": "Reset",
+        "description": "Reset button text for keyboard shortcuts."
     },
     "optionsLabelBlinkTime": {
         "message": "Blink Time:",
@@ -578,6 +582,18 @@
     "optionsRecommended": {
         "message": "Recommended: $1",
         "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "Shortcut for $1 has been successfully changed.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "Shortcut for $1 has been reset.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "Error: Shortcut for $1 has not been changed!",
+        "description": "Error message for changing keyboard shortcuts."
     },
     "optionsConnectedDatabasesText": {
         "message": "The following KeePassXC databases are connected to KeePassXC-Browser.",

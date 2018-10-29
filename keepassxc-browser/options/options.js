@@ -126,8 +126,10 @@ options.initGeneralSettings = function() {
         });
     });
 
-    $('#configureCommands').click(function(){
-        browser.tabs.create({ url: 'chrome://extensions/configureCommands' });
+    $('#configureCommands').click(function() {
+        browser.tabs.create({
+            url: isFirefox() ? browser.runtime.getURL("options/shortcuts.html") : 'chrome://extensions/configureCommands'
+        });
     });
 
     $('#blinkTimeoutButton').click(function(){
@@ -392,7 +394,9 @@ options.initSitePreferences = function() {
 
 options.initAbout = function() {
     $('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
-    if (isFirefox()) {
+
+    // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
+    if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/')+1, 2)) < 60) {
         $('#chrome-only').remove();
     }
 };
