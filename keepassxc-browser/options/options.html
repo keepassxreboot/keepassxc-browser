@@ -35,14 +35,14 @@
           <span data-i18n="contextMenuFillPassword"></span>: <span id="fill-password-shortcut">error</span><br />
           <span data-i18n="contextMenuFillTOTP"></span>: <span id="fill-totp-shortcut">error</span>
         </p>
-        <p id="chrome-only"><button class="btn btn-sm btn-primary" id="configureCommands" type="button"><span class="glyphicon glyphicon-cog"></span><span data-i18n="optionsButtonConfigureShortcuts"/></button></p>
+        <p id="chrome-only"><button class="btn btn-sm btn-primary" id="configureCommands" type="button"><span class="glyphicon glyphicon-cog"></span> <span data-i18n="optionsButtonConfigureShortcuts"/></button></p>
         <p>
           <div class="form-group">
             <label for="blinkTimeout" data-i18n="optionsLabelBlinkTime"></label>
             <div class="control-group">
               <div class="input-append">
                 <input type="number" id="blinkTimeout" placeholder="7500" value="7500" min="-1"/>
-                <button class="btn btn-sm btn-primary" id="blinkTimeoutButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span><span data-i18n="optionsButtonSave"/></button>
+                <button class="btn btn-sm btn-primary" id="blinkTimeoutButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
               </div>
             </div>
             <span class="help-inline">
@@ -58,7 +58,7 @@
             <div class="control-group">
               <div class="input-append">
                 <input type="number" id="blinkMinTimeout" placeholder="2000" value="2000" min="-1"/>
-                <button class="btn btn-sm btn-primary" id="blinkMinTimeoutButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span><span data-i18n="optionsButtonSave"/></button>
+                <button class="btn btn-sm btn-primary" id="blinkMinTimeoutButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
               </div>
             </div>
             <span class="help-inline">
@@ -76,7 +76,7 @@
             <div class="control-group">
               <div class="input-append">
                 <input type="number" id="allowedRedirect" placeholder="1" value="1" min="1"/>
-                <button class="btn btn-sm btn-primary" id="allowedRedirectButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span><span data-i18n="optionsButtonSave"/></button>
+                <button class="btn btn-sm btn-primary" id="allowedRedirectButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
               </div>
             </div>
             <span class="help-inline">
@@ -168,7 +168,7 @@
           </div>
           <div>
             <span data-i18n="optionsLatestVersion" i18n-placeholder="<em class='latestVersion'></em>"></span>
-            <button class="btn btn-sm btn-primary checkUpdateKeePassXC"><span class="glyphicon glyphicon-refresh"></span><span data-i18n="optionsButtonUpdate"/></button>
+            <button class="btn btn-sm btn-primary checkUpdateKeePassXC"><span class="glyphicon glyphicon-refresh"></span> <span data-i18n="optionsButtonUpdate"/></button>
           </div>
         </div>
         <hr />
@@ -211,12 +211,12 @@
               <td></td>
               <td class="last-used"></td>
               <td class="created"></td>
-              <td><button class="btn delete btn-danger"><span class="glyphicon glyphicon-remove-sign"></span><span data-i18n="optionsButtonRemove"></span></button></td>
+              <td><button class="btn delete btn-danger"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonRemove"></span></button></td>
             </tr>
           </tbody>
         </table>
         <div style="text-align: right">
-          <button id="connect-button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span><span data-i18n="optionsButtonConnect"></span></button>
+          <button id="connect-button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span> <span data-i18n="optionsButtonConnect"></span></button>
         </div>
 
         <div id="dialogDeleteConnectedDatabase" class="modal fade" tabindex="-1" role="dialog">
@@ -232,8 +232,8 @@
                 <p class="help-block" data-i18n="optionsDatabasesRemoveIdentifierConfirmSecond"></p>
               </div>
               <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span><span data-i18n="optionsButtonCancel"></span></button>
-                <button class="btn yes btn-primary"><span class="glyphicon glyphicon-ok"></span><span data-i18n="optionsButtonRemoveNow"></span></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span> <span data-i18n="optionsButtonCancel"></span></button>
+                <button class="btn yes btn-primary"><span class="glyphicon glyphicon-ok"></span> <span data-i18n="optionsButtonRemoveNow"></span></button>
               </div>
             </div>
           </div>
@@ -264,7 +264,7 @@
             </tr>
             <tr class="clone">
               <td></td>
-              <td><button class="btn delete btn-danger btn"><span class="glyphicon glyphicon-remove-sign"></span><span data-i18n="optionsButtonRemove"></span></button></td>
+              <td><button class="btn delete btn-danger btn"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonRemove"></span></button></td>
             </tr>
           </tbody>
         </table>
@@ -280,8 +280,8 @@
                 <p class="help-block" data-i18n="optionsCustomFieldsConfirmationHelpText"></p>
               </div>
               <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span><span data-i18n="optionsButtonCancel"></span></button>
-                <button class="btn yes btn-primary"><span class="glyphicon glyphicon-ok"></span><span data-i18n="optionsButtonRemoveNow"></span></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span> <span data-i18n="optionsButtonCancel"></span></button>
+                <button class="btn yes btn-primary"><span class="glyphicon glyphicon-ok"></span> <span data-i18n="optionsButtonRemoveNow"></span></button>
               </div>
             </div>
           </div>
@@ -307,7 +307,7 @@
           <div class="control-group">
             <div class="input-append">
               <input type="url" id="manualUrl"/>
-              <button class="btn btn-sm btn-primary" id="sitePreferencesManualAdd" type="button"><span class="glyphicon glyphicon-plus-sign"></span><span data-i18n="optionsButtonAdd"></span></button>
+              <button class="btn btn-sm btn-primary" id="sitePreferencesManualAdd" type="button"><span class="glyphicon glyphicon-plus-sign"></span> <span data-i18n="optionsButtonAdd"></span></button>
             </div>
           </div>
         </div>
@@ -335,7 +335,7 @@
                 </select>
               </td>
               <td><input type="checkbox" name="usernameOnly" value="false" /></td>
-              <td><button class="btn delete btn-danger btn"><span class="glyphicon glyphicon-remove-sign"></span><span data-i18n="optionsButtonRemove"></span></button></td>
+              <td><button class="btn delete btn-danger btn"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonRemove"></span></button></td>
             </tr>
           </tbody>
         </table>
@@ -351,8 +351,8 @@
                 <p class="help-block" data-i18n="optionsSitePreferencesConfirmationHelpText"></p>
               </div>
               <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true"><span data-i18n="optionsButtonCancel"></span></button>
-                <button class="btn yes btn-primary"><span data-i18n="optionsButtonRemoveNow"></span></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span> <span data-i18n="optionsButtonCancel"></span></button>
+                <button class="btn yes btn-primary"><span class="glyphicon glyphicon-ok"></span> <span data-i18n="optionsButtonRemoveNow"></span></button>
               </div>
             </div>
           </div>

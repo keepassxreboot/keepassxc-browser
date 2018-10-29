@@ -220,31 +220,31 @@
         "description": "Popup window title."
     },
     "popupSettingsText": {
-        "message": " Settings",
+        "message": "Settings",
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": " Choose custom login fields for this page",
+        "message": "Choose custom login fields for this page",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
-        "message": " Connect",
+        "message": "Connect",
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": " Reconnect",
+        "message": "Reconnect",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
-        "message": " Redetect login fields",
+        "message": "Redetect login fields",
         "description": "Popup Redetect login fields button text."
     },
     "popupReloadButton": {
-        "message": " Reload",
+        "message": "Reload",
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": " Reopen database",
+        "message": "Reopen database",
         "description": "Popup reopen database button text."
     },
     "popupErrorEncountered": {
@@ -260,7 +260,7 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupCheckingStatus": {
-        "message": " Checking status...",
+        "message": "Checking status...",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
@@ -328,15 +328,15 @@
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
-        "message": " New",
+        "message": "New",
         "description": "New button text in popup when updating credentials."
     },
     "popupButtonUpdate": {
-        "message": " Update",
+        "message": "Update",
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonDismiss": {
-        "message": " Dismiss",
+        "message": "Dismiss",
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
@@ -348,7 +348,7 @@
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": " Dismiss and show the default authentication dialog",
+        "message": "Dismiss and show the default authentication dialog",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
@@ -396,35 +396,35 @@
         "description": "About page header."
     },
     "optionsButtonConfigureShortcuts": {
-        "message": " Configure shortcuts",
+        "message": "Configure shortcuts",
         "description": "Keyboard shortcut button text."
     },
     "optionsButtonSave": {
-        "message": " Save",
+        "message": "Save",
         "description": "Save button text."
     },
     "optionsButtonConnect": {
-        "message": " Connect",
+        "message": "Connect",
         "description": "Connect button text."
     },
     "optionsButtonRemove": {
-        "message": " Remove",
+        "message": "Remove",
         "description": "Remove button text."
     },
     "optionsButtonAdd": {
-        "message": " Add",
+        "message": "Add",
         "description": "Add button text."
     },
     "optionsButtonUpdate": {
-        "message": " Check for updates",
+        "message": "Check for updates",
         "description": "Check for updates button text."
     },
     "optionsButtonRemoveNow": {
-        "message": " Yes, remove now",
+        "message": "Yes, remove now",
         "description": "Confirm button text when removing database key or custom login fields."
     },
     "optionsButtonCancel": {
-        "message": " Cancel",
+        "message": "Cancel",
         "description": "Cancel button text when removing database key or custom login fields."
     },
     "optionsLabelBlinkTime": {
@@ -476,19 +476,19 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": " every 3 days",
+        "message": "every 3 days",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
-        "message": " every week",
+        "message": "every week",
         "description": "Radio button text."
     },
     "optionsRadioMonth": {
-        "message": " every month",
+        "message": "every month",
         "description": "Radio button text."
     },
     "optionsRadioNever": {
-        "message": " never",
+        "message": "never",
         "description": "Radio button text."
     },
     "optionsKeyboardShortcutsHeader": {
