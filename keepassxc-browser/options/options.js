@@ -323,7 +323,7 @@ options.initSitePreferences = function() {
             tr.data('url', value);
             tr.attr('id', 'tr-scf' + newValue);
             tr.children('td:first').text(value);
-            tr.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING);
+            tr.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING).addClass('custom-select');
             $('#tab-site-preferences table tbody:first').append(tr);
             $('#tab-site-preferences table tbody:first tr.empty:first').hide();
 
@@ -366,8 +366,8 @@ options.initSitePreferences = function() {
             ++counter;
 
             tr.children('td:first').text(site.url);
-            tr.children('td:nth-child(2)').children('select').val(site.ignore);
-            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', site.usernameOnly);
+            tr.children('td:nth-child(2)').children('select').val(site.ignore).addClass('custom-select');
+            tr.children('td:nth-child(3) div').children('input[type=checkbox]').attr('checked', site.usernameOnly);
             $('#tab-site-preferences table tbody:first').append(tr);
         }
     }
