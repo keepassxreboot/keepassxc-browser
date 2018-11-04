@@ -1,0 +1,30 @@
+{
+  "name": "keepassxc-browser",
+  "version": "1.3.0-beta",
+  "description": "KeePassXC-Browser",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keepassxreboot/keepassxc-browser.git"
+  },
+  "author": "KeePassXC Team",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/keepassxreboot/keepassxc-browser/issues"
+  },
+  "homepage": "https://github.com/keepassxreboot/keepassxc-browser#readme",
+  "scripts": {
+    "build-bootstrap": "rollup -c"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.3.1",
+    "bootstrap": "^4.1.3",
+    "node-sass": "^4.9.4",
+    "postcss": "^7.0.5",
+    "postcss-preset-env": "^6.2.0"
+  },
+  "browserslist": [
+    "firefox > 60",
+    "chrome > 67",
+    "not dead"
+  ]
+}

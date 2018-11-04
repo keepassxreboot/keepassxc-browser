@@ -3,7 +3,7 @@
     <title data-i18n="popupTitle"></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css"/>
-    <link rel="stylesheet" href="../options/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/styles/bootstrap.css"/>
     <link rel="stylesheet" href="../fonts/fork-awesome.min.css">
     <script type="text/javascript" src="../browser-polyfill.min.js"></script>
     <script type="text/javascript" src="../global.js"></script>
@@ -15,7 +15,7 @@
 <body>
 <div class="container">
     <div id="settings" class="settings">
-        <button id="btn-options" class="btn btn-sm btn-success">
+        <button id="btn-options" class="btn btn-sm btn-primary">
             <span class="fa fa-cog" aria-hidden="true"></span> <span data-i18n="popupSettingsText"></span>
         </button>
         <button id="btn-choose-credential-fields" class="btn btn-sm btn-outline-secondary">
@@ -79,10 +79,10 @@
     </div>
 
     <div id="error-encountered" style="display: none">
-        <p data-i18n="popupErrorEncountered"></p>
-        <p style="margin-left: 1em">
-            <code id="error-message"></code>
-        </p>
+        <div class="alert alert-danger" role="alert">
+            <h6 data-i18n="popupErrorEncountered"></h6>
+            <div id="error-message"></div>
+        </div>
         <div class="text-right">
             <button id="reload-status-button" class="btn btn-sm btn-primary">
                 <span class="fa fa-repeat" aria-hidden="true"></span><span data-i18n="popupReloadButton"></span>
