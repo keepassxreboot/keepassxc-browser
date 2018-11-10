@@ -84,7 +84,7 @@
         }
     },
     "web_accessible_resources": [
-        "icons/key.png"
+        "icons/key.svg"
     ],
     "permissions": [
         "activeTab",

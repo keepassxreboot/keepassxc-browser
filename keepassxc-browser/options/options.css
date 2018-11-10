@@ -150,3 +150,11 @@ td.created {
 #dangerousSettings {
     display: none;
 }
+
+.panel-title {
+    font-size: 14px !important;
+}
+
+.panel-group .panel-default .panel-heading {
+    background-color: #fff !important;
+}

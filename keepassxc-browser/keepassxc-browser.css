@@ -84,12 +84,12 @@ input.genpw-text {
 }
 
 .cip-genpw-icon.key {
-    background: url('chrome-extension://__MSG_@@extension_id__/icons/key.png') right no-repeat;
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/key.svg') right no-repeat;
     background-size: contain;
 }
 
 .cip-genpw-icon.key-moz {
-    background: url('moz-extension://__MSG_@@extension_id__/icons/key.png') right no-repeat;
+    background: url('moz-extension://__MSG_@@extension_id__/icons/key.svg') right no-repeat;
     background-size: contain;
 }
 
