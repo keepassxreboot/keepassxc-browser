@@ -334,11 +334,11 @@ options.initSitePreferences = function() {
             tr.data('url', value);
             tr.attr('id', 'tr-scf' + newValue);
             tr.children('td:first').text(value);
-            tr.children('td:nth-child(2)').children('select').val(IGNORE_NORMAL);
+            tr.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING);
             $('#tab-site-preferences table tbody:first').append(tr);
             $('#tab-site-preferences table tbody:first tr.empty:first').hide();
 
-            options.settings['sitePreferences'].push({url: value, ignore: IGNORE_NORMAL, usernameOnly: false});
+            options.settings['sitePreferences'].push({url: value, ignore: IGNORE_NOTHING, usernameOnly: false});
             options.saveSettings();
 
             $('#manualUrl').val('');
