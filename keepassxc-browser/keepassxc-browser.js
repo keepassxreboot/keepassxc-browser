@@ -15,7 +15,10 @@ var _detectedFields = 0;
 // Element id's containing input fields detected by MutationObserver
 var _observerIds = [];
 
-browser.runtime.onMessage.addListener(function(req, sender) {
+// Document URL
+let _documentURL = document.location.href;
+
+browser.runtime.onMessage.addListener(function(req, sender, callback) {
     if ('action' in req) {
         if (req.action === 'fill_user_pass_with_specific_login') {
             if (cip.credentials[req.id]) {
@@ -874,7 +877,8 @@ cipFields.isSearchField = function(target) {
     if (closestForm) {
         // Check form action
         const formAction = closestForm.getAttribute('action');
-        if (formAction && formAction.includes('search')) {
+        if (formAction && (formAction.toLowerCase().includes('search') && 
+            !formAction.toLowerCase().includes('research'))) {
             return true;
         }
 
@@ -882,7 +886,7 @@ cipFields.isSearchField = function(target) {
         const closestFormId = closestForm.getAttribute('id');
         const closestFormClass = closestForm.className;
         if (closestFormClass && (closestForm.className.toLowerCase().includes('search') || 
-            (closestFormId && closestFormId.toLowerCase().includes('search')))) {
+            (closestFormId && closestFormId.toLowerCase().includes('search') && !closestFormId.toLowerCase().includes('research')))) {
             return true;
         }
     }
@@ -1336,6 +1340,14 @@ cipObserverHelper.handleObserverRemove = function(target) {
     }
 };
 
+cipObserverHelper.detectURLChange = function() {
+    if (_documentURL !== document.location.href) {
+        _documentURL = document.location.href;
+        cipEvents.clearCredentials();
+        cip.initCredentialFields(true);
+    }
+};
+
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 // Detects DOM changes in the document
@@ -1350,6 +1362,9 @@ let observer = new MutationObserver(function(mutations, observer) {
             continue;
         }
 
+        // Check document URL change and detect new fields
+        cipObserverHelper.detectURLChange();
+
         // Handle attributes only if CSS display is modified
         if (mut.type === 'attributes') {
             const newValue = mut.target.getAttribute(mut.attributeName);
@@ -1362,7 +1377,7 @@ let observer = new MutationObserver(function(mutations, observer) {
             }
         } else if (mut.type === 'childList') {
             cipObserverHelper.handleObserverAdd((mut.addedNodes.length > 0) ? mut.addedNodes[0] : mut.target);
-            cipObserverHelper.handleObserverRemove((mut.removedNodes.length > 0) ? mut.removedNodes[0] : mut.target);         
+            cipObserverHelper.handleObserverRemove((mut.removedNodes.length > 0) ? mut.removedNodes[0] : mut.target);
         }
     }
 });
