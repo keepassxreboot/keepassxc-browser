@@ -160,6 +160,7 @@ Unencrypted message:
 	"action": "get-logins",
 	"url": "<snip>",
 	"submitUrl": optional,
+	"httpAuth": optional,
 	"keys": [
 		{
 			"id": <connected_id>,

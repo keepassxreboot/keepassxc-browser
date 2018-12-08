@@ -194,7 +194,7 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
     });
 };
 
-keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallback, triggerUnlock = false) {
+keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallback, triggerUnlock = false, httpAuth = false) {
     page.debug('keepass.retrieveCredentials(callback, {1}, {2}, {3}, {4})', tab.id, url, submiturl, forceCallback);
 
     keepass.testAssociation((response) => {
@@ -238,6 +238,10 @@ keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallb
 
         if (submiturl) {
             messageData.submitUrl = submiturl;
+        }
+
+        if (httpAuth) {
+            messageData.httpAuth = 'true';
         }
 
         const request = {
