@@ -51,7 +51,7 @@ httpAuth.retrieveCredentials = function(tabId, url, submitUrl, forceCallback) {
     return new Promise((resolve, reject) => {
         keepass.retrieveCredentials((logins) => {
             resolve(logins);
-        }, tabId, url, submitUrl, forceCallback);
+        }, tabId, url, submitUrl, forceCallback, false, true);
     });
 };
 
