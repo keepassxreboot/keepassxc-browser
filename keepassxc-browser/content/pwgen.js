@@ -11,41 +11,18 @@ kpxcPassword.diffX = 0;
 kpxcPassword.diffY = 0;
 kpxcPassword.dialog = null;
 kpxcPassword.titleBar = null;
+kpxcPassword.useIcons = false;
 
-const DOMRectToArray = function(domRect) {
-    return [ domRect.bottom, domRect.height, domRect.left, domRect.right, domRect.top, domRect.width, domRect.x, domRect.y ];
-};
-
-/**
-* Detects if the input field appears or disappears -> show/hide the icon
-* - boundingClientRect with slightly (< -10) negative values -> hidden
-* - intersectionRatio === 0 -> hidden
-* - isIntersecting === false -> hidden
-* - intersectionRatio > 0 -> shown
-* - isIntersecting === true -> shown
-*/
 try {
     kpxcPassword.observer = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-            const rect = DOMRectToArray(entry.boundingClientRect);
-
-            if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
-                kpxcPassword.icon.style.display = 'none';
-            } else if (entry.intersectionRatio > 0 && entry.isIntersecting) {
-                kpxcPassword.icon.style.display = 'block';
-
-                // Wait for possible DOM animations
-                setTimeout(() => {
-                    kpxcPassword.setIconPosition(kpxcPassword.icon, entry.target);
-                }, 500);
-            }
-        }
+        kpxcUI.updateFromIntersectionObserver(kpxcPassword, entries);
     });
 } catch (err) {
     console.log(err);
 }
 
-kpxcPassword.init = function() {
+kpxcPassword.init = function(useIcons) {
+    kpxcPassword.useIcons = useIcons;
     if ('initPasswordGenerator' in _called) {
         return;
     }
@@ -58,24 +35,26 @@ kpxcPassword.initField = function(field, inputs, pos) {
         return;
     }
 
-    // Observer the visibility
-    if (kpxcPassword.observer) {
-        kpxcPassword.observer.observe(field);
-    }
-
     if (field.getAttribute('kpxc-password-generator')) {
         return;
     }
 
     field.setAttribute('kpxc-password-generator', true);
 
-    kpxcPassword.createIcon(field);
+    if (kpxcPassword.useIcons) {
+        // Observer the visibility
+        if (kpxcPassword.observer) {
+            kpxcPassword.observer.observe(field);
+        }
+        kpxcPassword.createIcon(field);
+    }
+
     kpxcPassword.inputField = field;
 
     let found = false;
     if (inputs) {
         for (let i = pos + 1; i < inputs.length; i++) {
-            if (inputs[i] && inputs[i].getAttribute('type') && inputs[i].getAttribute('type').toLowerCase() === 'password') {
+            if (inputs[i] && inputs[i].getLowerCaseAttribute('type') === 'password') {
                 field.setAttribute('kpxc-pwgen-next-field-id', inputs[i].getAttribute('data-kpxc-id'));
                 field.setAttribute('kpxc-pwgen-next-is-password-field', (i === 0));
                 found = true;
@@ -101,27 +80,33 @@ kpxcPassword.createIcon = function(field) {
             'offset': offset,
             'kpxc-pwgen-field-id': field.getAttribute('data-kpxc-id')
         });
-    icon.style.zIndex = '9999';
-    icon.style.width = String(size) + 'px';
-    icon.style.height = String(size) + 'px';
+    icon.style.zIndex = '10000000';
+    icon.style.width = Pixels(size);
+    icon.style.height = Pixels(size);
 
     icon.addEventListener('click', function(e) {
+        if (!e.isTrusted) {
+            return;
+        }
+
         e.preventDefault();
         kpxcPassword.showDialog(field, icon);
     });
 
-    kpxcPassword.setIconPosition(icon, field);
+    kpxcUI.setIconPosition(icon, field);
     kpxcPassword.icon = icon;
     document.body.appendChild(icon);
 };
 
-kpxcPassword.setIconPosition = function(icon, field) {
-    const rect = field.getBoundingClientRect();
-    const offset = Number(icon.getAttribute('offset'));
-    const size = Number(icon.getAttribute('size'));
-
-    icon.style.top = String((rect.top + document.scrollingElement.scrollTop) + offset + 1) + 'px';
-    icon.style.left = String((rect.left + document.scrollingElement.scrollLeft) + field.offsetWidth - size - offset) + 'px';
+kpxcPassword.removeIcon = function(field) {
+    if (field.getAttribute('kpxc-password-generator')) {
+        const pwgenIcons = document.querySelectorAll('.kpxc-pwgen-icon');
+        for (const i of pwgenIcons) {
+            if (i.getAttribute('kpxc-pwgen-field-id') === field.getAttribute('data-kpxc-id')) {
+                document.body.removeChild(i);
+            }
+        }
+    }
 };
 
 kpxcPassword.createDialog = function() {
@@ -140,45 +125,50 @@ kpxcPassword.createDialog = function() {
     const titleBar = kpxcUI.createElement('div', 'kpxc-pwgen-titlebar', {}, tr('passwordGeneratorTitle'));
     const closeButton = kpxcUI.createElement('div', 'kpxc-pwgen-close', {}, '×');
     closeButton.addEventListener('click', function(e) {
+        if (!e.isTrusted) {
+            return;
+        }
+
         kpxcPassword.openDialog();
     });
     titleBar.append(closeButton);
 
     const passwordRow = kpxcUI.createElement('div', 'kpxc-pwgen-password-row');
     const input = kpxcUI.createElement('input', 'kpxc-pwgen-input', { 'placeholder': tr('passwordGeneratorPlaceholder'), 'type': 'text', 'tabindex': '-1' });
-    const inputLabel = kpxcUI.createElement('label', 'kpxc-pwgen-bits', {}, tr('passwordGeneratorBits', '???'));
-    passwordRow.appendMultiple(input, inputLabel);
-
-    const nextFillRow = kpxcUI.createElement('div', 'kpxc-pwgen-nextfill-row');
-    const checkbox = kpxcUI.createElement('input', 'kpxc-pwgen-checkbox', { 'id': 'kpxc-pwgen-checkbox', 'type': 'checkbox' });
-    const checkboxLabel = kpxcUI.createElement('label', 'kpxc-pwgen-checkbox-label', { 'for': 'kpxc-pwgen-checkbox' }, tr('passwordGeneratorLabel'));
-    nextFillRow.appendMultiple(checkbox, checkboxLabel);
+    passwordRow.appendMultiple(input);
 
     // Buttons
     const buttonsRow = kpxcUI.createElement('div', 'kpxc-pwgen-buttons');
-    const generateButton = kpxcUI.createElement('button', 'kpxc-button kpxc-white-button', { 'id': 'kpxc-pwgen-btn-generate' }, tr('passwordGeneratorGenerate'));
-    const copyButton = kpxcUI.createElement('button', 'kpxc-button', { 'id': 'kpxc-pwgen-btn-copy' }, tr('passwordGeneratorCopy'));
-    const fillButton = kpxcUI.createElement('button', 'kpxc-button', { 'id': 'kpxc-pwgen-btn-fill' }, tr('passwordGeneratorFillAndCopy'));
+    const generateButton = kpxcUI.createElement('button', 'kpxc-button kpxc-orange-button', { 'id': 'kpxc-pwgen-btn-generate' }, tr('passwordGeneratorGenerate'));
+    const copyButton = kpxcUI.createElement('button', 'kpxc-button kpxc-orange-button', { 'id': 'kpxc-pwgen-btn-copy' }, tr('passwordGeneratorCopy'));
+    const fillButton = kpxcUI.createElement('button', 'kpxc-button kpxc-green-button', { 'id': 'kpxc-pwgen-btn-fill' }, tr('passwordGeneratorFill'));
 
     generateButton.addEventListener('click', function(e) {
         kpxcPassword.generate(e);
+    });
+
+    fillButton.addEventListener('click', function(e) {
+        kpxcPassword.fill(e);
+        kpxcPassword.openDialog();
     });
 
     copyButton.addEventListener('click', function(e) {
         kpxcPassword.copy(e);
     });
 
-    fillButton.addEventListener('click', function(e) {
-        kpxcPassword.fill(e);
-    });
-
     buttonsRow.appendMultiple(generateButton, copyButton, fillButton);
-    dialog.appendMultiple(titleBar, passwordRow, nextFillRow, buttonsRow);
+    dialog.appendMultiple(titleBar, passwordRow, buttonsRow);
     wrapper.append(dialog);
 
     const icon = $('.kpxc-pwgen-icon');
-    dialog.style.top = String(icon.offsetTop + icon.offsetHeight) + 'px';
-    dialog.style.left = icon.style.left;
+    if (icon) {
+        dialog.style.top = Pixels(icon.offsetTop + icon.offsetHeight);
+        dialog.style.left = icon.style.left;
+    } else {
+        const rect = document.activeElement.getBoundingClientRect();
+        dialog.style.top = Pixels(rect.top + rect.height);
+        dialog.style.left = Pixels(rect.left);
+    }
 
     document.body.append(wrapper);
 
@@ -209,7 +199,7 @@ kpxcPassword.openDialog = function() {
 };
 
 kpxcPassword.trigger = function() {
-    kpxcPassword.showDialog(kpxcPassword.inputField, kpxcPassword.icon);
+    kpxcPassword.showDialog(kpxcPassword.inputField || document.activeElement, kpxcPassword.icon);
 };
 
 kpxcPassword.showDialog = function(field, icon) {
@@ -224,8 +214,14 @@ kpxcPassword.showDialog = function(field, icon) {
 
     // Adjust the dialog location
     if (kpxcPassword.dialog) {
-        kpxcPassword.dialog.style.top = String(icon.offsetTop + icon.offsetHeight) + 'px';
-        kpxcPassword.dialog.style.left = icon.style.left;
+        if (icon) {
+            kpxcPassword.dialog.style.top = Pixels(icon.offsetTop + icon.offsetHeight);
+            kpxcPassword.dialog.style.left = icon.style.left;
+        } else {
+            const rect = document.activeElement.getBoundingClientRect();
+            kpxcPassword.dialog.style.top = Pixels(rect.top + rect.height);
+            kpxcPassword.dialog.style.left = Pixels(rect.left);
+        }
 
         kpxcPassword.dialog.setAttribute('kpxc-pwgen-field-id', field.getAttribute('data-kpxc-id'));
         kpxcPassword.dialog.setAttribute('kpxc-pwgen-next-field-id', field.getAttribute('kpxc-pwgen-next-field-id'));
@@ -244,27 +240,34 @@ kpxcPassword.showDialog = function(field, icon) {
     }
 };
 
-kpxcPassword.generate = function(e) {
+kpxcPassword.generate = async function(e) {
+    // This function can be also called from non-events
     if (e) {
+        if (!e.isTrusted) {
+            return;
+        }
         e.preventDefault();
     }
 
-    browser.runtime.sendMessage({
+    callbackGeneratedPassword(await browser.runtime.sendMessage({
         action: 'generate_password'
-    }).then(kpxcPassword.callbackGeneratedPassword).catch((err) => {
-        console.log(err);
-    });
+    }));
 };
 
 kpxcPassword.copy = function(e) {
-    e.preventDefault();
-    if (kpxcPassword.copyPasswordToClipboard()) {
-        kpxcPassword.greenButton('#kpxc-pwgen-btn-copy');
-        kpxcPassword.whiteButton('#kpxc-pwgen-btn-fill');
+    if (!e.isTrusted) {
+        return;
     }
+
+    e.preventDefault();
+    kpxcPassword.copyPasswordToClipboard();
 };
 
 kpxcPassword.fill = function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     e.preventDefault();
 
     // Use the active input field
@@ -285,19 +288,10 @@ kpxcPassword.fill = function(e) {
         }
 
         field.value = password.value;
-        if ($('.kpxc-pwgen-checkbox').checked) {
-            if (field.getAttribute('kpxc-pwgen-next-field-id')) {
-                const nextFieldId = field.getAttribute('kpxc-pwgen-next-field-id');
-                const nextField = $('input[data-kpxc-id=\'' + nextFieldId + '\']');
-                if (nextField) {
-                    nextField.value = password.value;
-                }
-            }
-        }
-
-        if (kpxcPassword.copyPasswordToClipboard()) {
-            kpxcPassword.greenButton('#kpxc-pwgen-btn-fill');
-            kpxcPassword.whiteButton('#kpxc-pwgen-btn-copy');
+        const nextFieldId = field.getAttribute('kpxc-pwgen-next-field-id');
+        const nextField = $('input[data-kpxc-id=\'' + nextFieldId + '\']');
+        if (nextField) {
+            nextField.value = password.value;
         }
     }
 };
@@ -312,33 +306,20 @@ kpxcPassword.copyPasswordToClipboard = function() {
     return false;
 };
 
-kpxcPassword.callbackGeneratedPassword = function(entries) {
+const callbackGeneratedPassword = function(entries) {
     if (entries && entries.length >= 1) {
         const errorMessage = $('#kpxc-pwgen-error');
         if (errorMessage) {
-            kpxcPassword.enableButtons();
-
-            $('.kpxc-pwgen-checkbox').parentElement.style.display = 'block';
-            $('.kpxc-pwgen-bits').style.display = 'block';
+            enableButtons();
 
             const input = $('.kpxc-pwgen-input');
             input.style.display = 'block';
             errorMessage.remove();
         }
 
-        kpxcPassword.whiteButton('#kpxc-pwgen-btn-fill');
-        kpxcPassword.whiteButton('#kpxc-pwgen-btn-copy');
         $('.kpxc-pwgen-input').value = entries[0].password;
-        if (entries[0].entropy) {
-            $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (Number.isNaN(entries[0].entropy) ? '???' : String(entries[0].entropy.toFixed(2))));
-        } else {
-            $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (isNaN(entries[0].login) ? '???' : entries[0].login));
-        }
     } else {
         if (document.querySelectorAll('div#kpxc-pwgen-error').length === 0) {
-            $('.kpxc-pwgen-checkbox').parentElement.style.display = 'none';
-            $('.kpxc-pwgen-bits').style.display = 'none';
-
             const input = $('.kpxc-pwgen-input');
             input.style.display = 'none';
 
@@ -347,34 +328,18 @@ kpxcPassword.callbackGeneratedPassword = function(entries) {
             errorMessage.style.whiteSpace = 'pre';
             input.parentElement.append(errorMessage);
 
-            kpxcPassword.disableButtons();
+            disableButtons();
         }
     }
 };
 
-kpxcPassword.onRequestPassword = function() {
-    browser.runtime.sendMessage({
-        action: 'generate_password'
-    }).then(kpxcPassword.callbackGeneratedPassword);
-};
-
-kpxcPassword.greenButton = function(button) {
-    $(button).classList.remove('kpxc-white-button');
-    $(button).classList.add('kpxc-green-button');
-};
-
-kpxcPassword.whiteButton = function(button) {
-    $(button).classList.remove('kpxc-green-button');
-    $(button).classList.add('kpxc-white-button');
-};
-
-kpxcPassword.enableButtons = function() {
+const enableButtons = function() {
     $('#kpxc-pwgen-btn-generate').textContent = tr('passwordGeneratorGenerate');
     $('#kpxc-pwgen-btn-copy').style.display = 'inline-block';
     $('#kpxc-pwgen-btn-fill').style.display = 'inline-block';
 };
 
-kpxcPassword.disableButtons = function() {
+const disableButtons = function() {
     $('#kpxc-pwgen-btn-generate').textContent = tr('passwordGeneratorTryAgain');
     $('#kpxc-pwgen-btn-copy').style.display = 'none';
     $('#kpxc-pwgen-btn-fill').style.display = 'none';
@@ -382,28 +347,10 @@ kpxcPassword.disableButtons = function() {
 
 // Handle icon position on window resize
 window.addEventListener('resize', function(e) {
-    if (kpxcPassword.inputField && kpxcPassword.icon) {
-        kpxcPassword.setIconPosition(kpxcPassword.icon, kpxcPassword.inputField);
-    }
+    kpxcUI.updateIconPosition(kpxcPassword);
 });
 
 // Handle icon position on scroll
 window.addEventListener('scroll', function(e) {
-    if (kpxcPassword.inputField && kpxcPassword.icon) {
-        kpxcPassword.setIconPosition(kpxcPassword.icon, kpxcPassword.inputField);
-    }
-});
-
-// Closes the dialog when clicked outside of it)
-document.addEventListener('click', function(e) {
-    if (kpxcPassword.dialog && kpxcPassword.dialog.style.display === 'block') {
-        const dialogEndX = kpxcPassword.dialog.offsetLeft + kpxcPassword.dialog.offsetWidth;
-        const dialogEndY = kpxcPassword.dialog.offsetTop + kpxcPassword.dialog.offsetHeight;
-
-        if ((e.clientX < kpxcPassword.dialog.offsetLeft || e.clientX > dialogEndX) ||
-            (e.clientY < kpxcPassword.dialog.offsetTop || e.clientY > dialogEndY) &&
-            !e.target.classList.contains('kpxc-pwgen-icon')) {
-            kpxcPassword.openDialog();
-        }
-    }
+    kpxcUI.updateIconPosition(kpxcPassword);
 });

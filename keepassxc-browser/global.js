@@ -21,6 +21,13 @@ var showNotification = function(message) {
     });
 };
 
+var AssociatedAction = {
+    NOT_ASSOCIATED: 0,
+    ASSOCIATED: 1,
+    NEW_ASSOCIATION: 2,
+    CANCELED: 3
+};
+
 /**
  * Transforms a valid match pattern into a regular expression
  * which matches all URLs included by that pattern.
@@ -71,6 +78,8 @@ var matchPatternToRegExp = function(pattern) {
     }
 
     if (path) {
+        path = trimURL(path);
+
         if (path === '*') {
             regex += '(/.*)?';
         } else if (path.charAt(0) !== '/') {
@@ -96,4 +105,9 @@ var slashNeededForUrl = function(pattern) {
 
 function tr(key, params) {
     return browser.i18n.getMessage(key, params);
+}
+
+// Removes everything after '?' from URL
+var trimURL = function(url) {
+    return url.indexOf('?') !== -1 ? url.split('?')[0] : url;
 }

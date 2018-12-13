@@ -69,25 +69,10 @@ body {
     height: 30px;
 }
 #login-filter {
-	outline:none;
+	outline: none;
 	border-radius: 4px;
 	border: 1px solid #ccc;
 	margin-bottom: 5px;
 	padding: 2px 10px;
 	width: 100%;
-}
-.credentials .groups {
-    display: none;
-    border-top: 1px solid #333;
-}
-.connected-database {
-    display: none;
-    font-size: 85%;
-    color: #787878;
-}
-.credentials .username-new {
-    display: none;
-}
-.credentials .username-exists {
-    display: none;
 }

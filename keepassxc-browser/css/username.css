@@ -1,0 +1,24 @@
+.kpxc-username-icon {
+    position: absolute;
+    cursor: pointer;
+}
+
+.kpxc-username-icon.lock {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/locked.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.lock-moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/locked.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.unlock {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/keepassxc.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.unlock-moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/keepassxc.svg') right no-repeat;
+    background-size: contain;
+}
