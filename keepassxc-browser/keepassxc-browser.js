@@ -1179,6 +1179,18 @@ cipFields.prepareCombinations = function(combinations) {
         // initialize form-submit for remembering credentials
         const fieldId = c.password || c.username;
         const field = _f(fieldId);
+
+        const usernameField = _f(c.username);
+
+        // Change icon for username field
+        browser.runtime.sendMessage({
+            action: 'get_status',
+            args: [ true ]
+        }).then((res) => {
+            kpxcUsernameField.init();
+            kpxcUsernameField.createIcon(usernameField, res.databaseClosed);
+        });
+
         if (field) {
             const form = field.closest('form');
             if (form && form.length > 0) {
@@ -1429,6 +1441,7 @@ cip.detectDatabaseChange = function(response) {
                 action: 'get_status',
                 args: [ true ]    // Set polling to true, this is an internal function call
             });
+            kpxcUsernameField.switchIcon(true); // Locked
         } else if (response.new !== '' && response.new !== response.old) {
             _called.retrieveCredentials = false;
             browser.runtime.sendMessage({
@@ -1436,6 +1449,7 @@ cip.detectDatabaseChange = function(response) {
             }).then((response) => {
                 cip.settings = response;
                 cip.initCredentialFields(true);
+                kpxcUsernameField.switchIcon(false); // Unlocked
 
                 // If user has requested a manual fill through context menu the actual credential filling
                 // is handled here when the opened database has been regognized. It's not a pretty hack.

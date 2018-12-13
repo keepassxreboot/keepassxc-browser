@@ -50,7 +50,8 @@
                 "global.js",
                 "jquery-3.3.1.min.js",
                 "jquery-ui.min.js",
-                "keepassxc-browser.js"
+                "keepassxc-browser.js",
+                "username-field.js"
             ],
             "css": [
                 "jquery-ui.min.css",
@@ -84,7 +85,9 @@
         }
     },
     "web_accessible_resources": [
-        "icons/key.svg"
+        "icons/key.svg",
+        "icons/lock.svg",
+        "icons/unlock.svg"
     ],
     "permissions": [
         "activeTab",

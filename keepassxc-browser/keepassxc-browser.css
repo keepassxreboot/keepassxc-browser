@@ -83,6 +83,11 @@ input.genpw-text {
     cursor: pointer;
 }
 
+.kpxc-username-icon {
+    position: absolute;
+    cursor: pointer;
+}
+
 .cip-genpw-icon.key {
     background: url('chrome-extension://__MSG_@@extension_id__/icons/key.svg') right no-repeat;
     background-size: contain;
@@ -90,6 +95,26 @@ input.genpw-text {
 
 .cip-genpw-icon.key-moz {
     background: url('moz-extension://__MSG_@@extension_id__/icons/key.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.lock {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/lock.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.lock-moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/lock.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.unlock {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/unlock.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.unlock-moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/unlock.svg') right no-repeat;
     background-size: contain;
 }
 

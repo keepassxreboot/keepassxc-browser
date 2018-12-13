@@ -169,6 +169,7 @@ kpxcEvent.onReconnect = function(callback, tab) {
 
 kpxcEvent.lockDatabase = function(callback, tab) {
     keepass.lockDatabase(tab).then((response => {
+        kpxcUsernameField.switchIcon(true); // Locked
         kpxcEvent.showStatus(true, tab, callback);
     }));
 };

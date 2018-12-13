@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1536"
+   height="1536"
+   version="1.1"
+   id="svg14"
+   sodipodi:docname="unlock.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <metadata
+     id="metadata20">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs18" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1198"
+     inkscape:window-height="728"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="0.15364583"
+     inkscape:cx="-400.99786"
+     inkscape:cy="790.05298"
+     inkscape:window-x="409"
+     inkscape:window-y="533"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg14" />
+  <path
+     d="m 1195.7626,768 c 47.2322,0 85.5526,38.32041 85.5526,85.55254 v 513.31516 c 0,47.2322 -38.3204,85.5526 -85.5526,85.5526 H 340.2373 c -47.23214,0 -85.55254,-38.3204 -85.55254,-85.5526 V 853.55254 C 254.68476,806.32041 293.00516,768 340.2373,768 h 28.5175 V 482.82487 c 0,-220.11955 179.12563,-399.245188 399.24518,-399.245188 220.11956,0 399.24512,179.125638 399.24512,399.245188 0,31.19103 -25.844,57.03503 -57.035,57.03503 h -57.035 c -31.191,0 -57.03502,-25.844 -57.03502,-57.03503 0,-125.65529 -102.48481,-228.1401 -228.14011,-228.1401 -125.65529,0 -228.1401,102.48481 -228.1401,228.1401 V 768 Z"
+     id="path12"
+     style="fill:#6cac4d;fill-opacity:1;stroke:#467720;stroke-width:39.30604172;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     inkscape:connector-curvature="0" />
+</svg>
