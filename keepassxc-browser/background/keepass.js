@@ -1,7 +1,6 @@
 'use strict';
 
 const keepass = {};
-
 keepass.associated = {'value': false, 'hash': null};
 keepass.keyPair = {publicKey: null, secretKey: null};
 keepass.serverPublicKey = '';
@@ -10,8 +9,8 @@ keepass.isConnected = false;
 keepass.isDatabaseClosed = false;
 keepass.isKeePassXCAvailable = false;
 keepass.isEncryptionKeyUnrecognized = false;
-keepass.currentKeePassXC = {'version': 0, 'versionParsed': 0};
-keepass.requiredKeePassXC = 230;
+keepass.currentKeePassXC = '';
+keepass.requiredKeePassXC = '2.3.0';
 keepass.nativeHostName = 'org.keepassxc.keepassxc_browser';
 keepass.nativePort = null;
 keepass.keySize = 24;
@@ -80,7 +79,7 @@ const kpErrors = {
 };
 
 browser.storage.local.get({
-    'latestKeePassXC': {'version': 0, 'versionParsed': 0, 'lastChecked': null},
+    'latestKeePassXC': {'version': '', 'lastChecked': null},
     'keyRing': {}}).then((item) => {
         keepass.latestKeePassXC = item.latestKeePassXC;
         keepass.keyRing = item.keyRing;
@@ -305,7 +304,7 @@ keepass.generatePassword = function(callback, tab, forceCallback) {
             return;
         }
 
-        if (keepass.currentKeePassXC.versionParsed < keepass.requiredKeePassXC) {
+        if (!keepass.compareVersion(keepass.requiredKeePassXC, keepass.currentKeePassXC)) {
             callback([]);
             return;
         }
@@ -409,7 +408,9 @@ keepass.associate = function(callback, tab) {
                     keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
                 }
                 else {
-                    keepass.setCryptoKey(id, idKey);    // Save the new identification public key as id key for the database
+                    // Use public key as identification key with older KeePassXC releases
+                    const savedKey = keepass.compareVersion('2.3.4', keepass.currentKeePassXC) ? idKey : key;
+                    keepass.setCryptoKey(id, savedKey); // Save the new identification public key as id key for the database
                     keepass.associated.value = true;
                     keepass.associated.hash = parsed.hash || 0;
                 }
@@ -781,10 +782,7 @@ keepass.deleteKey = function(hash) {
 
 keepass.setcurrentKeePassXCVersion = function(version) {
     if (version) {
-        keepass.currentKeePassXC = {
-            version: version,
-            versionParsed: Number(version.replace(/\./g, ''))
-        };
+        keepass.currentKeePassXC = version;
     }
 };
 
@@ -797,7 +795,7 @@ keepass.keePassXCUpdateAvailable = function() {
         }
     }
 
-    return (keepass.currentKeePassXC.versionParsed > 0 && keepass.currentKeePassXC.versionParsed < keepass.latestKeePassXC.versionParsed);
+    return keepass.compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version);
 };
 
 keepass.checkForNewKeePassXCVersion = function() {
@@ -810,7 +808,6 @@ keepass.checkForNewKeePassXCVersion = function() {
             if (json.tag_name) {
                 version = json.tag_name;
                 keepass.latestKeePassXC.version = version;
-                keepass.latestKeePassXC.versionParsed = Number(version.replace(/\./g, ''));
             }
         }
 
@@ -1071,4 +1068,14 @@ keepass.updateDatabase = function() {
             });
         });
     }, null);
+};
+
+keepass.compareVersion = function(minimum, current) {
+    if (!minimum || !current) {
+        return false;
+    }
+
+    const min = minimum.split('.', 3).map(s => s.padStart(4, '0')).join('.');
+    const cur = current.split('.', 3).map(s => s.padStart(4, '0')).join('.');
+    return min <= cur;
 };

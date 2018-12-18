@@ -158,10 +158,10 @@ options.initGeneralSettings = function() {
 };
 
 options.showKeePassXCVersions = function(response) {
-    if (response.current <= 0) {
+    if (response.current === '') {
         response.current = 'unknown';
     }
-    if (response.latest <= 0) {
+    if (response.latest === '') {
         response.latest = 'unknown';
     }
     $('#tab-general-settings .kphVersion:first em.yourVersion:first').text(response.current);
