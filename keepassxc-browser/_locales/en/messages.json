@@ -752,7 +752,7 @@
         "description": "About page text of contributors."
     },
     "optionsAboutLicenses": {
-        "message": "Licenses:",
+        "message": "Licenses",
         "description": "About page text of licenses."
     }
 }
