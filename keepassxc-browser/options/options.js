@@ -84,9 +84,12 @@ options.initGeneralSettings = function() {
     $('#tab-general-settings input[type=checkbox]').change(function() {
         const name = $(this).attr('name');
         options.settings[name] = $(this).is(':checked');
-        options.saveSettingsPromise().then((x) => {
+        options.saveSettingsPromise().then((updated) => {
             if (name === 'autoFillAndSend') {
                 browser.runtime.sendMessage({action: 'init_http_auth'});
+            } else if (name == 'automaticReconnect') {
+                const message = updated.automaticReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
+                browser.runtime.sendMessage({action: message});
             }
         });
     });

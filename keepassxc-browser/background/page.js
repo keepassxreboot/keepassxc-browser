@@ -9,7 +9,8 @@ const defaultSettings = {
     autoRetrieveCredentials: true,
     showNotifications: true,
     showLoginNotifications: true,
-    saveDomainOnly: true
+    saveDomainOnly: true,
+    automaticReconnect: true
 };
 
 var page = {};
@@ -48,6 +49,9 @@ page.initSettings = function() {
             }
             if (!('saveDomainOnly' in page.settings)) {
                 page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
+            }
+            if (!('automaticReconnect' in page.settings)) {
+                page.settings.automaticReconnect = defaultSettings.automaticReconnect;
             }
             browser.storage.local.set({'settings': page.settings});
             resolve(page.settings);

@@ -7,6 +7,7 @@ keepass.migrateKeyRing().then(() => {
             keepass.connectToNative();
             keepass.generateNewKeyPair();
             keepass.changePublicKeys(null).then((pkRes) => {
+                keepass.enableAutomaticReconnect();
                 keepass.getDatabaseHash((gdRes) => {}, null);
             });
         });

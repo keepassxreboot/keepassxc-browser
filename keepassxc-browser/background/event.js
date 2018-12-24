@@ -285,6 +285,8 @@ kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
     'associate': keepass.associate,
     'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
+    'enable_automatic_reconnect': keepass.enableAutomaticReconnect,
+    'disable_automatic_reconnect': keepass.disableAutomaticReconnect,
     'generate_password': keepass.generatePassword,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
     'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
