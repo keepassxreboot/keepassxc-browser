@@ -1401,22 +1401,26 @@ cip.init = function() {
     });
 };
 
+// Clears all from the content and background scripts, including autocomplete
+cip.clearAllFromPage = function() {
+    cipEvents.clearCredentials();
+
+    browser.runtime.sendMessage({
+        action: 'page_clear_logins'
+    });
+
+    // Switch back to default popup
+    browser.runtime.sendMessage({
+        action: 'get_status',
+        args: [ true ]    // Set polling to true, this is an internal function call
+    });
+};
+
 // Switch credentials if database is changed or closed
 cip.detectDatabaseChange = function(response) {
+    cip.clearAllFromPage();
     if (document.visibilityState !== 'hidden') {
-        if (response.new === '' && response.old !== '') {
-            cipEvents.clearCredentials();
-
-            browser.runtime.sendMessage({
-                action: 'page_clear_logins'
-            });
-
-            // Switch back to default popup
-            browser.runtime.sendMessage({
-                action: 'get_status',
-                args: [ true ] // Set polling to true, this is an internal function call
-            });
-        } else if (response.new !== '' && response.new !== response.old) {
+        if (response.new !== '' && response.new !== response.old) {
             _called.retrieveCredentials = false;
             browser.runtime.sendMessage({
                 action: 'load_settings',
@@ -1488,7 +1492,6 @@ cip.initCredentialFields = function(forceCall) {
         }
 
         if (cip.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (cip.url && cip.submitUrl)) {
-            _called.retrieveCredentials = true;
             browser.runtime.sendMessage({
                 action: 'retrieve_credentials',
                 args: [ cip.url, cip.submitUrl ]
