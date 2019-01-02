@@ -844,17 +844,6 @@ cipFields.traverseParents = function(element, predicate, resultFn = () => true, 
     return defaultValFn();
 };
 
-cipFields.getAriaHidden = function(field) {
-    // Check the main element
-    const val = field.getAttribute('aria-hidden');
-    if (val) {
-        return val;
-    }
-
-    const ariaFunc = f => f.getAttribute('aria-hidden');
-    return cipFields.traverseParents(field, ariaFunc, ariaFunc, () => 'false');
-};
-
 cipFields.getOverflowHidden = function(field) {
     return cipFields.traverseParents(field, f => f.style.overflow === 'hidden');
 };
@@ -912,11 +901,6 @@ cipFields.isVisible = function(field) {
 
     // Check element position and size
     if (rect.x < 0 || rect.y < 0 || rect.width < 8 || rect.height < 8) {
-        return false;
-    }
-
-    // Check aria-hidden property
-    if (cipFields.getAriaHidden(field) !== 'false') {
         return false;
     }
 
