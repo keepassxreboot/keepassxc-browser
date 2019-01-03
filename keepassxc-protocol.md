@@ -50,10 +50,20 @@ Response (success):
 ```
 
 ### get-databasehash
-Request (unencrypted):
+Unencrypted message:
 ```javascript
 {
 	"action": "get-databasehash"
+}
+```
+
+Request (**message is not encrypted**):
+```javascript
+{
+	"action": "get-databasehash",
+	"message": "<unencrypted message>",
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
