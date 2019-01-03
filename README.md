@@ -27,3 +27,7 @@ This can cause unsaved changes not to be saved. If you use this method it's impo
 ## Protocol
 
 The details about the messaging protocol used with the browser extension and KeePassXC can be found [here](keepassxc-protocol.md).
+
+## Translations
+
+Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
