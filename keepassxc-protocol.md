@@ -50,10 +50,20 @@ Response (success):
 ```
 
 ### get-databasehash
-Request (unencrypted):
+Unencrypted message:
 ```javascript
 {
 	"action": "get-databasehash"
+}
+```
+
+Request:
+```javascript
+{
+	"action": "get-databasehash",
+	"message": "<encrypted message>",
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
@@ -80,7 +90,7 @@ Request:
 ```javascript
 {
 	"action": "associate",
-	"message": encryptedMessage
+	"message": "<encrypted message>",
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
 	"clientID": "<clientID>"
 }
@@ -103,8 +113,7 @@ Unencrypted message:
 {
 	"action": "test-associate",
 	"id": "<saved database identifier>",
-	"key": "<saved database public key>",
-	"clientID": "<clientID>"
+	"key": "<saved database public key>"
 }
 ```
 
@@ -112,8 +121,9 @@ Request:
 ```javascript
 {
 	"action": "test-associate",
-	"message": encryptedMessage
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+	"message": "<encrypted message>",
+	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+	"clientID": "<clientID>"
 }
 ```
 
@@ -129,7 +139,7 @@ Response message data (success, decrypted):
 ```
 
 ### generate-password
-Request:
+Request (no unencrypted message is needed):
 ```javascript
 {
 	"action": "generate-password",
@@ -175,7 +185,7 @@ Request:
 ```javascript
 {
 	"action": "get-logins",
-	"message": encryptedMessage
+	"message": "<encrypted message>",
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
 	"clientID": "<clientID>"
 }
@@ -221,7 +231,7 @@ Request:
 ```javascript
 {
 	"action": "set-login",
-	"message": encryptedMessage
+	"message": "<encrypted message>",
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
 	"clientID": "<clientID>"
 }
@@ -241,10 +251,18 @@ Response message data (success, decrypted):
 ```
 
 ### lock-database
+Unencrypted message:
+```javascript
+{
+	"action": "lock-database"
+}
+```
+
 Request:
 ```javascript
 {
 	"action": "lock-database",
+	"message": "<encrypted message>",
 	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
 	"clientID": "<clientID>"
 }
