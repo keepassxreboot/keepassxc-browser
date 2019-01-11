@@ -795,7 +795,7 @@ keepass.keePassXCUpdateAvailable = function() {
         }
     }
 
-    return keepass.compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version);
+    return keepass.compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version, false);
 };
 
 keepass.checkForNewKeePassXCVersion = function() {
@@ -1070,12 +1070,12 @@ keepass.updateDatabase = function() {
     }, null);
 };
 
-keepass.compareVersion = function(minimum, current) {
+keepass.compareVersion = function(minimum, current, canBeEqual = true) {
     if (!minimum || !current) {
         return false;
     }
 
     const min = minimum.split('.', 3).map(s => s.padStart(4, '0')).join('.');
     const cur = current.split('.', 3).map(s => s.padStart(4, '0')).join('.');
-    return min <= cur;
+    return (canBeEqual ? (min <= cur) : (min < cur));
 };
