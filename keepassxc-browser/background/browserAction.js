@@ -6,6 +6,10 @@ const BLINK_TIMEOUT_DEFAULT = 7500;
 const BLINK_TIMEOUT_REDIRECT_THRESHOLD_TIME_DEFAULT = -1;
 const BLINK_TIMEOUT_REDIRECT_COUNT_DEFAULT = 1;
 
+// Milliseconds for intervall (e.g. to update browserAction)
+const _interval = 250;
+let _loop = null;
+
 browserAction.show = function(callback, tab) {
     let data = {};
     if (!page.tabs[tab.id] || page.tabs[tab.id].stack.length === 0) {
@@ -39,6 +43,7 @@ browserAction.update = function(interval) {
     if (data.visibleForMilliSeconds !== undefined && data.visibleForMilliSeconds !== -1) {
         if (data.visibleForMilliSeconds <= 0) {
             browserAction.stackPop(page.currentTabId);
+            browserAction.disableLoop();
             browserAction.show(null, {'id': page.currentTabId});
             page.clearCredentials(page.currentTabId);
             return;
@@ -83,6 +88,7 @@ browserAction.showDefault = function(callback, tab) {
         }
 
         browserAction.stackUnshift(stackData, tab.id);
+        browserAction.disableLoop();
         browserAction.show(null, tab);
     });
 };
@@ -239,6 +245,7 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
             popup: 'popup_remember.html'
         };
 
+        browserAction.activateLoop();
         browserAction.stackPush(stackData, id);
 
         page.tabs[id].credentials = {
@@ -321,3 +328,16 @@ browserAction.ignoreSite = function(url) {
     });
 };
 
+// Interval which updates the browserAction (e.g. blinking icon)
+browserAction.activateLoop = function() {
+    if (_loop === null) {
+        _loop = setInterval(function() {
+            browserAction.update(_interval);
+        }, _interval);
+    }
+};
+
+browserAction.disableLoop = function() {
+    clearInterval(_loop);
+    _loop = null;
+};
