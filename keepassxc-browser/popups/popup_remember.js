@@ -50,7 +50,7 @@ function _initialize(tab) {
                 // Another group name has been specified
                 const [ gname, guuid ] = getDefaultGroup(result.groups[0].children, result.defaultGroup);
                 if (gname === '' && guuid === '') {
-                    showNotification(tr('popupRememberErrorDefaultGroupNotFound'));
+                    showNotification(tr('popupRememberInfoDefaultGroupNotFound'));
 
                     // Create a new group
                     browser.runtime.sendMessage({
@@ -216,7 +216,7 @@ function _initialize(tab) {
                 const currentTab = tabs[0];
                 browser.runtime.getBackgroundPage().then((global) => {
                     browser.tabs.sendMessage(currentTab.id, {
-                        action: 'ignore-site',
+                        action: 'ignore_site',
                         args: [ _tab.credentials.url ]
                     });
                     _close();

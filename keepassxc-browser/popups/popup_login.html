@@ -1,15 +1,17 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title data-i18n="popupTitle"></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css" />
     <link rel="stylesheet" href="../options/bootstrap.min.css" />
-    <script type="text/javascript" src="../browser-polyfill.min.js"></script>
-    <script type="text/javascript" src="../global.js"></script>
-    <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../options/bootstrap.min.js" /></script>
-    <script type="text/javascript" src="popup_functions.js"></script>
-    <script type="text/javascript" src="popup_login.js"></script>
+    <script src="../browser-polyfill.min.js"></script>
+    <script src="../global.js"></script>
+    <script src="../jquery-3.3.1.min.js"></script>
+    <script src="../options/bootstrap.min.js"></script>
+    <script src="popup_functions.js"></script>
+    <script src="popup_login.js"></script>
+    <script defer src="../translate.js"></script>
   </head>
   <body>
     <div class="container">
@@ -21,7 +23,7 @@
         <div id="update-available" class="alert alert-danger">
           <span data-i18n="popupUpdateAvailable"></span>
           <br />
-          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"/></a>.
+          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"></span></a>.
         </div>
       </div>
 
@@ -44,6 +46,5 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="../translate.js"></script>
   </body>
 </html>

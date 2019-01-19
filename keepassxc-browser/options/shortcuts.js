@@ -74,8 +74,8 @@ async function updateShortcut(shortcut) {
             shortcut: document.querySelector('#' + shortcut).value
         });
         createBanner('success', shortcut);
-    } catch (e) {
-        console.log('Cannot change shortcut: ' + e);
+    } catch (err) {
+        console.log('Cannot change shortcut: ' + err);
         createBanner('danger', shortcut);
     }
 }

@@ -94,7 +94,7 @@ options.initGeneralSettings = function() {
     $('#tab-general-settings input[type=checkbox]').change(function() {
         const name = $(this).attr('name');
         options.settings[name] = $(this).is(':checked');
-        options.saveSettingsPromise().then((x) => {
+        options.saveSettingsPromise().then((updated) => {
             if (name === 'autoFillAndSend') {
                 browser.runtime.sendMessage({ action: 'init_http_auth' });
             } else if (name === 'defaultGroupAlwaysAsk') {
@@ -107,6 +107,9 @@ options.initGeneralSettings = function() {
                     $('#defaultGroupButton').prop('disabled', false);
                     $('#defaultGroupButtonReset').prop('disabled', false);
                 }
+            } else if (name == 'automaticReconnect') {
+                const message = updated.automaticReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
+                browser.runtime.sendMessage({ action: message });
             }
         });
     });
@@ -330,6 +333,10 @@ options.initCustomCredentialFields = function() {
 };
 
 options.initSitePreferences = function() {
+    if (!options.settings['sitePreferences']) {
+        options.settings['sitePreferences'] = [];
+    }
+
     $('#dialogDeleteSite').modal({ keyboard: true, show: false, backdrop: true });
     $('#tab-site-preferences tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
