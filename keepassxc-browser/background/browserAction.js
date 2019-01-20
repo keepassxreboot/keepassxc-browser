@@ -15,8 +15,7 @@ browserAction.show = function(callback, tab) {
     if (!page.tabs[tab.id] || page.tabs[tab.id].stack.length === 0) {
         browserAction.showDefault(callback, tab);
         return;
-    }
-    else {
+    } else {
         data = page.tabs[tab.id].stack[page.tabs[tab.id].stack.length - 1];
     }
 
@@ -38,13 +37,13 @@ browserAction.update = function(interval) {
         return;
     }
 
-    let data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
+    const data = page.tabs[page.currentTabId].stack[page.tabs[page.currentTabId].stack.length - 1];
 
     if (data.visibleForMilliSeconds !== undefined && data.visibleForMilliSeconds !== -1) {
         if (data.visibleForMilliSeconds <= 0) {
             browserAction.stackPop(page.currentTabId);
             browserAction.disableLoop();
-            browserAction.show(null, {'id': page.currentTabId});
+            browserAction.show(null, { 'id': page.currentTabId });
             page.clearCredentials(page.currentTabId);
             return;
         }
@@ -72,7 +71,7 @@ browserAction.update = function(interval) {
 };
 
 browserAction.showDefault = function(callback, tab) {
-    let stackData = {
+    const stackData = {
         level: 1,
         iconType: 'normal',
         popup: 'popup.html'
@@ -100,7 +99,7 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
         level = 1;
     }
 
-    let stackData = {
+    const stackData = {
         level: level,
         icon: icon
     };
@@ -123,13 +122,12 @@ browserAction.stackAdd = function(callback, tab, icon, popup, level, push, visib
 
     if (push) {
         browserAction.stackPush(stackData, id);
-    }
-    else {
+    } else {
         browserAction.stackUnshift(stackData, id);
     }
 
     if (!dontShow) {
-        browserAction.show(null, {'id': id});
+        browserAction.show(null, { 'id': id });
     }
 };
 
@@ -142,17 +140,15 @@ browserAction.removeLevelFromStack = function(callback, tab, level, type, dontSh
         type = '<=';
     }
 
-    let newStack = [];
+    const newStack = [];
     for (const i of page.tabs[tab.id].stack) {
-        if (
-            (type == '<' && i.level >= level) ||
-            (type == '<=' && i.level > level) ||
-            (type == '=' && i.level != level) ||
-            (type == '==' && i.level != level) ||
-            (type == '!=' && i.level == level) ||
-            (type == '>' && i.level <= level) ||
-            (type == '>=' && i.level < level)
-        ) {
+        if ((type === '<' && i.level >= level) ||
+            (type === '<=' && i.level > level) ||
+            (type === '=' && i.level !== level) ||
+            (type === '==' && i.level !== level) ||
+            (type === '!=' && i.level === level) ||
+            (type === '>' && i.level <= level) ||
+            (type === '>=' && i.level < level)) {
             newStack.push(i);
         }
     }
@@ -199,10 +195,8 @@ browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
             browserAction.stackPop(tab.id);
             browserAction.show(null, {"id": tab.id});
             page.clearCredentials(tab.id);
-            return;
-        }
-        else if (!isNaN(data.visibleForPageUpdates) && data.redirectOffset > 0 && currentMS >= data.redirectOffset) {
-            data.visibleForPageUpdates = data.visibleForPageUpdates - 1;
+        } else if (!isNaN(data.visibleForPageUpdates) && data.redirectOffset > 0 && currentMS >= data.redirectOffset) {
+            data.visibleForPageUpdates -= 1;
         }
     }
 };
@@ -256,17 +250,18 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
             list: credentialsList
         };
 
-        browserAction.show(null, {'id': id});
+        browserAction.show(null, { 'id': id });
 
         if (page.settings.showLoginNotifications) {
             const message = tr('rememberCredentialsPopup');
             const buttons = [
-            {
-                'title': tr('popupButtonClose')
-            },
-            {
-                'title': tr('popupButtonIgnore')
-            }];
+                {
+                    'title': tr('popupButtonClose')
+                },
+                {
+                    'title': tr('popupButtonIgnore')
+                }
+            ];
 
             browser.notifications.create({
                 'type': 'basic',
@@ -293,7 +288,7 @@ function getValueOrDefault(settings, key, defaultVal, min) {
             val = defaultVal;
         }
         return val;
-    } catch(e) {
+    } catch (e) {
         return defaultVal;
     }
 }
@@ -312,16 +307,16 @@ browserAction.generateIconName = function(iconType, icon) {
 };
 
 browserAction.ignoreSite = function(url) {
-    browser.windows.getCurrent().then((win) => {
+    browser.windows.getCurrent().then(() => {
         // Get current active window
         browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
             const tab = tabs[0];
 
             // Send the message to the current tab's content script
-            browser.runtime.getBackgroundPage().then((global) => {
+            browser.runtime.getBackgroundPage().then(() => {
                 browser.tabs.sendMessage(tab.id, {
-                    action: 'ignore-site',
-                    args: [url]
+                    action: 'ignore_site',
+                    args: [ url ]
                 });
             });
         });

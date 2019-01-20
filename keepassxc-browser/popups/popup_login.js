@@ -2,14 +2,14 @@
 
 $(function() {
     browser.runtime.getBackgroundPage().then((global) => {
-        browser.tabs.query({'active': true, 'currentWindow': true}).then((tabs) => {
+        browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
             if (tabs.length === 0) {
                 return; // For example: only the background devtools or a popup are opened
             }
             const tab = tabs[0];
 
             const logins = global.page.tabs[tab.id].loginList;
-            let ll = document.getElementById('login-list');
+            const ll = document.getElementById('login-list');
             for (let i = 0; i < logins.length; i++) {
                 const a = document.createElement('a');
                 a.textContent = logins[i];
@@ -25,17 +25,17 @@ $(function() {
                 });
                 ll.appendChild(a);
             }
-			
+
             if (logins.length > 1) {
                 document.getElementById('filter-block').style = '';
-                let filter = document.getElementById('login-filter');
+                const filter = document.getElementById('login-filter');
                 filter.addEventListener('keyup', (e) => {
-                    let val = filter.value;
-                    let re = new RegExp(val, 'i');
-                    let links = ll.getElementsByTagName('a');
-                    for (let i in links) {
+                    const val = filter.value;
+                    const re = new RegExp(val, 'i');
+                    const links = ll.getElementsByTagName('a');
+                    for (const i in links) {
                         if (links.hasOwnProperty(i)) {
-                            let found = String(links[i].textContent).match(re) !== null;
+                            const found = String(links[i].textContent).match(re) !== null;
                             links[i].style = found ? '' : 'display: none;';
                         }
                     }
@@ -57,7 +57,7 @@ $(function() {
     $('#reopen-database-button').click(function() {
         browser.runtime.sendMessage({
             action: 'get_status',
-            args: [ false, true ]    // Set forcePopup to true
+            args: [ false, true ] // Set forcePopup to true
         });
     });
 });

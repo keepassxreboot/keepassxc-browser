@@ -1,6 +1,6 @@
 'use strict';
 
-function status_response(r) {
+function statusResponse(r) {
     $('#initial-state').hide();
     $('#error-encountered').hide();
     $('#need-reconfigure').hide();
@@ -12,27 +12,21 @@ function status_response(r) {
     if (!r.keePassXCAvailable) {
         $('#error-message').html(r.error);
         $('#error-encountered').show();
-    }
-    else if (r.keePassXCAvailable && r.databaseClosed) {
+    } else if (r.keePassXCAvailable && r.databaseClosed) {
         $('#database-error-message').html(r.error);
         $('#database-not-opened').show();
-    }
-    else if (!r.configured) {
+    } else if (!r.configured) {
         $('#not-configured').show();
-    }
-    else if (r.encryptionKeyUnrecognized) {
+    } else if (r.encryptionKeyUnrecognized) {
         $('#need-reconfigure').show();
         $('#need-reconfigure-message').html(r.error);
-    }
-    else if (!r.associated) {
+    } else if (!r.associated) {
         $('#need-reconfigure').show();
         $('#need-reconfigure-message').html(r.error);
-    }
-    else if (r.error !== null) {
+    } else if (r.error !== null) {
         $('#error-encountered').show();
         $('#error-message').html(r.error);
-    }
-    else {
+    } else {
         $('#configured-and-associated').show();
         $('#associated-identifier').html(r.identifier);
         $('#lock-database-button').show();
@@ -57,22 +51,22 @@ $(function() {
     $('#reload-status-button').click(function() {
         browser.runtime.sendMessage({
             action: 'reconnect'
-        }).then(status_response);
+        }).then(statusResponse);
     });
 
     $('#reopen-database-button').click(function() {
         browser.runtime.sendMessage({
             action: 'get_status',
             args: [ false, true ]    // Set forcePopup to true
-        }).then(status_response);
+        }).then(statusResponse);
     });
 
     $('#redetect-fields-button').click(function() {
-        browser.tabs.query({"active": true, "currentWindow": true}).then(function(tabs) {
+        browser.tabs.query({ 'active': true, 'currentWindow': true }).then(function(tabs) {
             if (tabs.length === 0) {
                 return; // For example: only the background devtools or a popup are opened
             }
-            let tab = tabs[0];
+            const tab = tabs[0];
 
             browser.tabs.sendMessage(tab.id, {
                 action: 'redetect_fields'
@@ -83,10 +77,10 @@ $(function() {
     $('#lock-database-button').click(function() {
         browser.runtime.sendMessage({
             action: 'lock-database'
-        }).then(status_response);
+        }).then(statusResponse);
     });
 
     browser.runtime.sendMessage({
-        action: "get_status"
-    }).then(status_response);
+        action: 'get_status'
+    }).then(statusResponse);
 });

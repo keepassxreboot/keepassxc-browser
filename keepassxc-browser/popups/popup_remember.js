@@ -37,7 +37,7 @@ function _initialize(tab) {
         e.preventDefault();
 
         //  Only one entry which could be updated
-        if(_tab.credentials.list.length === 1) {
+        if (_tab.credentials.list.length === 1) {
             // Use the current username if it's empty
             if (!_tab.credentials.username) {
                 _tab.credentials.username = _tab.credentials.list[0].login;
@@ -47,22 +47,20 @@ function _initialize(tab) {
                 action: 'update_credentials',
                 args: [_tab.credentials.list[0].uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
             }).then(_verifyResult);
-        }
-        else {
+        } else {
             $('.credentials:first .username-new:first strong:first').text(_tab.credentials.username);
             $('.credentials:first .username-exists:first strong:first').text(_tab.credentials.username);
 
             if (_tab.credentials.usernameExists) {
                 $('.credentials:first .username-new:first').hide();
                 $('.credentials:first .username-exists:first').show();
-            }
-            else {
+            } else {
                 $('.credentials:first .username-new:first').show();
                 $('.credentials:first .username-exists:first').hide();
             }
 
             for (let i = 0; i < _tab.credentials.list.length; i++) {
-                let $a = $('<a>')
+                const $a = $('<a>')
                     .attr('href', '#')
                     .text(_tab.credentials.list[i].login + ' (' + _tab.credentials.list[i].name + ')')
                     .data('entryId', i)
@@ -84,7 +82,7 @@ function _initialize(tab) {
                                 _verifyResult('error');
                                 return;
                             }
-                            
+
                             // Show a notification if the user tries to update credentials using the old password
                             if (credentials[entryId].password === _tab.credentials.password) {
                                 showNotification('Error: Credentials not updated. The password has not been changed.');
@@ -122,8 +120,8 @@ function _initialize(tab) {
                 const tab = tabs[0];
                 browser.runtime.getBackgroundPage().then((global) => {
                     browser.tabs.sendMessage(tab.id, {
-                        action: 'ignore-site',
-                        args: [_tab.credentials.url]
+                        action: 'ignore_site',
+                        args: [ _tab.credentials.url ]
                     });
                     _close();
                 });
@@ -132,12 +130,11 @@ function _initialize(tab) {
     });
 }
 
-function _connected_database(db) {
+function _connectedDatabase(db) {
     if (db.count > 1 && db.identifier) {
         $('.connected-database:first em:first').text(db.identifier);
         $('.connected-database:first').show();
-    }
-    else {
+    } else {
         $('.connected-database:first').hide();
     }
 }
@@ -164,7 +161,7 @@ function _close() {
 $(function() {
     browser.runtime.sendMessage({
         action: 'stack_add',
-        args: ['icon_remember_red_background_19x19.png', 'popup_remember.html', 10, true, 0]
+        args: [ 'icon_remember_red_background_19x19.png', 'popup_remember.html', 10, true, 0 ]
     });
 
     browser.runtime.sendMessage({
@@ -173,5 +170,5 @@ $(function() {
 
     browser.runtime.sendMessage({
         action: 'get_connected_database'
-    }).then(_connected_database);
+    }).then(_connectedDatabase);
 });
