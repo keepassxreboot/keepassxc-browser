@@ -143,6 +143,10 @@
         "message": "Skip",
         "description": "Skip button text when choosing custom login fields."
     },
+    "defineMore": {
+        "message": "Show more",
+        "description": "More button text when choosing custom login fields."
+    },
     "defineAgain": {
         "message": "Again",
         "description": "Again button text when choosing custom login fields."

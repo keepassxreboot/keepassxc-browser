@@ -539,13 +539,21 @@ cipDefine.initDescription = function() {
             if (jQuery(this).data('step') === '1') {
                 cipDefine.selection.username = null;
                 cipDefine.prepareStep2();
-                cipDefine.markAllPasswordFields(jQuery('#b2c-cipDefine-fields'));
+                cipDefine.markAllPasswordFields(jQuery('#b2c-cipDefine-fields'), false);
             }
             else if (jQuery(this).data('step') === '2') {
                 cipDefine.selection.password = null;
                 cipDefine.prepareStep3();
                 cipDefine.markAllStringFields(jQuery('#b2c-cipDefine-fields'));
             }
+        });
+    const $btnMore = jQuery('<button>').text(tr('defineMore')).attr('id', 'b2c-btn-more')
+        .addClass('btn').addClass('btn-info')
+        .css('margin-right', '5px')
+        .css('margin-left', '5px')
+        .click(function() {
+            cipDefine.prepareStep2();
+            cipDefine.markAllPasswordFields(jQuery('#b2c-cipDefine-fields'), true);
         });
     const $btnAgain = jQuery('<button>').text(tr('defineAgain')).attr('id', 'b2c-btn-again')
         .addClass('btn').addClass('btn-warning')
@@ -598,6 +606,7 @@ cipDefine.initDescription = function() {
     $description.append($btnSkip);
     $description.append($btnAgain);
     $description.append($btnDismiss);
+    $description.append($btnMore);
 
     const location = cip.getDocumentLocation();
     if (cip.settings['defined-custom-fields'] && cip.settings['defined-custom-fields'][location]) {
@@ -656,14 +665,18 @@ cipDefine.markAllUsernameFields = function($chooser) {
     cipDefine.markFields($chooser, cipFields.inputQueryPattern);
 };
 
-cipDefine.markAllPasswordFields = function($chooser) {
+cipDefine.markAllPasswordFields = function($chooser, more) {
     cipDefine.eventFieldClick = function(e) {
         cipDefine.selection.password = jQuery(this).data('cip-id');
         jQuery(this).addClass('b2c-fixed-password-field').text(tr('password')).unbind('click');
         cipDefine.prepareStep3();
         cipDefine.markAllStringFields(jQuery('#b2c-cipDefine-fields'));
     };
-    cipDefine.markFields($chooser, 'input[type=\'password\']');
+    if (more) {
+      cipDefine.markFields($chooser, cipFields.inputQueryPattern);
+    } else {
+      cipDefine.markFields($chooser, 'input[type=\'password\']');
+    }
 };
 
 cipDefine.markAllStringFields = function($chooser) {
@@ -705,6 +718,7 @@ cipDefine.prepareStep1 = function() {
     jQuery('button#b2c-btn-skip:first').data('step', '1').show();
     jQuery('button#b2c-btn-confirm:first').hide();
     jQuery('button#b2c-btn-again:first').hide();
+    jQuery('button#b2c-btn-more:first').hide();
 };
 
 cipDefine.prepareStep2 = function() {
@@ -713,6 +727,7 @@ cipDefine.prepareStep2 = function() {
     jQuery('div:first', jQuery('div#b2c-cipDefine-description')).text(tr('defineChoosePassword'));
     jQuery('button#b2c-btn-skip:first').data('step', '2');
     jQuery('button#b2c-btn-again:first').show();
+    jQuery('button#b2c-btn-more:first').show();
 };
 
 cipDefine.prepareStep3 = function() {
@@ -724,6 +739,7 @@ cipDefine.prepareStep3 = function() {
     jQuery('div.b2c-fixed-field:not(.b2c-fixed-password-field,.b2c-fixed-username-field)', jQuery('div#b2c-cipDefine-fields')).remove();
     jQuery('button#b2c-btn-confirm:first').show();
     jQuery('button#b2c-btn-skip:first').data('step', '3').hide();
+    jQuery('button#b2c-btn-more:first').hide();
     jQuery('div:first', jQuery('div#b2c-cipDefine-description')).text(tr('defineConfirmSelection'));
 };
 
@@ -798,7 +814,7 @@ cipFields.isSearchField = function(target) {
     if (closestForm) {
         // Check form action
         const formAction = closestForm.getAttribute('action');
-        if (formAction && (formAction.toLowerCase().includes('search') && 
+        if (formAction && (formAction.toLowerCase().includes('search') &&
             !formAction.toLowerCase().includes('research'))) {
             return true;
         }
@@ -806,7 +822,7 @@ cipFields.isSearchField = function(target) {
         // Check form class and id
         const closestFormId = closestForm.getAttribute('id');
         const closestFormClass = closestForm.className;
-        if (closestFormClass && (closestForm.className.toLowerCase().includes('search') || 
+        if (closestFormClass && (closestForm.className.toLowerCase().includes('search') ||
             (closestFormId && closestFormId.toLowerCase().includes('search') && !closestFormId.toLowerCase().includes('research')))) {
             return true;
         }
@@ -1147,7 +1163,7 @@ cipObserverHelper.inputTypes = [
 // Ignores all nodes that doesn't contain elements
 cipObserverHelper.ignoredNode = function(target) {
     if (target.nodeType === Node.ATTRIBUTE_NODE ||
-        target.nodeType === Node.TEXT_NODE || 
+        target.nodeType === Node.TEXT_NODE ||
         target.nodeType === Node.CDATA_SECTION_NODE ||
         target.nodeType === Node.PROCESSING_INSTRUCTION_NODE ||
         target.nodeType === Node.COMMENT_NODE ||
@@ -1166,7 +1182,7 @@ cipObserverHelper.getInputs = function(target) {
 
     // Filter out any input fields with type 'hidden' right away
     let inputFields = [];
-    Array.from(target.getElementsByTagName('input')).forEach(e => { 
+    Array.from(target.getElementsByTagName('input')).forEach(e => {
         if (e.type !== 'hidden') {
             inputFields.push(e);
         }
@@ -1203,7 +1219,7 @@ cipObserverHelper.ignoredElement = function(target) {
     }
 
     // Ignore KeePassXC-Browser classes
-    if (target.className && target.className !== undefined && 
+    if (target.className && target.className !== undefined &&
         (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
         return true;
     }
@@ -1226,7 +1242,7 @@ cipObserverHelper.handleObserverAdd = function(target) {
     if (inputs.length > neededLength && !_observerIds.includes(id)) {
         // Save target element id for preventing multiple calls to initCredentialsFields()
         _observerIds.push(id);
-        
+
         // Sometimes the settings haven't been loaded before new input fields are detected
         if (Object.keys(cip.settings).length === 0) {
             cip.init();
@@ -1386,7 +1402,7 @@ cip.initCredentialFields = function(forceCall) {
                 }
             }
         }
-        
+
         const inputs = cipFields.getAllFields();
         if (inputs.length === 0) {
             return;
@@ -1691,7 +1707,7 @@ cip.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
                 cip.setValue(currentField, cip.credentials[pos].totp);
             }
         }
-    });    
+    });
 };
 
 cip.setValue = function(field, value) {
