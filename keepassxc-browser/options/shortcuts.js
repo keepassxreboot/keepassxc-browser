@@ -8,17 +8,17 @@ document.querySelectorAll('input').forEach((b) => {
     b.addEventListener('keyup', e => handleKeyUp(e));
 });
 
-const saveButtons = document.querySelectorAll('.btn-primary');
+const saveButtons = document.querySelectorAll('.save-btn');
 for (const b of saveButtons) {
     b.addEventListener('click', e => {
-        updateShortcut(b.parentElement.children[1].getAttribute('id'))
+        updateShortcut(b.parentElement.parentElement.children[0].getAttribute('id'))
     });
 }
 
-const resetButtons = document.querySelectorAll('.btn-danger');
+const resetButtons = document.querySelectorAll('.reset-btn');
 for (const b of resetButtons) {
     b.addEventListener('click', e => {
-        resetShortcut(b.parentElement.children[1].getAttribute('id'))
+        resetShortcut(b.parentElement.parentElement.children[0].getAttribute('id'))
     });
 }
 
@@ -31,7 +31,7 @@ async function handleKeyDown(e) {
         tempArray.push(key);
         keyArray.push(key);
     }
-};
+}
 
 async function handleKeyUp(e) {
     if (!e.repeat) {
@@ -55,7 +55,7 @@ async function handleKeyUp(e) {
             e.currentTarget.value = text;
         }
     }
-};
+}
 
 async function updateKeys() {
     const commands = await browser.commands.getAll();
@@ -65,53 +65,60 @@ async function updateKeys() {
             elem.value = c.shortcut;
         }
     }
-};
+}
 
 async function updateShortcut(shortcut) {
     try {
          await browser.commands.update({
             name: shortcut,
-            shortcut: document.querySelector('#' + shortcut).value
+            shortcut: document.querySelector(`#${shortcut}`).value
         });
-        createBanner('success', shortcut);
+        createAlert('success', shortcut);
     } catch(e) {
-        console.log('Cannot change shortcut: ' + e);
-        createBanner('danger', shortcut);
+        console.log('Cannot change shortcut: ', e);
+        createAlert('danger', shortcut);
     }
-};
+}
 
 async function resetShortcut(shortcut) {
     await browser.commands.reset(shortcut);
-    createBanner('info', shortcut);
+    createAlert('info', shortcut);
     updateKeys();
-};
+}
 
 // Ctrl behaves differently on different OS's. macOS needs to return MacCtrl instead of Ctrl (which will be handled as Command)
 function handleControl() {
     return (navigator.platform === 'MacIntel') ? 'MacCtrl' : 'Ctrl';
 }
 
-// Possible types: success, info, danger
-function createBanner(type, shortcut) {
-    const banner = document.createElement('div');
-    banner.classList.add('alert', 'alert-dismissible', 'alert-' + type, 'fade', 'in');
+const alertArea = document.querySelector('#alert-area');
+
+/**
+ * Creates a new alert that will disappear after 5 seconds
+ * @param {'success' | 'danger' | 'info' } type - type of the alert
+ * @param shortcut
+ */
+function createAlert(type, shortcut) {
+    const alert = document.createElement('div');
+    alert.classList.add('alert', 'alert-dismissible', `alert-${type}`, 'fade', 'in');
+    alert.role = 'alert';
 
     if (type === 'success') {
-        banner.textContent = tr('optionsShortcutsSuccess', shortcut);
+        alert.textContent = tr('optionsShortcutsSuccess', shortcut);
     } else if (type === 'info') {
-        banner.textContent = tr('optionsShortcutsInfo', shortcut);
+        alert.textContent = tr('optionsShortcutsInfo', shortcut);
     } else if (type === 'danger') {
-        banner.textContent = tr('optionsShortcutsDanger', shortcut);
+        alert.textContent = tr('optionsShortcutsDanger', shortcut);
     } else {
-        return;
+        throw new TypeError(`Unknown alert type ${type}`);
     }
-   
-    document.body.appendChild(banner);
 
-    // Destroy the banner after five seconds
+    alertArea.appendChild(alert);
+
+    // Destroy the alert after five seconds
     setTimeout(() => {
-        document.body.removeChild(banner);
+        alertArea.removeChild(alert);
     }, 5000);
-};
+}
 
 document.addEventListener('DOMContentLoaded', updateKeys);

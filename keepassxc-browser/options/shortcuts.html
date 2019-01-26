@@ -1,47 +1,118 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title data-i18n="popupTitle"></title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="shortcuts.css" />
-    <link rel="stylesheet" href="../options/bootstrap.min.css" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/styles/bootstrap.css" />
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
     <script src="../browser-polyfill.min.js"></script>
     <script src="../jquery-3.3.1.min.js"></script>
-    <script src="../options/bootstrap.min.js" /></script>
+    <script src="../options/bootstrap.min.js"></script>
     <script defer src="shortcuts.js"></script>
     <script defer src="../global.js"></script>
     <script defer src="../translate.js"></script>
-  </head>
-  <body>
-    <div class="conf-container">
-      <div class="conf-title">
-        <div id="icon">
-          <img src="/icons/keepassxc_19x19.png" alt="logo" />
-        </div>
-        <div id="title">
-          <h5 class="muted"><span data-i18n="optionsConfigureShortcuts"/></h3>
-        </div>
-      </div>
-      <hr />
-      <div class="conf-content">
-        <div id="conf-row">
-          <div><span data-i18n="contextMenuFillUsernameAndPassword"></span></div>
-          <input type="text" id="fill-username-password"/>
-          <button class="btn btn-sm btn-primary" id="buttonSaveUserandPass" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
-          <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonReset"></span></button>
-        </div>
-        <div id="conf-row">
-          <div><span data-i18n="contextMenuFillPassword"></span></div>
-          <input type="text" id="fill-password"/>
-          <button class="btn btn-sm btn-primary" id="buttonSavePass" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
-          <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonReset"></span></button>
-        </div>
-        <div id="conf-row">
-          <div><span data-i18n="contextMenuFillTOTP"></span></div>
-          <input type="text" id="fill-totp"/>
-          <button class="btn btn-sm btn-primary" id="buttonSaveTotp" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
-          <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonReset"></span></button>
-        </div>
-      </div>
-    </div>
-  </body>
+</head>
+<body class="container">
+<main class="col-xl-12 col-lg-10 offset-lg-1 mt-2 mt-lg-4">
+    <section class="card border-primary">
+        <h5 class="card-header bg-primary text-white">
+            <img src="/icons/keepassxc_19x19.png" alt="logo" />
+            <span data-i18n="optionsConfigureShortcuts"></span>
+        </h5>
+
+        <section class="card-body offset-xl-2">
+            <div id="alert-area" class="col-xl-9">
+                <!-- alerts will be placed here -->
+            </div>
+
+            <div class="form-group row">
+                <label
+                        for="fill-username-password"
+                        class="col-xl-4 col-lg-6"
+                        data-i18n="contextMenuFillUsernameAndPassword"
+                ></label>
+                <div class="input-group col-xl-5 col-lg-6">
+                    <input
+                            type="text"
+                            id="fill-username-password"
+                            class="form-control text-monospace"
+                    />
+                    <div class="input-group-append">
+                        <button
+                                class="btn btn-outline-primary save-btn"
+                                id="buttonSaveUserandPass"
+                                type="button"
+                        >
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonSave"></span>
+                        </button>
+                        <button class="btn btn-outline-secondary reset-btn">
+                            <span class="fa fa-undo" aria-hidden="true"></span>
+                            <span data-i18n="optionsButtonReset"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label
+                        for="fill-password"
+                        class="col-xl-4 col-lg-6"
+                        data-i18n="contextMenuFillPassword"
+                ></label>
+                <div class="input-group col-xl-5 col-lg-6">
+                    <input
+                            type="text"
+                            id="fill-password"
+                            class="form-control text-monospace"
+                    />
+                    <div class="input-group-append">
+                        <button
+                                class="btn btn-outline-primary save-btn"
+                                id="buttonSavePass"
+                                type="button"
+                        >
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonSave"></span>
+                        </button>
+                        <button class="btn btn-outline-secondary reset-btn">
+                            <span class="fa fa-undo" aria-hidden="true"></span>
+                            <span data-i18n="optionsButtonReset"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label
+                        for="fill-totp"
+                        class="col-xl-4 col-lg-6"
+                        data-i18n="contextMenuFillTOTP"
+                ></label>
+                <div class="input-group col-xl-5 col-lg-6">
+                    <input
+                            type="text"
+                            id="fill-totp"
+                            class="form-control text-monospace"
+                    />
+                    <div class="input-group-append">
+                        <button
+                                class="btn btn-outline-primary save-btn"
+                                id="buttonSaveTotp"
+                                type="button"
+                        >
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonSave"></span>
+                        </button>
+                        <button class="btn btn-outline-secondary reset-btn">
+                            <span class="fa fa-undo" aria-hidden="true"></span>
+                            <span data-i18n="optionsButtonReset"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
+</body>
 </html>
