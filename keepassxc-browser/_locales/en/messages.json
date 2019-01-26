@@ -52,16 +52,16 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Timeout or not connected to KeePassXC.",
-        "description": "Timeout or not connected to KeePassXC."
+        "message": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings.",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
         "message": "Action canceled or denied.",
         "description": "Action canceled or denied."
     },
     "errorMessageEncrypt": {
-        "message": "Cannot encrypt message or public key not found. Is native messaging or support for your browser enabled in KeePassXC?",
-        "description": "Cannot encrypt message or public key not found. Is native messaging or support for your browser enabled in KeePassXC?"
+        "message": "Message encryption failed. Is KeePassXC running?",
+        "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
         "message": "KeePassXC association failed, try again.",
@@ -142,6 +142,10 @@
     "defineSkip": {
         "message": "Skip",
         "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "Show more",
+        "description": "More button text when choosing custom login fields."
     },
     "defineAgain": {
         "message": "Again",

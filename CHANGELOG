@@ -1,3 +1,22 @@
+1.3.2 (11-01-2019)
+=========================
+ - Fix KeePassXC version check [#376]
+ - Fix race condition when web page has multiple frames [#371]
+ - Remove check for aria-hidden [#365]
+ - Reduce CPU usage [#349]
+
+1.3.1 (11-01-2019)
+=========================
+ - Fix database unlocking [#309]
+ - Add new key icon [#333]
+ - Add keyboard shortcut configuration page for Firefox [#326]
+ - Fix reconnect bug with older KeePassXC version [#354]
+ - Improve input field detection [#314]
+ - Remove unnecessary white space from translation files [#325]
+ - URL change detection [#340]
+ - HTTP auth credential requests are now handled separately (requires KeePassXC 2.4.0) [#343]
+ - Site preferences fixes [#338]
+
 1.3.0 (07-10-2018)
 =========================
  - Add support for translations [#37]

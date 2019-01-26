@@ -4,6 +4,10 @@ Browser extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 Based on [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
 Some changes merged also from [smorks'](https://github.com/smorks/keepasshttp-connector) KeePassHttp-Connector.
 
+## Download and use
+
+This browser extension was first supported in KeepassXC 2.3.0 (release end of 2017), in general it is advised to only use the latest available release.
+
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk).
 
 Please see this [document](https://keepassxc.org/docs/keepassxc-browser-migration/) for instructions how to configure KeePassXC in order to connect the database correctly.
@@ -23,3 +27,7 @@ This can cause unsaved changes not to be saved. If you use this method it's impo
 ## Protocol
 
 The details about the messaging protocol used with the browser extension and KeePassXC can be found [here](keepassxc-protocol.md).
+
+## Translations
+
+Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
