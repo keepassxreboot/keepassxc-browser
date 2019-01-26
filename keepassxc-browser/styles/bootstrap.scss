@@ -16,6 +16,10 @@ $navbar-padding-x: 0;
 $nav-link-padding-x: 3rem;
 $nav-link-padding-y: 1rem;
 
+// make inactive tab more readable
+$navbar-dark-color: rgba(255, 255, 255, 1);
+$navbar-dark-hover-color: rgba(255, 255, 255, .7);
+
 .navbar-dark .navbar-nav .show > .nav-link,
 .navbar-dark .navbar-nav .active > .nav-link,
 .navbar-dark .navbar-nav .nav-link.show,
