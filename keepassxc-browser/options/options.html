@@ -56,13 +56,13 @@
             </li>
         </ul>
     </nav>
-    <div class="tab-content">
+    <section class="tab-content">
 
         <!-- General Settings -->
-        <div class="tab-pane active" id="tab-general-settings" role="tabpanel" aria-labelledby="general-tab">
+        <section class="tab-pane active" id="tab-general-settings" role="tabpanel" aria-labelledby="general-tab">
 
             <!-- general settings -->
-            <div class="card border-primary">
+            <section class="card border-primary">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-cog" aria-hidden="true"></i> <span data-i18n="optionsGeneralSettingsTab"></span>
                 </div>
@@ -87,10 +87,10 @@
                         <small class="form-text text-muted" data-i18n="optionsSaveDomainOnlyHelpText"></small>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- auto fill-->
-            <div class="card mt-4 border-primary">
+            <section class="card mt-4 border-primary">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-sign-in" aria-hidden="true"></i> Auto Fill-In
                 </div>
@@ -136,10 +136,10 @@
                     </div>
                     <img src="/options/http-auth-dialog.png" alt="http-auth-dialog"/>
                 </div>
-            </div>
+            </section>
 
             <!-- keyboard shortcuts -->
-            <div class="card mt-4 border-primary">
+            <section class="card mt-4 border-primary">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-keyboard-o" aria-hidden="true"></i> <span
                         data-i18n="optionsKeyboardShortcutsHeader"></span>
@@ -159,14 +159,14 @@
                         </li>
                     </ul>
                     <button class="chrome-only mt-3 btn btn-sm btn-primary" id="configureCommands" type="button">
-                        <i class="fas fa-cog" aria-hidden="true"></i> <span
+                        <i class="fa fa-cog" aria-hidden="true"></i> <span
                             data-i18n="optionsConfigureShortcuts"></span>
                     </button>
                 </div>
-            </div>
+            </section>
 
             <!-- extension notifications -->
-            <div class="card mt-4 border-primary">
+            <section class="card mt-4 border-primary">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-bell" aria-hidden="true"></i> Notifications
                 </div>
@@ -249,10 +249,10 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- keepassxc update notification -->
-            <div class="card mt-4 border-primary">
+            <section class="card mt-4 border-primary">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-bell" aria-hidden="true"></i> KeePassXC updates notification
                 </div>
@@ -305,11 +305,11 @@
                                data-i18n="optionsRadioNever"></label>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </section>
 
         <!-- Connected Databases -->
-        <div class="tab-pane" id="tab-connected-databases" role="tabpanel" aria-labelledby="db-tab">
+        <section class="tab-pane" id="tab-connected-databases" role="tabpanel" aria-labelledby="db-tab">
             <p data-i18n="optionsConnectedDatabasesText"></p>
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -377,10 +377,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Custom credential fields -->
-        <div class="tab-pane" id="tab-custom-fields" role="tabpanel" aria-labelledby="custom-fields-tab">
+        <section class="tab-pane" id="tab-custom-fields" role="tabpanel" aria-labelledby="custom-fields-tab">
             <p>
                 <span data-i18n="optionsCustomFieldsTabHelpTextFirst"></span>
                 <br/>
@@ -435,10 +435,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Site preferences -->
-        <div class="tab-pane" id="tab-site-preferences" role="tabpanel" aria-labelledby="site-prefs-tab">
+        <section class="tab-pane" id="tab-site-preferences" role="tabpanel" aria-labelledby="site-prefs-tab">
             <p>
                 <span data-i18n="optionsSitePreferencesTabHelpTextFirst"></span>
                 <br/>
@@ -449,12 +449,16 @@
                 <br/>
                 <span data-i18n="optionsSitePreferencesTabHelpTextFourth"></span>
             </p>
-            <div class="form-inline mb-3">
+            <div class="mb-3">
                 <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
-                <input type="url" id="manualUrl" class="form-control ml-2 mr-2"/>
-                <button class="btn btn-sm btn-primary" id="sitePreferencesManualAdd" type="button">
-                    <i class="fa fa-plus" aria-hidden="true"></i><span data-i18n="optionsButtonAdd"></span>
-                </button>
+                <div class="input-group mb-3">
+                    <input id="manualUrl" type="url" class="form-control">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" id="sitePreferencesManualAdd" type="button">
+                            <i class="fa fa-plus" aria-hidden="true"></i><span data-i18n="optionsButtonAdd"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -531,12 +535,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
 
         <!-- About -->
-        <div class="tab-pane" id="tab-about" role="tabpanel" aria-labelledby="about-tab">
-            <div class="card border-primary">
+        <section class="tab-pane" id="tab-about" role="tabpanel" aria-labelledby="about-tab">
+            <section class="card border-primary">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-desktop" aria-hidden="true"></i> On the Web
                 </div>
@@ -556,9 +560,9 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </section>
 
-            <div class="card border-primary mt-4">
+            <section class="card border-primary mt-4">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-info-circle" aria-hidden="true"></i> Version information
                 </div>
@@ -570,9 +574,9 @@
                             i18n-placeholder="<em class='versionKPH'></em>"></li>
                     </ul>
                 </div>
-            </div>
+            </section>
 
-            <div class="card border-primary mt-4">
+            <section class="card border-primary mt-4">
                 <div class="card-header bg-primary text-white">
                     <i class="fa fa-users" aria-hidden="true"></i> <span data-i18n="optionsAboutContributors"></span>
                 </div>
@@ -596,7 +600,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </section>
 
             <div class="card border-primary mt-4">
                 <div class="card-header bg-primary text-white">
@@ -758,8 +762,8 @@
                     </details>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </section>
 </div>
 
 <footer class="footer text-muted mt-3 text-center">
