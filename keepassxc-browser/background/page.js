@@ -9,7 +9,9 @@ const defaultSettings = {
     autoRetrieveCredentials: true,
     showNotifications: true,
     showLoginNotifications: true,
-    saveDomainOnly: true
+    saveDomainOnly: true,
+    defaultGroup: '',
+    defaultGroupAlwaysAsk: false
 };
 
 var page = {};
@@ -49,7 +51,13 @@ page.initSettings = function() {
             if (!('saveDomainOnly' in page.settings)) {
                 page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
             }
-            browser.storage.local.set({'settings': page.settings});
+            if (!('defaultGroup' in page.settings)) {
+                page.settings.defaultGroup = defaultSettings.defaultGroup;
+            }
+            if (!('defaultGroupAlwaysAsk' in page.settings)) {
+                page.settings.defaultGroupAlwaysAsk = defaultSettings.defaultGroupAlwaysAsk;
+            }
+            browser.storage.local.set({ 'settings': page.settings });
             resolve(page.settings);
         });
     });

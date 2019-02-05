@@ -307,6 +307,26 @@
         "message": "Please choose the credentials you want to update.",
         "description": "A popup message shown choosing what credentials user wants to update."
     },
+    "popupRememberChooseGroup": {
+        "message": "Please choose the group you want to add the new credentials.",
+        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    },
+    "popupRememberErrorDefaultGroupNotFound": {
+        "message": "Error: Specified default group not found. Creating all necessary groups.",
+        "description": "Error message shown when default group set cannot be found."
+    },
+    "popupRememberErrorCreatingNewGroup": {
+        "message": "New group(s) cannot be created.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "popupRememberErrorPasswordNotChanged": {
+        "message": "Error: Credentials not updated. The password has not been changed.",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "popupRememberErrorCannotSaveCredentials": {
+        "message": "Error: Credentials cannot be saved or updated.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
     "popupLoginText": {
         "message": "Select the login information you would like to get entered into the page.",
         "description": "A popup message shown when one or multiple credentials are present."
@@ -446,6 +466,22 @@
     "optionsLabelRedirectAllowance": {
         "message": "Maximum (Number of) Redirects:",
         "description": "RMaximum (Number of) Redirects options text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "Default group for saving new passwords:",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "Separate the group with slashes, for example: Group/ChildGroup.",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "Always ask where to save new credentials",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "When enabled, the popup shows a group listing.",
+        "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
         "message": "Activate password generator.",

@@ -88,6 +88,30 @@
         </p>
         <hr />
         <p>
+          <div class="form-group">
+            <label for="defaultGroup" data-i18n="optionsLabelDefaultGroup"></label>
+            <div class="control-group">
+              <div class="input-append">
+                <input type="text" id="defaultGroup" placeholder="KeePassXC-Browser Passwords">
+                <button class="btn btn-sm btn-primary" id="defaultGroupButton" type="button"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-i18n="optionsButtonSave"/></button>
+                <button class="btn btn-sm btn-danger" id="defaultGroupButtonReset"><span class="glyphicon glyphicon-remove-sign"></span> <span data-i18n="optionsButtonReset"></span></button>
+              </div>
+            </div>
+            <span class="help-block">
+              <span data-i18n="optionsDefaultGroupHelpText"></span>
+              <br />
+              <span data-i18n="optionsDefault"></span> KeePassXC-Browser Passwords
+            </span>
+            <div class="checkbox">
+              <label class="checkbox">
+                <input type="checkbox" name="defaultGroupAlwaysAsk" value="true" /><span data-i18n="optionsLabelDefaultGroupCheckboxText"></span>
+              </label>
+              <span class="help-block" data-i18n="optionsLabelDefaultGroupCheckboxHelpText"></span>
+            </div>
+          </div>
+        </p>
+        <hr />
+        <p>
           <div class="checkbox">
             <label class="checkbox">
               <input type="checkbox" name="usePasswordGenerator" value="true"/><span data-i18n="optionsCheckboxUsePasswordGenerator"/>
