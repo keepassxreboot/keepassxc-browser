@@ -41,7 +41,7 @@ options.initMenu = function() {
 
 options.saveSettingsPromise = function() {
     return new Promise((resolve, reject) => {
-        browser.storage.local.set({'settings': options.settings}).then((item) => {
+        browser.storage.local.set({ 'settings': options.settings }).then((item) => {
             browser.runtime.sendMessage({
                 action: 'load_settings'
             }).then((settings) => {
@@ -56,21 +56,21 @@ options.saveSetting = function(name) {
     $(id).closest('.control-group').removeClass('error').addClass('success');
     setTimeout(() => { $(id).closest('.control-group').removeClass('success'); }, 2500);
 
-    browser.storage.local.set({'settings': options.settings});
+    browser.storage.local.set({ 'settings': options.settings });
     browser.runtime.sendMessage({
         action: 'load_settings'
     });
 };
 
 options.saveSettings = function() {
-    browser.storage.local.set({'settings': options.settings});
+    browser.storage.local.set({ 'settings': options.settings });
     browser.runtime.sendMessage({
         action: 'load_settings'
     });
 };
 
 options.saveKeyRing = function() {
-    browser.storage.local.set({'keyRing': options.keyRing});
+    browser.storage.local.set({ 'keyRing': options.keyRing });
     browser.runtime.sendMessage({
         action: 'load_keyring'
     });
@@ -86,7 +86,7 @@ options.initGeneralSettings = function() {
         options.settings[name] = $(this).is(':checked');
         options.saveSettingsPromise().then((x) => {
             if (name === 'autoFillAndSend') {
-                browser.runtime.sendMessage({action: 'init_http_auth'});
+                browser.runtime.sendMessage({ action: 'init_http_auth' });
             }
         });
     });
@@ -128,11 +128,11 @@ options.initGeneralSettings = function() {
 
     $('#configureCommands').click(function() {
         browser.tabs.create({
-            url: isFirefox() ? browser.runtime.getURL("options/shortcuts.html") : 'chrome://extensions/configureCommands'
+            url: isFirefox() ? browser.runtime.getURL('options/shortcuts.html') : 'chrome://extensions/configureCommands'
         });
     });
 
-    $('#blinkTimeoutButton').click(function(){
+    $('#blinkTimeoutButton').click(function() {
         const blinkTimeout = $.trim($('#blinkTimeout').val());
         const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
 
@@ -140,7 +140,7 @@ options.initGeneralSettings = function() {
         options.saveSetting('blinkTimeout');
     });
 
-    $('#blinkMinTimeoutButton').click(function(){
+    $('#blinkMinTimeoutButton').click(function() {
         const blinkMinTimeout = $.trim($('#blinkMinTimeout').val());
         const blinkMinTimeoutval = blinkMinTimeout !== '' ? Number(blinkMinTimeout) : defaultSettings.redirectOffset;
 
@@ -148,7 +148,7 @@ options.initGeneralSettings = function() {
         options.saveSetting('blinkMinTimeout');
     });
 
-    $('#allowedRedirectButton').click(function(){
+    $('#allowedRedirectButton').click(function() {
         const allowedRedirect = $.trim($('#allowedRedirect').val());
         const allowedRedirectval = allowedRedirect !== '' ? Number(allowedRedirect) : defaultSettings.redirectAllowance;
 
@@ -175,7 +175,7 @@ options.getPartiallyHiddenKey = function(key) {
 };
 
 options.initConnectedDatabases = function() {
-    $('#dialogDeleteConnectedDatabase').modal({keyboard: true, show: false, backdrop: true});
+    $('#dialogDeleteConnectedDatabase').modal({ keyboard: true, show: false, backdrop: true });
     $('#tab-connected-databases tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
         $('#dialogDeleteConnectedDatabase').data('hash', $(this).closest('tr').data('hash'));
@@ -233,7 +233,7 @@ options.initConnectedDatabases = function() {
 };
 
 options.initCustomCredentialFields = function() {
-    $('#dialogDeleteCustomCredentialFields').modal({keyboard: true, show: false, backdrop: true});
+    $('#dialogDeleteCustomCredentialFields').modal({ keyboard: true, show: false, backdrop: true });
     $('#tab-custom-fields tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
         $('#dialogDeleteCustomCredentialFields').data('url', $(this).closest('tr').data('url'));
@@ -262,7 +262,7 @@ options.initCustomCredentialFields = function() {
     const trClone = $('#tab-custom-fields table tr.clone:first').clone(true);
     trClone.removeClass('clone');
     let counter = 1;
-    for (let url in options.settings['defined-custom-fields']) {
+    for (const url in options.settings['defined-custom-fields']) {
         const tr = trClone.clone(true);
         tr.data('url', url);
         tr.attr('id', 'tr-scf' + counter);
@@ -280,7 +280,7 @@ options.initCustomCredentialFields = function() {
 };
 
 options.initSitePreferences = function() {
-    $('#dialogDeleteSite').modal({keyboard: true, show: false, backdrop: true});
+    $('#dialogDeleteSite').modal({ keyboard: true, show: false, backdrop: true });
     $('#tab-site-preferences tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
         $('#dialogDeleteSite').data('url', $(this).closest('tr').data('url'));
@@ -291,7 +291,7 @@ options.initSitePreferences = function() {
 
     $('#tab-site-preferences tr.clone:first input[type=checkbox]:first').change(function() {
         const url = $(this).closest('tr').data('url');
-        for (let site of options.settings['sitePreferences']) {
+        for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
                 site.usernameOnly = $(this).is(':checked');
             }
@@ -301,7 +301,7 @@ options.initSitePreferences = function() {
 
     $('#tab-site-preferences tr.clone:first select:first').change(function() {
         const url = $(this).closest('tr').data('url');
-        for (let site of options.settings['sitePreferences']) {
+        for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
                 site.ignore = $(this).val();
             }
@@ -309,9 +309,9 @@ options.initSitePreferences = function() {
         options.saveSettings();
     });
 
-    $("#manualUrl").keyup(function(event) {
+    $('#manualUrl').keyup(function(event) {
         if (event.keyCode === 13) {
-            $("#sitePreferencesManualAdd").click();
+            $('#sitePreferencesManualAdd').click();
         }
     });
 
@@ -340,7 +340,7 @@ options.initSitePreferences = function() {
             $('#tab-site-preferences table tbody:first').append(tr);
             $('#tab-site-preferences table tbody:first tr.empty:first').hide();
 
-            options.settings['sitePreferences'].push({url: value, ignore: IGNORE_NOTHING, usernameOnly: false});
+            options.settings['sitePreferences'].push({ url: value, ignore: IGNORE_NOTHING, usernameOnly: false });
             options.saveSettings();
 
             $('#manualUrl').val('');
@@ -371,7 +371,7 @@ options.initSitePreferences = function() {
     const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
     trClone.removeClass('clone');
     let counter = 1;
-    if (options.settings['sitePreferences']){
+    if (options.settings['sitePreferences']) {
         for (let site of options.settings['sitePreferences']) {
             const tr = trClone.clone(true);
             tr.data('url', site.url);
@@ -396,7 +396,7 @@ options.initAbout = function() {
     $('#tab-about em.versionCIP').text(browser.runtime.getManifest().version);
 
     // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
-    if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/')+1, 2)) < 60) {
+    if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1, 2)) < 60) {
         $('#chrome-only').remove();
     }
 };

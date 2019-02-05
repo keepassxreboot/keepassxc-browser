@@ -40,7 +40,7 @@ kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
         page.createTabEntry(senderTabId);
     }
 
-    // remove information from no longer existing tabs
+    // Remove information from no longer existing tabs
     page.removePageInformationFromNotExistingTabs();
 
     browser.tabs.get(senderTabId).then((tab) => {
@@ -70,8 +70,7 @@ kpxcEvent.invoke = function(handler, callback, senderTabId, args, secondTime) {
 
         if (handler) {
             handler.apply(this, args);
-        }
-        else {
+        } else {
             console.log('undefined handler for tab ' + tab.id);
         }
     }).catch((e) => {
@@ -113,12 +112,12 @@ kpxcEvent.onLoadSettings = function(callback, tab) {
 };
 
 kpxcEvent.onLoadKeyRing = function(callback, tab) {
-    browser.storage.local.get({'keyRing': {}}).then(function(item) {
+    browser.storage.local.get({ 'keyRing': {} }).then(function(item) {
         keepass.keyRing = item.keyRing;
         if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
             keepass.associated = {
-                "value": false,
-                "hash": null
+                'value': false,
+                'hash': null
             };
         }
         callback(item.keyRing);
@@ -128,7 +127,7 @@ kpxcEvent.onLoadKeyRing = function(callback, tab) {
 };
 
 kpxcEvent.onSaveSettings = function(callback, tab, settings) {
-    browser.storage.local.set({'settings': settings}).then(function() {
+    browser.storage.local.set({ 'settings': settings }).then(function() {
         kpxcEvent.onLoadSettings(callback, tab);
     });
 };
@@ -168,9 +167,9 @@ kpxcEvent.onReconnect = function(callback, tab) {
 };
 
 kpxcEvent.lockDatabase = function(callback, tab) {
-    keepass.lockDatabase(tab).then((response => {
+    keepass.lockDatabase(tab).then(() => {
         kpxcEvent.showStatus(true, tab, callback);
-    }));
+    });
 };
 
 kpxcEvent.onPopStack = function(callback, tab) {
@@ -191,7 +190,7 @@ kpxcEvent.onGetConnectedDatabase = function(callback, tab) {
 };
 
 kpxcEvent.onGetKeePassXCVersions = function(callback, tab) {
-    if (keepass.currentKeePassXC == '') {
+    if (keepass.currentKeePassXC === '') {
         keepass.getDatabaseHash((res) => {
             callback({'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version});
         }, tab);
@@ -229,7 +228,7 @@ kpxcEvent.onSetRememberPopup = function(callback, tab, username, password, url, 
 };
 
 kpxcEvent.onLoginPopup = function(callback, tab, logins) {
-    let stackData = {
+    const stackData = {
         level: 1,
         iconType: 'questionmark',
         popup: 'popup_login.html'
@@ -245,7 +244,7 @@ kpxcEvent.initHttpAuth = function(callback) {
 }
 
 kpxcEvent.onHTTPAuthPopup = function(callback, tab, data) {
-    let stackData = {
+    const stackData = {
         level: 1,
         iconType: 'questionmark',
         popup: 'popup_httpauth.html'
@@ -256,7 +255,7 @@ kpxcEvent.onHTTPAuthPopup = function(callback, tab, data) {
 };
 
 kpxcEvent.onMultipleFieldsPopup = function(callback, tab) {
-    let stackData = {
+    const stackData = {
         level: 1,
         iconType: 'normal',
         popup: 'popup_multiple-fields.html'
@@ -280,7 +279,7 @@ kpxcEvent.pageSetLoginId = function(callback, tab, loginId) {
     page.loginId = loginId;
 };
 
-// all methods named in this object have to be declared BEFORE this!
+// All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
     'associate': keepass.associate,

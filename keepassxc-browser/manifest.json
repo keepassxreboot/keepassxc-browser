@@ -61,21 +61,21 @@
         }
     ],
     "commands": {
-        "fill-username-password": {
+        "fill_username_password": {
             "description": "__MSG_contextMenuFillUsernameAndPassword__",
             "suggested_key": {
                 "default": "Alt+Shift+U",
                 "mac": "MacCtrl+Shift+U"
             }
         },
-        "fill-password": {
+        "fill_password": {
             "description": "__MSG_contextMenuFillPassword__",
             "suggested_key": {
                 "default": "Alt+Shift+I",
                 "mac": "MacCtrl+Shift+I"
             }
         },
-        "fill-totp": {
+        "fill_totp": {
             "description": "__MSG_contextMenuFillTOTP__",
             "suggested_key": {
                 "default": "Alt+Shift+T",

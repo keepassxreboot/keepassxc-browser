@@ -10,14 +10,14 @@ document.querySelectorAll('input').forEach((b) => {
 
 const saveButtons = document.querySelectorAll('.btn-primary');
 for (const b of saveButtons) {
-    b.addEventListener('click', e => {
+    b.addEventListener('click', (e) => {
         updateShortcut(b.parentElement.children[1].getAttribute('id'))
     });
 }
 
 const resetButtons = document.querySelectorAll('.btn-danger');
 for (const b of resetButtons) {
-    b.addEventListener('click', e => {
+    b.addEventListener('click', (e) => {
         resetShortcut(b.parentElement.children[1].getAttribute('id'))
     });
 }
@@ -69,12 +69,12 @@ async function updateKeys() {
 
 async function updateShortcut(shortcut) {
     try {
-         await browser.commands.update({
+        await browser.commands.update({
             name: shortcut,
             shortcut: document.querySelector('#' + shortcut).value
         });
         createBanner('success', shortcut);
-    } catch(e) {
+    } catch (e) {
         console.log('Cannot change shortcut: ' + e);
         createBanner('danger', shortcut);
     }
@@ -105,7 +105,7 @@ function createBanner(type, shortcut) {
     } else {
         return;
     }
-   
+
     document.body.appendChild(banner);
 
     // Destroy the banner after five seconds

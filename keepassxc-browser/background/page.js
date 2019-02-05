@@ -20,7 +20,7 @@ page.loginId = -1;
 
 page.initSettings = function() {
     return new Promise((resolve, reject) => {
-        browser.storage.local.get({'settings': {}}).then((item) => {
+        browser.storage.local.get({ 'settings': {} }).then((item) => {
             page.settings = item.settings;
             if (!('checkUpdateKeePassXC' in page.settings)) {
                 page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
@@ -62,14 +62,14 @@ page.initOpenedTabs = function() {
                 page.createTabEntry(i.id);
             }
 
-            // set initial tab-ID
-            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
-                if (tabs.length === 0) {
+            // Set initial tab-ID
+            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((t) => {
+                if (t.length === 0) {
                     resolve();
                     return; // For example: only the background devtools or a popup are opened
                 }
-                page.currentTabId = tabs[0].id;
-                browserAction.show(null, tabs[0]);
+                page.currentTabId = t[0].id;
+                browserAction.show(null, t[0]);
                 resolve();
             });
         });
@@ -84,7 +84,7 @@ page.isValidProtocol = function(url) {
 
 page.switchTab = function(callback, tab) {
     browserAction.showDefault(null, tab);
-    browser.tabs.sendMessage(tab.id, {action: 'activated_tab'}).catch((e) => {});
+    browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {});
 };
 
 page.clearCredentials = function(tabId, complete) {
@@ -121,18 +121,18 @@ page.createTabEntry = function(tabId) {
 };
 
 page.removePageInformationFromNotExistingTabs = function() {
-    let rand = Math.floor(Math.random()*1001);
+    const rand = Math.floor(Math.random() * 1001);
     if (rand === 28) {
         browser.tabs.query({}).then(function(tabs) {
-            let $tabIds = [];
-            const $infoIds = Object.keys(page.tabs);
+            const tabIds = [];
+            const infoIds = Object.keys(page.tabs);
 
             for (const t of tabs) {
-                $tabIds[t.id] = true;
+                tabIds[t.id] = true;
             }
 
-            for (const i of $infoIds) {
-                if (!(i in $tabIds)) {
+            for (const i of infoIds) {
+                if (!(i in tabIds)) {
                     delete page.tabs[i];
                 }
             }
@@ -143,8 +143,7 @@ page.removePageInformationFromNotExistingTabs = function() {
 page.debugConsole = function() {
     if (arguments.length > 1) {
         console.log(page.sprintf(arguments[0], arguments));
-    }
-    else {
+    } else {
         console.log(arguments[0]);
     }
 };
@@ -163,8 +162,7 @@ page.setDebug = function(bool) {
     if (bool) {
         page.debug = page.debugConsole;
         return 'Debug mode enabled';
-    }
-    else {
+    } else {
         page.debug = page.debugDummy;
         return 'Debug mode disabled';
     }
