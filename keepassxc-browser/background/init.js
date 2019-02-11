@@ -46,9 +46,9 @@ browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
  * @param {object} activeInfo
  */
 browser.tabs.onActivated.addListener((activeInfo) => {
-    // remove possible credentials from old tab information
+    // Remove possible credentials from old tab information
     page.clearCredentials(page.currentTabId, true);
-    browserAction.removeRememberPopup(null, {'id': page.currentTabId}, true);
+    browserAction.removeRememberPopup(null, { 'id': page.currentTabId }, true);
 
     browser.tabs.get(activeInfo.tabId).then((info) => {
         if (info && info.id) {
@@ -81,14 +81,14 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 
 const contextMenuItems = [
-    {title: tr('contextMenuFillUsernameAndPassword'), action: 'fill_user_pass'},
-    {title: tr('contextMenuFillPassword'), action: 'fill_pass_only'},
+    {title: tr('contextMenuFillUsernameAndPassword'), action: 'fill_username_password'},
+    {title: tr('contextMenuFillPassword'), action: 'fill_password'},
     {title: tr('contextMenuFillTOTP'), action: 'fill_totp'},
     {title: tr('contextMenuShowPasswordGeneratorIcons'), action: 'activate_password_generator'},
     {title: tr('contextMenuSaveCredentials'), action: 'remember_credentials'}
 ];
 
-let menuContexts = ['editable'];
+const menuContexts = ['editable'];
 
 if (isFirefox()) {
     menuContexts.push('password');
@@ -102,33 +102,19 @@ for (const item of contextMenuItems) {
         onclick: (info, tab) => {
             browser.tabs.sendMessage(tab.id, {
                 action: item.action
-            }).catch((e) => {console.log(e);});
+            }).catch((e) => {
+                console.log(e);
+            });
         }
     });
 }
 
 // Listen for keyboard shortcuts specified by user
 browser.commands.onCommand.addListener((command) => {
-    if (command === 'fill-username-password') {
+    if (contextMenuItems.some(e => e.action === command)) {
         browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
             if (tabs.length) {
-                browser.tabs.sendMessage(tabs[0].id, { action: 'fill_user_pass' });
-            }
-        });
-    }
-
-    if (command === 'fill-password') {
-        browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-            if (tabs.length) {
-                browser.tabs.sendMessage(tabs[0].id, { action: 'fill_pass_only' });
-            }
-        });
-    }
-
-    if (command === 'fill-totp') {
-        browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-            if (tabs.length) {
-                browser.tabs.sendMessage(tabs[0].id, { action: 'fill_totp' });
+                browser.tabs.sendMessage(tabs[0].id, { action: command });
             }
         });
     }

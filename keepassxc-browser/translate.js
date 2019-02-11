@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
 const items = document.querySelectorAll('[data-i18n]');
-for (let item of items) {
+for (const item of items) {
     const key = item.getAttribute('data-i18n');
     if (key) {
         const placeholder = item.getAttribute('i18n-placeholder');

@@ -10,14 +10,14 @@ document.querySelectorAll('input').forEach((b) => {
 
 const saveButtons = document.querySelectorAll('.save-btn');
 for (const b of saveButtons) {
-    b.addEventListener('click', e => {
+    b.addEventListener('click', (e) => {
         updateShortcut(b.parentElement.parentElement.children[0].getAttribute('id'))
     });
 }
 
 const resetButtons = document.querySelectorAll('.reset-btn');
 for (const b of resetButtons) {
-    b.addEventListener('click', e => {
+    b.addEventListener('click', (e) => {
         resetShortcut(b.parentElement.parentElement.children[0].getAttribute('id'))
     });
 }
@@ -69,7 +69,7 @@ async function updateKeys() {
 
 async function updateShortcut(shortcut) {
     try {
-         await browser.commands.update({
+        await browser.commands.update({
             name: shortcut,
             shortcut: document.querySelector(`#${shortcut}`).value
         });
