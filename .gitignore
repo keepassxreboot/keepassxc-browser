@@ -11,3 +11,5 @@
 .xz
 
 node_modules/
+
+keepassxc-browser/styles/bootstrap.css
