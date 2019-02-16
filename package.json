@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/keepassxreboot/keepassxc-browser#readme",
   "scripts": {
-    "build-bootstrap": "node ./build-bootstrap.js"
+    "build": "node ./build-bootstrap.js"
   },
   "devDependencies": {
     "autoprefixer": "^9.3.1",
