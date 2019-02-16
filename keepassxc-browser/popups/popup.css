@@ -1,9 +1,10 @@
 body {
     overflow-x: hidden;
     background-color: #eee;
-    min-width: 30rem;
-    max-width: 35rem;
-    padding: 0.5rem;
+    width: 28rem;
+    padding: 0.5rem 0;
+    /* smaller font size, like in bootstrap 3 (~14px)  */
+    font-size: 0.875rem;
 }
 
 .list-group-item:hover {
