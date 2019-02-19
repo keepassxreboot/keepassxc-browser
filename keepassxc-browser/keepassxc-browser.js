@@ -54,12 +54,12 @@ browser.runtime.onMessage.addListener(function(req, sender, callback) {
                     cipForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
                 }
             }
-        } else if (req.action === 'fill_user_pass') {
+        } else if (req.action === 'fill_username_password') {
             _called.manualFillRequested = 'both';
             cip.receiveCredentialsIfNecessary().then((response) => {
                 cip.fillInFromActiveElement(false);
             });
-        } else if (req.action === 'fill_pass_only') {
+        } else if (req.action === 'fill_password') {
             _called.manualFillRequested = 'pass';
             cip.receiveCredentialsIfNecessary().then((response) => {
                 cip.fillInFromActiveElement(false, true); // passOnly to true
