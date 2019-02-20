@@ -117,15 +117,15 @@ input.genpw-text {
 }
 
 .b2c-modal-backdrop:after {
-    content:'';
+    content: '';
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     background-color: #000000;
-    opacity: 0.8;
-    filter: alpha(opacity=80);
+    opacity: 0.5;
+    filter: alpha(opacity=50);
 }
 
 #b2c-cipDefine-fields {
@@ -142,7 +142,7 @@ input.genpw-text {
     left: 150px;
     text-align: left;
     cursor: pointer;
-    background-color:rgba(255,255,255,0.3);
+    background-color: rgba(0,0,0,0.8);
     font-size: 15px;
 }
 
@@ -168,12 +168,28 @@ input.genpw-text {
     margin-bottom: 3px;
 }
 
+#b2c-keyboardHelp {
+    font-size: 0.75em;
+}
+
+#b2c-keyboardHelp kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    color: #333;
+    display: inline-block;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}
+
 .b2c-fixed-field {
     position: absolute;
     border: 2px solid #efefef;
+    color: #fff;
     cursor: pointer;
     z-index: 2147483646;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
     background-color:rgba(239,239,239,0.4);
 }

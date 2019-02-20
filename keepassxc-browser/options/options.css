@@ -7,6 +7,10 @@ table td {
     width: 100%;
 }
 
+input:invalid {
+    border: 2px solid red;
+}
+
 /* Custom container */
 .container {
     margin: 0 auto;
@@ -42,7 +46,8 @@ table td {
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    color: #cccccc;
+    color: #ffffff;
+    background-color: #5f9f40;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
