@@ -228,8 +228,8 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Choose custom login fields for this page",
-        "description": "Popup credential choosing button text."
+        "message": "Select login fields",
+        "description": "Popup credential selection button text."
     },
     "popupConnectButton": {
         "message": "Connect",
