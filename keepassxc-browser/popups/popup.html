@@ -1,140 +1,147 @@
 <html>
-  <head>
-    <title data-i18n="popupTitle"></title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/styles/bootstrap.css" />
-    <link rel="stylesheet" href="popup.css" />
-    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
-    <script type="text/javascript" src="../browser-polyfill.min.js"></script>
-    <script type="text/javascript" src="../global.js"></script>
-    <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../options/bootstrap.min.js"></script>
-    <script type="text/javascript" src="popup_functions.js"></script>
-    <script type="text/javascript" src="popup.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div id="settings" class="settings">
-        <button id="btn-options" class="btn btn-sm btn-primary">
-          <span class="fa fa-cog" aria-hidden="true"></span>
-          <span data-i18n="popupSettingsText"></span>
-        </button>
-        <button
-          id="btn-choose-credential-fields"
-          class="btn btn-sm btn-warning"
-        >
-          <span class="fa fa-list-alt" aria-hidden="true"></span>
-          <span data-i18n="popupChooseCredentialsText"></span>
-        </button>
-        <button
-          id="lock-database-button"
-          class="btn btn-danger"
-          title="Lock database"
-        >
-          <i class="fa fa-lock" aria-hidden="true"></i>
-        </button>
+<head>
+  <title data-i18n="popupTitle"></title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/styles/bootstrap.css" />
+  <link rel="stylesheet" href="popup.css" />
+  <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
+  <script type="text/javascript" src="../browser-polyfill.min.js"></script>
+  <script type="text/javascript" src="../global.js"></script>
+  <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="../options/bootstrap.min.js"></script>
+  <script type="text/javascript" src="popup_functions.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
+</head>
+<body>
+<div class="container">
+  <div id="settings" class="settings d-flex justify-content-between">
+    <span>
+      <button
+              id="btn-choose-credential-fields"
+              class="btn btn-sm btn-warning mr-2"
+      >
+        <span class="fa fa-mouse-pointer" aria-hidden="true"></span>
+        <span data-i18n="popupChooseCredentialsText"></span>
+      </button>
+      <button
+              id="lock-database-button"
+              class="btn btn-sm btn-danger"
+              title="Lock database"
+      >
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        <span data-i18n="popupLockDatabaseText"></span>
+      </button>
+    </span>
 
-        <div id="update-available" class="alert alert-info">
-          <span data-i18n="popupUpdateAvailable"></span> <br />
-          <a
+    <button id="btn-options" class="btn btn-secondary">
+      <span class="fa fa-cog" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div id="update-available" class="alert alert-info" role="alert">
+    <span data-i18n="popupUpdateAvailable"></span> <br />
+    <a
             target="_blank"
             class="alert-link"
             href="https://keepassxc.org/download"
-            ><span data-i18n="popupDownloadNewVersion"></span></a
-          >.
-        </div>
-      </div>
+    ><span data-i18n="popupDownloadNewVersion"></span></a
+    >.
+  </div>
 
-      <div id="initial-state">
-        <p>
-          <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
-          <span data-i18n="popupCheckingStatus"></span>
-        </p>
-      </div>
+  <div id="initial-state">
+    <p>
+      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+      <span data-i18n="popupCheckingStatus"></span>
+    </p>
+  </div>
 
-      <div id="not-configured" style="display: none">
-        <div class="alert alert-info">
-          <i class="fa fa-info-circle" aria-hidden="true"></i>
-          <span data-i18n="popupNotConfigured"></span>
-        </div>
-
-        <div style="text-align: right">
-          <button id="connect-button" class="btn btn-sm btn-primary">
-            <span class="fa fa-link" aria-hidden="true"></span>
-            <span data-i18n="popupConnectButton"></span>
-          </button>
-        </div>
-      </div>
-
-      <div id="need-reconfigure" style="display: none">
-        <div class="alert alert-info">
-          <p data-i18n="popupNeedReconfigure"></p>
-          <p style="margin-left: 1em">
-            <code id="need-reconfigure-message"></code>
-          </p>
-          <p data-i18n="popupNeedReconfigureMessage"></p>
-        </div>
-        <div class="text-right">
-          <button id="reconnect-button" class="btn btn-sm btn-primary">
-            <span class="fa fa-refresh" aria-hidden="true"></span>
-            <span data-i18n="popupReconnectButton"></span>
-          </button>
-        </div>
-      </div>
-
-      <div
-        id="configured-not-associated"
-        style="display: none"
-        class="alert alert-info"
-      >
-        <span
-          data-i18n="popupConfiguredNotAssociated"
-          i18n-placeholder="<span class='bg-warning' id='unassociated-identifier'></span>"
-        ></span>
-      </div>
-
-      <div id="configured-and-associated" style="display: none">
-        <div class="alert alert-success">
-          <i class="fa fa-check-circle" aria-hidden="true"></i>
-          <span
-            data-i18n="popupConfiguredAndAssociated"
-            i18n-placeholder="<mark id='associated-identifier'></mark>"
-          ></span>
-        </div>
-        <div class="text-right">
-          <button id="redetect-fields-button" class="btn btn-sm btn-primary">
-            <span class="fa fa-repeat" aria-hidden="true"></span>
-            <span data-i18n="popupRedetectButton"></span>
-          </button>
-        </div>
-      </div>
-
-      <div id="error-encountered" style="display: none">
-        <div class="alert alert-danger" role="alert">
-          <h6 data-i18n="popupErrorEncountered"></h6>
-          <div id="error-message"></div>
-        </div>
-        <div class="text-right">
-          <button id="reload-status-button" class="btn btn-sm btn-primary">
-            <span class="fa fa-repeat" aria-hidden="true"></span>
-            <span data-i18n="popupReloadButton"></span>
-          </button>
-        </div>
-      </div>
-
-      <div id="database-not-opened" style="display: none">
-        <p data-i18n="popupErrorEncountered"></p>
-        <p style="margin-left: 1em">
-          <code id="database-error-message"></code>
-        </p>
-        <div class="text-right">
-          <button id="reopen-database-button" class="btn btn-sm btn-primary">
-            <span class="fa fa-lock" aria-hidden="true"></span>
-            <span data-i18n="popupReopenButton"></span>
-          </button>
-        </div>
-      </div>
+  <div id="not-configured" style="display: none">
+    <div class="alert alert-info" role="alert">
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      <span data-i18n="popupNotConfigured"></span>
     </div>
-    <script type="text/javascript" src="../translate.js"></script>
-  </body>
+
+    <div style="text-align: right">
+      <button id="connect-button" class="btn btn-sm btn-primary">
+        <span class="fa fa-link" aria-hidden="true"></span>
+        <span data-i18n="popupConnectButton"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="need-reconfigure" style="display: none">
+    <div class="alert alert-info" role="alert">
+      <p data-i18n="popupNeedReconfigure"></p>
+      <p style="margin-left: 1em">
+        <code id="need-reconfigure-message"></code>
+      </p>
+      <p data-i18n="popupNeedReconfigureMessage"></p>
+    </div>
+    <div class="text-right">
+      <button id="reconnect-button" class="btn btn-sm btn-primary">
+        <span class="fa fa-refresh" aria-hidden="true"></span>
+        <span data-i18n="popupReconnectButton"></span>
+      </button>
+    </div>
+  </div>
+
+  <div
+          id="configured-not-associated"
+          style="display: none"
+          class="alert alert-info"
+          role="alert"
+  >
+        <span
+                data-i18n="popupConfiguredNotAssociated"
+                i18n-placeholder="<span class='bg-warning' id='unassociated-identifier'></span>"
+        ></span>
+  </div>
+
+  <div id="configured-and-associated" style="display: none">
+    <div class="alert alert-success" role="alert">
+      <i class="fa fa-check-circle" aria-hidden="true"></i>
+      <span
+              data-i18n="popupConfiguredAndAssociated"
+              i18n-placeholder="<mark id='associated-identifier'></mark>"
+      ></span>
+    </div>
+    <div class="text-right">
+      <button id="redetect-fields-button" class="btn btn-sm btn-primary">
+        <span class="fa fa-repeat" aria-hidden="true"></span>
+        <span data-i18n="popupRedetectButton"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="error-encountered" style="display: none">
+    <div class="alert alert-danger" role="alert">
+      <h6 class="alert-heading">
+        <span class="fa fa-exclamation-triangle"></span>
+        <span data-i18n="popupErrorEncountered"></span>
+      </h6>
+      <div id="error-message"></div>
+    </div>
+    <div class="text-right">
+      <button id="reload-status-button" class="btn btn-sm btn-primary">
+        <span class="fa fa-repeat" aria-hidden="true"></span>
+        <span data-i18n="popupReloadButton"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="database-not-opened" style="display: none">
+    <p data-i18n="popupErrorEncountered"></p>
+    <p style="margin-left: 1em">
+      <code id="database-error-message"></code>
+    </p>
+    <div class="text-right">
+      <button id="reopen-database-button" class="btn btn-sm btn-primary">
+        <span class="fa fa-lock" aria-hidden="true"></span>
+        <span data-i18n="popupReopenButton"></span>
+      </button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../translate.js"></script>
+</body>
 </html>

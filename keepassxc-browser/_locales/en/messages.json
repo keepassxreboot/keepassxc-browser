@@ -223,9 +223,9 @@
         "message": "KeePassXC - Popup",
         "description": "Popup window title."
     },
-    "popupSettingsText": {
-        "message": "Settings",
-        "description": "Popup Settings button text."
+    "popupLockDatabaseText": {
+        "message": "Lock database",
+        "description": "Popup Lock database button text."
     },
     "popupChooseCredentialsText": {
         "message": "Select login fields",

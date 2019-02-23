@@ -1,10 +1,10 @@
 <html>
 <head>
     <title data-i18n="popupTitle"></title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/styles/bootstrap.css"/>
-    <link rel="stylesheet" href="popup.css"/>
-    <link rel="stylesheet" href="../fonts/fork-awesome.min.css">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/styles/bootstrap.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
     <script type="text/javascript" src="../browser-polyfill.min.js"></script>
     <script type="text/javascript" src="../global.js"></script>
     <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
@@ -14,29 +14,44 @@
 <body>
 <div class="container">
     <div id="settings" class="settings">
-        <button id="btn-options" class="btn btn-sm btn-success">
-            <i class="fa fa-cog" aria-hidden="true"></i> <span data-i18n="popupSettingsText"></span>
+        <button
+                id="btn-choose-credential-fields"
+                class="btn btn-sm btn-warning mr-2"
+        >
+            <span class="fa fa-mouse-pointer" aria-hidden="true"></span>
+            <span data-i18n="popupChooseCredentialsText"></span>
         </button>
-        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning">
-            <span class="fa fa-list-alt" aria-hidden="true"></span> <span data-i18n="popupChooseCredentialsText"></span>
-        </button>
-        <button id="lock-database-button" class="btn btn-danger" title="Lock database">
+        <button
+                id="lock-database-button"
+                class="btn btn-sm btn-danger"
+                title="Lock database"
+        >
             <span class="fa fa-lock" aria-hidden="true"></span>
+            <span data-i18n="popupLockDatabaseText"></span>
         </button>
 
-        <div id="update-available" class="alert alert-info">
-            <span data-i18n="popupUpdateAvailable"></span>
-            <br/>
-            <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span
-                    data-i18n="popupDownloadNewVersion"></span></a>.
-        </div>
+        <button id="btn-options" class="btn btn-secondary">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div id="update-available" class="alert alert-info" role="alert">
+        <span data-i18n="popupUpdateAvailable"></span>
+        <br />
+        <a
+                target="_blank"
+                class="alert-link"
+                href="https://keepassxc.org/download"
+        ><span data-i18n="popupDownloadNewVersion"></span></a
+        >.
     </div>
 
     <div>
         <p>
             <span data-i18n="popupMultiplePasswordFields"></span>
-            "<code><span data-i18n="contextMenuFillUsernameAndPassword"></span></code>", "<code><span
-                data-i18n="contextMenuFillPassword"></span></code>"
+            "<code
+        ><span data-i18n="contextMenuFillUsernameAndPassword"></span></code
+        >", "<code><span data-i18n="contextMenuFillPassword"></span></code>"
         </p>
     </div>
 </div>
