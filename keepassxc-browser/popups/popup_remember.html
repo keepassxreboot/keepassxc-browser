@@ -1,102 +1,102 @@
 <html>
 <head>
-    <title data-i18n="popupTitle"></title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/styles/bootstrap.css" />
-    <link rel="stylesheet" href="popup.css" />
-    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
-    <script type="text/javascript" src="../browser-polyfill.min.js"></script>
-    <script type="text/javascript" src="../global.js"></script>
-    <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../options/bootstrap.min.js"></script>
-    <script type="text/javascript" src="popup_functions.js"></script>
-    <script type="text/javascript" src="popup_remember.js"></script>
-    <style type="text/css">
-        .credentials {
-            display: none;
-            border-top: 1px solid #333;
-        }
+  <title data-i18n="popupTitle"></title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="/styles/bootstrap.css"/>
+  <link rel="stylesheet" href="popup.css"/>
+  <link rel="stylesheet" href="../fonts/fork-awesome.min.css"/>
+  <script type="text/javascript" src="../browser-polyfill.min.js"></script>
+  <script type="text/javascript" src="../global.js"></script>
+  <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="../options/bootstrap.min.js"></script>
+  <script type="text/javascript" src="popup_functions.js"></script>
+  <script type="text/javascript" src="popup_remember.js"></script>
+  <style type="text/css">
+    .credentials {
+      display: none;
+      border-top: 1px solid #333;
+    }
 
-        .connected-database {
-            display: none;
-            font-size: 85%;
-            color: #787878;
-        }
+    .connected-database {
+      display: none;
+      font-size: 85%;
+      color: #787878;
+    }
 
-        .credentials .username-new {
-            display: none;
-        }
+    .credentials .username-new {
+      display: none;
+    }
 
-        .credentials .username-exists {
-            display: none;
-        }
+    .credentials .username-exists {
+      display: none;
+    }
 
-        .small {
-            font-weight: bold;
-        }
+    .small {
+      font-weight: bold;
+    }
 
-        .small .normal {
-            font-weight: normal;
-        }
+    .small .normal {
+      font-weight: normal;
+    }
 
-        .info {
-            font-weight: normal;
-        }
-    </style>
+    .info {
+      font-weight: normal;
+    }
+  </style>
 </head>
 <body>
 <div class="buttons">
-    <p>
-        <span data-i18n="popupRememberInfoText"></span>
-        <br />
-        <span class="small" data-i18n="popupURL"></span
-        ><span class="small info information-url"></span>
-        <br />
-        <span class="small" data-i18n="popupUsername"></span
-        ><span class="small info information-username"></span>
-    </p>
-    <p>
-        <button id="btn-new" class="btn btn-sm btn-success">
-            <span class="fa fa-pencil"></span>
-            <span data-i18n="popupButtonNew"></span>
-        </button>
-        <button id="btn-update" class="btn btn-sm btn-warning">
+  <p>
+    <span data-i18n="popupRememberInfoText"></span>
+    <br/>
+    <span class="small" data-i18n="popupURL"></span
+    ><span class="small info information-url"></span>
+    <br/>
+    <span class="small" data-i18n="popupUsername"></span
+    ><span class="small info information-username"></span>
+  </p>
+  <p>
+    <button id="btn-new" class="btn btn-sm btn-success">
+      <span class="fa fa-pencil"></span>
+      <span data-i18n="popupButtonNew"></span>
+    </button>
+    <button id="btn-update" class="btn btn-sm btn-warning">
           <span class="fa fa-refresh" aria-hidden="true"></span
           ><span data-i18n="popupButtonUpdate"></span>
-        </button>
-        <button id="btn-dismiss" class="btn btn-sm btn-danger">
+    </button>
+    <button id="btn-dismiss" class="btn btn-sm btn-danger">
           <span class="fa fa-trash" aria-hidden="true"></span
           ><span data-i18n="popupButtonDismiss"></span>
-        </button>
-        <button id="btn-ignore" class="btn btn-sm btn-default">
+    </button>
+    <button id="btn-ignore" class="btn btn-sm btn-default">
           <span class="fa fa-trash" aria-hidden="true"></span
           ><span data-i18n="popupButtonIgnore"></span>
-        </button>
-    </p>
+    </button>
+  </p>
 </div>
 
 <div class="connected-database">
-    <p
-            data-i18n="popupRememberSaving"
-            i18n-placeholder="<span></span><em></em>"
-    ></p>
+  <p
+    data-i18n="popupRememberSaving"
+    i18n-placeholder="<span></span><em></em>"
+  ></p>
 </div>
 
 <div class="credentials">
-    <p class="username-new">
+  <p class="username-new">
         <span
-                data-i18n="popupRememberNewUsername"
-                i18n-placeholder="<strong></strong>"
+          data-i18n="popupRememberNewUsername"
+          i18n-placeholder="<strong></strong>"
         ></span>
-    </p>
-    <p class="username-exists">
+  </p>
+  <p class="username-exists">
         <span
-                data-i18n="popupRememberUsernameExists"
-                i18n-placeholder="<strong></strong>"
+          data-i18n="popupRememberUsernameExists"
+          i18n-placeholder="<strong></strong>"
         ></span>
-    </p>
-    <p data-i18n="popupRememberChooseCredentials"></p>
-    <ul id="list"></ul>
+  </p>
+  <p data-i18n="popupRememberChooseCredentials"></p>
+  <ul id="list"></ul>
 </div>
 <script type="text/javascript" src="../translate.js"></script>
 </body>

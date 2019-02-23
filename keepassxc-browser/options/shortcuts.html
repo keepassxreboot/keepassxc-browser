@@ -1,115 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title data-i18n="popupTitle"></title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/styles/bootstrap.css" />
-    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
-    <script defer src="shortcuts.js"></script>
-    <script defer src="../global.js"></script>
-    <script defer src="../translate.js"></script>
+  <title data-i18n="popupTitle"></title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="/styles/bootstrap.css"/>
+  <link rel="stylesheet" href="../fonts/fork-awesome.min.css"/>
+  <script defer src="shortcuts.js"></script>
+  <script defer src="../global.js"></script>
+  <script defer src="../translate.js"></script>
 </head>
 <body class="container">
 <main class="col-xl-12 col-lg-10 offset-lg-1 mt-2 mt-lg-4">
-    <section class="card border-primary">
-        <h5 class="card-header bg-primary text-white">
-            <img src="/icons/keepassxc_19x19.png" alt="logo" />
-            <span data-i18n="optionsConfigureShortcuts"></span>
-        </h5>
+  <section class="card border-primary">
+    <h5 class="card-header bg-primary text-white">
+      <img src="/icons/keepassxc_19x19.png" alt="logo"/>
+      <span data-i18n="optionsConfigureShortcuts"></span>
+    </h5>
 
-        <section class="card-body offset-xl-2">
-            <div id="alert-area" class="col-xl-9">
-                <!-- alerts will be placed here -->
-            </div>
+    <section class="card-body offset-xl-2">
+      <div id="alert-area" class="col-xl-9">
+        <!-- alerts will be placed here -->
+      </div>
 
-            <div class="form-group row">
-                <label
-                        for="fill-username-password"
-                        class="col-xl-4 col-lg-6"
-                        data-i18n="contextMenuFillUsernameAndPassword"
-                ></label>
-                <div class="input-group col-xl-5 col-lg-6">
-                    <input
-                            type="text"
-                            id="fill-username-password"
-                            class="form-control text-monospace"
-                    />
-                    <div class="input-group-append">
-                        <button
-                                class="btn btn-primary save-btn"
-                                id="buttonSaveUserandPass"
-                                type="button"
-                        >
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                            <span data-i18n="optionsButtonSave"></span>
-                        </button>
-                        <button class="btn btn-secondary reset-btn">
-                            <span class="fa fa-undo" aria-hidden="true"></span>
-                            <span data-i18n="optionsButtonReset"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <div class="form-group row">
+        <label
+          for="fill-username-password"
+          class="col-xl-4 col-lg-6"
+          data-i18n="contextMenuFillUsernameAndPassword"
+        ></label>
+        <div class="input-group col-xl-5 col-lg-6">
+          <input
+            type="text"
+            id="fill-username-password"
+            class="form-control text-monospace"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary save-btn"
+              id="buttonSaveUserandPass"
+              type="button"
+            >
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              <span data-i18n="optionsButtonSave"></span>
+            </button>
+            <button class="btn btn-secondary reset-btn">
+              <span class="fa fa-undo" aria-hidden="true"></span>
+              <span data-i18n="optionsButtonReset"></span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-            <div class="form-group row">
-                <label
-                        for="fill-password"
-                        class="col-xl-4 col-lg-6"
-                        data-i18n="contextMenuFillPassword"
-                ></label>
-                <div class="input-group col-xl-5 col-lg-6">
-                    <input
-                            type="text"
-                            id="fill-password"
-                            class="form-control text-monospace"
-                    />
-                    <div class="input-group-append">
-                        <button
-                                class="btn btn-primary save-btn"
-                                id="buttonSavePass"
-                                type="button"
-                        >
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                            <span data-i18n="optionsButtonSave"></span>
-                        </button>
-                        <button class="btn btn-secondary reset-btn">
-                            <span class="fa fa-undo" aria-hidden="true"></span>
-                            <span data-i18n="optionsButtonReset"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <div class="form-group row">
+        <label
+          for="fill-password"
+          class="col-xl-4 col-lg-6"
+          data-i18n="contextMenuFillPassword"
+        ></label>
+        <div class="input-group col-xl-5 col-lg-6">
+          <input
+            type="text"
+            id="fill-password"
+            class="form-control text-monospace"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary save-btn"
+              id="buttonSavePass"
+              type="button"
+            >
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              <span data-i18n="optionsButtonSave"></span>
+            </button>
+            <button class="btn btn-secondary reset-btn">
+              <span class="fa fa-undo" aria-hidden="true"></span>
+              <span data-i18n="optionsButtonReset"></span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-            <div class="form-group row">
-                <label
-                        for="fill-totp"
-                        class="col-xl-4 col-lg-6"
-                        data-i18n="contextMenuFillTOTP"
-                ></label>
-                <div class="input-group col-xl-5 col-lg-6">
-                    <input
-                            type="text"
-                            id="fill-totp"
-                            class="form-control text-monospace"
-                    />
-                    <div class="input-group-append">
-                        <button
-                                class="btn btn-primary save-btn"
-                                id="buttonSaveTotp"
-                                type="button"
-                        >
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                            <span data-i18n="optionsButtonSave"></span>
-                        </button>
-                        <button class="btn btn-secondary reset-btn">
-                            <span class="fa fa-undo" aria-hidden="true"></span>
-                            <span data-i18n="optionsButtonReset"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="form-group row">
+        <label
+          for="fill-totp"
+          class="col-xl-4 col-lg-6"
+          data-i18n="contextMenuFillTOTP"
+        ></label>
+        <div class="input-group col-xl-5 col-lg-6">
+          <input
+            type="text"
+            id="fill-totp"
+            class="form-control text-monospace"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary save-btn"
+              id="buttonSaveTotp"
+              type="button"
+            >
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              <span data-i18n="optionsButtonSave"></span>
+            </button>
+            <button class="btn btn-secondary reset-btn">
+              <span class="fa fa-undo" aria-hidden="true"></span>
+              <span data-i18n="optionsButtonReset"></span>
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
+  </section>
 </main>
 </body>
 </html>
