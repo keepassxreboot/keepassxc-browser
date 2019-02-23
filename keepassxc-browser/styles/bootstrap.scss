@@ -53,7 +53,13 @@ $navbar-dark-hover-color: rgba(255, 255, 255, .7);
 @import '../../node_modules/bootstrap/scss/modal';
 @import '../../node_modules/bootstrap/scss/close';
 @import '../../node_modules/bootstrap/scss/tables';
+@import '../../node_modules/bootstrap/scss/transitions';
 
 @import '../../node_modules/bootstrap/scss/utilities/display';
 @import '../../node_modules/bootstrap/scss/utilities/flex';
 
+@include media-breakpoint-up(md) {
+  .navbar-nav .nav-link {
+    padding-left: 1rem;
+  }
+}

@@ -19,42 +19,51 @@
     <h3><img src="/icons/keepassxc_48x48.png" alt="logo"/> KeePassXC-Browser</h3>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white mb-4">
-        <ul class="navbar-nav mr-auto nav" role="tablist" id="navtabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#tab-general-settings" id="general-tab" data-toggle="tab"
-                   aria-controls="tab-general-settings" aria-selected="true"
-                   role="tab">
-                    <span data-i18n="optionsMenuGeneral"></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#tab-connected-databases" id="db-tab" data-toggle="tab"
-                   aria-controls="tab-connected-databases" aria-selected="false"
-                   role="tab">
-                    <span data-i18n="optionsMenuConnectedDatabases"></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#tab-custom-fields" id="custom-fields-tab" data-toggle="tab"
-                   aria-controls="tab-custom-fields" aria-selected="false"
-                   role="tab">
-                    <span data-i18n="optionsMenuCustomFields"></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#tab-site-preferences" id="site-prefs-tab" data-toggle="tab"
-                   aria-controls="tab-site-preferences" aria-selected="false"
-                   role="tab">
-                    <span data-i18n="optionsMenuSitePreferences"></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#tab-about" id="about-tab" data-toggle="tab" aria-controls="tab-about"
-                   role="tab" aria-selected="false">
-                    <span data-i18n="optionsMenuAbout"></span>
-                </a>
-            </li>
-        </ul>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse" data-target="#optionsNavbar"
+                aria-controls="optionsNavbar" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="optionsNavbar">
+            <ul class="navbar-nav mr-auto nav" role="tablist" id="navtabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#tab-general-settings" id="general-tab" data-toggle="tab"
+                       aria-controls="tab-general-settings" aria-selected="true"
+                       role="tab">
+                        <span data-i18n="optionsMenuGeneral"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tab-connected-databases" id="db-tab" data-toggle="tab"
+                       aria-controls="tab-connected-databases" aria-selected="false"
+                       role="tab">
+                        <span data-i18n="optionsMenuConnectedDatabases"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tab-custom-fields" id="custom-fields-tab" data-toggle="tab"
+                       aria-controls="tab-custom-fields" aria-selected="false"
+                       role="tab">
+                        <span data-i18n="optionsMenuCustomFields"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tab-site-preferences" id="site-prefs-tab" data-toggle="tab"
+                       aria-controls="tab-site-preferences" aria-selected="false"
+                       role="tab">
+                        <span data-i18n="optionsMenuSitePreferences"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tab-about" id="about-tab" data-toggle="tab" aria-controls="tab-about"
+                       role="tab" aria-selected="false">
+                        <span data-i18n="optionsMenuAbout"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <section class="tab-content">
 
