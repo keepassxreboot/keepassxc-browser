@@ -280,12 +280,12 @@
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "KeePassXC-Browser has not yet connected to KeePassXC but has been configured using the identifier: $1",
+        "message": "KeePassXC-Browser has not yet connected to KeePassXC but has been configured using the identifier:",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "KeePassXC-Browser is connected to KeePassXC and has been configured using the following identifier: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "message": "KeePassXC-Browser is connected to KeePassXC and has been configured using the following identifier:",
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupRememberInfoText": {
         "message": "Username or password changed! Save it?",
