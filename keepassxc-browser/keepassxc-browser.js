@@ -127,11 +127,17 @@ cipAutocomplete.init = function(field) {
         .focus(cipAutocomplete.onFocus);
 };
 
-cipAutocomplete.onClick = function() {
+cipAutocomplete.onClick = function(e) {
+    if (!cipAutocomplete.isTrusted(e)) {
+        return;
+    }
     jQuery(this).autocomplete('search', jQuery(this).val());
 };
 
-cipAutocomplete.onOpen = function(event, ui) {
+cipAutocomplete.onOpen = function(e, ui) {
+    if (!cipAutocomplete.isTrusted(e)) {
+        return;
+    }
     jQuery('ul.ui-autocomplete.ui-menu').css('z-index', 2147483636);
 };
 
@@ -145,6 +151,9 @@ cipAutocomplete.onSource = function(request, callback) {
 };
 
 cipAutocomplete.onSelect = function(e, ui) {
+    if (!cipAutocomplete.isTrusted(e)) {
+        return;
+    }
     e.preventDefault();
     cip.setValueWithChange(jQuery(this), ui.item.value);
     const fieldId = cipFields.prepareId(jQuery(this).attr('data-cip-id'));
@@ -171,13 +180,27 @@ cipAutocomplete.onBlur = function() {
     }
 };
 
-cipAutocomplete.onFocus = function() {
+cipAutocomplete.onFocus = function(e) {
+    if (!cipAutocomplete.isTrusted(e)) {
+        return;
+    }
     cip.u = jQuery(this);
 
     if (jQuery(this).val() === '') {
         jQuery(this).autocomplete('search', '');
     }
 };
+
+// Search for isTrusted from jQuery's originalEvent
+cipAutocomplete.isTrusted = function(e) { 
+    for (let f = e.originalEvent; f !== null; f = f.originalEvent) {
+        if (f.isTrusted !== undefined) {
+            return f.isTrusted;
+        }
+    }
+    return false;
+};
+
 
 var cipPassword = {};
 cipPassword.observedIcons = [];
