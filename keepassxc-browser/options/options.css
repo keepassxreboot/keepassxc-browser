@@ -119,6 +119,10 @@ h2+hr {
     width: 75%;
 }
 
+#defaultGroup {
+    width: 50%;
+}
+
 tr.clone {
     display: none;
 }

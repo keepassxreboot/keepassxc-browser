@@ -10,15 +10,6 @@
     <script type="text/javascript" src="../options/bootstrap.min.js" /></script>
     <script type="text/javascript" src="popup_functions.js"></script>
     <script type="text/javascript" src="popup_remember.js"></script>
-    <style type="text/css">
-      .credentials {display: none; border-top: 1px solid #333;}
-      .connected-database {display: none; font-size: 85%; color: #787878;}
-      .credentials .username-new {display: none;}
-      .credentials .username-exists {display: none;}
-      .small { font-weight: bold; }
-      .small .normal { font-weight: normal; }
-      .info { font-weight: normal; }
-    </style>
   </head>
   <body>
     <div class="buttons">
@@ -41,11 +32,16 @@
       <p data-i18n="popupRememberSaving" i18n-placeholder="<span></span><em></em>"></p>
     </div>
 
-    <div class="credentials">
+    <div class="credentials" style="display: none;">
       <p class="username-new"><span data-i18n="popupRememberNewUsername" i18n-placeholder="<strong></strong>"></span></p>
       <p class="username-exists"><span data-i18n="popupRememberUsernameExists" i18n-placeholder="<strong></strong>"></span></p>
       <p data-i18n="popupRememberChooseCredentials"></p>
-      <ul id="list"></ul>
+      <ul id="list" class="list-group"></ul>
+    </div>
+
+    <div class="groups" style="display: none;">
+      <p data-i18n="popupRememberChooseGroup"></p>
+      <ul id="list" class="list-group"></ul>
     </div>
     <script type="text/javascript" src="../translate.js"></script>
   </body>

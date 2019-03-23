@@ -167,13 +167,13 @@ browserAction.stackPop = function(tabId) {
 
 browserAction.stackPush = function(data, tabId) {
     const id = tabId || page.currentTabId;
-    browserAction.removeLevelFromStack(null, {'id': id}, data.level, '<=', true);
+    browserAction.removeLevelFromStack(null, { 'id': id }, data.level, '<=', true);
     page.tabs[id].stack.push(data);
 };
 
 browserAction.stackUnshift = function(data, tabId) {
     const id = tabId || page.currentTabId;
-    browserAction.removeLevelFromStack(null, {'id': id}, data.level, '<=', true);
+    browserAction.removeLevelFromStack(null, { 'id': id }, data.level, '<=', true);
     page.tabs[id].stack.unshift(data);
 };
 
@@ -193,7 +193,7 @@ browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
         const currentMS = Date.now();
         if (removeImmediately || (data.visibleForPageUpdates <= 0 && data.redirectOffset > 0)) {
             browserAction.stackPop(tab.id);
-            browserAction.show(null, {"id": tab.id});
+            browserAction.show(null, { 'id': tab.id });
             page.clearCredentials(tab.id);
         } else if (!isNaN(data.visibleForPageUpdates) && data.redirectOffset > 0 && currentMS >= data.redirectOffset) {
             data.visibleForPageUpdates -= 1;
@@ -202,7 +202,7 @@ browserAction.removeRememberPopup = function(callback, tab, removeImmediately) {
 };
 
 browserAction.setRememberPopup = function(tabId, username, password, url, usernameExists, credentialsList) {
-    browser.storage.local.get({'settings': {}}).then(function(item) {
+    browser.storage.local.get({ 'settings': {} }).then(function(item) {
         const settings = item.settings;
 
         // Don't show anything if the site is in the ignore 
@@ -233,7 +233,7 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
                 index: 0,
                 counter: 0,
                 max: 2,
-                icons: ['icon_remember_red_background_19x19.png', 'icon_remember_red_lock_19x19.png']
+                icons: [ 'icon_remember_red_background_19x19.png', 'icon_remember_red_lock_19x19.png' ]
             },
             icon: 'icon_remember_red_background_19x19.png',
             popup: 'popup_remember.html'

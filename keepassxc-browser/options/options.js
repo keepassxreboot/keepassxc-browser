@@ -54,7 +54,9 @@ options.saveSettingsPromise = function() {
 options.saveSetting = function(name) {
     const id = '#' + name;
     $(id).closest('.control-group').removeClass('error').addClass('success');
-    setTimeout(() => { $(id).closest('.control-group').removeClass('success'); }, 2500);
+    setTimeout(() => {
+        $(id).closest('.control-group').removeClass('success');
+    }, 2500);
 
     browser.storage.local.set({ 'settings': options.settings });
     browser.runtime.sendMessage({
@@ -79,6 +81,11 @@ options.saveKeyRing = function() {
 options.initGeneralSettings = function() {
     $('#tab-general-settings input[type=checkbox]').each(function() {
         $(this).attr('checked', options.settings[$(this).attr('name')]);
+        if ($(this).attr('name') === 'defaultGroupAlwaysAsk' &&  $(this).attr('checked')) {
+            $('#defaultGroup').prop('disabled', true);
+            $('#defaultGroupButton').prop('disabled', true);
+            $('#defaultGroupButtonReset').prop('disabled', true);
+        }
     });
 
     $('#tab-general-settings input[type=checkbox]').change(function() {
@@ -87,9 +94,21 @@ options.initGeneralSettings = function() {
         options.saveSettingsPromise().then((x) => {
             if (name === 'autoFillAndSend') {
                 browser.runtime.sendMessage({ action: 'init_http_auth' });
+            } else if (name === 'defaultGroupAlwaysAsk') {
+                if ($(this).is(':checked')) {
+                    $('#defaultGroup').prop('disabled', true);
+                    $('#defaultGroupButton').prop('disabled', true);
+                    $('#defaultGroupButtonReset').prop('disabled', true);
+                } else {
+                    $('#defaultGroup').prop('disabled', false);
+                    $('#defaultGroupButton').prop('disabled', false);
+                    $('#defaultGroupButtonReset').prop('disabled', false);
+                }
             }
         });
     });
+
+    $('#tab-general-settings input#defaultGroup').val(options.settings['defaultGroup']);
 
     $('#tab-general-settings input[type=radio]').each(function() {
         if ($(this).val() === options.settings[$(this).attr('name')]) {
@@ -154,6 +173,20 @@ options.initGeneralSettings = function() {
 
         options.settings['allowedRedirect'] = allowedRedirectval;
         options.saveSetting('allowedRedirect');
+    });
+
+    $('#defaultGroupButton').click(function() {
+        const value = $('#defaultGroup').val();
+        if (value.length > 0) {
+            options.settings['defaultGroup'] = value;
+            options.saveSettings();
+        }
+    });
+
+    $('#defaultGroupButtonReset').click(function() {
+        $('#defaultGroup').val('');
+        options.settings['defaultGroup'] = '';
+        options.saveSettings();
     });
 };
 
