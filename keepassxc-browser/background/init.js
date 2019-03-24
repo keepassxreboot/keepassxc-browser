@@ -81,11 +81,12 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 
 const contextMenuItems = [
-    {title: tr('contextMenuFillUsernameAndPassword'), action: 'fill_username_password'},
-    {title: tr('contextMenuFillPassword'), action: 'fill_password'},
-    {title: tr('contextMenuFillTOTP'), action: 'fill_totp'},
-    {title: tr('contextMenuShowPasswordGeneratorIcons'), action: 'activate_password_generator'},
-    {title: tr('contextMenuSaveCredentials'), action: 'remember_credentials'}
+    { title: tr('contextMenuFillUsernameAndPassword'), action: 'fill_username_password' },
+    { title: tr('contextMenuFillPassword'), action: 'fill_password' },
+    { title: tr('contextMenuFillTOTP'), action: 'fill_totp' },
+    { title: tr('contextMenuShowPasswordGeneratorIcons'), action: 'activate_password_generator' },
+    { title: tr('contextMenuSaveCredentials'), action: 'remember_credentials' },
+    { title: tr('contextMenuShowPasswordGenerator'), action: 'show_password_generator' }
 ];
 
 const menuContexts = ['editable'];

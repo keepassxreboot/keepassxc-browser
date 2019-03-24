@@ -11,14 +11,14 @@ document.querySelectorAll('input').forEach((b) => {
 const saveButtons = document.querySelectorAll('.btn-primary');
 for (const b of saveButtons) {
     b.addEventListener('click', (e) => {
-        updateShortcut(b.parentElement.children[1].getAttribute('id'))
+        updateShortcut(b.parentElement.children[1].getAttribute('id'));
     });
 }
 
 const resetButtons = document.querySelectorAll('.btn-danger');
 for (const b of resetButtons) {
     b.addEventListener('click', (e) => {
-        resetShortcut(b.parentElement.children[1].getAttribute('id'))
+        resetShortcut(b.parentElement.children[1].getAttribute('id'));
     });
 }
 
@@ -31,7 +31,7 @@ async function handleKeyDown(e) {
         tempArray.push(key);
         keyArray.push(key);
     }
-};
+}
 
 async function handleKeyUp(e) {
     if (!e.repeat) {
@@ -55,7 +55,7 @@ async function handleKeyUp(e) {
             e.currentTarget.value = text;
         }
     }
-};
+}
 
 async function updateKeys() {
     const commands = await browser.commands.getAll();
@@ -65,7 +65,7 @@ async function updateKeys() {
             elem.value = c.shortcut;
         }
     }
-};
+}
 
 async function updateShortcut(shortcut) {
     try {
@@ -78,13 +78,13 @@ async function updateShortcut(shortcut) {
         console.log('Cannot change shortcut: ' + e);
         createBanner('danger', shortcut);
     }
-};
+}
 
 async function resetShortcut(shortcut) {
     await browser.commands.reset(shortcut);
     createBanner('info', shortcut);
     updateKeys();
-};
+}
 
 // Ctrl behaves differently on different OS's. macOS needs to return MacCtrl instead of Ctrl (which will be handled as Command)
 function handleControl() {
@@ -112,6 +112,6 @@ function createBanner(type, shortcut) {
     setTimeout(() => {
         document.body.removeChild(banner);
     }, 5000);
-};
+}
 
 document.addEventListener('DOMContentLoaded', updateKeys);
