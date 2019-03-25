@@ -252,7 +252,7 @@
         "description": "A text shown above error message in the popup."
     },
     "popupUpdateAvailable": {
-        "message": "You use an old version of KeePassXC.",
+        "message": "You are using an old version of KeePassXC.",
         "description": "Popup warning message about old version of KeePassXC."
     },
     "popupDownloadNewVersion": {
