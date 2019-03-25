@@ -7,6 +7,10 @@
     color: #222222 !important;
 }
 
+.kpxc .ui-menu {
+    z-index: 10000;
+}
+
 .ui-helper-hidden-accessible {
     display: none !important;
 }

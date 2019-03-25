@@ -194,7 +194,7 @@ cipAutocomplete.onFocus = function(e) {
 
 // Search for isTrusted from jQuery's originalEvent
 cipAutocomplete.isTrusted = function(e) { 
-    for (let f = e.originalEvent; f !== null; f = f.originalEvent) {
+    for (let f = e.originalEvent; f; f = f.originalEvent) {
         if (f.isTrusted !== undefined) {
             return f.isTrusted;
         }
