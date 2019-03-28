@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 const extra = require('fs-extra');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 const zaf = require('zip-a-folder');
 
 const DEST = 'keepassxc-browser';
@@ -31,7 +33,14 @@ function adjustManifest(manifest) {
     return `keepassxc-browser_${data['version']}_${browser}.zip`;
 }
 
+async function updateTranslations() {
+    console.log('Pulling translations from Transifex, please wait...');
+    const { stdout } = await exec('tx pull -af');
+    console.log(stdout);
+}
+
 (async() => {
+    await updateTranslations();
     fs.copyFileSync(`${DEST}/manifest.json`, `./${DEFAULT}`);
 
     for (const browser in BROWSERS) {
@@ -45,4 +54,4 @@ function adjustManifest(manifest) {
     }
 
     fs.renameSync(DEFAULT, `${DEST}/manifest.json`);
-})()
+})();
