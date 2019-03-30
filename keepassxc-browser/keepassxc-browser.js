@@ -1559,7 +1559,7 @@ cip.initCredentialFields = function(forceCall) {
         cip.initializeSitePreferences();
         if (cip.settings.sitePreferences) {
             for (const site of cip.settings.sitePreferences) {
-                if (site.url === document.location.href || siteMatch(site.url, window.top.location.href)) {
+                if (site.url === window.top.location.href || siteMatch(site.url, window.top.location.href)) {
                     if (site.ignore === IGNORE_FULL) {
                         return;
                     }
