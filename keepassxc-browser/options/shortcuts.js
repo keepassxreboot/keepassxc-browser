@@ -61,7 +61,7 @@ async function updateKeys() {
     const commands = await browser.commands.getAll();
     for (const c of commands) {
         const elem = document.getElementById(c.name);
-        if (elem) {
+        if (elem !== null) {
             elem.value = c.shortcut;
         }
     }
@@ -100,7 +100,7 @@ const alertArea = document.querySelector('#alert-area');
  */
 function createAlert(type, shortcut) {
     const alert = document.createElement('div');
-    alert.classList.add('alert', 'alert-dismissible', `alert-${type}`, 'fade', 'in');
+    alert.classList.add('alert', 'alert-dismissible', `alert-${type}`);
     alert.role = 'alert';
 
     if (type === 'success') {

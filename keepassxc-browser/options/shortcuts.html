@@ -18,20 +18,16 @@
     </h5>
 
     <section class="card-body offset-xl-2">
-      <div id="alert-area" class="col-xl-9">
-        <!-- alerts will be placed here -->
-      </div>
-
       <div class="form-group row">
         <label
-          for="fill-username-password"
+          for="fill_username_password"
           class="col-xl-4 col-lg-6"
           data-i18n="contextMenuFillUsernameAndPassword"
         ></label>
         <div class="input-group col-xl-5 col-lg-6">
           <input
             type="text"
-            id="fill-username-password"
+            id="fill_username_password"
             class="form-control text-monospace"
           />
           <div class="input-group-append">
@@ -53,14 +49,14 @@
 
       <div class="form-group row">
         <label
-          for="fill-password"
+          for="fill_password"
           class="col-xl-4 col-lg-6"
           data-i18n="contextMenuFillPassword"
         ></label>
         <div class="input-group col-xl-5 col-lg-6">
           <input
             type="text"
-            id="fill-password"
+            id="fill_password"
             class="form-control text-monospace"
           />
           <div class="input-group-append">
@@ -82,14 +78,14 @@
 
       <div class="form-group row">
         <label
-          for="fill-totp"
+          for="fill_totp"
           class="col-xl-4 col-lg-6"
           data-i18n="contextMenuFillTOTP"
         ></label>
         <div class="input-group col-xl-5 col-lg-6">
           <input
             type="text"
-            id="fill-totp"
+            id="fill_totp"
             class="form-control text-monospace"
           />
           <div class="input-group-append">
@@ -107,6 +103,39 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <div class="form-group row">
+        <label
+          for="show_password_generator"
+          class="col-xl-4 col-lg-6"
+          data-i18n="contextMenuShowPasswordGenerator"
+        ></label>
+        <div class="input-group col-xl-5 col-lg-6">
+          <input
+            type="text"
+            id="show_password_generator"
+            class="form-control text-monospace"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary save-btn"
+              id="buttonSaveGenerator"
+              type="button"
+            >
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              <span data-i18n="optionsButtonSave"></span>
+            </button>
+            <button class="btn btn-secondary reset-btn">
+              <span class="fa fa-undo" aria-hidden="true"></span>
+              <span data-i18n="optionsButtonReset"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="alert-area" class="col-xl-9">
+        <!-- alerts will be placed here -->
       </div>
     </section>
   </section>

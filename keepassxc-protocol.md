@@ -32,20 +32,20 @@ Currently these messages are implemented:
 Request:
 ```javascript
 {
-	"action": "change-public-keys",
-	"publicKey": "<current public key>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "change-public-keys",
+    "publicKey": "<current public key>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response (success):
 ```javascript
 {
-	"action": "change-public-keys",
-	"version": "2.2.0",
-	"publicKey": "<host public key>",
-	"success": "true"
+    "action": "change-public-keys",
+    "version": "2.2.0",
+    "publicKey": "<host public key>",
+    "success": "true"
 }
 ```
 
@@ -53,26 +53,26 @@ Response (success):
 Unencrypted message:
 ```javascript
 {
-	"action": "get-databasehash"
+    "action": "get-databasehash"
 }
 ```
 
 Request:
 ```javascript
 {
-	"action": "get-databasehash",
-	"message": "<encrypted message>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "get-databasehash",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response message data (success, decrypted):
 ```javascript
 {
-	"action": "hash",
-	"hash": "29234e32274a32276e25666a42",
-	"version": "2.2.0"
+    "action": "hash",
+    "hash": "29234e32274a32276e25666a42",
+    "version": "2.2.0"
 }
 ```
 
@@ -80,30 +80,30 @@ Response message data (success, decrypted):
 Unencrypted message:
 ```javascript
 {
-	"action": "associate",
-	"key": "<current public key>",
-	"idKey": "<a new identification key>"
+    "action": "associate",
+    "key": "<current public key>",
+    "idKey": "<a new identification key>"
 }
 ```
 
 Request:
 ```javascript
 {
-	"action": "associate",
-	"message": "<encrypted message>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "associate",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response message data (success, decrypted):
 ```javascript
 {
-	"hash": "29234e32274a32276e25666a42",
-	"version": "2.2.0",
-	"success": "true",
-	"id": "testclient",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+    "hash": "29234e32274a32276e25666a42",
+    "version": "2.2.0",
+    "success": "true",
+    "id": "testclient",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```
 
@@ -111,30 +111,30 @@ Response message data (success, decrypted):
 Unencrypted message:
 ```javascript
 {
-	"action": "test-associate",
-	"id": "<saved database identifier>",
-	"key": "<saved database public key>"
+    "action": "test-associate",
+    "id": "<saved database identifier>",
+    "key": "<saved database public key>"
 }
 ```
 
 Request:
 ```javascript
 {
-	"action": "test-associate",
-	"message": "<encrypted message>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "test-associate",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response message data (success, decrypted):
 ```javascript
 {
-	"version": "2.2.0",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"hash": "29234e32274a32276e25666a42",
-	"id": "testclient",
-	"success": "true"
+    "version": "2.2.0",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "hash": "29234e32274a32276e25666a42",
+    "id": "testclient",
+    "success": "true"
 }
 ```
 
@@ -142,24 +142,24 @@ Response message data (success, decrypted):
 Request (no unencrypted message is needed):
 ```javascript
 {
-	"action": "generate-password",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "generate-password",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response message data (success, decrypted):
 ```javascript
 {
-	"version": "2.2.0",
-	"entries": [
-		{
-			"login": 144,
-			"password": "testclientpassword"
-		}
-	],
-	"success": "true",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+    "version": "2.2.0",
+    "entries": [
+        {
+            "login": 144,
+            "password": "testclientpassword"
+        }
+    ],
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```
 
@@ -167,49 +167,49 @@ Response message data (success, decrypted):
 Unencrypted message:
 ```javascript
 {
-	"action": "get-logins",
-	"url": "<snip>",
-	"submitUrl": optional,
-	"httpAuth": optional,
-	"keys": [
-		{
-			"id": <connected_id>,
-			"key": <connected_key>
-		},
-		...
-	]
+    "action": "get-logins",
+    "url": "<snip>",
+    "submitUrl": optional,
+    "httpAuth": optional,
+    "keys": [
+        {
+            "id": <connected_id>,
+            "key": <connected_key>
+        },
+        ...
+    ]
 }
 ```
 
 Request:
 ```javascript
 {
-	"action": "get-logins",
-	"message": "<encrypted message>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "get-logins",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response message data (success, decrypted):
 ```javascript
 {
-	"count": "2",
-	"entries" : [
-	{
-		"login": "user1",
-		"name": "user1",
-		"password": "passwd1"
-	},
-	{
-		"login": "user2",
-		"name": "user2",
-		"password": "passwd2"
-	}],
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"success": "true",
-	"hash": "29234e32274a32276e25666a42",
-	"version": "2.2.0"
+    "count": "2",
+    "entries" : [
+    {
+        "login": "user1",
+        "name": "user1",
+        "password": "passwd1"
+    },
+    {
+        "login": "user2",
+        "name": "user2",
+        "password": "passwd2"
+    }],
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "success": "true",
+    "hash": "29234e32274a32276e25666a42",
+    "version": "2.2.0"
 }
 ```
 
@@ -217,36 +217,39 @@ Response message data (success, decrypted):
 Unencrypted message:
 ```javascript
 {
-	"action": "set-login",
-	"url": "<snip>",
-	"submitUrl": "<snip>",
-	"id": "testclient",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"login": "user1",
-	"password": "passwd1"
+    "action": "set-login",
+    "url": "<snip>",
+    "submitUrl": "<snip>",
+    "id": "testclient",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "login": "user1",
+    "password": "passwd1",
+    "group": "<group name>",
+    "groupUuid": "<group UUID>",
+    "uuid": "<entry UUID>"
 }
 ```
 
 Request:
 ```javascript
 {
-	"action": "set-login",
-	"message": "<encrypted message>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "set-login",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response message data (success, decrypted):
 ```javascript
 {
-	"count": null,
-	"entries" : null,
-	"error": "",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"success": "true",
-	"hash": "29234e32274a32276e25666a42",
-	"version": "2.2.0"
+    "count": null,
+    "entries" : null,
+    "error": "",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "success": "true",
+    "hash": "29234e32274a32276e25666a42",
+    "version": "2.2.0"
 }
 ```
 
@@ -254,26 +257,124 @@ Response message data (success, decrypted):
 Unencrypted message:
 ```javascript
 {
-	"action": "lock-database"
+    "action": "lock-database"
 }
 ```
 
 Request:
 ```javascript
 {
-	"action": "lock-database",
-	"message": "<encrypted message>",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-	"clientID": "<clientID>"
+    "action": "lock-database",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
 }
 ```
 
 Response message data (success always returns an error, decrypted):
 ```javascript
 {
-	"action": "lock-database",
-	"errorCode": 1,
-	"error": "Database not opened",
-	"nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+    "action": "lock-database",
+    "errorCode": 1,
+    "error": "Database not opened",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+}
+```
+
+### get-database-groups
+Unencrypted message:
+```javascript
+{
+    "action": "get-database-groups"
+}
+```
+
+Request:
+```javascript
+{
+    "action": "get-database-groups",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
+}
+```
+
+Response message data (success, decrypted):
+```json
+{
+    "defaultGroup": "<default group name>",
+    "defaultGroupAlwaysAllow": false,
+    "groups": [
+        {
+            "name": "Root",
+            "uuid": "<group UUID>",
+            "children": [
+                {
+                    "name": "KeePassXC-Browser Passwords",
+                    "uuid": "<group UUID>",
+                    "children": []
+                },
+                {
+                    "name": "SecondRoot",
+                    "uuid": "<group UUID>",
+                    "children": [
+                        {
+                            "name": "Child",
+                            "uuid": "<group UUID>",
+                            "children": [
+                                {
+                                    "name": "GrandChild",
+                                    "uuid": "<group UUID>",
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "ThirdRoot",
+                    "uuid": "<group UUID>",
+                    "children": [
+                        {
+                            "name": "Child2",
+                            "uuid": "<group UUID>",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Child2",
+                    "uuid": "<group UUID>",
+                    "children": []
+                }
+            ]
+        }
+    ]
+}
+```
+### create-new-group
+Unencrypted message:
+```javascript
+{
+    "action": "create-new-group",
+    "groupName": "<group name or path>"
+}
+```
+
+Request:
+```javascript
+{
+    "action": "create-new-group",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
+}
+```
+
+Response message data (success, decrypted):
+```json
+{
+    "name": "<group name>",
+    "uuid": "<group UUID>"
 }
 ```
