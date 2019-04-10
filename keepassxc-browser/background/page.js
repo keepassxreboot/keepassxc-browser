@@ -10,6 +10,7 @@ const defaultSettings = {
     showNotifications: true,
     showLoginNotifications: true,
     saveDomainOnly: true,
+    automaticReconnect: true,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false
 };
@@ -51,6 +52,9 @@ page.initSettings = function() {
             if (!('saveDomainOnly' in page.settings)) {
                 page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
             }
+            if (!('automaticReconnect' in page.settings)) {
+                page.settings.automaticReconnect = defaultSettings.automaticReconnect;
+            }
             if (!('defaultGroup' in page.settings)) {
                 page.settings.defaultGroup = defaultSettings.defaultGroup;
             }
@@ -71,13 +75,13 @@ page.initOpenedTabs = function() {
             }
 
             // Set initial tab-ID
-            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((t) => {
-                if (t.length === 0) {
+            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((currentTabs) => {
+                if (currentTabs.length === 0) {
                     resolve();
                     return; // For example: only the background devtools or a popup are opened
                 }
-                page.currentTabId = t[0].id;
-                browserAction.show(null, t[0]);
+                page.currentTabId = currentTabs[0].id;
+                browserAction.show(null, currentTabs[0]);
                 resolve();
             });
         });
@@ -145,33 +149,5 @@ page.removePageInformationFromNotExistingTabs = function() {
                 }
             }
         });
-    }
-};
-
-page.debugConsole = function() {
-    if (arguments.length > 1) {
-        console.log(page.sprintf(arguments[0], arguments));
-    } else {
-        console.log(arguments[0]);
-    }
-};
-
-page.sprintf = function(input, args) {
-    return input.replace(/{(\d+)}/g, (match, number) => {
-      return typeof args[number] !== 'undefined' ? (typeof args[number] === 'object' ? JSON.stringify(args[number]) : args[number]) : match;
-    });
-};
-
-page.debugDummy = function() {};
-
-page.debug = page.debugDummy;
-
-page.setDebug = function(bool) {
-    if (bool) {
-        page.debug = page.debugConsole;
-        return 'Debug mode enabled';
-    } else {
-        page.debug = page.debugDummy;
-        return 'Debug mode disabled';
     }
 };

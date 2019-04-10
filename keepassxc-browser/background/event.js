@@ -99,7 +99,7 @@ kpxcEvent.showStatus = function(configured, tab, callback) {
         keePassXCAvailable: keepass.isKeePassXCAvailable,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         associated: keepass.isAssociated(),
-        error: errorMessage ? errorMessage : null
+        error: errorMessage || null
     });
 };
 
@@ -192,16 +192,16 @@ kpxcEvent.onGetConnectedDatabase = function(callback, tab) {
 kpxcEvent.onGetKeePassXCVersions = function(callback, tab) {
     if (keepass.currentKeePassXC === '') {
         keepass.getDatabaseHash((res) => {
-            callback({'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version});
+            callback({ 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version });
         }, tab);
     } else {
-        callback({'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version});
+        callback({ 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version });
     }
 };
 
 kpxcEvent.onCheckUpdateKeePassXC = function(callback, tab) {
     keepass.checkForNewKeePassXCVersion();
-    callback({current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version});
+    callback({ current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version });
 };
 
 kpxcEvent.onUpdateAvailableKeePassXC = function(callback, tab) {
@@ -285,6 +285,8 @@ kpxcEvent.messageHandlers = {
     'associate': keepass.associate,
     'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
     'create_new_group': keepass.createNewGroup,
+    'enable_automatic_reconnect': keepass.enableAutomaticReconnect,
+    'disable_automatic_reconnect': keepass.disableAutomaticReconnect,
     'generate_password': keepass.generatePassword,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
     'get_database_groups': keepass.getDatabaseGroups,

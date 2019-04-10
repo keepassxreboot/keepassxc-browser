@@ -1,0 +1,19 @@
+.kpxcAutocomplete-items {
+    position: absolute !important;
+    border: 1px solid #d4d4d4;
+}
+
+.kpxcAutocomplete-items div {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #fff; 
+    border-bottom: 1px solid #d4d4d4;
+    width: auto;
+    color: #000;
+    font-size: .9em !important;
+}
+
+.kpxcAutocomplete-active {
+    background-color: #6cac4d !important; 
+    color: #ffffff !important;
+}
