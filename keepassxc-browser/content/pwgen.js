@@ -35,7 +35,7 @@ kpxcPassword.observer = new IntersectionObserver((entries) => {
 
             // Wait for possible DOM animations
             setTimeout(() => {
-                kpxcPassword.setIconPosition(kpxcPassword.icon, entry.target)
+                kpxcPassword.setIconPosition(kpxcPassword.icon, entry.target);
             }, 500);
         }
     }
@@ -127,7 +127,7 @@ kpxcPassword.createDialog = function() {
         }
         return;
     }
-    kpxcPassword.created = true;    
+    kpxcPassword.created = true;
 
     const wrapper = kpxcUI.createElement('div', 'kpxc');
     const dialog = kpxcUI.createElement('div', 'kpxc kpxc-pwgen-dialog');
@@ -307,8 +307,7 @@ kpxcPassword.copyPasswordToClipboard = function() {
     $('.kpxc-pwgen-input').select();
     try {
         return document.execCommand('copy');
-    }
-    catch (err) {
+    } catch (err) {
         console.log('Could not copy password to clipboard: ' + err);
     }
     return false;
