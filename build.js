@@ -3,6 +3,7 @@
 const fs = require('fs');
 const extra = require('fs-extra');
 const zaf = require('zip-a-folder');
+const {buildBootstrap} = require('./build-bootstrap');
 
 const DEST = 'keepassxc-browser';
 const DEFAULT = 'manifest_default.json';
@@ -32,6 +33,10 @@ function adjustManifest(manifest) {
 }
 
 (async() => {
+    console.info('Building Bootstrap theme');
+    buildBootstrap();
+    console.info('Bootstrap theme build finished');
+
     fs.copyFileSync(`${DEST}/manifest.json`, `./${DEFAULT}`);
 
     for (const browser in BROWSERS) {
@@ -45,4 +50,4 @@ function adjustManifest(manifest) {
     }
 
     fs.renameSync(DEFAULT, `${DEST}/manifest.json`);
-})()
+})();
