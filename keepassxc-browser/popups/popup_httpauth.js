@@ -3,7 +3,7 @@
 const getLoginData = function() {
     return new Promise((resolve, reject) => {
         browser.runtime.getBackgroundPage().then((global) => {
-            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
+            browser.tabs.query({'active': true, 'currentWindow': true}).then((tabs) => {
                 resolve(global.page.tabs[tabs[0].id].loginList);
             });
         });

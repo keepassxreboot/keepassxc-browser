@@ -1,84 +1,72 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <title data-i18n="popupTitle"></title>
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" href="/styles/bootstrap.css"/>
-  <link rel="stylesheet" href="popup.css"/>
-  <link rel="stylesheet" href="../fonts/fork-awesome.min.css"/>
-  <script type="text/javascript" src="../browser-polyfill.min.js"></script>
-  <script type="text/javascript" src="../global.js"></script>
-  <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="../options/bootstrap.min.js"></script>
-  <script type="text/javascript" src="popup_functions.js"></script>
-  <script type="text/javascript" src="popup_login.js"></script>
-</head>
-<body>
-<div class="container">
-  <div id="settings" class="settings">
-    <button
-      id="btn-choose-credential-fields"
-      class="btn btn-sm btn-secondary mr-2"
-    >
-      <span class="fa fa-mouse-pointer" aria-hidden="true"></span>
-      <span data-i18n="popupChooseCredentialsText"></span>
-    </button>
-    <button
-      id="lock-database-button"
-      class="btn btn-danger"
-      title="Lock database"
-    >
-      <i class="fa fa-lock" aria-hidden="true"></i>
-      <span data-i18n="popupLockDatabaseText"></span>
-    </button>
+  <head>
+    <title data-i18n="popupTitle"></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/styles/bootstrap.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
+    <script type="text/javascript" src="../browser-polyfill.min.js"></script>
+    <script type="text/javascript" src="../global.js"></script>
+    <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../options/bootstrap.min.js"></script>
+    <script type="text/javascript" src="popup_functions.js"></script>
+    <script type="text/javascript" src="popup_login.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="settings" class="settings d-flex justify-content-between">
+        <span>
+          <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning mr-2">
+            <span class="fa fa-mouse-pointer" aria-hidden="true"></span>
+            <span data-i18n="popupChooseCredentialsText"></span>
+          </button>
+          <button id="lock-database-button" class="btn btn-sm btn-danger" title="Lock database">
+            <i class="fa fa-lock" aria-hidden="true"></i>
+            <span data-i18n="popupLockDatabaseText"></span>
+          </button>
+        </span>
 
-    <button id="btn-options" class="btn btn-secondary">
-      <span class="fa fa-cog" aria-hidden="true"></span>
-    </button>
-  </div>
+        <button id="btn-options" class="btn btn-secondary btn-sm">
+          <span class="fa fa-cog" aria-hidden="true"></span>
+        </button>
+      </div>
 
-  <div id="update-available" class="alert alert-info" role="alert">
-    <span data-i18n="popupUpdateAvailable"></span>
-    <br/>
-    <a
-      target="_blank"
-      class="alert-link"
-      rel="noopener"
-      href="https://keepassxc.org/download"
-    ><span data-i18n="popupDownloadNewVersion"></span></a
-    >.
-  </div>
+      <main>
+        <div id="update-available" class="alert alert-info" role="alert">
+          <span data-i18n="popupUpdateAvailable"></span>
+          <br />
+          <a target="_blank" class="alert-link" rel="noopener" href="https://keepassxc.org/download"
+            ><span data-i18n="popupDownloadNewVersion"></span></a
+          >.
+        </div>
 
-  <div id="credentialsList" class="credentials">
-    <p data-i18n="popupLoginText"></p>
-    <div id="filter-block" style="display: none;">
-      <label for="login-filter" data-i18n="popupFilterText"></label>
-      <input type="text" id="login-filter"/>
+        <div id="credentialsList" class="credentials">
+          <p data-i18n="popupLoginText"></p>
+          <div id="filter-block" style="display: none;">
+            <label for="login-filter" data-i18n="popupFilterText"></label>
+            <input type="text" id="login-filter" />
+          </div>
+          <div id="login-list" class="list-group"></div>
+        </div>
+
+        <div id="database-not-opened" style="display: none" class="alert alert-danger" role="alert">
+          <h6 class="alert-heading">
+            <span class="fa fa-exclamation-triangle"></span>
+            <span data-i18n="popupErrorEncountered"></span>
+          </h6>
+          <p data-i18n="popupErrorEncountered"></p>
+          <p style="margin-left: 1em">
+            <code id="database-error-message"></code>
+          </p>
+          <div style="text-align: right">
+            <button id="reopen-database-button" class="btn btn-sm btn-primary">
+              <span class="fa fa-unlock"></span><span data-i18n="popupReopenButton"></span>
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
-    <div id="login-list" class="list-group"></div>
-  </div>
-
-  <div
-    id="database-not-opened"
-    style="display: none"
-    class="alert alert-danger"
-    role="alert"
-  >
-    <h6 class="alert-heading">
-      <span class="fa fa-exclamation-triangle"></span>
-      <span data-i18n="popupErrorEncountered"></span>
-    </h6>
-    <p data-i18n="popupErrorEncountered"></p>
-    <p style="margin-left: 1em">
-      <code id="database-error-message"></code>
-    </p>
-    <div style="text-align: right">
-      <button id="reopen-database-button" class="btn btn-sm btn-primary">
-            <span class="fa fa-unlock"></span
-            ><span data-i18n="popupReopenButton"></span>
-      </button>
-    </div>
-  </div>
-</div>
-<script type="text/javascript" src="../translate.js"></script>
-</body>
+    <script type="text/javascript" src="../translate.js"></script>
+  </body>
 </html>

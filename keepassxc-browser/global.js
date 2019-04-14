@@ -4,15 +4,12 @@ const IGNORE_NOTHING = 'ignoreNothing';
 const IGNORE_NORMAL = 'ignoreNormal';
 const IGNORE_FULL = 'ignoreFull';
 
-var schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
-var hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
-var pathSegment = '(.*)';
+const schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
+const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
+const pathSegment = '(.*)';
 
 var isFirefox = function() {
-    if (!(/Chrome/.test(navigator.userAgent) && /Google/.test(navigator.vendor))) {
-        return true;
-    }
-    return false;
+    return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
 };
 
 var showNotification = function(message) {
@@ -45,12 +42,12 @@ var matchPatternToRegExp = function(pattern) {
 
     let match = matchPatternRegExp.exec(pattern);
     if (!match) {
-        throw new TypeError(pattern + ' is not a valid MatchPattern');
+         throw new TypeError('"${pattern}" is not a valid MatchPattern');
     }
 
     let [, scheme, host, path] = match;
     if (!host) {
-        throw new TypeError(pattern + ' does not have a valid host');
+        throw new TypeError('"${pattern}" does not have a valid host');
     }
 
     let regex = '^';
@@ -92,7 +89,6 @@ var siteMatch = function(site, url) {
     return url.match(rx);
 };
 
-// Checks if URL has only scheme and host without the last / char.
 var slashNeededForUrl = function(pattern) {
     const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
     return matchPattern.exec(pattern);

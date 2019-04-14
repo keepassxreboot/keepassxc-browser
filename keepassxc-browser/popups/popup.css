@@ -54,7 +54,7 @@ body {
 
 #login-filter {
     outline: none;
-	border-radius: 4px;
+    border-radius: 4px;
     border: 1px solid #ccc;
     margin-bottom: 5px;
     padding: 2px 10px;
@@ -75,4 +75,10 @@ body {
 }
 .credentials .username-exists {
     display: none;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: .5rem;
 }
