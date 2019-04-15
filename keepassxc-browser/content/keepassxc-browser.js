@@ -151,6 +151,24 @@ kpxcForm.onSubmit = function() {
 var kpxcFields = {};
 
 kpxcFields.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input:not([type])';
+
+// copied from Sizzle.js
+kpxcFields.rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g;
+kpxcFields.fcssescape = function(ch, asCodePoint) {
+    if (asCodePoint) {
+        // U+0000 NULL becomes U+FFFD REPLACEMENT CHARACTER
+        if (ch === '\0') {
+            return '\uFFFD';
+        }
+
+        // Control characters and (dependent upon position) numbers get escaped as code points
+        return ch.slice(0, -1) + '\\' + ch.charCodeAt(ch.length - 1).toString(16) + ' ';
+    }
+
+    // Other potentially-special ASCII characters get backslash-escaped
+    return '\\' + ch;
+};
+
 // Unique number as new IDs for input fields
 kpxcFields.uniqueNumber = 342845638;
 // Objects with combination of username + password fields
@@ -175,9 +193,7 @@ kpxcFields.setUniqueId = function(field) {
 };
 
 kpxcFields.prepareId = function(id) {
-    return id.replace(/[:#.,\[\]\(\)' "]/g, function(m) {
-        return '\\' + m;
-    });
+    return (id + '').replace(kpxcFields.rcssescape, kpxcFields.fcssescape);
 };
 
 /**
