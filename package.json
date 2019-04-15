@@ -5,11 +5,16 @@
   "main": "build.js",
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-jquery": "^1.0.1",
+    "eslint-plugin-import": "^2.9.0",
     "fs-extra": "^7.0.1",
     "zip-a-folder": "0.0.7"
   },
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "lint": "eslint --ext .js ./keepassxc-browser"
   },
   "repository": {
     "type": "git",
