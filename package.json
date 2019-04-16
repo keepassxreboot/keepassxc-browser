@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/keepassxreboot/keepassxc-browser#readme",
   "browserslist": [
-    "firefox > 60",
+    "firefox >= 52",
     "chrome > 67",
     "not dead"
   ]
