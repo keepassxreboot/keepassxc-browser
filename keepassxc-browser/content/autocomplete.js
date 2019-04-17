@@ -22,14 +22,14 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
 
     if (showListInstantly) {
         showList(input);
-    } 
+    }
 
-    function showList(input) {
+    function showList(inputField) {
         closeList();
         const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
 
         // Element position
-        const rect = input.getBoundingClientRect();
+        const rect = inputField.getBoundingClientRect();
         div.style.top = String((rect.top + document.body.scrollTop) + input.offsetHeight) + 'px';
         div.style.left = String((rect.left + document.body.scrollLeft)) + 'px';
         div.style.minWidth = String(input.offsetWidth) + 'px';
@@ -48,10 +48,10 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
 
                 // Save index for combination.loginId
                 const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
-                input.value = this.getElementsByTagName('input')[0].value;
-                fillPassword(input.value, index);
+                inputField.value = this.getElementsByTagName('input')[0].value;
+                fillPassword(inputField.value, index);
                 closeList();
-                input.focus();
+                inputField.focus();
             });
 
             // These events prevent the double hover effect if both keyboard and mouse are used
@@ -71,7 +71,7 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
         const items = getAllItems();
         _index = 0;
         activateItem(items);
-    };
+    }
 
     function activateItem(item) {
         if (!item || item.length === 0) {
@@ -90,13 +90,13 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
         if (item[_index] !== undefined) {
             item[_index].classList.add('kpxcAutocomplete-active');
         }
-    };
+    }
 
     function removeItem(items) {
         for (const item of items) {
             item.classList.remove('kpxcAutocomplete-active');
         }
-    };
+    }
 
     function closeList(elem) {
         const items = document.getElementsByClassName('kpxcAutocomplete-items');
@@ -105,7 +105,7 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
                 item.parentNode.removeChild(item);
             }
         }
-    };
+    }
 
     function getAllItems() {
         const list = document.getElementById('kpxcAutocomplete-list');
@@ -113,7 +113,7 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
             return [];
         }
         return list.getElementsByTagName('div');
-    };
+    }
 
     /**
      * Keyboard shortcuts for autocomplete menu:
@@ -158,7 +158,7 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
             _index = -1;
             showList(input);
         }
-    };
+    }
 
     function fillPassword(value, index) {
         const fieldId = input.getAttribute('data-kpxc-id');
@@ -168,7 +168,7 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
 
         kpxc.fillInCredentials(combination, false, false);
         input.setAttribute('fetched', true);
-    };
+    }
 
     // Detect click outside autocomplete
     document.addEventListener('click', function(e) {

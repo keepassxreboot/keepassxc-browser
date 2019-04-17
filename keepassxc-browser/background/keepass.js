@@ -57,7 +57,7 @@ const kpErrors = {
     NO_URL_PROVIDED: 14,
     NO_LOGINS_FOUND: 15,
 
-    errorMessages : {
+    errorMessages: {
         0: { msg: tr('errorMessageUnknown') },
         1: { msg: tr('errorMessageDatabaseNotOpened') },
         2: { msg: tr('errorMessageDatabaseHash') },
@@ -197,8 +197,8 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 };
 
 keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallback, triggerUnlock = false, httpAuth = false) {
-    keepass.testAssociation((response) => {
-        if (!response) {
+    keepass.testAssociation((taResponse) => {
+        if (!taResponse) {
             browserAction.showDefault(null, tab);
             if (forceCallback) {
                 callback([]);
@@ -569,7 +569,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
                 keepass.setcurrentKeePassXCVersion(parsed.version);
                 keepass.databaseHash = parsed.hash || '';
 
-                if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
+                if (oldDatabaseHash && oldDatabaseHash !== keepass.databaseHash) {
                     keepass.associated.value = false;
                     keepass.associated.hash = null;
                 }
@@ -933,7 +933,7 @@ keepass.checkForNewKeePassXCVersion = function() {
         }
 
         if (version !== -1) {
-            browser.storage.local.set({'latestKeePassXC': keepass.latestKeePassXC});
+            browser.storage.local.set({ 'latestKeePassXC': keepass.latestKeePassXC });
         }
     };
 
@@ -944,8 +944,7 @@ keepass.checkForNewKeePassXCVersion = function() {
     try {
         xhr.open('GET', keepass.latestVersionUrl, true);
         xhr.send();
-    }
-    catch (ex) {
+    } catch (ex) {
         console.log(ex);
     }
     keepass.latestKeePassXC.lastChecked = new Date().valueOf();

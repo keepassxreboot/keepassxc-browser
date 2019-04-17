@@ -57,7 +57,7 @@ $(function() {
     $('#reopen-database-button').click(function() {
         browser.runtime.sendMessage({
             action: 'get_status',
-            args: [ false, true ]    // Set forcePopup to true
+            args: [ false, true ] // Set forcePopup to true
         }).then(statusResponse);
     });
 

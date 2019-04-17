@@ -1,8 +1,7 @@
 'use strict';
 
 // jQuery style wrapper for querySelector()
-var $ = function(elem)
-{
+var $ = function(elem) {
     return document.querySelector(elem);
 };
 
@@ -35,22 +34,22 @@ kpxcUI.createElement = function(type, classes, attributes, textContent) {
 // Enables dragging
 document.onmousemove = function(e) {
     if (kpxcPassword.selected === kpxcPassword.titleBar) {
-        const x_pos = e.clientX - kpxcPassword.diffX;
-        const y_pos = e.clientY - kpxcPassword.diffY;
+        const xPos = e.clientX - kpxcPassword.diffX;
+        const yPos = e.clientY - kpxcPassword.diffY;
 
         if (kpxcPassword.selected !== null) {
-            kpxcPassword.dialog.style.left = x_pos + 'px';
-            kpxcPassword.dialog.style.top = y_pos + 'px';
+            kpxcPassword.dialog.style.left = xPos + 'px';
+            kpxcPassword.dialog.style.top = yPos + 'px';
         }
     }
 
     if (kpxcDefine.selected === kpxcDefine.dialog) {
-        const x_pos = e.clientX - kpxcDefine.diffX;
-        const y_pos = e.clientY - kpxcDefine.diffY;
+        const xPos = e.clientX - kpxcDefine.diffX;
+        const yPos = e.clientY - kpxcDefine.diffY;
 
         if (kpxcDefine.selected !== null) {
-            kpxcDefine.dialog.style.left = x_pos + 'px';
-            kpxcDefine.dialog.style.top = y_pos + 'px';
+            kpxcDefine.dialog.style.left = xPos + 'px';
+            kpxcDefine.dialog.style.top = yPos + 'px';
         }
     }
 };

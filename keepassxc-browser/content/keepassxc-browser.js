@@ -5,7 +5,6 @@ var _called = {};
 _called.retrieveCredentials = false;
 _called.clearLogins = false;
 _called.manualFillRequested = 'none';
-let _loginId = -1;
 let _singleInputEnabledForPage = false;
 const _maximumInputs = 100;
 
@@ -77,14 +76,14 @@ browser.runtime.onMessage.addListener(function(req, sender) {
             kpxcDefine.init();
         } else if (req.action === 'redetect_fields') {
             browser.runtime.sendMessage({
-                action: 'load_settings',
+                action: 'load_settings'
             }).then((response) => {
                 kpxc.settings = response;
                 kpxc.initCredentialFields(true);
             });
         } else if (req.action === 'show_password_generator') {
             kpxcPassword.trigger();
-}
+        }
     }
 });
 
@@ -344,7 +343,7 @@ kpxcFields.getCombination = function(givenType, fieldId) {
         return kpxcFields.combinations[0];
     }
 
-    for (let c of kpxcFields.combinations) {
+    for (const c of kpxcFields.combinations) {
         if (c[givenType] === fieldId) {
             return c;
         }
@@ -522,7 +521,7 @@ kpxcFields.prepareCombinations = function(combinations) {
             pwField.setAttribute('kpxcFields-onChange', true);
             pwField.onchange = function() {
                 this.setAttribute('unchanged', false);
-            }
+            };
         }
 
         // Initialize form-submit for remembering credentials
@@ -699,7 +698,7 @@ kpxcObserverHelper.detectURLChange = function() {
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 // Detects DOM changes in the document
-let observer = new MutationObserver(function(mutations, observer) {
+const observer = new MutationObserver(function(mutations, obs) {
     if (document.visibilityState === 'hidden') {
         return;
     }
@@ -737,7 +736,7 @@ observer.observe(document, {
     attributes: true,
     childList: true,
     characterData: true,
-    attributeFilter: ['style']
+    attributeFilter: [ 'style' ]
 });
 
 var kpxc = {};
@@ -750,7 +749,7 @@ kpxc.credentials = [];
 
 const initcb = function() {
     browser.runtime.sendMessage({
-        action: 'load_settings',
+        action: 'load_settings'
     }).then((response) => {
         kpxc.settings = response;
         kpxc.initCredentialFields();
@@ -855,7 +854,7 @@ kpxc.initCredentialFields = function(forceCall) {
         // Get submitUrl for a single input
         if (!kpxc.submitUrl && kpxcFields.combinations.length === 1 && inputs.length === 1) {
             kpxc.submitUrl = kpxc.getFormActionUrlFromSingleInput(inputs[0]);
-        } 
+        }
 
         if (kpxc.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (kpxc.url && kpxc.submitUrl)) {
             browser.runtime.sendMessage({
@@ -914,7 +913,7 @@ kpxc.retrieveCredentialsCallback = function(credentials, dontAutoFillIn) {
 };
 
 kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
-    // only one login for this site
+    // Only one login for this site
     if (autoFillInForSingle && kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) {
         let combination = null;
         if (!kpxc.p && !kpxc.u && kpxcFields.combinations.length > 0) {
@@ -934,22 +933,25 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
         if (combination) {
             let list = [];
             if (kpxc.fillInStringFields(combination.fields, kpxc.credentials[0].stringFields, list)) {
-                kpxcForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
+                kpxcForm.destroy(false, { 'password': list.list[0], 'username': list.list[1] });
             }
         }
 
         // Generate popup-list of usernames + descriptions
         browser.runtime.sendMessage({
             action: 'popup_login',
-            args: [ [ kpxc.credentials[0].login + ' (' + kpxc.credentials[0].name + ')' ]]
+            args: [ [ kpxc.credentials[0].login + ' (' + kpxc.credentials[0].name + ')' ] ]
         });
+
+        // Auto-submit
+        kpxc.p.form.submit();
     } else if (kpxc.credentials.length > 1 || (kpxc.credentials.length > 0 && (!kpxc.settings.autoFillSingleEntry || !autoFillInForSingle))) {
         kpxc.preparePageForMultipleCredentials(kpxc.credentials);
     }
 };
 
 kpxc.preparePageForMultipleCredentials = function(credentials) {
-    // add usernames + descriptions to autocomplete-list and popup-list
+    // Add usernames + descriptions to autocomplete-list and popup-list
     const usernames = [];
     kpxcAutocomplete.elements = [];
     let visibleLogin;
@@ -1102,7 +1104,7 @@ kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     kpxc.fillInCredentials(combination, passOnly, suppressWarnings);
 };
 
-kpxc.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
+kpxc.fillInFromActiveElementTOTPOnly = function() {
     const el = document.activeElement;
     kpxcFields.setUniqueId(el);
     const fieldId = kpxcFields.prepareId(el.getAttribute('data-kpxc-id'));

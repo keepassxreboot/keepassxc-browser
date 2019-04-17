@@ -5,7 +5,7 @@ for (const item of items) {
     let key = item.getAttribute('data-i18n');
     if (key) {
         let attr = '';
-        [ attr, key] = trAttribute(key);
+        [ attr, key ] = trAttribute(key);
 
         const placeholder = item.getAttribute('i18n-placeholder');
         const translation = placeholder ? browser.i18n.getMessage(key, placeholder) : browser.i18n.getMessage(key);
@@ -31,4 +31,4 @@ function trAttribute(key) {
     }
 
     return [ attr, key ];
-};
+}

@@ -241,7 +241,7 @@ kpxcEvent.onLoginPopup = function(callback, tab, logins) {
 kpxcEvent.initHttpAuth = function(callback) {
     httpAuth.init();
     callback();
-}
+};
 
 kpxcEvent.onHTTPAuthPopup = function(callback, tab, data) {
     const stackData = {

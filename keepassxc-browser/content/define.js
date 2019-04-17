@@ -32,7 +32,7 @@ kpxcDefine.init = function() {
     kpxcDefine.prepareStep1();
     kpxcDefine.markAllUsernameFields('#kpxcDefine-fields');
 
-    kpxcDefine.dialog = $('#kpxcDefine-description');;
+    kpxcDefine.dialog = $('#kpxcDefine-description');
     kpxcDefine.dialog.onmousedown = function(e) {
         kpxcDefine.mouseDown(e);
     };
@@ -205,7 +205,7 @@ kpxcDefine.markFields = function(chooser, pattern) {
             };
             i.onfocus = function() {
                 field.classList.add('kpxcDefine-fixed-hover-field');
-            }
+            };
             i.onblur = function() {
                 field.classList.remove('kpxcDefine-fixed-hover-field');
             };
