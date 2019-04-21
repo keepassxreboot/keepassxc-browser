@@ -1,0 +1,850 @@
+{
+    "extensionDescription": {
+        "message": "현대적인 웹 브라우저용 KeePassXC 통합",
+        "description": "Name of the extension."
+    },
+    "contextMenuFillUsernameAndPassword": {
+        "message": "사용자 이름과 암호 입력",
+        "description": "Context menu item for filling both username and password."
+    },
+    "contextMenuFillPassword": {
+        "message": "암호만 입력",
+        "description": "Context menu item for filling password."
+    },
+    "contextMenuFillTOTP": {
+        "message": "TOTP 입력",
+        "description": "Context menu item for filling Time-based One Time Password."
+    },
+    "contextMenuShowPasswordGeneratorIcons": {
+        "message": "암호 생성기 아이콘 표시",
+        "description": "Show password generator icon on every password input field."
+    },
+    "contextMenuSaveCredentials": {
+        "message": "인증 정보 저장",
+        "description": "Save credentials using the extension popup icon."
+    },
+    "contextMenuShowPasswordGenerator": {
+        "message": "암호 생성기 표시",
+        "description": "Show password generator text."
+    },
+    "rememberCredentialsPopup": {
+        "message": "확장 기능 아이콘을 눌러서 인증 정보를 생성하거나 수정할 수 있습니다.",
+        "description": "Notification text when saving credentials from the context menu."
+    },
+    "multipleCredentialsDetected": {
+        "message": "여러 개의 인증 정보를 사용할 수 있습니다. 확장 기능 아이콘을 눌러서 사용할 인증 정보를 선택하십시오.",
+        "description": "Notification when HTTP Authentication has multiple credentials detected."
+    },
+    "errorMessageUnknown": {
+        "message": "알 수 없는 오류입니다.",
+        "description": "Unknown error."
+    },
+    "errorMessageDatabaseNotOpened": {
+        "message": "데이터베이스를 열지 않았습니다.",
+        "description": "Database not opened."
+    },
+    "errorMessageDatabaseHash": {
+        "message": "데이터베이스 해시를 수신하지 못했습니다.",
+        "description": "Database hash not received."
+    },
+    "errorMessageClientPublicKey": {
+        "message": "클라이언트 공개 키를 수신하지 못했습니다.",
+        "description": "Client public key not received."
+    },
+    "errorMessageDecrypt": {
+        "message": "메시지를 복호화할 수 없습니다.",
+        "description": "Cannot decrypt message."
+    },
+    "errorMessageTimeout": {
+        "message": "KeePassXC에 연결할 수 없습니다. KeePassXC 설정에서 브라우저 통합이 켜져 있는지 확인하십시오.",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
+    },
+    "errorMessageCanceled": {
+        "message": "동작이 취소되었거나 거부되었습니다.",
+        "description": "Action canceled or denied."
+    },
+    "errorMessageEncrypt": {
+        "message": "메시지를 암호화할 수 없습니다. KeePassXC가 실행 중입니까?",
+        "description": "Message encryption failed. Is KeePassXC running?"
+    },
+    "errorMessageAssociate": {
+        "message": "KeePassXC 연결이 실패했습니다. 다시 시도하십시오.",
+        "description": "KeePassXC association failed, try again."
+    },
+    "errorMessageKeyExchange": {
+        "message": "키 교환에 실패했습니다.",
+        "description": "Key exchange was not successful."
+    },
+    "errorMessageEncryptionKey": {
+        "message": "암호화 키를 인식할 수 없습니다.",
+        "description": "Encryption key is not recognized."
+    },
+    "errorMessageSavedDatabases": {
+        "message": "저장된 데이터베이스를 찾을 수 없습니다.",
+        "description": "No saved databases found."
+    },
+    "errorMessageIncorrectAction": {
+        "message": "동작이 잘못되었습니다.",
+        "description": "Incorrect action."
+    },
+    "errorMessageEmptyMessage": {
+        "message": "빈 메시지를 받았습니다.",
+        "description": "Empty message received."
+    },
+    "errorMessageNoURL": {
+        "message": "URL을 지정하지 않았습니다.",
+        "description": "No URL provided."
+    },
+    "errorMessageNoLogins": {
+        "message": "로그인을 찾을 수 없습니다.",
+        "description": "No logins found."
+    },
+    "passwordGeneratorIcon": {
+        "message": "암호 생성기 아이콘",
+        "description": "Alt attribute text of the password generator icon."
+    },
+    "passwordGeneratorPlaceholder": {
+        "message": "생성된 암호",
+        "description": "Input field placeholder for generated password."
+    },
+    "passwordGeneratorLabel": {
+        "message": "다음 암호 입력 필드도 채우기",
+        "description": "Checkbox text below the password generator input field."
+    },
+    "passwordGeneratorBits": {
+        "message": "??? 비트",
+        "description": "Bits of the generated password."
+    },
+    "passwordGeneratorTitle": {
+        "message": "암호 생성기",
+        "description": "Password generator dialog title."
+    },
+    "passwordGeneratorGenerate": {
+        "message": "생성",
+        "description": "Generate button text in password generator."
+    },
+    "passwordGeneratorCopy": {
+        "message": "복사",
+        "description": "Copy button text in password generator."
+    },
+    "passwordGeneratorFillAndCopy": {
+        "message": "채우고 복사",
+        "description": "Fill and copy button text in password generator."
+    },
+    "passwordGeneratorErrorTooLong": {
+        "message": "오류:\n생성된 암호가 입력이 허용된 암호보다 더 깁니다!\n허용된 길이에 맞춰서 암호를 잘랐습니다.\n\n새 암호를 기억하십시오!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorGenerateText": {
+        "message": "암호 생성",
+        "description": "Password icon title text."
+    },
+    "passwordGeneratorError": {
+        "message": "생성된 암호를 수신할 수 없습니다.<br />KeePassXC가 실행 중입니까?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "defineDismiss": {
+        "message": "숨기기",
+        "description": "Dismiss button text when choosing custom login fields."
+    },
+    "defineSkip": {
+        "message": "건너뛰기",
+        "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "더 보기",
+        "description": "More button text when choosing custom login fields."
+    },
+    "defineAgain": {
+        "message": "다시 시도",
+        "description": "Again button text when choosing custom login fields."
+    },
+    "defineConfirm": {
+        "message": "확인",
+        "description": "Confirm button text when choosing custom login fields."
+    },
+    "defineAlreadySelected": {
+        "message": "이 페이지의 로그인 필드가 선택되어 있으며 내용을 덮어 씁니다.",
+        "description": "A text shown when custom credentials fields are already set for the page."
+    },
+    "defineDiscard": {
+        "message": "선택 무시",
+        "description": "Discard selection button text when choosing custom login fields."
+    },
+    "defineStringField": {
+        "message": "문자열 필드 #",
+        "description": "Text for string field."
+    },
+    "defineChooseUsername": {
+        "message": "1. 사용자 이름 필드 선택",
+        "description": "Choosing a username field text when choosing custom login fields."
+    },
+    "defineChoosePassword": {
+        "message": "2. 암호 필드 선택",
+        "description": "Choosing a password field text when choosing custom login fields."
+    },
+    "defineConfirmSelection": {
+        "message": "3. 선택 확인",
+        "description": "Confirm a selection text when choosing custom login fields."
+    },
+    "defineHelpText": {
+        "message": "선택 사항을 확인하거나 더 많은 <em>문자열 필드</em>를 선택하십시오.",
+        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+    },
+    "defineKeyboardText": {
+        "message": "키보드에서 숫자를 눌러서 입력 필드를 선택할 수 있습니다.",
+        "description": "Help text when choosing custom login fields."
+    },
+    "username": {
+        "message": "사용자 이름",
+        "description": "General text for username."
+    },
+    "password": {
+        "message": "암호",
+        "description": "General text for password."
+    },
+    "credentialsNoUsername": {
+        "message": "- 사용자 이름 없음 -",
+        "description": "Shown when no username is set in the credentials."
+    },
+    "credentialsNoLoginsFound": {
+        "message": "오류:\n로그인을 찾을 수 없습니다.",
+        "description": "Shown when no credentials are found for the current page."
+    },
+    "credentialsMultipleFound": {
+        "message": "오류:\nKeePassXC에 하나 이상의 로그인 정보가 있습니다!\nKeePassXC-브라우저 아이콘을 눌러서 더 많은 옵션을 보십시오.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsNoUsernameFound": {
+        "message": "오류:\n지정한 사용자 이름과 일치하는 인증 정보를 찾을 수 없습니다.",
+        "description": "Alert message when no credentials are found for the given username."
+    },
+    "fieldsFill": {
+        "message": "오류:\n입력할 필드를 찾을 수 없습니다.",
+        "description": "Alert message when no fields are found to fill in."
+    },
+    "fieldsNoPasswordField": {
+        "message": "오류:\n암호 필드를 찾을 수 없습니다.",
+        "description": "Message shown when no password fields are found."
+    },
+    "rememberNothingChanged": {
+        "message": "오류:\n변경된 인증 정보를 감지할 수 없습니다.",
+        "description": "Message shown when trying to save credentials that haven't changed."
+    },
+    "popupTitle": {
+        "message": "KeePassXC - 팝업",
+        "description": "Popup window title."
+    },
+    "popupSettingsText": {
+        "message": "설정",
+        "description": "Popup Settings button text."
+    },
+    "popupChooseCredentialsText": {
+        "message": "이 페이지의 사용자 정의 로그인 필드 선택",
+        "description": "Popup credential choosing button text."
+    },
+    "popupConnectButton": {
+        "message": "연결",
+        "description": "Popup Connect button text."
+    },
+    "popupReconnectButton": {
+        "message": "다시 연결",
+        "description": "Popup Reconnect button text."
+    },
+    "popupRedetectButton": {
+        "message": "로그인 필드 다시 확인",
+        "description": "Popup Redetect login fields button text."
+    },
+    "popupReloadButton": {
+        "message": "새로 고침",
+        "description": "Popup Reload button text."
+    },
+    "popupReopenButton": {
+        "message": "데이터베이스 다시 열기",
+        "description": "Popup reopen database button text."
+    },
+    "popupErrorEncountered": {
+        "message": "KeePassXC-브라우저에서 오류가 발생했습니다:",
+        "description": "A text shown above error message in the popup."
+    },
+    "popupUpdateAvailable": {
+        "message": "KeePassXC의 오래된 버전을 사용하고 있습니다.",
+        "description": "Popup warning message about old version of KeePassXC."
+    },
+    "popupDownloadNewVersion": {
+        "message": "keepassxc.org 사이트에서 최신 버전을 다운로드하십시오",
+        "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupCheckingStatus": {
+        "message": "상태 확인 중...",
+        "description": "Checking status message in popup."
+    },
+    "popupNotConfigured": {
+        "message": "KeePassXC-브라우저가 설정되지 않았습니다. KeePassXC와 연결하려면 연결 단추를 누르십시오.",
+        "description": "A popup message shown when the extension has not been connected to KeePassXC."
+    },
+    "popupNeedReconfigure": {
+        "message": "KeePassXC-브라우저와 KeePassXC 사이의 연결이 끊어졌습니다.",
+        "description": "A popup message shown when the extension has been disconnected from KeePassXC."
+    },
+    "popupNeedReconfigureMessage": {
+        "message": "다시 연결 단추를 눌러서 새로 연결하십시오.",
+        "description": "A popup message shown when reconnect is needed."
+    },
+    "popupConfiguredNotAssociated": {
+        "message": "KeePassXC-브라우저가 아직 KeePassXC에 연결되지 않았지만 다음 식별자로 설정되어 있습니다: $1",
+        "description": "A popup message shown when KeePassXC is not connected but configured."
+    },
+    "popupConfiguredAndAssociated": {
+        "message": "KeePassXC-브라우저가 KeePassXC에 연결되어 있고 다음 식별자로 설정되어 있습니다: $1",
+        "description": "A popuo message when a connection to KeePassXC is succesful."
+    },
+    "popupRememberInfoText": {
+        "message": "사용자 이름이나 암호가 변경되었습니다! 저장하시겠습니까?",
+        "description": "Popup message when username or password has changed."
+    },
+    "popupRememberSaving": {
+        "message": "인증 정보를 연결된 데이터베이스에 식별자 $1(으)로 저장합니다",
+        "description": "A popup message when saving or updating credentials."
+    },
+    "popupRememberNewUsername": {
+        "message": "다음 사용자 이름이 저장되지 않았습니다: $1",
+        "description": "A popup message shown when a new username is detected when saving credentials."
+    },
+    "popupRememberUsernameExists": {
+        "message": "지정한 사용자 이름을 사용하는 인증 정보는 굵게 표시됩니다: $1",
+        "description": "A popup message shown when a existing username is detected when saving credentials."
+    },
+    "popupRememberChooseCredentials": {
+        "message": "업데이트할 인증 정보를 선택하십시오.",
+        "description": "A popup message shown choosing what credentials user wants to update."
+    },
+    "popupRememberChooseGroup": {
+        "message": "새 인증 정보를 추가할 그룹을 선택하십시오.",
+        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    },
+    "popupRememberErrorDefaultGroupNotFound": {
+        "message": "오류: 지정한 기본 그룹을 찾을 수 없습니다. 필요한 모든 그룹을 만듭니다.",
+        "description": "Error message shown when default group set cannot be found."
+    },
+    "popupRememberErrorCreatingNewGroup": {
+        "message": "새 그룹을 만들 수 없습니다.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "popupRememberErrorPasswordNotChanged": {
+        "message": "오류: 인증 정보를 업데이트하지 않았습니다. 암호가 변경되지 않았습니다.",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "popupRememberErrorCannotSaveCredentials": {
+        "message": "오류: 인증 정보를 저장하거나 업데이트할 수 없습니다.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "popupLoginText": {
+        "message": "페이지에 입력할 로그인 정보를 선택하십시오.",
+        "description": "A popup message shown when one or multiple credentials are present."
+    },
+    "popupFilterText": {
+        "message": "필터:",
+        "description": "Text for login credentials quick filter."
+    },
+    "popupAuthText": {
+        "message": "로그인에 사용할 인증 정보를 선택하십시오.",
+        "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
+    },
+    "popupMultiplePasswordFields": {
+        "message": "이 페이지에서 두 개 이상의 암호 필드를 찾았습니다. 암호 필드 중 하나를 오른쪽 단추로 누른 다음 선택하십시오:",
+        "description": "A popup message shown when web page has multiple password fields."
+    },
+    "popupURL": {
+        "message": "URL:",
+        "description": "URL. Might not need any translation."
+    },
+    "popupUsername": {
+        "message": "사용자 이름:",
+        "description": "A username field name shown on credential update."
+    },
+    "popupButtonNew": {
+        "message": "새로 만들기",
+        "description": "New button text in popup when updating credentials."
+    },
+    "popupButtonUpdate": {
+        "message": "업데이트",
+        "description": "Update button text in popup when updating credentials."
+    },
+    "popupButtonDismiss": {
+        "message": "숨기기",
+        "description": "Dismiss button text in popup when updating credentials."
+    },
+    "popupButtonIgnore": {
+        "message": "이 페이지에서 묻지 않기",
+        "description": "Ignore button text in popup or in notification when updating credentials."
+    },
+    "popupButtonClose": {
+        "message": "닫기",
+        "description": "Close button text in popup or in notification."
+    },
+    "popupButtonDismissHttpAuth": {
+        "message": "숨기고 기본 인증 대화 상자 표시",
+        "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsTitle": {
+        "message": "설정 | KeePassXC-브라우저",
+        "description": "Options page title."
+    },
+    "optionsGeneralSettingsTab": {
+        "message": "일반 설정",
+        "description": "General Settings tab text."
+    },
+    "optionsConnectedDatabasesTab": {
+        "message": "연결된 데이터베이스",
+        "description": "Connected Databases tab text."
+    },
+    "optionsCustomFieldsTab": {
+        "message": "사용자 정의 로그인 필드",
+        "description": "Saved custom login fields tab text."
+    },
+    "optionsSitePreferencesTab": {
+        "message": "사이트 환경 설정",
+        "description": "Site preferences fields tab text."
+    },
+    "optionsAboutTab": {
+        "message": "정보",
+        "description": "About tab text."
+    },
+    "optionsMenuGeneral": {
+        "message": "일반",
+        "description": "General settings page header."
+    },
+    "optionsMenuConnectedDatabases": {
+        "message": "연결된 데이터베이스",
+        "description": "Connected Databases page header."
+    },
+    "optionsMenuCustomFields": {
+        "message": "사용자 정의 로그인 필드",
+        "description": "Custom login fields page header."
+    },
+    "optionsMenuSitePreferences": {
+        "message": "사이트 환경 설정",
+        "description": "Site preferences page header."
+    },
+    "optionsMenuAbout": {
+        "message": "정보",
+        "description": "About page header."
+    },
+    "optionsConfigureShortcuts": {
+        "message": "단축키 설정",
+        "description": "Keyboard shortcut button and title text."
+    },
+    "optionsButtonSave": {
+        "message": "저장",
+        "description": "Save button text."
+    },
+    "optionsButtonConnect": {
+        "message": "연결",
+        "description": "Connect button text."
+    },
+    "optionsButtonRemove": {
+        "message": "삭제",
+        "description": "Remove button text."
+    },
+    "optionsButtonAdd": {
+        "message": "추가",
+        "description": "Add button text."
+    },
+    "optionsButtonUpdate": {
+        "message": "업데이트 확인",
+        "description": "Check for updates button text."
+    },
+    "optionsButtonRemoveNow": {
+        "message": "예, 삭제합니다",
+        "description": "Confirm button text when removing database key or custom login fields."
+    },
+    "optionsButtonCancel": {
+        "message": "취소",
+        "description": "Cancel button text when removing database key or custom login fields."
+    },
+     "optionsButtonReset": {
+        "message": "초기화",
+        "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsLabelBlinkTime": {
+        "message": "깜빡임 시간:",
+        "description": "Blink Time option text."
+    },
+    "optionsLabelRedirectOffset": {
+        "message": "전환 위치:",
+        "description": "Redirect Offset option text."
+    },
+    "optionsLabelRedirectAllowance": {
+        "message": "최대 전환 수:",
+        "description": "RMaximum (Number of) Redirects options text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "새 암호를 저장할 기본 그룹:",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "슬래시로 그룹을 구분하십시오. 예: 그룹/자식그룹.",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "항상 새 인증 정보를 추가할 그룹 묻기",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "이 옵션을 사용하면 팝업 창에 그룹 목록을 표시합니다.",
+        "description": "Default checkbox explanation help text."
+    },
+    "optionsCheckboxUsePasswordGenerator": {
+        "message": "암호 생성기를 활성화합니다.",
+        "description": "Activate password generator checkbox text."
+    },
+    "optionsCheckboxAutoRetrieveCredentials": {
+        "message": "자동으로 인증 정보를 가져옵니다.",
+        "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutoFillSingleEntry": {
+        "message": "자동으로 단일 인증 정보 항목을 입력합니다.",
+        "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoCompleteUsernames": {
+        "message": "사용자 이름 필드 자동 완성을 사용합니다.",
+        "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowNotifications": {
+        "message": "알림을 표시합니다.",
+        "description": "Show notifications checkbox text."
+    },
+    "optionsSaveDomainOnly": {
+        "message": "도메인만 저장합니다.",
+        "description": "Save domain only checkbox text."
+    },
+    "optionsCheckboxShowLoginNotifications": {
+        "message": "데이터베이스에 새 인증 정보를 저장할 수 있을 때 알림을 표시합니다.",
+        "description": "Show login notifications checkbox text."
+    },
+    "optionsCheckboxAutoFillAndSend": {
+        "message": "자동으로 HTTP 기본 인증 정보 항목을 입력하고 제출합니다.",
+        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsRadioText": {
+        "message": "KeePassXC 업데이트 확인:",
+        "description": "Text above radio buttons in the settings page."
+    },
+    "optionsRadioThreeDays": {
+        "message": "3일마다",
+        "description": "Radio button text."
+    },
+    "optionsRadioWeek": {
+        "message": "매주",
+        "description": "Radio button text."
+    },
+    "optionsRadioMonth": {
+        "message": "매달",
+        "description": "Radio button text."
+    },
+    "optionsRadioNever": {
+        "message": "하지 않음",
+        "description": "Radio button text."
+    },
+    "optionsKeyboardShortcutsHeader": {
+        "message": "키보드 단축키",
+        "description": "Keyboard shortcut header text."
+    },
+    "optionsBlinkTimeHelpText": {
+        "message": "새 인증 정보를 발견한 후 아이콘을 깜빡일 최대 시간(ms)",
+        "description": "Blink Time option help text."
+    },
+    "optionsRedirectOffsetHelpText": {
+        "message": "페이지 전환으로 인하여 비활성화될 때까지 아이콘을 깜빡일 최소 시간(ms)",
+        "description": "Redirect Offset option help text."
+    },
+    "optionsRedirectOffsetHelpTextSecond": {
+        "message": "-1을 입력하면 최대 전환 회수와 상관 없이 깜빡임 시간만 사용(이전 방식)",
+        "description": "Redirect Offset option help text, second part."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "전환 위치 이후 아이콘을 비활성화하기 전까지 탭을 순환할 회수",
+        "description": "Redirect Allowance option help text."
+    },
+    "optionsUsePasswordGeneratorHelpText": {
+        "message": "암호 필드에 새 암호 생성기 단추를 추가합니다.",
+        "description": "Password Generator option help text."
+    },
+    "optionsUsePasswordGeneratorHelpTextSecond": {
+        "message": "암호 생성 프로필을 사용하여 KeePassXC에서 암호를 생성합니다.",
+        "description": "Password Generator option help text, second part."
+    },
+    "optionsAutoRetrieveCredentialsHelpText": {
+        "message": "탭을 활성화할 때 KeePassXC-브라우저에서 인증 정보를 즉시 가져옵니다.",
+        "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutoFillSingleEntryHelpText": {
+        "message": "인증 정보가 하나만 있을 때 KeePassXC-브라우저에서 자동으로 입력합니다.",
+        "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillSingleEntryWarning": {
+        "message": "경고! 자동 입력은 안전하지 않을 수 있습니다. 주의하여 사용하십시오.",
+        "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutocompleteUsernamesHelpText": {
+        "message": "페이지에 있는 모든 사용자 이름 필드에 입력할 수 있는 인증 정보 드롭다운 목록을 표시합니다.",
+        "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowNotificationsHelpText": {
+        "message": "사용자 동작이 필요하거나 오류가 발생했을 때 알림을 표시합니다.",
+        "description": "Show notifications option help text."
+    },
+    "optionsSaveDomainOnlyHelpText": {
+        "message": "새 인증 정보를 저장할 때 전체 URL 대신 도메인만 저장합니다.",
+        "description": "Save domain only option help text."
+    },
+    "optionsAutoFillAndSendHelpText": {
+        "message": "페이지 인증 정보를 찾았고 로그인 형식이 HTTP 기본 인증일 때 KeePassXC-브라우저에서 최초로 지정한 인증 정보로 로그인을 시도합니다.",
+        "description": "Auto-Fill And Send option help text."
+    },
+    "optionsAutoFillAndSendHelpTextSecond": {
+        "message": "HTTP 기본 인증 대화 상자 예시:",
+        "description": "HTTP Basic Auth image help text."
+    },
+    "optionsVersionInfoText": {
+        "message": "KeePassXC-브라우저에서 인증 정보를 가져오려면 KeePassXC가 필요합니다.",
+        "description": "Settings page version info text."
+    },
+    "optionsVersionDownload": {
+        "message": "최신 안정 버전 다운로드: $1",
+        "description": "Settings page download link."
+    },
+    "optionsVersionRunning": {
+        "message": "실행 중인 KeePassXC 버전: $1",
+        "description": "Settings page info text of user's KeePassXC version."
+    },
+    "optionsLatestVersion": {
+        "message": "사용 가능한 KeePassXC 최신 버전: $1",
+        "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsDefault": {
+        "message": "기본값: $1",
+        "description": "Default setting text."
+    },
+    "optionsInfinite": {
+        "message": "무한대: $1",
+        "description": "Infinite setting text."
+    },
+    "optionsRecommended": {
+        "message": "추천: $1",
+        "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "$1의 단축키가 변경되었습니다.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "$1의 단축키를 초기화했습니다.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "오류: $1의 단축키가 변경되지 않았습니다!",
+        "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsConnectedDatabasesText": {
+        "message": "다음 KeePassXC 데이터베이스가 KeePassXC-브라우저에 연결되어 있습니다.",
+        "description": "Info text about connected databases."
+    },
+    "optionsConnectedDatabasesNotFound": {
+        "message": "연결된 데이터베이스를 찾을 수 없습니다.",
+        "description": "Shown in the connected databases table when there is no connected databases."
+    },
+    "optionsDatabasesRemoveIdentifier": {
+        "message": "데이터베이스 목록에서 식별자를 삭제하시겠습니까?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmFirst": {
+        "message": "다음 식별자를 데이터베이스 목록에서 삭제하시겠습니까?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmSecond": {
+        "message": "언제든지 데이터베이스에 다시 연결할 수 있습니다.",
+        "description": "Confirmation text when removing database from the list, second part."
+    },
+    "optionsDatabaseIdentifier": {
+        "message": "식별자",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseKey": {
+        "message": "키",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseLastUsed": {
+        "message": "마지막 사용",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseCreated": {
+        "message": "생성",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseDelete": {
+        "message": "삭제",
+        "description": "Database list column title."
+    },
+    "optionsColumnPageURL": {
+        "message": "페이지 URL",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnIgnore": {
+        "message": "무시",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnUsernameOnly": {
+        "message": "사용자 이름만 감지",
+        "description": "Site preferences list column title."
+    },
+    "optionsColumnDelete": {
+        "message": "삭제",
+        "description": "Site preferences list column title."
+    },
+    "optionsSelectionNothing": {
+        "message": "모든 기능 활성화",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionNormal": {
+        "message": "새로운/수정된 인증 정보 비활성화",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionFull": {
+        "message": "모든 기능 비활성화",
+        "description": "Site preferences option selection."
+    },
+    "optionsCustomFieldsNotFound": {
+        "message": "저장된 사용자 정의 로그인 필드가 없습니다.",
+        "description": "Shown when no saved custom credentials are saved."
+    },
+    "optionsCustomFieldsTableCaption": {
+        "message": "아래 표에서 저장된 사용자 정의 로그인 필드를 관리할 수 있습니다.",
+        "description": "Table caption of Custom login fields page."
+    },
+    "optionsCustomFieldsTabHelpTextFirst": {
+        "message": "KeePassXC-브라우저에서 잘못된 로그인 필드를 감지했다면 올바른 필드를 직접 지정할 수 있습니다.",
+        "description": "Saved custom login fields info text, first part."
+    },
+    "optionsCustomFieldsTabHelpTextSecond": {
+        "message": "해당 페이지로 이동하여 KeePassXC-브라우저 아이콘을 누른 다음 선택하십시오",
+        "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsRemove": {
+        "message": "저장된 사용자 정의 로그인 필드를 삭제하시겠습니까?",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmation": {
+        "message": "다음 페이지의 저장된 사용자 정의 로그인 필드를 삭제하시겠습니까: $1",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmationHelpText": {
+        "message": "다음 번에 이 페이지를 방문할 때 KeePassXC-브라우저에서 자동으로 로그인 필드를 감지합니다.",
+        "description": "Part of confirmation text when removing saved custom login fields."
+    },
+    "optionsSitePreferencesNotFound": {
+        "message": "무시할 사이트를 찾을 수 없습니다.",
+        "description": "Shown when no ignored sites are saved."
+    },
+    "optionsSitePreferencesRemove": {
+        "message": "사이트를 삭제하시겠습니까?",
+        "description": "Confirmation text when removing ignored sites from the list."
+    },
+    "optionsSitePreferencesTabHelpTextFirst": {
+        "message": "이 페이지에 있는 사이트에서는 개별적 처리 방법을 사용합니다.",
+        "description": "Site preferences info text, first part."
+    },
+    "optionsSitePreferencesTabHelpTextSecond": {
+        "message": "지정한 사이트에서 새로운/수정된 인증 정보를 무시하려면 아래에 추가하거나 깜빡이는 KeePassXC-브라우저 아이콘을 누른 다음 선택하십시오",
+        "description": "Site preferences info text, second part."
+    },
+    "optionsSitePreferencesTabHelpTextThird": {
+        "message": "만약 <em>모든 기능 비활성화</em>를 선택하여 사이트를 완전히 무시한다면 해당 사이트를 방문할 때 플러그인을 비활성화합니다.",
+        "description": "Site preferences info text, third part."
+    },
+    "optionsSitePreferencesTabHelpTextFourth": {
+        "message": "사용자 이름만 감지 기능을 사용하면 KeePassXC-브라우저에서 사용자 이름과 암호를 별도의 웹 페이지로 입력하는 사이트의 로그인 정보를 입력합니다.",
+        "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesManualAddText": {
+        "message": "직접 URL 추가",
+        "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesConfirmation": {
+        "message": "다음 사이트를 목록에서 삭제하시겠습니까: $1",
+        "description": "Confirmation text when removing site from site preferences."
+    },
+    "optionsSitePreferencesConfirmationHelpText": {
+        "message": "KeePassXC-브라우저는 이 사이트에서 모든 기능을 활성화하고 사용자 이름만 감지 기능을 사용하지 않습니다.",
+        "description": "Part of confirmation text when removing site preferences."
+    },
+    "optionsSitePreferencesTableCaption": {
+        "message": "아래 표에서 저장된 사이트별 설정을 관리할 수 있습니다.",
+        "description": "Table caption of Site Preferences page."
+    },
+    "optionsSitePreferencesSelect": {
+        "message": "페이지에서 확장 기능의 기능을 무시하는 옵션입니다.",
+        "description": "Title text of select element in Site Preferences."
+    },
+    "optionsAboutChrome": {
+        "message": "Chrome 웹 스토어의 KeePassXC-브라우저 페이지를 방문합니다.",
+        "description": "About page link to Chrome Web Store."
+    },
+    "optionsAboutMozilla": {
+        "message": "Mozilla 확장 기능 디렉터리의 KeePassXC-브라우저 페이지를 방문합니다.",
+        "description": "About page link to AMO."
+    },
+    "optionsAboutGitHub": {
+        "message": "GitHub의 KeePassXC-브라우저 페이지를 방문합니다.",
+        "description": "About page link to GitHub."
+    },
+    "optionsAboutExtensionVersion": {
+        "message": "KeePassXC-브라우저 버전: $1",
+        "description": "About page text of extension version."
+    },
+    "optionsAboutKeePassXCVersion": {
+        "message": "KeePassXC 버전: $1",
+        "description": "About page text of KeePassXC version."
+    },
+    "optionsAboutContributors": {
+        "message": "기여자",
+        "description": "About page text of contributors."
+    },
+    "optionsAboutLicenses": {
+        "message": "라이선스",
+        "description": "About page text of licenses."
+    },
+    "optionsAboutReportBugs": {
+        "message": "버그 보고",
+        "description": "About page text of reporting bugs."
+    },
+    "optionsAboutCreateNewIssue": {
+        "message": "GitHub에 새 문제점 보고하기",
+        "description": "Link text for creating a new issue."
+    },
+    "optionsAboutDebugInfo": {
+        "message": "다음 디버그 정보를 사용할 수 있습니다",
+        "description": "Debug info text."
+    },
+    "optionsErrorInvalidValue": {
+        "message": "값이 잘못되었습니다. 입력값을 확인하십시오.",
+        "description": "Error shown when input field has an incorrect value."
+    },
+    "optionsErrorInvalidURL": {
+        "message": "URL이 잘못되었습니다. 입력값을 확인하십시오.",
+        "description": "Error shown when input field has an incorrect URL."
+    },
+    "optionsErrorValueExists": {
+        "message": "값이 목록에 이미 존재합니다.",
+        "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "openNewTab": {
+        "message": "새 탭 열기",
+        "description": "Title attribute text."
+    },
+    "httpAuthDialog": {
+        "message": "HTTP 기본 인증 대화상자",
+        "description": "Options page HTTP Basic Auth dialog text"
+    }
+}

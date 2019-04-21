@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[keepassxc-browser.messagesjson]
+file_filter = keepassxc-browser/_locales/<lang>/messages.json
+minimum_perc = 60
+source_file = keepassxc-browser/_locales/en/messages.json
+source_lang = en
+type = CHROME

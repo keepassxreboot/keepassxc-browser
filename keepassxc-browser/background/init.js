@@ -7,6 +7,7 @@ keepass.migrateKeyRing().then(() => {
             keepass.connectToNative();
             keepass.generateNewKeyPair();
             keepass.changePublicKeys(null).then((pkRes) => {
+                keepass.enableAutomaticReconnect();
                 keepass.getDatabaseHash((gdRes) => {}, null);
             });
         });
@@ -85,11 +86,11 @@ const contextMenuItems = [
     { title: tr('contextMenuFillPassword'), action: 'fill_password' },
     { title: tr('contextMenuFillTOTP'), action: 'fill_totp' },
     { title: tr('contextMenuShowPasswordGeneratorIcons'), action: 'activate_password_generator' },
-    { title: tr('contextMenuSaveCredentials'), action: 'remember_credentials' },
-    { title: tr('contextMenuShowPasswordGenerator'), action: 'show_password_generator' }
+    { title: tr('contextMenuShowPasswordGenerator'), action: 'show_password_generator' },
+    { title: tr('contextMenuSaveCredentials'), action: 'remember_credentials' }
 ];
 
-const menuContexts = ['editable'];
+const menuContexts = [ 'editable' ];
 
 if (isFirefox()) {
     menuContexts.push('password');
@@ -103,8 +104,8 @@ for (const item of contextMenuItems) {
         onclick: (info, tab) => {
             browser.tabs.sendMessage(tab.id, {
                 action: item.action
-            }).catch((e) => {
-                console.log(e);
+            }).catch((err) => {
+                console.log(err);
             });
         }
     });

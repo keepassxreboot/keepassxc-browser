@@ -1,15 +1,17 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title data-i18n="popupTitle"></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css" />
     <link rel="stylesheet" href="../options/bootstrap.min.css" />
-    <script type="text/javascript" src="../browser-polyfill.min.js"></script>
-    <script type="text/javascript" src="../global.js"></script>
-    <script type="text/javascript" src="../jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../options/bootstrap.min.js" /></script>
-    <script type="text/javascript" src="popup_functions.js" /></script>
-    <script type="text/javascript" src="popup.js" /></script>
+    <script src="../browser-polyfill.min.js"></script>
+    <script src="../global.js"></script>
+    <script src="../jquery-3.3.1.min.js"></script>
+    <script src="../options/bootstrap.min.js"></script>
+    <script src="popup_functions.js"></script>
+    <script src="popup.js"></script>
+    <script defer src="../translate.js"></script>
   </head>
   <body>
     <div class="container">
@@ -21,7 +23,7 @@
         <div id="update-available" class="alert alert-danger">
           <span data-i18n="popupUpdateAvailable"></span>
           <br />
-          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"/></a>.
+          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"></span></a>.
         </div>
       </div>
 
@@ -30,18 +32,18 @@
       </div>
 
       <div id="not-configured" style="display: none">
-        <p data-i18n="popupNotConfigured"/>
+        <p data-i18n="popupNotConfigured"></p>
         <div style="text-align: right">
           <button id="connect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-link"></span> <span data-i18n="popupConnectButton"/></button>
         </div>
       </div>
 
       <div id="need-reconfigure" style="display: none">
-        <p data-i18n="popupNeedReconfigure"/>
+        <p data-i18n="popupNeedReconfigure"></p>
         <p style="margin-left: 1em">
           <code id="need-reconfigure-message"></code>
         </p>
-        <p data-i18n="popupNeedReconfigureMessage"/>
+        <p data-i18n="popupNeedReconfigureMessage"></p>
         <div style="text-align: right">
           <button id="reconnect-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-refresh"></span> <span data-i18n="popupReconnectButton"/></button>
         </div>
@@ -59,7 +61,7 @@
       </div>
 
       <div id="error-encountered" style="display: none">
-        <p data-i18n="popupErrorEncountered"/>
+        <p data-i18n="popupErrorEncountered"></p>
         <p style="margin-left: 1em">
           <code id="error-message"></code>
         </p>
@@ -69,7 +71,7 @@
       </div>
 
       <div id="database-not-opened" style="display: none">
-        <p data-i18n="popupErrorEncountered"/>
+        <p data-i18n="popupErrorEncountered"></p>
         <p style="margin-left: 1em">
           <code id="database-error-message"></code>
         </p>
@@ -78,6 +80,5 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="../translate.js"></script>
   </body>
 </html>

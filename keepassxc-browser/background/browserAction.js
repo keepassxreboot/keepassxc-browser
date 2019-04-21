@@ -21,7 +21,7 @@ browserAction.show = function(callback, tab) {
 
     browser.browserAction.setIcon({
         tabId: tab.id,
-        path: '/icons/19x19/' + browserAction.generateIconName(data.iconType, data.icon)
+        path: '/icons/toolbar/' + browserAction.generateIconName(data.iconType, data.icon)
     });
 
     if (data.popup) {
@@ -65,7 +65,7 @@ browserAction.update = function(interval) {
 
         browser.browserAction.setIcon({
             tabId: page.currentTabId,
-            path: '/icons/19x19/' + browserAction.generateIconName(null, data.intervalIcon.icons[data.intervalIcon.index])
+            path: '/icons/toolbar/' + browserAction.generateIconName(null, data.intervalIcon.icons[data.intervalIcon.index])
         });
     }
 };
@@ -205,7 +205,7 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
     browser.storage.local.get({ 'settings': {} }).then(function(item) {
         const settings = item.settings;
 
-        // Don't show anything if the site is in the ignore 
+        // Don't show anything if the site is in the ignore
         if (settings.sitePreferences !== undefined) {
             for (const site of settings.sitePreferences) {
                 if (site.ignore === IGNORE_NORMAL && (site.url === url || siteMatch(site.url, url))) {
@@ -233,9 +233,9 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
                 index: 0,
                 counter: 0,
                 max: 2,
-                icons: [ 'icon_remember_red_background_19x19.png', 'icon_remember_red_lock_19x19.png' ]
+                icons: [ 'icon_remember_red_background.png', 'icon_remember_red_lock.png' ]
             },
-            icon: 'icon_remember_red_background_19x19.png',
+            icon: 'icon_remember_red_background.png',
             popup: 'popup_remember.html'
         };
 
@@ -271,8 +271,8 @@ browserAction.setRememberPopup = function(tabId, username, password, url, userna
                 'buttons': buttons
             });
 
-            browser.notifications.onButtonClicked.addListener((id, index) => {
-                browser.notifications.clear(id);
+            browser.notifications.onButtonClicked.addListener((notificationId, index) => {
+                browser.notifications.clear(notificationId);
                 if (index === 1) {
                     browserAction.ignoreSite(url);
                 }
@@ -301,7 +301,7 @@ browserAction.generateIconName = function(iconType, icon) {
     let name = 'icon_';
     name += (keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
     name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
-    name += '_19x19.png';
+    name += '.png';
 
     return name;
 };

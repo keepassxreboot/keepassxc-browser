@@ -50,7 +50,7 @@ function _initialize(tab) {
                 // Another group name has been specified
                 const [ gname, guuid ] = getDefaultGroup(result.groups[0].children, result.defaultGroup);
                 if (gname === '' && guuid === '') {
-                    showNotification(tr('popupRememberErrorDefaultGroupNotFound'));
+                    showNotification(tr('popupRememberInfoDefaultGroupNotFound'));
 
                     // Create a new group
                     browser.runtime.sendMessage({
@@ -161,8 +161,8 @@ function _initialize(tab) {
                     .attr('class', 'list-group-item')
                     .text(_tab.credentials.list[i].login + ' (' + _tab.credentials.list[i].name + ')')
                     .data('entryId', i)
-                    .click(function(e) {
-                        e.preventDefault();
+                    .click(function(ev) {
+                        ev.preventDefault();
                         const entryId = $(this).data('entryId');
 
                         // Use the current username if it's empty
@@ -189,7 +189,7 @@ function _initialize(tab) {
 
                             browser.runtime.sendMessage({
                                 action: 'update_credentials',
-                                args: [_tab.credentials.list[entryId].uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url]
+                                args: [ _tab.credentials.list[entryId].uuid, _tab.credentials.username, _tab.credentials.password, _tab.credentials.url ]
                             }).then(_verifyResult);
                         });
                     });
@@ -216,7 +216,7 @@ function _initialize(tab) {
                 const currentTab = tabs[0];
                 browser.runtime.getBackgroundPage().then((global) => {
                     browser.tabs.sendMessage(currentTab.id, {
-                        action: 'ignore-site',
+                        action: 'ignore_site',
                         args: [ _tab.credentials.url ]
                     });
                     _close();
@@ -277,7 +277,7 @@ const getDefaultGroup = function(groups, defaultGroup) {
 $(function() {
     browser.runtime.sendMessage({
         action: 'stack_add',
-        args: [ 'icon_remember_red_background_19x19.png', 'popup_remember.html', 10, true, 0 ]
+        args: [ 'icon_remember_red_background.png', 'popup_remember.html', 10, true, 0 ]
     });
 
     browser.runtime.sendMessage({

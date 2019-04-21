@@ -112,7 +112,7 @@
         "description": "Checkbox text below the password generator input field."
     },
     "passwordGeneratorBits": {
-        "message": "??? Bits",
+        "message": "$1 Bits",
         "description": "Bits of the generated password."
     },
     "passwordGeneratorTitle": {
@@ -123,6 +123,10 @@
         "message": "Generate",
         "description": "Generate button text in password generator."
     },
+    "passwordGeneratorTryAgain": {
+        "message": "Try again",
+        "description": "Generate button text in password generator when not connected."
+    },
     "passwordGeneratorCopy": {
         "message": "Copy",
         "description": "Copy button text in password generator."
@@ -132,7 +136,15 @@
         "description": "Fill and copy button text in password generator."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Error:\nThe generated password is longer than the allowed length!\nIt has been cut to fit the length.\n\nPlease remember the new password!",
+        "message": "Error: The generated password is longer than the allowed length!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongCut": {
+        "message": "It has been cut to fit the length.",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongRemember": {
+        "message": "Please remember the new password!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
@@ -140,7 +152,11 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorError": {
-        "message": "Cannot receive generated password.<br />Is KeePassXC running?",
+        "message": "Cannot receive generated password.",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "passwordGeneratorErrorIsRunning": {
+        "message": "Is KeePassXC running and connected?",
         "description": "Password generator error text when KeePassXC is closed."
     },
     "defineDismiss": {
@@ -208,27 +224,31 @@
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Error:\nNo logins found.",
+        "message": "Error: No logins found.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Error:\nMore than one login was found in KeePassXC!\nPress the KeePassXC-Browser icon for more options.",
+        "message": "Error: More than one login was found in KeePassXC!",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsMultipleFoundSecondLine": {
+        "message": "Press the KeePassXC-Browser icon for more options.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Error:\nNo credentials for the given username found.",
+        "message": "Error: No credentials for the given username found.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "fieldsFill": {
-        "message": "Error:\nCannot find fields to fill in.",
+        "message": "Error: Cannot find fields to fill in.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "Error:\nUnable to find a password field.",
+        "message": "Error: Unable to find a password field.",
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "Error:\nCould not detect changed credentials.",
+        "message": "Error: Could not detect changed credentials.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -323,12 +343,12 @@
         "message": "Please choose the group you want to add the new credentials.",
         "description": "A popup message shown choosing what group user wants to use for new credentials."
     },
-    "popupRememberErrorDefaultGroupNotFound": {
-        "message": "Error: Specified default group not found. Creating all necessary groups.",
-        "description": "Error message shown when default group set cannot be found."
+    "popupRememberInfoDefaultGroupNotFound": {
+        "message": "Info: Default group created in connected database.",
+        "description": "Info message shown when default group set cannot be found."
     },
     "popupRememberErrorCreatingNewGroup": {
-        "message": "New group(s) cannot be created.",
+        "message": "Error: New group(s) cannot be created.",
         "description": "Error message shown when new groups cannot be created."
     },
     "popupRememberErrorPasswordNotChanged": {
@@ -503,6 +523,10 @@
         "message": "Automatically retrieve credentials.",
         "description": "Automatically retrieve credentials checkbox text."
     },
+    "optionsCheckboxAutomaticReconnect": {
+        "message": "Automatically reconnect to KeePassXC.",
+        "description": "Auto-reconnect checkbox text."
+    },
     "optionsCheckboxAutoFillSingleEntry": {
         "message": "Automatically fill in single-credential entries.",
         "description": "Automatically fill-in single credential entry checkbox text."
@@ -578,6 +602,10 @@
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",
         "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutomaticReconnectHelpText": {
+        "message": "Reconnects automatically to KeePassXC when it is detected.",
+        "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
         "message": "Let KeePassXC-Browser automatically fill in credentials if it receives only a single entry.",
@@ -730,6 +758,10 @@
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Go to the page and click on the KeePassXC-Browser icon, then select ",
         "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsTabHelpTextThird": {
+        "message": "On this page you can manage saved custom login fields.",
+        "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
         "message": "Remove saved custom login fields?",

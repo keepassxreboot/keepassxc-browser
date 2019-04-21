@@ -20,11 +20,11 @@ httpAuth.init = function() {
         browser.webRequest.onErrorOccurred.removeListener(httpAuth.requestCompleted);
     }
 
-    // only intercept http auth requests if the option is turned on.
+    // Only intercept http auth requests if the option is turned on.
     if (page.settings.autoFillAndSend) {
-        const opts = { urls: ['<all_urls>'] };
+        const opts = { urls: [ '<all_urls>' ] };
 
-        browser.webRequest.onAuthRequired.addListener(handleReq, opts, [reqType]);
+        browser.webRequest.onAuthRequired.addListener(handleReq, opts, [ reqType ]);
         browser.webRequest.onCompleted.addListener(httpAuth.requestCompleted, opts);
         browser.webRequest.onErrorOccurred.addListener(httpAuth.requestCompleted, opts);
     }
@@ -75,7 +75,7 @@ httpAuth.processPendingCallbacks = async function(details, resolve, reject) {
 
 httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
     // At least one login found --> use first to login
-    if (logins.length > 0  && page.settings.autoFillAndSend) {
+    if (logins.length > 0 && page.settings.autoFillAndSend) {
         if (logins.length === 1) {
             resolve({
                 authCredentials: {

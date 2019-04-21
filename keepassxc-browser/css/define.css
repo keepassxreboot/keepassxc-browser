@@ -1,0 +1,110 @@
+.kpxcDefine-modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2147483645;
+}
+
+.kpxcDefine-modal-backdrop:after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+#kpxcDefine-fields {
+    z-index: 2147483646;
+}
+
+#kpxcDefine-description {
+    z-index: 2147483646;
+    color: #efefef;
+    border: 2px solid #555555;
+    padding: 7px 5px;
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    text-align: left;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.8);
+    font-size: 15px;
+    user-select: none;
+}
+
+#kpxcDefine-description div:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    text-align: left;
+    color: #efefef;
+    padding-bottom: 8px;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+#kpxcDefine-description p {
+    margin-top: 10px;
+    padding-top: 10px;
+    color: #efefef;
+    border-top: 2px solid #666666;
+    line-height: 110%;
+}
+
+#kpxcDefine-help {
+    margin-bottom: 3px;
+}
+
+.kpxcDefine-keyboardHelp {
+    font-size: 0.75em;
+}
+
+.kpxcDefine-keyboardHelp kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    color: #333;
+    display: inline-block;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}
+
+.kpxcDefine-fixed-field {
+    position: absolute;
+    border: 2px solid #efefef;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2147483646;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgba(239,239,239,0.4);
+}
+
+.kpxcDefine-fixed-hover-field {
+    border: 2px solid orange;
+    background-color: rgba(255,165,239,0.4);
+}
+
+.kpxcDefine-fixed-password-field {
+    border: 2px solid red;
+    color: #efefef;
+    background-color: rgba(255,0,0,0.4);
+}
+
+.kpxcDefine-fixed-username-field {
+    border: 2px solid limegreen;
+    color: #efefef;
+    background-color: rgba(50,205,50,0.4);
+}
+
+.kpxcDefine-fixed-string-field {
+    border: 2px solid deepskyblue;
+    color: #efefef;
+    background-color: rgba(30,144,255,0.4);
+}
