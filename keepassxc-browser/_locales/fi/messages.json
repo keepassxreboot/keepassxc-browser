@@ -1,0 +1,850 @@
+{
+    "extensionDescription": {
+        "message": "KeePassXC-integraatio moderneille nettiselaimille",
+        "description": "Name of the extension."
+    },
+    "contextMenuFillUsernameAndPassword": {
+        "message": "Täytä käyttäjänimi ja salasana",
+        "description": "Context menu item for filling both username and password."
+    },
+    "contextMenuFillPassword": {
+        "message": "Täytä salasana",
+        "description": "Context menu item for filling password."
+    },
+    "contextMenuFillTOTP": {
+        "message": "Täytä TOTP",
+        "description": "Context menu item for filling Time-based One Time Password."
+    },
+    "contextMenuShowPasswordGeneratorIcons": {
+        "message": "Näytä salasanageneraattorin ikonit",
+        "description": "Show password generator icon on every password input field."
+    },
+    "contextMenuSaveCredentials": {
+        "message": "Tallenna tilitiedot",
+        "description": "Save credentials using the extension popup icon."
+    },
+    "contextMenuShowPasswordGenerator": {
+        "message": "Näytä salasanageneraattori",
+        "description": "Show password generator text."
+    },
+    "rememberCredentialsPopup": {
+        "message": "Luo tai muokkaa tilitietoja klikkaamalla selainlaajennuksen ikonia.",
+        "description": "Notification text when saving credentials from the context menu."
+    },
+    "multipleCredentialsDetected": {
+        "message": "Havaittiin useita tilitietoja HTTP-autentikaation yhteydessä. Klikkaa selainlaajennuksen ikonia valitaksesi oikeat tunnukset.",
+        "description": "Notification when HTTP Authentication has multiple credentials detected."
+    },
+    "errorMessageUnknown": {
+        "message": "Tuntematon virhe.",
+        "description": "Unknown error."
+    },
+    "errorMessageDatabaseNotOpened": {
+        "message": "Tietokanta ei ole avattu.",
+        "description": "Database not opened."
+    },
+    "errorMessageDatabaseHash": {
+        "message": "Tietokannan tiivistettä (hash) ei saatu.",
+        "description": "Database hash not received."
+    },
+    "errorMessageClientPublicKey": {
+        "message": "Asiakkaan julkista avainta ei saatu.",
+        "description": "Client public key not received."
+    },
+    "errorMessageDecrypt": {
+        "message": "Viestin salauksen purkaminen ei onnistu.",
+        "description": "Cannot decrypt message."
+    },
+    "errorMessageTimeout": {
+        "message": "KeePassXC:hen ei voitu yhdistää. Tarkista onko selainintegraatio päällä KeePassXC:n asetuksissa.",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
+    },
+    "errorMessageCanceled": {
+        "message": "Toiminto peruttiin tai estettiin.",
+        "description": "Action canceled or denied."
+    },
+    "errorMessageEncrypt": {
+        "message": "Viestin salaus epäonnistui. Onko KeePassXC käynnissä?",
+        "description": "Message encryption failed. Is KeePassXC running?"
+    },
+    "errorMessageAssociate": {
+        "message": "Liittäminen KeePassXC:hen epäonnistui, yritä uudelleen.",
+        "description": "KeePassXC association failed, try again."
+    },
+    "errorMessageKeyExchange": {
+        "message": "Avainten vaihto ei onnistunut.",
+        "description": "Key exchange was not successful."
+    },
+    "errorMessageEncryptionKey": {
+        "message": "Salausavainta ei tunnistettu.",
+        "description": "Encryption key is not recognized."
+    },
+    "errorMessageSavedDatabases": {
+        "message": "Tallennettuja tietokantoja ei löytynyt.",
+        "description": "No saved databases found."
+    },
+    "errorMessageIncorrectAction": {
+        "message": "Virheellinen toiminto.",
+        "description": "Incorrect action."
+    },
+    "errorMessageEmptyMessage": {
+        "message": "Vastaanotettiin tyhjä viesti.",
+        "description": "Empty message received."
+    },
+    "errorMessageNoURL": {
+        "message": "Sivuston osoitetta ei ole annettu.",
+        "description": "No URL provided."
+    },
+    "errorMessageNoLogins": {
+        "message": "Tunnuksia ei löydy.",
+        "description": "No logins found."
+    },
+    "passwordGeneratorIcon": {
+        "message": "Salasalageneraattorin ikoni",
+        "description": "Alt attribute text of the password generator icon."
+    },
+    "passwordGeneratorPlaceholder": {
+        "message": "Luotu salasana",
+        "description": "Input field placeholder for generated password."
+    },
+    "passwordGeneratorLabel": {
+        "message": "Täytä myös seuraava salasanakenttä",
+        "description": "Checkbox text below the password generator input field."
+    },
+    "passwordGeneratorBits": {
+        "message": "??? bittiä",
+        "description": "Bits of the generated password."
+    },
+    "passwordGeneratorTitle": {
+        "message": "Salasanageneraattori",
+        "description": "Password generator dialog title."
+    },
+    "passwordGeneratorGenerate": {
+        "message": "Luo",
+        "description": "Generate button text in password generator."
+    },
+    "passwordGeneratorCopy": {
+        "message": "Kopioi",
+        "description": "Copy button text in password generator."
+    },
+    "passwordGeneratorFillAndCopy": {
+        "message": "Täytä ja kopioi",
+        "description": "Fill and copy button text in password generator."
+    },
+    "passwordGeneratorErrorTooLong": {
+        "message": "Virhe:\nLuotu salasana on sallittua pidempi!\nSalasana on leikattu sopivan pituiseksi.\n\nMuista uusi salasana!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorGenerateText": {
+        "message": "Luo salasana",
+        "description": "Password icon title text."
+    },
+    "passwordGeneratorError": {
+        "message": "Salasanaa ei voitu luoda.<br />Onko KeePassXC käynnissä?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "defineDismiss": {
+        "message": "Poistu",
+        "description": "Dismiss button text when choosing custom login fields."
+    },
+    "defineSkip": {
+        "message": "Ohita",
+        "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "Näytä lisää",
+        "description": "More button text when choosing custom login fields."
+    },
+    "defineAgain": {
+        "message": "Uudestaan",
+        "description": "Again button text when choosing custom login fields."
+    },
+    "defineConfirm": {
+        "message": "Vahvista",
+        "description": "Confirm button text when choosing custom login fields."
+    },
+    "defineAlreadySelected": {
+        "message": "Tunnuksien kentät tälle sivustolle ovat jo valittu, ja ne ylikirjoitetaan.",
+        "description": "A text shown when custom credentials fields are already set for the page."
+    },
+    "defineDiscard": {
+        "message": "Hylkää valinta",
+        "description": "Discard selection button text when choosing custom login fields."
+    },
+    "defineStringField": {
+        "message": "Lisämerkkijonokenttä #",
+        "description": "Text for string field."
+    },
+    "defineChooseUsername": {
+        "message": "1. Valitse käyttäjänimen kenttä",
+        "description": "Choosing a username field text when choosing custom login fields."
+    },
+    "defineChoosePassword": {
+        "message": "2. Valitse salasanan kenttä",
+        "description": "Choosing a password field text when choosing custom login fields."
+    },
+    "defineConfirmSelection": {
+        "message": "3. Vahvista valinta",
+        "description": "Confirm a selection text when choosing custom login fields."
+    },
+    "defineHelpText": {
+        "message": "Vahvista valintasi tai merkitse lisää kenttiä <em>lisämerkkijonokentiksi</em>.",
+        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+    },
+    "defineKeyboardText": {
+        "message": "Voit myös valita kenttiä käyttämällä näppäimistön numeroita.",
+        "description": "Help text when choosing custom login fields."
+    },
+    "username": {
+        "message": "Käyttäjänimi",
+        "description": "General text for username."
+    },
+    "password": {
+        "message": "Salasana",
+        "description": "General text for password."
+    },
+    "credentialsNoUsername": {
+        "message": "- ei käyttäjänimeä -",
+        "description": "Shown when no username is set in the credentials."
+    },
+    "credentialsNoLoginsFound": {
+        "message": "Virhe:\nTunnuksia ei löydy.",
+        "description": "Shown when no credentials are found for the current page."
+    },
+    "credentialsMultipleFound": {
+        "message": "Virhe:\nKeePassXC löysi useampia tilitietoja!\nPaina selainlaajennuksen ikonia nähdäksesi lisävalinnat.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsNoUsernameFound": {
+        "message": "Virhe:\nTunnuksia annetulle käyttäjänimelle ei löydy.",
+        "description": "Alert message when no credentials are found for the given username."
+    },
+    "fieldsFill": {
+        "message": "Virhe:\nTäytön tarvitsemia kenttiä ei löydy.",
+        "description": "Alert message when no fields are found to fill in."
+    },
+    "fieldsNoPasswordField": {
+        "message": "Virhe:\nSalasanakenttää ei löytynyt.",
+        "description": "Message shown when no password fields are found."
+    },
+    "rememberNothingChanged": {
+        "message": "Virhe:\nTilitietojen muutoksia ei havaittu.",
+        "description": "Message shown when trying to save credentials that haven't changed."
+    },
+    "popupTitle": {
+        "message": "KeePassXC - Ponnahdusikkuna",
+        "description": "Popup window title."
+    },
+    "popupSettingsText": {
+        "message": "Asetukset",
+        "description": "Popup Settings button text."
+    },
+    "popupChooseCredentialsText": {
+        "message": "Valitse sivustolle mukautetut tunnuskentät",
+        "description": "Popup credential choosing button text."
+    },
+    "popupConnectButton": {
+        "message": "Yhdistä",
+        "description": "Popup Connect button text."
+    },
+    "popupReconnectButton": {
+        "message": "Yhdistä uudelleen",
+        "description": "Popup Reconnect button text."
+    },
+    "popupRedetectButton": {
+        "message": "Tunnista tunnuskentät uudelleen",
+        "description": "Popup Redetect login fields button text."
+    },
+    "popupReloadButton": {
+        "message": "Lataa uudelleen",
+        "description": "Popup Reload button text."
+    },
+    "popupReopenButton": {
+        "message": "Avaa tietokanta uudelleen",
+        "description": "Popup reopen database button text."
+    },
+    "popupErrorEncountered": {
+        "message": "KeePassXC-Browser havaitsi virheen:",
+        "description": "A text shown above error message in the popup."
+    },
+    "popupUpdateAvailable": {
+        "message": "Käytät KeePassXC:n vanhaa versiota.",
+        "description": "Popup warning message about old version of KeePassXC."
+    },
+    "popupDownloadNewVersion": {
+        "message": "Lataa uusin versio osoitteesta keepassxc.org",
+        "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupCheckingStatus": {
+        "message": "Haetaan tilaa...",
+        "description": "Checking status message in popup."
+    },
+    "popupNotConfigured": {
+        "message": "KeePassXC-Browser ei ole yhdistetty. Paina Yhdistä liittääksesi selainlaajennuksen KeePassXC:hen.",
+        "description": "A popup message shown when the extension has not been connected to KeePassXC."
+    },
+    "popupNeedReconfigure": {
+        "message": "KeePassXC-Browser on katkaissut yhteyden KeePassXC:hen.",
+        "description": "A popup message shown when the extension has been disconnected from KeePassXC."
+    },
+    "popupNeedReconfigureMessage": {
+        "message": "Paina Yhdistä uudelleen avataksesi uuden yhteyden.",
+        "description": "A popup message shown when reconnect is needed."
+    },
+    "popupConfiguredNotAssociated": {
+        "message": "KeePassXC-Browser ei ole vielä yhdistetty KeePassXC:hen, mutta on asetettu käyttämään tunnistetta: $1",
+        "description": "A popup message shown when KeePassXC is not connected but configured."
+    },
+    "popupConfiguredAndAssociated": {
+        "message": "KeePassXC-Browser on yhdistetty KeePassXC:hen käyttäen tunnistetta: $1",
+        "description": "A popuo message when a connection to KeePassXC is succesful."
+    },
+    "popupRememberInfoText": {
+        "message": "Käyttäjänimi tai salasana on muuttunut! Tallenna?",
+        "description": "Popup message when username or password has changed."
+    },
+    "popupRememberSaving": {
+        "message": "Tilitiedot tallennetaan yhdistettyyn tietokantaan tunnisteella $1",
+        "description": "A popup message when saving or updating credentials."
+    },
+    "popupRememberNewUsername": {
+        "message": "Käyttäjänimi ei ole tällä hetkellä tallennettu: $1",
+        "description": "A popup message shown when a new username is detected when saving credentials."
+    },
+    "popupRememberUsernameExists": {
+        "message": "Tilitiedot tämän hetkisellä käyttäjänimellä on lihavoitu: $1",
+        "description": "A popup message shown when a existing username is detected when saving credentials."
+    },
+    "popupRememberChooseCredentials": {
+        "message": "Valitse tilitiedot jotka haluat päivittää.",
+        "description": "A popup message shown choosing what credentials user wants to update."
+    },
+    "popupRememberChooseGroup": {
+        "message": "Valitse ryhmä johon haluat tallentaa uuden tietueen.",
+        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    },
+    "popupRememberErrorDefaultGroupNotFound": {
+        "message": "Virhe: Asetettua oletusryhmää ei löytynyt. Luodaan tarvittavat ryhmät.",
+        "description": "Error message shown when default group set cannot be found."
+    },
+    "popupRememberErrorCreatingNewGroup": {
+        "message": "Uusia ryhmiä ei voitu luoda.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "popupRememberErrorPasswordNotChanged": {
+        "message": "Virhe: Tietueita ei päivitetty. Salasana ei ole muuttunut.",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "popupRememberErrorCannotSaveCredentials": {
+        "message": "Virhe: Tietueita ei voitu tallentaa tai päivittää.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "popupLoginText": {
+        "message": "Valitse tunnukset jotka haluat täyttää sivulle.",
+        "description": "A popup message shown when one or multiple credentials are present."
+    },
+    "popupFilterText": {
+        "message": "Suodata:",
+        "description": "Text for login credentials quick filter."
+    },
+    "popupAuthText": {
+        "message": "Valitse tunnukset joilla haluat kirjautua.",
+        "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
+    },
+    "popupMultiplePasswordFields": {
+        "message": "Sivustolta löytyy useampi salasanakenttä. Klikkaa oikealla hiiren napilla salasanakenttää ja valitse yksi seuraavista:",
+        "description": "A popup message shown when web page has multiple password fields."
+    },
+    "popupURL": {
+        "message": "URL:",
+        "description": "URL. Might not need any translation."
+    },
+    "popupUsername": {
+        "message": "Käyttäjänimi:",
+        "description": "A username field name shown on credential update."
+    },
+    "popupButtonNew": {
+        "message": "Uusi",
+        "description": "New button text in popup when updating credentials."
+    },
+    "popupButtonUpdate": {
+        "message": "Päivitä",
+        "description": "Update button text in popup when updating credentials."
+    },
+    "popupButtonDismiss": {
+        "message": "Poistu",
+        "description": "Dismiss button text in popup when updating credentials."
+    },
+    "popupButtonIgnore": {
+        "message": "Älä kysy koskaan tälle sivustolle",
+        "description": "Ignore button text in popup or in notification when updating credentials."
+    },
+    "popupButtonClose": {
+        "message": "Sulje",
+        "description": "Close button text in popup or in notification."
+    },
+    "popupButtonDismissHttpAuth": {
+        "message": "Poistu ja näytä autentikaation oletusdialogi",
+        "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsTitle": {
+        "message": "Asetukset | KeePassXC-Browser ",
+        "description": "Options page title."
+    },
+    "optionsGeneralSettingsTab": {
+        "message": "Yleiset asetukset",
+        "description": "General Settings tab text."
+    },
+    "optionsConnectedDatabasesTab": {
+        "message": "Yhdistetyt tietokannat",
+        "description": "Connected Databases tab text."
+    },
+    "optionsCustomFieldsTab": {
+        "message": "Mukautetut tunnuskentät",
+        "description": "Saved custom login fields tab text."
+    },
+    "optionsSitePreferencesTab": {
+        "message": "Sivustojen asetukset",
+        "description": "Site preferences fields tab text."
+    },
+    "optionsAboutTab": {
+        "message": "Tietoja",
+        "description": "About tab text."
+    },
+    "optionsMenuGeneral": {
+        "message": "Yleiset",
+        "description": "General settings page header."
+    },
+    "optionsMenuConnectedDatabases": {
+        "message": "Yhdistetyt tietokannat",
+        "description": "Connected Databases page header."
+    },
+    "optionsMenuCustomFields": {
+        "message": "Mukautetut tunnuskentät",
+        "description": "Custom login fields page header."
+    },
+    "optionsMenuSitePreferences": {
+        "message": "Sivustojen asetukset",
+        "description": "Site preferences page header."
+    },
+    "optionsMenuAbout": {
+        "message": "Tietoja",
+        "description": "About page header."
+    },
+    "optionsConfigureShortcuts": {
+        "message": "Muokkaa näppäinoikoteitä",
+        "description": "Keyboard shortcut button and title text."
+    },
+    "optionsButtonSave": {
+        "message": "Tallenna",
+        "description": "Save button text."
+    },
+    "optionsButtonConnect": {
+        "message": "Yhdistä",
+        "description": "Connect button text."
+    },
+    "optionsButtonRemove": {
+        "message": "Poista",
+        "description": "Remove button text."
+    },
+    "optionsButtonAdd": {
+        "message": "Lisää",
+        "description": "Add button text."
+    },
+    "optionsButtonUpdate": {
+        "message": "Tarkista päivitykset",
+        "description": "Check for updates button text."
+    },
+    "optionsButtonRemoveNow": {
+        "message": "Kyllä, poista",
+        "description": "Confirm button text when removing database key or custom login fields."
+    },
+    "optionsButtonCancel": {
+        "message": "Peruuta",
+        "description": "Cancel button text when removing database key or custom login fields."
+    },
+     "optionsButtonReset": {
+        "message": "Palauta oletus",
+        "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsLabelBlinkTime": {
+        "message": "Vilkkumisaika:",
+        "description": "Blink Time option text."
+    },
+    "optionsLabelRedirectOffset": {
+        "message": "Uudelleenohjauksien määrä:",
+        "description": "Redirect Offset option text."
+    },
+    "optionsLabelRedirectAllowance": {
+        "message": "Uudelleenohjauksien maksimimäärä:",
+        "description": "RMaximum (Number of) Redirects options text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "Oletusryhmä johon uudet salasanat tallennetaan:",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "Erota ryhmät vinoviivalla, esimerkiksi: Ryhmä/AlaRyhmä.",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "Kysy aina minne uudet tietueet tallennetaan.",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "Kun tämä on asetettu, ponnahdusikkuna näyttää ryhmälistauksen.",
+        "description": "Default checkbox explanation help text."
+    },
+    "optionsCheckboxUsePasswordGenerator": {
+        "message": "Aktivoi salasanageneraattori.",
+        "description": "Activate password generator checkbox text."
+    },
+    "optionsCheckboxAutoRetrieveCredentials": {
+        "message": "Hae tilitiedot automaattisesti.",
+        "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutoFillSingleEntry": {
+        "message": "Täytä yhden tilitiedon sisältävät tietueet automaattisesti.",
+        "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoCompleteUsernames": {
+        "message": "Aktivoi käyttäjänimikenttien valikko.",
+        "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowNotifications": {
+        "message": "Näytä ilmoitukset.",
+        "description": "Show notifications checkbox text."
+    },
+    "optionsSaveDomainOnly": {
+        "message": "Tallenna vain verkkotunnus.",
+        "description": "Save domain only checkbox text."
+    },
+    "optionsCheckboxShowLoginNotifications": {
+        "message": "Näytä ilmoitus, kun uusia tilitietoja voidaan tallettaa tietokantaan.",
+        "description": "Show login notifications checkbox text."
+    },
+    "optionsCheckboxAutoFillAndSend": {
+        "message": "Täytä HTTP-autentikaation dialogit automaattisesti.",
+        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsRadioText": {
+        "message": "Tarkista KeePassXC:n päivitykset:",
+        "description": "Text above radio buttons in the settings page."
+    },
+    "optionsRadioThreeDays": {
+        "message": "joka kolmas päivä",
+        "description": "Radio button text."
+    },
+    "optionsRadioWeek": {
+        "message": "joka viikko",
+        "description": "Radio button text."
+    },
+    "optionsRadioMonth": {
+        "message": "joka kuukausi",
+        "description": "Radio button text."
+    },
+    "optionsRadioNever": {
+        "message": "ei koskaan",
+        "description": "Radio button text."
+    },
+    "optionsKeyboardShortcutsHeader": {
+        "message": "Pikanäppäimet",
+        "description": "Keyboard shortcut header text."
+    },
+    "optionsBlinkTimeHelpText": {
+        "message": "Maksimiaika (millisekunteina) jonka ikoni vilkkuu, kun uusia tilitietoja havaitaan",
+        "description": "Blink Time option help text."
+    },
+    "optionsRedirectOffsetHelpText": {
+        "message": "Minimiaika (millisekunteja) jonka ikoni vilkkuu sivun uudelleenohjauksen jälkeen.",
+        "description": "Redirect Offset option help text."
+    },
+    "optionsRedirectOffsetHelpTextSecond": {
+        "message": "-1 käyttää vain vilkkumisaikaa hyläten uudelleenohjauksien maksimimäärän",
+        "description": "Redirect Offset option help text, second part."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "Kuinka monta sivun latausta sallitaan ennen kuin ikonin vilkkuminen lakkaa",
+        "description": "Redirect Allowance option help text."
+    },
+    "optionsUsePasswordGeneratorHelpText": {
+        "message": "Lisää ikonin salasanakenttien loppuun uuden salasanan luomista varten.",
+        "description": "Password Generator option help text."
+    },
+    "optionsUsePasswordGeneratorHelpTextSecond": {
+        "message": "Salasanat luodaan käyttäen KeePassXC:n salasanageneraattorin asetuksia.",
+        "description": "Password Generator option help text, second part."
+    },
+    "optionsAutoRetrieveCredentialsHelpText": {
+        "message": "KeePassXC-Browser hakee tilitiedot heti kun välilehti on aktivoitu.",
+        "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutoFillSingleEntryHelpText": {
+        "message": "Sallii KeePassXC-Browser:in täyttää tilitiedot automaattisesti, jos tietueessa on niitä vain yksi.",
+        "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillSingleEntryWarning": {
+        "message": "Varoitus! Automaattisen täytön käyttö ei ole turvallista. Käytä omalla vastuulla.",
+        "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutocompleteUsernamesHelpText": {
+        "message": "Näyttää pudotusvalikon käyttäjänimikentässä kaikista saatavilla olevista tilitiedoista kyseiselle sivulle.",
+        "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowNotificationsHelpText": {
+        "message": "Näyttää ilmoituksen virheistä, ja tilanteista jolloin käyttäjältä vaaditaan toimia.",
+        "description": "Show notifications option help text."
+    },
+    "optionsSaveDomainOnlyHelpText": {
+        "message": "Uusia tilitietoja tallentaessa tallenna vain verkkotunnus koko osoitteen sijasta.",
+        "description": "Save domain only option help text."
+    },
+    "optionsAutoFillAndSendHelpText": {
+        "message": "Jos HTTP-autentikaatiota vaativalle sivustolle löydetään tilitiedot, KeePassXC-Browser yrittää automaattisesti kirjautua niitä käyttäen.",
+        "description": "Auto-Fill And Send option help text."
+    },
+    "optionsAutoFillAndSendHelpTextSecond": {
+        "message": "HTTP-autentikaatiodialogi näyttää tältä:",
+        "description": "HTTP Basic Auth image help text."
+    },
+    "optionsVersionInfoText": {
+        "message": "KeePassXC-Browser tarvitsee KeePassXC:tä hakeakseen tilitietoja.",
+        "description": "Settings page version info text."
+    },
+    "optionsVersionDownload": {
+        "message": "Voit ladata viimeisimmän vakaan version osoitteesta $1",
+        "description": "Settings page download link."
+    },
+    "optionsVersionRunning": {
+        "message": "Käytät KeePassXC:n versiota: $1",
+        "description": "Settings page info text of user's KeePassXC version."
+    },
+    "optionsLatestVersion": {
+        "message": "Viimeisin saatavilla oleva KeePassXC:n versio: $1",
+        "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsDefault": {
+        "message": "Oletus: $1",
+        "description": "Default setting text."
+    },
+    "optionsInfinite": {
+        "message": "Ääretön: $1",
+        "description": "Infinite setting text."
+    },
+    "optionsRecommended": {
+        "message": "Suositeltu: $1",
+        "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "Näppäinoikotie toiminnolle $1 on muutettu.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "Näppäinoikotie toiminnolle $1 on palautettu oletusasetukseen.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "Virhe: Näppäinoikotietä toiminnolle $1 ei pystytty muuttamaan!",
+        "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsConnectedDatabasesText": {
+        "message": "Seuraavat KeePassXC:n tietokannat ovat yhdistettynä selainlaajennukseen.",
+        "description": "Info text about connected databases."
+    },
+    "optionsConnectedDatabasesNotFound": {
+        "message": "Yhdistettyjä tietokantoja ei löytynyt.",
+        "description": "Shown in the connected databases table when there is no connected databases."
+    },
+    "optionsDatabasesRemoveIdentifier": {
+        "message": "Poista tunniste tietokantalistasta?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmFirst": {
+        "message": "Haluatko poistaa kyseisen tunnisteen tietokantalistasta?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmSecond": {
+        "message": "Voit yhdistää tietokannan myöhemmin uudelleen.",
+        "description": "Confirmation text when removing database from the list, second part."
+    },
+    "optionsDatabaseIdentifier": {
+        "message": "Tunniste",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseKey": {
+        "message": "Avain",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseLastUsed": {
+        "message": "Viimeksi käytetty",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseCreated": {
+        "message": "Luotu",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseDelete": {
+        "message": "Poista",
+        "description": "Database list column title."
+    },
+    "optionsColumnPageURL": {
+        "message": "Sivun URL",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnIgnore": {
+        "message": "Älä huomioi",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnUsernameOnly": {
+        "message": "Pelkän käyttäjänimikentän tunnistus",
+        "description": "Site preferences list column title."
+    },
+    "optionsColumnDelete": {
+        "message": "Poista",
+        "description": "Site preferences list column title."
+    },
+    "optionsSelectionNothing": {
+        "message": "Käytä kaikkia ominaisuuksia",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionNormal": {
+        "message": "Poista uusien/muokattujen tilitietojen tunnistus käytöstä",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionFull": {
+        "message": "Poista kaikki ominaisuudet käytöstä",
+        "description": "Site preferences option selection."
+    },
+    "optionsCustomFieldsNotFound": {
+        "message": "Mukautettuja tunnuskenttiä ei ole tallennettu.",
+        "description": "Shown when no saved custom credentials are saved."
+    },
+    "optionsCustomFieldsTableCaption": {
+        "message": "Voit hallita tallennettuja mukautettuja tunnuskenttiä käyttämällä alla olevaa taulukkoa.",
+        "description": "Table caption of Custom login fields page."
+    },
+    "optionsCustomFieldsTabHelpTextFirst": {
+        "message": "Jos KeePassXC-Browser tunnistaa sivustolla väärät tunnuskentät, voit valita oikeat kentät itse.",
+        "description": "Saved custom login fields info text, first part."
+    },
+    "optionsCustomFieldsTabHelpTextSecond": {
+        "message": "Mene sivustolle ja klikkaa KeePassXC-Browser:in ikonia, valitse sitten",
+        "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsRemove": {
+        "message": "Poista tallennetut mukautetut tunnuskentät?",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmation": {
+        "message": "Haluatko poistaa mukautetut tunnuskentät sivulta: $1",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmationHelpText": {
+        "message": "KeePassXC-Browser tunnistaa tunnuskentät automaattisesti seuraavan kerran, kun vierailet sivulla.",
+        "description": "Part of confirmation text when removing saved custom login fields."
+    },
+    "optionsSitePreferencesNotFound": {
+        "message": "Hyljättyjä sivustoja ei löydetty.",
+        "description": "Shown when no ignored sites are saved."
+    },
+    "optionsSitePreferencesRemove": {
+        "message": "Poista sivusto?",
+        "description": "Confirmation text when removing ignored sites from the list."
+    },
+    "optionsSitePreferencesTabHelpTextFirst": {
+        "message": "Tällä sivulla mainitut sivustot vaativat mukautettuja asetuksia.",
+        "description": "Site preferences info text, first part."
+    },
+    "optionsSitePreferencesTabHelpTextSecond": {
+        "message": "Poistaaksesi uusien/muokattujen tilitietojen tunnistuksen käytöstä tietyllä sivulla, lisää sivusto alle tai käytä KeePassXC-Browserin ponnahdusikkunaa ja valitse",
+        "description": "Site preferences info text, second part."
+    },
+    "optionsSitePreferencesTabHelpTextThird": {
+        "message": "Jos sivusto on täysin estetty (<em>Poista kaikki ominaisuudet käytöstä</em> on valittu), selainlaajennusta ei käytetä lainkaan sille sivustolle.",
+        "description": "Site preferences info text, third part."
+    },
+    "optionsSitePreferencesTabHelpTextFourth": {
+        "message": "Pelkän käyttäjänimikentän tunnistus mahdollistaa KeePassXC-Browser:in käytön sivustoilla joissa käyttäjänimi- ja salasanakenttä on jaoteltu eri sivuille.",
+        "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesManualAddText": {
+        "message": "Lisää URL manuaalisesti",
+        "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesConfirmation": {
+        "message": "Haluatko poistaa listalta sivuston: $1",
+        "description": "Confirmation text when removing site from site preferences."
+    },
+    "optionsSitePreferencesConfirmationHelpText": {
+        "message": "KeePassXC-Browser käyttää tällä sivustolla kaikkia ominaisuuksia ja poistaa pelkän käyttäjänimikentän tunnistuksen käytöstä.",
+        "description": "Part of confirmation text when removing site preferences."
+    },
+    "optionsSitePreferencesTableCaption": {
+        "message": "Voit hallita tallennettuja sivustojen asetuksia käyttämällä alla olevaa taulukkoa.",
+        "description": "Table caption of Site Preferences page."
+    },
+    "optionsSitePreferencesSelect": {
+        "message": "Asetus jonka kautta selainlaajennuksen ominaisuuksia voidaan rajoittaa sivustolle.",
+        "description": "Title text of select element in Site Preferences."
+    },
+    "optionsAboutChrome": {
+        "message": "KeePassXC-Browser Chrome Web Storessa.",
+        "description": "About page link to Chrome Web Store."
+    },
+    "optionsAboutMozilla": {
+        "message": "KeePassXC-Browser Mozillan Add-ons -sivustolla.",
+        "description": "About page link to AMO."
+    },
+    "optionsAboutGitHub": {
+        "message": "KeePassXC-Browser GitHubissa.",
+        "description": "About page link to GitHub."
+    },
+    "optionsAboutExtensionVersion": {
+        "message": "KeePassXC-Browser:in versio: $1",
+        "description": "About page text of extension version."
+    },
+    "optionsAboutKeePassXCVersion": {
+        "message": "KeePassXC:n versio: $1",
+        "description": "About page text of KeePassXC version."
+    },
+    "optionsAboutContributors": {
+        "message": "Osallistujat",
+        "description": "About page text of contributors."
+    },
+    "optionsAboutLicenses": {
+        "message": "Lisenssit",
+        "description": "About page text of licenses."
+    },
+    "optionsAboutReportBugs": {
+        "message": "Raportoi virheestä",
+        "description": "About page text of reporting bugs."
+    },
+    "optionsAboutCreateNewIssue": {
+        "message": "Luo uusi virheraportti GitHubissa",
+        "description": "Link text for creating a new issue."
+    },
+    "optionsAboutDebugInfo": {
+        "message": "Voit käyttää seuraavia vianjäljitystietoja",
+        "description": "Debug info text."
+    },
+    "optionsErrorInvalidValue": {
+        "message": "Väärä arvo. Tarkista kenttä.",
+        "description": "Error shown when input field has an incorrect value."
+    },
+    "optionsErrorInvalidURL": {
+        "message": "Väärä URL. Tarkista kenttä.",
+        "description": "Error shown when input field has an incorrect URL."
+    },
+    "optionsErrorValueExists": {
+        "message": "Arvo on jo listassa.",
+        "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "openNewTab": {
+        "message": "Avaa uuden välilehden",
+        "description": "Title attribute text."
+    },
+    "httpAuthDialog": {
+        "message": "HTTP Basic -autentikaatiodialogi",
+        "description": "Options page HTTP Basic Auth dialog text"
+    }
+}

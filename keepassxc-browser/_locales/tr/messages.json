@@ -1,0 +1,850 @@
+{
+    "extensionDescription": {
+        "message": "Modern web tarayıcıları için KeePassXC bütünleşmesi",
+        "description": "Name of the extension."
+    },
+    "contextMenuFillUsernameAndPassword": {
+        "message": "Kullanıcı Adı ve Parolayı Doldur",
+        "description": "Context menu item for filling both username and password."
+    },
+    "contextMenuFillPassword": {
+        "message": "Sadece Parolayı Doldur",
+        "description": "Context menu item for filling password."
+    },
+    "contextMenuFillTOTP": {
+        "message": "TOTP Doldur",
+        "description": "Context menu item for filling Time-based One Time Password."
+    },
+    "contextMenuShowPasswordGeneratorIcons": {
+        "message": "Parola Oluşturucu Simgelerini Göster",
+        "description": "Show password generator icon on every password input field."
+    },
+    "contextMenuSaveCredentials": {
+        "message": "Kimlik bilgilerini kaydet",
+        "description": "Save credentials using the extension popup icon."
+    },
+    "contextMenuShowPasswordGenerator": {
+        "message": "Parola oluşturucuyu göster",
+        "description": "Show password generator text."
+    },
+    "rememberCredentialsPopup": {
+        "message": "Uzantı simgesine tıklayarak kimlik bilgilerini oluşturun veya değiştirin.",
+        "description": "Notification text when saving credentials from the context menu."
+    },
+    "multipleCredentialsDetected": {
+        "message": "Birden çok kimlik bilgisi ile HTTP kimlik doğrulaması algılandı. Doğru olanı seçmek için uzantı simgesine tıklayın.",
+        "description": "Notification when HTTP Authentication has multiple credentials detected."
+    },
+    "errorMessageUnknown": {
+        "message": "Bilinmeyen hata.",
+        "description": "Unknown error."
+    },
+    "errorMessageDatabaseNotOpened": {
+        "message": "Veritabanı açılmadı.",
+        "description": "Database not opened."
+    },
+    "errorMessageDatabaseHash": {
+        "message": "Veritabanı karma alınmadı.",
+        "description": "Database hash not received."
+    },
+    "errorMessageClientPublicKey": {
+        "message": "İstemci ortak anahtar alınmadı.",
+        "description": "Client public key not received."
+    },
+    "errorMessageDecrypt": {
+        "message": "Mesaj şifresi çözülemiyor.",
+        "description": "Cannot decrypt message."
+    },
+    "errorMessageTimeout": {
+        "message": "KeePassXC'ye bağlanılamıyor. Tarayıcı bütünleşmesinin KeePassXC ayarlarında etkin olduğunu kontrol edin.",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
+    },
+    "errorMessageCanceled": {
+        "message": "Eylem iptal edildi veya reddedildi.",
+        "description": "Action canceled or denied."
+    },
+    "errorMessageEncrypt": {
+        "message": "İleti şifreleme başarısız. KeePassXC çalışıyor mu?",
+        "description": "Message encryption failed. Is KeePassXC running?"
+    },
+    "errorMessageAssociate": {
+        "message": "KeePassXC ilişkilendirmesi başarısız, tekrar deneyin.",
+        "description": "KeePassXC association failed, try again."
+    },
+    "errorMessageKeyExchange": {
+        "message": "Anahtar değişimi başarısız oldu.",
+        "description": "Key exchange was not successful."
+    },
+    "errorMessageEncryptionKey": {
+        "message": "Şifreleme anahtarı tanınmıyor.",
+        "description": "Encryption key is not recognized."
+    },
+    "errorMessageSavedDatabases": {
+        "message": "Kayıtlı veritabanları bulunamadı.",
+        "description": "No saved databases found."
+    },
+    "errorMessageIncorrectAction": {
+        "message": "Yanlış eylem.",
+        "description": "Incorrect action."
+    },
+    "errorMessageEmptyMessage": {
+        "message": "Boş mesaj alındı.",
+        "description": "Empty message received."
+    },
+    "errorMessageNoURL": {
+        "message": "URL sağlanmadı.",
+        "description": "No URL provided."
+    },
+    "errorMessageNoLogins": {
+        "message": "Hiçbir giriş bulunamadı.",
+        "description": "No logins found."
+    },
+    "passwordGeneratorIcon": {
+        "message": "Parola üreticisi simgesi",
+        "description": "Alt attribute text of the password generator icon."
+    },
+    "passwordGeneratorPlaceholder": {
+        "message": "Oluşturulan parola",
+        "description": "Input field placeholder for generated password."
+    },
+    "passwordGeneratorLabel": {
+        "message": "Ayrıca bir sonraki parola alanını doldurun",
+        "description": "Checkbox text below the password generator input field."
+    },
+    "passwordGeneratorBits": {
+        "message": "Bit ???",
+        "description": "Bits of the generated password."
+    },
+    "passwordGeneratorTitle": {
+        "message": "Parola Oluşturucu",
+        "description": "Password generator dialog title."
+    },
+    "passwordGeneratorGenerate": {
+        "message": "Oluştur",
+        "description": "Generate button text in password generator."
+    },
+    "passwordGeneratorCopy": {
+        "message": "Kopyala",
+        "description": "Copy button text in password generator."
+    },
+    "passwordGeneratorFillAndCopy": {
+        "message": "Doldur ve kopyala",
+        "description": "Fill and copy button text in password generator."
+    },
+    "passwordGeneratorErrorTooLong": {
+        "message": "Hata\nOluşturulan parola izin verilen uzunluktan daha uzun!\nUzunluğa uyacak şekilde kısaltıldı.\n\nLütfen yeni parolayı unutma!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorGenerateText": {
+        "message": "Parola oluştur",
+        "description": "Password icon title text."
+    },
+    "passwordGeneratorError": {
+        "message": "Oluşturulan parola alınamıyor.<br />KeePassXC çalışıyor mu?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "defineDismiss": {
+        "message": "Yoksay",
+        "description": "Dismiss button text when choosing custom login fields."
+    },
+    "defineSkip": {
+        "message": "Atla",
+        "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "Daha fazla göster",
+        "description": "More button text when choosing custom login fields."
+    },
+    "defineAgain": {
+        "message": "Tekrarla",
+        "description": "Again button text when choosing custom login fields."
+    },
+    "defineConfirm": {
+        "message": "Onayla",
+        "description": "Confirm button text when choosing custom login fields."
+    },
+    "defineAlreadySelected": {
+        "message": "Bu sayfa için giriş alanları seçildi ve üzerine yazılacak.",
+        "description": "A text shown when custom credentials fields are already set for the page."
+    },
+    "defineDiscard": {
+        "message": "Seçimi bırak",
+        "description": "Discard selection button text when choosing custom login fields."
+    },
+    "defineStringField": {
+        "message": "Dize alanı #",
+        "description": "Text for string field."
+    },
+    "defineChooseUsername": {
+        "message": "1. Bir kullanıcı adı alanı seçin",
+        "description": "Choosing a username field text when choosing custom login fields."
+    },
+    "defineChoosePassword": {
+        "message": "2. Şimdi bir parola alanı seçin",
+        "description": "Choosing a password field text when choosing custom login fields."
+    },
+    "defineConfirmSelection": {
+        "message": "3. Seçimi onaylayın",
+        "description": "Confirm a selection text when choosing custom login fields."
+    },
+    "defineHelpText": {
+        "message": "Lütfen seçiminizi onaylayın veya <em>Dizi alanları</em> olarak daha fazla alan seçin.",
+        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+    },
+    "defineKeyboardText": {
+        "message": "Girdi alanlarını klavyeden seçmek için de sayıları kullanabilirsiniz.",
+        "description": "Help text when choosing custom login fields."
+    },
+    "username": {
+        "message": "Kullanıcı adı",
+        "description": "General text for username."
+    },
+    "password": {
+        "message": "Parola",
+        "description": "General text for password."
+    },
+    "credentialsNoUsername": {
+        "message": "- kullanıcı adı yok -",
+        "description": "Shown when no username is set in the credentials."
+    },
+    "credentialsNoLoginsFound": {
+        "message": "Hata\nHiçbir giriş bulunamadı.",
+        "description": "Shown when no credentials are found for the current page."
+    },
+    "credentialsMultipleFound": {
+        "message": "Hata:\nKeePassXC'de birden fazla giriş bulundu!\nDaha fazla seçenek için KeePassXC-Tarayıcı simgesine basın.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsNoUsernameFound": {
+        "message": "Hata:\nVerilen kullanıcı adı için kimlik bilgisi bulunamadı.",
+        "description": "Alert message when no credentials are found for the given username."
+    },
+    "fieldsFill": {
+        "message": "Hata:\nDoldurulacak alanlar bulunamıyor.",
+        "description": "Alert message when no fields are found to fill in."
+    },
+    "fieldsNoPasswordField": {
+        "message": "Hata:\nParola alanı bulunamadı",
+        "description": "Message shown when no password fields are found."
+    },
+    "rememberNothingChanged": {
+        "message": "Hata:\nDeğiştirilen kimlik bilgileri tespit edilemedi.",
+        "description": "Message shown when trying to save credentials that haven't changed."
+    },
+    "popupTitle": {
+        "message": "KeepassXc - Açılır Pencere",
+        "description": "Popup window title."
+    },
+    "popupSettingsText": {
+        "message": "Ayarlar",
+        "description": "Popup Settings button text."
+    },
+    "popupChooseCredentialsText": {
+        "message": "Bu sayfa için özel giriş alanları seç",
+        "description": "Popup credential choosing button text."
+    },
+    "popupConnectButton": {
+        "message": "Bağlan",
+        "description": "Popup Connect button text."
+    },
+    "popupReconnectButton": {
+        "message": "Yeniden bağlan",
+        "description": "Popup Reconnect button text."
+    },
+    "popupRedetectButton": {
+        "message": "Giriş alanlarını yeniden belirle",
+        "description": "Popup Redetect login fields button text."
+    },
+    "popupReloadButton": {
+        "message": "Tekrarla",
+        "description": "Popup Reload button text."
+    },
+    "popupReopenButton": {
+        "message": "Veritabanını yeniden aç",
+        "description": "Popup reopen database button text."
+    },
+    "popupErrorEncountered": {
+        "message": "KeePassXC-Tarayıcı bir hatayla karşılaştı:",
+        "description": "A text shown above error message in the popup."
+    },
+    "popupUpdateAvailable": {
+        "message": "KeePassXC'nin eski sürümünü kullanıyorsunuz.",
+        "description": "Popup warning message about old version of KeePassXC."
+    },
+    "popupDownloadNewVersion": {
+        "message": "Lütfen keepassxc.org adresinden en son sürümü indirin.",
+        "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupCheckingStatus": {
+        "message": "Durum kontrol ediliyor...",
+        "description": "Checking status message in popup."
+    },
+    "popupNotConfigured": {
+        "message": "KeePassXC-Tarayıcı yapılandırılmamış. KeePassXC ile eşleştirmek için bağlantıya basın.",
+        "description": "A popup message shown when the extension has not been connected to KeePassXC."
+    },
+    "popupNeedReconfigure": {
+        "message": "KeePassXC-Tarayıcı KeePassXC ile bağlantısı kesildi.",
+        "description": "A popup message shown when the extension has been disconnected from KeePassXC."
+    },
+    "popupNeedReconfigureMessage": {
+        "message": "Yeni bir bağlantı kurmak için yeniden bağlan düğmesine basın.",
+        "description": "A popup message shown when reconnect is needed."
+    },
+    "popupConfiguredNotAssociated": {
+        "message": "KeePassXC-Tarayıcı henüz KeePassXC'ye bağlanmadı, ancak tanımlayıcı kullanılarak yapılandırıldı: $1",
+        "description": "A popup message shown when KeePassXC is not connected but configured."
+    },
+    "popupConfiguredAndAssociated": {
+        "message": "KeePassXC-Tarayıcı KeePassXC'ye bağlı ve aşağıdaki tanımlayıcı kullanılarak yapılandırıldı: $1",
+        "description": "A popuo message when a connection to KeePassXC is succesful."
+    },
+    "popupRememberInfoText": {
+        "message": "Kullanıcı adı veya parola değiştirildi! Kaydet?",
+        "description": "Popup message when username or password has changed."
+    },
+    "popupRememberSaving": {
+        "message": "Kimlik bilgileri, tanımlayıcı ile bağlı veritabanına kaydedilecek $1",
+        "description": "A popup message when saving or updating credentials."
+    },
+    "popupRememberNewUsername": {
+        "message": "Şu kullanıcı adı şu anda kaydedilmedi: $1",
+        "description": "A popup message shown when a new username is detected when saving credentials."
+    },
+    "popupRememberUsernameExists": {
+        "message": "Kullanılan kullanıcı adına sahip kimlik bilgileri koyu olarak işaretlenmiştir: $1",
+        "description": "A popup message shown when a existing username is detected when saving credentials."
+    },
+    "popupRememberChooseCredentials": {
+        "message": "Lütfen güncellemek istediğiniz kimlik bilgilerini seçin.",
+        "description": "A popup message shown choosing what credentials user wants to update."
+    },
+    "popupRememberChooseGroup": {
+        "message": "Lütfen yeni kimlik bilgilerini eklemek istediğiniz kümeyi seçin.",
+        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    },
+    "popupRememberErrorDefaultGroupNotFound": {
+        "message": "Hata: Belirtilen öntanımlı küme bulunamadı. Gerekli tüm kümelerin oluşturulması.",
+        "description": "Error message shown when default group set cannot be found."
+    },
+    "popupRememberErrorCreatingNewGroup": {
+        "message": "Yeni küme oluşturulamıyor.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "popupRememberErrorPasswordNotChanged": {
+        "message": "Hata: Kimlik bilgileri güncellenmedi. Parola değiştirilmedi.",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "popupRememberErrorCannotSaveCredentials": {
+        "message": "Hata: Kimlik bilgileri kaydedilemez veya güncellenemez.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "popupLoginText": {
+        "message": "Sayfaya girmek istediğiniz giriş bilgilerini seçin.",
+        "description": "A popup message shown when one or multiple credentials are present."
+    },
+    "popupFilterText": {
+        "message": "Süzgeç:",
+        "description": "Text for login credentials quick filter."
+    },
+    "popupAuthText": {
+        "message": "Giriş yapmak istediğiniz giriş bilgisini seçin.",
+        "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
+    },
+    "popupMultiplePasswordFields": {
+        "message": "Bu sayfada birden fazla parola alanı bulundu. Parola alanlarından birine sağ tıklayın ve şunlardan birini seçin:",
+        "description": "A popup message shown when web page has multiple password fields."
+    },
+    "popupURL": {
+        "message": "URL: ",
+        "description": "URL. Might not need any translation."
+    },
+    "popupUsername": {
+        "message": "kullanıcı adı:",
+        "description": "A username field name shown on credential update."
+    },
+    "popupButtonNew": {
+        "message": "Yeni",
+        "description": "New button text in popup when updating credentials."
+    },
+    "popupButtonUpdate": {
+        "message": "Güncelle",
+        "description": "Update button text in popup when updating credentials."
+    },
+    "popupButtonDismiss": {
+        "message": "Yoksay",
+        "description": "Dismiss button text in popup when updating credentials."
+    },
+    "popupButtonIgnore": {
+        "message": "Bu sayfayı asla sorma",
+        "description": "Ignore button text in popup or in notification when updating credentials."
+    },
+    "popupButtonClose": {
+        "message": "Kapat",
+        "description": "Close button text in popup or in notification."
+    },
+    "popupButtonDismissHttpAuth": {
+        "message": "Öntanımlı kimlik doğrulama iletişim kutusunu kapatın ve gösterin",
+        "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsTitle": {
+        "message": "Ayarlar | KeePassXC-Tarayıcı",
+        "description": "Options page title."
+    },
+    "optionsGeneralSettingsTab": {
+        "message": "Genel Ayarlar",
+        "description": "General Settings tab text."
+    },
+    "optionsConnectedDatabasesTab": {
+        "message": "Bağlı Veritabanları",
+        "description": "Connected Databases tab text."
+    },
+    "optionsCustomFieldsTab": {
+        "message": "Özel giriş alanları",
+        "description": "Saved custom login fields tab text."
+    },
+    "optionsSitePreferencesTab": {
+        "message": "Site tercihleri",
+        "description": "Site preferences fields tab text."
+    },
+    "optionsAboutTab": {
+        "message": "Hakkında",
+        "description": "About tab text."
+    },
+    "optionsMenuGeneral": {
+        "message": "Genel",
+        "description": "General settings page header."
+    },
+    "optionsMenuConnectedDatabases": {
+        "message": "Bağlı Veritabanları",
+        "description": "Connected Databases page header."
+    },
+    "optionsMenuCustomFields": {
+        "message": "Özel giriş alanları",
+        "description": "Custom login fields page header."
+    },
+    "optionsMenuSitePreferences": {
+        "message": "Site tercihleri",
+        "description": "Site preferences page header."
+    },
+    "optionsMenuAbout": {
+        "message": "Hakkında",
+        "description": "About page header."
+    },
+    "optionsConfigureShortcuts": {
+        "message": "Kısayolları yapılandır",
+        "description": "Keyboard shortcut button and title text."
+    },
+    "optionsButtonSave": {
+        "message": "Kaydet",
+        "description": "Save button text."
+    },
+    "optionsButtonConnect": {
+        "message": "Bağlan",
+        "description": "Connect button text."
+    },
+    "optionsButtonRemove": {
+        "message": "Kaldır",
+        "description": "Remove button text."
+    },
+    "optionsButtonAdd": {
+        "message": "Ekle",
+        "description": "Add button text."
+    },
+    "optionsButtonUpdate": {
+        "message": "Güncellemeleri kontrol et",
+        "description": "Check for updates button text."
+    },
+    "optionsButtonRemoveNow": {
+        "message": "Evet, şimdi kaldır",
+        "description": "Confirm button text when removing database key or custom login fields."
+    },
+    "optionsButtonCancel": {
+        "message": "İptal",
+        "description": "Cancel button text when removing database key or custom login fields."
+    },
+     "optionsButtonReset": {
+        "message": "Sıfırla",
+        "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsLabelBlinkTime": {
+        "message": "Göz Yumma Zamanı:",
+        "description": "Blink Time option text."
+    },
+    "optionsLabelRedirectOffset": {
+        "message": "Redirect Offset:",
+        "description": "Redirect Offset option text."
+    },
+    "optionsLabelRedirectAllowance": {
+        "message": "Maximum (Number of) Redirects:",
+        "description": "RMaximum (Number of) Redirects options text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "Yeni parolaları kaydetmek için öntanımlı küme:",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "Separate the group with slashes, for example: Group/ChildGroup.",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "Her zaman yeni kimlik bilgilerinin nereye kaydedileceğini sor",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "Etkinleştirildiğinde, açılır pencerede bir küme listesi gösterilir.",
+        "description": "Default checkbox explanation help text."
+    },
+    "optionsCheckboxUsePasswordGenerator": {
+        "message": "Parola oluşturucuyu etkinleştir.",
+        "description": "Activate password generator checkbox text."
+    },
+    "optionsCheckboxAutoRetrieveCredentials": {
+        "message": "Kimlik bilgilerini otomatik olarak al.",
+        "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutoFillSingleEntry": {
+        "message": "Automatically fill in single-credential entries.",
+        "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoCompleteUsernames": {
+        "message": "Kullanıcı adı alanları için otomatik tamamlamayı etkinleştir.",
+        "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowNotifications": {
+        "message": "Bildirimleri göster.",
+        "description": "Show notifications checkbox text."
+    },
+    "optionsSaveDomainOnly": {
+        "message": "Yalnızca etki alanını kaydet.",
+        "description": "Save domain only checkbox text."
+    },
+    "optionsCheckboxShowLoginNotifications": {
+        "message": "Yeni kimlik bilgileri veritabanına kaydedildiğinde bir bildirim göster.",
+        "description": "Show login notifications checkbox text."
+    },
+    "optionsCheckboxAutoFillAndSend": {
+        "message": "HTTP Temel Kimlik Doğrulama iletişim kutularını otomatik olarak doldur ve gönder.",
+        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsRadioText": {
+        "message": "KeePassXC güncellemelerini kontrol et:",
+        "description": "Text above radio buttons in the settings page."
+    },
+    "optionsRadioThreeDays": {
+        "message": "her 3 günde",
+        "description": "Radio button text."
+    },
+    "optionsRadioWeek": {
+        "message": "her hafta",
+        "description": "Radio button text."
+    },
+    "optionsRadioMonth": {
+        "message": "her ay",
+        "description": "Radio button text."
+    },
+    "optionsRadioNever": {
+        "message": "asla",
+        "description": "Radio button text."
+    },
+    "optionsKeyboardShortcutsHeader": {
+        "message": "Klavye kısayolları",
+        "description": "Keyboard shortcut header text."
+    },
+    "optionsBlinkTimeHelpText": {
+        "message": "Yeni kimlik bilgileri tespit edildikten sonra simgenin yanıp sönmesi gereken azami süre (ms)",
+        "description": "Blink Time option help text."
+    },
+    "optionsRedirectOffsetHelpText": {
+        "message": "Yeni kimlik bilgileri tespit edildikten sonra simgenin yanıp sönmesi gereken asgari süre (ms)",
+        "description": "Redirect Offset option help text."
+    },
+    "optionsRedirectOffsetHelpTextSecond": {
+        "message": "-1 to only use blink time ignoring Maximum Redirects (old behavior)",
+        "description": "Redirect Offset option help text, second part."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "How many pages should the tab cycle through after the redirect offset before deactivating the icon",
+        "description": "Redirect Allowance option help text."
+    },
+    "optionsUsePasswordGeneratorHelpText": {
+        "message": "Yeni bir parola oluşturmak için parola alanlarına bir düğme ekler.",
+        "description": "Password Generator option help text."
+    },
+    "optionsUsePasswordGeneratorHelpTextSecond": {
+        "message": "Parolalar, parola oluşturma profilinizi kullanarak KeePassXC tarafından üretilir.",
+        "description": "Password Generator option help text, second part."
+    },
+    "optionsAutoRetrieveCredentialsHelpText": {
+        "message": "KeePassXC-Tarayıcı, bir sekme etkinleştirildiğinde hemen kimlik bilgilerini alır.",
+        "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutoFillSingleEntryHelpText": {
+        "message": "Yalnızca tek bir giriş alırsa KeePassXC-Tarayıcı'nın otomatik olarak kimlik bilgilerini doldurmasına izin ver.",
+        "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillSingleEntryWarning": {
+        "message": "Uyarı! Otomatik doldurmayı kullanmak güvenli değildir. Kullanım kendi sorumluluğunuzdadır.",
+        "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutocompleteUsernamesHelpText": {
+        "message": "Bir sayfadaki tüm kullanıcı adı alanları için mevcut bilgileri içeren bir açılır liste göster.",
+        "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowNotificationsHelpText": {
+        "message": "Hata bildirimlerini ve kullanıcı etkileşimi gerektiğinde göster.",
+        "description": "Show notifications option help text."
+    },
+    "optionsSaveDomainOnlyHelpText": {
+        "message": "Yeni kimlik bilgilerini kaydederken, tam URL yerine yalnızca etki alanını kaydet.",
+        "description": "Save domain only option help text."
+    },
+    "optionsAutoFillAndSendHelpText": {
+        "message": "Bir sayfa için kimlik bilgileri bulunursa ve giriş türü bir HTTP Temel Kimlik Doğrulama isteği ise, KeePassXC-Tarayıcı ilk verilen kimlik bilgileriyle giriş yapmaya çalışır.",
+        "description": "Auto-Fill And Send option help text."
+    },
+    "optionsAutoFillAndSendHelpTextSecond": {
+        "message": "Bir HTTP Temel Kimlik Doğrulama iletişim kutusu şöyle görünür:",
+        "description": "HTTP Basic Auth image help text."
+    },
+    "optionsVersionInfoText": {
+        "message": "KeePassXC-Tarayıcı, kimlik bilgilerini almak için KeePassXC'e ihtiyaç duyuyor.",
+        "description": "Settings page version info text."
+    },
+    "optionsVersionDownload": {
+        "message": "En son kararlı sürümü indirebilirsiniz $1",
+        "description": "Settings page download link."
+    },
+    "optionsVersionRunning": {
+        "message": "KeePassXC $1 sürümünü çalıştırıyorsunuz",
+        "description": "Settings page info text of user's KeePassXC version."
+    },
+    "optionsLatestVersion": {
+        "message": "KeePassXC'nin mevcut en son sürümü: $1",
+        "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsDefault": {
+        "message": "Öntanımlı: $1",
+        "description": "Default setting text."
+    },
+    "optionsInfinite": {
+        "message": "Infinite: $1",
+        "description": "Infinite setting text."
+    },
+    "optionsRecommended": {
+        "message": "Tavsiye edilen: $1",
+        "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "$1 kısayolu başarıyla değiştirildi.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "$1 kısayolu sıfırlandı.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "Hata: $1 için kısayol değişmedi!",
+        "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsConnectedDatabasesText": {
+        "message": "Aşağıdaki KeePassXC veritabanları KeePassXC-Tarayıcıya bağlanmıştır.",
+        "description": "Info text about connected databases."
+    },
+    "optionsConnectedDatabasesNotFound": {
+        "message": "Bağlı veritabanı bulunamadı.",
+        "description": "Shown in the connected databases table when there is no connected databases."
+    },
+    "optionsDatabasesRemoveIdentifier": {
+        "message": "Tanımlayıcı veritabanı listesinden kaldırılsın mı?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmFirst": {
+        "message": "Aşağıdaki tanımlayıcıyı gerçekten veritabanı listesinden çıkarmak istiyor musunuz?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmSecond": {
+        "message": "Veritabanınızı istediğiniz zaman yeniden bağlayabilirsiniz.",
+        "description": "Confirmation text when removing database from the list, second part."
+    },
+    "optionsDatabaseIdentifier": {
+        "message": "Tanıtıcı",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseKey": {
+        "message": "Anahtar",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseLastUsed": {
+        "message": "Son kullanılan",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseCreated": {
+        "message": "Oluşturulan",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseDelete": {
+        "message": "Sil",
+        "description": "Database list column title."
+    },
+    "optionsColumnPageURL": {
+        "message": "Sayfa URL'si",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnIgnore": {
+        "message": "Yoksay",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnUsernameOnly": {
+        "message": "Sadece kullanıcı adı Tespiti",
+        "description": "Site preferences list column title."
+    },
+    "optionsColumnDelete": {
+        "message": "Dil",
+        "description": "Site preferences list column title."
+    },
+    "optionsSelectionNothing": {
+        "message": "Tüm özellikleri etkinleştir",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionNormal": {
+        "message": "Yeni/değiştirilmiş kimlik bilgilerini devre dışı bırak",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionFull": {
+        "message": "Tüm özellikleri devre dışı bırak",
+        "description": "Site preferences option selection."
+    },
+    "optionsCustomFieldsNotFound": {
+        "message": "Kaydedilmiş özel giriş alanı bulunamadı.",
+        "description": "Shown when no saved custom credentials are saved."
+    },
+    "optionsCustomFieldsTableCaption": {
+        "message": "Kayıtlı özel giriş alanlarını aşağıdaki tabloyu kullanarak yönetebilirsiniz.",
+        "description": "Table caption of Custom login fields page."
+    },
+    "optionsCustomFieldsTabHelpTextFirst": {
+        "message": "KeePassXC-Tarayıcı yanlış giriş alanlarını tespit ederse, doğru alanları kendiniz belirleyebilirsiniz.",
+        "description": "Saved custom login fields info text, first part."
+    },
+    "optionsCustomFieldsTabHelpTextSecond": {
+        "message": "Sayfaya gidin ve KeePassXC-Tarayıcı simgesine tıkla, sonra seç",
+        "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsRemove": {
+        "message": "Kayıtlı özel giriş alanları kaldırılsın mı?",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmation": {
+        "message": "Sayfadaki kayıtlı özel giriş alanlarını gerçekten kaldırmak istiyor musunuz: $1",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmationHelpText": {
+        "message": "KeePassXC-Tarayıcı bu sayfayı bir sonraki ziyaretinizde giriş alanlarını otomatik olarak algılar.",
+        "description": "Part of confirmation text when removing saved custom login fields."
+    },
+    "optionsSitePreferencesNotFound": {
+        "message": "Yok sayılan site bulunamadı.",
+        "description": "Shown when no ignored sites are saved."
+    },
+    "optionsSitePreferencesRemove": {
+        "message": "Site kaldırılsın mı?",
+        "description": "Confirmation text when removing ignored sites from the list."
+    },
+    "optionsSitePreferencesTabHelpTextFirst": {
+        "message": "Bu sayfadaki siteler, kendisiyle ilişkilendirilen özel işleme yöntemlerine sahiptir.",
+        "description": "Site preferences info text, first part."
+    },
+    "optionsSitePreferencesTabHelpTextSecond": {
+        "message": "Belirli bir sitedeki yeni / değiştirilmiş kimlik bilgilerini yok saymak için aşağıya ekleyin veya yanıp sönen KeePassXC-Tarayıcı simgesini tıkla ve seç",
+        "description": "Site preferences info text, second part."
+    },
+    "optionsSitePreferencesTabHelpTextThird": {
+        "message": "Bir site tamamen yok sayılırsa <em>(Tüm özellikleri devre dışı bırak seçiliyse)</em> eklenti bu siteyi ziyaret ederken hiçbir şey yapmaz.",
+        "description": "Site preferences info text, third part."
+    },
+    "optionsSitePreferencesTabHelpTextFourth": {
+        "message": "Sadece kullanıcı adı tespiti, KeePassXC-Tarayıcı, kullanıcı adı ve parola için ayrı sayfalara sahip web sitelerinde oturum açma detaylarını doldurmasına izin verir.",
+        "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesManualAddText": {
+        "message": "URL'yi elle ekle",
+        "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesConfirmation": {
+        "message": "Belirtilen siteyi listeden gerçekten kaldırmak istiyor musunuz: $1",
+        "description": "Confirmation text when removing site from site preferences."
+    },
+    "optionsSitePreferencesConfirmationHelpText": {
+        "message": "KeePassXC-Tarayıcı bu site için tüm özellikleri sağlayacak ve sadece kullanıcı adı tespitini kaldıracak.",
+        "description": "Part of confirmation text when removing site preferences."
+    },
+    "optionsSitePreferencesTableCaption": {
+        "message": "Kayıtlı site tercihlerini aşağıdaki tabloyu kullanarak yönetebilirsiniz.",
+        "description": "Table caption of Site Preferences page."
+    },
+    "optionsSitePreferencesSelect": {
+        "message": "Sayfanın eklenti özelliklerini yok sayma seçeneği.",
+        "description": "Title text of select element in Site Preferences."
+    },
+    "optionsAboutChrome": {
+        "message": "Chrome Web Mağazası'nda KeePassXC-Tarayıcı'yı ziyaret edin.",
+        "description": "About page link to Chrome Web Store."
+    },
+    "optionsAboutMozilla": {
+        "message": "Mozilla Eklentileri dizininde KeePassXC-Tarayıcı'yı ziyaret edin.",
+        "description": "About page link to AMO."
+    },
+    "optionsAboutGitHub": {
+        "message": "GitHub'da KeePassXC-Tarayıcı'yı ziyaret edin.",
+        "description": "About page link to GitHub."
+    },
+    "optionsAboutExtensionVersion": {
+        "message": "KeePassXC-Tarayıcı Sürümü: $1",
+        "description": "About page text of extension version."
+    },
+    "optionsAboutKeePassXCVersion": {
+        "message": "KeePassXC Sürümü: $1",
+        "description": "About page text of KeePassXC version."
+    },
+    "optionsAboutContributors": {
+        "message": "Katkıda bulunanlar",
+        "description": "About page text of contributors."
+    },
+    "optionsAboutLicenses": {
+        "message": "Lisanslar",
+        "description": "About page text of licenses."
+    },
+    "optionsAboutReportBugs": {
+        "message": "Hataları raporla",
+        "description": "About page text of reporting bugs."
+    },
+    "optionsAboutCreateNewIssue": {
+        "message": "GitHub'da yeni konu oluştur",
+        "description": "Link text for creating a new issue."
+    },
+    "optionsAboutDebugInfo": {
+        "message": "Aşağıdaki hata ayıklama bilgisi kullanılabilir",
+        "description": "Debug info text."
+    },
+    "optionsErrorInvalidValue": {
+        "message": "Geçersiz değer. Lütfen girişi kontrol edin.",
+        "description": "Error shown when input field has an incorrect value."
+    },
+    "optionsErrorInvalidURL": {
+        "message": "Geçersiz URL. Lütfen girişi kontrol edin.",
+        "description": "Error shown when input field has an incorrect URL."
+    },
+    "optionsErrorValueExists": {
+        "message": "Değer listede zaten var.",
+        "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "openNewTab": {
+        "message": "Yeni bir sekme açar",
+        "description": "Title attribute text."
+    },
+    "httpAuthDialog": {
+        "message": "HTTP Temel Kimlik Doğrulama iletişim kutusu",
+        "description": "Options page HTTP Basic Auth dialog text"
+    }
+}

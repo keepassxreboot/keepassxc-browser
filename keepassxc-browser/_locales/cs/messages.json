@@ -1,0 +1,850 @@
+{
+    "extensionDescription": {
+        "message": "Napojení KeePassXC na moderní webové prohlížeče",
+        "description": "Name of the extension."
+    },
+    "contextMenuFillUsernameAndPassword": {
+        "message": "Vyplnit uživatelské jméno a heslo",
+        "description": "Context menu item for filling both username and password."
+    },
+    "contextMenuFillPassword": {
+        "message": "Vyplnit pouze heslo",
+        "description": "Context menu item for filling password."
+    },
+    "contextMenuFillTOTP": {
+        "message": "Vyplnit TOTP heslo",
+        "description": "Context menu item for filling Time-based One Time Password."
+    },
+    "contextMenuShowPasswordGeneratorIcons": {
+        "message": "Zobrazovat ikony pro vytváření hesla",
+        "description": "Show password generator icon on every password input field."
+    },
+    "contextMenuSaveCredentials": {
+        "message": "Uložit přihlašovací údaje",
+        "description": "Save credentials using the extension popup icon."
+    },
+    "contextMenuShowPasswordGenerator": {
+        "message": "Show password generator",
+        "description": "Show password generator text."
+    },
+    "rememberCredentialsPopup": {
+        "message": "Přihlašovací údaje vytvoříte nebo upravíte kliknutím na ikonu rozšíření.",
+        "description": "Notification text when saving credentials from the context menu."
+    },
+    "multipleCredentialsDetected": {
+        "message": "Zjištěno HTTP ověření s vícero přihlašovacími údaji. Klikněte na ikonu rozšíření a zvolte to správné.",
+        "description": "Notification when HTTP Authentication has multiple credentials detected."
+    },
+    "errorMessageUnknown": {
+        "message": "Neznámá chyba.",
+        "description": "Unknown error."
+    },
+    "errorMessageDatabaseNotOpened": {
+        "message": "Databáze není otevřená.",
+        "description": "Database not opened."
+    },
+    "errorMessageDatabaseHash": {
+        "message": "Neobdržen otisk databáze.",
+        "description": "Database hash not received."
+    },
+    "errorMessageClientPublicKey": {
+        "message": "Nebyla obdržena veřejná část klíče klienta.",
+        "description": "Client public key not received."
+    },
+    "errorMessageDecrypt": {
+        "message": "Zprávu se nedaří rozšifrovat.",
+        "description": "Cannot decrypt message."
+    },
+    "errorMessageTimeout": {
+        "message": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings.",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
+    },
+    "errorMessageCanceled": {
+        "message": "Akce zrušena nebo odepřena.",
+        "description": "Action canceled or denied."
+    },
+    "errorMessageEncrypt": {
+        "message": "Message encryption failed. Is KeePassXC running?",
+        "description": "Message encryption failed. Is KeePassXC running?"
+    },
+    "errorMessageAssociate": {
+        "message": "Přiřazení KeePassXC se nezdařilo, zkuste to znovu.",
+        "description": "KeePassXC association failed, try again."
+    },
+    "errorMessageKeyExchange": {
+        "message": "Výměna klíče se nezdařila.",
+        "description": "Key exchange was not successful."
+    },
+    "errorMessageEncryptionKey": {
+        "message": "Šifrovací klíč není rozpoznán.",
+        "description": "Encryption key is not recognized."
+    },
+    "errorMessageSavedDatabases": {
+        "message": "Nenalezeny žádné uložené databáze.",
+        "description": "No saved databases found."
+    },
+    "errorMessageIncorrectAction": {
+        "message": "Nesprávná akce.",
+        "description": "Incorrect action."
+    },
+    "errorMessageEmptyMessage": {
+        "message": "Obdržena prázdná zpráva.",
+        "description": "Empty message received."
+    },
+    "errorMessageNoURL": {
+        "message": "Nebyla zadána URL adresa.",
+        "description": "No URL provided."
+    },
+    "errorMessageNoLogins": {
+        "message": "Nenalezena žádná uživatelská jména.",
+        "description": "No logins found."
+    },
+    "passwordGeneratorIcon": {
+        "message": "Password generator icon",
+        "description": "Alt attribute text of the password generator icon."
+    },
+    "passwordGeneratorPlaceholder": {
+        "message": "Vytvořené heslo",
+        "description": "Input field placeholder for generated password."
+    },
+    "passwordGeneratorLabel": {
+        "message": "Vyplnit také následující kolonku hesla",
+        "description": "Checkbox text below the password generator input field."
+    },
+    "passwordGeneratorBits": {
+        "message": "??? bitů",
+        "description": "Bits of the generated password."
+    },
+    "passwordGeneratorTitle": {
+        "message": "Vytváření hesel",
+        "description": "Password generator dialog title."
+    },
+    "passwordGeneratorGenerate": {
+        "message": "Vytvořit",
+        "description": "Generate button text in password generator."
+    },
+    "passwordGeneratorCopy": {
+        "message": "Zkopírovat",
+        "description": "Copy button text in password generator."
+    },
+    "passwordGeneratorFillAndCopy": {
+        "message": "Vyplnit a zkopírovat",
+        "description": "Fill and copy button text in password generator."
+    },
+    "passwordGeneratorErrorTooLong": {
+        "message": "Chyba:\nVytvořené heslo je delší než délka, která je možná!\nBylo zkráceno, aby se vešlo.\n\nZapamatujte se nové heslo!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorGenerateText": {
+        "message": "Vytvořit heslo",
+        "description": "Password icon title text."
+    },
+    "passwordGeneratorError": {
+        "message": "Nedaří se obdržet vytvořené heslo. <br />Je KeePassXC spuštěné?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "defineDismiss": {
+        "message": "Zahodit",
+        "description": "Dismiss button text when choosing custom login fields."
+    },
+    "defineSkip": {
+        "message": "Přeskočit",
+        "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "Show more",
+        "description": "More button text when choosing custom login fields."
+    },
+    "defineAgain": {
+        "message": "Znovu",
+        "description": "Again button text when choosing custom login fields."
+    },
+    "defineConfirm": {
+        "message": "Potvrdit",
+        "description": "Confirm button text when choosing custom login fields."
+    },
+    "defineAlreadySelected": {
+        "message": "Přihlašovací kolonky na této stránce už byly vybrány a budou přepsány.",
+        "description": "A text shown when custom credentials fields are already set for the page."
+    },
+    "defineDiscard": {
+        "message": "Zahodit výběr",
+        "description": "Discard selection button text when choosing custom login fields."
+    },
+    "defineStringField": {
+        "message": "Číslo kolonky řetězce",
+        "description": "Text for string field."
+    },
+    "defineChooseUsername": {
+        "message": "1. Zvolte kolonku pro uživatelské jméno",
+        "description": "Choosing a username field text when choosing custom login fields."
+    },
+    "defineChoosePassword": {
+        "message": "2. Zvolte kolonku pro heslo",
+        "description": "Choosing a password field text when choosing custom login fields."
+    },
+    "defineConfirmSelection": {
+        "message": "3. Potvrďte výběr",
+        "description": "Confirm a selection text when choosing custom login fields."
+    },
+    "defineHelpText": {
+        "message": "Potvrďte svůj výběr nebo zvolte více kolonek jako <em>Kolonky řetězců</em>.",
+        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+    },
+    "defineKeyboardText": {
+        "message": "You can also use the numbers to choose the input fields from keyboard.",
+        "description": "Help text when choosing custom login fields."
+    },
+    "username": {
+        "message": "Uživatelské jméno",
+        "description": "General text for username."
+    },
+    "password": {
+        "message": "Heslo",
+        "description": "General text for password."
+    },
+    "credentialsNoUsername": {
+        "message": "- žádné uživatelské jméno -",
+        "description": "Shown when no username is set in the credentials."
+    },
+    "credentialsNoLoginsFound": {
+        "message": "Chyba:\nNenalezena žádná uživatelská jména.",
+        "description": "Shown when no credentials are found for the current page."
+    },
+    "credentialsMultipleFound": {
+        "message": "Chyba:\nV KeePassXC nalezeno více než jedno uživateské jméno!\nKliknutím na ikonu KeePassXC-Browser zobrazíte další možnosti.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsNoUsernameFound": {
+        "message": "Chyba:\nPro dané uživatelské jméno nebyly nalezeny žádné přihlašovací údaje.",
+        "description": "Alert message when no credentials are found for the given username."
+    },
+    "fieldsFill": {
+        "message": "Chyba:\nNedaří se nalézt kolonky k vyplnění.",
+        "description": "Alert message when no fields are found to fill in."
+    },
+    "fieldsNoPasswordField": {
+        "message": "Chyba:\nNedaří se nalézt kolonku pro heslo.",
+        "description": "Message shown when no password fields are found."
+    },
+    "rememberNothingChanged": {
+        "message": "Chyba:\nNedaří se zjistit změněné přihlašovací údaje.",
+        "description": "Message shown when trying to save credentials that haven't changed."
+    },
+    "popupTitle": {
+        "message": "KeePassXC – vyskakovací okno",
+        "description": "Popup window title."
+    },
+    "popupSettingsText": {
+        "message": "Nastavení",
+        "description": "Popup Settings button text."
+    },
+    "popupChooseCredentialsText": {
+        "message": "Zvolte uživatelsky určené přihlašovací kolonky pro tuto stránku",
+        "description": "Popup credential choosing button text."
+    },
+    "popupConnectButton": {
+        "message": "Připojit",
+        "description": "Popup Connect button text."
+    },
+    "popupReconnectButton": {
+        "message": "Připojit znovu",
+        "description": "Popup Reconnect button text."
+    },
+    "popupRedetectButton": {
+        "message": "Znovu zjistit přihlašovací kolonky",
+        "description": "Popup Redetect login fields button text."
+    },
+    "popupReloadButton": {
+        "message": "Načíst znovu",
+        "description": "Popup Reload button text."
+    },
+    "popupReopenButton": {
+        "message": "Znovu otevřít databázi",
+        "description": "Popup reopen database button text."
+    },
+    "popupErrorEncountered": {
+        "message": "KeePassXC-Browser se setkalo s chybou:",
+        "description": "A text shown above error message in the popup."
+    },
+    "popupUpdateAvailable": {
+        "message": "Používáte starou verzi KeePassXC.",
+        "description": "Popup warning message about old version of KeePassXC."
+    },
+    "popupDownloadNewVersion": {
+        "message": "Stáhněte si nejnovější verzi z keepassxc.org",
+        "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupCheckingStatus": {
+        "message": "Zjišťování stavu…",
+        "description": "Checking status message in popup."
+    },
+    "popupNotConfigured": {
+        "message": "KeePassXC-Browser nebyl nastaven.\nKlikněte na připojit a spárujte s KeePassXC.",
+        "description": "A popup message shown when the extension has not been connected to KeePassXC."
+    },
+    "popupNeedReconfigure": {
+        "message": "KeePassXC-Browser byl odpojen od KeePassXC.",
+        "description": "A popup message shown when the extension has been disconnected from KeePassXC."
+    },
+    "popupNeedReconfigureMessage": {
+        "message": "Kliknutím na tlačítko připojit znovu navážete nové připojení.",
+        "description": "A popup message shown when reconnect is needed."
+    },
+    "popupConfiguredNotAssociated": {
+        "message": "KeePassXC-Browser ještě nebyl připojen ke KeePassXC, ale byl nastaven s použitím identifikátoru: $1",
+        "description": "A popup message shown when KeePassXC is not connected but configured."
+    },
+    "popupConfiguredAndAssociated": {
+        "message": "KeePassXC-Browser je připojený ke KeePassXC a byl nastaven s použitím následujícího identifikátoru: $1",
+        "description": "A popuo message when a connection to KeePassXC is succesful."
+    },
+    "popupRememberInfoText": {
+        "message": "Uživatelské jméno nebo heslo se změnilo! Uložit?",
+        "description": "Popup message when username or password has changed."
+    },
+    "popupRememberSaving": {
+        "message": "Přihlašovací údaje budou uloženy v připojené databázi pod identifikátorem $1",
+        "description": "A popup message when saving or updating credentials."
+    },
+    "popupRememberNewUsername": {
+        "message": "Následující uživatelské jméno v tuto chvíli není uloženo: $1",
+        "description": "A popup message shown when a new username is detected when saving credentials."
+    },
+    "popupRememberUsernameExists": {
+        "message": "Přihlašovací údaje s použitým uživatelským jménem jsou vyznačeny tučně: $1",
+        "description": "A popup message shown when a existing username is detected when saving credentials."
+    },
+    "popupRememberChooseCredentials": {
+        "message": "Vyberte přihlašovací údaje, které chcete aktualizovat.",
+        "description": "A popup message shown choosing what credentials user wants to update."
+    },
+    "popupRememberChooseGroup": {
+        "message": "Please choose the group you want to add the new credentials.",
+        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    },
+    "popupRememberErrorDefaultGroupNotFound": {
+        "message": "Error: Specified default group not found. Creating all necessary groups.",
+        "description": "Error message shown when default group set cannot be found."
+    },
+    "popupRememberErrorCreatingNewGroup": {
+        "message": "New group(s) cannot be created.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "popupRememberErrorPasswordNotChanged": {
+        "message": "Error: Credentials not updated. The password has not been changed.",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "popupRememberErrorCannotSaveCredentials": {
+        "message": "Error: Credentials cannot be saved or updated.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "popupLoginText": {
+        "message": "Vyberte uživatelské jméno které chcete vyplnit do stránky.",
+        "description": "A popup message shown when one or multiple credentials are present."
+    },
+    "popupFilterText": {
+        "message": "Filtrovat:",
+        "description": "Text for login credentials quick filter."
+    },
+    "popupAuthText": {
+        "message": "Vyberte uživatelské jméno, kterým se chcete přihlásit.",
+        "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
+    },
+    "popupMultiplePasswordFields": {
+        "message": "Na této stránce byla nalezena více než jedna kolonka pro heslo. Klikněte do jedné z těchto kolonek pravým tlačítkem a zvolte jedno z:",
+        "description": "A popup message shown when web page has multiple password fields."
+    },
+    "popupURL": {
+        "message": "URL adrea:",
+        "description": "URL. Might not need any translation."
+    },
+    "popupUsername": {
+        "message": "Uživatelské jméno:",
+        "description": "A username field name shown on credential update."
+    },
+    "popupButtonNew": {
+        "message": "Nové",
+        "description": "New button text in popup when updating credentials."
+    },
+    "popupButtonUpdate": {
+        "message": "Aktualizovat",
+        "description": "Update button text in popup when updating credentials."
+    },
+    "popupButtonDismiss": {
+        "message": "Zahodit",
+        "description": "Dismiss button text in popup when updating credentials."
+    },
+    "popupButtonIgnore": {
+        "message": "Na této stránce se už nikdy neptat",
+        "description": "Ignore button text in popup or in notification when updating credentials."
+    },
+    "popupButtonClose": {
+        "message": "Zavřít",
+        "description": "Close button text in popup or in notification."
+    },
+    "popupButtonDismissHttpAuth": {
+        "message": "Zahodit a zobrazit výchozí dialog ověřování",
+        "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsTitle": {
+        "message": "Nastavení | KeePassXC-Browser",
+        "description": "Options page title."
+    },
+    "optionsGeneralSettingsTab": {
+        "message": "Obecná nastavení",
+        "description": "General Settings tab text."
+    },
+    "optionsConnectedDatabasesTab": {
+        "message": "Připojené databáze",
+        "description": "Connected Databases tab text."
+    },
+    "optionsCustomFieldsTab": {
+        "message": "Uživatelsky určené přihlašovací kolonky",
+        "description": "Saved custom login fields tab text."
+    },
+    "optionsSitePreferencesTab": {
+        "message": "Předvolby pro stránky",
+        "description": "Site preferences fields tab text."
+    },
+    "optionsAboutTab": {
+        "message": "O aplikaci",
+        "description": "About tab text."
+    },
+    "optionsMenuGeneral": {
+        "message": "Obecné",
+        "description": "General settings page header."
+    },
+    "optionsMenuConnectedDatabases": {
+        "message": "Připojené databáze",
+        "description": "Connected Databases page header."
+    },
+    "optionsMenuCustomFields": {
+        "message": "Uživatelsky určené přihlašovací kolonky",
+        "description": "Custom login fields page header."
+    },
+    "optionsMenuSitePreferences": {
+        "message": "Předvolby pro stránky",
+        "description": "Site preferences page header."
+    },
+    "optionsMenuAbout": {
+        "message": "O aplikaci",
+        "description": "About page header."
+    },
+    "optionsConfigureShortcuts": {
+        "message": "Nastavit klávesové zkratky",
+        "description": "Keyboard shortcut button and title text."
+    },
+    "optionsButtonSave": {
+        "message": "Uložit",
+        "description": "Save button text."
+    },
+    "optionsButtonConnect": {
+        "message": "Připojit",
+        "description": "Connect button text."
+    },
+    "optionsButtonRemove": {
+        "message": "Odebrat",
+        "description": "Remove button text."
+    },
+    "optionsButtonAdd": {
+        "message": "Přidat",
+        "description": "Add button text."
+    },
+    "optionsButtonUpdate": {
+        "message": "Zjistit případné aktualizace",
+        "description": "Check for updates button text."
+    },
+    "optionsButtonRemoveNow": {
+        "message": "Ano, odebrat",
+        "description": "Confirm button text when removing database key or custom login fields."
+    },
+    "optionsButtonCancel": {
+        "message": "Storno",
+        "description": "Cancel button text when removing database key or custom login fields."
+    },
+     "optionsButtonReset": {
+        "message": "Vrátit na výchozí",
+        "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsLabelBlinkTime": {
+        "message": "Doba blikání:",
+        "description": "Blink Time option text."
+    },
+    "optionsLabelRedirectOffset": {
+        "message": "Posun přesměrování:",
+        "description": "Redirect Offset option text."
+    },
+    "optionsLabelRedirectAllowance": {
+        "message": "Nejvíce umožněno (počet) přesměrování:",
+        "description": "RMaximum (Number of) Redirects options text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "Default group for saving new passwords:",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "Separate the group with slashes, for example: Group/ChildGroup.",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "Always ask where to save new credentials",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "When enabled, the popup shows a group listing.",
+        "description": "Default checkbox explanation help text."
+    },
+    "optionsCheckboxUsePasswordGenerator": {
+        "message": "Zapnout vytváření hesel.",
+        "description": "Activate password generator checkbox text."
+    },
+    "optionsCheckboxAutoRetrieveCredentials": {
+        "message": "Získávat přihlašovací údaje automaticky.",
+        "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutoFillSingleEntry": {
+        "message": "Položky s jediným přihlašovacím údajem vyplňovat automaticky.",
+        "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoCompleteUsernames": {
+        "message": "Zapnout automatické dokončování v kolonkách pro uživatelské jméno.",
+        "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowNotifications": {
+        "message": "Zobrazit oznámení.",
+        "description": "Show notifications checkbox text."
+    },
+    "optionsSaveDomainOnly": {
+        "message": "Uložit pouze doménu.",
+        "description": "Save domain only checkbox text."
+    },
+    "optionsCheckboxShowLoginNotifications": {
+        "message": "Zobrazit oznámení pokud mohou být do databáze uložené nové přihlašovací údaje.",
+        "description": "Show login notifications checkbox text."
+    },
+    "optionsCheckboxAutoFillAndSend": {
+        "message": "Automaticky vyplňovat HTTP Basic Auth dialogy a odesílat je.",
+        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsRadioText": {
+        "message": "Zjišťovat případné aktualizace KeePassXC:",
+        "description": "Text above radio buttons in the settings page."
+    },
+    "optionsRadioThreeDays": {
+        "message": "každé 3 dny",
+        "description": "Radio button text."
+    },
+    "optionsRadioWeek": {
+        "message": "každý týden",
+        "description": "Radio button text."
+    },
+    "optionsRadioMonth": {
+        "message": "každý měsíc",
+        "description": "Radio button text."
+    },
+    "optionsRadioNever": {
+        "message": "nikdy",
+        "description": "Radio button text."
+    },
+    "optionsKeyboardShortcutsHeader": {
+        "message": "Klávesové zkratky",
+        "description": "Keyboard shortcut header text."
+    },
+    "optionsBlinkTimeHelpText": {
+        "message": "Jak nejdéle (ms) má ikona blikat po zjištění nových přihlašovacích údajů",
+        "description": "Blink Time option help text."
+    },
+    "optionsRedirectOffsetHelpText": {
+        "message": "Nejkratší doba (ms) po kterou má ikona blikat před deaktivací z důvodu přesměrování stránky.",
+        "description": "Redirect Offset option help text."
+    },
+    "optionsRedirectOffsetHelpTextSecond": {
+        "message": "-1 pro použití pouze doby blikání a ignorování Přesměrování nejvýše (původní chování)",
+        "description": "Redirect Offset option help text, second part."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "Kolik stránek by měl panel cyklovat po posunu přesměrování před vypnutím ikony",
+        "description": "Redirect Allowance option help text."
+    },
+    "optionsUsePasswordGeneratorHelpText": {
+        "message": "Přidá do kolonky hesla tlačítko pro vytvoření nového hesla.",
+        "description": "Password Generator option help text."
+    },
+    "optionsUsePasswordGeneratorHelpTextSecond": {
+        "message": "Hesla jsou vytvářena KeePassXC s použitím vašeho profilu vytváření hesel.",
+        "description": "Password Generator option help text, second part."
+    },
+    "optionsAutoRetrieveCredentialsHelpText": {
+        "message": "Při aktivaci panelu KeePassXC-Browser obdrží přihlašovací údaje bezprostředně.",
+        "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutoFillSingleEntryHelpText": {
+        "message": "Pokud obdrží pouze jedinou položku, nechat KeePassXC-Browser automaticky vyplnit přihlašovací údaje.",
+        "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillSingleEntryWarning": {
+        "message": "Varování! Použití automatického vyplnění není bezpečné. Použijte pouze na vlastní nebezpečí.",
+        "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutocompleteUsernamesHelpText": {
+        "message": "Zobrazit rozbalovací seznam obsahující přihlašovací údaje, které jsou k dispozici, ve všech kolonkách pro uživatelské jméno, která se na stránce nacházejí.",
+        "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowNotificationsHelpText": {
+        "message": "Zobrazovat oznámení chyb a když je třeba interakce s uživatelem.",
+        "description": "Show notifications option help text."
+    },
+    "optionsSaveDomainOnlyHelpText": {
+        "message": "Při ukládání nových přihlašovacích údajů, uložit pouze doménu namísto úplné URL adresy.",
+        "description": "Save domain only option help text."
+    },
+    "optionsAutoFillAndSendHelpText": {
+        "message": "Pokud jsou nalezeny přihlašovací údaje pro stránku a typ přihlášení je HTTP Basic Auth, KeePassXC-Browser se pokusí přihlásit pomocí prvního ze zadaných přihlašovacích údajů.",
+        "description": "Auto-Fill And Send option help text."
+    },
+    "optionsAutoFillAndSendHelpTextSecond": {
+        "message": "Dialog HTTP Basic Auth vypadá takto:",
+        "description": "HTTP Basic Auth image help text."
+    },
+    "optionsVersionInfoText": {
+        "message": "Pro získávání přihlašovacích údajů KeePassXC-Browser potřebuje KeePassXC.",
+        "description": "Settings page version info text."
+    },
+    "optionsVersionDownload": {
+        "message": "Nejnovější hotovou verzi si můžete stáhnout z $1",
+        "description": "Settings page download link."
+    },
+    "optionsVersionRunning": {
+        "message": "Provozujete KeePassXC verze: $1",
+        "description": "Settings page info text of user's KeePassXC version."
+    },
+    "optionsLatestVersion": {
+        "message": "Nejnovější dostupná verze KeePassXC: $1",
+        "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsDefault": {
+        "message": "Výchozí: $1",
+        "description": "Default setting text."
+    },
+    "optionsInfinite": {
+        "message": "Nekonečné: $1",
+        "description": "Infinite setting text."
+    },
+    "optionsRecommended": {
+        "message": "Doporučeno: $1",
+        "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "Klávesová zkratka $1 byla úspěšně změněna.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "Klávesová zkratka pro $1 byla resetována.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "Chyba: Klávesová zkratka pro $1 nebyla změněna!",
+        "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsConnectedDatabasesText": {
+        "message": "Ke KeePassXC-Browser jsou připojeny následující KeePassXC databáze.",
+        "description": "Info text about connected databases."
+    },
+    "optionsConnectedDatabasesNotFound": {
+        "message": "Nebyly nalezeny žádné připojené databáze.",
+        "description": "Shown in the connected databases table when there is no connected databases."
+    },
+    "optionsDatabasesRemoveIdentifier": {
+        "message": "Odebrat identifikátor ze seznamu databází?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmFirst": {
+        "message": "Opravdu chcete následující identifikátor odebrat ze seznamu databází?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmSecond": {
+        "message": "Databázi je možné kdykoli znovu připojit.",
+        "description": "Confirmation text when removing database from the list, second part."
+    },
+    "optionsDatabaseIdentifier": {
+        "message": "Identifikátor",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseKey": {
+        "message": "Klíč",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseLastUsed": {
+        "message": "Naposledy použito",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseCreated": {
+        "message": "Vytvořeno",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseDelete": {
+        "message": "Smazat",
+        "description": "Database list column title."
+    },
+    "optionsColumnPageURL": {
+        "message": "URL adresa stránky",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnIgnore": {
+        "message": "Ignorovat",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnUsernameOnly": {
+        "message": "Zjišťování pouze uživatelského jména",
+        "description": "Site preferences list column title."
+    },
+    "optionsColumnDelete": {
+        "message": "Smazat",
+        "description": "Site preferences list column title."
+    },
+    "optionsSelectionNothing": {
+        "message": "Zapnout všechny funkce",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionNormal": {
+        "message": "Vypnout nové/upravené přihlašovací údaje",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionFull": {
+        "message": "Vypnout všechny funkce",
+        "description": "Site preferences option selection."
+    },
+    "optionsCustomFieldsNotFound": {
+        "message": "Nebyly nalezeny žádné uživatelsky určené kolonky přihlášení.",
+        "description": "Shown when no saved custom credentials are saved."
+    },
+    "optionsCustomFieldsTableCaption": {
+        "message": "You can manage saved custom login fields using the table below.",
+        "description": "Table caption of Custom login fields page."
+    },
+    "optionsCustomFieldsTabHelpTextFirst": {
+        "message": "Pokud KeePassXC-Browser zjistí chybné přihlašovací kolonky, můžete ty správné určit sami.",
+        "description": "Saved custom login fields info text, first part."
+    },
+    "optionsCustomFieldsTabHelpTextSecond": {
+        "message": "Přejděte na stránku a klikněte na ikonu KeePassXC-Browser, pak vyberte",
+        "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsRemove": {
+        "message": "Odebrat uložené uživatelsky určené přihlašovací kolonky?",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmation": {
+        "message": "Opravdu chcete odebrat uloženou uživatelsky určenou přihlašovací kolonku na stránce: $1",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmationHelpText": {
+        "message": "Až tuto stránku navštívíte příště, KeePassXC-Browser automaticky zjistí přihlašovací kolonky.",
+        "description": "Part of confirmation text when removing saved custom login fields."
+    },
+    "optionsSitePreferencesNotFound": {
+        "message": "Nenalezeny žádné ignorované stránky.",
+        "description": "Shown when no ignored sites are saved."
+    },
+    "optionsSitePreferencesRemove": {
+        "message": "Odebrat stránky?",
+        "description": "Confirmation text when removing ignored sites from the list."
+    },
+    "optionsSitePreferencesTabHelpTextFirst": {
+        "message": "Stránky na této stránce mají přiřazenou speciální obslužnou metodu.",
+        "description": "Site preferences info text, first part."
+    },
+    "optionsSitePreferencesTabHelpTextSecond": {
+        "message": "Pro ignorování nových/upravených přihlašovacích údajů na konkrétních stránkách, přidejte je níže nebo klikněte na blikající ikonu KeePassXC-Browser a vyberte",
+        "description": "Site preferences info text, second part."
+    },
+    "optionsSitePreferencesTabHelpTextThird": {
+        "message": "Pokud jsou stránky zcela ingorovány (Je vybráno <em>Vypnout všechny funkce</em>), pak zásuvný modul při navštívení takových stránek nebude dělat vůbec nic.",
+        "description": "Site preferences info text, third part."
+    },
+    "optionsSitePreferencesTabHelpTextFourth": {
+        "message": "Zjišťování pouze uživatelského jména umožňuje KeePassXC-Browser vyplnit podrobnosti přihlášení na webech, které mají oddělené stránky pro uživatelské jméno a heslo.",
+        "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesManualAddText": {
+        "message": "Add URL manually",
+        "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesConfirmation": {
+        "message": "Opravdu chcete dané stránky odebrat ze seznamu: $1",
+        "description": "Confirmation text when removing site from site preferences."
+    },
+    "optionsSitePreferencesConfirmationHelpText": {
+        "message": "KeePassXC-Browser zapne pro tyto stránky všechny funkce a odebere zjišťování pouze uživatelského jména.",
+        "description": "Part of confirmation text when removing site preferences."
+    },
+    "optionsSitePreferencesTableCaption": {
+        "message": "You can manage saved site preferences using the table below.",
+        "description": "Table caption of Site Preferences page."
+    },
+    "optionsSitePreferencesSelect": {
+        "message": "Option to ignore extension features for the page.",
+        "description": "Title text of select element in Site Preferences."
+    },
+    "optionsAboutChrome": {
+        "message": "Navštívit KeePassXC-Browser v katalogu doplňků pro prohlížeč Chrome.",
+        "description": "About page link to Chrome Web Store."
+    },
+    "optionsAboutMozilla": {
+        "message": "Navštívit KeePassXC-Browser v katalogu doplňků pro prohlížeč Mozilla.",
+        "description": "About page link to AMO."
+    },
+    "optionsAboutGitHub": {
+        "message": "Navštívit KeePassXC-Browser na portálu GitHub.",
+        "description": "About page link to GitHub."
+    },
+    "optionsAboutExtensionVersion": {
+        "message": "Verze KeePassXC-Browser: $1",
+        "description": "About page text of extension version."
+    },
+    "optionsAboutKeePassXCVersion": {
+        "message": "Verze KeePassXC: $1",
+        "description": "About page text of KeePassXC version."
+    },
+    "optionsAboutContributors": {
+        "message": "Contributors",
+        "description": "About page text of contributors."
+    },
+    "optionsAboutLicenses": {
+        "message": "Licenses",
+        "description": "About page text of licenses."
+    },
+    "optionsAboutReportBugs": {
+        "message": "Report bugs",
+        "description": "About page text of reporting bugs."
+    },
+    "optionsAboutCreateNewIssue": {
+        "message": "Create new issue on GitHub",
+        "description": "Link text for creating a new issue."
+    },
+    "optionsAboutDebugInfo": {
+        "message": "The following debug info can be used",
+        "description": "Debug info text."
+    },
+    "optionsErrorInvalidValue": {
+        "message": "Invalid value. Please check the input.",
+        "description": "Error shown when input field has an incorrect value."
+    },
+    "optionsErrorInvalidURL": {
+        "message": "Invalid URL. Please check the input.",
+        "description": "Error shown when input field has an incorrect URL."
+    },
+    "optionsErrorValueExists": {
+        "message": "The value already exists in the list.",
+        "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "openNewTab": {
+        "message": "Opens a new tab",
+        "description": "Title attribute text."
+    },
+    "httpAuthDialog": {
+        "message": "HTTP Basic Authentication dialog",
+        "description": "Options page HTTP Basic Auth dialog text"
+    }
+}
