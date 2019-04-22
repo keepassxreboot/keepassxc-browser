@@ -392,7 +392,7 @@ window.addEventListener('scroll', function(e) {
 });
 
 // Closes the dialog when clicked outside of it)
-document.onclick = function(e) {
+document.addEventListener('click', function(e) {
     if (kpxcPassword.dialog && kpxcPassword.dialog.style.display === 'block') {
         const dialogEndX = kpxcPassword.dialog.offsetLeft + kpxcPassword.dialog.offsetWidth;
         const dialogEndY = kpxcPassword.dialog.offsetTop + kpxcPassword.dialog.offsetHeight;
@@ -403,4 +403,4 @@ document.onclick = function(e) {
             kpxcPassword.openDialog();
         }
     }
-};
+});
