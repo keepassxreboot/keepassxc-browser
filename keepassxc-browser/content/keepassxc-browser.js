@@ -942,9 +942,6 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
             action: 'popup_login',
             args: [ [ kpxc.credentials[0].login + ' (' + kpxc.credentials[0].name + ')' ] ]
         });
-
-        // Auto-submit
-        kpxc.p.form.submit();
     } else if (kpxc.credentials.length > 1 || (kpxc.credentials.length > 0 && (!kpxc.settings.autoFillSingleEntry || !autoFillInForSingle))) {
         kpxc.preparePageForMultipleCredentials(kpxc.credentials);
     }
@@ -978,14 +975,14 @@ kpxc.preparePageForMultipleCredentials = function(credentials) {
             // Both username and password fields are visible
             if (_detectedFields >= 2) {
                 if (_f(i.username)) {
-                    kpxcAutocomplete.create(_f(i.username));
+                    kpxcAutocomplete.create(_f(i.username), false, kpxc.settings.autoSubmit);
                 }
             } else if (_detectedFields === 1) {
                 if (_f(i.username)) {
-                    kpxcAutocomplete.create(_f(i.username));
+                    kpxcAutocomplete.create(_f(i.username), false, kpxc.settings.autoSubmit);
                 }
                 if (_f(i.password)) {
-                    kpxcAutocomplete.create(_f(i.password));
+                    kpxcAutocomplete.create(_f(i.password), false, kpxc.settings.autoSubmit);
                 }
             }
         }
@@ -1225,6 +1222,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                     args: [ message ]
                 });
             }
+            return;
         }
     } else if (combination.loginId !== undefined && kpxc.credentials[combination.loginId]) {
         // Specific login ID given
@@ -1260,6 +1258,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                     args: [ message ]
                 });
             }
+            return;
         }
     } else { // Multiple credentials available
         // Check if only one password for given username exists
@@ -1307,7 +1306,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
             if (countPasswords > 1) {
                 if (!suppressWarnings) {
                     const target = onlyPassword ? pField : uField;
-                    kpxcAutocomplete.create(target, true);
+                    kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
                     target.focus();
                 }
             } else if (countPasswords < 1) {
@@ -1322,9 +1321,18 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         } else {
             if (!suppressWarnings) {
                 const target = onlyPassword ? pField : uField;
-                kpxcAutocomplete.create(target, true);
+                kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
                 target.focus();
             }
+        }
+    }
+
+    // Auto-submit
+    if (kpxc.settings.autoSubmit) {
+        if (kpxc.u.form) {
+            kpxc.u.form.submit();
+        } else if (kpxc.p.form) {
+            kpxc.u.form.submit();
         }
     }
 };

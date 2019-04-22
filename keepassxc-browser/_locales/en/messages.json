@@ -535,6 +535,14 @@
         "message": "Activate autocomplete for username fields.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
+    "optionsCheckboxAutoSubmit": {
+        "message": "Auto-submit login forms",
+        "description": "Auto-submit checkbox text."
+    },
+    "optionsAutoSubmitHelpText": {
+        "message": "Automatically submits selected credentials. This is disabled for single entry auto-fill.",
+        "description": "Auto-submit help text."
+    },
     "optionsCheckboxShowNotifications": {
         "message": "Show notifications.",
         "description": "Show notifications checkbox text."
@@ -878,5 +886,9 @@
     "httpAuthDialog": {
         "message": "HTTP Basic Authentication dialog",
         "description": "Options page HTTP Basic Auth dialog text"
+    },
+    "autocompleteSubmitMessage": {
+        "message": "Your selection will be auto-submitted",
+        "description": "Message shown at the bottom of autocomplete menu."
     }
 }
