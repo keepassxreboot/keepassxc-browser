@@ -421,7 +421,6 @@ keepass.testAssociation = async function(callback, tab, enableTimeout = false, t
 
     if (!keepass.isKeePassXCAvailable && !page.settings.automaticReconnect) {
         try {
-            keepass.connectToNative();
             await keepass.reconnect();
         } catch (err) {
             keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
@@ -973,8 +972,10 @@ function onDisconnected() {
     keepass.isKeePassXCAvailable = false;
     keepass.associated.value = false;
     keepass.associated.hash = null;
+    keepass.databaseHash = '';
     page.clearCredentials(page.currentTabId, true);
     keepass.updatePopup('cross');
+    keepass.updateDatabaseHashToContent();
     console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 
@@ -1004,6 +1005,7 @@ keepass.nativeConnect = function() {
     keepass.nativePort.onMessage.addListener(keepass.onNativeMessage);
     keepass.nativePort.onDisconnect.addListener(onDisconnected);
     keepass.isConnected = true;
+    return keepass.nativePort;
 };
 
 keepass.verifyKeyResponse = function(response, key, nonce) {
@@ -1137,10 +1139,9 @@ keepass.enableAutomaticReconnect = function() {
     }
 
     if (keepass.reconnectLoop === null) {
-        keepass.reconnectLoop = setInterval(() => {
+        keepass.reconnectLoop = setInterval(async() => {
             if (!keepass.isKeePassXCAvailable) {
-                keepass.connectToNative();
-                keepass.reconnect().catch((e) => {});
+                keepass.reconnect();
             }
         }, 1000);
     }
@@ -1151,24 +1152,12 @@ keepass.disableAutomaticReconnect = function() {
     keepass.reconnectLoop = null;
 };
 
-keepass.reconnect = function(callback, tab) {
-    return new Promise((resolve, reject) => {
-        keepass.generateNewKeyPair();
-        keepass.changePublicKeys(tab, true).then((pkRes) => {
-            keepass.getDatabaseHash((gdRes) => {
-                keepass.testAssociation((response) => {
-                    keepass.isConfigured().then((configured) => {
-                        resolve(configured);
-                    }).catch((e) => {
-                        console.log(e);
-                        reject(e);
-                    });
-                }, tab);
-            }, null);
-        }).catch((e) => {
-            reject(e);
-        });
-    });
+keepass.reconnect = async function(callback, tab) {
+    ////keepass.connectToNative();
+    const port = keepass.nativeConnect();
+    console.log(port);
+    keepass.generateNewKeyPair();
+    keepass.changePublicKeys(tab, true).then(r => true).catch(e => false);
 };
 
 keepass.updatePopup = function(iconType) {
@@ -1184,19 +1173,22 @@ keepass.updateDatabase = function() {
     keepass.testAssociation((associationResponse) => {
         keepass.isConfigured().then((configured) => {
             keepass.updatePopup(configured ? 'normal' : 'cross');
-
-            // Send message to content script
-            browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-                if (tabs.length) {
-                    browser.tabs.sendMessage(tabs[0].id, {
-                        action: 'check_database_hash',
-                        hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash }
-                    });
-                    keepass.previousDatabaseHash = keepass.databaseHash;
-                }
-            });
+            keepass.updateDatabaseHashToContent();
         });
     }, null);
+};
+
+keepass.updateDatabaseHashToContent = function() {
+    // Send message to content script
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+        if (tabs.length) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                action: 'check_database_hash',
+                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash }
+            });
+            keepass.previousDatabaseHash = keepass.databaseHash;
+        }
+    });
 };
 
 keepass.compareVersion = function(minimum, current, canBeEqual = true) {

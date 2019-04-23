@@ -139,9 +139,9 @@ kpxcPassword.createDialog = function() {
     const dialog = kpxcUI.createElement('div', 'kpxc kpxc-pwgen-dialog');
     const titleBar = kpxcUI.createElement('div', 'kpxc-pwgen-titlebar', {}, tr('passwordGeneratorTitle'));
     const closeButton = kpxcUI.createElement('div', 'kpxc-pwgen-close', {}, '×');
-    closeButton.onclick = function(e) {
+    closeButton.addEventListener('click', function(e) {
         kpxcPassword.openDialog();
-    };
+    });
     titleBar.append(closeButton);
 
     const passwordRow = kpxcUI.createElement('div', 'kpxc-pwgen-password-row');
@@ -160,17 +160,17 @@ kpxcPassword.createDialog = function() {
     const copyButton = kpxcUI.createElement('button', 'kpxc-button', { 'id': 'kpxc-pwgen-btn-copy' }, tr('passwordGeneratorCopy'));
     const fillButton = kpxcUI.createElement('button', 'kpxc-button', { 'id': 'kpxc-pwgen-btn-fill' }, tr('passwordGeneratorFillAndCopy'));
 
-    generateButton.onclick = function(e) {
+    generateButton.addEventListener('click', function(e) {
         kpxcPassword.generate(e);
-    };
+    });
 
-    copyButton.onclick = function(e) {
+    copyButton.addEventListener('click', function(e) {
         kpxcPassword.copy(e);
-    };
+    });
 
-    fillButton.onclick = function(e) {
+    fillButton.addEventListener('click', function(e) {
         kpxcPassword.fill(e);
-    };
+    });
 
     buttonsRow.appendMultiple(generateButton, copyButton, fillButton);
     dialog.appendMultiple(titleBar, passwordRow, nextFillRow, buttonsRow);
@@ -184,9 +184,9 @@ kpxcPassword.createDialog = function() {
 
     kpxcPassword.dialog = dialog;
     kpxcPassword.titleBar = titleBar;
-    kpxcPassword.titleBar.onmousedown = function(e) {
+    kpxcPassword.titleBar.addEventListener('mousedown', function(e) {
         kpxcPassword.mouseDown(e);
-    };
+    });
 
     kpxcPassword.generate();
 };

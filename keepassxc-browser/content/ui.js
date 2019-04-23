@@ -32,7 +32,7 @@ kpxcUI.createElement = function(type, classes, attributes, textContent) {
 };
 
 // Enables dragging
-document.onmousemove = function(e) {
+document.addEventListener('mousemove', function(e) {
     if (kpxcPassword.selected === kpxcPassword.titleBar) {
         const xPos = e.clientX - kpxcPassword.diffX;
         const yPos = e.clientY - kpxcPassword.diffY;
@@ -52,12 +52,12 @@ document.onmousemove = function(e) {
             kpxcDefine.dialog.style.top = yPos + 'px';
         }
     }
-};
+});
 
-document.onmouseup = function() {
+document.addEventListener('mouseup', function() {
     kpxcPassword.selected = null;
     kpxcDefine.selected = null;
-};
+});
 
 HTMLDivElement.prototype.appendMultiple = function(...args) {
     for (const a of args) {
