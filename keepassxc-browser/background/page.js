@@ -6,6 +6,7 @@ const defaultSettings = {
     autoFillAndSend: false,
     usePasswordGenerator: true,
     autoFillSingleEntry: false,
+    autoSubmit: false,
     autoRetrieveCredentials: true,
     showNotifications: true,
     showLoginNotifications: true,
@@ -39,6 +40,9 @@ page.initSettings = function() {
             }
             if (!('autoFillSingleEntry' in page.settings)) {
                 page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
+            }
+            if (!('autoSubmit' in page.settings)) {
+                page.settings.autoSubmit = defaultSettings.autoSubmit;
             }
             if (!('autoRetrieveCredentials' in page.settings)) {
                 page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;

@@ -3,7 +3,7 @@
 var kpxcAutocomplete = {};
 kpxcAutocomplete.elements = [];
 
-kpxcAutocomplete.create = function(input, showListInstantly = false) {
+kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit = false) {
     let _index = -1;
 
     input.addEventListener('click', function(e) {
@@ -65,6 +65,12 @@ kpxcAutocomplete.create = function(input, showListInstantly = false) {
             });
 
             div.appendChild(item);
+        }
+
+        // Add a footer message for auto-submit
+        if (autoSubmit) {
+            const footer = kpxcUI.createElement('footer', '', {}, tr('autocompleteSubmitMessage'));
+            div.appendChild(footer);
         }
 
         // Activate the first item automatically
