@@ -538,8 +538,8 @@ kpxcFields.prepareCombinations = function(combinations) {
 
 kpxcFields.useDefinedCredentialFields = function() {
     const location = kpxc.getDocumentLocation();
-    if (kpxc.settings['defined-credential-fields'] && kpxc.settings['defined-credential-fields'][location]) {
-        const creds = kpxc.settings['defined-credential-fields'][location];
+    if (kpxc.settings['defined-custom-fields'] && kpxc.settings['defined-custom-fields'][location]) {
+        const creds = kpxc.settings['defined-custom-fields'][location];
 
         let found = _f(creds.username) || _f(creds.password);
         for (const i of creds.fields) {
