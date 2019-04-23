@@ -169,7 +169,8 @@ kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit 
     function fillPassword(value, index) {
         const fieldId = input.getAttribute('data-kpxc-id');
         kpxcFields.prepareId(fieldId);
-        const combination = kpxcFields.getCombination('username', fieldId);
+        const givenType = input.type === 'password' ? 'password' : 'username';
+        const combination = kpxcFields.getCombination(givenType, fieldId);
         combination.loginId = index;
 
         kpxc.fillInCredentials(combination, false, false);
