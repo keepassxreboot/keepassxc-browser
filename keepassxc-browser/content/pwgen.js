@@ -24,22 +24,26 @@ const DOMRectToArray = function(domRect) {
 * - intersectionRatio > 0 -> shown
 * - isIntersecting === true -> shown
 */
-kpxcPassword.observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-        const rect = DOMRectToArray(entry.boundingClientRect);
+try {
+    kpxcPassword.observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+            const rect = DOMRectToArray(entry.boundingClientRect);
 
-        if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
-            kpxcPassword.icon.style.display = 'none';
-        } else if (entry.intersectionRatio > 0 && entry.isIntersecting) {
-            kpxcPassword.icon.style.display = 'block';
+            if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
+                kpxcPassword.icon.style.display = 'none';
+            } else if (entry.intersectionRatio > 0 && entry.isIntersecting) {
+                kpxcPassword.icon.style.display = 'block';
 
-            // Wait for possible DOM animations
-            setTimeout(() => {
-                kpxcPassword.setIconPosition(kpxcPassword.icon, entry.target);
-            }, 500);
+                // Wait for possible DOM animations
+                setTimeout(() => {
+                    kpxcPassword.setIconPosition(kpxcPassword.icon, entry.target);
+                }, 500);
+            }
         }
-    }
-});
+    });
+} catch (err) {
+    console.log(err);
+}
 
 kpxcPassword.init = function() {
     if ('initPasswordGenerator' in _called) {
@@ -55,7 +59,9 @@ kpxcPassword.initField = function(field, inputs, pos) {
     }
 
     // Observer the visibility
-    kpxcPassword.observer.observe(field);
+    if (kpxcPassword.observer) {
+        kpxcPassword.observer.observe(field);
+    }
 
     if (field.getAttribute('kpxc-password-generator')) {
         return;
