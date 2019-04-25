@@ -149,7 +149,7 @@ kpxcForm.onSubmit = function() {
 
 var kpxcFields = {};
 
-kpxcFields.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input:not([type])';
+kpxcFields.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input[type=\'username\'], input:not([type])';
 
 // copied from Sizzle.js
 kpxcFields.rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g;
@@ -359,7 +359,7 @@ kpxcFields.getCombination = function(givenType, fieldId) {
     if (givenType === 'username') {
         const passwordField = kpxcFields.getPasswordField(fieldId, true);
         let passwordId = null;
-        if (passwordField && passwordField.value.length > 0) {
+        if (passwordField) {
             passwordId = kpxcFields.prepareId(passwordField.getAttribute('data-kpxc-id'));
         }
         combination = {
@@ -370,7 +370,7 @@ kpxcFields.getCombination = function(givenType, fieldId) {
     } else if (givenType === 'password') {
         const usernameField = kpxcFields.getUsernameField(fieldId, true);
         let usernameId = null;
-        if (usernameField && usernameField.value.length > 0) {
+        if (usernameField) {
             usernameId = kpxcFields.prepareId(usernameField.getAttribute('data-kpxc-id'));
         }
         combination = {
@@ -572,6 +572,7 @@ kpxcObserverHelper.inputTypes = [
     'password',
     'tel',
     'number',
+    'username', // Note: Not a standard
     null // Input field can be without any type. Include these to the list.
 ];
 
