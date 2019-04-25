@@ -133,30 +133,41 @@ kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit 
             return;
         }
 
-        const item = getAllItems();
+        const items = getAllItems();
         if (e.key === 'ArrowDown') {
-            // If the list is now shown, show it
-            if (item.length === 0) {
+            // If the list is not visible, show it
+            if (items.length === 0) {
                 _index = -1;
                 showList(input);
             } else {
                 // Activate next item
                 ++_index;
-                activateItem(item);
+                activateItem(items);
             }
         } else if (e.key === 'ArrowUp') {
             --_index;
-            activateItem(item);
-        } else if (e.key === 'Enter' || e.key === 'Tab') {
+            activateItem(items);
+        } else if (e.key === 'Enter') {
             if (input.value === '' && e.key === 'Enter') {
                 e.preventDefault();
             }
 
-            if (_index >= 0 && item && item[_index] !== undefined) {
+            if (_index >= 0 && items && items[_index] !== undefined) {
+                e.preventDefault();
                 input.value = e.currentTarget.value;
                 fillPassword(input.value, _index);
                 closeList();
             }
+        } else if (e.key === 'Tab') {
+            // Return if value is not in the list
+            if (input.value !== '' && kpxcAutocomplete.elements.some(c => c.value !== input.value)) {
+                closeList();
+                return;
+            }
+
+            _index = kpxcAutocomplete.elements.findIndex(c => c.value === input.value);
+            fillPassword(input.value, _index);
+            closeList();
         } else if (e.key === 'Escape') {
             closeList();
         } else if ((e.key === 'Backspace' || e.key === 'Delete') && input.value === '') {
