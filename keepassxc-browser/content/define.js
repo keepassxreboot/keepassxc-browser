@@ -194,21 +194,21 @@ kpxcDefine.markFields = function(chooser, pattern) {
             field.style.width = rect.width + 'px';
             field.style.height = rect.height + 'px';
             field.textContent = String(index);
-            field.onclick = function(e) {
+            field.addEventListener('click', function(e) {
                 kpxcDefine.eventFieldClick(e);
-            };
-            field.onmouseenter = function() {
+            });
+            field.addEventListener('mouseenter', function() {
                 field.classList.add('kpxcDefine-fixed-hover-field');
-            };
-            field.onmouseleave = function() {
+            });
+            field.addEventListener('mouseleave', function() {
                 field.classList.remove('kpxcDefine-fixed-hover-field');
-            };
-            i.onfocus = function() {
+            });
+            i.addEventListener('focus', function() {
                 field.classList.add('kpxcDefine-fixed-hover-field');
-            };
-            i.onblur = function() {
+            });
+            i.addEventListener('blur', function() {
                 field.classList.remove('kpxcDefine-fixed-hover-field');
-            };
+            });
             const elem = $(chooser);
             if (elem) {
                 elem.append(field);

@@ -117,7 +117,7 @@ kpxcForm.destroy = function(form, credentialFields) {
     }
 
     if (form && form.length > 0) {
-        form.onsubmit = null;
+        form.removeEventListener('submit', kpxcForm.onSubmit);
     }
 };
 
@@ -519,9 +519,9 @@ kpxcFields.prepareCombinations = function(combinations) {
         // Needed for auto-complete: don't overwrite manually filled-in password field
         if (pwField && !pwField.getAttribute('kpxcFields-onChange')) {
             pwField.setAttribute('kpxcFields-onChange', true);
-            pwField.onchange = function() {
+            pwField.addEventListener('change', function() {
                 this.setAttribute('unchanged', false);
-            };
+            });
         }
 
         // Initialize form-submit for remembering credentials
