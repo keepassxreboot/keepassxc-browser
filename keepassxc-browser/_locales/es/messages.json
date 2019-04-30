@@ -180,7 +180,7 @@
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Ahopra elija un campo de contraseña",
+        "message": "2. Ahora elija un campo de contraseña",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineConfirmSelection": {
