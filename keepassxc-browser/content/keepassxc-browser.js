@@ -818,12 +818,16 @@ kpxc.initCredentialFields = function(forceCall) {
         kpxc.initializeSitePreferences();
         if (kpxc.settings.sitePreferences) {
             for (const site of kpxc.settings.sitePreferences) {
-                if (site.url === window.top.location.href || siteMatch(site.url, window.top.location.href)) {
-                    if (site.ignore === IGNORE_FULL) {
-                        return;
-                    }
+                try {
+                    if (siteMatch(site.url, window.top.location.href) || site.url === window.top.location.href) {
+                        if (site.ignore === IGNORE_FULL) {
+                            return;
+                        }
 
-                    _singleInputEnabledForPage = site.usernameOnly;
+                        _singleInputEnabledForPage = site.usernameOnly;
+                    }
+                } catch (err) {
+                    return;
                 }
             }
         }
