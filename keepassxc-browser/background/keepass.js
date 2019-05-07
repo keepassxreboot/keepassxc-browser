@@ -1153,9 +1153,7 @@ keepass.disableAutomaticReconnect = function() {
 };
 
 keepass.reconnect = async function(callback, tab) {
-    ////keepass.connectToNative();
-    const port = keepass.nativeConnect();
-    console.log(port);
+    keepass.connectToNative();
     keepass.generateNewKeyPair();
     keepass.changePublicKeys(tab, true).then(r => true).catch(e => false);
 };
