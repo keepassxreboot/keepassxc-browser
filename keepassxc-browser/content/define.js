@@ -145,7 +145,7 @@ kpxcDefine.markAllUsernameFields = function(chooser) {
     kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern);
 };
 
-kpxcDefine.markAllPasswordFields = function(chooser, more) {
+kpxcDefine.markAllPasswordFields = function(chooser, more = false) {
     kpxcDefine.eventFieldClick = function(e, elem) {
         const field = elem || e.currentTarget;
         kpxcDefine.selection.password = field.getAttribute('data-kpxc-id');
@@ -183,7 +183,7 @@ kpxcDefine.markFields = function(chooser, pattern) {
 
     for (const i of inputs) {
         if (kpxcDefine.isFieldSelected(i.getAttribute('data-kpxc-id'))) {
-            return true;
+            continue;
         }
 
         if (kpxcFields.isVisible(i)) {
@@ -326,6 +326,10 @@ kpxcDefine.confirm = function() {
 };
 
 kpxcDefine.discard = function() {
+    if (!$('#kpxcDefine-btn-discard')) {
+        return;
+    }
+
     const location = kpxc.getDocumentLocation();
     delete kpxc.settings['defined-custom-fields'][location];
 
