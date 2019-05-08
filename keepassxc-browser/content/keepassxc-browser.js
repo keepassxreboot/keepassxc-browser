@@ -1328,12 +1328,26 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         }
     }
 
+    // Get the form submit button instead if action URL is same as the page itself
+    function getSubmitButton(form) {
+        if (kpxc.submitUrl === document.location.origin + document.location.pathname) {
+            for (const i of form.elements) {
+                if (i.type === 'submit') {
+                    return i;
+                }
+            }
+        }
+        return undefined;
+    }
+
     // Auto-submit
     if (kpxc.settings.autoSubmit) {
-        if (kpxc.u.form) {
-            kpxc.u.form.submit();
-        } else if (kpxc.p.form) {
-            kpxc.u.form.submit();
+        const form = kpxc.u.form || kpxc.p.form;
+        const submitButton = getSubmitButton(form);
+        if (submitButton !== undefined) {
+            submitButton.click();
+        } else {
+            form.submit();
         }
     }
 };
