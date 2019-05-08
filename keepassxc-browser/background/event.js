@@ -153,8 +153,6 @@ kpxcEvent.onGetStatus = function(callback, tab, internalPoll = false, triggerUnl
 };
 
 kpxcEvent.onReconnect = function(callback, tab) {
-    keepass.connectToNative();
-
     // Add a small timeout after reconnecting. Just to make sure. It's not pretty, I know :(
     setTimeout(() => {
         keepass.reconnect(callback, tab).then((configured) => {
