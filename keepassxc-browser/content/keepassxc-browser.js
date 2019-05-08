@@ -1307,9 +1307,14 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
             if (countPasswords > 1) {
                 if (!suppressWarnings) {
                     const target = onlyPassword ? pField : uField;
-                    kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
+                    if (kpxcAutocomplete.started) {
+                        kpxcAutocomplete.showList(target);
+                    } else {
+                        kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
+                    }
                     target.focus();
                 }
+                return;
             } else if (countPasswords < 1) {
                 if (!suppressWarnings) {
                     const message = tr('credentialsNoUsernameFound');
@@ -1318,12 +1323,18 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                         args: [ message ]
                     });
                 }
+                return;
             }
         } else {
             if (!suppressWarnings) {
                 const target = onlyPassword ? pField : uField;
-                kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
+                if (kpxcAutocomplete.started) {
+                    kpxcAutocomplete.showList(target);
+                } else {
+                    kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
+                }
                 target.focus();
+                return;
             }
         }
     }
