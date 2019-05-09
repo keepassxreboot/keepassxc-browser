@@ -10,7 +10,7 @@ kpxcAutocomplete.input = undefined;
 kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit = false) {
     kpxcAutocomplete.autoSubmit = autoSubmit;
     kpxcAutocomplete.input = input;
-    kpxcAutocomplete.started = true
+    kpxcAutocomplete.started = true;
 
     input.addEventListener('click', function(e) {
         if (!e.isTrusted) {

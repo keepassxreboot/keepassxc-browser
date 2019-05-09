@@ -204,7 +204,8 @@ Response message data (success, decrypted):
     {
         "login": "user2",
         "name": "user2",
-        "password": "passwd2"
+        "password": "passwd2",
+        "expired": "true"
     }],
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "success": "true",
