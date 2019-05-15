@@ -941,7 +941,7 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
         // Generate popup-list of usernames + descriptions
         browser.runtime.sendMessage({
             action: 'popup_login',
-            args: [ [ kpxc.credentials[0].login + ' (' + kpxc.credentials[0].name + ')' ] ]
+            args: [ [ `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})` ] ]
         });
     } else if (kpxc.credentials.length > 1 || (kpxc.credentials.length > 0 && (!kpxc.settings.autoFillSingleEntry || !autoFillInForSingle))) {
         kpxc.preparePageForMultipleCredentials(kpxc.credentials);
@@ -949,15 +949,23 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
 };
 
 kpxc.preparePageForMultipleCredentials = function(credentials) {
+    function getLoginText(credential) {
+        const visibleLogin = (credential.login.length > 0) ? credential.login : tr('credentialsNoUsername');
+        if (credential.expired && credential.expired === 'true') {
+            return `${visibleLogin} (${credential.name}) [${tr('credentialExpired')}]`;
+        }
+        return `${visibleLogin} (${credential.name})`;
+    }
+
     // Add usernames + descriptions to autocomplete-list and popup-list
     const usernames = [];
     kpxcAutocomplete.elements = [];
-    let visibleLogin;
     for (let i = 0; i < credentials.length; i++) {
-        visibleLogin = (credentials[i].login.length > 0) ? credentials[i].login : tr('credentialsNoUsername');
-        usernames.push(visibleLogin + ' (' + credentials[i].name + ')');
+        const loginText = getLoginText(credentials[i]);
+        usernames.push(loginText);
+
         const item = {
-            label: visibleLogin + ' (' + credentials[i].name + ')',
+            label: loginText,
             value: credentials[i].login,
             loginId: i
         };
