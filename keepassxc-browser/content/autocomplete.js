@@ -167,7 +167,7 @@ kpxcAutocomplete.keyPress = function(e) {
         }
     } else if (e.key === 'Tab') {
         // Return if value is not in the list
-        if (kpxcAutocomplete.input.value !== '' && kpxcAutocomplete.elements.some(c => c.value !== kpxcAutocomplete.input.value)) {
+        if (kpxcAutocomplete.input.value !== '' && !kpxcAutocomplete.elements.some(c => c.value === kpxcAutocomplete.input.value)) {
             kpxcAutocomplete.closeList();
             return;
         }
