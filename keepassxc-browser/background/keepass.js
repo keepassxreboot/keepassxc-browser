@@ -1152,10 +1152,25 @@ keepass.disableAutomaticReconnect = function() {
     keepass.reconnectLoop = null;
 };
 
-keepass.reconnect = async function(callback, tab) {
-    keepass.connectToNative();
-    keepass.generateNewKeyPair();
-    keepass.changePublicKeys(tab, true).then(r => true).catch(e => false);
+keepass.reconnect = function(callback, tab) {
+    return new Promise((resolve) => {
+        keepass.connectToNative();
+        keepass.generateNewKeyPair();
+        keepass.changePublicKeys(tab, true).then((r) => {
+            keepass.getDatabaseHash((gdRes) => {
+                if (gdRes !== '' && tab && page.tabs[tab.id]) {
+                    delete page.tabs[tab.id].errorMessage;
+                }
+                keepass.testAssociation((associationResponse) => {
+                    keepass.isConfigured().then((configured) => {
+                        resolve(true);
+                    });
+                });
+            }, tab);
+        }).catch((e) => {
+            resolve(false); 
+        });
+    });
 };
 
 keepass.updatePopup = function(iconType) {
