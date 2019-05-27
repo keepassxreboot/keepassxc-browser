@@ -336,7 +336,11 @@ kpxcPassword.callbackGeneratedPassword = function(entries) {
         kpxcPassword.whiteButton('#kpxc-pwgen-btn-fill');
         kpxcPassword.whiteButton('#kpxc-pwgen-btn-copy');
         $('.kpxc-pwgen-input').value = entries[0].password;
-        $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (isNaN(entries[0].login) ? '???' : entries[0].login));
+        if (entries[0].entropy) {
+            $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (Number.isNaN(entries[0].entropy) ? '???' : String(entries[0].entropy.toFixed(2))));
+        } else {
+            $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (isNaN(entries[0].login) ? '???' : entries[0].login));
+        }
     } else {
         if (document.querySelectorAll('div#kpxc-pwgen-error').length === 0) {
             $('.kpxc-pwgen-checkbox').parentElement.style.display = 'none';

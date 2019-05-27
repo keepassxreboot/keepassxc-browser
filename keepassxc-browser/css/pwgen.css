@@ -55,6 +55,7 @@
     border: 1px solid #ccc;
     padding: .4em;
     border-radius: 4px;
+    width: 30%;
     min-width: 60px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
