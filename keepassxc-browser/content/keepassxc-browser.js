@@ -1145,7 +1145,7 @@ kpxc.setValue = function(field, value) {
         value = value.toLowerCase().trim();
         const options = field.querySelectorAll('option');
         for (const o of options) {
-            if (o.test().toLowerCase().trim() === value) {
+            if (o.textContent.toLowerCase().trim() === value) {
                 kpxc.setValueWithChange(field, o.value);
                 return false;
             }
