@@ -152,16 +152,12 @@ kpxcEvent.onGetStatus = function(callback, tab, internalPoll = false, triggerUnl
     }
 };
 
-kpxcEvent.onReconnect = function(callback, tab) {
-    // Add a small timeout after reconnecting. Just to make sure. It's not pretty, I know :(
-    setTimeout(() => {
-        keepass.reconnect(callback, tab).then((configured) => {
-            browser.tabs.sendMessage(tab.id, {
-                action: 'redetect_fields'
-            });
-            kpxcEvent.showStatus(configured, tab, callback);
-        });
-    }, 500);
+kpxcEvent.onReconnect = async function(callback, tab) {
+    const configured = await keepass.reconnect(callback, tab);
+    browser.tabs.sendMessage(tab.id, {
+        action: 'redetect_fields'
+    });
+    kpxcEvent.showStatus(configured, tab, callback);
 };
 
 kpxcEvent.lockDatabase = function(callback, tab) {
