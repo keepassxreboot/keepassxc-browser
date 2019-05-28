@@ -33,6 +33,7 @@ kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit 
 
 kpxcAutocomplete.showList = function(inputField) {
     kpxcAutocomplete.closeList();
+    kpxcAutocomplete.input = inputField;
     const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
 
     // Element position
@@ -191,7 +192,7 @@ kpxcAutocomplete.fillPassword = function(value, index) {
     const combination = kpxcFields.getCombination(givenType, fieldId);
     combination.loginId = index;
 
-    kpxc.fillInCredentials(combination, false, false);
+    kpxc.fillInCredentials(combination, givenType === 'password', false);
     kpxcAutocomplete.input.setAttribute('fetched', true);
 };
 
