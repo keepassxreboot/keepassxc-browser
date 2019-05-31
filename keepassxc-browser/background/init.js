@@ -4,10 +4,9 @@ keepass.migrateKeyRing().then(() => {
     page.initSettings().then(() => {
         page.initOpenedTabs().then(() => {
             httpAuth.init();
-            keepass.enableAutomaticReconnect();
-            keepass.changePublicKeys(null).then((pkRes) => {
-                keepass.getDatabaseHash((gdRes) => {}, null);
-            }).catch((e) => {});
+            keepass.reconnect().then(() => {
+                keepass.enableAutomaticReconnect();
+            });
         });
     });
 });

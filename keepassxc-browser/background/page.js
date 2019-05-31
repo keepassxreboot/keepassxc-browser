@@ -11,7 +11,7 @@ const defaultSettings = {
     showNotifications: true,
     showLoginNotifications: true,
     saveDomainOnly: true,
-    automaticReconnect: true,
+    autoReconnect: false,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false
 };
@@ -56,8 +56,8 @@ page.initSettings = function() {
             if (!('saveDomainOnly' in page.settings)) {
                 page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
             }
-            if (!('automaticReconnect' in page.settings)) {
-                page.settings.automaticReconnect = defaultSettings.automaticReconnect;
+            if (!('autoReconnect' in page.settings)) {
+                page.settings.autoReconnect = defaultSettings.autoReconnect;
             }
             if (!('defaultGroup' in page.settings)) {
                 page.settings.defaultGroup = defaultSettings.defaultGroup;

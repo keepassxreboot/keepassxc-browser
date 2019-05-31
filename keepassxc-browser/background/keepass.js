@@ -419,16 +419,6 @@ keepass.testAssociation = async function(callback, tab, enableTimeout = false, t
         page.tabs[tab.id].errorMessage = null;
     }
 
-    if (!keepass.isKeePassXCAvailable && !page.settings.automaticReconnect) {
-        try {
-            await keepass.reconnect();
-        } catch (err) {
-            keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
-            callback(false);
-            return false;
-        }
-    }
-
     keepass.getDatabaseHash((dbHash) => {
         if (!dbHash) {
             callback(false);
@@ -1133,7 +1123,7 @@ keepass.decrypt = function(input, nonce) {
 
 keepass.enableAutomaticReconnect = function() {
     // Disable for Windows if KeePassXC is older than 2.3.4
-    if (!page.settings.automaticReconnect ||
+    if (!page.settings.autoReconnect ||
         (navigator.platform.toLowerCase().includes('win') && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
         return;
     }
@@ -1198,6 +1188,8 @@ keepass.updateDatabaseHashToContent = function() {
             browser.tabs.sendMessage(tabs[0].id, {
                 action: 'check_database_hash',
                 hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash }
+            }).catch((err) => {
+                console.log(err);
             });
             keepass.previousDatabaseHash = keepass.databaseHash;
         }

@@ -531,6 +531,10 @@
         "message": "Automatically reconnect to KeePassXC.",
         "description": "Auto-reconnect checkbox text."
     },
+    "optionsAutomaticReconnectWarning": {
+        "message": "Warning! This feature is experimental. Use at your own risk.",
+        "description": "Auto-reconnect warning message."
+    },
     "optionsCheckboxAutoFillSingleEntry": {
         "message": "Automatically fill in single-credential entries.",
         "description": "Automatically fill-in single credential entry checkbox text."

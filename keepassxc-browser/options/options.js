@@ -107,8 +107,8 @@ options.initGeneralSettings = function() {
                     $('#defaultGroupButton').prop('disabled', false);
                     $('#defaultGroupButtonReset').prop('disabled', false);
                 }
-            } else if (name === 'automaticReconnect') {
-                const message = updated.automaticReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
+            } else if (name === 'autoReconnect') {
+                const message = updated.autoReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
                 browser.runtime.sendMessage({ action: message });
             }
         });
