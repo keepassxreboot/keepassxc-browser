@@ -1240,7 +1240,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
     } else if (combination.loginId !== undefined && kpxc.credentials[combination.loginId]) {
         // Specific login ID given
         let filledIn = false;
-        if (uField) {
+        if (uField && (!onlyPassword || _singleInputEnabledForPage)) {
             kpxc.setValueWithChange(uField, kpxc.credentials[combination.loginId].login);
             browser.runtime.sendMessage({
                 action: 'page_set_login_id', args: [ combination.loginId ]
