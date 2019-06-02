@@ -2,10 +2,10 @@
 <html>
   <head>
     <title data-i18n="optionsTitle"></title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/styles/bootstrap.css" />
-    <link rel="stylesheet" href="options.css" />
-    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/styles/bootstrap.css"/>
+    <link rel="stylesheet" href="options.css"/>
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css"/>
     <script src="../browser-polyfill.min.js"></script>
     <script src="../global.js"></script>
     <script src="../jquery-3.3.1.min.js"></script>
@@ -15,1017 +15,684 @@
   </head>
 
   <body>
-    <div class="container">
-      <h3><img src="/icons/keepassxc_48x48.png" alt="logo" /> KeePassXC-Browser</h3>
+  <div class="container">
+    <h3><img src="/icons/keepassxc_48x48.png" alt="logo"/> KeePassXC-Browser</h3>
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white mb-4">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#optionsNavbar"
-          aria-controls="optionsNavbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white mb-4">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#optionsNavbar"
+              aria-controls="optionsNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="optionsNavbar">
-          <ul class="navbar-nav mr-auto nav" role="tablist" id="navtabs">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                href="#tab-general-settings"
-                id="general-tab"
-                data-toggle="tab"
-                aria-controls="tab-general-settings"
-                aria-selected="true"
-                tabindex="1"
-                role="tab"
-              >
-                <span data-i18n="optionsMenuGeneral"></span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#tab-connected-databases"
-                id="db-tab"
-                data-toggle="tab"
-                aria-controls="tab-connected-databases"
-                aria-selected="false"
-                tabindex="2"
-                role="tab"
-              >
-                <span data-i18n="optionsMenuConnectedDatabases"></span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#tab-custom-fields"
-                id="custom-fields-tab"
-                data-toggle="tab"
-                aria-controls="tab-custom-fields"
-                aria-selected="false"
-                tabindex="3"
-                role="tab"
-              >
-                <span data-i18n="optionsMenuCustomFields"></span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#tab-site-preferences"
-                id="site-prefs-tab"
-                data-toggle="tab"
-                aria-controls="tab-site-preferences"
-                aria-selected="false"
-                tabindex="4"
-                role="tab"
-              >
-                <span data-i18n="optionsMenuSitePreferences"></span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#tab-about"
-                id="about-tab"
-                data-toggle="tab"
-                aria-controls="tab-about"
-                role="tab"
-                aria-selected="false"
-                tabindex="5"
-              >
-                <span data-i18n="optionsMenuAbout"></span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <section class="tab-content">
-        <!-- General Settings -->
-        <section
-          class="tab-pane active"
-          id="tab-general-settings"
-          role="tabpanel"
-          aria-labelledby="general-tab"
-        >
-          <!-- keyboard shortcuts -->
-          <section class="card border-primary">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-keyboard-o" aria-hidden="true"></i>
-              <span data-i18n="optionsKeyboardShortcutsHeader"></span>
-            </div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <span data-i18n="contextMenuFillUsernameAndPassword"></span>:
-                  <span id="fill_username_password-shortcut">error</span>
-                </li>
-                <li class="list-group-item">
-                  <span data-i18n="contextMenuFillPassword"></span>:
-                  <span id="fill_password-shortcut">error</span>
-                </li>
-                <li class="list-group-item">
-                  <span data-i18n="contextMenuFillTOTP"></span>:
-                  <span id="fill_totp-shortcut">error</span>
-                </li>
-                <li class="list-group-item">
-                  <span data-i18n="contextMenuShowPasswordGenerator"></span>:
-                  <span id="show_password_generator-shortcut">error</span>
-                </li>
-              </ul>
-              <button
-                class="chrome-only mt-3 btn btn-sm btn-primary"
-                id="configureCommands"
-                type="button"
-              >
-                <i class="fa fa-cog" aria-hidden="true"></i>
-                <span data-i18n="optionsConfigureShortcuts"></span>
-              </button>
-            </div>
-          </section>
-
-          <!-- extension notifications -->
-          <section class="card mt-4 border-primary">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-bell" aria-hidden="true"></i> Notifications
-            </div>
-            <div class="card-body">
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="showNotifications"
-                  id="showNotifications"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxShowNotifications"
-                  for="showNotifications"
-                ></label>
-                <small
-                  class="form-text text-muted"
-                  data-i18n="optionsShowNotificationsHelpText"
-                ></small>
-              </div>
-
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="showLoginNotifications"
-                  id="showLoginNotifications"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxShowLoginNotifications"
-                  for="showLoginNotifications"
-                ></label>
-              </div>
-
-              <div class="form-group mt-3">
-                <label for="blinkTimeout" data-i18n="optionsLabelBlinkTime"></label>
-                <div class="input-group col-lg-3 col-md-4 col-12">
-                  <input
-                    type="number"
-                    id="blinkTimeout"
-                    placeholder="7500"
-                    value="7500"
-                    min="-1"
-                    class="form-control"
-                    aria-describedby="optionsLabelBlinkTimeAppend"
-                  />
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="optionsLabelBlinkTimeAppend">ms</span>
-                  </div>
-                </div>
-                <small class="form-text text-muted">
-                  <span data-i18n="optionsBlinkTimeHelpText"></span>
-                  <br />
-                  <span data-i18n="optionsDefault" i18n-placeholder="7500"></span>,
-                  <span data-i18n="optionsInfinite" i18n-placeholder="-1"></span>
-                </small>
-                <button class="btn btn-sm btn-primary mt-2" id="blinkTimeoutButton" type="button">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                  <span data-i18n="optionsButtonSave"></span>
-                </button>
-              </div>
-
-              <div class="form-group">
-                <label for="blinkMinTimeout" data-i18n="optionsLabelRedirectOffset"></label>
-                <div class="input-group col-lg-3 col-md-4 col-12">
-                  <input
-                    type="number"
-                    id="blinkMinTimeout"
-                    placeholder="2000"
-                    value="2000"
-                    min="-1"
-                    class="form-control"
-                    aria-describedby="optionsLabelRedirectOffsetAppend"
-                  />
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="optionsLabelRedirectOffsetLabel">ms</span>
-                  </div>
-                </div>
-                <small class="form-text text-muted">
-                  <span data-i18n="optionsRedirectOffsetHelpText"></span>
-                  <br />
-                  <span data-i18n="optionsRedirectOffsetHelpTextSecond"></span>
-                  <br />
-                  <span data-i18n="optionsDefault" i18n-placeholder="-1"></span>,
-                  <span data-i18n="optionsRecommended" i18n-placeholder="2000"></span>
-                </small>
-                <button
-                  class="btn btn-sm btn-primary mt-2"
-                  id="blinkMinTimeoutButton"
-                  type="button"
-                >
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                  <span data-i18n="optionsButtonSave"></span>
-                </button>
-              </div>
-
-              <div class="form-group">
-                <label for="allowedRedirect" data-i18n="optionsLabelRedirectAllowance"></label>
-                <div class="input-group col-lg-3 col-md-4 col-12">
-                  <input
-                    type="number"
-                    id="allowedRedirect"
-                    placeholder="1"
-                    value="1"
-                    min="1"
-                    class="form-control"
-                  />
-                </div>
-                <small class="form-text text-muted">
-                  <span data-i18n="optionsRedirectAllowanceHelpText"></span>
-                  <br />
-                  <span data-i18n="optionsDefault" i18n-placeholder="1"></span>
-                </small>
-                <button class="btn btn-sm btn-primary" id="allowedRedirectButton" type="button">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                  <span data-i18n="optionsButtonSave"></span>
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <!-- general settings -->
-          <section class="card border-primary mt-4">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-key" aria-hidden="true"></i>
-              <span data-i18n="optionsGeneralSectionKeePassXcSettings"></span>
-            </div>
-            <div class="card-body">
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="autoReconnect"
-                  id="autoReconnect"
-                  value="false"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxAutomaticReconnect"
-                  for="autoReconnect"
-                ></label>
-                <small class="form-text text-muted">
-                  <span data-i18n="optionsAutomaticReconnectHelpText"></span>
-                </small>
-              </div>
-
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="usePasswordGenerator"
-                  id="usePasswordGenerator"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxUsePasswordGenerator"
-                  for="usePasswordGenerator"
-                ></label>
-                <small class="form-text text-muted">
-                  <span data-i18n="optionsUsePasswordGeneratorHelpText"></span>
-                  <br />
-                  <span data-i18n="optionsUsePasswordGeneratorHelpTextSecond"></span>
-                </small>
-              </div>
-
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="saveDomainOnly"
-                  id="saveDomainOnly"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsSaveDomainOnly"
-                  for="saveDomainOnly"
-                ></label>
-                <small
-                  class="form-text text-muted"
-                  data-i18n="optionsSaveDomainOnlyHelpText"
-                ></small>
-              </div>
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    name="defaultGroupAlwaysAsk"
-                    id="defaultGroupAlwaysAsk"
-                    value="true"
-                    class="custom-control-input"
-                  />
-                  <label
-                    class="custom-control-label"
-                    data-i18n="optionsLabelDefaultGroupCheckboxText"
-                    for="defaultGroupAlwaysAsk"
-                  ></label>
-                  <small
-                    class="form-text text-muted"
-                    data-i18n="optionsLabelDefaultGroupCheckboxHelpText"
-                  ></small>
-                </div>
-
-                <div class="form-group">
-                  <label for="defaultGroup" data-i18n="optionsLabelDefaultGroup"></label>
-                  <div class="input-group col-xl-5 col-lg-6">
-                    <input
-                      type="text"
-                      id="defaultGroup"
-                      class="form-control"
-                      placeholder="KeePassXC-Browser Passwords"
-                    />
-                    <div class="input-group-append">
-                      <button
-                        class="btn btn-primary save-btn"
-                        id="defaultGroupButton"
-                        type="button"
-                      >
-                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                        <span data-i18n="optionsButtonSave"></span>
-                      </button>
-                      <button class="btn btn-secondary reset-btn" id="defaultGroupButtonReset">
-                        <span class="fa fa-undo" aria-hidden="true"></span>
-                        <span data-i18n="optionsButtonReset"></span>
-                      </button>
-                    </div>
-                  </div>
-                  <small class="text-muted">
-                    <span data-i18n="optionsDefaultGroupHelpText"></span>
-                    <br />
-                    <span data-i18n="optionsDefault"></span> KeePassXC-Browser Passwords
-                  </small>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- auto fill-->
-          <section class="card mt-4 border-primary">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-sign-in" aria-hidden="true"></i> Auto Fill-In
-            </div>
-            <div class="card-body">
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="autoRetrieveCredentials"
-                  id="autoRetrieveCredentials"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxAutoRetrieveCredentials"
-                  for="autoRetrieveCredentials"
-                ></label>
-                <small
-                  class="form-text text-muted"
-                  data-i18n="optionsAutoRetrieveCredentialsHelpText"
-                ></small>
-              </div>
-
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="autoFillSingleEntry"
-                  id="autoFillSingleEntry"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxAutoFillSingleEntry"
-                  for="autoFillSingleEntry"
-                ></label>
-                <small
-                  class="form-text text-muted"
-                  data-i18n="optionsAutoFillSingleEntryHelpText"
-                ></small>
-                <div class="alert alert-warning mt-3" role="alert">
-                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                  <span data-i18n="optionsAutoFillSingleEntryWarning"></span>
-                </div>
-              </div>
-
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="autoCompleteUsernames"
-                  id="autoCompleteUsernames"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxAutoCompleteUsernames"
-                  for="autoCompleteUsernames"
-                ></label>
-                <small
-                  class="form-text text-muted"
-                  data-i18n="optionsAutocompleteUsernamesHelpText"
-                ></small>
-              </div>
-
-              <div class="custom-control custom-checkbox mb-3">
-                <input
-                  type="checkbox"
-                  name="autoFillAndSend"
-                  id="autoFillAndSend"
-                  value="true"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  data-i18n="optionsCheckboxAutoFillAndSend"
-                  for="autoFillAndSend"
-                ></label>
-                <small class="form-text text-muted">
-                  <span data-i18n="optionsAutoFillAndSendHelpText"></span>
-                  <br />
-                  <span data-i18n="optionsAutoFillAndSendHelpTextSecond"></span>
-                </small>
-              </div>
-              <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog" />
-            </div>
-          </section>
-
-          <!-- keepassxc update notification -->
-          <section class="card mt-4 border-primary">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-bell" aria-hidden="true"></i> KeePassXC updates notification
-            </div>
-            <div class="card-body">
-              <div class="alert alert-info mt-2" role="alert">
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                <span data-i18n="optionsVersionInfoText"></span>
-                <br />
-                <span
-                  data-i18n="optionsVersionDownload"
-                  i18n-placeholder="<a target='_blank' class='alert-link' rel='noopener' href='https://keepassxc.org/'>https://keepassxc.org/</a>"
-                >
-                </span>
-              </div>
-
-              <div>
-                <span
-                  data-i18n="optionsVersionRunning"
-                  i18n-placeholder="<em class='yourVersion'></em>"
-                ></span>
-              </div>
-              <div>
-                <span
-                  data-i18n="optionsLatestVersion"
-                  i18n-placeholder="<em class='latestVersion'></em>"
-                ></span>
-              </div>
-              <button class="btn btn-sm btn-primary mt-2 checkUpdateKeePassXC">
-                <i class="fa fa-refresh" aria-hidden="true"></i>
-                <span data-i18n="optionsButtonUpdate"></span>
-              </button>
-
-              <div class="mt-4" data-i18n="optionsRadioText"></div>
-
-              <div class="custom-control custom-radio custom-control-inline">
-                <input
-                  type="radio"
-                  id="checkUpdateKeePassXC3"
-                  name="checkUpdateKeePassXC"
-                  value="3"
-                  checked
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  for="checkUpdateKeePassXC3"
-                  data-i18n="optionsRadioThreeDays"
-                ></label>
-              </div>
-
-              <div class="custom-control custom-radio custom-control-inline">
-                <input
-                  type="radio"
-                  id="checkUpdateKeePassXC7"
-                  name="checkUpdateKeePassXC"
-                  value="7"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  for="checkUpdateKeePassXC7"
-                  data-i18n="optionsRadioWeek"
-                ></label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input
-                  type="radio"
-                  id="checkUpdateKeePassXC30"
-                  name="checkUpdateKeePassXC"
-                  value="30"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  for="checkUpdateKeePassXC30"
-                  data-i18n="optionsRadioMonth"
-                ></label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input
-                  type="radio"
-                  id="checkUpdateKeePassXC0"
-                  name="checkUpdateKeePassXC"
-                  value="0"
-                  class="custom-control-input"
-                />
-                <label
-                  class="custom-control-label"
-                  for="checkUpdateKeePassXC0"
-                  data-i18n="optionsRadioNever"
-                ></label>
-              </div>
-            </div>
-          </section>
-        </section>
-
-        <!-- Connected Databases -->
-        <section
-          class="tab-pane"
-          id="tab-connected-databases"
-          role="tabpanel"
-          aria-labelledby="db-tab"
-        >
-          <p data-i18n="optionsConnectedDatabasesTab"></p>
-          <table class="table table-striped table-bordered table-hover">
-            <caption data-i18n="optionsConnectedDatabasesText"></caption>
-            <thead>
-              <tr>
-                <th scope="col"><span data-i18n="optionsDatabaseIdentifier"></span></th>
-                <th scope="col"><span data-i18n="optionsDatabaseKey"></span></th>
-                <th scope="col"><span data-i18n="optionsDatabaseLastUsed"></span></th>
-                <th scope="col"><span data-i18n="optionsDatabaseCreated"></span></th>
-                <th scope="col"><span data-i18n="optionsDatabaseDelete"></span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="empty">
-                <td colspan="5"><span data-i18n="optionsConnectedDatabasesNotFound"></span></td>
-              </tr>
-              <tr class="clone">
-                <td></td>
-                <td></td>
-                <td class="last-used"></td>
-                <td class="created"></td>
-                <td>
-                  <button class="btn delete btn-danger">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonRemove"></span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div style="text-align: right">
-            <button id="connect-button" class="btn btn-primary">
-              <i class="fa fa-link" aria-hidden="true"></i>
-              <span data-i18n="optionsButtonConnect"></span>
+      <div class="collapse navbar-collapse" id="optionsNavbar">
+        <ul class="navbar-nav mr-auto nav" role="tablist" id="navtabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#tab-general-settings" id="general-tab" data-toggle="tab"
+               aria-controls="tab-general-settings" aria-selected="true" tabindex="1" role="tab">
+              <span data-i18n="optionsMenuGeneral"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-connected-databases" id="db-tab" data-toggle="tab"
+               aria-controls="tab-connected-databases" aria-selected="false" tabindex="2" role="tab">
+              <span data-i18n="optionsMenuConnectedDatabases"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-custom-fields" id="custom-fields-tab" data-toggle="tab"
+               aria-controls="tab-custom-fields" aria-selected="false" tabindex="3" role="tab">
+              <span data-i18n="optionsMenuCustomFields"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-site-preferences" id="site-prefs-tab" data-toggle="tab"
+               aria-controls="tab-site-preferences" aria-selected="false" tabindex="4" role="tab">
+              <span data-i18n="optionsMenuSitePreferences"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-about" id="about-tab" data-toggle="tab" aria-controls="tab-about" role="tab"
+               aria-selected="false" tabindex="5">
+              <span data-i18n="optionsMenuAbout"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section class="tab-content">
+      <!-- General Settings -->
+      <section class="tab-pane active" id="tab-general-settings" role="tabpanel" aria-labelledby="general-tab">
+        <!-- keyboard shortcuts -->
+        <section class="card border-primary">
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+            <span data-i18n="optionsKeyboardShortcutsHeader"></span>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <span data-i18n="contextMenuFillUsernameAndPassword"></span>:
+                <span id="fill_username_password-shortcut">error</span>
+              </li>
+              <li class="list-group-item">
+                <span data-i18n="contextMenuFillPassword"></span>:
+                <span id="fill_password-shortcut">error</span>
+              </li>
+              <li class="list-group-item">
+                <span data-i18n="contextMenuFillTOTP"></span>:
+                <span id="fill_totp-shortcut">error</span>
+              </li>
+              <li class="list-group-item">
+                <span data-i18n="contextMenuShowPasswordGenerator"></span>:
+                <span id="show_password_generator-shortcut">error</span>
+              </li>
+            </ul>
+            <button class="chrome-only mt-3 btn btn-sm btn-primary" id="configureCommands" type="button">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <span data-i18n="optionsConfigureShortcuts"></span>
             </button>
           </div>
+        </section>
 
-          <div id="dialogDeleteConnectedDatabase" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                  <h5 class="modal-title">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    <span data-i18n="optionsDatabasesRemoveIdentifier"></span>
-                  </h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+        <!-- extension notifications -->
+        <section class="card mt-4 border-primary">
+          <div class="card-header bg-primary text-white"><i class="fa fa-bell" aria-hidden="true"></i> Notifications
+          </div>
+          <div class="card-body">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="showNotifications" id="showNotifications" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxShowNotifications"
+                     for="showNotifications"></label>
+              <small class="form-text text-muted" data-i18n="optionsShowNotificationsHelpText"></small>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="showLoginNotifications" id="showLoginNotifications" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxShowLoginNotifications"
+                     for="showLoginNotifications"></label>
+            </div>
+
+            <div class="form-group mt-3">
+              <label for="blinkTimeout" data-i18n="optionsLabelBlinkTime"></label>
+              <div class="input-group col-lg-3 col-md-4 col-12">
+                <input type="number" id="blinkTimeout" placeholder="7500" value="7500" min="-1" class="form-control"
+                       aria-describedby="optionsLabelBlinkTimeAppend"/>
+                <div class="input-group-append">
+                  <span class="input-group-text" id="optionsLabelBlinkTimeAppend">ms</span>
                 </div>
-                <div class="modal-body">
-                  <p data-i18n="optionsDatabasesRemoveIdentifierConfirmFirst"></p>
-                  <strong id="dialogDeleteConnectedDatabaseName" class="mark"></strong>
-                  <div class="alert alert-info mt-2">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                    <span data-i18n="optionsDatabasesRemoveIdentifierConfirmSecond"></span>
+              </div>
+              <small class="form-text text-muted">
+                <span data-i18n="optionsBlinkTimeHelpText"></span>
+                <br/>
+                <span data-i18n="optionsDefault" i18n-placeholder="7500"></span>,
+                <span data-i18n="optionsInfinite" i18n-placeholder="-1"></span>
+              </small>
+              <button class="btn btn-sm btn-primary mt-2" id="blinkTimeoutButton" type="button">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span data-i18n="optionsButtonSave"></span>
+              </button>
+            </div>
+
+            <div class="form-group">
+              <label for="blinkMinTimeout" data-i18n="optionsLabelRedirectOffset"></label>
+              <div class="input-group col-lg-3 col-md-4 col-12">
+                <input type="number" id="blinkMinTimeout" placeholder="2000" value="2000" min="-1" class="form-control"
+                       aria-describedby="optionsLabelRedirectOffsetAppend"/>
+                <div class="input-group-append">
+                  <span class="input-group-text" id="optionsLabelRedirectOffsetLabel">ms</span>
+                </div>
+              </div>
+              <small class="form-text text-muted">
+                <span data-i18n="optionsRedirectOffsetHelpText"></span>
+                <br/>
+                <span data-i18n="optionsRedirectOffsetHelpTextSecond"></span>
+                <br/>
+                <span data-i18n="optionsDefault" i18n-placeholder="-1"></span>,
+                <span data-i18n="optionsRecommended" i18n-placeholder="2000"></span>
+              </small>
+              <button class="btn btn-sm btn-primary mt-2" id="blinkMinTimeoutButton" type="button">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span data-i18n="optionsButtonSave"></span>
+              </button>
+            </div>
+
+            <div class="form-group">
+              <label for="allowedRedirect" data-i18n="optionsLabelRedirectAllowance"></label>
+              <div class="input-group col-lg-3 col-md-4 col-12">
+                <input type="number" id="allowedRedirect" placeholder="1" value="1" min="1" class="form-control"/>
+              </div>
+              <small class="form-text text-muted">
+                <span data-i18n="optionsRedirectAllowanceHelpText"></span>
+                <br/>
+                <span data-i18n="optionsDefault" i18n-placeholder="1"></span>
+              </small>
+              <button class="btn btn-sm btn-primary" id="allowedRedirectButton" type="button">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span data-i18n="optionsButtonSave"></span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- general settings -->
+        <section class="card border-primary mt-4">
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-key" aria-hidden="true"></i>
+            <span data-i18n="optionsGeneralSectionKeePassXcSettings"></span>
+          </div>
+          <div class="card-body">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="autoReconnect" id="autoReconnect" value="false"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxAutomaticReconnect"
+                     for="autoReconnect"></label>
+              <small class="form-text text-muted">
+                <span data-i18n="optionsAutomaticReconnectHelpText"></span>
+              </small>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="usePasswordGenerator" id="usePasswordGenerator" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxUsePasswordGenerator"
+                     for="usePasswordGenerator"></label>
+              <small class="form-text text-muted">
+                <span data-i18n="optionsUsePasswordGeneratorHelpText"></span>
+                <br/>
+                <span data-i18n="optionsUsePasswordGeneratorHelpTextSecond"></span>
+              </small>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="saveDomainOnly" id="saveDomainOnly" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsSaveDomainOnly" for="saveDomainOnly"></label>
+              <small class="form-text text-muted" data-i18n="optionsSaveDomainOnlyHelpText"></small>
+            </div>
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="defaultGroupAlwaysAsk" id="defaultGroupAlwaysAsk" value="true"
+                       class="custom-control-input"/>
+                <label class="custom-control-label" data-i18n="optionsLabelDefaultGroupCheckboxText"
+                       for="defaultGroupAlwaysAsk"></label>
+                <small class="form-text text-muted" data-i18n="optionsLabelDefaultGroupCheckboxHelpText"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="defaultGroup" data-i18n="optionsLabelDefaultGroup"></label>
+                <div class="input-group col-xl-5 col-lg-6">
+                  <input type="text" id="defaultGroup" class="form-control" placeholder="KeePassXC-Browser Passwords"/>
+                  <div class="input-group-append">
+                    <button class="btn btn-primary save-btn" id="defaultGroupButton" type="button">
+                      <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                      <span data-i18n="optionsButtonSave"></span>
+                    </button>
+                    <button class="btn btn-secondary reset-btn" id="defaultGroupButtonReset">
+                      <span class="fa fa-undo" aria-hidden="true"></span>
+                      <span data-i18n="optionsButtonReset"></span>
+                    </button>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonCancel"></span>
-                  </button>
-                  <button type="button" class="btn btn-danger yes">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonRemoveNow"></span>
-                  </button>
-                </div>
+                <small class="text-muted">
+                  <span data-i18n="optionsDefaultGroupHelpText"></span>
+                  <br/>
+                  <span data-i18n="optionsDefault"></span> KeePassXC-Browser Passwords
+                </small>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Custom credential fields -->
-        <section
-          class="tab-pane"
-          id="tab-custom-fields"
-          role="tabpanel"
-          aria-labelledby="custom-fields-tab"
-        >
-          <p>
-            <span data-i18n="optionsCustomFieldsTabHelpTextFirst"></span>
-            <br />
-            <span data-i18n="optionsCustomFieldsTabHelpTextSecond"></span
-            ><em><span data-i18n="popupChooseCredentialsText"></span></em>.
-            <br />
-            <span data-i18n="optionsCustomFieldsTabHelpTextThird"></span>
-          </p>
-          <table class="table table-striped table-bordered table-hover">
-            <caption data-i18n="optionsCustomFieldsTableCaption"></caption>
-            <thead>
-              <tr>
-                <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
-                <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="empty">
-                <td colspan="2"><span data-i18n="optionsCustomFieldsNotFound"></span></td>
-              </tr>
-              <tr class="clone">
-                <td></td>
-                <td>
-                  <button class="btn delete btn-danger btn">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonRemove"></span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div
-            id="dialogDeleteCustomCredentialFields"
-            class="modal fade"
-            tabindex="-1"
-            role="dialog"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    ×
-                  </button>
-                  <h3 data-i18n="optionsCustomFieldsRemove"></h3>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    <span
-                      data-i18n="optionsCustomFieldsConfirmation"
-                      i18n-placeholder="<strong></strong>"
-                    ></span>
-                  </p>
-                  <small
-                    class="form-text text-muted"
-                    data-i18n="optionsCustomFieldsConfirmationHelpText"
-                  ></small>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn" data-dismiss="modal" aria-hidden="true">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonCancel"></span>
-                  </button>
-                  <button class="btn yes btn-primary">
-                    <i class="fa fa-check-circle" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonRemoveNow"></span>
-                  </button>
-                </div>
+        <!-- auto fill-->
+        <section class="card mt-4 border-primary">
+          <div class="card-header bg-primary text-white"><i class="fa fa-sign-in" aria-hidden="true"></i> Auto Fill-In
+          </div>
+          <div class="card-body">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="autoRetrieveCredentials" id="autoRetrieveCredentials" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxAutoRetrieveCredentials"
+                     for="autoRetrieveCredentials"></label>
+              <small class="form-text text-muted" data-i18n="optionsAutoRetrieveCredentialsHelpText"></small>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="autoFillSingleEntry" id="autoFillSingleEntry" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxAutoFillSingleEntry"
+                     for="autoFillSingleEntry"></label>
+              <small class="form-text text-muted" data-i18n="optionsAutoFillSingleEntryHelpText"></small>
+              <div class="alert alert-warning mt-3" role="alert">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <span data-i18n="optionsAutoFillSingleEntryWarning"></span>
               </div>
             </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="autoCompleteUsernames" id="autoCompleteUsernames" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxAutoCompleteUsernames"
+                     for="autoCompleteUsernames"></label>
+              <small class="form-text text-muted" data-i18n="optionsAutocompleteUsernamesHelpText"></small>
+            </div>
+
+            <div class="custom-control custom-checkbox mb-3">
+              <input type="checkbox" name="autoFillAndSend" id="autoFillAndSend" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxAutoFillAndSend"
+                     for="autoFillAndSend"></label>
+              <small class="form-text text-muted">
+                <span data-i18n="optionsAutoFillAndSendHelpText"></span>
+                <br/>
+                <span data-i18n="optionsAutoFillAndSendHelpTextSecond"></span>
+              </small>
+            </div>
+            <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog"/>
           </div>
         </section>
 
-        <!-- Site preferences -->
-        <section
-          class="tab-pane"
-          id="tab-site-preferences"
-          role="tabpanel"
-          aria-labelledby="site-prefs-tab"
-        >
-          <p>
-            <span data-i18n="optionsSitePreferencesTabHelpTextFirst"></span>
-            <br />
-            <span data-i18n="optionsSitePreferencesTabHelpTextSecond"></span>
-            <em><span data-i18n="popupButtonIgnore"></span></em>.
-            <br />
-            <span data-i18n="optionsSitePreferencesTabHelpTextThird"></span>
-            <br />
-            <span data-i18n="optionsSitePreferencesTabHelpTextFourth"></span>
-          </p>
-          <div class="mb-3">
-            <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
-            <div class="input-group mb-3" id="manualUrlGroup">
-              <input
-                id="manualUrl"
-                type="url"
-                class="form-control"
-                pattern="ftp://.*|http://.*|https://.*"
-                minlength="10"
-              />
-              <div class="input-group-append">
-                <button class="btn btn-primary" id="sitePreferencesManualAdd" type="button">
-                  <i class="fa fa-plus" aria-hidden="true"></i
-                  ><span data-i18n="optionsButtonAdd"></span>
+        <!-- keepassxc update notification -->
+        <section class="card mt-4 border-primary">
+          <div class="card-header bg-primary text-white"><i class="fa fa-bell" aria-hidden="true"></i> KeePassXC updates
+            notification
+          </div>
+          <div class="card-body">
+            <div class="alert alert-info mt-2" role="alert">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <span data-i18n="optionsVersionInfoText"></span>
+              <br/>
+              <span data-i18n="optionsVersionDownload"
+                    i18n-placeholder="<a target='_blank' class='alert-link' rel='noopener' href='https://keepassxc.org/'>https://keepassxc.org/</a>"> </span>
+            </div>
+
+            <div>
+              <span data-i18n="optionsVersionRunning" i18n-placeholder="<em class='yourVersion'></em>"></span>
+            </div>
+            <div>
+              <span data-i18n="optionsLatestVersion" i18n-placeholder="<em class='latestVersion'></em>"></span>
+            </div>
+            <button class="btn btn-sm btn-primary mt-2 checkUpdateKeePassXC">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+              <span data-i18n="optionsButtonUpdate"></span>
+            </button>
+
+            <div class="mt-4" data-i18n="optionsRadioText"></div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="checkUpdateKeePassXC3" name="checkUpdateKeePassXC" value="3" checked
+                     class="custom-control-input"/>
+              <label class="custom-control-label" for="checkUpdateKeePassXC3" data-i18n="optionsRadioThreeDays"></label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="checkUpdateKeePassXC7" name="checkUpdateKeePassXC" value="7"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" for="checkUpdateKeePassXC7" data-i18n="optionsRadioWeek"></label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="checkUpdateKeePassXC30" name="checkUpdateKeePassXC" value="30"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" for="checkUpdateKeePassXC30" data-i18n="optionsRadioMonth"></label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="checkUpdateKeePassXC0" name="checkUpdateKeePassXC" value="0"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" for="checkUpdateKeePassXC0" data-i18n="optionsRadioNever"></label>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Connected Databases -->
+      <section class="tab-pane" id="tab-connected-databases" role="tabpanel" aria-labelledby="db-tab">
+        <p data-i18n="optionsConnectedDatabasesTab"></p>
+        <table class="table table-striped table-bordered table-hover">
+          <caption data-i18n="optionsConnectedDatabasesText"></caption>
+          <thead>
+          <tr>
+            <th scope="col"><span data-i18n="optionsDatabaseIdentifier"></span></th>
+            <th scope="col"><span data-i18n="optionsDatabaseKey"></span></th>
+            <th scope="col"><span data-i18n="optionsDatabaseLastUsed"></span></th>
+            <th scope="col"><span data-i18n="optionsDatabaseCreated"></span></th>
+            <th scope="col"><span data-i18n="optionsDatabaseDelete"></span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="empty">
+            <td colspan="5"><span data-i18n="optionsConnectedDatabasesNotFound"></span></td>
+          </tr>
+          <tr class="clone">
+            <td></td>
+            <td></td>
+            <td class="last-used"></td>
+            <td class="created"></td>
+            <td>
+              <button class="btn delete btn-danger">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span data-i18n="optionsButtonRemove"></span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div style="text-align: right">
+          <button id="connect-button" class="btn btn-primary">
+            <i class="fa fa-link" aria-hidden="true"></i>
+            <span data-i18n="optionsButtonConnect"></span>
+          </button>
+        </div>
+
+        <div id="dialogDeleteConnectedDatabase" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                  <span data-i18n="optionsDatabasesRemoveIdentifier"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p data-i18n="optionsDatabasesRemoveIdentifierConfirmFirst"></p>
+                <strong id="dialogDeleteConnectedDatabaseName" class="mark"></strong>
+                <div class="alert alert-info mt-2">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  <span data-i18n="optionsDatabasesRemoveIdentifierConfirmSecond"></span>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                  <span data-i18n="optionsButtonCancel"></span>
+                </button>
+                <button type="button" class="btn btn-danger yes">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <span data-i18n="optionsButtonRemoveNow"></span>
                 </button>
               </div>
             </div>
           </div>
-          <table class="table table-striped table-bordered table-hover">
-            <caption data-i18n="optionsSitePreferencesTableCaption"></caption>
-            <thead>
-              <tr>
-                <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
-                <th scope="col"><span data-i18n="optionsColumnIgnore"></span></th>
-                <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
-                <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="empty">
-                <td colspan="4"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
-              </tr>
-              <tr class="clone">
-                <td></td>
-                <td>
-                  <select name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
-                    <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
-                    <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
-                    <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
-                  </select>
-                </td>
-                <td>
-                  <div class="custom-control custom-checkbox">
-                    <input
-                      class="custom-control-input"
-                      type="checkbox"
-                      name="usernameOnly"
-                      value="false"
-                      id="usernameOnly"
-                      data-i18n="[title]optionsColumnUsernameOnly"
-                    />
-                    <label
-                      data-i18n="optionsColumnUsernameOnly"
-                      class="custom-control-label"
-                      for="usernameOnly"
-                    ></label>
-                  </div>
-                </td>
-                <td>
-                  <button class="btn delete btn-danger">
-                    <span class="fa fa-trash" aria-hidden="true"></span
-                    ><span data-i18n="optionsButtonRemove"></span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div id="dialogDeleteSite" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                  <h5 class="modal-title">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    <span data-i18n="optionsSitePreferencesRemove"></span>
-                  </h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    <span
-                      data-i18n="optionsSitePreferencesConfirmation"
-                      i18n-placeholder="<strong></strong>"
-                    ></span>
-                  </p>
-                  <div class="alert alert-info mt-2" role="alert">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                    <span data-i18n="optionsSitePreferencesConfirmationHelpText"></span>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonCancel"></span>
-                  </button>
-                  <button type="button" class="btn btn-danger yes">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    <span data-i18n="optionsButtonRemoveNow"></span>
-                  </button>
-                </div>
+        </div>
+      </section>
+
+      <!-- Custom credential fields -->
+      <section class="tab-pane" id="tab-custom-fields" role="tabpanel" aria-labelledby="custom-fields-tab">
+        <p>
+          <span data-i18n="optionsCustomFieldsTabHelpTextFirst"></span>
+          <br/>
+          <span data-i18n="optionsCustomFieldsTabHelpTextSecond"></span><em><span
+          data-i18n="popupChooseCredentialsText"></span></em>.
+          <br/>
+          <span data-i18n="optionsCustomFieldsTabHelpTextThird"></span>
+        </p>
+        <table class="table table-striped table-bordered table-hover">
+          <caption data-i18n="optionsCustomFieldsTableCaption"></caption>
+          <thead>
+          <tr>
+            <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
+            <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="empty">
+            <td colspan="2"><span data-i18n="optionsCustomFieldsNotFound"></span></td>
+          </tr>
+          <tr class="clone">
+            <td></td>
+            <td>
+              <button class="btn delete btn-danger btn">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span data-i18n="optionsButtonRemove"></span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div id="dialogDeleteCustomCredentialFields" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  ×
+                </button>
+                <h3 data-i18n="optionsCustomFieldsRemove"></h3>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <span data-i18n="optionsCustomFieldsConfirmation" i18n-placeholder="<strong></strong>"></span>
+                </p>
+                <small class="form-text text-muted" data-i18n="optionsCustomFieldsConfirmationHelpText"></small>
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <span data-i18n="optionsButtonCancel"></span>
+                </button>
+                <button class="btn yes btn-primary">
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                  <span data-i18n="optionsButtonRemoveNow"></span>
+                </button>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- About -->
-        <section class="tab-pane" id="tab-about" role="tabpanel" aria-labelledby="about-tab">
-          <section class="card border-primary">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-desktop" aria-hidden="true"></i> On the Web
-            </div>
-            <div class="card-body">
-              <ul class="list-unstyled" style="line-height: 2;">
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk"
-                    data-i18n="[title]openNewTab"
-                    tabindex="6"
-                  >
-                    <span class="fa fa-chrome fa-lg"></span>
-                    <span data-i18n="optionsAboutChrome"></span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/"
-                    data-i18n="[title]openNewTab"
-                    tabindex="7"
-                  >
-                    <span class="fa fa-firefox fa-lg"></span>
-                    <span data-i18n="optionsAboutMozilla"></span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://github.com/keepassxreboot/keepassxc-browser"
-                    data-i18n="[title]openNewTab"
-                    tabindex="8"
-                  >
-                    <span class="fa fa-github fa-lg"></span>
-                    <span data-i18n="optionsAboutGitHub"></span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="card border-primary mt-4">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-info-circle" aria-hidden="true"></i> Version information
-            </div>
-            <div class="card-body">
-              <ul class="list-unstyled">
-                <li
-                  data-i18n="optionsAboutExtensionVersion"
-                  i18n-placeholder="<em class='versionCIP'></em>"
-                ></li>
-                <li
-                  data-i18n="optionsAboutKeePassXCVersion"
-                  i18n-placeholder="<em class='versionKPH'></em>"
-                ></li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="card border-primary mt-4">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-users" aria-hidden="true"></i>
-              <span data-i18n="optionsAboutContributors"></span>
-            </div>
-            <div class="card-body">
-              <ul class="list-unstyled">
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://github.com/pfn/"
-                    data-i18n="[title]openNewTab"
-                    tabindex="9"
-                  >
-                    Perry Nguyen
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="http://lukas-schulze.de"
-                    data-i18n="[title]openNewTab"
-                    tabindex="10"
-                  >
-                    Lukas Schulze
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://github.com/smorks"
-                    data-i18n="[title]openNewTab"
-                    tabindex="11"
-                  >
-                    Andy Brandt
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://github.com/varjolintu/"
-                    data-i18n="[title]openNewTab"
-                    tabindex="12"
-                  >
-                    Sami Vänttinen
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://github.com/keepassxreboot/keepassxc-browser"
-                    data-i18n="[title]openNewTab"
-                    tabindex="13"
-                  >
-                    KeePassXC Team
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <div class="card border-primary mt-4">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-bug" aria-hidden="true"></i>
-              <span data-i18n="optionsAboutReportBugs"></span>
-            </div>
-            <div class="card-body">
-              <a
-                target="_blank"
-                href="https://github.com/keepassxreboot/keepassxc-browser/issues/new"
-                tabindex="14"
-                ><span data-i18n="optionsAboutCreateNewIssue"></span
-              ></a>
-              <p><span data-i18n="optionsAboutDebugInfo"></span>:</p>
-              <ul class="list-unstyled">
-                <li>KeePassXC: <span class="kpxcVersion"></span></li>
-                <li>KeePassXC-Browser: <span class="kpxcbrVersion"></span></li>
-                <li>Operating system: <span class="kpxcbrOS"></span></li>
-                <li>Browser: <span class="kpxcbrBrowser"></span></li>
-              </ul>
+      <!-- Site preferences -->
+      <section class="tab-pane" id="tab-site-preferences" role="tabpanel" aria-labelledby="site-prefs-tab">
+        <p>
+          <span data-i18n="optionsSitePreferencesTabHelpTextFirst"></span>
+          <br/>
+          <span data-i18n="optionsSitePreferencesTabHelpTextSecond"></span>
+          <em><span data-i18n="popupButtonIgnore"></span></em>.
+          <br/>
+          <span data-i18n="optionsSitePreferencesTabHelpTextThird"></span>
+          <br/>
+          <span data-i18n="optionsSitePreferencesTabHelpTextFourth"></span>
+        </p>
+        <div class="mb-3">
+          <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
+          <div class="input-group mb-3" id="manualUrlGroup">
+            <input id="manualUrl" type="url" class="form-control" pattern="ftp://.*|http://.*|https://.*"
+                   minlength="10"/>
+            <div class="input-group-append">
+              <button class="btn btn-primary" id="sitePreferencesManualAdd" type="button"><i class="fa fa-plus"
+                                                                                             aria-hidden="true"></i><span
+                data-i18n="optionsButtonAdd"></span></button>
             </div>
           </div>
-
-          <div class="card border-primary mt-4">
-            <div class="card-header bg-primary text-white">
-              <i class="fa fa-file-code-o" aria-hidden="true"></i>
-              <span data-i18n="optionsAboutLicenses"></span>
+        </div>
+        <table class="table table-striped table-bordered table-hover">
+          <caption data-i18n="optionsSitePreferencesTableCaption"></caption>
+          <thead>
+          <tr>
+            <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
+            <th scope="col"><span data-i18n="optionsColumnIgnore"></span></th>
+            <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
+            <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="empty">
+            <td colspan="4"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
+          </tr>
+          <tr class="clone">
+            <td></td>
+            <td>
+              <select name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
+                <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
+                <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
+                <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
+              </select>
+            </td>
+            <td>
+              <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" name="usernameOnly" value="false" id="usernameOnly"
+                       data-i18n="[title]optionsColumnUsernameOnly"/>
+                <label data-i18n="optionsColumnUsernameOnly" class="custom-control-label" for="usernameOnly"></label>
+              </div>
+            </td>
+            <td>
+              <button class="btn delete btn-danger"><span class="fa fa-trash" aria-hidden="true"></span><span
+                data-i18n="optionsButtonRemove"></span></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div id="dialogDeleteSite" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                  <span data-i18n="optionsSitePreferencesRemove"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <span data-i18n="optionsSitePreferencesConfirmation" i18n-placeholder="<strong></strong>"></span>
+                </p>
+                <div class="alert alert-info mt-2" role="alert">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  <span data-i18n="optionsSitePreferencesConfirmationHelpText"></span>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                  <span data-i18n="optionsButtonCancel"></span>
+                </button>
+                <button type="button" class="btn btn-danger yes">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <span data-i18n="optionsButtonRemoveNow"></span>
+                </button>
+              </div>
             </div>
-            <div class="card-body">
-              <details>
-                <summary>Bootstrap</summary>
-                <pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="tab-pane" id="tab-about" role="tabpanel" aria-labelledby="about-tab">
+        <section class="card border-primary">
+          <div class="card-header bg-primary text-white"><i class="fa fa-desktop" aria-hidden="true"></i> On the Web
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled" style="line-height: 2;">
+              <li>
+                <a target="_blank" rel="noopener"
+                   href="https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk"
+                   data-i18n="[title]openNewTab" tabindex="6">
+                  <span class="fa fa-chrome fa-lg"></span>
+                  <span data-i18n="optionsAboutChrome"></span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener"
+                   href="https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/"
+                   data-i18n="[title]openNewTab" tabindex="7">
+                  <span class="fa fa-firefox fa-lg"></span>
+                  <span data-i18n="optionsAboutMozilla"></span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener" href="https://github.com/keepassxreboot/keepassxc-browser"
+                   data-i18n="[title]openNewTab" tabindex="8">
+                  <span class="fa fa-github fa-lg"></span>
+                  <span data-i18n="optionsAboutGitHub"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="card border-primary mt-4">
+          <div class="card-header bg-primary text-white"><i class="fa fa-info-circle" aria-hidden="true"></i> Version
+            information
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li data-i18n="optionsAboutExtensionVersion" i18n-placeholder="<em class='versionCIP'></em>"></li>
+              <li data-i18n="optionsAboutKeePassXCVersion" i18n-placeholder="<em class='versionKPH'></em>"></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="card border-primary mt-4">
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span data-i18n="optionsAboutContributors"></span>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li>
+                <a target="_blank" rel="noopener" href="https://github.com/pfn/" data-i18n="[title]openNewTab"
+                   tabindex="9">
+                  Perry Nguyen
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener" href="http://lukas-schulze.de" data-i18n="[title]openNewTab"
+                   tabindex="10">
+                  Lukas Schulze
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener" href="https://github.com/smorks" data-i18n="[title]openNewTab"
+                   tabindex="11">
+                  Andy Brandt
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener" href="https://github.com/varjolintu/" data-i18n="[title]openNewTab"
+                   tabindex="12">
+                  Sami Vänttinen
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="noopener" href="https://github.com/keepassxreboot/keepassxc-browser"
+                   data-i18n="[title]openNewTab" tabindex="13">
+                  KeePassXC Team
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="card border-primary mt-4">
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-bug" aria-hidden="true"></i>
+            <span data-i18n="optionsAboutReportBugs"></span>
+          </div>
+          <div class="card-body">
+            <a target="_blank" href="https://github.com/keepassxreboot/keepassxc-browser/issues/new" tabindex="14"><span
+              data-i18n="optionsAboutCreateNewIssue"></span></a>
+            <p><span data-i18n="optionsAboutDebugInfo"></span>:</p>
+            <ul class="list-unstyled">
+              <li>KeePassXC: <span class="kpxcVersion"></span></li>
+              <li>KeePassXC-Browser: <span class="kpxcbrVersion"></span></li>
+              <li>Operating system: <span class="kpxcbrOS"></span></li>
+              <li>Browser: <span class="kpxcbrBrowser"></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card border-primary mt-4">
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-file-code-o" aria-hidden="true"></i>
+            <span data-i18n="optionsAboutLicenses"></span>
+          </div>
+          <div class="card-body">
+            <details>
+              <summary>Bootstrap</summary>
+              <pre>
               The MIT License (MIT)
 
               Copyright (c) 2011-2019 Twitter, Inc.
@@ -1048,12 +715,11 @@
               LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
               OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
               THE SOFTWARE.
-                      </pre
-                >
-              </details>
-              <details>
-                <summary>jQuery</summary>
-                <pre>
+             </pre>
+            </details>
+            <details>
+              <summary>jQuery</summary>
+              <pre>
               Copyright JS Foundation and other contributors, https://js.foundation/
 
               Permission is hereby granted, free of charge, to any person obtaining
@@ -1074,13 +740,12 @@
               LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
               OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
               WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-            </pre
-                >
-              </details>
+            </pre>
+            </details>
 
-              <details>
-                <summary>Fork Awesome</summary>
-                <pre>
+            <details>
+              <summary>Fork Awesome</summary>
+              <pre>
               Copyright (c) 2018, Fork Awesome (https://forkawesome.github.io),
               with Reserved Font Name Fork Awesome.
 
@@ -1176,17 +841,16 @@
               DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
               FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
               OTHER DEALINGS IN THE FONT SOFTWARE.
-            </pre
-                >
-              </details>
-            </div>
+              </pre >
+            </details>
           </div>
-        </section>
+        </div>
       </section>
-    </div>
+    </section>
+  </div>
 
-    <footer class="footer text-muted mt-3 text-center">
-      (C) 2017-2019 KeePassXC Team
-    </footer>
+  <footer class="footer text-muted mt-3 text-center">
+    (C) 2017-2019 KeePassXC Team
+  </footer>
   </body>
 </html>
