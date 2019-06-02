@@ -239,6 +239,10 @@
         "message": "Error: No credentials for the given username found.",
         "description": "Alert message when no credentials are found for the given username."
     },
+    "credentialExpired": {
+        "message": "Expired",
+        "description": "If a credential is expired, this is appended to the title label."
+    },
     "fieldsFill": {
         "message": "Error: Cannot find fields to fill in.",
         "description": "Alert message when no fields are found to fill in."
@@ -531,6 +535,10 @@
         "message": "Automatically reconnect to KeePassXC.",
         "description": "Auto-reconnect checkbox text."
     },
+    "optionsAutomaticReconnectWarning": {
+        "message": "Warning! This feature is experimental. Use at your own risk.",
+        "description": "Auto-reconnect warning message."
+    },
     "optionsCheckboxAutoFillSingleEntry": {
         "message": "Automatically fill in single-credential entries.",
         "description": "Automatically fill-in single credential entry checkbox text."
@@ -538,6 +546,14 @@
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Activate autocomplete for username fields.",
         "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxAutoSubmit": {
+        "message": "Auto-submit login forms",
+        "description": "Auto-submit checkbox text."
+    },
+    "optionsAutoSubmitHelpText": {
+        "message": "Automatically submits selected credentials. This is disabled for single entry auto-fill.",
+        "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
         "message": "Show notifications.",
@@ -882,5 +898,9 @@
     "httpAuthDialog": {
         "message": "HTTP Basic Authentication dialog",
         "description": "Options page HTTP Basic Auth dialog text"
+    },
+    "autocompleteSubmitMessage": {
+        "message": "Your selection will be auto-submitted",
+        "description": "Message shown at the bottom of autocomplete menu."
     }
 }

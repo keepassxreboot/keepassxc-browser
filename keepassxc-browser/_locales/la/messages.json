@@ -1,0 +1,850 @@
+{
+    "extensionDescription": {
+        "message": "KeePassXC integratio pro interretialibus navigatoribus modernis",
+        "description": "Name of the extension."
+    },
+    "contextMenuFillUsernameAndPassword": {
+        "message": "Imple Nomine Usorio et Tessera",
+        "description": "Context menu item for filling both username and password."
+    },
+    "contextMenuFillPassword": {
+        "message": "Imple Tessera Tantum",
+        "description": "Context menu item for filling password."
+    },
+    "contextMenuFillTOTP": {
+        "message": "Imple TOTP",
+        "description": "Context menu item for filling Time-based One Time Password."
+    },
+    "contextMenuShowPasswordGeneratorIcons": {
+        "message": "Ostende Tesserarum Generatoris Icones",
+        "description": "Show password generator icon on every password input field."
+    },
+    "contextMenuSaveCredentials": {
+        "message": "Serva litteras credentiales",
+        "description": "Save credentials using the extension popup icon."
+    },
+    "contextMenuShowPasswordGenerator": {
+        "message": "Ostende generatorem tesserarium",
+        "description": "Show password generator text."
+    },
+    "rememberCredentialsPopup": {
+        "message": "Litteras credentialies vel creare vel mutare potes incone extensionis deprimendo.",
+        "description": "Notification text when saving credentials from the context menu."
+    },
+    "multipleCredentialsDetected": {
+        "message": "HTTP authenticatio cum litteris credentialibus multis invent comprehensa sunt. Deprime iconem extensionis ut recta eligas.",
+        "description": "Notification when HTTP Authentication has multiple credentials detected."
+    },
+    "errorMessageUnknown": {
+        "message": "Error incognitus.",
+        "description": "Unknown error."
+    },
+    "errorMessageDatabaseNotOpened": {
+        "message": "Datorum basis non aperta est.",
+        "description": "Database not opened."
+    },
+    "errorMessageDatabaseHash": {
+        "message": "Datorum basis comminutum non receptum est.",
+        "description": "Database hash not received."
+    },
+    "errorMessageClientPublicKey": {
+        "message": "Clientis publica clavis recepta non est.",
+        "description": "Client public key not received."
+    },
+    "errorMessageDecrypt": {
+        "message": "Nuntius discifrari non potest.",
+        "description": "Cannot decrypt message."
+    },
+    "errorMessageTimeout": {
+        "message": "Non potest connexi ad KeePassXC. Comproba in KeePassXC optionibus navigatoris integrationem habilitatam esse",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
+    },
+    "errorMessageCanceled": {
+        "message": "Actio aut cancellata aut vetita est.",
+        "description": "Action canceled or denied."
+    },
+    "errorMessageEncrypt": {
+        "message": "Nuntii cifrandi defecerunt. Curritne KeePassXC?",
+        "description": "Message encryption failed. Is KeePassXC running?"
+    },
+    "errorMessageAssociate": {
+        "message": "KeePassXC associatio fefellit. Conare iterum.",
+        "description": "KeePassXC association failed, try again."
+    },
+    "errorMessageKeyExchange": {
+        "message": "Permutatio clavorum non successavit.",
+        "description": "Key exchange was not successful."
+    },
+    "errorMessageEncryptionKey": {
+        "message": "Clavis cryptographica non cognita est.",
+        "description": "Encryption key is not recognized."
+    },
+    "errorMessageSavedDatabases": {
+        "message": "Nullae servatae datorum bases inventae sunt.",
+        "description": "No saved databases found."
+    },
+    "errorMessageIncorrectAction": {
+        "message": "Prava actio.",
+        "description": "Incorrect action."
+    },
+    "errorMessageEmptyMessage": {
+        "message": "Nuntius vacuus receptus.",
+        "description": "Empty message received."
+    },
+    "errorMessageNoURL": {
+        "message": "Nullum URL praebitum est.",
+        "description": "No URL provided."
+    },
+    "errorMessageNoLogins": {
+        "message": "Nulla credentialia sunt inventa.",
+        "description": "No logins found."
+    },
+    "passwordGeneratorIcon": {
+        "message": "Icon generatoris tesserarii",
+        "description": "Alt attribute text of the password generator icon."
+    },
+    "passwordGeneratorPlaceholder": {
+        "message": "Tessera generata",
+        "description": "Input field placeholder for generated password."
+    },
+    "passwordGeneratorLabel": {
+        "message": "Imple quoque campum tesserarium sequentem ",
+        "description": "Checkbox text below the password generator input field."
+    },
+    "passwordGeneratorBits": {
+        "message": "??? Biti",
+        "description": "Bits of the generated password."
+    },
+    "passwordGeneratorTitle": {
+        "message": "Tesserarum Generator",
+        "description": "Password generator dialog title."
+    },
+    "passwordGeneratorGenerate": {
+        "message": "Genera",
+        "description": "Generate button text in password generator."
+    },
+    "passwordGeneratorCopy": {
+        "message": "Exscribe",
+        "description": "Copy button text in password generator."
+    },
+    "passwordGeneratorFillAndCopy": {
+        "message": "Imple et exscribe",
+        "description": "Fill and copy button text in password generator."
+    },
+    "passwordGeneratorErrorTooLong": {
+        "message": "Error:\nHaec tessera generata longior est quam longitudo permitta!\nSecuta est ut longitudini conveniat.\n\nMemento, si vis, novam tesseram!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorGenerateText": {
+        "message": "Genera tesseram",
+        "description": "Password icon title text."
+    },
+    "passwordGeneratorError": {
+        "message": "Tessera generata recepi non potest.<br />Curritne KeePassXC?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "defineDismiss": {
+        "message": "Dimitte",
+        "description": "Dismiss button text when choosing custom login fields."
+    },
+    "defineSkip": {
+        "message": "Transi",
+        "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "Ostende plus",
+        "description": "More button text when choosing custom login fields."
+    },
+    "defineAgain": {
+        "message": "Iterum",
+        "description": "Again button text when choosing custom login fields."
+    },
+    "defineConfirm": {
+        "message": "Confirme",
+        "description": "Confirm button text when choosing custom login fields."
+    },
+    "defineAlreadySelected": {
+        "message": "Campi credentiales pro hac pagina iam electi sunt et superscribentur.",
+        "description": "A text shown when custom credentials fields are already set for the page."
+    },
+    "defineDiscard": {
+        "message": "Excute electum",
+        "description": "Discard selection button text when choosing custom login fields."
+    },
+    "defineStringField": {
+        "message": "Campus serialis #",
+        "description": "Text for string field."
+    },
+    "defineChooseUsername": {
+        "message": "1. Campus pro nomine usorio legendo",
+        "description": "Choosing a username field text when choosing custom login fields."
+    },
+    "defineChoosePassword": {
+        "message": "2. Campus pro tessera nunc legenda",
+        "description": "Choosing a password field text when choosing custom login fields."
+    },
+    "defineConfirmSelection": {
+        "message": "3. Confirma electionem",
+        "description": "Confirm a selection text when choosing custom login fields."
+    },
+    "defineHelpText": {
+        "message": "Confirma, si vis, electionem tuam vel elige plures campos pro <em>Serialibus Campis</em>.",
+        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+    },
+    "defineKeyboardText": {
+        "message": "Potes quoque numeris uti ut ex claviario campos inductos eligas.",
+        "description": "Help text when choosing custom login fields."
+    },
+    "username": {
+        "message": "Nomen usorium",
+        "description": "General text for username."
+    },
+    "password": {
+        "message": "Tessera",
+        "description": "General text for password."
+    },
+    "credentialsNoUsername": {
+        "message": "- nullum nomen usorium -",
+        "description": "Shown when no username is set in the credentials."
+    },
+    "credentialsNoLoginsFound": {
+        "message": "Error:\nNulla credentialia inventa sunt.",
+        "description": "Shown when no credentials are found for the current page."
+    },
+    "credentialsMultipleFound": {
+        "message": "Error:\nPlus uno credentiali in KeePassXC inventum est!\nDeprime KeePassXC-Navigatoris inconem ut plus optionum videas.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsNoUsernameFound": {
+        "message": "Error:\nNullae litterae credentialies pro praebito nomini usorio inventae sunt.",
+        "description": "Alert message when no credentials are found for the given username."
+    },
+    "fieldsFill": {
+        "message": "Error:\nCampi inveniri ad implendum non possunt.",
+        "description": "Alert message when no fields are found to fill in."
+    },
+    "fieldsNoPasswordField": {
+        "message": "Error:\nCampus tesserarius inveniri non potest.",
+        "description": "Message shown when no password fields are found."
+    },
+    "rememberNothingChanged": {
+        "message": "Error:\nMutatae litterae credentiales non inventae sunt.",
+        "description": "Message shown when trying to save credentials that haven't changed."
+    },
+    "popupTitle": {
+        "message": "KeePassXC - Emergens",
+        "description": "Popup window title."
+    },
+    "popupSettingsText": {
+        "message": "Configuratio",
+        "description": "Popup Settings button text."
+    },
+    "popupChooseCredentialsText": {
+        "message": "Elige personalizatos initii campos pro hac pagina.",
+        "description": "Popup credential choosing button text."
+    },
+    "popupConnectButton": {
+        "message": "Connecte",
+        "description": "Popup Connect button text."
+    },
+    "popupReconnectButton": {
+        "message": "Reconnecte",
+        "description": "Popup Reconnect button text."
+    },
+    "popupRedetectButton": {
+        "message": "Initii campos rursus inveni",
+        "description": "Popup Redetect login fields button text."
+    },
+    "popupReloadButton": {
+        "message": "Reonera",
+        "description": "Popup Reload button text."
+    },
+    "popupReopenButton": {
+        "message": "Reclude datorum basim",
+        "description": "Popup reopen database button text."
+    },
+    "popupErrorEncountered": {
+        "message": "KeepassXC-Navigator errori occurrit.",
+        "description": "A text shown above error message in the popup."
+    },
+    "popupUpdateAvailable": {
+        "message": "Uteris KeePassXC veteri versione.",
+        "description": "Popup warning message about old version of KeePassXC."
+    },
+    "popupDownloadNewVersion": {
+        "message": "Extrahe, si vis, novissimam versionem ex keepassxc.org",
+        "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupCheckingStatus": {
+        "message": "Comprobans statum...",
+        "description": "Checking status message in popup."
+    },
+    "popupNotConfigured": {
+        "message": "KeePassXC-Navigator non configuratus est. Deprime malleolum connexionis ut Navigatorem cum KeePassXC copules.",
+        "description": "A popup message shown when the extension has not been connected to KeePassXC."
+    },
+    "popupNeedReconfigure": {
+        "message": "KeePassXC-Naviagator disconnexus est de KeePassXC.",
+        "description": "A popup message shown when the extension has been disconnected from KeePassXC."
+    },
+    "popupNeedReconfigureMessage": {
+        "message": "Deprime malleolum cui titulus \"Reconnecte est\" ut connexum novum constituas.",
+        "description": "A popup message shown when reconnect is needed."
+    },
+    "popupConfiguredNotAssociated": {
+        "message": "KeePassXC-Navigator non iam connexit cum KeePassXC sed configuratus est signo: $1",
+        "description": "A popup message shown when KeePassXC is not connected but configured."
+    },
+    "popupConfiguredAndAssociated": {
+        "message": "KeePassXC-Navigator connexus cum KeePassXC et configuratus est cum sequenti signo: $1",
+        "description": "A popuo message when a connection to KeePassXC is succesful."
+    },
+    "popupRememberInfoText": {
+        "message": "Mutatum est aut nomen usorium aut tesseram. Visne id servare?",
+        "description": "Popup message when username or password has changed."
+    },
+    "popupRememberSaving": {
+        "message": "Litterae credentiales in connexa datorum basi servabuntur cum signo $1",
+        "description": "A popup message when saving or updating credentials."
+    },
+    "popupRememberNewUsername": {
+        "message": "Nomen usorium sequens non servatum est: $1",
+        "description": "A popup message shown when a new username is detected when saving credentials."
+    },
+    "popupRememberUsernameExists": {
+        "message": "Credentialia cum nomine usorio uso sunt graviter marcata: $1",
+        "description": "A popup message shown when a existing username is detected when saving credentials."
+    },
+    "popupRememberChooseCredentials": {
+        "message": "Elige, si vis, litteras credentiales actualizandas.",
+        "description": "A popup message shown choosing what credentials user wants to update."
+    },
+    "popupRememberChooseGroup": {
+        "message": "Elige, si vis, classem cui novas litteras credentiales addere vis.",
+        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    },
+    "popupRememberErrorDefaultGroupNotFound": {
+        "message": "Error: Praebita classis defalta non invenitur. Omnes classes necessarias creabuntur.",
+        "description": "Error message shown when default group set cannot be found."
+    },
+    "popupRememberErrorCreatingNewGroup": {
+        "message": "Novae classes creari non possunt.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "popupRememberErrorPasswordNotChanged": {
+        "message": "Error: Litterae credentiales non actualizatae sunt. Tessera non actualizata est.",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "popupRememberErrorCannotSaveCredentials": {
+        "message": "Error: Litterae credentiales aut servari aut actualizari non possunt.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "popupLoginText": {
+        "message": "Elige login-informationem quae velis inducere in pagina.",
+        "description": "A popup message shown when one or multiple credentials are present."
+    },
+    "popupFilterText": {
+        "message": "Percolator:",
+        "description": "Text for login credentials quick filter."
+    },
+    "popupAuthText": {
+        "message": "Elige informationem credentialem vis tibi initurum esse.",
+        "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
+    },
+    "popupMultiplePasswordFields": {
+        "message": "Plus uno campo tesseralio in hac pagina inventus est. Dextrorsum deprime unum campum tesseralium, et elige unum ex:",
+        "description": "A popup message shown when web page has multiple password fields."
+    },
+    "popupURL": {
+        "message": "URL:",
+        "description": "URL. Might not need any translation."
+    },
+    "popupUsername": {
+        "message": "Nomen usorium:",
+        "description": "A username field name shown on credential update."
+    },
+    "popupButtonNew": {
+        "message": "Novum",
+        "description": "New button text in popup when updating credentials."
+    },
+    "popupButtonUpdate": {
+        "message": "Actualizatio",
+        "description": "Update button text in popup when updating credentials."
+    },
+    "popupButtonDismiss": {
+        "message": "Dimitte",
+        "description": "Dismiss button text in popup when updating credentials."
+    },
+    "popupButtonIgnore": {
+        "message": "Noli poscere umquam hanc paginam",
+        "description": "Ignore button text in popup or in notification when updating credentials."
+    },
+    "popupButtonClose": {
+        "message": "Claude",
+        "description": "Close button text in popup or in notification."
+    },
+    "popupButtonDismissHttpAuth": {
+        "message": "Dimitte ostendeque dialogum authenticationis defaltum",
+        "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsTitle": {
+        "message": "Configuratio | KeePassXC-Browser",
+        "description": "Options page title."
+    },
+    "optionsGeneralSettingsTab": {
+        "message": "Configuratio Generalis",
+        "description": "General Settings tab text."
+    },
+    "optionsConnectedDatabasesTab": {
+        "message": "Datorum Bases Connectae",
+        "description": "Connected Databases tab text."
+    },
+    "optionsCustomFieldsTab": {
+        "message": "Personalizati campi credentiales",
+        "description": "Saved custom login fields tab text."
+    },
+    "optionsSitePreferencesTab": {
+        "message": "Potissima situs interretialis ",
+        "description": "Site preferences fields tab text."
+    },
+    "optionsAboutTab": {
+        "message": "Informatio de",
+        "description": "About tab text."
+    },
+    "optionsMenuGeneral": {
+        "message": "Generale",
+        "description": "General settings page header."
+    },
+    "optionsMenuConnectedDatabases": {
+        "message": "Connectae Datorum Bases",
+        "description": "Connected Databases page header."
+    },
+    "optionsMenuCustomFields": {
+        "message": "Campos initiailizandi sessionis personalizatos",
+        "description": "Custom login fields page header."
+    },
+    "optionsMenuSitePreferences": {
+        "message": "Potissima situs interretialis ",
+        "description": "Site preferences page header."
+    },
+    "optionsMenuAbout": {
+        "message": "Informatio de",
+        "description": "About page header."
+    },
+    "optionsConfigureShortcuts": {
+        "message": "Configura excurtiatus",
+        "description": "Keyboard shortcut button and title text."
+    },
+    "optionsButtonSave": {
+        "message": "Serva",
+        "description": "Save button text."
+    },
+    "optionsButtonConnect": {
+        "message": "Connecte",
+        "description": "Connect button text."
+    },
+    "optionsButtonRemove": {
+        "message": "Excute",
+        "description": "Remove button text."
+    },
+    "optionsButtonAdd": {
+        "message": "Adde",
+        "description": "Add button text."
+    },
+    "optionsButtonUpdate": {
+        "message": "Comproba utrum actualizationes sunt",
+        "description": "Check for updates button text."
+    },
+    "optionsButtonRemoveNow": {
+        "message": "Ita, excute nunc",
+        "description": "Confirm button text when removing database key or custom login fields."
+    },
+    "optionsButtonCancel": {
+        "message": "Cancella",
+        "description": "Cancel button text when removing database key or custom login fields."
+    },
+     "optionsButtonReset": {
+        "message": "Reimpone",
+        "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsLabelBlinkTime": {
+        "message": "Tempus in Connivendo:",
+        "description": "Blink Time option text."
+    },
+    "optionsLabelRedirectOffset": {
+        "message": "Redirectionis numeratus:",
+        "description": "Redirect Offset option text."
+    },
+    "optionsLabelRedirectAllowance": {
+        "message": "Maximus numerus redirectionum:",
+        "description": "RMaximum (Number of) Redirects options text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "Defalta classis ad novarum tesserarum servandum:",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "Separa classem lineolis intercendentibus, e.g.: Classis/FiliaClassis.",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "Semper roga ubi oportet novas litteras credentialas servari.",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "Popup habiltatu elenchum circulatum osdenit.",
+        "description": "Default checkbox explanation help text."
+    },
+    "optionsCheckboxUsePasswordGenerator": {
+        "message": "Activa generatorem tesserae.",
+        "description": "Activate password generator checkbox text."
+    },
+    "optionsCheckboxAutoRetrieveCredentials": {
+        "message": "Automatice litteras credentiales repete",
+        "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutoFillSingleEntry": {
+        "message": "Automatice imple nomina singulorum credentialorum.",
+        "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoCompleteUsernames": {
+        "message": "Activa autocomplete pro campis nominum usoriorum.",
+        "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowNotifications": {
+        "message": "Ostende notificationes.",
+        "description": "Show notifications checkbox text."
+    },
+    "optionsSaveDomainOnly": {
+        "message": "Serva dominium solum.",
+        "description": "Save domain only checkbox text."
+    },
+    "optionsCheckboxShowLoginNotifications": {
+        "message": "Ostende notificationem si litterae credentialiae novae in datorum basi servari possunt.",
+        "description": "Show login notifications checkbox text."
+    },
+    "optionsCheckboxAutoFillAndSend": {
+        "message": "Automatice imple HTTP Basic Auth dialogos et submitte eos.",
+        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsRadioText": {
+        "message": "Comproba si actualizationes sint pro KeePassKC:",
+        "description": "Text above radio buttons in the settings page."
+    },
+    "optionsRadioThreeDays": {
+        "message": "ternis (3) diebus",
+        "description": "Radio button text."
+    },
+    "optionsRadioWeek": {
+        "message": "singulis hebdomadis",
+        "description": "Radio button text."
+    },
+    "optionsRadioMonth": {
+        "message": "singulis mensibus",
+        "description": "Radio button text."
+    },
+    "optionsRadioNever": {
+        "message": "numquam",
+        "description": "Radio button text."
+    },
+    "optionsKeyboardShortcutsHeader": {
+        "message": "Excurtiatus claviaturiales",
+        "description": "Keyboard shortcut header text."
+    },
+    "optionsBlinkTimeHelpText": {
+        "message": "Maximum tempus (ms) oportet iconem connivere postquam novae litterae credentiales inveniuntur",
+        "description": "Blink Time option help text."
+    },
+    "optionsRedirectOffsetHelpText": {
+        "message": "Minimum tempus (ms) oportet iconem connivere dum cesset propter redirectiones paginales.",
+        "description": "Redirect Offset option help text."
+    },
+    "optionsRedirectOffsetHelpTextSecond": {
+        "message": "-1 ut tantum tempus connivendi conferatur, praeterens Maximum Redirectionum Numerum (vetus usus)",
+        "description": "Redirect Offset option help text, second part."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "Quot paginas periterare oportet tabellam post redirectionem ante inconem disactivandum?",
+        "description": "Redirect Allowance option help text."
+    },
+    "optionsUsePasswordGeneratorHelpText": {
+        "message": "Addit malleolum campis tesserariis ad novam tesseram generandam.",
+        "description": "Password Generator option help text."
+    },
+    "optionsUsePasswordGeneratorHelpTextSecond": {
+        "message": "KeePassXC tesseras generat profilo tesserarum generandarum.",
+        "description": "Password Generator option help text, second part."
+    },
+    "optionsAutoRetrieveCredentialsHelpText": {
+        "message": "KeePassXC-Navigator, cum tabella activatur, litteras credentiales statim referret.  ",
+        "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutoFillSingleEntryHelpText": {
+        "message": "Permitte ipsum KeePassXC-Navigatorem implere litteras credentiales si solum unum nomen recipiat.",
+        "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillSingleEntryWarning": {
+        "message": "Cave! Auto-implere non est tutum a periculo. Utere tuo periculo.",
+        "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutocompleteUsernamesHelpText": {
+        "message": "Ostende elenchum pendentem omnes litteras credentiales habentem omnium camporum usoriorum qui sunt in singula pagina.",
+        "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowNotificationsHelpText": {
+        "message": "Ostende notificationes cum errores sint aut congressus cum usore opus est. ",
+        "description": "Show notifications option help text."
+    },
+    "optionsSaveDomainOnlyHelpText": {
+        "message": "Quotiescumque novas litteras credentiales servas, serva solum dominium pro plena URL.",
+        "description": "Save domain only option help text."
+    },
+    "optionsAutoFillAndSendHelpText": {
+        "message": "Si litterae credentiales pro pagina inveniatur et login-typus est HTTP Basic Auth request, KeePassXC-Navigator intrare conabitur primis datis litteris credentialibus.",
+        "description": "Auto-Fill And Send option help text."
+    },
+    "optionsAutoFillAndSendHelpTextSecond": {
+        "message": "Dialogus HTTP Basic Auth similis eo videtur:",
+        "description": "HTTP Basic Auth image help text."
+    },
+    "optionsVersionInfoText": {
+        "message": "KeePassXC-Navigator requirit KeePassXC litteras credentiales arcessere.",
+        "description": "Settings page version info text."
+    },
+    "optionsVersionDownload": {
+        "message": "Novissimam versionem stabilem extrahere potes ex $1",
+        "description": "Settings page download link."
+    },
+    "optionsVersionRunning": {
+        "message": "Agis KeePassXC versionem: $1",
+        "description": "Settings page info text of user's KeePassXC version."
+    },
+    "optionsLatestVersion": {
+        "message": "Novissima versio KeePassXC in promptu: $1",
+        "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsDefault": {
+        "message": "Defaltum: $1",
+        "description": "Default setting text."
+    },
+    "optionsInfinite": {
+        "message": "Infinitum: $1",
+        "description": "Infinite setting text."
+    },
+    "optionsRecommended": {
+        "message": "Suasum: $1",
+        "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "Excurtiatus pro $1 sine errore mutatus est.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "Excurtiatus for $1 reimpositus est.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "Error: Excurtiatus pro $1 mutatus non est!",
+        "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsConnectedDatabasesText": {
+        "message": "Sequentes KeePassXC datorum bases ad KeePassXC-Navigatorem connectae sunt.",
+        "description": "Info text about connected databases."
+    },
+    "optionsConnectedDatabasesNotFound": {
+        "message": "Nullae datorum bases connectae inventae sunt.",
+        "description": "Shown in the connected databases table when there is no connected databases."
+    },
+    "optionsDatabasesRemoveIdentifier": {
+        "message": "Excutiaturne indentifactor ex datorum basis tabula?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmFirst": {
+        "message": "Num vis sequentem identificatorem ex datorum basis tabula excutere?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmSecond": {
+        "message": "Reconnectere datorum basim semper potes.",
+        "description": "Confirmation text when removing database from the list, second part."
+    },
+    "optionsDatabaseIdentifier": {
+        "message": "Identificator",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseKey": {
+        "message": "Clavis",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseLastUsed": {
+        "message": "Novissime usum",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseCreated": {
+        "message": "Creatum",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseDelete": {
+        "message": "Dele",
+        "description": "Database list column title."
+    },
+    "optionsColumnPageURL": {
+        "message": "Paginae URL",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnIgnore": {
+        "message": "Praetere",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnUsernameOnly": {
+        "message": "Detectio nominis usorii tantum",
+        "description": "Site preferences list column title."
+    },
+    "optionsColumnDelete": {
+        "message": "Dele",
+        "description": "Site preferences list column title."
+    },
+    "optionsSelectionNothing": {
+        "message": "Habilita omnia propria",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionNormal": {
+        "message": "Debilita litteras credentiales novas aut mutatas",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionFull": {
+        "message": "Debilita omnia propria",
+        "description": "Site preferences option selection."
+    },
+    "optionsCustomFieldsNotFound": {
+        "message": "Nulli personalizati campi credentiales inventi sunt.",
+        "description": "Shown when no saved custom credentials are saved."
+    },
+    "optionsCustomFieldsTableCaption": {
+        "message": "Tabulae inferioris opere, potes servatos campos credentiales administrare.",
+        "description": "Table caption of Custom login fields page."
+    },
+    "optionsCustomFieldsTabHelpTextFirst": {
+        "message": "Si KeePassXC-Navigator inveniat falsos initializandi campos, potes ipse rectos campos indicare.",
+        "description": "Saved custom login fields info text, first part."
+    },
+    "optionsCustomFieldsTabHelpTextSecond": {
+        "message": "Adi ad paginam et deprime KeePassXC-Navigatoris iconem, deinde elige",
+        "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsRemove": {
+        "message": "Visne excutere campos sessionis initializandi personalizatos servatos?",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmation": {
+        "message": "Num vis huius paginae campos servatos initializandi sessionis personalizatos: $1",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmationHelpText": {
+        "message": "KeePassXC-Navigator initializandi campos automatice inveniet in tuo visitatione huius paginae sequenti. ",
+        "description": "Part of confirmation text when removing saved custom login fields."
+    },
+    "optionsSitePreferencesNotFound": {
+        "message": "Nulli interretiales situs praeteriti inventi sunt.",
+        "description": "Shown when no ignored sites are saved."
+    },
+    "optionsSitePreferencesRemove": {
+        "message": "Visne excutere situm interretialem?",
+        "description": "Confirmation text when removing ignored sites from the list."
+    },
+    "optionsSitePreferencesTabHelpTextFirst": {
+        "message": "Situs interretiales in hac pagina habunt iis modos tractandi proprios.",
+        "description": "Site preferences info text, first part."
+    },
+    "optionsSitePreferencesTabHelpTextSecond": {
+        "message": "Ut praetereas litteras cuiusdam situs interretialis credentiales, vel ea adde infra vel deprime iconem KeePassXC-Navigator eligeque.",
+        "description": "Site preferences info text, second part."
+    },
+    "optionsSitePreferencesTabHelpTextThird": {
+        "message": "Si situs interretialis est omnino praeteritus (<em> Debilita omnia propria</em>), hoc plugin nihil operabit quoties illum situm visitas.",
+        "description": "Site preferences info text, third part."
+    },
+    "optionsSitePreferencesTabHelpTextFourth": {
+        "message": "Detectio pro nomini usorio tantum inveniendo efficit ut KeePassXC-Navigator singulas res de sessionis initio in interretilibus sitis separatas paginas pro nomine usorio et pro tessera habentis implere possit.",
+        "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesManualAddText": {
+        "message": "Adde URL manualiter",
+        "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesConfirmation": {
+        "message": "Num vis situm interretialem praebitum ex indice excutere: $1",
+        "description": "Confirmation text when removing site from site preferences."
+    },
+    "optionsSitePreferencesConfirmationHelpText": {
+        "message": "KeePassXC-Navigator omnia pro hoc sito interretiali propria habilitabit et detectionem tantum pro nomini usorio excutiet.",
+        "description": "Part of confirmation text when removing site preferences."
+    },
+    "optionsSitePreferencesTableCaption": {
+        "message": "Tabulae inferioris opere, potes servata potissima administrare.",
+        "description": "Table caption of Site Preferences page."
+    },
+    "optionsSitePreferencesSelect": {
+        "message": "Optio ad proprium extensionis ignorandum in quaqua pagina.",
+        "description": "Title text of select element in Site Preferences."
+    },
+    "optionsAboutChrome": {
+        "message": "Visita KeePassXC-Navigator in Chrome Web Store.",
+        "description": "About page link to Chrome Web Store."
+    },
+    "optionsAboutMozilla": {
+        "message": "Visita KeePassXC-Navigator in Mozilla Add-ons indice.",
+        "description": "About page link to AMO."
+    },
+    "optionsAboutGitHub": {
+        "message": "Vistita KeePassXC-Navigator in GitHub.",
+        "description": "About page link to GitHub."
+    },
+    "optionsAboutExtensionVersion": {
+        "message": "KeePassXC-Navigatoris Versio: $1",
+        "description": "About page text of extension version."
+    },
+    "optionsAboutKeePassXCVersion": {
+        "message": "KeePassXC Versio: $1",
+        "description": "About page text of KeePassXC version."
+    },
+    "optionsAboutContributors": {
+        "message": "Contributores",
+        "description": "About page text of contributors."
+    },
+    "optionsAboutLicenses": {
+        "message": "Licentiae",
+        "description": "About page text of licenses."
+    },
+    "optionsAboutReportBugs": {
+        "message": "Nuntia errores",
+        "description": "About page text of reporting bugs."
+    },
+    "optionsAboutCreateNewIssue": {
+        "message": "Crea novam adsumptionem in GitHub",
+        "description": "Link text for creating a new issue."
+    },
+    "optionsAboutDebugInfo": {
+        "message": "Debug informatio sequens potest adhiberi",
+        "description": "Debug info text."
+    },
+    "optionsErrorInvalidValue": {
+        "message": "Invalidus valor. Comproba, si vis, inductum.",
+        "description": "Error shown when input field has an incorrect value."
+    },
+    "optionsErrorInvalidURL": {
+        "message": "URL invalida. Comproba, si vis, inductum.",
+        "description": "Error shown when input field has an incorrect URL."
+    },
+    "optionsErrorValueExists": {
+        "message": "Valor iam est in indice.",
+        "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "openNewTab": {
+        "message": "Tabellam novam aperit",
+        "description": "Title attribute text."
+    },
+    "httpAuthDialog": {
+        "message": "HTTP Basic Authenticationis dialogus",
+        "description": "Options page HTTP Basic Auth dialog text"
+    }
+}

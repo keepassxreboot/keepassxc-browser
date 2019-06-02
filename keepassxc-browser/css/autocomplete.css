@@ -1,6 +1,5 @@
 .kpxcAutocomplete-items {
     position: absolute !important;
-    border: 1px solid #d4d4d4;
 }
 
 .kpxcAutocomplete-items div {
@@ -8,12 +7,25 @@
     cursor: pointer;
     background-color: #fff; 
     border-bottom: 1px solid #d4d4d4;
+    border-left: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;
     width: auto;
     color: #000;
     font-size: .9em !important;
 }
 
+.kpxcAutocomplete-items footer {
+    padding: 5px;
+    background-color: #ddd;
+    border: 1px solid #d4d4d4 !important;
+    width: auto;
+    color: #000;
+    font-size: .8em !important;
+    font-style: italic;
+}
+
 .kpxcAutocomplete-active {
     background-color: #6cac4d !important; 
     color: #ffffff !important;
+    border: 0px !important;
 }

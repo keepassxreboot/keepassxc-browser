@@ -152,18 +152,16 @@ kpxcEvent.onGetStatus = function(callback, tab, internalPoll = false, triggerUnl
     }
 };
 
-kpxcEvent.onReconnect = function(callback, tab) {
-    keepass.connectToNative();
-
-    // Add a small timeout after reconnecting. Just to make sure. It's not pretty, I know :(
-    setTimeout(() => {
-        keepass.reconnect(callback, tab).then((configured) => {
-            browser.tabs.sendMessage(tab.id, {
-                action: 'redetect_fields'
-            });
-            kpxcEvent.showStatus(configured, tab, callback);
+kpxcEvent.onReconnect = async function(callback, tab) {
+    const configured = await keepass.reconnect(callback, tab);
+    if (configured) {
+        browser.tabs.sendMessage(tab.id, {
+            action: 'redetect_fields'
+        }).catch((err) => {
+            console.log(err);
         });
-    }, 500);
+    }
+    kpxcEvent.showStatus(configured, tab, callback);
 };
 
 kpxcEvent.lockDatabase = function(callback, tab) {
@@ -241,7 +239,7 @@ kpxcEvent.onLoginPopup = function(callback, tab, logins) {
 kpxcEvent.initHttpAuth = function(callback) {
     httpAuth.init();
     callback();
-}
+};
 
 kpxcEvent.onHTTPAuthPopup = function(callback, tab, data) {
     const stackData = {

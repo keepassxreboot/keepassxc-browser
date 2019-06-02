@@ -39,7 +39,7 @@ options.saveSettingsPromise = function() {
             });
         });
     });
-}
+};
 
 options.saveSetting = function(name) {
     const id = '#' + name;
@@ -71,7 +71,7 @@ options.saveKeyRing = function() {
 options.initGeneralSettings = function() {
     $('#tab-general-settings input[type=checkbox]').each(function() {
         $(this).attr('checked', options.settings[$(this).attr('name')]);
-        if ($(this).attr('name') === 'defaultGroupAlwaysAsk' &&  $(this).attr('checked')) {
+        if ($(this).attr('name') === 'defaultGroupAlwaysAsk' && $(this).attr('checked')) {
             $('#defaultGroup').prop('disabled', true);
             $('#defaultGroupButton').prop('disabled', true);
             $('#defaultGroupButtonReset').prop('disabled', true);
@@ -94,8 +94,8 @@ options.initGeneralSettings = function() {
                     $('#defaultGroupButton').prop('disabled', false);
                     $('#defaultGroupButtonReset').prop('disabled', false);
                 }
-            } else if (name == 'automaticReconnect') {
-                const message = updated.automaticReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
+            } else if (name === 'autoReconnect') {
+                const message = updated.autoReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
                 browser.runtime.sendMessage({ action: message });
             }
         });
@@ -239,12 +239,12 @@ options.initConnectedDatabases = function() {
 
     const trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
     trClone.removeClass('clone');
-    for (let hash in options.keyRing) {
+    for (const hash in options.keyRing) {
         const tr = trClone.clone(true);
         tr.data('hash', hash);
         tr.attr('id', 'tr-cd-' + hash);
 
-        $('a.dropdown-toggle:first img:first', tr).attr('src', '/icons/19x19/icon_normal_19x19.png');
+        $('a.dropdown-toggle:first img:first', tr).attr('src', '/icons/toolbar/icon_normal.png');
 
         tr.children('td:first').text(options.keyRing[hash].id);
         tr.children('td:eq(1)').text(options.getPartiallyHiddenKey(options.keyRing[hash].key));
@@ -434,7 +434,7 @@ options.initSitePreferences = function() {
     trClone.removeClass('clone');
     let counter = 1;
     if (options.settings['sitePreferences']) {
-        for (let site of options.settings['sitePreferences']) {
+        for (const site of options.settings['sitePreferences']) {
             const tr = trClone.clone(true);
             tr.data('url', site.url);
             tr.attr('id', 'tr-scf' + counter);

@@ -40,14 +40,14 @@ var matchPatternToRegExp = function(pattern) {
         `^${schemeSegment}://${hostSegment}/${pathSegment}$`
     );
 
-    let match = matchPatternRegExp.exec(pattern);
+    const match = matchPatternRegExp.exec(pattern);
     if (!match) {
-         throw new TypeError('"${pattern}" is not a valid MatchPattern');
+        throw new TypeError(`"${pattern}" is not a valid MatchPattern`);
     }
 
-    let [, scheme, host, path] = match;
+    let [ , scheme, host, path ] = match;
     if (!host) {
-        throw new TypeError('"${pattern}" does not have a valid host');
+        throw new TypeError(`"${pattern}" does not have a valid host`);
     }
 
     let regex = '^';
@@ -96,4 +96,4 @@ var slashNeededForUrl = function(pattern) {
 
 function tr(key, params) {
     return browser.i18n.getMessage(key, params);
-};
+}

@@ -1,3 +1,20 @@
+1.4.0 (21-04-2019)
+=========================
+ - Add translations from Transifex
+ - Show HiDPI toolbar icon in Chrome [#471]
+ - Remove jQuery as a dependency [#128, #430]
+ - Fix ignored sites in Firefox [#458]
+ - Add "Show more" button for selecting arbitrary custom fields [#360]
+
+1.3.3 (26-03-2019)
+=========================
+ - Prevent page scripts from using added DOM elements [#438]
+ - Clear credentials when screen is locked [#358]
+ - Fix z-order of password generator icon [#447]
+ - Allow to select group when adding new credentials [#369]
+ - Improve error messages [#392]
+ - Fix shortcuts [#414]
+
 1.3.2 (11-01-2019)
 =========================
  - Fix KeePassXC version check [#376]

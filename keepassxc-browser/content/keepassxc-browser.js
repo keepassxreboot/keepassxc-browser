@@ -5,7 +5,6 @@ var _called = {};
 _called.retrieveCredentials = false;
 _called.clearLogins = false;
 _called.manualFillRequested = 'none';
-let _loginId = -1;
 let _singleInputEnabledForPage = false;
 const _maximumInputs = 100;
 
@@ -77,14 +76,14 @@ browser.runtime.onMessage.addListener(function(req, sender) {
             kpxcDefine.init();
         } else if (req.action === 'redetect_fields') {
             browser.runtime.sendMessage({
-                action: 'load_settings',
+                action: 'load_settings'
             }).then((response) => {
                 kpxc.settings = response;
                 kpxc.initCredentialFields(true);
             });
         } else if (req.action === 'show_password_generator') {
             kpxcPassword.trigger();
-}
+        }
     }
 });
 
@@ -118,7 +117,7 @@ kpxcForm.destroy = function(form, credentialFields) {
     }
 
     if (form && form.length > 0) {
-        form.onsubmit = null;
+        form.removeEventListener('submit', kpxcForm.onSubmit);
     }
 };
 
@@ -150,7 +149,7 @@ kpxcForm.onSubmit = function() {
 
 var kpxcFields = {};
 
-kpxcFields.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input:not([type])';
+kpxcFields.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input[type=\'username\'], input:not([type])';
 
 // copied from Sizzle.js
 kpxcFields.rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g;
@@ -344,7 +343,7 @@ kpxcFields.getCombination = function(givenType, fieldId) {
         return kpxcFields.combinations[0];
     }
 
-    for (let c of kpxcFields.combinations) {
+    for (const c of kpxcFields.combinations) {
         if (c[givenType] === fieldId) {
             return c;
         }
@@ -360,7 +359,7 @@ kpxcFields.getCombination = function(givenType, fieldId) {
     if (givenType === 'username') {
         const passwordField = kpxcFields.getPasswordField(fieldId, true);
         let passwordId = null;
-        if (passwordField && passwordField.value.length > 0) {
+        if (passwordField) {
             passwordId = kpxcFields.prepareId(passwordField.getAttribute('data-kpxc-id'));
         }
         combination = {
@@ -371,7 +370,7 @@ kpxcFields.getCombination = function(givenType, fieldId) {
     } else if (givenType === 'password') {
         const usernameField = kpxcFields.getUsernameField(fieldId, true);
         let usernameId = null;
-        if (usernameField && usernameField.value.length > 0) {
+        if (usernameField) {
             usernameId = kpxcFields.prepareId(usernameField.getAttribute('data-kpxc-id'));
         }
         combination = {
@@ -520,9 +519,9 @@ kpxcFields.prepareCombinations = function(combinations) {
         // Needed for auto-complete: don't overwrite manually filled-in password field
         if (pwField && !pwField.getAttribute('kpxcFields-onChange')) {
             pwField.setAttribute('kpxcFields-onChange', true);
-            pwField.onchange = function() {
+            pwField.addEventListener('change', function() {
                 this.setAttribute('unchanged', false);
-            }
+            });
         }
 
         // Initialize form-submit for remembering credentials
@@ -539,8 +538,8 @@ kpxcFields.prepareCombinations = function(combinations) {
 
 kpxcFields.useDefinedCredentialFields = function() {
     const location = kpxc.getDocumentLocation();
-    if (kpxc.settings['defined-credential-fields'] && kpxc.settings['defined-credential-fields'][location]) {
-        const creds = kpxc.settings['defined-credential-fields'][location];
+    if (kpxc.settings['defined-custom-fields'] && kpxc.settings['defined-custom-fields'][location]) {
+        const creds = kpxc.settings['defined-custom-fields'][location];
 
         let found = _f(creds.username) || _f(creds.password);
         for (const i of creds.fields) {
@@ -573,6 +572,7 @@ kpxcObserverHelper.inputTypes = [
     'password',
     'tel',
     'number',
+    'username', // Note: Not a standard
     null // Input field can be without any type. Include these to the list.
 ];
 
@@ -699,7 +699,7 @@ kpxcObserverHelper.detectURLChange = function() {
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 // Detects DOM changes in the document
-let observer = new MutationObserver(function(mutations, observer) {
+const observer = new MutationObserver(function(mutations, obs) {
     if (document.visibilityState === 'hidden') {
         return;
     }
@@ -737,7 +737,7 @@ observer.observe(document, {
     attributes: true,
     childList: true,
     characterData: true,
-    attributeFilter: ['style']
+    attributeFilter: [ 'style' ]
 });
 
 var kpxc = {};
@@ -750,7 +750,7 @@ kpxc.credentials = [];
 
 const initcb = function() {
     browser.runtime.sendMessage({
-        action: 'load_settings',
+        action: 'load_settings'
     }).then((response) => {
         kpxc.settings = response;
         kpxc.initCredentialFields();
@@ -818,12 +818,16 @@ kpxc.initCredentialFields = function(forceCall) {
         kpxc.initializeSitePreferences();
         if (kpxc.settings.sitePreferences) {
             for (const site of kpxc.settings.sitePreferences) {
-                if (site.url === window.top.location.href || siteMatch(site.url, window.top.location.href)) {
-                    if (site.ignore === IGNORE_FULL) {
-                        return;
-                    }
+                try {
+                    if (siteMatch(site.url, window.top.location.href) || site.url === window.top.location.href) {
+                        if (site.ignore === IGNORE_FULL) {
+                            return;
+                        }
 
-                    _singleInputEnabledForPage = site.usernameOnly;
+                        _singleInputEnabledForPage = site.usernameOnly;
+                    }
+                } catch (err) {
+                    return;
                 }
             }
         }
@@ -855,7 +859,7 @@ kpxc.initCredentialFields = function(forceCall) {
         // Get submitUrl for a single input
         if (!kpxc.submitUrl && kpxcFields.combinations.length === 1 && inputs.length === 1) {
             kpxc.submitUrl = kpxc.getFormActionUrlFromSingleInput(inputs[0]);
-        } 
+        }
 
         if (kpxc.settings.autoRetrieveCredentials && _called.retrieveCredentials === false && (kpxc.url && kpxc.submitUrl)) {
             browser.runtime.sendMessage({
@@ -914,7 +918,7 @@ kpxc.retrieveCredentialsCallback = function(credentials, dontAutoFillIn) {
 };
 
 kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
-    // only one login for this site
+    // Only one login for this site
     if (autoFillInForSingle && kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) {
         let combination = null;
         if (!kpxc.p && !kpxc.u && kpxcFields.combinations.length > 0) {
@@ -934,14 +938,14 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
         if (combination) {
             let list = [];
             if (kpxc.fillInStringFields(combination.fields, kpxc.credentials[0].stringFields, list)) {
-                kpxcForm.destroy(false, {'password': list.list[0], 'username': list.list[1]});
+                kpxcForm.destroy(false, { 'password': list.list[0], 'username': list.list[1] });
             }
         }
 
         // Generate popup-list of usernames + descriptions
         browser.runtime.sendMessage({
             action: 'popup_login',
-            args: [ [ kpxc.credentials[0].login + ' (' + kpxc.credentials[0].name + ')' ]]
+            args: [ [ `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})` ] ]
         });
     } else if (kpxc.credentials.length > 1 || (kpxc.credentials.length > 0 && (!kpxc.settings.autoFillSingleEntry || !autoFillInForSingle))) {
         kpxc.preparePageForMultipleCredentials(kpxc.credentials);
@@ -949,15 +953,23 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
 };
 
 kpxc.preparePageForMultipleCredentials = function(credentials) {
-    // add usernames + descriptions to autocomplete-list and popup-list
+    function getLoginText(credential) {
+        const visibleLogin = (credential.login.length > 0) ? credential.login : tr('credentialsNoUsername');
+        if (credential.expired && credential.expired === 'true') {
+            return `${visibleLogin} (${credential.name}) [${tr('credentialExpired')}]`;
+        }
+        return `${visibleLogin} (${credential.name})`;
+    }
+
+    // Add usernames + descriptions to autocomplete-list and popup-list
     const usernames = [];
     kpxcAutocomplete.elements = [];
-    let visibleLogin;
     for (let i = 0; i < credentials.length; i++) {
-        visibleLogin = (credentials[i].login.length > 0) ? credentials[i].login : tr('credentialsNoUsername');
-        usernames.push(visibleLogin + ' (' + credentials[i].name + ')');
+        const loginText = getLoginText(credentials[i]);
+        usernames.push(loginText);
+
         const item = {
-            label: visibleLogin + ' (' + credentials[i].name + ')',
+            label: loginText,
             value: credentials[i].login,
             loginId: i
         };
@@ -976,14 +988,14 @@ kpxc.preparePageForMultipleCredentials = function(credentials) {
             // Both username and password fields are visible
             if (_detectedFields >= 2) {
                 if (_f(i.username)) {
-                    kpxcAutocomplete.create(_f(i.username));
+                    kpxcAutocomplete.create(_f(i.username), false, kpxc.settings.autoSubmit);
                 }
             } else if (_detectedFields === 1) {
                 if (_f(i.username)) {
-                    kpxcAutocomplete.create(_f(i.username));
+                    kpxcAutocomplete.create(_f(i.username), false, kpxc.settings.autoSubmit);
                 }
                 if (_f(i.password)) {
-                    kpxcAutocomplete.create(_f(i.password));
+                    kpxcAutocomplete.create(_f(i.password), false, kpxc.settings.autoSubmit);
                 }
             }
         }
@@ -1102,7 +1114,7 @@ kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     kpxc.fillInCredentials(combination, passOnly, suppressWarnings);
 };
 
-kpxc.fillInFromActiveElementTOTPOnly = function(suppressWarnings) {
+kpxc.fillInFromActiveElementTOTPOnly = function() {
     const el = document.activeElement;
     kpxcFields.setUniqueId(el);
     const fieldId = kpxcFields.prepareId(el.getAttribute('data-kpxc-id'));
@@ -1133,7 +1145,7 @@ kpxc.setValue = function(field, value) {
         value = value.toLowerCase().trim();
         const options = field.querySelectorAll('option');
         for (const o of options) {
-            if (o.test().toLowerCase().trim() === value) {
+            if (o.textContent.toLowerCase().trim() === value) {
                 kpxc.setValueWithChange(field, o.value);
                 return false;
             }
@@ -1223,11 +1235,12 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                     args: [ message ]
                 });
             }
+            return;
         }
     } else if (combination.loginId !== undefined && kpxc.credentials[combination.loginId]) {
         // Specific login ID given
         let filledIn = false;
-        if (uField) {
+        if (uField && (!onlyPassword || _singleInputEnabledForPage)) {
             kpxc.setValueWithChange(uField, kpxc.credentials[combination.loginId].login);
             browser.runtime.sendMessage({
                 action: 'page_set_login_id', args: [ combination.loginId ]
@@ -1258,6 +1271,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                     args: [ message ]
                 });
             }
+            return;
         }
     } else { // Multiple credentials available
         // Check if only one password for given username exists
@@ -1305,9 +1319,14 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
             if (countPasswords > 1) {
                 if (!suppressWarnings) {
                     const target = onlyPassword ? pField : uField;
-                    kpxcAutocomplete.create(target, true);
+                    if (kpxcAutocomplete.started) {
+                        kpxcAutocomplete.showList(target);
+                    } else {
+                        kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
+                    }
                     target.focus();
                 }
+                return;
             } else if (countPasswords < 1) {
                 if (!suppressWarnings) {
                     const message = tr('credentialsNoUsernameFound');
@@ -1316,13 +1335,42 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                         args: [ message ]
                     });
                 }
+                return;
             }
         } else {
             if (!suppressWarnings) {
                 const target = onlyPassword ? pField : uField;
-                kpxcAutocomplete.create(target, true);
+                if (kpxcAutocomplete.started) {
+                    kpxcAutocomplete.showList(target);
+                } else {
+                    kpxcAutocomplete.create(target, true, kpxc.settings.autoSubmit);
+                }
                 target.focus();
+                return;
             }
+        }
+    }
+
+    // Get the form submit button instead if action URL is same as the page itself
+    function getSubmitButton(form) {
+        if (kpxc.submitUrl === document.location.origin + document.location.pathname) {
+            for (const i of form.elements) {
+                if (i.type === 'submit') {
+                    return i;
+                }
+            }
+        }
+        return undefined;
+    }
+
+    // Auto-submit
+    if (kpxc.settings.autoSubmit) {
+        const form = kpxc.u.form || kpxc.p.form;
+        const submitButton = getSubmitButton(form);
+        if (submitButton !== undefined) {
+            submitButton.click();
+        } else {
+            form.submit();
         }
     }
 };

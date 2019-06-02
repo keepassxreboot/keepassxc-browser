@@ -57,7 +57,7 @@ const kpErrors = {
     NO_URL_PROVIDED: 14,
     NO_LOGINS_FOUND: 15,
 
-    errorMessages : {
+    errorMessages: {
         0: { msg: tr('errorMessageUnknown') },
         1: { msg: tr('errorMessageDatabaseNotOpened') },
         2: { msg: tr('errorMessageDatabaseHash') },
@@ -197,8 +197,8 @@ keepass.updateCredentials = function(callback, tab, entryId, username, password,
 };
 
 keepass.retrieveCredentials = function(callback, tab, url, submiturl, forceCallback, triggerUnlock = false, httpAuth = false) {
-    keepass.testAssociation((response) => {
-        if (!response) {
+    keepass.testAssociation((taResponse) => {
+        if (!taResponse) {
             browserAction.showDefault(null, tab);
             if (forceCallback) {
                 callback([]);
@@ -419,17 +419,6 @@ keepass.testAssociation = async function(callback, tab, enableTimeout = false, t
         page.tabs[tab.id].errorMessage = null;
     }
 
-    if (!keepass.isKeePassXCAvailable && !page.settings.automaticReconnect) {
-        try {
-            keepass.connectToNative();
-            await keepass.reconnect();
-        } catch (err) {
-            keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
-            callback(false);
-            return false;
-        }
-    }
-
     keepass.getDatabaseHash((dbHash) => {
         if (!dbHash) {
             callback(false);
@@ -569,7 +558,7 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
                 keepass.setcurrentKeePassXCVersion(parsed.version);
                 keepass.databaseHash = parsed.hash || '';
 
-                if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
+                if (oldDatabaseHash && oldDatabaseHash !== keepass.databaseHash) {
                     keepass.associated.value = false;
                     keepass.associated.hash = null;
                 }
@@ -933,7 +922,7 @@ keepass.checkForNewKeePassXCVersion = function() {
         }
 
         if (version !== -1) {
-            browser.storage.local.set({'latestKeePassXC': keepass.latestKeePassXC});
+            browser.storage.local.set({ 'latestKeePassXC': keepass.latestKeePassXC });
         }
     };
 
@@ -944,8 +933,7 @@ keepass.checkForNewKeePassXCVersion = function() {
     try {
         xhr.open('GET', keepass.latestVersionUrl, true);
         xhr.send();
-    }
-    catch (ex) {
+    } catch (ex) {
         console.log(ex);
     }
     keepass.latestKeePassXC.lastChecked = new Date().valueOf();
@@ -974,8 +962,10 @@ function onDisconnected() {
     keepass.isKeePassXCAvailable = false;
     keepass.associated.value = false;
     keepass.associated.hash = null;
+    keepass.databaseHash = '';
     page.clearCredentials(page.currentTabId, true);
     keepass.updatePopup('cross');
+    keepass.updateDatabaseHashToContent();
     console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 
@@ -1005,6 +995,7 @@ keepass.nativeConnect = function() {
     keepass.nativePort.onMessage.addListener(keepass.onNativeMessage);
     keepass.nativePort.onDisconnect.addListener(onDisconnected);
     keepass.isConnected = true;
+    return keepass.nativePort;
 };
 
 keepass.verifyKeyResponse = function(response, key, nonce) {
@@ -1132,16 +1123,15 @@ keepass.decrypt = function(input, nonce) {
 
 keepass.enableAutomaticReconnect = function() {
     // Disable for Windows if KeePassXC is older than 2.3.4
-    if (!page.settings.automaticReconnect ||
+    if (!page.settings.autoReconnect ||
         (navigator.platform.toLowerCase().includes('win') && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
         return;
     }
 
     if (keepass.reconnectLoop === null) {
-        keepass.reconnectLoop = setInterval(() => {
+        keepass.reconnectLoop = setInterval(async() => {
             if (!keepass.isKeePassXCAvailable) {
-                keepass.connectToNative();
-                keepass.reconnect().catch((e) => {});
+                keepass.reconnect();
             }
         }, 1000);
     }
@@ -1153,21 +1143,22 @@ keepass.disableAutomaticReconnect = function() {
 };
 
 keepass.reconnect = function(callback, tab) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
+        keepass.connectToNative();
         keepass.generateNewKeyPair();
-        keepass.changePublicKeys(tab, true).then((pkRes) => {
+        keepass.changePublicKeys(tab, true).then((r) => {
             keepass.getDatabaseHash((gdRes) => {
-                keepass.testAssociation((response) => {
+                if (gdRes !== '' && tab && page.tabs[tab.id]) {
+                    delete page.tabs[tab.id].errorMessage;
+                }
+                keepass.testAssociation((associationResponse) => {
                     keepass.isConfigured().then((configured) => {
-                        resolve(configured);
-                    }).catch((e) => {
-                        console.log(e);
-                        reject(e);
+                        resolve(true);
                     });
-                }, tab);
-            }, null);
+                });
+            }, tab);
         }).catch((e) => {
-            reject(e);
+            resolve(false); 
         });
     });
 };
@@ -1185,19 +1176,24 @@ keepass.updateDatabase = function() {
     keepass.testAssociation((associationResponse) => {
         keepass.isConfigured().then((configured) => {
             keepass.updatePopup(configured ? 'normal' : 'cross');
-
-            // Send message to content script
-            browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
-                if (tabs.length) {
-                    browser.tabs.sendMessage(tabs[0].id, {
-                        action: 'check_database_hash',
-                        hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash }
-                    });
-                    keepass.previousDatabaseHash = keepass.databaseHash;
-                }
-            });
+            keepass.updateDatabaseHashToContent();
         });
     }, null);
+};
+
+keepass.updateDatabaseHashToContent = function() {
+    // Send message to content script
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+        if (tabs.length) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                action: 'check_database_hash',
+                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash }
+            }).catch((err) => {
+                console.log(err);
+            });
+            keepass.previousDatabaseHash = keepass.databaseHash;
+        }
+    });
 };
 
 keepass.compareVersion = function(minimum, current, canBeEqual = true) {

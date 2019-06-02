@@ -24,22 +24,26 @@ const DOMRectToArray = function(domRect) {
 * - intersectionRatio > 0 -> shown
 * - isIntersecting === true -> shown
 */
-kpxcPassword.observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-        const rect = DOMRectToArray(entry.boundingClientRect);
+try {
+    kpxcPassword.observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+            const rect = DOMRectToArray(entry.boundingClientRect);
 
-        if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
-            kpxcPassword.icon.style.display = 'none';
-        } else if (entry.intersectionRatio > 0 && entry.isIntersecting) {
-            kpxcPassword.icon.style.display = 'block';
+            if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
+                kpxcPassword.icon.style.display = 'none';
+            } else if (entry.intersectionRatio > 0 && entry.isIntersecting) {
+                kpxcPassword.icon.style.display = 'block';
 
-            // Wait for possible DOM animations
-            setTimeout(() => {
-                kpxcPassword.setIconPosition(kpxcPassword.icon, entry.target)
-            }, 500);
+                // Wait for possible DOM animations
+                setTimeout(() => {
+                    kpxcPassword.setIconPosition(kpxcPassword.icon, entry.target);
+                }, 500);
+            }
         }
-    }
-});
+    });
+} catch (err) {
+    console.log(err);
+}
 
 kpxcPassword.init = function() {
     if ('initPasswordGenerator' in _called) {
@@ -55,7 +59,9 @@ kpxcPassword.initField = function(field, inputs, pos) {
     }
 
     // Observer the visibility
-    kpxcPassword.observer.observe(field);
+    if (kpxcPassword.observer) {
+        kpxcPassword.observer.observe(field);
+    }
 
     if (field.getAttribute('kpxc-password-generator')) {
         return;
@@ -127,15 +133,15 @@ kpxcPassword.createDialog = function() {
         }
         return;
     }
-    kpxcPassword.created = true;    
+    kpxcPassword.created = true;
 
     const wrapper = kpxcUI.createElement('div', 'kpxc');
     const dialog = kpxcUI.createElement('div', 'kpxc kpxc-pwgen-dialog');
     const titleBar = kpxcUI.createElement('div', 'kpxc-pwgen-titlebar', {}, tr('passwordGeneratorTitle'));
     const closeButton = kpxcUI.createElement('div', 'kpxc-pwgen-close', {}, '×');
-    closeButton.onclick = function(e) {
+    closeButton.addEventListener('click', function(e) {
         kpxcPassword.openDialog();
-    };
+    });
     titleBar.append(closeButton);
 
     const passwordRow = kpxcUI.createElement('div', 'kpxc-pwgen-password-row');
@@ -154,17 +160,17 @@ kpxcPassword.createDialog = function() {
     const copyButton = kpxcUI.createElement('button', 'kpxc-button', { 'id': 'kpxc-pwgen-btn-copy' }, tr('passwordGeneratorCopy'));
     const fillButton = kpxcUI.createElement('button', 'kpxc-button', { 'id': 'kpxc-pwgen-btn-fill' }, tr('passwordGeneratorFillAndCopy'));
 
-    generateButton.onclick = function(e) {
+    generateButton.addEventListener('click', function(e) {
         kpxcPassword.generate(e);
-    };
+    });
 
-    copyButton.onclick = function(e) {
+    copyButton.addEventListener('click', function(e) {
         kpxcPassword.copy(e);
-    };
+    });
 
-    fillButton.onclick = function(e) {
+    fillButton.addEventListener('click', function(e) {
         kpxcPassword.fill(e);
-    };
+    });
 
     buttonsRow.appendMultiple(generateButton, copyButton, fillButton);
     dialog.appendMultiple(titleBar, passwordRow, nextFillRow, buttonsRow);
@@ -178,9 +184,9 @@ kpxcPassword.createDialog = function() {
 
     kpxcPassword.dialog = dialog;
     kpxcPassword.titleBar = titleBar;
-    kpxcPassword.titleBar.onmousedown = function(e) {
+    kpxcPassword.titleBar.addEventListener('mousedown', function(e) {
         kpxcPassword.mouseDown(e);
-    };
+    });
 
     kpxcPassword.generate();
 };
@@ -307,8 +313,7 @@ kpxcPassword.copyPasswordToClipboard = function() {
     $('.kpxc-pwgen-input').select();
     try {
         return document.execCommand('copy');
-    }
-    catch (err) {
+    } catch (err) {
         console.log('Could not copy password to clipboard: ' + err);
     }
     return false;
@@ -331,7 +336,11 @@ kpxcPassword.callbackGeneratedPassword = function(entries) {
         kpxcPassword.whiteButton('#kpxc-pwgen-btn-fill');
         kpxcPassword.whiteButton('#kpxc-pwgen-btn-copy');
         $('.kpxc-pwgen-input').value = entries[0].password;
-        $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (isNaN(entries[0].login) ? '???' : entries[0].login));
+        if (entries[0].entropy) {
+            $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (Number.isNaN(entries[0].entropy) ? '???' : String(entries[0].entropy.toFixed(2))));
+        } else {
+            $('.kpxc-pwgen-bits').textContent = tr('passwordGeneratorBits', (isNaN(entries[0].login) ? '???' : entries[0].login));
+        }
     } else {
         if (document.querySelectorAll('div#kpxc-pwgen-error').length === 0) {
             $('.kpxc-pwgen-checkbox').parentElement.style.display = 'none';
@@ -393,7 +402,7 @@ window.addEventListener('scroll', function(e) {
 });
 
 // Closes the dialog when clicked outside of it)
-document.onclick = function(e) {
+document.addEventListener('click', function(e) {
     if (kpxcPassword.dialog && kpxcPassword.dialog.style.display === 'block') {
         const dialogEndX = kpxcPassword.dialog.offsetLeft + kpxcPassword.dialog.offsetWidth;
         const dialogEndY = kpxcPassword.dialog.offsetTop + kpxcPassword.dialog.offsetHeight;
@@ -404,4 +413,4 @@ document.onclick = function(e) {
             kpxcPassword.openDialog();
         }
     }
-};
+});

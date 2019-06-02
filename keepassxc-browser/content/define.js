@@ -32,7 +32,7 @@ kpxcDefine.init = function() {
     kpxcDefine.prepareStep1();
     kpxcDefine.markAllUsernameFields('#kpxcDefine-fields');
 
-    kpxcDefine.dialog = $('#kpxcDefine-description');;
+    kpxcDefine.dialog = $('#kpxcDefine-description');
     kpxcDefine.dialog.onmousedown = function(e) {
         kpxcDefine.mouseDown(e);
     };
@@ -145,7 +145,7 @@ kpxcDefine.markAllUsernameFields = function(chooser) {
     kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern);
 };
 
-kpxcDefine.markAllPasswordFields = function(chooser, more) {
+kpxcDefine.markAllPasswordFields = function(chooser, more = false) {
     kpxcDefine.eventFieldClick = function(e, elem) {
         const field = elem || e.currentTarget;
         kpxcDefine.selection.password = field.getAttribute('data-kpxc-id');
@@ -183,7 +183,7 @@ kpxcDefine.markFields = function(chooser, pattern) {
 
     for (const i of inputs) {
         if (kpxcDefine.isFieldSelected(i.getAttribute('data-kpxc-id'))) {
-            return true;
+            continue;
         }
 
         if (kpxcFields.isVisible(i)) {
@@ -194,21 +194,21 @@ kpxcDefine.markFields = function(chooser, pattern) {
             field.style.width = rect.width + 'px';
             field.style.height = rect.height + 'px';
             field.textContent = String(index);
-            field.onclick = function(e) {
+            field.addEventListener('click', function(e) {
                 kpxcDefine.eventFieldClick(e);
-            };
-            field.onmouseenter = function() {
+            });
+            field.addEventListener('mouseenter', function() {
                 field.classList.add('kpxcDefine-fixed-hover-field');
-            };
-            field.onmouseleave = function() {
+            });
+            field.addEventListener('mouseleave', function() {
                 field.classList.remove('kpxcDefine-fixed-hover-field');
-            };
-            i.onfocus = function() {
+            });
+            i.addEventListener('focus', function() {
                 field.classList.add('kpxcDefine-fixed-hover-field');
-            }
-            i.onblur = function() {
+            });
+            i.addEventListener('blur', function() {
                 field.classList.remove('kpxcDefine-fixed-hover-field');
-            };
+            });
             const elem = $(chooser);
             if (elem) {
                 elem.append(field);
@@ -326,6 +326,10 @@ kpxcDefine.confirm = function() {
 };
 
 kpxcDefine.discard = function() {
+    if (!$('#kpxcDefine-btn-discard')) {
+        return;
+    }
+
     const location = kpxc.getDocumentLocation();
     delete kpxc.settings['defined-custom-fields'][location];
 

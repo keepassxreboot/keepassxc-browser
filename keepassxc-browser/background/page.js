@@ -6,11 +6,12 @@ const defaultSettings = {
     autoFillAndSend: false,
     usePasswordGenerator: true,
     autoFillSingleEntry: false,
+    autoSubmit: false,
     autoRetrieveCredentials: true,
     showNotifications: true,
     showLoginNotifications: true,
     saveDomainOnly: true,
-    automaticReconnect: true,
+    autoReconnect: false,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false
 };
@@ -40,6 +41,9 @@ page.initSettings = function() {
             if (!('autoFillSingleEntry' in page.settings)) {
                 page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
             }
+            if (!('autoSubmit' in page.settings)) {
+                page.settings.autoSubmit = defaultSettings.autoSubmit;
+            }
             if (!('autoRetrieveCredentials' in page.settings)) {
                 page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
             }
@@ -52,8 +56,8 @@ page.initSettings = function() {
             if (!('saveDomainOnly' in page.settings)) {
                 page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
             }
-            if (!('automaticReconnect' in page.settings)) {
-                page.settings.automaticReconnect = defaultSettings.automaticReconnect;
+            if (!('autoReconnect' in page.settings)) {
+                page.settings.autoReconnect = defaultSettings.autoReconnect;
             }
             if (!('defaultGroup' in page.settings)) {
                 page.settings.defaultGroup = defaultSettings.defaultGroup;
