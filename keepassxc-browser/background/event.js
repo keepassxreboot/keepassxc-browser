@@ -154,9 +154,13 @@ kpxcEvent.onGetStatus = function(callback, tab, internalPoll = false, triggerUnl
 
 kpxcEvent.onReconnect = async function(callback, tab) {
     const configured = await keepass.reconnect(callback, tab);
-    browser.tabs.sendMessage(tab.id, {
-        action: 'redetect_fields'
-    });
+    if (configured) {
+        browser.tabs.sendMessage(tab.id, {
+            action: 'redetect_fields'
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
     kpxcEvent.showStatus(configured, tab, callback);
 };
 
