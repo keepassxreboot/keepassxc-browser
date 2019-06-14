@@ -105,6 +105,11 @@ kpxcForm.init = function(form, credentialFields) {
         form.setAttribute('kpxcForm-initialized', true);
         kpxcForm.setInputFields(form, credentialFields);
         form.addEventListener('submit', kpxcForm.onSubmit);
+
+        const submitButton = kpxc.getSubmitButton(form);
+        if (submitButton !== undefined) {
+            submitButton.addEventListener('click', kpxcForm.onSubmit);
+        }
     }
 };
 
@@ -127,8 +132,9 @@ kpxcForm.setInputFields = function(form, credentialFields) {
 };
 
 kpxcForm.onSubmit = function() {
-    const usernameId = this.getAttribute('kpxcUsername');
-    const passwordId = this.getAttribute('kpxcPassword');
+    const form = this.nodeName === 'FORM' ? this : this.form;
+    const usernameId = form.getAttribute('kpxcUsername');
+    const passwordId = form.getAttribute('kpxcPassword');
 
     let usernameValue = '';
     let passwordValue = '';
@@ -137,7 +143,7 @@ kpxcForm.onSubmit = function() {
     const passwordField = _f(passwordId);
 
     if (usernameField) {
-        usernameValue = usernameField.value;
+        usernameValue = usernameField.value || usernameField.placeholder;
     }
     if (passwordField) {
         passwordValue = passwordField.value;
@@ -1040,6 +1046,26 @@ kpxc.getFormActionUrlFromSingleInput = function(field) {
     return action;
 };
 
+// Get the form submit button instead if action URL is same as the page itself
+kpxc.getSubmitButton = function(form) {
+    const action = kpxc.submitUrl || form.action;
+    if (action.includes(document.location.origin + document.location.pathname)) {
+        for (const i of form.elements) {
+            if (i.type === 'submit') {
+                return i;
+            }
+        }
+    }
+
+    // Try to find another button. Select the first one.
+    const buttons = Array.from(form.querySelectorAll('button[type=\'button\'], input[type=\'button\'], button:not([type])'));
+    if (buttons.length > 0) {
+        return buttons[0];
+    }
+
+    return undefined;
+};
+
 kpxc.fillInCredentials = function(combination, onlyPassword, suppressWarnings) {
     const action = kpxc.getFormActionUrl(combination);
     const u = _f(combination.username);
@@ -1351,22 +1377,10 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         }
     }
 
-    // Get the form submit button instead if action URL is same as the page itself
-    function getSubmitButton(form) {
-        if (kpxc.submitUrl === document.location.origin + document.location.pathname) {
-            for (const i of form.elements) {
-                if (i.type === 'submit') {
-                    return i;
-                }
-            }
-        }
-        return undefined;
-    }
-
     // Auto-submit
     if (kpxc.settings.autoSubmit) {
         const form = kpxc.u.form || kpxc.p.form;
-        const submitButton = getSubmitButton(form);
+        const submitButton = kpxc.getSubmitButton(form);
         if (submitButton !== undefined) {
             submitButton.click();
         } else {
