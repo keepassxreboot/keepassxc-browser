@@ -819,6 +819,10 @@
         "message": "Username-only detection allows KeePassXC-Browser to fill in login details on websites with separate pages for username and password.",
         "description": "Site preferences info text, fourth part."
     },
+    "optionsSitePreferencesManualAddHelp": {
+        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, or <code>ftp://</code> and must be at least 10 characters long.",
+        "description": "Help text for adding site manually on Site preferences tab."
+    },
     "optionsSitePreferencesManualAddText": {
         "message": "Add URL manually",
         "description": "Label for adding site manually on Site preferences tab."

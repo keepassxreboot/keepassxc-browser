@@ -18,6 +18,7 @@
   <div class="container">
     <h3><img src="/icons/keepassxc_48x48.png" alt="logo"/> KeePassXC-Browser</h3>
 
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white mb-4">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#optionsNavbar"
               aria-controls="optionsNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -422,6 +423,8 @@
 
       <!-- Site preferences -->
       <section class="tab-pane" id="tab-site-preferences" role="tabpanel" aria-labelledby="site-prefs-tab">
+
+
         <p>
           <span data-i18n="optionsSitePreferencesTabHelpTextFirst"></span>
           <br/>
@@ -432,18 +435,29 @@
           <br/>
           <span data-i18n="optionsSitePreferencesTabHelpTextFourth"></span>
         </p>
-        <div class="mb-3">
+        <form class="needs-validation" novalidate id="optionsSitePreferencesManualAddForm">
+          <div class="alert alert-info mt-2" role="alert">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <span data-i18n="optionsSitePreferencesManualAddHelp"></span>
+          </div>
+
+          <div class="alert alert-warning d-none" role="alert" id="optionsSitePreferencesTabErrorValueAlreadyExists">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <span data-i18n="optionsErrorValueExists"></span>
+          </div>
+
           <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
           <div class="input-group mb-3" id="manualUrlGroup">
-            <input id="manualUrl" type="url" class="form-control" pattern="ftp://.*|http://.*|https://.*"
-                   minlength="10"/>
+            <input id="manualUrl" type="url" class="form-control"
+                   pattern="ftp://.*|http://.*|https://.*" minlength="10" required/>
             <div class="input-group-append">
-              <button class="btn btn-primary" id="sitePreferencesManualAdd" type="button"><i class="fa fa-plus"
-                                                                                             aria-hidden="true"></i><span
-                data-i18n="optionsButtonAdd"></span></button>
+              <button class="btn btn-primary" type="submit">
+                <i class="fa fa-plus" aria-hidden="true"></i> <span data-i18n="optionsButtonAdd"></span>
+              </button>
             </div>
-          </div>
-        </div>
+              <div class="invalid-feedback" data-i18n="optionsErrorInvalidURL"></div>
+            </div>
+        </form>
         <table class="table table-striped table-bordered table-hover">
           <caption data-i18n="optionsSitePreferencesTableCaption"></caption>
           <thead>
@@ -475,8 +489,9 @@
               </div>
             </td>
             <td>
-              <button class="btn delete btn-danger"><span class="fa fa-trash" aria-hidden="true"></span><span
-                data-i18n="optionsButtonRemove"></span></button>
+              <button class="btn delete btn-danger">
+                <span class="fa fa-trash" aria-hidden="true"></span> <span data-i18n="optionsButtonRemove"></span>
+              </button>
             </td>
           </tr>
           </tbody>
