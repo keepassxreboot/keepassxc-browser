@@ -88,12 +88,12 @@ browser.runtime.onMessage.addListener(function(req, sender) {
 });
 
 function _f(fieldId) {
-    const inputs = document.querySelectorAll('input[data-kpxc-id=\'' + fieldId + '\']');
+    const inputs = document.querySelectorAll(`input[data-kpxc-id='${fieldId}']`);
     return inputs.length > 0 ? inputs[0] : null;
 }
 
 function _fs(fieldId) {
-    const inputs = document.querySelectorAll('input[data-kpxc-id=\'' + fieldId + '\'], select[data-kpxc-id=\'' + fieldId + '\']');
+    const inputs = document.querySelectorAll(`input[data-kpxc-id='${fieldId}'], select[data-kpxc-id='${fieldId}']`);
     return inputs.length > 0 ? inputs[0] : null;
 }
 
