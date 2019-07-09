@@ -1110,7 +1110,13 @@ kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     const el = document.activeElement;
     if (el.tagName.toLowerCase() !== 'input') {
         if (kpxcFields.combinations.length > 0) {
-            kpxc.fillInCredentials(kpxcFields.combinations[0], false, suppressWarnings);
+            kpxc.fillInCredentials(kpxcFields.combinations[0], passOnly, suppressWarnings);
+
+            // Focus to the input field
+            const field = _f(passOnly ? kpxcFields.combinations[0].password : kpxcFields.combinations[0].username);
+            if (field) {
+                field.focus();
+            }
         }
         return;
     }
