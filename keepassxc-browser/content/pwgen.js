@@ -267,15 +267,8 @@ kpxcPassword.copy = function(e) {
 kpxcPassword.fill = function(e) {
     e.preventDefault();
 
-    let field = null;
-    const inputs = document.querySelectorAll('input[type=\'password\']');
-    for (const i of inputs) {
-        if (i.getAttribute('data-kpxc-id')) {
-            field = i;
-            break;
-        }
-    }
-
+    // Use the active input field
+    const field = _f(kpxcPassword.dialog.getAttribute('kpxc-pwgen-field-id'));
     if (field) {
         const password = $('.kpxc-pwgen-input');
         if (field.getAttribute('maxlength')) {
