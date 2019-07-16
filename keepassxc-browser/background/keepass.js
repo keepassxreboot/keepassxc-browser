@@ -521,7 +521,8 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
     const incrementedNonce = keepass.incrementedNonce(nonce);
 
     const messageData = {
-        action: kpAction
+        action: kpAction,
+        connectedKeys: Object.keys(keepass.keyRing) // This will be removed in the future
     };
 
     const encrypted = keepass.encrypt(messageData, nonce);
@@ -565,6 +566,12 @@ keepass.getDatabaseHash = function(callback, tab, enableTimeout = false, trigger
 
                 keepass.isDatabaseClosed = false;
                 keepass.isKeePassXCAvailable = true;
+
+                // Update the databaseHash from legacy hash
+                if (parsed.oldHash) {
+                    keepass.updateDatabaseHash(parsed.oldHash, parsed.hash);
+                }
+
                 callback(parsed.hash);
                 return;
             } else if (parsed.errorCode) {
@@ -881,6 +888,19 @@ keepass.saveKey = function(hash, id, key) {
 keepass.updateLastUsed = function(hash) {
     if ((hash in keepass.keyRing)) {
         keepass.keyRing[hash].lastUsed = new Date().valueOf();
+        browser.storage.local.set({ 'keyRing': keepass.keyRing });
+    }
+};
+// Update the databaseHash from legacy hash
+keepass.updateDatabaseHash = function(oldHash, newHash) {
+    if (!oldHash || !newHash) {
+        return;
+    }
+
+    if ((oldHash in keepass.keyRing)) {
+        keepass.keyRing[newHash] = keepass.keyRing[oldHash];
+        keepass.keyRing[newHash].hash = newHash;
+        delete keepass.keyRing[oldHash];
         browser.storage.local.set({ 'keyRing': keepass.keyRing });
     }
 };
