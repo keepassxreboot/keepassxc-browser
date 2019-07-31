@@ -1,26 +1,3 @@
-body {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
-
-#tab-connected-databases .color.dropdown .dropdown-menu {
-    width: 180px;
-    padding: 7px 10px;
-    line-height: 175%;
-}
-
-#tab-connected-databases .color.dropdown .dropdown-menu a {
-    margin-right: 3px;
-}
-
-#tab-connected-databases .color.dropdown a.dropdown-toggle img {
-    margin-right: 5px;
-}
-
-#manualUrl {
-    width: 75%;
-}
-
 #defaultGroup {
     width: 50%;
 }
