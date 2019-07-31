@@ -15,7 +15,7 @@
   </head>
 
   <body>
-  <div class="container">
+  <div class="container mt-3">
     <h3><img src="/icons/keepassxc_48x48.png" alt="logo"/> KeePassXC-Browser</h3>
 
 
@@ -97,7 +97,8 @@
 
         <!-- extension notifications -->
         <section class="card mt-4 border-primary">
-          <div class="card-header bg-primary text-white"><i class="fa fa-bell" aria-hidden="true"></i> Notifications
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-bell" aria-hidden="true"></i> Notifications
           </div>
           <div class="card-body">
             <div class="custom-control custom-checkbox">
@@ -114,6 +115,7 @@
               <label class="custom-control-label" data-i18n="optionsCheckboxShowLoginNotifications"
                      for="showLoginNotifications"></label>
             </div>
+          </div>
         </section>
 
         <!-- general settings -->
@@ -128,9 +130,13 @@
                      class="custom-control-input"/>
               <label class="custom-control-label" data-i18n="optionsCheckboxAutomaticReconnect"
                      for="autoReconnect"></label>
-              <small class="form-text text-muted">
-                <span data-i18n="optionsAutomaticReconnectHelpText"></span>
+              <small class="form-text text-muted"
+                     data-i18n="optionsAutomaticReconnectHelpText">
               </small>
+              <div class="alert alert-warning mt-3" role="alert">
+                <i class="fa fa-flask" aria-hidden="true"></i>
+                <span data-i18n="optionsAutomaticReconnectWarning"></span>
+              </div>
             </div>
 
             <div class="custom-control custom-checkbox">
@@ -216,6 +222,14 @@
               <label class="custom-control-label" data-i18n="optionsCheckboxAutoCompleteUsernames"
                      for="autoCompleteUsernames"></label>
               <small class="form-text text-muted" data-i18n="optionsAutocompleteUsernamesHelpText"></small>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="autoSubmit" id="autoSubmit" value="false"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxAutoSubmit"
+                     for="autoSubmit"></label>
+              <small class="form-text text-muted" data-i18n="optionsAutoSubmitHelpText"></small>
             </div>
 
             <div class="custom-control custom-checkbox mb-3">
@@ -483,7 +497,8 @@
             </td>
             <td>
               <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox" name="usernameOnly" value="false" id="usernameOnly"
+                <input class="custom-control-input" type="checkbox" name="usernameOnly"
+                       checked="false" id="usernameOnly"
                        data-i18n="[title]optionsColumnUsernameOnly"/>
                 <label data-i18n="optionsColumnUsernameOnly" class="custom-control-label" for="usernameOnly"></label>
               </div>
