@@ -110,7 +110,14 @@
         "icons/keepassxc.svg",
         "icons/key.svg",
         "icons/locked.svg",
-        "icons/otp.svg"
+        "icons/otp.svg",
+        "css/autocomplete.css",
+        "css/banner.css",
+        "css/button.css",
+        "css/colors.css",
+        "css/pwgen.css",
+        "css/username.css",
+        "css/totp.css"
     ],
     "permissions": [
         "activeTab",
