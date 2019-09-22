@@ -134,6 +134,10 @@ kpxcDefine.isFieldSelected = function(kpxcId) {
 
 kpxcDefine.markAllUsernameFields = function(chooser) {
     kpxcDefine.eventFieldClick = function(e, elem) {
+        if (!e.isTrusted) {
+            return;
+        }
+
         const field = elem || e.currentTarget;
         kpxcDefine.selection.username = field.getAttribute('data-kpxc-id');
         field.classList.add('kpxcDefine-fixed-username-field');
@@ -147,6 +151,10 @@ kpxcDefine.markAllUsernameFields = function(chooser) {
 
 kpxcDefine.markAllPasswordFields = function(chooser, more = false) {
     kpxcDefine.eventFieldClick = function(e, elem) {
+        if (!e.isTrusted) {
+            return;
+        }
+
         const field = elem || e.currentTarget;
         kpxcDefine.selection.password = field.getAttribute('data-kpxc-id');
         field.classList.add('kpxcDefine-fixed-password-field');
@@ -164,6 +172,10 @@ kpxcDefine.markAllPasswordFields = function(chooser, more = false) {
 
 kpxcDefine.markAllStringFields = function(chooser) {
     kpxcDefine.eventFieldClick = function(e, elem) {
+        if (!e.isTrusted) {
+            return;
+        }
+
         const field = elem || e.currentTarget;
         const value = field.getAttribute('data-kpxc-id');
         kpxcDefine.selection.fields[value] = true;
@@ -189,10 +201,10 @@ kpxcDefine.markFields = function(chooser, pattern) {
         if (kpxcFields.isVisible(i)) {
             const field = kpxcUI.createElement('div', 'kpxcDefine-fixed-field', { 'data-kpxc-id': i.getAttribute('data-kpxc-id') });
             const rect = i.getBoundingClientRect();
-            field.style.top = rect.top + 'px';
-            field.style.left = rect.left + 'px';
-            field.style.width = rect.width + 'px';
-            field.style.height = rect.height + 'px';
+            field.style.top = Pixels(rect.top);
+            field.style.left = Pixels(rect.left);
+            field.style.width = Pixels(rect.width);
+            field.style.height = Pixels(rect.height);
             field.textContent = String(index);
             field.addEventListener('click', function(e) {
                 kpxcDefine.eventFieldClick(e);
@@ -262,7 +274,11 @@ kpxcDefine.prepareStep3 = function() {
     $('#kpxcDefine-btn-confirm').style.display = 'inline-block';
 };
 
-kpxcDefine.skip = function() {
+kpxcDefine.skip = function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     if (kpxcDefine.dataStep === 1) {
         kpxcDefine.selection.username = null;
         kpxcDefine.prepareStep2();
@@ -274,20 +290,32 @@ kpxcDefine.skip = function() {
     }
 };
 
-kpxcDefine.again = function() {
+kpxcDefine.again = function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     kpxcDefine.resetSelection();
     kpxcDefine.prepareStep1();
     kpxcDefine.markAllUsernameFields('#kpxcDefine-fields');
 };
 
-kpxcDefine.more = function() {
+kpxcDefine.more = function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     if (kpxcDefine.dataStep === 2) {
         kpxcDefine.prepareStep2();
         kpxcDefine.markAllPasswordFields('#kpxcDefine-fields', true);
     }
 };
 
-kpxcDefine.confirm = function() {
+kpxcDefine.confirm = async function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     if (kpxcDefine.dataStep !== 3) {
         return;
     }
@@ -317,7 +345,7 @@ kpxcDefine.confirm = function() {
         fields: fieldIds
     };
 
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'save_settings',
         args: [ kpxc.settings ]
     });
@@ -325,7 +353,11 @@ kpxcDefine.confirm = function() {
     kpxcDefine.close();
 };
 
-kpxcDefine.discard = function() {
+kpxcDefine.discard = async function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     if (!$('#kpxcDefine-btn-discard')) {
         return;
     }
@@ -333,12 +365,12 @@ kpxcDefine.discard = function() {
     const location = kpxc.getDocumentLocation();
     delete kpxc.settings['defined-custom-fields'][location];
 
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'save_settings',
         args: [ kpxc.settings ]
     });
 
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'load_settings'
     });
 
@@ -347,6 +379,10 @@ kpxcDefine.discard = function() {
 
 // Handle the keyboard events
 kpxcDefine.keyDown = function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     if (e.key === 'Escape') {
         kpxcDefine.close();
     } else if (e.key === 'Enter') {

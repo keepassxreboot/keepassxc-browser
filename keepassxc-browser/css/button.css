@@ -1,48 +1,55 @@
 .kpxc-button {
+    background-color: #fff;
+    background-image: none !important;
+    border: 1px solid #ccc !important;
+    border-radius: .25em !important;
     font-size: 12px !important;
     font-family: 'Lato', sans-serif !important;
     height: 28px !important;
     margin: .2em !important;
-    background-color: #fff;
-    border: 1px solid #888 !important;
-    border-radius: 4px !important;
+    padding: 1px 7px 2px !important;
 }
 
 .kpxc-white-button {
-    color: #333 !important;
-    background-color: #fff !important;
-    border-color: #ccc !important;
+    background-color: #f8f9fa !important;
+    border-color: #f8f9fa !important;
+    color: #212529 !important;
 }
 
 .kpxc-red-button {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
     color: #fff !important;
-    background-color: #d9534f !important;
-    border-color: #d43f3a !important;
 }
 
 .kpxc-orange-button {
-    color: #fff !important;
-    background-color: #f0ad4e !important;
-    border-color: #eea236 !important;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #212529 !important;
 }
 
 .kpxc-blue-button {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
     color: #fff !important;
-    background-color: #337ab7 !important;
-    border-color: #2e6da4 !important;
 }
 
 .kpxc-green-button {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
     color: #fff !important;
-    background-color: #5cb85c !important;
-    border-color: #4cae4c !important;
 }
 
 .kpxc-button:hover {
-    background-color: #eee;
-    cursor: pointer;
+    cursor: pointer !important;
+    filter: brightness(92%) !important;
+    transition: all .15s;
 }
 
-.kpxc-button:active {
-    background-color: #ddd;   
+.kpxc-button:disabled {
+    border-color: #ccc !important;
+}
+
+.kpxc-button:disabled:hover {
+    background-color: #fff !important;
 }

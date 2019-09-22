@@ -4,28 +4,22 @@ if (jQuery) {
     var $ = jQuery.noConflict(true);
 }
 
-const defaultSettings = {
-    blinkTimeout: 7500,
-    redirectOffset: -1,
-    redirectAllowance: 1
-};
-
-$(function() {
-    browser.runtime.sendMessage({ action: 'load_settings' }).then((settings) => {
+$(async function() {
+    try {
+        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
         options.settings = settings;
-        browser.runtime.sendMessage({ action: 'load_keyring' }).then((keyRing) => {
-            options.keyRing = keyRing;
-            options.initMenu();
-            options.initGeneralSettings();
-            options.initConnectedDatabases();
-            options.initCustomCredentialFields();
-            options.initSitePreferences();
-            options.initAbout();
-        });
-    });
 
-    // Set options page language to HTML element from locale
-    $('html').attr('lang', browser.i18n.getUILanguage());
+        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+        options.keyRing = keyRing;
+        options.initMenu();
+        options.initGeneralSettings();
+        options.initConnectedDatabases();
+        options.initCustomCredentialFields();
+        options.initSitePreferences();
+        options.initAbout();
+    } catch (err) {
+        console.log('Error loading options page: ' + err);
+    }
 });
 
 var options = options || {};
@@ -54,7 +48,7 @@ options.saveSettingsPromise = function() {
     });
 };
 
-options.saveSetting = function(name) {
+options.saveSetting = async function(name) {
     const id = '#' + name;
     $(id).closest('.control-group').removeClass('error').addClass('success');
     setTimeout(() => {
@@ -62,21 +56,21 @@ options.saveSetting = function(name) {
     }, 2500);
 
     browser.storage.local.set({ 'settings': options.settings });
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'load_settings'
     });
 };
 
-options.saveSettings = function() {
+options.saveSettings = async function() {
     browser.storage.local.set({ 'settings': options.settings });
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'load_settings'
     });
 };
 
-options.saveKeyRing = function() {
+options.saveKeyRing = async function() {
     browser.storage.local.set({ 'keyRing': options.keyRing });
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'load_keyring'
     });
 };
@@ -123,7 +117,7 @@ options.initGeneralSettings = function() {
     });
 
     $('#tab-general-settings input[type=radio]').change(function() {
-        options.settings[$(this).attr('name')] = $(this).val();
+        options.settings[$(this).attr('name')] = Number($(this).val());
         options.saveSettings();
     });
 
@@ -139,13 +133,9 @@ options.initGeneralSettings = function() {
         }).then(options.showKeePassXCVersions);
     });
 
-    $('#blinkTimeout').val(options.settings['blinkTimeout']);
-    $('#blinkMinTimeout').val(options.settings['blinkMinTimeout']);
-    $('#allowedRedirect').val(options.settings['allowedRedirect']);
-
     browser.commands.getAll().then(function(commands) {
         commands.forEach(function(command) {
-            var shortcut = document.getElementById(`${command.name}-shortcut`);
+            let shortcut = document.getElementById(`${command.name}-shortcut`);
             if (!shortcut) {
                 return;
             }
@@ -157,35 +147,6 @@ options.initGeneralSettings = function() {
         browser.tabs.create({
             url: isFirefox() ? browser.runtime.getURL('options/shortcuts.html') : 'chrome://extensions/configureCommands'
         });
-    });
-
-    $('#blinkTimeoutButton').click(function() {
-        const input = document.querySelector('#blinkTimeout');
-        if (!input.validity.valid) {
-            options.createWarning(input, tr('optionsErrorInvalidValue'));
-        }
-
-        const blinkTimeout = input.value;
-        const blinkTimeoutval = blinkTimeout !== '' ? Number(blinkTimeout) : defaultSettings.blinkTimeout;
-
-        options.settings['blinkTimeout'] = blinkTimeoutval;
-        options.saveSetting('blinkTimeout');
-    });
-
-    $('#blinkMinTimeoutButton').click(function() {
-        const blinkMinTimeout = $.trim($('#blinkMinTimeout').val());
-        const blinkMinTimeoutval = blinkMinTimeout !== '' ? Number(blinkMinTimeout) : defaultSettings.redirectOffset;
-
-        options.settings['blinkMinTimeout'] = blinkMinTimeoutval;
-        options.saveSetting('blinkMinTimeout');
-    });
-
-    $('#allowedRedirectButton').click(function() {
-        const allowedRedirect = $.trim($('#allowedRedirect').val());
-        const allowedRedirectval = allowedRedirect !== '' ? Number(allowedRedirect) : defaultSettings.redirectAllowance;
-
-        options.settings['allowedRedirect'] = allowedRedirectval;
-        options.saveSetting('allowedRedirect');
     });
 
     $('#defaultGroupButton').click(function() {
@@ -253,7 +214,8 @@ options.initConnectedDatabases = function() {
 
     const trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
     trClone.removeClass('clone');
-    for (const hash in options.keyRing) {
+
+    const addHashToTable = function(hash) {
         const tr = trClone.clone(true);
         tr.data('hash', hash);
         tr.attr('id', 'tr-cd-' + hash);
@@ -269,16 +231,28 @@ options.initConnectedDatabases = function() {
         $('#tab-connected-databases table tbody:first').append(tr);
     }
 
+    const hashList = options.keyRing;
+    for (const hash in hashList) {
+        addHashToTable(hash);
+    }
+
     if ($('#tab-connected-databases table tbody:first tr').length > 2) {
         $('#tab-connected-databases table tbody:first tr.empty:first').hide();
     } else {
         $('#tab-connected-databases table tbody:first tr.empty:first').show();
     }
 
-    $('#connect-button').click(function() {
-        browser.runtime.sendMessage({
-            action: 'associate'
-        });
+    $('#connect-button').click(async function() {
+        const result = await browser.runtime.sendMessage({ action: 'associate' });
+
+        if (result === AssociatedAction.NEW_ASSOCIATION) {
+            // Update the connection list with the added hash
+            options.keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+            for (const hash in hashList) {
+                const newHash = Object.keys(options.keyRing).find(h => h !== hash);
+                addHashToTable(newHash);
+            }
+        }
     });
 };
 
@@ -485,8 +459,8 @@ options.createWarning = function(elem, text) {
     const banner = document.createElement('div');
     banner.classList.add('alert', 'alert-dismissible', 'alert-danger', 'fade', 'in');
     banner.style.position = 'absolute';
-    banner.style.left = String(elem.offsetLeft) + 'px';
-    banner.style.top = String(elem.offsetTop + elem.offsetHeight) + 'px';
+    banner.style.left = Pixels(elem.offsetLeft);
+    banner.style.top = Pixels(elem.offsetTop + elem.offsetHeight);
     banner.style.padding = '0px';
     banner.style.width = '300px';
     banner.textContent = text;

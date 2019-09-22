@@ -1,67 +1,41 @@
 .kpxc-pwgen-dialog {
-    font-family: 'Lato', sans-serif !important;
-    width: 350px;
-    min-height: 80px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
-    z-index: 2147483645;
+    font-family: 'Lato', sans-serif !important;
+    min-height: 80px;
     padding: .1em .2em .1em .2em;
     position: absolute !important;
+    width: 350px;
+    z-index: 10000000 !important;
 }
 
 .kpxc-pwgen-titlebar {
-    font-size: 14px !important;
     background-color: #6cac4d;
     color: #fff;
-    padding: .4em .2em .4em .8em;
-    margin: .2em 0 .2em 0;
-    position: relative;
     cursor: move;
+    font-size: 12px !important;
+    margin: .2em 0 .2em 0;
+    padding: .4em .2em .4em .8em;
+    position: relative;
 }
 
 .kpxc-pwgen-password-row {
     color: #fff;
-    padding: .4em 1em;
-    margin: .2em 0 .2em 0;
     display: flex;
-}
-
-.kpxc-pwgen-nextfill-row {
-    font-size: 12px !important;
-    color: #000;
-    padding: .4em 1em;
     margin: .2em 0 .2em 0;
+    padding: .4em 1em;
 }
 
 .kpxc-pwgen-buttons {
+    align-items: center;
+    border-top: 1px solid #ccc;
     color: #fff;
+    display: flex;
+    justify-content: left;
     padding: .4em 1em;
     margin: .2em 0 .2em 0;
-    border-top: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.kpxc-pwgen-bits {
-    font-size: 12px !important;
-    font-style: normal !important;
-    font-weight: normal !important; 
-    text-align: center;
-    color: #000;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    padding: .4em;
-    border-radius: 4px;
-    width: 30%;
-    min-width: 60px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-collapse: separate;
-    vertical-align: middle;
-    white-space: nowrap;
 }
 
 .kpxc-pwgen-close {
@@ -80,9 +54,14 @@
 }
 
 .kpxc-pwgen-input {
-    width: 100%;
+    background: none !important;
+    border-radius: 4px !important;
+    color: #000 !important;
     font-size: 12px !important;
     font-weight: normal !important;
+    height: auto !important;
+    padding: 4px !important;
+    width: 100% !important;
 }
 
 .kpxc-pwgen-checkbox-label {
@@ -100,8 +79,8 @@
 }
 
 .kpxc-pwgen-icon {
-    position: absolute;
     cursor: pointer;
+    position: absolute;
 }
 
 .kpxc-pwgen-icon.key {
