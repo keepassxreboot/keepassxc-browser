@@ -1342,12 +1342,18 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         return;
     }
 
+    let skipAutoSubmit = false;
     const uField = _f(combination.username);
     const pField = _f(combination.password);
 
     // Exactly one pair of credentials available
     if (kpxc.credentials.length === 1) {
         let filledIn = false;
+
+        if (kpxc.credentials[0].skipAutoSubmit !== undefined) {
+            skipAutoSubmit = kpxc.credentials[0].skipAutoSubmit === 'true';
+        }
+
         if (uField && (!onlyPassword || _singleInputEnabledForPage)) {
             kpxc.setValueWithChange(uField, kpxc.credentials[0].login);
             browser.runtime.sendMessage({
@@ -1380,6 +1386,11 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
     } else if (combination.loginId !== undefined && kpxc.credentials[combination.loginId]) {
         // Specific login ID given
         let filledIn = false;
+
+        if (kpxc.credentials[0].skipAutoSubmit !== undefined) {
+            skipAutoSubmit = kpxc.credentials[combination.loginId].skipAutoSubmit === 'true';
+        }
+
         if (uField && (!onlyPassword || _singleInputEnabledForPage)) {
             kpxc.setValueWithChange(uField, kpxc.credentials[combination.loginId].login);
             browser.runtime.sendMessage({
@@ -1426,6 +1437,10 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                     valPassword = c.password;
                     valUsername = c.login;
                     valStringFields = c.stringFields;
+
+                    if (c.skipAutoSubmit !== undefined) {
+                        skipAutoSubmit = c.skipAutoSubmit === 'true';
+                    }
                 }
             }
 
@@ -1495,7 +1510,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
     kpxcAutocomplete.closeList();
 
     // Auto-submit
-    if (kpxc.settings.autoSubmit) {
+    if (kpxc.settings.autoSubmit && !skipAutoSubmit) {
         const form = kpxc.u.form || kpxc.p.form;
         const submitButton = kpxc.getFormSubmitButton(form);
         if (submitButton !== undefined) {
