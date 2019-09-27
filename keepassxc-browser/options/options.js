@@ -19,9 +19,9 @@ function setupBootstrapFormValidation() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', setupBootstrapFormValidation);
 
 $(async function() {
-    setupBootstrapFormValidation();
     try {
         const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
         options.settings = settings;
@@ -346,6 +346,9 @@ options.initSitePreferences = function() {
 
     const addUrlForm = document.querySelector('#optionsSitePreferencesManualAddForm');
     addUrlForm.addEventListener('submit', e => {
+        if (addUrlForm.checkValidity() === false) {
+            return;
+        }
         // prevent page reload
         e.preventDefault();
         const manualUrl = document.querySelector('#manualUrl');
