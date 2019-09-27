@@ -54,7 +54,16 @@ const createIcon = function(target, databaseClosed) {
 
     const field = target;
     const className = getIconClassName(databaseClosed);
-    const size = (field.offsetHeight > 28) ? 24 : 16;
+
+    // Size the icon dynamically, but not greater than 24 or smaller than 14
+    const size = Math.max(Math.min(24, field.offsetHeight - 4), 14);
+    
+    // Don't create the icon if the input field is too small
+    if (field.offsetWidth < (size * 1.5) || field.offsetHeight < size) {
+        kpxcUsernameField.observer.unobserve(field);
+        return;
+    }
+
     let offset = Math.floor((field.offsetHeight - size) / 3);
     offset = (offset < 0) ? 0 : offset;
 
