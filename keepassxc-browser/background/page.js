@@ -10,6 +10,7 @@ const defaultSettings = {
     autoRetrieveCredentials: true,
     showNotifications: true,
     showLoginNotifications: true,
+    showLoginFormIcon: true,
     saveDomainOnly: true,
     autoReconnect: false,
     defaultGroup: '',
@@ -56,6 +57,9 @@ page.initSettings = async function() {
         }
         if (!('showLoginNotifications' in page.settings)) {
             page.settings.showLoginNotifications = defaultSettings.showLoginNotifications;
+        }
+        if (!('showLoginFormIcon' in page.settings)) {
+            page.settings.showLoginFormIcon = defaultSettings.showLoginFormIcon;
         }
         if (!('saveDomainOnly' in page.settings)) {
             page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;

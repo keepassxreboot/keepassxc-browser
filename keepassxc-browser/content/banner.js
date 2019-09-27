@@ -72,7 +72,7 @@ kpxcBanner.create = async function(credentials = {}) {
     const updateButton = kpxcUI.createElement('button', 'kpxc-button kpxc-orange-button', { 'id': 'kpxc-banner-btn-update' }, tr('popupButtonUpdate'));
     const dismissButton = kpxcUI.createElement('button', 'kpxc-button kpxc-red-button', { 'id': 'kpxc-banner-btn-dismiss' }, tr('popupButtonDismiss'));
 
-    const separator = kpxcUI.createElement('div', 'separator');
+    const separator = kpxcUI.createElement('div', 'kpxc-separator');
     const ignoreCheckbox = kpxcUI.createElement('input', 'kpxc-checkbox', { type: 'checkbox', name: 'ignoreCheckbox' });
     const checkboxLabel = kpxcUI.createElement('label', 'kpxc-checkbox-label', { for: 'ignoreCheckbox' }, tr('popupButtonIgnore'));
 

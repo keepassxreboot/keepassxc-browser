@@ -447,7 +447,9 @@ kpxcFields.getUsernameField = function(passwordId, checkDisabled) {
                 return true; // Continue
             }
 
-            kpxcUsernameField.initField(usernameField);
+            if (kpxc.settings.showLoginFormIcon) {
+                kpxcUsernameField.initField(usernameField);
+            }
             usernameField = i;
         }
     } else {
@@ -561,7 +563,9 @@ kpxcFields.prepareCombinations = async function(combinations) {
             args: [ true ]
         });
 
-        kpxcUsernameField.initField(usernameField, res.databaseClosed);
+        if (kpxc.settings.showLoginFormIcon) {
+            kpxcUsernameField.initField(usernameField, res.databaseClosed);
+        }
 
         // Initialize form-submit for remembering credentials
         if (field) {

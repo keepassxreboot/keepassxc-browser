@@ -65,7 +65,7 @@ div.kpxc-banner .kpxc-banner-icon-moz {
     background-size: contain;
 }
 
-.separator {
+.kpxc-separator {
     border-left: 1px solid #ccc;
     height: 100% !important;
     margin: 10px !important;
