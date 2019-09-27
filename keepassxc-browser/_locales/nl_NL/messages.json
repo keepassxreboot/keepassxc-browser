@@ -16,20 +16,16 @@
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "Wachtwoordgenerator-pictogrammen tonen",
+        "message": "Wachtwoordgenerator-pictogram tonen",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
         "message": "Inloggegevens opslaan",
-        "description": "Save credentials using the extension popup icon."
+        "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
         "message": "Wachtwoordgenerator weergeven",
         "description": "Show password generator text."
-    },
-    "rememberCredentialsPopup": {
-        "message": "Creëer of bewerk de inloggegevens door de klikken op het extensiepictogram.",
-        "description": "Notification text when saving credentials from the context menu."
     },
     "multipleCredentialsDetected": {
         "message": "HTTP-authenticatie met meerdere inloggegevens gedetecteerd. Klik op het extensiepictogram om de juiste te kiezen.",
@@ -40,11 +36,11 @@
         "description": "Unknown error."
     },
     "errorMessageDatabaseNotOpened": {
-        "message": "Databank niet geopend.",
+        "message": "Database niet geopend.",
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "Geen databank-hash ontvangen.",
+        "message": "Geen controlegetal ontvangen.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
@@ -56,7 +52,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Kan niet met KeePassXC verbinden. Controleer of browser integratie aan staat in de KeePassXC instellingen.",
+        "message": "Kan niet met KeePassXC verbinden. Controleer in KeePassXC-instellingen of browserintegratie geactiveerd is.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -80,7 +76,7 @@
         "description": "Encryption key is not recognized."
     },
     "errorMessageSavedDatabases": {
-        "message": "Geen opgeslagen databanken aangetroffen.",
+        "message": "Geen opgeslagen databases aangetroffen.",
         "description": "No saved databases found."
     },
     "errorMessageIncorrectAction": {
@@ -99,8 +95,12 @@
         "message": "Geen inloggegevens aangetroffen.",
         "description": "No logins found."
     },
+    "errorNotConnected": {
+        "message": "Geen verbinding met KeePassXC.",
+        "description": "Error notification shown when not connected to KeePassXC"
+    },
     "passwordGeneratorIcon": {
-        "message": "Wachtwoordgenerator pictogram",
+        "message": "Wachtwoordgenerator-pictogram",
         "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorPlaceholder": {
@@ -111,10 +111,6 @@
         "message": "Volgend wachtwoordveld ook invullen",
         "description": "Checkbox text below the password generator input field."
     },
-    "passwordGeneratorBits": {
-        "message": "??? bits",
-        "description": "Bits of the generated password."
-    },
     "passwordGeneratorTitle": {
         "message": "Wachtwoordgenerator",
         "description": "Password generator dialog title."
@@ -123,16 +119,28 @@
         "message": "Genereren",
         "description": "Generate button text in password generator."
     },
+    "passwordGeneratorTryAgain": {
+        "message": "Opnieuw proberen",
+        "description": "Generate button text in password generator when not connected."
+    },
     "passwordGeneratorCopy": {
         "message": "Kopiëren",
         "description": "Copy button text in password generator."
     },
-    "passwordGeneratorFillAndCopy": {
-        "message": "Invullen en kopiëren",
-        "description": "Fill and copy button text in password generator."
+    "passwordGeneratorFill": {
+        "message": "Wachtwoord invullen",
+        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Fout:\nHet gegenereerde wachtwoord is langer dan de toegestane lengte!\nHet wachtwoord is daarom ingekort.\n\nOnthoudt het nieuwe wachtwoord!",
+        "message": "Fout: Het gegenereerde wachtwoord is langer dan toegestaan!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongCut": {
+        "message": "Het is op de lengte ingekort.",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongRemember": {
+        "message": "Vergeet het nieuwe wachtwoord niet!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
@@ -140,8 +148,24 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorError": {
-        "message": "Kan gegenereerd wachtwoord niet ontvangen.<br />Is KeePassXC actief?",
+        "message": "Kan geen gegenereerd wachtwoord ontvangen.",
         "description": "Password generator error text when KeePassXC is closed."
+    },
+    "passwordGeneratorErrorIsRunning": {
+        "message": "Is KeePassXC actief en aangesloten?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "usernameFieldText": {
+        "message": "Vul de inloggegevens van KeePassXC",
+        "description": "Username field icon hover text."
+    },
+    "usernameLockedFieldText": {
+        "message": "Database is vergrendeld",
+        "description": "Username field icon hover text when database is locked."
+    },
+    "usernameFieldIcon": {
+        "message": "Gebruikersnaam-pictogram",
+        "description": "Username field icon text."
     },
     "defineDismiss": {
         "message": "Verwerpen",
@@ -172,7 +196,7 @@
         "description": "Discard selection button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "String-veld #",
+        "message": "Tekstveld #",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
@@ -188,11 +212,11 @@
         "description": "Confirm a selection text when choosing custom login fields."
     },
     "defineHelpText": {
-        "message": "Bevestig je selectie of kies meerdere velden als <em>stringvelden</em>.",
+        "message": "Bevestig je selectie of kies meerdere velden als <em>tekstvelden</em>.",
         "description": "Confirm a selection text when choosing custom login fields which contains string fields."
     },
     "defineKeyboardText": {
-        "message": "You can also use the numbers to choose the input fields from keyboard.",
+        "message": "Je kan ook de nummers toetsen om de invoervelden te kiezen.",
         "description": "Help text when choosing custom login fields."
     },
     "username": {
@@ -208,27 +232,35 @@
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Fout:\nGeen inloggegevens aangetroffen.",
+        "message": "Geen inloggegevens aangetroffen.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Fout:\nEr zijn meerdere inloggegevens aangetroffen in KeePassXC!\nDruk op het KeePassXC-browserpictogram voor meer opties.",
+        "message": "Er is meer dan één login gevonden in KeePassXC!",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsMultipleFoundSecondLine": {
+        "message": "Klik het KeePassXC-browserpictogram voor meer opties.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Fout:\nGeen inloggegevens aangetroffen voor de opgegeven gebruikersnaam.",
+        "message": "Er zijn geen inloggegevens gevonden voor de gebruikersnaam.",
         "description": "Alert message when no credentials are found for the given username."
     },
+    "credentialExpired": {
+        "message": "Verlopen",
+        "description": "If a credential is expired, this is appended to the title label."
+    },
     "fieldsFill": {
-        "message": "Fout:\nGeen in te vullen velden aangetroffen.",
+        "message": "Fout: Geen velden kunnen vinden om in te vullen.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "Fout:\nGeen wachtwoordveld aangetroffen.",
+        "message": "Fout: Geen wachtwoordveld kunnen vinden.",
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "Fout:\nKan gewijzigde inloggegevens niet detecteren.",
+        "message": "Fout: Geen gewijzigde inloggegevens kunnen vinden.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -244,11 +276,11 @@
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
-        "message": "Koppelen",
+        "message": "Verbinding maken",
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": "Opnieuw koppelen",
+        "message": "Opnieuw verbinden",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
@@ -260,8 +292,12 @@
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": "Databank heropenen",
+        "message": "Database opnieuw openen",
         "description": "Popup reopen database button text."
+    },
+    "popupUsernameButton": {
+        "message": "Optie alleen-gebruikersnaam toevoegen voor de site",
+        "description": "Button text for adding Username-only option."
     },
     "popupErrorEncountered": {
         "message": "Er is een fout opgetreden in KeePassXC-Browser:",
@@ -280,64 +316,96 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser is niet ingesteld. Druk op de knop 'Koppelen' om te koppelen met KeePassXC.",
+        "message": "KeePassXC-Browser is niet ingesteld. Druk op de knop 'Opnieuw verbinden' om te koppelen met KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
-        "message": "KeePassXC-Browser is niet langer gekoppeld aan KeePassXC.",
+        "message": "KeePassXC-Browser is niet langer verbonden met KeePassXC.",
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Druk op de knop 'Opnieuw koppelen' om een nieuwe verbinding op te zetten.",
+        "message": "Druk op de knop 'Opnieuw verbinden' om een nieuwe verbinding op te zetten.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "KeePassXC-Browser is nog niet gekoppeld aan KeePassXC, maar is wél ingesteld met de identificatie: $1",
+        "message": "KeePassXC-Browser is nog niet verbonden met KeePassXC, maar is wél ingesteld met de identificatie: $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "KeePassXC-Browser is gekoppeld aan KeePassXC en is ingesteld met de volgende identificatie: $1",
+        "message": "KeePassXC-Browser is verbonden met KeePassXC en is ingesteld met de volgende identificatie: $1",
         "description": "A popuo message when a connection to KeePassXC is succesful."
     },
-    "popupRememberInfoText": {
-        "message": "Gebruikersnaam of wachtwoord gewijzigd. Opslaan?",
-        "description": "Popup message when username or password has changed."
+    "popupUsernameFieldDetected": {
+        "message": "Er is slechts één gebruikersnaam veld aangetroffen. De URL toevoegen aan de sitevoorkeuren met de optie alleen-gebruikersnaam ingeschakeld?",
+        "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
-    "popupRememberSaving": {
-        "message": "De inloggegevens worden opgeslagen in de gekoppelde databank met de identificatie $1",
-        "description": "A popup message when saving or updating credentials."
+    "rememberInfoText": {
+        "message": "Gebruikersnaam of wachtwoord gewijzigd! Opslaan?",
+        "description": "Message when username or password has changed."
     },
-    "popupRememberNewUsername": {
-        "message": "De volgende gebruikersnaam is nog niet opgeslagen: $1",
-        "description": "A popup message shown when a new username is detected when saving credentials."
+    "rememberSaving": {
+        "message": "De inloggegevens worden met de id $1 opgeslagen in de verbonden database",
+        "description": "A message when saving or updating credentials."
     },
-    "popupRememberUsernameExists": {
-        "message": "De inloggegevens met de gebruikte gebruikersnaam zijn vetgedrukt: $1",
-        "description": "A popup message shown when a existing username is detected when saving credentials."
+    "rememberNewUsername": {
+        "message": "De volgende gebruikersnaam is momenteel niet opgeslagen: $1",
+        "description": "A message shown when a new username is detected when saving credentials."
     },
-    "popupRememberChooseCredentials": {
-        "message": "Kies de bij te werken inloggegevens.",
-        "description": "A popup message shown choosing what credentials user wants to update."
+    "rememberUsernameExists": {
+        "message": "De inloggegevens met de gebruikte gebruikersnaam zijn vet gemarkeerd: $1",
+        "description": "A message shown when a existing username is detected when saving credentials."
     },
-    "popupRememberChooseGroup": {
-        "message": "Please choose the group you want to add the new credentials.",
-        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    "rememberChooseCredentials": {
+        "message": "Kies de inloggegevens die u wilt bijwerken.",
+        "description": "A message shown choosing what credentials user wants to update."
     },
-    "popupRememberErrorDefaultGroupNotFound": {
-        "message": "Error: Specified default group not found. Creating all necessary groups.",
-        "description": "Error message shown when default group set cannot be found."
+    "rememberChooseGroup": {
+        "message": "Selecteer de groep waaraan u de nieuwe inloggegevens wilt toevoegen.",
+        "description": "A message shown choosing what group user wants to use for new credentials."
     },
-    "popupRememberErrorCreatingNewGroup": {
-        "message": "New group(s) cannot be created.",
+    "rememberInfoDefaultGroupNotFound": {
+        "message": "Standaardgroep die is gemaakt in de verbonden database.",
+        "description": "Info message shown when default group set cannot be found."
+    },
+    "rememberErrorCreatingNewGroup": {
+        "message": "Kan geen nieuwe groep(en) aanmaken.",
         "description": "Error message shown when new groups cannot be created."
     },
-    "popupRememberErrorPasswordNotChanged": {
-        "message": "Error: Credentials not updated. The password has not been changed.",
+    "rememberErrorPasswordNotChanged": {
+        "message": "De inloggegevens worden niet bijgewerkt. Het wachtwoord is niet gewijzigd.",
         "description": "Error message shown when credential password is not changed."
     },
-    "popupRememberErrorCannotSaveCredentials": {
-        "message": "Error: Credentials cannot be saved or updated.",
+    "rememberErrorCannotSaveCredentials": {
+        "message": "De inloggegevens kunnen niet worden opgeslagen of bijgewerkt.",
         "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "rememberErrorDatabaseClosed": {
+        "message": "De inloggegevens kunnen niet worden opgeslagen of bijgewerkt in een gesloten database.",
+        "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
+    },
+    "rememberCredentialsNotSaved": {
+        "message": "De bewerking is geannuleerd. De inloggegevens zijn niet bijgewerkt.",
+        "description": "Message shown when saving operation was cancelled."
+    },
+    "rememberCredentialsSaved": {
+        "message": "Nieuwe inloggegevens met gebruikersnaam $1 opgeslagen.",
+        "description": "Message shown when new credentials are saved."
+    },
+    "rememberCredentialsUpdated": {
+        "message": "Inloggegevens met gebruikersnaam $1 bijgewerkt.",
+        "description": "Message shown when new credentials are succesfully updated."
+    },
+    "rememberCredentialsExists": {
+        "message": "Er bestaan al identieke inloggegevens. Niets om bij te werken.",
+        "description": "Message shown when new credentials already found in database."
+    },
+    "rememberEmptyUsername": {
+        "message": "(leeg)",
+        "description": "Means an empty username."
+    },
+    "rememberNoPassword": {
+        "message": "Vul het wachtwoordveld in voordat u inloggegevens opslaat.",
+        "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
         "message": "Kies de inloggegevens die je wilt invullen op de pagina.",
@@ -376,7 +444,7 @@
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Nooit vragen op deze pagina",
+        "message": "Niet opnieuw vragen voor deze site",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -396,7 +464,7 @@
         "description": "General Settings tab text."
     },
     "optionsConnectedDatabasesTab": {
-        "message": "Gekoppelde databanken",
+        "message": "Verbonden databases",
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
@@ -416,7 +484,7 @@
         "description": "General settings page header."
     },
     "optionsMenuConnectedDatabases": {
-        "message": "Gekoppelde databanken",
+        "message": "Verbonden databases",
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
@@ -440,7 +508,7 @@
         "description": "Save button text."
     },
     "optionsButtonConnect": {
-        "message": "Koppelen",
+        "message": "Verbinden",
         "description": "Connect button text."
     },
     "optionsButtonRemove": {
@@ -467,41 +535,37 @@
         "message": "Terugzetten",
         "description": "Reset button text for keyboard shortcuts."
     },
-    "optionsLabelBlinkTime": {
-        "message": "Knippertijd:",
-        "description": "Blink Time option text."
-    },
-    "optionsLabelRedirectOffset": {
-        "message": "Doorverwijstijd:",
-        "description": "Redirect Offset option text."
-    },
-    "optionsLabelRedirectAllowance": {
-        "message": "Maximaal aantal doorverwijzingen:",
-        "description": "RMaximum (Number of) Redirects options text."
-    },
     "optionsLabelDefaultGroup": {
-        "message": "Default group for saving new passwords:",
+        "message": "Standaardgroep voor het opslaan van nieuwe wachtwoorden:",
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Separate the group with slashes, for example: Group/ChildGroup.",
+        "message": "Scheid de groep met schuine strepen, bijv.: Groep/Subgroep.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Always ask where to save new credentials",
+        "message": "Altijd vragen waar nieuwe inloggegevens op te slaan",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "When enabled, the popup shows a group listing.",
+        "message": "Wanneer ingeschakeld, wordt een pop-up met groepenlijst weergegeven.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Wachtwoordgenerator activeren.",
-        "description": "Activate password generator checkbox text."
+        "message": "Wachtwoordgenerator-pictogrammen weergeven.",
+        "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
         "message": "Inloggegevens automatisch ophalen.",
         "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutomaticReconnect": {
+        "message": "Automatisch opnieuw verbinding maken met KeePassXC.",
+        "description": "Auto-reconnect checkbox text."
+    },
+    "optionsAutomaticReconnectWarning": {
+        "message": "Waarschuwing! Deze functie is experimenteel. Gebruik op eigen risico.",
+        "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
         "message": "Pagina's met één inlogveld automatisch invullen.",
@@ -510,6 +574,14 @@
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Auto-aanvullen inschakelen voor gebruikersnaamvelden.",
         "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxAutoSubmit": {
+        "message": "Aanmeldingsformulieren automatisch indienen",
+        "description": "Auto-submit checkbox text."
+    },
+    "optionsAutoSubmitHelpText": {
+        "message": "De geselecteerde inloggegevens automatisch indienen. Dit is uitgeschakeld voor automatisch aanvullen met een enkele invoer.",
+        "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
         "message": "Meldingen tonen.",
@@ -520,7 +592,7 @@
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Melding tonen als er nieuwe inloggegevens kunnen worden opgeslagen in de databank.",
+        "message": "Een banner op de pagina weergeven wanneer nieuwe inloggegevens in de database kunnen worden opgeslagen.",
         "description": "Show login notifications checkbox text."
     },
     "optionsCheckboxAutoFillAndSend": {
@@ -551,24 +623,8 @@
         "message": "Sneltoetsen",
         "description": "Keyboard shortcut header text."
     },
-    "optionsBlinkTimeHelpText": {
-        "message": "Maximale tijd (ms) dat het pictogram moet knipperen na het detecteren van nieuwe inloggegevens",
-        "description": "Blink Time option help text."
-    },
-    "optionsRedirectOffsetHelpText": {
-        "message": "Minimale tijd (ms) dat het pictogram moet knipperen voordat pagina-doorverwijzingen worden uitgeschakeld.",
-        "description": "Redirect Offset option help text."
-    },
-    "optionsRedirectOffsetHelpTextSecond": {
-        "message": "-1 om knippertijd te gebruiken waarbij het maximale aantal doorverwijzingen wordt genegeerd (oorspronkelijke instelling)",
-        "description": "Redirect Offset option help text, second part."
-    },
-    "optionsRedirectAllowanceHelpText": {
-        "message": "Hoeveel pagina's moeten worden doorgebladerd na het doorverwijzen voordat het een pictogram wordt gedeactiveerd",
-        "description": "Redirect Allowance option help text."
-    },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Voegt een knop toe aan wachtwoordvelden om een nieuw wachtwoord te genereren.",
+        "message": "Hiermee voegt u een pictogram toe aan wachtwoordvelden voor het genereren van een nieuw wachtwoord.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
@@ -578,6 +634,10 @@
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser haalt inloggegevens automatisch op als een tabblad wordt geactiveerd.",
         "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutomaticReconnectHelpText": {
+        "message": "Maakt automatisch opnieuw verbinding met KeePassXC wanneer deze wordt gedetecteerd.",
+        "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
         "message": "Inloggegevens automatisch invullen als er slechts één veld wordt gedetecteerd.",
@@ -648,23 +708,23 @@
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsConnectedDatabasesText": {
-        "message": "De volgende KeePassXC-databanken zijn gekoppeld aan KeePassXC-Browser.",
+        "message": "De volgende KeePassXC-databases zijn verbonden met KeePassXC-Browser.",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
-        "message": "Geen gekoppelde databanken aangetroffen.",
+        "message": "Geen verbonden databases aangetroffen.",
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
-        "message": "Identificatie verwijderen uit databanklijst?",
+        "message": "Identificatie verwijderen uit databaselijst?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Weet je zeker dat je de volgende identificatie wilt verwijderen uit de databanklijst?",
+        "message": "Weet je zeker dat je de volgende identificatie wilt verwijderen uit de databaselijst?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
-        "message": "Je kunt je databank op elk moment opnieuw koppelen.",
+        "message": "Je kunt je database op elk moment opnieuw verbinden.",
         "description": "Confirmation text when removing database from the list, second part."
     },
     "optionsDatabaseIdentifier": {
@@ -720,7 +780,7 @@
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table below.",
+        "message": "Je kan opgeslagen aangepaste aanmeldingsvelden met behulp van deze tabel beheren.",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
@@ -730,6 +790,10 @@
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Ga naar de pagina, klik op het KeePassXC-browserpictogram en kies",
         "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsTabHelpTextThird": {
+        "message": "Op deze pagina kan je opgeslagen aangepaste inlogvelden beheren.",
+        "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
         "message": "Opgeslagen aangepaste inlogvelden verwijderen?",
@@ -756,7 +820,7 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Om nieuwe/aangepaste inloggegevens op een specifieke site te nergeren, voeg ze hier onder toe of klik op het knipperende KeePassXC-Browser icoon en selecteer",
+        "message": "Als u nieuwe/gewijzigde inloggegevens op een specifieke site wilt negeren, voeg deze dan hieronder toe of wanneer u de banner op de pagina selecteert",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
@@ -768,7 +832,7 @@
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesManualAddText": {
-        "message": "Add URL manually",
+        "message": "URL handmatig toevoegen",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
@@ -780,11 +844,11 @@
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table below.",
+        "message": "Je kan opgeslagen Sitevoorkeuren met behulp van deze tabel beheren.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Option to ignore extension features for the page.",
+        "message": "Optie om uitbreidingsfuncties voor de pagina te negeren.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
@@ -808,43 +872,47 @@
         "description": "About page text of KeePassXC version."
     },
     "optionsAboutContributors": {
-        "message": "Contributors",
+        "message": "Medewerkers",
         "description": "About page text of contributors."
     },
     "optionsAboutLicenses": {
-        "message": "Licenses",
+        "message": "Licenties",
         "description": "About page text of licenses."
     },
     "optionsAboutReportBugs": {
-        "message": "Report bugs",
+        "message": "Meld een fout",
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Create new issue on GitHub",
+        "message": "Meld een nieuw probleem op GitHub",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
-        "message": "The following debug info can be used",
+        "message": "De volgende foutinformatie kan worden gebruikt",
         "description": "Debug info text."
     },
     "optionsErrorInvalidValue": {
-        "message": "Invalid value. Please check the input.",
+        "message": "Ongeldige waarde. Controleer de invoer.",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Invalid URL. Please check the input.",
+        "message": "Ongeldige URL. Controleer de invoer.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
-        "message": "The value already exists in the list.",
+        "message": "De waarde bestaat al in de lijst.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
     "openNewTab": {
-        "message": "Opens a new tab",
+        "message": "Opent een nieuw tabblad",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "HTTP Basic Authentication dialog",
+        "message": "Dialoogvenster HTTP-basisverificatie",
         "description": "Options page HTTP Basic Auth dialog text"
+    },
+    "autocompleteSubmitMessage": {
+        "message": "De selectie wordt automatisch ingediend",
+        "description": "Message shown at the bottom of autocomplete menu."
     }
 }
