@@ -88,7 +88,8 @@
                 <span id="show_password_generator-shortcut">error</span>
               </li>
             </ul>
-            <button class="chrome-only mt-3 btn btn-sm btn-primary" id="configureCommands" type="button">
+            <button class="chrome-only mt-3 btn btn-sm btn-primary" id="configureCommands"
+                    type="button" data-i18n="[title]openNewTab">
               <i class="fa fa-cog" aria-hidden="true"></i>
               <span data-i18n="optionsConfigureShortcuts"></span>
             </button>
@@ -188,6 +189,28 @@
                 </small>
               </div>
             </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="showLoginFormIcon" id="showLoginFormIcon" value="true"
+                     class="custom-control-input"/>
+              <label class="custom-control-label" data-i18n="optionsCheckboxUsernameIcons"
+                     for="showLoginFormIcon"></label>
+              <small class="form-text text-muted"
+                     data-i18n="optionsShowLoginFormIconHelpText"></small>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" name="usePasswordGeneratorIcons"
+                     id="usePasswordGeneratorIcons" value="true"/>
+              <label for="usePasswordGeneratorIcons" class="custom-control-label"
+                     data-i18n="optionsCheckboxUsePasswordGenerator"></label>
+              <small class="form-text text-muted">
+                <span data-i18n="optionsUsePasswordGeneratorHelpText"></span>
+                <br/>
+                <span data-i18n="optionsUsePasswordGeneratorHelpTextSecond"></span>
+              </small>
+            </div>
+
           </div>
         </section>
 

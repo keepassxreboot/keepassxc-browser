@@ -19,22 +19,23 @@ function setupBootstrapFormValidation() {
     }
 }
 
-$(function() {
-    setupBootstrapFormValidation();
-    browser.runtime.sendMessage({ action: 'load_settings' }).then((settings) => {
-        options.settings = settings;
-        browser.runtime.sendMessage({ action: 'load_keyring' }).then((keyRing) => {
-            options.keyRing = keyRing;
-            options.initGeneralSettings();
-            options.initConnectedDatabases();
-            options.initCustomCredentialFields();
-            options.initSitePreferences();
-            options.initAbout();
-        });
-    });
 
-    // Set options page language to HTML element from locale
-    $('html').attr('lang', browser.i18n.getUILanguage());
+$(async function() {
+    setupBootstrapFormValidation();
+    try {
+        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
+        options.settings = settings;
+
+        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+        options.keyRing = keyRing;
+        options.initGeneralSettings();
+        options.initConnectedDatabases();
+        options.initCustomCredentialFields();
+        options.initSitePreferences();
+        options.initAbout();
+    } catch (err) {
+        console.log('Error loading options page: ' + err);
+    }
 });
 
 const options = {};
@@ -51,7 +52,7 @@ options.saveSettingsPromise = function() {
     });
 };
 
-options.saveSetting = function(name) {
+options.saveSetting = async function(name) {
     const id = '#' + name;
     $(id).closest('.control-group').removeClass('error').addClass('success');
     setTimeout(() => {
@@ -59,21 +60,21 @@ options.saveSetting = function(name) {
     }, 2500);
 
     browser.storage.local.set({ 'settings': options.settings });
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'load_settings'
     });
 };
 
-options.saveSettings = function() {
+options.saveSettings = async function() {
     browser.storage.local.set({ 'settings': options.settings });
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'load_settings'
     });
 };
 
-options.saveKeyRing = function() {
+options.saveKeyRing = async function() {
     browser.storage.local.set({ 'keyRing': options.keyRing });
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'load_keyring'
     });
 };
@@ -120,7 +121,7 @@ options.initGeneralSettings = function() {
     });
 
     $('#tab-general-settings input[type=radio]').change(function() {
-        options.settings[$(this).attr('name')] = $(this).val();
+        options.settings[$(this).attr('name')] = Number($(this).val());
         options.saveSettings();
     });
 
@@ -216,7 +217,8 @@ options.initConnectedDatabases = function() {
 
     const trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
     trClone.removeClass('clone');
-    for (const hash in options.keyRing) {
+
+    const addHashToTable = function(hash) {
         const tr = trClone.clone(true);
         tr.data('hash', hash);
         tr.attr('id', 'tr-cd-' + hash);
@@ -230,16 +232,28 @@ options.initConnectedDatabases = function() {
         $('#tab-connected-databases table tbody:first').append(tr);
     }
 
+    const hashList = options.keyRing;
+    for (const hash in hashList) {
+        addHashToTable(hash);
+    }
+
     if ($('#tab-connected-databases table tbody:first tr').length > 2) {
         $('#tab-connected-databases table tbody:first tr.empty:first').hide();
     } else {
         $('#tab-connected-databases table tbody:first tr.empty:first').show();
     }
 
-    $('#connect-button').click(function() {
-        browser.runtime.sendMessage({
-            action: 'associate'
-        });
+    $('#connect-button').click(async function() {
+        const result = await browser.runtime.sendMessage({ action: 'associate' });
+
+        if (result === AssociatedAction.NEW_ASSOCIATION) {
+            // Update the connection list with the added hash
+            options.keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+            for (const hash in hashList) {
+                const newHash = Object.keys(options.keyRing).find(h => h !== hash);
+                addHashToTable(newHash);
+            }
+        }
     });
 };
 
@@ -433,6 +447,23 @@ options.initAbout = function() {
     if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1, 2)) < 60) {
         $('.chrome-only').remove();
     }
+};
+
+options.createWarning = function(elem, text) {
+    const banner = document.createElement('div');
+    banner.classList.add('alert', 'alert-dismissible', 'alert-danger', 'fade', 'in');
+    banner.style.position = 'absolute';
+    banner.style.left = Pixels(elem.offsetLeft);
+    banner.style.top = Pixels(elem.offsetTop + elem.offsetHeight);
+    banner.style.padding = '0px';
+    banner.style.width = '300px';
+    banner.textContent = text;
+    elem.parentElement.append(banner);
+
+    // Destroy the warning after five seconds
+    setTimeout(() => {
+        elem.parentElement.removeChild(banner);
+    }, 5000);
 };
 
 const getBrowserId = function() {

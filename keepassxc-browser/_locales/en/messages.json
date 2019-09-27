@@ -21,15 +21,11 @@
     },
     "contextMenuSaveCredentials": {
         "message": "Save credentials",
-        "description": "Save credentials using the extension popup icon."
+        "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Show password generator",
+        "message": "Show Password Generator",
         "description": "Show password generator text."
-    },
-    "rememberCredentialsPopup": {
-        "message": "Create or modify the credentials by clicking on the extension icon.",
-        "description": "Notification text when saving credentials from the context menu."
     },
     "multipleCredentialsDetected": {
         "message": "HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.",
@@ -99,6 +95,10 @@
         "message": "No logins found.",
         "description": "No logins found."
     },
+    "errorNotConnected": {
+        "message": "Not connected to KeePassXC.",
+        "description": "Error notification shown when not connected to KeePassXC"
+    },
     "passwordGeneratorIcon": {
         "message": "Password generator icon",
         "description": "Alt attribute text of the password generator icon."
@@ -110,10 +110,6 @@
     "passwordGeneratorLabel": {
         "message": "Also fill in the next password-field",
         "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorBits": {
-        "message": "$1 Bits",
-        "description": "Bits of the generated password."
     },
     "passwordGeneratorTitle": {
         "message": "Password Generator",
@@ -131,9 +127,9 @@
         "message": "Copy",
         "description": "Copy button text in password generator."
     },
-    "passwordGeneratorFillAndCopy": {
-        "message": "Fill and copy",
-        "description": "Fill and copy button text in password generator."
+    "passwordGeneratorFill": {
+        "message": "Fill password",
+        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Error: The generated password is longer than the allowed length!",
@@ -158,6 +154,18 @@
     "passwordGeneratorErrorIsRunning": {
         "message": "Is KeePassXC running and connected?",
         "description": "Password generator error text when KeePassXC is closed."
+    },
+    "usernameFieldText": {
+        "message": "Fill credentials from KeePassXC",
+        "description": "Username field icon hover text."
+    },
+    "usernameLockedFieldText": {
+        "message": "Database is locked",
+        "description": "Username field icon hover text when database is locked."
+    },
+    "usernameFieldIcon": {
+        "message": "Username field icon",
+        "description": "Username field icon text."
     },
     "defineDismiss": {
         "message": "Dismiss",
@@ -224,11 +232,11 @@
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Error: No logins found.",
+        "message": "No logins found.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Error: More than one login was found in KeePassXC!",
+        "message": "More than one login was found in KeePassXC!",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
@@ -236,7 +244,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Error: No credentials for the given username found.",
+        "message": "No credentials for the given username found.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialExpired": {
@@ -287,6 +295,10 @@
         "message": "Reopen database",
         "description": "Popup reopen database button text."
     },
+    "popupUsernameButton": {
+        "message": "Add Username-only option for the site",
+        "description": "Button text for adding Username-only option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser has encountered an error:",
         "description": "A text shown above error message in the popup."
@@ -323,45 +335,77 @@
         "message": "KeePassXC-Browser is connected to KeePassXC and has been configured using the following identifier:",
         "description": "A popup message when a connection to KeePassXC is successful."
     },
-    "popupRememberInfoText": {
+    "popupUsernameFieldDetected": {
+        "message": "Only a single username field was detected. Add the URL to Site Preferences with Username-only option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "rememberInfoText": {
         "message": "Username or password changed! Save it?",
-        "description": "Popup message when username or password has changed."
+        "description": "Message when username or password has changed."
     },
-    "popupRememberSaving": {
+    "rememberSaving": {
         "message": "Credentials will be saved in connected database with identifier $1",
-        "description": "A popup message when saving or updating credentials."
+        "description": "A message when saving or updating credentials."
     },
-    "popupRememberNewUsername": {
+    "rememberNewUsername": {
         "message": "The following username is currently not saved: $1",
-        "description": "A popup message shown when a new username is detected when saving credentials."
+        "description": "A message shown when a new username is detected when saving credentials."
     },
-    "popupRememberUsernameExists": {
+    "rememberUsernameExists": {
         "message": "The credentials with the used username are marked bold: $1",
-        "description": "A popup message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when a existing username is detected when saving credentials."
     },
-    "popupRememberChooseCredentials": {
+    "rememberChooseCredentials": {
         "message": "Please choose the credentials you want to update.",
-        "description": "A popup message shown choosing what credentials user wants to update."
+        "description": "A message shown choosing what credentials user wants to update."
     },
-    "popupRememberChooseGroup": {
+    "rememberChooseGroup": {
         "message": "Please choose the group you want to add the new credentials.",
-        "description": "A popup message shown choosing what group user wants to use for new credentials."
+        "description": "A message shown choosing what group user wants to use for new credentials."
     },
-    "popupRememberInfoDefaultGroupNotFound": {
-        "message": "Info: Default group created in connected database.",
+    "rememberInfoDefaultGroupNotFound": {
+        "message": "Default group created in connected database.",
         "description": "Info message shown when default group set cannot be found."
     },
-    "popupRememberErrorCreatingNewGroup": {
-        "message": "Error: New group(s) cannot be created.",
+    "rememberErrorCreatingNewGroup": {
+        "message": "New group(s) cannot be created.",
         "description": "Error message shown when new groups cannot be created."
     },
-    "popupRememberErrorPasswordNotChanged": {
-        "message": "Error: Credentials not updated. The password has not been changed.",
+    "rememberErrorPasswordNotChanged": {
+        "message": "Credentials not updated. The password has not been changed.",
         "description": "Error message shown when credential password is not changed."
     },
-    "popupRememberErrorCannotSaveCredentials": {
-        "message": "Error: Credentials cannot be saved or updated.",
+    "rememberErrorCannotSaveCredentials": {
+        "message": "Credentials cannot be saved or updated.",
         "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "rememberErrorDatabaseClosed": {
+        "message": "Credentials cannot be saved or updated to a closed database.",
+        "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
+    },
+    "rememberCredentialsNotSaved": {
+        "message": "Operation cancelled. Credentials are not updated.",
+        "description": "Message shown when saving operation was cancelled."
+    },
+    "rememberCredentialsSaved": {
+        "message": "New credentials with username $1 saved.",
+        "description": "Message shown when new credentials are saved."
+    },
+    "rememberCredentialsUpdated": {
+        "message": "Credentials with username $1 updated.",
+        "description": "Message shown when new credentials are succesfully updated."
+    },
+    "rememberCredentialsExists": {
+        "message": "Identical credentials already exists. Nothing to update.",
+        "description": "Message shown when new credentials already found in database."
+    },
+    "rememberEmptyUsername": {
+        "message": "(empty)",
+        "description": "Means an empty username."
+    },
+    "rememberNoPassword": {
+        "message": "Please fill the password field before saving credentials.",
+        "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
         "message": "Select the login information you would like to get entered into the page.",
@@ -400,7 +444,7 @@
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Never ask for this page",
+        "message": "Don't ask again for this site",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -491,18 +535,6 @@
         "message": "Reset",
         "description": "Reset button text for keyboard shortcuts."
     },
-    "optionsLabelBlinkTime": {
-        "message": "Blink Time:",
-        "description": "Blink Time option text."
-    },
-    "optionsLabelRedirectOffset": {
-        "message": "Redirect Offset:",
-        "description": "Redirect Offset option text."
-    },
-    "optionsLabelRedirectAllowance": {
-        "message": "Maximum (Number of) Redirects:",
-        "description": "RMaximum (Number of) Redirects options text."
-    },
     "optionsLabelDefaultGroup": {
         "message": "Default group for saving new passwords:",
         "description": "Default group options text."
@@ -524,8 +556,12 @@
         "description": "Section to configure KeePassXC-specific settings."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Activate password generator.",
-        "description": "Activate password generator checkbox text."
+        "message": "Activate password generator icons.",
+        "description": "Activate password generator icons checkbox text."
+    },
+    "optionsCheckboxUsernameIcons": {
+        "message": "Activate username field icons.",
+        "description": "Activate username field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
         "message": "Automatically retrieve credentials.",
@@ -564,7 +600,7 @@
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Show a notification when new credentials can be saved to the database.",
+        "message": "Show a banner on the page when new credentials can be saved to the database.",
         "description": "Show login notifications checkbox text."
     },
     "optionsCheckboxAutoFillAndSend": {
@@ -595,29 +631,17 @@
         "message": "Keyboard shortcuts",
         "description": "Keyboard shortcut header text."
     },
-    "optionsBlinkTimeHelpText": {
-        "message": "Maximum time (ms) the icon should blink after detecting new credentials",
-        "description": "Blink Time option help text."
-    },
-    "optionsRedirectOffsetHelpText": {
-        "message": "Minimum time (ms) the icon should blink before deactivating due to page redirects.",
-        "description": "Redirect Offset option help text."
-    },
-    "optionsRedirectOffsetHelpTextSecond": {
-        "message": "-1 to only use blink time ignoring Maximum Redirects (old behavior)",
-        "description": "Redirect Offset option help text, second part."
-    },
-    "optionsRedirectAllowanceHelpText": {
-        "message": "How many pages should the tab cycle through after the redirect offset before deactivating the icon",
-        "description": "Redirect Allowance option help text."
-    },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Adds a button to password fields for generating a new password.",
+        "message": "Adds an icon to password fields for generating a new password.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
         "message": "Passwords are generated by KeePassXC using your password generation profile.",
         "description": "Password Generator option help text, second part."
+    },
+    "optionsShowLoginFormIconHelpText": {
+        "message": "Adds an icon to username fields for filling credentials with a single mouse click.",
+        "description": "Username field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",
@@ -808,7 +832,7 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "To ignore new/modified credentials on a specific site, add them below or click the blinking KeePassXC-Browser icon and select",
+        "message": "To ignore new/modified credentials on a specific site, add them below or when using the credential banner on the page select",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {

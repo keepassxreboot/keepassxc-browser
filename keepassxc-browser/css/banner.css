@@ -1,0 +1,138 @@
+div.kpxc-banner {
+    animation-duration: 0.2s;
+    animation-name: slidein;
+    background-color: #ffffff;
+    border-bottom: 1px solid #38383d !important;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
+    box-sizing: border-box !important;
+    color: #000000 !important;
+    font-family: sans-serif !important;
+    font-size: 1em !important;
+    height: auto !important;
+    left: 0px !important;
+    line-height: 1 !important;
+    margin: 0 auto !important;
+    min-height: 2em !important;
+    max-height: 4em !important;
+    overflow-x: hidden !important;
+    padding: 4px !important;
+    position: fixed !important;
+    top: 0px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+@keyframes slidein {
+    from {
+        max-height: 0em;
+    }
+  
+    to {
+        max-height: 4em;
+    }
+}
+
+div.kpxc-banner .banner-info > span {
+    margin: 4px;
+}
+
+div.kpxc-banner div.banner-info, div.banner-buttons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+div.kpxc-banner .small {
+    font-size: 80%;
+    color: #787878;
+}
+
+div.kpxc-banner .kpxc-banner-icon {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/keepassxc.svg') right no-repeat;
+    background-size: contain;
+}
+
+div.kpxc-banner .kpxc-banner-icon-moz {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    background: url('moz-extension://__MSG_@@extension_id__/icons/keepassxc.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-separator {
+    border-left: 1px solid #ccc;
+    height: 100% !important;
+    margin: 10px !important;
+}
+
+div.kpxc-banner .kpxc-checkbox {
+    margin: 2px !important;
+}
+
+div.kpxc-banner label {
+    font-family: 'Lato', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    margin: 4px !important;
+}
+
+div.kpxc-banner-dialog {
+    display: block !important;
+    position: fixed !important;
+    margin: 0 auto;
+    width: 680px;
+    max-height: 600px;
+    max-width: 460px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    padding: 8px;
+    z-index: 10000000;
+}
+
+div.kpxc-banner-dialog > ul {
+    list-style-type: disc !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding-left: 0 !important;
+}
+
+div.kpxc-banner-dialog > p > span.strong {
+    font-weight: bold !important;
+}
+
+div.kpxc-banner-dialog .list-group {
+    font-size: .9em !important;
+}
+
+div.kpxc-banner-dialog .list-group-item {
+    border: 1px solid #ddd !important;
+    color: #000 !important;
+    display: block !important;
+    padding: 5px 10px;
+    position: relative !important;
+    text-decoration: none !important;
+}
+
+div.kpxc-banner-dialog .list-group-item:first-child {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+div.kpxc-banner-dialog .list-group-item:last-child {
+    margin-bottom: 0 !important;
+    border-bottom-right-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+}
+
+div.kpxc-banner-dialog .list-group-item:hover {
+    cursor: pointer !important;;
+    background-color: #eee !important;
+}

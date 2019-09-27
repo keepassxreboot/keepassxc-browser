@@ -8,31 +8,28 @@ function updateAvailableResponse(available) {
     }
 }
 
-function initSettings() {
-    $('#settings #btn-options').click(function() {
+async function initSettings() {
+    $('#settings #btn-options').click(() => {
         browser.runtime.openOptionsPage().then(close());
     });
 
-    $('#settings #btn-choose-credential-fields').click(function() {
-        browser.windows.getCurrent().then((win) => {
-            browser.tabs.query({ 'active': true, 'currentWindow': true }).then((tabs) => {
-                const tab = tabs[0];
-                browser.runtime.getBackgroundPage().then((global) => {
-                    browser.tabs.sendMessage(tab.id, {
-                        action: 'choose_credential_fields'
-                    });
-                    close();
-                });
-            });
+    $('#settings #btn-choose-credential-fields').click(async () => {
+        await browser.windows.getCurrent();
+        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+        const tab = tabs[0];
+        await browser.runtime.getBackgroundPage();
+
+        browser.tabs.sendMessage(tab.id, {
+            action: 'choose_credential_fields'
         });
+        close();
     });
 }
 
 
-$(function() {
-    initSettings();
-
-    browser.runtime.sendMessage({
+$(async () => {
+    await initSettings();
+    updateAvailableResponse(await browser.runtime.sendMessage({
         action: 'update_available_keepassxc'
-    }).then(updateAvailableResponse);
+    }));
 });

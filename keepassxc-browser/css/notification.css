@@ -1,0 +1,69 @@
+.kpxc-notification {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    cursor: pointer;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    margin: 0px auto;
+    margin-bottom: 20px;
+    padding: 15px;
+    padding-right: 35px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    width: 520px;
+    z-index: 9999;
+}
+
+.kpxc-notification span {
+    padding: 2px;
+}
+
+.kpxc-notification .kpxc-banner-icon {
+    width: 24px;
+    height: 24px;
+    padding: 10px;
+    margin-right: 4px;
+    overflow: hidden;
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/keepassxc.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-notification .kpxc-banner-icon-moz {
+    width: 24px;
+    height: 24px;
+    padding: 10px;
+    margin-right: 4px;
+    overflow: hidden;
+    background: url('moz-extension://__MSG_@@extension_id__/icons/keepassxc.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-notification .kpxc-label {
+    font-weight: bold;
+}
+
+.kpxc-notification-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.kpxc-notification-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.kpxc-notification-info {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.kpxc-notification-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

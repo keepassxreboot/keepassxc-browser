@@ -34,13 +34,9 @@ kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit 
 kpxcAutocomplete.showList = function(inputField) {
     kpxcAutocomplete.closeList();
     kpxcAutocomplete.input = inputField;
-    const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
 
-    // Element position
-    const rect = inputField.getBoundingClientRect();
-    div.style.top = String((rect.top + document.body.scrollTop) + inputField.offsetHeight) + 'px';
-    div.style.left = String((rect.left + document.body.scrollLeft)) + 'px';
-    div.style.minWidth = String(inputField.offsetWidth) + 'px';
+    const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
+    kpxcAutocomplete.updatePosition(inputField, div);
     div.style.zIndex = '2147483646';
     document.body.append(div);
 
@@ -56,6 +52,10 @@ kpxcAutocomplete.showList = function(inputField) {
 
             // Save index for combination.loginId
             const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
+            browser.runtime.sendMessage({
+                action: 'page_set_login_id', args: [ index ]
+            });
+
             inputField.value = this.getElementsByTagName('input')[0].value;
             kpxcAutocomplete.fillPassword(inputField.value, index);
             kpxcAutocomplete.closeList();
@@ -188,12 +188,25 @@ kpxcAutocomplete.keyPress = function(e) {
 kpxcAutocomplete.fillPassword = function(value, index) {
     const fieldId = kpxcAutocomplete.input.getAttribute('data-kpxc-id');
     kpxcFields.prepareId(fieldId);
+
     const givenType = kpxcAutocomplete.input.type === 'password' ? 'password' : 'username';
     const combination = kpxcFields.getCombination(givenType, fieldId);
     combination.loginId = index;
 
     kpxc.fillInCredentials(combination, givenType === 'password', false);
     kpxcAutocomplete.input.setAttribute('fetched', true);
+};
+
+kpxcAutocomplete.updatePosition = function(inputField, elem) {
+    const div = elem || $('.kpxcAutocomplete-items');
+    if (!div) {
+        return;
+    }
+
+    const rect = inputField.getBoundingClientRect();
+    div.style.top = Pixels((rect.top + document.scrollingElement.scrollTop) + inputField.offsetHeight);
+    div.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft));
+    div.style.minWidth = Pixels(inputField.offsetWidth);
 };
 
 // Detect click outside autocomplete
@@ -207,7 +220,31 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    if (e.target !== kpxcAutocomplete.input && (e.target.nodeName !== kpxcAutocomplete.input.nodeName)) {
+    if (e.target !== kpxcAutocomplete.input &&
+        !e.target.classList.contains('kpxc-username-icon') &&
+        e.target.nodeName !== kpxcAutocomplete.input.nodeName) {
         kpxcAutocomplete.closeList(e.target);
+    }
+});
+
+// Handle autocomplete position on window resize
+window.addEventListener('resize', function() {
+    if (!kpxc.settings.autoCompleteUsernames) {
+        return;
+    }
+
+    if (kpxcAutocomplete.input) {
+        kpxcAutocomplete.updatePosition(kpxcAutocomplete.input);
+    }
+});
+
+// Handle autocomplete position on scroll
+window.addEventListener('scroll', function() {
+    if (!kpxc.settings.autoCompleteUsernames) {
+        return;
+    }
+
+    if (kpxcAutocomplete.input) {
+        kpxcAutocomplete.updatePosition(kpxcAutocomplete.input);
     }
 });

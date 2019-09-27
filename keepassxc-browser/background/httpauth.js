@@ -47,11 +47,10 @@ httpAuth.handleRequestCallback = function(details, callback) {
     httpAuth.processPendingCallbacks(details, callback, callback);
 };
 
-httpAuth.retrieveCredentials = function(tabId, url, submitUrl, forceCallback) {
-    return new Promise((resolve, reject) => {
-        keepass.retrieveCredentials((logins) => {
-            resolve(logins);
-        }, tabId, url, submitUrl, forceCallback, false, true);
+httpAuth.retrieveCredentials = async function(tabId, url, submitUrl) {
+    return await keepass.retrieveCredentials(tabId, [ url, submitUrl, false, true ]).catch((err) => {
+        console.log('httpAuth.retrieveCredentials error: ' + err);
+        return Promise.reject();
     });
 };
 
@@ -69,7 +68,7 @@ httpAuth.processPendingCallbacks = async function(details, resolve, reject) {
 
     details.searchUrl = (details.isProxy && details.proxyUrl) ? details.proxyUrl : details.url;
 
-    const logins = await httpAuth.retrieveCredentials({ 'id': details.tabId }, details.searchUrl, details.searchUrl, true);
+    const logins = await httpAuth.retrieveCredentials({ 'id': details.tabId }, details.searchUrl, details.searchUrl);
     httpAuth.loginOrShowCredentials(logins, details, resolve, reject);
 };
 
@@ -87,7 +86,7 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
             if (page.settings.showNotifications) {
                 showNotification(tr('multipleCredentialsDetected'));
             }
-            kpxcEvent.onHTTPAuthPopup(null, { 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
+            kpxcEvent.onHTTPAuthPopup({ 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
         }
     } else {
         reject({ cancel: false }); // No logins found

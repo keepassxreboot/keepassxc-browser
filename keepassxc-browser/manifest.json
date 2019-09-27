@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.4.7",
-    "version_name": "1.4.7",
+    "version": "1.5.1",
+    "version_name": "1.5.1",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {
@@ -54,18 +54,24 @@
             ],
             "js": [
                 "browser-polyfill.min.js",
+                "content/banner.js",
                 "content/autocomplete.js",
                 "content/define.js",
                 "content/keepassxc-browser.js",
                 "content/pwgen.js",
+                "content/sites.js",
                 "content/ui.js",
+                "content/username-field.js",
                 "global.js"
             ],
             "css": [
                 "css/autocomplete.css",
+                "css/banner.css",
                 "css/button.css",
                 "css/define.css",
-                "css/pwgen.css"
+                "css/notification.css",
+                "css/pwgen.css",
+                "css/username.css"
             ],
             "run_at": "document_idle",
             "all_frames": true
@@ -102,7 +108,9 @@
         }
     },
     "web_accessible_resources": [
-        "icons/key.svg"
+        "icons/keepassxc.svg",
+        "icons/key.svg",
+        "icons/locked.svg"
     ],
     "permissions": [
         "activeTab",
