@@ -1,24 +1,25 @@
 'use strict';
 
-const kpxcUsernameFields = {};
-kpxcUsernameFields.icons = [];
+const kpxcUsernameIcons = {};
+kpxcUsernameIcons.icons = [];
 
-kpxcUsernameFields.newIcon = function(field, databaseClosed = true) {
-    kpxcUsernameFields.icons.push(new UsernameFieldIcon(field, databaseClosed));
+kpxcUsernameIcons.newIcon = function(field, databaseClosed = true) {
+    kpxcUsernameIcons.icons.push(new UsernameFieldIcon(field, databaseClosed));
 };
 
-kpxcUsernameFields.switchIcon = function(locked) {
-    kpxcUsernameFields.icons.forEach(u => u.switchIcon(locked));
+kpxcUsernameIcons.switchIcon = function(locked) {
+    kpxcUsernameIcons.icons.forEach(u => u.switchIcon(locked));
 };
 
 
 class UsernameFieldIcon extends Icon {
     constructor(field, databaseClosed = true) {
         super();
+        this.databaseClosed = databaseClosed;
         this.icon = null;
         this.inputField = null;
 
-        this.initField(field, databaseClosed);
+        this.initField(field,);
         kpxcUI.monitorIconPosition(this);
     }
 
@@ -39,7 +40,7 @@ class UsernameFieldIcon extends Icon {
     }
 };
 
-UsernameFieldIcon.prototype.initField = function(field, databaseClosed = true) {
+UsernameFieldIcon.prototype.initField = function(field) {
     if (!field || field.getAttribute('kpxc-username-field') === 'true') {
         return;
     }
@@ -51,18 +52,18 @@ UsernameFieldIcon.prototype.initField = function(field, databaseClosed = true) {
         this.observer.observe(field);
     }
 
-    this.createIcon(field, databaseClosed);
+    this.createIcon(field);
     this.inputField = field;
 };
 
-UsernameFieldIcon.prototype.createIcon = function(target, databaseClosed) {
+UsernameFieldIcon.prototype.createIcon = function(target) {
     // Remove any existing password generator icons from the input field
     if (target.getAttribute('kpxc-password-generator')) {
         kpxcPasswordDialog.removeIcon(target);
     }
 
     const field = target;
-    const className = getIconClassName(databaseClosed);
+    const className = getIconClassName(this.databaseClosed);
 
     // Size the icon dynamically, but not greater than 24 or smaller than 14
     const size = Math.max(Math.min(24, field.offsetHeight - 4), 14);
@@ -78,7 +79,7 @@ UsernameFieldIcon.prototype.createIcon = function(target, databaseClosed) {
 
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-username-icon ' + className,
         {
-            'title': databaseClosed ? tr('usernameLockedFieldText') : tr('usernameFieldText'),
+            'title': this.databaseClosed ? tr('usernameLockedFieldText') : tr('usernameFieldText'),
             'alt': tr('usernameFieldIcon'),
             'size': size,
             'offset': offset,

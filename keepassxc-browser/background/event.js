@@ -228,6 +228,15 @@ kpxcEvent.onUsernameFieldDetected = function(tab, detected) {
     page.usernameFieldDetected = detected;
 };
 
+kpxcEvent.passwordGetFilled = async function() {
+    return page.passwordFilled;
+}
+
+kpxcEvent.passwordSetFilled = function(tab, state) {
+    page.passwordFilled = state;
+    return Promise.resolve();
+}
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -255,6 +264,8 @@ kpxcEvent.messageHandlers = {
     'page_get_submitted': kpxcEvent.pageGetSubmitted,
     'page_set_login_id': kpxcEvent.pageSetLoginId,
     'page_set_submitted': kpxcEvent.pageSetSubmitted,
+    'password_get_filled': kpxcEvent.passwordGetFilled,
+    'password_set_filled': kpxcEvent.passwordSetFilled,
     'pop_stack': kpxcEvent.onPopStack,
     'popup_login': kpxcEvent.onLoginPopup,
     'popup_multiple-fields': kpxcEvent.onMultipleFieldsPopup,

@@ -21,6 +21,18 @@ class Icon {
             console.log(err);
         }
     }
+
+    switchIcon(locked) {
+        if (!this.icon) {
+            return;
+        }
+    
+        if (locked) {
+           this.icon.style.filter = 'saturate(0%)';
+        } else {
+            this.icon.style.filter = 'saturate(100%)';
+        }
+    }
 };
 
 const kpxcUI = {};
