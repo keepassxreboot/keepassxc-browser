@@ -54,15 +54,15 @@
             ],
             "js": [
                 "browser-polyfill.min.js",
+                "global.js",
+                "content/ui.js",
                 "content/banner.js",
                 "content/autocomplete.js",
                 "content/define.js",
                 "content/keepassxc-browser.js",
                 "content/pwgen.js",
                 "content/sites.js",
-                "content/ui.js",
-                "content/username-field.js",
-                "global.js"
+                "content/username-field.js"
             ],
             "css": [
                 "css/autocomplete.css",
