@@ -1573,7 +1573,7 @@ kpxc.contextMenuRememberCredentials = async function() {
  * @param {Array} oldCredentials    Credentials saved from the password change page, if available
  */
 kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue, oldCredentials) {
-    const credentials = kpxc.credentials || oldCredentials;
+    const credentials = (oldCredentials !== undefined && oldCredentials.length > 0) ? oldCredentials : kpxc.credentials;
 
     // No password given or field cleaned by a site-running script
     // --> no password to save
