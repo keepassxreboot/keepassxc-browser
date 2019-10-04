@@ -73,16 +73,37 @@ httpAuth.processPendingCallbacks = async function(details, resolve, reject) {
 };
 
 httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
-    // At least one login found --> use first to login
+    // At least one login found
     if (logins.length > 0 && page.settings.autoFillAndSend) {
-        if (logins.length === 1) {
+        let loginToUse = null
+        if(logins.length === 1){
+            // if we only have one login, use that
+            loginToUse = logins[0]
+        }else{
+            // if we have more than one than check for specific kph flag to use that as http auth
+            loginLoop: for (let i = 0; i < logins.length; i++) {
+                let login = logins[i]
+                if(login.stringFields){
+                    for (let j = 0; j < login.stringFields.length; j++) {
+                        let stringField = login.stringFields[j]
+                        if(typeof stringField['KPH: HttpAuth'] !== 'undefined' && stringField['KPH: HttpAuth'] === "1"){
+                            loginToUse = login
+                            break loginLoop
+                        }
+                    }
+                }
+            }
+        }
+        if (loginToUse !== null) {
+            // if we have a dedicated login, use it
             resolve({
                 authCredentials: {
-                    username: logins[0].login,
-                    password: logins[0].password
+                    username: loginToUse.login,
+                    password: loginToUse.password
                 }
             });
         } else {
+            // if we have no dedicated login, show notes and popups
             if (page.settings.showNotifications) {
                 showNotification(tr('multipleCredentialsDetected'));
             }
