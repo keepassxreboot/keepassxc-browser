@@ -86,7 +86,7 @@ browser.storage.local.get({ 'latestKeePassXC': { 'version': '', 'lastChecked': n
     keepass.keyRing = item.keyRing;
 });
 
-keepass.sendNativeMessage = function(request, enableTimeout = false) {
+keepass.sendNativeMessage = function(request, enableTimeout = false, timeoutValue) {
     return new Promise((resolve, reject) => {
         let timeout;
         const requestAction = request.action;
@@ -106,6 +106,7 @@ keepass.sendNativeMessage = function(request, enableTimeout = false) {
         })(ev, requestAction);
         ev.addListener(listener);
 
+        let messageTimeout = timeoutValue || keepass.messageTimeout;
 
         // Handle timeouts
         if (enableTimeout) {
@@ -118,7 +119,7 @@ keepass.sendNativeMessage = function(request, enableTimeout = false) {
                 keepass.isKeePassXCAvailable = false;
                 ev.removeListener(listener.handler);
                 resolve(errorMessage);
-            }, keepass.messageTimeout);
+            }, messageTimeout);
         }
 
         // Send the request
@@ -571,7 +572,7 @@ keepass.getDatabaseHash = async function(tab, args = []) {
     }
 };
 
-keepass.changePublicKeys = async function(tab, enableTimeout = false) {
+keepass.changePublicKeys = async function(tab, enableTimeout = false, connectionTimeout) {
     if (!keepass.isConnected) {
         keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
         return false;
@@ -590,19 +591,19 @@ keepass.changePublicKeys = async function(tab, enableTimeout = false) {
     };
 
     try {
-        const response = await keepass.sendNativeMessage(request, enableTimeout);
+        const response = await keepass.sendNativeMessage(request, enableTimeout, connectionTimeout);
         keepass.setcurrentKeePassXCVersion(response.version);
 
         if (!keepass.verifyKeyResponse(response, key, incrementedNonce)) {
             if (tab && page.tabs[tab.id]) {
                 keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
-                return false;
             }
-        } else {
-            keepass.isKeePassXCAvailable = true;
-            console.log('Server public key: ' + nacl.util.encodeBase64(keepass.serverPublicKey));
+
+            return false;
         }
 
+        keepass.isKeePassXCAvailable = true;
+        console.log('Server public key: ' + nacl.util.encodeBase64(keepass.serverPublicKey));
         return true;
     } catch (err) {
         console.log('changePublicKeys failed: ', err);
@@ -987,17 +988,15 @@ keepass.verifyKeyResponse = function(response, key, nonce) {
         return false;
     }
 
-    let reply = false;
     if (!keepass.checkNonceLength(response.nonce)) {
         console.log('Error: Invalid nonce length');
         return false;
     }
 
-    reply = (response.nonce === nonce);
-
-    if (response.publicKey) {
+    const reply = (response.nonce === nonce);
+    if (response.publicKey && reply) {
         keepass.serverPublicKey = nacl.util.decodeBase64(response.publicKey);
-        reply = true;
+        return true;
     }
 
     return reply;
@@ -1126,24 +1125,27 @@ keepass.disableAutomaticReconnect = function() {
     keepass.reconnectLoop = null;
 };
 
-keepass.reconnect = function(tab) {
-    return new Promise(async (resolve) => {
-        keepass.connectToNative();
-        keepass.generateNewKeyPair();
-        await keepass.changePublicKeys(tab, true).catch((e) => {
-            resolve(false);
-        });
-
-        const hash = await keepass.getDatabaseHash(tab);
-        if (hash !== '' && tab && page.tabs[tab.id]) {
-            delete page.tabs[tab.id].errorMessage;
-        }
-
-        await keepass.testAssociation();
-        await keepass.isConfigured();
-        keepass.updateDatabaseHashToContent();
-        resolve(true);
+keepass.reconnect = async function(tab, connectionTimeout) {
+    keepass.connectToNative();
+    keepass.generateNewKeyPair();
+    const keyChangeResult = await keepass.changePublicKeys(tab, true, connectionTimeout).catch((e) => {
+        return false;
     });
+
+    // Change public keys timeout
+    if (!keyChangeResult) {
+        return false;
+    }
+
+    const hash = await keepass.getDatabaseHash(tab);
+    if (hash !== '' && tab && page.tabs[tab.id]) {
+        delete page.tabs[tab.id].errorMessage;
+    }
+
+    await keepass.testAssociation();
+    await keepass.isConfigured();
+    keepass.updateDatabaseHashToContent();
+    return true;
 };
 
 keepass.updatePopup = function(iconType) {

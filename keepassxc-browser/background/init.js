@@ -6,7 +6,7 @@
         await page.initSettings();
         await page.initOpenedTabs();
         await httpAuth.init();
-        await keepass.reconnect();
+        await keepass.reconnect(null, 5000); // 5 second timeout for the first connect
         await keepass.enableAutomaticReconnect();
     } catch (e) {
         console.log('init.js failed');
