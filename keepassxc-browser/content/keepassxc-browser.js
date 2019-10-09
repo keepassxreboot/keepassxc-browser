@@ -1,13 +1,13 @@
 'use strict';
 
-var ManualFill = {
+const ManualFill = {
     NONE: 0,
     PASS: 1,
     BOTH: 2
 };
 
 // contains already called method names
-var _called = {};
+const _called = {};
 _called.retrieveCredentials = false;
 _called.clearLogins = false;
 _called.manualFillRequested = ManualFill.NONE;
@@ -18,7 +18,7 @@ const _maximumInputs = 100;
 var _detectedFields = 0;
 
 // Element id's containing input fields detected by MutationObserver
-var _observerIds = [];
+const _observerIds = [];
 
 // Document URL
 let _documentURL = document.location.href;
@@ -38,7 +38,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxc.fillInFromActiveElement(false, true); // passOnly to true
         } else if (req.action === 'fill_totp') {
             await kpxc.receiveCredentialsIfNecessary();
-            kpxc.fillInFromActiveElementTOTPOnly(false);
+            kpxc.fillInFromActiveElementTOTPOnly();
         } else if (req.action === 'clear_credentials') {
             kpxcEvents.clearCredentials();
             return Promise.resolve();
@@ -186,7 +186,7 @@ kpxcForm.getNewPassword = function() {
 };
 
 
-var kpxcFields = {};
+const kpxcFields = {};
 kpxcFields.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input[type=\'username\'], input:not([type])';
 
 // copied from Sizzle.js
@@ -658,10 +658,7 @@ kpxcObserverHelper.getInputs = function(target) {
     // Only include input fields that match with kpxcObserverHelper.inputTypes
     const inputs = [];
     for (const i of inputFields) {
-        let type = i.getAttribute('type');
-        if (type) {
-            type = type.toLowerCase();
-        }
+        let type = i.getLowerCaseAttribute('type');
 
         if (kpxcObserverHelper.inputTypes.includes(type)) {
             inputs.push(i);
@@ -682,7 +679,7 @@ kpxcObserverHelper.ignoredElement = function(target) {
 
     // Ignore KeePassXC-Browser classes
     if (target.className && target.className !== undefined &&
-        (target.className.includes('kpxc') || target.className.includes('ui-helper'))) {
+        target.className.includes('kpxc')) {
         return true;
     }
 
@@ -792,7 +789,7 @@ observer.observe(document, {
     attributeFilter: [ 'style', 'class' ]
 });
 
-var kpxc = {};
+const kpxc = {};
 kpxc.settings = {};
 kpxc.u = null;
 kpxc.p = null;
@@ -970,7 +967,7 @@ kpxc.receiveCredentialsIfNecessary = async function() {
 
         // If the database was locked, this is scope never met. In these cases the response is met at kpxc.detectDatabaseChange
         _called.manualFillRequested = ManualFill.NONE;
-        kpxc.retrieveCredentialsCallback(credentials, false);
+        await kpxc.retrieveCredentialsCallback(credentials, false);
         return credentials;
     }
 
@@ -1195,7 +1192,7 @@ kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarni
             args: [ kpxc.url, kpxc.submitUrl, true ] // Sets triggerUnlock to true
         });
 
-        kpxc.retrieveCredentialsCallback(credentials, true);
+        await kpxc.retrieveCredentialsCallback(credentials, true);
         kpxc.fillIn(combination, onlyPassword, suppressWarnings);
     }
 };

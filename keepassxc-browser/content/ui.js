@@ -1,16 +1,16 @@
 'use strict';
 
 // jQuery style wrapper for querySelector()
-var $ = function(elem) {
+const $ = function(elem) {
     return document.querySelector(elem);
 };
 
 // Returns a string with 'px' for CSS styles
-var Pixels = function(value) {
+const Pixels = function(value) {
     return String(value) + 'px';
 };
 
-var kpxcUI = {};
+const kpxcUI = {};
 
 // Wrapper for creating elements
 kpxcUI.createElement = function(type, classes, attributes, textContent) {

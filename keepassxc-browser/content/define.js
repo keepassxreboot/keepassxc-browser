@@ -274,11 +274,7 @@ kpxcDefine.prepareStep3 = function() {
     $('#kpxcDefine-btn-confirm').style.display = 'inline-block';
 };
 
-kpxcDefine.skip = function(e) {
-    if (!e.isTrusted) {
-        return;
-    }
-
+kpxcDefine.skip = function() {
     if (kpxcDefine.dataStep === 1) {
         kpxcDefine.selection.username = null;
         kpxcDefine.prepareStep2();
@@ -290,32 +286,20 @@ kpxcDefine.skip = function(e) {
     }
 };
 
-kpxcDefine.again = function(e) {
-    if (!e.isTrusted) {
-        return;
-    }
-
+kpxcDefine.again = function() {
     kpxcDefine.resetSelection();
     kpxcDefine.prepareStep1();
     kpxcDefine.markAllUsernameFields('#kpxcDefine-fields');
 };
 
-kpxcDefine.more = function(e) {
-    if (!e.isTrusted) {
-        return;
-    }
-
+kpxcDefine.more = function() {
     if (kpxcDefine.dataStep === 2) {
         kpxcDefine.prepareStep2();
         kpxcDefine.markAllPasswordFields('#kpxcDefine-fields', true);
     }
 };
 
-kpxcDefine.confirm = async function(e) {
-    if (!e.isTrusted) {
-        return;
-    }
-
+kpxcDefine.confirm = async function() {
     if (kpxcDefine.dataStep !== 3) {
         return;
     }
@@ -353,11 +337,7 @@ kpxcDefine.confirm = async function(e) {
     kpxcDefine.close();
 };
 
-kpxcDefine.discard = async function(e) {
-    if (!e.isTrusted) {
-        return;
-    }
-
+kpxcDefine.discard = async function() {
     if (!$('#kpxcDefine-btn-discard')) {
         return;
     }
