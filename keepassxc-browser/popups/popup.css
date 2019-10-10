@@ -13,6 +13,20 @@ body {
     max-width: 460px;
     width: auto;
 }
+.loader {
+    animation: spin 2s linear infinite;
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #28a745;
+    float: left;
+    height: 1.4em;
+    margin-right: 1em;
+    width: 1.4em;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 .list-group {
     font-size: .9em !important;
 }
