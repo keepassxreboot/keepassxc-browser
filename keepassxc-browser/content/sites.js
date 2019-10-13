@@ -8,7 +8,7 @@ const siteList = [
     }
 ];
 
-var kpxcSites = {};
+const kpxcSites = {};
 
 // Returns a predefined URL for certain sites to ensure compatibility with Site Preferences
 kpxcSites.definedURL = function(url) {

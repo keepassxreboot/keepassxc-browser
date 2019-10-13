@@ -8,11 +8,11 @@ const schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 const pathSegment = '(.*)';
 
-var isFirefox = function() {
+const isFirefox = function() {
     return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
 };
 
-var showNotification = function(message) {
+const showNotification = function(message) {
     browser.notifications.create({
         'type': 'basic',
         'iconUrl': browser.extension.getURL('icons/keepassxc_64x64.png'),
@@ -21,7 +21,7 @@ var showNotification = function(message) {
     });
 };
 
-var AssociatedAction = {
+const AssociatedAction = {
     NOT_ASSOCIATED: 0,
     ASSOCIATED: 1,
     NEW_ASSOCIATION: 2,
@@ -38,7 +38,7 @@ var AssociatedAction = {
  *
  * https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Match_patterns
  */
-var matchPatternToRegExp = function(pattern) {
+const matchPatternToRegExp = function(pattern) {
     if (pattern === '') {
         return (/^(?:http|https|file|ftp|app):\/\//);
     }
@@ -93,12 +93,12 @@ var matchPatternToRegExp = function(pattern) {
     return new RegExp(regex);
 };
 
-var siteMatch = function(site, url) {
+const siteMatch = function(site, url) {
     const rx = matchPatternToRegExp(site);
     return url.match(rx);
 };
 
-var slashNeededForUrl = function(pattern) {
+const slashNeededForUrl = function(pattern) {
     const matchPattern = new RegExp(`^${schemeSegment}://${hostSegment}$`);
     return matchPattern.exec(pattern);
 };
@@ -108,6 +108,6 @@ function tr(key, params) {
 }
 
 // Removes everything after '?' from URL
-var trimURL = function(url) {
+const trimURL = function(url) {
     return url.indexOf('?') !== -1 ? url.split('?')[0] : url;
 }

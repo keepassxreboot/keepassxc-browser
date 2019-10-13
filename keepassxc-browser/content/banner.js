@@ -2,7 +2,7 @@
 
 const DEFAULT_BROWSER_GROUP = 'KeePassXC-Browser Passwords';
 
-var kpxcBanner = {};
+const kpxcBanner = {};
 kpxcBanner.banner = undefined;
 kpxcBanner.created = false;
 kpxcBanner.credentials = {};

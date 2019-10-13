@@ -1,6 +1,6 @@
 'use strict';
 
-var kpxcAutocomplete = {};
+const kpxcAutocomplete = {};
 kpxcAutocomplete.autoSubmit = false;
 kpxcAutocomplete.elements = [];
 kpxcAutocomplete.started = false;

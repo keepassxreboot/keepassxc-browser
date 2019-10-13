@@ -1,6 +1,6 @@
 'use strict';
 
-var kpxcPassword = {};
+const kpxcPassword = {};
 kpxcPassword.created = false;
 kpxcPassword.icon = null;
 kpxcPassword.inputField = null;

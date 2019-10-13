@@ -103,12 +103,6 @@ page.initOpenedTabs = async function() {
     }
 };
 
-page.isValidProtocol = function(url) {
-    let protocol = url.substring(0, url.indexOf(':'));
-    protocol = protocol.toLowerCase();
-    return !(url.indexOf('.') === -1 || (protocol !== 'http' && protocol !== 'https' && protocol !== 'ftp' && protocol !== 'sftp'));
-};
-
 page.switchTab = function(tab) {
     browserAction.showDefault(tab);
     browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {});

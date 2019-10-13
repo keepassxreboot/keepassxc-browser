@@ -1,6 +1,6 @@
 'use strict';
 
-var kpxcUsernameField = {};
+const kpxcUsernameField = {};
 kpxcUsernameField.icon = null;
 kpxcUsernameField.inputField = null;
 
