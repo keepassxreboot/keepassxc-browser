@@ -1158,6 +1158,8 @@ keepass.updatePopup = function(iconType) {
 
 // Updates the database hashes to content script
 keepass.updateDatabase = async function() {
+    keepass.associated.value = false;
+    keepass.associated.hash = null;
     await keepass.testAssociation(null);
     const configured = await keepass.isConfigured();
     keepass.updatePopup(configured ? 'normal' : 'cross');
