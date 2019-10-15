@@ -615,7 +615,8 @@ kpxcObserverHelper.inputTypes = [
     'tel',
     'number',
     'username', // Note: Not a standard
-    null // Input field can be without any type. Include these to the list.
+    undefined, // Input field can be without any type. Include this and null to the list.
+    null 
 ];
 
 // Ignores all nodes that doesn't contain elements
