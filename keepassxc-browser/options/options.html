@@ -39,6 +39,12 @@
         </p>
         <p id="chrome-only"><button class="btn btn-sm btn-primary" id="configureCommands" type="button" data-i18n="[title]openNewTab"><span class="glyphicon glyphicon-cog"></span><span data-i18n="optionsConfigureShortcuts"></span></button></p>
         <hr />
+        <h3 data-i18n="optionsImportExportSettings"></h3>
+        <p>
+          <button class="btn btn-sm btn-primary" id="importSettingsButton"><span class="glyphicon glyphicon-save"></span> <span data-i18n="optionsButtonImport"/></button>
+          <button class="btn btn-sm btn-primary" id="exportSettingsButton"><span class="glyphicon glyphicon-open"></span> <span data-i18n="optionsButtonExport"></span></button>
+        </p>
+        <hr />
         <p>
           <div class="form-group">
             <label for="defaultGroup" data-i18n="optionsLabelDefaultGroup"></label>
@@ -188,9 +194,25 @@
               <span data-i18n="optionsAutoFillAndSendHelpTextSecond"></span>
             </span>
           </div>
-        <!--<img src="/options/http-auth-dialog.png" alt="http-auth-dialog" />-->
-        <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog"/>
+          <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog"/>
         </p>
+        <div id="dialogImportSettings" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title" id="myModalLabel" data-i18n="optionsImportSettingsDialogTitle"></h3>
+            </div>
+            <div class="modal-body">
+                <p data-i18n="optionsImportSettingsDialogText"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span> <span data-i18n="optionsButtonCancel"></span></button>
+                <button class="btn yes btn-primary" autofocus><span class="glyphicon glyphicon-ok"></span> <span data-i18n="optionsButtonImport"></span></button>
+            </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Connected Databases -->
