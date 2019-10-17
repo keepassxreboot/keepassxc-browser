@@ -202,6 +202,7 @@ options.initConnectedDatabases = function() {
 
         delete options.keyRing[hash];
         options.saveKeyRing();
+        hashList = options.keyRing;
 
         if ($('#tab-connected-databases table tbody:first tr').length > 2) {
             $('#tab-connected-databases table tbody:first tr.empty:first').hide();
@@ -216,6 +217,7 @@ options.initConnectedDatabases = function() {
     trClone.removeClass('clone');
 
     const addHashToTable = function(hash) {
+        $('#tab-connected-databases table tbody:first tr.empty:first').hide();
         const tr = trClone.clone(true);
         tr.data('hash', hash);
         tr.attr('id', 'tr-cd-' + hash);
@@ -231,7 +233,7 @@ options.initConnectedDatabases = function() {
         $('#tab-connected-databases table tbody:first').append(tr);
     }
 
-    const hashList = options.keyRing;
+    let hashList = options.keyRing;
     for (const hash in hashList) {
         addHashToTable(hash);
     }
@@ -248,6 +250,14 @@ options.initConnectedDatabases = function() {
         if (result === AssociatedAction.NEW_ASSOCIATION) {
             // Update the connection list with the added hash
             options.keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+
+            // This one is the first hash added
+            if (Object.keys(options.keyRing).length === 1) {
+                addHashToTable(Object.keys(options.keyRing)[0]);
+                hashList = options.keyRing;
+                return;
+            }
+
             for (const hash in hashList) {
                 const newHash = Object.keys(options.keyRing).find(h => h !== hash);
                 addHashToTable(newHash);
