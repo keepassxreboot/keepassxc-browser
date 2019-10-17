@@ -531,9 +531,17 @@
         "message": "Cancel",
         "description": "Cancel button text when removing database key or custom login fields."
     },
-     "optionsButtonReset": {
+    "optionsButtonReset": {
         "message": "Reset",
         "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsButtonImport": {
+        "message": "Import settings",
+        "description": "Import settings button text."
+    },
+    "optionsButtonExport": {
+        "message": "Export settings",
+        "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
         "message": "Default group for saving new passwords:",
@@ -714,6 +722,18 @@
      "optionsShortcutsDanger": {
         "message": "Error: Shortcut for $1 has not been changed!",
         "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsImportExportSettings": {
+        "message": "Import/Export settings",
+        "description": "Settings page header text for import/export."
+    },
+    "optionsImportSettingsDialogTitle": {
+        "message": "Import settings from external file?",
+        "description": "Import settings confirmation dialog title text."
+    },
+    "optionsImportSettingsDialogText": {
+        "message": "Current settings will be overridden. Do you really want to import the settings file?",
+        "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
         "message": "The following KeePassXC databases are connected to KeePassXC-Browser.",

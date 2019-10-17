@@ -162,6 +162,64 @@ options.initGeneralSettings = function() {
         options.settings['defaultGroup'] = '';
         options.saveSettings();
     });
+
+    let temporarySettings;
+    $('#dialogImportSettings').modal({ keyboard: true, show: false, backdrop: true });
+    $('#importSettingsButton').click(function() {
+        var link = document.createElement('input');
+        link.setAttribute('type', 'file');
+        link.onchange = function(e) {
+            const reader = new FileReader();
+            
+            if (e.target.files.length > 0) {
+                reader.readAsText(e.target.files[0]);
+            }
+
+            reader.onloadend = function(e) {
+                try {
+                    const contents = JSON.parse(e.target.result);
+
+                    // A quick check that this is the KeePassXC-Browser settings file
+                    if (!contents['checkUpdateKeePassXC'] ||
+                        !contents['autoCompleteUsernames'] ||
+                        !contents['autoFillAndSend']) {
+                        console.log('Error: Not a KeePassXC-Browser settings file.');
+                        return;
+                    }
+
+                    // Verify the import
+                    temporarySettings = contents;
+                    $('#dialogImportSettings').data('hash', $(this).closest('tr').data('hash'));
+                    $('#dialogImportSettings .modal-body:first span:first').text($(this).closest('tr').children('td:first').text());
+                    $('#dialogImportSettings').modal('show');
+                    $('#dialogImportSettings').on('shown.bs.modal', () => {
+                        $('#dialogImportSettings').find('[autofocus]').focus();
+                    });
+                } catch (e) {
+                    console.log('Error loading JSON settings file.');
+                }
+            };
+        };
+
+        link.click();
+    });
+
+    $('#exportSettingsButton').click(function() {
+        const link = document.createElement('a');
+        const file = new Blob([ JSON.stringify(options.settings)], { type: 'application/json' });
+        link.href = URL.createObjectURL(file);
+        link.download = 'keepassxc-browser_settings.json';
+        link.click();
+    });
+
+    $('#dialogImportSettings .modal-footer:first button.yes:first').click(function(e) {
+        $('#dialogImportSettings').modal('hide');
+
+        if (temporarySettings) {
+            options.settings = temporarySettings;
+            options.saveSettings();
+        }
+    });
 };
 
 options.showKeePassXCVersions = function(response) {
