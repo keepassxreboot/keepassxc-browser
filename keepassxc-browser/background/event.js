@@ -113,9 +113,9 @@ kpxcEvent.onPopStack = function(tab) {
     return Promise.resolve();
 };
 
-kpxcEvent.onGetTabInformation = function(tab) {
+kpxcEvent.onGetTabInformation = async function(tab) {
     const id = tab.id || page.currentTabId;
-    return Promise.resolve(page.tabs[id]);
+    return page.tabs[id];
 };
 
 kpxcEvent.onGetConnectedDatabase = function() {
@@ -131,7 +131,7 @@ kpxcEvent.onGetKeePassXCVersions = async function(tab) {
         return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
     }
 
-    return Promise.resolve({ 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version });
+    return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
 };
 
 kpxcEvent.onCheckUpdateKeePassXC = async function() {
@@ -158,11 +158,7 @@ kpxcEvent.onLoginPopup = function(tab, logins) {
     };
 
     browserAction.stackUnshift(stackData, tab.id);
-
-    if (logins.length > 0) {
-        page.tabs[tab.id].loginList = logins[0];
-    }
-
+    page.tabs[tab.id].loginList = logins;
     browserAction.show(tab);
     return Promise.resolve();
 };
@@ -204,8 +200,8 @@ kpxcEvent.pageClearLogins = function(tab, alreadyCalled) {
     return Promise.resolve();
 };
 
-kpxcEvent.pageGetLoginId = function() {
-    return Promise.resolve(page.loginId);
+kpxcEvent.pageGetLoginId = async function() {
+    return page.loginId;
 };
 
 kpxcEvent.pageSetLoginId = function(tab, loginId) {
@@ -218,8 +214,8 @@ kpxcEvent.pageClearSubmitted = function() {
     return Promise.resolve();
 }
 
-kpxcEvent.pageGetSubmitted = function() {
-    return Promise.resolve(page.submittedCredentials);
+kpxcEvent.pageGetSubmitted = async function() {
+    return page.submittedCredentials;
 };
 
 kpxcEvent.pageSetSubmitted = function(tab, args = []) {
@@ -228,8 +224,8 @@ kpxcEvent.pageSetSubmitted = function(tab, args = []) {
     return Promise.resolve();
 };
 
-kpxcEvent.onUsernameFieldDetected = function(tab, args = []) {
-    page.usernameFieldDetected = args[0];
+kpxcEvent.onUsernameFieldDetected = function(tab, detected) {
+    page.usernameFieldDetected = detected;
 };
 
 // All methods named in this object have to be declared BEFORE this!
