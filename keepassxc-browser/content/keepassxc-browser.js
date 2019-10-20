@@ -306,7 +306,7 @@ kpxcFields.getAllFields = function() {
         fields.length === 1 && fields[0].getLowerCaseAttribute('type') !== 'password') {
         browser.runtime.sendMessage({
             action: 'username_field_detected',
-            args: [ true ]
+            args: true
         });
     }
 
@@ -886,7 +886,7 @@ kpxc.initCredentialFields = async function(forceCall) {
 
     await browser.runtime.sendMessage({
         action: 'page_clear_logins',
-        args: [ _called.clearLogins ]
+        args: _called.clearLogins
     });
 
     _called.clearLogins = true;
@@ -1028,7 +1028,7 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
         // Generate popup-list of usernames + descriptions
         browser.runtime.sendMessage({
             action: 'popup_login',
-            args: [ [ `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})` ] ]
+            args: [ `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})` ]
         });
     } else if (kpxc.credentials.length > 1 || (kpxc.credentials.length > 0 && (!kpxc.settings.autoFillSingleEntry || !autoFillInForSingle))) {
         kpxc.preparePageForMultipleCredentials(kpxc.credentials);
@@ -1066,7 +1066,7 @@ kpxc.preparePageForMultipleCredentials = function(credentials) {
     // Generate popup-list of usernames + descriptions
     browser.runtime.sendMessage({
         action: 'popup_login',
-        args: [ usernames ]
+        args: usernames
     });
 
     // Initialize autocomplete for username fields
@@ -1314,16 +1314,14 @@ kpxc.fillWithSpecificLogin = function(id) {
             kpxc.setValueWithChange(kpxc.u, kpxc.credentials[id].login);
             combination = kpxcFields.getCombination('username', kpxc.u);
             browser.runtime.sendMessage({
-                action: 'page_set_login_id',
-                args: [ id ]
+                action: 'page_set_login_id', args: id
             });
             kpxc.u.focus();
         }
         if (kpxc.p) {
             kpxc.setValueWithChange(kpxc.p, kpxc.credentials[id].password);
             browser.runtime.sendMessage({
-                action: 'page_set_login_id',
-                args: [ id ]
+                action: 'page_set_login_id', args: id
             });
             combination = kpxcFields.getCombination('password', kpxc.p);
         }
@@ -1359,7 +1357,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         if (uField && (!onlyPassword || _singleInputEnabledForPage)) {
             kpxc.setValueWithChange(uField, kpxc.credentials[0].login);
             browser.runtime.sendMessage({
-                action: 'page_set_login_id', args: [ 0 ]
+                action: 'page_set_login_id', args: 0
             });
             filledIn = true;
         }
@@ -1368,7 +1366,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
             kpxc.setValueWithChange(pField, kpxc.credentials[0].password);
             pField.setAttribute('unchanged', true);
             browser.runtime.sendMessage({
-                action: 'page_set_login_id', args: [ 0 ]
+                action: 'page_set_login_id', args: 0
             });
             filledIn = true;
         }
@@ -1396,7 +1394,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         if (uField && (!onlyPassword || _singleInputEnabledForPage)) {
             kpxc.setValueWithChange(uField, kpxc.credentials[combination.loginId].login);
             browser.runtime.sendMessage({
-                action: 'page_set_login_id', args: [ combination.loginId ]
+                action: 'page_set_login_id', args: combination.loginId
             });
             filledIn = true;
         }
@@ -1405,7 +1403,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
             kpxc.setValueWithChange(pField, kpxc.credentials[combination.loginId].password);
             pField.setAttribute('unchanged', true);
             browser.runtime.sendMessage({
-                action: 'page_set_login_id', args: [ combination.loginId ]
+                action: 'page_set_login_id', args: combination.loginId
             });
             filledIn = true;
         }
@@ -1727,7 +1725,7 @@ kpxc.addToSitePreferences = async function(sites) {
 
     browser.runtime.sendMessage({
         action: 'username_field_detected',
-        args: [ false ]
+        args: false
     });
 };
 

@@ -53,7 +53,7 @@ kpxcAutocomplete.showList = function(inputField) {
             // Save index for combination.loginId
             const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
             browser.runtime.sendMessage({
-                action: 'page_set_login_id', args: [ index ]
+                action: 'page_set_login_id', args: index
             });
 
             inputField.value = this.getElementsByTagName('input')[0].value;
