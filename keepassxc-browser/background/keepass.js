@@ -851,7 +851,7 @@ keepass.updateLastUsed = function(hash) {
 };
 // Update the databaseHash from legacy hash
 keepass.updateDatabaseHash = function(oldHash, newHash) {
-    if (!oldHash || !newHash) {
+    if (!oldHash || !newHash || oldHash === newHash) {
         return;
     }
 
