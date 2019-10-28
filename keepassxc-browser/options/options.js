@@ -111,7 +111,7 @@ options.initGeneralSettings = function() {
     $('#tab-general-settings input#defaultGroup').val(options.settings['defaultGroup']);
 
     $('#tab-general-settings input[type=radio]').each(function() {
-        if ($(this).val() === options.settings[$(this).attr('name')]) {
+        if ($(this).val() === String(options.settings[$(this).attr('name')])) {
             $(this).attr('checked', options.settings[$(this).attr('name')]);
         }
     });
