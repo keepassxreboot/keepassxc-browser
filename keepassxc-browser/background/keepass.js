@@ -881,9 +881,11 @@ keepass.keePassXCUpdateAvailable = function() {
         if (daysSinceLastCheck >= page.settings.checkUpdateKeePassXC) {
             keepass.checkForNewKeePassXCVersion();
         }
+
+        return keepass.compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version, false);
     }
 
-    return keepass.compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version, false);
+    return false;
 };
 
 keepass.checkForNewKeePassXCVersion = function() {
