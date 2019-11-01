@@ -878,6 +878,33 @@ kpxc.detectDatabaseChange = async function(response) {
     }
 };
 
+// Checks if the site has been ignored using Site Preferences
+kpxc.siteIgnored = function() {
+    kpxc.initializeSitePreferences();
+    if (kpxc.settings.sitePreferences) {
+        let currentLocation;
+        try {
+            currentLocation = window.top.location.href;
+        } catch (err) {
+            // Cross-domain security error inspecting window.top.location.href.
+            // This catches an error when an iframe is being accessed from another (sub)domain -> use the iframe URL instead.
+            currentLocation = window.self.location.href;
+        } 
+
+        for (const site of kpxc.settings.sitePreferences) {
+            if (siteMatch(site.url, currentLocation) || site.url === currentLocation) {
+                if (site.ignore === IGNORE_FULL) {
+                    return true;
+                }
+
+                _singleInputEnabledForPage = site.usernameOnly;
+            }
+        }
+    }
+
+    return false;
+};
+
 kpxc.initCredentialFields = async function(forceCall) {
     if (_called.initCredentialFields && !forceCall) {
         return;
@@ -891,22 +918,8 @@ kpxc.initCredentialFields = async function(forceCall) {
 
     _called.clearLogins = true;
 
-    // Check site preferences
-    kpxc.initializeSitePreferences();
-    if (kpxc.settings.sitePreferences) {
-        for (const site of kpxc.settings.sitePreferences) {
-            try {
-                if (siteMatch(site.url, window.top.location.href) || site.url === window.top.location.href) {
-                    if (site.ignore === IGNORE_FULL) {
-                        return;
-                    }
-
-                    _singleInputEnabledForPage = site.usernameOnly;
-                }
-            } catch (err) {
-                return;
-            }
-        }
+    if (kpxc.siteIgnored()) {
+        return;
     }
 
     const inputs = kpxcFields.getAllFields();
