@@ -48,10 +48,6 @@
             "matches": [
                 "<all_urls>"
             ],
-            "exclude_matches": [
-                "*://*/*.xml",
-                "*://*/*.xsd"
-            ],
             "js": [
                 "browser-polyfill.min.js",
                 "content/banner.js",
