@@ -60,7 +60,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxc.settings = response;
             kpxc.initCredentialFields(true);
         } else if (req.action === 'show_password_generator') {
-            kpxcPassword.trigger();
+            kpxcPasswordDialog.trigger();
         } else if (req.action === 'add_username_only_option') {
             kpxc.addToSitePreferences();
         }
@@ -448,7 +448,7 @@ kpxcFields.getUsernameField = function(passwordId, checkDisabled) {
             }
 
             if (kpxc.settings.showLoginFormIcon) {
-                kpxcUsernameField.initField(usernameField);
+                kpxcUsernameFields.newIcon(usernameField);
             }
             usernameField = i;
         }
@@ -506,8 +506,7 @@ kpxcFields.getPasswordField = function(usernameId, checkDisabled) {
             passwordField = null;
         }
 
-        kpxcPassword.init(kpxc.settings.usePasswordGeneratorIcons);
-        kpxcPassword.initField(passwordField);
+        kpxcPasswordIcons.newIcon(kpxc.settings.usePasswordGeneratorIcons, passwordField);
     } else {
         // Search all inputs on page
         const inputs = kpxcFields.getAllFields();
@@ -564,7 +563,7 @@ kpxcFields.prepareCombinations = async function(combinations) {
         });
 
         if (kpxc.settings.showLoginFormIcon) {
-            kpxcUsernameField.initField(usernameField, res.databaseClosed);
+            kpxcUsernameFields.newIcon(usernameField, res.databaseClosed);
         }
 
         // Initialize form-submit for remembering credentials
@@ -856,7 +855,7 @@ kpxc.clearAllFromPage = function() {
 // Switch credentials if database is changed or closed
 kpxc.detectDatabaseChange = async function(response) {
     kpxc.clearAllFromPage();
-    kpxcUsernameField.switchIcon(true);
+    kpxcUsernameFields.switchIcon(true);
 
     if (document.visibilityState !== 'hidden') {
         if (response.new !== '' && response.new !== response.old) {
@@ -866,7 +865,7 @@ kpxc.detectDatabaseChange = async function(response) {
             });
             kpxc.settings = settings;
             await kpxc.initCredentialFields(true);
-            kpxcUsernameField.switchIcon(false); // Unlocked
+            kpxcUsernameFields.switchIcon(false); // Unlocked
 
             // If user has requested a manual fill through context menu the actual credential filling
             // is handled here when the opened database has been regognized. It's not a pretty hack.
@@ -963,11 +962,9 @@ kpxc.initCredentialFields = async function(forceCall) {
 };
 
 kpxc.initPasswordGenerator = function(inputs) {
-    kpxcPassword.init(kpxc.settings.usePasswordGeneratorIcons);
-
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i] && inputs[i].getLowerCaseAttribute('type') === 'password') {
-            kpxcPassword.initField(inputs[i], inputs, i);
+            kpxcPasswordIcons.newIcon(kpxc.settings.usePasswordGeneratorIcons, inputs[i], inputs, i);
         }
     }
 };
@@ -1783,7 +1780,7 @@ kpxcEvents.triggerActivatedTab = async function() {
 
     // Update username field lock state
     const state = await browser.runtime.sendMessage({ action: 'check_database_hash' });
-    kpxcUsernameField.switchIcon(state === '');
+    kpxcUsernameFields.switchIcon(state === '');
 
     // initCredentialFields calls also "retrieve_credentials", to prevent it
     // check of init() was already called
