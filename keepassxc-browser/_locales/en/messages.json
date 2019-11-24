@@ -167,6 +167,14 @@
         "message": "Username field icon",
         "description": "Username field icon text."
     },
+    "totpFieldText": {
+        "message": "Fill TOTP from KeePassXC",
+        "description": "OTP field icon hover text."
+    },
+    "totpFieldIcon": {
+        "message": "TOTP field icon",
+        "description": "OTP field icon text."
+    },
     "defineDismiss": {
         "message": "Dismiss",
         "description": "Dismiss button text when choosing custom login fields."
@@ -567,6 +575,10 @@
         "message": "Activate username field icons.",
         "description": "Activate username field icons textbox text."
     },
+    "optionsCheckboxOTPIcons": {
+        "message": "Activate 2FA/OTP field icons.",
+        "description": "Activate OTP field icons textbox text."
+    },
     "optionsCheckboxAutoRetrieveCredentials": {
         "message": "Automatically retrieve credentials.",
         "description": "Automatically retrieve credentials checkbox text."
@@ -646,6 +658,10 @@
     "optionsShowLoginFormIconHelpText": {
         "message": "Adds an icon to username fields for filling credentials with a single mouse click.",
         "description": "Username field icon option help text."
+    },
+    "optionsShowOTPIconHelpText": {
+        "message": "Adds an icon to input fields that are recognized as OTP/2FA.",
+        "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",

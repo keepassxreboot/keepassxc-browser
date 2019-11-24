@@ -1,0 +1,14 @@
+.kpxc-totp-icon {
+    position: absolute;
+    cursor: pointer;
+}
+
+.kpxc-totp-icon.default {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/otp.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-totp-icon.moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/otp.svg') right no-repeat;
+    background-size: contain;
+}

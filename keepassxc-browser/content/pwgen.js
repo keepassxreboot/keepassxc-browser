@@ -3,15 +3,20 @@
 const kpxcPasswordIcons = {};
 kpxcPasswordIcons.icons = [];
 
-kpxcPasswordIcons.newIcon = function(field, databaseClosed = true) {
-    kpxcPasswordIcons.icons.push(new PasswordIcon(field, databaseClosed));
+kpxcPasswordIcons.newIcon = function(useIcons, field, inputs, pos, databaseClosed = true) {
+    kpxcPasswordIcons.icons.push(new PasswordIcon(useIcons, field, inputs, pos, databaseClosed));
+};
+
+kpxcPasswordIcons.switchIcon = function(locked) {
+    kpxcPasswordIcons.icons.forEach(u => u.switchIcon(locked));
 };
 
 
 class PasswordIcon extends Icon {
-    constructor(useIcons, field, inputs, pos) {
+    constructor(useIcons, field, inputs, pos, databaseClosed) {
         super();
         this.useIcons = useIcons;
+        this.databaseClosed = databaseClosed;
 
         this.initField(field, inputs, pos);
         kpxcUI.monitorIconPosition(this);
@@ -71,6 +76,10 @@ PasswordIcon.prototype.createIcon = function(field) {
     icon.style.zIndex = '10000000';
     icon.style.width = Pixels(size);
     icon.style.height = Pixels(size);
+
+    if (this.databaseClosed) {
+        icon.style.filter = 'saturate(0%)';
+    }
 
     icon.addEventListener('click', function(e) {
         if (!e.isTrusted) {

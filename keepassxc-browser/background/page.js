@@ -11,6 +11,7 @@ const defaultSettings = {
     showNotifications: true,
     showLoginNotifications: true,
     showLoginFormIcon: true,
+    showOTPIcon: true,
     saveDomainOnly: true,
     autoReconnect: false,
     defaultGroup: '',
@@ -21,6 +22,7 @@ var page = {};
 page.blockedTabs = [];
 page.currentTabId = -1;
 page.loginId = -1;
+page.passwordFilled = false;
 page.submitted = false;
 page.submittedCredentials = {};
 page.tabs = [];
@@ -60,6 +62,9 @@ page.initSettings = async function() {
         }
         if (!('showLoginFormIcon' in page.settings)) {
             page.settings.showLoginFormIcon = defaultSettings.showLoginFormIcon;
+        }
+        if (!('showOTPIcon' in page.settings)) {
+            page.settings.showOTPIcon = defaultSettings.showOTPIcon;
         }
         if (!('saveDomainOnly' in page.settings)) {
             page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
@@ -114,6 +119,7 @@ page.clearCredentials = function(tabId, complete) {
     }
 
     page.usernameFieldDetected = false;
+    page.passwordFilled = false;
     page.tabs[tabId].credentials = [];
     delete page.tabs[tabId].credentials;
 
