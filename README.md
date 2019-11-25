@@ -34,6 +34,6 @@ The details about the messaging protocol used with the browser extension and Kee
 
 Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
 
-## Development
+## Development and testing
 
 See [wiki](https://github.com/keepassxreboot/keepassxc-browser/wiki/Loading-the-extension-manually).
