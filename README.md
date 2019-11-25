@@ -1,4 +1,5 @@
 # KeePassXC-Browser
+
 Browser extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 Based on [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
@@ -6,13 +7,14 @@ Some changes merged also from [smorks](https://github.com/smorks)' [KeePassHttp-
 
 ## Download and use
 
-This browser extension was first supported in KeepassXC 2.3.0 (release end of 2017), in general it is advised to only use the latest available release.
+This browser extension was first supported in KeePassXC 2.3.0 (release end of 2017). In general it is advised to only use the latest available release.
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk).
 
 Please see this [document](https://keepassxc.org/docs/keepassxc-browser-migration/) for instructions how to configure KeePassXC in order to connect the database correctly.
 
 ## How it works
+
 There are two methods which you can use KeePassXC-Browser to connect to KeePassXC:
 
 1. KeePassXC-Browser communicates with KeePassXC through keepassxc-proxy. The proxy handles listening to STDIN/STDOUT
@@ -31,3 +33,27 @@ The details about the messaging protocol used with the browser extension and Kee
 ## Translations
 
 Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
+
+## Development
+
+### Prerequisites
+
+- Run `npm install`.
+- Install the [Transifex CLI tool](https://github.com/transifex/transifex-client#installation).
+- Log into Transifex (e.g., with your GitHub account), click "Join team" on [this page](https://www.transifex.com/keepassxc/keepassxc-browser/) and, after a page reload, make sure "KeePassXC" is the active organization in the drop-down box on the top of the page.
+- Go to your Transifex user settings, generate an API token, give it a name associating it with KeePassXC and [save it in your config file](https://docs.transifex.com/client/client-configuration).
+
+### Building
+
+Run `npm run build`.
+
+### Installing
+
+#### Firefox
+
+- Visit `about:config` and set `xpinstall.signatures.required` to `false`. This requires ESR, Developer Edition or Nightly. (Remember to undo this.)
+- Visit `about:addons`.
+- Go to the custom add-on settings and export a backup.
+- Uninstall the add-on.
+- Click the gear button, "Install Add-on From File..." and choose the built .zip file for Firefox.
+- Restart the browser and connect your database via the settings.
