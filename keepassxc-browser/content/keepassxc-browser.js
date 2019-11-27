@@ -885,7 +885,7 @@ kpxc.detectDatabaseChange = async function(response) {
 };
 
 // Checks if the site has been ignored using Site Preferences
-kpxc.siteIgnored = function() {
+kpxc.siteIgnored = function(condition) {
     kpxc.initializeSitePreferences();
     if (kpxc.settings.sitePreferences) {
         let currentLocation;
@@ -897,9 +897,10 @@ kpxc.siteIgnored = function() {
             currentLocation = window.self.location.href;
         } 
 
+        const currentSetting = condition || IGNORE_FULL;
         for (const site of kpxc.settings.sitePreferences) {
             if (siteMatch(site.url, currentLocation) || site.url === currentLocation) {
-                if (site.ignore === IGNORE_FULL) {
+                if (site.ignore === currentSetting) {
                     return true;
                 }
 
