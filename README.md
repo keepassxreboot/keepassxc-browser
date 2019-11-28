@@ -1,4 +1,5 @@
 # KeePassXC-Browser
+
 Browser extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
 
 Based on [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
@@ -6,13 +7,14 @@ Some changes merged also from [smorks](https://github.com/smorks)' [KeePassHttp-
 
 ## Download and use
 
-This browser extension was first supported in KeepassXC 2.3.0 (release end of 2017), in general it is advised to only use the latest available release.
+This browser extension was first supported in KeePassXC 2.3.0 (release end of 2017). In general it is advised to only use the latest available release.
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk).
 
 Please see this [document](https://keepassxc.org/docs/keepassxc-browser-migration/) for instructions how to configure KeePassXC in order to connect the database correctly.
 
 ## How it works
+
 There are two methods which you can use KeePassXC-Browser to connect to KeePassXC:
 
 1. KeePassXC-Browser communicates with KeePassXC through keepassxc-proxy. The proxy handles listening to STDIN/STDOUT
@@ -31,3 +33,7 @@ The details about the messaging protocol used with the browser extension and Kee
 ## Translations
 
 Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
+
+## Development and testing
+
+See [wiki](https://github.com/keepassxreboot/keepassxc-browser/wiki/Loading-the-extension-manually).
