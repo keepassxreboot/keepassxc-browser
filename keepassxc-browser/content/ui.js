@@ -26,7 +26,7 @@ class Icon {
         if (!this.icon) {
             return;
         }
-    
+
         if (locked) {
            this.icon.style.filter = 'saturate(0%)';
         } else {
@@ -85,7 +85,12 @@ kpxcUI.setIconPosition = function(icon, field) {
     const size = Number(icon.getAttribute('size'));
 
     icon.style.top = Pixels((rect.top + document.scrollingElement.scrollTop) + offset + 1);
-    icon.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft) + field.offsetWidth - size - offset);
+    if (document.dir == 'rtl') {
+        icon.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft) + offset);
+    }
+    else {
+        icon.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft) + field.offsetWidth - size - offset);
+    }
 };
 
 /**
