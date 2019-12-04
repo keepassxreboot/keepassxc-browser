@@ -87,8 +87,7 @@ kpxcUI.setIconPosition = function(icon, field) {
     icon.style.top = Pixels((rect.top + document.scrollingElement.scrollTop) + offset + 1);
     if (document.dir === 'rtl') {
         icon.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft) + offset);
-    }
-    else {
+    } else {
         icon.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft) + field.offsetWidth - size - offset);
     }
 };
