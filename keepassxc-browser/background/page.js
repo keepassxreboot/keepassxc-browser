@@ -138,6 +138,7 @@ page.clearLogins = function(tabId) {
     }
 
     page.tabs[tabId].loginList = [];
+    page.passwordFilled = false;
 };
 
 page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials) {
