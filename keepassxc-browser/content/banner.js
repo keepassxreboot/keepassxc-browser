@@ -44,12 +44,8 @@ kpxcBanner.create = async function(credentials = {}) {
     }
 
     // Don't show anything if the site is in the ignore
-    if (kpxc.settings.sitePreferences !== undefined) {
-        for (const site of kpxc.settings.sitePreferences) {
-            if (site.ignore !== IGNORE_NOTHING && (site.url === credentials.url || siteMatch(site.url, credentials.url))) {
-                return;
-            }
-        }
+    if (kpxc.siteIgnored(IGNORE_NORMAL)) {
+        return;
     }
 
     kpxcBanner.created = true;
