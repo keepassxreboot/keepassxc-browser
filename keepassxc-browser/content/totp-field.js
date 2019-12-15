@@ -1,5 +1,7 @@
 'use strict';
 
+const MINIMUM_SIZE = 60;
+
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
@@ -25,7 +27,7 @@ class TOTPFieldIcon extends Icon {
 };
 
 TOTPFieldIcon.prototype.initField = function(field) {
-    if (!field || field.getAttribute('kpxc-totp-field') === 'true') {
+    if (!field || field.getAttribute('kpxc-totp-field') === 'true' || field.offsetWidth < MINIMUM_SIZE) {
         return;
     }
 
