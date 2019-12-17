@@ -27,7 +27,11 @@ class TOTPFieldIcon extends Icon {
 };
 
 TOTPFieldIcon.prototype.initField = function(field) {
-    if (!field || field.getAttribute('kpxc-totp-field') === 'true' || field.offsetWidth < MINIMUM_SIZE) {
+    if (!field
+        || field.getAttribute('kpxc-totp-field') === 'true' 
+        || field.offsetWidth < MINIMUM_SIZE
+        || field.size < 2
+        || (field.maxLength > 0 && field.maxLength < 4)) {
         return;
     }
 
