@@ -47,6 +47,9 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             _called.manualFillRequested = ManualFill.PASS;
             await kpxc.receiveCredentialsIfNecessary();
             kpxc.fillInFromActiveElement(false, true); // passOnly to true
+        } else if (req.action === 'fill_attribute' && 'args' in req && 'attribute' in req.args) {
+            await kpxc.receiveCredentialsIfNecessary();
+            kpxc.fillInFromActiveElementAttribute(null, req.args.attribute);
         } else if (req.action === 'fill_totp') {
             await kpxc.receiveCredentialsIfNecessary();
             kpxc.fillInFromActiveElementTOTPOnly();
@@ -1272,6 +1275,18 @@ kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     delete combination.loginId;
 
     kpxc.fillInCredentials(combination, passOnly, suppressWarnings);
+};
+
+kpxc.fillInFromActiveElementAttribute = async function(target, attribute) {
+    const el = target || document.activeElement;
+
+    const allStringFields = kpxc.credentials[0].stringFields.reduce((acc, obj) => ({
+        ...acc,
+        ...obj,
+    }), {});
+
+    const value = allStringFields[`KPH: ${attribute}`];
+    kpxc.setValueWithChange(el, value);
 };
 
 kpxc.fillInFromActiveElementTOTPOnly = async function(target) {

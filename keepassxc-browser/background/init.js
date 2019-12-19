@@ -72,7 +72,7 @@ browser.tabs.onActivated.addListener(async function(activeInfo) {
  * @param {integer} tabId
  * @param {object} changeInfo
  */
-browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     // If the tab URL has changed (e.g. logged in) clear credentials
     if (changeInfo.url) {
         page.clearLogins(tabId);
@@ -83,6 +83,33 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         if (!page.tabs[tab.id]) {
             page.createTabEntry(tab.id);
         }
+
+        // Get string fields
+        const credentials = await keepass.retrieveCredentials(tab, [new URL(tab.url).origin]);
+        const attributeNames = Object.keys(credentials[0].stringFields.reduce((acc, obj) => ({
+            ...acc,
+            ...obj,
+        }), {})).map(key => key.replace(/^KPH: /, ''));
+
+        // Remove any old attribute items
+        while (attributeMenuItemIds.length) {
+            browser.contextMenus.remove(attributeMenuItemIds.pop());
+        }
+
+        // Set parent item visibility
+        browser.contextMenus.update('fillAttribute', { visible: attributeNames.length > 0 });
+
+        // Add any new attribute items
+        for (const attributeName of attributeNames) {
+            attributeMenuItemIds.push(createContextMenuItem({
+                parentId: 'fillAttribute',
+                title: attributeName,
+                action: 'fill_attribute',
+                args: {
+                    attribute: attributeName,
+                },
+            }));
+        }
     }
 });
 
@@ -91,10 +118,13 @@ browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 const contextMenuItems = [
     { title: tr('contextMenuFillUsernameAndPassword'), action: 'fill_username_password' },
     { title: tr('contextMenuFillPassword'), action: 'fill_password' },
+    { id: 'fillAttribute', title: tr('contextMenuFillAttribute'), visible: false },
     { title: tr('contextMenuFillTOTP'), action: 'fill_totp' },
     { title: tr('contextMenuShowPasswordGenerator'), action: 'show_password_generator' },
     { title: tr('contextMenuSaveCredentials'), action: 'remember_credentials' }
 ];
+
+const attributeMenuItemIds = [];
 
 const menuContexts = [ 'editable' ];
 
@@ -102,19 +132,24 @@ if (isFirefox()) {
     menuContexts.push('password');
 }
 
-// Create context menu items
-for (const item of contextMenuItems) {
-    browser.contextMenus.create({
-        title: item.title,
+function createContextMenuItem({ action, args, ...options }) {
+    return browser.contextMenus.create({
         contexts: menuContexts,
         onclick: (info, tab) => {
             browser.tabs.sendMessage(tab.id, {
-                action: item.action
+                action: action,
+                args: args,
             }).catch((err) => {
                 console.log(err);
             });
-        }
+        },
+        ...options,
     });
+}
+
+// Create context menu items
+for (const item of contextMenuItems) {
+    createContextMenuItem(item);
 }
 
 // Listen for keyboard shortcuts specified by user

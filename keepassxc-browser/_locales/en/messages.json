@@ -11,6 +11,10 @@
         "message": "Fill Password Only",
         "description": "Context menu item for filling password."
     },
+    "contextMenuFillAttribute": {
+        "message": "Fill attribute…",
+        "description": "Context menu parent item for filling a custom attribute"
+    },
     "contextMenuFillTOTP": {
         "message": "Fill TOTP",
         "description": "Context menu item for filling Time-based One Time Password."
