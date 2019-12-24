@@ -300,11 +300,16 @@ kpxcFields.isVisible = function(field) {
     return true;
 };
 
+kpxcFields.isAutocompleteAppropriate = function(field) {
+    const autocomplete = field.getLowerCaseAttribute('autocomplete');
+    return !(autocomplete === 'off' || autocomplete === 'new-password');
+};
+
 kpxcFields.getAllFields = function() {
     const fields = [];
     const inputs = kpxcObserverHelper.getInputs(document);
     for (const i of inputs) {
-        if (kpxcFields.isVisible(i) && !kpxcFields.isSearchField(i)) {
+        if (kpxcFields.isVisible(i) && !kpxcFields.isSearchField(i) && kpxcFields.isAutocompleteAppropriate(i)) {
             kpxcFields.setUniqueId(i);
             fields.push(i);
         }
@@ -992,8 +997,9 @@ kpxc.initOTPFields = function(inputs, databaseClosed) {
     for (const i of inputs) {
         const id = i.getLowerCaseAttribute('id');
         const name = i.getLowerCaseAttribute('name');
+        const autocomplete = i.getLowerCaseAttribute('autocomplete');
 
-        if (acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f)))) {
+        if (autocomplete === 'one-time-code' || acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f)))) {
             kpxcTOTPIcons.newIcon(i, _databaseClosed);
         }
     }
