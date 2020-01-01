@@ -575,6 +575,14 @@
         "message": "Activate username field icons.",
         "description": "Activate username field icons textbox text."
     },
+    "optionsUseObserver": {
+        "message": "Use dynamic input field detection.",
+        "description": "Use dynamic input field detection checkbox text."
+    },
+    "optionsUseObserverHelpText": {
+        "message": "Useful with pages that use popups or dynamic dialogs. Disable the feature to reduce CPU load on slower machines. When disabled credentials can be only inserted using keyboard shortcuts, the context menu or the extension popup.",
+        "description": "Use dynamic input field detection help text."
+    },
     "optionsCheckboxOTPIcons": {
         "message": "Activate 2FA/OTP field icons.",
         "description": "Activate OTP field icons textbox text."

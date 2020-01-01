@@ -17,6 +17,7 @@ const defaultSettings = {
     showLoginNotifications: true,
     showNotifications: true,
     showOTPIcon: true,
+    useObserver: true,
     usePasswordGeneratorIcons: false
 };
 
@@ -76,6 +77,10 @@ page.initSettings = async function() {
             page.settings.defaultGroupAlwaysAsk = defaultSettings.defaultGroupAlwaysAsk;
         }
 
+        if (!('redirectAllowance' in page.settings)) {
+            page.settings.redirectAllowance = defaultSettings.redirectAllowance;
+        }
+
         if (!('saveDomainOnly' in page.settings)) {
             page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
         }
@@ -100,8 +105,12 @@ page.initSettings = async function() {
             page.settings.usePasswordGeneratorIcons = defaultSettings.usePasswordGeneratorIcons;
         }
 
-        if (!('redirectAllowance' in page.settings)) {
-            page.settings.redirectAllowance = defaultSettings.redirectAllowance;
+        if (!('useObserver' in page.settings)) {
+            page.settings.useObserver = defaultSettings.useObserver;
+        }
+
+        if (!('usePasswordGeneratorIcons' in page.settings)) {
+            page.settings.usePasswordGeneratorIcons = defaultSettings.usePasswordGeneratorIcons;
         }
 
         await browser.storage.local.set({ 'settings': page.settings });
