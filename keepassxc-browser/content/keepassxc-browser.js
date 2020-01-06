@@ -1080,19 +1080,28 @@ kpxc.preparePageForMultipleCredentials = function(credentials) {
         return;
     }
 
-    function getLoginText(credential) {
+    function getLoginText(credential, withGroup) {
+        const group = (withGroup && credential.group) ? `[${credential.group}] ` : '';
         const visibleLogin = (credential.login.length > 0) ? credential.login : tr('credentialsNoUsername');
+        const text = `${group}${credential.name} (${visibleLogin})`;
         if (credential.expired && credential.expired === 'true') {
-            return `${visibleLogin} (${credential.name}) [${tr('credentialExpired')}]`;
+            return `${text} [${tr('credentialExpired')}]`;
         }
-        return `${visibleLogin} (${credential.name})`;
+        return text;
+    }
+
+    function getUniqueGroupCount(credentials) {
+        const groups = credentials.map(c => c.group || '')
+        const uniqueGroups = new Set(groups)
+        return uniqueGroups.size
     }
 
     // Add usernames + descriptions to autocomplete-list and popup-list
     const usernames = [];
     kpxcAutocomplete.elements = [];
+    const credentialsInDifferentGroups = getUniqueGroupCount(credentials) > 1
     for (let i = 0; i < credentials.length; i++) {
-        const loginText = getLoginText(credentials[i]);
+        const loginText = getLoginText(credentials[i], credentialsInDifferentGroups);
         usernames.push(loginText);
 
         const item = {
