@@ -69,8 +69,8 @@ kpxcBanner.create = async function(credentials = {}) {
     const dismissButton = kpxcUI.createElement('button', 'kpxc-button kpxc-red-button', { 'id': 'kpxc-banner-btn-dismiss' }, tr('popupButtonDismiss'));
 
     const separator = kpxcUI.createElement('div', 'kpxc-separator');
-    const ignoreCheckbox = kpxcUI.createElement('input', 'kpxc-checkbox', { type: 'checkbox', name: 'ignoreCheckbox' });
-    const checkboxLabel = kpxcUI.createElement('label', 'kpxc-checkbox-label', { for: 'ignoreCheckbox' }, tr('popupButtonIgnore'));
+    const ignoreCheckbox = kpxcUI.createElement('input', 'kpxc-checkbox', { type: 'checkbox', name: 'ignoreCheckbox', id: 'kpxc-banner-ignoreCheckbox' });
+    const checkboxLabel = kpxcUI.createElement('label', 'kpxc-checkbox-label', { for: 'kpxc-banner-ignoreCheckbox' }, tr('popupButtonIgnore'));
 
     // No existing credentials to update --> disable Update button
     if (credentials.list.length === 0) {
