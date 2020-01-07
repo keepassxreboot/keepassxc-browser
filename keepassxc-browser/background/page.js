@@ -13,6 +13,7 @@ const defaultSettings = {
     showLoginFormIcon: true,
     showOTPIcon: true,
     saveDomainOnly: true,
+    saveDomainOnlyNewCreds: false,
     autoReconnect: false,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false
@@ -68,6 +69,9 @@ page.initSettings = async function() {
         }
         if (!('saveDomainOnly' in page.settings)) {
             page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
+        }
+        if (!('saveDomainOnlyNewCreds' in page.settings)) {
+            page.settings.saveDomainOnlyNewCreds = defaultSettings.saveDomainOnlyNewCreds;
         }
         if (!('autoReconnect' in page.settings)) {
             page.settings.autoReconnect = defaultSettings.autoReconnect;

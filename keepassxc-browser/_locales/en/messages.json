@@ -691,6 +691,10 @@
         "message": "When saving new credentials, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
+    "optionsSaveDomainOnlyCustomLoginHelpText": {
+        "message": "When saving new custom login fields, save only the domain instead of full URL.",
+        "description": "Save domain only option help text."
+    },
     "optionsAutoFillAndSendHelpText": {
         "message": "If credentials are found for a page and the login-type is an HTTP Basic Auth request, KeePassXC-Browser tries to login with the first given credentials.",
         "description": "Auto-Fill And Send option help text."
