@@ -1190,7 +1190,7 @@ kpxc.getFormSubmitButton = function(form) {
     }
 
     // Try to find another button. Select the first one.
-    const buttons = Array.from(form.querySelectorAll('button[type=\'button\'], input[type=\'button\'], button:not([type])'));
+    const buttons = Array.from(form.querySelectorAll('button[type=\'button\'], button[type=\'submit\'], input[type=\'button\'], button:not([type])'));
     if (buttons.length > 0) {
         return buttons[0];
     }
