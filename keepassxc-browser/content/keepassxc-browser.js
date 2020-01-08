@@ -1654,7 +1654,7 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
 
         let url = this.action;
         if (!url) {
-            url = kpxc.getDocumentLocation();
+            url = kpxc.settings.saveDomainOnlyNewCreds ? document.location.origin : document.location.href;
             if (url.indexOf('?') > 0) {
                 url = url.substring(0, url.indexOf('?'));
                 if (url.length < document.location.origin.length) {
