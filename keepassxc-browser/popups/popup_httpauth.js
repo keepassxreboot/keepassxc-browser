@@ -7,6 +7,8 @@ const getLoginData = async () => {
 };
 
 $(async () => {
+    await initColorTheme();
+
     const data = await getLoginData();
     const ll = document.getElementById('login-list');
     for (let i = 0; i < data.logins.length; ++i) {

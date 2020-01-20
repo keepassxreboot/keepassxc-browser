@@ -3,6 +3,7 @@
   <head>
     <title data-i18n="optionsTitle"></title>
       <meta charset="UTF-8">
+      <link rel="stylesheet" href="../css/colors.css" />
       <link rel="stylesheet" href="bootstrap.min.css" />
       <link rel="stylesheet" href="options.css" />
       <script src="../browser-polyfill.min.js"></script>
@@ -29,6 +30,13 @@
       <!-- General Settings -->
       <div class="tab" id="tab-general-settings">
         <h2 data-i18n="optionsGeneralSettingsTab"></h2>
+        <hr />
+        <h3 data-i18n="optionsThemeSelectionHeader"></h3>
+          <select id="colorTheme" data-i18n="[title]optionsThemeSelection">
+            <option value="system" data-i18n="optionsThemeSystem"></option>
+            <option value="dark" data-i18n="optionsThemeDark"></option>
+            <option value="light" data-i18n="optionsThemeLight"></option>
+          </select>
         <hr />
         <h3 data-i18n="optionsKeyboardShortcutsHeader"></h3>
         <p>

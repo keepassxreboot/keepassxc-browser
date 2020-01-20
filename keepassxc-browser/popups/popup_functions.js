@@ -27,6 +27,19 @@ async function initSettings() {
 }
 
 
+async function initColorTheme() {
+    const colorTheme = await browser.runtime.sendMessage({
+        action: 'get_color_theme'
+    });
+
+    if (colorTheme === undefined || colorTheme === 'system') {
+        document.body.removeAttribute('data-color-theme');
+    } else {
+        document.body.setAttribute('data-color-theme', colorTheme);
+    }
+};
+
+
 $(async () => {
     await initSettings();
     updateAvailableResponse(await browser.runtime.sendMessage({

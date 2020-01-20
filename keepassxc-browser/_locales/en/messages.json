@@ -643,6 +643,26 @@
         "message": "never",
         "description": "Radio button text."
     },
+    "optionsThemeSelectionHeader": {
+        "message": "Color theme",
+        "description": "Theme selection header text."
+    },
+    "optionsThemeSelection": {
+        "message": "Select color theme",
+        "description": "Theme selection title text."
+    },
+    "optionsThemeSystem": {
+        "message": "System",
+        "description": "System theme text."
+    },
+    "optionsThemeDark": {
+        "message": "Dark",
+        "description": "Dark theme text."
+    },
+    "optionsThemeLight": {
+        "message": "Light",
+        "description": "Light theme text."
+    },
     "optionsKeyboardShortcutsHeader": {
         "message": "Keyboard shortcuts",
         "description": "Keyboard shortcut header text."

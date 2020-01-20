@@ -16,7 +16,8 @@ const defaultSettings = {
     saveDomainOnlyNewCreds: false,
     autoReconnect: false,
     defaultGroup: '',
-    defaultGroupAlwaysAsk: false
+    defaultGroupAlwaysAsk: false,
+    colorTheme: 'system'
 };
 
 var page = {};
@@ -81,6 +82,9 @@ page.initSettings = async function() {
         }
         if (!('defaultGroupAlwaysAsk' in page.settings)) {
             page.settings.defaultGroupAlwaysAsk = defaultSettings.defaultGroupAlwaysAsk;
+        }
+        if (!('colorTheme' in page.settings)) {
+            page.settings.colorTheme = defaultSettings.colorTheme;
         }
 
         await browser.storage.local.set({ 'settings': page.settings });

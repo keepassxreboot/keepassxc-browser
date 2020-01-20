@@ -5,12 +5,12 @@
 .kpxcAutocomplete-items div {
     padding: 5px;
     cursor: pointer;
-    background-color: #fff; 
+    background-color: var(--background-color);
     border-bottom: 1px solid #d4d4d4;
     border-left: 1px solid #d4d4d4;
     border-right: 1px solid #d4d4d4;
     width: auto;
-    color: #000;
+    color: var(--text-color);
     font-size: .9em !important;
 }
 
@@ -27,5 +27,18 @@
 .kpxcAutocomplete-active {
     background-color: #6cac4d !important; 
     color: #ffffff !important;
-    border: 0px !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .kpxcAutocomplete-items {
+        background: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .kpxc-pwgen-input {
+        background-color: var(--input-background-color) !important;
+        border: var(--input-border);
+        border-color: var(--input-border-color);
+        color: var(--text-color) !important;
+    }
 }

@@ -219,6 +219,7 @@ kpxcPasswordDialog.showDialog = function(field, icon) {
     }
 
     kpxcPasswordDialog.createDialog();
+    initColorTheme(kpxcPasswordDialog.dialog);
     kpxcPasswordDialog.openDialog();
 
     // Adjust the dialog location

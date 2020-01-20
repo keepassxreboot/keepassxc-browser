@@ -155,6 +155,17 @@ const DOMRectToArray = function(domRect) {
     return [ domRect.bottom, domRect.height, domRect.left, domRect.right, domRect.top, domRect.width, domRect.x, domRect.y ];
 };
 
+const initColorTheme = function(elem) {
+    const colorTheme = kpxc.settings['colorTheme'];
+
+    if (colorTheme === undefined || colorTheme === 'system') {
+        elem.removeAttribute('data-color-theme');
+    } else {
+        elem.setAttribute('data-color-theme', colorTheme);
+    }
+};
+
+
 // Enables dragging
 document.addEventListener('mousemove', function(e) {
     if (kpxcPasswordDialog.selected === kpxcPasswordDialog.titleBar) {
