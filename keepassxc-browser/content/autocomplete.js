@@ -38,6 +38,7 @@ kpxcAutocomplete.showList = function(inputField) {
     const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
     kpxcAutocomplete.updatePosition(inputField, div);
     div.style.zIndex = '2147483646';
+    initColorTheme(div);
     document.body.append(div);
 
     for (const c of kpxcAutocomplete.elements) {

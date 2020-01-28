@@ -230,12 +230,16 @@ kpxcEvent.onUsernameFieldDetected = function(tab, detected) {
 
 kpxcEvent.passwordGetFilled = async function() {
     return page.passwordFilled;
-}
+};
 
 kpxcEvent.passwordSetFilled = function(tab, state) {
     page.passwordFilled = state;
     return Promise.resolve();
-}
+};
+
+kpxcEvent.getColorTheme = async function(tab) {
+    return page.settings.colorTheme;
+};
 
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
@@ -247,6 +251,7 @@ kpxcEvent.messageHandlers = {
     'enable_automatic_reconnect': keepass.enableAutomaticReconnect,
     'disable_automatic_reconnect': keepass.disableAutomaticReconnect,
     'generate_password': keepass.generatePassword,
+    'get_color_theme': kpxcEvent.getColorTheme,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
     'get_database_hash': keepass.getDatabaseHash,
     'get_database_groups': keepass.getDatabaseGroups,

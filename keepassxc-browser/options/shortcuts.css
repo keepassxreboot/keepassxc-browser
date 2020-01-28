@@ -6,8 +6,8 @@ body {
     margin: 0 auto;
     width: 680px;
     max-height: 315px;
-    background-color: white;
-    border: 1px solid #ccc;
+    background-color: var(--background-color);
+    border: var(--container-border);
     border-radius: 4px;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
@@ -50,4 +50,31 @@ body {
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
     margin: 20px auto;
     width: 680px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .bg-danger {
+        color: #000;
+    }
+
+    body {
+        background: var(--input-background-color) !important;
+        color: var(--text-color);
+    }
+
+    input {
+        background-color: var(--input-background-color);
+        border: var(--input-border);
+        border-color: var(--input-border-color);
+    }
+
+    input:active {
+        border-color: var(--input-active-border-color);
+    }
+
+    .conf-container {
+        background: var(--background-color);
+        border: var(--container-border);
+        color: var(--text-color);
+    }
 }

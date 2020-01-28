@@ -17,6 +17,7 @@ $(async function() {
         options.initCustomCredentialFields();
         options.initSitePreferences();
         options.initAbout();
+        options.initTheme();
     } catch (err) {
         console.log('Error loading options page: ' + err);
     }
@@ -76,6 +77,18 @@ options.saveKeyRing = async function() {
 };
 
 options.initGeneralSettings = function() {
+    if (options.settings['colorTheme'] === undefined) {
+        $('#tab-general-settings select#colorTheme').val('system');
+    } else {
+        $('#tab-general-settings select#colorTheme').val(options.settings['colorTheme']);
+    }
+
+    $('#tab-general-settings select:first').change(function() {
+        options.settings['colorTheme'] = $(this).val();
+        options.saveSettings();
+        location.reload();
+    });
+
     $('#tab-general-settings input[type=checkbox]').each(function() {
         $(this).attr('checked', options.settings[$(this).attr('name')]);
         if ($(this).attr('name') === 'defaultGroupAlwaysAsk' && $(this).attr('checked')) {
@@ -520,6 +533,14 @@ options.initAbout = function() {
     // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
     if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1, 2)) < 60) {
         $('#chrome-only').remove();
+    }
+};
+
+options.initTheme = function() {
+    if (options.settings['colorTheme'] === undefined) {
+        document.body.removeAttribute('data-color-theme');
+    } else {
+        document.body.setAttribute('data-color-theme', options.settings['colorTheme']);
     }
 };
 

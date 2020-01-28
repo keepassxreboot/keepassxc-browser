@@ -116,6 +116,8 @@ kpxcBanner.create = async function(credentials = {}) {
     bannerInfo.appendMultiple(icon, infoText, usernameText, usernameSpan);
     bannerButtons.appendMultiple(newButton, updateButton, separator, ignoreCheckbox, checkboxLabel, dismissButton);
     banner.appendMultiple(bannerInfo, bannerButtons);
+
+    initColorTheme(banner);
     document.body.appendChild(banner);
 };
 
@@ -365,6 +367,7 @@ kpxcBanner.createCredentialDialog = async function() {
     usernameNew.append(kpxcUI.createElement('span', 'strong'));
     usernameExists.append(kpxcUI.createElement('span', 'strong'));
     dialog.appendMultiple(databaseText, usernameNew, usernameExists, chooseCreds, list);
+    initColorTheme(dialog);
     document.body.appendChild(dialog);
 };
 

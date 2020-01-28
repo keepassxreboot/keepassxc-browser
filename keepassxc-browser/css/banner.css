@@ -1,11 +1,11 @@
 div.kpxc-banner {
     animation-duration: 0.2s;
     animation-name: slidein;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     border-bottom: 1px solid #38383d !important;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
     box-sizing: border-box !important;
-    color: #000000 !important;
+    color: var(--text-color) !important;
     font-family: sans-serif !important;
     font-size: 1em !important;
     height: auto !important;
@@ -89,8 +89,9 @@ div.kpxc-banner-dialog {
     width: 680px;
     max-height: 600px;
     max-width: 460px;
-    background-color: white;
-    border: 1px solid #ccc;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: var(--container-border);
     border-radius: 0 0 4px 4px;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
     padding: 8px;
@@ -114,7 +115,7 @@ div.kpxc-banner-dialog .list-group {
 
 div.kpxc-banner-dialog .list-group-item {
     border: 1px solid #ddd !important;
-    color: #000 !important;
+    color: var(--text-color) !important;
     display: block !important;
     padding: 5px 10px;
     position: relative !important;
@@ -133,6 +134,23 @@ div.kpxc-banner-dialog .list-group-item:last-child {
 }
 
 div.kpxc-banner-dialog .list-group-item:hover {
-    cursor: pointer !important;;
+    cursor: pointer !important;
     background-color: #eee !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    div.kpxc-banner, div.kpxc-banner-dialog {
+        background-color: var(--input-background-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    div.kpxc-banner-dialog .list-group-item:hover {
+        background-color: var(--table-hover-color) !important;
+        color: #000;
+    }
+
+    div.kpxc-banner-dialog .list-group-item {
+        background-color: var(--input-background-color) !important;
+        color: var(--text-color) !important;
+    }
 }
