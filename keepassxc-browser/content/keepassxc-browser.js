@@ -1099,9 +1099,9 @@ kpxc.preparePageForMultipleCredentials = function(credentials) {
     // Add usernames + descriptions to autocomplete-list and popup-list
     const usernames = [];
     kpxcAutocomplete.elements = [];
-    const credentialsInDifferentGroups = getUniqueGroupCount(credentials) > 1
+    const showGroupNameInAutocomplete = kpxc.settings.showGroupNameInAutocomplete && (getUniqueGroupCount(credentials) > 1)
     for (let i = 0; i < credentials.length; i++) {
-        const loginText = getLoginText(credentials[i], credentialsInDifferentGroups);
+        const loginText = getLoginText(credentials[i], showGroupNameInAutocomplete);
         usernames.push(loginText);
 
         const item = {

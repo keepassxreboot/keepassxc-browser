@@ -599,6 +599,10 @@
         "message": "Activate autocomplete for username fields.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
+    "optionsCheckboxShowGroupNameInAutocomplete": {
+        "message": "Display the group name of the credentials in the autocomplete list",
+        "description": "Show group name in autocomplete checkbox text."
+    },
     "optionsCheckboxAutoSubmit": {
         "message": "Auto-submit login forms",
         "description": "Auto-submit checkbox text."
@@ -682,6 +686,10 @@
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Show a dropdown list containing available credentials for all username fields on a page.",
         "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowGroupNameInAutocompleteHelpText": {
+        "message": "This only happens if there are matching credentials from different groups for a page.",
+        "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
         "message": "Show notifications for errors and when user interaction is required.",
