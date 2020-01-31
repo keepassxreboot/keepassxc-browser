@@ -463,7 +463,7 @@
         "message": "Cancelar",
         "description": "Cancel button text when removing database key or custom login fields."
     },
-    "optionsButtonReset": {
+     "optionsButtonReset": {
         "message": "Resetear",
         "description": "Reset button text for keyboard shortcuts."
     },
@@ -639,11 +639,11 @@
         "message": "El acceso directo para $1 ha sido cambiado con éxito.",
         "description": "Message for successful keyboard shortcut change."
     },
-    "optionsShortcutsInfo": {
+     "optionsShortcutsInfo": {
         "message": "Acceso directo para $1 se ha restablecido.",
         "description": "Info message for changing keyboard shortcuts."
     },
-    "optionsShortcutsDanger": {
+     "optionsShortcutsDanger": {
         "message": "Error: Acceso directo para  $1 no ha cambiado!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -691,11 +691,11 @@
         "message": "URL de la página",
         "description": "Site preferences list column title."
     },
-    "optionsColumnIgnore": {
+     "optionsColumnIgnore": {
         "message": "Ignorar",
         "description": "Site preferences list column title."
     },
-    "optionsColumnUsernameOnly": {
+     "optionsColumnUsernameOnly": {
         "message": "Detección por nombre de usuario únicamente",
         "description": "Site preferences list column title."
     },
