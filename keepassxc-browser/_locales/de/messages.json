@@ -511,10 +511,6 @@
         "message": "Autovervollständigung für Benutzernamensfelder aktivieren.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
-    "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Gruppenname des Eintrags in Autovervollständigungs-Liste anzeigen",
-        "description": "Show group name in autocomplete checkbox text."
-    },
     "optionsCheckboxShowNotifications": {
         "message": "Benachrichtigungen anzeigen.",
         "description": "Show notifications checkbox text."
@@ -594,10 +590,6 @@
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Eine Dropdown-Liste mit verfügbaren Anmeldedaten für alle Benutzernamensfelder auf einer Seite anzeigen.",
         "description": "Autocomplete Usernames option help text."
-    },
-    "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Sollten mehrere Anmeldedaten von verschiedenen Gruppen für eine Seite verfügbar sein, wird der Gruppenname zusätzlich angezeigt.",
-        "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
         "message": "Benachrichtigungen bei Fehlern, und wenn Benutzerinteraktion erforderlich ist, anzeigen.",

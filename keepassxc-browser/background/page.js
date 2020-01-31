@@ -29,7 +29,7 @@ page.submittedCredentials = {};
 page.tabs = [];
 page.usernameFieldDetected = false;
 
-page.initSettings = async function() {
+page.initSettings = async function () {
     try {
         const item = await browser.storage.local.get({ 'settings': {} });
         page.settings = item.settings;
@@ -91,7 +91,7 @@ page.initSettings = async function() {
     }
 };
 
-page.initOpenedTabs = async function() {
+page.initOpenedTabs = async function () {
     try {
         const tabs = await browser.tabs.query({});
         for (const i of tabs) {
@@ -112,12 +112,12 @@ page.initOpenedTabs = async function() {
     }
 };
 
-page.switchTab = function(tab) {
+page.switchTab = function (tab) {
     browserAction.showDefault(tab);
-    browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {});
+    browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => { });
 };
 
-page.clearCredentials = function(tabId, complete) {
+page.clearCredentials = function (tabId, complete) {
     if (!page.tabs[tabId]) {
         return;
     }
@@ -132,11 +132,11 @@ page.clearCredentials = function(tabId, complete) {
 
         browser.tabs.sendMessage(tabId, {
             action: 'clear_credentials'
-        }).catch((e) => {});
+        }).catch((e) => { });
     }
 };
 
-page.clearLogins = function(tabId) {
+page.clearLogins = function (tabId) {
     if (!page.tabs[tabId]) {
         return;
     }
@@ -145,7 +145,7 @@ page.clearLogins = function(tabId) {
     page.passwordFilled = false;
 };
 
-page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials) {
+page.setSubmittedCredentials = function (submitted, username, password, url, oldCredentials) {
     page.submittedCredentials.submitted = submitted;
     page.submittedCredentials.username = username;
     page.submittedCredentials.password = password;
@@ -153,12 +153,12 @@ page.setSubmittedCredentials = function(submitted, username, password, url, oldC
     page.submittedCredentials.oldCredentials = oldCredentials;
 };
 
-page.clearSubmittedCredentials = function() {
+page.clearSubmittedCredentials = function () {
     page.submitted = false;
     page.submittedCredentials = {};
 };
 
-page.createTabEntry = function(tabId) {
+page.createTabEntry = function (tabId) {
     page.tabs[tabId] = {
         'stack': [],
         'errorMessage': null,
@@ -167,7 +167,7 @@ page.createTabEntry = function(tabId) {
     page.clearSubmittedCredentials();
 };
 
-page.removePageInformationFromNotExistingTabs = async function() {
+page.removePageInformationFromNotExistingTabs = async function () {
     const rand = Math.floor(Math.random() * 1001);
     if (rand === 28) {
         const tabs = await browser.tabs.query({});

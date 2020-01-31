@@ -463,7 +463,7 @@
         "message": "Cancelar",
         "description": "Cancel button text when removing database key or custom login fields."
     },
-     "optionsButtonReset": {
+    "optionsButtonReset": {
         "message": "Resetear",
         "description": "Reset button text for keyboard shortcuts."
     },
@@ -510,10 +510,6 @@
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Activar autocompletar para los campos de nombre de usuario.",
         "description": "Activate autocomplete for username fields checkbox text."
-    },
-    "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Mostrar el nombre del grupo del credencial en la liste de autocomplete",
-        "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxShowNotifications": {
         "message": "Mostrar notificaciones.",
@@ -595,10 +591,6 @@
         "message": "Muestre una lista desplegable que contenga las credenciales disponibles para todos los campos de nombre de usuario en una página.",
         "description": "Autocomplete Usernames option help text."
     },
-    "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Solo aparece si existe mas que un credencial de diferentes grupos para una página.",
-        "description": "Show group name in autocomplete help text."
-    },
     "optionsShowNotificationsHelpText": {
         "message": "Mostrar notificaciones de errores y cuándo es necesaria la interacción del usuario.",
         "description": "Show notifications option help text."
@@ -647,11 +639,11 @@
         "message": "El acceso directo para $1 ha sido cambiado con éxito.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Acceso directo para $1 se ha restablecido.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Error: Acceso directo para  $1 no ha cambiado!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -699,11 +691,11 @@
         "message": "URL de la página",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignorar",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Detección por nombre de usuario únicamente",
         "description": "Site preferences list column title."
     },
