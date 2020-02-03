@@ -118,7 +118,7 @@ kpxcBanner.create = async function(credentials = {}) {
     banner.appendMultiple(bannerInfo, bannerButtons);
 
     initColorTheme(banner);
-    document.body.appendChild(banner);
+    window.parent.document.body.appendChild(banner);
 };
 
 kpxcBanner.saveNewCredentials = async function(credentials = {}) {
