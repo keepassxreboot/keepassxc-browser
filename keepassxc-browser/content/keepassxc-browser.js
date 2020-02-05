@@ -1222,20 +1222,17 @@ kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarni
         kpxc.p = p;
     }
 
-    if (kpxc.url === document.location.origin && kpxc.submitUrl === action && kpxc.credentials.length > 0) {
-        kpxc.fillIn(combination, onlyPassword, suppressWarnings);
-    } else {
-        kpxc.url = document.location.origin;
-        kpxc.submitUrl = action;
+    kpxc.url = document.location.origin;
+    kpxc.submitUrl = action;
 
-        const credentials = await browser.runtime.sendMessage({
-            action: 'retrieve_credentials',
-            args: [ kpxc.url, kpxc.submitUrl, true ] // Sets triggerUnlock to true
-        });
+    const credentials = await browser.runtime.sendMessage({
+        action: 'retrieve_credentials',
+        args: [ kpxc.url, kpxc.submitUrl, true ] // Sets triggerUnlock to true
+    });
 
-        await kpxc.retrieveCredentialsCallback(credentials, true);
-        kpxc.fillIn(combination, onlyPassword, suppressWarnings);
-    }
+    await kpxc.retrieveCredentialsCallback(credentials, true);
+    kpxc.fillIn(combination, onlyPassword, suppressWarnings);
+  
 };
 
 kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
