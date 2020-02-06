@@ -241,6 +241,10 @@ kpxcEvent.getColorTheme = async function(tab) {
     return page.settings.colorTheme;
 };
 
+kpxcEvent.pageGetRedirectCount = async function() {
+    return page.redirectCount;
+};
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -266,6 +270,7 @@ kpxcEvent.messageHandlers = {
     'page_clear_logins': kpxcEvent.pageClearLogins,
     'page_clear_submitted': kpxcEvent.pageClearSubmitted,
     'page_get_login_id': kpxcEvent.pageGetLoginId,
+    'page_get_redirect_count': kpxcEvent.pageGetRedirectCount,
     'page_get_submitted': kpxcEvent.pageGetSubmitted,
     'page_set_login_id': kpxcEvent.pageSetLoginId,
     'page_set_submitted': kpxcEvent.pageSetSubmitted,

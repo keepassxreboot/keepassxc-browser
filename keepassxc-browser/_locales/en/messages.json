@@ -619,6 +619,14 @@
         "message": "Show a banner on the page when new credentials can be saved to the database.",
         "description": "Show login notifications checkbox text."
     },
+    "optionsRedirectAllowance": {
+        "message": "Number of allowed redirects: $1",
+        "description": "Redirect allowance range input text."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "How many redirects are allowed until the banner disappears. Default value is 1. Maximum is infinite.",
+        "description": "Redirect allowance help text."
+    },
     "optionsCheckboxAutoFillAndSend": {
         "message": "Automatically fill in HTTP Basic Auth dialogs and submit them.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."

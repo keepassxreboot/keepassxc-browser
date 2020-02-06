@@ -98,6 +98,10 @@ options.initGeneralSettings = function() {
         }
     });
 
+    $('#tab-general-settings input[type=range]').val(options.settings['redirectAllowance']);
+    $('#redirectAllowanceLabel').text(tr('optionsRedirectAllowance', 
+        options.settings['redirectAllowance'] === 11 ? 'Infinite' : String(options.settings['redirectAllowance'])));
+
     $('#tab-general-settings input[type=checkbox]').change(function() {
         const name = $(this).attr('name');
         options.settings[name] = $(this).is(':checked');
@@ -131,6 +135,18 @@ options.initGeneralSettings = function() {
 
     $('#tab-general-settings input[type=radio]').change(function() {
         options.settings[$(this).attr('name')] = Number($(this).val());
+        options.saveSettings();
+    });
+
+    // Change label text dynamically with the range input
+    $('#tab-general-settings input[type=range]').on('propertychange input', function(e) {
+        const currentValue = e.target.valueAsNumber === 11 ? 'Infinite' : e.target.value;
+        $('#redirectAllowanceLabel').text(tr('optionsRedirectAllowance', currentValue));
+    });
+
+    // Only save the setting when mouse is released from the range input
+    $('#tab-general-settings input[type=range').change(function(e) {
+        options.settings['redirectAllowance'] = e.target.valueAsNumber;
         options.saveSettings();
     });
 

@@ -120,6 +120,7 @@
         "notifications",
         "storage",
         "tabs",
+        "webNavigation",
         "webRequest",
         "webRequestBlocking",
         "https://*/*",
