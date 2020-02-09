@@ -3,6 +3,7 @@
   <head>
     <title data-i18n="optionsTitle"></title>
       <meta charset="UTF-8">
+      <link rel="stylesheet" href="../css/colors.css" />
       <link rel="stylesheet" href="bootstrap.min.css" />
       <link rel="stylesheet" href="options.css" />
       <script src="../browser-polyfill.min.js"></script>
@@ -29,6 +30,13 @@
       <!-- General Settings -->
       <div class="tab" id="tab-general-settings">
         <h2 data-i18n="optionsGeneralSettingsTab"></h2>
+        <hr />
+        <h3 data-i18n="optionsThemeSelectionHeader"></h3>
+          <select id="colorTheme" data-i18n="[title]optionsThemeSelection">
+            <option value="system" data-i18n="optionsThemeSystem"></option>
+            <option value="dark" data-i18n="optionsThemeDark"></option>
+            <option value="light" data-i18n="optionsThemeLight"></option>
+          </select>
         <hr />
         <h3 data-i18n="optionsKeyboardShortcutsHeader"></h3>
         <p>
@@ -69,6 +77,16 @@
           </div>
         </p>
         <hr />
+        <p>
+          <div class="checkbox">
+              <label class="checkbox">
+                <input type="checkbox" name="useObserver" value="true"/><span data-i18n="optionsUseObserver"></span>
+              </label>
+              <span class="help-block">
+                <span data-i18n="optionsUseObserverHelpText"></span>
+              </span>
+            </div>
+          </p>
         <p>
           <div class="checkbox">
             <label class="checkbox">
@@ -149,14 +167,14 @@
         </p>
         <hr />
         <p>
-            <div class="checkbox">
-              <label class="checkbox">
-                <input type="checkbox" name="autoSubmit" value="false" /><span data-i18n="optionsCheckboxAutoSubmit"></span>
-              </label>
-              <span class="help-block" data-i18n="optionsAutoSubmitHelpText"></span>
-            </div>
-          </p>
-          <hr />
+          <div class="checkbox">
+            <label class="checkbox">
+              <input type="checkbox" name="autoSubmit" value="false" /><span data-i18n="optionsCheckboxAutoSubmit"></span>
+            </label>
+            <span class="help-block" data-i18n="optionsAutoSubmitHelpText"></span>
+          </div>
+        </p>
+        <hr />
         <p>
           <div class="checkbox">
             <label class="checkbox">
@@ -164,10 +182,22 @@
             </label>
             <span class="help-block" data-i18n="optionsShowNotificationsHelpText"></span>
           </div>
+          <hr />
           <div class="checkbox">
             <label class="checkbox">
               <input type="checkbox" name="showLoginNotifications" value="true" /><span data-i18n="optionsCheckboxShowLoginNotifications"></span>
             </label>
+          </div>
+          <div class="checkbox">
+            <label class="checkbox">
+              <input type="checkbox" name="saveDomainOnlyNewCreds" value="true" /><span data-i18n="optionsSaveDomainOnly"></span>
+            </label>
+            <span class="help-block" data-i18n="optionsSaveDomainOnlyHelpText"></span>
+          </div>
+          <div class="form-group">
+            <label id="redirectAllowanceLabel" for="redirectAllowance" data-i18n="optionsRedirectAllowance" i18n-placeholder="1"></label>
+            <input type="range" name="redirectAllowance" min="1" max="11" step="1" value="1" />
+            <span class="help-block" data-i18n="optionsRedirectAllowanceHelpText"></span>
           </div>
         </p>
         <hr />
@@ -176,7 +206,7 @@
             <label class="checkbox">
               <input type="checkbox" name="saveDomainOnly" value="true" /><span data-i18n="optionsSaveDomainOnly"></span>
             </label>
-            <span class="help-block" data-i18n="optionsSaveDomainOnlyHelpText"></span>
+            <span class="help-block" data-i18n="optionsSaveDomainOnlyCustomLoginHelpText"></span>
           </div>
         </p>
         <hr />

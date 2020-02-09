@@ -575,6 +575,14 @@
         "message": "Activate username field icons.",
         "description": "Activate username field icons textbox text."
     },
+    "optionsUseObserver": {
+        "message": "Use dynamic input field detection.",
+        "description": "Use dynamic input field detection checkbox text."
+    },
+    "optionsUseObserverHelpText": {
+        "message": "Useful with pages that use popups or dynamic dialogs. Disable the feature to reduce CPU load on slower machines. When disabled credentials can be only inserted using keyboard shortcuts, the context menu or the extension popup.",
+        "description": "Use dynamic input field detection help text."
+    },
     "optionsCheckboxOTPIcons": {
         "message": "Activate 2FA/OTP field icons.",
         "description": "Activate OTP field icons textbox text."
@@ -623,6 +631,14 @@
         "message": "Show a banner on the page when new credentials can be saved to the database.",
         "description": "Show login notifications checkbox text."
     },
+    "optionsRedirectAllowance": {
+        "message": "Number of allowed redirects: $1",
+        "description": "Redirect allowance range input text."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "How many redirects are allowed until the banner disappears. Default value is 1. Maximum is infinite.",
+        "description": "Redirect allowance help text."
+    },
     "optionsCheckboxAutoFillAndSend": {
         "message": "Automatically fill in HTTP Basic Auth dialogs and submit them.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
@@ -646,6 +662,26 @@
     "optionsRadioNever": {
         "message": "never",
         "description": "Radio button text."
+    },
+    "optionsThemeSelectionHeader": {
+        "message": "Color theme",
+        "description": "Theme selection header text."
+    },
+    "optionsThemeSelection": {
+        "message": "Select color theme",
+        "description": "Theme selection title text."
+    },
+    "optionsThemeSystem": {
+        "message": "System",
+        "description": "System theme text."
+    },
+    "optionsThemeDark": {
+        "message": "Dark",
+        "description": "Dark theme text."
+    },
+    "optionsThemeLight": {
+        "message": "Light",
+        "description": "Light theme text."
     },
     "optionsKeyboardShortcutsHeader": {
         "message": "Keyboard shortcuts",
@@ -697,6 +733,10 @@
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "When saving new credentials, save only the domain instead of full URL.",
+        "description": "Save domain only option help text."
+    },
+    "optionsSaveDomainOnlyCustomLoginHelpText": {
+        "message": "When saving new custom login fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
     "optionsAutoFillAndSendHelpText": {

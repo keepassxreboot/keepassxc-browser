@@ -65,6 +65,7 @@
                 "css/autocomplete.css",
                 "css/banner.css",
                 "css/button.css",
+                "css/colors.css",
                 "css/define.css",
                 "css/notification.css",
                 "css/pwgen.css",
@@ -109,7 +110,14 @@
         "icons/keepassxc.svg",
         "icons/key.svg",
         "icons/locked.svg",
-        "icons/otp.svg"
+        "icons/otp.svg",
+        "css/autocomplete.css",
+        "css/banner.css",
+        "css/button.css",
+        "css/colors.css",
+        "css/pwgen.css",
+        "css/username.css",
+        "css/totp.css"
     ],
     "permissions": [
         "activeTab",
@@ -119,6 +127,7 @@
         "notifications",
         "storage",
         "tabs",
+        "webNavigation",
         "webRequest",
         "webRequestBlocking",
         "https://*/*",
@@ -128,7 +137,7 @@
     "applications": {
        "gecko": {
            "id": "keepassxc-browser@keepassxc.org",
-           "strict_min_version": "52.0"
+           "strict_min_version": "67.0"
        }
    },
    "default_locale": "en"

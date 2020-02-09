@@ -1,18 +1,21 @@
 body {
     font-family: sans-serif;
     overflow-x: hidden;
-    background-color: #eee;
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
     font-size: 15px;
     padding: 8px;
     min-width: 440px;
     max-width: 460px;
     width: auto;
 }
+
 .container {
     min-width: 440px;
     max-width: 460px;
     width: auto;
 }
+
 .loader {
     animation: spin 2s linear infinite;
     border: 4px solid #f3f3f3;
@@ -23,19 +26,24 @@ body {
     margin-right: 1em;
     width: 1.4em;
 }
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 .list-group {
     font-size: .9em !important;
 }
+
 .list-group-item {
     padding: 5px 10px !important;
 }
+
 .list-group-item:hover {
-    cursor: pointer;
+    cursor: pointer
 }
+
 .settings {
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -43,29 +51,36 @@ body {
     font-size: 90%;
     text-align: left;
 }
+
 .settings label {
     display: block;
 }
+
 .settings label input {
     vertical-align: middle;
 }
+
 .settings .description {
     margin-top: 3px;
     font-size: 80%;
     color: #787878;
 }
+
 #list {
     padding-left: 0px;
 }
+
 #child {
     border-top: 0px;
 }
+
 .small {
     margin-top: 3px;
     margin-left: 12px;
     font-size: 80%;
     color: #787878;
 }
+
 #update-available {
     padding-top: 10px;
     margin-top: 10px;
@@ -74,14 +89,17 @@ body {
     text-align: left;
     display: none;
 }
+
 #update-available a:hover,
 #update-available a:active {
     text-decoration: underline;
 }
+
 #lock-database-button {
     float: right;
     height: 30px;
 }
+
 #login-filter {
 	outline: none;
 	border-radius: 4px;
@@ -89,4 +107,31 @@ body {
 	margin-bottom: 5px;
 	padding: 2px 10px;
 	width: 100%;
+}
+
+@media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
+    body {
+        background: var(--background-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    input, input[type="checkbox"] {
+        background-color: var(--input-background-color) !important;
+        border: var(--input-border);
+        border-color: var(--input-border-color);
+    }
+
+    .list-group-item {
+        background-color: var(--input-background-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    .list-group-item:hover {
+        background-color: var(--table-hover-color) !important;
+    }
+
+    span.bg-success {
+        background-color: var(--table-hover-color) !important;
+        color: var(--text-color) !important;
+    }
 }

@@ -24,6 +24,7 @@ _called.manualFillRequested = ManualFill.NONE;
 let _singleInputEnabledForPage = false;
 let _databaseClosed = true;
 const _maximumInputs = 100;
+const _maximumMutations = 200;
 
 // Count of detected form fields on the page
 var _detectedFields = 0;
@@ -303,6 +304,7 @@ kpxcFields.isVisible = function(field) {
 kpxcFields.getAllFields = function() {
     const fields = [];
     const inputs = kpxcObserverHelper.getInputs(document);
+
     for (const i of inputs) {
         if (kpxcFields.isVisible(i) && !kpxcFields.isSearchField(i)) {
             kpxcFields.setUniqueId(i);
@@ -711,7 +713,7 @@ kpxcObserverHelper.handleObserverAdd = function(target) {
         if (Object.keys(kpxc.settings).length === 0) {
             kpxc.init();
         } else {
-            kpxc.initCredentialFields(true);
+            kpxc.initCredentialFields(true, inputs);
         }
     }
 };
@@ -746,53 +748,7 @@ kpxcObserverHelper.detectURLChange = function() {
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-// Detects DOM changes in the document
-const observer = new MutationObserver(function(mutations, obs) {
-    if (document.visibilityState === 'hidden') {
-        return;
-    }
 
-    for (const mut of mutations) {
-        // Skip text nodes
-        if (mut.target.nodeType === Node.TEXT_NODE) {
-            continue;
-        }
-
-        // Check document URL change and detect new fields
-        kpxcObserverHelper.detectURLChange();
-
-        // Handle attributes only if CSS display is modified
-        if (mut.type === 'attributes') {
-            // Check if some class is changed that folds a form or input field(s)
-            if (mut.attributeName === 'class' && mut.target.querySelectorAll('form input').length > 0) {
-                kpxc.initCredentialFields(true);
-                continue;
-            }
-
-            const newValue = mut.target.getAttribute(mut.attributeName);
-            if (newValue && (newValue.includes('display') || newValue.includes('z-index'))) {
-                if (mut.target.style.display !== 'none') {
-                    kpxcObserverHelper.handleObserverAdd(mut.target);
-                } else {
-                    kpxcObserverHelper.handleObserverRemove(mut.target);
-                }
-            }
-        } else if (mut.type === 'childList') {
-            kpxcObserverHelper.handleObserverAdd((mut.addedNodes.length > 0) ? mut.addedNodes[0] : mut.target);
-            kpxcObserverHelper.handleObserverRemove((mut.removedNodes.length > 0) ? mut.removedNodes[0] : mut.target);
-        }
-    }
-});
-
-// define what element should be observed by the observer
-// and what types of mutations trigger the callback
-observer.observe(document, {
-    subtree: true,
-    attributes: true,
-    childList: true,
-    characterData: true,
-    attributeFilter: [ 'style', 'class' ]
-});
 
 const kpxc = {};
 kpxc.settings = {};
@@ -809,11 +765,25 @@ const initcb = async function() {
         });
 
         kpxc.settings = settings;
+
+        // Don't initialize MutationObserver if the site is ignored
+        if (kpxc.siteIgnored()) {
+            return;
+        }
+
+        if (kpxc.settings.useObserver) {
+            kpxc.initObserver();
+        }
+
         await kpxc.initCredentialFields();
 
         // Retrieve submitted credentials if available.
         const creds = await browser.runtime.sendMessage({
             action: 'page_get_submitted'
+        });
+
+        const redirectCount = await browser.runtime.sendMessage({
+            action: 'page_get_redirect_count'
         });
 
         if (creds && creds.submitted) {
@@ -822,9 +792,11 @@ const initcb = async function() {
                 return;
             }
 
-            await browser.runtime.sendMessage({
-                action: 'page_clear_submitted'
-            });
+            if (redirectCount >= kpxc.settings.redirectAllowance) {
+                await browser.runtime.sendMessage({
+                    action: 'page_clear_submitted'
+                });
+            }
 
             kpxc.rememberCredentials(creds.username, creds.password, creds.url, creds.oldCredentials);
         }
@@ -841,6 +813,61 @@ if (document.readyState === 'complete' || (document.readyState !== 'loading' && 
 
 kpxc.init = function() {
     initcb();
+};
+
+// Detects DOM changes in the document
+kpxc.initObserver = function() {
+    const observer = new MutationObserver(function(mutations, obs) {
+        if (document.visibilityState === 'hidden' || kpxcUI.mouseDown) {
+            return;
+        }
+
+        // Limit the mutation handling
+        if (mutations.length > _maximumMutations) {
+            mutations.slice(0, _maximumMutations);
+        }
+
+        for (const mut of mutations) {
+            // Skip text nodes
+            if (mut.target.nodeType === Node.TEXT_NODE) {
+                continue;
+            }
+    
+            // Check document URL change and detect new fields
+            kpxcObserverHelper.detectURLChange();
+    
+            // Handle attributes only if CSS display is modified
+            if (mut.type === 'attributes') {
+                // Check if some class is changed that folds a form or input field(s)
+                if (mut.attributeName === 'class' && mut.target.querySelectorAll('form input').length > 0) {
+                    kpxc.initCredentialFields(true);
+                    continue;
+                }
+    
+                const newValue = mut.target.getAttribute(mut.attributeName);
+                if (newValue && (newValue.includes('display') || newValue.includes('z-index'))) {
+                    if (mut.target.style.display !== 'none') {
+                        kpxcObserverHelper.handleObserverAdd(mut.target);
+                    } else {
+                        kpxcObserverHelper.handleObserverRemove(mut.target);
+                    }
+                }
+            } else if (mut.type === 'childList') {
+                kpxcObserverHelper.handleObserverAdd((mut.addedNodes.length > 0) ? mut.addedNodes[0] : mut.target);
+                kpxcObserverHelper.handleObserverRemove((mut.removedNodes.length > 0) ? mut.removedNodes[0] : mut.target);
+            }
+        }
+    });
+    
+    // define what element should be observed by the observer
+    // and what types of mutations trigger the callback
+    observer.observe(document, {
+        subtree: true,
+        attributes: true,
+        childList: true,
+        characterData: true,
+        attributeFilter: [ 'style', 'class' ]
+    });
 };
 
 // Clears all from the content and background scripts, including autocomplete
@@ -912,7 +939,7 @@ kpxc.siteIgnored = function(condition) {
     return false;
 };
 
-kpxc.initCredentialFields = async function(forceCall) {
+kpxc.initCredentialFields = async function(forceCall, inputs) {
     if (_called.initCredentialFields && !forceCall) {
         return;
     }
@@ -929,7 +956,11 @@ kpxc.initCredentialFields = async function(forceCall) {
         return;
     }
 
-    const inputs = kpxcFields.getAllFields();
+    // If target input fields are not defined, get inputs from the whole document
+    if (inputs === undefined) {
+        inputs = kpxcFields.getAllFields();
+    }
+
     if (inputs.length === 0) {
         return;
     }
@@ -981,9 +1012,13 @@ kpxc.initCredentialFields = async function(forceCall) {
 };
 
 kpxc.initPasswordGenerator = function(inputs) {
+    if (!kpxc.settings.usePasswordGeneratorIcons) {
+        return;
+    }
+
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i] && inputs[i].getLowerCaseAttribute('type') === 'password') {
-            kpxcPasswordIcons.newIcon(kpxc.settings.usePasswordGeneratorIcons, inputs[i], inputs, i, _databaseClosed);
+            kpxcPasswordIcons.newIcon(true, inputs[i], inputs, i, _databaseClosed);
         }
     }
 };
@@ -1199,7 +1234,7 @@ kpxc.getFormSubmitButton = function(form) {
     }
 
     // Try to find another button. Select the first one.
-    const buttons = Array.from(form.querySelectorAll('button[type=\'button\'], input[type=\'button\'], button:not([type])'));
+    const buttons = Array.from(form.querySelectorAll('button[type=\'button\'], button[type=\'submit\'], input[type=\'button\'], button:not([type])'));
     if (buttons.length > 0) {
         return buttons[0];
     }
@@ -1663,7 +1698,7 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
 
         let url = this.action;
         if (!url) {
-            url = kpxc.getDocumentLocation();
+            url = kpxc.settings.saveDomainOnlyNewCreds ? document.location.origin : document.location.href;
             if (url.indexOf('?') > 0) {
                 url = url.substring(0, url.indexOf('?'));
                 if (url.length < document.location.origin.length) {

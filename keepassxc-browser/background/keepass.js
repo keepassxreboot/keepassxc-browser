@@ -255,7 +255,7 @@ keepass.retrieveCredentials = async function(tab, args = []) {
             keepass.setcurrentKeePassXCVersion(parsed.version);
 
             if (keepass.verifyResponse(parsed, incrementedNonce)) {
-                entries = parsed.entries;
+                entries = removeDuplicateEntries(parsed.entries);
                 keepass.updateLastUsed(keepass.databaseHash);
                 if (entries.length === 0) {
                     // Questionmark-icon is not triggered, so we have to trigger for the normal symbol
@@ -1213,4 +1213,18 @@ keepass.buildRequest = function(action, encrypted, nonce, clientID, triggerUnloc
 
 keepass.getIsKeePassXCAvailable = async function() {
     return keepass.isKeePassXCAvailable;
+};
+
+const removeDuplicateEntries = function(arr) {
+    const newArray = [];
+
+    for (const a of arr) {
+        if (newArray.some(i => i.uuid === a.uuid)) {
+            continue;
+        }
+
+        newArray.push(a);
+    }
+
+    return newArray;
 };

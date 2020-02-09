@@ -7,8 +7,17 @@ table td {
     width: 100%;
 }
 
+input {
+    background-color: var(--input-background-color);
+    border: 1px solid #292a2a;
+}
+
 input:invalid {
     border: 2px solid red;
+}
+
+input[type=range] {
+    width: 20%;
 }
 
 /* Custom container */
@@ -25,7 +34,7 @@ input:invalid {
     font-family: 'Lato',sans-serif;
     background-color: #6cac4d;
     border: 0px;
-    box-shadow: 0 2px 6px 0;
+    box-shadow: 0 0px 2px 0;
     display: inline-block;
     float: none;
     width: 100%;
@@ -128,6 +137,10 @@ h2+hr {
     width: 50%;
 }
 
+#redirectAllowanceLabel {
+    font-weight: normal;
+}
+
 tr.clone {
     display: none;
 }
@@ -166,4 +179,70 @@ td.created {
 
 .panel-group .panel-default .panel-heading {
     background-color: #fff !important;
+}
+
+@media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
+    a {
+        color: var(--link-color);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--link-hover-color);
+        text-decoration: none;
+    }
+
+    .bg-danger {
+        color: #000;
+    }
+
+    body, pre {
+        background: var(--background-color);
+        color: var(--text-color);
+    }
+
+    input, input[type="checkbox"] {
+        background-color: var(--input-background-color);
+        border-color: var(--input-border-color);
+    }
+
+    input:active {
+        border-color: var(--input-active-border-color);
+    }
+
+    .modal-content {
+        background: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .navbar-default {
+        box-shadow: 0 0px 2px 0;
+    }
+
+    select {
+        background-color: var(--input-background-color);
+        color: var(--text-color);
+    }
+
+    select option {
+        background-color: var(--input-background-color);
+        color: var(--text-color);
+    }
+
+    select hover {
+        background: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .table > caption {
+        color: var(--text-color);
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: var(--table-hover-color);
+    }
+
+    .table-striped > tbody > tr:hover {
+        background-color: var(--table-hover-color);
+    }
 }

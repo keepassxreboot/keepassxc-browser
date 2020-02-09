@@ -1,8 +1,9 @@
 .kpxc-pwgen-dialog {
-    background-color: white;
+    background-color: var(--background-color);
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    color: var(--text-color);
     font-family: 'Lato', sans-serif !important;
     min-height: 80px;
     padding: .1em .2em .1em .2em;
@@ -56,7 +57,7 @@
 .kpxc-pwgen-input {
     background: none !important;
     border-radius: 4px !important;
-    color: #000 !important;
+    color: var(--text-color) !important;
     font-size: 12px !important;
     font-weight: normal !important;
     height: auto !important;
@@ -64,13 +65,8 @@
     width: 100% !important;
 }
 
-.kpxc-pwgen-checkbox-label {
-    font-style: normal !important;
-    font-weight: normal !important;
-}
-
 .kpxc #kpxc-pwgen-error {
-    color: #000;
+    color: var(--text-color);
     font-size: 12px !important;
     font-style: normal !important;
     font-weight: normal !important;
@@ -91,4 +87,22 @@
 .kpxc-pwgen-icon.key-moz {
     background: url('moz-extension://__MSG_@@extension_id__/icons/key.svg') right no-repeat;
     background-size: contain;
+}
+
+@media (prefers-color-scheme: dark) {
+    .kpxc-pwgen-dialog {
+        background: var(--background-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    .kpxc-pwgen-input {
+        background-color: var(--input-background-color) !important;
+        border: var(--input-border);
+        border-color: var(--input-border-color);
+        color: var(--text-color) !important;
+    }
+
+    .kpxc #kpxc-pwgen-error {
+        color: var(--text-color) !important;
+    }
 }

@@ -36,6 +36,7 @@ class Icon {
 };
 
 const kpxcUI = {};
+kpxcUI.mouseDown = false;
 
 // Wrapper for creating elements
 kpxcUI.createElement = function(type, classes, attributes, textContent) {
@@ -155,8 +156,29 @@ const DOMRectToArray = function(domRect) {
     return [ domRect.bottom, domRect.height, domRect.left, domRect.right, domRect.top, domRect.width, domRect.x, domRect.y ];
 };
 
+const initColorTheme = function(elem) {
+    const colorTheme = kpxc.settings['colorTheme'];
+
+    if (colorTheme === undefined || colorTheme === 'system') {
+        elem.removeAttribute('data-color-theme');
+    } else {
+        elem.setAttribute('data-color-theme', colorTheme);
+    }
+};
+
+const createStylesheet = function(file) {
+    const stylesheet = document.createElement('link');
+    stylesheet.setAttribute('rel', 'stylesheet');
+    stylesheet.setAttribute('href', browser.runtime.getURL(file));
+    return stylesheet;
+};
+
 // Enables dragging
 document.addEventListener('mousemove', function(e) {
+    if (!kpxcUI.mouseDown) {
+        return;
+    }
+
     if (kpxcPasswordDialog.selected === kpxcPasswordDialog.titleBar) {
         const xPos = e.clientX - kpxcPasswordDialog.diffX;
         const yPos = e.clientY - kpxcPasswordDialog.diffY;
@@ -178,9 +200,14 @@ document.addEventListener('mousemove', function(e) {
     }
 });
 
+document.addEventListener('mousedown', function() {
+    kpxcUI.mouseDown = true;
+});
+
 document.addEventListener('mouseup', function() {
     kpxcPasswordDialog.selected = null;
     kpxcDefine.selected = null;
+    kpxcUI.mouseDown = false;
 });
 
 HTMLDivElement.prototype.appendMultiple = function(...args) {
@@ -191,4 +218,17 @@ HTMLDivElement.prototype.appendMultiple = function(...args) {
 
 Element.prototype.getLowerCaseAttribute = function(attr) {
     return this.getAttribute(attr) ? this.getAttribute(attr).toLowerCase() : undefined;
+};
+
+Element.prototype._attachShadow = Element.prototype.attachShadow;
+Element.prototype.attachShadow = function () {
+    return this._attachShadow( { mode: 'closed' } );
+};
+
+Object.prototype.shadowSelector = function(value) {
+    return this.shadowRoot ? this.shadowRoot.querySelector(value) : undefined;
+};
+
+Object.prototype.shadowSelectorAll = function(value) {
+    return this.shadowRoot ? this.shadowRoot.querySelectorAll(value) : undefined;
 };

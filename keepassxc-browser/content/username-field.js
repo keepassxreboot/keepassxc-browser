@@ -100,7 +100,16 @@ UsernameFieldIcon.prototype.createIcon = function(target) {
 
     kpxcUI.setIconPosition(icon, field);
     this.icon = icon;
-    document.body.appendChild(icon);
+
+    const styleSheet = document.createElement('link');
+    styleSheet.setAttribute('rel', 'stylesheet');
+    styleSheet.setAttribute('href', browser.runtime.getURL('css/username.css'));
+
+    const wrapper = document.createElement('div');
+    this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+    this.shadowRoot.append(styleSheet);
+    this.shadowRoot.append(icon);
+    document.body.append(wrapper);
 };
 
 const iconClicked = async function(field, icon) {
