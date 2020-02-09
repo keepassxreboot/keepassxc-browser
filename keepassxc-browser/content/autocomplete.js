@@ -6,6 +6,8 @@ kpxcAutocomplete.elements = [];
 kpxcAutocomplete.started = false;
 kpxcAutocomplete.index = -1;
 kpxcAutocomplete.input = undefined;
+kpxcAutocomplete.shadowRoot = undefined;
+kpxcAutocomplete.wrapper = undefined;
 
 kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit = false) {
     kpxcAutocomplete.autoSubmit = autoSubmit;
@@ -36,10 +38,21 @@ kpxcAutocomplete.showList = function(inputField) {
     kpxcAutocomplete.input = inputField;
 
     const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
+    initColorTheme(div);
+
     kpxcAutocomplete.updatePosition(inputField, div);
     div.style.zIndex = '2147483646';
-    initColorTheme(div);
-    document.body.append(div);
+    
+    const styleSheet = createStylesheet('css/autocomplete.css');
+    const colorStyleSheet = createStylesheet('css/colors.css');
+    const wrapper = kpxcUI.createElement('div');
+
+    kpxcAutocomplete.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+    kpxcAutocomplete.shadowRoot.append(colorStyleSheet);
+    kpxcAutocomplete.shadowRoot.append(styleSheet);
+    kpxcAutocomplete.shadowRoot.append(div);
+    kpxcAutocomplete.wrapper = wrapper;
+    document.body.append(wrapper);
 
     for (const c of kpxcAutocomplete.elements) {
         const item = document.createElement('div');
@@ -61,6 +74,7 @@ kpxcAutocomplete.showList = function(inputField) {
             kpxcAutocomplete.fillPassword(inputField.value, index);
             kpxcAutocomplete.closeList();
             inputField.focus();
+            document.body.removeChild(wrapper);
         });
 
         // These events prevent the double hover effect if both keyboard and mouse are used
@@ -114,7 +128,15 @@ kpxcAutocomplete.removeItem = function(items) {
 };
 
 kpxcAutocomplete.closeList = function(elem) {
-    const items = document.getElementsByClassName('kpxcAutocomplete-items');
+    if (!kpxcAutocomplete.shadowRoot) {
+        return;
+    }
+
+    const items = kpxcAutocomplete.shadowSelectorAll('.kpxcAutocomplete-items');
+    if (!items) {
+        return;
+    }
+
     for (const item of items) {
         if (elem !== item && kpxcAutocomplete.input) {
             item.parentNode.removeChild(item);
@@ -123,7 +145,7 @@ kpxcAutocomplete.closeList = function(elem) {
 };
 
 kpxcAutocomplete.getAllItems = function() {
-    const list = document.getElementById('kpxcAutocomplete-list');
+    const list = kpxcAutocomplete.shadowSelector('#kpxcAutocomplete-list');
     if (!list) {
         return [];
     }
@@ -199,7 +221,7 @@ kpxcAutocomplete.fillPassword = function(value, index) {
 };
 
 kpxcAutocomplete.updatePosition = function(inputField, elem) {
-    const div = elem || $('.kpxcAutocomplete-items');
+    const div = elem || kpxcAutocomplete.shadowSelector('.kpxcAutocomplete-items');
     if (!div) {
         return;
     }
@@ -216,7 +238,7 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    const list = document.getElementById('kpxcAutocomplete-list');
+    const list = kpxcAutocomplete.shadowRoot ? kpxcAutocomplete.shadowSelector('#kpxcAutocomplete-list') : undefined;
     if (!list) {
         return;
     }
@@ -225,6 +247,10 @@ document.addEventListener('click', function(e) {
         !e.target.classList.contains('kpxc-username-icon') &&
         e.target.nodeName !== kpxcAutocomplete.input.nodeName) {
         kpxcAutocomplete.closeList(e.target);
+        
+        if (kpxcAutocomplete.wrapper) {
+            document.body.removeChild(kpxcAutocomplete.wrapper);
+        }
     }
 });
 
