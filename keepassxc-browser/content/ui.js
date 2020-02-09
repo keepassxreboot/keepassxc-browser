@@ -165,7 +165,6 @@ const initColorTheme = function(elem) {
     }
 };
 
-
 // Enables dragging
 document.addEventListener('mousemove', function(e) {
     if (kpxcPasswordDialog.selected === kpxcPasswordDialog.titleBar) {

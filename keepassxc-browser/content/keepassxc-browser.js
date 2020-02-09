@@ -303,6 +303,7 @@ kpxcFields.isVisible = function(field) {
 kpxcFields.getAllFields = function() {
     const fields = [];
     const inputs = kpxcObserverHelper.getInputs(document);
+
     for (const i of inputs) {
         if (kpxcFields.isVisible(i) && !kpxcFields.isSearchField(i)) {
             kpxcFields.setUniqueId(i);
@@ -794,6 +795,7 @@ observer.observe(document, {
     attributeFilter: [ 'style', 'class' ]
 });
 
+
 const kpxc = {};
 kpxc.settings = {};
 kpxc.u = null;
@@ -816,15 +818,21 @@ const initcb = async function() {
             action: 'page_get_submitted'
         });
 
+        const redirectCount = await browser.runtime.sendMessage({
+            action: 'page_get_redirect_count'
+        });
+
         if (creds && creds.submitted) {
             // If username field is not set, wait for credentials in kpxc.retrieveCredentialsCallback.
             if (!creds.username) {
                 return;
             }
 
-            await browser.runtime.sendMessage({
-                action: 'page_clear_submitted'
-            });
+            if (redirectCount >= kpxc.settings.redirectAllowance) {
+                await browser.runtime.sendMessage({
+                    action: 'page_clear_submitted'
+                });
+            }
 
             kpxc.rememberCredentials(creds.username, creds.password, creds.url, creds.oldCredentials);
         }

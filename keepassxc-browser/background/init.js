@@ -71,6 +71,7 @@ browser.tabs.onActivated.addListener(async function(activeInfo) {
  * Update browserAction on every update of the page
  * @param {integer} tabId
  * @param {object} changeInfo
+ * @param {object} tab
  */
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     // If the tab URL has changed (e.g. logged in) clear credentials
@@ -84,6 +85,21 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             page.createTabEntry(tab.id);
         }
     }
+});
+
+/**
+ * Detects page redirects and increases the count. Count is reset after a normal navigation event.
+ * Form submit is counted as one.
+ * @param {object} details
+ */
+browser.webNavigation.onCommitted.addListener((details) => {
+    if ((details.transitionQualifiers.length > 0 && details.transitionQualifiers[0] === 'client_redirect') ||
+        details.transitionType === 'form_submit') {
+        page.redirectCount += 1;
+        return;
+    }
+
+    page.redirectCount = 0;
 });
 
 browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
