@@ -1,4 +1,5 @@
 body {
+    font-size: .875rem;
     padding-top: 20px;
 }
 
@@ -27,22 +28,22 @@ body {
     margin: 10px 0;
 }
 
-.conf-content { 
+.conf-content {
     margin: 10px 0 20px 40px;
 }
 
-#conf-row {
+.conf-row {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-#conf-row div:first-child {
+.conf-row div:first-child {
     width: 200px;
     margin: 10px;
 }
 
-#conf-row button {
+.conf-row button {
     margin-left: 10px;
 }
 

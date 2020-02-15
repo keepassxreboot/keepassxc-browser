@@ -106,7 +106,7 @@ keepass.sendNativeMessage = function(request, enableTimeout = false, timeoutValu
         })(ev, requestAction);
         ev.addListener(listener);
 
-        let messageTimeout = timeoutValue || keepass.messageTimeout;
+        const messageTimeout = timeoutValue || keepass.messageTimeout;
 
         // Handle timeouts
         if (enableTimeout) {
