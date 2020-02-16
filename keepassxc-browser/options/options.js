@@ -209,9 +209,9 @@ options.initGeneralSettings = function() {
                     const contents = JSON.parse(e.target.result);
 
                     // A quick check that this is the KeePassXC-Browser settings file
-                    if (!contents['checkUpdateKeePassXC'] ||
-                        !contents['autoCompleteUsernames'] ||
-                        !contents['autoFillAndSend']) {
+                    if (contents['checkUpdateKeePassXC'] === undefined ||
+                        contents['autoCompleteUsernames'] === undefined ||
+                        contents['autoFillAndSend'] === undefined) {
                         console.log('Error: Not a KeePassXC-Browser settings file.');
                         return;
                     }
