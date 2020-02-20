@@ -2,6 +2,7 @@
 
 const defaultSettings = {
     autoCompleteUsernames: true,
+    showGroupNameInAutocomplete: true,
     autoFillAndSend: false,
     autoFillSingleEntry: false,
     autoReconnect: false,
@@ -39,6 +40,10 @@ page.initSettings = async function() {
 
         if (!('autoCompleteUsernames' in page.settings)) {
             page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
+        }
+
+        if (!('showGroupNameInAutocomplete' in page.settings)) {
+            page.settings.showGroupNameInAutocomplete = defaultSettings.showGroupNameInAutocomplete;
         }
 
         if (!('autoFillAndSend' in page.settings)) {
