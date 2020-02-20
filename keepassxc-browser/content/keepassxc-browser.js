@@ -303,7 +303,7 @@ kpxcFields.isVisible = function(field) {
 
 kpxcFields.isAutocompleteAppropriate = function(field) {
     const autocomplete = field.getLowerCaseAttribute('autocomplete');
-    return !(autocomplete === 'off' || autocomplete === 'new-password');
+    return autocomplete !== 'new-password';
 };
 
 kpxcFields.getAllFields = function() {
@@ -334,7 +334,7 @@ kpxcFields.getAllFields = function() {
 kpxcFields.prepareVisibleFieldsWithID = function(pattern) {
     const patterns = document.querySelectorAll(pattern);
     for (const i of patterns) {
-        if (kpxcFields.isVisible(i) && i.style.visibility !== 'hidden' && i.style.visibility !== 'collapsed') {
+        if (kpxcFields.isVisible(i)) {
             kpxcFields.setUniqueId(i);
         }
     }
@@ -347,7 +347,7 @@ kpxcFields.getAllCombinations = function(inputs) {
     for (const i of inputs) {
         if (i) {
             if (i.getLowerCaseAttribute('type') === 'password') {
-                const uId = (!uField || uField.length < 1) ? null : uField.getAttribute('data-kpxc-id');
+                const uId = (!uField || uField.size < 1) ? null : uField.getAttribute('data-kpxc-id');
 
                 const combination = {
                     username: uId,
@@ -673,6 +673,7 @@ kpxcObserverHelper.getInputs = function(target) {
         let type = i.getLowerCaseAttribute('type');
 
         if (kpxcObserverHelper.inputTypes.includes(type)) {
+            kpxcFields.setUniqueId(i);
             inputs.push(i);
         }
     }

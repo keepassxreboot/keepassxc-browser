@@ -29,7 +29,11 @@ kpxcBanner.destroy = function() {
 };
 
 kpxcBanner.create = async function(credentials = {}) {
-    if (!kpxc.settings.showLoginNotifications || kpxcBanner.created) {
+    const connectedDatabase = await browser.runtime.sendMessage({
+        action: 'get_connected_database'
+    });
+
+    if (!kpxc.settings.showLoginNotifications || kpxcBanner.created || connectedDatabase.identifier === null) {
         return;
     }
 
