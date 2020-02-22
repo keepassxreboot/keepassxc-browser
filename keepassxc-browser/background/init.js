@@ -21,13 +21,11 @@
  */
 browser.tabs.onCreated.addListener((tab) => {
     if (tab.id > 0) {
-        if (tab.selected) {
-            page.currentTabId = tab.id;
-            if (!page.tabs[tab.id]) {
-                page.createTabEntry(tab.id);
-            }
-            page.switchTab(tab);
+        page.currentTabId = tab.id;
+        if (!page.tabs[tab.id]) {
+            page.createTabEntry(tab.id);
         }
+        page.switchTab(tab);
     }
 });
 
@@ -37,9 +35,17 @@ browser.tabs.onCreated.addListener((tab) => {
  * @param {object} removeInfo
  */
 browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
+    if (page.tabs[tabId].httpAuthDialog) {
+        browser.windows.remove(page.tabs[tabId].httpAuthDialog);
+    }
+
     delete page.tabs[tabId];
     if (page.currentTabId === tabId) {
         page.currentTabId = -1;
+    }
+
+    if (page.httpAuthDialog) {
+        browser.windows.remove(page.httpAuthDialog);
     }
 });
 
@@ -53,11 +59,17 @@ browser.tabs.onActivated.addListener(async function(activeInfo) {
         const info = await browser.tabs.get(activeInfo.tabId);
         if (info && info.id) {
             page.currentTabId = info.id;
+
             if (info.status === 'complete') {
                 if (!page.tabs[info.id]) {
                     page.createTabEntry(info.id);
                 }
+
                 page.switchTab(info);
+
+                if (page.httpAuthDialog) {
+                    browser.windows.remove(page.httpAuthDialog);
+                }
             }
         }
     } catch (err) {

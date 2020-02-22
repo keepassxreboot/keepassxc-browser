@@ -26,6 +26,7 @@ var page = {};
 page.blockedTabs = [];
 page.currentRequest = {};
 page.currentTabId = -1;
+page.httpAuthDialog = undefined;
 page.loginId = -1;
 page.manualFill = ManualFill.NONE;
 page.passwordFilled = false;
