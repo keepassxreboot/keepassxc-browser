@@ -42,7 +42,7 @@ kpxcAutocomplete.showList = function(inputField) {
 
     kpxcAutocomplete.updatePosition(inputField, div);
     div.style.zIndex = '2147483646';
-    
+
     const styleSheet = createStylesheet('css/autocomplete.css');
     const colorStyleSheet = createStylesheet('css/colors.css');
     const wrapper = kpxcUI.createElement('div');
@@ -243,11 +243,11 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    if (e.target !== kpxcAutocomplete.input &&
-        !e.target.classList.contains('kpxc-username-icon') &&
-        e.target.nodeName !== kpxcAutocomplete.input.nodeName) {
+    if (e.target !== kpxcAutocomplete.input
+        && !e.target.classList.contains('kpxc-username-icon')
+        && e.target.nodeName !== kpxcAutocomplete.input.nodeName) {
         kpxcAutocomplete.closeList(e.target);
-        
+
         if (kpxcAutocomplete.wrapper) {
             document.body.removeChild(kpxcAutocomplete.wrapper);
         }

@@ -166,7 +166,7 @@ kpxcEvent.onLoginPopup = function(tab, logins) {
 kpxcEvent.initHttpAuth = function() {
     httpAuth.init();
     return Promise.resolve();
-}
+};
 
 kpxcEvent.onHTTPAuthPopup = function(tab, data) {
     const stackData = {
@@ -212,7 +212,7 @@ kpxcEvent.pageSetLoginId = function(tab, loginId) {
 kpxcEvent.pageClearSubmitted = function() {
     page.clearSubmittedCredentials();
     return Promise.resolve();
-}
+};
 
 kpxcEvent.pageGetSubmitted = async function() {
     return page.submittedCredentials;

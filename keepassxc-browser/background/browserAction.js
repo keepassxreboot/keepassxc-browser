@@ -59,13 +59,13 @@ browserAction.removeLevelFromStack = function(tab, level, type, dontShow) {
 
     const newStack = [];
     for (const i of page.tabs[tab.id].stack) {
-        if ((type === '<' && i.level >= level) ||
-            (type === '<=' && i.level > level) ||
-            (type === '=' && i.level !== level) ||
-            (type === '==' && i.level !== level) ||
-            (type === '!=' && i.level === level) ||
-            (type === '>' && i.level <= level) ||
-            (type === '>=' && i.level < level)) {
+        if ((type === '<' && i.level >= level)
+            || (type === '<=' && i.level > level)
+            || (type === '=' && i.level !== level)
+            || (type === '==' && i.level !== level)
+            || (type === '!=' && i.level === level)
+            || (type === '>' && i.level <= level)
+            || (type === '>=' && i.level < level)) {
             newStack.push(i);
         }
     }

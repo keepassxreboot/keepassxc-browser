@@ -27,7 +27,7 @@ class UsernameFieldIcon extends Icon {
         if (!this.icon) {
             return;
         }
-    
+
         if (locked) {
             this.icon.classList.remove(getIconClassName());
             this.icon.classList.add(getIconClassName(true));
@@ -38,7 +38,7 @@ class UsernameFieldIcon extends Icon {
             this.icon.title = tr('usernameFieldText');
         }
     }
-};
+}
 
 UsernameFieldIcon.prototype.initField = function(field) {
     if (!field || field.getAttribute('kpxc-username-field') === 'true') {
@@ -67,7 +67,7 @@ UsernameFieldIcon.prototype.createIcon = function(target) {
 
     // Size the icon dynamically, but not greater than 24 or smaller than 14
     const size = Math.max(Math.min(24, field.offsetHeight - 4), 14);
-    
+
     // Don't create the icon if the input field is too small
     if (field.offsetWidth < (size * 1.5) || field.offsetHeight < size) {
         this.observer.unobserve(field);

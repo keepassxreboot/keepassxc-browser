@@ -124,9 +124,9 @@ kpxcDefine.resetSelection = function() {
 kpxcDefine.isFieldSelected = function(kpxcId) {
     if (kpxcId) {
         return (
-            kpxcId === kpxcDefine.selection.username ||
-            kpxcId === kpxcDefine.selection.password ||
-            kpxcId in kpxcDefine.selection.fields
+            kpxcId === kpxcDefine.selection.username
+            || kpxcId === kpxcDefine.selection.password
+            || kpxcId in kpxcDefine.selection.fields
         );
     }
     return false;

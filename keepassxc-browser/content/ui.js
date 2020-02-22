@@ -28,12 +28,12 @@ class Icon {
         }
 
         if (locked) {
-           this.icon.style.filter = 'saturate(0%)';
+            this.icon.style.filter = 'saturate(0%)';
         } else {
             this.icon.style.filter = 'saturate(100%)';
         }
     }
-};
+}
 
 const kpxcUI = {};
 kpxcUI.mouseDown = false;
@@ -222,7 +222,7 @@ Element.prototype.getLowerCaseAttribute = function(attr) {
 
 Element.prototype._attachShadow = Element.prototype.attachShadow;
 Element.prototype.attachShadow = function () {
-    return this._attachShadow( { mode: 'closed' } );
+    return this._attachShadow({ mode: 'closed' });
 };
 
 Object.prototype.shadowSelector = function(value) {
