@@ -14,19 +14,17 @@ httpAuth.init = function() {
         reqType = 'asyncBlocking';
     }
 
-    if (browser.webRequest.onAuthRequired.hasListener(handleReq)) {
-        browser.webRequest.onAuthRequired.removeListener(handleReq);
-        browser.webRequest.onCompleted.removeListener(httpAuth.requestCompleted);
-        browser.webRequest.onErrorOccurred.removeListener(httpAuth.requestCompleted);
-    }
-
     // Only intercept http auth requests if the option is turned on.
-    if (page.settings.autoFillAndSend) {
+    if (page.settings.autoFillAndSend && !browser.webRequest.onAuthRequired.hasListener(handleReq)) {
         const opts = { urls: [ '<all_urls>' ] };
 
         browser.webRequest.onAuthRequired.addListener(handleReq, opts, [ reqType ]);
         browser.webRequest.onCompleted.addListener(httpAuth.requestCompleted, opts);
         browser.webRequest.onErrorOccurred.addListener(httpAuth.requestCompleted, opts);
+    } else if (browser.webRequest.onAuthRequired.hasListener(handleReq)) {
+        browser.webRequest.onAuthRequired.removeListener(handleReq);
+        browser.webRequest.onCompleted.removeListener(httpAuth.requestCompleted);
+        browser.webRequest.onErrorOccurred.removeListener(httpAuth.requestCompleted);
     }
 };
 
@@ -86,7 +84,7 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
             if (page.settings.showNotifications) {
                 showNotification(tr('multipleCredentialsDetected'));
             }
-            kpxcEvent.onHTTPAuthPopup({ 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
+            kpxcEvent.onHTTPAuthPopup({ 'id': details.tabId }, { 'logins': logins, 'details': details, 'resolve': resolve, 'reject': reject });
         }
     } else {
         reject({ cancel: false }); // No logins found

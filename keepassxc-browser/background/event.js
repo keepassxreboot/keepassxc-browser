@@ -168,7 +168,7 @@ kpxcEvent.initHttpAuth = function() {
     return Promise.resolve();
 }
 
-kpxcEvent.onHTTPAuthPopup = function(tab, data) {
+kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
     const stackData = {
         level: 1,
         iconType: 'questionmark',
@@ -178,6 +178,25 @@ kpxcEvent.onHTTPAuthPopup = function(tab, data) {
     browserAction.stackUnshift(stackData, tab.id);
     page.tabs[tab.id].loginList = data;
     browserAction.show(tab);
+
+    const dialogData = {
+        width: 480, height: 250,
+        left: (window.screen.width/2) - (480/2),
+        top: (window.screen.height/2) - (250/2)
+    };
+
+    const httpAuthDialog = page.tabs[tab.id].httpAuthDialog;
+    if (httpAuthDialog && await browser.windows.get(httpAuthDialog)) {
+        dialogData.focused = true;
+        browser.windows.update(httpAuthDialog, dialogData);
+        return Promise.resolve();
+    }
+    
+    dialogData.type = "popup";
+    dialogData.url = `/popups/popup_httpauth.html?tab=${tab.id}`;
+    const wnd = await browser.windows.create(dialogData);
+    page.tabs[tab.id].httpAuthDialog = wnd.id;
+
     return Promise.resolve();
 };
 
