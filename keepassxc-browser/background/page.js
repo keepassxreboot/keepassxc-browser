@@ -101,7 +101,7 @@ page.initSettings = async function() {
         if (!('showNotifications' in page.settings)) {
             page.settings.showNotifications = defaultSettings.showNotifications;
         }
-    
+
         if (!('showOTPIcon' in page.settings)) {
             page.settings.showOTPIcon = defaultSettings.showOTPIcon;
         }

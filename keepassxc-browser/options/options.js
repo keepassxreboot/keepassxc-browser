@@ -99,7 +99,7 @@ options.initGeneralSettings = function() {
     });
 
     $('#tab-general-settings input[type=range]').val(options.settings['redirectAllowance']);
-    $('#redirectAllowanceLabel').text(tr('optionsRedirectAllowance', 
+    $('#redirectAllowanceLabel').text(tr('optionsRedirectAllowance',
         options.settings['redirectAllowance'] === 11 ? 'Infinite' : String(options.settings['redirectAllowance'])));
 
     $('#tab-general-settings input[type=checkbox]').change(function() {
@@ -164,7 +164,7 @@ options.initGeneralSettings = function() {
 
     browser.commands.getAll().then(function(commands) {
         commands.forEach(function(command) {
-            let shortcut = document.getElementById(`${command.name}-shortcut`);
+            const shortcut = document.getElementById(`${command.name}-shortcut`);
             if (!shortcut) {
                 return;
             }
@@ -199,19 +199,19 @@ options.initGeneralSettings = function() {
         link.setAttribute('type', 'file');
         link.onchange = function(e) {
             const reader = new FileReader();
-            
+
             if (e.target.files.length > 0) {
                 reader.readAsText(e.target.files[0]);
             }
 
-            reader.onloadend = function(e) {
+            reader.onloadend = function(ev) {
                 try {
-                    const contents = JSON.parse(e.target.result);
+                    const contents = JSON.parse(ev.target.result);
 
                     // A quick check that this is the KeePassXC-Browser settings file
-                    if (contents['checkUpdateKeePassXC'] === undefined ||
-                        contents['autoCompleteUsernames'] === undefined ||
-                        contents['autoFillAndSend'] === undefined) {
+                    if (contents['checkUpdateKeePassXC'] === undefined
+                        || contents['autoCompleteUsernames'] === undefined
+                        || contents['autoFillAndSend'] === undefined) {
                         console.log('Error: Not a KeePassXC-Browser settings file.');
                         return;
                     }
@@ -224,7 +224,7 @@ options.initGeneralSettings = function() {
                     $('#dialogImportSettings').on('shown.bs.modal', () => {
                         $('#dialogImportSettings').find('[autofocus]').focus();
                     });
-                } catch (e) {
+                } catch (err) {
                     console.log('Error loading JSON settings file.');
                 }
             };
@@ -235,7 +235,7 @@ options.initGeneralSettings = function() {
 
     $('#exportSettingsButton').click(function() {
         const link = document.createElement('a');
-        const file = new Blob([ JSON.stringify(options.settings)], { type: 'application/json' });
+        const file = new Blob([ JSON.stringify(options.settings) ], { type: 'application/json' });
         link.href = URL.createObjectURL(file);
         link.download = 'keepassxc-browser_settings.json';
         link.click();
@@ -318,7 +318,7 @@ options.initConnectedDatabases = function() {
         const date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : 'unknown';
         tr.children('td:eq(3)').text(date);
         $('#tab-connected-databases table tbody:first').append(tr);
-    }
+    };
 
     let hashList = options.keyRing;
     for (const hash in hashList) {

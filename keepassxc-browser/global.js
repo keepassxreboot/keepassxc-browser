@@ -110,4 +110,4 @@ function tr(key, params) {
 // Removes everything after '?' from URL
 const trimURL = function(url) {
     return url.indexOf('?') !== -1 ? url.split('?')[0] : url;
-}
+};

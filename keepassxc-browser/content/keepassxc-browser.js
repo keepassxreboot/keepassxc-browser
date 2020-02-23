@@ -177,8 +177,8 @@ kpxcForm.getNewPassword = function() {
     }
 
     // Just two password fields, current and new
-    if (kpxcForm.passwordInputs.length === 2 &&
-        kpxcForm.passwordInputs[0] !== kpxcForm.passwordInputs[1]) {
+    if (kpxcForm.passwordInputs.length === 2
+        && kpxcForm.passwordInputs[0] !== kpxcForm.passwordInputs[1]) {
         return kpxcForm.passwordInputs[1].value;
     }
 
@@ -262,16 +262,16 @@ kpxcFields.isSearchField = function(target) {
     if (closestForm) {
         // Check form action
         const formAction = closestForm.getAttribute('action');
-        if (formAction && (formAction.toLowerCase().includes('search') &&
-            !formAction.toLowerCase().includes('research'))) {
+        if (formAction && (formAction.toLowerCase().includes('search')
+            && !formAction.toLowerCase().includes('research'))) {
             return true;
         }
 
         // Check form class and id
         const closestFormId = closestForm.getAttribute('id');
         const closestFormClass = closestForm.className;
-        if (closestFormClass && (closestForm.className.toLowerCase().includes('search') ||
-            (closestFormId && closestFormId.toLowerCase().includes('search') && !closestFormId.toLowerCase().includes('research')))) {
+        if (closestFormClass && (closestForm.className.toLowerCase().includes('search')
+            || (closestFormId && closestFormId.toLowerCase().includes('search') && !closestFormId.toLowerCase().includes('research')))) {
             return true;
         }
     }
@@ -320,8 +320,8 @@ kpxcFields.getAllFields = function() {
     _detectedFields = fields.length;
 
     // Show add username-only option for the site in popup
-    if (!_singleInputEnabledForPage &&
-        fields.length === 1 && fields[0].getLowerCaseAttribute('type') !== 'password') {
+    if (!_singleInputEnabledForPage
+        && fields.length === 1 && fields[0].getLowerCaseAttribute('type') !== 'password') {
         browser.runtime.sendMessage({
             action: 'username_field_detected',
             args: true
@@ -627,18 +627,18 @@ kpxcObserverHelper.inputTypes = [
     'number',
     'username', // Note: Not a standard
     undefined, // Input field can be without any type. Include this and null to the list.
-    null 
+    null
 ];
 
 // Ignores all nodes that doesn't contain elements
 kpxcObserverHelper.ignoredNode = function(target) {
-    if (target.nodeType === Node.ATTRIBUTE_NODE ||
-        target.nodeType === Node.TEXT_NODE ||
-        target.nodeType === Node.CDATA_SECTION_NODE ||
-        target.nodeType === Node.PROCESSING_INSTRUCTION_NODE ||
-        target.nodeType === Node.COMMENT_NODE ||
-        target.nodeType === Node.DOCUMENT_TYPE_NODE ||
-        target.nodeType === Node.NOTATION_NODE) {
+    if (target.nodeType === Node.ATTRIBUTE_NODE
+        || target.nodeType === Node.TEXT_NODE
+        || target.nodeType === Node.CDATA_SECTION_NODE
+        || target.nodeType === Node.PROCESSING_INSTRUCTION_NODE
+        || target.nodeType === Node.COMMENT_NODE
+        || target.nodeType === Node.DOCUMENT_TYPE_NODE
+        || target.nodeType === Node.NOTATION_NODE) {
         return true;
     }
     return false;
@@ -652,7 +652,7 @@ kpxcObserverHelper.getInputs = function(target) {
 
     // Filter out any input fields with type 'hidden' right away
     const inputFields = [];
-    Array.from(target.getElementsByTagName('input')).forEach((e) => {
+    Array.from(target.getElementsByTagName('input')).forEach(e => {
         if (e.type !== 'hidden' && !e.readOnly) {
             inputFields.push(e);
         }
@@ -670,7 +670,7 @@ kpxcObserverHelper.getInputs = function(target) {
     // Only include input fields that match with kpxcObserverHelper.inputTypes
     const inputs = [];
     for (const i of inputFields) {
-        let type = i.getLowerCaseAttribute('type');
+        const type = i.getLowerCaseAttribute('type');
 
         if (kpxcObserverHelper.inputTypes.includes(type)) {
             kpxcFields.setUniqueId(i);
@@ -691,8 +691,8 @@ kpxcObserverHelper.ignoredElement = function(target) {
     }
 
     // Ignore KeePassXC-Browser classes
-    if (target.className && target.className !== undefined &&
-        target.className.includes('kpxc')) {
+    if (target.className && target.className !== undefined
+        && target.className.includes('kpxc')) {
         return true;
     }
 
@@ -753,7 +753,6 @@ kpxcObserverHelper.detectURLChange = function() {
 };
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-
 
 
 const kpxc = {};
@@ -838,10 +837,10 @@ kpxc.initObserver = function() {
             if (mut.target.nodeType === Node.TEXT_NODE) {
                 continue;
             }
-    
+
             // Check document URL change and detect new fields
             kpxcObserverHelper.detectURLChange();
-    
+
             // Handle attributes only if CSS display is modified
             if (mut.type === 'attributes') {
                 // Check if some class is changed that folds a form or input field(s)
@@ -849,7 +848,7 @@ kpxc.initObserver = function() {
                     kpxc.initCredentialFields(true);
                     continue;
                 }
-    
+
                 const newValue = mut.target.getAttribute(mut.attributeName);
                 if (newValue && (newValue.includes('display') || newValue.includes('z-index'))) {
                     if (mut.target.style.display !== 'none') {
@@ -864,7 +863,7 @@ kpxc.initObserver = function() {
             }
         }
     });
-    
+
     // define what element should be observed by the observer
     // and what types of mutations trigger the callback
     observer.observe(document, {
@@ -928,7 +927,7 @@ kpxc.siteIgnored = function(condition) {
             // Cross-domain security error inspecting window.top.location.href.
             // This catches an error when an iframe is being accessed from another (sub)domain -> use the iframe URL instead.
             currentLocation = window.self.location.href;
-        } 
+        }
 
         const currentSetting = condition || IGNORE_FULL;
         for (const site of kpxc.settings.sitePreferences) {
@@ -1101,7 +1100,7 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
         }
 
         if (combination) {
-            let list = [];
+            const list = [];
             if (kpxc.fillInStringFields(combination.fields, kpxc.credentials[0].stringFields, list)) {
                 kpxcForm.destroy(false, { 'password': list.list[0], 'username': list.list[1] });
             }
@@ -1132,16 +1131,16 @@ kpxc.preparePageForMultipleCredentials = function(credentials) {
         return text;
     }
 
-    function getUniqueGroupCount(credentials) {
-        const groups = credentials.map(c => c.group || '')
-        const uniqueGroups = new Set(groups)
-        return uniqueGroups.size
+    function getUniqueGroupCount(creds) {
+        const groups = creds.map(c => c.group || '');
+        const uniqueGroups = new Set(groups);
+        return uniqueGroups.size;
     }
 
     // Add usernames + descriptions to autocomplete-list and popup-list
     const usernames = [];
     kpxcAutocomplete.elements = [];
-    const showGroupNameInAutocomplete = kpxc.settings.showGroupNameInAutocomplete && (getUniqueGroupCount(credentials) > 1)
+    const showGroupNameInAutocomplete = kpxc.settings.showGroupNameInAutocomplete && (getUniqueGroupCount(credentials) > 1);
     for (let i = 0; i < credentials.length; i++) {
         const loginText = getLoginText(credentials[i], showGroupNameInAutocomplete);
         usernames.push(loginText);
@@ -1417,7 +1416,7 @@ kpxc.fillWithSpecificLogin = function(id) {
             combination = kpxcFields.getCombination('password', kpxc.p);
         }
 
-        let list = [];
+        const list = [];
         if (kpxc.fillInStringFields(combination.fields, kpxc.credentials[id].stringFields, list)) {
             kpxcForm.destroy(false, { 'password': list.list[0], 'username': list.list[1] });
         }
@@ -1463,7 +1462,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
             kpxc.setPasswordFilled(true);
         }
 
-        let list = [];
+        const list = [];
         if (kpxc.fillInStringFields(combination.fields, kpxc.credentials[0].stringFields, list)) {
             kpxcForm.destroy(false, { 'password': list.list[0], 'username': list.list[1] });
             filledIn = true;
@@ -1501,7 +1500,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
             kpxc.setPasswordFilled(true);
         }
 
-        let list = [];
+        const list = [];
         if (kpxc.fillInStringFields(combination.fields, kpxc.credentials[combination.loginId].stringFields, list)) {
             kpxcForm.destroy(false, { 'password': list.list[0], 'username': list.list[1] });
             filledIn = true;
@@ -1554,7 +1553,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                     kpxc.setPasswordFilled(true);
                 }
 
-                let list = [];
+                const list = [];
                 if (kpxc.fillInStringFields(combination.fields, valStringFields, list)) {
                     kpxcForm.destroy(false, { 'password': list.list[0], 'username': list.list[1] });
                 }

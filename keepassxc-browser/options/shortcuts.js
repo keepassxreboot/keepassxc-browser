@@ -1,6 +1,6 @@
 'use strict';
 
-let tempArray = [];
+const tempArray = [];
 let keyArray = [];
 
 document.querySelectorAll('input').forEach((b) => {

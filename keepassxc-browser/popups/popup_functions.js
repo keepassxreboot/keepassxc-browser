@@ -37,7 +37,7 @@ async function initColorTheme() {
     } else {
         document.body.setAttribute('data-color-theme', colorTheme);
     }
-};
+}
 
 
 $(async () => {

@@ -21,7 +21,7 @@ class PasswordIcon extends Icon {
         this.initField(field, inputs, pos);
         kpxcUI.monitorIconPosition(this);
     }
-};
+}
 
 PasswordIcon.prototype.initField = function(field, inputs, pos) {
     if (!field) {
@@ -294,8 +294,8 @@ kpxcPasswordDialog.fill = function(e) {
         const password = kpxcPasswordDialog.shadowSelector('.kpxc-pwgen-input');
         if (field.getAttribute('maxlength')) {
             if (password.value.length > field.getAttribute('maxlength')) {
-                const message = tr('passwordGeneratorErrorTooLong') + '\r\n' +
-                    tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
+                const message = tr('passwordGeneratorErrorTooLong') + '\r\n'
+                                + tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
                 message.style.whiteSpace = 'pre';
                 browser.runtime.sendMessage({
                     action: 'show_notification',

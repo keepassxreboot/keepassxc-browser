@@ -120,7 +120,6 @@ kpxcBanner.create = async function(credentials = {}) {
 
     initColorTheme(banner);
 
-   
     const styleSheet = createStylesheet('css/banner.css');
     const buttonStyleSheet = createStylesheet('css/button.css');
     const colorStyleSheet = createStylesheet('css/colors.css');
@@ -149,7 +148,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
     // Or when default group is not set and defaultGroupAskAlways is disabled -> save to default
     if ((result.groups === undefined || (result.groups.length > 0 && result.groups[0].children.length === 0)) ||
         (!result.defaultGroupAlwaysAsk && (result.defaultGroup === '' || result.defaultGroup === DEFAULT_BROWSER_GROUP))) {
-        let args = [ credentials.username, credentials.password, credentials.url ];
+        const args = [ credentials.username, credentials.password, credentials.url ];
 
         // If root group is defined by the user, and there's no default browser group, save the credentials to the root group
         if (result.groups[0].children.length === 0 && result.defaultGroup.toLowerCase() === 'root') {
@@ -300,7 +299,7 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
                 browser.runtime.sendMessage({
                     action: 'retrieve_credentials',
                     args: [ url, '', true ] // Sets triggerUnlock to true
-                }).then(async (creds) => {
+                }).then(async creds => {
                     if (!creds || creds.length !== credentials.list.length) {
                         kpxcBanner.verifyResult('error');
                         return;
