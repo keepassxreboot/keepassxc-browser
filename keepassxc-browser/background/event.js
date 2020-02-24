@@ -179,10 +179,15 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
     page.tabs[tab.id].loginList = data;
     browserAction.show(tab);
 
+    const tabinfo = await browser.tabs.get(tab.id);
+    const windowinfo = await browser.windows.get(tabinfo.windowId);
+
+    const width = 480;
+    const height = 250;
     const dialogData = {
-        width: 480, height: 250,
-        left: (window.screen.width/2) - (480/2),
-        top: (window.screen.height/2) - (250/2)
+        width: width, height: height,
+        left: Math.round(windowinfo.left + ((windowinfo.width/2) - (width/2))),
+        top: Math.round(windowinfo.top + ((windowinfo.height/2) - (height/2)))
     };
 
     const httpAuthDialog = page.tabs[tab.id].httpAuthDialog;
@@ -192,11 +197,15 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
         return Promise.resolve();
     }
     
-    dialogData.type = "popup";
+    dialogData.type = 'popup';
     dialogData.url = `/popups/popup_httpauth.html?tab=${tab.id}`;
+    dialogData.titlePreface = `${data.details.realm} (${data.details.challenger.host}) - `;
     const wnd = await browser.windows.create(dialogData);
     page.tabs[tab.id].httpAuthDialog = wnd.id;
 
+    if (isFirefox()) { // workaround for firefox bug that ignores top/left for new windows
+        browser.windows.update(wnd.id, { left: dialogData.left, top: dialogData.top });
+    }
     return Promise.resolve();
 };
 

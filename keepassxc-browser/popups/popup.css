@@ -109,6 +109,11 @@ body {
 	width: 100%;
 }
 
+#login-list {
+    height: 100px;
+    overflow: hidden auto;
+}
+
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
     body {
         background: var(--background-color) !important;
