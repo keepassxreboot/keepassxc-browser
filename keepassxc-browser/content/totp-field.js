@@ -1,6 +1,7 @@
 'use strict';
 
 const MINIMUM_SIZE = 60;
+const ignoreRegex = /^(zip|postal).*code$/i;
 
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
@@ -28,10 +29,13 @@ class TOTPFieldIcon extends Icon {
 
 TOTPFieldIcon.prototype.initField = function(field) {
     if (!field
+        || field.type === 'password'
         || field.getAttribute('kpxc-totp-field') === 'true'
         || field.offsetWidth < MINIMUM_SIZE
         || field.size < 2
-        || (field.maxLength > 0 && field.maxLength < 4)) {
+        || (field.maxLength > 0 && field.maxLength < 4)
+        || field.id.match(ignoreRegex)
+        || field.name.match(ignoreRegex)) {
         return;
     }
 
