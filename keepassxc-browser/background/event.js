@@ -177,13 +177,14 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
 
     browserAction.stackUnshift(stackData, tab.id);
     page.tabs[tab.id].loginList = data;
+    page.tabs[tab.id].titlePreface = `${data.details.realm} (${data.details.challenger.host}) - `;
     browserAction.show(tab);
 
     const tabinfo = await browser.tabs.get(tab.id);
     const windowinfo = await browser.windows.get(tabinfo.windowId);
 
     const width = 480;
-    const height = 250;
+    const height = 160 + (30 * Math.min(data.logins.length, 8));
     const dialogData = {
         width: width, height: height,
         left: Math.round(windowinfo.left + ((windowinfo.width/2) - (width/2))),
@@ -199,7 +200,6 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
     
     dialogData.type = 'popup';
     dialogData.url = `/popups/popup_httpauth.html?tab=${tab.id}`;
-    dialogData.titlePreface = `${data.details.realm} (${data.details.challenger.host}) - `;
     const wnd = await browser.windows.create(dialogData);
     page.tabs[tab.id].httpAuthDialog = wnd.id;
 
