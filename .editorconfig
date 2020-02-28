@@ -1,0 +1,19 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+
+# Get rid of whitespace to avoid diffs with a bunch of EOL changes
+trim_trailing_whitespace = true
+
+[*.{html,json}]
+indent_size = 2
+
+[*.{js,css}]
+indent_size = 4
