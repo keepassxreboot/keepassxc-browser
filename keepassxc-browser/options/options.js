@@ -31,7 +31,7 @@ options.initMenu = function() {
         $('.sidebar:first ul.nav:first li').removeClass('active');
         $(this).parent('li').addClass('active');
         $('div.tab').hide();
-        $('div.tab#tab-' + $(this).attr('href').substring(1)).fadeIn();
+        $('div.tab#tab-' + $(this).attr('href').substring(1)).removeClass('d-none').fadeIn();
     });
 
     $('div.tab:first').show();
@@ -307,7 +307,7 @@ options.initConnectedDatabases = function() {
     $('#tab-connected-databases tr.clone:first .dropdown-menu:first').width('230px');
 
     const trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
-    trClone.removeClass('clone');
+    trClone.removeClass('clone d-none');
 
     const addHashToTable = function(hash) {
         $('#tab-connected-databases table tbody:first tr.empty:first').hide();
@@ -390,7 +390,7 @@ options.initCustomCredentialFields = function() {
     });
 
     const trClone = $('#tab-custom-fields table tr.clone:first').clone(true);
-    trClone.removeClass('clone');
+    trClone.removeClass('clone d-none');
     let counter = 1;
     for (const url in options.settings['defined-custom-fields']) {
         const tr = trClone.clone(true);
@@ -488,7 +488,7 @@ options.initSitePreferences = function() {
 
             const newValue = options.settings['sitePreferences'].length + 1;
             const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
-            trClone.removeClass('clone');
+            trClone.removeClass('clone d-none');
 
             const tr = trClone.clone(true);
             tr.data('url', value);
@@ -526,7 +526,7 @@ options.initSitePreferences = function() {
     });
 
     const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
-    trClone.removeClass('clone');
+    trClone.removeClass('clone d-none');
     let counter = 1;
     if (options.settings['sitePreferences']) {
         for (const site of options.settings['sitePreferences']) {
