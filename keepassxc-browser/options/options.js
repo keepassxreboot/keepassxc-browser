@@ -250,6 +250,11 @@ options.initGeneralSettings = function() {
             options.saveSettings();
         }
     });
+
+    $('#copyVersionToClipboard').on('click', function () {
+        const copyText = document.getElementById('versionInfo').innerText;
+        navigator.clipboard.writeText(copyText);
+    })
 };
 
 options.showKeePassXCVersions = function(response) {
