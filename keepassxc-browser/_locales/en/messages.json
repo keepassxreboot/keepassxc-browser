@@ -280,7 +280,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Choose custom login fields for this page",
+        "message": "Choose custom login fields",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -763,6 +763,10 @@
         "message": "Latest available version of KeePassXC: $1",
         "description": "Settings page info text about the latest KeePassXC version."
     },
+    "optionsKeePassXCVersionRequired": {
+        "message": "Requires KeePassXC version: $1",
+        "description": "KeePassXC version requirement text."
+    },
     "optionsDefault": {
         "message": "Default: $1",
         "description": "Default setting text."
@@ -812,7 +816,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list?",
+        "message": "Do you really want to remove the following identifier from the database list: $1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -872,7 +876,7 @@
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table below.",
+        "message": "You can manage saved custom login fields using the table above.",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
@@ -927,6 +931,10 @@
         "message": "Add URL manually",
         "description": "Label for adding site manually on Site preferences tab."
     },
+    "optionsSitePreferencesManualAddHelp": {
+        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, or <code>ftp://</code> and must be at least 10 characters long.",
+        "description": "Help text for adding site manually on Site preferences tab."
+    },
     "optionsSitePreferencesConfirmation": {
         "message": "Do you really want to remove the specified site from the list: $1",
         "description": "Confirmation text when removing site from site preferences."
@@ -936,7 +944,7 @@
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table below.",
+        "message": "You can manage saved site preferences using the table above.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {

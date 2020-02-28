@@ -6,7 +6,6 @@ div.kpxc-banner {
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
     box-sizing: border-box !important;
     color: var(--text-color) !important;
-    font-family: sans-serif !important;
     font-size: 1em !important;
     height: auto !important;
     left: 0px !important;
@@ -117,7 +116,7 @@ div.kpxc-banner-dialog .list-group-item {
     border: 1px solid #ddd !important;
     color: var(--text-color) !important;
     display: block !important;
-    padding: 5px 10px;
+    padding: 7px 14px;
     position: relative !important;
     text-decoration: none !important;
 }
@@ -135,7 +134,7 @@ div.kpxc-banner-dialog .list-group-item:last-child {
 
 div.kpxc-banner-dialog .list-group-item:hover {
     cursor: pointer !important;
-    background-color: #eee !important;
+    background-color: var(--table-hover-color) !important;
 }
 
 @media (prefers-color-scheme: dark) {

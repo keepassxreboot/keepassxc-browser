@@ -26,9 +26,9 @@ $(async function() {
 var options = options || {};
 
 options.initMenu = function() {
-    $('.navbar:first ul.nav:first li a').click(function(e) {
+    $('.sidebar:first ul.nav:first li a').click(function(e) {
         e.preventDefault();
-        $('.navbar:first ul.nav:first li').removeClass('active');
+        $('.sidebar:first ul.nav:first li').removeClass('active');
         $(this).parent('li').addClass('active');
         $('div.tab').hide();
         $('div.tab#tab-' + $(this).attr('href').substring(1)).fadeIn();
@@ -145,7 +145,7 @@ options.initGeneralSettings = function() {
     });
 
     // Only save the setting when mouse is released from the range input
-    $('#tab-general-settings input[type=range').change(function(e) {
+    $('#tab-general-settings input[type=range]').change(function(e) {
         options.settings['redirectAllowance'] = e.target.valueAsNumber;
         options.saveSettings();
     });
@@ -173,8 +173,9 @@ options.initGeneralSettings = function() {
     });
 
     $('#configureCommands').click(function() {
+        const scheme = isEdge() ? 'edge' : 'chrome';
         browser.tabs.create({
-            url: isFirefox() ? browser.runtime.getURL('options/shortcuts.html') : 'chrome://extensions/configureCommands'
+            url: isFirefox() ? browser.runtime.getURL('options/shortcuts.html') : `${scheme}://extensions/shortcuts`
         });
     });
 
@@ -274,7 +275,7 @@ options.initConnectedDatabases = function() {
     $('#tab-connected-databases tr.clone:first button.delete:first').click(function(e) {
         e.preventDefault();
         $('#dialogDeleteConnectedDatabase').data('hash', $(this).closest('tr').data('hash'));
-        $('#dialogDeleteConnectedDatabase .modal-body:first span:first').text($(this).closest('tr').children('td:first').text());
+        $('#dialogDeleteConnectedDatabase .modal-body:first strong:first').text($(this).closest('tr').children('td:first').text());
         $('#dialogDeleteConnectedDatabase').modal('show');
         $('#dialogDeleteConnectedDatabase').on('shown.bs.modal', () => {
             $('#dialogDeleteConnectedDatabase').find('[autofocus]').focus();
@@ -440,6 +441,10 @@ options.initSitePreferences = function() {
         options.saveSettings();
     });
 
+    $('.was-validated').submit(function(e) {
+        e.preventDefault();
+    });
+
     $('#manualUrl').keyup(function(event) {
         if (event.key === 'Enter') {
             $('#sitePreferencesManualAdd').click();
@@ -562,13 +567,12 @@ options.initTheme = function() {
 
 options.createWarning = function(elem, text) {
     const banner = document.createElement('div');
-    banner.classList.add('alert', 'alert-dismissible', 'alert-danger', 'fade', 'in');
-    banner.style.position = 'absolute';
-    banner.style.left = Pixels(elem.offsetLeft);
-    banner.style.top = Pixels(elem.offsetTop + elem.offsetHeight);
-    banner.style.padding = '0px';
-    banner.style.width = '300px';
+    banner.classList.add('alert', 'alert-dismissible', 'alert-danger', 'mt-2');
+    banner.style.position = 'relative';
+    banner.style.marginBottom = '0px';
+    banner.style.width = '100%';
     banner.textContent = text;
+    banner.setAttribute('role', 'alert');
     elem.parentElement.append(banner);
 
     // Destroy the warning after five seconds
@@ -580,6 +584,11 @@ options.createWarning = function(elem, text) {
 const getBrowserId = function() {
     if (navigator.userAgent.indexOf('Firefox') > -1) {
         return 'Mozilla Firefox ' + navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1);
+    } else if (navigator.userAgent.indexOf('Edg') > -1) {
+        let startPos = navigator.userAgent.indexOf('Edg');
+        startPos = navigator.userAgent.indexOf('/', startPos) + 1;
+        const version = navigator.userAgent.substring(startPos);
+        return 'Microsoft Edge ' + version;
     } else if (navigator.userAgent.indexOf('Chrome') > -1) {
         let startPos = navigator.userAgent.indexOf('Chrome');
         startPos = navigator.userAgent.indexOf('/', startPos) + 1;
