@@ -83,9 +83,9 @@ options.initGeneralSettings = function() {
         $('#tab-general-settings select#colorTheme').val(options.settings['colorTheme']);
     }
 
-    $('#tab-general-settings select:first').change(function() {
+    $('#tab-general-settings select:first').change(async function() {
         options.settings['colorTheme'] = $(this).val();
-        options.saveSettings();
+        await options.saveSettingsPromise();
         location.reload();
     });
 
