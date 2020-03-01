@@ -1,5 +1,6 @@
 :root {
     --background-color: #fff;
+    --card-background-color: #fff;
     --card-border-color: rgba(0,0,0,.125);
     --card-header-color: #fafafa;
     --container-border: 1px solid #ccc;
@@ -10,6 +11,7 @@
     --input-main-border-color: rgba(0,0,0,.125);
     --link-color: #3a8233;
     --link-hover-color: #429f14;
+    --sidebar-background-color: #27272a;
     --table-border-color: rgb(222, 226, 230);
     --table-hover-color: #f2f2f2;
     --table-odd-color: #f2f2f2;
@@ -18,12 +20,13 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: #3b3d3c;
+        --background-color: #3b3b3d;
+        --card-background-color: #2b2a2a;
         --card-border-color: #292a2a;
-        --card-header-color: #2a2a2a;
+        --card-header-color: #27272a;
         --container-border: 1px solid #000;
         --input-active-border-color: #2b4d1a;
-        --input-background-color: #2f2f2f;
+        --input-background-color: #27272a;
         --input-border: 1px solid #2b4d1a;
         --input-border-color: #292a2a;
         --input-main-border-color: #3b3d3c;
@@ -38,12 +41,13 @@
 
 /* Same colors for manual switching */
 [data-color-theme='dark'] {
-    --background-color: #3b3d3c;
+    --background-color: #3b3b3d;
+    --card-background-color: #2b2a2a;
     --card-border-color: #292a2a;
-    --card-header-color: #2a2a2a;
+    --card-header-color: #27272a;
     --container-border: 1px solid #000;
     --input-active-border-color: #2b4d1a;
-    --input-background-color: #2f2f2f;
+    --input-background-color: #27272a;
     --input-border: 1px solid #2b4d1a;
     --input-border-color: #292a2a;
     --input-main-border-color: #3b3d3c;
@@ -51,12 +55,13 @@
     --link-hover-color: #429f14;
     --table-border-color: #a0a0a0;
     --table-hover-color: #474948;
-    --table-odd-color: #3b3d3c;
+    --table-odd-color: #3b3b3d;
     --text-color: #cbcfcb;
 }
 
 [data-color-theme='light'] {
     --background-color: #fff;
+    --card-background-color: #fff;
     --card-border-color: rgba(0,0,0,.125);
     --card-header-color: #fafafa;
     --container-border: 1px solid #ccc;

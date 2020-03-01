@@ -10,6 +10,10 @@ body {
     width: auto;
 }
 
+code {
+    font-size: 14px !important;
+}
+
 .container {
     min-width: 440px;
     max-width: 460px;
@@ -41,7 +45,7 @@ body {
     padding: 5px 10px !important;
 }
 
-.list-group-item+.list-group-item {
+.list-group-item+.list-group-item:first-child {
     border-top-width: 1px !important;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
@@ -138,7 +142,7 @@ body {
         background-color: var(--table-hover-color) !important;
         color: var(--text-color) !important;
     }
-    
+
     #login-filter {
         color: var(--text-color) !important;
     }
