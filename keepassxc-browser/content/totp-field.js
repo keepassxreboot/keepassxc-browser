@@ -2,6 +2,7 @@
 
 const MINIMUM_SIZE = 60;
 const ignoreRegex = /^(zip|postal).*code$/i;
+const ignoredTypes = [ 'email', 'password', 'username' ];
 
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
@@ -29,7 +30,7 @@ class TOTPFieldIcon extends Icon {
 
 TOTPFieldIcon.prototype.initField = function(field) {
     if (!field
-        || field.type === 'password'
+        || ignoredTypes.some(t => t === field.type)
         || field.getAttribute('kpxc-totp-field') === 'true'
         || field.offsetWidth < MINIMUM_SIZE
         || field.size < 2
