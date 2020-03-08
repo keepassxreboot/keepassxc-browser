@@ -15,7 +15,8 @@ a:hover {
     text-decoration: none;
 }
 
-table td {
+.table td {
+    vertical-align: middle !important;
     width: 100%;
     word-break: break-all;
 }
@@ -81,7 +82,7 @@ button.collapsed {
 }
 
 .card {
-    background-color: var(--input-background-color);
+    background-color: var(--card-background-color);
     border: 1px solid rgba(0,0,0,.125);
     margin-bottom: 2rem;
     min-width: 720px;
@@ -101,7 +102,7 @@ button.collapsed {
 }
 
 .sidebar {
-    background-color: #2f2f2f !important;
+    background-color: var(--sidebar-background-color) !important;
     bottom: 0;
     min-width: 160px !important;
     position: fixed;
@@ -156,6 +157,7 @@ button.collapsed {
 .invalid-feedback {
     color: var(--link-color);
     display: block;
+    font-size: 95% !important;
 }
 
 .invalid-feedback code {
@@ -300,7 +302,7 @@ button.collapsed {
     }
 
     .card-body {
-        background-color: var(--input-background-color);
+        background-color: var(--card-background-color);
         color: var(--text-color);
     }
 }
