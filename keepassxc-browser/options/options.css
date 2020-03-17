@@ -1,244 +1,111 @@
 body {
-    background-color: var(--background-color);
     font-size: 14px;
-    padding-top: 20px;
-    padding-bottom: 60px;
+    max-width: 1440px;
 }
 
 a {
-    color: var(--link-color);
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--link-hover-color);
-    text-decoration: none;
-}
-
-.table td {
-    vertical-align: middle !important;
-    width: 100%;
-    word-break: break-all;
-}
-
-table td:last-child {
-    white-space: nowrap;
-    width: 1%;
-}
-
-input {
-    background-color: var(--input-background-color);
+    text-decoration: none !important;
 }
 
 input:invalid {
     border: 2px solid red;
 }
 
-input[type=range] {
-    width: 20%;
-}
-
-input[type=text], input[type=url] {
-    max-width: 66.666667%;
-}
-
-main {
-    background: var(--background-color);
+input[disabled] {
+    opacity: .3!important;
 }
 
 footer {
     bottom: 1rem;
-    color: #cbcfcb;
-    font-size: .75rem;
-    position: absolute;
-    text-transform: uppercase;
 }
 
-select {
-    background-color: var(--input-background-color) !important;
-    color: var(--text-color) !important;
-    min-width: 100px !important;
-    width: auto !important;
+.table tbody td {
+    vertical-align: middle;
 }
 
-h2, hr {
-    margin-top: 0;
+#tab-site-preferences td:nth-of-type(2),
+#tab-site-preferences td:nth-of-type(2) select {
+    width: 200px;
 }
 
-tr.clone {
-    display: none;
-}
-
-td.identifier, td.key, td.last-used, td.created {
-    white-space: nowrap;
-}
-
-button.collapsed {
-    display: none;
+#tab-site-preferences td:nth-of-type(3),
+table td:last-of-type {
+    width: 1px;
 }
 
 .fa {
     margin-right: 0.2rem;
 }
 
-.card {
-    background-color: var(--card-background-color);
-    border: 1px solid rgba(0,0,0,.125);
-    margin-bottom: 2rem;
-    min-width: 720px;
-    width: 75%;
-}
-
-.card-header {
-    background-color: var(--card-header-color);
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.card-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
 .sidebar {
-    background-color: var(--sidebar-background-color) !important;
+    height: 50px;
     bottom: 0;
-    min-width: 160px !important;
     position: fixed;
     top: 0;
     z-index: 100;
 }
 
 .sidebar a {
-    color: #cbcfcb;
+    border: 1px solid transparent;
 }
 
-.sidebar a:hover {
-    color: #a0a0a0;
-}
-
-.nav-item, .sidebar-heading {
+h1,
+.nav-item,
+.sidebar-heading {
     font-size: .75rem;
-    text-transform: uppercase;
 }
 
 .active > a {
-    border: 1px solid #a0a0a0;
-    border-radius: 2px;
-    color: #a0a0a0;
+    border-color: currentColor;
+    color: #a0a0a0 !important;
 }
 
-.sidebar-heading {
-    color: #f2f2f2;
-    padding-bottom: 1.5rem;
-}
-
-.tab {
-    display: none;
-}
-
-.tab-header {
-    margin-bottom: 2rem;
-}
-
-.table, tbody, thead, tr, th, td {
-    border: 1px solid var(--table-border-color) !important;
-}
-
-.alert, #manualUrl {
-    width: 75%;
-}
-
-.collapse:not(.show) {
+.collapse.show {
     display: block !important;
 }
 
 .invalid-feedback {
-    color: var(--link-color);
-    display: block;
     font-size: 95% !important;
 }
 
-.invalid-feedback code {
-    color: var(--link-hover-color) !important;
-}
-
-#defaultGroup {
-    width: 50%;
-}
-
-#redirectAllowanceLabel {
-    font-weight: normal;
-}
-
-#colorTheme {
-    width: 20%;
-}
-
-#dangerousSettings {
-    display: none;
-}
-
-#padded-helptext {
-    margin-bottom: 1rem;
-    padding-left: 1.25rem;
-}
-
-@media (max-width: 768px) {
-    main {
-        padding-top: 50px;
-    }
-
-    h6.d-flex {
-        float: right !important;
-    }
-
-    button.collapsed {
-      display: block;
-      padding-top: 0.5rem !important;
-    }
-
-    .collapse:not(.show) {
-        display: none !important;
-    }
-
-    .d-flex {
-        display: none !important;
-    }
-
+@media (min-width: 768px) {
     .sidebar {
-        height: 50px;
-        min-width: 100% !important;
+        height: auto;
     }
+}
 
-    #sidebar {
-        background-color: #2f2f2f;
-        width: 30%;
+@media (min-width: 1440px) {
+    .sidebar {
+        width: 240px;
     }
 }
 
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
     a {
         color: var(--link-color);
-        text-decoration: none;
     }
 
     a:hover {
         color: var(--link-hover-color);
-        text-decoration: none;
     }
 
-    .bg-danger {
-        color: #000;
-    }
-
-    body, pre {
+    body,
+    pre {
         background-color: var(--background-color);
         color: var(--text-color);
     }
 
-    input, input[type="checkbox"] {
+    main {
+        background: var(--background-color);
+    }
+
+    #sidebar,
+    .sidebar {
+        background-color: var(--sidebar-background-color) !important;
+    }
+
+    input,
+    input[type="checkbox"] {
         background-color: var(--background-color) !important;
         border-color: var(--input-main-border-color) !important;
         color: var(--text-color) !important;
@@ -253,13 +120,9 @@ button.collapsed {
         color: var(--text-color);
     }
 
-    .navbar-default {
-        box-shadow: 0 0px 2px 0;
-    }
-
     select {
-        background-color: var(--input-background-color);
-        color: var(--text-color);
+        background-color: var(--input-background-color) !important;
+        color: var(--text-color) !important;
     }
 
     select option {
@@ -267,19 +130,25 @@ button.collapsed {
         color: var(--text-color);
     }
 
-    .table, tbody, thead, tr, th, td {
-        border: 1px solid var(--table-border-color) !important;
+    .table,
+    tbody,
+    thead,
+    tr,
+    th,
+    td {
+        border-color: var(--table-border-color) !important;
     }
 
     .table > caption {
         color: var(--text-color);
     }
 
-    .table > thead, tbody {
+    .table > thead,
+    tbody {
         color: var(--text-color);
     }
 
-    .table-striped > tbody > tr:nth-of-type(odd)  {
+    .table-striped > tbody > tr:nth-of-type(odd) {
         background-color: var(--table-odd-color);
     }
 
@@ -288,7 +157,7 @@ button.collapsed {
     }
 
     .card {
-        background-color: var(--input-background-color);
+        background-color: var(--card-background-color);
         border-color: var(--card-border-color);
     }
 
@@ -297,12 +166,16 @@ button.collapsed {
         color: var(--text-color);
     }
 
-    .card-header:first-child {
-        border-radius: 0;
-    }
-
     .card-body {
         background-color: var(--card-background-color);
         color: var(--text-color);
+    }
+
+    .invalid-feedback code {
+        color: var(--link-hover-color) !important;
+    }
+
+    .invalid-feedback {
+        color: var(--link-color);
     }
 }

@@ -3,6 +3,7 @@
   <head>
     <title data-i18n="optionsTitle"></title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../css/colors.css" />
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
@@ -17,44 +18,44 @@
     <script src="options.js"></script>
     <script src="../translate.js" defer></script>
   </head>
-  <body>
+  <body class="pt-3 pb-5">
     <div class="container-fluid">
       <div class="row">
-        <nav class="col-md-2 bg-dark sidebar">
-          <button class="navbar-dark navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar">
+        <nav class="col-md-3 col-lg-2 sidebar">
+          <button class="navbar-dark navbar-toggler collapsed d-block d-md-none pt-2" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse" id="sidebar">
-            <h6 class="sidebar-heading d-flex px-3 mt-4 mb-1">KeePassXC-Browser</h6>
-            <ul class="nav flex-column mb-2">
-              <li class="active nav-item"><a class="nav-link" href="#general-settings" tabindex="1"><span data-i18n="optionsMenuGeneral"></span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#connected-databases" tabindex="2"><span data-i18n="optionsMenuConnectedDatabases"></span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#custom-fields" tabindex="3"><span data-i18n="optionsMenuCustomFields"></span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#site-preferences" tabindex="4"><span data-i18n="optionsMenuSitePreferences"></span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#about" tabindex="5"><span data-i18n="optionsMenuAbout"></span></a></li>
+          <div class="collapse d-none d-md-block" id="sidebar">
+            <h1 class="text-uppercase text-white-50 d-none d-md-flex px-3 pb-4 mt-4 mb-1 ">KeePassXC-Browser</h1>
+            <ul class="nav flex-column mb-2 text-uppercase">
+              <li class="active nav-item"><a class="nav-link text-light rounded-sm" href="#general-settings" tabindex="1"><span data-i18n="optionsMenuGeneral"></span></a></li>
+              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#connected-databases" tabindex="2"><span data-i18n="optionsMenuConnectedDatabases"></span></a></li>
+              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#custom-fields" tabindex="3"><span data-i18n="optionsMenuCustomFields"></span></a></li>
+              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#site-preferences" tabindex="4"><span data-i18n="optionsMenuSitePreferences"></span></a></li>
+              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#about" tabindex="5"><span data-i18n="optionsMenuAbout"></span></a></li>
             </ul>
-            <footer class="d-flex px-3 mt-4 mb-1">
+            <footer class="d-none d-md-flex px-3 mt-4 mb-1 text-uppercase position-absolute small text-muted">
               (C) 2017-2020 - KeePassXC Team
             </footer>
           </div>
         </nav>
 
-        <main class="col-md-9 ml-sm-auto col-md-10 px-4">
+        <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 px-4 mt-5 mt-md-0">
           <div class="content">
 
             <!-- General Settings -->
             <div class="tab" id="tab-general-settings">
-              <h2 class="tab-header" data-i18n="optionsGeneralSettingsTab"></h2>
+              <h2 class="pb-3 mt-0" data-i18n="optionsGeneralSettingsTab"></h2>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-television" aria-hidden="true"></i>
                   User interface
                 </div>
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="colorTheme"><span data-i18n="optionsThemeSelectionHeader"></span></label>
-                    <select class="form-control form-control-sm" id="colorTheme" data-i18n="[title]optionsThemeSelection">
+                    <label for="colorTheme" data-i18n="optionsThemeSelectionHeader"></label>
+                    <select class="form-control form-control-sm col-md-3 col-lg-2" id="colorTheme" data-i18n="[title]optionsThemeSelection">
                       <option value="system" data-i18n="optionsThemeSystem"></option>
                       <option value="dark" data-i18n="optionsThemeDark"></option>
                       <option value="light" data-i18n="optionsThemeLight"></option>
@@ -64,8 +65,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showLoginFormIcon" id="usernameIconsCheckBox" value="true" />
-                      <span data-i18n="optionsCheckboxUsernameIcons"></span>
-                      <label class="form-check-label" for="usernameIconsCheckBox"></label>
+                      <label class="form-check-label" for="usernameIconsCheckBox" data-i18n="optionsCheckboxUsernameIcons"></label>
                       <span class="form-text text-muted" data-i18n="optionsShowLoginFormIconHelpText"></span>
                     </div>
                   </div>
@@ -73,8 +73,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="usePasswordGeneratorIcons" id="passwordIconsCheckBox" value="true" />
-                      <span data-i18n="optionsCheckboxUsePasswordGenerator"></span>
-                      <label class="form-check-label" for="passwordIconsCheckBox"></label>
+                      <label class="form-check-label" for="passwordIconsCheckBox" data-i18n="optionsCheckboxUsePasswordGenerator"></label>
                       <span class="form-text text-muted" data-i18n="optionsUsePasswordGeneratorHelpText"></span>
                       <span class="form-text text-muted" data-i18n="optionsUsePasswordGeneratorHelpTextSecond"></span>
                     </div>
@@ -83,8 +82,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showOTPIcon" id="totpIconsCheckBox" value="true" />
-                      <span data-i18n="optionsCheckboxOTPIcons"></span>
-                      <label class="form-check-label" for="totpIconsCheckBox"></label>
+                      <label class="form-check-label" for="totpIconsCheckBox"  data-i18n="optionsCheckboxOTPIcons"></label>
                       <span class="form-text text-muted" data-i18n="optionsShowOTPIconHelpText"></span>
                     </div>
                   </div>
@@ -92,16 +90,15 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showNotifications" id="notificationCheckBox" value="true" />
-                      <span data-i18n="optionsCheckboxShowNotifications"></span>
-                      <label class="form-check-label" for="notificationCheckBox"></label>
+                      <label class="form-check-label" for="notificationCheckBox" data-i18n="optionsCheckboxShowNotifications"></label>
                       <span class="form-text text-muted" data-i18n="optionsShowNotificationsHelpText"></span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-keyboard-o" aria-hidden="true"></i>
                   <span data-i18n="optionsKeyboardShortcutsHeader"></span>
                 </div>
@@ -120,8 +117,8 @@
                 </div>
               </div>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                   Filling credentials
                 </div>
@@ -129,8 +126,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoRetrieveCredentials" id="autoRetrieveCredentials" value="true" />
-                      <span data-i18n="optionsCheckboxAutoRetrieveCredentials"></span>
-                      <label class="form-check-label" for="autoRetrieveCredentials"></label>
+                      <label class="form-check-label" for="autoRetrieveCredentials" data-i18n="optionsCheckboxAutoRetrieveCredentials"></label>
                       <span class="form-text text-muted" data-i18n="optionsAutoRetrieveCredentialsHelpText"></span>
                     </div>
                   </div>
@@ -138,8 +134,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoCompleteUsernames" id="autoCompleteUsernames" value="true" />
-                      <span data-i18n="optionsCheckboxAutoCompleteUsernames"></span>
-                      <label class="form-check-label" for="autoCompleteUsernames"></label>
+                      <label class="form-check-label" for="autoCompleteUsernames" data-i18n="optionsCheckboxAutoCompleteUsernames"></label>
                       <span class="form-text text-muted" data-i18n="optionsAutocompleteUsernamesHelpText"></span>
                     </div>
                   </div>
@@ -147,8 +142,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoSubmit" id="autoSubmit" value="true" />
-                      <span data-i18n="optionsCheckboxAutoSubmit"></span>
-                      <label class="form-check-label" for="autoSubmit"></label>
+                      <label class="form-check-label" for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
                       <span class="form-text text-muted" data-i18n="optionsAutoSubmitHelpText"></span>
                     </div>
                   </div>
@@ -156,10 +150,9 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoFillSingleEntry" id="autoFillSingleEntry" value="true" />
-                      <span data-i18n="optionsCheckboxAutoFillSingleEntry"></span>
-                      <label class="form-check-label" for="autoFillSingleEntry"></label>
+                      <label class="form-check-label" for="autoFillSingleEntry" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
                       <span class="form-text text-muted" data-i18n="optionsAutoFillSingleEntryHelpText"></span>
-                      <div class="alert alert-warning mt-3" role="alert">
+                      <div class="alert alert-warning mt-3 col-lg-9" role="alert">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <span data-i18n="optionsAutoFillSingleEntryWarning"></span>
                       </div>
@@ -169,18 +162,17 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoFillAndSend" id="autoFillAndSend" value="true">
-                      <span data-i18n="optionsCheckboxAutoFillAndSend"></span>
-                      <label class="form-check-label" for="autoFillAndSend"></label>
+                      <label class="form-check-label" for="autoFillAndSend" data-i18n="optionsCheckboxAutoFillAndSend"></label>
                       <span class="form-text text-muted" data-i18n="optionsAutoFillAndSendHelpText"></span>
                       <span class="form-text text-muted" data-i18n="optionsAutoFillAndSendHelpTextSecond"></span>
-                      <br /><img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog"/>
+                      <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog" class="img-fluid mt-2"/>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-save" aria-hidden="true"></i>
                   Saving credentials
                 </div>
@@ -188,66 +180,65 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showLoginNotifications" id="showLoginNotifications" value="true">
-                      <span data-i18n="optionsCheckboxShowLoginNotifications"></span>
-                      <label class="form-check-label" for="saveDomainOnlyNewCreds"></label>
+                      <label class="form-check-label" for="showLoginNotifications" data-i18n="optionsCheckboxShowLoginNotifications"></label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="defaultGroupAlwaysAsk" id="defaultGroupAlwaysAsk" value="true">
+                      <label class="form-check-label" for="defaultGroupAlwaysAsk" data-i18n="optionsLabelDefaultGroupCheckboxText"></label>
+                      <span class="form-text text-muted" data-i18n="optionsLabelDefaultGroupCheckboxHelpText"></span>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="defaultGroup" data-i18n="optionsLabelDefaultGroup"></label>
                     <div class="input-group">
-                      <input class="form-control form-control-sm" type="text" id="defaultGroup" placeholder="KeePassXC-Browser Passwords">
+                      <input class="form-control form-control-sm col-md-8 col-lg-6" type="text" id="defaultGroup" placeholder="KeePassXC-Browser Passwords">
                       <div class="input-group-append">
                         <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-save" aria-hidden="true"></i><span data-i18n="optionsButtonSave"></span></button>
                         <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonReset"></span></button>
                       </div>
-                    </div>
-                    <span class="form-text text-muted" id="padded-helptext" data-i18n="optionsDefaultGroupHelpText"></span>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="defaultGroupAlwaysAsk" id="defaultGroupAlwaysAsk" value="true">
-                      <span data-i18n="optionsLabelDefaultGroupCheckboxText"></span>
-                      <label class="form-check-label" for="defaultGroupAlwaysAsk"></label>
-                      <span class="form-text text-muted" data-i18n="optionsLabelDefaultGroupCheckboxHelpText"></span>
+                      <span class="form-text text-muted w-100" data-i18n="optionsDefaultGroupHelpText"></span>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnlyNewCreds" id="saveDomainOnlyNewCreds" value="true">
-                      <span data-i18n="optionsSaveDomainOnly"></span>
-                      <label class="form-check-label" for="saveDomainOnlyNewCreds"></label>
+                      <label class="form-check-label" for="saveDomainOnlyNewCreds" data-i18n="optionsSaveDomainOnly"></label>
                       <span class="form-text text-muted" data-i18n="optionsSaveDomainOnlyHelpText"></span>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label id="redirectAllowanceLabel" for="redirectAllowance" data-i18n="optionsRedirectAllowance" i18n-placeholder="1"></label>
-                    <input type="range" class="form-control-range" id="redirectAllowance" name="redirectAllowance" min="1" max="11" step="1" value="1" />
+                    <label id="redirectAllowanceLabel" class="font-weight-normal" for="redirectAllowance" data-i18n="optionsRedirectAllowance" i18n-placeholder="1"></label>
+                    <input type="range" class="form-control-range col-md-6 col-lg-4" id="redirectAllowance" name="redirectAllowance" min="1" max="11" step="1" value="1" />
                   </div>
                   <span class="form-text text-muted" data-i18n="optionsRedirectAllowanceHelpText"></span>
                 </div>
               </div>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-clock-o" aria-hidden="true"></i>
                   Updates
                 </div>
                 <div class="card-body">
                   <div class="help-block kphVersion">
-                    <span data-i18n="optionsVersionInfoText"></span>
-                    <br />
-                    <span data-i18n="optionsVersionDownload" i18n-placeholder="<a target='_blank' href='https://keepassxc.org/'>https://keepassxc.org/</a>"></span>
-                    <br />
-                    <br />
-                    <div>
+                      <p>
+                      <span data-i18n="optionsVersionInfoText"></span>
+                      <br />
+                      <span data-i18n="optionsVersionDownload" i18n-placeholder="<a target='_blank' href='https://keepassxc.org/'>https://keepassxc.org/</a>"></span>
+                    </p>
+                    <p>
                       <span data-i18n="optionsVersionRunning" i18n-placeholder="<em class='yourVersion'></em>"></span>
-                    </div>
-                    <div>
+                    </p>
+                    <p>
                       <span data-i18n="optionsLatestVersion" i18n-placeholder="<em class='latestVersion'></em>"></span>
-                      <p></p>
+                    </p>
                       <button class="btn btn-sm btn-success checkUpdateKeePassXC"><i class="fa fa-refresh" aria-hidden="true"></i><span data-i18n="optionsButtonUpdate"></span></button>
-                    </div>
                     <div class="mt-3">
                       <div data-i18n="optionsRadioText"></div>
                       <div class="form-check form-check-inline">
@@ -271,8 +262,8 @@
                 </div>
               </div>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                   Advanced settings
                 </div>
@@ -280,8 +271,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="useObserver" id="useObserver" value="true" />
-                      <span data-i18n="optionsUseObserver"></span>
-                      <label class="form-check-label" for="useObserver"></label>
+                      <label class="form-check-label" for="useObserver" data-i18n="optionsUseObserver"></label>
                       <span class="form-text text-muted" data-i18n="optionsUseObserverHelpText"></span>
                     </div>
                   </div>
@@ -289,10 +279,9 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showGroupNameInAutocomplete" id="showGroupNameInAutocomplete" value="true" />
-                      <span data-i18n="optionsCheckboxShowGroupNameInAutocomplete"></span>
-                      <label class="form-check-label" for="showGroupNameInAutocomplete"></label>
+                      <label class="form-check-label" for="showGroupNameInAutocomplete" data-i18n="optionsCheckboxShowGroupNameInAutocomplete"></label>
                       <span class="form-text text-muted" data-i18n="optionsShowGroupNameInAutocompleteHelpText"></span>
-                      <div class="alert alert-info mt-3" role="alert">
+                      <div class="alert alert-info mt-3 col-lg-9" role="alert">
                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         <span data-i18n="optionsKeePassXCVersionRequired" i18n-placeholder="2.6.0"></span>
                       </div>
@@ -302,10 +291,9 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoReconnect" id="autoReconnect" value="true" />
-                      <span data-i18n="optionsCheckboxAutomaticReconnect"></span>
-                      <label class="form-check-label" for="autoReconnect"></label>
+                      <label class="form-check-label" for="autoReconnect" data-i18n="optionsCheckboxAutomaticReconnect"></label>
                       <span class="form-text text-muted" data-i18n="optionsAutomaticReconnectHelpText"></span>
-                      <div class="alert alert-warning mt-3" role="alert">
+                      <div class="alert alert-warning mt-3 col-lg-9" role="alert">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <span data-i18n="optionsAutomaticReconnectWarning"></span>
                       </div>
@@ -315,8 +303,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnly" id="saveDomainOnly" value="true" />
-                      <span data-i18n="optionsSaveDomainOnly"></span>
-                      <label class="form-check-label" for="saveDomainOnly"></label>
+                      <label class="form-check-label" for="saveDomainOnly" data-i18n="optionsSaveDomainOnly"></label>
                       <span class="form-text text-muted" data-i18n="optionsSaveDomainOnlyCustomLoginHelpText"></span>
                     </div>
                   </div>
@@ -352,35 +339,37 @@
             </div>
 
             <!-- Connected Databases -->
-            <div class="tab" id="tab-connected-databases">
-              <h2 class="tab-header" data-i18n="optionsConnectedDatabasesTab"></h2>
+            <div class="tab d-none" id="tab-connected-databases">
+              <h2 class="pb-3 mt-0" data-i18n="optionsConnectedDatabasesTab"></h2>
 
-              <div class="card shadow">
+              <div class="card my-4 shadow">
                 <div class="card-body">
-                  <table class="table table-striped table-bordered">
-                    <caption data-i18n="optionsConnectedDatabasesText"></caption>
-                    <thead>
-                      <tr>
-                        <th scope="col"><span data-i18n="optionsDatabaseIdentifier"></span></th>
-                        <th scope="col"><span data-i18n="optionsDatabaseKey"></span></th>
-                        <th scope="col"><span data-i18n="optionsDatabaseLastUsed"></span></th>
-                        <th scope="col"><span data-i18n="optionsDatabaseCreated"></span></th>
-                        <th scope="col"><span data-i18n="optionsDatabaseDelete"></span></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="empty">
-                        <td colspan="5"><span data-i18n="optionsConnectedDatabasesNotFound"></span></td>
-                      </tr>
-                      <tr class="clone">
-                        <td class="identifier"></td>
-                        <td class="key"></td>
-                        <td class="last-used"></td>
-                        <td class="created"></td>
-                        <td><button class="btn btn-sm delete btn-danger"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered">
+                      <caption data-i18n="optionsConnectedDatabasesText"></caption>
+                      <thead>
+                        <tr>
+                          <th scope="col"><span data-i18n="optionsDatabaseIdentifier"></span></th>
+                          <th scope="col"><span data-i18n="optionsDatabaseKey"></span></th>
+                          <th scope="col"><span data-i18n="optionsDatabaseLastUsed"></span></th>
+                          <th scope="col"><span data-i18n="optionsDatabaseCreated"></span></th>
+                          <th scope="col"><span data-i18n="optionsDatabaseDelete"></span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="empty">
+                          <td colspan="5"><span data-i18n="optionsConnectedDatabasesNotFound"></span></td>
+                        </tr>
+                        <tr class="clone d-none">
+                          <td class="identifier text-nowrap"></td>
+                          <td class="key text-nowrap"></td>
+                          <td class="last-used text-nowrap"></td>
+                          <td class="created text-nowrap"></td>
+                          <td class="text-nowrap"><button class="btn btn-sm delete btn-danger"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                   <div>
                     <button id="connect-button" class="btn btn-sm btn-success"><i class="fa fa-link" aria-hidden="true"></i><span data-i18n="optionsButtonConnect"></span></button>
                   </div>
@@ -408,34 +397,36 @@
             </div>
 
             <!-- Custom login fields -->
-            <div class="tab" id="tab-custom-fields">
-              <h2 class="tab-header" data-i18n="optionsCustomFieldsTab"></h2>
+            <div class="tab d-none" id="tab-custom-fields">
+              <h2 class="pb-3 mt-0" data-i18n="optionsCustomFieldsTab"></h2>
 
-              <div class="card shadow">
+              <div class="card my-4 shadow">
                 <div class="card-body">
                   <p>
                     <span data-i18n="optionsCustomFieldsTabHelpTextFirst"></span>
                     <br />
                     <span data-i18n="optionsCustomFieldsTabHelpTextSecond"></span><em><span data-i18n="popupChooseCredentialsText"></span></em>.
                   </p>
-                   <table class="table table-striped table-bordered">
-                    <caption data-i18n="optionsCustomFieldsTableCaption"></caption>
-                    <thead>
-                      <tr>
-                        <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
-                        <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="empty">
-                        <td colspan="2"><span data-i18n="optionsCustomFieldsNotFound"></span></td>
-                      </tr>
-                      <tr class="clone">
-                        <td></td>
-                        <td><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="table-responsive">
+                     <table class="table table-sm table-striped table-bordered">
+                      <caption data-i18n="optionsCustomFieldsTableCaption"></caption>
+                      <thead>
+                        <tr>
+                          <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
+                          <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="empty">
+                          <td colspan="2"><span data-i18n="optionsCustomFieldsNotFound"></span></td>
+                        </tr>
+                        <tr class="clone d-none">
+                          <td></td>
+                          <td class="text-nowrap"><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
 
                   <div id="dialogDeleteCustomCredentialFields" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
@@ -460,10 +451,10 @@
             </div>
 
             <!-- Site preferences -->
-            <div class="tab" id="tab-site-preferences">
-              <h2 class="tab-header" data-i18n="optionsSitePreferencesTab"></h2>
+            <div class="tab d-none" id="tab-site-preferences">
+              <h2 class="pb-3 mt-0" data-i18n="optionsSitePreferencesTab"></h2>
 
-              <div class="card shadow">
+              <div class="card my-4 shadow">
                 <div class="card-body">
                   <p>
                     <span data-i18n="optionsSitePreferencesTabHelpTextFirst"></span>
@@ -474,49 +465,51 @@
                     <br />
                     <span data-i18n="optionsSitePreferencesTabHelpTextFourth"></span>
                   </p>
-                  <hr />
+                  <hr class="mt-0" />
 
                   <form class="was-validated">
                     <div class="form-group">
                         <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
                       <div class="input-group" id="manualUrlGroup">
-                        <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="ftp://.*|http://.*|https://.*" minlength="10" required>
+                        <input class="form-control form-control-sm col-lg-10" type="url" id="manualUrl" aria-label="Manual URL" pattern="ftp://.*|http://.*|https://.*" minlength="10" required>
                         <div class="input-group-append">
                           <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd"><i class="fa fa-plus" aria-hidden="true"></i><span data-i18n="optionsButtonAdd"></span></button>
                         </div>
                       </div>
-                      <span class="invalid-feedback" data-i18n="optionsSitePreferencesManualAddHelp"></span>
+                      <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
                     </div>
                   </form>
 
-                  <table class="table table-striped table-bordered">
-                    <caption data-i18n="optionsSitePreferencesTableCaption"></caption>
-                    <thead>
-                      <tr>
-                        <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
-                        <th scope="col"><span data-i18n="optionsColumnIgnore"></span></th>
-                        <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
-                        <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="empty">
-                        <td colspan="4"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
-                      </tr>
-                      <tr class="clone">
-                        <td></td>
-                        <td>
-                          <select class="form-control form-control-sm" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
-                            <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
-                            <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
-                            <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
-                          </select>
-                        </td>
-                        <td><input type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"/></td>
-                        <td><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered">
+                      <caption data-i18n="optionsSitePreferencesTableCaption"></caption>
+                      <thead>
+                        <tr>
+                          <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
+                          <th scope="col"><span data-i18n="optionsColumnIgnore"></span></th>
+                          <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
+                          <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="empty">
+                          <td colspan="4"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
+                        </tr>
+                        <tr class="clone d-none">
+                          <td class="text-nowrap"></td>
+                          <td>
+                            <select class="form-control form-control-sm" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
+                              <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
+                              <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
+                              <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
+                            </select>
+                          </td>
+                          <td><input type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"/></td>
+                          <td class="text-nowrap"><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
 
                   <div id="dialogDeleteSite" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
@@ -542,11 +535,11 @@
 
 
             <!-- About -->
-            <div class="tab" id="tab-about">
-              <h2 class="tab-header" data-i18n="optionsAboutTab"></h2>
+            <div class="tab d-none" id="tab-about">
+              <h2 class="pb-3 mt-0" data-i18n="optionsAboutTab"></h2>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-desktop" aria-hidden="true"></i>
                   Extension
                 </div>
@@ -563,14 +556,14 @@
                     <a target="_blank" href="https://github.com/keepassxreboot/keepassxc-browser" data-i18n="[title]openNewTab" tabindex="8">
                     <span data-i18n="optionsAboutGitHub"></span></a>
                   </p>
-                  <hr />
+                  <hr class="mt-0" />
                   <p>
                     <span data-i18n="optionsAboutExtensionVersion" i18n-placeholder="<em class='versionCIP'></em>"></span>
                   </p>
                   <p>
                     <span data-i18n="optionsAboutKeePassXCVersion" i18n-placeholder="<em class='versionKPH'></em>"></span>
                   </p>
-                  <hr />
+                  <hr class="mt-0" />
                   <p>
                     <span data-i18n="optionsAboutContributors"></span>:<br>
                     <a target="_blank" href="https://github.com/pfn/" data-i18n="[title]openNewTab" tabindex="9">Perry Nguyen</a>,
@@ -582,8 +575,8 @@
                 </div>
               </div>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-bug" aria-hidden="true"></i>
                   <span data-i18n="optionsAboutReportBugs"></span>
                 </div>
@@ -601,8 +594,8 @@
                 </div>
               </div>
 
-              <div class="card shadow">
-                <div class="card-header">
+              <div class="card my-4 shadow">
+                <div class="card-header h6 rounded-0">
                   <i class="fa fa-file-code-o" aria-hidden="true"></i>
                   <span data-i18n="optionsAboutLicenses"></span>
                 </div>
