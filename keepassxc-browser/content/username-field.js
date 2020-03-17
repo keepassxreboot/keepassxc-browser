@@ -41,7 +41,7 @@ class UsernameFieldIcon extends Icon {
 }
 
 UsernameFieldIcon.prototype.initField = function(field) {
-    if (!field || field.getAttribute('kpxc-username-field') === 'true') {
+    if (!field || field.getAttribute('kpxc-username-field') === 'true' || !kpxcFields.isVisible(field)) {
         return;
     }
 

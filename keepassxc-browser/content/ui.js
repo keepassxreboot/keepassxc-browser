@@ -104,7 +104,6 @@ kpxcUI.setIconPosition = function(icon, field) {
 kpxcUI.updateFromIntersectionObserver = function(iconClass, entries) {
     for (const entry of entries) {
         const rect = DOMRectToArray(entry.boundingClientRect);
-        const temp = entry.target.closest('.kpxc-username-icon');
 
         if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
             iconClass.icon.style.display = 'none';
