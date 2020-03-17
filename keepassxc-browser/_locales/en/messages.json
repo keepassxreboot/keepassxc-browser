@@ -1003,6 +1003,30 @@
         "message": "The value already exists in the list.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
+    "optionsUserInterfaceTitle": {
+      "message": "User interface",
+      "description": "User interface title in settings page"
+    },
+    "optionsFillingCredentialsTitle": {
+      "message": "Filling credentials",
+      "description": "Filling credentials title in settings page"
+    },
+    "optionsSavingCredentialsTitle": {
+      "message": "Saving credentials",
+      "description": "Saving credentials title in settings page"
+    },
+    "optionsUpdatesTitle": {
+      "message": "Updates",
+      "description": "Updates title in settings page"
+    },
+    "optionsAdvancedSettingsTitle": {
+      "message": "Advanced settings",
+      "description": "Advanced settings title in settings page"
+    },
+    "optionsExtensionTitle": {
+      "message": "Extension",
+      "description": "Extension title in settings page"
+    },
     "openNewTab": {
         "message": "Opens a new tab",
         "description": "Title attribute text."
