@@ -1028,7 +1028,7 @@ kpxc.initPasswordGenerator = function(inputs) {
     }
 };
 
-kpxc.initOTPFields = function(inputs, databaseClosed) {
+kpxc.initOTPFields = function(inputs) {
     for (const i of inputs) {
         const id = i.getLowerCaseAttribute('id');
         const name = i.getLowerCaseAttribute('name');
