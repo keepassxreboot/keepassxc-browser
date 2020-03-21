@@ -287,7 +287,7 @@ options.initConnectedDatabases = function() {
         });
     });
 
-    $('#dialogDeleteConnectedDatabase .modal-footer:first button.yes:first').click(function(e) {
+    $('#dialogDeleteConnectedDatabase .modal-footer:first button.yes:first').click(async function(e) {
         $('#dialogDeleteConnectedDatabase').modal('hide');
 
         const hash = $('#dialogDeleteConnectedDatabase').data('hash');
@@ -296,6 +296,11 @@ options.initConnectedDatabases = function() {
         delete options.keyRing[hash];
         options.saveKeyRing();
         hashList = options.keyRing;
+
+        // Force reconnect so the extension will disconnect the current database
+        await browser.runtime.sendMessage({ action: 'reconnect' }).catch(err => {
+            console.log(err);
+        });
 
         if ($('#tab-connected-databases table tbody:first tr').length > 2) {
             $('#tab-connected-databases table tbody:first tr.empty:first').hide();
