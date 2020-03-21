@@ -839,6 +839,8 @@ keepass.saveKey = function(hash, id, key) {
         keepass.keyRing[hash].id = id;
         keepass.keyRing[hash].key = key;
         keepass.keyRing[hash].hash = hash;
+        keepass.keyRing[hash].created = new Date().valueOf();
+        keepass.keyRing[hash].lastUsed = new Date().valueOf();
     }
     browser.storage.local.set({ 'keyRing': keepass.keyRing });
 };
@@ -849,6 +851,7 @@ keepass.updateLastUsed = function(hash) {
         browser.storage.local.set({ 'keyRing': keepass.keyRing });
     }
 };
+
 // Update the databaseHash from legacy hash
 keepass.updateDatabaseHash = function(oldHash, newHash) {
     if (!oldHash || !newHash || oldHash === newHash) {
