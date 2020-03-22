@@ -1,79 +1,79 @@
 :root {
-    --background-color: #fff;
-    --card-background-color: #fff;
-    --card-border-color: rgba(0,0,0,.125);
-    --card-header-color: #fafafa;
-    --container-border: 1px solid #ccc;
-    --input-active-border-color: #2b4d1a;
-    --input-background-color: #fff;
-    --input-border: 1px solid #2b4d1a;
-    --input-border-color: #292a2a;
-    --input-main-border-color: rgba(0,0,0,.125);
-    --link-color: #3a8233;
-    --link-hover-color: #429f14;
-    --sidebar-background-color: #27272a;
-    --table-border-color: rgb(222, 226, 230);
-    --table-hover-color: #f2f2f2;
-    --table-odd-color: #f2f2f2;
-    --text-color: #000;
+    --kpxc-background-color: #fff;
+    --kpxc-card-background-color: #fff;
+    --kpxc-card-border-color: rgba(0,0,0,.125);
+    --kpxc-card-header-color: #fafafa;
+    --kpxc-container-border: 1px solid #ccc;
+    --kpxc-input-active-border-color: #2b4d1a;
+    --kpxc-input-background-color: #fff;
+    --kpxc-input-border: 1px solid #2b4d1a;
+    --kpxc-input-border-color: #292a2a;
+    --kpxc-input-main-border-color: rgba(0,0,0,.125);
+    --kpxc-link-color: #3a8233;
+    --kpxc-link-hover-color: #429f14;
+    --kpxc-sidebar-background-color: #27272a;
+    --kpxc-table-border-color: rgb(222, 226, 230);
+    --kpxc-table-hover-color: #f2f2f2;
+    --kpxc-table-odd-color: #f2f2f2;
+    --kpxc-text-color: #000;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: #3b3b3d;
-        --card-background-color: #2b2a2a;
-        --card-border-color: #292a2a;
-        --card-header-color: #27272a;
-        --container-border: 1px solid #000;
-        --input-active-border-color: #2b4d1a;
-        --input-background-color: #27272a;
-        --input-border: 1px solid #2b4d1a;
-        --input-border-color: #292a2a;
-        --input-main-border-color: #3b3d3c;
-        --link-color: #6cac4d;
-        --link-hover-color: #429f14;
-        --table-border-color: #a0a0a0;
-        --table-hover-color: #474948;
-        --table-odd-color: #3b3d3c;
-        --text-color: #cbcfcb;
+        --kpxc-background-color: #3b3b3d;
+        --kpxc-card-background-color: #2b2a2a;
+        --kpxc-card-border-color: #292a2a;
+        --kpxc-card-header-color: #27272a;
+        --kpxc-container-border: 1px solid #000;
+        --kpxc-input-active-border-color: #2b4d1a;
+        --kpxc-input-background-color: #27272a;
+        --kpxc-input-border: 1px solid #2b4d1a;
+        --kpxc-input-border-color: #292a2a;
+        --kpxc-input-main-border-color: #3b3d3c;
+        --kpxc-link-color: #6cac4d;
+        --kpxc-link-hover-color: #429f14;
+        --kpxc-table-border-color: #a0a0a0;
+        --kpxc-table-hover-color: #474948;
+        --kpxc-table-odd-color: #3b3d3c;
+        --kpxc-text-color: #cbcfcb;
     }
 }
 
 /* Same colors for manual switching */
 [data-color-theme='dark'] {
-    --background-color: #3b3b3d;
-    --card-background-color: #2b2a2a;
-    --card-border-color: #292a2a;
-    --card-header-color: #27272a;
-    --container-border: 1px solid #000;
-    --input-active-border-color: #2b4d1a;
-    --input-background-color: #27272a;
-    --input-border: 1px solid #2b4d1a;
-    --input-border-color: #292a2a;
-    --input-main-border-color: #3b3d3c;
-    --link-color: #6cac4d;
-    --link-hover-color: #429f14;
-    --table-border-color: #a0a0a0;
-    --table-hover-color: #474948;
-    --table-odd-color: #3b3b3d;
-    --text-color: #cbcfcb;
+    --kpxc-background-color: #3b3b3d;
+    --kpxc-card-background-color: #2b2a2a;
+    --kpxc-card-border-color: #292a2a;
+    --kpxc-card-header-color: #27272a;
+    --kpxc-container-border: 1px solid #000;
+    --kpxc-input-active-border-color: #2b4d1a;
+    --kpxc-input-background-color: #27272a;
+    --kpxc-input-border: 1px solid #2b4d1a;
+    --kpxc-input-border-color: #292a2a;
+    --kpxc-input-main-border-color: #3b3d3c;
+    --kpxc-link-color: #6cac4d;
+    --kpxc-link-hover-color: #429f14;
+    --kpxc-table-border-color: #a0a0a0;
+    --kpxc-table-hover-color: #474948;
+    --kpxc-table-odd-color: #3b3b3d;
+    --kpxc-text-color: #cbcfcb;
 }
 
 [data-color-theme='light'] {
-    --background-color: #fff;
-    --card-background-color: #fff;
-    --card-border-color: rgba(0,0,0,.125);
-    --card-header-color: #fafafa;
-    --container-border: 1px solid #ccc;
-    --input-active-border-color: #2b4d1a;
-    --input-background-color: #fff;
-    --input-border: 1px solid #2b4d1a;
-    --input-border-color: #292a2a;
-    --input-main-border-color: rgba(0,0,0,.125);
-    --link-color: #3a8233;
-    --link-hover-color: #429f14;
-    --table-border-color: rgb(222, 226, 230);
-    --table-hover-color: #f2f2f2;
-    --table-odd-color: #f2f2f2;
-    --text-color: #000;
+    --kpxc-background-color: #fff;
+    --kpxc-card-background-color: #fff;
+    --kpxc-card-border-color: rgba(0,0,0,.125);
+    --kpxc-card-header-color: #fafafa;
+    --kpxc-container-border: 1px solid #ccc;
+    --kpxc-input-active-border-color: #2b4d1a;
+    --kpxc-input-background-color: #fff;
+    --kpxc-input-border: 1px solid #2b4d1a;
+    --kpxc-input-border-color: #292a2a;
+    --kpxc-input-main-border-color: rgba(0,0,0,.125);
+    --kpxc-link-color: #3a8233;
+    --kpxc-link-hover-color: #429f14;
+    --kpxc-table-border-color: rgb(222, 226, 230);
+    --kpxc-table-hover-color: #f2f2f2;
+    --kpxc-table-odd-color: #f2f2f2;
+    --kpxc-text-color: #000;
 }

@@ -7,8 +7,8 @@ body {
     margin: 0 auto;
     width: 680px;
     max-height: 315px;
-    background-color: var(--background-color);
-    border: var(--container-border);
+    background-color: var(--kpxc-background-color);
+    border: var(--kpxc-container-border);
     border-radius: 4px;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
@@ -59,23 +59,23 @@ body {
     }
 
     body {
-        background: var(--input-background-color) !important;
-        color: var(--text-color);
+        background: var(--kpxc-input-background-color) !important;
+        color: var(--kpxc-text-color);
     }
 
     input {
-        background-color: var(--input-background-color);
-        border: var(--input-border);
-        border-color: var(--input-border-color);
+        background-color: var(--kpxc-input-background-color);
+        border: var(--kpxc-input-border);
+        border-color: var(--kpxc-input-border-color);
     }
 
     input:active {
-        border-color: var(--input-active-border-color);
+        border-color: var(--kpxc-input-active-border-color);
     }
 
     .conf-container {
-        background: var(--background-color);
-        border: var(--container-border);
-        color: var(--text-color);
+        background: var(--kpxc-background-color);
+        border: var(--kpxc-container-border);
+        color: var(--kpxc-text-color);
     }
 }

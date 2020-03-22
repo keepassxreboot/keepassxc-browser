@@ -1,8 +1,8 @@
 body {
     font-family: sans-serif;
     overflow-x: hidden;
-    background-color: var(--background-color) !important;
-    color: var(--text-color) !important;
+    background-color: var(--kpxc-background-color) !important;
+    color: var(--kpxc-text-color) !important;
     font-size: 14px !important;
     padding: 8px;
     min-width: 440px;
@@ -119,31 +119,31 @@ code {
 
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
     body {
-        background: var(--background-color) !important;
-        color: var(--text-color) !important;
+        background: var(--kpxc-background-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 
     input, input[type="checkbox"] {
-        background-color: var(--input-background-color) !important;
-        border: var(--input-border);
-        border-color: var(--input-border-color);
+        background-color: var(--kpxc-input-background-color) !important;
+        border: var(--kpxc-input-border);
+        border-color: var(--kpxc-input-border-color);
     }
 
     .list-group-item {
-        background-color: var(--input-background-color) !important;
-        color: var(--text-color) !important;
+        background-color: var(--kpxc-input-background-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 
     .list-group-item:hover {
-        background-color: var(--table-hover-color) !important;
+        background-color: var(--kpxc-table-hover-color) !important;
     }
 
     span.bg-success {
-        background-color: var(--table-hover-color) !important;
-        color: var(--text-color) !important;
+        background-color: var(--kpxc-table-hover-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 
     #login-filter {
-        color: var(--text-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 }
