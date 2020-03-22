@@ -82,52 +82,52 @@ h1,
 
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
     a {
-        color: var(--link-color);
+        color: var(--kpxc-link-color);
     }
 
     a:hover {
-        color: var(--link-hover-color);
+        color: var(--kpxc-link-hover-color);
     }
 
     body,
     pre {
-        background-color: var(--background-color);
-        color: var(--text-color);
+        background-color: var(--kpxc-background-color);
+        color: var(--kpxc-text-color);
     }
 
     main {
-        background: var(--background-color);
+        background: var(--kpxc-background-color);
     }
 
     #sidebar,
     .sidebar {
-        background-color: var(--sidebar-background-color) !important;
+        background-color: var(--kpxc-sidebar-background-color) !important;
     }
 
     input,
     input[type="checkbox"] {
-        background-color: var(--background-color) !important;
-        border-color: var(--input-main-border-color) !important;
-        color: var(--text-color) !important;
+        background-color: var(--kpxc-background-color) !important;
+        border-color: var(--kpxc-input-main-border-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 
     input:active {
-        border-color: var(--input-active-border-color);
+        border-color: var(--kpxc-input-active-border-color);
     }
 
     .modal-content {
-        background: var(--background-color);
-        color: var(--text-color);
+        background: var(--kpxc-background-color);
+        color: var(--kpxc-text-color);
     }
 
     select {
-        background-color: var(--input-background-color) !important;
-        color: var(--text-color) !important;
+        background-color: var(--kpxc-input-background-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 
     select option {
-        background-color: var(--input-background-color);
-        color: var(--text-color);
+        background-color: var(--kpxc-input-background-color);
+        color: var(--kpxc-text-color);
     }
 
     .table,
@@ -136,46 +136,46 @@ h1,
     tr,
     th,
     td {
-        border-color: var(--table-border-color) !important;
+        border-color: var(--kpxc-table-border-color) !important;
     }
 
     .table > caption {
-        color: var(--text-color);
+        color: var(--kpxc-text-color);
     }
 
     .table > thead,
     tbody {
-        color: var(--text-color);
+        color: var(--kpxc-text-color);
     }
 
     .table-striped > tbody > tr:nth-of-type(odd) {
-        background-color: var(--table-odd-color);
+        background-color: var(--kpxc-table-odd-color);
     }
 
     .close {
-        color: var(--text-color);
+        color: var(--kpxc-text-color);
     }
 
     .card {
-        background-color: var(--card-background-color);
-        border-color: var(--card-border-color);
+        background-color: var(--kpxc-card-background-color);
+        border-color: var(--kpxc-card-border-color);
     }
 
     .card-header {
-        background-color: var(--card-header-color);
-        color: var(--text-color);
+        background-color: var(--kpxc-card-header-color);
+        color: var(--kpxc-text-color);
     }
 
     .card-body {
-        background-color: var(--card-background-color);
-        color: var(--text-color);
+        background-color: var(--kpxc-card-background-color);
+        color: var(--kpxc-text-color);
     }
 
     .invalid-feedback code {
-        color: var(--link-hover-color) !important;
+        color: var(--kpxc-link-hover-color) !important;
     }
 
     .invalid-feedback {
-        color: var(--link-color);
+        color: var(--kpxc-link-color);
     }
 }
