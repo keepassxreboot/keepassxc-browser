@@ -179,18 +179,18 @@ options.initGeneralSettings = function() {
         });
     });
 
-    $('#defaultGroupButton').click(function() {
+    $('#defaultGroupButton').click(async function() {
         const value = $('#defaultGroup').val();
         if (value.length > 0) {
             options.settings['defaultGroup'] = value;
-            options.saveSettings();
+            await options.saveSettingsPromise();
         }
     });
 
-    $('#defaultGroupButtonReset').click(function() {
+    $('#defaultGroupButtonReset').click(async function() {
         $('#defaultGroup').val('');
         options.settings['defaultGroup'] = '';
-        options.saveSettings();
+        await options.saveSettingsPromise();
     });
 
     let temporarySettings;
