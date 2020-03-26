@@ -145,9 +145,9 @@ options.initGeneralSettings = function() {
     });
 
     // Only save the setting when mouse is released from the range input
-    $('#tab-general-settings input[type=range]').change(function(e) {
+    $('#tab-general-settings input[type=range]').change(async function(e) {
         options.settings['redirectAllowance'] = e.target.valueAsNumber;
-        options.saveSettings();
+        await options.saveSettingsPromise();
     });
 
     browser.runtime.sendMessage({
@@ -254,7 +254,7 @@ options.initGeneralSettings = function() {
     $('#copyVersionToClipboard').on('click', function () {
         const copyText = document.getElementById('versionInfo').innerText;
         navigator.clipboard.writeText(copyText);
-    })
+    });
 };
 
 options.showKeePassXCVersions = function(response) {
