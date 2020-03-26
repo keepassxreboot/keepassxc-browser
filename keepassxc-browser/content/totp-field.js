@@ -1,7 +1,7 @@
 'use strict';
 
 const MINIMUM_SIZE = 60;
-const ignoreRegex = /^(zip|postal).*code$/i;
+const ignoreRegex = /(zip|postal).*code/i;
 const ignoredTypes = [ 'email', 'password', 'username' ];
 
 var kpxcTOTPIcons = {};
