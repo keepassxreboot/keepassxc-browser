@@ -705,8 +705,17 @@ kpxcObserverHelper.getInputs = function(target) {
     return inputs;
 };
 
+// Gets of generates an ID for the element
 kpxcObserverHelper.getId = function(target) {
-    return target.classList.length === 0 ? target.id : target.classList;
+    if (target.classList.length > 0) {
+        return target.classlist;
+    }
+
+    if (target.id !== '') {
+        return target.id;
+    }
+
+    return `kpxc${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}`;
 };
 
 kpxcObserverHelper.ignoredElement = function(target) {
@@ -858,8 +867,11 @@ kpxc.initObserver = function() {
         }
 
         for (const mut of mutations) {
-            // Skip text nodes
-            if (mut.target.nodeType === Node.TEXT_NODE) {
+            // Skip text nodes and base HTML element
+            if (mut.target.nodeType === Node.TEXT_NODE
+                || mut.target.nodeName === 'HTML'
+                || mut.target.nodeName === 'LINK'
+                || mut.target.nodeName === 'HEAD') {
                 continue;
             }
 
@@ -868,8 +880,9 @@ kpxc.initObserver = function() {
 
             // Handle attributes only if CSS display is modified
             if (mut.type === 'attributes') {
-                // Check if some class is changed that folds a form or input field(s)
-                if (mut.attributeName === 'class' && mut.target.querySelectorAll('form input').length > 0) {
+                // Check if some class is changed that holds a form or input field(s). Ignore large forms.
+                const formInput = mut.target.querySelector('form input');
+                if (mut.attributeName === 'class' && formInput !== null && formInput.form.length < 20) {
                     kpxc.initCredentialFields(true);
                     continue;
                 }
