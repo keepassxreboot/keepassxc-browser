@@ -35,7 +35,7 @@ Currently these messages are implemented:
 
 ### change-public-keys
 Request:
-```javascript
+```json
 {
     "action": "change-public-keys",
     "publicKey": "<client public key>",
@@ -45,7 +45,7 @@ Request:
 ```
 
 Response (success):
-```javascript
+```json
 {
     "action": "change-public-keys",
     "version": "2.2.0",
@@ -56,14 +56,14 @@ Response (success):
 
 ### get-databasehash
 Unencrypted message:
-```javascript
+```json
 {
     "action": "get-databasehash"
 }
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "get-databasehash",
     "message": "<encrypted message>",
@@ -73,7 +73,7 @@ Request:
 ```
 
 Response message data (success, decrypted):
-```javascript
+```json
 {
     "action": "hash",
     "hash": "29234e32274a32276e25666a42",
@@ -83,7 +83,7 @@ Response message data (success, decrypted):
 
 ### associate
 Unencrypted message:
-```javascript
+```json
 {
     "action": "associate",
     "key": "<client public key>",
@@ -92,7 +92,7 @@ Unencrypted message:
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "associate",
     "message": "<encrypted message>",
@@ -102,7 +102,7 @@ Request:
 ```
 
 Response message data (success, decrypted):
-```javascript
+```json
 {
     "hash": "29234e32274a32276e25666a42",
     "version": "2.2.0",
@@ -114,7 +114,7 @@ Response message data (success, decrypted):
 
 ### test-associate
 Unencrypted message:
-```javascript
+```json
 {
     "action": "test-associate",
     "id": "<saved database identifier received from associate>",
@@ -123,7 +123,7 @@ Unencrypted message:
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "test-associate",
     "message": "<encrypted message>",
@@ -133,7 +133,7 @@ Request:
 ```
 
 Response message data (success, decrypted):
-```javascript
+```json
 {
     "version": "2.2.0",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
@@ -145,7 +145,7 @@ Response message data (success, decrypted):
 
 ### generate-password
 Request (no unencrypted message is needed):
-```javascript
+```json
 {
     "action": "generate-password",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
@@ -154,7 +154,7 @@ Request (no unencrypted message is needed):
 ```
 
 Response message data (success, decrypted):
-```javascript
+```json
 {
     "version": "2.2.0",
     "entries": [
@@ -170,12 +170,12 @@ Response message data (success, decrypted):
 
 ### get-logins
 Unencrypted message:
-```javascript
+```json
 {
     "action": "get-logins",
     "url": "<snip>",
-    "submitUrl": optional,
-    "httpAuth": optional,
+    "submitUrl": "<optional>",
+    "httpAuth": "<optional>",
     "keys": [
         {
             "id": "<saved database identifier received from associate>",
@@ -187,7 +187,7 @@ Unencrypted message:
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "get-logins",
     "message": "<encrypted message>",
@@ -197,7 +197,7 @@ Request:
 ```
 
 Response message data (success, decrypted):
-```javascript
+```json
 {
     "count": "2",
     "entries" : [
@@ -221,7 +221,7 @@ Response message data (success, decrypted):
 
 ### set-login
 Unencrypted message:
-```javascript
+```json
 {
     "action": "set-login",
     "url": "<snip>",
@@ -237,7 +237,7 @@ Unencrypted message:
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "set-login",
     "message": "<encrypted message>",
@@ -247,7 +247,7 @@ Request:
 ```
 
 Response message data (success, decrypted):
-```javascript
+```json
 {
     "count": null,
     "entries" : null,
@@ -261,14 +261,14 @@ Response message data (success, decrypted):
 
 ### lock-database
 Unencrypted message:
-```javascript
+```json
 {
     "action": "lock-database"
 }
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "lock-database",
     "message": "<encrypted message>",
@@ -278,7 +278,7 @@ Request:
 ```
 
 Response message data (success always returns an error, decrypted):
-```javascript
+```json
 {
     "action": "lock-database",
     "errorCode": 1,
@@ -289,14 +289,14 @@ Response message data (success always returns an error, decrypted):
 
 ### get-database-groups
 Unencrypted message:
-```javascript
+```json
 {
     "action": "get-database-groups"
 }
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "get-database-groups",
     "message": "<encrypted message>",
@@ -360,7 +360,7 @@ Response message data (success, decrypted):
 ```
 ### create-new-group
 Unencrypted message:
-```javascript
+```json
 {
     "action": "create-new-group",
     "groupName": "<group name or path>"
@@ -368,7 +368,7 @@ Unencrypted message:
 ```
 
 Request:
-```javascript
+```json
 {
     "action": "create-new-group",
     "message": "<encrypted message>",
