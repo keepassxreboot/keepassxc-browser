@@ -10,11 +10,16 @@ Now the requests are encrypted by [TweetNaCl.js](https://github.com/dchest/tweet
 5. When KeePassXC sends a message it is encrypted with keepassxc-browser's public key and an incremented nonce.
 6. Databases are stored with newly created public key used with `associate`. A new key pair for data transfer is generated each time keepassxc-browser is launched. This saved key is not used again, as it's only used for identification.
 
+Thus there are three key pairs involved in every communication:
+- `host key` - A temporary key pair created by KeePassXC to encrypt the communication of the current session.
+- `client key` - A temporary key pair created by keepassxc-browser to encrypt the communication of the current session.
+- `identification key` - A permanent key pair created by keepassxc-browser used to authenticate the browser in later sessions after it was successfully *associated* with a database. This one should be stored safely by the browser. Note that only the public key part is ever used which might be a tiny flaw in the protocol since that part is also stored in the database.
+
 Encrypted messages are built with these JSON parameters:
 - action - `test-associate`, `associate`, `get-logins`, `get-logins-count`, `set-login`...
 - message - Encrypted message, base64 encoded
 - nonce - 24 bytes long random data, base64 encoded. This is incremented to the response.
-- clientID - 24 bytes long random data, base64 encoded. This is used to identify different browsers if multiple are used with proxy application.
+- clientID - 24 bytes long random data, base64 encoded. This is used for a single session to identify different browsers if multiple are used with proxy application.
 
 Currently these messages are implemented:
 - `change-public-keys`: Request for passing public keys from client to server and back.
@@ -33,7 +38,7 @@ Request:
 ```javascript
 {
     "action": "change-public-keys",
-    "publicKey": "<current public key>",
+    "publicKey": "<client public key>",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "clientID": "<clientID>"
 }
@@ -81,8 +86,8 @@ Unencrypted message:
 ```javascript
 {
     "action": "associate",
-    "key": "<current public key>",
-    "idKey": "<a new identification key>"
+    "key": "<client public key>",
+    "idKey": "<a new identification public key>"
 }
 ```
 
@@ -112,8 +117,8 @@ Unencrypted message:
 ```javascript
 {
     "action": "test-associate",
-    "id": "<saved database identifier>",
-    "key": "<saved database public key>"
+    "id": "<saved database identifier received from associate>",
+    "key": "<saved identification public key>"
 }
 ```
 
@@ -173,8 +178,8 @@ Unencrypted message:
     "httpAuth": optional,
     "keys": [
         {
-            "id": <connected_id>,
-            "key": <connected_key>
+            "id": "<saved database identifier received from associate>",
+            "key": "<saved identification public key>"
         },
         ...
     ]
