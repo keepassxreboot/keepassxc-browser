@@ -34,7 +34,7 @@ TOTPFieldIcon.prototype.initField = function(field) {
         || field.getAttribute('kpxc-totp-field') === 'true'
         || field.offsetWidth < MINIMUM_SIZE
         || field.size < 2
-        || (field.maxLength > 0 && field.maxLength < 4)
+        || (field.maxLength > 0 && (field.maxLength < 6 || field.maxLength > 8))
         || field.id.match(ignoreRegex)
         || field.name.match(ignoreRegex)) {
         return;
