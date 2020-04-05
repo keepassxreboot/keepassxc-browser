@@ -151,7 +151,10 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
         const args = [ credentials.username, credentials.password, credentials.url ];
 
         // If root group is defined by the user, and there's no default browser group, save the credentials to the root group
-        if (result.groups[0].children.length === 0 && result.defaultGroup.toLowerCase() === 'root') {
+        if (result.groups !== undefined
+            && result.groups.length > 0
+            && result.groups[0].children.length === 0
+            && result.defaultGroup.toLowerCase() === 'root') {
             args.push(result.groups[0].name, result.groups[0].uuid);
         }
 
