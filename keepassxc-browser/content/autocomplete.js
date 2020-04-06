@@ -227,6 +227,7 @@ kpxcAutocomplete.updatePosition = function(inputField, elem) {
     }
 
     const rect = inputField.getBoundingClientRect();
+    div.style.minWidth = Pixels(inputField.offsetWidth);
     const bodyrect = document.body.getBoundingClientRect();
     const bodystyle = getComputedStyle(document.body);
 
