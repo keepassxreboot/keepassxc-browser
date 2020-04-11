@@ -1112,7 +1112,9 @@ keepass.decrypt = function(input, nonce) {
 keepass.enableAutomaticReconnect = function() {
     // Disable for Windows if KeePassXC is older than 2.3.4
     if (!page.settings.autoReconnect
-        || (navigator.platform.toLowerCase().includes('win') && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
+        || (navigator.platform.toLowerCase().includes('win')
+            && keepass.currentKeePassXC
+            && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
         return;
     }
 
