@@ -245,6 +245,22 @@ kpxcFields.prepareId = function(id) {
     return (id + '').replace(kpxcFields.rcssescape, kpxcFields.fcssescape);
 };
 
+/**
+ * Returns the first parent element satifying the {@code predicate} mapped by {@code resultFn} or else {@code defaultVal}.
+ * @param {HTMLElement} element     The start element (excluded, starting with the parents)
+ * @param {function} predicate      Matcher for the element to find, type (HTMLElement) => boolean
+ * @param {function} resultFn       Callback function of type (HTMLElement) => {*} called for the first matching element
+ * @param {fun} defaultValFn        Fallback return value supplier, if no element matching the predicate can be found
+ */
+kpxcFields.traverseParents = function(element, predicate, resultFn = () => true, defaultValFn = () => false) {
+    for (let f = element.parentElement; f !== null; f = f.parentElement) {
+        if (predicate(f)) {
+            return resultFn(f);
+        }
+    }
+    return defaultValFn();
+};
+
 // Checks if input field is a search field. Attributes or form action containing 'search', or parent element holding
 // role="search" will be identified as a search field.
 kpxcFields.isSearchField = function(target) {
@@ -285,7 +301,10 @@ kpxcFields.isSearchField = function(target) {
 };
 
 kpxcFields.isVisible = function(field) {
-    const rect = field.getBoundingClientRect();
+    // Check for parent opacity
+    if (kpxcFields.traverseParents(field, f => f.style.opacity === '0')) {
+        return false;
+    }
 
     // Check CSS visibility
     const fieldStyle = getComputedStyle(field);
@@ -294,6 +313,7 @@ kpxcFields.isVisible = function(field) {
     }
 
     // Check element position and size
+    const rect = field.getBoundingClientRect();
     if (rect.x < 0 || rect.y < 0 || rect.width < 8 || rect.height < 8) {
         return false;
     }
