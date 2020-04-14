@@ -7,13 +7,14 @@ const ManualFill = {
 };
 
 const acceptedOTPFields = [
-    '2fa',
+    '2f',
     'auth',
     'challenge',
     'code',
     'mfa',
     'otp',
-    'token'
+    'token',
+    'pin'
 ];
 
 // Contains already called method names
