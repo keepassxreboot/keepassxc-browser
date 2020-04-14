@@ -613,6 +613,11 @@ kpxcFields.useDefinedCredentialFields = function() {
     if (kpxc.settings['defined-custom-fields'] && kpxc.settings['defined-custom-fields'][location]) {
         const creds = kpxc.settings['defined-custom-fields'][location];
 
+        // Handle custom TOTP field
+        if (_f(creds.totp)) {
+            kpxcTOTPIcons.newIcon(_f(creds.totp), _databaseClosed);
+        }
+
         let found = _f(creds.username) || _f(creds.password);
         for (const i of creds.fields) {
             if (_fs(i)) {

@@ -5,6 +5,7 @@ var kpxcDefine = {};
 kpxcDefine.selection = {
     username: null,
     password: null,
+    totp: null,
     fields: []
 };
 kpxcDefine.eventFieldClick = null;
@@ -112,6 +113,7 @@ kpxcDefine.resetSelection = function() {
     kpxcDefine.selection = {
         username: null,
         password: null,
+        totp: null,
         fields: []
     };
 
@@ -126,6 +128,7 @@ kpxcDefine.isFieldSelected = function(kpxcId) {
         return (
             kpxcId === kpxcDefine.selection.username
             || kpxcId === kpxcDefine.selection.password
+            || kpxcId === kpxcDefine.selection.totp
             || kpxcId in kpxcDefine.selection.fields
         );
     }
@@ -161,7 +164,7 @@ kpxcDefine.markAllPasswordFields = function(chooser, more = false) {
         field.textContent = tr('password');
         field.onclick = null;
         kpxcDefine.prepareStep3();
-        kpxcDefine.markAllStringFields('#kpxcDefine-fields');
+        kpxcDefine.markAllTOTPFields('#kpxcDefine-fields');
     };
     if (more) {
         kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern);
@@ -186,6 +189,23 @@ kpxcDefine.markAllStringFields = function(chooser) {
         field.onclick = null;
     };
     kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern + ', select');
+};
+
+kpxcDefine.markAllTOTPFields = function(chooser) {
+    kpxcDefine.eventFieldClick = function(e, elem) {
+        if (!e.isTrusted) {
+            return;
+        }
+
+        const field = elem || e.currentTarget;
+        kpxcDefine.selection.totp = field.getAttribute('data-kpxc-id');
+        field.classList.add('kpxcDefine-fixed-totp-field');
+        field.textContent = 'TOTP';
+        field.onclick = null;
+        kpxcDefine.prepareStep4();
+        kpxcDefine.markAllStringFields('#kpxcDefine-fields');
+    };
+    kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern);
 };
 
 kpxcDefine.markFields = function(chooser, pattern) {
@@ -266,8 +286,21 @@ kpxcDefine.prepareStep3 = function() {
     $('#kpxcDefine-help').textContent = tr('defineHelpText');
 
     removeContent('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field)');
-    $('#kpxcDefine-chooser-headline').textContent = tr('defineConfirmSelection');
+    $('#kpxcDefine-chooser-headline').textContent = tr('defineChooseTOTP');
     kpxcDefine.dataStep = 3;
+    $('#kpxcDefine-btn-skip').style.display = 'inline-block';
+    $('#kpxcDefine-btn-again').style.display = 'inline-block';
+    $('#kpxcDefine-btn-more').style.display = 'none';
+    $('#kpxcDefine-btn-confirm').style.display = 'none';
+};
+
+kpxcDefine.prepareStep4 = function() {
+    $('#kpxcDefine-help').style.marginBottom = '10px';
+    $('#kpxcDefine-help').textContent = tr('defineHelpText');
+
+    removeContent('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field)');
+    $('#kpxcDefine-chooser-headline').textContent = tr('defineConfirmSelection');
+    kpxcDefine.dataStep = 4;
     $('#kpxcDefine-btn-skip').style.display = 'none';
     $('#kpxcDefine-btn-more').style.display = 'none';
     $('#kpxcDefine-btn-again').style.display = 'inline-block';
@@ -282,6 +315,10 @@ kpxcDefine.skip = function() {
     } else if (kpxcDefine.dataStep === 2) {
         kpxcDefine.selection.password = null;
         kpxcDefine.prepareStep3();
+        kpxcDefine.markAllTOTPFields('#kpxcDefine-fields');
+    } else if (kpxcDefine.dataStep === 3) {
+        kpxcDefine.selection.totp = null;
+        kpxcDefine.prepareStep4();
         kpxcDefine.markAllStringFields('#kpxcDefine-fields');
     }
 };
@@ -300,7 +337,7 @@ kpxcDefine.more = function() {
 };
 
 kpxcDefine.confirm = async function() {
-    if (kpxcDefine.dataStep !== 3) {
+    if (kpxcDefine.dataStep !== 4) {
         return;
     }
 
@@ -316,6 +353,10 @@ kpxcDefine.confirm = async function() {
         kpxcDefine.selection.password = kpxcFields.prepareId(kpxcDefine.selection.password);
     }
 
+    if (kpxcDefine.selection.totp) {
+        kpxcDefine.selection.totp = kpxcFields.prepareId(kpxcDefine.selection.totp);
+    }
+
     const fieldIds = [];
     const fieldKeys = Object.keys(kpxcDefine.selection.fields);
     for (const i of fieldKeys) {
@@ -326,6 +367,7 @@ kpxcDefine.confirm = async function() {
     kpxc.settings['defined-custom-fields'][location] = {
         username: kpxcDefine.selection.username,
         password: kpxcDefine.selection.password,
+        totp: kpxcDefine.selection.totp,
         fields: fieldIds
     };
 

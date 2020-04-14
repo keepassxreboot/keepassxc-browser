@@ -103,7 +103,7 @@
     background-color: rgba(50,205,50,0.4);
 }
 
-.kpxcDefine-fixed-string-field {
+.kpxcDefine-fixed-string-field, .kpxcDefine-fixed-totp-field {
     border: 2px solid deepskyblue;
     color: #efefef;
     background-color: rgba(30,144,255,0.4);
