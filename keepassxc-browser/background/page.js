@@ -180,12 +180,13 @@ page.clearLogins = function(tabId) {
     page.passwordFilled = false;
 };
 
-page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials) {
+page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials, tabId) {
     page.submittedCredentials.submitted = submitted;
     page.submittedCredentials.username = username;
     page.submittedCredentials.password = password;
     page.submittedCredentials.url = url;
     page.submittedCredentials.oldCredentials = oldCredentials;
+    page.submittedCredentials.tabId = tabId;
 };
 
 page.clearSubmittedCredentials = function() {
