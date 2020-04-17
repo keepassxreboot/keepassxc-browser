@@ -740,7 +740,7 @@
         "description": "Save domain only option help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "If credentials are found for a page and the login-type is an HTTP Basic Auth request, KeePassXC-Browser tries to login with the first given credentials.",
+        "message": "If credentials are found for a page and the login-type is an HTTP Basic Auth request, KeePassXC-Browser tries to login automatically with the first given credentials. When multiple credentials are present, the extension popup can be used to choose the correct one. Even when this feature is enabled, it is still possible to enter HTTP Basic Auth login manually.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
