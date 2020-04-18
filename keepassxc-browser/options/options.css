@@ -1,10 +1,37 @@
 body {
+    background-color: var(--kpxc-background-color);
+    color: var(--kpxc-text-color);
     font-size: 14px;
     max-width: 1440px;
 }
 
 a {
+    color: var(--kpxc-link-color);
     text-decoration: none !important;
+}
+
+a:hover {
+    color: var(--kpxc-link-hover-color);
+}
+
+pre {
+    background-color: var(--kpxc-background-color);
+    color: var(--kpxc-text-color);
+}
+
+main {
+    background: var(--kpxc-background-color);
+}
+
+input,
+input[type="checkbox"] {
+    background-color: var(--kpxc-background-color) !important;
+    border-color: var(--kpxc-input-main-border-color) !important;
+    color: var(--kpxc-text-color) !important;
+}
+
+input:active {
+    border-color: var(--kpxc-input-active-border-color);
 }
 
 input:invalid {
@@ -17,6 +44,38 @@ input[disabled] {
 
 footer {
     bottom: 1rem;
+}
+
+select {
+    background-color: var(--kpxc-input-background-color) !important;
+    color: var(--kpxc-text-color) !important;
+}
+
+select option {
+    background-color: var(--kpxc-input-background-color);
+    color: var(--kpxc-text-color);
+}
+
+.table,
+tbody,
+thead,
+tr,
+th,
+td {
+    border-color: var(--kpxc-table-border-color) !important;
+}
+
+.table > caption {
+    color: var(--kpxc-text-color);
+}
+
+.table > thead,
+tbody {
+    color: var(--kpxc-text-color);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--kpxc-table-odd-color);
 }
 
 .table tbody td {
@@ -33,11 +92,39 @@ table td:last-of-type {
     width: 1px;
 }
 
+.close {
+    color: var(--kpxc-text-color);
+}
+
+.card {
+    background-color: var(--kpxc-card-background-color);
+    border-color: var(--kpxc-card-border-color);
+}
+
+.card-header {
+    background-color: var(--kpxc-card-header-color);
+    color: var(--kpxc-text-color);
+}
+
+.card-body {
+    background-color: var(--kpxc-card-background-color);
+    color: var(--kpxc-text-color);
+}
+
+.invalid-feedback {
+    color: var(--kpxc-link-color);
+}
+
+.invalid-feedback code {
+    color: var(--kpxc-link-hover-color) !important;
+}
+
 .fa {
     margin-right: 0.2rem;
 }
 
 .sidebar {
+    background-color: var(--kpxc-sidebar-background-color) !important;
     height: 50px;
     bottom: 0;
     position: fixed;
@@ -47,6 +134,10 @@ table td:last-of-type {
 
 .sidebar a {
     border: 1px solid transparent;
+}
+
+#sidebar {
+    background-color: var(--kpxc-sidebar-background-color) !important;
 }
 
 h1,
@@ -68,6 +159,11 @@ h1,
     font-size: 95% !important;
 }
 
+.modal-content {
+    background: var(--kpxc-background-color);
+    color: var(--kpxc-text-color);
+}
+
 @media (min-width: 768px) {
     .sidebar {
         height: auto;
@@ -77,105 +173,5 @@ h1,
 @media (min-width: 1440px) {
     .sidebar {
         width: 240px;
-    }
-}
-
-@media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
-    a {
-        color: var(--kpxc-link-color);
-    }
-
-    a:hover {
-        color: var(--kpxc-link-hover-color);
-    }
-
-    body,
-    pre {
-        background-color: var(--kpxc-background-color);
-        color: var(--kpxc-text-color);
-    }
-
-    main {
-        background: var(--kpxc-background-color);
-    }
-
-    #sidebar,
-    .sidebar {
-        background-color: var(--kpxc-sidebar-background-color) !important;
-    }
-
-    input,
-    input[type="checkbox"] {
-        background-color: var(--kpxc-background-color) !important;
-        border-color: var(--kpxc-input-main-border-color) !important;
-        color: var(--kpxc-text-color) !important;
-    }
-
-    input:active {
-        border-color: var(--kpxc-input-active-border-color);
-    }
-
-    .modal-content {
-        background: var(--kpxc-background-color);
-        color: var(--kpxc-text-color);
-    }
-
-    select {
-        background-color: var(--kpxc-input-background-color) !important;
-        color: var(--kpxc-text-color) !important;
-    }
-
-    select option {
-        background-color: var(--kpxc-input-background-color);
-        color: var(--kpxc-text-color);
-    }
-
-    .table,
-    tbody,
-    thead,
-    tr,
-    th,
-    td {
-        border-color: var(--kpxc-table-border-color) !important;
-    }
-
-    .table > caption {
-        color: var(--kpxc-text-color);
-    }
-
-    .table > thead,
-    tbody {
-        color: var(--kpxc-text-color);
-    }
-
-    .table-striped > tbody > tr:nth-of-type(odd) {
-        background-color: var(--kpxc-table-odd-color);
-    }
-
-    .close {
-        color: var(--kpxc-text-color);
-    }
-
-    .card {
-        background-color: var(--kpxc-card-background-color);
-        border-color: var(--kpxc-card-border-color);
-    }
-
-    .card-header {
-        background-color: var(--kpxc-card-header-color);
-        color: var(--kpxc-text-color);
-    }
-
-    .card-body {
-        background-color: var(--kpxc-card-background-color);
-        color: var(--kpxc-text-color);
-    }
-
-    .invalid-feedback code {
-        color: var(--kpxc-link-hover-color) !important;
-    }
-
-    .invalid-feedback {
-        color: var(--kpxc-link-color);
     }
 }
