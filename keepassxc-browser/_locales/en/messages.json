@@ -215,12 +215,16 @@
         "message": "2. Now choose a password field",
         "description": "Choosing a password field text when choosing custom login fields."
     },
+    "defineChooseTOTP": {
+        "message": "3. Choose a TOTP field",
+        "description": "Choosing a TOTP field text when choosing custom login fields."
+    },
     "defineConfirmSelection": {
-        "message": "3. Confirm selection",
+        "message": "4. Confirm selection",
         "description": "Confirm a selection text when choosing custom login fields."
     },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as <em>String fields</em>.",
+        "message": "Please confirm your selection or choose more fields as String fields.",
         "description": "Confirm a selection text when choosing custom login fields which contains string fields."
     },
     "defineKeyboardText": {
