@@ -808,7 +808,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
-        "message": "The following KeePassXC databases are connected to KeePassXC-Browser.",
+        "message": "Databases connected to KeePassXC-Browser.",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
