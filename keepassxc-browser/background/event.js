@@ -214,13 +214,17 @@ kpxcEvent.pageClearSubmitted = function() {
     return Promise.resolve();
 };
 
-kpxcEvent.pageGetSubmitted = async function() {
+kpxcEvent.pageGetSubmitted = async function(tab) {
+    // Do not return any credentials if the tab ID does not match.
+    if (tab.id !== page.submittedCredentials.tabId) {
+        return {};
+    }
     return page.submittedCredentials;
 };
 
 kpxcEvent.pageSetSubmitted = function(tab, args = []) {
     const [ submitted, username, password, url, oldCredentials ] = args;
-    page.setSubmittedCredentials(submitted, username, password, url, oldCredentials);
+    page.setSubmittedCredentials(submitted, username, password, url, oldCredentials, tab.id);
     return Promise.resolve();
 };
 
