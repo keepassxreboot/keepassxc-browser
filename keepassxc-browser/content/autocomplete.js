@@ -228,12 +228,12 @@ kpxcAutocomplete.updatePosition = function(inputField, elem) {
 
     const rect = inputField.getBoundingClientRect();
     div.style.minWidth = Pixels(inputField.offsetWidth);
-    const bodyrect = document.body.getBoundingClientRect();
-    const bodystyle = getComputedStyle(document.body);
+    const bodyRect = document.body.getBoundingClientRect();
+    const bodyStyle = getComputedStyle(document.body);
 
-    if (bodystyle.position.toLowerCase() === 'relative') {
-        div.style.top = Pixels(rect.top - bodyrect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
-        div.style.left = Pixels(rect.left - bodyrect.left + document.scrollingElement.scrollLeft);
+    if (bodyStyle.position.toLowerCase() === 'relative') {
+        div.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+        div.style.left = Pixels(rect.left - bodyRect.left + document.scrollingElement.scrollLeft);
     } else {
         div.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
         div.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);

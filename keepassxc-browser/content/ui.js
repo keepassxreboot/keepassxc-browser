@@ -82,14 +82,14 @@ kpxcUI.updateIconPosition = function(iconClass) {
 
 kpxcUI.setIconPosition = function(icon, field) {
     const rect = field.getBoundingClientRect();
-    const bodyrect = document.body.getBoundingClientRect();
-    const bodystyle = getComputedStyle(document.body);
+    const bodyRect = document.body.getBoundingClientRect();
+    const bodyStyle = getComputedStyle(document.body);
     const offset = Number(icon.getAttribute('offset'));
     const size = (document.dir !== 'rtl') ? Number(icon.getAttribute('size')) : 0;
 
-    if (bodystyle.position.toLowerCase() === 'relative') {
-        icon.style.top = Pixels(rect.top - bodyrect.top + document.scrollingElement.scrollTop + offset + 1);
-        icon.style.left = Pixels(rect.left - bodyrect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
+    if (bodyStyle.position.toLowerCase() === 'relative') {
+        icon.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + offset + 1);
+        icon.style.left = Pixels(rect.left - bodyRect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
     } else {
         icon.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + offset + 1);
         icon.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
