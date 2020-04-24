@@ -227,9 +227,18 @@ kpxcAutocomplete.updatePosition = function(inputField, elem) {
     }
 
     const rect = inputField.getBoundingClientRect();
-    div.style.top = Pixels((rect.top + document.scrollingElement.scrollTop) + inputField.offsetHeight);
-    div.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft));
     div.style.minWidth = Pixels(inputField.offsetWidth);
+    const bodyRect = document.body.getBoundingClientRect();
+    const bodyStyle = getComputedStyle(document.body);
+
+    if (bodyStyle.position.toLowerCase() === 'relative') {
+        div.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+        div.style.left = Pixels(rect.left - bodyRect.left + document.scrollingElement.scrollLeft);
+    } else {
+        div.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+        div.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);
+    }
+
 };
 
 // Detect click outside autocomplete
