@@ -37,18 +37,6 @@ options.initMenu = function() {
     $('div.tab:first').show();
 };
 
-options.saveSettingsPromise = function() {
-    return new Promise((resolve, reject) => {
-        browser.storage.local.set({ 'settings': options.settings }).then((item) => {
-            browser.runtime.sendMessage({
-                action: 'load_settings'
-            }).then((settings) => {
-                resolve(settings);
-            });
-        });
-    });
-};
-
 options.saveSetting = async function(name) {
     const id = '#' + name;
     $(id).closest('.control-group').removeClass('error').addClass('success');
@@ -56,24 +44,30 @@ options.saveSetting = async function(name) {
         $(id).closest('.control-group').removeClass('success');
     }, 2500);
 
-    browser.storage.local.set({ 'settings': options.settings });
+    await browser.storage.local.set({ 'settings': options.settings });
     await browser.runtime.sendMessage({
         action: 'load_settings'
     });
+
+    return Promise.resolve();
 };
 
 options.saveSettings = async function() {
-    browser.storage.local.set({ 'settings': options.settings });
-    await browser.runtime.sendMessage({
+    await browser.storage.local.set({ 'settings': options.settings });
+    const settings = await browser.runtime.sendMessage({
         action: 'load_settings'
     });
+
+    return settings;
 };
 
 options.saveKeyRing = async function() {
-    browser.storage.local.set({ 'keyRing': options.keyRing });
+    await browser.storage.local.set({ 'keyRing': options.keyRing });
     await browser.runtime.sendMessage({
         action: 'load_keyring'
     });
+
+    return Promise.resolve();
 };
 
 options.initGeneralSettings = function() {
@@ -85,7 +79,7 @@ options.initGeneralSettings = function() {
 
     $('#tab-general-settings select:first').change(async function() {
         options.settings['colorTheme'] = $(this).val();
-        await options.saveSettingsPromise();
+        await options.saveSettings();
         location.reload();
     });
 
@@ -102,27 +96,27 @@ options.initGeneralSettings = function() {
     $('#redirectAllowanceLabel').text(tr('optionsRedirectAllowance',
         options.settings['redirectAllowance'] === 11 ? 'Infinite' : String(options.settings['redirectAllowance'])));
 
-    $('#tab-general-settings input[type=checkbox]').change(function() {
+    $('#tab-general-settings input[type=checkbox]').change(async function() {
         const name = $(this).attr('name');
         options.settings[name] = $(this).is(':checked');
-        options.saveSettingsPromise().then((updated) => {
-            if (name === 'autoFillAndSend') {
-                browser.runtime.sendMessage({ action: 'init_http_auth' });
-            } else if (name === 'defaultGroupAlwaysAsk') {
-                if ($(this).is(':checked')) {
-                    $('#defaultGroup').prop('disabled', true);
-                    $('#defaultGroupButton').prop('disabled', true);
-                    $('#defaultGroupButtonReset').prop('disabled', true);
-                } else {
-                    $('#defaultGroup').prop('disabled', false);
-                    $('#defaultGroupButton').prop('disabled', false);
-                    $('#defaultGroupButtonReset').prop('disabled', false);
-                }
-            } else if (name === 'autoReconnect') {
-                const message = updated.autoReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
-                browser.runtime.sendMessage({ action: message });
+
+        const updated = await options.saveSettings();
+        if (name === 'autoFillAndSend') {
+            browser.runtime.sendMessage({ action: 'init_http_auth' });
+        } else if (name === 'defaultGroupAlwaysAsk') {
+            if ($(this).is(':checked')) {
+                $('#defaultGroup').prop('disabled', true);
+                $('#defaultGroupButton').prop('disabled', true);
+                $('#defaultGroupButtonReset').prop('disabled', true);
+            } else {
+                $('#defaultGroup').prop('disabled', false);
+                $('#defaultGroupButton').prop('disabled', false);
+                $('#defaultGroupButtonReset').prop('disabled', false);
             }
-        });
+        } else if (name === 'autoReconnect') {
+            const message = updated.autoReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
+            browser.runtime.sendMessage({ action: message });
+        }
     });
 
     $('#tab-general-settings input#defaultGroup').val(options.settings['defaultGroup']);
@@ -147,7 +141,7 @@ options.initGeneralSettings = function() {
     // Only save the setting when mouse is released from the range input
     $('#tab-general-settings input[type=range]').change(async function(e) {
         options.settings['redirectAllowance'] = e.target.valueAsNumber;
-        await options.saveSettingsPromise();
+        await options.saveSettings();
     });
 
     browser.runtime.sendMessage({
@@ -183,14 +177,14 @@ options.initGeneralSettings = function() {
         const value = $('#defaultGroup').val();
         if (value.length > 0) {
             options.settings['defaultGroup'] = value;
-            await options.saveSettingsPromise();
+            await options.saveSettings();
         }
     });
 
     $('#defaultGroupButtonReset').click(async function() {
         $('#defaultGroup').val('');
         options.settings['defaultGroup'] = '';
-        await options.saveSettingsPromise();
+        await options.saveSettings();
     });
 
     let temporarySettings;
