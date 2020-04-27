@@ -5,6 +5,9 @@
     cursor: pointer;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-rendering: auto !important;
     margin: 0px auto;
     margin-bottom: 20px;
     padding: 15px;
