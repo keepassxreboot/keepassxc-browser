@@ -11,6 +11,9 @@
     width: auto;
     color: var(--kpxc-text-color);
     font-size: .9em !important;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-rendering: auto !important;
 }
 
 .kpxcAutocomplete-items div:last-child {
