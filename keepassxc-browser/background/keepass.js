@@ -729,18 +729,10 @@ keepass.setCryptoKey = function(id, key) {
 //--------------------------------------------------------------------------
 
 keepass.enableAutomaticReconnect = function() {
-    // Disable for Windows if KeePassXC is older than 2.3.4
-    if (!page.settings.autoReconnect
-        || (navigator.platform.toLowerCase().includes('win')
-            && keepass.currentKeePassXC
-            && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
-        return;
-    }
-
     if (keepass.reconnectLoop === null) {
         keepass.reconnectLoop = setInterval(async () => {
             if (!keepass.isKeePassXCAvailable) {
-                keepass.reconnect();
+                keepassClient.connectToNative();
             }
         }, 1000);
     }
@@ -752,14 +744,18 @@ keepass.disableAutomaticReconnect = function() {
 };
 
 keepass.reconnect = async function(tab, connectionTimeout) {
-    keepassClient.connectToNative();
+    console.log('reconnect()');
+    keepass.isConnected = true;
     keepass.generateNewKeyPair();
+
     const keyChangeResult = await keepass.changePublicKeys(tab, true, connectionTimeout).catch((e) => {
+        console.log('Error changing keys');
         return false;
     });
 
     // Change public keys timeout
     if (!keyChangeResult) {
+        console.log('Key change timeout');
         return false;
     }
 

@@ -3,6 +3,7 @@
 const keepassClient = {};
 keepassClient.keySize = 24;
 keepassClient.messageTimeout = 500; // Milliseconds
+keepassClient.connectionTimeout = 5000; // Milliseconds
 keepassClient.nativeHostName = 'org.keepassxc.keepassxc_browser';
 keepassClient.nativePort = null;
 
@@ -322,8 +323,7 @@ keepassClient.nativeConnect = function() {
     return keepassClient.nativePort;
 };
 
-function onDisconnected() {
-    keepassClient.nativePort = null;
+function disconnect() {
     keepass.isConnected = false;
     keepass.isDatabaseClosed = true;
     keepass.isKeePassXCAvailable = false;
@@ -334,12 +334,26 @@ function onDisconnected() {
     page.clearAllLogins();
     keepass.updatePopup('cross');
     keepass.updateDatabaseHashToContent();
-    logError(`Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message)}`);
+}
+
+function onDisconnected() {
+    console.log('onDisconnected');
+    keepass.nativePort = null;
+    disconnect();
+    console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
 }
 
 keepassClient.onNativeMessage = function(response) {
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.updateDatabase();
+    } else if (response.action === 'reconnected') {
+        setTimeout(function() {
+            keepass.reconnect(null, keepassClient.connectionTimeout);
+        }, 1000);
+    } else if (response.action === 'disconnected') {
+        if (keepass.isConnected) {
+            disconnect();
+        }
     }
 };
