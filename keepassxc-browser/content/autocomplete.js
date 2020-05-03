@@ -10,6 +10,10 @@ kpxcAutocomplete.shadowRoot = undefined;
 kpxcAutocomplete.wrapper = undefined;
 
 kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit = false) {
+    if (input.readOnly) {
+        return;
+    }
+
     kpxcAutocomplete.autoSubmit = autoSubmit;
     kpxcAutocomplete.input = input;
     kpxcAutocomplete.started = true;
@@ -238,7 +242,6 @@ kpxcAutocomplete.updatePosition = function(inputField, elem) {
         div.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
         div.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);
     }
-
 };
 
 // Detect click outside autocomplete
