@@ -84,6 +84,9 @@
                 "mac": "MacCtrl+Shift+U"
             }
         },
+        "fill_username_password_totp": {
+            "description": "__MSG_contextMenuFillUsernameAndPasswordTOTP__"
+        },
         "fill_password": {
             "description": "__MSG_contextMenuFillPassword__",
             "suggested_key": {

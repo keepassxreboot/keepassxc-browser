@@ -3,6 +3,10 @@
         "message": "KeePassXC integration for modern web browsers",
         "description": "Name of the extension."
     },
+    "contextMenuFillUsernameAndPasswordTOTP": {
+        "message": "Fill Username and Pass+TOTP",
+        "description": "Context menu item for filling both username and password + TOTP."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Fill Username and Password",
         "description": "Context menu item for filling both username and password."
@@ -258,6 +262,10 @@
     "credentialsNoUsernameFound": {
         "message": "No credentials for the given username found.",
         "description": "Alert message when no credentials are found for the given username."
+    },
+    "credentialsNoTOTPFound": {
+        "message": "No TOTP for the given username found.",
+        "description": "Alert message when no TOTP is found for the given username."
     },
     "credentialExpired": {
         "message": "Expired",

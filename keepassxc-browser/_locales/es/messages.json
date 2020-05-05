@@ -3,6 +3,10 @@
         "message": "Integración de KeePassXC para navegadores web modernos.",
         "description": "Name of the extension."
     },
+    "contextMenuFillUsernameAndPasswordTOTP": {
+        "message": "Llene nombre de Usuario y Contraseña+TOTP",
+        "description": "Context menu item for filling both username and password + TOTP."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Llene nombre de Usuario y Contraseña",
         "description": "Context menu item for filling both username and password."
@@ -218,6 +222,10 @@
     "credentialsNoUsernameFound": {
         "message": "Error:\nNo se encontraron credenciales para el nombre de usuario dado.",
         "description": "Alert message when no credentials are found for the given username."
+    },
+    "credentialsNoTOTPFound": {
+        "message": "Error: \nNo se encontro el campo TOTP en las credenciales del usuario.",
+        "description": "Alert message when no TOTP is found for the given username."
     },
     "fieldsFill": {
         "message": "Error:\nNo se pueden encontrar campos para rellenar.",

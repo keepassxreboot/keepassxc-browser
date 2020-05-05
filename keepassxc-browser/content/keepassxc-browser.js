@@ -44,6 +44,10 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             _called.manualFillRequested = ManualFill.BOTH;
             await kpxc.receiveCredentialsIfNecessary();
             kpxc.fillInFromActiveElement(false);
+        } else if (req.action === 'fill_username_password_totp') {
+            _called.manualFillRequested = ManualFill.BOTH;
+            await kpxc.receiveCredentialsIfNecessary();
+            kpxc.fillInFromActiveElement(false, false, true); // appendTOTP y to true
         } else if (req.action === 'fill_password') {
             _called.manualFillRequested = ManualFill.PASS;
             await kpxc.receiveCredentialsIfNecessary();
@@ -1286,7 +1290,7 @@ kpxc.getFormSubmitButton = function(form) {
     return undefined;
 };
 
-kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarnings) {
+kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarnings, appendTOTP = false) {
     const action = kpxc.getFormActionUrl(combination);
     const u = _f(combination.username);
     const p = _f(combination.password);
@@ -1311,7 +1315,7 @@ kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarni
     }
 
     if (kpxc.url === document.location.origin && kpxc.submitUrl === action && kpxc.credentials.length > 0) {
-        kpxc.fillIn(combination, onlyPassword, suppressWarnings);
+        kpxc.fillIn(combination, onlyPassword, suppressWarnings, appendTOTP);
     } else {
         kpxc.url = document.location.origin;
         kpxc.submitUrl = action;
@@ -1322,15 +1326,15 @@ kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarni
         });
 
         await kpxc.retrieveCredentialsCallback(credentials, true);
-        kpxc.fillIn(combination, onlyPassword, suppressWarnings);
+        kpxc.fillIn(combination, onlyPassword, suppressWarnings, appendTOTP);
     }
 };
 
-kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
+kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false, appendTOTP = false) {
     const el = document.activeElement;
     if (el.tagName.toLowerCase() !== 'input') {
         if (kpxcFields.combinations.length > 0) {
-            kpxc.fillInCredentials(kpxcFields.combinations[0], passOnly, suppressWarnings);
+            kpxc.fillInCredentials(kpxcFields.combinations[0], passOnly, suppressWarnings, appendTOTP);
 
             // Focus to the input field
             const field = _f(passOnly ? kpxcFields.combinations[0].password : kpxcFields.combinations[0].username);
@@ -1359,7 +1363,7 @@ kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
 
     delete combination.loginId;
 
-    kpxc.fillInCredentials(combination, passOnly, suppressWarnings);
+    kpxc.fillInCredentials(combination, passOnly, suppressWarnings, appendTOTP);
 };
 
 kpxc.fillInFromActiveElementTOTPOnly = async function(target) {
@@ -1372,18 +1376,10 @@ kpxc.fillInFromActiveElementTOTPOnly = async function(target) {
     });
 
     if (index >= 0 && kpxc.credentials[index]) {
-        // Check the value from stringFields (to be removed)
         const currentField = _fs(fieldId);
-        if (kpxc.credentials[index].stringFields && kpxc.credentials[index].stringFields.length > 0) {
-            const stringFields = kpxc.credentials[index].stringFields;
-            for (const s of stringFields) {
-                const val = s['KPH: {TOTP}'];
-                if (val) {
-                    kpxc.setValue(currentField, val);
-                }
-            }
-        } else if (kpxc.credentials[index].totp && kpxc.credentials[index].totp.length > 0) {
-            kpxc.setValue(currentField, kpxc.credentials[index].totp);
+        let valTOTP = kpxc.getTOTP(kpxc.credentials[index]);
+        if (valTOTP) {
+            kpxc.setValue(currentField, valTOTP);
         }
     }
 };
@@ -1463,7 +1459,24 @@ kpxc.fillWithSpecificLogin = function(id) {
     }
 };
 
-kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
+kpxc.getTOTP = function(entry) {
+    // Check the value from stringFields (to be removed)
+    if (entry.stringFields && entry.stringFields.length > 0) {
+        const stringFields = entry.stringFields;
+        for (const s of stringFields) {
+        const val = s['KPH: {TOTP}'];
+            if (val) {
+                return val;
+            }
+        }
+    }
+    if (entry.totp && entry.totp.length > 0) {
+        return entry.totp;
+    }
+    return null;
+}
+
+kpxc.fillIn = function(combination, onlyPassword, suppressWarnings, appendTOTP = false) {
     // No credentials available
     if (kpxc.credentials.length === 0 && !suppressWarnings) {
         kpxcUI.createNotification('error', tr('credentialsNoLoginsFound'));
@@ -1491,7 +1504,16 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         }
         if (pField) {
             pField.setAttribute('type', 'password');
-            kpxc.setValueWithChange(pField, kpxc.credentials[0].password);
+            let password = kpxc.credentials[0].password;
+            if (appendTOTP) {
+                const totp = kpxc.getTOTP(kpxc.credentials[0]);
+                if (!totp) {
+                    kpxcUI.createNotification('error', tr('credentialsNoTOTPFound'));
+                    return;
+                }
+                password += totp;
+            }
+            kpxc.setValueWithChange(pField, password);
             pField.setAttribute('unchanged', true);
             browser.runtime.sendMessage({
                 action: 'page_set_login_id', args: 0
@@ -1529,7 +1551,16 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         }
 
         if (pField) {
-            kpxc.setValueWithChange(pField, kpxc.credentials[combination.loginId].password);
+            let password = kpxc.credentials[combination.loginId].password;
+            if (appendTOTP) {
+                const totp = kpxc.getTOTP(kpxc.credentials[combination.loginId]);
+                if (!totp) {
+                    kpxcUI.createNotification('error', tr('credentialsNoTOTPFound'));
+                    return;
+                }
+                password += totp;
+            }
+            kpxc.setValueWithChange(pField, password);
             pField.setAttribute('unchanged', true);
             browser.runtime.sendMessage({
                 action: 'page_set_login_id', args: combination.loginId
@@ -1557,6 +1588,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
         if (uField) {
             let valPassword = '';
             let valUsername = '';
+            let valTOTP = '';
             let valStringFields = [];
             const valQueryUsername = uField.value.toLowerCase();
 
@@ -1567,6 +1599,7 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                     valPassword = c.password;
                     valUsername = c.login;
                     valStringFields = c.stringFields;
+                    valTOTP = kpxc.getTOTP(c);
 
                     if (c.skipAutoSubmit !== undefined) {
                         skipAutoSubmit = c.skipAutoSubmit === 'true';
@@ -1586,6 +1619,14 @@ kpxc.fillIn = function(combination, onlyPassword, suppressWarnings) {
                 }
 
                 if (pField) {
+                    if (appendTOTP) {
+                        if (valTOTP) {
+                            valPassword += valTOTP;
+                        } else {
+                            kpxcUI.createNotification('error', tr('credentialsNoTOTPFound'));
+                            return;
+                        }
+                    }
                     kpxc.setValueWithChange(pField, valPassword);
                     pField.setAttribute('unchanged', true);
                     kpxc.setPasswordFilled(true);

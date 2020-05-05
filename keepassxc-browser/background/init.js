@@ -106,6 +106,7 @@ browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 
 const contextMenuItems = [
     { title: tr('contextMenuFillUsernameAndPassword'), action: 'fill_username_password' },
+    { title: tr('contextMenuFillUsernameAndPasswordTOTP'), action: 'fill_username_password_totp' },
     { title: tr('contextMenuFillPassword'), action: 'fill_password' },
     { title: tr('contextMenuFillTOTP'), action: 'fill_totp' },
     { title: tr('contextMenuShowPasswordGenerator'), action: 'show_password_generator' },
