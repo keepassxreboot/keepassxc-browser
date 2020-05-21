@@ -1068,6 +1068,10 @@ kpxc.initPasswordGenerator = function(inputs) {
 
 kpxc.initOTPFields = function(inputs) {
     for (const i of inputs) {
+        if (!kpxcFields.isVisible(i)) {
+            continue;
+        }
+
         const id = i.getLowerCaseAttribute('id');
         const name = i.getLowerCaseAttribute('name');
         const autocomplete = i.getLowerCaseAttribute('autocomplete');
