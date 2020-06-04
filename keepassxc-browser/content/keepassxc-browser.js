@@ -25,6 +25,7 @@ let _singleInputEnabledForPage = false;
 let _databaseClosed = true;
 const _maximumInputs = 100;
 const _maximumMutations = 200;
+const _monitorTimeout = 2000;
 
 // Count of detected form fields on the page
 var _detectedFields = 0;
@@ -642,6 +643,7 @@ kpxcFields.useDefinedCredentialFields = function() {
     return false;
 };
 
+
 const kpxcObserverHelper = {};
 
 kpxcObserverHelper.inputTypes = [
@@ -654,6 +656,25 @@ kpxcObserverHelper.inputTypes = [
     undefined, // Input field can be without any type. Include this and null to the list.
     null
 ];
+
+kpxcObserverHelper.monitoredElements = [];
+
+
+// Adds an element to a list and deletes it after 1 second.
+// The element is not handled by the observer if it's already monitored.
+kpxcObserverHelper.monitorElement = function(elem) {
+    if (kpxcObserverHelper.monitoredElements.includes(elem)) {
+        return false;
+    }
+
+    kpxcObserverHelper.monitoredElements.push(elem);
+    setTimeout(() => {
+        const index = kpxcObserverHelper.monitoredElements.indexOf(elem);
+        kpxcObserverHelper.monitoredElements.splice(index, 1);
+    }, _monitorTimeout);
+
+    return true;
+};
 
 // Ignores all nodes that doesn't contain elements
 kpxcObserverHelper.ignoredNode = function(target) {
@@ -721,6 +742,11 @@ kpxcObserverHelper.getId = function(target) {
 kpxcObserverHelper.ignoredElement = function(target) {
     // Ignore elements that do not have a className (including SVG)
     if (typeof target.className !== 'string') {
+        return true;
+    }
+
+    // Element has been already observer within 1 second
+    if (!kpxcObserverHelper.monitorElement(target)) {
         return true;
     }
 
