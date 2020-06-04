@@ -80,12 +80,17 @@ kpxcUI.updateIconPosition = function(iconClass) {
     }
 };
 
+kpxcUI.calculateIconOffset = function(field, size) {
+    const offset = Math.floor((field.offsetHeight - size) / 3);
+    return (offset < 0) ? 0 : offset;
+};
+
 kpxcUI.setIconPosition = function(icon, field) {
     const rect = field.getBoundingClientRect();
     const bodyRect = document.body.getBoundingClientRect();
     const bodyStyle = getComputedStyle(document.body);
-    const offset = Number(icon.getAttribute('offset'));
     const size = (document.dir !== 'rtl') ? Number(icon.getAttribute('size')) : 0;
+    const offset = kpxcUI.calculateIconOffset(field, size);
 
     if (bodyStyle.position.toLowerCase() === 'relative') {
         icon.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + offset + 1);
