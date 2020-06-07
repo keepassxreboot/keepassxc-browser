@@ -22,15 +22,15 @@ class Icon {
         }
     }
 
-    switchIcon(locked) {
+    switchIcon(state) {
         if (!this.icon) {
             return;
         }
 
-        if (locked) {
-            this.icon.style.filter = 'saturate(0%)';
-        } else {
+        if (state === DatabaseState.UNLOCKED) {
             this.icon.style.filter = 'saturate(100%)';
+        } else {
+            this.icon.style.filter = 'saturate(0%)';
         }
     }
 }
@@ -94,7 +94,6 @@ kpxcUI.setIconPosition = function(icon, field) {
         icon.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + offset + 1);
         icon.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
     }
-
 };
 
 /**

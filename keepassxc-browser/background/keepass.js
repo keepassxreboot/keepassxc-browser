@@ -512,6 +512,7 @@ keepass.getDatabaseHash = async function(tab, args = []) {
     const encrypted = keepass.encrypt(messageData, nonce);
     if (encrypted.length <= 0) {
         keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
+        keepass.updateDatabaseHashToContent();
         return keepass.databaseHash;
     }
 
@@ -599,6 +600,7 @@ keepass.changePublicKeys = async function(tab, enableTimeout = false, connection
                 keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
             }
 
+            keepass.updateDatabaseHashToContent();
             return false;
         }
 
@@ -1169,7 +1171,7 @@ keepass.updateDatabase = async function() {
     keepass.associated.hash = null;
     await keepass.testAssociation(null);
     const configured = await keepass.isConfigured();
-    keepass.updatePopup(configured ? 'normal' : 'cross');
+    keepass.updatePopup(configured ? 'normal' : 'locked');
     keepass.updateDatabaseHashToContent();
 };
 
@@ -1180,7 +1182,8 @@ keepass.updateDatabaseHashToContent = async function() {
             // Send message to content script
             browser.tabs.sendMessage(tabs[0].id, {
                 action: 'check_database_hash',
-                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash }
+                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
+                connected: keepass.isKeePassXCAvailable
             }).catch((err) => {
                 console.log('Error: No content script available for this tab.');
             });

@@ -3,20 +3,20 @@
 const kpxcPasswordIcons = {};
 kpxcPasswordIcons.icons = [];
 
-kpxcPasswordIcons.newIcon = function(useIcons, field, inputs, pos, databaseClosed = true) {
-    kpxcPasswordIcons.icons.push(new PasswordIcon(useIcons, field, inputs, pos, databaseClosed));
+kpxcPasswordIcons.newIcon = function(useIcons, field, inputs, pos, databaseState = DatabaseState.DISCONNECTED) {
+    kpxcPasswordIcons.icons.push(new PasswordIcon(useIcons, field, inputs, pos, databaseState));
 };
 
-kpxcPasswordIcons.switchIcon = function(locked) {
-    kpxcPasswordIcons.icons.forEach(u => u.switchIcon(locked));
+kpxcPasswordIcons.switchIcon = function(state) {
+    kpxcPasswordIcons.icons.forEach(u => u.switchIcon(state));
 };
 
 
 class PasswordIcon extends Icon {
-    constructor(useIcons, field, inputs, pos, databaseClosed) {
+    constructor(useIcons, field, inputs, pos, databaseState) {
         super();
         this.useIcons = useIcons;
-        this.databaseClosed = databaseClosed;
+        this.databaseState = databaseState;
 
         this.initField(field, inputs, pos);
         kpxcUI.monitorIconPosition(this);
@@ -77,7 +77,7 @@ PasswordIcon.prototype.createIcon = function(field) {
     icon.style.width = Pixels(size);
     icon.style.height = Pixels(size);
 
-    if (this.databaseClosed) {
+    if (this.databaseState === DatabaseState.DISCONNECTED || this.databaseState === DatabaseState.LOCKED) {
         icon.style.filter = 'saturate(0%)';
     }
 

@@ -3,8 +3,8 @@
 const kpxcUsernameIcons = {};
 kpxcUsernameIcons.icons = [];
 
-kpxcUsernameIcons.newIcon = function(field, databaseClosed = true) {
-    kpxcUsernameIcons.icons.push(new UsernameFieldIcon(field, databaseClosed));
+kpxcUsernameIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED) {
+    kpxcUsernameIcons.icons.push(new UsernameFieldIcon(field, databaseState));
 };
 
 kpxcUsernameIcons.switchIcon = function(locked) {
@@ -13,30 +13,24 @@ kpxcUsernameIcons.switchIcon = function(locked) {
 
 
 class UsernameFieldIcon extends Icon {
-    constructor(field, databaseClosed = true) {
+    constructor(field, databaseState = DatabaseState.DISCONNECTED) {
         super();
-        this.databaseClosed = databaseClosed;
+        this.databaseState = databaseState;
         this.icon = null;
         this.inputField = null;
 
-        this.initField(field,);
+        this.initField(field);
         kpxcUI.monitorIconPosition(this);
     }
 
-    switchIcon(locked) {
+    switchIcon(state) {
         if (!this.icon) {
             return;
         }
 
-        if (locked) {
-            this.icon.classList.remove(getIconClassName());
-            this.icon.classList.add(getIconClassName(true));
-            this.icon.title = tr('usernameLockedFieldText');
-        } else {
-            this.icon.classList.remove(getIconClassName(true));
-            this.icon.classList.add(getIconClassName());
-            this.icon.title = tr('usernameFieldText');
-        }
+        this.icon.classList.remove('lock', 'moz-lock', 'unlock', 'moz-unlock', 'disconnected', 'moz-disconnected');
+        this.icon.classList.add(getIconClassName(state));
+        this.icon.title = getIconText(state);
     }
 }
 
@@ -66,7 +60,7 @@ UsernameFieldIcon.prototype.createIcon = function(target) {
     }
 
     const field = target;
-    const className = getIconClassName(this.databaseClosed);
+    const className = getIconClassName(this.databaseState);
 
     // Size the icon dynamically, but not greater than 24 or smaller than 14
     const size = Math.max(Math.min(24, field.offsetHeight - 4), 14);
@@ -82,7 +76,7 @@ UsernameFieldIcon.prototype.createIcon = function(target) {
 
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-username-icon ' + className,
         {
-            'title': this.databaseClosed ? tr('usernameLockedFieldText') : tr('usernameFieldText'),
+            'title': getIconText(this.databaseState),
             'alt': tr('usernameFieldIcon'),
             'size': size,
             'offset': offset,
@@ -143,11 +137,23 @@ const iconClicked = async function(field, icon) {
     }
 };
 
-const getIconClassName = function(locked = false) {
-    if (locked) {
+const getIconClassName = function(state = DatabaseState.UNLOCKED) {
+    if (state === DatabaseState.LOCKED) {
         return (isFirefox() ? 'lock-moz' : 'lock');
+    } else if (state === DatabaseState.DISCONNECTED) {
+        return (isFirefox() ? 'lock-disconnected' : 'disconnected');
     }
     return (isFirefox() ? 'unlock-moz' : 'unlock');
+};
+
+const getIconText = function(state) {
+    if (state === DatabaseState.LOCKED) {
+        return tr('usernameLockedFieldText');
+    } else if (state === DatabaseState.DISCONNECTED) {
+        return tr('usernameDisconnectedFieldText');
+    }
+
+    return tr('usernameFieldText');
 };
 
 const fillCredentials = function(field) {

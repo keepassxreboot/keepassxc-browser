@@ -7,21 +7,21 @@ const ignoredTypes = [ 'email', 'password', 'username' ];
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
-kpxcTOTPIcons.newIcon = function(field, databaseClosed = true) {
-    kpxcTOTPIcons.icons.push(new TOTPFieldIcon(field, databaseClosed));
+kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED) {
+    kpxcTOTPIcons.icons.push(new TOTPFieldIcon(field, databaseState));
 };
 
-kpxcTOTPIcons.switchIcon = function(locked) {
-    kpxcTOTPIcons.icons.forEach(u => u.switchIcon(locked));
+kpxcTOTPIcons.switchIcon = function(state) {
+    kpxcTOTPIcons.icons.forEach(u => u.switchIcon(state));
 };
 
 
 class TOTPFieldIcon extends Icon {
-    constructor(field, databaseClosed = true) {
+    constructor(field, databaseState = DatabaseState.DISCONNECTED) {
         super();
         this.icon = null;
         this.inputField = null;
-        this.databaseClosed = databaseClosed;
+        this.databaseState = databaseState;
 
         this.initField(field);
         kpxcUI.monitorIconPosition(this);
@@ -70,7 +70,7 @@ TOTPFieldIcon.prototype.createIcon = function(field) {
     icon.style.width = Pixels(size);
     icon.style.height = Pixels(size);
 
-    if (this.databaseClosed) {
+    if (this.databaseState === DatabaseState.DISCONNECTED || this.databaseState === DatabaseState.LOCKED) {
         icon.style.filter = 'saturate(0%)';
     }
 

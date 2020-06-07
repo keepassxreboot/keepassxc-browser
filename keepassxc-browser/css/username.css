@@ -3,6 +3,16 @@
     cursor: pointer;
 }
 
+.kpxc-username-icon.disconnected {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/disconnected.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-username-icon.disconnected-moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/disconnected.svg') right no-repeat;
+    background-size: contain;
+}
+
 .kpxc-username-icon.lock {
     background: url('chrome-extension://__MSG_@@extension_id__/icons/locked.svg') right no-repeat;
     background-size: contain;
