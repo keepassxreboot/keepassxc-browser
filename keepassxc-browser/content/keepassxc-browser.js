@@ -1300,6 +1300,16 @@ kpxc.getFormSubmitButton = function(form) {
         return buttons[0];
     }
 
+    // Try to find similar buttons outside the form which are added via 'form' property
+    for (const e of form.elements) {
+        if ((e.nodeName === 'BUTTON' && e.type === 'button')
+            || (e.nodeName === 'BUTTON' && e.type === 'submit')
+            || (e.nodeName === 'INPUT' && e.type === 'button')
+            || (e.nodeName === 'BUTTON' && e.type === '')) {
+            return e;
+        }
+    }
+
     return undefined;
 };
 
