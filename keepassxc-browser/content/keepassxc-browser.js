@@ -133,7 +133,18 @@ kpxcForm.onSubmit = async function(e) {
         return;
     }
 
-    const form = this.nodeName === 'FORM' ? this : this.form;
+    const searchForm = f => {
+        if (f.nodeName === 'FORM') {
+            return f;
+        }
+    };
+
+    // Traverse parents if the form is not found.
+    const form = this.nodeName === 'FORM' ? this : kpxcFields.traverseParents(this, searchForm, searchForm, () => null);
+    if (!form) {
+        return;
+    }
+
     const usernameId = form.getAttribute('kpxcUsername');
     const passwordId = form.getAttribute('kpxcPassword');
     const usernameField = _f(usernameId);
@@ -1270,6 +1281,8 @@ kpxc.getFormActionUrlFromSingleInput = function(field) {
     return action;
 };
 
+const formButtonQuery = 'button[type=\'button\'], button[type=\'submit\'], input[type=\'button\'], button:not([type]), div[role=\'button\']';
+
 // Get the form submit button instead if action URL is same as the page itself
 kpxc.getFormSubmitButton = function(form) {
     const action = kpxc.submitUrl || form.action;
@@ -1282,7 +1295,7 @@ kpxc.getFormSubmitButton = function(form) {
     }
 
     // Try to find another button. Select the first one.
-    const buttons = Array.from(form.querySelectorAll('button[type=\'button\'], button[type=\'submit\'], input[type=\'button\'], button:not([type])'));
+    const buttons = Array.from(form.querySelectorAll(formButtonQuery));
     if (buttons.length > 0) {
         return buttons[0];
     }
