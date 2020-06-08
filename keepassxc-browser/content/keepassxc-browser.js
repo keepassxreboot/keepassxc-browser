@@ -6,6 +6,12 @@ const ManualFill = {
     BOTH: 2
 };
 
+const DatabaseState = {
+    DISCONNECTED: 0,
+    LOCKED: 1,
+    UNLOCKED: 2
+}
+
 const acceptedOTPFields = [
     '2fa',
     'auth',
@@ -22,7 +28,7 @@ _called.retrieveCredentials = false;
 _called.clearLogins = false;
 _called.manualFillRequested = ManualFill.NONE;
 let _singleInputEnabledForPage = false;
-let _databaseClosed = true;
+let _databaseState = DatabaseState.DISCONNECTED;
 const _maximumInputs = 100;
 const _maximumMutations = 200;
 
@@ -60,7 +66,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'ignore_site') {
             kpxc.ignoreSite(req.args);
         } else if (req.action === 'check_database_hash' && 'hash' in req) {
-            kpxc.detectDatabaseChange(req.hash);
+            kpxc.detectDatabaseChange(req);
         } else if (req.action === 'remember_credentials') {
             kpxc.contextMenuRememberCredentials();
         } else if (req.action === 'choose_credential_fields') {
@@ -555,7 +561,7 @@ kpxcFields.getPasswordField = function(usernameId, checkDisabled) {
             passwordField = null;
         }
 
-        kpxcPasswordIcons.newIcon(kpxc.settings.usePasswordGeneratorIcons, passwordField, [], undefined, _databaseClosed);
+        kpxcPasswordIcons.newIcon(kpxc.settings.usePasswordGeneratorIcons, passwordField, [], undefined, _databaseState);
     } else {
         // Search all inputs on page
         const inputs = kpxcFields.getAllFields();
@@ -606,7 +612,7 @@ kpxcFields.prepareCombinations = async function(combinations) {
         const usernameField = c.username ? _f(c.username) : field;
 
         if (kpxc.settings.showLoginFormIcon && await kpxc.passwordFilled() === false) {
-            kpxcUsernameIcons.newIcon(usernameField, _databaseClosed);
+            kpxcUsernameIcons.newIcon(usernameField, _databaseState);
         }
 
         // Initialize form-submit for remembering credentials
@@ -626,7 +632,7 @@ kpxcFields.useDefinedCredentialFields = function() {
 
         // Handle custom TOTP field
         if (_f(creds.totp)) {
-            kpxcTOTPIcons.newIcon(_f(creds.totp), _databaseClosed);
+            kpxcTOTPIcons.newIcon(_f(creds.totp), _databaseState);
         }
 
         let found = _f(creds.username) || _f(creds.password);
@@ -940,20 +946,20 @@ kpxc.clearAllFromPage = function() {
 
 // Switch credentials if database is changed or closed
 kpxc.detectDatabaseChange = async function(response) {
-    _databaseClosed = true;
+    _databaseState = DatabaseState.LOCKED;
     kpxc.clearAllFromPage();
-    kpxc.switchIcons(true);
+    kpxc.switchIcons();
 
     if (document.visibilityState !== 'hidden') {
-        if (response.new !== '' && response.new !== response.old) {
+        if (response.hash.new !== '' && response.hash.new !== response.hash.old) {
             _called.retrieveCredentials = false;
             const settings = await browser.runtime.sendMessage({
                 action: 'load_settings'
             });
             kpxc.settings = settings;
             await kpxc.initCredentialFields(true);
-            kpxc.switchIcons(false); // Unlocked
-            _databaseClosed = false;
+            _databaseState = DatabaseState.UNLOCKED;
+            kpxc.switchIcons();
 
             // If user has requested a manual fill through context menu the actual credential filling
             // is handled here when the opened database has been regognized. It's not a pretty hack.
@@ -961,6 +967,9 @@ kpxc.detectDatabaseChange = async function(response) {
                 await kpxc.fillInFromActiveElement(false, _called.manualFillRequested === ManualFill.PASS);
                 _called.manualFillRequested = ManualFill.NONE;
             }
+        } else if (!response.connected) {
+            _databaseState = DatabaseState.DISCONNECTED;
+            kpxc.switchIcons();
         }
     }
 };
@@ -1019,12 +1028,13 @@ kpxc.initCredentialFields = async function(forceCall, inputs) {
         return;
     }
 
-    // Update database closed status
+    // Check database closed status
     const res = await browser.runtime.sendMessage({
         action: 'get_status',
         args: [ true ]
     });
-    _databaseClosed = res.databaseClosed;
+
+    _databaseState = !res.keePassXCAvailable ? DatabaseState.DISCONNECTED : DatabaseState.LOCKED;
 
     kpxcFields.prepareVisibleFieldsWithID('select');
     kpxc.initPasswordGenerator(inputs);
@@ -1072,7 +1082,7 @@ kpxc.initPasswordGenerator = function(inputs) {
 
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i] && inputs[i].getLowerCaseAttribute('type') === 'password') {
-            kpxcPasswordIcons.newIcon(true, inputs[i], inputs, i, _databaseClosed);
+            kpxcPasswordIcons.newIcon(true, inputs[i], inputs, i, _databaseState);
         }
     }
 };
@@ -1088,7 +1098,7 @@ kpxc.initOTPFields = function(inputs) {
         const autocomplete = i.getLowerCaseAttribute('autocomplete');
 
         if (autocomplete === 'one-time-code' || acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f)))) {
-            kpxcTOTPIcons.newIcon(i, _databaseClosed);
+            kpxcTOTPIcons.newIcon(i, _databaseState);
         }
     }
 };
@@ -1903,10 +1913,10 @@ kpxc.getDocumentLocation = function() {
 };
 
 // Sets the icons to corresponding database lock status
-kpxc.switchIcons = function(locked) {
-    kpxcUsernameIcons.switchIcon(locked);
-    kpxcPasswordIcons.switchIcon(locked);
-    kpxcTOTPIcons.switchIcon(locked);
+kpxc.switchIcons = function() {
+    kpxcUsernameIcons.switchIcon(_databaseState);
+    kpxcPasswordIcons.switchIcon(_databaseState);
+    kpxcTOTPIcons.switchIcon(_databaseState);
 };
 
 kpxc.setPasswordFilled = function(state) {
@@ -1945,8 +1955,13 @@ kpxcEvents.triggerActivatedTab = async function() {
     kpxc.init();
 
     // Update username field lock state
-    const state = await browser.runtime.sendMessage({ action: 'check_database_hash' });
-    kpxc.switchIcons(state === '');
+    const res = await browser.runtime.sendMessage({
+        action: 'get_status',
+        args: [ true ]
+    });
+
+    _databaseState = !res.keePassXCAvailable ? DatabaseState.DISCONNECTED : DatabaseState.LOCKED;
+    kpxc.switchIcons();
 
     // initCredentialFields calls also "retrieve_credentials", to prevent it
     // check of init() was already called

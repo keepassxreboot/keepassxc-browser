@@ -107,6 +107,7 @@
         }
     },
     "web_accessible_resources": [
+        "icons/disconnected.svg",
         "icons/keepassxc.svg",
         "icons/key.svg",
         "icons/locked.svg",

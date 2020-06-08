@@ -35,8 +35,10 @@ browserAction.showDefault = async function(tab) {
         console.log('Error: Cannot show default popup: ' + err);
     });
 
-    if (!response || keepass.isDatabaseClosed || !keepass.isKeePassXCAvailable) {
+    if (!response && !keepass.isKeePassXCAvailable) {
         stackData.iconType = 'cross';
+    } else if (keepass.isKeePassXCAvailable && keepass.isDatabaseClosed) {
+        stackData.iconType = 'locked';
     }
 
     if (page.tabs[tab.id] && page.tabs[tab.id].loginList.length > 0) {

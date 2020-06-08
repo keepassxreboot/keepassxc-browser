@@ -163,6 +163,10 @@
         "message": "Database is locked",
         "description": "Username field icon hover text when database is locked."
     },
+    "usernameDisconnectedFieldText": {
+      "message": "KeePassXC is disconnected",
+      "description": "Username field icon hover text when KeePassXC is disconnected."
+    },
     "usernameFieldIcon": {
         "message": "Username field icon",
         "description": "Username field icon text."
