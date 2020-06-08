@@ -1056,7 +1056,7 @@ kpxc.initCredentialFields = async function(forceCall, inputs) {
         return;
     }
 
-    kpxc.url = document.location.origin;
+    kpxc.url = document.location.href;
     kpxc.submitUrl = kpxc.getFormActionUrl(kpxcFields.combinations[0]);
 
     // Get submitUrl for a single input
@@ -1347,10 +1347,10 @@ kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarni
         kpxc.p = p;
     }
 
-    if (kpxc.url === document.location.origin && kpxc.submitUrl === action && kpxc.credentials.length > 0) {
+    if (kpxc.url === document.location.href && kpxc.submitUrl === action && kpxc.credentials.length > 0) {
         kpxc.fillIn(combination, onlyPassword, suppressWarnings);
     } else {
-        kpxc.url = document.location.origin;
+        kpxc.url = document.location.href;
         kpxc.submitUrl = action;
 
         const credentials = await browser.runtime.sendMessage({
