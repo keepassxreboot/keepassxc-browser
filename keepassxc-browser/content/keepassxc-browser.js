@@ -711,12 +711,12 @@ kpxcObserverHelper.getInputs = function(target) {
 
     // Only include input fields that match with kpxcObserverHelper.inputTypes
     const inputs = [];
-    for (const i of inputFields) {
-        const type = i.getLowerCaseAttribute('type');
+    for (const field of inputFields) {
+        const type = field.getLowerCaseAttribute('type');
 
-        if (kpxcObserverHelper.inputTypes.includes(type)) {
-            kpxcFields.setUniqueId(i);
-            inputs.push(i);
+        if (kpxcObserverHelper.inputTypes.includes(type) && kpxcFields.isVisible(field)) {
+            kpxcFields.setUniqueId(field);
+            inputs.push(field);
         }
     }
     return inputs;
