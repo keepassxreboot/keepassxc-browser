@@ -144,27 +144,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
         action: 'get_database_groups'
     });
 
-    // Only the Root group and no KeePassXC-Browser passwords -> save to default
-    // Or when default group is not set and defaultGroupAskAlways is disabled -> save to default
-    if ((result.groups === undefined || (result.groups.length > 0 && result.groups[0].children.length === 0))
-        || (!result.defaultGroupAlwaysAsk && (result.defaultGroup === '' || result.defaultGroup === DEFAULT_BROWSER_GROUP))) {
-        const args = [ credentials.username, credentials.password, credentials.url ];
-
-        // If root group is defined by the user, and there's no default browser group, save the credentials to the root group
-        if (result.groups !== undefined
-            && result.groups.length > 0
-            && result.groups[0].children.length === 0
-            && result.defaultGroup.toLowerCase() === 'root') {
-            args.push(result.groups[0].name, result.groups[0].uuid);
-        }
-
-        const res = await browser.runtime.sendMessage({
-            action: 'add_credentials',
-            args: args
-        });
-        kpxcBanner.verifyResult(res);
-        return;
-    } else if (!result.defaultGroupAlwaysAsk && (result.defaultGroup !== '' || result.defaultGroup !== DEFAULT_BROWSER_GROUP)) {
+    if (!result.defaultGroupAlwaysAsk && (result.defaultGroup !== '' && result.defaultGroup !== DEFAULT_BROWSER_GROUP)) {
         // Another group name has been specified
         const [ gname, guuid ] = kpxcBanner.getDefaultGroup(result.groups[0].children, result.defaultGroup);
         if (gname === '' && guuid === '') {
@@ -194,6 +174,27 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
         const res = await browser.runtime.sendMessage({
             action: 'add_credentials',
             args: [ credentials.username, credentials.password, credentials.url, gname, guuid ]
+        });
+        kpxcBanner.verifyResult(res);
+        return;
+    } else if ((result.groups === undefined || (result.groups.length > 0 && result.groups[0].children.length === 0))
+        || (!result.defaultGroupAlwaysAsk && (result.defaultGroup === '' || result.defaultGroup === DEFAULT_BROWSER_GROUP))) {
+        // Only the Root group and no KeePassXC-Browser passwords -> save to default
+        // Or when default group is not set and defaultGroupAskAlways is disabled -> save to default
+        const args = [ credentials.username, credentials.password, credentials.url ];
+
+        // If root group is defined by the user, and there's no default browser group, save the credentials to the root group
+        if (result.groups !== undefined
+            && result.groups.length > 0
+            && result.groups[0].children.length === 0
+            && (result.defaultGroup.toLowerCase() === 'root'
+                || result.defaultGroup === '/')) {
+            args.push(result.groups[0].name, result.groups[0].uuid);
+        }
+
+        const res = await browser.runtime.sendMessage({
+            action: 'add_credentials',
+            args: args
         });
         kpxcBanner.verifyResult(res);
         return;
