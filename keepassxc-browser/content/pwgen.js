@@ -24,7 +24,7 @@ class PasswordIcon extends Icon {
 }
 
 PasswordIcon.prototype.initField = function(field, inputs, pos) {
-    if (!field) {
+    if (!field || field.readOnly) {
         return;
     }
 
