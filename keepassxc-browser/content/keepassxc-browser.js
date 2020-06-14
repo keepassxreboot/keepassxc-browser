@@ -632,7 +632,9 @@ kpxcFields.useDefinedCredentialFields = function() {
 
         // Handle custom TOTP field
         if (_f(creds.totp)) {
-            kpxcTOTPIcons.newIcon(_f(creds.totp), _databaseState);
+            const totpField = _f(creds.totp);
+            totpField.setAttribute('kpxc-defined', 'totp');
+            kpxcTOTPIcons.newIcon(totpField, _databaseState, true);
         }
 
         let found = _f(creds.username) || _f(creds.password);
@@ -644,6 +646,14 @@ kpxcFields.useDefinedCredentialFields = function() {
         }
 
         if (found) {
+            if (creds.username) {
+                _f(creds.username).setAttribute('kpxc-defined', 'username');
+            }
+
+            if (creds.password) {
+                _f(creds.password).setAttribute('kpxc-defined', 'password');
+            }
+
             const fields = {
                 username: creds.username,
                 password: creds.password,
@@ -1036,18 +1046,18 @@ kpxc.initCredentialFields = async function(forceCall, inputs) {
 
     _databaseState = !res.keePassXCAvailable ? DatabaseState.DISCONNECTED : DatabaseState.LOCKED;
 
+    if (!kpxcFields.useDefinedCredentialFields()) {
+        // Get all combinations of username + password fields
+        kpxcFields.combinations = kpxcFields.getAllCombinations(inputs);
+    }
+    kpxcFields.prepareCombinations(kpxcFields.combinations);
+
     kpxcFields.prepareVisibleFieldsWithID('select');
     kpxc.initPasswordGenerator(inputs);
 
     if (kpxc.settings.showOTPIcon) {
         kpxc.initOTPFields(inputs);
     }
-
-    if (!kpxcFields.useDefinedCredentialFields()) {
-        // Get all combinations of username + password fields
-        kpxcFields.combinations = kpxcFields.getAllCombinations(inputs);
-    }
-    kpxcFields.prepareCombinations(kpxcFields.combinations);
 
     if (kpxcFields.combinations.length === 0 && inputs.length === 0) {
         browser.runtime.sendMessage({

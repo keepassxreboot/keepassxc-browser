@@ -28,7 +28,8 @@ PasswordIcon.prototype.initField = function(field, inputs, pos) {
         return;
     }
 
-    if (field.getAttribute('kpxc-password-generator')) {
+    if (field.getAttribute('kpxc-password-generator')
+        || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'password')) {
         return;
     }
 
@@ -62,8 +63,7 @@ PasswordIcon.prototype.initField = function(field, inputs, pos) {
 PasswordIcon.prototype.createIcon = function(field) {
     const className = (isFirefox() ? 'key-moz' : 'key');
     const size = (field.offsetHeight > 28) ? 24 : 16;
-    let offset = Math.floor((field.offsetHeight - size) / 3);
-    offset = (offset < 0) ? 0 : offset;
+    const offset = kpxcUI.calculateIconOffset(field, size);
 
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-pwgen-icon ' + className,
         {

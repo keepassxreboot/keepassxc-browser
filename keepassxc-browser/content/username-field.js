@@ -38,6 +38,7 @@ UsernameFieldIcon.prototype.initField = function(field) {
     if (!field
         || field.getAttribute('kpxc-username-field') === 'true'
         || field.getAttribute('kpxc-totp-field') === 'true'
+        || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'username')
         || !kpxcFields.isVisible(field)) {
         return;
     }
@@ -71,8 +72,7 @@ UsernameFieldIcon.prototype.createIcon = function(target) {
         return;
     }
 
-    let offset = Math.floor((field.offsetHeight - size) / 3);
-    offset = (offset < 0) ? 0 : offset;
+    const offset = kpxcUI.calculateIconOffset(field, size);
 
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-username-icon ' + className,
         {

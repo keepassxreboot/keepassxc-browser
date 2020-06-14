@@ -7,8 +7,8 @@ const ignoredTypes = [ 'email', 'password', 'username' ];
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
-kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED) {
-    kpxcTOTPIcons.icons.push(new TOTPFieldIcon(field, databaseState));
+kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
+    kpxcTOTPIcons.icons.push(new TOTPFieldIcon(field, databaseState, forced));
 };
 
 kpxcTOTPIcons.switchIcon = function(state) {
@@ -17,27 +17,38 @@ kpxcTOTPIcons.switchIcon = function(state) {
 
 
 class TOTPFieldIcon extends Icon {
-    constructor(field, databaseState = DatabaseState.DISCONNECTED) {
+    constructor(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
         super();
         this.icon = null;
         this.inputField = null;
         this.databaseState = databaseState;
 
-        this.initField(field);
+        this.initField(field, forced);
         kpxcUI.monitorIconPosition(this);
     }
 }
 
-TOTPFieldIcon.prototype.initField = function(field) {
-    if (!field
-        || ignoredTypes.some(t => t === field.type)
-        || field.getAttribute('kpxc-totp-field') === 'true'
-        || field.offsetWidth < MINIMUM_SIZE
-        || field.size < 2
-        || (field.maxLength > 0 && (field.maxLength < 6 || field.maxLength > 8))
-        || field.id.match(ignoreRegex)
-        || field.name.match(ignoreRegex)) {
+TOTPFieldIcon.prototype.initField = function(field, forced) {
+    if (!field) {
         return;
+    }
+
+    if (!forced) {
+        if (ignoredTypes.some(t => t === field.type)
+            || ignoredTypes.some(t => t === field.autocomplete)
+            || field.getAttribute('kpxc-totp-field') === 'true'
+            || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'totp')
+            || field.offsetWidth < MINIMUM_SIZE
+            || field.size < 2
+            || (field.maxLength > 0 && (field.maxLength < 6 || field.maxLength > 8))
+            || field.id.match(ignoreRegex)
+            || field.name.match(ignoreRegex)) {
+            return;
+        }
+    } else {
+        if (field.getAttribute('kpxc-totp-field') === 'true') {
+            return;
+        }
     }
 
     field.setAttribute('kpxc-totp-field', 'true');
@@ -56,8 +67,7 @@ TOTPFieldIcon.prototype.createIcon = function(field) {
 
     // Size the icon dynamically, but not greater than 24 or smaller than 14
     const size = Math.max(Math.min(24, field.offsetHeight - 4), 14);
-    let offset = Math.floor((field.offsetHeight - size) / 3);
-    offset = (offset < 0) ? 0 : offset;
+    const offset = kpxcUI.calculateIconOffset(field, size);
 
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-totp-icon ' + className,
         {
