@@ -841,6 +841,7 @@ const initcb = async function() {
             kpxc.initObserver();
         }
 
+        await kpxc.updateDatabaseState();
         await kpxc.initCredentialFields();
 
         // Retrieve submitted credentials if available.
@@ -1037,14 +1038,6 @@ kpxc.initCredentialFields = async function(forceCall, inputs) {
     if (inputs.length === 0) {
         return;
     }
-
-    // Check database closed status
-    const res = await browser.runtime.sendMessage({
-        action: 'get_status',
-        args: [ true ]
-    });
-
-    _databaseState = !res.keePassXCAvailable ? DatabaseState.DISCONNECTED : DatabaseState.LOCKED;
 
     if (!kpxcFields.useDefinedCredentialFields()) {
         // Get all combinations of username + password fields
@@ -1940,6 +1933,19 @@ kpxc.passwordFilled = async function() {
     return await browser.runtime.sendMessage({ action: 'password_get_filled' });
 };
 
+kpxc.updateDatabaseState = async function() {
+    const res = await browser.runtime.sendMessage({
+        action: 'get_status',
+        args: [ true ]
+    });
+
+    if (!res.keePassXCAvailable) {
+        _databaseState = DatabaseState.DISCONNECTED;
+        return;
+    }
+
+    _databaseState = res.databaseClosed ? DatabaseState.LOCKED : DatabaseState.UNLOCKED;
+};
 
 const kpxcEvents = {};
 
@@ -1964,13 +1970,7 @@ kpxcEvents.triggerActivatedTab = async function() {
     // Doesn't run a second time because of _called.initCredentialFields set to true
     kpxc.init();
 
-    // Update username field lock state
-    const res = await browser.runtime.sendMessage({
-        action: 'get_status',
-        args: [ true ]
-    });
-
-    _databaseState = !res.keePassXCAvailable ? DatabaseState.DISCONNECTED : DatabaseState.LOCKED;
+    await kpxc.updateDatabaseState();
     kpxc.switchIcons();
 
     // initCredentialFields calls also "retrieve_credentials", to prevent it
