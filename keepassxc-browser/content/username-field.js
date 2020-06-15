@@ -7,8 +7,8 @@ kpxcUsernameIcons.newIcon = function(field, databaseState = DatabaseState.DISCON
     kpxcUsernameIcons.icons.push(new UsernameFieldIcon(field, databaseState));
 };
 
-kpxcUsernameIcons.switchIcon = function(locked) {
-    kpxcUsernameIcons.icons.forEach(u => u.switchIcon(locked));
+kpxcUsernameIcons.switchIcon = function(state) {
+    kpxcUsernameIcons.icons.forEach(u => u.switchIcon(state));
 };
 
 
@@ -28,7 +28,7 @@ class UsernameFieldIcon extends Icon {
             return;
         }
 
-        this.icon.classList.remove('lock', 'moz-lock', 'unlock', 'moz-unlock', 'disconnected', 'moz-disconnected');
+        this.icon.classList.remove('lock', 'lock-moz', 'unlock', 'unlock-moz', 'disconnected', 'disconnected-moz');
         this.icon.classList.add(getIconClassName(state));
         this.icon.title = getIconText(state);
     }
