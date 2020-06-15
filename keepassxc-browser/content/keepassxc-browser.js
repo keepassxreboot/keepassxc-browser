@@ -10,7 +10,7 @@ const DatabaseState = {
     DISCONNECTED: 0,
     LOCKED: 1,
     UNLOCKED: 2
-}
+};
 
 const acceptedOTPFields = [
     '2fa',
