@@ -79,6 +79,7 @@
         "browser": true,
         "browserAction": true,
         "createStylesheet": true,
+        "DatabaseState": true,
         "httpAuth": true,
         "Icon": true,
         "isEdge": true,

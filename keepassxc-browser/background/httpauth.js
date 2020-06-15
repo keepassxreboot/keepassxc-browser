@@ -66,7 +66,7 @@ httpAuth.processPendingCallbacks = async function(details, resolve, reject) {
         // Non-HTTP proxies are possible with PAC scripts, while currently only
         // Firefox provides info about the proxy protocol used [1].
         // [1] https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onAuthRequired
-        let scheme = details.proxyInfo ? details.proxyInfo.type : 'http';
+        const scheme = details.proxyInfo ? details.proxyInfo.type : 'http';
         details.proxyUrl = scheme + '://' + details.challenger.host;
     }
 
