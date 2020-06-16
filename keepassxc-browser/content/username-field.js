@@ -157,12 +157,12 @@ const getIconText = function(state) {
     return tr('usernameFieldText');
 };
 
-const fillCredentials = function(field) {
+const fillCredentials = async function(field) {
     const fieldId = field.getAttribute('data-kpxc-id');
     kpxcFields.prepareId(fieldId);
 
     const givenType = field.type === 'password' ? 'password' : 'username';
-    const combination = kpxcFields.getCombination(givenType, fieldId);
+    const combination = await kpxcFields.getCombination(givenType, fieldId);
 
     kpxc.fillInCredentials(combination, givenType === 'password', false);
 };
