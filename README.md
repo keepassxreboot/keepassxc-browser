@@ -1,6 +1,6 @@
 # KeePassXC-Browser
 
-Browser extension for [KeePassXC](https://keepassxc.org/) with Native Messaging.
+Browser extension for [KeePassXC](https://keepassxc.org/) with [Native Messaging](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging).
 
 Based on [pfn](https://github.com/pfn)'s [chromeIPass](https://github.com/pfn/passifox).
 Some changes merged also from [smorks](https://github.com/smorks)' [KeePassHttp-Connector](https://github.com/smorks/keepasshttp-connector).
@@ -15,16 +15,30 @@ Please see this [document](https://keepassxc.org/docs/keepassxc-browser-migratio
 
 ## How it works
 
-There are two methods which you can use KeePassXC-Browser to connect to KeePassXC:
-
-1. KeePassXC-Browser communicates with KeePassXC through keepassxc-proxy. The proxy handles listening to STDIN/STDOUT
+KeePassXC-Browser communicates with KeePassXC through _keepassxc-proxy_. The proxy handles listening to STDIN/STDOUT
 and transfers these messages through Unix domain sockets / named pipes to KeePassXC. This means KeePassXC can be used and started normally without inteference from
-Native Messaging API. KeePassXC-Browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. You don't need to install keepassxc-proxy separately. It is included in the latest KeePassXC fork. Alternatively you can use
-[keepassxc-proxy-rust](https://github.com/varjolintu/keepassxc-proxy-rust) as a proxy if you prefer a non-Qt solution. There's also Python and C++ versions available at
-[keepassxc-proxy](https://github.com/varjolintu/keepassxc-proxy).
+Native Messaging API. KeePassXC-Browser starts only the proxy application and there's no risk of shutting down KeePassXC or losing any unsaved changes. You don't need to install keepassxc-proxy separately. It is included in the KeePassXC application package. Alternatively you can use
+[keepassxc-proxy-rust](https://github.com/varjolintu/keepassxc-proxy-rust) as a proxy if you prefer a non-Qt solution.
 
-2. KeePassXC-Browser communicates directly with KeePassXC via stdin/stdout. Using native messaging directly is a more secure as it ensures the traffic between KeePassXC and KeePassXC-Browser is direct. This method launches KeePassXC every time you start the browser and closes when you exit.
-This can cause unsaved changes not to be saved. If you use this method it's important to enable `Automatically save after every change` from KeePassXC's preferences. Because this option is not preferred as default it's good to test this feature with your OS and ensure KeePassXC asks to confirm any unsaved changes before exit.
+## Requested permissions
+
+KeePassXC-Browser extension requests the following permissions:
+
+| Name  | Reason |
+| ----- | ----- |
+| `activeTab`               | To get URL of the current tab |
+| `contextMenus`            | To show context menu items |
+| `clipboardWrite`          | Allows password to be copied from password generator to clipboard |
+| `nativeMessaging`         | Allows communication with KeePassXC application |
+| `notifications`           | To show browser notifications |
+| `storage`                 | For storing extension settings to localStorage |
+| `tabs`                    | To request tab URL's and other info |
+| `webNavigation`           | To show browser notifications on install or update |
+| `webRequest`              | For handling HTTP Basic Auth |
+| `webRequestBlocking`      | For handling HTTP Basic Auth |
+| `http://*/*`              | To allow using KeePassXC-Browser on all websites |
+| `https://*/*`             | To allow using KeePassXC-Browser on all websites |
+| `https://api.github.com/` | For checking the latest KeePassXC version from GitHub |
 
 ## Protocol
 

@@ -61,7 +61,7 @@ $(async () => {
     });
 
     $('#reconnect-button').click(async () => {
-        await browser.runtime.sendMessage({ 
+        await browser.runtime.sendMessage({
             action: 'associate'
         });
         close();

@@ -5,6 +5,9 @@
     cursor: pointer;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-rendering: auto !important;
     margin: 0px auto;
     margin-bottom: 20px;
     padding: 15px;
@@ -13,7 +16,7 @@
     right: 0px;
     top: 0px;
     width: 520px;
-    z-index: 9999;
+    z-index: 2147483646;
 }
 
 .kpxc-notification span {

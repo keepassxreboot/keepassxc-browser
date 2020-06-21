@@ -2,6 +2,7 @@
 
 const defaultSettings = {
     autoCompleteUsernames: true,
+    showGroupNameInAutocomplete: true,
     autoFillAndSend: false,
     autoFillSingleEntry: false,
     autoReconnect: false,
@@ -39,6 +40,10 @@ page.initSettings = async function() {
 
         if (!('autoCompleteUsernames' in page.settings)) {
             page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
+        }
+
+        if (!('showGroupNameInAutocomplete' in page.settings)) {
+            page.settings.showGroupNameInAutocomplete = defaultSettings.showGroupNameInAutocomplete;
         }
 
         if (!('autoFillAndSend' in page.settings)) {
@@ -96,7 +101,7 @@ page.initSettings = async function() {
         if (!('showNotifications' in page.settings)) {
             page.settings.showNotifications = defaultSettings.showNotifications;
         }
-    
+
         if (!('showOTPIcon' in page.settings)) {
             page.settings.showOTPIcon = defaultSettings.showOTPIcon;
         }
@@ -175,12 +180,13 @@ page.clearLogins = function(tabId) {
     page.passwordFilled = false;
 };
 
-page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials) {
+page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials, tabId) {
     page.submittedCredentials.submitted = submitted;
     page.submittedCredentials.username = username;
     page.submittedCredentials.password = password;
     page.submittedCredentials.url = url;
     page.submittedCredentials.oldCredentials = oldCredentials;
+    page.submittedCredentials.tabId = tabId;
 };
 
 page.clearSubmittedCredentials = function() {

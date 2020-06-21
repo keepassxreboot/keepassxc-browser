@@ -12,6 +12,10 @@ const isFirefox = function() {
     return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
 };
 
+const isEdge = function() {
+    return navigator.userAgent.indexOf('Edg') !== -1;
+};
+
 const showNotification = function(message) {
     browser.notifications.create({
         'type': 'basic',
@@ -110,4 +114,4 @@ function tr(key, params) {
 // Removes everything after '?' from URL
 const trimURL = function(url) {
     return url.indexOf('?') !== -1 ? url.split('?')[0] : url;
-}
+};

@@ -95,8 +95,8 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  * @param {object} details
  */
 browser.webNavigation.onCommitted.addListener((details) => {
-    if ((details.transitionQualifiers.length > 0 && details.transitionQualifiers[0] === 'client_redirect') ||
-        details.transitionType === 'form_submit') {
+    if ((details.transitionQualifiers.length > 0 && details.transitionQualifiers[0] === 'client_redirect')
+        || details.transitionType === 'form_submit') {
         page.redirectCount += 1;
         return;
     }

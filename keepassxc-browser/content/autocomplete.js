@@ -10,6 +10,10 @@ kpxcAutocomplete.shadowRoot = undefined;
 kpxcAutocomplete.wrapper = undefined;
 
 kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit = false) {
+    if (input.readOnly) {
+        return;
+    }
+
     kpxcAutocomplete.autoSubmit = autoSubmit;
     kpxcAutocomplete.input = input;
     kpxcAutocomplete.started = true;
@@ -42,7 +46,7 @@ kpxcAutocomplete.showList = function(inputField) {
 
     kpxcAutocomplete.updatePosition(inputField, div);
     div.style.zIndex = '2147483646';
-    
+
     const styleSheet = createStylesheet('css/autocomplete.css');
     const colorStyleSheet = createStylesheet('css/colors.css');
     const wrapper = kpxcUI.createElement('div');
@@ -227,9 +231,17 @@ kpxcAutocomplete.updatePosition = function(inputField, elem) {
     }
 
     const rect = inputField.getBoundingClientRect();
-    div.style.top = Pixels((rect.top + document.scrollingElement.scrollTop) + inputField.offsetHeight);
-    div.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft));
     div.style.minWidth = Pixels(inputField.offsetWidth);
+    const bodyRect = document.body.getBoundingClientRect();
+    const bodyStyle = getComputedStyle(document.body);
+
+    if (bodyStyle.position.toLowerCase() === 'relative') {
+        div.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+        div.style.left = Pixels(rect.left - bodyRect.left + document.scrollingElement.scrollLeft);
+    } else {
+        div.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+        div.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);
+    }
 };
 
 // Detect click outside autocomplete
@@ -243,11 +255,11 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    if (e.target !== kpxcAutocomplete.input &&
-        !e.target.classList.contains('kpxc-username-icon') &&
-        e.target.nodeName !== kpxcAutocomplete.input.nodeName) {
+    if (e.target !== kpxcAutocomplete.input
+        && !e.target.classList.contains('kpxc-username-icon')
+        && e.target.nodeName !== kpxcAutocomplete.input.nodeName) {
         kpxcAutocomplete.closeList(e.target);
-        
+
         if (kpxcAutocomplete.wrapper) {
             document.body.removeChild(kpxcAutocomplete.wrapper);
         }

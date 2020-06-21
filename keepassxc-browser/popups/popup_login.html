@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/colors.css" />
     <link rel="stylesheet" href="popup.css" />
-    <link rel="stylesheet" href="../options/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
     <script src="../browser-polyfill.min.js"></script>
     <script src="../global.js"></script>
-    <script src="../jquery-3.3.1.min.js"></script>
-    <script src="../options/bootstrap.min.js"></script>
+    <script src="../bootstrap/jquery-3.4.1.min.js"></script>
+    <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="popup_functions.js"></script>
     <script src="popup_login.js"></script>
     <script defer src="../translate.js"></script>
@@ -17,9 +18,9 @@
   <body>
     <div class="container">
       <div id="settings" class="settings">
-        <button id="btn-options" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-cog"></span> <span data-i18n="popupSettingsText"/></button>
-        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> <span data-i18n="popupChooseCredentialsText"/></button>
-        <button id="lock-database-button" class="btn btn-danger" title="Lock database"><span class="glyphicon glyphicon-lock"></span></button>
+        <button id="btn-options" class="btn btn-sm btn-success"><i class="fa fa-cog" aria-hidden="true"></i> <span data-i18n="popupSettingsText"></span></button>
+        <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><i class="fa fa-list-alt" aria-hidden="true"></i> <span data-i18n="popupChooseCredentialsText"></span></button>
+        <button id="lock-database-button" class="btn btn-sm btn-danger" data-i18n="[title]lockDatabase"><i class="fa fa-lock" aria-hidden="true"></i></button>
 
         <div id="update-available" class="alert alert-danger">
           <span data-i18n="popupUpdateAvailable"></span>
@@ -43,7 +44,7 @@
           <code id="database-error-message"></code>
         </p>
         <div style="text-align: right">
-          <button id="reopen-database-button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-lock"></span><span data-i18n="popupReopenButton"/></button>
+          <button id="reopen-database-button" class="btn btn-sm btn-primary"><i class="fa fa-lock" aria-hidden="true"></i> <span data-i18n="popupReopenButton"></span></button>
         </div>
       </div>
     </div>

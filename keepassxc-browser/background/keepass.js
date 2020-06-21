@@ -106,7 +106,7 @@ keepass.sendNativeMessage = function(request, enableTimeout = false, timeoutValu
         })(ev, requestAction);
         ev.addListener(listener);
 
-        let messageTimeout = timeoutValue || keepass.messageTimeout;
+        const messageTimeout = timeoutValue || keepass.messageTimeout;
 
         // Handle timeouts
         if (enableTimeout) {
@@ -512,6 +512,7 @@ keepass.getDatabaseHash = async function(tab, args = []) {
     const encrypted = keepass.encrypt(messageData, nonce);
     if (encrypted.length <= 0) {
         keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
+        keepass.updateDatabaseHashToContent();
         return keepass.databaseHash;
     }
 
@@ -533,7 +534,7 @@ keepass.getDatabaseHash = async function(tab, args = []) {
                 keepass.setcurrentKeePassXCVersion(parsed.version);
                 keepass.databaseHash = parsed.hash || '';
 
-                if (oldDatabaseHash && oldDatabaseHash != keepass.databaseHash) {
+                if (oldDatabaseHash && oldDatabaseHash !== keepass.databaseHash) {
                     keepass.associated.value = false;
                     keepass.associated.hash = null;
                 }
@@ -599,6 +600,7 @@ keepass.changePublicKeys = async function(tab, enableTimeout = false, connection
                 keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
             }
 
+            keepass.updateDatabaseHashToContent();
             return false;
         }
 
@@ -839,6 +841,8 @@ keepass.saveKey = function(hash, id, key) {
         keepass.keyRing[hash].id = id;
         keepass.keyRing[hash].key = key;
         keepass.keyRing[hash].hash = hash;
+        keepass.keyRing[hash].created = new Date().valueOf();
+        keepass.keyRing[hash].lastUsed = new Date().valueOf();
     }
     browser.storage.local.set({ 'keyRing': keepass.keyRing });
 };
@@ -849,6 +853,7 @@ keepass.updateLastUsed = function(hash) {
         browser.storage.local.set({ 'keyRing': keepass.keyRing });
     }
 };
+
 // Update the databaseHash from legacy hash
 keepass.updateDatabaseHash = function(oldHash, newHash) {
     if (!oldHash || !newHash || oldHash === newHash) {
@@ -1108,8 +1113,10 @@ keepass.decrypt = function(input, nonce) {
 
 keepass.enableAutomaticReconnect = function() {
     // Disable for Windows if KeePassXC is older than 2.3.4
-    if (!page.settings.autoReconnect ||
-        (navigator.platform.toLowerCase().includes('win') && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
+    if (!page.settings.autoReconnect
+        || (navigator.platform.toLowerCase().includes('win')
+            && keepass.currentKeePassXC
+            && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
         return;
     }
 
@@ -1164,7 +1171,7 @@ keepass.updateDatabase = async function() {
     keepass.associated.hash = null;
     await keepass.testAssociation(null);
     const configured = await keepass.isConfigured();
-    keepass.updatePopup(configured ? 'normal' : 'cross');
+    keepass.updatePopup(configured ? 'normal' : 'locked');
     keepass.updateDatabaseHashToContent();
 };
 
@@ -1175,7 +1182,8 @@ keepass.updateDatabaseHashToContent = async function() {
             // Send message to content script
             browser.tabs.sendMessage(tabs[0].id, {
                 action: 'check_database_hash',
-                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash }
+                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
+                connected: keepass.isKeePassXCAvailable
             }).catch((err) => {
                 console.log('Error: No content script available for this tab.');
             });

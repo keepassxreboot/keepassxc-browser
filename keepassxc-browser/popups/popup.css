@@ -1,13 +1,17 @@
 body {
     font-family: sans-serif;
     overflow-x: hidden;
-    background-color: var(--background-color) !important;
-    color: var(--text-color) !important;
-    font-size: 15px;
+    background-color: var(--kpxc-background-color) !important;
+    color: var(--kpxc-text-color) !important;
+    font-size: 14px !important;
     padding: 8px;
     min-width: 440px;
     max-width: 460px;
     width: auto;
+}
+
+code {
+    font-size: 14px !important;
 }
 
 .container {
@@ -34,10 +38,17 @@ body {
 
 .list-group {
     font-size: .9em !important;
+    margin-bottom: 1rem !important;
 }
 
 .list-group-item {
     padding: 5px 10px !important;
+}
+
+.list-group-item+.list-group-item:first-child {
+    border-top-width: 1px !important;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
 }
 
 .list-group-item:hover {
@@ -66,6 +77,13 @@ body {
     color: #787878;
 }
 
+.small {
+    margin-top: 3px;
+    margin-left: 12px;
+    font-size: 80%;
+    color: #787878;
+}
+
 #list {
     padding-left: 0px;
 }
@@ -74,18 +92,8 @@ body {
     border-top: 0px;
 }
 
-.small {
-    margin-top: 3px;
-    margin-left: 12px;
-    font-size: 80%;
-    color: #787878;
-}
-
 #update-available {
-    padding-top: 10px;
     margin-top: 10px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
     text-align: left;
     display: none;
 }
@@ -97,7 +105,7 @@ body {
 
 #lock-database-button {
     float: right;
-    height: 30px;
+    width: 2.5rem;
 }
 
 #login-filter {
@@ -111,27 +119,31 @@ body {
 
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
     body {
-        background: var(--background-color) !important;
-        color: var(--text-color) !important;
+        background: var(--kpxc-background-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 
     input, input[type="checkbox"] {
-        background-color: var(--input-background-color) !important;
-        border: var(--input-border);
-        border-color: var(--input-border-color);
+        background-color: var(--kpxc-input-background-color) !important;
+        border: var(--kpxc-input-border);
+        border-color: var(--kpxc-input-border-color);
     }
 
     .list-group-item {
-        background-color: var(--input-background-color) !important;
-        color: var(--text-color) !important;
+        background-color: var(--kpxc-input-background-color) !important;
+        color: var(--kpxc-text-color) !important;
     }
 
     .list-group-item:hover {
-        background-color: var(--table-hover-color) !important;
+        background-color: var(--kpxc-table-hover-color) !important;
     }
 
     span.bg-success {
-        background-color: var(--table-hover-color) !important;
-        color: var(--text-color) !important;
+        background-color: var(--kpxc-table-hover-color) !important;
+        color: var(--kpxc-text-color) !important;
+    }
+
+    #login-filter {
+        color: var(--kpxc-text-color) !important;
     }
 }

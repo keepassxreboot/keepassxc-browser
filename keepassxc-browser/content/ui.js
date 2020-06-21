@@ -22,18 +22,18 @@ class Icon {
         }
     }
 
-    switchIcon(locked) {
+    switchIcon(state) {
         if (!this.icon) {
             return;
         }
 
-        if (locked) {
-           this.icon.style.filter = 'saturate(0%)';
-        } else {
+        if (state === DatabaseState.UNLOCKED) {
             this.icon.style.filter = 'saturate(100%)';
+        } else {
+            this.icon.style.filter = 'saturate(0%)';
         }
     }
-};
+}
 
 const kpxcUI = {};
 kpxcUI.mouseDown = false;
@@ -80,16 +80,24 @@ kpxcUI.updateIconPosition = function(iconClass) {
     }
 };
 
+kpxcUI.calculateIconOffset = function(field, size) {
+    const offset = Math.floor((field.offsetHeight - size) / 3);
+    return (offset < 0) ? 0 : offset;
+};
+
 kpxcUI.setIconPosition = function(icon, field) {
     const rect = field.getBoundingClientRect();
-    const offset = Number(icon.getAttribute('offset'));
-    const size = Number(icon.getAttribute('size'));
+    const bodyRect = document.body.getBoundingClientRect();
+    const bodyStyle = getComputedStyle(document.body);
+    const size = (document.dir !== 'rtl') ? Number(icon.getAttribute('size')) : 0;
+    const offset = kpxcUI.calculateIconOffset(field, size);
 
-    icon.style.top = Pixels((rect.top + document.scrollingElement.scrollTop) + offset + 1);
-    if (document.dir === 'rtl') {
-        icon.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft) + offset);
+    if (bodyStyle.position.toLowerCase() === 'relative') {
+        icon.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + offset + 1);
+        icon.style.left = Pixels(rect.left - bodyRect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
     } else {
-        icon.style.left = Pixels((rect.left + document.scrollingElement.scrollLeft) + field.offsetWidth - size - offset);
+        icon.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + offset + 1);
+        icon.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
     }
 };
 
@@ -104,7 +112,6 @@ kpxcUI.setIconPosition = function(icon, field) {
 kpxcUI.updateFromIntersectionObserver = function(iconClass, entries) {
     for (const entry of entries) {
         const rect = DOMRectToArray(entry.boundingClientRect);
-        const temp = entry.target.closest('.kpxc-username-icon');
 
         if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
             iconClass.icon.style.display = 'none';
@@ -222,7 +229,7 @@ Element.prototype.getLowerCaseAttribute = function(attr) {
 
 Element.prototype._attachShadow = Element.prototype.attachShadow;
 Element.prototype.attachShadow = function () {
-    return this._attachShadow( { mode: 'closed' } );
+    return this._attachShadow({ mode: 'closed' });
 };
 
 Object.prototype.shadowSelector = function(value) {

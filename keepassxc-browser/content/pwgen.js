@@ -3,32 +3,33 @@
 const kpxcPasswordIcons = {};
 kpxcPasswordIcons.icons = [];
 
-kpxcPasswordIcons.newIcon = function(useIcons, field, inputs, pos, databaseClosed = true) {
-    kpxcPasswordIcons.icons.push(new PasswordIcon(useIcons, field, inputs, pos, databaseClosed));
+kpxcPasswordIcons.newIcon = function(useIcons, field, inputs, pos, databaseState = DatabaseState.DISCONNECTED) {
+    kpxcPasswordIcons.icons.push(new PasswordIcon(useIcons, field, inputs, pos, databaseState));
 };
 
-kpxcPasswordIcons.switchIcon = function(locked) {
-    kpxcPasswordIcons.icons.forEach(u => u.switchIcon(locked));
+kpxcPasswordIcons.switchIcon = function(state) {
+    kpxcPasswordIcons.icons.forEach(u => u.switchIcon(state));
 };
 
 
 class PasswordIcon extends Icon {
-    constructor(useIcons, field, inputs, pos, databaseClosed) {
+    constructor(useIcons, field, inputs, pos, databaseState) {
         super();
         this.useIcons = useIcons;
-        this.databaseClosed = databaseClosed;
+        this.databaseState = databaseState;
 
         this.initField(field, inputs, pos);
         kpxcUI.monitorIconPosition(this);
     }
-};
+}
 
 PasswordIcon.prototype.initField = function(field, inputs, pos) {
-    if (!field) {
+    if (!field || field.readOnly) {
         return;
     }
 
-    if (field.getAttribute('kpxc-password-generator')) {
+    if (field.getAttribute('kpxc-password-generator')
+        || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'password')) {
         return;
     }
 
@@ -62,8 +63,7 @@ PasswordIcon.prototype.initField = function(field, inputs, pos) {
 PasswordIcon.prototype.createIcon = function(field) {
     const className = (isFirefox() ? 'key-moz' : 'key');
     const size = (field.offsetHeight > 28) ? 24 : 16;
-    let offset = Math.floor((field.offsetHeight - size) / 3);
-    offset = (offset < 0) ? 0 : offset;
+    const offset = kpxcUI.calculateIconOffset(field, size);
 
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-pwgen-icon ' + className,
         {
@@ -77,7 +77,7 @@ PasswordIcon.prototype.createIcon = function(field) {
     icon.style.width = Pixels(size);
     icon.style.height = Pixels(size);
 
-    if (this.databaseClosed) {
+    if (this.databaseState === DatabaseState.DISCONNECTED || this.databaseState === DatabaseState.LOCKED) {
         icon.style.filter = 'saturate(0%)';
     }
 
@@ -294,8 +294,8 @@ kpxcPasswordDialog.fill = function(e) {
         const password = kpxcPasswordDialog.shadowSelector('.kpxc-pwgen-input');
         if (field.getAttribute('maxlength')) {
             if (password.value.length > field.getAttribute('maxlength')) {
-                const message = tr('passwordGeneratorErrorTooLong') + '\r\n' +
-                    tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
+                const message = tr('passwordGeneratorErrorTooLong') + '\r\n'
+                                + tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
                 message.style.whiteSpace = 'pre';
                 browser.runtime.sendMessage({
                     action: 'show_notification',

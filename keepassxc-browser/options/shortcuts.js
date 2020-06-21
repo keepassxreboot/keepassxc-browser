@@ -1,11 +1,24 @@
 'use strict';
 
-let tempArray = [];
+const tempArray = [];
 let keyArray = [];
 
-document.querySelectorAll('input').forEach((b) => {
-    b.addEventListener('keydown', e => handleKeyDown(e));
-    b.addEventListener('keyup', e => handleKeyUp(e));
+$(async function() {
+    try {
+        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
+        if (settings['colorTheme'] === undefined) {
+            document.body.removeAttribute('data-color-theme');
+        } else {
+            document.body.setAttribute('data-color-theme', settings['colorTheme']);
+        }
+
+        document.querySelectorAll('input').forEach((b) => {
+            b.addEventListener('keydown', e => handleKeyDown(e));
+            b.addEventListener('keyup', e => handleKeyUp(e));
+        });
+    } catch (err) {
+        console.log('Error loading options page: ' + err);
+    }
 });
 
 const saveButtons = document.querySelectorAll('.btn-primary');
@@ -94,7 +107,7 @@ function handleControl() {
 // Possible types: success, info, danger
 function createBanner(type, shortcut) {
     const banner = document.createElement('div');
-    banner.classList.add('alert', 'alert-dismissible', 'alert-' + type, 'fade', 'in');
+    banner.classList.add('alert', 'alert-dismissible', 'alert-' + type);
 
     if (type === 'success') {
         banner.textContent = tr('optionsShortcutsSuccess', shortcut);
