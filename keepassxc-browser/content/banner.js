@@ -107,7 +107,8 @@ kpxcBanner.create = async function(credentials = {}) {
             kpxcBanner.banner.removeChild(dialog);
         } else {
             if (ignoreCheckbox.checked) {
-                kpxc.ignoreSite([ window.top.location.href ]);
+                const ignoreUrl = window.location.href.slice(0, window.location.href.lastIndexOf('/') + 1) + '*';
+                kpxc.ignoreSite([ ignoreUrl ]);
             }
             kpxcBanner.destroy();
         }
