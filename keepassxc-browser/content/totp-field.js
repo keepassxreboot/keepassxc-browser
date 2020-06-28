@@ -1,6 +1,5 @@
 'use strict';
 
-const MINIMUM_SIZE = 60;
 const ignoreRegex = /(zip|postal).*code/i;
 const ignoredTypes = [ 'email', 'password', 'username' ];
 
@@ -15,6 +14,10 @@ kpxcTOTPIcons.switchIcon = function(state) {
     kpxcTOTPIcons.icons.forEach(u => u.switchIcon(state));
 };
 
+kpxcTOTPIcons.deleteHiddenIcons = function() {
+    kpxcUI.deleteHiddenIcons(kpxcTOTPIcons.icons, 'kpxc-totp-field');
+};
+
 
 class TOTPFieldIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
@@ -23,8 +26,9 @@ class TOTPFieldIcon extends Icon {
         this.inputField = null;
         this.databaseState = databaseState;
 
-        this.initField(field, forced);
-        kpxcUI.monitorIconPosition(this);
+        if (this.initField(field, forced)) {
+            kpxcUI.monitorIconPosition(this);
+        }
     }
 }
 
@@ -35,20 +39,20 @@ TOTPFieldIcon.prototype.initField = function(field, forced) {
 
     if (!forced) {
         if (ignoredTypes.some(t => t === field.type)
+            || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH
+            || field.size < 2
+            || (field.maxLength > 0 && (field.maxLength < 6 || field.maxLength > 8))
             || ignoredTypes.some(t => t === field.autocomplete)
             || field.getAttribute('kpxc-totp-field') === 'true'
             || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'totp')
-            || field.offsetWidth < MINIMUM_SIZE
-            || field.size < 2
-            || (field.maxLength > 0 && (field.maxLength < 6 || field.maxLength > 8))
             || field.id.match(ignoreRegex)
             || field.name.match(ignoreRegex)
             || field.readOnly) {
-            return;
+            return false;
         }
     } else {
         if (field.getAttribute('kpxc-totp-field') === 'true') {
-            return;
+            return false;
         }
     }
 
@@ -61,6 +65,7 @@ TOTPFieldIcon.prototype.initField = function(field, forced) {
 
     this.createIcon(field);
     this.inputField = field;
+    return false;
 };
 
 TOTPFieldIcon.prototype.createIcon = function(field) {
