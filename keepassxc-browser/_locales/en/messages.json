@@ -924,7 +924,7 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "To ignore new/modified credentials on a specific site, add them below or when using the credential banner on the page select",
+        "message": "To ignore new/modified credentials on a specific site, add them below or when using the credential banner on the page select <em>Don't ask again for this site</em>.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
