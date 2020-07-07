@@ -2,6 +2,12 @@
 
 const MINIMUM_INPUT_FIELD_WIDTH = 60;
 
+const DatabaseState = {
+    DISCONNECTED: 0,
+    LOCKED: 1,
+    UNLOCKED: 2
+};
+
 // jQuery style wrapper for querySelector()
 const $ = function(elem) {
     return document.querySelector(elem);
@@ -44,6 +50,8 @@ class Icon {
 }
 
 const kpxcUI = {};
+kpxcUI.bodyRect = document.body.getBoundingClientRect();
+kpxcUI.bodyStyle = getComputedStyle(document.body);
 kpxcUI.mouseDown = false;
 
 // Wrapper for creating elements
@@ -95,14 +103,12 @@ kpxcUI.calculateIconOffset = function(field, size) {
 
 kpxcUI.setIconPosition = function(icon, field) {
     const rect = field.getBoundingClientRect();
-    const bodyRect = document.body.getBoundingClientRect();
-    const bodyStyle = getComputedStyle(document.body);
     const size = (document.dir !== 'rtl') ? Number(icon.getAttribute('size')) : 0;
     const offset = kpxcUI.calculateIconOffset(field, size);
 
-    if (bodyStyle.position.toLowerCase() === 'relative') {
-        icon.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + offset + 1);
-        icon.style.left = Pixels(rect.left - bodyRect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
+    if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
+        icon.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + offset + 1);
+        icon.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
     } else {
         icon.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + offset + 1);
         icon.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
@@ -110,11 +116,21 @@ kpxcUI.setIconPosition = function(icon, field) {
 };
 
 kpxcUI.deleteHiddenIcons = function(iconList, attr) {
+    const deletedIcons = [];
     for (const icon of iconList) {
         if (icon.inputField && !kpxcFields.isVisible(icon.inputField)) {
             const index = iconList.indexOf(icon);
             icon.removeIcon(attr);
             iconList.splice(index, 1);
+            deletedIcons.push(icon.inputField);
+        }
+    }
+
+    // Remove the same icons from kpxcIcons.icons array
+    for (const input of deletedIcons) {
+        const index = kpxcIcons.icons.findIndex(e => e.field === input);
+        if (index >= 0) {
+            kpxcIcons.icons.splice(index, 1);
         }
     }
 };
@@ -139,7 +155,7 @@ kpxcUI.updateFromIntersectionObserver = function(iconClass, entries) {
             // Wait for possible DOM animations
             setTimeout(() => {
                 kpxcUI.setIconPosition(iconClass.icon, entry.target);
-            }, 500);
+            }, 400);
         }
     }
 };
