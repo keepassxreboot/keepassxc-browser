@@ -82,18 +82,20 @@ div.kpxc-banner label {
 }
 
 div.kpxc-banner-dialog {
-    display: block !important;
-    position: fixed !important;
-    margin: 0 auto;
-    width: 680px;
-    max-height: 600px;
-    max-width: 460px;
     background-color: var(--kpxc-background-color);
-    color: var(--kpxc-text-color);
     border: var(--kpxc-container-border);
     border-radius: 0 0 4px 4px;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    color: var(--kpxc-text-color);
+    display: block !important;
+    margin: 0 auto;
+    max-height: 60%;
+    max-width: 460px;
+    overflow: hidden !important;
+    overflow-y: scroll !important;
     padding: 8px;
+    position: fixed !important;
+    width: 680px;
     z-index: 10000000;
 }
 
