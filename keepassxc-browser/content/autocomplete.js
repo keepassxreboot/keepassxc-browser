@@ -212,12 +212,12 @@ kpxcAutocomplete.keyPress = function(e) {
     }
 };
 
-kpxcAutocomplete.fillPassword = function(value, index) {
+kpxcAutocomplete.fillPassword = async function(value, index) {
     const fieldId = kpxcAutocomplete.input.getAttribute('data-kpxc-id');
     kpxcFields.prepareId(fieldId);
 
     const givenType = kpxcAutocomplete.input.type === 'password' ? 'password' : 'username';
-    const combination = kpxcFields.getCombination(givenType, fieldId);
+    const combination = await kpxcFields.getCombination(givenType, fieldId);
     combination.loginId = index;
 
     kpxc.fillInCredentials(combination, givenType === 'password', false);

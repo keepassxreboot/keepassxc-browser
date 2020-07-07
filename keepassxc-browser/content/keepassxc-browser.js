@@ -412,7 +412,7 @@ kpxcFields.getAllCombinations = function(inputs) {
     return fields;
 };
 
-kpxcFields.getCombination = function(givenType, fieldId) {
+kpxcFields.getCombination = async function(givenType, fieldId) {
     if (kpxcFields.combinations.length === 0) {
         if (kpxcFields.useDefinedCredentialFields()) {
             return kpxcFields.combinations[0];
@@ -449,7 +449,7 @@ kpxcFields.getCombination = function(givenType, fieldId) {
         };
         newCombi = true;
     } else if (givenType === 'password') {
-        const usernameField = kpxcFields.getUsernameField(fieldId, true);
+        const usernameField = await kpxcFields.getUsernameField(fieldId, true);
         let usernameId = null;
         if (usernameField) {
             usernameId = kpxcFields.prepareId(usernameField.getAttribute('data-kpxc-id'));
@@ -1045,9 +1045,6 @@ kpxc.initCredentialFields = async function(forceCall, inputs) {
     }
     kpxcFields.prepareCombinations(kpxcFields.combinations);
 
-    kpxcFields.prepareVisibleFieldsWithID('select');
-    kpxc.initPasswordGenerator(inputs);
-
     if (kpxc.settings.showOTPIcon) {
         kpxc.initOTPFields(inputs);
     }
@@ -1130,7 +1127,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials, dontAutoFillIn) {
 
     if (credentials && credentials.length > 0) {
         kpxc.credentials = credentials;
-        kpxc.prepareFieldsForCredentials(!dontAutoFillIn);
+        await kpxc.prepareFieldsForCredentials(!dontAutoFillIn);
     }
 
     // Retrieve submitted credentials if available
@@ -1147,7 +1144,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials, dontAutoFillIn) {
     }
 };
 
-kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
+kpxc.prepareFieldsForCredentials = async function(autoFillInForSingle) {
     // Only one login for this site
     if (autoFillInForSingle && kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) {
         let combination = null;
@@ -1158,11 +1155,11 @@ kpxc.prepareFieldsForCredentials = function(autoFillInForSingle) {
         }
         if (kpxc.u) {
             kpxc.setValueWithChange(kpxc.u, kpxc.credentials[0].login);
-            combination = kpxcFields.getCombination('username', kpxc.u);
+            combination = await kpxcFields.getCombination('username', kpxc.u);
         }
         if (kpxc.p) {
             kpxc.setValueWithChange(kpxc.p, kpxc.credentials[0].password);
-            combination = kpxcFields.getCombination('password', kpxc.p);
+            combination = await kpxcFields.getCombination('password', kpxc.p);
         }
 
         if (combination) {
@@ -1366,7 +1363,7 @@ kpxc.fillInCredentials = async function(combination, onlyPassword, suppressWarni
     }
 };
 
-kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
+kpxc.fillInFromActiveElement = async function(suppressWarnings, passOnly = false) {
     const el = document.activeElement;
     if (el.tagName.toLowerCase() !== 'input') {
         if (kpxcFields.combinations.length > 0) {
@@ -1385,9 +1382,9 @@ kpxc.fillInFromActiveElement = function(suppressWarnings, passOnly = false) {
     const fieldId = kpxcFields.prepareId(el.getAttribute('data-kpxc-id'));
     let combination = null;
     if (el.getAttribute('type') === 'password') {
-        combination = kpxcFields.getCombination('password', fieldId);
+        combination = await kpxcFields.getCombination('password', fieldId);
     } else {
-        combination = kpxcFields.getCombination('username', fieldId);
+        combination = await kpxcFields.getCombination('username', fieldId);
     }
 
     if (passOnly) {
@@ -1475,12 +1472,12 @@ kpxc.setValueWithChange = function(field, value) {
     field.dispatchEvent(new Event('change', { 'bubbles': true }));
 };
 
-kpxc.fillWithSpecificLogin = function(id) {
+kpxc.fillWithSpecificLogin = async function(id) {
     if (kpxc.credentials[id]) {
         let combination = null;
         if (kpxc.u) {
             kpxc.setValueWithChange(kpxc.u, kpxc.credentials[id].login);
-            combination = kpxcFields.getCombination('username', kpxc.u);
+            combination = await kpxcFields.getCombination('username', kpxc.u);
             browser.runtime.sendMessage({
                 action: 'page_set_login_id', args: id
             });
@@ -1491,7 +1488,7 @@ kpxc.fillWithSpecificLogin = function(id) {
             browser.runtime.sendMessage({
                 action: 'page_set_login_id', args: id
             });
-            combination = kpxcFields.getCombination('password', kpxc.p);
+            combination = await kpxcFields.getCombination('password', kpxc.p);
         }
 
         const list = [];
@@ -1702,9 +1699,9 @@ kpxc.contextMenuRememberCredentials = async function() {
     const fieldId = kpxcFields.prepareId(el.getAttribute('data-kpxc-id'));
     let combination = null;
     if (el.getAttribute('type') === 'password') {
-        combination = kpxcFields.getCombination('password', fieldId);
+        combination = await kpxcFields.getCombination('password', fieldId);
     } else {
-        combination = kpxcFields.getCombination('username', fieldId);
+        combination = await kpxcFields.getCombination('username', fieldId);
     }
 
     let usernameValue = '';
