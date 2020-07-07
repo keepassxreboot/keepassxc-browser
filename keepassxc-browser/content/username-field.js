@@ -11,6 +11,10 @@ kpxcUsernameIcons.switchIcon = function(state) {
     kpxcUsernameIcons.icons.forEach(u => u.switchIcon(state));
 };
 
+kpxcUsernameIcons.deleteHiddenIcons = function() {
+    kpxcUI.deleteHiddenIcons(kpxcUsernameIcons.icons, 'kpxc-username-field');
+};
+
 
 class UsernameFieldIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED) {
@@ -19,8 +23,9 @@ class UsernameFieldIcon extends Icon {
         this.icon = null;
         this.inputField = null;
 
-        this.initField(field);
-        kpxcUI.monitorIconPosition(this);
+        if (this.initField(field)) {
+            kpxcUI.monitorIconPosition(this);
+        }
     }
 
     switchIcon(state) {
@@ -36,12 +41,13 @@ class UsernameFieldIcon extends Icon {
 
 UsernameFieldIcon.prototype.initField = function(field) {
     if (!field
+        || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH
+        || field.readOnly
         || field.getAttribute('kpxc-username-field') === 'true'
         || field.getAttribute('kpxc-totp-field') === 'true'
         || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'username')
-        || !kpxcFields.isVisible(field)
-        || field.readOnly) {
-        return;
+        || !kpxcFields.isVisible(field)) {
+        return false;
     }
 
     field.setAttribute('kpxc-username-field', 'true');
@@ -53,11 +59,12 @@ UsernameFieldIcon.prototype.initField = function(field) {
 
     this.createIcon(field);
     this.inputField = field;
+    return true;
 };
 
 UsernameFieldIcon.prototype.createIcon = function(target) {
     // Remove any existing password generator icons from the input field
-    if (target.getAttribute('kpxc-password-generator')) {
+    if (target.getAttribute('kpxc-password-field')) {
         kpxcPasswordDialog.removeIcon(target);
     }
 

@@ -44,6 +44,11 @@ let _documentURL = document.location.href;
 // These are executed in each frame
 browser.runtime.onMessage.addListener(async function(req, sender) {
     if ('action' in req) {
+        // Don't allow any actions if the site is ignored
+        if (kpxc.siteIgnored()) {
+            return Promise.resolve();
+        }
+
         if (req.action === 'fill_user_pass_with_specific_login') {
             kpxc.fillWithSpecificLogin(req.id);
         } else if (req.action === 'fill_username_password') {
@@ -275,6 +280,7 @@ kpxcFields.traverseParents = function(element, predicate, resultFn = () => true,
             return resultFn(f);
         }
     }
+
     return defaultValFn();
 };
 
@@ -318,20 +324,26 @@ kpxcFields.isSearchField = function(target) {
 };
 
 kpxcFields.isVisible = function(field) {
-    // Check for parent opacity
-    if (kpxcFields.traverseParents(field, f => f.style.opacity === '0')) {
+    // Check element position and size
+    const rect = field.getBoundingClientRect();
+    if (rect.x < 0
+        || rect.y < 0
+        || rect.width < 8
+        || rect.x > document.body.offsetWidth
+        || rect.y > document.body.offsetHeight
+        || rect.height < 8) {
         return false;
     }
 
     // Check CSS visibility
     const fieldStyle = getComputedStyle(field);
-    if (fieldStyle.visibility && (fieldStyle.visibility === 'hidden' || fieldStyle.visibility === 'collapse')) {
+    if (fieldStyle.visibility && (fieldStyle.visibility === 'hidden' || fieldStyle.visibility === 'collapse')
+        || fieldStyle.opacity === '0') {
         return false;
     }
 
-    // Check element position and size
-    const rect = field.getBoundingClientRect();
-    if (rect.x < 0 || rect.y < 0 || rect.width < 8 || rect.height < 8) {
+    // Check for parent opacity
+    if (kpxcFields.traverseParents(field, f => f.style.opacity === '0')) {
         return false;
     }
 
@@ -595,6 +607,16 @@ kpxcFields.getPasswordField = function(usernameId, checkDisabled) {
 };
 
 kpxcFields.prepareCombinations = async function(combinations) {
+    if (combinations.length === 0) {
+        return;
+    }
+
+    // Only request this once if there are combinations available
+    let passwordFilled;
+    if (combinations.length > 0) {
+        passwordFilled = await kpxc.passwordFilled();
+    }
+
     for (const c of combinations) {
         const pwField = _f(c.password);
         // Needed for auto-complete: don't overwrite manually filled-in password field
@@ -611,7 +633,7 @@ kpxcFields.prepareCombinations = async function(combinations) {
         // If no username field is found, handle the single password field as such
         const usernameField = c.username ? _f(c.username) : field;
 
-        if (kpxc.settings.showLoginFormIcon && await kpxc.passwordFilled() === false) {
+        if (kpxc.settings.showLoginFormIcon && passwordFilled === false) {
             kpxcUsernameIcons.newIcon(usernameField, _databaseState);
         }
 
@@ -683,6 +705,7 @@ kpxcObserverHelper.inputTypes = [
 ];
 
 // Ignores all nodes that doesn't contain elements
+// Also ignore few Youtube-specific custom nodeNames
 kpxcObserverHelper.ignoredNode = function(target) {
     if (target.nodeType === Node.ATTRIBUTE_NODE
         || target.nodeType === Node.TEXT_NODE
@@ -690,13 +713,20 @@ kpxcObserverHelper.ignoredNode = function(target) {
         || target.nodeType === Node.PROCESSING_INSTRUCTION_NODE
         || target.nodeType === Node.COMMENT_NODE
         || target.nodeType === Node.DOCUMENT_TYPE_NODE
-        || target.nodeType === Node.NOTATION_NODE) {
+        || target.nodeType === Node.NOTATION_NODE
+        || target.nodeName === 'HTML'
+        || target.nodeName === 'LINK'
+        || target.nodeName === 'HEAD'
+        || target.nodeName === 'VIDEO'
+        || target.nodeName.startsWith('YTMUSIC')
+        || target.nodeName.startsWith('YT-')) {
         return true;
     }
+
     return false;
 };
 
-kpxcObserverHelper.getInputs = function(target) {
+kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     // Ignores target element if it's not an element node
     if (kpxcObserverHelper.ignoredNode(target)) {
         return [];
@@ -705,7 +735,9 @@ kpxcObserverHelper.getInputs = function(target) {
     // Filter out any input fields with type 'hidden' right away
     const inputFields = [];
     Array.from(target.getElementsByTagName('input')).forEach(e => {
-        if (e.type !== 'hidden') {
+        if (e.type !== 'hidden'
+            && !e.disabled
+            && !kpxcObserverHelper.hasKpxcClass(e)) {
             inputFields.push(e);
         }
     });
@@ -724,9 +756,15 @@ kpxcObserverHelper.getInputs = function(target) {
     for (const field of inputFields) {
         const type = field.getLowerCaseAttribute('type');
 
-        if (kpxcObserverHelper.inputTypes.includes(type) && kpxcFields.isVisible(field)) {
-            kpxcFields.setUniqueId(field);
-            inputs.push(field);
+        if (ignoreVisibility) {
+            if (kpxcObserverHelper.inputTypes.includes(type)) {
+                inputs.push(field);
+            }
+        } else {
+            if (kpxcObserverHelper.inputTypes.includes(type) && kpxcFields.isVisible(field)) {
+                kpxcFields.setUniqueId(field);
+                inputs.push(field);
+            }
         }
     }
     return inputs;
@@ -745,15 +783,27 @@ kpxcObserverHelper.getId = function(target) {
     return `kpxc${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}`;
 };
 
+kpxcObserverHelper.hasKpxcClass = function(target) {
+    if (!target.className
+        || !target.className.includes('kpxc')) {
+        return false;
+    }
+
+    return target.className.includes('kpxc');
+};
+
 kpxcObserverHelper.ignoredElement = function(target) {
+    if (kpxcObserverHelper.ignoredNode(target)) {
+        return true;
+    }
+
     // Ignore elements that do not have a className (including SVG)
     if (typeof target.className !== 'string') {
         return true;
     }
 
     // Ignore KeePassXC-Browser classes
-    if (target.className && target.className !== undefined
-        && target.className.includes('kpxc')) {
+    if (kpxcObserverHelper.hasKpxcClass(target)) {
         return true;
     }
 
@@ -780,7 +830,7 @@ kpxcObserverHelper.handleObserverAdd = function(target) {
         if (Object.keys(kpxc.settings).length === 0) {
             kpxc.init();
         } else {
-            kpxc.initCredentialFields(true, inputs);
+            kpxc.handleCredentialFields(inputs);
         }
     }
 };
@@ -790,10 +840,12 @@ kpxcObserverHelper.handleObserverRemove = function(target) {
         return;
     }
 
-    const inputs = kpxcObserverHelper.getInputs(target);
+    const inputs = kpxcObserverHelper.getInputs(target, true);
     if (inputs.length === 0) {
         return;
     }
+
+    kpxc.deleteHiddenIcons();
 
     // Remove target element id from the list
     const id = kpxcObserverHelper.getId(target);
@@ -824,7 +876,7 @@ kpxc.url = null;
 kpxc.submitUrl = null;
 kpxc.credentials = [];
 
-const initcb = async function() {
+const initContentScript = async function() {
     try {
         const settings = await browser.runtime.sendMessage({
             action: 'load_settings'
@@ -873,13 +925,13 @@ const initcb = async function() {
 };
 
 if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
-    initcb();
+    initContentScript();
 } else {
-    document.addEventListener('DOMContentLoaded', initcb);
+    document.addEventListener('DOMContentLoaded', initContentScript);
 }
 
 kpxc.init = function() {
-    initcb();
+    initContentScript();
 };
 
 // Detects DOM changes in the document
@@ -896,10 +948,7 @@ kpxc.initObserver = function() {
 
         for (const mut of mutations) {
             // Skip text nodes and base HTML element
-            if (mut.target.nodeType === Node.TEXT_NODE
-                || mut.target.nodeName === 'HTML'
-                || mut.target.nodeName === 'LINK'
-                || mut.target.nodeName === 'HEAD') {
+            if (kpxcObserverHelper.ignoredNode(mut.target)) {
                 continue;
             }
 
@@ -911,7 +960,7 @@ kpxc.initObserver = function() {
                 // Check if some class is changed that holds a form or input field(s). Ignore large forms.
                 const formInput = mut.target.querySelector('form input');
                 if (mut.attributeName === 'class' && formInput !== null && formInput.form.length < 20) {
-                    kpxc.initCredentialFields(true);
+                    kpxc.handleCredentialFields(Array.from(formInput.form.getElementsByTagName('input')));
                     continue;
                 }
 
@@ -1013,7 +1062,8 @@ kpxc.siteIgnored = function(condition) {
     return false;
 };
 
-kpxc.initCredentialFields = async function(forceCall, inputs) {
+// Initializes all input fields from the whole page
+kpxc.initCredentialFields = async function(forceCall) {
     if (_called.initCredentialFields && !forceCall) {
         return;
     }
@@ -1030,11 +1080,13 @@ kpxc.initCredentialFields = async function(forceCall, inputs) {
         return;
     }
 
-    // If target input fields are not defined, get inputs from the whole document
-    if (inputs === undefined) {
-        inputs = kpxcFields.getAllFields();
-    }
+    // Get inputs from the whole document
+    const inputs = kpxcFields.getAllFields();
+    kpxc.handleCredentialFields(inputs);
+};
 
+// Handles the input fields from the whole page or from dynamically added content
+kpxc.handleCredentialFields = async function(inputs) {
     if (inputs.length === 0) {
         return;
     }
@@ -1089,10 +1141,6 @@ kpxc.initPasswordGenerator = function(inputs) {
 
 kpxc.initOTPFields = function(inputs) {
     for (const i of inputs) {
-        if (!kpxcFields.isVisible(i)) {
-            continue;
-        }
-
         const id = i.getLowerCaseAttribute('id');
         const name = i.getLowerCaseAttribute('name');
         const autocomplete = i.getLowerCaseAttribute('autocomplete');
@@ -1244,6 +1292,10 @@ kpxc.preparePageForMultipleCredentials = function(credentials) {
 
 // Returns the form that includes the inputField
 kpxc.getForm = function(inputField) {
+    if (inputField.form) {
+        return inputField.form;
+    }
+
     for (const f of document.forms) {
         for (const e of f.elements) {
             if (e === inputField) {
@@ -1917,6 +1969,12 @@ kpxc.switchIcons = function() {
     kpxcUsernameIcons.switchIcon(_databaseState);
     kpxcPasswordIcons.switchIcon(_databaseState);
     kpxcTOTPIcons.switchIcon(_databaseState);
+};
+
+kpxc.deleteHiddenIcons = function() {
+    kpxcUsernameIcons.deleteHiddenIcons();
+    kpxcPasswordIcons.deleteHiddenIcons();
+    kpxcTOTPIcons.deleteHiddenIcons();
 };
 
 kpxc.setPasswordFilled = function(state) {

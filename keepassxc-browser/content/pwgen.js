@@ -11,6 +11,10 @@ kpxcPasswordIcons.switchIcon = function(state) {
     kpxcPasswordIcons.icons.forEach(u => u.switchIcon(state));
 };
 
+kpxcPasswordIcons.deleteHiddenIcons = function() {
+    kpxcUI.deleteHiddenIcons(kpxcPasswordIcons.icons, 'kpxc-password-field');
+};
+
 
 class PasswordIcon extends Icon {
     constructor(useIcons, field, inputs, pos, databaseState) {
@@ -18,22 +22,25 @@ class PasswordIcon extends Icon {
         this.useIcons = useIcons;
         this.databaseState = databaseState;
 
-        this.initField(field, inputs, pos);
-        kpxcUI.monitorIconPosition(this);
+        if (this.initField(field, inputs, pos)) {
+            kpxcUI.monitorIconPosition(this);
+        }
     }
 }
 
 PasswordIcon.prototype.initField = function(field, inputs, pos) {
-    if (!field || field.readOnly) {
-        return;
+    if (!field
+        || field.readOnly
+        || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH) {
+        return false;
     }
 
-    if (field.getAttribute('kpxc-password-generator')
+    if (field.getAttribute('kpxc-password-field')
         || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'password')) {
-        return;
+        return false;
     }
 
-    field.setAttribute('kpxc-password-generator', true);
+    field.setAttribute('kpxc-password-field', true);
 
     if (this.useIcons) {
         // Observer the visibility
@@ -58,6 +65,7 @@ PasswordIcon.prototype.initField = function(field, inputs, pos) {
     }
 
     field.setAttribute('kpxc-pwgen-next-field-exists', found);
+    return true;
 };
 
 PasswordIcon.prototype.createIcon = function(field) {
@@ -117,7 +125,7 @@ kpxcPasswordDialog.dialog = null;
 kpxcPasswordDialog.titleBar = null;
 
 kpxcPasswordDialog.removeIcon = function(field) {
-    if (field.getAttribute('kpxc-password-generator')) {
+    if (field.getAttribute('kpxc-password-field')) {
         const pwgenIcons = document.querySelectorAll('.kpxc-pwgen-icon');
         for (const i of pwgenIcons) {
             if (i.getAttribute('kpxc-pwgen-field-id') === field.getAttribute('data-kpxc-id')) {
@@ -233,7 +241,7 @@ kpxcPasswordDialog.trigger = function() {
 kpxcPasswordDialog.showDialog = function(field, icon) {
     if (!kpxcFields.isVisible(field)) {
         document.body.removeChild(icon);
-        field.removeAttribute('kpxc-password-generator');
+        field.removeAttribute('kpxc-password-field');
         return;
     }
 

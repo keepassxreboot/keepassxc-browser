@@ -1,5 +1,7 @@
 'use strict';
 
+const MINIMUM_INPUT_FIELD_WIDTH = 60;
+
 // jQuery style wrapper for querySelector()
 const $ = function(elem) {
     return document.querySelector(elem);
@@ -32,6 +34,12 @@ class Icon {
         } else {
             this.icon.style.filter = 'saturate(0%)';
         }
+    }
+
+    removeIcon(attr) {
+        this.inputField.removeAttribute(attr);
+        this.shadowRoot.removeChild(this.icon);
+        document.body.removeChild(this.shadowRoot.host);
     }
 }
 
@@ -98,6 +106,16 @@ kpxcUI.setIconPosition = function(icon, field) {
     } else {
         icon.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + offset + 1);
         icon.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
+    }
+};
+
+kpxcUI.deleteHiddenIcons = function(iconList, attr) {
+    for (const icon of iconList) {
+        if (icon.inputField && !kpxcFields.isVisible(icon.inputField)) {
+            const index = iconList.indexOf(icon);
+            icon.removeIcon(attr);
+            iconList.splice(index, 1);
+        }
     }
 };
 
