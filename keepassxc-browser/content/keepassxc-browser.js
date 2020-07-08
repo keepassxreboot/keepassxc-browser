@@ -875,6 +875,7 @@ kpxc.p = null;
 kpxc.url = null;
 kpxc.submitUrl = null;
 kpxc.credentials = [];
+kpxc.observer = null;
 
 const initContentScript = async function() {
     try {
@@ -889,11 +890,12 @@ const initContentScript = async function() {
             return;
         }
 
-        if (kpxc.settings.useObserver) {
+        if (kpxc.settings.useObserver && !kpxc.observer) {
             kpxc.initObserver();
         }
 
         await kpxc.updateDatabaseState();
+        kpxc.switchIcons();
         await kpxc.initCredentialFields();
 
         // Retrieve submitted credentials if available.
@@ -920,7 +922,7 @@ const initContentScript = async function() {
             kpxc.rememberCredentials(creds.username, creds.password, creds.url, creds.oldCredentials);
         }
     } catch (err) {
-        console.log('Error: Cannot load extension settings');
+        console.log('initContentScript error: ', err);
     }
 };
 
@@ -936,7 +938,7 @@ kpxc.init = function() {
 
 // Detects DOM changes in the document
 kpxc.initObserver = function() {
-    const observer = new MutationObserver(function(mutations, obs) {
+    kpxc.observer = new MutationObserver(function(mutations, obs) {
         if (document.visibilityState === 'hidden' || kpxcUI.mouseDown) {
             return;
         }
@@ -981,7 +983,7 @@ kpxc.initObserver = function() {
 
     // define what element should be observed by the observer
     // and what types of mutations trigger the callback
-    observer.observe(document, {
+    kpxc.observer.observe(document, {
         subtree: true,
         attributes: true,
         childList: true,
@@ -2022,11 +2024,7 @@ kpxcEvents.clearCredentials = function() {
 };
 
 kpxcEvents.triggerActivatedTab = async function() {
-    // Doesn't run a second time because of _called.initCredentialFields set to true
     kpxc.init();
-
-    await kpxc.updateDatabaseState();
-    kpxc.switchIcons();
 
     // initCredentialFields calls also "retrieve_credentials", to prevent it
     // check of init() was already called
