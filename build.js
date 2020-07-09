@@ -25,6 +25,7 @@ function adjustManifest(manifest) {
         for (const elem in data['browser_action']['default_icon']) {
             data['browser_action']['default_icon'][elem] = 'icons/keepassxc.svg';
         }
+        delete data['version_name'];
     } else if (manifest.includes('chromium')) {
         delete data['applications'];
     }
