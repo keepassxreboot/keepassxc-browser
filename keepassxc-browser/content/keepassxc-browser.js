@@ -962,7 +962,7 @@ kpxc.initObserver = function() {
                 // Check if some class is changed that holds a form or input field(s). Ignore large forms.
                 const formInput = mut.target.querySelector('form input');
                 if (mut.attributeName === 'class' && formInput !== null && formInput.form.length < 20) {
-                    kpxc.handleCredentialFields(Array.from(formInput.form.getElementsByTagName('input')));
+                    kpxc.handleCredentialFields(kpxcObserverHelper.getInputs(formInput.form));
                     continue;
                 }
 
