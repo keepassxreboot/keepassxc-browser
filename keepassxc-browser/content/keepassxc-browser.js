@@ -329,8 +329,8 @@ kpxcFields.isVisible = function(field) {
     if (rect.x < 0
         || rect.y < 0
         || rect.width < 8
-        || rect.x > document.body.offsetWidth
-        || rect.y > document.body.offsetHeight
+        || rect.x > Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth)
+        || rect.y > Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight)
         || rect.height < 8) {
         return false;
     }
