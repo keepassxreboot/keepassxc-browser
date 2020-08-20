@@ -32,6 +32,7 @@ Currently these messages are implemented:
 - `lock-database`: Request for locking the database from client.
 - `database-locked`: A signal from KeePassXC, the current active database is locked.
 - `database-unlocked`: A signal from KeePassXC, the current active database is unlocked.
+- `get-totp`: Request for receiving the current TOTP.
 
 ### change-public-keys
 Request:
@@ -382,5 +383,24 @@ Response message data (success, decrypted):
 {
     "name": "<group name>",
     "uuid": "<group UUID>"
+}
+```
+
+### get-totp (KeePassXC 2.6.1 and newer)
+Request (no unencrypted message is needed):
+```json
+{
+    "action": "generate-password",
+    "uuid": "<entry UUID>"
+}
+```
+
+Response message data (success, decrypted):
+```json
+{
+    "totp": <TOTP>,
+    "version": "2.2.0",
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```
