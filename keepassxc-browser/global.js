@@ -32,6 +32,12 @@ const AssociatedAction = {
     CANCELED: 3
 };
 
+const ManualFill = {
+    NONE: 0,
+    PASSWORD: 1,
+    BOTH: 2
+};
+
 /**
  * Transforms a valid match pattern into a regular expression
  * which matches all URLs included by that pattern.

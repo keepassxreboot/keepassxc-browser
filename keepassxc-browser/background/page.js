@@ -24,14 +24,20 @@ const defaultSettings = {
 
 var page = {};
 page.blockedTabs = [];
+page.currentRequest = {};
 page.currentTabId = -1;
 page.loginId = -1;
+page.manualFill = ManualFill.NONE;
 page.passwordFilled = false;
 page.redirectCount = 0;
 page.submitted = false;
 page.submittedCredentials = {};
 page.tabs = [];
-page.usernameFieldDetected = false;
+
+page.popupData = {
+    iconType: 'normal',
+    popup: 'popup'
+};
 
 page.initSettings = async function() {
     try {
@@ -136,11 +142,11 @@ page.initOpenedTabs = async function() {
         // Set initial tab-ID
         const currentTabs = await browser.tabs.query({ active: true, currentWindow: true });
         if (currentTabs.length === 0) {
-            return Promise.resolve();
+            return;
         }
+
         page.currentTabId = currentTabs[0].id;
-        browserAction.show(currentTabs[0]);
-        return Promise.resolve();
+        browserAction.showDefault(currentTabs[0]);
     } catch (err) {
         console.log('page.initOpenedTabs error: ' + err);
         return Promise.reject();
@@ -149,18 +155,18 @@ page.initOpenedTabs = async function() {
 
 page.switchTab = function(tab) {
     browserAction.showDefault(tab);
-    browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {});
+    browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
+        console.log('Cannot send activated_tab message: ', e);
+    });
 };
 
-page.clearCredentials = function(tabId, complete) {
+page.clearCredentials = async function(tabId, complete) {
     if (!page.tabs[tabId]) {
         return;
     }
 
-    page.usernameFieldDetected = false;
     page.passwordFilled = false;
     page.tabs[tabId].credentials = [];
-    delete page.tabs[tabId].credentials;
 
     if (complete) {
         page.clearLogins(tabId);
@@ -176,8 +182,17 @@ page.clearLogins = function(tabId) {
         return;
     }
 
+    page.tabs[tabId].credentials = [];
     page.tabs[tabId].loginList = [];
+    page.currentRequest = {};
     page.passwordFilled = false;
+};
+
+// Clear all logins from all pages and update the content scripts
+page.clearAllLogins = function() {
+    for (const tabId of Object.keys(page.tabs)) {
+        page.clearCredentials(Number(tabId), true);
+    }
 };
 
 page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials, tabId) {
@@ -189,17 +204,18 @@ page.setSubmittedCredentials = function(submitted, username, password, url, oldC
     page.submittedCredentials.tabId = tabId;
 };
 
-page.clearSubmittedCredentials = function() {
+page.clearSubmittedCredentials = async function() {
     page.submitted = false;
     page.submittedCredentials = {};
 };
 
 page.createTabEntry = function(tabId) {
     page.tabs[tabId] = {
-        'stack': [],
-        'errorMessage': null,
-        'loginList': []
+        credentials: [],
+        errorMessage: null,
+        loginList: []
     };
+
     page.clearSubmittedCredentials();
 };
 
@@ -220,4 +236,62 @@ page.removePageInformationFromNotExistingTabs = async function() {
             }
         }
     }
+};
+
+// Retrieves the credentials. Returns cached values when found.
+// Page reload or tab switch clears the cache.
+page.retrieveCredentials = async function(tab, args = []) {
+    const [ url, submitUrl ] = args;
+    if (page.tabs[tab.id] && page.tabs[tab.id].credentials.length > 0) {
+        return page.tabs[tab.id].credentials;
+    }
+
+    // Ignore duplicate requests
+    if (page.currentRequest.url === url && page.currentRequest.submitUrl === submitUrl) {
+        return [];
+    } else {
+        page.currentRequest.url = url;
+        page.currentRequest.submitUrl = submitUrl;
+    }
+
+    const credentials = await keepass.retrieveCredentials(tab, args);
+    page.tabs[tab.id].credentials = credentials;
+    return credentials;
+};
+
+page.getLoginId = async function(tab) {
+    // If there's only one credential available and loginId is not set
+    if (page.loginId < 0
+        && page.tabs[tab.id]
+        && page.tabs[tab.id].credentials.length === 1) {
+        return 0; // Index to the first credential
+    }
+
+    return page.loginId;
+};
+
+page.setLoginId = async function(tab, loginId) {
+    page.loginId = loginId;
+};
+
+page.getManualFill = async function(tab) {
+    return page.manualFill;
+};
+
+page.setManualFill = async function(tab, manualFill) {
+    page.manualFill = manualFill;
+};
+
+page.getSubmitted = async function(tab) {
+    // Do not return any credentials if the tab ID does not match.
+    if (tab.id !== page.submittedCredentials.tabId) {
+        return {};
+    }
+
+    return page.submittedCredentials;
+};
+
+page.setSubmitted = async function(tab, args = []) {
+    const [ submitted, username, password, url, oldCredentials ] = args;
+    page.setSubmittedCredentials(submitted, username, password, url, oldCredentials, tab.id);
 };

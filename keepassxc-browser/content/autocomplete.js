@@ -9,7 +9,7 @@ kpxcAutocomplete.input = undefined;
 kpxcAutocomplete.shadowRoot = undefined;
 kpxcAutocomplete.wrapper = undefined;
 
-kpxcAutocomplete.create = function(input, showListInstantly = false, autoSubmit = false) {
+kpxcAutocomplete.create = async function(input, showListInstantly = false, autoSubmit = false) {
     if (input.readOnly) {
         return;
     }
@@ -63,22 +63,20 @@ kpxcAutocomplete.showList = function(inputField) {
         item.textContent += c.label;
         const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
         item.append(itemInput);
-        item.addEventListener('click', function(e) {
+
+        item.addEventListener('click', async function(e) {
             if (!e.isTrusted) {
                 return;
             }
 
             // Save index for combination.loginId
             const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
-            browser.runtime.sendMessage({
-                action: 'page_set_login_id', args: index
-            });
+            await sendMessage('page_set_login_id', index);
 
-            inputField.value = this.getElementsByTagName('input')[0].value;
-            kpxcAutocomplete.fillPassword(inputField.value, index);
+            const usernameValue = this.getElementsByTagName('input')[0].value;
+            await kpxcAutocomplete.fillPassword(usernameValue, index, c.uuid);
             kpxcAutocomplete.closeList();
             inputField.focus();
-            document.body.removeChild(wrapper);
         });
 
         // These events prevent the double hover effect if both keyboard and mouse are used
@@ -87,6 +85,7 @@ kpxcAutocomplete.showList = function(inputField) {
             item.classList.add('kpxcAutocomplete-active');
             kpxcAutocomplete.index = Array.from(div.childNodes).indexOf(item);
         });
+
         item.addEventListener('mouseout', function(e) {
             item.classList.remove('kpxcAutocomplete-active');
         });
@@ -153,6 +152,7 @@ kpxcAutocomplete.getAllItems = function() {
     if (!list) {
         return [];
     }
+
     return list.getElementsByTagName('div');
 };
 
@@ -189,7 +189,7 @@ kpxcAutocomplete.keyPress = function(e) {
 
         if (kpxcAutocomplete.index >= 0 && items && items[kpxcAutocomplete.index] !== undefined) {
             e.preventDefault();
-            kpxcAutocomplete.input.value = e.currentTarget.value;
+            kpxcAutocomplete.input.value = kpxcAutocomplete.elements[kpxcAutocomplete.index].value;
             kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index);
             kpxcAutocomplete.closeList();
         }
@@ -212,15 +212,12 @@ kpxcAutocomplete.keyPress = function(e) {
     }
 };
 
-kpxcAutocomplete.fillPassword = async function(value, index) {
-    const fieldId = kpxcAutocomplete.input.getAttribute('data-kpxc-id');
-    kpxcFields.prepareId(fieldId);
-
-    const givenType = kpxcAutocomplete.input.type === 'password' ? 'password' : 'username';
-    const combination = await kpxcFields.getCombination(givenType, fieldId);
+kpxcAutocomplete.fillPassword = async function(value, index, uuid) {
+    const combination = await kpxcFields.getCombination(kpxcAutocomplete.input);
     combination.loginId = index;
 
-    kpxc.fillInCredentials(combination, givenType === 'password', false);
+    const manualFill = await sendMessage('page_get_manual_fill');
+    await kpxc.fillInCredentials(combination, value, uuid, manualFill === ManualFill.PASSWORD);
     kpxcAutocomplete.input.setAttribute('fetched', true);
 };
 
@@ -232,12 +229,10 @@ kpxcAutocomplete.updatePosition = function(inputField, elem) {
 
     const rect = inputField.getBoundingClientRect();
     div.style.minWidth = Pixels(inputField.offsetWidth);
-    const bodyRect = document.body.getBoundingClientRect();
-    const bodyStyle = getComputedStyle(document.body);
 
-    if (bodyStyle.position.toLowerCase() === 'relative') {
-        div.style.top = Pixels(rect.top - bodyRect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
-        div.style.left = Pixels(rect.left - bodyRect.left + document.scrollingElement.scrollLeft);
+    if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
+        div.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+        div.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + document.scrollingElement.scrollLeft);
     } else {
         div.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
         div.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);

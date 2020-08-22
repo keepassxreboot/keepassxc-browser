@@ -263,6 +263,10 @@
         "message": "No credentials for the given username found.",
         "description": "Alert message when no credentials are found for the given username."
     },
+    "credentialsNoTOTPFound": {
+      "message": "No TOTP found.",
+      "description": "Alert message when no TOTP is found."
+    },
     "credentialExpired": {
         "message": "Expired",
         "description": "If a credential is expired, this is appended to the title label."

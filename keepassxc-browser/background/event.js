@@ -13,13 +13,16 @@ kpxcEvent.onMessage = async function(request, sender) {
     }
 };
 
-kpxcEvent.showStatus = async function(tab, configured) {
+kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     let keyId = null;
     if (configured && keepass.databaseHash !== '') {
         keyId = keepass.keyRing[keepass.databaseHash].id;
     }
 
-    browserAction.showDefault(tab);
+    if (!internalPoll) {
+        browserAction.showDefault(tab);
+    }
+
     const errorMessage = page.tabs[tab.id].errorMessage;
     return {
         identifier: keyId,
@@ -29,7 +32,7 @@ kpxcEvent.showStatus = async function(tab, configured) {
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         associated: keepass.isAssociated(),
         error: errorMessage || null,
-        usernameFieldDetected: page.usernameFieldDetected
+        usernameFieldDetected: page.tabs[tab.id].usernameFieldDetected
     };
 };
 
@@ -57,11 +60,9 @@ kpxcEvent.onLoadKeyRing = async function() {
     return item.keyRing;
 };
 
-kpxcEvent.onSaveSettings = async function(tab, args = []) {
-    const [ settings ] = args;
+kpxcEvent.onSaveSettings = async function(tab, settings) {
     browser.storage.local.set({ 'settings': settings });
     kpxcEvent.onLoadSettings(tab);
-    return Promise.resolve();
 };
 
 kpxcEvent.onGetStatus = async function(tab, args = []) {
@@ -76,7 +77,7 @@ kpxcEvent.onGetStatus = async function(tab, args = []) {
         }
 
         const configured = await keepass.isConfigured();
-        return kpxcEvent.showStatus(tab, configured);
+        return kpxcEvent.showStatus(tab, configured, internalPoll);
     } catch (err) {
         console.log('Error: No status shown: ' + err);
         return Promise.reject();
@@ -107,18 +108,12 @@ kpxcEvent.lockDatabase = async function(tab) {
     }
 };
 
-kpxcEvent.onPopStack = function(tab) {
-    browserAction.stackPop(tab.id);
-    browserAction.show(tab);
-    return Promise.resolve();
-};
-
 kpxcEvent.onGetTabInformation = async function(tab) {
     const id = tab.id || page.currentTabId;
     return page.tabs[id];
 };
 
-kpxcEvent.onGetConnectedDatabase = function() {
+kpxcEvent.onGetConnectedDatabase = async function() {
     return Promise.resolve({
         count: Object.keys(keepass.keyRing).length,
         identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
@@ -143,102 +138,46 @@ kpxcEvent.onUpdateAvailableKeePassXC = async function() {
     return (page.settings.checkUpdateKeePassXC > 0) ? keepass.keePassXCUpdateAvailable() : false;
 };
 
-kpxcEvent.onRemoveCredentialsFromTabInformation = function(tab) {
+kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
     const id = tab.id || page.currentTabId;
     page.clearCredentials(id);
     page.clearSubmittedCredentials();
-    return Promise.resolve();
 };
 
-kpxcEvent.onLoginPopup = function(tab, logins) {
-    const stackData = {
-        level: 1,
+kpxcEvent.onLoginPopup = async function(tab, logins) {
+    const popupData = {
         iconType: 'questionmark',
-        popup: 'popup_login.html'
+        popup: 'popup_login'
     };
 
-    browserAction.stackUnshift(stackData, tab.id);
     page.tabs[tab.id].loginList = logins;
-    browserAction.show(tab);
-    return Promise.resolve();
+    browserAction.show(tab, popupData);
 };
 
-kpxcEvent.initHttpAuth = function() {
+kpxcEvent.initHttpAuth = async function() {
     httpAuth.init();
-    return Promise.resolve();
 };
 
-kpxcEvent.onHTTPAuthPopup = function(tab, data) {
-    const stackData = {
-        level: 1,
+kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
+    const popupData = {
         iconType: 'questionmark',
-        popup: 'popup_httpauth.html'
+        popup: 'popup_httpauth'
     };
 
-    browserAction.stackUnshift(stackData, tab.id);
     page.tabs[tab.id].loginList = data;
-    browserAction.show(tab);
-    return Promise.resolve();
+    browserAction.show(tab, popupData);
 };
 
-kpxcEvent.onMultipleFieldsPopup = function(tab) {
-    const stackData = {
-        level: 1,
-        iconType: 'normal',
-        popup: 'popup_multiple-fields.html'
-    };
-
-    browserAction.stackUnshift(stackData, tab.id);
-    browserAction.show(tab);
-    return Promise.resolve();
-};
-
-kpxcEvent.pageClearLogins = function(tab, alreadyCalled) {
-    if (!alreadyCalled) {
-        page.clearLogins(tab.id);
-    }
-    return Promise.resolve();
-};
-
-kpxcEvent.pageGetLoginId = async function() {
-    return page.loginId;
-};
-
-kpxcEvent.pageSetLoginId = function(tab, loginId) {
-    page.loginId = loginId;
-    return Promise.resolve();
-};
-
-kpxcEvent.pageClearSubmitted = function() {
-    page.clearSubmittedCredentials();
-    return Promise.resolve();
-};
-
-kpxcEvent.pageGetSubmitted = async function(tab) {
-    // Do not return any credentials if the tab ID does not match.
-    if (tab.id !== page.submittedCredentials.tabId) {
-        return {};
-    }
-    return page.submittedCredentials;
-};
-
-kpxcEvent.pageSetSubmitted = function(tab, args = []) {
-    const [ submitted, username, password, url, oldCredentials ] = args;
-    page.setSubmittedCredentials(submitted, username, password, url, oldCredentials, tab.id);
-    return Promise.resolve();
-};
-
-kpxcEvent.onUsernameFieldDetected = function(tab, detected) {
-    page.usernameFieldDetected = detected;
+kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {
+    page.tabs[tab.id].usernameFieldDetected = detected;
 };
 
 kpxcEvent.passwordGetFilled = async function() {
     return page.passwordFilled;
 };
 
-kpxcEvent.passwordSetFilled = function(tab, state) {
+kpxcEvent.passwordSetFilled = async function(tab, state) {
     page.passwordFilled = state;
-    return Promise.resolve();
 };
 
 kpxcEvent.getColorTheme = async function(tab) {
@@ -247,6 +186,12 @@ kpxcEvent.getColorTheme = async function(tab) {
 
 kpxcEvent.pageGetRedirectCount = async function() {
     return page.redirectCount;
+};
+
+kpxcEvent.pageClearLogins = async function(tab, alreadyCalled) {
+    if (!alreadyCalled) {
+        page.clearLogins(tab.id);
+    }
 };
 
 // All methods named in this object have to be declared BEFORE this!
@@ -266,26 +211,27 @@ kpxcEvent.messageHandlers = {
     'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
     'get_status': kpxcEvent.onGetStatus,
     'get_tab_information': kpxcEvent.onGetTabInformation,
+    'get_totp': keepass.getTotp,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': keepass.getIsKeePassXCAvailable,
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
-    'lock-database': kpxcEvent.lockDatabase,
+    'lock_database': kpxcEvent.lockDatabase,
     'page_clear_logins': kpxcEvent.pageClearLogins,
-    'page_clear_submitted': kpxcEvent.pageClearSubmitted,
-    'page_get_login_id': kpxcEvent.pageGetLoginId,
+    'page_clear_submitted': page.clearSubmittedCredentials,
+    'page_get_login_id': page.getLoginId,
+    'page_get_manual_fill': page.getManualFill,
     'page_get_redirect_count': kpxcEvent.pageGetRedirectCount,
-    'page_get_submitted': kpxcEvent.pageGetSubmitted,
-    'page_set_login_id': kpxcEvent.pageSetLoginId,
-    'page_set_submitted': kpxcEvent.pageSetSubmitted,
+    'page_get_submitted': page.getSubmitted,
+    'page_set_login_id': page.setLoginId,
+    'page_set_manual_fill': page.setManualFill,
+    'page_set_submitted': page.setSubmitted,
     'password_get_filled': kpxcEvent.passwordGetFilled,
     'password_set_filled': kpxcEvent.passwordSetFilled,
-    'pop_stack': kpxcEvent.onPopStack,
     'popup_login': kpxcEvent.onLoginPopup,
-    'popup_multiple-fields': kpxcEvent.onMultipleFieldsPopup,
     'reconnect': kpxcEvent.onReconnect,
     'remove_credentials_from_tab_information': kpxcEvent.onRemoveCredentialsFromTabInformation,
-    'retrieve_credentials': keepass.retrieveCredentials,
+    'retrieve_credentials': page.retrieveCredentials,
     'show_default_browseraction': browserAction.showDefault,
     'update_credentials': keepass.updateCredentials,
     'username_field_detected': kpxcEvent.onUsernameFieldDetected,

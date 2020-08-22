@@ -33,7 +33,7 @@ $(async () => {
 
     $('#lock-database-button').click(function() {
         browser.runtime.sendMessage({
-            action: 'lock-database'
+            action: 'lock_database'
         }).then(statusResponse);
     });
 

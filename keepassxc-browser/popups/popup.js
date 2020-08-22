@@ -93,7 +93,7 @@ $(async () => {
 
     $('#lock-database-button').click(async () => {
         statusResponse(await browser.runtime.sendMessage({
-            action: 'lock-database'
+            action: 'lock_database'
         }));
     });
 

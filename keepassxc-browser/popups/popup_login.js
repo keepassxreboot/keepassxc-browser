@@ -8,15 +8,18 @@ $(async () => {
     if (tabs.length === 0) {
         return; // For example: only the background devtools or a popup are opened
     }
-    const tab = tabs[0];
 
+    const tab = tabs[0];
     const logins = global.page.tabs[tab.id].loginList;
     const ll = document.getElementById('login-list');
+
     for (let i = 0; i < logins.length; i++) {
+        const uuid = logins[i].uuid;
         const a = document.createElement('a');
-        a.textContent = logins[i];
+        a.textContent = logins[i].text;
         a.setAttribute('class', 'list-group-item');
         a.setAttribute('id', '' + i);
+
         a.addEventListener('click', (e) => {
             if (!e.isTrusted) {
                 return;
@@ -25,10 +28,13 @@ $(async () => {
             const id = e.target.id;
             browser.tabs.sendMessage(tab.id, {
                 action: 'fill_user_pass_with_specific_login',
-                id: Number(id)
+                id: Number(id),
+                uuid: uuid
             });
+
             close();
         });
+
         ll.appendChild(a);
     }
 
@@ -50,12 +56,13 @@ $(async () => {
                 }
             }
         });
+
         filter.focus();
     }
 
     $('#lock-database-button').click((e) => {
         browser.runtime.sendMessage({
-            action: 'lock-database'
+            action: 'lock_database'
         });
         $('#credentialsList').hide();
         $('#database-not-opened').show();

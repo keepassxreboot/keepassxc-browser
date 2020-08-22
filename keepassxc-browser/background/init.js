@@ -8,6 +8,7 @@
         await httpAuth.init();
         await keepass.reconnect(null, 5000); // 5 second timeout for the first connect
         await keepass.enableAutomaticReconnect();
+        await keepass.updateDatabase();
     } catch (e) {
         console.log('init.js failed');
     }
@@ -48,9 +49,6 @@ browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
  * @param {object} activeInfo
  */
 browser.tabs.onActivated.addListener(async function(activeInfo) {
-    // Remove possible credentials from old tab information
-    page.clearCredentials(page.currentTabId, true);
-
     try {
         const info = await browser.tabs.get(activeInfo.tabId);
         if (info && info.id) {

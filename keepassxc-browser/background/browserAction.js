@@ -2,33 +2,30 @@
 
 const browserAction = {};
 
-browserAction.show = function(tab) {
-    let data = {};
-    if (!page.tabs[tab.id] || page.tabs[tab.id].stack.length === 0) {
-        browserAction.showDefault(tab);
-        return;
-    } else {
-        data = page.tabs[tab.id].stack[page.tabs[tab.id].stack.length - 1];
+browserAction.show = function(tab, popupData) {
+    if (!popupData) {
+        popupData = page.popupData;
     }
+
+    page.popupData = popupData;
 
     browser.browserAction.setIcon({
         tabId: tab.id,
-        path: '/icons/toolbar/' + browserAction.generateIconName(data.iconType, data.icon)
+        path: browserAction.generateIconName(popupData.iconType)
     });
 
-    if (data.popup) {
+    if (popupData.popup) {
         browser.browserAction.setPopup({
             tabId: tab.id,
-            popup: 'popups/' + data.popup
+            popup: `popups/${popupData.popup}.html`
         });
     }
 };
 
 browserAction.showDefault = async function(tab) {
-    const stackData = {
-        level: 1,
+    const popupData = {
         iconType: 'normal',
-        popup: 'popup.html'
+        popup: 'popup'
     };
 
     const response = await keepass.isConfigured().catch((err) => {
@@ -36,77 +33,41 @@ browserAction.showDefault = async function(tab) {
     });
 
     if (!response && !keepass.isKeePassXCAvailable) {
-        stackData.iconType = 'cross';
+        popupData.iconType = 'cross';
     } else if (keepass.isKeePassXCAvailable && keepass.isDatabaseClosed) {
-        stackData.iconType = 'locked';
+        popupData.iconType = 'locked';
     }
 
     if (page.tabs[tab.id] && page.tabs[tab.id].loginList.length > 0) {
-        stackData.iconType = 'questionmark';
-        stackData.popup = 'popup_login.html';
+        popupData.iconType = 'questionmark';
+        popupData.popup = 'popup_login';
     }
 
-    browserAction.stackUnshift(stackData, tab.id);
-    browserAction.show(tab);
+    browserAction.show(tab, popupData);
 };
 
-browserAction.removeLevelFromStack = function(tab, level, type, dontShow) {
-    if (!page.tabs[tab.id]) {
-        return;
-    }
-
-    if (!type) {
-        type = '<=';
-    }
-
-    const newStack = [];
-    for (const i of page.tabs[tab.id].stack) {
-        if ((type === '<' && i.level >= level)
-            || (type === '<=' && i.level > level)
-            || (type === '=' && i.level !== level)
-            || (type === '==' && i.level !== level)
-            || (type === '!=' && i.level === level)
-            || (type === '>' && i.level <= level)
-            || (type === '>=' && i.level < level)) {
-            newStack.push(i);
+browserAction.updateIcon = async function(tab, iconType) {
+    if (!tab) {
+        const tabs = await browser.tabs.query({ 'active': true, 'currentWindow': true });
+        if (tabs.length === 0) {
+            return;
         }
+
+        tab = tabs[0];
     }
 
-    page.tabs[tab.id].stack = newStack;
-
-    if (!dontShow) {
-        browserAction.show(tab);
-    }
+    browser.browserAction.setIcon({
+        tabId: tab.id,
+        path: browserAction.generateIconName(iconType)
+    });
 };
 
-browserAction.stackPop = function(tabId) {
-    const id = tabId || page.currentTabId;
-    page.tabs[id].stack.pop();
-};
-
-browserAction.stackPush = function(data, tabId) {
-    const id = tabId || page.currentTabId;
-    browserAction.removeLevelFromStack({ 'id': id }, data.level, '<=', true);
-    page.tabs[id].stack.push(data);
-};
-
-browserAction.stackUnshift = function(data, tabId) {
-    const id = tabId || page.currentTabId;
-    browserAction.removeLevelFromStack({ 'id': id }, data.level, '<=', true);
-    page.tabs[id].stack.unshift(data);
-};
-
-browserAction.generateIconName = function(iconType, icon) {
-    if (icon) {
-        return icon;
-    }
-
+browserAction.generateIconName = function(iconType) {
     let name = 'icon_';
     name += (keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
     name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
-    name += '.png';
 
-    return name;
+    return `/icons/toolbar/${name}.png`;
 };
 
 browserAction.ignoreSite = async function(url) {

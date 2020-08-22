@@ -3,8 +3,8 @@
 const kpxcPasswordIcons = {};
 kpxcPasswordIcons.icons = [];
 
-kpxcPasswordIcons.newIcon = function(useIcons, field, inputs, pos, databaseState = DatabaseState.DISCONNECTED) {
-    kpxcPasswordIcons.icons.push(new PasswordIcon(useIcons, field, inputs, pos, databaseState));
+kpxcPasswordIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED) {
+    kpxcPasswordIcons.icons.push(new PasswordIcon(field, databaseState));
 };
 
 kpxcPasswordIcons.switchIcon = function(state) {
@@ -15,57 +15,38 @@ kpxcPasswordIcons.deleteHiddenIcons = function() {
     kpxcUI.deleteHiddenIcons(kpxcPasswordIcons.icons, 'kpxc-password-field');
 };
 
+kpxcPasswordIcons.isValid = function(field) {
+    if (!field
+        || field.readOnly
+        || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH
+        || kpxcIcons.hasIcon(field)
+        || !kpxcFields.isVisible(field)) {
+        return false;
+    }
+
+    return true;
+};
+
 
 class PasswordIcon extends Icon {
-    constructor(useIcons, field, inputs, pos, databaseState) {
+    constructor(field, databaseState = DatabaseState.DISCONNECTED) {
         super();
-        this.useIcons = useIcons;
         this.databaseState = databaseState;
+        this.nextFieldExists = false;
 
-        if (this.initField(field, inputs, pos)) {
-            kpxcUI.monitorIconPosition(this);
-        }
+        this.initField(field);
+        kpxcUI.monitorIconPosition(this);
     }
 }
 
-PasswordIcon.prototype.initField = function(field, inputs, pos) {
-    if (!field
-        || field.readOnly
-        || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH) {
-        return false;
+PasswordIcon.prototype.initField = function(field) {
+    // Observer the visibility
+    if (this.observer) {
+        this.observer.observe(field);
     }
 
-    if (field.getAttribute('kpxc-password-field')
-        || (field.hasAttribute('kpxc-defined') && field.getAttribute('kpxc-defined') !== 'password')) {
-        return false;
-    }
-
-    field.setAttribute('kpxc-password-field', true);
-
-    if (this.useIcons) {
-        // Observer the visibility
-        if (this.observer) {
-            this.observer.observe(field);
-        }
-        this.createIcon(field);
-    }
-
+    this.createIcon(field);
     this.inputField = field;
-
-    let found = false;
-    if (inputs) {
-        for (let i = pos + 1; i < inputs.length; i++) {
-            if (inputs[i] && inputs[i].getLowerCaseAttribute('type') === 'password') {
-                field.setAttribute('kpxc-pwgen-next-field-id', inputs[i].getAttribute('data-kpxc-id'));
-                field.setAttribute('kpxc-pwgen-next-is-password-field', (i === 0));
-                found = true;
-                break;
-            }
-        }
-    }
-
-    field.setAttribute('kpxc-pwgen-next-field-exists', found);
-    return true;
 };
 
 PasswordIcon.prototype.createIcon = function(field) {
@@ -81,6 +62,7 @@ PasswordIcon.prototype.createIcon = function(field) {
             'offset': offset,
             'kpxc-pwgen-field-id': field.getAttribute('data-kpxc-id')
         });
+
     icon.style.zIndex = '10000000';
     icon.style.width = Pixels(size);
     icon.style.height = Pixels(size);
@@ -116,6 +98,8 @@ PasswordIcon.prototype.createIcon = function(field) {
 const kpxcPasswordDialog = {};
 kpxcPasswordDialog.created = false;
 kpxcPasswordDialog.icon = null;
+kpxcPasswordDialog.input = null;
+kpxcPasswordDialog.nextField = null;
 kpxcPasswordDialog.selected = null;
 kpxcPasswordDialog.startPosX = 0;
 kpxcPasswordDialog.startPosY = 0;
@@ -123,17 +107,6 @@ kpxcPasswordDialog.diffX = 0;
 kpxcPasswordDialog.diffY = 0;
 kpxcPasswordDialog.dialog = null;
 kpxcPasswordDialog.titleBar = null;
-
-kpxcPasswordDialog.removeIcon = function(field) {
-    if (field.getAttribute('kpxc-password-field')) {
-        const pwgenIcons = document.querySelectorAll('.kpxc-pwgen-icon');
-        for (const i of pwgenIcons) {
-            if (i.getAttribute('kpxc-pwgen-field-id') === field.getAttribute('data-kpxc-id')) {
-                document.body.removeChild(i);
-            }
-        }
-    }
-};
 
 kpxcPasswordDialog.createDialog = function() {
     if (kpxcPasswordDialog.created) {
@@ -245,6 +218,15 @@ kpxcPasswordDialog.showDialog = function(field, icon) {
         return;
     }
 
+    kpxcPasswordDialog.input = field;
+
+    // Save next password field if found
+    if (kpxc.inputs.length > 0) {
+        const index = kpxc.inputs.indexOf(field);
+        const nextField = kpxc.inputs[index+1];
+        kpxcPasswordDialog.nextField = (nextField && nextField.getLowerCaseAttribute('type') === 'password') ? nextField : undefined;
+    }
+
     kpxcPasswordDialog.createDialog();
     initColorTheme(kpxcPasswordDialog.dialog);
     kpxcPasswordDialog.openDialog();
@@ -259,10 +241,6 @@ kpxcPasswordDialog.showDialog = function(field, icon) {
             kpxcPasswordDialog.dialog.style.top = Pixels(rect.top + rect.height);
             kpxcPasswordDialog.dialog.style.left = Pixels(rect.left);
         }
-
-        kpxcPasswordDialog.dialog.setAttribute('kpxc-pwgen-field-id', field.getAttribute('data-kpxc-id'));
-        kpxcPasswordDialog.dialog.setAttribute('kpxc-pwgen-next-field-id', field.getAttribute('kpxc-pwgen-next-field-id'));
-        kpxcPasswordDialog.dialog.setAttribute('kpxc-pwgen-next-is-password-field', field.getAttribute('kpxc-pwgen-next-is-password-field'));
     }
 };
 
@@ -275,9 +253,7 @@ kpxcPasswordDialog.generate = async function(e) {
         e.preventDefault();
     }
 
-    callbackGeneratedPassword(await browser.runtime.sendMessage({
-        action: 'generate_password'
-    }));
+    callbackGeneratedPassword(await sendMessage('generate_password'));
 };
 
 kpxcPasswordDialog.copy = function(e) {
@@ -290,35 +266,27 @@ kpxcPasswordDialog.copy = function(e) {
 };
 
 kpxcPasswordDialog.fill = function(e) {
-    if (!e.isTrusted) {
+    if (!e.isTrusted || !kpxcPasswordDialog.input) {
         return;
     }
 
     e.preventDefault();
 
-    // Use the active input field
-    const field = _f(kpxcPasswordDialog.dialog.getAttribute('kpxc-pwgen-field-id'));
-    if (field) {
-        const password = kpxcPasswordDialog.shadowSelector('.kpxc-pwgen-input');
-        if (field.getAttribute('maxlength')) {
-            if (password.value.length > field.getAttribute('maxlength')) {
-                const message = tr('passwordGeneratorErrorTooLong') + '\r\n'
-                                + tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
-                message.style.whiteSpace = 'pre';
-                browser.runtime.sendMessage({
-                    action: 'show_notification',
-                    args: [ message ]
-                });
-                return;
-            }
+    const password = kpxcPasswordDialog.shadowSelector('.kpxc-pwgen-input');
+    if (kpxcPasswordDialog.input.getAttribute('maxlength')) {
+        if (password.value.length > kpxcPasswordDialog.input.getAttribute('maxlength')) {
+            const message = tr('passwordGeneratorErrorTooLong') + '\r\n'
+                            + tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
+            message.style.whiteSpace = 'pre';
+            sendMessage('show_notification' [ message ]);
+            return;
         }
+    }
 
-        field.value = password.value;
-        const nextFieldId = field.getAttribute('kpxc-pwgen-next-field-id');
-        const nextField = $('input[data-kpxc-id=\'' + nextFieldId + '\']');
-        if (nextField) {
-            nextField.value = password.value;
-        }
+    kpxcPasswordDialog.input.value = password.value;
+
+    if (kpxcPasswordDialog.nextField) {
+        kpxcPasswordDialog.nextField.value = password.value;
     }
 };
 

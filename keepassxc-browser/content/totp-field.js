@@ -3,6 +3,17 @@
 const ignoreRegex = /(zip|postal).*code/i;
 const ignoredTypes = [ 'email', 'password', 'username' ];
 
+const acceptedOTPFields = [
+    '2fa',
+    'auth',
+    'challenge',
+    'code',
+    'mfa',
+    'otp',
+    'token',
+    'twofactor'
+];
+
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
@@ -18,23 +29,22 @@ kpxcTOTPIcons.deleteHiddenIcons = function() {
     kpxcUI.deleteHiddenIcons(kpxcTOTPIcons.icons, 'kpxc-totp-field');
 };
 
+// Quick check for a valid TOTP field
+kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
+    const id = field.getLowerCaseAttribute('id');
+    const name = field.getLowerCaseAttribute('name');
+    const autocomplete = field.getLowerCaseAttribute('autocomplete');
 
-class TOTPFieldIcon extends Icon {
-    constructor(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
-        super();
-        this.icon = null;
-        this.inputField = null;
-        this.databaseState = databaseState;
-
-        if (this.initField(field, forced)) {
-            kpxcUI.monitorIconPosition(this);
-        }
+    if (autocomplete === 'one-time-code' || acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f)))) {
+        return true;
     }
-}
 
-TOTPFieldIcon.prototype.initField = function(field, forced) {
-    if (!field) {
-        return;
+    return false;
+};
+
+kpxcTOTPIcons.isValid = function(field, forced) {
+    if (!field || !kpxcTOTPIcons.isAcceptedTOTPField(field)) {
+        return false;
     }
 
     if (!forced) {
@@ -56,8 +66,22 @@ TOTPFieldIcon.prototype.initField = function(field, forced) {
         }
     }
 
-    field.setAttribute('kpxc-totp-field', 'true');
+    return true;
+};
 
+class TOTPFieldIcon extends Icon {
+    constructor(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
+        super();
+        this.icon = null;
+        this.inputField = null;
+        this.databaseState = databaseState;
+
+        this.initField(field, forced);
+        kpxcUI.monitorIconPosition(this);
+    }
+}
+
+TOTPFieldIcon.prototype.initField = function(field, forced) {
     // Observer the visibility
     if (this.observer) {
         this.observer.observe(field);
@@ -65,7 +89,6 @@ TOTPFieldIcon.prototype.initField = function(field, forced) {
 
     this.createIcon(field);
     this.inputField = field;
-    return false;
 };
 
 TOTPFieldIcon.prototype.createIcon = function(field) {
@@ -97,7 +120,7 @@ TOTPFieldIcon.prototype.createIcon = function(field) {
 
         e.preventDefault();
         await kpxc.receiveCredentialsIfNecessary();
-        kpxc.fillInFromActiveElementTOTPOnly(field);
+        kpxc.fillFromTOTP(field);
     });
 
     kpxcUI.setIconPosition(icon, field);

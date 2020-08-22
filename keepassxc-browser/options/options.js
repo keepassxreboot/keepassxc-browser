@@ -48,8 +48,6 @@ options.saveSetting = async function(name) {
     await browser.runtime.sendMessage({
         action: 'load_settings'
     });
-
-    return Promise.resolve();
 };
 
 options.saveSettings = async function() {
@@ -66,8 +64,6 @@ options.saveKeyRing = async function() {
     await browser.runtime.sendMessage({
         action: 'load_keyring'
     });
-
-    return Promise.resolve();
 };
 
 options.initGeneralSettings = function() {
@@ -175,10 +171,8 @@ options.initGeneralSettings = function() {
 
     $('#defaultGroupButton').click(async function() {
         const value = $('#defaultGroup').val();
-        if (value.length > 0) {
-            options.settings['defaultGroup'] = value;
-            await options.saveSettings();
-        }
+        options.settings['defaultGroup'] = (value.length > 0 ? value : '');
+        await options.saveSettings();
     });
 
     $('#defaultGroupButtonReset').click(async function() {

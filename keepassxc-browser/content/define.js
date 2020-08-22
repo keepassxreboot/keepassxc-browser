@@ -8,15 +8,18 @@ kpxcDefine.selection = {
     totp: null,
     fields: []
 };
-kpxcDefine.eventFieldClick = null;
+
 kpxcDefine.dialog = null;
-kpxcDefine.startPosX = 0;
-kpxcDefine.startPosY = 0;
 kpxcDefine.diffX = 0;
 kpxcDefine.diffY = 0;
+kpxcDefine.eventFieldClick = null;
+kpxcDefine.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input[type=\'username\'], input:not([type])';
+kpxcDefine.markedFields= [];
 kpxcDefine.keyDown = null;
+kpxcDefine.startPosX = 0;
+kpxcDefine.startPosY = 0;
 
-kpxcDefine.init = function() {
+kpxcDefine.init = async function() {
     const backdrop = kpxcUI.createElement('div', 'kpxcDefine-modal-backdrop', { 'id': 'kpxcDefine-backdrop' });
     const chooser = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-fields' });
     const description = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-description' });
@@ -24,9 +27,6 @@ kpxcDefine.init = function() {
     backdrop.append(description);
     document.body.append(backdrop);
     document.body.append(chooser);
-
-    kpxcFields.getAllFields();
-    kpxcFields.prepareVisibleFieldsWithID('select');
 
     kpxcDefine.initDescription();
     kpxcDefine.resetSelection();
@@ -117,21 +117,24 @@ kpxcDefine.resetSelection = function() {
         fields: []
     };
 
+    kpxcDefine.markedFields = [];
+
     const fields = $('#kpxcDefine-fields');
     if (fields) {
         fields.textContent = '';
     }
 };
 
-kpxcDefine.isFieldSelected = function(kpxcId) {
-    if (kpxcId) {
+kpxcDefine.isFieldSelected = function(field) {
+    if (kpxcDefine.markedFields.some(f => f === field)) {
         return (
-            kpxcId === kpxcDefine.selection.username
-            || kpxcId === kpxcDefine.selection.password
-            || kpxcId === kpxcDefine.selection.totp
-            || kpxcId in kpxcDefine.selection.fields
+            (kpxcDefine.selection.username && kpxcDefine.selection.username.originalElement === field)
+            || (kpxcDefine.selection.password && kpxcDefine.selection.password.originalElement === field)
+            || (kpxcDefine.selection.totp && kpxcDefine.selection.totp.originalElement === field)
+            || kpxcDefine.selection.fields.includes(field)
         );
     }
+
     return false;
 };
 
@@ -142,35 +145,37 @@ kpxcDefine.markAllUsernameFields = function(chooser) {
         }
 
         const field = elem || e.currentTarget;
-        kpxcDefine.selection.username = field.getAttribute('data-kpxc-id');
         field.classList.add('kpxcDefine-fixed-username-field');
         field.textContent = tr('username');
         field.onclick = null;
+        kpxcDefine.selection.username = field;
+        kpxcDefine.markedFields.push(field.originalElement);
+
         kpxcDefine.prepareStep2();
         kpxcDefine.markAllPasswordFields('#kpxcDefine-fields');
     };
-    kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern);
+
+    kpxcDefine.markFields(chooser, kpxcDefine.inputQueryPattern);
 };
 
-kpxcDefine.markAllPasswordFields = function(chooser, more = false) {
+kpxcDefine.markAllPasswordFields = function(chooser) {
     kpxcDefine.eventFieldClick = function(e, elem) {
         if (!e.isTrusted) {
             return;
         }
 
         const field = elem || e.currentTarget;
-        kpxcDefine.selection.password = field.getAttribute('data-kpxc-id');
         field.classList.add('kpxcDefine-fixed-password-field');
         field.textContent = tr('password');
         field.onclick = null;
+        kpxcDefine.selection.password = field;
+        kpxcDefine.markedFields.push(field.originalElement);
+
         kpxcDefine.prepareStep3();
         kpxcDefine.markAllTOTPFields('#kpxcDefine-fields');
     };
-    if (more) {
-        kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern);
-    } else {
-        kpxcDefine.markFields(chooser, 'input[type=\'password\']');
-    }
+
+    kpxcDefine.markFields(chooser, 'input[type=\'password\']');
 };
 
 kpxcDefine.markAllStringFields = function(chooser) {
@@ -180,15 +185,19 @@ kpxcDefine.markAllStringFields = function(chooser) {
         }
 
         const field = elem || e.currentTarget;
-        const value = field.getAttribute('data-kpxc-id');
-        kpxcDefine.selection.fields[value] = true;
+        if (kpxcDefine.isFieldSelected(field.originalElement)) {
+            return;
+        }
 
-        const count = Object.keys(kpxcDefine.selection.fields).length;
+        kpxcDefine.selection.fields.push(field.originalElement);
+        kpxcDefine.markedFields.push(field.originalElement);
+
         field.classList.add('kpxcDefine-fixed-string-field');
-        field.textContent = tr('defineStringField') + String(count);
+        field.textContent = tr('defineStringField') + String(kpxcDefine.selection.fields.length);
         field.onclick = null;
     };
-    kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern + ', select');
+
+    kpxcDefine.markFields(chooser, kpxcDefine.inputQueryPattern + ', select');
 };
 
 kpxcDefine.markAllTOTPFields = function(chooser) {
@@ -198,14 +207,17 @@ kpxcDefine.markAllTOTPFields = function(chooser) {
         }
 
         const field = elem || e.currentTarget;
-        kpxcDefine.selection.totp = field.getAttribute('data-kpxc-id');
         field.classList.add('kpxcDefine-fixed-totp-field');
         field.textContent = 'TOTP';
         field.onclick = null;
+        kpxcDefine.selection.totp = field;
+        kpxcDefine.markedFields.push(field.originalElement);
+
         kpxcDefine.prepareStep4();
         kpxcDefine.markAllStringFields('#kpxcDefine-fields');
     };
-    kpxcDefine.markFields(chooser, kpxcFields.inputQueryPattern);
+
+    kpxcDefine.markFields(chooser, kpxcDefine.inputQueryPattern);
 };
 
 kpxcDefine.markFields = function(chooser, pattern) {
@@ -214,39 +226,49 @@ kpxcDefine.markFields = function(chooser, pattern) {
     const inputs = document.querySelectorAll(pattern);
 
     for (const i of inputs) {
-        if (kpxcDefine.isFieldSelected(i.getAttribute('data-kpxc-id'))) {
+        if (kpxcDefine.isFieldSelected(i)) {
             continue;
         }
 
-        if (kpxcFields.isVisible(i)) {
-            const field = kpxcUI.createElement('div', 'kpxcDefine-fixed-field', { 'data-kpxc-id': i.getAttribute('data-kpxc-id') });
-            const rect = i.getBoundingClientRect();
-            field.style.top = Pixels(rect.top);
-            field.style.left = Pixels(rect.left);
-            field.style.width = Pixels(rect.width);
-            field.style.height = Pixels(rect.height);
-            field.textContent = String(index);
-            field.addEventListener('click', function(e) {
-                kpxcDefine.eventFieldClick(e);
-            });
-            field.addEventListener('mouseenter', function() {
-                field.classList.add('kpxcDefine-fixed-hover-field');
-            });
-            field.addEventListener('mouseleave', function() {
-                field.classList.remove('kpxcDefine-fixed-hover-field');
-            });
-            i.addEventListener('focus', function() {
-                field.classList.add('kpxcDefine-fixed-hover-field');
-            });
-            i.addEventListener('blur', function() {
-                field.classList.remove('kpxcDefine-fixed-hover-field');
-            });
-            const elem = $(chooser);
-            if (elem) {
-                elem.append(field);
-                firstInput = field;
-                ++index;
-            }
+        if (!kpxcFields.isVisible(i)) {
+            continue;
+        }
+
+        const field = kpxcUI.createElement('div', 'kpxcDefine-fixed-field');
+        field.originalElement = i;
+
+        const rect = i.getBoundingClientRect();
+        field.style.top = Pixels(rect.top);
+        field.style.left = Pixels(rect.left);
+        field.style.width = Pixels(rect.width);
+        field.style.height = Pixels(rect.height);
+        field.textContent = String(index);
+
+        field.addEventListener('click', function(e) {
+            kpxcDefine.eventFieldClick(e);
+        });
+
+        field.addEventListener('mouseenter', function() {
+            field.classList.add('kpxcDefine-fixed-hover-field');
+        });
+
+        field.addEventListener('mouseleave', function() {
+            field.classList.remove('kpxcDefine-fixed-hover-field');
+        });
+
+        i.addEventListener('focus', function() {
+            field.classList.add('kpxcDefine-fixed-hover-field');
+        });
+
+        i.addEventListener('blur', function() {
+            field.classList.remove('kpxcDefine-fixed-hover-field');
+        });
+
+        const elem = $(chooser);
+        if (elem) {
+            elem.append(field);
+            firstInput = field;
+            ++index;
         }
     }
 
@@ -298,7 +320,7 @@ kpxcDefine.prepareStep4 = function() {
     $('#kpxcDefine-help').style.marginBottom = '10px';
     $('#kpxcDefine-help').textContent = tr('defineHelpText');
 
-    removeContent('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field)');
+    removeContent('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field):not(.kpxcDefine-fixed-string-field)');
     $('#kpxcDefine-chooser-headline').textContent = tr('defineConfirmSelection');
     kpxcDefine.dataStep = 4;
     $('#kpxcDefine-btn-skip').style.display = 'none';
@@ -330,10 +352,17 @@ kpxcDefine.again = function() {
 };
 
 kpxcDefine.more = function() {
-    if (kpxcDefine.dataStep === 2) {
+    if (kpxcDefine.dataStep === 1) {
+        kpxcDefine.prepareStep1();
+    } else if (kpxcDefine.dataStep === 2) {
         kpxcDefine.prepareStep2();
-        kpxcDefine.markAllPasswordFields('#kpxcDefine-fields', true);
+    } else if (kpxcDefine.dataStep === 3) {
+        kpxcDefine.prepareStep3();
+    } else if (kpxcDefine.dataStep === 4) {
+        kpxcDefine.prepareStep4();
     }
+
+    kpxcDefine.markFields('#kpxcDefine-fields', kpxcDefine.inputQueryPattern + ', select');
 };
 
 kpxcDefine.confirm = async function() {
@@ -346,21 +375,20 @@ kpxcDefine.confirm = async function() {
     }
 
     if (kpxcDefine.selection.username) {
-        kpxcDefine.selection.username = kpxcFields.prepareId(kpxcDefine.selection.username);
+        kpxcDefine.selection.username = kpxcFields.getId(kpxcDefine.selection.username.originalElement);
     }
 
     if (kpxcDefine.selection.password) {
-        kpxcDefine.selection.password = kpxcFields.prepareId(kpxcDefine.selection.password);
+        kpxcDefine.selection.password = kpxcFields.getId(kpxcDefine.selection.password.originalElement);
     }
 
     if (kpxcDefine.selection.totp) {
-        kpxcDefine.selection.totp = kpxcFields.prepareId(kpxcDefine.selection.totp);
+        kpxcDefine.selection.totp = kpxcFields.getId(kpxcDefine.selection.totp.originalElement);
     }
 
     const fieldIds = [];
-    const fieldKeys = Object.keys(kpxcDefine.selection.fields);
-    for (const i of fieldKeys) {
-        fieldIds.push(kpxcFields.prepareId(i));
+    for (const i of kpxcDefine.selection.fields) {
+        fieldIds.push(kpxcFields.getId(i));
     }
 
     const location = kpxc.getDocumentLocation();
@@ -371,11 +399,7 @@ kpxcDefine.confirm = async function() {
         fields: fieldIds
     };
 
-    await browser.runtime.sendMessage({
-        action: 'save_settings',
-        args: [ kpxc.settings ]
-    });
-
+    await sendMessage('save_settings', kpxc.settings);
     kpxcDefine.close();
 };
 
@@ -387,19 +411,13 @@ kpxcDefine.discard = async function() {
     const location = kpxc.getDocumentLocation();
     delete kpxc.settings['defined-custom-fields'][location];
 
-    await browser.runtime.sendMessage({
-        action: 'save_settings',
-        args: [ kpxc.settings ]
-    });
-
-    await browser.runtime.sendMessage({
-        action: 'load_settings'
-    });
+    await sendMessage('save_settings', kpxc.settings);
+    await sendMessage('load_settings');
 
     $('div.alreadySelected').remove();
 };
 
-// Handle the keyboard events
+// Handle keyboard events
 kpxcDefine.keyDown = function(e) {
     if (!e.isTrusted) {
         return;
@@ -413,7 +431,7 @@ kpxcDefine.keyDown = function(e) {
         // Select input field by number
         e.preventDefault();
         const index = e.keyCode - 48;
-        const inputFields = document.querySelectorAll('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field)');
+        const inputFields = document.querySelectorAll('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field)');
 
         if (inputFields.length >= index) {
             kpxcDefine.eventFieldClick(e, inputFields[index - 1]);
