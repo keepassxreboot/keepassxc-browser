@@ -5,6 +5,7 @@ const _maximumMutations = 200;
 
 // Contains already called method names
 const _called = {};
+_called.automaticRedetectCompleted = false;
 _called.clearLogins = false;
 _called.retrieveCredentials = false;
 
@@ -338,7 +339,7 @@ kpxcFields.getAllCombinations = async function(inputs) {
 // Return all input fields on the page, but ignore previously detected
 kpxcFields.getAllPageInputs = async function(previousInputs = []) {
     const fields = [];
-    const inputs = kpxcObserverHelper.getInputs(document);
+    const inputs = kpxcObserverHelper.getInputs(document.body);
 
     for (const input of inputs) {
         // Ignore fields that are already detected
@@ -523,7 +524,7 @@ kpxcFields.useCustomLoginFields = async function() {
 
     // Get all input fields from the page without any extra filters
     const inputFields = [];
-    document.querySelectorAll('input, select').forEach(e => {
+    document.body.querySelectorAll('input, select').forEach(e => {
         if (e.type !== 'hidden' && !e.disabled) {
             inputFields.push(e);
         }
@@ -1044,9 +1045,14 @@ kpxc.initCredentialFields = async function() {
     if (formInputs.length === 0 && pageInputs.length === 0) {
         // Run 'redetect_credentials' manually if no fields are found after a page load
         setTimeout(async function() {
+            if (_called.automaticRedetectCompleted) {
+                return;
+            }
+
             if (kpxc.inputs.length === 0 || kpxc.combinations.length === 0) {
                 kpxc.initCredentialFields();
             }
+            _called.automaticRedetectCompleted = true;
         }, 2000);
 
         return;
@@ -1412,7 +1418,8 @@ kpxcObserverHelper.observerConfig = {
 };
 
 // Stores mutation style to an cache array
-kpxcObserverHelper.cacheStyle = function(mut, styleMutations) {
+// If there's a single style mutation, it's safe to calculate it
+kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
     if (mut.attributeName !== 'style') {
         return;
     }
@@ -1420,7 +1427,7 @@ kpxcObserverHelper.cacheStyle = function(mut, styleMutations) {
     // If the target is inside a form we are monitoring, calculate the CSS style for better compatibility.
     // getComputedStyle() is very slow, so we cannot do that for every style target.
     let style = mut.target.style;
-    if (kpxcForm.formIdentified(mut.target.parentNode)) {
+    if (kpxcForm.formIdentified(mut.target.parentNode) || mutationCount === 1) {
         style = getComputedStyle(mut.target);
     }
 
@@ -1457,6 +1464,15 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
             inputFields.push(e);
         }
     });
+
+    // Append any input fields in Shadow DOM
+    if (target.shadowRoot) {
+        target.shadowSelectorAll('input').forEach(e => {
+            if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
+                inputFields.push(e);
+            };
+        });
+    }
 
     if (inputFields.length === 0) {
         return [];
@@ -1582,7 +1598,7 @@ kpxcObserverHelper.initObserver = async function() {
             }
 
             // Cache style mutations. We only need the last style mutation of the target.
-            kpxcObserverHelper.cacheStyle(mut, styleMutations);
+            kpxcObserverHelper.cacheStyle(mut, styleMutations, mutations.length);
 
             if (mut.type === 'childList') {
                 if (mut.addedNodes.length > 0) {
@@ -1616,7 +1632,7 @@ kpxcObserverHelper.initObserver = async function() {
         }
     });
 
-    kpxc.observer.observe(document, kpxcObserverHelper.observerConfig);
+    kpxc.observer.observe(document.body, kpxcObserverHelper.observerConfig);
 };
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
