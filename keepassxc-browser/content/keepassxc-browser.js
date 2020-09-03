@@ -780,6 +780,7 @@ kpxc.fillFromTOTP = async function(target) {
 
 // Fill requested from username icon
 kpxc.fillFromUsernameIcon = async function(combination) {
+    await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
         return;
     } else if (kpxc.credentials.length > 1) {
