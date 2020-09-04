@@ -144,11 +144,11 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
 
     if (!result.defaultGroupAlwaysAsk) {
         if (result.defaultGroup === '' || result.defaultGroup === DEFAULT_BROWSER_GROUP) {
-             // Default group is used
-             const args = [ credentials.username, credentials.password, credentials.url ];
-             const res = await sendMessage('add_credentials', args);
-             kpxcBanner.verifyResult(res);
-             return;
+            // Default group is used
+            const args = [ credentials.username, credentials.password, credentials.url ];
+            const res = await sendMessage('add_credentials', args);
+            kpxcBanner.verifyResult(res);
+            return;
         } else {
             // A specified group is used
             let gname = '';
