@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.7.1",
-    "version_name": "1.7.1",
+    "version": "1.7.2",
+    "version_name": "1.7.2",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {
@@ -31,8 +31,9 @@
     },
     "background": {
         "scripts": [
-            "browser-polyfill.min.js",
-            "global.js",
+            "common/browser-polyfill.min.js",
+            "common/global.js",
+            "common/sites.js",
             "background/nacl.min.js",
             "background/nacl-util.min.js",
             "background/keepass.js",
@@ -49,15 +50,15 @@
                 "<all_urls>"
             ],
             "js": [
-                "browser-polyfill.min.js",
-                "global.js",
+                "common/browser-polyfill.min.js",
+                "common/global.js",
+                "common/sites.js",
                 "content/ui.js",
                 "content/banner.js",
                 "content/autocomplete.js",
                 "content/define.js",
                 "content/keepassxc-browser.js",
                 "content/pwgen.js",
-                "content/sites.js",
                 "content/totp-field.js",
                 "content/username-field.js"
             ],
