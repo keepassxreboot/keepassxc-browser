@@ -358,9 +358,9 @@ kpxcFields.getAllPageInputs = async function(previousInputs = []) {
     if (!kpxc.singleInputEnabledForPage
         && ((fields.length === 1 && fields[0].getLowerCaseAttribute('type') !== 'password')
         || (previousInputs.length === 1 && previousInputs[0].getLowerCaseAttribute('type') !== 'password'))) {
-        sendMessage('username_field_detected', true );
+        sendMessage('username_field_detected', true);
     } else {
-        sendMessage('username_field_detected', false );
+        sendMessage('username_field_detected', false);
     }
 
     await kpxc.initCombinations(inputs);
@@ -390,11 +390,11 @@ kpxcFields.getCombination = async function(field, givenType) {
 // Gets of generates an unique ID for the element
 kpxcFields.getId = function(target) {
     if (target.classList.length > 0) {
-        return `${target.nodeName} ${target.type} ${target.classList.value}`;
+        return `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
     }
 
     if (target.id && target.id !== '') {
-        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)}`;
+        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.name} ${target.placeholder}`;
     }
 
     return `kpxc ${target.type} ${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}${target.offsetTop}${target.offsetLeft}`;
@@ -530,7 +530,7 @@ kpxcFields.useCustomLoginFields = async function() {
         }
     });
 
-    [ creds.username, creds.password, creds.totp ] = await Promise.all([
+    const [ username, password, totp ] = await Promise.all([
         await findInputField(inputFields, creds.username),
         await findInputField(inputFields, creds.password),
         await findInputField(inputFields, creds.totp)
@@ -546,17 +546,17 @@ kpxcFields.useCustomLoginFields = async function() {
     }
 
     // Handle custom TOTP field
-    if (creds.totp) {
-        creds.totp.setAttribute('kpxc-defined', 'totp');
-        kpxcTOTPIcons.newIcon(creds.totp, kpxc.databaseState, true);
+    if (totp) {
+        totp.setAttribute('kpxc-defined', 'totp');
+        kpxcTOTPIcons.newIcon(totp, kpxc.databaseState, true);
     }
 
     const combinations = [];
     combinations.push({
-        username: creds.username,
-        password: creds.password,
-        passwordInputs: [ creds.password ],
-        totp: creds.totp,
+        username: username,
+        password: password,
+        passwordInputs: [ password ],
+        totp: totp,
         fields: stringFields
     });
 
@@ -696,7 +696,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
     const el = document.activeElement;
     if (el.nodeName !== 'INPUT' || kpxc.credentials.length === 0) {
         return;
-    } else if (kpxc.credentials.length > 1 && kpxc.combinations.length > 0) {
+    } else if (kpxc.credentials.length > 1 && kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
         kpxcAutocomplete.showList(el);
         return;
     }
@@ -723,15 +723,16 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
 
 // Fill requested by Auto-Fill
 kpxc.fillFromAutofill = async function() {
-    if (kpxc.credentials.length !== 1 || kpxc.combinations.length !== 1) {
+    if (kpxc.credentials.length !== 1 || kpxc.combinations.length === 0) {
         return;
     }
 
+    const index = kpxc.combinations.length - 1;
     await sendMessage('page_set_login_id', 0);
-    kpxc.fillInCredentials(kpxc.combinations[0], kpxc.credentials[0].login, kpxc.credentials[0].uuid);
+    kpxc.fillInCredentials(kpxc.combinations[index], kpxc.credentials[0].login, kpxc.credentials[0].uuid);
 
     // Generate popup-list of usernames + descriptions
-    sendMessage('popup_login', [ `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})` ]);
+    sendMessage('popup_login', [ { text: `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})`, uuid: kpxc.credentials[0].uuid } ]);
 };
 
 // Fill requested by selecting credentials from the popup
@@ -783,7 +784,7 @@ kpxc.fillFromUsernameIcon = async function(combination) {
     await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
         return;
-    } else if (kpxc.credentials.length > 1) {
+    } else if (kpxc.credentials.length > 1 && kpxc.settings.autoCompleteUsernames) {
         kpxcAutocomplete.showList(combination.username || combination.password);
         return;
     }
@@ -854,7 +855,7 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
 
     // Auto-submit
     if (kpxc.settings.autoSubmit && !skipAutoSubmit) {
-        const submitButton = kpxc.getFormSubmitButton(combination.form);
+        const submitButton = kpxcForm.getFormSubmitButton(combination.form);
         if (submitButton !== undefined) {
             submitButton.click();
         } else {
@@ -1035,7 +1036,7 @@ kpxc.initCombinations = async function(inputs = []) {
 
 // The main function for finding input fields
 kpxc.initCredentialFields = async function() {
-    await sendMessage('page_clear_logins', _called.clearLogins );
+    await sendMessage('page_clear_logins', _called.clearLogins);
     _called.clearLogins = true;
 
     // Identify all forms in the page
@@ -1060,7 +1061,7 @@ kpxc.initCredentialFields = async function() {
     }
 
     // Combine inputs
-    kpxc.inputs = [...formInputs, ...pageInputs];
+    kpxc.inputs = [ ...formInputs, ...pageInputs ];
 
     // Combinations are already saved when identifying fields
     if (kpxc.combinations.length === 0) {
@@ -1471,7 +1472,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         target.shadowSelectorAll('input').forEach(e => {
             if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
                 inputFields.push(e);
-            };
+            }
         });
     }
 
@@ -1525,8 +1526,13 @@ kpxcObserverHelper.handleObserverAdd = async function(target) {
     await kpxc.initCombinations(inputs);
     await kpxcIcons.initIcons(kpxc.combinations);
 
-    if (kpxc.databaseState === DatabaseState.UNLOCKED && _called.retrieveCredentials === false) {
-        await kpxc.retrieveCredentials();
+    if (kpxc.databaseState === DatabaseState.UNLOCKED) {
+        if (_called.retrieveCredentials === false) {
+            await kpxc.retrieveCredentials();
+            return;
+        }
+
+        kpxc.prepareCredentials();
     }
 };
 
@@ -1574,8 +1580,8 @@ kpxcObserverHelper.ignoredNode = function(target) {
         || kpxcObserverHelper.ignoredNodeNames.some(e => e === target.nodeName)
         || target.nodeName.startsWith('YTMUSIC')
         || target.nodeName.startsWith('YT-')) {
-            return true;
-        }
+        return true;
+    }
 
     return false;
 };
@@ -1592,7 +1598,7 @@ kpxcObserverHelper.initObserver = async function() {
             mutations = mutations.slice(0, _maximumMutations);
         }
 
-        let styleMutations = [];
+        const styleMutations = [];
         for (const mut of mutations) {
             if (kpxcObserverHelper.ignoredNode(mut.target)) {
                 continue;
@@ -1613,10 +1619,6 @@ kpxcObserverHelper.initObserver = async function() {
                 if (forms.length === 0) {
                     continue;
                 }
-
-                // Listen for possible CSS animations
-                mut.target.removeEventListener('transitionend', kpxcObserverHelper.handleTransitionEnd);
-                mut.target.addEventListener('transitionend', kpxcObserverHelper.handleTransitionEnd);
 
                 // There's an issue here. We cannot know for sure if the class attribute if added or removed.
                 kpxcObserverHelper.handleObserverAdd(mut.target);
@@ -1658,7 +1660,7 @@ const initContentScript = async function() {
         }
 
         // Retrieve submitted credentials if available.
-        const [creds, redirectCount] = await Promise.all([
+        const [ creds, redirectCount ] = await Promise.all([
             await sendMessage('page_get_submitted'),
             await sendMessage('page_get_redirect_count')
         ]);

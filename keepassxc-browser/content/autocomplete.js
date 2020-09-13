@@ -190,7 +190,7 @@ kpxcAutocomplete.keyPress = function(e) {
         if (kpxcAutocomplete.index >= 0 && items && items[kpxcAutocomplete.index] !== undefined) {
             e.preventDefault();
             kpxcAutocomplete.input.value = kpxcAutocomplete.elements[kpxcAutocomplete.index].value;
-            kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index);
+            kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index, kpxcAutocomplete.elements[kpxcAutocomplete.index].uuid);
             kpxcAutocomplete.closeList();
         }
     } else if (e.key === 'Tab') {
@@ -201,7 +201,7 @@ kpxcAutocomplete.keyPress = function(e) {
         }
 
         kpxcAutocomplete.index = kpxcAutocomplete.elements.findIndex(c => c.value === kpxcAutocomplete.input.value);
-        kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index);
+        kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index, kpxcAutocomplete.elements[kpxcAutocomplete.index].uuid);
         kpxcAutocomplete.closeList();
     } else if (e.key === 'Escape') {
         kpxcAutocomplete.closeList();

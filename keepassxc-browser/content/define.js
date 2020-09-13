@@ -14,7 +14,7 @@ kpxcDefine.diffX = 0;
 kpxcDefine.diffY = 0;
 kpxcDefine.eventFieldClick = null;
 kpxcDefine.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input[type=\'username\'], input:not([type])';
-kpxcDefine.markedFields= [];
+kpxcDefine.markedFields = [];
 kpxcDefine.keyDown = null;
 kpxcDefine.startPosX = 0;
 kpxcDefine.startPosY = 0;

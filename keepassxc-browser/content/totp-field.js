@@ -34,8 +34,12 @@ kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
     const id = field.getLowerCaseAttribute('id');
     const name = field.getLowerCaseAttribute('name');
     const autocomplete = field.getLowerCaseAttribute('autocomplete');
+    const placeholder = field.getLowerCaseAttribute('placeholder');
 
-    if (autocomplete === 'one-time-code' || acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f)))) {
+    // Checks if the field id, name or placeholder includes some of the acceptedOTPFields but not any from ignoredTypes
+    if (autocomplete === 'one-time-code'
+        || (acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f))))
+            && !ignoredTypes.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f)))) {
         return true;
     }
 

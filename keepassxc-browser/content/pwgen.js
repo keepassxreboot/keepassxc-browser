@@ -223,7 +223,7 @@ kpxcPasswordDialog.showDialog = function(field, icon) {
     // Save next password field if found
     if (kpxc.inputs.length > 0) {
         const index = kpxc.inputs.indexOf(field);
-        const nextField = kpxc.inputs[index+1];
+        const nextField = kpxc.inputs[index + 1];
         kpxcPasswordDialog.nextField = (nextField && nextField.getLowerCaseAttribute('type') === 'password') ? nextField : undefined;
     }
 
@@ -278,7 +278,7 @@ kpxcPasswordDialog.fill = function(e) {
             const message = tr('passwordGeneratorErrorTooLong') + '\r\n'
                             + tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
             message.style.whiteSpace = 'pre';
-            sendMessage('show_notification' [ message ]);
+            sendMessage('show_notification', [ message ]);
             return;
         }
     }
