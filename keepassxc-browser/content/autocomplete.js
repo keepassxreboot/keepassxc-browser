@@ -201,7 +201,10 @@ kpxcAutocomplete.keyPress = function(e) {
         }
 
         kpxcAutocomplete.index = kpxcAutocomplete.elements.findIndex(c => c.value === kpxcAutocomplete.input.value);
-        kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index, kpxcAutocomplete.elements[kpxcAutocomplete.index].uuid);
+        if (kpxcAutocomplete.index >= 0) {
+            kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index, kpxcAutocomplete.elements[kpxcAutocomplete.index].uuid);
+        }
+
         kpxcAutocomplete.closeList();
     } else if (e.key === 'Escape') {
         kpxcAutocomplete.closeList();
