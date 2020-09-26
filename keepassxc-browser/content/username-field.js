@@ -31,10 +31,7 @@ kpxcUsernameIcons.isValid = function(field) {
 
 class UsernameFieldIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED) {
-        super();
-        this.databaseState = databaseState;
-        this.icon = null;
-        this.inputField = null;
+        super(field, databaseState);
 
         this.initField(field);
         kpxcUI.monitorIconPosition(this);
@@ -63,8 +60,7 @@ UsernameFieldIcon.prototype.initField = function(field) {
     this.inputField = field;
 };
 
-UsernameFieldIcon.prototype.createIcon = function(target) {
-    const field = target;
+UsernameFieldIcon.prototype.createIcon = function(field) {
     const className = getIconClassName(this.databaseState);
 
     // Size the icon dynamically, but not greater than 24 or smaller than 14
@@ -99,7 +95,7 @@ UsernameFieldIcon.prototype.createIcon = function(target) {
         iconClicked(field, icon);
     });
 
-    kpxcUI.setIconPosition(icon, field);
+    kpxcUI.setIconPosition(icon, field, this.rtl);
     this.icon = icon;
 
     const styleSheet = document.createElement('link');

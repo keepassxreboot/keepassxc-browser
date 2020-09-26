@@ -20,7 +20,12 @@ const Pixels = function(value) {
 
 // Basic icon class
 class Icon {
-    constructor() {
+    constructor(field, databaseState = DatabaseState.DISCONNECTED) {
+        this.databaseState = databaseState;
+        this.icon = null;
+        this.inputField = null;
+        this.rtl = kpxcUI.isRTL(field);
+
         try {
             this.observer = new IntersectionObserver((entries) => {
                 kpxcUI.updateFromIntersectionObserver(this, entries);
@@ -92,7 +97,7 @@ kpxcUI.monitorIconPosition = function(iconClass) {
 
 kpxcUI.updateIconPosition = function(iconClass) {
     if (iconClass.inputField && iconClass.icon) {
-        kpxcUI.setIconPosition(iconClass.icon, iconClass.inputField);
+        kpxcUI.setIconPosition(iconClass.icon, iconClass.inputField, iconClass.rtl);
     }
 };
 
@@ -101,18 +106,17 @@ kpxcUI.calculateIconOffset = function(field, size) {
     return (offset < 0) ? 0 : offset;
 };
 
-kpxcUI.setIconPosition = function(icon, field) {
+kpxcUI.setIconPosition = function(icon, field, rtl = false) {
     const rect = field.getBoundingClientRect();
-    const size = (document.dir !== 'rtl') ? Number(icon.getAttribute('size')) : 0;
+    const size = Number(icon.getAttribute('size'));
     const offset = kpxcUI.calculateIconOffset(field, size);
+    const left = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
+    const top = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
 
-    if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
-        icon.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + offset + 1);
-        icon.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
-    } else {
-        icon.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + offset + 1);
-        icon.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
-    }
+    icon.style.top = Pixels(top + document.scrollingElement.scrollTop + offset + 1);
+    icon.style.left = rtl
+                    ? Pixels((left + document.scrollingElement.scrollLeft) + offset)
+                    : Pixels(left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
 };
 
 kpxcUI.deleteHiddenIcons = function(iconList, attr) {
@@ -135,6 +139,23 @@ kpxcUI.deleteHiddenIcons = function(iconList, attr) {
     }
 };
 
+kpxcUI.isRTL = function(field) {
+    if (!field) {
+        return false;
+    }
+
+    const style = getComputedStyle(field);
+    if (style.textAlign.toLowerCase() === 'left') {
+        return false;
+    } else if (style.textAlign.toLowerCase() === 'right') {
+        return true;
+    }
+
+    return kpxcFields.traverseParents(field,
+        f => [ 'ltr', 'rtl' ].includes(f.getLowerCaseAttribute('dir')),
+        f => ({ 'ltr': false, 'rtl': true })[f.getLowerCaseAttribute('dir')]);
+};
+
 /**
 * Detects if the input field appears or disappears -> show/hide the icon
 * - boundingClientRect with slightly (< -10) negative values -> hidden
@@ -154,7 +175,7 @@ kpxcUI.updateFromIntersectionObserver = function(iconClass, entries) {
 
             // Wait for possible DOM animations
             setTimeout(() => {
-                kpxcUI.setIconPosition(iconClass.icon, entry.target);
+                kpxcUI.setIconPosition(iconClass.icon, entry.target, iconClass.rtl);
             }, 400);
         }
     }
