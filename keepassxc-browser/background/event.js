@@ -236,5 +236,6 @@ kpxcEvent.messageHandlers = {
     'update_credentials': keepass.updateCredentials,
     'username_field_detected': kpxcEvent.onUsernameFieldDetected,
     'save_settings': kpxcEvent.onSaveSettings,
-    'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC
+    'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC,
+    'update_context_menu': page.updateContextMenu
 };

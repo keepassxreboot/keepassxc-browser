@@ -720,6 +720,21 @@ kpxc.detectDatabaseChange = async function(response) {
     }
 };
 
+// Fill selected attribute from the context menu
+kpxc.fillAttributeToActiveElementWith = async function(attr) {
+    const el = document.activeElement;
+    if (el.nodeName !== 'INPUT' || kpxc.credentials.length === 0) {
+        return;
+    }
+
+    const value = Object.values(attr);
+    if (!value || value.length === 0) {
+        return;
+    }
+
+    kpxc.setValue(el, value[0]);
+};
+
 // Fill requested from the context menu. Active element is used for combination detection
 kpxc.fillInFromActiveElement = async function(passOnly = false) {
     if (kpxc.credentials.length === 0) {
@@ -1292,6 +1307,12 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
         await kpxc.prepareCredentials();
     }
 
+    // Update fill_attribute context menu if String Fields are available
+    const stringFieldsFound = credentials.some(e => e.stringFields && e.stringFields.length > 0);
+    if (stringFieldsFound) {
+        await sendMessage('update_context_menu', credentials);
+    }
+
     // Retrieve submitted credentials if available
     const creds = await sendMessage('page_get_submitted');
     if (creds && creds.submitted) {
@@ -1761,6 +1782,9 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'fill_totp') {
             await kpxc.receiveCredentialsIfNecessary();
             kpxc.fillFromTOTP();
+        } else if (req.action === 'fill_attribute' && req.args) {
+            await kpxc.receiveCredentialsIfNecessary();
+            kpxc.fillAttributeToActiveElementWith(req.args);
         } else if (req.action === 'ignore_site') {
             kpxc.ignoreSite(req.args);
         } else if (req.action === 'redetect_fields') {

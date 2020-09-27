@@ -24,6 +24,7 @@ const defaultSettings = {
 };
 
 var page = {};
+page.attributeMenuItemIds = [];
 page.blockedTabs = [];
 page.currentRequest = {};
 page.currentTabId = -1;
@@ -170,7 +171,14 @@ page.initSitePreferences = async function() {
     await browser.storage.local.set({ 'settings': page.settings });
 };
 
-page.switchTab = function(tab) {
+page.switchTab = async function(tab) {
+    browser.contextMenus.update('fill_attribute', { visible: false });
+    if (page.tabs[tab.id]
+        && page.tabs[tab.id].credentials.length > 0
+        && page.tabs[tab.id].credentials.some(e => e.stringFields && e.stringFields.length > 0)) {
+        await page.updateContextMenu(tab, page.tabs[tab.id].credentials);
+    }
+
     browserAction.showDefault(tab);
     browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
         console.log('Cannot send activated_tab message: ', e);
@@ -203,6 +211,8 @@ page.clearLogins = function(tabId) {
     page.tabs[tabId].loginList = [];
     page.currentRequest = {};
     page.passwordFilled = false;
+
+    browser.contextMenus.update('fill_attribute', { visible: false });
 };
 
 // Clear all logins from all pages and update the content scripts
@@ -234,6 +244,7 @@ page.createTabEntry = function(tabId) {
     };
 
     page.clearSubmittedCredentials();
+    browser.contextMenus.update('fill_attribute', { visible: false });
 };
 
 page.removePageInformationFromNotExistingTabs = async function() {
@@ -311,4 +322,52 @@ page.getSubmitted = async function(tab) {
 page.setSubmitted = async function(tab, args = []) {
     const [ submitted, username, password, url, oldCredentials ] = args;
     page.setSubmittedCredentials(submitted, username, password, url, oldCredentials, tab.id);
+};
+
+// Update context menu for attribute filling
+page.updateContextMenu = async function(tab, credentials) {
+    // Remove any old attribute items
+    while (page.attributeMenuItemIds.length) {
+        browser.contextMenus.remove(page.attributeMenuItemIds.pop());
+    }
+
+    // Set parent item visibility
+    browser.contextMenus.update('fill_attribute', { visible: true });
+
+    // Add any new attribute items
+    for (const cred of credentials) {
+        if (!cred.stringFields) {
+            continue;
+        }
+
+        for (const attribute of cred.stringFields) {
+            // Show username inside [] if there are KPH attributes inside multiple credentials
+            const attributeName = Object.keys(attribute)[0].slice(5);
+            const finalName = credentials.length > 1
+                       ? `[${cred.login}] ${attributeName}`
+                       : attributeName;
+
+            page.attributeMenuItemIds.push(createContextMenuItem({
+                action: 'fill_attribute',
+                args: attribute,
+                parentId: 'fill_attribute',
+                title: finalName
+            }));
+        }
+    }
+};
+
+const createContextMenuItem = function({action, args, ...options}) {
+    return browser.contextMenus.create({
+        contexts: menuContexts,
+        onclick: (info, tab) => {
+            browser.tabs.sendMessage(tab.id, {
+                action: action,
+                args: args
+            }).catch((err) => {
+                console.log(err);
+            });
+        },
+        ...options
+    });
 };
