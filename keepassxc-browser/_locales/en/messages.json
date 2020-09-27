@@ -27,6 +27,10 @@
         "message": "Show Password Generator",
         "description": "Show password generator text."
     },
+    "contextMenuFillAttribute": {
+      "message": "Fill attribute…",
+      "description": "Context menu parent item for filling a custom attribute."
+    },
     "multipleCredentialsDetected": {
         "message": "HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
