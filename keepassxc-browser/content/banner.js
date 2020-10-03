@@ -136,18 +136,22 @@ kpxcBanner.create = async function(credentials = {}) {
 };
 
 kpxcBanner.saveNewCredentials = async function(credentials = {}) {
+    const saveToDefaultGroup = async function(creds) {
+        const args = [ creds.username, creds.password, creds.url ];
+        const res = await sendMessage('add_credentials', args);
+        kpxcBanner.verifyResult(res);
+    };
+
     const result = await sendMessage('get_database_groups');
     if (!result || !result.groups) {
         console.log('Error: Empty result from get_database_groups');
+        await saveToDefaultGroup(credentials);
         return;
     }
 
     if (!result.defaultGroupAlwaysAsk) {
         if (result.defaultGroup === '' || result.defaultGroup === DEFAULT_BROWSER_GROUP) {
-            // Default group is used
-            const args = [ credentials.username, credentials.password, credentials.url ];
-            const res = await sendMessage('add_credentials', args);
-            kpxcBanner.verifyResult(res);
+            await saveToDefaultGroup(credentials);
             return;
         } else {
             // A specified group is used
