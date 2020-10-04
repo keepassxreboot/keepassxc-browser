@@ -697,6 +697,11 @@ const getBrowserId = function() {
         startPos = navigator.userAgent.indexOf('/', startPos) + 1;
         const version = navigator.userAgent.substring(startPos, navigator.userAgent.indexOf('Safari'));
         return 'Chrome/Chromium ' + version;
+    } else if (navigator.userAgent.indexOf('Safari') > -1) {
+        let startPos = navigator.userAgent.indexOf('Version');
+        startPos = navigator.userAgent.indexOf('/', startPos) + 1;
+        const version = navigator.userAgent.substring(startPos, navigator.userAgent.indexOf('Safari'));
+        return 'Safari ' + version;
     }
 
     return 'Other/Unknown';

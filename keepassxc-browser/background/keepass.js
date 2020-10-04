@@ -18,6 +18,7 @@ keepass.previousDatabaseHash = '';
 keepass.keyId = 'keepassxc-browser-cryptokey-name';
 keepass.keyBody = 'keepassxc-browser-key';
 keepass.reconnectLoop = null;
+keepass.isSafari = isSafari();
 
 const kpActions = {
     SET_LOGIN: 'set-login',

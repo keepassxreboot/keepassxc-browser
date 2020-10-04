@@ -104,7 +104,7 @@ keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeo
         const messageTimeout = timeoutValue || keepassClient.messageTimeout;
 
         // Handle timeouts
-        if (enableTimeout) {
+        if (!keepass.isSafari && enableTimeout) {
             timeout = setTimeout(() => {
                 const errorMessage = {
                     action: requestAction,
@@ -121,8 +121,10 @@ keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeo
         messageBuffer.addMessage(request);
 
         // Send the request
-        if (keepassClient.nativePort) {
-            keepassClient.nativePort.postMessage(request);
+        if (keepass.isSafari) {
+            browser.runtime.sendNativeMessage(keepass.nativeHostName, { message: JSON.stringify(request) });
+        } else if (keepass.nativePort) {
+            keepass.nativePort.postMessage(request);
         }
     });
 };
