@@ -241,7 +241,7 @@ page.removePageInformationFromNotExistingTabs = async function() {
 // Retrieves the credentials. Returns cached values when found.
 // Page reload or tab switch clears the cache.
 page.retrieveCredentials = async function(tab, args = []) {
-    const [ url, submitUrl ] = args;
+    const [ url, submitUrl, triggerUnlock = false, httpAuth = false ] = args;
     if (page.tabs[tab.id] && page.tabs[tab.id].credentials.length > 0) {
         return page.tabs[tab.id].credentials;
     }
