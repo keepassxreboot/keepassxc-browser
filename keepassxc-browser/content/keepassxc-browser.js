@@ -156,6 +156,18 @@ kpxcForm.getCredentialFieldsFromForm = function(form) {
 // Get the form submit button instead if action URL is same as the page itself
 kpxcForm.getFormSubmitButton = function(form) {
     const action = kpxc.submitUrl || form.action;
+
+    // Special handling for accounts.google.com. The submit button is outside the form.
+    if (form.action.startsWith('https://accounts.google.com')) {
+        const findDiv = $('#identifierNext');
+        if (!findDiv) {
+            return undefined;
+        }
+
+        const buttons = findDiv.getElementsByTagName('button');
+        return buttons.length > 0 ? buttons[0] : undefined;
+    }
+
     if (action.includes(document.location.origin + document.location.pathname)) {
         for (const i of form.elements) {
             if (i.type === 'submit') {
