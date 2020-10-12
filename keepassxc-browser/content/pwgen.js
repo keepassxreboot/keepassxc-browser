@@ -30,8 +30,7 @@ kpxcPasswordIcons.isValid = function(field) {
 
 class PasswordIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED) {
-        super();
-        this.databaseState = databaseState;
+        super(field, databaseState);
         this.nextFieldExists = false;
 
         this.initField(field);
@@ -80,7 +79,7 @@ PasswordIcon.prototype.createIcon = function(field) {
         kpxcPasswordDialog.showDialog(field, icon);
     });
 
-    kpxcUI.setIconPosition(icon, field);
+    kpxcUI.setIconPosition(icon, field, this.rtl);
     this.icon = icon;
 
     const styleSheet = document.createElement('link');

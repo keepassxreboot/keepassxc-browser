@@ -75,10 +75,7 @@ kpxcTOTPIcons.isValid = function(field, forced) {
 
 class TOTPFieldIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
-        super();
-        this.icon = null;
-        this.inputField = null;
-        this.databaseState = databaseState;
+        super(field, databaseState);
 
         this.initField(field, forced);
         kpxcUI.monitorIconPosition(this);
@@ -127,7 +124,7 @@ TOTPFieldIcon.prototype.createIcon = function(field) {
         kpxc.fillFromTOTP(field);
     });
 
-    kpxcUI.setIconPosition(icon, field);
+    kpxcUI.setIconPosition(icon, field, this.rtl);
     this.icon = icon;
 
     const styleSheet = document.createElement('link');
