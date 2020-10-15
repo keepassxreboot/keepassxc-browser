@@ -1588,7 +1588,8 @@ kpxcObserverHelper.ignoredElement = function(target) {
 // Ignores all nodes that doesn't contain elements
 // Also ignore few Youtube-specific custom nodeNames
 kpxcObserverHelper.ignoredNode = function(target) {
-    if (kpxcObserverHelper.ignoredNodeTypes.some(e => e === target.nodeType)
+    if (!target
+        ||kpxcObserverHelper.ignoredNodeTypes.some(e => e === target.nodeType)
         || kpxcObserverHelper.ignoredNodeNames.some(e => e === target.nodeName)
         || target.nodeName.startsWith('YTMUSIC')
         || target.nodeName.startsWith('YT-')) {
@@ -1647,7 +1648,9 @@ kpxcObserverHelper.initObserver = async function() {
         }
     });
 
-    kpxc.observer.observe(document.body, kpxcObserverHelper.observerConfig);
+    if (document.body) {
+        kpxc.observer.observe(document.body, kpxcObserverHelper.observerConfig);
+    }
 };
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;

@@ -55,9 +55,12 @@ class Icon {
 }
 
 const kpxcUI = {};
-kpxcUI.bodyRect = document.body.getBoundingClientRect();
-kpxcUI.bodyStyle = getComputedStyle(document.body);
 kpxcUI.mouseDown = false;
+
+if (document.body) {
+    kpxcUI.bodyRect = document.body.getBoundingClientRect();
+    kpxcUI.bodyStyle = getComputedStyle(document.body);
+}
 
 // Wrapper for creating elements
 kpxcUI.createElement = function(type, classes, attributes, textContent) {
