@@ -11,7 +11,7 @@ This browser extension was first supported in KeePassXC 2.3.0 (release end of 20
 
 Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk) or [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/pdffhmdngciaglkoonimfcmckehcpafo) (requires KeePassXC 2.5.3 or newer).
 
-Please see this [document](https://keepassxc.org/docs/keepassxc-browser-migration/) for instructions how to configure KeePassXC in order to connect the database correctly.
+Please see this [document](https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_setup_browser_integration) for instructions how to configure KeePassXC in order to connect the database correctly.
 
 ## How it works
 
