@@ -705,8 +705,23 @@ kpxc.detectDatabaseChange = async function(response) {
 
 // Fill requested from the context menu. Active element is used for combination detection
 kpxc.fillInFromActiveElement = async function(passOnly = false) {
+    if (kpxc.credentials.length === 0) {
+        return;
+    }
+
     const el = document.activeElement;
-    if (el.nodeName !== 'INPUT' || kpxc.credentials.length === 0) {
+    if (el.nodeName !== 'INPUT') {
+        // No active input element selected -> fill the first combination found
+        if (kpxc.combinations.length > 0) {
+            kpxc.fillInCredentials(kpxc.combinations[0], kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
+
+            // Focus to the input field
+            const field = passOnly ? kpxc.combinations[0].password : kpxc.combinations[0].username;
+            if (field) {
+                field.focus();
+            }
+        }
+
         return;
     } else if (kpxc.credentials.length > 1 && kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
         kpxcAutocomplete.showList(el);
