@@ -273,7 +273,9 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     await kpxc.setPasswordFilled(true);
-    await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, trimURL(window.top.location.href), kpxc.credentials ]);
+
+    const url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? window.top.location.origin : window.top.location.href);
+    await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, url, kpxc.credentials ]);
 
     // Show the banner if the page does not reload
     kpxc.rememberCredentials(usernameValue, passwordValue);
@@ -1213,12 +1215,9 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
     }
 
     const getUrl = function() {
-        let url = kpxc.settings.saveDomainOnlyNewCreds ? document.location.origin : document.location.href;
-        if (url.indexOf('?') > 0) {
-            url = url.substring(0, url.indexOf('?'));
-            if (url.length < document.location.origin.length) {
-                url = document.location.origin;
-            }
+        let url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? document.location.origin : document.location.href);
+        if (url.length < document.location.origin.length) {
+            url = document.location.origin;
         }
 
         return url;
