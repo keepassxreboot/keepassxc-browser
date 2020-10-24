@@ -1,8 +1,9 @@
 'use strict';
 
-const MINIMUM_INPUT_FIELD_WIDTH = 60;
 const MIN_TOTP_INPUT_LENGTH = 6;
 const MAX_TOTP_INPUT_LENGTH = 10;
+const MIN_INPUT_FIELD_WIDTH_PX = 8;
+const MIN_INPUT_FIELD_OFFSET_WIDTH = 60;
 
 const DatabaseState = {
     DISCONNECTED: 0,

@@ -8,6 +8,7 @@ const acceptedOTPFields = [
     'auth',
     'challenge',
     'code',
+    'idvpin',
     'mfa',
     'otp',
     'token',
@@ -53,7 +54,7 @@ kpxcTOTPIcons.isValid = function(field, forced) {
 
     if (!forced) {
         if (ignoredTypes.some(t => t === field.type)
-            || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH
+            || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
             || field.size < 2
             || (field.maxLength > 0 && (field.maxLength < MIN_TOTP_INPUT_LENGTH || field.maxLength > kpxcSites.expectedTOTPMaxLength()))
             || ignoredTypes.some(t => t === field.autocomplete)
