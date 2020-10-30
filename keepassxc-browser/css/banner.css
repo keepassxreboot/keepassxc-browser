@@ -159,3 +159,9 @@ div.kpxc-banner-dialog .list-group-item:hover {
         color: var(--kpxc-text-color) !important;
     }
 }
+
+@media print {
+    div.kpxc-banner {
+        visibility: hidden;
+    }
+}
