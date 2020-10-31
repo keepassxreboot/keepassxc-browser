@@ -134,7 +134,7 @@ kpxcIcons.switchIcons = function() {
  * Identifies form submits and password changes.
  */
 const kpxcForm = {};
-kpxcForm.formButtonQuery = 'button[type=\'button\'], button[type=\'submit\'], input[type=\'button\'], button:not([type]), div[role=\'button\']';
+kpxcForm.formButtonQuery = 'button[type=\'button\'], button[type=\'submit\'], input[type=\'button\'], input[type=\'submit\'], button:not([type]), div[role=\'button\']';
 kpxcForm.savedForms = [];
 
 // Returns true if form has been already saved
@@ -176,16 +176,17 @@ kpxcForm.getFormSubmitButton = function(form) {
         }
     }
 
-    // Try to find another button. Select the first one.
+    // Try to find another button. Select the last one.
+    // TODO: Possibly change this behavior to select the last one for only certain sites.
     const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery));
     if (buttons.length > 0) {
-        return buttons[0];
+        return buttons[buttons.length - 1];
     }
 
     // Try to find similar buttons outside the form which are added via 'form' property
     for (const e of form.elements) {
         if ((e.nodeName === 'BUTTON' && (e.type === 'button' || e.type === 'submit' || e.type === ''))
-            || (e.nodeName === 'INPUT' && e.type === 'button')) {
+            || (e.nodeName === 'INPUT' && (e.type === 'button' || e.type === 'submit'))) {
             return e;
         }
     }
