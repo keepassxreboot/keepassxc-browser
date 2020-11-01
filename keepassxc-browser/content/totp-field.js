@@ -1,6 +1,6 @@
 'use strict';
 
-const ignoreRegex = /(zip|postal).*code/i;
+const ignoreRegex = /(act|bank|coupon|postal|user|zip).*code|comment|author/i;
 const ignoredTypes = [ 'email', 'password', 'username' ];
 const MIN_INPUT_LENGTH = 6;
 const MAX_INPUT_LENGTH = 10;
