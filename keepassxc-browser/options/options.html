@@ -11,12 +11,13 @@
     <link rel="icon" type="image/png" href="../icons/keepassxc_32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="../icons/keepassxc_64x64.png" sizes="64x64">
     <link rel="icon" type="image/png" href="../icons/keepassxc_96x96.png" sizes="96x96">
-    <script src="../browser-polyfill.min.js"></script>
-    <script src="../global.js"></script>
+    <script src="../common/browser-polyfill.min.js"></script>
+    <script src="../common/global.js"></script>
+    <script src="../common/sites.js"></script>
     <script src="../bootstrap/jquery-3.4.1.min.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="options.js"></script>
-    <script src="../translate.js" defer></script>
+    <script src="../common/translate.js" defer></script>
   </head>
   <body class="pt-3 pb-5">
     <div class="container-fluid">
@@ -305,6 +306,17 @@
                       <input class="form-check-input" type="checkbox" name="saveDomainOnly" id="saveDomainOnly" value="true" />
                       <label class="form-check-label" for="saveDomainOnly" data-i18n="optionsSaveDomainOnly"></label>
                       <span class="form-text text-muted" data-i18n="optionsSaveDomainOnlyCustomLoginHelpText"></span>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="usePredefinedSites" id="usePredefinedSites" value="true" />
+                      <label class="form-check-label" for="usePredefinedSites" data-i18n="optionsUsePredefinedSites"></label>
+                      <span class="form-text text-muted" data-i18n="optionsUsePredefinedSitesHelpText"></span>
+                      <details id="predefinedSiteList">
+                        <summary><span data-i18n="optionsPredefinedSiteList"></span></summary>
+                      </details>
                     </div>
                   </div>
                 </div>

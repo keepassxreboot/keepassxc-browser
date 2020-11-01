@@ -19,6 +19,7 @@ const defaultSettings = {
     showNotifications: true,
     showOTPIcon: true,
     useObserver: true,
+    usePredefinedSites: true,
     usePasswordGeneratorIcons: false
 };
 
@@ -124,6 +125,10 @@ page.initSettings = async function() {
             page.settings.usePasswordGeneratorIcons = defaultSettings.usePasswordGeneratorIcons;
         }
 
+        if (!('usePredefinedSites' in page.settings)) {
+            page.settings.usePredefinedSites = defaultSettings.usePredefinedSites;
+        }
+
         await browser.storage.local.set({ 'settings': page.settings });
         return page.settings;
     } catch (err) {
@@ -151,6 +156,18 @@ page.initOpenedTabs = async function() {
         console.log('page.initOpenedTabs error: ' + err);
         return Promise.reject();
     }
+};
+
+page.initSitePreferences = async function() {
+    if (!page.settings) {
+        return;
+    }
+
+    if (!page.settings['sitePreferences']) {
+        page.settings['sitePreferences'] = [];
+    }
+
+    await browser.storage.local.set({ 'settings': page.settings });
 };
 
 page.switchTab = function(tab) {

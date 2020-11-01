@@ -243,6 +243,18 @@ options.initGeneralSettings = function() {
         const copyText = document.getElementById('versionInfo').innerText;
         navigator.clipboard.writeText(copyText);
     });
+
+    // Add predefined sites to the <details> list
+    const siteListing = $('#predefinedSiteList');
+    if (siteListing) {
+        // From sites.js
+        for (const site of PREDEFINED_SITELIST) {
+            const elem = document.createElement('span');
+            elem.textContent = site;
+            siteListing.append(document.createElement('br'));
+            siteListing.append(elem);
+        }
+    }
 };
 
 options.showKeePassXCVersions = function(response) {

@@ -112,6 +112,7 @@
         "slashNeededForUrl": true,
         "statusResponse": true,
         "tr": true,
-        "trimURL", true
+        "trimURL": true,
+        "PREDEFINED_SITELIST": true
     }
 }

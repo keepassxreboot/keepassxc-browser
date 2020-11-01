@@ -158,13 +158,14 @@ kpxcForm.getFormSubmitButton = function(form) {
     const action = kpxc.submitUrl || form.action;
 
     // Special handling for accounts.google.com. The submit button is outside the form.
-    if (form.action.startsWith('https://accounts.google.com')) {
-        const findDiv = $('#identifierNext');
+    if (form.action.startsWith(kpxcSites.googleUrl)) {
+        const findDiv = $('#identifierNext, #passwordNext');
         if (!findDiv) {
             return undefined;
         }
 
         const buttons = findDiv.getElementsByTagName('button');
+        kpxcSites.savedForm = form;
         return buttons.length > 0 ? buttons[0] : undefined;
     }
 
@@ -220,7 +221,8 @@ kpxcForm.getNewPassword = function(passwordInputs = []) {
 
 // Initializes form and attaches the submit button to our own callback
 kpxcForm.init = function(form, credentialFields) {
-    if (!kpxcForm.formIdentified(form) && (credentialFields.password || credentialFields.username)) {
+    if (!kpxcForm.formIdentified(form) && (credentialFields.password || credentialFields.username)
+        || form.action.startsWith(kpxcSites.googlePasswordFormUrl)) {
         kpxcForm.saveForm(form, credentialFields);
         form.addEventListener('submit', kpxcForm.onSubmit);
 
@@ -244,7 +246,13 @@ kpxcForm.onSubmit = async function(e) {
     };
 
     // Traverse parents if the form is not found.
-    const form = this.nodeName === 'FORM' ? this : kpxcFields.traverseParents(this, searchForm, searchForm, () => null);
+    let form = this.nodeName === 'FORM' ? this : kpxcFields.traverseParents(this, searchForm, searchForm, () => null);
+
+    // Check for extra forms from sites.js
+    if (!form) {
+        form = kpxcSites.savedForm;
+    }
+
     if (!form) {
         return;
     }
@@ -612,11 +620,9 @@ kpxc.submitUrl = null;
 kpxc.url = null;
 
 // Add page to Site Preferences with Username-only detection enabled. Set from the popup
-kpxc.addToSitePreferences = async function(sites) {
-    kpxc.initSitePreferences();
-
+kpxc.addToSitePreferences = async function() {
     // Returns a predefined URL for certain sites
-    let site = kpxcSites.definedURL(trimURL(window.top.location.href));
+    let site = trimURL(window.top.location.href);
 
     // Check if the site already exists -> update the current settings
     let siteExists = false;
@@ -955,8 +961,6 @@ kpxc.getSite = function(sites) {
     }
 
     let site = trimURL(sites[0]);
-    kpxc.initSitePreferences();
-
     if (slashNeededForUrl(site)) {
         site += '/';
     }
@@ -1149,17 +1153,6 @@ kpxc.initLoginPopup = function() {
 
     // Generate popup-list of usernames + descriptions
     sendMessage('popup_login', usernames);
-};
-
-// Delete previously created Object if it exists. It will be replaced by an Array
-kpxc.initSitePreferences = function() {
-    if (kpxc.settings['sitePreferences'] !== undefined && kpxc.settings['sitePreferences'].constructor === Object) {
-        delete kpxc.settings['sitePreferences'];
-    }
-
-    if (!kpxc.settings['sitePreferences']) {
-        kpxc.settings['sitePreferences'] = [];
-    }
 };
 
 kpxc.passwordFilled = async function() {
@@ -1356,8 +1349,6 @@ kpxc.setValueWithChange = function(field, value) {
 
 // Returns true if site is ignored
 kpxc.siteIgnored = async function(condition) {
-    kpxc.initSitePreferences();
-
     if (kpxc.settings.sitePreferences) {
         let currentLocation;
         try {
@@ -1376,6 +1367,15 @@ kpxc.siteIgnored = async function(condition) {
                 }
 
                 kpxc.singleInputEnabledForPage = site.usernameOnly;
+            }
+        }
+
+        // Check for predefined sites
+        if (kpxc.settings.usePredefinedSites) {
+            for (const url of PREDEFINED_SITELIST) {
+                if (siteMatch(url, currentLocation) || url === currentLocation) {
+                    kpxc.singleInputEnabledForPage = true;
+                }
             }
         }
     }
@@ -1644,7 +1644,7 @@ kpxcObserverHelper.initObserver = async function() {
             } else if (mut.type === 'attributes' && mut.attributeName === 'class') {
                 // Only accept targets with forms
                 const forms = mut.target.nodeName === 'FORM' ? mut.target : mut.target.getElementsByTagName('form');
-                if (forms.length === 0) {
+                if (forms.length === 0 && !kpxcSites.exceptionFound(mut.target.classList)) {
                     continue;
                 }
 
