@@ -1494,6 +1494,10 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         }
     });
 
+    if (target.nodeName === 'INPUT') {
+        inputFields.push(target);
+    }
+
     // Append any input fields in Shadow DOM
     if (target.shadowRoot) {
         target.shadowSelectorAll('input').forEach(e => {
@@ -1604,7 +1608,7 @@ kpxcObserverHelper.ignoredElement = function(target) {
 // Also ignore few Youtube-specific custom nodeNames
 kpxcObserverHelper.ignoredNode = function(target) {
     if (!target
-        ||kpxcObserverHelper.ignoredNodeTypes.some(e => e === target.nodeType)
+        || kpxcObserverHelper.ignoredNodeTypes.some(e => e === target.nodeType)
         || kpxcObserverHelper.ignoredNodeNames.some(e => e === target.nodeName)
         || target.nodeName.startsWith('YTMUSIC')
         || target.nodeName.startsWith('YT-')) {
