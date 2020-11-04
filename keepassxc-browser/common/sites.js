@@ -3,16 +3,18 @@
 const PREDEFINED_SITELIST = [
     'https://accounts.google.com/*',
     'https://www.paypal.com/*',
-    'https://*.live.com/*',
-    'https://www.amazon.com/*',
-    'https://www.amazon.de/*',
-    'https://www.amazon.co.uk/*',
+    'https://outlook.live.com/*',
+    'https://login.live.com/*',
+    'https://login.microsoftonline.com/*',
+    'https://www.amazon.com/ap/*',
+    'https://www.amazon.de/ap/*',
+    'https://www.amazon.co.uk/ap/*',
     'https://signin.aws.amazon.com/*',
     'https://www.upwork.com/ab/*',
     'https://home.personalcapital.com/*',
     'https://auth.services.adobe.com/*',
     'https://idmsa.apple.com/*',
-    'https://*.soundcloud.com/*',
+    'https://secure.soundcloud.com/*',
     'https://icloud.com/*',
     'https://signin.ebay.de/*',
     'https://signin.ebay.com/*',
@@ -34,7 +36,7 @@ const PREDEFINED_SITELIST = [
     'https://signin.ebay.in/*',
     'https://signin.ebay.ph/*',
     'https://login.yahoo.com/*',
-    'https://*.atlassian.com/*'
+    'https://id.atlassian.com/*'
 ];
 
 const kpxcSites = {};
