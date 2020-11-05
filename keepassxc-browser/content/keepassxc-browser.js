@@ -727,25 +727,26 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
     }
 
     const el = document.activeElement;
-    if (el.nodeName !== 'INPUT' && kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
-        // No active input element selected -> focus to the input field
-        const field = passOnly ? kpxc.combinations[0].password : kpxc.combinations[0].username;
-        if (field) {
-            field.focus();
-        }
 
-        if (kpxc.credentials.length > 1) {
-            // More than one credential -> show autocomplete list
-            kpxcAutocomplete.showList(field);
-            return
-        } else {
-            // Just one credential -> fill the first combination found
-            kpxc.fillInCredentials(kpxc.combinations[0], kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
+    if (kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
+        const field = passOnly ? kpxc.combinations[0].password : kpxc.combinations[0].username;
+        if (field && field.id !== el.id) {
+            // focus to the correct input field
+            field.focus();
+
+            if (kpxc.credentials.length > 1) {
+                // More than one credential -> show autocomplete list
+                kpxcAutocomplete.showList(field);
+                return
+            } else {
+                // Just one credential -> fill the first combination found
+                kpxc.fillInCredentials(kpxc.combinations[0], kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
+                return;
+            }
+        } else if (kpxc.credentials.length > 1) {
+            kpxcAutocomplete.showList(el);
             return;
         }
-    } else if (kpxc.credentials.length > 1 && kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
-        kpxcAutocomplete.showList(el);
-        return;
     }
 
     // No previous combinations detected. Create a new one from active element
