@@ -155,6 +155,10 @@ kpxcForm.getCredentialFieldsFromForm = function(form) {
 
 // Get the form submit button instead if action URL is same as the page itself
 kpxcForm.getFormSubmitButton = function(form) {
+    if (!form.action || typeof form.action !== 'string') {
+        return;
+    }
+
     const action = kpxc.submitUrl || form.action;
 
     // Special handling for accounts.google.com. The submit button is outside the form.
@@ -221,6 +225,10 @@ kpxcForm.getNewPassword = function(passwordInputs = []) {
 
 // Initializes form and attaches the submit button to our own callback
 kpxcForm.init = function(form, credentialFields) {
+    if (!form.action || typeof form.action !== 'string') {
+        return;
+    }
+
     if (!kpxcForm.formIdentified(form) && (credentialFields.password || credentialFields.username)
         || form.action.startsWith(kpxcSites.googlePasswordFormUrl)) {
         kpxcForm.saveForm(form, credentialFields);
