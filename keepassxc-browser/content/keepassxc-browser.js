@@ -727,7 +727,18 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
     }
 
     if (kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
-        const field = passOnly ? kpxc.combinations[0].password : kpxc.combinations[0].username;
+        const combination = passOnly
+            ? kpxc.combinations.find(c => c.password)
+            : kpxc.combinations.find(c => c.username);
+        if (!combination) {
+            return;
+        }
+
+        const field = passOnly ? combination.password : combination.username;
+        if (!field) {
+            return;
+        }
+
         // set focus to the input field
         field.focus();
 
@@ -737,7 +748,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
             return
         } else {
             // Just one credential -> fill the first combination found
-            kpxc.fillInCredentials(kpxc.combinations[0], kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
+            kpxc.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
             return;
         }
     }
