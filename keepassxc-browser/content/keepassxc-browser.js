@@ -134,7 +134,7 @@ kpxcIcons.switchIcons = function() {
  * Identifies form submits and password changes.
  */
 const kpxcForm = {};
-kpxcForm.formButtonQuery = 'button[type=\'button\'], button[type=\'submit\'], input[type=\'button\'], input[type=\'submit\'], button:not([type]), div[role=\'button\']';
+kpxcForm.formButtonQuery = 'button[type=button], button[type=submit], input[type=button], input[type=submit], button:not([type]), div[role=button]';
 kpxcForm.savedForms = [];
 
 // Returns true if form has been already saved
