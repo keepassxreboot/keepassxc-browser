@@ -390,7 +390,7 @@ Response message data (success, decrypted):
 Request (no unencrypted message is needed):
 ```json
 {
-    "action": "generate-password",
+    "action": "get-totp",
     "uuid": "<entry UUID>"
 }
 ```
