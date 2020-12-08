@@ -378,7 +378,7 @@ kpxcFields.getAllPageInputs = async function(previousInputs = []) {
             continue;
         }
 
-        if (kpxcFields.isVisible(input) && !kpxcFields.isSearchField(input) && kpxcFields.isAutocompleteAppropriate(input)) {
+        if (kpxcFields.isVisible(input) && kpxcFields.isAutocompleteAppropriate(input)) {
             fields.push(input);
         }
     }
@@ -1548,7 +1548,8 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     // Only include input fields that match with kpxcObserverHelper.inputTypes
     const inputs = [];
     for (const field of inputFields) {
-        if (!ignoreVisibility && !kpxcFields.isVisible(field)) {
+        if ((!ignoreVisibility && !kpxcFields.isVisible(field))
+            || kpxcFields.isSearchField(field)) {
             continue;
         }
 
