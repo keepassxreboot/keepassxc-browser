@@ -1,7 +1,117 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 'use strict';
 
-const tempArray = [];
-let keyArray = [];
+// From chrome://mozapps/content/extensions/shortcuts.js
+const keyOptions = [
+    e => String.fromCharCode(e.which), // A letter?
+    e => e.code.toUpperCase(), // A letter.
+    e => trimPrefix(e.code), // Digit3, ArrowUp, Numpad9.
+    e => trimPrefix(e.key), // Digit3, ArrowUp, Numpad9.
+    e => remapKey(e.key), // Comma, Period, Space.
+];
+
+// From chrome://mozapps/content/extensions/shortcuts.js
+const validKeys = new Set([
+    'Home', 'End', 'PageUp', 'PageDown', 'Insert', 'Delete', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12' ,
+    'MediaNextTrack', 'MediaPlayPause', 'MediaPrevTrack', 'MediaStop',
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'Up', 'Down', 'Left', 'Right', 'Comma', 'Period', 'Space'
+]);
+
+// From chrome://mozapps/content/extensions/shortcuts.js
+const remapKeys = {
+    ',': 'Comma',
+    '.': 'Period',
+    ' ': 'Space',
+};
+
+// From chrome://mozapps/content/extensions/shortcuts.js
+function trimPrefix(string) {
+    return string.replace(/^(?:Digit|Numpad|Arrow)/, '');
+}
+
+// From chrome://mozapps/content/extensions/shortcuts.js
+function remapKey(string) {
+    if (remapKeys.hasOwnProperty(string)) {
+        return remapKeys[string];
+    }
+
+    return string;
+}
+
+// Modified from chrome://mozapps/content/extensions/shortcuts.js
+function getStringForEvent(event) {
+    for (let option of keyOptions) {
+        const value = option(event);
+        if (validKeys.has(value)) {
+            return value;
+        }
+    }
+
+    return '';
+}
+
+// From chrome://mozapps/content/extensions/shortcuts.js
+function getShortcutForEvent(e) {
+    let modifierMap;
+
+    if (navigator.platform === 'MacIntel') {
+        modifierMap = {
+            MacCtrl: e.ctrlKey,
+            Alt: e.altKey,
+            Command: e.metaKey,
+            Shift: e.shiftKey,
+        };
+    } else {
+        modifierMap = {
+            Ctrl: e.ctrlKey,
+            Alt: e.altKey,
+            Shift: e.shiftKey,
+        };
+    }
+
+    return Object.entries(modifierMap)
+        .filter(([key, isDown]) => isDown)
+        .map(([key]) => key)
+        .concat(getStringForEvent(e))
+        .join('+');
+}
+
+// Modified from chrome://mozapps/content/extensions/shortcuts.js
+function shortCutChanged(e) {
+    let input = e.target;
+
+    if (e.key === 'Escape') {
+        input.blur();
+        return;
+    } else if (e.key === 'Tab') {
+        return;
+    }
+
+    if (!e.altKey && !e.ctrlKey && !e.shiftKey && !e.metaKey) {
+        if (e.key === 'Delete' || e.key === 'Backspace') {
+            // Avoid triggering back-navigation.
+            e.preventDefault();
+            e.currentTarget.value = '';
+            return;
+        }
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const shortcutString = getShortcutForEvent(e);
+    if (e.type === 'keyup' || !shortcutString.length) {
+        return;
+    }
+
+    e.currentTarget.value = shortcutString;
+}
+
 
 $(async function() {
     try {
@@ -13,8 +123,7 @@ $(async function() {
         }
 
         document.querySelectorAll('input').forEach((b) => {
-            b.addEventListener('keydown', e => handleKeyDown(e));
-            b.addEventListener('keyup', e => handleKeyUp(e));
+            b.addEventListener('keydown', e => shortCutChanged(e));
         });
     } catch (err) {
         console.log('Error loading options page: ' + err);
@@ -33,41 +142,6 @@ for (const b of resetButtons) {
     b.addEventListener('click', (e) => {
         resetShortcut(b.parentElement.children[1].getAttribute('id'));
     });
-}
-
-async function handleKeyDown(e) {
-    if (!e.repeat) {
-        e.currentTarget.value = '';
-
-        // Transform single keys to upper case for comparison
-        const key = e.key.length === 1 ? e.key.toUpperCase() : e.key;
-        tempArray.push(key);
-        keyArray.push(key);
-    }
-}
-
-async function handleKeyUp(e) {
-    if (!e.repeat) {
-        e.currentTarget.value = '';
-        const index = tempArray.indexOf(e.key.length === 1 ? e.key.toUpperCase() : e.key);
-        if (index !== -1) {
-            tempArray.splice(index, 1);
-        }
-
-        if (tempArray.length === 0) {
-            let text = '';
-            for (let i = 0; i < keyArray.length; ++i) {
-                const currentText = keyArray[i] === 'Control' ? handleControl() : keyArray[i];
-                text += currentText;
-                if (i !== keyArray.length - 1) {
-                    text += '+';
-                }
-            }
-
-            keyArray = [];
-            e.currentTarget.value = text;
-        }
-    }
 }
 
 async function updateKeys() {
@@ -97,11 +171,6 @@ async function resetShortcut(shortcut) {
     await browser.commands.reset(shortcut);
     createBanner('info', shortcut);
     updateKeys();
-}
-
-// Ctrl behaves differently on different OS's. macOS needs to return MacCtrl instead of Ctrl (which will be handled as Command)
-function handleControl() {
-    return (navigator.platform === 'MacIntel') ? 'MacCtrl' : 'Ctrl';
 }
 
 // Possible types: success, info, danger
