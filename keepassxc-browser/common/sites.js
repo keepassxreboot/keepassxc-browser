@@ -66,3 +66,12 @@ kpxcSites.exceptionFound = function(classList) {
 
     return false;
 };
+
+kpxcSites.expectedTOTPMaxLength = function() {
+    if (document.location.origin.startsWith('https://www.amazon')
+        && document.location.href.includes('/ap/mfa')) {
+        return 20;
+    }
+
+    return MAX_TOTP_INPUT_LENGTH;
+};
