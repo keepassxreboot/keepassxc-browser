@@ -2,7 +2,7 @@
 
 const PREDEFINED_SITELIST = [
     'https://accounts.google.com/*',
-    'https://www.paypal.com/*',
+    'https://www.paypal.com/*/signin',
     'https://outlook.live.com/*',
     'https://login.live.com/*',
     'https://login.microsoftonline.com/*',
