@@ -1019,6 +1019,10 @@
         "message": "The following debug info can be used",
         "description": "Debug info text."
     },
+    "optionsAboutSupporters": {
+      "message": "Supporters",
+      "description": "Supporters label text."
+    },
     "optionsErrorInvalidValue": {
         "message": "Invalid value. Please check the input.",
         "description": "Error shown when input field has an incorrect value."
