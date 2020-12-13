@@ -2,8 +2,6 @@
 
 const ignoreRegex = /(bank|coupon|postal|user|zip).*code|comment|author/i;
 const ignoredTypes = [ 'email', 'password', 'username' ];
-const MIN_TOTP_INPUT_LENGTH = 6;
-const MAX_TOTP_INPUT_LENGTH = 10;
 
 const acceptedOTPFields = [
     '2fa',
