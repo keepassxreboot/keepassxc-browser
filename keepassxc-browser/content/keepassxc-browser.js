@@ -817,15 +817,7 @@ kpxc.fillFromTOTP = async function(target) {
 
     if (index >= 0 && kpxc.credentials[index]) {
         // Check the value from StringFields
-        if (kpxc.credentials[index].stringFields && kpxc.credentials[index].stringFields.length > 0) {
-            const stringFields = kpxc.credentials[index].stringFields;
-            for (const s of stringFields) {
-                const val = s['KPH: {TOTP}'];
-                if (val) {
-                    kpxc.setValue(el, val);
-                }
-            }
-        } else if (kpxc.credentials[index].totp && kpxc.credentials[index].totp.length > 0) {
+        if (kpxc.credentials[index].totp && kpxc.credentials[index].totp.length > 0) {
             // Retrieve a new TOTP value
             const totp = await sendMessage('get_totp', [ kpxc.credentials[index].uuid, kpxc.credentials[index].totp ]);
             if (!totp) {
@@ -834,6 +826,14 @@ kpxc.fillFromTOTP = async function(target) {
             }
 
             kpxc.setValue(el, totp);
+        } else if (kpxc.credentials[index].stringFields && kpxc.credentials[index].stringFields.length > 0) {
+            const stringFields = kpxc.credentials[index].stringFields;
+            for (const s of stringFields) {
+                const val = s['KPH: {TOTP}'];
+                if (val) {
+                    kpxc.setValue(el, val);
+                }
+            }
         }
     }
 };
