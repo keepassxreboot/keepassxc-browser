@@ -1140,9 +1140,12 @@ kpxc.initLoginPopup = function() {
     }
 
     const getLoginText = function(credential, withGroup) {
+        const name = credential.name.length < MAX_AUTOCOMPLETE_NAME_LEN
+                   ? credential.name
+                   : credential.name.substr(0, MAX_AUTOCOMPLETE_NAME_LEN) + '…';
         const group = (withGroup && credential.group) ? `[${credential.group}] ` : '';
         const visibleLogin = (credential.login.length > 0) ? credential.login : tr('credentialsNoUsername');
-        const text = `${group}${credential.name} (${visibleLogin})`;
+        const text = `${group}${name} (${visibleLogin})`;
 
         if (credential.expired && credential.expired === 'true') {
             return `${text} [${tr('credentialExpired')}]`;
