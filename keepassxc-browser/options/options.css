@@ -56,6 +56,10 @@ select option {
     color: var(--kpxc-text-color);
 }
 
+pre {
+    white-space: pre-line;
+}
+
 .table,
 tbody,
 thead,
