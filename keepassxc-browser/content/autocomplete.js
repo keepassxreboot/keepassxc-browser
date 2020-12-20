@@ -1,5 +1,7 @@
 'use strict';
 
+const MAX_AUTOCOMPLETE_NAME_LEN = 50;
+
 const kpxcAutocomplete = {};
 kpxcAutocomplete.autoSubmit = false;
 kpxcAutocomplete.elements = [];
