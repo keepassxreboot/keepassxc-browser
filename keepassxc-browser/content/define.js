@@ -13,7 +13,9 @@ kpxcDefine.dialog = null;
 kpxcDefine.diffX = 0;
 kpxcDefine.diffY = 0;
 kpxcDefine.eventFieldClick = null;
-kpxcDefine.inputQueryPattern = 'input[type=\'text\'], input[type=\'email\'], input[type=\'password\'], input[type=\'tel\'], input[type=\'number\'], input[type=\'username\'], input:not([type])';
+kpxcDefine.inputQueryPattern = 'input[type=email], input[type=number], input[type=password], input[type=tel], input[type=text], input[type=username], input:not([type])';
+kpxcDefine.keyboardSelectorPattern = 'div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field)';
+kpxcDefine.moreInputQueryPattern = 'input:not([type=button]):not([type=checkbox]):not([type=color]):not([type=date]):not([type=datetime-local]):not([type=file]):not([type=hidden]):not([type=image]):not([type=month]):not([type=range]):not([type=reset]):not([type=submit]):not([type=time]):not([type=week]), select, textarea';
 kpxcDefine.markedFields = [];
 kpxcDefine.keyDown = null;
 kpxcDefine.startPosX = 0;
@@ -354,6 +356,11 @@ kpxcDefine.again = function() {
 kpxcDefine.more = function() {
     if (kpxcDefine.dataStep === 1) {
         kpxcDefine.prepareStep1();
+
+        // Reset previous marked fields when no usernames have been selected
+        if (kpxcDefine.markedFields.length === 0) {
+            kpxcDefine.resetSelection();
+        }
     } else if (kpxcDefine.dataStep === 2) {
         kpxcDefine.prepareStep2();
     } else if (kpxcDefine.dataStep === 3) {
@@ -362,7 +369,7 @@ kpxcDefine.more = function() {
         kpxcDefine.prepareStep4();
     }
 
-    kpxcDefine.markFields('#kpxcDefine-fields', kpxcDefine.inputQueryPattern + ', select');
+    kpxcDefine.markFields('#kpxcDefine-fields', kpxcDefine.moreInputQueryPattern);
 };
 
 kpxcDefine.confirm = async function() {
@@ -431,7 +438,7 @@ kpxcDefine.keyDown = function(e) {
         // Select input field by number
         e.preventDefault();
         const index = e.keyCode - 48;
-        const inputFields = document.querySelectorAll('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field)');
+        const inputFields = document.querySelectorAll(kpxcDefine.keyboardSelectorPattern);
 
         if (inputFields.length >= index) {
             kpxcDefine.eventFieldClick(e, inputFields[index - 1]);

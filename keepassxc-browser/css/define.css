@@ -1,22 +1,22 @@
 .kpxcDefine-modal-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
     bottom: 0;
     left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
     z-index: 2147483645;
 }
 
 .kpxcDefine-modal-backdrop:after {
-    content: '';
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     background-color: #000000;
-    opacity: 0.5;
+    bottom: 0;
+    content: '';
     filter: alpha(opacity=50);
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
 #kpxcDefine-fields {
@@ -24,36 +24,37 @@
 }
 
 #kpxcDefine-description {
-    z-index: 2147483646;
-    color: #efefef;
+    background-color: rgba(0,0,0,0.8);
     border: 2px solid #555555;
+    color: #efefef;
+    cursor: pointer;
+    font-size: 15px;
+    height: auto !important;
+    left: 150px;
     padding: 7px 5px;
     position: absolute;
-    top: 100px;
-    left: 150px;
     text-align: left;
-    cursor: pointer;
-    background-color: rgba(0,0,0,0.8);
-    font-size: 15px;
+    top: 100px;
     user-select: none;
+    z-index: 2147483646;
 }
 
 #kpxcDefine-description div:first-of-type {
-    margin-top: 0;
-    padding-top: 0;
-    text-align: left;
     color: #efefef;
-    padding-bottom: 8px;
     font-weight: bold;
     font-size: 120%;
+    margin-top: 0;
+    padding-bottom: 8px;
+    padding-top: 0;
+    text-align: left;
 }
 
 #kpxcDefine-description p {
+    border-top: 2px solid #666666;
+    color: #efefef;
+    line-height: 110%;
     margin-top: 10px;
     padding-top: 10px;
-    color: #efefef;
-    border-top: 2px solid #666666;
-    line-height: 110%;
 }
 
 #kpxcDefine-help {
@@ -62,6 +63,7 @@
 
 .kpxcDefine-keyboardHelp {
     font-size: 0.75em;
+    height: auto !important;
 }
 
 .kpxcDefine-keyboardHelp kbd {
@@ -70,20 +72,25 @@
     border: 1px solid #b4b4b4;
     color: #333;
     display: inline-block;
+    height: auto !important;
     line-height: 1;
     padding: 2px 4px;
     white-space: nowrap;
 }
 
+.kpxcDefine-chooser-help {
+    height: auto !important;
+}
+
 .kpxcDefine-fixed-field {
-    position: absolute;
+    background-color: rgba(239,239,239,0.4);
     border: 2px solid #efefef;
     color: #fff;
     cursor: pointer;
-    z-index: 2147483646;
-    text-align: center;
     font-weight: bold;
-    background-color: rgba(239,239,239,0.4);
+    position: absolute;
+    text-align: center;
+    z-index: 2147483646;
 }
 
 .kpxcDefine-fixed-hover-field {
@@ -93,18 +100,18 @@
 
 .kpxcDefine-fixed-password-field {
     border: 2px solid red;
-    color: #efefef;
     background-color: rgba(255,0,0,0.4);
+    color: #efefef;
 }
 
 .kpxcDefine-fixed-username-field {
     border: 2px solid limegreen;
-    color: #efefef;
     background-color: rgba(50,205,50,0.4);
+    color: #efefef;
 }
 
 .kpxcDefine-fixed-string-field, .kpxcDefine-fixed-totp-field {
     border: 2px solid deepskyblue;
-    color: #efefef;
     background-color: rgba(30,144,255,0.4);
+    color: #efefef;
 }
