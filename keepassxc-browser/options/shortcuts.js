@@ -16,7 +16,7 @@ const keyOptions = [
 // From chrome://mozapps/content/extensions/shortcuts.js
 const validKeys = new Set([
     'Home', 'End', 'PageUp', 'PageDown', 'Insert', 'Delete', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12' ,
+    'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
     'MediaNextTrack', 'MediaPlayPause', 'MediaPrevTrack', 'MediaStop',
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     'Up', 'Down', 'Left', 'Right', 'Comma', 'Period', 'Space'
@@ -45,7 +45,7 @@ function remapKey(string) {
 
 // Modified from chrome://mozapps/content/extensions/shortcuts.js
 function getStringForEvent(event) {
-    for (let option of keyOptions) {
+    for (const option of keyOptions) {
         const value = option(event);
         if (validKeys.has(value)) {
             return value;
@@ -75,15 +75,15 @@ function getShortcutForEvent(e) {
     }
 
     return Object.entries(modifierMap)
-        .filter(([key, isDown]) => isDown)
-        .map(([key]) => key)
+        .filter(([ key, isDown ]) => isDown)
+        .map(([ key ]) => key)
         .concat(getStringForEvent(e))
         .join('+');
 }
 
 // Modified from chrome://mozapps/content/extensions/shortcuts.js
 function shortCutChanged(e) {
-    let input = e.target;
+    const input = e.target;
 
     if (e.key === 'Escape') {
         input.blur();

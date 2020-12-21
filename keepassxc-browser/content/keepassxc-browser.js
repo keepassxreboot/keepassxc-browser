@@ -762,7 +762,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
         if (kpxc.credentials.length > 1) {
             // More than one credential -> show autocomplete list
             kpxcAutocomplete.showList(field);
-            return
+            return;
         } else {
             // Just one credential -> fill the first combination found
             kpxc.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
