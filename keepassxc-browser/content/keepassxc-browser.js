@@ -491,16 +491,18 @@ kpxcFields.isVisible = function(elem) {
     const rect = elem.getBoundingClientRect();
     if (rect.x < 0
         || rect.y < 0
-        || rect.width < 8
+        || rect.width < MIN_INPUT_FIELD_WIDTH_PX
         || rect.x > Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth)
         || rect.y > Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight)
-        || rect.height < 8) {
+        || rect.height < MIN_INPUT_FIELD_WIDTH_PX) {
         return false;
     }
 
     // Check CSS visibility
     const elemStyle = getComputedStyle(elem);
-    if (elemStyle.visibility && (elemStyle.visibility === 'hidden' || elemStyle.visibility === 'collapse')) {
+    if (elemStyle.visibility && (elemStyle.visibility === 'hidden' || elemStyle.visibility === 'collapse')
+        || parseInt(elemStyle.width, 10) <= MIN_INPUT_FIELD_WIDTH_PX
+        || parseInt(elemStyle.height, 10) <= MIN_INPUT_FIELD_WIDTH_PX) {
         return false;
     }
 
@@ -1722,6 +1724,11 @@ MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 const initContentScript = async function() {
     try {
         const settings = await sendMessage('load_settings');
+        if (!settings) {
+            console.log('Error: Cannot load extension settings');
+            return;
+        }
+
         kpxc.settings = settings;
 
         if (await kpxc.siteIgnored()) {

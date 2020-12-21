@@ -18,7 +18,7 @@ kpxcUsernameIcons.deleteHiddenIcons = function() {
 
 kpxcUsernameIcons.isValid = function(field) {
     if (!field
-        || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH
+        || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
         || field.readOnly
         || kpxcIcons.hasIcon(field)
         || !kpxcFields.isVisible(field)) {

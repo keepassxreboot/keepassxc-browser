@@ -18,7 +18,7 @@ kpxcPasswordIcons.deleteHiddenIcons = function() {
 kpxcPasswordIcons.isValid = function(field) {
     if (!field
         || field.readOnly
-        || field.offsetWidth < MINIMUM_INPUT_FIELD_WIDTH
+        || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
         || kpxcIcons.hasIcon(field)
         || !kpxcFields.isVisible(field)) {
         return false;
