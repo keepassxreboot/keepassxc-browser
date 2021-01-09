@@ -41,6 +41,7 @@ const PREDEFINED_SITELIST = [
 ];
 
 const kpxcSites = {};
+kpxcSites.ebayUrl = 'https://www.ebay.';
 kpxcSites.googlePasswordFormUrl = 'https://accounts.google.com/signin/v2/challenge/password';
 kpxcSites.googleUrl = 'https://accounts.google.com';
 kpxcSites.savedForm = undefined;
