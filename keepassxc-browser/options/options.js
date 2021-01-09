@@ -562,9 +562,14 @@ options.initSitePreferences = function() {
 
 options.initAbout = function() {
     const version = browser.runtime.getManifest().version;
+    let platform = navigator.platform;
+    if (platform === 'Win32' && (navigator.userAgent.includes('x64') || navigator.userAgent.includes('WOW64'))) {
+        platform = 'Win64';
+    }
+
     $('#tab-about em.versionCIP').text(version);
     $('#tab-about span.kpxcbrVersion').text(version);
-    $('#tab-about span.kpxcbrOS').text(navigator.platform);
+    $('#tab-about span.kpxcbrOS').text(platform);
     $('#tab-about span.kpxcbrBrowser').text(getBrowserId());
 
     // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
