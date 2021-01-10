@@ -56,9 +56,11 @@
                 "content/ui.js",
                 "content/banner.js",
                 "content/autocomplete.js",
+                "content/credential-autocomplete.js",
                 "content/define.js",
                 "content/keepassxc-browser.js",
                 "content/pwgen.js",
+                "content/totp-autocomplete.js",
                 "content/totp-field.js",
                 "content/username-field.js"
             ],

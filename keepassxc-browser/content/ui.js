@@ -268,11 +268,19 @@ document.addEventListener('mousemove', function(e) {
     }
 });
 
-document.addEventListener('mousedown', function() {
+document.addEventListener('mousedown', function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     kpxcUI.mouseDown = true;
 });
 
-document.addEventListener('mouseup', function() {
+document.addEventListener('mouseup', function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
     kpxcPasswordDialog.selected = null;
     kpxcDefine.selected = null;
     kpxcUI.mouseDown = false;
