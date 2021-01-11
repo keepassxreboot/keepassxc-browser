@@ -171,6 +171,13 @@ kpxcForm.getFormSubmitButton = function(form) {
         const buttons = findDiv.getElementsByTagName('button');
         kpxcSites.savedForm = form;
         return buttons.length > 0 ? buttons[0] : undefined;
+    } else if (form.action.startsWith(kpxcSites.ebayUrl)) {
+        // For eBay we must return the first button.
+        for (const i of form.elements) {
+            if (i.type === 'button') {
+                return i;
+            }
+        }
     }
 
     if (action.includes(document.location.origin + document.location.pathname)) {
