@@ -56,7 +56,7 @@ kpxcSites.exceptionFound = function(classList) {
     if (document.location.origin === 'https://idmsa.apple.com'
         && [ 'password', 'form-row', 'show-password' ].every(c => classList.contains(c))) {
         return true;
-    } else if (document.location.origin.startsWith('https://signin.ebay.com')
+    } else if (document.location.origin.startsWith('https://signin.ebay.')
                && classList.contains('null')) {
         return true;
     } else if (document.location.origin.startsWith('https://www.fidelity.com')
