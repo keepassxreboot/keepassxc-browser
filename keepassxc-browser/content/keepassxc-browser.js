@@ -261,6 +261,11 @@ kpxcForm.onSubmit = async function(e) {
         form = kpxcSites.savedForm;
     }
 
+    // Still not found? Try using the first one from kpxcForm.savedForms
+    if (!form && kpxcForm.savedForms.length > 0) {
+        form = kpxcForm.savedForms[0].form;
+    }
+
     if (!form) {
         return;
     }
