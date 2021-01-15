@@ -317,6 +317,7 @@ kpxcForm.saveForm = function(form, combination) {
         username: combination.username,
         password: combination.password,
         totp: combination.totp,
+        totpInputs: Array.from(form.elements).filter(e => e.nodeName === 'INPUT' && kpxcTOTPIcons.isValid(e)),
         passwordInputs: Array.from(form.elements).filter(e => e.nodeName === 'INPUT' && e.type === 'password')
     });
 };
@@ -376,6 +377,29 @@ kpxcFields.getAllCombinations = async function(inputs) {
         combinations.push(combination);
     }
 
+    // Check for multiple segmented TOTP fields
+    if (combinations.length === 0) {
+        kpxcFields.getSegmentedTOTPFields(inputs, combinations);
+    }
+
+    return combinations;
+};
+
+// Adds segmented TOTP fields to the combination if found
+kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
+    const form = inputs.length > 0 ? inputs[0].form : undefined;
+    if (acceptedOTPFields.some(f => form.className.includes(f) || form.id.includes(f) || form.name.includes(f))) {
+        const totpInputs = Array.from(form.elements).filter(e => e.nodeName === 'INPUT' && e.type !== 'password');
+        if (totpInputs.length === 6) {
+            const combination = {
+                form: form,
+                totpInputs: totpInputs
+            };
+
+            combinations.push(combination);
+        }
+    }
+
     return combinations;
 };
 
@@ -420,8 +444,8 @@ kpxcFields.getCombination = async function(field, givenType) {
     for (const combination of kpxc.combinations) {
         if (!givenType && Object.values(combination).find(c => c === field)) {
             return combination;
-        } else if (givenType) {
-            if (combination[givenType] === field) {
+        } else if (givenType && combination[givenType]) {
+            if (combination[givenType] === field || combination[givenType].includes(field)) {
                 return combination;
             }
         }
@@ -833,12 +857,12 @@ kpxc.fillFromTOTP = async function(target) {
     const el = target || document.activeElement;
     const credentialList = await kpxc.updateTOTPList();
 
-    if (credentialList.length === 0) {
+    if (credentialList && credentialList.length === 0) {
         kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
         return;
     }
 
-    if (credentialList.length === 1) {
+    if (credentialList && credentialList.length === 1) {
         kpxc.fillTOTPFromUuid(el, credentialList[0].uuid);
         return;
     }
@@ -865,15 +889,42 @@ kpxc.fillTOTPFromUuid = async function(el, uuid) {
             return;
         }
 
-        kpxc.setValue(el, totp);
+        kpxc.setTOTPValue(el, totp);
     } else if (user.stringFields && user.stringFields.length > 0) {
         const stringFields = user.stringFields;
         for (const s of stringFields) {
             const val = s['KPH: {TOTP}'];
             if (val) {
-                kpxc.setValue(el, val);
+                kpxc.setTOTPValue(el, val);
             }
         }
+    }
+};
+
+// Set normal or segmented TOTP value
+kpxc.setTOTPValue = function(elem, val) {
+    if (kpxc.combinations.length === 0) {
+        return;
+    }
+
+    for (const comb of kpxc.combinations) {
+        if (comb.totpInputs && comb.totpInputs.length === 6) {
+            kpxc.fillSegmentedTotp(elem, val, comb.totpInputs);
+            return;
+        }
+    }
+
+    kpxc.setValue(elem, val);
+};
+
+// Fill TOTP in parts
+kpxc.fillSegmentedTotp = function(elem, val, totpInputs) {
+    if (!totpInputs.includes(elem)) {
+        return;
+    }
+
+    for (let i = 0; i < 6; ++i) {
+        kpxc.setValue(totpInputs[i], val[i]);
     }
 };
 

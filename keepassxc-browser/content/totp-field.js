@@ -13,6 +13,7 @@ const acceptedOTPFields = [
     'otp',
     'token',
     'twofa',
+    'two-factor',
     'twofactor'
 ];
 
