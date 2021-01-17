@@ -2,245 +2,261 @@
 
 const MAX_AUTOCOMPLETE_NAME_LEN = 50;
 
-const kpxcAutocomplete = {};
-kpxcAutocomplete.autoSubmit = false;
-kpxcAutocomplete.elements = [];
-kpxcAutocomplete.started = false;
-kpxcAutocomplete.index = -1;
-kpxcAutocomplete.input = undefined;
-kpxcAutocomplete.shadowRoot = undefined;
-kpxcAutocomplete.wrapper = undefined;
-
-kpxcAutocomplete.create = async function(input, showListInstantly = false, autoSubmit = false) {
-    if (input.readOnly) {
-        return;
+class Autocomplete {
+    constructor() {
+        this.autoSubmit = false;
+        this.elements = [];
+        this.started = false;
+        this.index = -1;
+        this.input = undefined;
+        this.shadowRoot = undefined;
+        this.wrapper = undefined;
     }
 
-    kpxcAutocomplete.autoSubmit = autoSubmit;
-    kpxcAutocomplete.input = input;
-    kpxcAutocomplete.started = true;
+    clear() {
+        this.elements = [];
+    }
 
-    input.addEventListener('click', function(e) {
+    async click(e, input) {
+
+    }
+
+    async itemClick(e, item, input, uuid) {
+
+    }
+
+    async itemEnter(index, elements) {
+
+    }
+
+    async create(input, showListInstantly = false, autoSubmit = false) {
+        if (input.readOnly) {
+            return;
+        }
+
+        this.autoSubmit = autoSubmit;
+        this.input = input;
+        this.started = true;
+
+        input.addEventListener('click', ev => this.click(ev, this.input));
+        input.addEventListener('keydown', ev => this.keyPress(ev));
+        input.setAttribute('autocomplete', 'off');
+
+        if (showListInstantly) {
+            this.showList(input);
+        }
+    }
+
+    mouseOver(e, div, item) {
+        this.removeItem(this.getAllItems());
+        item.classList.add('kpxcAutocomplete-active');
+        this.index = Array.from(div.childNodes).indexOf(item);
+    }
+
+    mouseOut(e, item) {
+        item.classList.remove('kpxcAutocomplete-active');
+    }
+
+    async showList(inputField) {
+        this.closeList();
+        this.input = inputField;
+        this.input.select();
+
+        const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
+        initColorTheme(div);
+
+        this.updatePosition(inputField, div);
+        div.style.zIndex = '2147483646';
+
+        const styleSheet = createStylesheet('css/autocomplete.css');
+        const colorStyleSheet = createStylesheet('css/colors.css');
+        const wrapper = kpxcUI.createElement('div');
+
+        this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+        this.shadowRoot.append(colorStyleSheet);
+        this.shadowRoot.append(styleSheet);
+        this.shadowRoot.append(div);
+        this.wrapper = wrapper;
+        document.body.append(wrapper);
+
+        await kpxc.updateTOTPList();
+        for (const c of this.elements) {
+            const item = document.createElement('div');
+            item.textContent += c.label;
+            const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
+            item.append(itemInput);
+            item.addEventListener('click', ev => this.itemClick(ev, item, inputField, c.uuid));
+
+            // These events prevent the double hover effect if both keyboard and mouse are used
+            item.addEventListener('mouseover', ev => this.mouseOver(ev, div, item));
+            item.addEventListener('mouseout', ev => this.mouseOut(ev, item));
+
+            div.appendChild(item);
+        }
+
+        // Add a footer message for auto-submit
+        if (this.autoSubmit) {
+            const footer = kpxcUI.createElement('footer', '', {}, tr('autocompleteSubmitMessage'));
+            div.appendChild(footer);
+        }
+
+        // Activate the first item automatically
+        const items = this.getAllItems();
+        this.index = 0;
+        this.activateItem(items);
+    }
+
+    activateItem(item) {
+        if (!item || item.length === 0) {
+            return;
+        }
+
+        this.removeItem(item);
+        if (this.index >= item.length) {
+            this.index = 0;
+        }
+
+        if (this.index < 0) {
+            this.index = item.length - 1;
+        }
+
+        if (item[this.index] !== undefined) {
+            item[this.index].classList.add('kpxcAutocomplete-active');
+        }
+    }
+
+    removeItem(items) {
+        for (const item of items) {
+            item.classList.remove('kpxcAutocomplete-active');
+        }
+    }
+
+    closeList(elem) {
+        if (!this.shadowRoot) {
+            return;
+        }
+
+        const items = this.shadowSelectorAll('.kpxcAutocomplete-items');
+        if (!items) {
+            return;
+        }
+
+        for (const item of items) {
+            if (elem !== item && this.input) {
+                item.parentNode.removeChild(item);
+            }
+        }
+    }
+
+    getAllItems() {
+        const list = this.shadowSelector('#kpxcAutocomplete-list');
+        if (!list) {
+            return [];
+        }
+
+        return list.getElementsByTagName('div');
+    }
+
+    /**
+     * Keyboard shortcuts for autocomplete menu:
+     * - ArrowDown shows the list or selects item below, or the first item (last is active)
+     * - ArrowUp selects item above, or the last item (first is active)
+     * - Enter or Tab selects the item
+     * - Backspace and Delete shows the list if input field is empty. First item is activated
+    */
+    keyPress(e) {
         if (!e.isTrusted) {
             return;
         }
 
-        if (input.value !== '') {
-            input.select();
-        }
-        kpxcAutocomplete.showList(input);
-    });
+        const items = this.getAllItems();
+        if (e.key === 'ArrowDown') {
+            // If the list is not visible, show it
+            if (items.length === 0) {
+                this.index = -1;
+                this.showList(this.input);
+            } else {
+                // Activate next item
+                ++this.index;
+                this.activateItem(items);
+            }
+        } else if (e.key === 'ArrowUp') {
+            --this.index;
+            this.activateItem(items);
+        } else if (e.key === 'Enter') {
+            if (this.input.value === '') {
+                e.preventDefault();
+            }
 
-    input.addEventListener('keydown', kpxcAutocomplete.keyPress);
-    input.setAttribute('autocomplete', 'off');
+            if (this.index >= 0 && items && items[this.index] !== undefined) {
+                e.preventDefault();
 
-    if (showListInstantly) {
-        kpxcAutocomplete.showList(input);
-    }
-};
-
-kpxcAutocomplete.showList = function(inputField) {
-    kpxcAutocomplete.closeList();
-    kpxcAutocomplete.input = inputField;
-
-    const div = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
-    initColorTheme(div);
-
-    kpxcAutocomplete.updatePosition(inputField, div);
-    div.style.zIndex = '2147483646';
-
-    const styleSheet = createStylesheet('css/autocomplete.css');
-    const colorStyleSheet = createStylesheet('css/colors.css');
-    const wrapper = kpxcUI.createElement('div');
-
-    kpxcAutocomplete.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
-    kpxcAutocomplete.shadowRoot.append(colorStyleSheet);
-    kpxcAutocomplete.shadowRoot.append(styleSheet);
-    kpxcAutocomplete.shadowRoot.append(div);
-    kpxcAutocomplete.wrapper = wrapper;
-    document.body.append(wrapper);
-
-    for (const c of kpxcAutocomplete.elements) {
-        const item = document.createElement('div');
-        item.textContent += c.label;
-        const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
-        item.append(itemInput);
-
-        item.addEventListener('click', async function(e) {
-            if (!e.isTrusted) {
+                this.itemEnter(this.index, this.elements);
+                this.closeList();
+            }
+        } else if (e.key === 'Tab') {
+            // Return if value is not in the list
+            if (this.input.value !== '' && !this.elements.some(c => c.value === this.input.value)) {
+                this.closeList();
                 return;
             }
 
-            // Save index for combination.loginId
-            const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
-            await sendMessage('page_set_login_id', index);
+            this.index = this.elements.findIndex(c => c.value === this.input.value);
+            if (this.index >= 0) {
+                this.fillPassword(this.input.value, this.index, this.elements[this.index].uuid);
+            }
 
-            const usernameValue = this.getElementsByTagName('input')[0].value;
-            await kpxcAutocomplete.fillPassword(usernameValue, index, c.uuid);
-            kpxcAutocomplete.closeList();
-            inputField.focus();
-        });
-
-        // These events prevent the double hover effect if both keyboard and mouse are used
-        item.addEventListener('mouseover', function(e) {
-            kpxcAutocomplete.removeItem(kpxcAutocomplete.getAllItems());
-            item.classList.add('kpxcAutocomplete-active');
-            kpxcAutocomplete.index = Array.from(div.childNodes).indexOf(item);
-        });
-
-        item.addEventListener('mouseout', function(e) {
-            item.classList.remove('kpxcAutocomplete-active');
-        });
-
-        div.appendChild(item);
-    }
-
-    // Add a footer message for auto-submit
-    if (kpxcAutocomplete.autoSubmit) {
-        const footer = kpxcUI.createElement('footer', '', {}, tr('autocompleteSubmitMessage'));
-        div.appendChild(footer);
-    }
-
-    // Activate the first item automatically
-    const items = kpxcAutocomplete.getAllItems();
-    kpxcAutocomplete.index = 0;
-    kpxcAutocomplete.activateItem(items);
-};
-
-kpxcAutocomplete.activateItem = function(item) {
-    if (!item || item.length === 0) {
-        return;
-    }
-
-    kpxcAutocomplete.removeItem(item);
-    if (kpxcAutocomplete.index >= item.length) {
-        kpxcAutocomplete.index = 0;
-    }
-
-    if (kpxcAutocomplete.index < 0) {
-        kpxcAutocomplete.index = item.length - 1;
-    }
-
-    if (item[kpxcAutocomplete.index] !== undefined) {
-        item[kpxcAutocomplete.index].classList.add('kpxcAutocomplete-active');
-    }
-};
-
-kpxcAutocomplete.removeItem = function(items) {
-    for (const item of items) {
-        item.classList.remove('kpxcAutocomplete-active');
-    }
-};
-
-kpxcAutocomplete.closeList = function(elem) {
-    if (!kpxcAutocomplete.shadowRoot) {
-        return;
-    }
-
-    const items = kpxcAutocomplete.shadowSelectorAll('.kpxcAutocomplete-items');
-    if (!items) {
-        return;
-    }
-
-    for (const item of items) {
-        if (elem !== item && kpxcAutocomplete.input) {
-            item.parentNode.removeChild(item);
+            this.closeList();
+        } else if (e.key === 'Escape') {
+            this.closeList();
+        } else if ((e.key === 'Backspace' || e.key === 'Delete') && this.input.value === '') {
+            // Show menu when input field has no value and backspace is pressed
+            this.index = -1;
+            this.showList(this.input);
         }
     }
-};
 
-kpxcAutocomplete.getAllItems = function() {
-    const list = kpxcAutocomplete.shadowSelector('#kpxcAutocomplete-list');
-    if (!list) {
-        return [];
-    }
-
-    return list.getElementsByTagName('div');
-};
-
-/**
- * Keyboard shortcuts for autocomplete menu:
- * - ArrowDown shows the list or selects item below, or the first item (last is active)
- * - ArrowUp selects item above, or the last item (first is active)
- * - Enter or Tab selects the item
- * - Backspace and Delete shows the list if input field is empty. First item is activated
-*/
-kpxcAutocomplete.keyPress = function(e) {
-    if (!e.isTrusted) {
-        return;
-    }
-
-    const items = kpxcAutocomplete.getAllItems();
-    if (e.key === 'ArrowDown') {
-        // If the list is not visible, show it
-        if (items.length === 0) {
-            kpxcAutocomplete.index = -1;
-            kpxcAutocomplete.showList(kpxcAutocomplete.input);
-        } else {
-            // Activate next item
-            ++kpxcAutocomplete.index;
-            kpxcAutocomplete.activateItem(items);
-        }
-    } else if (e.key === 'ArrowUp') {
-        --kpxcAutocomplete.index;
-        kpxcAutocomplete.activateItem(items);
-    } else if (e.key === 'Enter') {
-        if (kpxcAutocomplete.input.value === '') {
-            e.preventDefault();
-        }
-
-        if (kpxcAutocomplete.index >= 0 && items && items[kpxcAutocomplete.index] !== undefined) {
-            e.preventDefault();
-            const usernameValue = kpxcAutocomplete.elements[kpxcAutocomplete.index].value;
-            kpxcAutocomplete.fillPassword(usernameValue, kpxcAutocomplete.index, kpxcAutocomplete.elements[kpxcAutocomplete.index].uuid);
-            kpxcAutocomplete.closeList();
-        }
-    } else if (e.key === 'Tab') {
-        // Return if value is not in the list
-        if (kpxcAutocomplete.input.value !== '' && !kpxcAutocomplete.elements.some(c => c.value === kpxcAutocomplete.input.value)) {
-            kpxcAutocomplete.closeList();
+    updatePosition(inputField, elem) {
+        const div = elem || this.shadowSelector('.kpxcAutocomplete-items');
+        if (!div) {
             return;
         }
 
-        kpxcAutocomplete.index = kpxcAutocomplete.elements.findIndex(c => c.value === kpxcAutocomplete.input.value);
-        if (kpxcAutocomplete.index >= 0) {
-            kpxcAutocomplete.fillPassword(kpxcAutocomplete.input.value, kpxcAutocomplete.index, kpxcAutocomplete.elements[kpxcAutocomplete.index].uuid);
+        const rect = inputField.getBoundingClientRect();
+        div.style.minWidth = Pixels(inputField.offsetWidth);
+
+        if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
+            div.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+            div.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + document.scrollingElement.scrollLeft);
+        } else {
+            div.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
+            div.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);
         }
-
-        kpxcAutocomplete.closeList();
-    } else if (e.key === 'Escape') {
-        kpxcAutocomplete.closeList();
-    } else if ((e.key === 'Backspace' || e.key === 'Delete') && kpxcAutocomplete.input.value === '') {
-        // Show menu when input field has no value and backspace is pressed
-        kpxcAutocomplete.index = -1;
-        kpxcAutocomplete.showList(kpxcAutocomplete.input);
     }
-};
+}
 
-kpxcAutocomplete.fillPassword = async function(value, index, uuid) {
-    const combination = await kpxcFields.getCombination(kpxcAutocomplete.input);
-    combination.loginId = index;
 
-    const manualFill = await sendMessage('page_get_manual_fill');
-    await kpxc.fillInCredentials(combination, value, uuid, manualFill === ManualFill.PASSWORD);
-    kpxcAutocomplete.input.setAttribute('fetched', true);
-};
-
-kpxcAutocomplete.updatePosition = function(inputField, elem) {
-    const div = elem || kpxcAutocomplete.shadowSelector('.kpxcAutocomplete-items');
-    if (!div) {
+// Global handlers
+const handleOutsideClick = function(e, autocompleteMenu) {
+    const list = autocompleteMenu.shadowRoot ? autocompleteMenu.shadowSelector('#kpxcAutocomplete-list') : undefined;
+    if (!list) {
         return;
     }
 
-    const rect = inputField.getBoundingClientRect();
-    div.style.minWidth = Pixels(inputField.offsetWidth);
+    if (e.target !== autocompleteMenu.input
+        && !e.target.classList.contains('kpxc-username-icon')
+        && e.target.nodeName !== autocompleteMenu.input.nodeName) {
+        autocompleteMenu.closeList(e.target);
 
-    if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
-        div.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
-        div.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + document.scrollingElement.scrollLeft);
-    } else {
-        div.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + inputField.offsetHeight);
-        div.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);
+        if (autocompleteMenu.wrapper) {
+            document.body.removeChild(autocompleteMenu.wrapper);
+        }
+    }
+};
+
+const updatePosition = function(autocompleteMenu) {
+    if (autocompleteMenu.input) {
+        autocompleteMenu.updatePosition(autocompleteMenu.input);
     }
 };
 
@@ -250,20 +266,8 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    const list = kpxcAutocomplete.shadowRoot ? kpxcAutocomplete.shadowSelector('#kpxcAutocomplete-list') : undefined;
-    if (!list) {
-        return;
-    }
-
-    if (e.target !== kpxcAutocomplete.input
-        && !e.target.classList.contains('kpxc-username-icon')
-        && e.target.nodeName !== kpxcAutocomplete.input.nodeName) {
-        kpxcAutocomplete.closeList(e.target);
-
-        if (kpxcAutocomplete.wrapper) {
-            document.body.removeChild(kpxcAutocomplete.wrapper);
-        }
-    }
+    handleOutsideClick(e, kpxcUserAutocomplete);
+    handleOutsideClick(e, kpxcTOTPAutocomplete);
 });
 
 // Handle autocomplete position on window resize
@@ -272,9 +276,8 @@ window.addEventListener('resize', function() {
         return;
     }
 
-    if (kpxcAutocomplete.input) {
-        kpxcAutocomplete.updatePosition(kpxcAutocomplete.input);
-    }
+    updatePosition(kpxcUserAutocomplete);
+    updatePosition(kpxcTOTPAutocomplete);
 });
 
 // Handle autocomplete position on scroll
@@ -283,7 +286,6 @@ window.addEventListener('scroll', function() {
         return;
     }
 
-    if (kpxcAutocomplete.input) {
-        kpxcAutocomplete.updatePosition(kpxcAutocomplete.input);
-    }
+    updatePosition(kpxcUserAutocomplete);
+    updatePosition(kpxcTOTPAutocomplete);
 });

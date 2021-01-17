@@ -155,7 +155,7 @@ kpxcForm.getCredentialFieldsFromForm = function(form) {
 
 // Get the form submit button instead if action URL is same as the page itself
 kpxcForm.getFormSubmitButton = function(form) {
-    if (!form.action || typeof form.action !== 'string') {
+    if (!form || !form.action || typeof form.action !== 'string') {
         return;
     }
 
@@ -675,11 +675,11 @@ kpxc.addToSitePreferences = async function() {
 kpxc.clearAllFromPage = function() {
     kpxc.credentials = [];
     kpxc.inputs = [];
-    kpxcAutocomplete.elements = [];
+    kpxcUserAutocomplete.clear();
     _called.retrieveCredentials = false;
 
     if (kpxc.settings.autoCompleteUsernames) {
-        kpxcAutocomplete.closeList();
+        kpxcUserAutocomplete.closeList();
     }
 
     // Switch back to default popup
@@ -773,7 +773,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
 
         if (kpxc.credentials.length > 1) {
             // More than one credential -> show autocomplete list
-            kpxcAutocomplete.showList(field);
+            kpxcUserAutocomplete.showList(field);
             return;
         } else {
             // Just one credential -> fill the first combination found
@@ -825,37 +825,53 @@ kpxc.fillFromPopup = async function(id, uuid) {
 
     await sendMessage('page_set_login_id', id);
     kpxc.fillInCredentials(kpxc.combinations[0], kpxc.credentials[id].login, uuid);
-    kpxcAutocomplete.closeList();
+    kpxcUserAutocomplete.closeList();
 };
 
 // Fill requested from TOTP icon
 kpxc.fillFromTOTP = async function(target) {
     const el = target || document.activeElement;
-    let index = await sendMessage('page_get_login_id');
+    const credentialList = await kpxc.updateTOTPList();
 
-    // Use the first credential available if not set
-    if (index === undefined) {
-        index = 0;
+    if (credentialList.length === 0) {
+        kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
+        return;
     }
 
-    if (index >= 0 && kpxc.credentials[index]) {
-        // Check the value from StringFields
-        if (kpxc.credentials[index].totp && kpxc.credentials[index].totp.length > 0) {
-            // Retrieve a new TOTP value
-            const totp = await sendMessage('get_totp', [ kpxc.credentials[index].uuid, kpxc.credentials[index].totp ]);
-            if (!totp) {
-                kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
-                return;
-            }
+    if (credentialList.length === 1) {
+        kpxc.fillTOTPFromUuid(el, credentialList[0].uuid);
+        return;
+    }
 
-            kpxc.setValue(el, totp);
-        } else if (kpxc.credentials[index].stringFields && kpxc.credentials[index].stringFields.length > 0) {
-            const stringFields = kpxc.credentials[index].stringFields;
-            for (const s of stringFields) {
-                const val = s['KPH: {TOTP}'];
-                if (val) {
-                    kpxc.setValue(el, val);
-                }
+    kpxcTOTPAutocomplete.showList(el, true);
+};
+
+// Fill TOTP with matching uuid
+kpxc.fillTOTPFromUuid = async function(el, uuid) {
+    if (!el || !uuid) {
+        return;
+    }
+
+    const user = kpxc.credentials.find(c => c.uuid === uuid);
+    if (!user) {
+        return;
+    }
+
+    if (user.totp && user.totp.length > 0) {
+        // Retrieve a new TOTP value
+        const totp = await sendMessage('get_totp', [ user.uuid, user.totp ]);
+        if (!totp) {
+            kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
+            return;
+        }
+
+        kpxc.setValue(el, totp);
+    } else if (user.stringFields && user.stringFields.length > 0) {
+        const stringFields = user.stringFields;
+        for (const s of stringFields) {
+            const val = s['KPH: {TOTP}'];
+            if (val) {
+                kpxc.setValue(el, val);
             }
         }
     }
@@ -867,7 +883,7 @@ kpxc.fillFromUsernameIcon = async function(combination) {
     if (kpxc.credentials.length === 0) {
         return;
     } else if (kpxc.credentials.length > 1 && kpxc.settings.autoCompleteUsernames) {
-        kpxcAutocomplete.showList(combination.username || combination.password);
+        kpxcUserAutocomplete.showList(combination.username || combination.password);
         return;
     }
 
@@ -930,7 +946,7 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
     }
 
     // Close autocomplete menu after fill
-    kpxcAutocomplete.closeList();
+    kpxcUserAutocomplete.closeList();
 
     // Reset ManualFill
     await sendMessage('page_set_manual_fill', ManualFill.NONE);
@@ -940,7 +956,7 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
         const submitButton = kpxcForm.getFormSubmitButton(combination.form);
         if (submitButton !== undefined) {
             submitButton.click();
-        } else {
+        } else if (combination.form) {
             combination.form.submit();
         }
     }
@@ -994,7 +1010,9 @@ kpxc.getFormActionUrl = function(combination) {
     }
 
     if (typeof(action) !== 'string' || action === '') {
-        action = document.location.origin + document.location.pathname;
+        // Firefox can report location.origin as 'null' with localHost files
+        const origin = document.location.origin === 'null' ? 'file://' : document.location.origin;
+        action = origin + document.location.pathname;
     }
 
     return action;
@@ -1076,10 +1094,14 @@ kpxc.initAutocomplete = function() {
 
     for (const c of kpxc.combinations) {
         if (c.username) {
-            kpxcAutocomplete.create(c.username, false, kpxc.settings.autoSubmit);
+            kpxcUserAutocomplete.create(c.username, false, kpxc.settings.autoSubmit);
         } else if (!c.username && c.password) {
             // Single password field
-            kpxcAutocomplete.create(c.password, false, kpxc.settings.autoSubmit);
+            kpxcUserAutocomplete.create(c.password, false, kpxc.settings.autoSubmit);
+        }
+
+        if (c.totp) {
+            kpxcTOTPAutocomplete.create(c.totp, false, kpxc.settings.autoSubmit);
         }
     }
 };
@@ -1185,14 +1207,14 @@ kpxc.initLoginPopup = function() {
 
     // Add usernames + descriptions to autocomplete-list and popup-list
     const usernames = [];
-    kpxcAutocomplete.elements = [];
+    kpxcUserAutocomplete.clear();
     const showGroupNameInAutocomplete = kpxc.settings.showGroupNameInAutocomplete && (getUniqueGroupCount(kpxc.credentials) > 1);
 
     for (let i = 0; i < kpxc.credentials.length; i++) {
         const loginText = getLoginText(kpxc.credentials[i], showGroupNameInAutocomplete);
         usernames.push({ text: loginText, uuid: kpxc.credentials[i].uuid });
 
-        kpxcAutocomplete.elements.push({
+        kpxcUserAutocomplete.elements.push({
             label: loginText,
             value: kpxc.credentials[i].login,
             uuid: kpxc.credentials[i].uuid,
@@ -1460,6 +1482,35 @@ kpxc.updateDatabaseState = async function() {
     }
 
     kpxc.databaseState = res.databaseClosed ? DatabaseState.LOCKED : DatabaseState.UNLOCKED;
+};
+
+// Updates the TOTP Autocomplete Menu
+kpxc.updateTOTPList = async function() {
+    let index = await sendMessage('page_get_login_id');
+    if (index < 0) {
+        // Credential haven't been selected
+        return;
+    }
+
+    // Use the first credential available if not set
+    if (index === undefined) {
+        index = 0;
+    }
+
+    if (index >= 0 && kpxc.credentials[index]) {
+        const username = kpxc.credentials[index].login;
+        const password = kpxc.credentials[index].password;
+
+        // If no username is set, compare with a password
+        const credentialList = kpxc.credentials.filter(c => (c.totp || c.stringFields.some(s => s['KPH: {TOTP}']))
+            && (c.login === username || (!username && c.password === password)));
+
+        // Filter TOTP Autocomplete Menu with matching 2FA credentials
+        kpxcTOTPAutocomplete.elements = kpxcUserAutocomplete.elements.filter(e => credentialList.some(u => u.uuid === e.uuid));
+        return credentialList;
+    }
+
+    return [];
 };
 
 
