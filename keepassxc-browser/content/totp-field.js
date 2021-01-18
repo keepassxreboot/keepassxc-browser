@@ -12,6 +12,7 @@ const acceptedOTPFields = [
     'mfa',
     'otp',
     'token',
+    'twofa',
     'twofactor'
 ];
 
