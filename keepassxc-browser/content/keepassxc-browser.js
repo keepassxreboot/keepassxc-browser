@@ -1417,8 +1417,8 @@ kpxc.setValue = function(field, value) {
 // Sets a new value to input field and triggers necessary events
 kpxc.setValueWithChange = function(field, value) {
     field.value = value;
-    field.dispatchEvent(new Event('input', { 'bubbles': true }));
-    field.dispatchEvent(new Event('change', { 'bubbles': true }));
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    field.dispatchEvent(new Event('change', { bubbles: true }));
     field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false, key: '', char: '' }));
     field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false, key: '', char: '' }));
     field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false, key: '', char: '' }));

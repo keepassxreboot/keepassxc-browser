@@ -283,6 +283,8 @@ kpxcPasswordDialog.fill = function(e) {
     }
 
     kpxcPasswordDialog.input.value = password.value;
+    kpxcPasswordDialog.input.dispatchEvent(new Event('input', { bubbles: true }));
+    kpxcPasswordDialog.input.dispatchEvent(new Event('change', { bubbles: true }));
 
     if (kpxcPasswordDialog.nextField) {
         kpxcPasswordDialog.nextField.value = password.value;
