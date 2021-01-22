@@ -189,8 +189,9 @@ kpxcForm.getFormSubmitButton = function(form) {
     }
 
     // Try to find another button. Select the last one.
-    // TODO: Possibly change this behavior to select the last one for only certain sites.
-    const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery));
+    // If any formaction overriding the default action is set, ignore those buttons.
+    const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery))
+                         .filter(b => b.formAction === document.location.href);
     if (buttons.length > 0) {
         return buttons[buttons.length - 1];
     }
