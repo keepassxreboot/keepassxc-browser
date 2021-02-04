@@ -941,7 +941,7 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
     }
 
     // Fill StringFields
-    if (selectedCredentials.stringFields.length > 0) {
+    if (selectedCredentials.stringFields && selectedCredentials.stringFields.length > 0) {
         kpxc.fillInStringFields(combination.fields, selectedCredentials.stringFields);
     }
 
@@ -1502,7 +1502,7 @@ kpxc.updateTOTPList = async function() {
         const password = kpxc.credentials[index].password;
 
         // If no username is set, compare with a password
-        const credentialList = kpxc.credentials.filter(c => (c.totp || c.stringFields.some(s => s['KPH: {TOTP}']))
+        const credentialList = kpxc.credentials.filter(c => (c.totp || (c.stringFields && c.stringFields.some(s => s['KPH: {TOTP}'])))
             && (c.login === username || (!username && c.password === password)));
 
         // Filter TOTP Autocomplete Menu with matching 2FA credentials
