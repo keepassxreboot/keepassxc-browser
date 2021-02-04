@@ -36,15 +36,18 @@ class Autocomplete {
 
         this.autoSubmit = autoSubmit;
         this.input = input;
-        this.started = true;
 
-        input.addEventListener('click', ev => this.click(ev, this.input));
-        input.addEventListener('keydown', ev => this.keyPress(ev));
-        input.setAttribute('autocomplete', 'off');
+        if (!this.started) {
+            input.addEventListener('click', ev => this.click(ev, this.input));
+            input.addEventListener('keydown', ev => this.keyPress(ev));
+            input.setAttribute('autocomplete', 'off');
+        }
 
         if (showListInstantly) {
             this.showList(input);
         }
+
+        this.started = true;
     }
 
     mouseOver(e, div, item) {
