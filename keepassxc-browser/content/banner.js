@@ -9,6 +9,10 @@ kpxcBanner.credentials = {};
 kpxcBanner.wrapper = undefined;
 
 kpxcBanner.destroy = async function() {
+    if (!kpxcBanner.created) {
+        return;
+    }
+
     kpxcBanner.created = false;
     kpxcBanner.credentials = {};
 
@@ -302,13 +306,15 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
     }
 };
 
-kpxcBanner.verifyResult = function(code) {
+kpxcBanner.verifyResult = async function(code) {
     if (code === 'error') {
         kpxcUI.createNotification('error', tr('rememberErrorCannotSaveCredentials'));
     } else if (code === 'created') {
         kpxcUI.createNotification('success', tr('rememberCredentialsSaved', kpxcBanner.credentials.username || tr('rememberEmptyUsername')));
+        await kpxc.retrieveCredentials(true); // Forced reload
     } else if (code === 'updated') {
         kpxcUI.createNotification('success', tr('rememberCredentialsUpdated', kpxcBanner.credentials.username || tr('rememberEmptyUsername')));
+        await kpxc.retrieveCredentials(true); // Forced reload
     } else if (code === 'canceled') {
         kpxcUI.createNotification('warning', tr('rememberCredentialsNotSaved'));
     } else {

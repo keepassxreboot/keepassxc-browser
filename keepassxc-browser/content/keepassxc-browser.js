@@ -1251,8 +1251,9 @@ kpxc.prepareCredentials = async function() {
  * @param {string} passwordValue    Submitted password
  * @param {string} urlValue         URL of the page where password change was detected
  * @param {Array} oldCredentials    Credentials saved from the password change page, if available
+ * @param {boolean} useBanner       If banner is disabled, save directly
  */
-kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue, oldCredentials) {
+kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue, oldCredentials, useBanner = true) {
     const credentials = (oldCredentials !== undefined && oldCredentials.length > 0) ? oldCredentials : kpxc.credentials;
     if (passwordValue === '') {
         return undefined;
@@ -1302,14 +1303,20 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
         }
     }
 
-    // Show the Credential Banner
-    kpxcBanner.create({
+    const saveCredentials = {
         username: usernameValue,
         password: passwordValue,
         url: urlValue,
         usernameExists: usernameExists,
         list: credentialsList
-    });
+    };
+
+    if (useBanner) {
+        kpxcBanner.create(saveCredentials);
+    } else {
+        kpxcBanner.credentials = saveCredentials;
+        kpxcBanner.saveNewCredentials(saveCredentials);
+    }
 
     return true;
 };
@@ -1326,7 +1333,7 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
     const usernameValue = combination.username ? combination.username.value : '';
     const passwordValue = combination.password ? combination.password.value : '';
 
-    const result = await kpxc.rememberCredentials(usernameValue, passwordValue);
+    const result = await kpxc.rememberCredentials(usernameValue, passwordValue, undefined, undefined, kpxc.settings.showLoginNotifications);
     if (result === undefined) {
         kpxcUI.createNotification('error', tr('rememberNoPassword'));
         return;
@@ -1337,13 +1344,14 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
     }
 };
 
-// The basic function for retrieving credentials from KeePassXC
-kpxc.retrieveCredentials = async function() {
+// The basic function for retrieving credentials from KeePassXC.
+// Credential Banner can force the retrieval for reloading new/modified credentials.
+kpxc.retrieveCredentials = async function(force = false) {
     kpxc.url = document.location.href;
     kpxc.submitUrl = kpxc.getFormActionUrl(kpxc.combinations[0]);
 
     if (kpxc.settings.autoRetrieveCredentials && kpxc.url && kpxc.submitUrl) {
-        await kpxc.retrieveCredentialsCallback(await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl ]));
+        await kpxc.retrieveCredentialsCallback(await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, force ]));
     }
 };
 
@@ -1878,6 +1886,8 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxc.initCredentialFields();
         } else if (req.action === 'remember_credentials') {
             kpxc.rememberCredentialsFromContextMenu();
+        } else if (req.action === 'retrive_credentials_forced') {
+            await kpxc.retrieveCredentials(true);
         } else if (req.action === 'show_password_generator') {
             kpxcPasswordDialog.trigger();
         }
