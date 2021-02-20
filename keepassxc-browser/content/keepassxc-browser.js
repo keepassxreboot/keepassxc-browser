@@ -432,12 +432,16 @@ kpxcFields.getCombination = async function(field, givenType) {
 
 // Gets of generates an unique ID for the element
 kpxcFields.getId = function(target) {
+    if (target.name) {
+        return `${target.nodeName} ${target.type} ${target.name} ${target.placeholder}`;
+    }
+
     if (target.classList.length > 0) {
-        return `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
+        return `${target.nodeName} ${target.type} ${target.classList.value} ${target.placeholder}`;
     }
 
     if (target.id && target.id !== '') {
-        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.name} ${target.placeholder}`;
+        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.placeholder}`;
     }
 
     return `kpxc ${target.type} ${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}${target.offsetTop}${target.offsetLeft}`;
