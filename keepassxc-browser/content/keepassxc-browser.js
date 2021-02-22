@@ -430,17 +430,34 @@ kpxcFields.getCombination = async function(field, givenType) {
     return undefined;
 };
 
-// Gets of generates an unique ID for the element
+// Returns an unique ID for the element
 kpxcFields.getId = function(target) {
-    if (target.classList.length > 0) {
-        return `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
+    let xpath = '';
+    let pos;
+    let temp;
+
+    while (target !== document.documentElement) {
+        pos = 0;
+        temp = target;
+        while (temp) {
+            if (temp.nodeType === 1 && temp.nodeName === target.nodeName) {
+                pos += 1;
+            }
+
+            temp = temp.previousSibling;
+        }
+
+        xpath = `${target.nodeName.toLowerCase()}${(pos > 1 ? `[${pos}]/` : '/')}${xpath}`;
+        target = target.parentNode;
     }
 
-    if (target.id && target.id !== '') {
-        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.name} ${target.placeholder}`;
-    }
+    xpath = `/${document.documentElement.nodeName.toLowerCase()}/${xpath}`;
+    xpath = xpath.replace(/\/$/, '');
+    return xpath;
+};
 
-    return `kpxc ${target.type} ${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}${target.offsetTop}${target.offsetLeft}`;
+kpxcFields.getElementFromId = function(id) {
+    return (new XPathEvaluator()).evaluate(id, document.documentElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 };
 
 // Check for new password via autocomplete attribute
@@ -558,7 +575,7 @@ kpxcFields.useCustomLoginFields = async function() {
     // Finds the input field based on the stored ID
     const findInputField = async function(inputFields, id) {
         if (id) {
-            const input = inputFields.find(e => kpxcFields.getId(e) === id);
+            const input = inputFields.find(e => e === kpxcFields.getElementFromId(id));
             if (input) {
                 return input;
             }
