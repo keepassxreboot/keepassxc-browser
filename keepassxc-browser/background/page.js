@@ -268,14 +268,15 @@ page.removePageInformationFromNotExistingTabs = async function() {
 
 // Retrieves the credentials. Returns cached values when found.
 // Page reload or tab switch clears the cache.
+// If the retrieval is forced (from Credential Banner), get new credentials normally.
 page.retrieveCredentials = async function(tab, args = []) {
-    const [ url, submitUrl ] = args;
-    if (page.tabs[tab.id] && page.tabs[tab.id].credentials.length > 0) {
+    const [ url, submitUrl, force ] = args;
+    if (page.tabs[tab.id] && page.tabs[tab.id].credentials.length > 0 && !force) {
         return page.tabs[tab.id].credentials;
     }
 
     // Ignore duplicate requests
-    if (page.currentRequest.url === url && page.currentRequest.submitUrl === submitUrl) {
+    if (page.currentRequest.url === url && page.currentRequest.submitUrl === submitUrl && !force) {
         return [];
     } else {
         page.currentRequest.url = url;
