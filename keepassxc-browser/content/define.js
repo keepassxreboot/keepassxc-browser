@@ -386,7 +386,8 @@ kpxcDefine.confirm = async function() {
     }
 
     if (kpxcDefine.selection.password) {
-        kpxcDefine.selection.password = kpxcFields.getId(kpxcDefine.selection.password.originalElement);
+        kpxcDefine.selection.password = kpxcFields.getId(kpxcDefine.selection.password.originalElement,
+            kpxcDefine.selection.username);
     }
 
     if (kpxcDefine.selection.totp) {

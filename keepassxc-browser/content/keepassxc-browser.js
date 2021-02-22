@@ -430,14 +430,24 @@ kpxcFields.getCombination = async function(field, givenType) {
     return undefined;
 };
 
-// Gets of generates an unique ID for the element
-kpxcFields.getId = function(target) {
+/**
+ * Returns an unique ID for the element
+ * @param {HTMLElement} target Input field
+ * @param {String} previouslySet Used for comparison so two ID's cannot be identical
+ */
+kpxcFields.getId = function(target, previouslySet) {
     if (target.classList.length > 0) {
-        return `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
+        const id = `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
+        if (id !== previouslySet) {
+            return id;
+        }
     }
 
     if (target.id && target.id !== '') {
-        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.name} ${target.placeholder}`;
+        const id = `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.name} ${target.placeholder}`;
+        if (id !== previouslySet) {
+            return id;
+        }
     }
 
     return `kpxc ${target.type} ${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}${target.offsetTop}${target.offsetLeft}`;
