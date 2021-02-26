@@ -10,7 +10,10 @@ CredentialAutocomplete.prototype.click = async function(e, input) {
         input.select();
     }
 
-    this.showList(input);
+    const field = this.autocompleteList.find(a => a === input);
+    if (field) {
+        this.showList(field);
+    }
 };
 
 CredentialAutocomplete.prototype.itemClick = async function(e, item, input, uuid) {
