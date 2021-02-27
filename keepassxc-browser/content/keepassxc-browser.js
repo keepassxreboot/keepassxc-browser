@@ -430,8 +430,24 @@ kpxcFields.getCombination = async function(field, givenType) {
     return undefined;
 };
 
-// Returns an unique ID for the element
-kpxcFields.getId = function(target) {
+// Sets and returns unique ID's for the element
+kpxcFields.setId = function(target) {
+    return [ kpxcFields.getIdFromXPath(target), kpxcFields.getIdFromProperties(target) ];
+};
+
+// Returns generated unique ID's for the element. If XPath ID fails, return the fallback one.
+kpxcFields.getId = function(idArray, inputField) {
+    if (!idArray || idArray.length < 2) {
+        return '';
+    }
+
+    const elementFromXPath = kpxcFields.getElementFromXPathId(idArray[0]);
+    const fallbackId = kpxcFields.getIdFromProperties(inputField);
+
+    return elementFromXPath || (fallbackId === idArray[1] ? inputField : '');
+};
+
+kpxcFields.getIdFromXPath = function(target) {
     let xpath = '';
     let pos;
     let temp;
@@ -456,8 +472,24 @@ kpxcFields.getId = function(target) {
     return xpath;
 };
 
-kpxcFields.getElementFromId = function(id) {
-    return (new XPathEvaluator()).evaluate(id, document.documentElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+kpxcFields.getIdFromProperties = function(target) {
+    if (target.name) {
+        return `${target.nodeName} ${target.type} ${target.name} ${target.placeholder}`;
+    }
+
+    if (target.classList && target.classList.length > 0) {
+        return `${target.nodeName} ${target.type} ${target.classList.value} ${target.placeholder}`;
+    }
+
+    if (target.id && target.id !== '') {
+        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.placeholder}`;
+    }
+
+    return `kpxc ${target.type} ${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}${target.offsetTop}${target.offsetLeft}`;
+}
+
+kpxcFields.getElementFromXPathId = function(xpath) {
+    return (new XPathEvaluator()).evaluate(xpath, document.documentElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 };
 
 // Check for new password via autocomplete attribute
@@ -573,9 +605,9 @@ kpxcFields.useCustomLoginFields = async function() {
     }
 
     // Finds the input field based on the stored ID
-    const findInputField = async function(inputFields, id) {
-        if (id) {
-            const input = inputFields.find(e => e === kpxcFields.getElementFromId(id));
+    const findInputField = async function(inputFields, idArray) {
+        if (idArray) {
+            const input = inputFields.find(e => e === kpxcFields.getId(idArray, e));
             if (input) {
                 return input;
             }

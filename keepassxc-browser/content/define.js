@@ -382,20 +382,20 @@ kpxcDefine.confirm = async function() {
     }
 
     if (kpxcDefine.selection.username) {
-        kpxcDefine.selection.username = kpxcFields.getId(kpxcDefine.selection.username.originalElement);
+        kpxcDefine.selection.username = kpxcFields.setId(kpxcDefine.selection.username.originalElement);
     }
 
     if (kpxcDefine.selection.password) {
-        kpxcDefine.selection.password = kpxcFields.getId(kpxcDefine.selection.password.originalElement);
+        kpxcDefine.selection.password = kpxcFields.setId(kpxcDefine.selection.password.originalElement);
     }
 
     if (kpxcDefine.selection.totp) {
-        kpxcDefine.selection.totp = kpxcFields.getId(kpxcDefine.selection.totp.originalElement);
+        kpxcDefine.selection.totp = kpxcFields.setId(kpxcDefine.selection.totp.originalElement);
     }
 
     const fieldIds = [];
     for (const i of kpxcDefine.selection.fields) {
-        fieldIds.push(kpxcFields.getId(i));
+        fieldIds.push(kpxcFields.setId(i));
     }
 
     const location = kpxc.getDocumentLocation();
