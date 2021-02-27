@@ -4,9 +4,9 @@ const MAX_AUTOCOMPLETE_NAME_LEN = 50;
 
 class Autocomplete {
     constructor() {
+        this.autocompleteList = [];
         this.autoSubmit = false;
         this.elements = [];
-        this.started = false;
         this.index = -1;
         this.input = undefined;
         this.shadowRoot = undefined;
@@ -35,19 +35,17 @@ class Autocomplete {
         }
 
         this.autoSubmit = autoSubmit;
-        this.input = input;
 
-        if (!this.started) {
-            input.addEventListener('click', ev => this.click(ev, this.input));
+        if (!this.autocompleteList.includes(input)) {
+            input.addEventListener('click', ev => this.click(ev, input));
             input.addEventListener('keydown', ev => this.keyPress(ev));
             input.setAttribute('autocomplete', 'off');
+            this.autocompleteList.push(input);
         }
 
         if (showListInstantly) {
             this.showList(input);
         }
-
-        this.started = true;
     }
 
     mouseOver(e, div, item) {
