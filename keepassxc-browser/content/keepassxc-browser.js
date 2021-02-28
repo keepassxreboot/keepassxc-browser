@@ -644,7 +644,7 @@ kpxc.url = null;
 // Add page to Site Preferences with Username-only detection enabled. Set from the popup
 kpxc.addToSitePreferences = async function() {
     // Returns a predefined URL for certain sites
-    let site = trimURL(window.top.location.href);
+    let site = trimURL(window.top.location.href).toLowerCase();
 
     // Check if the site already exists -> update the current settings
     let siteExists = false;
@@ -1437,11 +1437,11 @@ kpxc.siteIgnored = async function(condition) {
     if (kpxc.settings.sitePreferences) {
         let currentLocation;
         try {
-            currentLocation = window.top.location.href;
+            currentLocation = window.top.location.href.toLowerCase();
         } catch (err) {
             // Cross-domain security error inspecting window.top.location.href.
             // This catches an error when an iframe is being accessed from another (sub)domain -> use the iframe URL instead.
-            currentLocation = window.self.location.href;
+            currentLocation = window.self.location.href.toLowerCase();
         }
 
         const currentSetting = condition || IGNORE_FULL;
