@@ -46,22 +46,29 @@ kpxcSites.googlePasswordFormUrl = 'https://accounts.google.com/signin/v2/challen
 kpxcSites.googleUrl = 'https://accounts.google.com';
 kpxcSites.savedForm = undefined;
 
-// Handles a few exceptions for certain sites where password form is inside a div
-// or another element that is not detected directly. Triggered by MutationObserver.
-// Returns true if an Element has a matching classList.
-kpxcSites.exceptionFound = function(classList) {
-    if (!classList || classList.length === 0) {
+/**
+ * Handles a few exceptions for certain sites where password form is inside a div
+ * or another element that is not detected directly. Triggered by MutationObserver.
+ * @param {string} identifier   Usually a classList or element id
+ * @returns {boolean}           True if an Element has a match with the identifier and document location
+ */
+kpxcSites.exceptionFound = function(identifier) {
+    if (!identifier || identifier.length === 0) {
         return;
     }
 
     if (document.location.origin === 'https://idmsa.apple.com'
-        && [ 'password', 'form-row', 'show-password' ].every(c => classList.contains(c))) {
+        && [ 'password', 'form-row', 'show-password' ].every(c => identifier.contains(c))) {
         return true;
     } else if (document.location.origin.startsWith('https://signin.ebay.')
-               && classList.contains('null')) {
+               && identifier.contains('null')) {
         return true;
     } else if (document.location.origin.startsWith('https://www.fidelity.com')
-               && classList.contains('fs-mask-username')) {
+               && identifier.contains('fs-mask-username')) {
+        return true;
+    } else if (document.location.origin.startsWith('https://app.protonmail.ch')
+              || document.location.origin.startsWith('https://mail.protonmail.com')
+              && identifier === 'mailboxPassword') {
         return true;
     }
 
