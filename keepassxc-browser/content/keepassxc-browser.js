@@ -51,7 +51,7 @@ kpxcIcons.addIcon = async function(field, iconType) {
 // Adds all necessary icons to a saved form
 kpxcIcons.addIconsFromForm = async function(form) {
     const addUsernameIcons = async function(c) {
-        if (kpxc.settings.showLoginFormIcon && await kpxc.passwordFilled() === false) {
+        if (kpxc.settings.showLoginFormIcon && await kpxc.passwordFilledWithExceptions(c) === false) {
             // Special case where everything else has been hidden, but a single password field is now displayed.
             // For example PayPal and Amazon is handled like this.
             if (c.username && !c.password && c.passwordInputs.length === 1) {
@@ -1227,6 +1227,21 @@ kpxc.initLoginPopup = function() {
 };
 
 kpxc.passwordFilled = async function() {
+    return await sendMessage('password_get_filled');
+};
+
+/**
+ * Handle passwordFilled() with possible exceptions, e.g. Protonmail's mailbox password
+ * where we actually need two passwords for a successful login.
+ * If an exception is found, act like password is not yet filled.
+ * @param {Object} currentForm  Current saved form. @see kpxcForm.saveForm
+ * @returns {boolean}           True if password has been already filled
+ */
+kpxc.passwordFilledWithExceptions = async function(currentForm) {
+    if (currentForm.password && kpxcSites.exceptionFound(currentForm.password.id)) {
+        return false;
+    }
+
     return await sendMessage('password_get_filled');
 };
 
