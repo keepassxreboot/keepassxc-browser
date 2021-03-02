@@ -1899,7 +1899,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxc.inputs = [];
             kpxc.combinations = [];
             kpxc.initCredentialFields();
-        } else if (req.action === 'remember_credentials') {
+        } else if (req.action === 'save_credentials') {
             kpxc.rememberCredentialsFromContextMenu();
         } else if (req.action === 'retrive_credentials_forced') {
             await kpxc.retrieveCredentials(true);
