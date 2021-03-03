@@ -28,8 +28,8 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-      "message": "Fill attribute…",
-      "description": "Context menu parent item for filling a custom attribute."
+        "message": "Fill attribute…",
+        "description": "Context menu parent item for filling a custom attribute."
     },
     "multipleCredentialsDetected": {
         "message": "HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.",
@@ -168,8 +168,8 @@
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-      "message": "KeePassXC is disconnected",
-      "description": "Username field icon hover text when KeePassXC is disconnected."
+        "message": "KeePassXC is disconnected",
+        "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
         "message": "Username field icon",
@@ -268,8 +268,8 @@
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
-      "message": "No TOTP found.",
-      "description": "Alert message when no TOTP is found."
+        "message": "No TOTP found.",
+        "description": "Alert message when no TOTP is found."
     },
     "credentialExpired": {
         "message": "Expired",
@@ -1020,8 +1020,8 @@
         "description": "Debug info text."
     },
     "optionsAboutSupporters": {
-      "message": "Supporters",
-      "description": "Supporters label text."
+        "message": "Supporters",
+        "description": "Supporters label text."
     },
     "optionsErrorInvalidValue": {
         "message": "Invalid value. Please check the input.",

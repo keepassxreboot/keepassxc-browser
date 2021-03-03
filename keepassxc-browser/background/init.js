@@ -109,7 +109,7 @@ const contextMenuItems = [
     { title: tr('contextMenuFillTOTP'), action: 'fill_totp' },
     { title: tr('contextMenuFillAttribute'), id: 'fill_attribute', visible: false },
     { title: tr('contextMenuShowPasswordGenerator'), action: 'show_password_generator' },
-    { title: tr('contextMenuSaveCredentials'), action: 'remember_credentials' }
+    { title: tr('contextMenuSaveCredentials'), action: 'save_credentials' }
 ];
 
 const menuContexts = [ 'editable' ];
@@ -137,7 +137,10 @@ for (const item of contextMenuItems) {
 
 // Listen for keyboard shortcuts specified by user
 browser.commands.onCommand.addListener(async (command) => {
-    if (contextMenuItems.some(e => e.action === command)) {
+    if (contextMenuItems.some(e => e.action === command)
+        || command === 'redetect_fields'
+        || command === 'choose_credential_fields'
+        || command === 'retrive_credentials_forced') {
         const tabs = await browser.tabs.query({ active: true, currentWindow: true });
         if (tabs.length) {
             browser.tabs.sendMessage(tabs[0].id, { action: command });

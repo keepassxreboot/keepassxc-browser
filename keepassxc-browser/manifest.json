@@ -107,6 +107,18 @@
                 "default": "Alt+Shift+G",
                 "mac": "MacCtrl+Shift+G"
             }
+        },
+        "save_credentials": {
+            "description": "__MSG_contextMenuSaveCredentials__"
+        },
+        "redetect_fields": {
+            "description": "__MSG_popupRedetectButton__"
+        },
+        "choose_credential_fields": {
+            "description": "__MSG_popupChooseCredentialsText__"
+        },
+        "retrive_credentials_forced": {
+            "description": "__MSG_popupReopenButton__"
         }
     },
     "web_accessible_resources": [
