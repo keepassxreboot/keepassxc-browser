@@ -1015,7 +1015,8 @@ keepass.onNativeMessage = function(response) {
     }
 };
 
-function onDisconnected() {
+function onDisconnected(port) {
+    let error = (port && port.error) || browser.runtime.lastError;
     keepass.nativePort = null;
     keepass.isConnected = false;
     keepass.isDatabaseClosed = true;
@@ -1026,7 +1027,7 @@ function onDisconnected() {
     page.clearCredentials(page.currentTabId, true);
     keepass.updatePopup('cross');
     keepass.updateDatabaseHashToContent();
-    console.log('Failed to connect: ' + (browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message));
+    console.log('Failed to connect: ' + ((error === null)? 'Unknown error' : error.message);
 }
 
 keepass.getNonce = function() {
