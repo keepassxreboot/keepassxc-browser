@@ -397,6 +397,14 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
             };
 
             combinations.push(combination);
+
+            // Create an icon to the right side of the segmented fields
+            kpxcTOTPIcons.newIcon(totpInputs[totpInputs.length - 1], kpxc.databaseState, true);
+            kpxcIcons.icons.push({
+                field: totpInputs[totpInputs.length - 1],
+                iconType: kpxcIcons.iconTypes.TOTP,
+                segmented: true
+            });
         }
     }
 
@@ -617,7 +625,7 @@ kpxcFields.useCustomLoginFields = async function() {
     // Handle custom TOTP field
     if (totp) {
         totp.setAttribute('kpxc-defined', 'totp');
-        kpxcTOTPIcons.newIcon(totp, kpxc.databaseState, true);
+        kpxcTOTPIcons.newIcon(totp, kpxc.databaseState);
     }
 
     const combinations = [];

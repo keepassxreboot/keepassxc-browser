@@ -23,11 +23,12 @@ const Pixels = function(value) {
 
 // Basic icon class
 class Icon {
-    constructor(field, databaseState = DatabaseState.DISCONNECTED) {
+    constructor(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
         this.databaseState = databaseState;
         this.icon = null;
         this.inputField = null;
         this.rtl = kpxcUI.isRTL(field);
+        this.segmented = segmented;
 
         try {
             this.observer = new IntersectionObserver((entries) => {
@@ -103,7 +104,7 @@ kpxcUI.monitorIconPosition = function(iconClass) {
 
 kpxcUI.updateIconPosition = function(iconClass) {
     if (iconClass.inputField && iconClass.icon) {
-        kpxcUI.setIconPosition(iconClass.icon, iconClass.inputField, iconClass.rtl);
+        kpxcUI.setIconPosition(iconClass.icon, iconClass.inputField, iconClass.rtl, iconClass.segmented);
     }
 };
 
@@ -112,12 +113,17 @@ kpxcUI.calculateIconOffset = function(field, size) {
     return (offset < 0) ? 0 : offset;
 };
 
-kpxcUI.setIconPosition = function(icon, field, rtl = false) {
+kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     const rect = field.getBoundingClientRect();
     const size = Number(icon.getAttribute('size'));
     const offset = kpxcUI.calculateIconOffset(field, size);
-    const left = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
+    let left = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
     const top = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
+
+    // Add more space for the icon to show it at the right side of the field if TOTP fields are segmented
+    if (segmented) {
+        left += size + 10;
+    }
 
     icon.style.top = Pixels(top + document.scrollingElement.scrollTop + offset + 1);
     icon.style.left = rtl
@@ -181,7 +187,7 @@ kpxcUI.updateFromIntersectionObserver = function(iconClass, entries) {
 
             // Wait for possible DOM animations
             setTimeout(() => {
-                kpxcUI.setIconPosition(iconClass.icon, entry.target, iconClass.rtl);
+                kpxcUI.setIconPosition(iconClass.icon, entry.target, iconClass.rtl, iconClass.segmented);
             }, 400);
         }
     }
