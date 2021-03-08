@@ -430,8 +430,75 @@ kpxcFields.getCombination = async function(field, givenType) {
     return undefined;
 };
 
-// Gets of generates an unique ID for the element
-kpxcFields.getId = function(target) {
+// Sets and returns unique ID's for the element
+kpxcFields.setId = function(target) {
+    return [ kpxcFields.getIdFromXPath(target), kpxcFields.getIdFromProperties(target) ];
+};
+
+// Returns generated unique ID's for the element. If XPath ID fails, return the fallback one.
+kpxcFields.getId = function(idArray, inputField) {
+    if (!idArray) {
+        return '';
+    }
+
+    // Legacy ID is used. Convert it to the new one if possible
+    if (!Array.isArray(idArray) && idArray.length > 0) {
+        if (idArray === kpxcFields.getLegacyId(inputField)) {
+            idArray = kpxcFields.setId(inputField);
+        }
+    }
+
+    const elementFromXPath = kpxcFields.getElementFromXPathId(idArray[0]);
+    const fallbackId = kpxcFields.getIdFromProperties(inputField);
+
+    return elementFromXPath || (fallbackId === idArray[1] ? inputField : '');
+};
+
+// Returns element XPath
+kpxcFields.getIdFromXPath = function(target) {
+    let xpath = '';
+    let pos;
+    let temp;
+
+    while (target !== document.documentElement) {
+        pos = 0;
+        temp = target;
+        while (temp) {
+            if (temp.nodeType === 1 && temp.nodeName === target.nodeName) {
+                pos += 1;
+            }
+
+            temp = temp.previousSibling;
+        }
+
+        xpath = `${target.nodeName.toLowerCase()}${(pos > 1 ? `[${pos}]/` : '/')}${xpath}`;
+        target = target.parentNode;
+    }
+
+    xpath = `/${document.documentElement.nodeName.toLowerCase()}/${xpath}`;
+    xpath = xpath.replace(/\/$/, '');
+    return xpath;
+};
+
+// Generate uniqe ID from properties (new method)
+kpxcFields.getIdFromProperties = function(target) {
+    if (target.name) {
+        return `${target.nodeName} ${target.type} ${target.name} ${target.placeholder}`;
+    }
+
+    if (target.classList && target.classList.length > 0) {
+        return `${target.nodeName} ${target.type} ${target.classList.value} ${target.placeholder}`;
+    }
+
+    if (target.id && target.id !== '') {
+        return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.placeholder}`;
+    }
+
+    return `kpxc ${target.type} ${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}${target.offsetTop}${target.offsetLeft}`;
+};
+
+// Legacy unique ID generation for converting
+kpxcFields.getLegacyId = function(target) {
     if (target.classList.length > 0) {
         return `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
     }
@@ -441,6 +508,10 @@ kpxcFields.getId = function(target) {
     }
 
     return `kpxc ${target.type} ${target.clientTop}${target.clientLeft}${target.clientWidth}${target.clientHeight}${target.offsetTop}${target.offsetLeft}`;
+};
+
+kpxcFields.getElementFromXPathId = function(xpath) {
+    return (new XPathEvaluator()).evaluate(xpath, document.documentElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 };
 
 // Check for new password via autocomplete attribute
@@ -556,9 +627,9 @@ kpxcFields.useCustomLoginFields = async function() {
     }
 
     // Finds the input field based on the stored ID
-    const findInputField = async function(inputFields, id) {
-        if (id) {
-            const input = inputFields.find(e => kpxcFields.getId(e) === id);
+    const findInputField = async function(inputFields, idArray) {
+        if (idArray) {
+            const input = inputFields.find(e => e === kpxcFields.getId(idArray, e));
             if (input) {
                 return input;
             }
@@ -594,6 +665,12 @@ kpxcFields.useCustomLoginFields = async function() {
     if (totp) {
         totp.setAttribute('kpxc-defined', 'totp');
         kpxcTOTPIcons.newIcon(totp, kpxc.databaseState, true);
+    }
+
+    // If not all expected fields are identified, return an empty combination
+    if ((creds.username && !username) || (creds.password && !password) || (creds.totp && !totp)
+        || (creds.fields.length !== stringFields.length)) {
+        return [];
     }
 
     const combinations = [];
@@ -1112,10 +1189,15 @@ kpxc.initCombinations = async function(inputs = []) {
         return [];
     }
 
-    const combinations = kpxcFields.isCustomLoginFieldsUsed()
+    const isCustomLoginFieldsUsed = kpxcFields.isCustomLoginFieldsUsed();
+    const combinations = isCustomLoginFieldsUsed
                        ? await kpxcFields.useCustomLoginFields()
                        : await kpxcFields.getAllCombinations(inputs);
     if (!combinations || combinations.length === 0) {
+        if (isCustomLoginFieldsUsed) {
+            kpxcUI.createNotification('warning', tr('optionsCustomFieldsNotFound'));
+        }
+
         return [];
     }
 
