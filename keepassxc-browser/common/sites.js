@@ -5,6 +5,7 @@ const PREDEFINED_SITELIST = [
     'https://www.paypal.com/*/signin',
     'https://outlook.live.com/*',
     'https://login.live.com/*',
+    'https://odc.officeapps.live.com/*',
     'https://login.microsoftonline.com/*',
     'https://www.amazon.com/ap/*',
     'https://www.amazon.de/ap/*',
