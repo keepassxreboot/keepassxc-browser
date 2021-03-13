@@ -388,7 +388,8 @@ kpxcFields.getAllCombinations = async function(inputs) {
 // Adds segmented TOTP fields to the combination if found
 kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
     const form = inputs.length > 0 ? inputs[0].form : undefined;
-    if (acceptedOTPFields.some(f => form.className.includes(f) || form.id.includes(f) || form.name.includes(f))) {
+    if (acceptedOTPFields.some(f => form.className.includes(f) || form.id.includes(f) || form.name.includes(f))
+        || form.length === 6) {
         const totpInputs = Array.from(form.elements).filter(e => e.nodeName === 'INPUT' && e.type !== 'password');
         if (totpInputs.length === 6) {
             const combination = {
