@@ -236,6 +236,7 @@ kpxcEvent.messageHandlers = {
     'popup_login': kpxcEvent.onLoginPopup,
     'reconnect': kpxcEvent.onReconnect,
     'remove_credentials_from_tab_information': kpxcEvent.onRemoveCredentialsFromTabInformation,
+    'request_autotype': keepass.requestAutotype,
     'retrieve_credentials': page.retrieveCredentials,
     'show_default_browseraction': browserAction.showDefault,
     'update_credentials': keepass.updateCredentials,

@@ -404,3 +404,21 @@ Response message data (success, decrypted):
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```
+
+### request-autotype (KeePassXC 2.7.0 and newer)
+Request (no unencrypted message is needed):
+```json
+{
+    "action": "request-autotype",
+    "search": "<base domain of URL>"
+}
+```
+
+Response message data (success, decrypted):
+```json
+{
+    "version": "2.7.0",
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+}
+```

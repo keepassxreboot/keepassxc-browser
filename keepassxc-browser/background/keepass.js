@@ -37,7 +37,8 @@ const kpActions = {
     DATABASE_UNLOCKED: 'database-unlocked',
     GET_DATABASE_GROUPS: 'get-database-groups',
     CREATE_NEW_GROUP: 'create-new-group',
-    GET_TOTP: 'get-totp'
+    GET_TOTP: 'get-totp',
+    REQUEST_AUTOTYPE: 'request-autotype'
 };
 
 const kpErrors = {
@@ -851,6 +852,50 @@ keepass.getTotp = async function(tab, args = []) {
         console.log('getTotp failed: ', err);
     }
 };
+
+keepass.requestAutotype = async function(tab, args = []) {
+    if (!keepass.isConnected) {
+        keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
+        return false;
+    }
+
+    const kpAction = kpActions.REQUEST_AUTOTYPE;
+    const [ nonce, incrementedNonce ] = keepass.getNonces();
+    const search = getTopLevelDomainFromUrl(args[0]);
+
+    const messageData = {
+        action: kpAction,
+        search: search
+    };
+
+    const request = keepass.buildRequest(kpAction, keepass.encrypt(messageData, nonce), nonce, keepass.clientID);
+
+    try {
+        const response = await keepass.sendNativeMessage(request);
+        if (response.message && response.nonce) {
+            const res = keepass.decrypt(response.message, response.nonce);
+            if (!res) {
+                keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+                return false;
+            }
+
+            const message = nacl.util.encodeUTF8(res);
+            const parsed = JSON.parse(message);
+
+            if (keepass.verifyResponse(parsed, incrementedNonce)) {
+                return true;
+            }
+        } else if (response.error && response.errorCode) {
+            keepass.handleError(tab, response.errorCode, response.error);
+        }
+
+        return false;
+    } catch (err) {
+        console.log('requestAutotype failed: ', err);
+        return false;
+    }
+};
+
 
 keepass.generateNewKeyPair = function() {
     keepass.keyPair = nacl.box.keyPair();

@@ -43,6 +43,20 @@ async function testGeneral() {
     for (const m of matches) {
         assertRegex(siteMatch(m[0], m[1]), m[2], testCard, `siteMatch() for ${m[1]}`);
     }
+
+    // Base domain parsing (window.location.hostname)
+    const domains = [
+        [ 'another.example.co.uk', 'example.co.uk' ],
+        [ 'www.example.com', 'example.com' ],
+        [ 'test.net', 'test.net' ],
+        [ 'so.many.subdomains.co.jp', 'subdomains.co.jp' ],
+        [ 'test.site.example.com.au', 'example.com.au' ],
+        [ '192.168.0.1', '192.168.0.1' ]
+    ];
+
+    for (const d of domains) {
+        kpxcAssert(getTopLevelDomainFromUrl(d[0]), d[1], testCard, 'getBaseDomainFromUrl() for ' + d[0]);
+    }
 }
 
 // Input field matching (keepassxc-browser.js)

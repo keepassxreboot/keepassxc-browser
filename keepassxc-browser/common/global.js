@@ -140,6 +140,24 @@ const slashNeededForUrl = function(pattern) {
     return matchPattern.exec(pattern);
 };
 
+// Returns the top level domain, e.g. https://another.example.co.uk -> example.co.uk
+const getTopLevelDomainFromUrl = function(hostname) {
+    const ipRegex = new RegExp(/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/g);
+    const domainRegex = new RegExp(/(\w+).(com|net|org|edu|co)*(.\w+)$/g);
+
+    // If the hostname is an IP address, return it directly
+    if (hostname.match(ipRegex)) {
+        return hostname;
+    }
+
+    const domainMatch = domainRegex.exec(hostname);
+    if (domainMatch) {
+        return domainMatch[0];
+    }
+
+    return hostname;
+};
+
 function tr(key, params) {
     return browser.i18n.getMessage(key, params);
 }

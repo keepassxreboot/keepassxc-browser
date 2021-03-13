@@ -31,6 +31,10 @@
         "message": "Fill attribute…",
         "description": "Context menu parent item for filling a custom attribute."
     },
+    "contextMenuRequestGlobalAutoType": {
+      "message": "Request Global Auto-Type",
+      "description": "Global Auto-Type shortcut text."
+    },
     "multipleCredentialsDetected": {
         "message": "HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."

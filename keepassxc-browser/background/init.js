@@ -114,7 +114,8 @@ const contextMenuItems = [
     { title: tr('contextMenuFillTOTP'), action: 'fill_totp' },
     { title: tr('contextMenuFillAttribute'), id: 'fill_attribute', visible: false },
     { title: tr('contextMenuShowPasswordGenerator'), action: 'show_password_generator' },
-    { title: tr('contextMenuSaveCredentials'), action: 'save_credentials' }
+    { title: tr('contextMenuSaveCredentials'), action: 'save_credentials' },
+    { title: tr('contextMenuRequestGlobalAutoType'), action: 'request_autotype' }
 ];
 
 const menuContexts = [ 'editable' ];
