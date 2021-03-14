@@ -387,14 +387,8 @@ kpxcFields.getAllCombinations = async function(inputs) {
 
 // Adds segmented TOTP fields to the combination if found
 kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
-    const form = inputs.length > 0 ? inputs[0].form : undefined;
-    if (!form) {
-        return combinations;
-    }
-
-    if (acceptedOTPFields.some(f => form.className.includes(f) || form.id.includes(f) || form.name.includes(f))
-        || form.length === 6) {
-        const totpInputs = Array.from(form.elements).filter(e => e.nodeName === 'INPUT' && e.type !== 'password');
+    const addTotpFieldsToCombination = function(inputFields) {
+        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password');
         if (totpInputs.length === 6) {
             const combination = {
                 form: form,
@@ -411,6 +405,16 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
                 segmented: true
             });
         }
+    };
+
+    const form = inputs.length > 0 ? inputs[0].form : undefined;
+    if (form && (acceptedOTPFields.some(f => form.className.includes(f) || form.id.includes(f) || form.name.includes(f))
+        || form.length === 6)) {
+        // Use the form's elements
+        addTotpFieldsToCombination(form.elements);
+    } else if (inputs.length === 6 && inputs.every(i => i.inputMode === 'numeric' && i.pattern.includes('0-9'))) {
+        // No form is found, but input fields are possibly segmented TOTP fields
+        addTotpFieldsToCombination(inputs);
     }
 
     return combinations;
