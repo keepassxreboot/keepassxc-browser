@@ -2,6 +2,7 @@
 
 const IGNORE_NOTHING = 'ignoreNothing';
 const IGNORE_NORMAL = 'ignoreNormal';
+const IGNORE_AUTOSUBMIT = 'ignoreAutoSubmit';
 const IGNORE_FULL = 'ignoreFull';
 
 const schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
