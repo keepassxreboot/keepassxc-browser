@@ -85,6 +85,7 @@
         "Icon": true,
         "isEdge": true,
         "isFirefox": true,
+        "IGNORE_AUTOSUBMIT": true,
         "IGNORE_FULL": true,
         "IGNORE_NORMAL": true,
         "IGNORE_NOTHING": true,

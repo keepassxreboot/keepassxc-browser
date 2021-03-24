@@ -1029,7 +1029,8 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
     await sendMessage('page_set_manual_fill', ManualFill.NONE);
 
     // Auto-submit
-    if (kpxc.settings.autoSubmit && !skipAutoSubmit) {
+    const autoSubmitIgnoredForSite = await kpxc.siteIgnored(IGNORE_AUTOSUBMIT);
+    if (kpxc.settings.autoSubmit && !skipAutoSubmit && !autoSubmitIgnoredForSite) {
         const submitButton = kpxcForm.getFormSubmitButton(combination.form);
         if (submitButton !== undefined) {
             submitButton.click();
