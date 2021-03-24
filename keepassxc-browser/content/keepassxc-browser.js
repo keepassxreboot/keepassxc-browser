@@ -1329,25 +1329,46 @@ kpxc.initCredentialFields = async function() {
     }
 };
 
-// Intializes the login popup list for choosing credentials
+// Intializes the login lists for popup and Autocomplete Menu
 kpxc.initLoginPopup = function() {
     if (kpxc.credentials.length === 0) {
         return;
     }
 
-    const getLoginText = function(credential, withGroup) {
-        const name = credential.name.length < MAX_AUTOCOMPLETE_NAME_LEN
+    // Returns a login item with additional information for sorting
+    const getLoginItem = function(credential, withGroup, loginId) {
+        const title = credential.name.length < MAX_AUTOCOMPLETE_NAME_LEN
                    ? credential.name
                    : credential.name.substr(0, MAX_AUTOCOMPLETE_NAME_LEN) + '…';
         const group = (withGroup && credential.group) ? `[${credential.group}] ` : '';
         const visibleLogin = (credential.login.length > 0) ? credential.login : tr('credentialsNoUsername');
-        const text = `${group}${name} (${visibleLogin})`;
+        let text = `${group}${title} (${visibleLogin})`;
 
         if (credential.expired && credential.expired === 'true') {
-            return `${text} [${tr('credentialExpired')}]`;
+            text = `${text} [${tr('credentialExpired')}]`;
         }
 
-        return text;
+        return {
+            title: title,
+            group: group,
+            visibleLogin: visibleLogin,
+            login: credential.login,
+            loginId: loginId,
+            uuid: credential.uuid,
+            text: text
+        };
+    };
+
+    // Sorting with or without group name included
+    const sortLoginItemBy = function(a, b, name, withGroup = false) {
+        const firstGroup = a.group.toLowerCase();
+        const secondGroup = b.group.toLowerCase();
+        const first = a[name].toLowerCase();
+        const second = b[name].toLowerCase();
+
+        return withGroup
+            ? firstGroup.localeCompare(secondGroup) || first.localeCompare(second)
+            : first.localeCompare(second);
     };
 
     const getUniqueGroupCount = function(creds) {
@@ -1356,25 +1377,43 @@ kpxc.initLoginPopup = function() {
         return uniqueGroups.size;
     };
 
-    // Add usernames + descriptions to autocomplete-list and popup-list
-    const usernames = [];
-    kpxcUserAutocomplete.clear();
     const showGroupNameInAutocomplete = kpxc.settings.showGroupNameInAutocomplete && (getUniqueGroupCount(kpxc.credentials) > 1);
 
+    // Initialize login items
+    const loginItems = [];
     for (let i = 0; i < kpxc.credentials.length; i++) {
-        const loginText = getLoginText(kpxc.credentials[i], showGroupNameInAutocomplete);
-        usernames.push({ text: loginText, uuid: kpxc.credentials[i].uuid });
+        const loginItem = getLoginItem(kpxc.credentials[i], showGroupNameInAutocomplete, i);
+        loginItems.push(loginItem);
+    }
+
+    // Sort login items
+    if (kpxc.settings.credentialSorting === SORT_BY_TITLE) {
+        loginItems.sort((a, b) => sortLoginItemBy(a, b, 'title'));
+    } else if (kpxc.settings.credentialSorting === SORT_BY_USERNAME) {
+        loginItems.sort((a, b) => sortLoginItemBy(a, b, 'visibleLogin'));
+    } else if (kpxc.settings.credentialSorting === SORT_BY_GROUP_AND_TITLE) {
+        loginItems.sort((a, b) => sortLoginItemBy(a, b, 'title', true));
+    } else if (kpxc.settings.credentialSorting === SORT_BY_GROUP_AND_USERNAME) {
+        loginItems.sort((a, b) => sortLoginItemBy(a, b, 'visibleLogin', true));
+    }
+
+    const popupLoginItems = [];
+    kpxcUserAutocomplete.clear();
+
+    // Initialize Popup Login and Autocomplete Menu items
+    for (const l of loginItems) {
+        popupLoginItems.push({ text: l.text, uuid: l.uuid });
 
         kpxcUserAutocomplete.elements.push({
-            label: loginText,
-            value: kpxc.credentials[i].login,
-            uuid: kpxc.credentials[i].uuid,
-            loginId: i
+            label: l.text,
+            value: l.login,
+            uuid: l.uuid,
+            loginId: l.loginId
         });
     }
 
-    // Generate popup-list of usernames + descriptions
-    sendMessage('popup_login', usernames);
+    // Activate Popup Login list of usernames + descriptions
+    sendMessage('popup_login', popupLoginItems);
 };
 
 kpxc.passwordFilled = async function() {

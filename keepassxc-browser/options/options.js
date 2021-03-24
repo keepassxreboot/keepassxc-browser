@@ -73,10 +73,15 @@ options.initGeneralSettings = function() {
         $('#tab-general-settings select#colorTheme').val(options.settings['colorTheme']);
     }
 
-    $('#tab-general-settings select:first').change(async function() {
+    $('#tab-general-settings select#colorTheme').change(async function() {
         options.settings['colorTheme'] = $(this).val();
         await options.saveSettings();
         location.reload();
+    });
+
+    $('#tab-general-settings select#credentialSorting').change(async function() {
+        options.settings['credentialSorting'] = $(this).val();
+        await options.saveSettings();
     });
 
     $('#tab-general-settings input[type=checkbox]').each(function() {
@@ -115,6 +120,7 @@ options.initGeneralSettings = function() {
         }
     });
 
+    $('#tab-general-settings select#credentialSorting').val(options.settings['credentialSorting']);
     $('#tab-general-settings input#defaultGroup').val(options.settings['defaultGroup']);
 
     $('#tab-general-settings input[type=radio]').each(function() {

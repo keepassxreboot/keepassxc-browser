@@ -1,9 +1,16 @@
 'use strict';
 
+// Site Preferences ignore options
 const IGNORE_NOTHING = 'ignoreNothing';
 const IGNORE_NORMAL = 'ignoreNormal';
 const IGNORE_AUTOSUBMIT = 'ignoreAutoSubmit';
 const IGNORE_FULL = 'ignoreFull';
+
+// Credential sorting options
+const SORT_BY_TITLE = 'sortByTitle';
+const SORT_BY_USERNAME = 'sortByUsername';
+const SORT_BY_GROUP_AND_TITLE = 'sortByGroupAndTitle';
+const SORT_BY_GROUP_AND_USERNAME = 'sortByGroupAndUsername';
 
 const schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';

@@ -142,6 +142,18 @@
 
                   <div class="form-group">
                     <div class="form-check">
+                      <label for="credentialSorting" data-i18n="optionsCredentialSortSelectionHeader"></label>
+                      <select class="form-control form-control-sm col-md-2" id="credentialSorting" data-i18n="[title]optionsCredentialSortSelection">
+                        <option value="sortByTitle" data-i18n="optionsSortByTitle"></option>
+                        <option value="sortByUsername" data-i18n="optionsSortByUsername"></option>
+                        <option value="sortByGroupAndTitle" data-i18n="optionsSortByGroupAndTitle"></option>
+                        <option value="sortByGroupAndUsername" data-i18n="optionsSortByGroupAndUsername"></option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoSubmit" id="autoSubmit" value="true" />
                       <label class="form-check-label" for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
                       <span class="form-text text-muted" data-i18n="optionsAutoSubmitHelpText"></span>
