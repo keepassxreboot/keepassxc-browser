@@ -27,7 +27,8 @@ TOTPAutocomplete.prototype.itemEnter = async function(index, elements) {
 };
 
 TOTPAutocomplete.prototype.fillTotp = async function(index, uuid) {
-    const combination = await kpxcFields.getCombination(this.input);
+    const combination = await kpxcFields.getCombination(this.input, 'totp')
+                     || await kpxcFields.getCombination(this.input, 'totpInputs');
     combination.loginId = index;
     kpxc.fillTOTPFromUuid(this.input, uuid);
 };

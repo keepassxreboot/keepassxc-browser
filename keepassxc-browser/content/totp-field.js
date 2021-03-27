@@ -13,14 +13,15 @@ const acceptedOTPFields = [
     'otp',
     'token',
     'twofa',
+    'two-factor',
     'twofactor'
 ];
 
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
-kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
-    kpxcTOTPIcons.icons.push(new TOTPFieldIcon(field, databaseState, forced));
+kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
+    kpxcTOTPIcons.icons.push(new TOTPFieldIcon(field, databaseState, segmented));
 };
 
 kpxcTOTPIcons.switchIcon = function(state) {
@@ -75,25 +76,25 @@ kpxcTOTPIcons.isValid = function(field, forced) {
 };
 
 class TOTPFieldIcon extends Icon {
-    constructor(field, databaseState = DatabaseState.DISCONNECTED, forced = false) {
-        super(field, databaseState);
+    constructor(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
+        super(field, databaseState, segmented);
 
-        this.initField(field, forced);
+        this.initField(field, segmented);
         kpxcUI.monitorIconPosition(this);
     }
 }
 
-TOTPFieldIcon.prototype.initField = function(field, forced) {
+TOTPFieldIcon.prototype.initField = function(field, segmented) {
     // Observer the visibility
     if (this.observer) {
         this.observer.observe(field);
     }
 
-    this.createIcon(field);
+    this.createIcon(field, segmented);
     this.inputField = field;
 };
 
-TOTPFieldIcon.prototype.createIcon = function(field) {
+TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
     const className = (isFirefox() ? 'moz' : 'default');
 
     // Size the icon dynamically, but not greater than 24 or smaller than 14
@@ -125,7 +126,7 @@ TOTPFieldIcon.prototype.createIcon = function(field) {
         kpxc.fillFromTOTP(field);
     });
 
-    kpxcUI.setIconPosition(icon, field, this.rtl);
+    kpxcUI.setIconPosition(icon, field, this.rtl, segmented);
     this.icon = icon;
 
     const styleSheet = document.createElement('link');
