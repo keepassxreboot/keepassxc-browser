@@ -10,6 +10,7 @@ const defaultSettings = {
     autoSubmit: false,
     checkUpdateKeePassXC: 3,
     colorTheme: 'system',
+    credentialSorting: SORT_BY_GROUP_AND_TITLE,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
     redirectAllowance: 1,
@@ -80,6 +81,10 @@ page.initSettings = async function() {
 
         if (!('colorTheme' in page.settings)) {
             page.settings.colorTheme = defaultSettings.colorTheme;
+        }
+
+        if (!('credentialSorting' in page.settings)) {
+            page.settings.credentialSorting = defaultSettings.credentialSorting;
         }
 
         if (!('defaultGroup' in page.settings)) {

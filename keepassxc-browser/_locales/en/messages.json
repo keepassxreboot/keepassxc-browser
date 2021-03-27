@@ -683,6 +683,10 @@
         "message": "Color theme",
         "description": "Theme selection header text."
     },
+    "optionsCredentialSortSelectionHeader": {
+        "message": "Sort matching credentials by",
+        "description": "Credential sort option header text."
+    },
     "optionsThemeSelection": {
         "message": "Select color theme",
         "description": "Theme selection title text."
@@ -902,6 +906,22 @@
     "optionsSelectionFull": {
         "message": "Disable all features",
         "description": "Site preferences option selection."
+    },
+    "optionsSortByTitle": {
+        "message": "Title",
+        "desription": "Sort matching credentials by title option selection."
+    },
+    "optionsSortByUsername": {
+        "message": "Username",
+        "desription": "Sort matching credentials by username option selection."
+    },
+    "optionsSortByGroupAndTitle": {
+        "message": "Group and title",
+        "desription": "Sort matching credentials by group and title option selection."
+    },
+    "optionsSortByGroupAndUsername": {
+        "message": "Group and username",
+        "desription": "Sort matching credentials by group and username option selection."
     },
     "optionsCustomFieldsNotFound": {
         "message": "No saved custom login fields found.",
