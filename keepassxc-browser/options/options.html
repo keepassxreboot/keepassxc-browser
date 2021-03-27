@@ -36,7 +36,7 @@
               <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#about" tabindex="5"><i class="fa fa-info-circle fa-lg pr-2" aria-hidden="true"></i><span data-i18n="optionsMenuAbout"></span></a></li>
             </ul>
             <footer class="d-none d-md-flex px-3 mt-4 mb-1 text-uppercase position-absolute small text-muted">
-              (C) 2017-2020 - KeePassXC Team
+              (C) 2017-2021 - KeePassXC Team
             </footer>
           </div>
         </nav>
@@ -48,12 +48,15 @@
             <div class="tab" id="tab-general-settings">
               <h2 class="pb-3 mt-0" data-i18n="optionsGeneralSettingsTab"></h2>
 
+              <!-- User interface -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-television" aria-hidden="true"></i>
                   <span data-i18n="optionsUserInterfaceTitle"></span>
                 </div>
                 <div class="card-body">
+
+                  <!-- Color theme -->
                   <div class="form-group">
                     <label for="colorTheme" data-i18n="optionsThemeSelectionHeader"></label>
                     <select class="form-control form-control-sm col-md-3 col-lg-2" id="colorTheme" data-i18n="[title]optionsThemeSelection">
@@ -63,6 +66,7 @@
                     </select>
                   </div>
 
+                  <!-- Activate username icons -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showLoginFormIcon" id="usernameIconsCheckBox" value="true" />
@@ -71,6 +75,7 @@
                     </div>
                   </div>
 
+                  <!-- Activate password icons -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="usePasswordGeneratorIcons" id="passwordIconsCheckBox" value="true" />
@@ -80,6 +85,7 @@
                     </div>
                   </div>
 
+                  <!-- Activate TOTP icons -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showOTPIcon" id="totpIconsCheckBox" value="true" />
@@ -88,6 +94,7 @@
                     </div>
                   </div>
 
+                  <!-- Show notifications -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showNotifications" id="notificationCheckBox" value="true" />
@@ -98,6 +105,7 @@
                 </div>
               </div>
 
+              <!-- Keyboard shortcuts -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-keyboard-o" aria-hidden="true"></i>
@@ -118,12 +126,15 @@
                 </div>
               </div>
 
+              <!-- Filling credentials -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                   <span data-i18n="optionsFillingCredentialsTitle"></span>
                 </div>
                 <div class="card-body">
+
+                  <!-- Automatically retrieve credentials -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoRetrieveCredentials" id="autoRetrieveCredentials" value="true" />
@@ -132,6 +143,7 @@
                     </div>
                   </div>
 
+                  <!-- Use Autocomplete Menu -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoCompleteUsernames" id="autoCompleteUsernames" value="true" />
@@ -140,6 +152,7 @@
                     </div>
                   </div>
 
+                  <!-- Use Auto-Submit -->
                   <div class="form-group">
                     <div class="form-check">
                       <label for="credentialSorting" data-i18n="optionsCredentialSortSelectionHeader"></label>
@@ -160,6 +173,7 @@
                     </div>
                   </div>
 
+                  <!-- Automatically fill single-credential entries -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoFillSingleEntry" id="autoFillSingleEntry" value="true" />
@@ -172,6 +186,7 @@
                     </div>
                   </div>
 
+                  <!-- Autofill HTTP Auth dialogs -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoFillAndSend" id="autoFillAndSend" value="true">
@@ -184,12 +199,15 @@
                 </div>
               </div>
 
+              <!-- Saving credentials -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-save" aria-hidden="true"></i>
                   <span data-i18n="optionsSavingCredentialsTitle"></span>
                 </div>
                 <div class="card-body">
+
+                  <!-- Show Credential Banner -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showLoginNotifications" id="showLoginNotifications" value="true">
@@ -197,6 +215,7 @@
                     </div>
                   </div>
 
+                  <!-- Ask where to save credentials -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="defaultGroupAlwaysAsk" id="defaultGroupAlwaysAsk" value="true">
@@ -205,6 +224,7 @@
                     </div>
                   </div>
 
+                  <!-- Default group for saving -->
                   <div class="form-group">
                     <label for="defaultGroup" data-i18n="optionsLabelDefaultGroup"></label>
                     <div class="input-group">
@@ -217,6 +237,7 @@
                     </div>
                   </div>
 
+                  <!-- Save domain only -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnlyNewCreds" id="saveDomainOnlyNewCreds" value="true">
@@ -225,6 +246,7 @@
                     </div>
                   </div>
 
+                  <!-- Number of allowed redirects -->
                   <div class="form-group">
                     <label id="redirectAllowanceLabel" class="font-weight-normal" for="redirectAllowance" data-i18n="optionsRedirectAllowance" i18n-placeholder="1"></label>
                     <input type="range" class="form-control-range col-md-6 col-lg-4" id="redirectAllowance" name="redirectAllowance" min="1" max="11" step="1" value="1" />
@@ -233,6 +255,7 @@
                 </div>
               </div>
 
+              <!-- Updates -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -275,11 +298,14 @@
                 </div>
               </div>
 
+              <!-- Advanced settings -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                   <span data-i18n="optionsAdvancedSettingsTitle"></span>
                 </div>
+
+                <!-- Use dynamic input field detection -->
                 <div class="card-body">
                   <div class="form-group">
                     <div class="form-check">
@@ -289,6 +315,7 @@
                     </div>
                   </div>
 
+                  <!-- Display group name -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showGroupNameInAutocomplete" id="showGroupNameInAutocomplete" value="true" />
@@ -301,6 +328,7 @@
                     </div>
                   </div>
 
+                  <!-- Automatic reconnect -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoReconnect" id="autoReconnect" value="true" />
@@ -313,6 +341,7 @@
                     </div>
                   </div>
 
+                  <!-- Save domain only -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnly" id="saveDomainOnly" value="true" />
@@ -321,6 +350,7 @@
                     </div>
                   </div>
 
+                  <!-- Use predefined sites -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="usePredefinedSites" id="usePredefinedSites" value="true" />
@@ -331,9 +361,20 @@
                       </details>
                     </div>
                   </div>
+
+                  <!-- Clear credential timeout -->
+                  <div class="form-group">
+                    <form>
+                    <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
+                    <br />
+                    <input class="form-input" type="number" id="clearCredentialTimeout" min="0" max="3600" required/>
+                    <span class="form-text text-muted" data-i18n="optionsClearCredentialsTimeoutHelpText"></span>
+                  </form>
+                  </div>
                 </div>
               </div>
 
+              <!-- Import/Export settings -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-exchange fa-rotate-90" aria-hidden="true"></i>
@@ -610,6 +651,7 @@
 
                       Bart Libert
                       David Walluscheck
+                      yuriyk
                     </pre>
                   </details>
                 </div>
