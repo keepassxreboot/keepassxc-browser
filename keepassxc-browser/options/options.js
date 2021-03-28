@@ -276,7 +276,7 @@ options.showKeePassXCVersions = function(response) {
     $('#tab-about span.kpxcVersion').text(response.current);
     $('#tab-general-settings button.checkUpdateKeePassXC:first').attr('disabled', false);
 
-    if (response.current.startsWith('2.6') || response.current === '2.5.3-snapshot') {
+    if (response.current.startsWith('2.6') || response.current.includes('snapshot')) {
         $('#tab-general-settings #versionRequiredAlert').hide();
     } else {
         $('#tab-general-settings #showGroupNameInAutocomplete').attr('disabled', true);
