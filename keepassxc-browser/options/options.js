@@ -123,6 +123,16 @@ options.initGeneralSettings = function() {
     $('#tab-general-settings select#credentialSorting').val(options.settings['credentialSorting']);
     $('#tab-general-settings input#defaultGroup').val(options.settings['defaultGroup']);
 
+    $('#tab-general-settings input#clearCredentialTimeout').val(options.settings['clearCredentialsTimeout']);
+    $('#tab-general-settings input#clearCredentialTimeout').change(async function(e) {
+        if (e.target.valueAsNumber < 0 || e.target.valueAsNumber > 3600) {
+            return;
+        }
+
+        options.settings['clearCredentialsTimeout'] = e.target.valueAsNumber;
+        await options.saveSettings();
+    });
+
     $('#tab-general-settings input[type=radio]').each(function() {
         if ($(this).val() === String(options.settings[$(this).attr('name')])) {
             $(this).attr('checked', options.settings[$(this).attr('name')]);

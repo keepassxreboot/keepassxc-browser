@@ -9,6 +9,7 @@ const defaultSettings = {
     autoRetrieveCredentials: true,
     autoSubmit: false,
     checkUpdateKeePassXC: 3,
+    clearCredentialsTimeout: 10,
     colorTheme: 'system',
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
     defaultGroup: '',
@@ -27,6 +28,7 @@ const defaultSettings = {
 var page = {};
 page.attributeMenuItemIds = [];
 page.blockedTabs = [];
+page.clearCredentialsTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
 page.loginId = -1;
@@ -81,6 +83,10 @@ page.initSettings = async function() {
 
         if (!('colorTheme' in page.settings)) {
             page.settings.colorTheme = defaultSettings.colorTheme;
+        }
+
+        if (!('clearCredentialsTimeout' in page.settings)) {
+            page.settings.clearCredentialsTimeout = defaultSettings.clearCredentialsTimeout;
         }
 
         if (!('credentialSorting' in page.settings)) {
@@ -177,12 +183,18 @@ page.initSitePreferences = async function() {
 };
 
 page.switchTab = async function(tab) {
+    // Clears Fill Attribute selection from context menu
     browser.contextMenus.update('fill_attribute', { visible: false });
-    if (page.tabs[tab.id]
-        && page.tabs[tab.id].credentials.length > 0
-        && page.tabs[tab.id].credentials.some(e => e.stringFields && e.stringFields.length > 0)) {
-        await page.updateContextMenu(tab, page.tabs[tab.id].credentials);
-    }
+
+    // Clears all logins from other tabs after a timeout
+    clearTimeout(page.clearCredentialsTimeout);
+    page.clearCredentialsTimeout = setTimeout(() => {
+        for (const pageTabId of Object.keys(page.tabs)) {
+            if (tab.id !== Number(pageTabId)) {
+                page.clearCredentials(Number(pageTabId), true);
+            }
+        }
+    }, page.settings.clearCredentialsTimeout * 1000);
 
     browserAction.showDefault(tab);
     browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {

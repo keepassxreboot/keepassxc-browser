@@ -6,7 +6,6 @@ const _maximumMutations = 200;
 // Contains already called method names
 const _called = {};
 _called.automaticRedetectCompleted = false;
-_called.clearLogins = false;
 _called.retrieveCredentials = false;
 
 // Wrapper
@@ -1289,9 +1288,6 @@ kpxc.initCombinations = async function(inputs = []) {
 
 // The main function for finding input fields
 kpxc.initCredentialFields = async function() {
-    await sendMessage('page_clear_logins', _called.clearLogins);
-    _called.clearLogins = true;
-
     // Identify all forms in the page
     const formInputs = await kpxc.identifyFormInputs();
 

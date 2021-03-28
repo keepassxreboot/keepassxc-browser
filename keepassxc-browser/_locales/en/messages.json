@@ -779,6 +779,14 @@
         "message": "An HTTP Basic Auth dialog looks like this:",
         "description": "HTTP Basic Auth image help text."
     },
+    "optionsClearCredentialsTimeout": {
+        "message": "Clear credentials from non-active tabs after (seconds, 0-3600).",
+        "description": "Clear credentials label text."
+    },
+    "optionsClearCredentialsTimeoutHelpText": {
+        "message": "Credentials are cleared from background tabs after the timeout and permissions for those pages will be asked again.",
+        "description": "Clear credentials timeout help text."
+    },
     "optionsVersionInfoText": {
         "message": "KeePassXC-Browser needs KeePassXC to retrieve credentials.",
         "description": "Settings page version info text."
