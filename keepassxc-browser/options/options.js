@@ -273,7 +273,7 @@ options.initGeneralSettings = function() {
     }
 };
 
-options.showKeePassXCVersions = function(response) {
+options.showKeePassXCVersions = async function(response) {
     if (response.current === '') {
         response.current = 'unknown';
     }
@@ -286,7 +286,12 @@ options.showKeePassXCVersions = function(response) {
     $('#tab-about span.kpxcVersion').text(response.current);
     $('#tab-general-settings button.checkUpdateKeePassXC:first').attr('disabled', false);
 
-    if (response.current.startsWith('2.6') || response.current === '2.5.3-snapshot') {
+    const result = await browser.runtime.sendMessage({
+        action: 'compare_version',
+        args: [ '2.6.0', response.current ]
+    });
+
+    if (result) {
         $('#tab-general-settings #versionRequiredAlert').hide();
     } else {
         $('#tab-general-settings #showGroupNameInAutocomplete').attr('disabled', true);
