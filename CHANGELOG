@@ -1,3 +1,218 @@
+1.7.7 (30-03-2021)
+=========================
+- Add support for credential sorting (KeePassXC side option will be removed) [#1280]
+- Add support for additional keyboard shortcuts [#1256]
+- Add support for multiple Autocomplete Menu locations [#1248]
+- Add support for filling multiple/segmented TOTP fields [#1216]
+- Add support for clearing data from non-active tabs [#1283]
+- Update WebExtension-Polyfill to 0.7.0 [#1222]
+- Fix reloading credentials after save [#1227]
+- Custom Login Fields improvements [#1239, #1242]
+- Site Preferences improvements [#1252, #1278]
+- Predefined Sites additions [#1251, #1261, #1264]
+
+1.7.6 (04-02-2021)
+=========================
+- Fixes for the new Autocomplete implementation [#1206, #1208]
+
+1.7.5 (31-01-2021)
+=========================
+- Add support for filling TOTP from another database [#1173]
+- TOTP detection fixes [#1168, #1188]
+- Show Win64 platform correctly [#1170]
+- Site specific fixes for eBay [#1171, #1172]
+- Improve form handling with credentials saving [#1169]
+- Fix password general fill events [#1183]
+- Ignore form buttons with different formaction [#1193]
+- New translations: Slovenian
+
+1.7.4 (21-12-2020)
+=========================
+- Update tweetnacl.js to 1.0.3 [#1125]
+- Improve keyboard shortcuts page for Firefox [#1104]
+- Add a new feature for filling any KPH attribute from context menu [#1023]
+- Fix PayPal URL with Predefined Sites [#1141]
+- Add list of supporters [#1140]
+- Allow Custom Login Fields to select input fields with less restrictions when using Show More [#1115]
+- Add tests for content scripts [#1066]
+- Fix showing Autocomplete Menu when not focused [#1086]
+- Define maximum entry name length for Autocomplete Menu [#1154]
+
+1.7.3 (07-11-2020)
+=========================
+- Fix submitting username from Autocomplete Menu [#1094]
+- Fix TOTP field identification [#1085]
+- Fix Predefined Sites [#1084, #1090]
+
+1.7.2 (02-11-2020)
+=========================
+- Add predefined sites option to improve the login flow with multiple pages [#1010]
+- Adjustments for input types [#1022, #1040, #1071]
+- Credential Banner fixes [#1065, #1075]
+- Fix filling from keyboard without input field focus [#1057]
+- Fix Google login page submit detection [#1015]
+- Fix relative icon positions with dir="rtl" [#1021]
+
+1.7.1 (13-09-2020)
+=========================
+- Fix fill from username icon when Automatically retrieve credentials is disabled [#990]
+- Fix Custom Login Field behavior [#1000]
+- Add missing uuid to Autocomplete when filling using keyboard [#1000]
+- Respect Autocomplete Menu setting when filling using keyboard or Username Icon [#1000]
+- Fix Auto-Submit (wrong function call) [#1000]
+- Fix Auto-Fill (e.g. with Google) [#1000]
+
+1.7.0 (02-09-2020)
+=========================
+
+Major content script refactor. See https://github.com/keepassxreboot/keepassxc-browser/pull/961 for details.
+
+- Add support for Shadow DOM with dynamic input field detection [#984]
+- Add support for retrieving the latest TOTP value [#961]
+- Add support for CSS animations [#961]
+- Fixed possible extension slowdowns [#961]
+
+1.6.6 (13-07-2020)
+=========================
+- Fix document max size calculation, affects input field detection [#937]
+
+1.6.5 (11-07-2020)
+=========================
+- Icon and translation fixes [#934, #924]
+- Add wilcard to ignored URL [#915]
+- Make groups scrollable when saving credentials [#918]
+- High CPU usage fixes [#931, #928, #920]
+
+Changelog:
+1.6.4 (15-06-2020)
+=========================
+- Fix allow filling readonly fields [#878]
+- Fix saving credentials to a new group [#909]
+- Fix checking visibility for dynamically added fields [#906]
+- Improve TOTP field detection [#890, #901]
+- Improve form handling [#898, #892]
+- Update some icons and add database locked icon [#903]
+
+1.6.3 (28-04-2020)
+=========================
+- Fix auto-reconnect with Windows [#832]
+- Fix credential saving check [#843]
+- CSS fixes [#851, #865, #874]
+- Text and translation changes [#853, #864, #867]
+- TOTP icon fixes [#844]
+- Choose custom TOTP field feature [#859]
+- Fix showing Credential Banner on tab change [#863]
+- Performance fixes [#836]
+- Fix relative autocomplete position [#840]
+- Code cleaning on settings page [#872]
+
+1.6.2 (26-03-2020)
+=========================
+- Fix TOTP icon check [#821]
+- Fix saving issues with settings page [#823, #828]
+
+1.6.1 (22-03-2020)
+=========================
+- Fix CSS root variable collide [#816]
+- Disable group name option with older KeePassXC releases [#817]
+
+1.6.0 (21-03-2020)
+=========================
+- TOTP icon and keyboard shortcut fixes [#716, #784, #786, #798]
+- Move all DOM elements to Shadow DOM [#719]
+- Add Save domain only option when saving new credentials [#743]
+- UI redesign with dark theme [#758, #772, #791, #792, #793, #794, #808, #810]
+- Add Redirect allowance option [#767]
+- Remove duplicate entries with Additional URL's [#762]
+- Fix group saving to root [#742]
+- Fix import settings [#773]
+- Fix updating datetime on reconnect [#814]
+
+1.5.4 (09-12-2019
+=========================
+- Add support for filling TOTP using an icon [#625] [#710]
+- Add support for icon positioning with right-to-left pages [#702]
+- Fix handling cross-domain iframes [#652]
+- Fix extension icon with update check [#655]
+- Fix handling multiple icons [#617]
+- Fix using Site Preferences with the new Credential Banner [#694]
+- Remove XML exclude from the manifest [#666]
+
+1.5.3 (21-10-2019)
+=========================
+- Add undefined type to the input field list [#637]
+- Fix association with databases and hash upgrade [#638] [#641] [#647]
+- Fix returning Promise with TOTP filling [#646]
+- Add a feature for import/export settings [#642]
+
+1.5.2 (13-10-2019)
+=========================
+- Fix missing await when filling a TOTP [#632]
+- Fix connection issues and "Cannot decrypt message" related problems [#630]
+- Fix update button handling from Credential Banner [#620]
+
+1.5.1 (27-09-2019)
+=========================
+- Username field icon is now optional (enabled by default) [#614]
+- Fix CSS separator [#614]
+- Scale the username field icon dynamically [#614]
+- Hide the username field icon when input field is too small in width or height [#614]
+
+For detailed information about the changes, please see https://github.com/keepassxreboot/keepassxc-browser/wiki/What's-new-in-1.5.0
+
+1.5.0 (26-09-2019)
+=========================
+- New username field icon and behaviour [#351]
+- New notifications [#351]
+- Password generator icon(s) are hidden by default [#351]
+- Totally rewritten credential saving, and credential banner [#351]
+- Username-only setting can be set from the extension popup [#351]
+- Simplified password generator [#351]
+- Support for ignoring Auto-submit [#592]
+
+For detailed information about the changes, please see https://github.com/keepassxreboot/keepassxc-browser/wiki/What's-new-in-1.5.0
+
+1.4.7 (28-07-2019)
+=========================
+- Improve password change detection [#566]
+- Fix password fill [#577]
+- Focus to input field after keyboard fill [#578]
+- Support for updating legacy database hashes [#581]
+
+1.4.6 (02-06-2019)
+=========================
+- Fix password fill from context menu [#556]
+- More reconnect fixes [#561]
+
+1.4.5 (27-05-2019)
+=========================
+- Fix reconnect issues [#549]
+- Add support for fixed entropy display [#552]
+- Fix filling an option value [#554]
+
+1.4.4 (16-05-2019)
+=========================
+- Allow filling username only from keyboard shortcut [#520]
+- Fix reconnect from popup [#529]
+- Fix Show More when choosing custom fields [#530]
+- Fix for Auto-Submit [#534]
+- Add support for displaying expired credentials [#537]
+- Fix using Tab with Autocomplete [#539]
+
+1.4.3 (26-04-2019)
+=========================
+- Remove document event overrides [#495]
+- Fix filling String Fields [#498]
+- Fix using Tab command with autocomplete [#504]
+- Add username as accepted non-standard input type [#505]
+
+1.4.2 (23-04-2019)
+=========================
+- Add option for Auto-submit [#480]
+- Prevent onclick override [#487]
+- Allow disabling IntersectionObserver [#491]
+- Fix password-only fill with autocomplete [#493]
+
 1.4.0 (21-04-2019)
 =========================
  - Add translations from Transifex
