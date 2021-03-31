@@ -407,8 +407,10 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
     };
 
     const form = inputs.length > 0 ? inputs[0].form : undefined;
-    if (form && (acceptedOTPFields.some(f => form.className.includes(f) || form.id.includes(f) || form.name.includes(f))
-        || form.length === 6)) {
+    if (form && (acceptedOTPFields.some(f => (form.className && form.className.includes(f))
+        || (form.id && typeof(form.id) === 'string' && form.id.includes(f))
+        || (form.name && typeof(form.name) === 'string' && form.name.includes(f))
+        || form.length === 6))) {
         // Use the form's elements
         addTotpFieldsToCombination(form.elements);
     } else if (inputs.length === 6 && inputs.every(i => i.inputMode === 'numeric' && i.pattern.includes('0-9'))) {
