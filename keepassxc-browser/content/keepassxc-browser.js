@@ -943,7 +943,13 @@ kpxc.fillFromPopup = async function(id, uuid) {
     }
 
     await sendMessage('page_set_login_id', id);
-    kpxc.fillInCredentials(kpxc.combinations[0], kpxc.credentials[id].login, uuid);
+    const selectedCredentials = kpxc.credentials.find(c => c.uuid === uuid);
+    if (!selectedCredentials) {
+        console.log('Error: Uuid not found: ', uuid);
+        return;
+    }
+
+    kpxc.fillInCredentials(kpxc.combinations[0], selectedCredentials.login, uuid);
     kpxcUserAutocomplete.closeList();
 };
 
@@ -1064,6 +1070,7 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
     // Find the correct credentials
     const selectedCredentials = kpxc.credentials.find(c => c.uuid === uuid);
     if (!selectedCredentials) {
+        console.log('Error: Uuid not found: ', uuid);
         return;
     }
 
