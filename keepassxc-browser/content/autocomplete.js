@@ -203,7 +203,7 @@ class Autocomplete {
                 return;
             }
 
-            this.index = this.elements.findIndex(c => c.value === input.value);
+            this.index = this.elements.findIndex(c => c.value === inputField.value);
             if (this.index >= 0) {
                 this.fillPassword(inputField.value, this.index, this.elements[this.index].uuid);
             }
