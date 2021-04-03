@@ -171,11 +171,12 @@ class Autocomplete {
         }
 
         const items = this.getAllItems();
+        const inputField = e.target;
         if (e.key === 'ArrowDown') {
             // If the list is not visible, show it
             if (items.length === 0) {
                 this.index = -1;
-                this.showList(this.input);
+                this.showList(inputField);
             } else {
                 // Activate next item
                 ++this.index;
@@ -185,7 +186,7 @@ class Autocomplete {
             --this.index;
             this.activateItem(items);
         } else if (e.key === 'Enter') {
-            if (this.input.value === '') {
+            if (inputField.value === '') {
                 e.preventDefault();
             }
 
@@ -197,23 +198,23 @@ class Autocomplete {
             }
         } else if (e.key === 'Tab') {
             // Return if value is not in the list
-            if (this.input.value !== '' && !this.elements.some(c => c.value === this.input.value)) {
+            if (inputField.value !== '' && !this.elements.some(c => c.value === inputField.value)) {
                 this.closeList();
                 return;
             }
 
-            this.index = this.elements.findIndex(c => c.value === this.input.value);
+            this.index = this.elements.findIndex(c => c.value === inputField.value);
             if (this.index >= 0) {
-                this.fillPassword(this.input.value, this.index, this.elements[this.index].uuid);
+                this.fillPassword(inputField.value, this.index, this.elements[this.index].uuid);
             }
 
             this.closeList();
         } else if (e.key === 'Escape') {
             this.closeList();
-        } else if ((e.key === 'Backspace' || e.key === 'Delete') && this.input.value === '') {
+        } else if ((e.key === 'Backspace' || e.key === 'Delete') && inputField.value === '') {
             // Show menu when input field has no value and backspace is pressed
             this.index = -1;
-            this.showList(this.input);
+            this.showList(inputField);
         }
     }
 
