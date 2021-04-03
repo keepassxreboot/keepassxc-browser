@@ -300,7 +300,9 @@ kpxcForm.onSubmit = async function(e) {
         return;
     }
 
-    await kpxc.setPasswordFilled(true);
+    if (passwordField) {
+        await kpxc.setPasswordFilled(true);
+    }
 
     const url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? window.top.location.origin : window.top.location.href);
     await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, url, kpxc.credentials ]);
