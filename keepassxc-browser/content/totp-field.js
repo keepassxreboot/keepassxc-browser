@@ -5,6 +5,7 @@ const ignoredTypes = [ 'email', 'password', 'username' ];
 
 const acceptedOTPFields = [
     '2fa',
+    '2fpin',
     'auth',
     'challenge',
     'code',
