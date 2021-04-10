@@ -79,7 +79,7 @@ kpxcSites.exceptionFound = function(identifier) {
         && [ 'password', 'form-row', 'show-password' ].every(c => identifier.contains(c))) {
         return true;
     } else if (document.location.origin.startsWith('https://signin.ebay.')
-               && identifier.contains('null')) {
+               && (identifier === 'null' || identifier.value === 'null' || identifier === 'pass')) {
         return true;
     } else if (document.location.origin.startsWith('https://www.fidelity.com')
                && identifier.contains('fs-mask-username')) {
