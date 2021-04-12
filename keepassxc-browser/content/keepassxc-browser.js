@@ -920,7 +920,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
         return;
     }
 
-    await sendMessage('page_set_login_id', 0);
+    await sendMessage('page_set_login_id', '');
     kpxc.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
 };
 
@@ -931,7 +931,7 @@ kpxc.fillFromAutofill = async function() {
     }
 
     const index = kpxc.combinations.length - 1;
-    await sendMessage('page_set_login_id', 0);
+    await sendMessage('page_set_login_id', '');
     kpxc.fillInCredentials(kpxc.combinations[index], kpxc.credentials[0].login, kpxc.credentials[0].uuid);
 
     // Generate popup-list of usernames + descriptions
@@ -944,7 +944,7 @@ kpxc.fillFromPopup = async function(id, uuid) {
         return;
     }
 
-    await sendMessage('page_set_login_id', id);
+    await sendMessage('page_set_login_id', uuid);
     const selectedCredentials = kpxc.credentials.find(c => c.uuid === uuid);
     if (!selectedCredentials) {
         console.log('Error: Uuid not found: ', uuid);
@@ -1041,7 +1041,7 @@ kpxc.fillFromUsernameIcon = async function(combination) {
         return;
     }
 
-    await sendMessage('page_set_login_id', 0);
+    await sendMessage('page_set_login_id', '');
     kpxc.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid);
 };
 
@@ -1508,9 +1508,12 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
         if (credentialsList.length === 1) {
             usernameValue = credentialsList[0].login;
         } else if (credentialsList.length > 1) {
-            const index = await sendMessage('page_get_login_id');
-            if (index >= 0) {
-                usernameValue = credentialsList[index].login;
+            const uuid = await sendMessage('page_get_login_id');
+            if (uuid) {
+                const credsFromUuid = credentialsList.find(c => c.uuid === uuid);
+                if (credsFromUuid) {
+                    usernameValue = credsFromUuid.login;
+                }
             }
         }
     }
@@ -1706,20 +1709,21 @@ kpxc.updateDatabaseState = async function() {
 
 // Updates the TOTP Autocomplete Menu
 kpxc.updateTOTPList = async function() {
-    let index = await sendMessage('page_get_login_id');
-    if (index < 0) {
+    let uuid = await sendMessage('page_get_login_id');
+    if (uuid === undefined) {
         // Credential haven't been selected
         return;
     }
 
     // Use the first credential available if not set
-    if (index === undefined) {
-        index = 0;
+    if (uuid === '') {
+        uuid = kpxc.credentials[0].uuid;
     }
 
-    if (index >= 0 && kpxc.credentials[index]) {
-        const username = kpxc.credentials[index].login;
-        const password = kpxc.credentials[index].password;
+    const credentials = kpxc.credentials.find(c => c.uuid === uuid);
+    if (credentials) {
+        const username = credentials.login;
+        const password = credentials.password;
 
         // If no username is set, compare with a password
         const credentialList = kpxc.credentials.filter(c => (c.totp || (c.stringFields && c.stringFields.some(s => s['KPH: {TOTP}'])))
