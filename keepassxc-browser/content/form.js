@@ -161,6 +161,7 @@ kpxcForm.onSubmit = async function(e) {
 
     // Return if credentials are already found
     if (kpxc.credentials.some(c => c.login === usernameValue && c.password === passwordValue)) {
+        sendMessage('set_auto_submit', false);
         return;
     }
 
@@ -169,6 +170,7 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     const url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? window.top.location.origin : window.top.location.href);
+    sendMessage('set_auto_submit', false);
     await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, url, kpxc.credentials ]);
 
     // Show the banner if the page does not reload

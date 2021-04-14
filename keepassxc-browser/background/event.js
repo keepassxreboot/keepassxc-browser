@@ -32,7 +32,8 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         associated: keepass.isAssociated(),
         error: errorMessage || null,
-        usernameFieldDetected: page.tabs[tab.id].usernameFieldDetected
+        usernameFieldDetected: page.tabs[tab.id].usernameFieldDetected,
+        autoSubmit: page.tabs[tab.id].autoSubmit ?? page.settings.autoSubmit,
     };
 };
 
@@ -154,6 +155,11 @@ kpxcEvent.onLoginPopup = async function(tab, logins) {
     browserAction.show(tab, popupData);
 };
 
+kpxcEvent.setAutoSubmit = async function(tab, value) {
+    page.tabs[tab.id].autoSubmit = value;
+    return kpxcEvent.showStatus(tab, await keepass.isConfigured());
+};
+
 kpxcEvent.initHttpAuth = async function() {
     httpAuth.init();
 };
@@ -242,6 +248,7 @@ kpxcEvent.messageHandlers = {
     'remove_credentials_from_tab_information': kpxcEvent.onRemoveCredentialsFromTabInformation,
     'request_autotype': keepass.requestAutotype,
     'retrieve_credentials': page.retrieveCredentials,
+    'set_auto_submit': kpxcEvent.setAutoSubmit,
     'show_default_browseraction': browserAction.showDefault,
     'update_credentials': keepass.updateCredentials,
     'username_field_detected': kpxcEvent.onUsernameFieldDetected,

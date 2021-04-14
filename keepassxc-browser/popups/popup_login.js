@@ -75,4 +75,15 @@ $(async () => {
             args: [ false, true ] // Set forcePopup to true
         });
     });
+
+    const page = global.page;
+    $('#auto-submit').prop(
+        'checked', page.tabs[tab.id].autoSubmit ?? page.settings.autoSubmit
+    ).click(async (ev) => {
+        console.log('Toggling auto-submit', ev);
+        browser.runtime.sendMessage({
+            action: 'set_auto_submit',
+            args: ev.target.checked,
+        });
+    });
 });

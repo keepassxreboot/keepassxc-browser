@@ -151,6 +151,13 @@ page.initSettings = async function() {
         }
 
         await browser.storage.local.set({ 'settings': page.settings });
+
+        const tab = page.tabs[page.currentTabId];
+        if (tab && tab.autoSubmit === false) {
+            console.info('Disabling auto-submit for ' + page.currentTabId);
+            page.settings.autoSubmit = false;
+        }
+
         return page.settings;
     } catch (err) {
         logError('page.initSettings error: ' + err);

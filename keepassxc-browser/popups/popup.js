@@ -8,6 +8,7 @@ function statusResponse(r) {
     $('#configured-and-associated').hide();
     $('#configured-not-associated').hide();
     $('#lock-database-button').hide();
+    $('#auto-submit')[0].checked = r.autoSubmit;
 
     if (!r.keePassXCAvailable) {
         $('#error-message').html(r.error);
@@ -97,6 +98,13 @@ $(async () => {
     $('#lock-database-button').click(async () => {
         statusResponse(await browser.runtime.sendMessage({
             action: 'lock_database'
+        }));
+    });
+
+    $('#auto-submit').click(async (ev) => {
+        statusResponse(await browser.runtime.sendMessage({
+            action: 'set_auto_submit',
+            args: ev.target.checked,
         }));
     });
 
