@@ -12,7 +12,7 @@ const SORT_BY_USERNAME = 'sortByUsername';
 const SORT_BY_GROUP_AND_TITLE = 'sortByGroupAndTitle';
 const SORT_BY_GROUP_AND_USERNAME = 'sortByGroupAndUsername';
 
-const schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
+const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 const pathSegment = '(.*)';
 
