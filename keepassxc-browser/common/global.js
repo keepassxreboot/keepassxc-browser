@@ -61,6 +61,18 @@ const matchPatternToRegExp = function(pattern) {
         return (/^(?:http|https|file|ftp|app):\/\//);
     }
 
+    // special handling of file:// since there is no host
+    if (pattern.startsWith('file://')) {
+        let regex = '^';
+        if (pattern.endsWith('*')) {
+            regex += pattern.slice(0, -1);
+        }
+        else {
+            regex += `${pattern}$`;
+        }
+        return new RegExp(regex);
+    }
+
     const matchPatternRegExp = new RegExp(
         `^${schemeSegment}://${hostSegment}/${pathSegment}$`
     );
