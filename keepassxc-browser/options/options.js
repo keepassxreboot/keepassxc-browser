@@ -500,7 +500,7 @@ options.initSitePreferences = function() {
             return;
         }
 
-        let value = manualUrl.value;
+        let value = manualUrl.value.toLowerCase();
 
         // Fills the last / char if needed. This ensures the compatibility with Match Patterns
         if (slashNeededForUrl(value)) {
@@ -522,14 +522,14 @@ options.initSitePreferences = function() {
         trClone.removeClass('clone d-none');
 
         const tr = trClone.clone(true);
-        tr.data('url', value.toLowerCase());
+        tr.data('url', value);
         tr.attr('id', 'tr-scf' + newValue);
         tr.children('td:first').text(value);
         tr.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING);
         $('#tab-site-preferences table tbody:first').append(tr);
         $('#tab-site-preferences table tbody:first tr.empty:first').hide();
 
-        options.settings['sitePreferences'].push({ url: value.toLowerCase(), ignore: IGNORE_NOTHING, usernameOnly: false });
+        options.settings['sitePreferences'].push({ url: value, ignore: IGNORE_NOTHING, usernameOnly: false });
         options.saveSettings();
         manualUrl.value = '';
     });
