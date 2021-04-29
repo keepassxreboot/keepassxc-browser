@@ -64,6 +64,7 @@ const matchPatternToRegExp = function(pattern) {
     // special handling of file:// since there is no host
     if (pattern.startsWith('file://')) {
         let regex = '^';
+        pattern = pattern.replace(/\./g, '\\.');
         if (pattern.endsWith('*')) {
             regex += pattern.slice(0, -1);
         }
