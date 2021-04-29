@@ -500,7 +500,6 @@ options.initSitePreferences = function() {
             return;
         }
 
-        const errorMessage = tr('optionsErrorValueExists');
         let value = manualUrl.value;
 
         // Fills the last / char if needed. This ensures the compatibility with Match Patterns
@@ -510,7 +509,7 @@ options.initSitePreferences = function() {
 
         // Check if the URL is already in the list
         if (options.settings['sitePreferences'].some(s => s.url === value)) {
-            options.createWarning(manualUrl, errorMessage);
+            options.createWarning(manualUrl, tr('optionsErrorValueExists'));
             return;
         }
 
