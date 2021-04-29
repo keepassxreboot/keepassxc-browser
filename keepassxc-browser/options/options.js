@@ -502,38 +502,37 @@ options.initSitePreferences = function() {
 
         const errorMessage = tr('optionsErrorValueExists');
         let value = manualUrl.value;
-        if (value.length > 10 && value.length <= 2000) {
-            // Fills the last / char if needed. This ensures the compatibility with Match Patterns
-            if (slashNeededForUrl(value)) {
-                value += '/';
-            }
 
-            // Check if the URL is already in the list
-            if (options.settings['sitePreferences'].some(s => s.url === value)) {
-                options.createWarning(manualUrl, errorMessage);
-                return;
-            }
-
-            if (options.settings['sitePreferences'] === undefined) {
-                options.settings['sitePreferences'] = [];
-            }
-
-            const newValue = options.settings['sitePreferences'].length + 1;
-            const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
-            trClone.removeClass('clone d-none');
-
-            const tr = trClone.clone(true);
-            tr.data('url', value.toLowerCase());
-            tr.attr('id', 'tr-scf' + newValue);
-            tr.children('td:first').text(value);
-            tr.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING);
-            $('#tab-site-preferences table tbody:first').append(tr);
-            $('#tab-site-preferences table tbody:first tr.empty:first').hide();
-
-            options.settings['sitePreferences'].push({ url: value.toLowerCase(), ignore: IGNORE_NOTHING, usernameOnly: false });
-            options.saveSettings();
-            manualUrl.value = '';
+        // Fills the last / char if needed. This ensures the compatibility with Match Patterns
+        if (slashNeededForUrl(value)) {
+            value += '/';
         }
+
+        // Check if the URL is already in the list
+        if (options.settings['sitePreferences'].some(s => s.url === value)) {
+            options.createWarning(manualUrl, errorMessage);
+            return;
+        }
+
+        if (options.settings['sitePreferences'] === undefined) {
+            options.settings['sitePreferences'] = [];
+        }
+
+        const newValue = options.settings['sitePreferences'].length + 1;
+        const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
+        trClone.removeClass('clone d-none');
+
+        const tr = trClone.clone(true);
+        tr.data('url', value.toLowerCase());
+        tr.attr('id', 'tr-scf' + newValue);
+        tr.children('td:first').text(value);
+        tr.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING);
+        $('#tab-site-preferences table tbody:first').append(tr);
+        $('#tab-site-preferences table tbody:first tr.empty:first').hide();
+
+        options.settings['sitePreferences'].push({ url: value.toLowerCase(), ignore: IGNORE_NOTHING, usernameOnly: false });
+        options.saveSettings();
+        manualUrl.value = '';
     });
 
     $('#dialogDeleteSite .modal-footer:first button.yes:first').click(function(e) {
