@@ -1435,7 +1435,7 @@ kpxc.passwordFilled = async function() {
  * @returns {boolean}           True if password has been already filled
  */
 kpxc.passwordFilledWithExceptions = async function(currentForm) {
-    if (currentForm.password && kpxcSites.exceptionFound(currentForm.password.id)) {
+    if (currentForm.password && kpxcSites.exceptionFound(currentForm.password.classList)) {
         return false;
     }
 
