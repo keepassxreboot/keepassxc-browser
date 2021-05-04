@@ -567,7 +567,7 @@ kpxcFields.isAutocompleteAppropriate = function(field) {
 // Checks if Custom Login Fields are used for the site
 kpxcFields.isCustomLoginFieldsUsed = function() {
     const location = kpxc.getDocumentLocation();
-    return kpxc.settings['defined-custom-fields'] && kpxc.settings['defined-custom-fields'][location];
+    return kpxc.settings['defined-custom-fields'] !== undefined && kpxc.settings['defined-custom-fields'][location] !== undefined;
 };
 
 // Returns true if form is a search form
