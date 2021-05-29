@@ -1,6 +1,6 @@
 div.kpxc-banner {
     animation-duration: 0.2s;
-    animation-name: slidein;
+    animation-name: kpxc-slidein;
     background-color: var(--kpxc-background-color);
     border-bottom: 1px solid #38383d !important;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
@@ -22,7 +22,7 @@ div.kpxc-banner {
     justify-content: space-between !important;
 }
 
-@keyframes slidein {
+@keyframes kpxc-slidein {
     from {
         max-height: 0em;
     }
