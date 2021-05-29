@@ -62,7 +62,7 @@ browser.tabs.onActivated.addListener(async function(activeInfo) {
             }
         }
     } catch (err) {
-        console.log('Error: ' + err);
+        console.log('Error: ' + err.message);
     }
 });
 
@@ -96,6 +96,11 @@ browser.webNavigation.onCommitted.addListener((details) => {
         || details.transitionType === 'form_submit') {
         page.redirectCount += 1;
         return;
+    }
+
+    // Clear credentials on reload so a new retrieval can be made
+    if (details.transitionType === 'reload') {
+        page.clearLogins(details.tabId);
     }
 
     page.redirectCount = 0;
