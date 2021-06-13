@@ -889,7 +889,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
             return;
         }
 
-        // set focus to the input field
+        // Set focus to the input field
         field.focus();
 
         if (kpxc.credentials.length > 1) {
@@ -920,7 +920,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
         return;
     }
 
-    await sendMessage('page_set_login_id', '');
+    await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
     kpxc.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
 };
 
@@ -931,7 +931,7 @@ kpxc.fillFromAutofill = async function() {
     }
 
     const index = kpxc.combinations.length - 1;
-    await sendMessage('page_set_login_id', '');
+    await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
     kpxc.fillInCredentials(kpxc.combinations[index], kpxc.credentials[0].login, kpxc.credentials[0].uuid);
 
     // Generate popup-list of usernames + descriptions
@@ -1041,7 +1041,7 @@ kpxc.fillFromUsernameIcon = async function(combination) {
         return;
     }
 
-    await sendMessage('page_set_login_id', '');
+    await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
     kpxc.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid);
 };
 
@@ -1710,7 +1710,7 @@ kpxc.updateDatabaseState = async function() {
 // Updates the TOTP Autocomplete Menu
 kpxc.updateTOTPList = async function() {
     let uuid = await sendMessage('page_get_login_id');
-    if (uuid === undefined) {
+    if (uuid === undefined || kpxc.credentials.length === 0) {
         // Credential haven't been selected
         return;
     }
