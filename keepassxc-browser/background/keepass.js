@@ -975,7 +975,7 @@ keepass.checkForNewKeePassXCVersion = function() {
     xhr.onload = function(e) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const json = JSON.parse(xhr.responseText);
-            if (json.tag_name) {
+            if (json.tag_name && json.prerelease === false) {
                 version = json.tag_name;
                 keepass.latestKeePassXC.version = version;
             }
