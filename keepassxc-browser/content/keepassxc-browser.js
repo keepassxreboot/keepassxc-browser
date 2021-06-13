@@ -898,6 +898,7 @@ kpxc.fillInFromActiveElement = async function(passOnly = false) {
             return;
         } else {
             // Just one credential -> fill the first combination found
+            await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
             kpxc.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
             return;
         }
