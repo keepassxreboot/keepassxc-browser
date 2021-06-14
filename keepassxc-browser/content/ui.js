@@ -125,10 +125,12 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
         left += size + 10;
     }
 
-    icon.style.top = Pixels(top + document.scrollingElement.scrollTop + offset + 1);
+    const scrollTop = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
+    const scrollLeft = document.scrollingElement ? document.scrollingElement.scrollLeft : 0;
+    icon.style.top = Pixels(top + scrollTop + offset + 1);
     icon.style.left = rtl
-                    ? Pixels((left + document.scrollingElement.scrollLeft) + offset)
-                    : Pixels(left + document.scrollingElement.scrollLeft + field.offsetWidth - size - offset);
+                    ? Pixels((left + scrollLeft) + offset)
+                    : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
 };
 
 kpxcUI.deleteHiddenIcons = function(iconList, attr) {
