@@ -338,24 +338,24 @@ options.initConnectedDatabases = function() {
 
     $('#tab-connected-databases tr.clone:first .dropdown-menu:first').width('230px');
 
-    const trClone = $('#tab-connected-databases table tr.clone:first').clone(true);
-    trClone.removeClass('clone d-none');
+    const rowClone = $('#tab-connected-databases table tr.clone:first').clone(true);
+    rowClone.removeClass('clone d-none');
 
     const addHashToTable = function(hash) {
         $('#tab-connected-databases table tbody:first tr.empty:first').hide();
-        const tr = trClone.clone(true);
-        tr.data('hash', hash);
-        tr.attr('id', 'tr-cd-' + hash);
+        const row = rowClone.clone(true);
+        row.data('hash', hash);
+        row.attr('id', 'tr-cd-' + hash);
 
-        $('a.dropdown-toggle:first img:first', tr).attr('src', '/icons/toolbar/icon_normal.png');
+        $('a.dropdown-toggle:first img:first', row).attr('src', '/icons/toolbar/icon_normal.png');
 
-        tr.children('td:first').text(options.keyRing[hash].id);
-        tr.children('td:eq(1)').text(options.getPartiallyHiddenKey(options.keyRing[hash].key));
+        row.children('td:first').text(options.keyRing[hash].id);
+        row.children('td:eq(1)').text(options.getPartiallyHiddenKey(options.keyRing[hash].key));
         const lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : 'unknown';
-        tr.children('td:eq(2)').text(lastUsed);
+        row.children('td:eq(2)').text(lastUsed);
         const date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : 'unknown';
-        tr.children('td:eq(3)').text(date);
-        $('#tab-connected-databases table tbody:first').append(tr);
+        row.children('td:eq(3)').text(date);
+        $('#tab-connected-databases table tbody:first').append(row);
     };
 
     let hashList = options.keyRing;
@@ -421,17 +421,17 @@ options.initCustomCredentialFields = function() {
         }
     });
 
-    const trClone = $('#tab-custom-fields table tr.clone:first').clone(true);
-    trClone.removeClass('clone d-none');
+    const rowClone = $('#tab-custom-fields table tr.clone:first').clone(true);
+    rowClone.removeClass('clone d-none');
     let counter = 1;
     for (const url in options.settings['defined-custom-fields']) {
-        const tr = trClone.clone(true);
-        tr.data('url', url);
-        tr.attr('id', 'tr-scf' + counter);
+        const row = rowClone.clone(true);
+        row.data('url', url);
+        row.attr('id', 'tr-scf' + counter);
         ++counter;
 
-        tr.children('td:first').text(url);
-        $('#tab-custom-fields table tbody:first').append(tr);
+        row.children('td:first').text(url);
+        $('#tab-custom-fields table tbody:first').append(row);
     }
 
     if ($('#tab-custom-fields table tbody:first tr').length > 2) {
@@ -500,40 +500,38 @@ options.initSitePreferences = function() {
             return;
         }
 
-        const errorMessage = tr('optionsErrorValueExists');
-        let value = manualUrl.value;
-        if (value.length > 10 && value.length <= 2000) {
-            // Fills the last / char if needed. This ensures the compatibility with Match Patterns
-            if (slashNeededForUrl(value)) {
-                value += '/';
-            }
+        let value = manualUrl.value.toLowerCase();
 
-            // Check if the URL is already in the list
-            if (options.settings['sitePreferences'].some(s => s.url === value)) {
-                options.createWarning(manualUrl, errorMessage);
-                return;
-            }
-
-            if (options.settings['sitePreferences'] === undefined) {
-                options.settings['sitePreferences'] = [];
-            }
-
-            const newValue = options.settings['sitePreferences'].length + 1;
-            const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
-            trClone.removeClass('clone d-none');
-
-            const tr = trClone.clone(true);
-            tr.data('url', value.toLowerCase());
-            tr.attr('id', 'tr-scf' + newValue);
-            tr.children('td:first').text(value);
-            tr.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING);
-            $('#tab-site-preferences table tbody:first').append(tr);
-            $('#tab-site-preferences table tbody:first tr.empty:first').hide();
-
-            options.settings['sitePreferences'].push({ url: value.toLowerCase(), ignore: IGNORE_NOTHING, usernameOnly: false });
-            options.saveSettings();
-            manualUrl.value = '';
+        // Fills the last / char if needed. This ensures the compatibility with Match Patterns
+        if (slashNeededForUrl(value)) {
+            value += '/';
         }
+
+        // Check if the URL is already in the list
+        if (options.settings['sitePreferences'].some(s => s.url === value)) {
+            options.createWarning(manualUrl, tr('optionsErrorValueExists'));
+            return;
+        }
+
+        if (options.settings['sitePreferences'] === undefined) {
+            options.settings['sitePreferences'] = [];
+        }
+
+        const newValue = options.settings['sitePreferences'].length + 1;
+        const rowClone = $('#tab-site-preferences table tr.clone:first').clone(true);
+        rowClone.removeClass('clone d-none');
+
+        const row = rowClone.clone(true);
+        row.data('url', value);
+        row.attr('id', 'tr-scf' + newValue);
+        row.children('td:first').text(value);
+        row.children('td:nth-child(2)').children('select').val(IGNORE_NOTHING);
+        $('#tab-site-preferences table tbody:first').append(row);
+        $('#tab-site-preferences table tbody:first tr.empty:first').hide();
+
+        options.settings['sitePreferences'].push({ url: value, ignore: IGNORE_NOTHING, usernameOnly: false });
+        options.saveSettings();
+        manualUrl.value = '';
     });
 
     $('#dialogDeleteSite .modal-footer:first button.yes:first').click(function(e) {
@@ -557,20 +555,20 @@ options.initSitePreferences = function() {
         }
     });
 
-    const trClone = $('#tab-site-preferences table tr.clone:first').clone(true);
-    trClone.removeClass('clone d-none');
+    const rowClone = $('#tab-site-preferences table tr.clone:first').clone(true);
+    rowClone.removeClass('clone d-none');
     let counter = 1;
     if (options.settings['sitePreferences']) {
         for (const site of options.settings['sitePreferences']) {
-            const tr = trClone.clone(true);
-            tr.data('url', site.url);
-            tr.attr('id', 'tr-scf' + counter);
+            const row = rowClone.clone(true);
+            row.data('url', site.url);
+            row.attr('id', 'tr-scf' + counter);
             ++counter;
 
-            tr.children('td:first').text(site.url);
-            tr.children('td:nth-child(2)').children('select').val(site.ignore);
-            tr.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', site.usernameOnly);
-            $('#tab-site-preferences table tbody:first').append(tr);
+            row.children('td:first').text(site.url);
+            row.children('td:nth-child(2)').children('select').val(site.ignore);
+            row.children('td:nth-child(3)').children('input[type=checkbox]').attr('checked', site.usernameOnly);
+            $('#tab-site-preferences table tbody:first').append(row);
         }
     }
 

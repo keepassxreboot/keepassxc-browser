@@ -12,7 +12,7 @@ const SORT_BY_USERNAME = 'sortByUsername';
 const SORT_BY_GROUP_AND_TITLE = 'sortByGroupAndTitle';
 const SORT_BY_GROUP_AND_USERNAME = 'sortByGroupAndUsername';
 
-const schemeSegment = '(\\*|http|https|ws|wss|file|ftp)';
+const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 const pathSegment = '(.*)';
 
@@ -59,6 +59,19 @@ const ManualFill = {
 const matchPatternToRegExp = function(pattern) {
     if (pattern === '') {
         return (/^(?:http|https|file|ftp|app):\/\//);
+    }
+
+    // special handling of file:// since there is no host
+    if (pattern.startsWith('file://')) {
+        let regex = '^';
+        pattern = pattern.replace(/\./g, '\\.');
+        if (pattern.endsWith('*')) {
+            regex += pattern.slice(0, -1);
+        }
+        else {
+            regex += `${pattern}$`;
+        }
+        return new RegExp(regex);
     }
 
     const matchPatternRegExp = new RegExp(

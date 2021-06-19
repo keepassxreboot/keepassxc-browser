@@ -992,7 +992,7 @@
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, or <code>ftp://</code> and must be at least 10 characters long.",
+        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> and must be at least 5 characters long.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
