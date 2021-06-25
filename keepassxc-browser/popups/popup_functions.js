@@ -1,6 +1,16 @@
 'use strict';
 
-var $ = jQuery.noConflict(true);
+const $ = function(elem) {
+    return document.querySelector(elem);
+};
+
+HTMLDivElement.prototype.show = function() {
+    this.style.display = 'block';
+};
+
+HTMLDivElement.prototype.hide = function() {
+    this.style.display = 'none';
+};
 
 function updateAvailableResponse(available) {
     if (available) {
@@ -9,11 +19,11 @@ function updateAvailableResponse(available) {
 }
 
 async function initSettings() {
-    $('#settings #btn-options').click(() => {
+    $('#settings #btn-options').addEventListener('click', () => {
         browser.runtime.openOptionsPage().then(close());
     });
 
-    $('#settings #btn-choose-credential-fields').click(async () => {
+    $('#settings #btn-choose-credential-fields').addEventListener('click', async () => {
         await browser.windows.getCurrent();
         const tabs = await browser.tabs.query({ active: true, currentWindow: true });
         const tab = tabs[0];
@@ -40,9 +50,14 @@ async function initColorTheme() {
 }
 
 
-$(async () => {
-    await initSettings();
+(async () => {
+    if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
+        await initSettings();
+    } else {
+        document.addEventListener('DOMContentLoaded', initSettings);
+    }
+
     updateAvailableResponse(await browser.runtime.sendMessage({
         action: 'update_available_keepassxc'
     }));
-});
+})();

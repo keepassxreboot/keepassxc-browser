@@ -6,7 +6,7 @@ const getLoginData = async () => {
     return global.page.tabs[tabs[0].id].loginList;
 };
 
-$(async () => {
+(async () => {
     await initColorTheme();
 
     const data = await getLoginData();
@@ -50,4 +50,4 @@ $(async () => {
         }
         close();
     });
-});
+})();

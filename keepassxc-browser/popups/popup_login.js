@@ -1,6 +1,6 @@
 'use strict';
 
-$(async () => {
+(async () => {
     await initColorTheme();
 
     const global = await browser.runtime.getBackgroundPage();
@@ -75,4 +75,4 @@ $(async () => {
             args: [ false, true ] // Set forcePopup to true
         });
     });
-});
+})();
