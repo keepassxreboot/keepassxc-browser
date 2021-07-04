@@ -393,7 +393,10 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         if (totpInputs.length === 6) {
             const combination = {
                 form: form,
-                totpInputs: totpInputs
+                totpInputs: totpInputs,
+                username: null,
+                password: null,
+                passwordInputs: []
             };
 
             combinations.push(combination);
@@ -415,7 +418,8 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         || form.length === 6))) {
         // Use the form's elements
         addTotpFieldsToCombination(form.elements);
-    } else if (inputs.length === 6 && inputs.every(i => i.inputMode === 'numeric' && i.pattern.includes('0-9'))) {
+    } else if (inputs.length === 6 && inputs.every(i => (i.inputMode === 'numeric' && i.pattern.includes('0-9'))
+                || i.type === 'tel')) {
         // No form is found, but input fields are possibly segmented TOTP fields
         addTotpFieldsToCombination(inputs);
     }
