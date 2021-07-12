@@ -631,7 +631,9 @@ kpxcFields.isVisible = function(elem) {
 
     // Check CSS visibility
     const elemStyle = getComputedStyle(elem);
+    const opacity = Number(elemStyle.opacity);
     if (elemStyle.visibility && (elemStyle.visibility === 'hidden' || elemStyle.visibility === 'collapse')
+        || (opacity < MIN_OPACITY || opacity > MAX_OPACITY)
         || parseInt(elemStyle.width, 10) <= MIN_INPUT_FIELD_WIDTH_PX
         || parseInt(elemStyle.height, 10) <= MIN_INPUT_FIELD_WIDTH_PX) {
         return false;
@@ -639,6 +641,11 @@ kpxcFields.isVisible = function(elem) {
 
     // Check for parent opacity
     if (kpxcFields.traverseParents(elem, f => f.style.opacity === '0')) {
+        return false;
+    }
+
+    // If the input field belongs to a form, check its visibility also
+    if (elem.nodeName === 'INPUT' && elem.form && !kpxcFields.isVisible(elem.form)) {
         return false;
     }
 
