@@ -283,11 +283,17 @@ kpxcPasswordDialog.fill = function(e) {
     }
 
     kpxcPasswordDialog.input.value = password.value;
+    kpxcPasswordDialog.input.dispatchEvent(new Event('keydown', { bubbles: true }));
+    kpxcPasswordDialog.input.dispatchEvent(new Event('keyup', { bubbles: true }));
     kpxcPasswordDialog.input.dispatchEvent(new Event('input', { bubbles: true }));
     kpxcPasswordDialog.input.dispatchEvent(new Event('change', { bubbles: true }));
 
     if (kpxcPasswordDialog.nextField) {
         kpxcPasswordDialog.nextField.value = password.value;
+        kpxcPasswordDialog.nextField.dispatchEvent(new Event('keydown', { bubbles: true }));
+        kpxcPasswordDialog.nextField.dispatchEvent(new Event('keyup', { bubbles: true }));
+        kpxcPasswordDialog.nextField.dispatchEvent(new Event('input', { bubbles: true }));
+        kpxcPasswordDialog.nextField.dispatchEvent(new Event('change', { bubbles: true }));
     }
 };
 
