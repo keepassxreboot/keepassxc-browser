@@ -1834,7 +1834,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     }
 
     // Append any input fields in Shadow DOM
-    if (target.shadowRoot) {
+    if (target.shadowRoot && typeof target.shadowSelectorAll === 'function') {
         target.shadowSelectorAll('input').forEach(e => {
             if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
                 inputFields.push(e);
