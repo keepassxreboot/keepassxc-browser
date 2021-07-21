@@ -18,6 +18,10 @@ const acceptedOTPFields = [
     'twofactor'
 ];
 
+const acceptedParents = [
+    '.mfa-verify',
+];
+
 var kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
@@ -42,7 +46,7 @@ kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
 
     // Checks if the field id, name or placeholder includes some of the acceptedOTPFields but not any from ignoredTypes
     if (autocomplete === 'one-time-code'
-        || (acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f))))
+        || (acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f))) || acceptedParents.some(s => field.closest(s)))
             && !ignoredTypes.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f)))) {
         return true;
     }
