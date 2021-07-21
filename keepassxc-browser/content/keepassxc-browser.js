@@ -1988,7 +1988,7 @@ kpxcObserverHelper.initObserver = async function() {
                 } else if (mut.removedNodes.length > 0) {
                     kpxcObserverHelper.handleObserverRemove(mut.removedNodes[0]);
                 }
-            } else if (mut.type === 'attributes' && mut.attributeName === 'class') {
+            } else if (mut.type === 'attributes' && (mut.attributeName === 'class' || mut.attributeName === 'style')) {
                 // Only accept targets with forms
                 const forms = mut.target.nodeName === 'FORM' ? mut.target : mut.target.getElementsByTagName('form');
                 if (forms.length === 0 && !kpxcSites.exceptionFound(mut.target.classList)) {
