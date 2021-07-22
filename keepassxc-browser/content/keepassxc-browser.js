@@ -644,11 +644,6 @@ kpxcFields.isVisible = function(elem) {
         return false;
     }
 
-    // If the input field belongs to a form, check its visibility also
-    if (elem.nodeName === 'INPUT' && elem.form && !kpxcFields.isVisible(elem.form)) {
-        return false;
-    }
-
     return true;
 };
 
