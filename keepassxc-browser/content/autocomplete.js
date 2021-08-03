@@ -92,6 +92,9 @@ class Autocomplete {
             item.addEventListener('mouseover', ev => this.mouseOver(ev, div, item));
             item.addEventListener('mouseout', ev => this.mouseOut(ev, item));
 
+            item.addEventListener('mousedown', ev => ev.stopPropagation());
+            item.addEventListener('mouseup', ev => ev.stopPropagation());
+
             div.appendChild(item);
         }
 

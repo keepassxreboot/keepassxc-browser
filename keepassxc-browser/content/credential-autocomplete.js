@@ -6,6 +6,8 @@ CredentialAutocomplete.prototype.click = async function(e, input) {
         return;
     }
 
+    e.stopPropagation();
+
     if (input.value !== '') {
         input.select();
     }
@@ -20,6 +22,8 @@ CredentialAutocomplete.prototype.itemClick = async function(e, item, input, uuid
     if (!e.isTrusted) {
         return;
     }
+
+    e.stopPropagation();
 
     const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
     const usernameValue = item.getElementsByTagName('input')[0].value;
