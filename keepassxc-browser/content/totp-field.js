@@ -130,11 +130,9 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
     kpxcUI.setIconPosition(icon, field, this.rtl, segmented);
     this.icon = icon;
 
-    const styleSheet = document.createElement('link');
-    styleSheet.setAttribute('rel', 'stylesheet');
-    styleSheet.setAttribute('href', browser.runtime.getURL('css/totp.css'));
-
+    const styleSheet = createStylesheet('css/totp.css');
     const wrapper = document.createElement('div');
+
     this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
     this.shadowRoot.append(styleSheet);
     this.shadowRoot.append(icon);
