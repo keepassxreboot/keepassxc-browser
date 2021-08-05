@@ -122,10 +122,13 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
             return;
         }
 
-        e.preventDefault();
+        e.stopPropagation();
         await kpxc.receiveCredentialsIfNecessary();
         kpxc.fillFromTOTP(field);
     });
+
+    icon.addEventListener('mousedown', ev => ev.stopPropagation());
+    icon.addEventListener('mouseup', ev => ev.stopPropagation());
 
     kpxcUI.setIconPosition(icon, field, this.rtl, segmented);
     this.icon = icon;
