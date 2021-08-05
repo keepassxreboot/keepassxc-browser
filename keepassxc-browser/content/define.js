@@ -9,33 +9,54 @@ kpxcDefine.selection = {
     fields: []
 };
 
-kpxcDefine.dialog = null;
+kpxcDefine.buttons = {
+    again: undefined,
+    confirm: undefined,
+    discard: undefined,
+    dismiss: undefined,
+    more: undefined,
+    skip: undefined
+};
+
+kpxcDefine.backdrop = undefined;
+kpxcDefine.chooser = undefined;
+kpxcDefine.dialog = undefined;
 kpxcDefine.diffX = 0;
 kpxcDefine.diffY = 0;
-kpxcDefine.eventFieldClick = null;
+kpxcDefine.discardSection = undefined;
+kpxcDefine.eventFieldClick = undefined;
+kpxcDefine.headline = undefined;
+kpxcDefine.help = undefined;
 kpxcDefine.inputQueryPattern = 'input[type=email], input[type=number], input[type=password], input[type=tel], input[type=text], input[type=username], input:not([type])';
 kpxcDefine.keyboardSelectorPattern = 'div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field)';
 kpxcDefine.moreInputQueryPattern = 'input:not([type=button]):not([type=checkbox]):not([type=color]):not([type=date]):not([type=datetime-local]):not([type=file]):not([type=hidden]):not([type=image]):not([type=month]):not([type=range]):not([type=reset]):not([type=submit]):not([type=time]):not([type=week]), select, textarea';
 kpxcDefine.markedFields = [];
-kpxcDefine.keyDown = null;
+kpxcDefine.keyDown = undefined;
 kpxcDefine.startPosX = 0;
 kpxcDefine.startPosY = 0;
 
 kpxcDefine.init = async function() {
-    const backdrop = kpxcUI.createElement('div', 'kpxcDefine-modal-backdrop', { 'id': 'kpxcDefine-backdrop' });
-    const chooser = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-fields' });
-    const description = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-description' });
+    kpxcDefine.backdrop = kpxcUI.createElement('div', 'kpxcDefine-modal-backdrop', { 'id': 'kpxcDefine-backdrop' });
+    kpxcDefine.chooser = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-fields' });
+    kpxcDefine.dialog = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-description' });
+    kpxcDefine.backdrop.append(kpxcDefine.dialog);
 
-    backdrop.append(description);
-    document.body.append(backdrop);
-    document.body.append(chooser);
+    const styleSheet = createStylesheet('css/define.css');
+    const buttonStyleSheet = createStylesheet('css/button.css');
+    const wrapper = document.createElement('div');
+
+    this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+    this.shadowRoot.append(styleSheet);
+    this.shadowRoot.append(buttonStyleSheet);
+    this.shadowRoot.append(kpxcDefine.backdrop);
+    this.shadowRoot.append(kpxcDefine.chooser);
+    document.body.append(wrapper);
 
     kpxcDefine.initDescription();
     kpxcDefine.resetSelection();
     kpxcDefine.prepareStep1();
-    kpxcDefine.markAllUsernameFields('#kpxcDefine-fields');
+    kpxcDefine.markAllUsernameFields();
 
-    kpxcDefine.dialog = $('#kpxcDefine-description');
     kpxcDefine.dialog.onmousedown = function(e) {
         kpxcDefine.mouseDown(e);
     };
@@ -44,8 +65,8 @@ kpxcDefine.init = async function() {
 };
 
 kpxcDefine.close = function() {
-    $('#kpxcDefine-backdrop').remove();
-    $('#kpxcDefine-fields').remove();
+    kpxcDefine.backdrop.remove();
+    kpxcDefine.chooser.remove();
     document.removeEventListener('keydown', kpxcDefine.keyDown);
 };
 
@@ -59,9 +80,9 @@ kpxcDefine.mouseDown = function(e) {
 };
 
 kpxcDefine.initDescription = function() {
-    const description = $('#kpxcDefine-description');
-    const h1 = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-chooser-headline' });
-    const help = kpxcUI.createElement('div', 'kpxcDefine-chooser-help', { 'id': 'kpxcDefine-help' });
+    const description = kpxcDefine.dialog;
+    kpxcDefine.headline = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-chooser-headline' });
+    kpxcDefine.help = kpxcUI.createElement('div', 'kpxcDefine-chooser-help', { 'id': 'kpxcDefine-help' });
 
     // Show keyboard shortcuts help text
     const keyboardHelp = kpxcUI.createElement('div', 'kpxcDefine-keyboardHelp', {}, `${tr('optionsKeyboardShortcutsHeader')}:`);
@@ -73,7 +94,7 @@ kpxcDefine.initDescription = function() {
     keyboardHelp.appendMultiple(document.createElement('br'), kpxcUI.createElement('kbd', '', {}, 'M'), ' ' + tr('defineMore'));
     keyboardHelp.appendMultiple(document.createElement('br'), kpxcUI.createElement('kbd', '', {}, 'D'), ' ' + tr('defineDiscard'));
 
-    description.appendMultiple(h1, help, keyboardHelp);
+    description.appendMultiple(kpxcDefine.headline, kpxcDefine.help, keyboardHelp);
 
     const buttonDismiss = kpxcUI.createElement('button', 'kpxc-button kpxc-red-button', { 'id': 'kpxcDefine-btn-dismiss' }, tr('defineDismiss'));
     buttonDismiss.addEventListener('click', kpxcDefine.close);
@@ -96,6 +117,11 @@ kpxcDefine.initDescription = function() {
     buttonConfirm.style.display = 'none';
     buttonConfirm.addEventListener('click', kpxcDefine.confirm);
 
+    kpxcDefine.buttons.again = buttonAgain;
+    kpxcDefine.buttons.confirm = buttonConfirm;
+    kpxcDefine.buttons.dismiss = buttonDismiss;
+    kpxcDefine.buttons.more = buttonMore;
+    kpxcDefine.buttons.skip = buttonSkip;
     description.appendMultiple(buttonConfirm, buttonSkip, buttonMore, buttonAgain, buttonDismiss);
 
     const location = kpxc.getDocumentLocation();
@@ -105,6 +131,8 @@ kpxcDefine.initDescription = function() {
         const buttonDiscard = kpxcUI.createElement('button', 'kpxc-button kpxc-red-button', { 'id': 'kpxcDefine-btn-discard' }, tr('defineDiscard'));
         buttonDiscard.style.marginTop = '5px';
         buttonDiscard.addEventListener('click', kpxcDefine.discard);
+        kpxcDefine.buttons.discard = buttonSkip;
+        kpxcDefine.discardSection = div;
 
         div.appendMultiple(defineDiscard, buttonDiscard);
         description.append(div);
@@ -121,9 +149,8 @@ kpxcDefine.resetSelection = function() {
 
     kpxcDefine.markedFields = [];
 
-    const fields = $('#kpxcDefine-fields');
-    if (fields) {
-        fields.textContent = '';
+    if (kpxcDefine.chooser) {
+        kpxcDefine.chooser.textContent = '';
     }
 };
 
@@ -140,7 +167,7 @@ kpxcDefine.isFieldSelected = function(field) {
     return false;
 };
 
-kpxcDefine.markAllUsernameFields = function(chooser) {
+kpxcDefine.markAllUsernameFields = function() {
     kpxcDefine.eventFieldClick = function(e, elem) {
         if (!e.isTrusted) {
             return;
@@ -154,13 +181,13 @@ kpxcDefine.markAllUsernameFields = function(chooser) {
         kpxcDefine.markedFields.push(field.originalElement);
 
         kpxcDefine.prepareStep2();
-        kpxcDefine.markAllPasswordFields('#kpxcDefine-fields');
+        kpxcDefine.markAllPasswordFields();
     };
 
-    kpxcDefine.markFields(chooser, kpxcDefine.inputQueryPattern);
+    kpxcDefine.markFields(kpxcDefine.inputQueryPattern);
 };
 
-kpxcDefine.markAllPasswordFields = function(chooser) {
+kpxcDefine.markAllPasswordFields = function() {
     kpxcDefine.eventFieldClick = function(e, elem) {
         if (!e.isTrusted) {
             return;
@@ -174,13 +201,13 @@ kpxcDefine.markAllPasswordFields = function(chooser) {
         kpxcDefine.markedFields.push(field.originalElement);
 
         kpxcDefine.prepareStep3();
-        kpxcDefine.markAllTOTPFields('#kpxcDefine-fields');
+        kpxcDefine.markAllTOTPFields();
     };
 
-    kpxcDefine.markFields(chooser, 'input[type=\'password\']');
+    kpxcDefine.markFields('input[type=\'password\']');
 };
 
-kpxcDefine.markAllStringFields = function(chooser) {
+kpxcDefine.markAllStringFields = function() {
     kpxcDefine.eventFieldClick = function(e, elem) {
         if (!e.isTrusted) {
             return;
@@ -199,10 +226,10 @@ kpxcDefine.markAllStringFields = function(chooser) {
         field.onclick = null;
     };
 
-    kpxcDefine.markFields(chooser, kpxcDefine.inputQueryPattern + ', select');
+    kpxcDefine.markFields(kpxcDefine.inputQueryPattern + ', select');
 };
 
-kpxcDefine.markAllTOTPFields = function(chooser) {
+kpxcDefine.markAllTOTPFields = function() {
     kpxcDefine.eventFieldClick = function(e, elem) {
         if (!e.isTrusted) {
             return;
@@ -216,13 +243,13 @@ kpxcDefine.markAllTOTPFields = function(chooser) {
         kpxcDefine.markedFields.push(field.originalElement);
 
         kpxcDefine.prepareStep4();
-        kpxcDefine.markAllStringFields('#kpxcDefine-fields');
+        kpxcDefine.markAllStringFields();
     };
 
-    kpxcDefine.markFields(chooser, kpxcDefine.inputQueryPattern);
+    kpxcDefine.markFields(kpxcDefine.inputQueryPattern);
 };
 
-kpxcDefine.markFields = function(chooser, pattern) {
+kpxcDefine.markFields = function(pattern) {
     let index = 1;
     let firstInput = null;
     const inputs = document.querySelectorAll(pattern);
@@ -266,9 +293,8 @@ kpxcDefine.markFields = function(chooser, pattern) {
             field.classList.remove('kpxcDefine-fixed-hover-field');
         });
 
-        const elem = $(chooser);
-        if (elem) {
-            elem.append(field);
+        if (kpxcDefine.chooser) {
+            kpxcDefine.chooser.append(field);
             firstInput = field;
             ++index;
         }
@@ -280,77 +306,78 @@ kpxcDefine.markFields = function(chooser, pattern) {
 };
 
 kpxcDefine.prepareStep1 = function() {
-    const help = $('#kpxcDefine-help');
-    help.style.marginBottom = '10px';
-    help.textContent = tr('defineKeyboardText');
+    kpxcDefine.help.style.marginBottom = '10px';
+    kpxcDefine.help.textContent = tr('defineKeyboardText');
 
     removeContent('div#kpxcDefine-fixed-field');
-    $('#kpxcDefine-chooser-headline').textContent = tr('defineChooseUsername');
+    kpxcDefine.headline.textContent = tr('defineChooseUsername');
     kpxcDefine.dataStep = 1;
-    $('#kpxcDefine-btn-skip').style.display = 'inline-block';
-    $('#kpxcDefine-btn-confirm').style.display = 'none';
-    $('#kpxcDefine-btn-again').style.display = 'none';
-    $('#kpxcDefine-btn-more').style.display = 'none';
+
+    kpxcDefine.buttons.skip.style.display = 'inline-block';
+    kpxcDefine.buttons.confirm.style.display = 'none';
+    kpxcDefine.buttons.again.style.display = 'none';
+    kpxcDefine.buttons.more.style.display = 'none';
 };
 
 kpxcDefine.prepareStep2 = function() {
-    const help = $('#kpxcDefine-help');
+    const help = kpxcDefine.help;
     help.style.marginBottom = '10px';
     help.textContent = tr('defineKeyboardText');
 
     removeContent('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field)');
-    $('#kpxcDefine-chooser-headline').textContent = tr('defineChoosePassword');
+    removeContent('div.kpxcDefine-fixed.field');
+    kpxcDefine.headline.textContent = tr('defineChoosePassword');
     kpxcDefine.dataStep = 2;
-    $('#kpxcDefine-btn-again').style.display = 'inline-block';
-    $('#kpxcDefine-btn-more').style.display = 'inline-block';
+    kpxcDefine.buttons.again.style.display = 'inline-block';
+    kpxcDefine.buttons.more.style.display = 'inline-block';
 };
 
 kpxcDefine.prepareStep3 = function() {
-    $('#kpxcDefine-help').style.marginBottom = '10px';
-    $('#kpxcDefine-help').textContent = tr('defineHelpText');
+    kpxcDefine.help.style.marginBottom = '10px';
+    kpxcDefine.help.textContent = tr('defineHelpText');
 
     removeContent('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field)');
-    $('#kpxcDefine-chooser-headline').textContent = tr('defineChooseTOTP');
+    kpxcDefine.headline.textContent = tr('defineChooseTOTP');
     kpxcDefine.dataStep = 3;
-    $('#kpxcDefine-btn-skip').style.display = 'inline-block';
-    $('#kpxcDefine-btn-again').style.display = 'inline-block';
-    $('#kpxcDefine-btn-more').style.display = 'none';
-    $('#kpxcDefine-btn-confirm').style.display = 'none';
+    kpxcDefine.buttons.skip.style.display = 'inline-block';
+    kpxcDefine.buttons.again.style.display = 'inline-block';
+    kpxcDefine.buttons.more.style.display = 'none';
+    kpxcDefine.buttons.confirm.style.display = 'none';
 };
 
 kpxcDefine.prepareStep4 = function() {
-    $('#kpxcDefine-help').style.marginBottom = '10px';
-    $('#kpxcDefine-help').textContent = tr('defineHelpText');
+    kpxcDefine.help.style.marginBottom = '10px';
+    kpxcDefine.help.textContent = tr('defineHelpText');
 
     removeContent('div.kpxcDefine-fixed-field:not(.kpxcDefine-fixed-username-field):not(.kpxcDefine-fixed-password-field):not(.kpxcDefine-fixed-totp-field):not(.kpxcDefine-fixed-string-field)');
-    $('#kpxcDefine-chooser-headline').textContent = tr('defineConfirmSelection');
+    kpxcDefine.headline.textContent = tr('defineConfirmSelection');
     kpxcDefine.dataStep = 4;
-    $('#kpxcDefine-btn-skip').style.display = 'none';
-    $('#kpxcDefine-btn-more').style.display = 'none';
-    $('#kpxcDefine-btn-again').style.display = 'inline-block';
-    $('#kpxcDefine-btn-confirm').style.display = 'inline-block';
+    kpxcDefine.buttons.skip.style.display = 'none';
+    kpxcDefine.buttons.more.style.display = 'none';
+    kpxcDefine.buttons.again.style.display = 'inline-block';
+    kpxcDefine.buttons.confirm.style.display = 'inline-block';
 };
 
 kpxcDefine.skip = function() {
     if (kpxcDefine.dataStep === 1) {
         kpxcDefine.selection.username = null;
         kpxcDefine.prepareStep2();
-        kpxcDefine.markAllPasswordFields('#kpxcDefine-fields');
+        kpxcDefine.markAllPasswordFields();
     } else if (kpxcDefine.dataStep === 2) {
         kpxcDefine.selection.password = null;
         kpxcDefine.prepareStep3();
-        kpxcDefine.markAllTOTPFields('#kpxcDefine-fields');
+        kpxcDefine.markAllTOTPFields();
     } else if (kpxcDefine.dataStep === 3) {
         kpxcDefine.selection.totp = null;
         kpxcDefine.prepareStep4();
-        kpxcDefine.markAllStringFields('#kpxcDefine-fields');
+        kpxcDefine.markAllStringFields();
     }
 };
 
 kpxcDefine.again = function() {
     kpxcDefine.resetSelection();
     kpxcDefine.prepareStep1();
-    kpxcDefine.markAllUsernameFields('#kpxcDefine-fields');
+    kpxcDefine.markAllUsernameFields();
 };
 
 kpxcDefine.more = function() {
@@ -369,7 +396,7 @@ kpxcDefine.more = function() {
         kpxcDefine.prepareStep4();
     }
 
-    kpxcDefine.markFields('#kpxcDefine-fields', kpxcDefine.moreInputQueryPattern);
+    kpxcDefine.markFields(kpxcDefine.moreInputQueryPattern);
 };
 
 kpxcDefine.confirm = async function() {
@@ -411,7 +438,7 @@ kpxcDefine.confirm = async function() {
 };
 
 kpxcDefine.discard = async function() {
-    if (!$('#kpxcDefine-btn-discard')) {
+    if (!kpxcDefine.buttons.discard) {
         return;
     }
 
@@ -421,7 +448,7 @@ kpxcDefine.discard = async function() {
     await sendMessage('save_settings', kpxc.settings);
     await sendMessage('load_settings');
 
-    $('div.alreadySelected').remove();
+    kpxcDefine.discardSection.remove();
 };
 
 // Handle keyboard events
@@ -462,7 +489,7 @@ kpxcDefine.keyDown = function(e) {
 };
 
 const removeContent = function(pattern) {
-    const elems = document.querySelectorAll(pattern);
+    const elems = kpxcDefine.chooser.querySelectorAll(pattern);
     for (const e of elems) {
         e.remove();
     }

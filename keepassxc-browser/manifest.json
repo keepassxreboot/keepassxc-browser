@@ -120,6 +120,7 @@
         "css/banner.css",
         "css/button.css",
         "css/colors.css",
+        "css/define.css",
         "css/pwgen.css",
         "css/username.css",
         "css/totp.css"
