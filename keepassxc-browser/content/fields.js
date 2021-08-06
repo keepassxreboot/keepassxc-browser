@@ -62,6 +62,31 @@ kpxcFields.getAllCombinations = async function(inputs) {
     return combinations;
 };
 
+// If there are multiple combinations, return the first one where input field can be found inside the document.
+// Used with Custom Login Fields where selected input fields might not be visible on the page yet,
+// and there's an extra combination for those. Only used from popup fill.
+kpxcFields.getCombinationFromAllInputs = function() {
+    const inputs = kpxcObserverHelper.getInputs(document.body);
+
+    for (const combination of kpxc.combinations) {
+        for (const value of Object.values(combination)) {
+            if (Array.isArray(value)) {
+                for (const v of value) {
+                    if (inputs.some(i => i === v)) {
+                        return combination;
+                    }
+                }
+            } else {
+                if (inputs.some(i => i === value)) {
+                    return combination;
+                }
+            }
+        }
+    }
+
+    return kpxc.combinations[0];
+};
+
 // Adds segmented TOTP fields to the combination if found
 kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
     if (!kpxc.settings.showOTPIcon) {
@@ -395,12 +420,6 @@ kpxcFields.useCustomLoginFields = async function() {
     if (totp) {
         totp.setAttribute('kpxc-defined', 'totp');
         kpxcTOTPIcons.newIcon(totp, kpxc.databaseState);
-    }
-
-    // If not all expected fields are identified, return an empty combination
-    if ((creds.username && !username) || (creds.password && !password) || (creds.totp && !totp)
-        || (creds.fields.length !== stringFields.length)) {
-        return [];
     }
 
     const combinations = [];
