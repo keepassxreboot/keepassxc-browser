@@ -15,7 +15,8 @@ const acceptedOTPFields = [
     'token',
     'twofa',
     'two-factor',
-    'twofactor'
+    'twofactor',
+    'verification_pin'
 ];
 
 var kpxcTOTPIcons = {};
