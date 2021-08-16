@@ -156,7 +156,7 @@ kpxcCustomLoginFieldsBanner.usernameButtonClicked = function(e) {
         return;
     }
 
-    kpxcCustomLoginFieldsBanner.resetSelection();
+    kpxcCustomLoginFieldsBanner.removeMarkedFields();
     kpxcCustomLoginFieldsBanner.prepareUsernameSelection();
     kpxcCustomLoginFieldsBanner.markAllUsernameFields(true);
 
@@ -170,7 +170,7 @@ kpxcCustomLoginFieldsBanner.passwordButtonClicked = function(e) {
         return;
     }
 
-    kpxcCustomLoginFieldsBanner.resetSelection();
+    kpxcCustomLoginFieldsBanner.removeMarkedFields();
     kpxcCustomLoginFieldsBanner.preparePasswordSelection();
     kpxcCustomLoginFieldsBanner.markAllPasswordFields(true);
 
@@ -183,7 +183,7 @@ kpxcCustomLoginFieldsBanner.totpButtonClicked = function(e) {
         return;
     }
 
-    kpxcCustomLoginFieldsBanner.resetSelection();
+    kpxcCustomLoginFieldsBanner.removeMarkedFields();
     kpxcCustomLoginFieldsBanner.prepareTOTPSelection();
     kpxcCustomLoginFieldsBanner.markAllTOTPFields(true);
 
@@ -196,7 +196,7 @@ kpxcCustomLoginFieldsBanner.stringFieldsButtonClicked = function(e) {
         return;
     }
 
-    kpxcCustomLoginFieldsBanner.resetSelection();
+    kpxcCustomLoginFieldsBanner.removeMarkedFields();
     kpxcCustomLoginFieldsBanner.prepareStringFieldSelection();
     kpxcCustomLoginFieldsBanner.markAllStringFields();
 
@@ -224,6 +224,26 @@ kpxcCustomLoginFieldsBanner.hideKeyboardHelp = function() {
     kpxcCustomLoginFieldsBanner.keyboardHelp.style.display = 'none';
 };
 
+// Updates the possible selections if the page content has been changed
+kpxcCustomLoginFieldsBanner.updateFieldSelections = function() {
+    kpxcCustomLoginFieldsBanner.removeMarkedFields();
+
+    if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_USERNAME) {
+        kpxcCustomLoginFieldsBanner.prepareUsernameSelection();
+        kpxcCustomLoginFieldsBanner.markAllUsernameFields();
+    } else if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_PASSWORD) {
+        kpxcCustomLoginFieldsBanner.preparePasswordSelection();
+        kpxcCustomLoginFieldsBanner.markAllPasswordFields();
+    } else if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_TOTP) {
+        kpxcCustomLoginFieldsBanner.prepareTOTPSelection();
+        kpxcCustomLoginFieldsBanner.markAllTOTPFields();
+    } else if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_STRING_FIELDS) {
+        kpxcCustomLoginFieldsBanner.prepareStringFieldSelection();
+        kpxcCustomLoginFieldsBanner.markAllStringFields();
+    }
+};
+
+// Skips the current step and proceeds to the next one
 kpxcCustomLoginFieldsBanner.skip = function() {
     if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_USERNAME) {
         kpxcCustomLoginFieldsBanner.selection.username = undefined;
@@ -240,6 +260,7 @@ kpxcCustomLoginFieldsBanner.skip = function() {
     }
 };
 
+// Starts from beginning
 kpxcCustomLoginFieldsBanner.again = function() {
     kpxcCustomLoginFieldsBanner.resetSelection();
     kpxcCustomLoginFieldsBanner.prepareUsernameSelection();
@@ -248,6 +269,7 @@ kpxcCustomLoginFieldsBanner.again = function() {
     kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = true;
 };
 
+// Shows more possible input field selections
 kpxcCustomLoginFieldsBanner.more = function() {
     if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_USERNAME) {
         kpxcCustomLoginFieldsBanner.prepareUsernameSelection();
@@ -267,6 +289,7 @@ kpxcCustomLoginFieldsBanner.more = function() {
     kpxcCustomLoginFieldsBanner.markFields(kpxcCustomLoginFieldsBanner.moreInputQueryPattern);
 };
 
+// Confirm and save the selections
 kpxcCustomLoginFieldsBanner.confirm = async function() {
     if (!kpxc.settings['defined-custom-fields']) {
         kpxc.settings['defined-custom-fields'] = {};
@@ -284,27 +307,10 @@ kpxcCustomLoginFieldsBanner.confirm = async function() {
         }
     };
 
-    let usernamePath;
-    let passwordPath;
-    let totpPath;
-    const stringFieldsPaths = [];
-
-    if (kpxcCustomLoginFieldsBanner.selection.username) {
-        usernamePath = kpxcFields.setId(kpxcCustomLoginFieldsBanner.selection.username.originalElement);
-    }
-
-    if (kpxcCustomLoginFieldsBanner.selection.password) {
-        passwordPath = kpxcFields.setId(kpxcCustomLoginFieldsBanner.selection.password.originalElement);
-    }
-
-    if (kpxcCustomLoginFieldsBanner.selection.totp) {
-        totpPath = kpxcFields.setId(kpxcCustomLoginFieldsBanner.selection.totp.originalElement);
-    }
-
-    for (const i of kpxcCustomLoginFieldsBanner.selection.fields) {
-        stringFieldsPaths.push(kpxcFields.setId(i));
-    }
-
+    const usernamePath = kpxcCustomLoginFieldsBanner.selection.username;
+    const passwordPath = kpxcCustomLoginFieldsBanner.selection.password;
+    const totpPath = kpxcCustomLoginFieldsBanner.selection.totp;
+    const stringFieldsPaths = kpxcCustomLoginFieldsBanner.selection.fields;
     const location = kpxc.getDocumentLocation();
     const currentSettings = kpxc.settings['defined-custom-fields'][location];
 
@@ -336,6 +342,7 @@ kpxcCustomLoginFieldsBanner.confirm = async function() {
     kpxcCustomLoginFieldsBanner.destroy();
 };
 
+// Clears the previously saved data from settings
 kpxcCustomLoginFieldsBanner.clearData = async function() {
     const location = kpxc.getDocumentLocation();
     delete kpxc.settings['defined-custom-fields'][location];
@@ -346,6 +353,7 @@ kpxcCustomLoginFieldsBanner.clearData = async function() {
     kpxcCustomLoginFieldsBanner.buttons.clearData.style.display = 'none';
 };
 
+// Resets all selections and marked fields
 kpxcCustomLoginFieldsBanner.resetSelection = function() {
     kpxcCustomLoginFieldsBanner.selection = {
         username: undefined,
@@ -354,12 +362,16 @@ kpxcCustomLoginFieldsBanner.resetSelection = function() {
         fields: []
     };
 
+    kpxcCustomLoginFieldsBanner.removeMarkedFields();
+    kpxcCustomLoginFieldsBanner.singleSelection = false;
+};
+
+kpxcCustomLoginFieldsBanner.removeMarkedFields = function() {
     while (kpxcCustomLoginFieldsBanner.chooser.firstChild) {
         kpxcCustomLoginFieldsBanner.chooser.firstChild.remove();
     }
 
     kpxcCustomLoginFieldsBanner.markedFields = [];
-    kpxcCustomLoginFieldsBanner.singleSelection = false;
 };
 
 kpxcCustomLoginFieldsBanner.prepareUsernameSelection = function() {
@@ -429,7 +441,8 @@ kpxcCustomLoginFieldsBanner.markAllUsernameFields = function(singleSelection = f
         field.classList.add('kpxcDefine-fixed-username-field');
         field.textContent = tr('username');
         field.onclick = undefined;
-        kpxcCustomLoginFieldsBanner.selection.username = field;
+
+        kpxcCustomLoginFieldsBanner.selection.username = kpxcFields.setId(field.originalElement);
         kpxcCustomLoginFieldsBanner.markedFields.push(field.originalElement);
         kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = false;
 
@@ -458,7 +471,8 @@ kpxcCustomLoginFieldsBanner.markAllPasswordFields = function(singleSelection = f
         field.classList.add('kpxcDefine-fixed-password-field');
         field.textContent = tr('password');
         field.onclick = undefined;
-        kpxcCustomLoginFieldsBanner.selection.password = field;
+
+        kpxcCustomLoginFieldsBanner.selection.password = kpxcFields.setId(field.originalElement);
         kpxcCustomLoginFieldsBanner.markedFields.push(field.originalElement);
         kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = false;
 
@@ -487,7 +501,8 @@ kpxcCustomLoginFieldsBanner.markAllTOTPFields = function(singleSelection = false
         field.classList.add('kpxcDefine-fixed-totp-field');
         field.textContent = 'TOTP';
         field.onclick = undefined;
-        kpxcCustomLoginFieldsBanner.selection.totp = field;
+
+        kpxcCustomLoginFieldsBanner.selection.totp = kpxcFields.setId(field.originalElement);
         kpxcCustomLoginFieldsBanner.markedFields.push(field.originalElement);
         kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = false;
 
@@ -513,7 +528,7 @@ kpxcCustomLoginFieldsBanner.markAllStringFields = function() {
             return;
         }
 
-        kpxcCustomLoginFieldsBanner.selection.fields.push(field.originalElement);
+        kpxcCustomLoginFieldsBanner.selection.fields.push(kpxcFields.setId(field.originalElement));
         kpxcCustomLoginFieldsBanner.markedFields.push(field.originalElement);
         kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = false;
 
