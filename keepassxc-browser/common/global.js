@@ -12,6 +12,12 @@ const SORT_BY_USERNAME = 'sortByUsername';
 const SORT_BY_GROUP_AND_TITLE = 'sortByGroupAndTitle';
 const SORT_BY_GROUP_AND_USERNAME = 'sortByGroupAndUsername';
 
+// Update check intervals
+const CHECK_UPDATE_NEVER = 0;
+const CHECK_UPDATE_THREE_DAYS = 3;
+const CHECK_UPDATE_ONE_WEEK = 7;
+const CHECK_UPDATE_ONE_MONTH = 30;
+
 const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 const pathSegment = '(.*)';
