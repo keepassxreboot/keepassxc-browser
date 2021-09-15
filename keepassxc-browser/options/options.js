@@ -93,6 +93,11 @@ options.initGeneralSettings = function() {
         }
     });
 
+    $('#tab-general-settings input[type=radio]#checkUpdateThreeDays').val(CHECK_UPDATE_THREE_DAYS);
+    $('#tab-general-settings input[type=radio]#checkUpdateOneWeek').val(CHECK_UPDATE_ONE_WEEK);
+    $('#tab-general-settings input[type=radio]#checkUpdateOneMonth').val(CHECK_UPDATE_ONE_MONTH);
+    $('#tab-general-settings input[type=radio]#checkUpdateNever').val(CHECK_UPDATE_NEVER);
+
     $('#tab-general-settings input[type=range]').val(options.settings['redirectAllowance']);
     $('#redirectAllowanceLabel').text(tr('optionsRedirectAllowance',
         options.settings['redirectAllowance'] === 11 ? 'Infinite' : String(options.settings['redirectAllowance'])));

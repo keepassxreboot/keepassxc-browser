@@ -8,7 +8,7 @@ const defaultSettings = {
     autoReconnect: false,
     autoRetrieveCredentials: true,
     autoSubmit: false,
-    checkUpdateKeePassXC: 3,
+    checkUpdateKeePassXC: CHECK_UPDATE_NEVER,
     clearCredentialsTimeout: 10,
     colorTheme: 'system',
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
