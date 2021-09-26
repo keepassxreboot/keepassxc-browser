@@ -5,16 +5,16 @@
   "main": "build.js",
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "mocha": "^8.1.3",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.24.2",
+    "mocha": "^8.4.0",
     "zip-a-folder": "0.0.12"
   },
   "dependencies": {
     "file-url": "^3.0.0",
     "fs-extra": "^8.1.0",
     "selenium-webdriver": "^3.6.0",
-    "soft-assert": "^0.2.3"
+    "soft-assert": "^0.2.6"
   },
   "scripts": {
     "build": "node build.js",
