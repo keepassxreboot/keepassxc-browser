@@ -169,6 +169,16 @@ Response message data (success, decrypted):
 }
 ```
 
+Response message data (success, decrypted, KeePassXC 2.7.0 and later):
+```json
+{
+    "version": "2.7.0",
+    "password": "thePassword",
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+}
+```
+
 ### get-logins
 Unencrypted message:
 ```json
