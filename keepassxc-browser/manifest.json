@@ -108,6 +108,9 @@
         },
         "retrive_credentials_forced": {
             "description": "__MSG_popupReopenButton__"
+        },
+        "request_autotype": {
+            "description": "__MSG_contextMenuRequestGlobalAutoType__"
         }
     },
     "web_accessible_resources": [
