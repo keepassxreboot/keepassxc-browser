@@ -141,16 +141,11 @@ const slashNeededForUrl = function(pattern) {
 };
 
 // Returns the top level domain, e.g. https://another.example.co.uk -> example.co.uk
+// This is done because a top level domain will probably give better matches with Auto-Type than a full hostname.
 const getTopLevelDomainFromUrl = function(hostname) {
-    const ipRegex = new RegExp(/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/g);
     const domainRegex = new RegExp(/(\w+).(com|net|org|edu|co)*(.\w+)$/g);
-
-    // If the hostname is an IP address, return it directly
-    if (hostname.match(ipRegex)) {
-        return hostname;
-    }
-
     const domainMatch = domainRegex.exec(hostname);
+
     if (domainMatch) {
         return domainMatch[0];
     }
