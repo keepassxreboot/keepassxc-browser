@@ -81,9 +81,12 @@ kpxcSites.exceptionFound = function(identifier) {
     } else if (document.location.origin.startsWith('https://signin.ebay.')
                && (identifier === 'null' || identifier.value === 'null' || identifier === 'pass')) {
         return true;
-    } else if (document.location.origin.startsWith('https://www.fidelity.com')
-               && identifier.contains('fs-mask-username')) {
-        return true;
+    } else if (document.location.origin.startsWith('https://www.fidelity.com')) {
+        if (typeof identifier === 'string') {
+            return identifier.includes('fs-mask-username');
+        }
+
+        return identifier.contains('fs-mask-username');
     } else if (document.location.origin.startsWith('https://app.protonmail.ch')
               || document.location.origin.startsWith('https://mail.protonmail.com')
               && identifier === 'mailboxPassword') {
