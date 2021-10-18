@@ -76,7 +76,8 @@ kpxcSites.exceptionFound = function(identifier) {
     }
 
     if (document.location.origin === 'https://idmsa.apple.com'
-        && [ 'password', 'form-row', 'show-password' ].every(c => identifier.contains(c))) {
+        && ((typeof identifier === 'string' && identifier === 'password_text_field')
+        || [ 'password', 'form-row', 'show-password' ].every(c => identifier.contains(c)))) {
         return true;
     } else if (document.location.origin.startsWith('https://signin.ebay.')
                && (identifier === 'null' || identifier.value === 'null' || identifier === 'pass')) {
