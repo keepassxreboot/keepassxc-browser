@@ -1,4 +1,4 @@
-:root {
+:root, :host {
     --kpxc-background-color: #fff;
     --kpxc-card-background-color: #fff;
     --kpxc-card-border-color: rgba(0,0,0,.125);
@@ -19,7 +19,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root, :host {
         --kpxc-background-color: #3b3b3d;
         --kpxc-card-background-color: #2b2a2a;
         --kpxc-card-border-color: #292a2a;
