@@ -2108,6 +2108,8 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxc.inputs = [];
             kpxc.combinations = [];
             kpxc.initCredentialFields();
+        } else if (req.action === 'reload_extension') {
+            sendMessage('reconnect');
         } else if (req.action === 'save_credentials') {
             kpxc.rememberCredentialsFromContextMenu();
         } else if (req.action === 'retrive_credentials_forced') {

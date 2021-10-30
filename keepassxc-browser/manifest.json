@@ -111,6 +111,9 @@
         },
         "request_autotype": {
             "description": "__MSG_contextMenuRequestGlobalAutoType__"
+        },
+        "reload_extension": {
+            "description": "__MSG_popupReloadButton__"
         }
     },
     "web_accessible_resources": [
