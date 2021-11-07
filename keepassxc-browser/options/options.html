@@ -20,6 +20,13 @@
     <script src="../common/translate.js" defer></script>
   </head>
   <body class="pt-3 pb-5">
+    <script>
+    // We eagerly load the theme here to avoid a white flash
+    let colorTheme = localStorage.getItem('colorTheme');
+    if (colorTheme) {
+      document.body.setAttribute('data-color-theme', colorTheme);
+    }
+    </script>
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-3 col-lg-2 sidebar">
