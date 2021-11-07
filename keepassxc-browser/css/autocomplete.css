@@ -1,5 +1,7 @@
 .kpxcAutocomplete-items {
     position: absolute !important;
+    max-height: 250px;
+    overflow-y: auto;
 }
 
 .kpxcAutocomplete-items div {
