@@ -200,6 +200,11 @@ class Autocomplete {
                 this.closeList();
             }
         } else if (e.key === 'Tab') {
+            // Return if the list is not open
+            if (items.length === 0) {
+                return;
+            }
+
             // Return if value is not in the list
             if (inputField.value !== '' && !this.elements.some(c => c.value === inputField.value)) {
                 this.closeList();
