@@ -21,15 +21,15 @@
     },
     "contextMenuSaveCredentials": {
         "message": "Guardar credenciales",
-        "description": "Save credentials using the extension popup icon."
+        "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
         "message": "Mostrar generador de contraseña",
         "description": "Show password generator text."
     },
-    "rememberCredentialsPopup": {
-        "message": "Crear o modificar las credenciales haciendo clic en el icono de la extensión.",
-        "description": "Notification text when saving credentials from the context menu."
+    "contextMenuFillAttribute": {
+        "message": "Rellenar atributo...",
+        "description": "Context menu parent item for filling a custom attribute."
     },
     "multipleCredentialsDetected": {
         "message": "Autenticación HTTP con múltiples credenciales detectadas. Haga clic en el icono de la extensión de elegir la correcta.",
@@ -99,6 +99,10 @@
         "message": "No se encontraron inicios de sesión.",
         "description": "No logins found."
     },
+    "errorNotConnected": {
+        "message": "No conectado a KeePassXC.",
+        "description": "Error notification shown when not connected to KeePassXC"
+    },
     "passwordGeneratorIcon": {
         "message": "Iconos del generador de contraseña",
         "description": "Alt attribute text of the password generator icon."
@@ -111,10 +115,6 @@
         "message": "También rellenar el siguiente campo de contraseña",
         "description": "Checkbox text below the password generator input field."
     },
-    "passwordGeneratorBits": {
-        "message": "??? Bits",
-        "description": "Bits of the generated password."
-    },
     "passwordGeneratorTitle": {
         "message": "Generador de Contraseñas",
         "description": "Password generator dialog title."
@@ -123,16 +123,28 @@
         "message": "Generar",
         "description": "Generate button text in password generator."
     },
+    "passwordGeneratorTryAgain": {
+        "message": "Intentar de nuevo",
+        "description": "Generate button text in password generator when not connected."
+    },
     "passwordGeneratorCopy": {
         "message": "Copiar",
         "description": "Copy button text in password generator."
     },
-    "passwordGeneratorFillAndCopy": {
-        "message": "Llenar y copiar",
-        "description": "Fill and copy button text in password generator."
+    "passwordGeneratorFill": {
+        "message": "Rellenar contraseña",
+        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Error:\nLa contraseña generada es más larga que la longitud permitida!\nSe ha cortado para adaptarse a la longitud.\n\nPor favor, recuerde la nueva contraseña!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongCut": {
+        "message": "Se ha cortado para ajustarse a la longitud.",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongRemember": {
+        "message": "Por favor, ¡recuerde la nueva contraseña!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
@@ -142,6 +154,34 @@
     "passwordGeneratorError": {
         "message": "No se puede recibir la contraseña generada.<br />¿Se está ejecutando KeePassXC?",
         "description": "Password generator error text when KeePassXC is closed."
+    },
+    "passwordGeneratorErrorIsRunning": {
+        "message": "¿Está KeePassXC en ejecución y conectado?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "usernameFieldText": {
+        "message": "Rellenar credenciales de KeePassXC",
+        "description": "Username field icon hover text."
+    },
+    "usernameLockedFieldText": {
+        "message": "La base de datos está bloqueada",
+        "description": "Username field icon hover text when database is locked."
+    },
+    "usernameDisconnectedFieldText": {
+        "message": "KeePassXC está desconectado",
+        "description": "Username field icon hover text when KeePassXC is disconnected."
+    },
+    "usernameFieldIcon": {
+        "message": "Icono del campo de nombre de usuario",
+        "description": "Username field icon text."
+    },
+    "totpFieldText": {
+        "message": "Rellenar TOTP desde KeePassXC",
+        "description": "OTP field icon hover text."
+    },
+    "totpFieldIcon": {
+        "message": "Campo icono TOTP",
+        "description": "OTP field icon text."
     },
     "defineDismiss": {
         "message": "Descartar",
@@ -183,6 +223,10 @@
         "message": "2. Ahopra elija un campo de contraseña",
         "description": "Choosing a password field text when choosing custom login fields."
     },
+    "defineChooseTOTP": {
+        "message": "3. Elija un campo TOTP",
+        "description": "Choosing a TOTP field text when choosing custom login fields."
+    },
     "defineConfirmSelection": {
         "message": "3. Confirme su elección",
         "description": "Confirm a selection text when choosing custom login fields."
@@ -215,9 +259,21 @@
         "message": "Error:\n¡Se encontró más de un inicio de sesión en KeePassXC!\nPresiona el ícono del KeePassXC-Browser para más opciones.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
+    "credentialsMultipleFoundSecondLine": {
+        "message": "Pulse el icono KeePassXC-Browser para más opciones.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
     "credentialsNoUsernameFound": {
         "message": "Error:\nNo se encontraron credenciales para el nombre de usuario dado.",
         "description": "Alert message when no credentials are found for the given username."
+    },
+    "credentialsNoTOTPFound": {
+        "message": "No se ha encontrado TOTP.",
+        "description": "Alert message when no TOTP is found."
+    },
+    "credentialExpired": {
+        "message": "Caducado",
+        "description": "If a credential is expired, this is appended to the title label."
     },
     "fieldsFill": {
         "message": "Error:\nNo se pueden encontrar campos para rellenar.",
@@ -263,6 +319,10 @@
         "message": "Reabrir la base de datos",
         "description": "Popup reopen database button text."
     },
+    "popupUsernameButton": {
+        "message": "Añadir opción de solo nombre de usuario para el sitio",
+        "description": "Button text for adding Username-only option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser ha encontrado un error:",
         "description": "A text shown above error message in the popup."
@@ -299,45 +359,77 @@
         "message": "KeePassXC-Browser está conectado a KeePassXC y se ha configurado utilizando el siguiente identificador: $1",
         "description": "A popuo message when a connection to KeePassXC is succesful."
     },
-    "popupRememberInfoText": {
-        "message": "Nombre de usuario o contraseña cambiado! Lo guarda?",
-        "description": "Popup message when username or password has changed."
+    "popupUsernameFieldDetected": {
+        "message": "Sólo un campo de nombre de usuario fue detectado. ¿Añadir la URL a Preferencias del sitio con la opción solo-nombre-de-usuario habilitada?",
+        "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
-    "popupRememberSaving": {
+    "rememberInfoText": {
+        "message": "¡Usuario o contraseña cambiado! ¿Guardarlo?",
+        "description": "Message when username or password has changed."
+    },
+    "rememberSaving": {
         "message": "Las credenciales se guardarán en la base de datos conectada con el identificador $1",
-        "description": "A popup message when saving or updating credentials."
+        "description": "A message when saving or updating credentials."
     },
-    "popupRememberNewUsername": {
+    "rememberNewUsername": {
         "message": "El siguiente nombre de usuario no está guardado actualmente: $1",
-        "description": "A popup message shown when a new username is detected when saving credentials."
+        "description": "A message shown when a new username is detected when saving credentials."
     },
-    "popupRememberUsernameExists": {
+    "rememberUsernameExists": {
         "message": "Las credenciales con el nombre de usuario utilizado están marcadas en negrita: $1",
-        "description": "A popup message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when a existing username is detected when saving credentials."
     },
-    "popupRememberChooseCredentials": {
-        "message": "Por favor, elija las credenciales que desea actualizar.",
-        "description": "A popup message shown choosing what credentials user wants to update."
+    "rememberChooseCredentials": {
+        "message": "Elija las credenciales que desea actualizar.",
+        "description": "A message shown choosing what credentials user wants to update."
     },
-    "popupRememberChooseGroup": {
-        "message": "Elija el grupo al que desea agregar las nuevas credenciales.",
-        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    "rememberChooseGroup": {
+        "message": "Elija el grupo que desea agregar las nuevas credenciales.",
+        "description": "A message shown choosing what group user wants to use for new credentials."
     },
-    "popupRememberErrorDefaultGroupNotFound": {
-        "message": "Error: No se ha encontrado el grupo predeterminado especificado. Creando todos los grupos necesarios.",
-        "description": "Error message shown when default group set cannot be found."
+    "rememberInfoDefaultGroupNotFound": {
+        "message": "Grupo predeterminado creado en la base de datos conectada.",
+        "description": "Info message shown when default group set cannot be found."
     },
-    "popupRememberErrorCreatingNewGroup": {
-        "message": "No se puede(n) crear nuevo(s) grupo(s).",
+    "rememberErrorCreatingNewGroup": {
+        "message": "No se pueden crear nuevo(s) grupo(s).",
         "description": "Error message shown when new groups cannot be created."
     },
-    "popupRememberErrorPasswordNotChanged": {
-        "message": "Error: Credenciales no actualizadas. La contraseña no ha sido cambiada.",
+    "rememberErrorPasswordNotChanged": {
+        "message": "Credenciales no actualizadas. La contraseña no se ha cambiado.",
         "description": "Error message shown when credential password is not changed."
     },
-    "popupRememberErrorCannotSaveCredentials": {
-        "message": "Error: las credenciales no se pueden guardar o actualizar.",
+    "rememberErrorCannotSaveCredentials": {
+        "message": "Las credenciales no se pueden guardar ni actualizar.",
         "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "rememberErrorDatabaseClosed": {
+        "message": "Las credenciales no se pueden guardar ni actualizar en una base de datos cerrada.",
+        "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
+    },
+    "rememberCredentialsNotSaved": {
+        "message": "Operación cancelada. Las credenciales no se actualizan.",
+        "description": "Message shown when saving operation was cancelled."
+    },
+    "rememberCredentialsSaved": {
+        "message": "Nuevas credenciales con nombre de usuario $1 guardado.",
+        "description": "Message shown when new credentials are saved."
+    },
+    "rememberCredentialsUpdated": {
+        "message": "Credenciales con nombre de usuario $1 actualizado.",
+        "description": "Message shown when new credentials are succesfully updated."
+    },
+    "rememberCredentialsExists": {
+        "message": "Las credenciales idénticas ya existen. Nada que actualizar.",
+        "description": "Message shown when new credentials already found in database."
+    },
+    "rememberEmptyUsername": {
+        "message": "(vacío)",
+        "description": "Means an empty username."
+    },
+    "rememberNoPassword": {
+        "message": "Rellene el campo de la contraseña antes de guardar las credenciales.",
+        "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
         "message": "Seleccione la información de inicio de sesión que desea que se ingrese en la página.",
@@ -463,21 +555,17 @@
         "message": "Cancelar",
         "description": "Cancel button text when removing database key or custom login fields."
     },
-     "optionsButtonReset": {
+    "optionsButtonReset": {
         "message": "Resetear",
         "description": "Reset button text for keyboard shortcuts."
     },
-    "optionsLabelBlinkTime": {
-        "message": "Tiempo de parpadeo:",
-        "description": "Blink Time option text."
+    "optionsButtonImport": {
+        "message": "Opciones de importación",
+        "description": "Import settings button text."
     },
-    "optionsLabelRedirectOffset": {
-        "message": "Desplazamiento de redirección:",
-        "description": "Redirect Offset option text."
-    },
-    "optionsLabelRedirectAllowance": {
-        "message": "Máximo (número de) Redirecciones:",
-        "description": "RMaximum (Number of) Redirects options text."
+    "optionsButtonExport": {
+        "message": "Configuración de exportación",
+        "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
         "message": "Grupo predeterminado para guardar nuevas contraseñas:",
@@ -497,11 +585,35 @@
     },
     "optionsCheckboxUsePasswordGenerator": {
         "message": "Activar generador de contraseñas.",
-        "description": "Activate password generator checkbox text."
+        "description": "Activate password generator icons checkbox text."
+    },
+    "optionsCheckboxUsernameIcons": {
+        "message": "Activar iconos del campo nombre de usuario.",
+        "description": "Activate username field icons textbox text."
+    },
+    "optionsUseObserver": {
+        "message": "Usar detección dinámica de campo de entrada.",
+        "description": "Use dynamic input field detection checkbox text."
+    },
+    "optionsUseObserverHelpText": {
+        "message": "Útil con páginas que usan ventanas emergentes o diálogos dinámicos. Deshabilitar la característica para reducir la carga de CPU en máquinas lentas. Cuando se deshabilitan las credenciales solo pueden ser insertadas usando atajos de teclado, el menú contextual o la extensión emergente.",
+        "description": "Use dynamic input field detection help text."
+    },
+    "optionsCheckboxOTPIcons": {
+        "message": "Activar iconos del campo 2FA/OTP.",
+        "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
         "message": "Recuperar automáticamente las credenciales.",
         "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutomaticReconnect": {
+        "message": "Vuelva a conectarse automáticamente a KeePassXC.",
+        "description": "Auto-reconnect checkbox text."
+    },
+    "optionsAutomaticReconnectWarning": {
+        "message": "¡Advertencia! Esta característica es experimental. Utilícelo bajo su propio riesgo.",
+        "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
         "message": "Rellenar automáticamente las entradas de una sola credencial.",
@@ -510,6 +622,18 @@
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Activar autocompletar para los campos de nombre de usuario.",
         "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowGroupNameInAutocomplete": {
+        "message": "Mostrar el nombre del grupo en la lista de autocompletado cuando las credenciales son de diferentes grupos.",
+        "description": "Show group name in autocomplete checkbox text."
+    },
+    "optionsCheckboxAutoSubmit": {
+        "message": "Autoenvía formularios de inicio de sesión",
+        "description": "Auto-submit checkbox text."
+    },
+    "optionsAutoSubmitHelpText": {
+        "message": "Envía automáticamente las credenciales seleccionadas. Esto está inhabilitada para el autorellenado con entrada única.",
+        "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
         "message": "Mostrar notificaciones.",
@@ -522,6 +646,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "Mostrar una notificación cuando las nuevas credenciales se pueden guardar en la base de datos.",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsRedirectAllowance": {
+        "message": "Número de redirecciones permitidas:  $1",
+        "description": "Redirect allowance range input text."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "¿Cuántas páginas debe recorrer la pestaña después del desvío de redireccionamiento antes de desactivar el icono?",
+        "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
         "message": "Rellene automáticamente los cuadros de diálogo de autenticación básica de HTTP y envíelos.",
@@ -547,25 +679,33 @@
         "message": "nunca",
         "description": "Radio button text."
     },
+    "optionsThemeSelectionHeader": {
+        "message": "Color del tema",
+        "description": "Theme selection header text."
+    },
+    "optionsCredentialSortSelectionHeader": {
+        "message": "Ordenar credenciales coincidentes por",
+        "description": "Credential sort option header text."
+    },
+    "optionsThemeSelection": {
+        "message": "Seleccionar color del tema",
+        "description": "Theme selection title text."
+    },
+    "optionsThemeSystem": {
+        "message": "Sistema",
+        "description": "System theme text."
+    },
+    "optionsThemeDark": {
+        "message": "Oscuro",
+        "description": "Dark theme text."
+    },
+    "optionsThemeLight": {
+        "message": "Claro",
+        "description": "Light theme text."
+    },
     "optionsKeyboardShortcutsHeader": {
         "message": "Atajos de teclado",
         "description": "Keyboard shortcut header text."
-    },
-    "optionsBlinkTimeHelpText": {
-        "message": "Tiempo máximo (ms) que el icono debe parpadear después de detectar nuevas credenciales",
-        "description": "Blink Time option help text."
-    },
-    "optionsRedirectOffsetHelpText": {
-        "message": "Tiempo mínimo (ms) para que el icono parpadee antes de desactivarse debido a los redireccionamientos de página.",
-        "description": "Redirect Offset option help text."
-    },
-    "optionsRedirectOffsetHelpTextSecond": {
-        "message": "-1 para usar solo el tiempo de parpadeo ignorando redireccionamientos máximos (comportamiento anterior)",
-        "description": "Redirect Offset option help text, second part."
-    },
-    "optionsRedirectAllowanceHelpText": {
-        "message": "¿Cuántas páginas debe recorrer la pestaña después del desvío de redireccionamiento antes de desactivar el icono?",
-        "description": "Redirect Allowance option help text."
     },
     "optionsUsePasswordGeneratorHelpText": {
         "message": "Añade un botón a los campos de contraseña para generar una nueva contraseña.",
@@ -575,9 +715,33 @@
         "message": "KeePassXC genera las contraseñas utilizando su perfil de generación de contraseñas.",
         "description": "Password Generator option help text, second part."
     },
+    "optionsPredefinedSiteList": {
+        "message": "Sitios predefinidos",
+        "description": "Predefined site list details button text."
+    },
+    "optionsUsePredefinedSites": {
+        "message": "Usar sitios predefinidos por compatibilidad.",
+        "description": "Use predefined sites checkbox text."
+    },
+    "optionsUsePredefinedSitesHelpText": {
+        "message": "Añade sitios comunes que tienen formularios con solo nombre de usuario a las preferencias de sitios.",
+        "description": "Use predefined sites option help text."
+    },
+    "optionsShowLoginFormIconHelpText": {
+        "message": "Añadir como icono a los campos de nombre de usuario para rellenar credenciales con un solo clic del ratón.",
+        "description": "Username field icon option help text."
+    },
+    "optionsShowOTPIconHelpText": {
+        "message": "Añade un icono a los campos de entrada que son reconocidos como OTP/2FA.",
+        "description": "OTP field icon option help text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser recuperará inmediatamente las credenciales cuando se active una pestaña.",
         "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutomaticReconnectHelpText": {
+        "message": "Reconecta automáticamente a KeePassXC cuando es detectada",
+        "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
         "message": "Permitir que KeePassXC-Browser complete las credenciales automáticamente si recibe solo una entrada.",
@@ -591,12 +755,20 @@
         "message": "Muestre una lista desplegable que contenga las credenciales disponibles para todos los campos de nombre de usuario en una página.",
         "description": "Autocomplete Usernames option help text."
     },
+    "optionsShowGroupNameInAutocompleteHelpText": {
+        "message": "Cuando las credenciales son devueltas desde diferentes grupos, se muestra el nombre del grupo.",
+        "description": "Show group name in autocomplete help text."
+    },
     "optionsShowNotificationsHelpText": {
         "message": "Mostrar notificaciones de errores y cuándo es necesaria la interacción del usuario.",
         "description": "Show notifications option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Al guardar nuevas credenciales, guarde solo el dominio en lugar de la URL completa.",
+        "description": "Save domain only option help text."
+    },
+    "optionsSaveDomainOnlyCustomLoginHelpText": {
+        "message": "Al guardar nuevos campos de inicio de sesión personalizados, guarde solo el dominio en lugar de la URL completa.",
         "description": "Save domain only option help text."
     },
     "optionsAutoFillAndSendHelpText": {
@@ -606,6 +778,14 @@
     "optionsAutoFillAndSendHelpTextSecond": {
         "message": "Un diálogo de Autenticación Básica de HTTP se ve así:",
         "description": "HTTP Basic Auth image help text."
+    },
+    "optionsClearCredentialsTimeout": {
+        "message": "Limpiar credenciales de las pestañas no activas después de (segundos, 0-3600).",
+        "description": "Clear credentials label text."
+    },
+    "optionsClearCredentialsTimeoutHelpText": {
+        "message": "Las credenciales son limpiadas de las pestañas en segundo plano después del tiempo de espera y los permisos para esas páginas se solicitarán de nuevo.",
+        "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
         "message": "KeePassXC-Browser necesita KeePassXC para recuperar credenciales.",
@@ -622,6 +802,10 @@
     "optionsLatestVersion": {
         "message": "Última versión disponible de KeePassXC:$1",
         "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsKeePassXCVersionRequired": {
+        "message": "Requiere la versión de KeePassXC:  $1",
+        "description": "KeePassXC version requirement text."
     },
     "optionsDefault": {
         "message": "Por defecto: $1",
@@ -646,6 +830,18 @@
      "optionsShortcutsDanger": {
         "message": "Error: Acceso directo para  $1 no ha cambiado!",
         "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsImportExportSettings": {
+        "message": "Configuración de importación/exportación",
+        "description": "Settings page header text for import/export."
+    },
+    "optionsImportSettingsDialogTitle": {
+        "message": "¿Importar configuración desde un archivo externo?",
+        "description": "Import settings confirmation dialog title text."
+    },
+    "optionsImportSettingsDialogText": {
+        "message": "La configuración actual será sobrescrita. ¿Desea importar el archivo de configuración?",
+        "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
         "message": "Las siguientes bases de datos KeePassXC están conectadas a KeePassXC-Browser.",
@@ -711,9 +907,29 @@
         "message": "Desactivar credenciales nuevas/modificadas",
         "description": "Site preferences option selection."
     },
+    "optionsSelectionAutoSubmit": {
+        "message": "Deshabilitar autoenvío",
+        "description": "Site preferences option selection."
+    },
     "optionsSelectionFull": {
         "message": "Desactivar todas las características",
         "description": "Site preferences option selection."
+    },
+    "optionsSortByTitle": {
+        "message": "Título",
+        "desription": "Sort matching credentials by title option selection."
+    },
+    "optionsSortByUsername": {
+        "message": "Usuario",
+        "desription": "Sort matching credentials by username option selection."
+    },
+    "optionsSortByGroupAndTitle": {
+        "message": "Grupo y título",
+        "desription": "Sort matching credentials by group and title option selection."
+    },
+    "optionsSortByGroupAndUsername": {
+        "message": "Grupo y usuario",
+        "desription": "Sort matching credentials by group and username option selection."
     },
     "optionsCustomFieldsNotFound": {
         "message": "No se encontraron campos de inicio de sesión personalizado.",
@@ -731,6 +947,10 @@
         "message": "Vaya a la página y haga clic en el icono de KeePassXC-Browser, luego seleccione",
         "description": "Saved custom login fields info text, second part."
     },
+    "optionsCustomFieldsTabHelpTextThird": {
+        "message": "En esta página puedes gestionar campos personalizadas de inicio de sesión guardadas",
+        "description": "Saved custom login fields info text, third part."
+    },
     "optionsCustomFieldsRemove": {
         "message": "¿Quitar campos de inicio de sesión personalizados?",
         "description": "Confirmation text when removing saved custom login fields."
@@ -745,7 +965,7 @@
     },
     "optionsSitePreferencesNotFound": {
         "message": "No se encontraron sitios ignorados.",
-        "description": "Shown when no ignored sites are saved."
+        "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "¿Eliminar el sitio?",
@@ -770,6 +990,10 @@
     "optionsSitePreferencesManualAddText": {
         "message": "Añadir URL manualmente",
         "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesManualAddHelp": {
+        "message": "La URL debe empezar con <code>https://</code>, <code>http://</code>, <code>file://</code>, o <code>ftp://</code> y debe ser de al menos 5 caracteres de largo.",
+        "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "¿Realmente desea eliminar el sitio especificado de la lista: $1",
@@ -827,6 +1051,10 @@
         "message": "La siguiente información de depuración puede ser utilizada",
         "description": "Debug info text."
     },
+    "optionsAboutSupporters": {
+        "message": "Colaboradores",
+        "description": "Supporters label text."
+    },
     "optionsErrorInvalidValue": {
         "message": "Valor no válido. Por favor, verifique la entrada.",
         "description": "Error shown when input field has an incorrect value."
@@ -839,6 +1067,30 @@
         "message": "El valor ya existe en la lista.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
+    "optionsUserInterfaceTitle": {
+        "message": "Interfaz de usuario",
+        "description": "User interface title in settings page"
+    },
+    "optionsFillingCredentialsTitle": {
+        "message": "Rellenando credenciales",
+        "description": "Filling credentials title in settings page"
+    },
+    "optionsSavingCredentialsTitle": {
+        "message": "Guardando credenciales",
+        "description": "Saving credentials title in settings page"
+    },
+    "optionsUpdatesTitle": {
+        "message": "Actualizaciones",
+        "description": "Updates title in settings page"
+    },
+    "optionsAdvancedSettingsTitle": {
+        "message": "Opciones avanzadas",
+        "description": "Advanced settings title in settings page"
+    },
+    "optionsExtensionTitle": {
+        "message": "Extensión",
+        "description": "Extension title in settings page"
+    },
     "openNewTab": {
         "message": "Se abre una nueva pestaña",
         "description": "Title attribute text."
@@ -846,5 +1098,13 @@
     "httpAuthDialog": {
         "message": "Cuadro de diálogo de autenticación básica HTTP",
         "description": "Options page HTTP Basic Auth dialog text"
+    },
+    "autocompleteSubmitMessage": {
+        "message": "Su selección será autoenviada",
+        "description": "Message shown at the bottom of autocomplete menu."
+    },
+    "lockDatabase": {
+        "message": "Bloquear base de datos",
+        "description": "Lock database button title text."
     }
 }
