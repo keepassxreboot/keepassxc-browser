@@ -75,6 +75,8 @@ options.initGeneralSettings = function() {
 
     $('#tab-general-settings select#colorTheme').change(async function() {
         options.settings['colorTheme'] = $(this).val();
+        // The theme is also stored in localStorage to prevent a white flash when the settings are first opened
+        localStorage.setItem('colorTheme', options.settings['colorTheme']);
         await options.saveSettings();
         location.reload();
     });
@@ -607,6 +609,11 @@ options.initTheme = function() {
         document.body.removeAttribute('data-color-theme');
     } else {
         document.body.setAttribute('data-color-theme', options.settings['colorTheme']);
+    }
+    // Sync localStorage setting
+    let localStorageTheme = localStorage.getItem('colorTheme');
+    if (localStorageTheme !== options.settings['colorTheme']) {
+        localStorage.setItem('colorTheme', options.settings['colorTheme']);
     }
 };
 
