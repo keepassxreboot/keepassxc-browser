@@ -290,7 +290,7 @@ document.addEventListener('mousemove', function(e) {
         const xPos = e.clientX - kpxcDefine.diffX;
         const yPos = e.clientY - kpxcDefine.diffY;
 
-        if (kpxcDefine.selected !== null) {
+        if (kpxcDefine.selected && kpxcDefine.dialog) {
             kpxcDefine.dialog.style.left = Pixels(xPos);
             kpxcDefine.dialog.style.top = Pixels(yPos);
         }
