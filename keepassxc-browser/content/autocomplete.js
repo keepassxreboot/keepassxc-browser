@@ -60,6 +60,12 @@ class Autocomplete {
 
     async showList(inputField) {
         this.closeList();
+
+        // Return if there are no credentials
+        if (this.elements.length === 0) {
+            return;
+        }
+
         this.input = inputField;
         this.input.select();
 
