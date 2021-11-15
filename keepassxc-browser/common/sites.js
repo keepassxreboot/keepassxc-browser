@@ -55,7 +55,8 @@ const PREDEFINED_SITELIST = [
     'https://signin.ebay.ph/*',
     'https://login.yahoo.com/*',
     'https://id.atlassian.com/*',
-    'https://www.fidelity.com/*'
+    'https://www.fidelity.com/*',
+    'https://twitter.com/i/flow/login'
 ];
 
 const kpxcSites = {};
@@ -91,6 +92,25 @@ kpxcSites.exceptionFound = function(identifier) {
     } else if (document.location.origin.startsWith('https://app.protonmail.ch')
               || document.location.origin.startsWith('https://mail.protonmail.com')
               && identifier === 'mailboxPassword') {
+        return true;
+    }
+
+    return false;
+};
+
+/**
+ * Handles a few exceptions for certain sites where 2FA field is not regognized properly.
+ * @param {object} field   Input field Element
+ * @returns {boolean}      True if an Element has a match with the needed indentfifiers and document location
+ */
+kpxcSites.totpExceptionFound = function(field) {
+    if (!field || field.nodeName !== 'INPUT') {
+        return false;
+    }
+
+    if (document.location.href === 'https://twitter.com/i/flow/login'
+        && field.autocomplete === 'on' && field.dir === 'auto'
+        && field.name === 'text' && field.type === 'text') {
         return true;
     }
 
