@@ -52,6 +52,10 @@ kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
         return true;
     }
 
+    if (kpxcSites.totpExceptionFound(field)) {
+        return true;
+    }
+
     return false;
 };
 
