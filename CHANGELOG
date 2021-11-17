@@ -1,3 +1,54 @@
+1.7.10.1 (17-11-2021)
+=========================
+- Fix interfering with mouse events [#1447]
+
+1.7.10 (16-11-2021)
+=========================
+- Add support for resolving TOTP field by parent selector [#1381]
+- Add support for triggering Global Auto-Type from the extension (2.7.0 and newer) [#1265]
+- Add support for launching KeePassXC password generator from the extension (2.7.0 and newer) [#1329]
+- Add support for extension reload keyboard shortcut [#1434]
+- Add scrolling to Autocomplete Menu [#1439]
+- Change update check default value to Never [#1404]
+- Fix login page problems with Apple, Twitter, Fidelity and LinkedIn [#1392, #1429, #1445]
+- Fix filling dynamic popups [#1388]
+- Fix segmented TOTP field with text type [#1396]
+- Fix white flash from options page [#1440]
+- Fix selecting text content of field when no credentials [#1443]
+- Fix autofill with tab key when Autocomplete Menu is closed [#1438]
+- Fix CSS leaking that causes possible fingerprinting [#1386]
+- Fix some general CSS theme issues [#1389, #1435]
+- Update libraries for scripts [#1407]
+
+1.7.9.1 (22-07-2021)
+=========================
+- Revert form visibility check [#1380]
+
+1.7.9. (21-07-2021)
+=========================
+- Add support for file:// protocol in Site Preferences [#1317]
+- Fix for checking Custom Fields [#1320]
+- Fix affecting slidein animations [#1335]
+- Fix credential retrieval on page reload [#1338]
+- Fix password generation fill [#1374]
+- Fix for querying elements from Shadow DOM [#1376]
+- Fix form detection from style attribute [#1351]
+- Ignore prereleases on update check [#1349]
+- Ignore transparent forms [#1368]
+- TOTP fixes [#1350, #1363]
+
+1.7.8.1. (12-04-2021)
+=========================
+- Fix TOTP sorting [#1304]
+
+1.7.8 (10-04-2021)
+=========================
+- Fix filling Autocomplete Menu from keyboard [#1294]
+- Fix ID and Name check for page form [#1290]
+- Fix filling from extension popuo [#1296]
+- Accepted OTP fields addition [#1301]
+- Improve eBay login flow [#1299]
+
 1.7.7 (30-03-2021)
 =========================
 - Add support for credential sorting (KeePassXC side option will be removed) [#1280]
