@@ -274,8 +274,6 @@ document.addEventListener('mousemove', function(e) {
         return;
     }
 
-    e.stopPropagation();
-
     if (kpxcPasswordDialog.selected === kpxcPasswordDialog.titleBar) {
         const xPos = e.clientX - kpxcPasswordDialog.diffX;
         const yPos = e.clientY - kpxcPasswordDialog.diffY;
@@ -302,7 +300,6 @@ document.addEventListener('mousedown', function(e) {
         return;
     }
 
-    e.stopPropagation();
     kpxcUI.mouseDown = true;
 });
 
@@ -311,7 +308,6 @@ document.addEventListener('mouseup', function(e) {
         return;
     }
 
-    e.stopPropagation();
     kpxcPasswordDialog.selected = null;
     kpxcDefine.selected = null;
     kpxcUI.mouseDown = false;
