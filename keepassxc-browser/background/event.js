@@ -166,6 +166,26 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
 
     page.tabs[tab.id].loginList = data;
     browserAction.show(tab, popupData);
+
+    const dialogData = {
+        width: 480,
+        height: 250,
+        left: (window.screen.width / 2) - (480 / 2),
+        top: (window.screen.height / 2) - (250 / 2)
+    };
+
+    const httpAuthDialog = page.tabs[tab.id].httpAuthDialog;
+    if (httpAuthDialog && await browser.windows.get(httpAuthDialog)) {
+        dialogData.focused = true;
+        browser.windows.update(httpAuthDialog, dialogData);
+        return;
+    }
+
+    dialogData.type = 'popup';
+    dialogData.url = `/popups/popup_httpauth.html?tab=${tab.id}`;
+
+    const wnd = await browser.windows.create(dialogData);
+    page.httpAuthDialog = wnd.id;
 };
 
 kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {

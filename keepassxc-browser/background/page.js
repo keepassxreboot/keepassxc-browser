@@ -31,6 +31,7 @@ page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
+page.httpAuthDialog = undefined;
 page.loginId = -1;
 page.manualFill = ManualFill.NONE;
 page.passwordFilled = false;
