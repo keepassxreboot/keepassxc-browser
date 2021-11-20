@@ -58,6 +58,7 @@
                 "content/banner.js",
                 "content/autocomplete.js",
                 "content/credential-autocomplete.js",
+                "content/credit-card-form.js",
                 "content/define.js",
                 "content/fields.js",
                 "content/fill.js",
@@ -123,6 +124,7 @@
         }
     },
     "web_accessible_resources": [
+        "icons/credit-card.svg",
         "icons/disconnected.svg",
         "icons/keepassxc.svg",
         "icons/key.svg",
@@ -132,6 +134,7 @@
         "css/banner.css",
         "css/button.css",
         "css/colors.css",
+        "css/credit-card.css",
         "css/define.css",
         "css/notification.css",
         "css/pwgen.css",

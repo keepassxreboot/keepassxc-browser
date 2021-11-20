@@ -6,11 +6,11 @@
  */
 const kpxcIcons = {};
 kpxcIcons.icons = [];
-kpxcIcons.iconTypes = { USERNAME: 0, PASSWORD: 1, TOTP: 2 };
+kpxcIcons.iconTypes = { USERNAME: 0, PASSWORD: 1, TOTP: 2, CC: 3 };
 
 // Adds an icon to input field
 kpxcIcons.addIcon = async function(field, iconType) {
-    if (!field || iconType < 0 || iconType > 2) {
+    if (!field || iconType < kpxcIcons.iconTypes.USERNAME || iconType > kpxcIcons.iconTypes.CC) {
         return;
     }
 
@@ -23,6 +23,9 @@ kpxcIcons.addIcon = async function(field, iconType) {
         iconSet = true;
     } else if (iconType === kpxcIcons.iconTypes.TOTP && kpxcTOTPIcons.isValid(field)) {
         kpxcTOTPIcons.newIcon(field, kpxc.databaseState);
+        iconSet = true;
+    } else if (iconType === kpxcIcons.iconTypes.CC && kpxcCCIcons.isValid(field)) {
+        kpxcCCIcons.newIcon(field, kpxc.databaseState);
         iconSet = true;
     }
 
@@ -69,10 +72,17 @@ kpxcIcons.addIconsFromForm = async function(form) {
         }
     };
 
+    const addCCIcons = async function(c) {
+        if (c.ccInputs.ccName/* && kpxc.settings.showCCIcons*/) {
+            kpxcIcons.addIcon(c.ccInputs.ccName, kpxcIcons.iconTypes.CC);
+        }
+    };
+
     await Promise.all([
         await addUsernameIcons(form),
         await addPasswordIcons(form),
-        await addTOTPIcons(form)
+        await addTOTPIcons(form),
+        await addCCIcons(form)
     ]);
 };
 
@@ -81,6 +91,7 @@ kpxcIcons.deleteHiddenIcons = function() {
     kpxcUsernameIcons.deleteHiddenIcons();
     kpxcPasswordIcons.deleteHiddenIcons();
     kpxcTOTPIcons.deleteHiddenIcons();
+    kpxcCCIcons.deleteHiddenIcons();
 };
 
 // Initializes all icons needed to be shown
@@ -112,4 +123,5 @@ kpxcIcons.switchIcons = function() {
     kpxcUsernameIcons.switchIcon(kpxc.databaseState);
     kpxcPasswordIcons.switchIcon(kpxc.databaseState);
     kpxcTOTPIcons.switchIcon(kpxc.databaseState);
+    kpxcCCIcons.switchIcon(kpxc.databaseState);
 };

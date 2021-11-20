@@ -11,6 +11,7 @@ const kpxcFields = {};
 kpxcFields.getAllCombinations = async function(inputs) {
     const combinations = [];
     let usernameField = null;
+    let ccField = undefined;
 
     for (const input of inputs) {
         if (!input) {
@@ -38,9 +39,24 @@ kpxcFields.getAllCombinations = async function(inputs) {
             };
 
             combinations.push(combination);
+        } else if (kpxcCCIcons.detectCreditCardForm(input, inputs)) {
+            ccField = input;
         } else {
             usernameField = input;
         }
+    }
+
+    if (ccField) {
+        const combination = {
+            username: null,
+            password: null,
+            passwordInputs: [],
+            totp: null,
+            form: null,
+            ccInputs: kpxcCCIcons.ccForm
+        };
+
+        combinations.push(combination);
     }
 
     if (kpxc.singleInputEnabledForPage && combinations.length === 0 && usernameField) {

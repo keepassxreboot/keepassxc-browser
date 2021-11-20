@@ -137,13 +137,9 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         return [];
     }
 
-    // Filter out any input fields with type 'hidden' right away
     const inputFields = [];
-    Array.from(target.getElementsByTagName('input')).forEach(e => {
-        if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
-            inputFields.push(e);
-        }
-    });
+    addInputsToList(target, 'input', inputFields);
+    addInputsToList(target, 'select', inputFields);
 
     if (target.nodeName === 'INPUT') {
         inputFields.push(target);
@@ -269,4 +265,14 @@ kpxcObserverHelper.ignoredNode = function(target) {
     }
 
     return false;
+};
+
+// Appends inputs from target to the list with a selected tagName (input, select..)
+const addInputsToList = function(target, tagName, inputFields) {
+    // Filter out any input fields with type 'hidden' right away
+    Array.from(target.getElementsByTagName(tagName)).forEach(e => {
+        if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
+            inputFields.push(e);
+        }
+    });
 };

@@ -1,5 +1,14 @@
 'use strict';
 
+// TODO: Attribute names should be specified properly
+const KPH_CC_CCV = 'KPH: CC_CCV';
+const KPH_CC_EXP = 'KPH: CC_EXP';
+const KPH_CC_EXP_MONTH = 'KPH: CC_EXP_MONTH';
+const KPH_CC_EXP_YEAR = 'KPH: CC_EXP_YEAR';
+const KPH_CC_NAME = 'KPH: CC_NAME';
+const KPH_CC_NUMBER = 'KPH: CC_NUMBER';
+const KPH_CC_TYPE = 'KPH: CC_TYPE';
+
 /**
  * @Object kpxcFill
  * The class for filling credentials.
@@ -92,6 +101,32 @@ kpxcFill.fillFromAutofill = async function() {
 
     // Generate popup-list of usernames + descriptions
     sendMessage('popup_login', [ { text: `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})`, uuid: kpxc.credentials[0].uuid } ]);
+};
+
+// Fill requested from Credit Card form
+kpxcFill.fillFromCreditCardForm = async function() {
+    if (kpxc.credentials.length === 0) {
+        logDebug('Error: Credential list is empty.');
+        return;
+    }
+
+    const fillCCValue = function(inputField, ccFieldName, fields) {
+        if (inputField) {
+            const newValue = fields.find(s => s[ccFieldName]);
+            if (newValue) {
+                kpxc.setValue(inputField, newValue[ccFieldName]);
+            }
+        }
+    };
+
+    const stringFields = kpxc.credentials[0].stringFields;
+    fillCCValue(kpxcCCIcons.ccForm.ccCcv, KPH_CC_CCV, stringFields);
+    fillCCValue(kpxcCCIcons.ccForm.ccExp, KPH_CC_EXP, stringFields);
+    fillCCValue(kpxcCCIcons.ccForm.ccExpMonth, KPH_CC_EXP_MONTH, stringFields);
+    fillCCValue(kpxcCCIcons.ccForm.ccExpYear, KPH_CC_EXP_YEAR, stringFields);
+    fillCCValue(kpxcCCIcons.ccForm.ccName, KPH_CC_NAME, stringFields);
+    fillCCValue(kpxcCCIcons.ccForm.ccNumber, KPH_CC_NUMBER, stringFields);
+    fillCCValue(kpxcCCIcons.ccForm.ccType, KPH_CC_TYPE, stringFields);
 };
 
 // Fill requested by selecting credentials from the popup

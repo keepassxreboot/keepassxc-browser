@@ -141,7 +141,7 @@ kpxc.getForm = function(inputField) {
 
 // Returns form action URL or document origin if it's not found
 kpxc.getFormActionUrl = function(combination) {
-    if (!combination || (combination.username === null && combination.password === null)) {
+    if (!combination || (combination.username === null && combination.password === null && !combination.ccInputs.ccCcv)) {
         return null;
     }
 
