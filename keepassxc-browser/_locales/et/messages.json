@@ -1,0 +1,1114 @@
+{
+    "extensionDescription": {
+        "message": "KeePassXC integratsioon moodsatele brauseritele",
+        "description": "Name of the extension."
+    },
+    "contextMenuFillUsernameAndPassword": {
+        "message": "Täida kasutajanimi ja parool",
+        "description": "Context menu item for filling both username and password."
+    },
+    "contextMenuFillPassword": {
+        "message": "Täida ainult parool",
+        "description": "Context menu item for filling password."
+    },
+    "contextMenuFillTOTP": {
+        "message": "Täida TOTP",
+        "description": "Context menu item for filling Time-based One Time Password."
+    },
+    "contextMenuShowPasswordGeneratorIcons": {
+        "message": "Kuva parooligeneraatori ikoone",
+        "description": "Show password generator icon on every password input field."
+    },
+    "contextMenuSaveCredentials": {
+        "message": "Salvesta andmed",
+        "description": "Save credentials using the credential banner."
+    },
+    "contextMenuShowPasswordGenerator": {
+        "message": "Kuva parooligeneraator",
+        "description": "Show password generator text."
+    },
+    "contextMenuFillAttribute": {
+        "message": "Täida atribuut...",
+        "description": "Context menu parent item for filling a custom attribute."
+    },
+    "contextMenuRequestGlobalAutoType": {
+      "message": "",
+      "description": "Global Auto-Type shortcut text."
+    },
+    "multipleCredentialsDetected": {
+        "message": "",
+        "description": "Notification when HTTP Authentication has multiple credentials detected."
+    },
+    "errorMessageUnknown": {
+        "message": "Tundmatu tõrge.",
+        "description": "Unknown error."
+    },
+    "errorMessageDatabaseNotOpened": {
+        "message": "",
+        "description": "Database not opened."
+    },
+    "errorMessageDatabaseHash": {
+        "message": "",
+        "description": "Database hash not received."
+    },
+    "errorMessageClientPublicKey": {
+        "message": "",
+        "description": "Client public key not received."
+    },
+    "errorMessageDecrypt": {
+        "message": "Ei saa dekrüpteerida sõnumit.",
+        "description": "Cannot decrypt message."
+    },
+    "errorMessageTimeout": {
+        "message": "Ei saanud ühendada KeePassXC-ga. Palun veendu, et veebilehitseja integratsioon on lubatud KeePassXC sätetes.",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
+    },
+    "errorMessageCanceled": {
+        "message": "Tegevus tühistatud või keelatud",
+        "description": "Action canceled or denied."
+    },
+    "errorMessageEncrypt": {
+        "message": "Sõnumi krüpteerimine ebaõnnestus. Kas KeePassXC töötab?",
+        "description": "Message encryption failed. Is KeePassXC running?"
+    },
+    "errorMessageAssociate": {
+        "message": "KeePassXC-ga ühildumine ebaõnnestus, proovi uuesti",
+        "description": "KeePassXC association failed, try again."
+    },
+    "errorMessageKeyExchange": {
+        "message": "Võtmevahetus ei õnnestunud.",
+        "description": "Key exchange was not successful."
+    },
+    "errorMessageEncryptionKey": {
+        "message": "Krüpteerimisvõtit ei tuvastatud.",
+        "description": "Encryption key is not recognized."
+    },
+    "errorMessageSavedDatabases": {
+        "message": "Salvestatud andmebaase ei leitud.",
+        "description": "No saved databases found."
+    },
+    "errorMessageIncorrectAction": {
+        "message": "Vale tegevus.",
+        "description": "Incorrect action."
+    },
+    "errorMessageEmptyMessage": {
+        "message": "",
+        "description": "Empty message received."
+    },
+    "errorMessageNoURL": {
+        "message": "URL-i pole sisestatud.",
+        "description": "No URL provided."
+    },
+    "errorMessageNoLogins": {
+        "message": "",
+        "description": "No logins found."
+    },
+    "errorNotConnected": {
+        "message": "Ei ole ühendatud KeePassXC-ga.",
+        "description": "Error notification shown when not connected to KeePassXC"
+    },
+    "passwordGeneratorIcon": {
+        "message": "Parooligeneraatori ikoon",
+        "description": "Alt attribute text of the password generator icon."
+    },
+    "passwordGeneratorPlaceholder": {
+        "message": "Genereeritud parool",
+        "description": "Input field placeholder for generated password."
+    },
+    "passwordGeneratorLabel": {
+        "message": "Täida ka järgmine parooliväli",
+        "description": "Checkbox text below the password generator input field."
+    },
+    "passwordGeneratorTitle": {
+        "message": "Parooligeneraator",
+        "description": "Password generator dialog title."
+    },
+    "passwordGeneratorGenerate": {
+        "message": "Genereeri",
+        "description": "Generate button text in password generator."
+    },
+    "passwordGeneratorTryAgain": {
+        "message": "Proovi uuesti",
+        "description": "Generate button text in password generator when not connected."
+    },
+    "passwordGeneratorCopy": {
+        "message": "Kopeeri",
+        "description": "Copy button text in password generator."
+    },
+    "passwordGeneratorFill": {
+        "message": "Täida parool",
+        "description": "Fill a password in password generator."
+    },
+    "passwordGeneratorErrorTooLong": {
+        "message": "Tõrge: Genereeritud parool on pikem kui lubatud pikkus!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongCut": {
+        "message": "",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongRemember": {
+        "message": "Palun jätke uus parool meelde!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorGenerateText": {
+        "message": "Genereeri parool",
+        "description": "Password icon title text."
+    },
+    "passwordGeneratorError": {
+        "message": "",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "passwordGeneratorErrorIsRunning": {
+        "message": "Kas KeePassXC töötab ja on ühendatud?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "usernameFieldText": {
+        "message": "Täida andmed KeePassXC-st",
+        "description": "Username field icon hover text."
+    },
+    "usernameLockedFieldText": {
+        "message": "Andmebaas on lukus",
+        "description": "Username field icon hover text when database is locked."
+    },
+    "usernameDisconnectedFieldText": {
+        "message": "KeePassXC on ühendamata",
+        "description": "Username field icon hover text when KeePassXC is disconnected."
+    },
+    "usernameFieldIcon": {
+        "message": "Kasutajavälja ikoon",
+        "description": "Username field icon text."
+    },
+    "totpFieldText": {
+        "message": "Täida TOTP KeePassXC-st",
+        "description": "OTP field icon hover text."
+    },
+    "totpFieldIcon": {
+        "message": "TOTP välja ikoon",
+        "description": "OTP field icon text."
+    },
+    "defineDismiss": {
+        "message": "",
+        "description": "Dismiss button text when choosing custom login fields."
+    },
+    "defineSkip": {
+        "message": "Jäta vahele",
+        "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "Näita rohkem",
+        "description": "More button text when choosing custom login fields."
+    },
+    "defineAgain": {
+        "message": "Jälle",
+        "description": "Again button text when choosing custom login fields."
+    },
+    "defineConfirm": {
+        "message": "Kinnita",
+        "description": "Confirm button text when choosing custom login fields."
+    },
+    "defineAlreadySelected": {
+        "message": "",
+        "description": "A text shown when custom credentials fields are already set for the page."
+    },
+    "defineDiscard": {
+        "message": "Loobu valikust",
+        "description": "Discard selection button text when choosing custom login fields."
+    },
+    "defineStringField": {
+        "message": "",
+        "description": "Text for string field."
+    },
+    "defineChooseUsername": {
+        "message": "1. Vali kasutajanime väli",
+        "description": "Choosing a username field text when choosing custom login fields."
+    },
+    "defineChoosePassword": {
+        "message": "2. Nüüd vali parooli väli",
+        "description": "Choosing a password field text when choosing custom login fields."
+    },
+    "defineChooseTOTP": {
+        "message": "3. Vali TOTP väli",
+        "description": "Choosing a TOTP field text when choosing custom login fields."
+    },
+    "defineConfirmSelection": {
+        "message": "4. Kinnita valik",
+        "description": "Confirm a selection text when choosing custom login fields."
+    },
+    "defineHelpText": {
+        "message": "",
+        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+    },
+    "defineKeyboardText": {
+        "message": "",
+        "description": "Help text when choosing custom login fields."
+    },
+    "username": {
+        "message": "Kasutajanimi",
+        "description": "General text for username."
+    },
+    "password": {
+        "message": "Parool",
+        "description": "General text for password."
+    },
+    "credentialsNoUsername": {
+        "message": "- puudub kasutajanimi -",
+        "description": "Shown when no username is set in the credentials."
+    },
+    "credentialsNoLoginsFound": {
+        "message": "",
+        "description": "Shown when no credentials are found for the current page."
+    },
+    "credentialsMultipleFound": {
+        "message": "KeePassXC-st leiti rohkem kui ühed sisselogimisandmed!",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsMultipleFoundSecondLine": {
+        "message": "Lisavalikute saamiseks vajuta KeePassXC-Browser-i ikooni.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsNoUsernameFound": {
+        "message": "Ei leidnud andmeid antud kasutajanime jaoks.",
+        "description": "Alert message when no credentials are found for the given username."
+    },
+    "credentialsNoTOTPFound": {
+        "message": "Ei leidnud TOTP-d.",
+        "description": "Alert message when no TOTP is found."
+    },
+    "credentialExpired": {
+        "message": "Aegunud",
+        "description": "If a credential is expired, this is appended to the title label."
+    },
+    "fieldsFill": {
+        "message": "Tõrge: Ei leidnud täitmiseks välju",
+        "description": "Alert message when no fields are found to fill in."
+    },
+    "fieldsNoPasswordField": {
+        "message": "Tõrge: Ei leia paroolivälja",
+        "description": "Message shown when no password fields are found."
+    },
+    "rememberNothingChanged": {
+        "message": "",
+        "description": "Message shown when trying to save credentials that haven't changed."
+    },
+    "popupTitle": {
+        "message": "KeePassXC - hüpik",
+        "description": "Popup window title."
+    },
+    "popupSettingsText": {
+        "message": "Sätted",
+        "description": "Popup Settings button text."
+    },
+    "popupChooseCredentialsText": {
+        "message": "Vali kohandatud sisselogimisväljad.",
+        "description": "Popup credential choosing button text."
+    },
+    "popupConnectButton": {
+        "message": "Ühenda",
+        "description": "Popup Connect button text."
+    },
+    "popupReconnectButton": {
+        "message": "Ühenda uuesti",
+        "description": "Popup Reconnect button text."
+    },
+    "popupRedetectButton": {
+        "message": "Suuna ümber sisselogimisväljas.",
+        "description": "Popup Redetect login fields button text."
+    },
+    "popupReloadButton": {
+        "message": "Laadi uuesti",
+        "description": "Popup Reload button text."
+    },
+    "popupReopenButton": {
+        "message": "Ava andmebaas uuesti",
+        "description": "Popup reopen database button text."
+    },
+    "popupUsernameButton": {
+        "message": "Lisa ainult kasutajanime valik saidile",
+        "description": "Button text for adding Username-only option."
+    },
+    "popupErrorEncountered": {
+        "message": "",
+        "description": "A text shown above error message in the popup."
+    },
+    "popupUpdateAvailable": {
+        "message": "Sa kasutad KeePassXC vana versiooni.",
+        "description": "Popup warning message about old version of KeePassXC."
+    },
+    "popupDownloadNewVersion": {
+        "message": "Palun laadi alla uusim versioon lehelt keepassxc.org",
+        "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupCheckingStatus": {
+        "message": "Oleku kontrollimine...",
+        "description": "Checking status message in popup."
+    },
+    "popupNotConfigured": {
+        "message": "KeePassXC-Browser ei ole konfigureeritud. Vajuta ühenda nuppu, et ühendada KeePassXC-ga.",
+        "description": "A popup message shown when the extension has not been connected to KeePassXC."
+    },
+    "popupNeedReconfigure": {
+        "message": "KeePassXC-Browser pole KeePassXC-ga ühendatud.",
+        "description": "A popup message shown when the extension has been disconnected from KeePassXC."
+    },
+    "popupNeedReconfigureMessage": {
+        "message": "Uuesti ühendamiseks vajuta uuesti ühendamise nuppu.",
+        "description": "A popup message shown when reconnect is needed."
+    },
+    "popupConfiguredNotAssociated": {
+        "message": "",
+        "description": "A popup message shown when KeePassXC is not connected but configured."
+    },
+    "popupConfiguredAndAssociated": {
+        "message": "",
+        "description": "A popuo message when a connection to KeePassXC is succesful."
+    },
+    "popupUsernameFieldDetected": {
+        "message": "",
+        "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "rememberInfoText": {
+        "message": "Kasutajanimi või parool on muutunud! Salvestada?",
+        "description": "Message when username or password has changed."
+    },
+    "rememberSaving": {
+        "message": "",
+        "description": "A message when saving or updating credentials."
+    },
+    "rememberNewUsername": {
+        "message": "Järgnev kasutajanimi pole praegu salvestatud: $1",
+        "description": "A message shown when a new username is detected when saving credentials."
+    },
+    "rememberUsernameExists": {
+        "message": "",
+        "description": "A message shown when a existing username is detected when saving credentials."
+    },
+    "rememberChooseCredentials": {
+        "message": "Vali andmed, mida soovid uuendada.",
+        "description": "A message shown choosing what credentials user wants to update."
+    },
+    "rememberChooseGroup": {
+        "message": "Vali grupp, kuhu soovid uued andmed lisada.",
+        "description": "A message shown choosing what group user wants to use for new credentials."
+    },
+    "rememberInfoDefaultGroupNotFound": {
+        "message": "Vaikegrupp loodud ühendatud andmebaasis.",
+        "description": "Info message shown when default group set cannot be found."
+    },
+    "rememberErrorCreatingNewGroup": {
+        "message": "Uut gruppi ei saa luua.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "rememberErrorPasswordNotChanged": {
+        "message": "",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "rememberErrorCannotSaveCredentials": {
+        "message": "Andmeid ei saa salvestada ega uuendada.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "rememberErrorDatabaseClosed": {
+        "message": "Andmeid ei saa salvestada ega uuendada suletud andmebaasi.",
+        "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
+    },
+    "rememberCredentialsNotSaved": {
+        "message": "Tegevus tühistatud. Andmeid ei ole uuendatud.",
+        "description": "Message shown when saving operation was cancelled."
+    },
+    "rememberCredentialsSaved": {
+        "message": "Uued andmed kasutajanimega $1 salvestatud.",
+        "description": "Message shown when new credentials are saved."
+    },
+    "rememberCredentialsUpdated": {
+        "message": "Andmed kasutajanimega $1 uuendatud.",
+        "description": "Message shown when new credentials are succesfully updated."
+    },
+    "rememberCredentialsExists": {
+        "message": "Identsed andmed on juba olemas. Pole midagi uuendada.",
+        "description": "Message shown when new credentials already found in database."
+    },
+    "rememberEmptyUsername": {
+        "message": "(tühi)",
+        "description": "Means an empty username."
+    },
+    "rememberNoPassword": {
+        "message": "Palun täida parooliväli enne andmete salvestamist.",
+        "description": "Message shown when no password is set when saving credentials."
+    },
+    "popupLoginText": {
+        "message": "Vali sisselogimisinformatsioon, mida sa soovid lehele sisestada.",
+        "description": "A popup message shown when one or multiple credentials are present."
+    },
+    "popupFilterText": {
+        "message": "Filter:",
+        "description": "Text for login credentials quick filter."
+    },
+    "popupAuthText": {
+        "message": "Vali sisselogimisinformatsioon, millega soovid sisse logida.",
+        "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
+    },
+    "popupMultiplePasswordFields": {
+        "message": "Rohkem kui üks parooliväli leitud sellel lehel. Parem-klõksa ühel neist ja vali kas:",
+        "description": "A popup message shown when web page has multiple password fields."
+    },
+    "popupURL": {
+        "message": "URL:",
+        "description": "URL. Might not need any translation."
+    },
+    "popupUsername": {
+        "message": "Kasutajanimi:",
+        "description": "A username field name shown on credential update."
+    },
+    "popupButtonNew": {
+        "message": "Uus",
+        "description": "New button text in popup when updating credentials."
+    },
+    "popupButtonUpdate": {
+        "message": "Uuenda",
+        "description": "Update button text in popup when updating credentials."
+    },
+    "popupButtonDismiss": {
+        "message": "",
+        "description": "Dismiss button text in popup when updating credentials."
+    },
+    "popupButtonIgnore": {
+        "message": "Ära selle saidi puhul uuesti küsi",
+        "description": "Ignore button text in popup or in notification when updating credentials."
+    },
+    "popupButtonClose": {
+        "message": "Sulge",
+        "description": "Close button text in popup or in notification."
+    },
+    "popupButtonDismissHttpAuth": {
+        "message": "",
+        "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsTitle": {
+        "message": "Sätted | KeePassXC-Browser",
+        "description": "Options page title."
+    },
+    "optionsGeneralSettingsTab": {
+        "message": "Üldsätted",
+        "description": "General Settings tab text."
+    },
+    "optionsConnectedDatabasesTab": {
+        "message": "Ühendatud andmebaasid",
+        "description": "Connected Databases tab text."
+    },
+    "optionsCustomFieldsTab": {
+        "message": "Kohandatud sisselogimisväljad",
+        "description": "Saved custom login fields tab text."
+    },
+    "optionsSitePreferencesTab": {
+        "message": "Saitide eelistused",
+        "description": "Site preferences fields tab text."
+    },
+    "optionsAboutTab": {
+        "message": "Teave",
+        "description": "About tab text."
+    },
+    "optionsMenuGeneral": {
+        "message": "Üldine",
+        "description": "General settings page header."
+    },
+    "optionsMenuConnectedDatabases": {
+        "message": "Ühendatud andmebaasid",
+        "description": "Connected Databases page header."
+    },
+    "optionsMenuCustomFields": {
+        "message": "Kohandatud sisselogimisväljad",
+        "description": "Custom login fields page header."
+    },
+    "optionsMenuSitePreferences": {
+        "message": "Saitide eelistused",
+        "description": "Site preferences page header."
+    },
+    "optionsMenuAbout": {
+        "message": "Teave",
+        "description": "About page header."
+    },
+    "optionsConfigureShortcuts": {
+        "message": "Seadista otseteed",
+        "description": "Keyboard shortcut button and title text."
+    },
+    "optionsButtonSave": {
+        "message": "Salvesta",
+        "description": "Save button text."
+    },
+    "optionsButtonConnect": {
+        "message": "Ühenda",
+        "description": "Connect button text."
+    },
+    "optionsButtonRemove": {
+        "message": "Eemalda",
+        "description": "Remove button text."
+    },
+    "optionsButtonAdd": {
+        "message": "Lisa",
+        "description": "Add button text."
+    },
+    "optionsButtonUpdate": {
+        "message": "Kontrolli uuendus",
+        "description": "Check for updates button text."
+    },
+    "optionsButtonRemoveNow": {
+        "message": "Jah, eemalda",
+        "description": "Confirm button text when removing database key or custom login fields."
+    },
+    "optionsButtonCancel": {
+        "message": "Loob",
+        "description": "Cancel button text when removing database key or custom login fields."
+    },
+    "optionsButtonReset": {
+        "message": "Lähtesta",
+        "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsButtonImport": {
+        "message": "Impordi sätted",
+        "description": "Import settings button text."
+    },
+    "optionsButtonExport": {
+        "message": "Ekspordi sätted",
+        "description": "Export settings button text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "Paroolide salvestamise vaikegrup",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "Eralda grupid kaldkriipsudega, näiteks: Grupp/AlaGrupp",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "Küsi alati, kuhu uued andmed salvestada",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "",
+        "description": "Default checkbox explanation help text."
+    },
+    "optionsCheckboxUsePasswordGenerator": {
+        "message": "Aktiveeri parooligeneraatori ikoonid.",
+        "description": "Activate password generator icons checkbox text."
+    },
+    "optionsCheckboxUsernameIcons": {
+        "message": "Aktiveeri kasutajavälja ikoonid.",
+        "description": "Activate username field icons textbox text."
+    },
+    "optionsUseObserver": {
+        "message": "Kasuta dünaamilist sisestusvälja tuvastust.",
+        "description": "Use dynamic input field detection checkbox text."
+    },
+    "optionsUseObserverHelpText": {
+        "message": "",
+        "description": "Use dynamic input field detection help text."
+    },
+    "optionsCheckboxOTPIcons": {
+        "message": "Aktiveeri 2FA/OTP välja ikoonid.",
+        "description": "Activate OTP field icons textbox text."
+    },
+    "optionsCheckboxAutoRetrieveCredentials": {
+        "message": "",
+        "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutomaticReconnect": {
+        "message": "Automaatselt ühendu uuesti KeePassXC-ga.",
+        "description": "Auto-reconnect checkbox text."
+    },
+    "optionsAutomaticReconnectWarning": {
+        "message": "Hoiatus! See funktsioon on eksperimentaalne. Kasuta omal vastutusel.",
+        "description": "Auto-reconnect warning message."
+    },
+    "optionsCheckboxAutoFillSingleEntry": {
+        "message": "",
+        "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoCompleteUsernames": {
+        "message": "",
+        "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowGroupNameInAutocomplete": {
+        "message": "",
+        "description": "Show group name in autocomplete checkbox text."
+    },
+    "optionsCheckboxAutoSubmit": {
+        "message": "",
+        "description": "Auto-submit checkbox text."
+    },
+    "optionsAutoSubmitHelpText": {
+        "message": "",
+        "description": "Auto-submit help text."
+    },
+    "optionsCheckboxShowNotifications": {
+        "message": "Näita teavitusi.",
+        "description": "Show notifications checkbox text."
+    },
+    "optionsSaveDomainOnly": {
+        "message": "Salvesta ainult domeen.",
+        "description": "Save domain only checkbox text."
+    },
+    "optionsCheckboxShowLoginNotifications": {
+        "message": "",
+        "description": "Show login notifications checkbox text."
+    },
+    "optionsRedirectAllowance": {
+        "message": "Lubatud ümbersuunamiste arv: $1",
+        "description": "Redirect allowance range input text."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "",
+        "description": "Redirect allowance help text."
+    },
+    "optionsCheckboxAutoFillAndSend": {
+        "message": "",
+        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsRadioText": {
+        "message": "Kontrolli KeePassXC uuendusi:",
+        "description": "Text above radio buttons in the settings page."
+    },
+    "optionsRadioThreeDays": {
+        "message": "iga 3 päeva tagant",
+        "description": "Radio button text."
+    },
+    "optionsRadioWeek": {
+        "message": "iga nädal",
+        "description": "Radio button text."
+    },
+    "optionsRadioMonth": {
+        "message": "iga kuu",
+        "description": "Radio button text."
+    },
+    "optionsRadioNever": {
+        "message": "mitte kunagi",
+        "description": "Radio button text."
+    },
+    "optionsThemeSelectionHeader": {
+        "message": "Värviteema",
+        "description": "Theme selection header text."
+    },
+    "optionsCredentialSortSelectionHeader": {
+        "message": "",
+        "description": "Credential sort option header text."
+    },
+    "optionsThemeSelection": {
+        "message": "Vali värviteema",
+        "description": "Theme selection title text."
+    },
+    "optionsThemeSystem": {
+        "message": "Süsteem",
+        "description": "System theme text."
+    },
+    "optionsThemeDark": {
+        "message": "Tume",
+        "description": "Dark theme text."
+    },
+    "optionsThemeLight": {
+        "message": "Hele",
+        "description": "Light theme text."
+    },
+    "optionsKeyboardShortcutsHeader": {
+        "message": "Klaviatuuri otseteed",
+        "description": "Keyboard shortcut header text."
+    },
+    "optionsUsePasswordGeneratorHelpText": {
+        "message": "Lisab parooliväljadele ikooni uute paroolide genereerimiseks",
+        "description": "Password Generator option help text."
+    },
+    "optionsUsePasswordGeneratorHelpTextSecond": {
+        "message": "",
+        "description": "Password Generator option help text, second part."
+    },
+    "optionsPredefinedSiteList": {
+        "message": "Eelnevalt määratud saidid",
+        "description": "Predefined site list details button text."
+    },
+    "optionsUsePredefinedSites": {
+        "message": "Kasuta eelnevalt määratud saite ühilduvuseks.",
+        "description": "Use predefined sites checkbox text."
+    },
+    "optionsUsePredefinedSitesHelpText": {
+        "message": "",
+        "description": "Use predefined sites option help text."
+    },
+    "optionsShowLoginFormIconHelpText": {
+        "message": "",
+        "description": "Username field icon option help text."
+    },
+    "optionsShowOTPIconHelpText": {
+        "message": "Lisab ikooni sisendväljadele, mis on tuvastatud kui OTP/2FA.",
+        "description": "OTP field icon option help text."
+    },
+    "optionsAutoRetrieveCredentialsHelpText": {
+        "message": "",
+        "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutomaticReconnectHelpText": {
+        "message": "Ühendab tuvastamisel automaatselt KeePassXC-ga.",
+        "description": "Auto-reconnect option help text."
+    },
+    "optionsAutoFillSingleEntryHelpText": {
+        "message": "",
+        "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillSingleEntryWarning": {
+        "message": "Hoiatus! Automaattäite kasutamine pole turvaline. Kasuta omal vastutusel.",
+        "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutocompleteUsernamesHelpText": {
+        "message": "",
+        "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowGroupNameInAutocompleteHelpText": {
+        "message": "",
+        "description": "Show group name in autocomplete help text."
+    },
+    "optionsShowNotificationsHelpText": {
+        "message": "",
+        "description": "Show notifications option help text."
+    },
+    "optionsSaveDomainOnlyHelpText": {
+        "message": "Uute andmete salvestamisel salvesta täieliku URL-i asemel ainult domeen.",
+        "description": "Save domain only option help text."
+    },
+    "optionsSaveDomainOnlyCustomLoginHelpText": {
+        "message": "Uute kohandatud sisselogimisväljade salvestamisel salvestage täieliku URL-i asemel ainult domeen.",
+        "description": "Save domain only option help text."
+    },
+    "optionsAutoFillAndSendHelpText": {
+        "message": "",
+        "description": "Auto-Fill And Send option help text."
+    },
+    "optionsAutoFillAndSendHelpTextSecond": {
+        "message": "",
+        "description": "HTTP Basic Auth image help text."
+    },
+    "optionsClearCredentialsTimeout": {
+        "message": "",
+        "description": "Clear credentials label text."
+    },
+    "optionsClearCredentialsTimeoutHelpText": {
+        "message": "",
+        "description": "Clear credentials timeout help text."
+    },
+    "optionsVersionInfoText": {
+        "message": "KeePassXC-Browser vajab andmete saamiseks KeePassXC-d.",
+        "description": "Settings page version info text."
+    },
+    "optionsVersionDownload": {
+        "message": "Uusima stabiilse versiooni saate alla laadida $1",
+        "description": "Settings page download link."
+    },
+    "optionsVersionRunning": {
+        "message": "Sa kasutad KeePassXC versiooni: $1",
+        "description": "Settings page info text of user's KeePassXC version."
+    },
+    "optionsLatestVersion": {
+        "message": "KeePassXC uusim saadav versioon: $1",
+        "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsKeePassXCVersionRequired": {
+        "message": "Nõuab KeePassXC versiooni: $1",
+        "description": "KeePassXC version requirement text."
+    },
+    "optionsDefault": {
+        "message": "Vaikimisi: $1",
+        "description": "Default setting text."
+    },
+    "optionsInfinite": {
+        "message": "Lõpmatu: $1",
+        "description": "Infinite setting text."
+    },
+    "optionsRecommended": {
+        "message": "Soovitatav: $1",
+        "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "Otsetee $1 jaoks on edukalt muudetud.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "Otsetee $1 jaoks on lähtestatud.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "Tõrge: Otseteed $1 jaoks pole muudetud!",
+        "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsImportExportSettings": {
+        "message": "Impordi/Ekspordi sätted",
+        "description": "Settings page header text for import/export."
+    },
+    "optionsImportSettingsDialogTitle": {
+        "message": "Impordi sätted välisest failist?",
+        "description": "Import settings confirmation dialog title text."
+    },
+    "optionsImportSettingsDialogText": {
+        "message": "Praegused sätted kirjutatakse üle. Kas soovid tõesti sätete faili importida?",
+        "description": "Import settings confirmation dialog help text."
+    },
+    "optionsConnectedDatabasesText": {
+        "message": "KeePassXC-Browser-ga ühendatud andmebaasid.",
+        "description": "Info text about connected databases."
+    },
+    "optionsConnectedDatabasesNotFound": {
+        "message": "Ei leitud ühendatud andmebaase.",
+        "description": "Shown in the connected databases table when there is no connected databases."
+    },
+    "optionsDatabasesRemoveIdentifier": {
+        "message": "Eemaldada identifikaator andmebaaside nimekirjast?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmFirst": {
+        "message": "Kas soovid tõesti andmebaasiloendist eemaldada järgmise identifikaatori: $1",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmSecond": {
+        "message": "Oma andmebaasiga saate igal ajal uuesti ühendada.",
+        "description": "Confirmation text when removing database from the list, second part."
+    },
+    "optionsDatabaseIdentifier": {
+        "message": "Identifikaator",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseKey": {
+        "message": "Võti",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseLastUsed": {
+        "message": "Viimati kasutatud",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseCreated": {
+        "message": "Loodud",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseDelete": {
+        "message": "Kustutamine",
+        "description": "Database list column title."
+    },
+    "optionsColumnPageURL": {
+        "message": "Lehe URL",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnIgnore": {
+        "message": "Eiramine",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnUsernameOnly": {
+        "message": "Ainult kasutajanime tuvastus",
+        "description": "Site preferences list column title."
+    },
+    "optionsColumnDelete": {
+        "message": "Kustuta",
+        "description": "Site preferences list column title."
+    },
+    "optionsSelectionNothing": {
+        "message": "Lülita sisse kõik funktsioonid",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionNormal": {
+        "message": "Lülita välja uued/muudetud andmed",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionAutoSubmit": {
+        "message": "",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionFull": {
+        "message": "Lülita välja kõik funktsioonid",
+        "description": "Site preferences option selection."
+    },
+    "optionsSortByTitle": {
+        "message": "",
+        "desription": "Sort matching credentials by title option selection."
+    },
+    "optionsSortByUsername": {
+        "message": "",
+        "desription": "Sort matching credentials by username option selection."
+    },
+    "optionsSortByGroupAndTitle": {
+        "message": "",
+        "desription": "Sort matching credentials by group and title option selection."
+    },
+    "optionsSortByGroupAndUsername": {
+        "message": "",
+        "desription": "Sort matching credentials by group and username option selection."
+    },
+    "optionsCustomFieldsNotFound": {
+        "message": "Salvestatud kohandatud sisselogimisvälju ei leitud.",
+        "description": "Shown when no saved custom credentials are saved."
+    },
+    "optionsCustomFieldsTableCaption": {
+        "message": "Salvestatud kohandatud sisselogimisvälju saad hallata tabeliga.",
+        "description": "Table caption of Custom login fields page."
+    },
+    "optionsCustomFieldsTabHelpTextFirst": {
+        "message": "Kui KeePassXC-Browser tuvastab valed sisselogimisväljad, saad õiged väljad ise määrata.",
+        "description": "Saved custom login fields info text, first part."
+    },
+    "optionsCustomFieldsTabHelpTextSecond": {
+        "message": "Minge lehele ja klõpsake KeePassXC-Browser-i ikooni, seejärel valige ",
+        "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsTabHelpTextThird": {
+        "message": "Sellel lehel saad hallata salvestatud kohandatud sisselogimisvälju.",
+        "description": "Saved custom login fields info text, third part."
+    },
+    "optionsCustomFieldsRemove": {
+        "message": "Eemaldada salvestatud kohandatud sisselogimisväljad?",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmation": {
+        "message": "Kas soovid tõesti salvestatud kohandatud sisselogimisväljad eemaldada lehel: $1",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmationHelpText": {
+        "message": "KeePassXC-Browser tuvastab sisselogimisväljad automaatselt järgmine kord, kui seda lehte külastate.",
+        "description": "Part of confirmation text when removing saved custom login fields."
+    },
+    "optionsSitePreferencesNotFound": {
+        "message": "Saidieelistusi ei leitud.",
+        "description": "Shown when no site preferences are saved."
+    },
+    "optionsSitePreferencesRemove": {
+        "message": "Eemaldada sait?",
+        "description": "Confirmation text when removing ignored sites from the list."
+    },
+    "optionsSitePreferencesTabHelpTextFirst": {
+        "message": "Sellel lehel asuvatel saitidel on nendega seotud spetsiaalsed käsitsemismeetodid.",
+        "description": "Site preferences info text, first part."
+    },
+    "optionsSitePreferencesTabHelpTextSecond": {
+        "message": "",
+        "description": "Site preferences info text, second part."
+    },
+    "optionsSitePreferencesTabHelpTextThird": {
+        "message": "",
+        "description": "Site preferences info text, third part."
+    },
+    "optionsSitePreferencesTabHelpTextFourth": {
+        "message": "",
+        "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesManualAddText": {
+        "message": "URL-i lisamine käsitsi",
+        "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesManualAddHelp": {
+        "message": "",
+        "description": "Help text for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesConfirmation": {
+        "message": "Kas sa tõesti tahad eemaldada valitud saidi nimekirjast?: $1",
+        "description": "Confirmation text when removing site from site preferences."
+    },
+    "optionsSitePreferencesConfirmationHelpText": {
+        "message": "KeePassXC-Browser lülitab kõik selle saidi funktsioonid sisse ja eemaldab ainult kasutajanime tuvastamise.",
+        "description": "Part of confirmation text when removing site preferences."
+    },
+    "optionsSitePreferencesTableCaption": {
+        "message": "Salvestatud saidieelistusi saad hallata tabeli abil.",
+        "description": "Table caption of Site Preferences page."
+    },
+    "optionsSitePreferencesSelect": {
+        "message": "Valik lehe laiendusfunktsioonide eiramiseks.",
+        "description": "Title text of select element in Site Preferences."
+    },
+    "optionsAboutChrome": {
+        "message": "Külasta KeePassXC-Browser-t Chrome Web Store-s.",
+        "description": "About page link to Chrome Web Store."
+    },
+    "optionsAboutMozilla": {
+        "message": "Külasta KeePassXC-Browser-t Mozilla Add-on-de loetelus.",
+        "description": "About page link to AMO."
+    },
+    "optionsAboutGitHub": {
+        "message": "Külasta KeePassXC-Browser-t GirHub-s.",
+        "description": "About page link to GitHub."
+    },
+    "optionsAboutExtensionVersion": {
+        "message": "KeePassXC-Browser versioon: $1",
+        "description": "About page text of extension version."
+    },
+    "optionsAboutKeePassXCVersion": {
+        "message": "KeePassXC versioon: $1",
+        "description": "About page text of KeePassXC version."
+    },
+    "optionsAboutContributors": {
+        "message": "Kaasautorid",
+        "description": "About page text of contributors."
+    },
+    "optionsAboutLicenses": {
+        "message": "Litsentsid",
+        "description": "About page text of licenses."
+    },
+    "optionsAboutReportBugs": {
+        "message": "Teata vigadest",
+        "description": "About page text of reporting bugs."
+    },
+    "optionsAboutCreateNewIssue": {
+        "message": "Loo uus teema GitHubis",
+        "description": "Link text for creating a new issue."
+    },
+    "optionsAboutDebugInfo": {
+        "message": "Kasutada saab järgmist silumisteavet",
+        "description": "Debug info text."
+    },
+    "optionsAboutSupporters": {
+        "message": "Toetajad",
+        "description": "Supporters label text."
+    },
+    "optionsErrorInvalidValue": {
+        "message": "Kehtetu väärtus. Palun kontrolli sisendit.",
+        "description": "Error shown when input field has an incorrect value."
+    },
+    "optionsErrorInvalidURL": {
+        "message": "Kehtetu URL. Palun kontrolli sisendit.",
+        "description": "Error shown when input field has an incorrect URL."
+    },
+    "optionsErrorValueExists": {
+        "message": "Väärtus on nimekirjas juba olemas.",
+        "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "optionsUserInterfaceTitle": {
+        "message": "Kasutajaliides",
+        "description": "User interface title in settings page"
+    },
+    "optionsFillingCredentialsTitle": {
+        "message": "Andmete täitmine",
+        "description": "Filling credentials title in settings page"
+    },
+    "optionsSavingCredentialsTitle": {
+        "message": "Andmete salvestamine",
+        "description": "Saving credentials title in settings page"
+    },
+    "optionsUpdatesTitle": {
+        "message": "Uuendused",
+        "description": "Updates title in settings page"
+    },
+    "optionsAdvancedSettingsTitle": {
+        "message": "Täpsemad sätted",
+        "description": "Advanced settings title in settings page"
+    },
+    "optionsExtensionTitle": {
+        "message": "Laiendus",
+        "description": "Extension title in settings page"
+    },
+    "openNewTab": {
+        "message": "Avab uue vahelehe",
+        "description": "Title attribute text."
+    },
+    "httpAuthDialog": {
+        "message": "HTTP Basic Authentication dialoog",
+        "description": "Options page HTTP Basic Auth dialog text"
+    },
+    "autocompleteSubmitMessage": {
+        "message": "Sinu valik esitatakse automaatselt",
+        "description": "Message shown at the bottom of autocomplete menu."
+    },
+    "lockDatabase": {
+        "message": "Lukusta andmebaas",
+        "description": "Lock database button title text."
+    }
+}
