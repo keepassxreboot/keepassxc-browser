@@ -73,7 +73,8 @@ kpxcTOTPIcons.isValid = function(field, forced) {
             || field.id.match(ignoreRegex)
             || field.name.match(ignoreRegex)
             || field.placeholder.match(ignoreRegex)
-            || field.readOnly) {
+            || field.readOnly
+            || field.inputMode === 'email') {
             return false;
         }
     } else {
