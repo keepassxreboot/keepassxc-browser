@@ -1,0 +1,1114 @@
+{
+    "extensionDescription": {
+        "message": "שילוב KeePassXC בדפדפני מרשתת חדישים",
+        "description": "Name of the extension."
+    },
+    "contextMenuFillUsernameAndPassword": {
+        "message": "מילוי שם משתמש וססמה",
+        "description": "Context menu item for filling both username and password."
+    },
+    "contextMenuFillPassword": {
+        "message": "מילוי ססמה בלבד",
+        "description": "Context menu item for filling password."
+    },
+    "contextMenuFillTOTP": {
+        "message": "מילוי TOTP",
+        "description": "Context menu item for filling Time-based One Time Password."
+    },
+    "contextMenuShowPasswordGeneratorIcons": {
+        "message": "הצגת סמלי מחולל ססמאות",
+        "description": "Show password generator icon on every password input field."
+    },
+    "contextMenuSaveCredentials": {
+        "message": "שמירת אישורים",
+        "description": "Save credentials using the credential banner."
+    },
+    "contextMenuShowPasswordGenerator": {
+        "message": "הצגת מחולל ססמאות",
+        "description": "Show password generator text."
+    },
+    "contextMenuFillAttribute": {
+        "message": "מילוי תכונה...",
+        "description": "Context menu parent item for filling a custom attribute."
+    },
+    "contextMenuRequestGlobalAutoType": {
+      "message": "בקשת הקלדה־אוטומטית כללית",
+      "description": "Global Auto-Type shortcut text."
+    },
+    "multipleCredentialsDetected": {
+        "message": "זוהה אימות HTTP עם אישורים מרובים. נא להקיש על סמל ההרחבה כדי לבחור את הסמל הנכון.",
+        "description": "Notification when HTTP Authentication has multiple credentials detected."
+    },
+    "errorMessageUnknown": {
+        "message": "שגיאה לא ידועה.",
+        "description": "Unknown error."
+    },
+    "errorMessageDatabaseNotOpened": {
+        "message": "מסד הנתונים לא נפתח.",
+        "description": "Database not opened."
+    },
+    "errorMessageDatabaseHash": {
+        "message": "גיבוב מסד נתונים לא התקבל.",
+        "description": "Database hash not received."
+    },
+    "errorMessageClientPublicKey": {
+        "message": "המפתח ציבורי ללקוח לא התקבל.",
+        "description": "Client public key not received."
+    },
+    "errorMessageDecrypt": {
+        "message": "לא ניתן לפענח הודעה.",
+        "description": "Cannot decrypt message."
+    },
+    "errorMessageTimeout": {
+        "message": "לא ניתן להתחבר ל־KeePassXC. נא לבדוק ששלוב הדפדפן אופשר בהגדרות KeePassXC.",
+        "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
+    },
+    "errorMessageCanceled": {
+        "message": "הפעולה בוטלה או נדחתה.",
+        "description": "Action canceled or denied."
+    },
+    "errorMessageEncrypt": {
+        "message": "הצפנת ההודעה כשלה. האם KeePassXC פועל?",
+        "description": "Message encryption failed. Is KeePassXC running?"
+    },
+    "errorMessageAssociate": {
+        "message": "שיוך KeePassXC כשל, נא לנסות שוב.",
+        "description": "KeePassXC association failed, try again."
+    },
+    "errorMessageKeyExchange": {
+        "message": "חילופי מפתחות לא צלחו.",
+        "description": "Key exchange was not successful."
+    },
+    "errorMessageEncryptionKey": {
+        "message": "מפתח ההצפנה לא מזוהה.",
+        "description": "Encryption key is not recognized."
+    },
+    "errorMessageSavedDatabases": {
+        "message": "לא נמצאו מסדי נתונים שמורים.",
+        "description": "No saved databases found."
+    },
+    "errorMessageIncorrectAction": {
+        "message": "פעולה שגויה.",
+        "description": "Incorrect action."
+    },
+    "errorMessageEmptyMessage": {
+        "message": "התקבלה הודעה ריקה.",
+        "description": "Empty message received."
+    },
+    "errorMessageNoURL": {
+        "message": "לא סופק מען URL.",
+        "description": "No URL provided."
+    },
+    "errorMessageNoLogins": {
+        "message": "לא נמצאו התחברויות.",
+        "description": "No logins found."
+    },
+    "errorNotConnected": {
+        "message": "לא מחובר ל־KeePassXC.",
+        "description": "Error notification shown when not connected to KeePassXC"
+    },
+    "passwordGeneratorIcon": {
+        "message": "סמל מחולל ססמאות",
+        "description": "Alt attribute text of the password generator icon."
+    },
+    "passwordGeneratorPlaceholder": {
+        "message": "ססמה שחוללה",
+        "description": "Input field placeholder for generated password."
+    },
+    "passwordGeneratorLabel": {
+        "message": "למלא גם את שדה הססמה הבא",
+        "description": "Checkbox text below the password generator input field."
+    },
+    "passwordGeneratorTitle": {
+        "message": "מחולל ססמאות",
+        "description": "Password generator dialog title."
+    },
+    "passwordGeneratorGenerate": {
+        "message": "חילול",
+        "description": "Generate button text in password generator."
+    },
+    "passwordGeneratorTryAgain": {
+        "message": "לנסות שוב",
+        "description": "Generate button text in password generator when not connected."
+    },
+    "passwordGeneratorCopy": {
+        "message": "עותק",
+        "description": "Copy button text in password generator."
+    },
+    "passwordGeneratorFill": {
+        "message": "מילוי ססמת",
+        "description": "Fill a password in password generator."
+    },
+    "passwordGeneratorErrorTooLong": {
+        "message": "שגיאה: הססמה שנוצרה ארוכה מהאורך המותר!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongCut": {
+        "message": "נחתך כך שיתאים לאורך.",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongRemember": {
+        "message": "נא לזכור את הססמה החדשה!",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorGenerateText": {
+        "message": "חילול ססמה",
+        "description": "Password icon title text."
+    },
+    "passwordGeneratorError": {
+        "message": "לא ניתן לקבל ססמה שחוללה.",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "passwordGeneratorErrorIsRunning": {
+        "message": "האם KeePassXC פועל ומחובר?",
+        "description": "Password generator error text when KeePassXC is closed."
+    },
+    "usernameFieldText": {
+        "message": "מילוי אישורים מ־KeePassXC",
+        "description": "Username field icon hover text."
+    },
+    "usernameLockedFieldText": {
+        "message": "מסד נתונים נעול",
+        "description": "Username field icon hover text when database is locked."
+    },
+    "usernameDisconnectedFieldText": {
+        "message": "KeePassXC מנותק",
+        "description": "Username field icon hover text when KeePassXC is disconnected."
+    },
+    "usernameFieldIcon": {
+        "message": "סמל שדה שם משתמש",
+        "description": "Username field icon text."
+    },
+    "totpFieldText": {
+        "message": "מילוי TOTP מ־KeePassXC",
+        "description": "OTP field icon hover text."
+    },
+    "totpFieldIcon": {
+        "message": "סמל שדה TOTP",
+        "description": "OTP field icon text."
+    },
+    "defineDismiss": {
+        "message": "סילוק",
+        "description": "Dismiss button text when choosing custom login fields."
+    },
+    "defineSkip": {
+        "message": "דילוג",
+        "description": "Skip button text when choosing custom login fields."
+    },
+    "defineMore": {
+        "message": "להציג עוד",
+        "description": "More button text when choosing custom login fields."
+    },
+    "defineAgain": {
+        "message": "שוב",
+        "description": "Again button text when choosing custom login fields."
+    },
+    "defineConfirm": {
+        "message": "אישור",
+        "description": "Confirm button text when choosing custom login fields."
+    },
+    "defineAlreadySelected": {
+        "message": "שדות התחברות לעמוד זה זה כבר נבחרו ויידרסו.",
+        "description": "A text shown when custom credentials fields are already set for the page."
+    },
+    "defineDiscard": {
+        "message": "נטישת הבחירה",
+        "description": "Discard selection button text when choosing custom login fields."
+    },
+    "defineStringField": {
+        "message": "שדה מחרוזת #",
+        "description": "Text for string field."
+    },
+    "defineChooseUsername": {
+        "message": "1. נא לבחור שדה שם משתמש",
+        "description": "Choosing a username field text when choosing custom login fields."
+    },
+    "defineChoosePassword": {
+        "message": "2. כעת נא לבחור שדה ססמה",
+        "description": "Choosing a password field text when choosing custom login fields."
+    },
+    "defineChooseTOTP": {
+        "message": "3. בחירת שדה TOTP",
+        "description": "Choosing a TOTP field text when choosing custom login fields."
+    },
+    "defineConfirmSelection": {
+        "message": "4. אישור בחירה",
+        "description": "Confirm a selection text when choosing custom login fields."
+    },
+    "defineHelpText": {
+        "message": "נא לאשר את הבחירה או לבחור שדות נוספים כשדות מחרוזת.",
+        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+    },
+    "defineKeyboardText": {
+        "message": "ניתן להשתמש גם במספרים לבחירת שדות הקלט מלוח המקשים.",
+        "description": "Help text when choosing custom login fields."
+    },
+    "username": {
+        "message": "שם משתמש",
+        "description": "General text for username."
+    },
+    "password": {
+        "message": "ססמה",
+        "description": "General text for password."
+    },
+    "credentialsNoUsername": {
+        "message": "- אין שם משתמש -",
+        "description": "Shown when no username is set in the credentials."
+    },
+    "credentialsNoLoginsFound": {
+        "message": "לא נמצאו התחברויות.",
+        "description": "Shown when no credentials are found for the current page."
+    },
+    "credentialsMultipleFound": {
+        "message": "נמצאה יותר מהתחברות אחת ל־KeePassXC!",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsMultipleFoundSecondLine": {
+        "message": "לחיצה על סמל דפדפן־KeePassXC לקבלת אפשרויות נוספות.",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
+    "credentialsNoUsernameFound": {
+        "message": "לא נמצאו אישורים לשם המשתמש הנתון.",
+        "description": "Alert message when no credentials are found for the given username."
+    },
+    "credentialsNoTOTPFound": {
+        "message": "לא נמצא TOTP",
+        "description": "Alert message when no TOTP is found."
+    },
+    "credentialExpired": {
+        "message": "תפוגה",
+        "description": "If a credential is expired, this is appended to the title label."
+    },
+    "fieldsFill": {
+        "message": "שגיאה: לא ניתן למצוא שדות למילוי.",
+        "description": "Alert message when no fields are found to fill in."
+    },
+    "fieldsNoPasswordField": {
+        "message": "שגיאה: אין ניתן למצוא שדה ססמה.",
+        "description": "Message shown when no password fields are found."
+    },
+    "rememberNothingChanged": {
+        "message": "שגיאה: לא ניתן לזהות אישורים שהשתנו.",
+        "description": "Message shown when trying to save credentials that haven't changed."
+    },
+    "popupTitle": {
+        "message": "KeePassXC - צץ",
+        "description": "Popup window title."
+    },
+    "popupSettingsText": {
+        "message": "הגדרות",
+        "description": "Popup Settings button text."
+    },
+    "popupChooseCredentialsText": {
+        "message": "בחירת שדות התחברויות מותאמים אישית",
+        "description": "Popup credential choosing button text."
+    },
+    "popupConnectButton": {
+        "message": "התחברות",
+        "description": "Popup Connect button text."
+    },
+    "popupReconnectButton": {
+        "message": "חיבור מחדש",
+        "description": "Popup Reconnect button text."
+    },
+    "popupRedetectButton": {
+        "message": "זיהוי שדות התחברות מחדש",
+        "description": "Popup Redetect login fields button text."
+    },
+    "popupReloadButton": {
+        "message": "טעינה מחדש",
+        "description": "Popup Reload button text."
+    },
+    "popupReopenButton": {
+        "message": "פתיחת מסד הנתונים מחדש",
+        "description": "Popup reopen database button text."
+    },
+    "popupUsernameButton": {
+        "message": "הוספת האפשרות 'שם משתמש בלבד' לאתר",
+        "description": "Button text for adding Username-only option."
+    },
+    "popupErrorEncountered": {
+        "message": "דפדפן־KeePassXC נתקל בשגיאה:",
+        "description": "A text shown above error message in the popup."
+    },
+    "popupUpdateAvailable": {
+        "message": "זוהי גרסה ישנה של KeePassXC.",
+        "description": "Popup warning message about old version of KeePassXC."
+    },
+    "popupDownloadNewVersion": {
+        "message": "נא הוריד את הגרסה העדכנית ביותר מ־keepassxc.org",
+        "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupCheckingStatus": {
+        "message": "בדיקת מצב...",
+        "description": "Checking status message in popup."
+    },
+    "popupNotConfigured": {
+        "message": "דפדפן־KeePassXC לא תוצר. נא ללחץ על לחצן ההתחברות לצימוד ל־KeePassXC.",
+        "description": "A popup message shown when the extension has not been connected to KeePassXC."
+    },
+    "popupNeedReconfigure": {
+        "message": "דפדפן־KeePassXC נותק מ־KeePassXC.",
+        "description": "A popup message shown when the extension has been disconnected from KeePassXC."
+    },
+    "popupNeedReconfigureMessage": {
+        "message": "נא ללחץ על לחצן ה'חיבור מחדש' כדי ליצור חיבור חדש.",
+        "description": "A popup message shown when reconnect is needed."
+    },
+    "popupConfiguredNotAssociated": {
+        "message": "דפדפן־KeePassXC עדיין לא מחובר ל־KeePassXC אבל הוגדר באמצעות המזהה: $1",
+        "description": "A popup message shown when KeePassXC is not connected but configured."
+    },
+    "popupConfiguredAndAssociated": {
+        "message": "דפדפן־KeePassXC מחובר ל־KeePassXC והוא הוגדר באמצעות המזהה הבא: $1",
+        "description": "A popuo message when a connection to KeePassXC is succesful."
+    },
+    "popupUsernameFieldDetected": {
+        "message": "זוהה שדה שם משתמש יחיד בלבד. האם להוסיף את מען ה־URL להעדפות האתר כאשר האפשרות שם משתמש בלבד זמינה?",
+        "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "rememberInfoText": {
+        "message": "שם המשתמש או הססמה השתנו! האם לשמור את זה?",
+        "description": "Message when username or password has changed."
+    },
+    "rememberSaving": {
+        "message": "אישורים יישמרו במסד נתונים מחובר עם מזהה $1",
+        "description": "A message when saving or updating credentials."
+    },
+    "rememberNewUsername": {
+        "message": "שם המשתמש הבא לא נשמר כעת: $1",
+        "description": "A message shown when a new username is detected when saving credentials."
+    },
+    "rememberUsernameExists": {
+        "message": "האישורים עם שם המשתמש שבשימוש מסומנים בהדגשה: $1",
+        "description": "A message shown when a existing username is detected when saving credentials."
+    },
+    "rememberChooseCredentials": {
+        "message": "נא לבחור את האישורים לעדכן.",
+        "description": "A message shown choosing what credentials user wants to update."
+    },
+    "rememberChooseGroup": {
+        "message": "נא לבחור את הקבוצה להוספת האישורים החדשים.",
+        "description": "A message shown choosing what group user wants to use for new credentials."
+    },
+    "rememberInfoDefaultGroupNotFound": {
+        "message": "קבוצת ברירת מחדל נוצרה במסד נתונים מחובר.",
+        "description": "Info message shown when default group set cannot be found."
+    },
+    "rememberErrorCreatingNewGroup": {
+        "message": "לא ניתן ליצור קבוצות חדשות.",
+        "description": "Error message shown when new groups cannot be created."
+    },
+    "rememberErrorPasswordNotChanged": {
+        "message": "האישורים לא עודכנו. הססמה לא שונתה.",
+        "description": "Error message shown when credential password is not changed."
+    },
+    "rememberErrorCannotSaveCredentials": {
+        "message": "לא ניתן לשמור או לעדכן אישורים.",
+        "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "rememberErrorDatabaseClosed": {
+        "message": "לא ניתן לשמור או לעדכן אישורים במסד נתונים סגור.",
+        "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
+    },
+    "rememberCredentialsNotSaved": {
+        "message": "הפעולה בוטלה. האישורים לא מעודכנים.",
+        "description": "Message shown when saving operation was cancelled."
+    },
+    "rememberCredentialsSaved": {
+        "message": "אישורים חדשים עם שם משתמש $1 נשמרו.",
+        "description": "Message shown when new credentials are saved."
+    },
+    "rememberCredentialsUpdated": {
+        "message": "אישורים עם שם משתמש $1 עודכנו.",
+        "description": "Message shown when new credentials are succesfully updated."
+    },
+    "rememberCredentialsExists": {
+        "message": "קיימים כבר אישורים זהים. אין מה לעדכן.",
+        "description": "Message shown when new credentials already found in database."
+    },
+    "rememberEmptyUsername": {
+        "message": "(ריק)",
+        "description": "Means an empty username."
+    },
+    "rememberNoPassword": {
+        "message": "נא למלא את שדה הססמה לפני שמירת אישורים.",
+        "description": "Message shown when no password is set when saving credentials."
+    },
+    "popupLoginText": {
+        "message": "נא לבחור פרטי התחברויות להזנה לעמוד זה.",
+        "description": "A popup message shown when one or multiple credentials are present."
+    },
+    "popupFilterText": {
+        "message": "מסנן:",
+        "description": "Text for login credentials quick filter."
+    },
+    "popupAuthText": {
+        "message": "נא לבחור פרטי התחברויות אתם תרצו להתחבר.",
+        "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
+    },
+    "popupMultiplePasswordFields": {
+        "message": "יותר משדה ססמה אחד נמצא בעמוד זה. נא ללחץ באמצעות לחצן העכבר הימני על אחד משדות הססמה ולבחור אחד מתוך:",
+        "description": "A popup message shown when web page has multiple password fields."
+    },
+    "popupURL": {
+        "message": "מען URL: ",
+        "description": "URL. Might not need any translation."
+    },
+    "popupUsername": {
+        "message": "שם משתמש: ",
+        "description": "A username field name shown on credential update."
+    },
+    "popupButtonNew": {
+        "message": "חדש",
+        "description": "New button text in popup when updating credentials."
+    },
+    "popupButtonUpdate": {
+        "message": "עדכון",
+        "description": "Update button text in popup when updating credentials."
+    },
+    "popupButtonDismiss": {
+        "message": "סילוק",
+        "description": "Dismiss button text in popup when updating credentials."
+    },
+    "popupButtonIgnore": {
+        "message": "לא לשאול שוב לאתר זה",
+        "description": "Ignore button text in popup or in notification when updating credentials."
+    },
+    "popupButtonClose": {
+        "message": "סגירה",
+        "description": "Close button text in popup or in notification."
+    },
+    "popupButtonDismissHttpAuth": {
+        "message": "ביטול והצגת תיבת דו־השיח אימות ברירת מחדל",
+        "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsTitle": {
+        "message": "הגדרות | דפדפן־KeePassXC",
+        "description": "Options page title."
+    },
+    "optionsGeneralSettingsTab": {
+        "message": "הגדרות כלליות",
+        "description": "General Settings tab text."
+    },
+    "optionsConnectedDatabasesTab": {
+        "message": "מסדי נתונים מחוברים",
+        "description": "Connected Databases tab text."
+    },
+    "optionsCustomFieldsTab": {
+        "message": "שדות התחברות מותאמים אישית",
+        "description": "Saved custom login fields tab text."
+    },
+    "optionsSitePreferencesTab": {
+        "message": "העדפות אתר",
+        "description": "Site preferences fields tab text."
+    },
+    "optionsAboutTab": {
+        "message": "אודות",
+        "description": "About tab text."
+    },
+    "optionsMenuGeneral": {
+        "message": "כללי",
+        "description": "General settings page header."
+    },
+    "optionsMenuConnectedDatabases": {
+        "message": "מסדי נתונים מחוברים",
+        "description": "Connected Databases page header."
+    },
+    "optionsMenuCustomFields": {
+        "message": "שדות התחברות מותאמים אישית",
+        "description": "Custom login fields page header."
+    },
+    "optionsMenuSitePreferences": {
+        "message": "העדפות אתר",
+        "description": "Site preferences page header."
+    },
+    "optionsMenuAbout": {
+        "message": "אודות",
+        "description": "About page header."
+    },
+    "optionsConfigureShortcuts": {
+        "message": "תצור קיצורי־דרך",
+        "description": "Keyboard shortcut button and title text."
+    },
+    "optionsButtonSave": {
+        "message": "שמירה",
+        "description": "Save button text."
+    },
+    "optionsButtonConnect": {
+        "message": "התחברות",
+        "description": "Connect button text."
+    },
+    "optionsButtonRemove": {
+        "message": "הסרה",
+        "description": "Remove button text."
+    },
+    "optionsButtonAdd": {
+        "message": "הוספה",
+        "description": "Add button text."
+    },
+    "optionsButtonUpdate": {
+        "message": "בדיקת זמינות עדכונים",
+        "description": "Check for updates button text."
+    },
+    "optionsButtonRemoveNow": {
+        "message": "כן, להסיר כעת",
+        "description": "Confirm button text when removing database key or custom login fields."
+    },
+    "optionsButtonCancel": {
+        "message": "ביטול",
+        "description": "Cancel button text when removing database key or custom login fields."
+    },
+    "optionsButtonReset": {
+        "message": "איפוס",
+        "description": "Reset button text for keyboard shortcuts."
+    },
+    "optionsButtonImport": {
+        "message": "ייבוא הגדרות",
+        "description": "Import settings button text."
+    },
+    "optionsButtonExport": {
+        "message": "ייצוא הגדרות",
+        "description": "Export settings button text."
+    },
+    "optionsLabelDefaultGroup": {
+        "message": "קבוצת ברירת מחדל לשמירת ססמאות חדשות:",
+        "description": "Default group options text."
+    },
+    "optionsDefaultGroupHelpText": {
+        "message": "הפרדת הקבוצה באמצעות לוכסן, לדוגמה: קבוצה/קבוצת צאצא.",
+        "description": "Default group help text."
+    },
+    "optionsLabelDefaultGroupCheckboxText": {
+        "message": "לשאול תמיד היכן לשמור אישורים חדשים",
+        "description": "Default group checkbox help text."
+    },
+    "optionsLabelDefaultGroupCheckboxHelpText": {
+        "message": "כאשר מאופשר, תוצג רשימת קבוצות בחלון־הצץ.",
+        "description": "Default checkbox explanation help text."
+    },
+    "optionsCheckboxUsePasswordGenerator": {
+        "message": "שפעול סמלי מחולל ססמאות.",
+        "description": "Activate password generator icons checkbox text."
+    },
+    "optionsCheckboxUsernameIcons": {
+        "message": "שפעול סמלי שדות שם משתמש.",
+        "description": "Activate username field icons textbox text."
+    },
+    "optionsUseObserver": {
+        "message": "שימוש בזיהוי שדה קלט דינאמי.",
+        "description": "Use dynamic input field detection checkbox text."
+    },
+    "optionsUseObserverHelpText": {
+        "message": "שימושי בעמודים שמשתמשים בחלונות צצים או בתיבות דו־שיח דינמיות. ניתן להשבית את התכונה להפחתת את עומס המעבד במחשבים איטיים יותר. כאשר מושבת, ניתן להוסיף אישורים לא זמינים רק באמצעות קיצורי מקשים, מתפריט ההקשר או מחלון ההרחבה הצץ.",
+        "description": "Use dynamic input field detection help text."
+    },
+    "optionsCheckboxOTPIcons": {
+        "message": "שפעול סמלי שדה 2FA/OTP.",
+        "description": "Activate OTP field icons textbox text."
+    },
+    "optionsCheckboxAutoRetrieveCredentials": {
+        "message": "אחזר אישורים באופן אוטומטי.",
+        "description": "Automatically retrieve credentials checkbox text."
+    },
+    "optionsCheckboxAutomaticReconnect": {
+        "message": "החיבור מחדש ל־KeePassXC באופן אוטומטי.",
+        "description": "Auto-reconnect checkbox text."
+    },
+    "optionsAutomaticReconnectWarning": {
+        "message": "אזהרה! זוהי תכונה ניסיונית. נא להשתמש על אחריותכם בלבד.",
+        "description": "Auto-reconnect warning message."
+    },
+    "optionsCheckboxAutoFillSingleEntry": {
+        "message": "מילוי אוטומטי של רשומות עם אישור יחיד.",
+        "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoCompleteUsernames": {
+        "message": "שפעול השלמה אוטומטית בשדות שם משתמש.",
+        "description": "Activate autocomplete for username fields checkbox text."
+    },
+    "optionsCheckboxShowGroupNameInAutocomplete": {
+        "message": "הצגת שם הקבוצה ברשימת־השלמה־אוטומטית כאשר האישורים הם מקבוצות שונות.",
+        "description": "Show group name in autocomplete checkbox text."
+    },
+    "optionsCheckboxAutoSubmit": {
+        "message": "שיגור פרטי התחברויות אוטומטית",
+        "description": "Auto-submit checkbox text."
+    },
+    "optionsAutoSubmitHelpText": {
+        "message": "שיגור אישורים שנבחרו אוטומטית. אפשרות זו אינה זמינה למילוי אוטומטי של ערך יחיד.",
+        "description": "Auto-submit help text."
+    },
+    "optionsCheckboxShowNotifications": {
+        "message": "הצגת הודעות.",
+        "description": "Show notifications checkbox text."
+    },
+    "optionsSaveDomainOnly": {
+        "message": "שמירת תחום בלבד.",
+        "description": "Save domain only checkbox text."
+    },
+    "optionsCheckboxShowLoginNotifications": {
+        "message": "הצג כרזה בעמוד כאשר ניתן לשמור אישורים חדשים במסד הנתונים.",
+        "description": "Show login notifications checkbox text."
+    },
+    "optionsRedirectAllowance": {
+        "message": "מספר הסטות מותר: $1",
+        "description": "Redirect allowance range input text."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "מספר הסטות המותר עד שהכרזה תעלם. ערך ברירת המחדל הוא 1. ערך מירבי הוא אינסוף.",
+        "description": "Redirect allowance help text."
+    },
+    "optionsCheckboxAutoFillAndSend": {
+        "message": "מילוי תיבות דו־שיח אימות HTTP בסיסי באופן אוטומטי ושיגורן.",
+        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsRadioText": {
+        "message": "בדיקת זמינות עדכוני KeePassXC:",
+        "description": "Text above radio buttons in the settings page."
+    },
+    "optionsRadioThreeDays": {
+        "message": "כל 3 ימים",
+        "description": "Radio button text."
+    },
+    "optionsRadioWeek": {
+        "message": "כל שבוע",
+        "description": "Radio button text."
+    },
+    "optionsRadioMonth": {
+        "message": "כל חודש",
+        "description": "Radio button text."
+    },
+    "optionsRadioNever": {
+        "message": "אף פעם",
+        "description": "Radio button text."
+    },
+    "optionsThemeSelectionHeader": {
+        "message": "ערכת נושא 'צבע'",
+        "description": "Theme selection header text."
+    },
+    "optionsCredentialSortSelectionHeader": {
+        "message": "מיון אישורים תואמים לפי",
+        "description": "Credential sort option header text."
+    },
+    "optionsThemeSelection": {
+        "message": "בחירת ערכת צבעים",
+        "description": "Theme selection title text."
+    },
+    "optionsThemeSystem": {
+        "message": "מערכת",
+        "description": "System theme text."
+    },
+    "optionsThemeDark": {
+        "message": "כהה",
+        "description": "Dark theme text."
+    },
+    "optionsThemeLight": {
+        "message": "בהיר",
+        "description": "Light theme text."
+    },
+    "optionsKeyboardShortcutsHeader": {
+        "message": "קיצורי־מקלדת",
+        "description": "Keyboard shortcut header text."
+    },
+    "optionsUsePasswordGeneratorHelpText": {
+        "message": "הוספת סמל לשדות ססמה לחילול ססמה חדשה.",
+        "description": "Password Generator option help text."
+    },
+    "optionsUsePasswordGeneratorHelpTextSecond": {
+        "message": "ססמאות מחוללות על־ידי KeePassXC באמצעות פרופיל יצירת הססמאות.",
+        "description": "Password Generator option help text, second part."
+    },
+    "optionsPredefinedSiteList": {
+        "message": "אתרים מוגדרים מראש",
+        "description": "Predefined site list details button text."
+    },
+    "optionsUsePredefinedSites": {
+        "message": "נא להשתמש באתרים מוגדרים מראש לצורך תאימות.",
+        "description": "Use predefined sites checkbox text."
+    },
+    "optionsUsePredefinedSitesHelpText": {
+        "message": "הוספת אתרים נפוצים,להעדפות האתר, הכוללים טפסי התחברויות שמות משתמשים בלבד.",
+        "description": "Use predefined sites option help text."
+    },
+    "optionsShowLoginFormIconHelpText": {
+        "message": "הוספת סמל לשדות שם משתמש למילוי אישורים בלחיצת עכבר אחת.",
+        "description": "Username field icon option help text."
+    },
+    "optionsShowOTPIconHelpText": {
+        "message": "הוספת סמל לשדות קלט המזוהים כ־OTP/2FA.",
+        "description": "OTP field icon option help text."
+    },
+    "optionsAutoRetrieveCredentialsHelpText": {
+        "message": "דפדפן־KeePassXC יאחזר אישורים מיד כאשר כרטיסייה תשופעל.",
+        "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsAutomaticReconnectHelpText": {
+        "message": "התחברות מחדשת אוטומטית ל־KeePassXC עם זיהויו.",
+        "description": "Auto-reconnect option help text."
+    },
+    "optionsAutoFillSingleEntryHelpText": {
+        "message": "לאפשר לדפדפן־KeePassXC למלא אישורים באופן אוטומטי בקבלת רק ערך יחיד.",
+        "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillSingleEntryWarning": {
+        "message": "אזהרה! השימוש במילוי אוטומטי אינו בטוח. נא להשתמש על אחריותכם בלבד.",
+        "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutocompleteUsernamesHelpText": {
+        "message": "הצגת תיבת רשימה־נפתחת המכילה אישורים זמינים לכל שדות שם המשתמש בעמוד.",
+        "description": "Autocomplete Usernames option help text."
+    },
+    "optionsShowGroupNameInAutocompleteHelpText": {
+        "message": "כאשר אישורים מוחזרים מקבוצות שונות, שם הקבוצה יוצג.",
+        "description": "Show group name in autocomplete help text."
+    },
+    "optionsShowNotificationsHelpText": {
+        "message": "הצגת הודעות שגיאה ואם נדרשת התערבות משתמש.",
+        "description": "Show notifications option help text."
+    },
+    "optionsSaveDomainOnlyHelpText": {
+        "message": "בעת שמירת אישורים חדשים, לשמור רק את שם המתחם במקום את מען ה־URL המלא.",
+        "description": "Save domain only option help text."
+    },
+    "optionsSaveDomainOnlyCustomLoginHelpText": {
+        "message": "בעת שמירת שדות להעדפות האתר מותאמים אישית חדשים, לשמור רק את שם המתחם במקום את מען ה־URL המלא.",
+        "description": "Save domain only option help text."
+    },
+    "optionsAutoFillAndSendHelpText": {
+        "message": "אם נמצאו אישורים עבור עמוד, וסוג ההתחברות הוא בקשת אימות בסיסית של HTTP, KeePassXCדפדפן־ מנסה להתחבר באופן אוטומטי עם האישורים הראשונים שניתנו. כאשר קיימים אישורים מרובים, ניתן להשתמש בהרחבה הצצה כדי לבחור את האישור הנכון. גם כאשר תכונה זו מופעלת, עדיין ניתן להזין התחברויות ל־HTTP Basic Auth באופן ידני.",
+        "description": "Auto-Fill And Send option help text."
+    },
+    "optionsAutoFillAndSendHelpTextSecond": {
+        "message": "תיבת דו־שיח אימות HTTP בסיסי נראית כך:",
+        "description": "HTTP Basic Auth image help text."
+    },
+    "optionsClearCredentialsTimeout": {
+        "message": "ניקוי אישורים מלשוניות לא פעילות לאחר (שניות, 0-3600).",
+        "description": "Clear credentials label text."
+    },
+    "optionsClearCredentialsTimeoutHelpText": {
+        "message": "האישורים מנוקים מלשוניות רקע לאחר פסק־הזמן הקצוב והרשאות לעמודים אלה יתבקשו שוב.",
+        "description": "Clear credentials timeout help text."
+    },
+    "optionsVersionInfoText": {
+        "message": "דפדפן־KeePassXC צריך את KeePassXC כדי לאחזר אישורים.",
+        "description": "Settings page version info text."
+    },
+    "optionsVersionDownload": {
+        "message": "ניתן להוריד את הגרסה היציבה העדכנית ביותר מ־$1",
+        "description": "Settings page download link."
+    },
+    "optionsVersionRunning": {
+        "message": "גרסת KeePassXC מותקנת: $1",
+        "description": "Settings page info text of user's KeePassXC version."
+    },
+    "optionsLatestVersion": {
+        "message": "הגרסת KeePassXC האחרונה הזמינה: $1",
+        "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsKeePassXCVersionRequired": {
+        "message": "נדרשת גרסת KeePassXC: $1",
+        "description": "KeePassXC version requirement text."
+    },
+    "optionsDefault": {
+        "message": "ברירת מחדל: $1",
+        "description": "Default setting text."
+    },
+    "optionsInfinite": {
+        "message": "אינסופי: $1",
+        "description": "Infinite setting text."
+    },
+    "optionsRecommended": {
+        "message": "מומלץ: $1",
+        "description": "Recommended setting text."
+    },
+    "optionsShortcutsSuccess": {
+        "message": "קיצור הדרך ל־$1 השתנה בהצלחה.",
+        "description": "Message for successful keyboard shortcut change."
+    },
+     "optionsShortcutsInfo": {
+        "message": "קיצור הדרך ל־$1 אופס.",
+        "description": "Info message for changing keyboard shortcuts."
+    },
+     "optionsShortcutsDanger": {
+        "message": "שגיאה: קיצור הדרך ל־$1 לא השתנה!",
+        "description": "Error message for changing keyboard shortcuts."
+    },
+    "optionsImportExportSettings": {
+        "message": "הגדרות ייבוא/ייצוא",
+        "description": "Settings page header text for import/export."
+    },
+    "optionsImportSettingsDialogTitle": {
+        "message": "האם לייבא הגדרות מקובץ חיצוני?",
+        "description": "Import settings confirmation dialog title text."
+    },
+    "optionsImportSettingsDialogText": {
+        "message": "ההגדרות הנוכחיות יידרסו. האם לייבא את קובץ ההגדרות?",
+        "description": "Import settings confirmation dialog help text."
+    },
+    "optionsConnectedDatabasesText": {
+        "message": "מסדי נתונים מחוברים לדפדפן־KeePassXC.",
+        "description": "Info text about connected databases."
+    },
+    "optionsConnectedDatabasesNotFound": {
+        "message": "לא נמצאו מסדי נתונים מחוברים.",
+        "description": "Shown in the connected databases table when there is no connected databases."
+    },
+    "optionsDatabasesRemoveIdentifier": {
+        "message": "האם להסיר מזהה מרשימת מסדי הנתונים?",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmFirst": {
+        "message": "האם להסיר את המזהה הבא מרשימת מסדי הנתונים: $1",
+        "description": "Confirmation text when removing database from the list."
+    },
+    "optionsDatabasesRemoveIdentifierConfirmSecond": {
+        "message": "ניתן לחבר מחדש את מסד הנתונים בכל עת.",
+        "description": "Confirmation text when removing database from the list, second part."
+    },
+    "optionsDatabaseIdentifier": {
+        "message": "מזהה",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseKey": {
+        "message": "מפתח",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseLastUsed": {
+        "message": "בשימוש לאחרונה",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseCreated": {
+        "message": "נוצרו",
+        "description": "Database list column title."
+    },
+    "optionsDatabaseDelete": {
+        "message": "מחיקה",
+        "description": "Database list column title."
+    },
+    "optionsColumnPageURL": {
+        "message": "מען URL עמוד",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnIgnore": {
+        "message": "להתעלם",
+        "description": "Site preferences list column title."
+    },
+     "optionsColumnUsernameOnly": {
+        "message": "זיהוי שמות משתמשים בלבד",
+        "description": "Site preferences list column title."
+    },
+    "optionsColumnDelete": {
+        "message": "מחיקה",
+        "description": "Site preferences list column title."
+    },
+    "optionsSelectionNothing": {
+        "message": "אפשור כל התכונות",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionNormal": {
+        "message": "השבתת אישורים חדשים/מוסגלים",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionAutoSubmit": {
+        "message": "השבתת הגשה אוטומטית",
+        "description": "Site preferences option selection."
+    },
+    "optionsSelectionFull": {
+        "message": "השבתת כל התכונות",
+        "description": "Site preferences option selection."
+    },
+    "optionsSortByTitle": {
+        "message": "כותרת",
+        "desription": "Sort matching credentials by title option selection."
+    },
+    "optionsSortByUsername": {
+        "message": "שם משתמש",
+        "desription": "Sort matching credentials by username option selection."
+    },
+    "optionsSortByGroupAndTitle": {
+        "message": "קבוצה וכותרת",
+        "desription": "Sort matching credentials by group and title option selection."
+    },
+    "optionsSortByGroupAndUsername": {
+        "message": "קיבוצה ושם משתמש",
+        "desription": "Sort matching credentials by group and username option selection."
+    },
+    "optionsCustomFieldsNotFound": {
+        "message": "לא נמצאו שדות התחברויות מותאמים אישית שמורים.",
+        "description": "Shown when no saved custom credentials are saved."
+    },
+    "optionsCustomFieldsTableCaption": {
+        "message": "ניתן לנהל שדות התחברויות מותאמים אישית שנשמרו באמצעות הטבלה.",
+        "description": "Table caption of Custom login fields page."
+    },
+    "optionsCustomFieldsTabHelpTextFirst": {
+        "message": "במידה שדפדפן־KeePassXC מזהה שדות התחברויות שגויים, ניתן להגדיר את השדות הנכונים ידנית.",
+        "description": "Saved custom login fields info text, first part."
+    },
+    "optionsCustomFieldsTabHelpTextSecond": {
+        "message": "נא לעבור לעמוד וללחץ על סמל דפדפן־KeePassXC, ולאחר מכן לבחור ",
+        "description": "Saved custom login fields info text, second part."
+    },
+    "optionsCustomFieldsTabHelpTextThird": {
+        "message": "בעמוד זה ניתן לנהל שדות התחברויות מותאמים אישית שנשמרו.",
+        "description": "Saved custom login fields info text, third part."
+    },
+    "optionsCustomFieldsRemove": {
+        "message": "האם להסיר שדות התחברויות מותאמים אישית שנשמרו?",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmation": {
+        "message": "האם להסיר את שדות ההתחברויות המותאמים אישית שנשמרו בעמוד: $1",
+        "description": "Confirmation text when removing saved custom login fields."
+    },
+    "optionsCustomFieldsConfirmationHelpText": {
+        "message": "דפדפן־KeePassXC יזהה באופן אוטומטי את שדות ההתחברות בפעם הבאה שתבקרו בעמוד זה.",
+        "description": "Part of confirmation text when removing saved custom login fields."
+    },
+    "optionsSitePreferencesNotFound": {
+        "message": "לא נמצאו העדפות אתר.",
+        "description": "Shown when no site preferences are saved."
+    },
+    "optionsSitePreferencesRemove": {
+        "message": "האם להסיר אתר?",
+        "description": "Confirmation text when removing ignored sites from the list."
+    },
+    "optionsSitePreferencesTabHelpTextFirst": {
+        "message": "שיטות טיפול מיוחדות משויכות לאתרים בעמוד זה.",
+        "description": "Site preferences info text, first part."
+    },
+    "optionsSitePreferencesTabHelpTextSecond": {
+        "message": "כדי להתעלם מאישורים חדשים/מוסגלים באתר מסוים, נא להוסיף אותם מטה, או בעת שימוש בכרזת האישור בעמוד, יש  לבחור באפשרות <em>לא לבקש שוב עבור אתר זה</em>.",
+        "description": "Site preferences info text, second part."
+    },
+    "optionsSitePreferencesTabHelpTextThird": {
+        "message": "אם המערכת מתעלמת לחלוטין מאתר (אפשרות <em>יש לבטל את כל התכונות</em> נבחרה), המתקע לא יעשה דבר בעת ביקור באתר זה.",
+        "description": "Site preferences info text, third part."
+    },
+    "optionsSitePreferencesTabHelpTextFourth": {
+        "message": "זיהוי שמות משתמשים בלבד מאפשר לדפדפן־KeePassXC למלא פרטי התחברות באתרי מרשתת עם עמודים נפרדים לשם משתמש וססמה.",
+        "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesManualAddText": {
+        "message": "הוספת מען URL באופן ידני",
+        "description": "Label for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesManualAddHelp": {
+        "message": "מען ה־URL חייב להתחיל <code>https://</code>, <code>http://</code>, <code>file://</code>, או <code>ftp://</code> וחייב להיות באורך של 5 תווים לפחות.",
+        "description": "Help text for adding site manually on Site preferences tab."
+    },
+    "optionsSitePreferencesConfirmation": {
+        "message": "האם להסיר את האתר שצוין מהרשימה: $1",
+        "description": "Confirmation text when removing site from site preferences."
+    },
+    "optionsSitePreferencesConfirmationHelpText": {
+        "message": "דפדפן־KeePassXC יאפשר את כל התכונות עבור אתר זה וזיהוי שם משתמש בלבד, יוסר.",
+        "description": "Part of confirmation text when removing site preferences."
+    },
+    "optionsSitePreferencesTableCaption": {
+        "message": "ניתן לנהל העדפות אתר שמורות באמצעות הטבלה.",
+        "description": "Table caption of Site Preferences page."
+    },
+    "optionsSitePreferencesSelect": {
+        "message": "אפשרות להתעלם מתכונות הרחבה עבור העמוד.",
+        "description": "Title text of select element in Site Preferences."
+    },
+    "optionsAboutChrome": {
+        "message": "בקרו את דפדפן־KeePassXC בחנות המרשתת של Chrome.",
+        "description": "About page link to Chrome Web Store."
+    },
+    "optionsAboutMozilla": {
+        "message": "בקרו את דפדפן־KeePassXC במחיצת התוספים של מוזילה.",
+        "description": "About page link to AMO."
+    },
+    "optionsAboutGitHub": {
+        "message": "בקרו את דפדפן־KeePassXC ב־GitHub.",
+        "description": "About page link to GitHub."
+    },
+    "optionsAboutExtensionVersion": {
+        "message": "גרסת דפדפן־KeePassXC: $1",
+        "description": "About page text of extension version."
+    },
+    "optionsAboutKeePassXCVersion": {
+        "message": "גרסת KeePassXC: $1",
+        "description": "About page text of KeePassXC version."
+    },
+    "optionsAboutContributors": {
+        "message": "תורמים",
+        "description": "About page text of contributors."
+    },
+    "optionsAboutLicenses": {
+        "message": "רשיונות",
+        "description": "About page text of licenses."
+    },
+    "optionsAboutReportBugs": {
+        "message": "דיווח על תקלים",
+        "description": "About page text of reporting bugs."
+    },
+    "optionsAboutCreateNewIssue": {
+        "message": "יצירת סוגיה חדשה ב־GitHub",
+        "description": "Link text for creating a new issue."
+    },
+    "optionsAboutDebugInfo": {
+        "message": "ניתן להשתמש במידע ניפוי־תקלים הבא",
+        "description": "Debug info text."
+    },
+    "optionsAboutSupporters": {
+        "message": "תומכים",
+        "description": "Supporters label text."
+    },
+    "optionsErrorInvalidValue": {
+        "message": "ערך לא תקין. נא בדוק את הקלט.",
+        "description": "Error shown when input field has an incorrect value."
+    },
+    "optionsErrorInvalidURL": {
+        "message": "מען URL לא תקין. נא בדוק את הקלט.",
+        "description": "Error shown when input field has an incorrect URL."
+    },
+    "optionsErrorValueExists": {
+        "message": "הערך כבר קיים ברשימה.",
+        "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "optionsUserInterfaceTitle": {
+        "message": "מנשק משתמש",
+        "description": "User interface title in settings page"
+    },
+    "optionsFillingCredentialsTitle": {
+        "message": "מילוי אישורים",
+        "description": "Filling credentials title in settings page"
+    },
+    "optionsSavingCredentialsTitle": {
+        "message": "שמירת אישורים",
+        "description": "Saving credentials title in settings page"
+    },
+    "optionsUpdatesTitle": {
+        "message": "עדכונים",
+        "description": "Updates title in settings page"
+    },
+    "optionsAdvancedSettingsTitle": {
+        "message": "הגדרות מתקדמות",
+        "description": "Advanced settings title in settings page"
+    },
+    "optionsExtensionTitle": {
+        "message": "הרחבות",
+        "description": "Extension title in settings page"
+    },
+    "openNewTab": {
+        "message": "פתיחת לשונית חדשה",
+        "description": "Title attribute text."
+    },
+    "httpAuthDialog": {
+        "message": "תיבת דו־השיח אימות HTTP בסיסי",
+        "description": "Options page HTTP Basic Auth dialog text"
+    },
+    "autocompleteSubmitMessage": {
+        "message": "הבחירה משוגר באופן אוטומטי",
+        "description": "Message shown at the bottom of autocomplete menu."
+    },
+    "lockDatabase": {
+        "message": "נעילת מסד נתונים",
+        "description": "Lock database button title text."
+    }
+}
