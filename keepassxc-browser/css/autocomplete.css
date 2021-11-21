@@ -12,7 +12,7 @@
     border-top-width: 0px !important;
     width: auto;
     color: var(--kpxc-text-color);
-    font-size: .9em !important;
+    font-size: max(10px, .9em) !important;
     letter-spacing: normal !important;
     word-spacing: normal !important;
     text-rendering: auto !important;
@@ -29,7 +29,7 @@
     border: 1px solid rgba(0,0,0,.125) !important;
     width: auto;
     color: #000;
-    font-size: .8em !important;
+    font-size: max(9px, .8em) !important;
     font-style: italic;
 }
 
