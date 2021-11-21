@@ -191,6 +191,10 @@ keepass.updateCredentials = async function(tab, args = []) {
             messageData.uuid = entryId;
         }
 
+        if (!entryId && page.settings.downloadFaviconAfterSave) {
+            messageData.downloadFavicon = 'true';
+        }
+
         if (group && groupUuid) {
             messageData.group = group;
             messageData.groupUuid = groupUuid;

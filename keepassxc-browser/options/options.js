@@ -280,6 +280,7 @@ options.initGeneralSettings = function() {
     }
 };
 
+// Also hides/disables any options with KeePassXC versions that are too old
 options.showKeePassXCVersions = async function(response) {
     if (response.current === '') {
         response.current = 'unknown';
@@ -293,15 +294,26 @@ options.showKeePassXCVersions = async function(response) {
     $('#tab-about span.kpxcVersion').text(response.current);
     $('#tab-general-settings button.checkUpdateKeePassXC:first').attr('disabled', false);
 
-    const result = await browser.runtime.sendMessage({
+    // Hide/disable certain options with older KeePassXC versions than 2.6.0
+    const version260Result = await browser.runtime.sendMessage({
         action: 'compare_version',
         args: [ '2.6.0', response.current ]
     });
 
-    if (result) {
+    if (version260Result) {
         $('#tab-general-settings #versionRequiredAlert').hide();
     } else {
         $('#tab-general-settings #showGroupNameInAutocomplete').attr('disabled', true);
+    }
+
+    // Hide certain options with older KeePassXC versions than 2.7.0
+    const version270Result = await browser.runtime.sendMessage({
+        action: 'compare_version',
+        args: [ '2.7.0', response.current ]
+    });
+
+    if (!version270Result) {
+        $('#tab-general-settings #downloadFaviconAfterSaveFormGroup').hide();
     }
 };
 
@@ -611,7 +623,7 @@ options.initTheme = function() {
         document.body.setAttribute('data-color-theme', options.settings['colorTheme']);
     }
     // Sync localStorage setting
-    let localStorageTheme = localStorage.getItem('colorTheme');
+    const localStorageTheme = localStorage.getItem('colorTheme');
     if (localStorageTheme !== options.settings['colorTheme']) {
         localStorage.setItem('colorTheme', options.settings['colorTheme']);
     }
