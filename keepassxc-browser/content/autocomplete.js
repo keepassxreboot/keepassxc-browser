@@ -88,7 +88,7 @@ class Autocomplete {
 
         // Try to detect a username from the webpage in order to show it first in the list
         // This is useful when a website prompts you to enter the password again, and the username is already filled in
-        // It can also helps with multi-page login flows
+        // It also helps with multi-page login flows
         const username = kpxcSites.detectUsername();
 
         await kpxc.updateTOTPList();
