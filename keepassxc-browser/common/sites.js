@@ -76,6 +76,7 @@ kpxcSites.detectUsername = function() {
       return profileIdentifier.textContent.trim();
     }
   }
+  return undefined;
 };
 
 /**
