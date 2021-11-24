@@ -86,6 +86,17 @@ class Autocomplete {
         this.wrapper = wrapper;
         document.body.append(wrapper);
 
+        // Try to detect a username from the webpage in order to show it first in the list
+        // This is useful when a website prompts you to enter the password again, and the username is already filled in
+        // It can also helps with multi-page login flows
+        let username;
+        if (window.location.origin === 'https://accounts.google.com') {
+          const profileIdentifier = document.getElementById('profileIdentifier');
+          if (profileIdentifier) {
+            username = profileIdentifier.textContent.trim();
+          }
+        }
+
         await kpxc.updateTOTPList();
         for (const c of this.elements) {
             const item = document.createElement('div');
@@ -101,7 +112,11 @@ class Autocomplete {
             item.addEventListener('mousedown', ev => ev.stopPropagation());
             item.addEventListener('mouseup', ev => ev.stopPropagation());
 
-            div.appendChild(item);
+            if (username === c.value) {
+              div.prepend(item);
+            } else {
+              div.appendChild(item);
+            }
         }
 
         // Add a footer message for auto-submit
