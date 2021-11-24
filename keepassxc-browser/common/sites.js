@@ -66,6 +66,19 @@ kpxcSites.googleUrl = 'https://accounts.google.com';
 kpxcSites.savedForm = undefined;
 
 /**
+ * Tries to detect a username from the page.
+ * @returns {string}   Returns the detected username if there is one, undefined otherwise.
+ */
+kpxcSites.detectUsername = function() {
+  if (document.location.origin === 'https://accounts.google.com') {
+    const profileIdentifier = document.getElementById('profileIdentifier');
+    if (profileIdentifier) {
+      return profileIdentifier.textContent.trim();
+    }
+  }
+};
+
+/**
  * Handles a few exceptions for certain sites where password form is inside a div
  * or another element that is not detected directly. Triggered by MutationObserver.
  * @param {string} identifier   Usually a classList or element id

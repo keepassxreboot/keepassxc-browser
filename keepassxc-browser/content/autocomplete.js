@@ -89,13 +89,7 @@ class Autocomplete {
         // Try to detect a username from the webpage in order to show it first in the list
         // This is useful when a website prompts you to enter the password again, and the username is already filled in
         // It can also helps with multi-page login flows
-        let username;
-        if (window.location.origin === 'https://accounts.google.com') {
-          const profileIdentifier = document.getElementById('profileIdentifier');
-          if (profileIdentifier) {
-            username = profileIdentifier.textContent.trim();
-          }
-        }
+        const username = kpxcSites.detectUsername();
 
         await kpxc.updateTOTPList();
         for (const c of this.elements) {
