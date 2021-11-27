@@ -56,7 +56,9 @@ const PREDEFINED_SITELIST = [
     'https://login.yahoo.com/*',
     'https://id.atlassian.com/*',
     'https://www.fidelity.com/*',
-    'https://twitter.com/i/flow/login'
+    'https://twitter.com/i/flow/login',
+    'https://login3.id.hp.com/*',
+    'https://secure.fnac.com/identity/server/gateway/*'
 ];
 
 const kpxcSites = {};
