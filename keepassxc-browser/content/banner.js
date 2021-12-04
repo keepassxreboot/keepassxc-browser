@@ -48,6 +48,7 @@ kpxcBanner.create = async function(credentials = {}) {
         return;
     }
 
+    credentials.username = credentials.username.trim();
     kpxcBanner.credentials = credentials;
 
     const banner = kpxcUI.createElement('div', 'kpxc-banner', { 'id': 'container' });
