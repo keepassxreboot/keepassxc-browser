@@ -47,6 +47,12 @@ class UsernameFieldIcon extends Icon {
         this.icon.classList.remove('lock', 'lock-moz', 'unlock', 'unlock-moz', 'disconnected', 'disconnected-moz');
         this.icon.classList.add(getIconClassName(state));
         this.icon.title = getIconText(state);
+
+        if (kpxc.credentials.length === 0 && state === DatabaseState.UNLOCKED) {
+            this.icon.style.filter = 'saturate(0%)';
+        } else {
+            this.icon.style.filter = 'saturate(100%)';
+        }
     }
 }
 
@@ -142,6 +148,7 @@ const getIconClassName = function(state = DatabaseState.UNLOCKED) {
     } else if (state === DatabaseState.DISCONNECTED) {
         return (isFirefox() ? 'lock-disconnected' : 'disconnected');
     }
+
     return (isFirefox() ? 'unlock-moz' : 'unlock');
 };
 
