@@ -230,6 +230,10 @@ kpxcUI.createNotification = function(type, message) {
     const styleSheet = createStylesheet('css/notification.css');
     notificationWrapper = notificationWrapper || document.createElement('div');
     this.shadowRoot = notificationWrapper.attachShadow({ mode: 'closed' });
+    if (!this.shadowRoot) {
+        return;
+    }
+
     this.shadowRoot.append(styleSheet);
     this.shadowRoot.append(notification);
     document.body.append(notificationWrapper);
@@ -325,7 +329,11 @@ Element.prototype.getLowerCaseAttribute = function(attr) {
 
 Element.prototype._attachShadow = Element.prototype.attachShadow;
 Element.prototype.attachShadow = function () {
-    return this._attachShadow({ mode: 'closed' });
+    try {
+        return this._attachShadow({ mode: 'closed' });
+    } catch (e) {
+        console.log('Error: ', e);
+    }
 };
 
 Object.prototype.shadowSelector = function(value) {
