@@ -1540,6 +1540,10 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
 
     const type = el.getAttribute('type');
     const combination = await kpxcFields.getCombination(el, (type === 'password' ? type : 'username'));
+    if (!combination) {
+        return;
+    }
+
     const usernameValue = combination.username ? combination.username.value : '';
     const passwordValue = combination.password ? combination.password.value : '';
 
