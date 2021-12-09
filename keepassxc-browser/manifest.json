@@ -127,6 +127,7 @@
         "css/button.css",
         "css/colors.css",
         "css/define.css",
+        "css/notification.css",
         "css/pwgen.css",
         "css/username.css",
         "css/totp.css"
