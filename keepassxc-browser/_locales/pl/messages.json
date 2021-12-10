@@ -56,7 +56,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Nie można połączyć się z KeePassXC. Sprawdź, czy integracja przeglądarki jest włączona w ustawieniach KeePassXC.",
+        "message": "Nie można połączyć się z KeePassXC. Sprawdź, czy integracja z przeglądarką jest włączona w ustawieniach KeePassXC.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -84,7 +84,7 @@
         "description": "No saved databases found."
     },
     "errorMessageIncorrectAction": {
-        "message": "Nieprawidłowe działanie.",
+        "message": "Nieprawidłowa akcja.",
         "description": "Incorrect action."
     },
     "errorMessageEmptyMessage": {
@@ -184,7 +184,7 @@
         "description": "OTP field icon text."
     },
     "defineDismiss": {
-        "message": "Odwołaj",
+        "message": "Anuluj",
         "description": "Dismiss button text when choosing custom login fields."
     },
     "defineSkip": {
@@ -464,7 +464,7 @@
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonDismiss": {
-        "message": "Odwołaj",
+        "message": "Anuluj",
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
@@ -476,7 +476,7 @@
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": "Odwołaj i pokaż domyślne okno uwierzytelniania",
+        "message": "Anuluj i pokaż domyślne okno uwierzytelniania",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
