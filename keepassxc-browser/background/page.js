@@ -14,6 +14,7 @@ const defaultSettings = {
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
+    downloadFaviconAfterSave: false,
     redirectAllowance: 1,
     saveDomainOnly: true,
     showLoginFormIcon: true,
@@ -99,6 +100,10 @@ page.initSettings = async function() {
 
         if (!('defaultGroupAlwaysAsk' in page.settings)) {
             page.settings.defaultGroupAlwaysAsk = defaultSettings.defaultGroupAlwaysAsk;
+        }
+
+        if (!('downloadFaviconAfterSave' in page.settings)) {
+            page.settings.downloadFaviconAfterSave = defaultSettings.downloadFaviconAfterSave;
         }
 
         if (!('redirectAllowance' in page.settings)) {
