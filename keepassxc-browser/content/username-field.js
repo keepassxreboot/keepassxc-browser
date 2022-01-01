@@ -157,5 +157,5 @@ const getIconText = function(state) {
 
 const fillCredentials = async function(field) {
     const combination = await kpxcFields.getCombination(field);
-    kpxc.fillFromUsernameIcon(combination);
+    kpxcFill.fillFromUsernameIcon(combination);
 };

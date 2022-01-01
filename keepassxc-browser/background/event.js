@@ -135,7 +135,7 @@ kpxcEvent.onCheckUpdateKeePassXC = async function() {
 };
 
 kpxcEvent.onUpdateAvailableKeePassXC = async function() {
-    return (page.settings.checkUpdateKeePassXC != CHECK_UPDATE_NEVER) ? keepass.keePassXCUpdateAvailable() : false;
+    return (page.settings.checkUpdateKeePassXC !== CHECK_UPDATE_NEVER) ? keepass.keePassXCUpdateAvailable() : false;
 };
 
 kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {

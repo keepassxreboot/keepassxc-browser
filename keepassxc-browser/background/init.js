@@ -147,7 +147,7 @@ browser.commands.onCommand.addListener(async (command) => {
         || command === 'redetect_fields'
         || command === 'choose_credential_fields'
         || command === 'retrive_credentials_forced'
-        || command === 'reload_extension') {
+        || command === 'reload_extension') {
         const tabs = await browser.tabs.query({ active: true, currentWindow: true });
         if (tabs.length) {
             browser.tabs.sendMessage(tabs[0].id, { action: command });
