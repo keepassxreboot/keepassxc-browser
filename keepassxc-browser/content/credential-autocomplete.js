@@ -1,24 +1,21 @@
 'use strict';
 
 class CredentialAutocomplete extends Autocomplete {}
-CredentialAutocomplete.prototype.click = async function(e, input) {
+CredentialAutocomplete.prototype.click = async function(e) {
     if (!e.isTrusted) {
         return;
     }
 
     e.stopPropagation();
 
-    if (input.value !== '') {
-        input.select();
-    }
-
-    const field = this.autocompleteList.find(a => a === input);
+    const field = this.autocompleteList.find(a => a === e.target);
     if (field) {
-        this.showList(field);
+        await this.showList(field);
+        this.updateSearch();
     }
 };
 
-CredentialAutocomplete.prototype.itemClick = async function(e, item, input, uuid) {
+CredentialAutocomplete.prototype.itemClick = async function(e, uuid) {
     if (!e.isTrusted) {
         return;
     }
@@ -26,11 +23,10 @@ CredentialAutocomplete.prototype.itemClick = async function(e, item, input, uuid
     e.stopPropagation();
 
     const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
-    const usernameValue = item.getElementsByTagName('input')[0].value;
+    const usernameValue = e.target.getElementsByTagName('input')[0].value;
     await this.fillPassword(usernameValue, index, uuid);
 
     this.closeList();
-    input.focus();
 };
 
 CredentialAutocomplete.prototype.itemEnter = async function(index, elements) {
