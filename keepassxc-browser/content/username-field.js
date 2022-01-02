@@ -112,7 +112,7 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 
 const iconClicked = async function(field, icon) {
     if (!kpxcFields.isVisible(field)) {
-        document.body.removeChild(icon);
+        icon.parentNode.removeChild(icon);
         field.removeAttribute('kpxc-username-field');
         return;
     }
