@@ -125,7 +125,7 @@ class Autocomplete {
         const item = items[this.index];
         if (item !== undefined) {
             item.classList.add('kpxcAutocomplete-active');
-            item.scrollIntoView({ block: "nearest" });
+            item.scrollIntoView({ block: 'nearest' });
         }
     }
 
