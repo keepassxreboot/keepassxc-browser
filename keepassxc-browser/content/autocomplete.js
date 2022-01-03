@@ -22,7 +22,7 @@ class Autocomplete {
 
     }
 
-    async itemClick(e, item, input, uuid) {
+    async itemClick(e, input, uuid) {
 
     }
 
@@ -97,7 +97,7 @@ class Autocomplete {
                 item.textContent = c.label;
                 const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
                 item.append(itemInput);
-                item.addEventListener('click', e => this.itemClick(e, c.uuid));
+                item.addEventListener('click', e => this.itemClick(e, this.input, c.uuid));
 
                 // These events prevent the double hover effect if both keyboard and mouse are used
                 item.addEventListener('mousemove', e => this.mouseMove(e));

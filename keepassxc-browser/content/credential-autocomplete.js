@@ -15,7 +15,7 @@ CredentialAutocomplete.prototype.click = async function(e) {
     }
 };
 
-CredentialAutocomplete.prototype.itemClick = async function(e, uuid) {
+CredentialAutocomplete.prototype.itemClick = async function(e, input, uuid) {
     if (!e.isTrusted) {
         return;
     }
@@ -27,6 +27,7 @@ CredentialAutocomplete.prototype.itemClick = async function(e, uuid) {
     await this.fillPassword(usernameValue, index, uuid);
 
     this.closeList();
+    input.focus();
 };
 
 CredentialAutocomplete.prototype.itemEnter = async function(index, elements) {
