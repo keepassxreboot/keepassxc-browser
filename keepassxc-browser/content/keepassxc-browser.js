@@ -1111,7 +1111,7 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
             combination.form.submit();
         }
     } else {
-        (combination.password || combination.username).focus();
+        (combination.username || combination.password).focus();
     }
 };
 
