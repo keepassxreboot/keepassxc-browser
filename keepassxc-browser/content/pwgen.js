@@ -224,7 +224,7 @@ kpxcPasswordDialog.trigger = async function() {
 
 kpxcPasswordDialog.showDialog = function(field, icon) {
     if (!kpxcFields.isVisible(field)) {
-        document.body.removeChild(icon);
+        icon.parentNode.removeChild(icon);
         field.removeAttribute('kpxc-password-field');
         return;
     }

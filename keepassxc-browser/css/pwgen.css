@@ -20,6 +20,7 @@
     margin: .2em 0 .2em 0;
     padding: .4em .2em .4em .8em;
     position: relative;
+    user-select: none;
 }
 
 .kpxc-pwgen-password-row {
