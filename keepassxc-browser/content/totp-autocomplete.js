@@ -10,7 +10,7 @@ TOTPAutocomplete.prototype.click = async function(e, input) {
     this.showList(input, true);
 };
 
-TOTPAutocomplete.prototype.itemClick = async function(e, item, input, uuid) {
+TOTPAutocomplete.prototype.itemClick = async function(e, input, uuid) {
     if (!e.isTrusted) {
         return;
     }

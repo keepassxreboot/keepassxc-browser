@@ -1110,6 +1110,8 @@ kpxc.fillInCredentials = async function(combination, predefinedUsername, uuid, p
         } else if (combination.form) {
             combination.form.submit();
         }
+    } else {
+        (combination.username || combination.password).focus();
     }
 };
 
