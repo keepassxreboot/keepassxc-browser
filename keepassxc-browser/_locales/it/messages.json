@@ -24,7 +24,7 @@
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Show password generator",
+        "message": "Mostra il generatore di password",
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
@@ -56,7 +56,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings.",
+        "message": "Impossibile connettersi a KeePassXC. Verifica che l'integrazione del browser sia abilitata nelle impostazioni di KeePassXC.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -64,7 +64,7 @@
         "description": "Action canceled or denied."
     },
     "errorMessageEncrypt": {
-        "message": "Message encryption failed. Is KeePassXC running?",
+        "message": "Crittografia del messaggio non riuscita. KeePassXC è in esecuzione?",
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
@@ -104,7 +104,7 @@
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
-        "message": "Password generator icon",
+        "message": "Icona generatore di password",
         "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorPlaceholder": {
@@ -192,7 +192,7 @@
         "description": "Skip button text when choosing custom login fields."
     },
     "defineMore": {
-        "message": "Show more",
+        "message": "Mostra altro",
         "description": "More button text when choosing custom login fields."
     },
     "defineAgain": {
@@ -228,7 +228,7 @@
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
     "defineConfirmSelection": {
-        "message": "3. Confermare la selezione",
+        "message": "4. Confermare la selezione",
         "description": "Confirm a selection text when choosing custom login fields."
     },
     "defineHelpText": {
@@ -236,7 +236,7 @@
         "description": "Confirm a selection text when choosing custom login fields which contains string fields."
     },
     "defineKeyboardText": {
-        "message": "You can also use the numbers to choose the input fields from keyboard.",
+        "message": "È possibile utilizzare i numeri per scegliere i campi di input da tastiera.",
         "description": "Help text when choosing custom login fields."
     },
     "username": {
@@ -524,7 +524,7 @@
         "description": "About page header."
     },
     "optionsConfigureShortcuts": {
-        "message": " Configurare le scorciatoie",
+        "message": "Configurare le scorciatoie",
         "description": "Keyboard shortcut button and title text."
     },
     "optionsButtonSave": {
@@ -568,19 +568,19 @@
         "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
-        "message": "Default group for saving new passwords:",
+        "message": "Gruppo predefinito per salvare le nuove password:",
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Separate the group with slashes, for example: Group/ChildGroup.",
+        "message": "Separare il gruppo con delle barre, per esempio: Gruppo/Sottogruppo.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Always ask where to save new credentials",
+        "message": "Chiedi sempre dove salvare le nuove credenziali",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "When enabled, the popup shows a group listing.",
+        "message": "Quando è abilitato, il popup mostra un elenco di gruppi.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
@@ -784,7 +784,7 @@
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Le credenziali sono cancellate dalle schede in background dopo il timeout e le autorizzazioni per quelle pagine verranno richieste di nuovo. ",
+        "message": "Le credenziali sono cancellate dalle schede in background dopo il timeout e le autorizzazioni per quelle pagine verranno richieste di nuovo.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
@@ -936,11 +936,11 @@
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table below.",
+        "message": "È possibile i campi di login personalizzati salvati usando la tabella qui sotto.",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": " Se KeePassXC-Browser rileva i campo di login sbagliati è possibile specificare quelli corretti.",
+        "message": "Se KeePassXC-Browser rileva i campo di login sbagliati è possibile specificare quelli corretti.",
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
@@ -988,7 +988,7 @@
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesManualAddText": {
-        "message": "Add URL manually",
+        "message": "Aggiungere manualmente l'URL",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
@@ -1004,11 +1004,11 @@
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table below.",
+        "message": "È possibile gestire le preferenze salvate del sito usando la tabella qui sotto.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Option to ignore extension features for the page.",
+        "message": "Opzione per ignorare le funzionalità dell'estensione per la pagina.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
@@ -1032,23 +1032,23 @@
         "description": "About page text of KeePassXC version."
     },
     "optionsAboutContributors": {
-        "message": "Contributors",
+        "message": "Contributori",
         "description": "About page text of contributors."
     },
     "optionsAboutLicenses": {
-        "message": "Licenses",
+        "message": "Licenze",
         "description": "About page text of licenses."
     },
     "optionsAboutReportBugs": {
-        "message": "Report bugs",
+        "message": "Segnala bug",
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Create new issue on GitHub",
+        "message": "Crea una nuova issue su GitHub",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
-        "message": "The following debug info can be used",
+        "message": "Le seguenti informazioni di debug possono essere utilizzate",
         "description": "Debug info text."
     },
     "optionsAboutSupporters": {
@@ -1056,15 +1056,15 @@
         "description": "Supporters label text."
     },
     "optionsErrorInvalidValue": {
-        "message": "Invalid value. Please check the input.",
+        "message": "Valore non valido. Si prega di verificare l'input.",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Invalid URL. Please check the input.",
+        "message": "URL non valido. Si prega di verificare l'input.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
-        "message": "The value already exists in the list.",
+        "message": "Il valore esiste già nella lista.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
     "optionsUserInterfaceTitle": {
@@ -1092,11 +1092,11 @@
         "description": "Extension title in settings page"
     },
     "openNewTab": {
-        "message": "Opens a new tab",
+        "message": "Apre una nuova scheda",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "HTTP Basic Authentication dialog",
+        "message": "Finestra Autenticazione di base HTTP",
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
