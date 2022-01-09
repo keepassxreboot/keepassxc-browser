@@ -198,6 +198,10 @@ kpxcEvent.compareVersion = async function(tab, args = []) {
     return keepass.compareVersion(args[0], args[1]);
 };
 
+kpxcEvent.getIsKeePassXCAvailable = async function() {
+    return keepass.isKeePassXCAvailable;
+};
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -218,7 +222,7 @@ kpxcEvent.messageHandlers = {
     'get_tab_information': kpxcEvent.onGetTabInformation,
     'get_totp': keepass.getTotp,
     'init_http_auth': kpxcEvent.initHttpAuth,
-    'is_connected': keepass.getIsKeePassXCAvailable,
+    'is_connected': kpxcEvent.getIsKeePassXCAvailable,
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,

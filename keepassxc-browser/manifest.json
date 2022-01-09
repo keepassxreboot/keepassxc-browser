@@ -36,6 +36,7 @@
             "common/sites.js",
             "background/nacl.min.js",
             "background/nacl-util.min.js",
+            "background/client.js",
             "background/keepass.js",
             "background/httpauth.js",
             "background/browserAction.js",
