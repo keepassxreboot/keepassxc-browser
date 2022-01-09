@@ -134,7 +134,7 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
 
         e.stopPropagation();
         await kpxc.receiveCredentialsIfNecessary();
-        kpxc.fillFromTOTP(field);
+        kpxcFill.fillFromTOTP(field);
     });
 
     icon.addEventListener('mousedown', ev => ev.stopPropagation());

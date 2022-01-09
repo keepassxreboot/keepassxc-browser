@@ -100,7 +100,11 @@ PasswordIcon.prototype.createIcon = function(field) {
     document.body.append(wrapper);
 };
 
-
+/**
+ * @Object kpxcPasswordDialog
+ * Provides a password dialog for content scripts.
+ * TODO: To be removed when KeePassXC 2.8.0 is released. 2.7.0 already uses KeePassXC's own password generator instead.
+ */
 const kpxcPasswordDialog = {};
 kpxcPasswordDialog.created = false;
 kpxcPasswordDialog.icon = null;

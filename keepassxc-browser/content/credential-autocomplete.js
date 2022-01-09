@@ -42,7 +42,7 @@ CredentialAutocomplete.prototype.fillPassword = async function(value, index, uui
     await sendMessage('page_set_login_id', uuid);
 
     const manualFill = await sendMessage('page_get_manual_fill');
-    await kpxc.fillInCredentials(combination, value, uuid, manualFill === ManualFill.PASSWORD);
+    await kpxcFill.fillInCredentials(combination, value, uuid, manualFill === ManualFill.PASSWORD);
 };
 
 const kpxcUserAutocomplete = new CredentialAutocomplete();
