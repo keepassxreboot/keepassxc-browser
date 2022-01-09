@@ -88,6 +88,11 @@ code {
     padding-left: 0px;
 }
 
+#login-list {
+    overflow-y: auto;
+    max-height: 380px;
+}
+
 #child {
     border-top: 0px;
 }
