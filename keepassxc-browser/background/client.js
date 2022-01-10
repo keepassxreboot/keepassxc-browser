@@ -129,21 +129,20 @@ keepassClient.handleResponse = function(response, incrementedNonce, tab) {
         const res = keepassClient.decrypt(response.message, response.nonce);
         if (!res) {
             keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
-            return [ false, undefined ];
+            return undefined;
         }
 
         const message = nacl.util.encodeUTF8(res);
         const parsed = JSON.parse(message);
 
         if (keepassClient.verifyResponse(parsed, incrementedNonce)) {
-            return [ true, parsed ];
+            return parsed;
         }
     } else if (response.error && response.errorCode) {
         keepass.handleError(tab, response.errorCode, response.error);
-        return [ false, undefined ];
     }
 
-    return [ false, undefined ];
+    return undefined;
 };
 
 keepassClient.buildRequest = function(action, encrypted, nonce, clientID, triggerUnlock = false) {
@@ -161,9 +160,12 @@ keepassClient.buildRequest = function(action, encrypted, nonce, clientID, trigge
     return request;
 };
 
-keepassClient.sendMessage = async function(kpAction, messageData, nonce, enableTimeout = false, triggerUnlock = false) {
+keepassClient.sendMessage = async function(kpAction, tab, messageData, nonce, enableTimeout = false, triggerUnlock = false) {
     const request = keepassClient.buildRequest(kpAction, keepassClient.encrypt(messageData, nonce), nonce, keepass.clientID, triggerUnlock);
-    return await keepassClient.sendNativeMessage(request, enableTimeout);
+    const response = await keepassClient.sendNativeMessage(request, enableTimeout);
+
+    const incrementedNonce = keepassClient.incrementedNonce(nonce);
+    return keepassClient.handleResponse(response, incrementedNonce, tab);
 };
 
 //--------------------------------------------------------------------------

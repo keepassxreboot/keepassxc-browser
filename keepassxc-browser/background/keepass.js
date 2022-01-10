@@ -61,7 +61,7 @@ keepass.updateCredentials = async function(tab, args = []) {
 
         const kpAction = kpActions.SET_LOGIN;
         const [ dbid ] = keepass.getCryptoKey();
-        const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+        const nonce = keepassClient.getNonce();
 
         const messageData = {
             action: kpAction,
@@ -85,12 +85,11 @@ keepass.updateCredentials = async function(tab, args = []) {
             messageData.groupUuid = groupUuid;
         }
 
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
             // KeePassXC versions lower than 2.5.0 will have an empty parsed.error
             let successMessage = parsed.error;
-            if (parsed.error === 'success' || parsed.error === '') {
+            if (response.error === 'success' || response.error === '') {
                 successMessage = entryId ? 'updated' : 'created';
             }
 
@@ -124,7 +123,7 @@ keepass.retrieveCredentials = async function(tab, args = []) {
         let entries = [];
         const keys = [];
         const kpAction = kpActions.GET_LOGINS;
-        const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+        const nonce = keepassClient.getNonce();
         const [ dbid ] = keepass.getCryptoKey();
 
         for (const keyHash in keepass.keyRing) {
@@ -149,10 +148,9 @@ keepass.retrieveCredentials = async function(tab, args = []) {
             messageData.httpAuth = 'true';
         }
 
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
-            entries = removeDuplicateEntries(parsed.entries);
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
+            entries = removeDuplicateEntries(response.entries);
             keepass.updateLastUsed(keepass.databaseHash);
 
             if (entries.length === 0) {
@@ -189,7 +187,7 @@ keepass.generatePassword = async function(tab) {
 
         let password;
         const kpAction = kpActions.GENERATE_PASSWORD;
-        const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+        const nonce = keepassClient.getNonce();
 
         const messageData = {
             action: kpAction,
@@ -197,10 +195,9 @@ keepass.generatePassword = async function(tab) {
             clientID: keepass.clientID
         };
 
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
-            password = parsed.entries ?? parsed.password;
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
+            password = response.entries ?? response.password;
             keepass.updateLastUsed(keepass.databaseHash);
         } else {
             console.log(`${EXTENSION_NAME}: generatePassword rejected`);
@@ -230,7 +227,7 @@ keepass.associate = async function(tab) {
 
         const kpAction = kpActions.ASSOCIATE;
         const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
-        const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+        const nonce = keepassClient.getNonce();
         const idKeyPair = nacl.box.keyPair();
         const idKey = nacl.util.encodeBase64(idKeyPair.publicKey);
 
@@ -240,14 +237,13 @@ keepass.associate = async function(tab) {
             idKey: idKey
         };
 
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce, false, true);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce, false, true);
+        if (response) {
             // Use public key as identification key with older KeePassXC releases
             const savedKey = keepass.compareVersion('2.3.4', keepass.currentKeePassXC) ? idKey : key;
-            keepass.setCryptoKey(parsed.id, savedKey); // Save the new identification public key as id key for the database
+            keepass.setCryptoKey(response.id, savedKey); // Save the new identification public key as id key for the database
             keepass.associated.value = true;
-            keepass.associated.hash = parsed.hash || 0;
+            keepass.associated.hash = response.hash || 0;
 
             browserAction.show(tab);
             return AssociatedAction.NEW_ASSOCIATION;
@@ -290,7 +286,7 @@ keepass.testAssociation = async function(tab, args = []) {
         }
 
         const kpAction = kpActions.TEST_ASSOCIATE;
-        const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+        const nonce = keepassClient.getNonce();
         const [ dbid, dbkey ] = keepass.getCryptoKey();
 
         if (dbkey === null || dbid === null) {
@@ -306,9 +302,8 @@ keepass.testAssociation = async function(tab, args = []) {
             key: dbkey
         };
 
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce, enableTimeout);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (!res) {
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce, enableTimeout);
+        if (!response) {
             const hash = response.hash || 0;
             keepass.deleteKey(hash);
             keepass.isEncryptionKeyUnrecognized = true;
@@ -460,7 +455,7 @@ keepass.lockDatabase = async function(tab) {
     }
 
     const kpAction = kpActions.LOCK_DATABASE;
-    const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+    const nonce = keepassClient.getNonce();
 
     const messageData = {
         action: kpAction
@@ -468,9 +463,8 @@ keepass.lockDatabase = async function(tab) {
 
 
     try {
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
             keepass.isDatabaseClosed = true;
             keepass.updateDatabase();
 
@@ -506,16 +500,15 @@ keepass.getDatabaseGroups = async function(tab) {
 
         let groups = [];
         const kpAction = kpActions.GET_DATABASE_GROUPS;
-        const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+        const nonce = keepassClient.getNonce();
 
         const messageData = {
             action: kpAction
         };
 
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
-            groups = parsed.groups;
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
+            groups = response.groups;
             groups.defaultGroup = page.settings.defaultGroup;
             groups.defaultGroupAlwaysAsk = page.settings.defaultGroupAlwaysAsk;
             keepass.updateLastUsed(keepass.databaseHash);
@@ -548,18 +541,17 @@ keepass.createNewGroup = async function(tab, args = []) {
         }
 
         const kpAction = kpActions.CREATE_NEW_GROUP;
-        const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+        const nonce = keepassClient.getNonce();
 
         const messageData = {
             action: kpAction,
             groupName: groupName
         };
 
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
             keepass.updateLastUsed(keepass.databaseHash);
-            return parsed;
+            return response;
         } else {
             console.log(`${EXTENSION_NAME}: getDatabaseGroups rejected`);
         }
@@ -584,7 +576,7 @@ keepass.getTotp = async function(tab, args = []) {
     }
 
     const kpAction = kpActions.GET_TOTP;
-    const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+    const nonce = keepassClient.getNonce();
 
     const messageData = {
         action: kpAction,
@@ -592,11 +584,10 @@ keepass.getTotp = async function(tab, args = []) {
     };
 
     try {
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        if (res) {
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
             keepass.updateLastUsed(keepass.databaseHash);
-            return parsed.totp;
+            return response.totp;
         }
 
         return;
@@ -612,7 +603,7 @@ keepass.requestAutotype = async function(tab, args = []) {
     }
 
     const kpAction = kpActions.REQUEST_AUTOTYPE;
-    const [ nonce, incrementedNonce ] = keepassClient.getNonces();
+    const nonce = keepassClient.getNonce();
     const search = getTopLevelDomainFromUrl(args[0]);
 
     const messageData = {
@@ -621,9 +612,8 @@ keepass.requestAutotype = async function(tab, args = []) {
     };
 
     try {
-        const response = await keepassClient.sendMessage(kpAction, messageData, nonce);
-        const [ res, parsed ] = keepassClient.handleResponse(response, incrementedNonce, tab);
-        return res;
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        return response;
     } catch (err) {
         console.log(`${EXTENSION_NAME}: requestAutotype failed: ${err}`);
         return false;
