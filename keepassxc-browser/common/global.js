@@ -1,5 +1,7 @@
 'use strict';
 
+const EXTENSION_NAME = 'KeePassXC-Browser';
+
 // Site Preferences ignore options
 const IGNORE_NOTHING = 'ignoreNothing';
 const IGNORE_NORMAL = 'ignoreNormal';
