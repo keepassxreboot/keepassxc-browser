@@ -162,3 +162,16 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
 
     return undefined;
 };
+
+/**
+ * Handles a few exceptions for certain sites where popup fill is not working properly.
+ * @param {object} form     Form element
+ * @returns {boolean}       True if exception found
+ */
+kpxcSites.popupExceptionFound = function(combinations) {
+    if (combinations.length > 1 && combinations[0].form && combinations[0].form.action.startsWith(googleUrl)) {
+        return true;
+    }
+
+    return false;
+};

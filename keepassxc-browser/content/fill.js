@@ -106,7 +106,7 @@ kpxcFill.fillFromPopup = async function(id, uuid) {
     // For Google password field we need to do some special handling. The password field is actually in the
     // second combination that was just detected after a username fill.
     let combination = kpxc.combinations[0];
-    if (kpxc.combinations.length > 1 && kpxc.combinations[0].form && kpxc.combinations[0].form.action.startsWith(googleUrl)) {
+    if (kpxcSites.popupExceptionFound(kpxc.combinations)) {
         combination = kpxc.combinations[1];
     }
 
