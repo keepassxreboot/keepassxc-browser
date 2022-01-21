@@ -32,7 +32,6 @@ page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
-page.loginId = -1;
 page.manualFill = ManualFill.NONE;
 page.passwordFilled = false;
 page.redirectCount = 0;
@@ -265,30 +264,12 @@ page.createTabEntry = function(tabId) {
     page.tabs[tabId] = {
         credentials: [],
         errorMessage: null,
-        loginList: []
+        loginList: [],
+        loginId: -1
     };
 
     page.clearSubmittedCredentials();
     browser.contextMenus.update('fill_attribute', { visible: false });
-};
-
-page.removePageInformationFromNotExistingTabs = async function() {
-    const rand = Math.floor(Math.random() * 1001);
-    if (rand === 28) {
-        const tabs = await browser.tabs.query({});
-        const tabIds = [];
-        const infoIds = Object.keys(page.tabs);
-
-        for (const t of tabs) {
-            tabIds[t.id] = true;
-        }
-
-        for (const i of infoIds) {
-            if (!(i in tabIds)) {
-                delete page.tabs[i];
-            }
-        }
-    }
 };
 
 // Retrieves the credentials. Returns cached values when found.
@@ -315,17 +296,17 @@ page.retrieveCredentials = async function(tab, args = []) {
 
 page.getLoginId = async function(tab) {
     // If there's only one credential available and loginId is not set
-    if (page.loginId < 0
+    if (page.tabs[tab.id] && page.tabs[tab.id].loginId < 0
         && page.tabs[tab.id]
         && page.tabs[tab.id].credentials.length === 1) {
         return 0; // Index to the first credential
     }
 
-    return page.loginId;
+    return page.tabs[tab.id] ? page.tabs[tab.id].loginId : undefined;
 };
 
 page.setLoginId = async function(tab, loginId) {
-    page.loginId = loginId;
+    page.tabs[tab.id].loginId = loginId;
 };
 
 page.getManualFill = async function(tab) {
