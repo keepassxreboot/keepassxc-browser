@@ -165,7 +165,7 @@ const trimURL = function(url) {
 };
 
 const debugLogMessage = function(message, extra) {
-    console.log(`[Debug] ${EXTENSION_NAME} - ${message}`);
+    console.log(`[Debug ${getFileAndLine()}] ${EXTENSION_NAME} - ${message}`);
 
     if (extra) {
         console.log(extra);
@@ -173,5 +173,14 @@ const debugLogMessage = function(message, extra) {
 };
 
 const logError = function(message) {
-    console.log(`${EXTENSION_NAME} Error: ${message}`);
+    console.log(`[Error ${getFileAndLine()}] ${EXTENSION_NAME} - ${message}`);
+};
+
+// Returns file name and line number from error stack
+const getFileAndLine = function() {
+    const err = new Error().stack.split('\n');
+    const line = err[4] ?? err[err.length - 1];
+    const result = line.substring(line.lastIndexOf('/') + 1, line.lastIndexOf(':'));
+
+    return result;
 };
