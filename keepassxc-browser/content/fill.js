@@ -146,7 +146,7 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
 
     const user = kpxc.credentials.find(c => c.uuid === uuid);
     if (!user) {
-        logDebug('Error: No user found with uuid: ' + uuid);
+        logDebug('Error: No entry found with uuid: ' + uuid);
         return;
     }
 
