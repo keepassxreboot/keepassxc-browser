@@ -11,7 +11,7 @@
         await keepass.enableAutomaticReconnect();
         await keepass.updateDatabase();
     } catch (e) {
-        showErrorMessage('init.js failed');
+        logError('init.js failed');
     }
 })();
 
@@ -62,7 +62,7 @@ browser.tabs.onActivated.addListener(async function(activeInfo) {
             }
         }
     } catch (err) {
-        showErrorMessage(err.message);
+        logError(err.message);
     }
 });
 
@@ -135,7 +135,7 @@ for (const item of contextMenuItems) {
             browser.tabs.sendMessage(tab.id, {
                 action: item.action
             }).catch((err) => {
-                showErrorMessage(err);
+                logError(err);
             });
         }
     });

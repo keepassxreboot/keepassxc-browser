@@ -279,7 +279,7 @@ kpxc.initCombinations = async function(inputs = []) {
         }
     }
 
-    debugLog('Login field combinations identified:', combinations);
+    logDebug('Login field combinations identified:', combinations);
     return combinations;
 };
 
@@ -431,7 +431,7 @@ kpxc.passwordFilledWithExceptions = async function(currentForm) {
 // Prepares autocomplete and login popup ready for user interaction
 kpxc.prepareCredentials = async function() {
     if (kpxc.credentials.length === 0) {
-        debugLog('Error: No combination found.');
+        logDebug('Error: No combination found.');
         return;
     }
 
@@ -455,7 +455,7 @@ kpxc.prepareCredentials = async function() {
 kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue, oldCredentials, useBanner = true) {
     const credentials = (oldCredentials !== undefined && oldCredentials.length > 0) ? oldCredentials : kpxc.credentials;
     if (passwordValue === '') {
-        debugLog('Error: Empty password.');
+        logDebug('Error: Empty password.');
         return undefined;
     }
 
@@ -534,7 +534,7 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
     const type = el.getAttribute('type');
     const combination = await kpxcFields.getCombination(el, (type === 'password' ? type : 'username'));
     if (!combination) {
-        debugLog('Error: No combination found.');
+        logDebug('Error: No combination found.');
         return;
     }
 
@@ -595,7 +595,7 @@ kpxc.receiveCredentialsIfNecessary = async function() {
         // Sets triggerUnlock to true
         const credentials = await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, true ]);
         if (credentials.length === 0) {
-            debugLog('Error: No credentials found.');
+            logDebug('Error: No credentials found.');
             return [];
         }
 
@@ -706,7 +706,7 @@ kpxc.updateTOTPList = async function() {
     let uuid = await sendMessage('page_get_login_id');
     if (uuid === undefined || kpxc.credentials.length === 0) {
         // Credential haven't been selected
-        debugLog('Error: No credentials selected for TOTP.');
+        logDebug('Error: No credentials selected for TOTP.');
         return;
     }
 
@@ -740,14 +740,14 @@ const initContentScript = async function() {
     try {
         const settings = await sendMessage('load_settings');
         if (!settings) {
-            showErrorMessage('Error: Cannot load extension settings');
+            logError('Error: Cannot load extension settings');
             return;
         }
 
         kpxc.settings = settings;
 
         if (await kpxc.siteIgnored()) {
-            debugLog('This site is ignored in Site Preferences.');
+            logDebug('This site is ignored in Site Preferences.');
             return;
         }
 
@@ -777,7 +777,7 @@ const initContentScript = async function() {
             kpxc.rememberCredentials(creds.username, creds.password, creds.url, creds.oldCredentials);
         }
     } catch (err) {
-        showErrorMessage('initContentScript error: ' + err);
+        logError('initContentScript error: ' + err);
     }
 };
 
@@ -792,7 +792,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
     if ('action' in req) {
         // Don't allow any actions if the site is ignored
         if (await kpxc.siteIgnored()) {
-            debugLog('This site is ignored in Site Preferences.');
+            logDebug('This site is ignored in Site Preferences.');
             return;
         }
 

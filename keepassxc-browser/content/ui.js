@@ -40,7 +40,7 @@ class Icon {
                 kpxcUI.updateFromIntersectionObserver(this, entries);
             });
         } catch (err) {
-            showErrorMessage(err);
+            logError(err);
         }
     }
 
@@ -210,7 +210,7 @@ kpxcUI.createNotification = function(type, message) {
         return;
     }
 
-    debugLog(message);
+    logDebug(message);
 
     const notification = kpxcUI.createElement('div', 'kpxc-notification kpxc-notification-' + type, {});
     type = type.charAt(0).toUpperCase() + type.slice(1) + '!';
@@ -274,9 +274,9 @@ const createStylesheet = function(file) {
     return stylesheet;
 };
 
-const debugLog = function(message, extra) {
+const logDebug = function(message, extra) {
     if (kpxc.settings.debugLogging) {
-        showDebugMessage(message, extra);
+        debugLogMessage(message, extra);
     }
 };
 
@@ -340,7 +340,7 @@ Element.prototype.attachShadow = function () {
     try {
         return this._attachShadow({ mode: 'closed' });
     } catch (e) {
-        showErrorMessage(e);
+        logError(e);
     }
 };
 
