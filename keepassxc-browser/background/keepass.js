@@ -98,7 +98,7 @@ keepass.updateCredentials = async function(tab, args = []) {
             return 'error';
         }
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: updateCredentials failed: ${err}`);
+        showErrorMessage(`updateCredentials failed: ${err}`);
         return [];
     }
 };
@@ -158,13 +158,14 @@ keepass.retrieveCredentials = async function(tab, args = []) {
                 browserAction.showDefault(tab);
             }
 
+            debugLog(`Found ${entries.length} entries for url ${url}`);
             return entries;
         }
 
         browserAction.showDefault(tab);
         return [];
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: retrieveCredentials failed: ${err}`);
+        showErrorMessage(`retrieveCredentials failed: ${err}`);
         return [];
     }
 };
@@ -200,12 +201,12 @@ keepass.generatePassword = async function(tab) {
             password = response.entries ?? response.password;
             keepass.updateLastUsed(keepass.databaseHash);
         } else {
-            console.log(`${EXTENSION_NAME}: generatePassword rejected`);
+            showErrorMessage('generatePassword rejected');
         }
 
         return password;
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: generatePassword failed: ${err}`);
+        showErrorMessage(`generatePassword failed: ${err}`);
         return [];
     }
 };
@@ -252,7 +253,7 @@ keepass.associate = async function(tab) {
         keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
         return AssociatedAction.NOT_ASSOCIATED;
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: associate failed: ${err}`);
+        showErrorMessage(`associate failed: ${err}`);
     }
 
     return AssociatedAction.NOT_ASSOCIATED;
@@ -321,7 +322,7 @@ keepass.testAssociation = async function(tab, args = []) {
 
         return keepass.isAssociated();
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: testAssociation failed: ${err}`);
+        showErrorMessage(`testAssociation failed: ${err}`);
         return false;
     }
 };
@@ -403,7 +404,7 @@ keepass.getDatabaseHash = async function(tab, args = []) {
         }
         return keepass.databaseHash;
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: getDatabaseHash failed: ${err}`);
+        showErrorMessage(`getDatabaseHash failed: ${err}`);
         return keepass.databaseHash;
     }
 };
@@ -443,7 +444,7 @@ keepass.changePublicKeys = async function(tab, enableTimeout = false, connection
         console.log(`${EXTENSION_NAME}: Server public key: ${nacl.util.encodeBase64(keepass.serverPublicKey)}`);
         return true;
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: changePublicKeys failed: ${err}`);
+        showErrorMessage(`changePublicKeys failed: ${err}`);
         return false;
     }
 };
@@ -477,7 +478,7 @@ keepass.lockDatabase = async function(tab) {
 
         return false;
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: lockDatabase failed: ${err}`);
+        showErrorMessage(`ockDatabase failed: ${err}`);
         return false;
     }
 };
@@ -518,7 +519,7 @@ keepass.getDatabaseGroups = async function(tab) {
         browserAction.showDefault(tab);
         return [];
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: getDatabaseGroups failed: ${err}`);
+        showErrorMessage(`getDatabaseGroups failed: ${err}`);
         return [];
     }
 };
@@ -553,13 +554,13 @@ keepass.createNewGroup = async function(tab, args = []) {
             keepass.updateLastUsed(keepass.databaseHash);
             return response;
         } else {
-            console.log(`${EXTENSION_NAME}: getDatabaseGroups rejected`);
+            showErrorMessage(`getDatabaseGroups rejected`);
         }
 
         browserAction.showDefault(tab);
         return [];
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: createNewGroup failed: ${err}`);
+        showErrorMessage(`createNewGroup failed: ${err}`);
         return [];
     }
 };
@@ -592,7 +593,7 @@ keepass.getTotp = async function(tab, args = []) {
 
         return;
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: getTotp failed: ${err}`);
+        showErrorMessage(`getTotp failed: ${err}`);
     }
 };
 
@@ -615,7 +616,7 @@ keepass.requestAutotype = async function(tab, args = []) {
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
         return response;
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: requestAutotype failed: ${err}`);
+        showErrorMessage(`requestAutotype failed: ${err}`);
         return false;
     }
 };
@@ -774,7 +775,6 @@ keepass.reconnect = async function(tab, connectionTimeout) {
 
 keepass.generateNewKeyPair = function() {
     keepass.keyPair = nacl.box.keyPair();
-    //console.log(nacl.util.encodeBase64(keepass.keyPair.publicKey) + ' ' + nacl.util.encodeBase64(keepass.keyPair.secretKey));
 };
 
 keepass.isConfigured = async function() {
@@ -833,14 +833,14 @@ keepass.checkForNewKeePassXCVersion = function() {
     };
 
     xhr.onerror = function(err) {
-        console.log(`${EXTENSION_NAME}: checkForNewKeePassXCVersion error: ${err}`);
+        showErrorMessage(`checkForNewKeePassXCVersion error: ${err}`);
     };
 
     try {
         xhr.open('GET', keepass.latestVersionUrl, true);
         xhr.send();
     } catch (ex) {
-        console.log(ex);
+        showErrorMessage(ex);
     }
     keepass.latestKeePassXC.lastChecked = new Date().valueOf();
 };
@@ -849,7 +849,7 @@ keepass.handleError = function(tab, errorCode, errorMessage = '') {
     if (errorMessage.length === 0) {
         errorMessage = kpErrors.getError(errorCode);
     }
-    console.log(`${EXTENSION_NAME}: Error ${errorCode}: ${errorMessage}`);
+    showErrorMessage(`${errorCode}: ${errorMessage}`);
     if (tab && page.tabs[tab.id]) {
         page.tabs[tab.id].errorMessage = errorMessage;
     }
@@ -884,12 +884,12 @@ keepass.updateDatabaseHashToContent = async function() {
                 hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
                 connected: keepass.isKeePassXCAvailable
             }).catch((err) => {
-                console.log(`${EXTENSION_NAME}: Error. No content script available for this tab.`);
+                showErrorMessage(`No content script available for this tab.`);
             });
             keepass.previousDatabaseHash = keepass.databaseHash;
         }
     } catch (err) {
-        console.log(`${EXTENSION_NAME}: updateDatabaseHashToContent failed: ${err}`);
+        showErrorMessage(`updateDatabaseHashToContent failed: ${err}`);
     }
 };
 

@@ -61,12 +61,14 @@ kpxcForm.getFormSubmitButton = function(form) {
         }
     }
 
+    debugLog('No form submit button found.');
     return undefined;
 };
 
 // Retrieve new password from a form with three elements: Current, New, Repeat New
 kpxcForm.getNewPassword = function(passwordInputs = []) {
     if (passwordInputs.length < 2) {
+        debugLog('Error: Not enough input fields to detect possible new password.')
         return '';
     }
 
@@ -85,12 +87,14 @@ kpxcForm.getNewPassword = function(passwordInputs = []) {
         return newPass;
     }
 
+    debugLog('Error: No valid new password found.');
     return '';
 };
 
 // Initializes form and attaches the submit button to our own callback
 kpxcForm.init = function(form, credentialFields) {
     if (!form.action || typeof form.action !== 'string') {
+        debugLog('Error: Form action is not found.');
         return;
     }
 
@@ -132,6 +136,7 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     if (!form) {
+        debugLog('Error: No form found for submit detection.');
         return;
     }
 

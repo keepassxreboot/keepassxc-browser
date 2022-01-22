@@ -163,3 +163,15 @@ function tr(key, params) {
 const trimURL = function(url) {
     return url.indexOf('?') !== -1 ? url.split('?')[0] : url;
 };
+
+const showDebugMessage = function(message, extra) {
+    console.log(`${EXTENSION_NAME} - ${message}`);
+
+    if (extra) {
+        console.log(extra);
+    }
+};
+
+const showErrorMessage = function(message) {
+    console.log(`${EXTENSION_NAME} Error: ${message}`);
+};

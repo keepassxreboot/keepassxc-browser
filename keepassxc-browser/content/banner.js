@@ -149,7 +149,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
 
     const result = await sendMessage('get_database_groups');
     if (!result || !result.groups) {
-        console.log('Error: Empty result from get_database_groups');
+        showErrorMessage('Empty result from get_database_groups');
         await saveToDefaultGroup(credentials);
         return;
     }

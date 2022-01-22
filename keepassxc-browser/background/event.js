@@ -38,14 +38,14 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
 
 kpxcEvent.onLoadSettings = async function() {
     return await page.initSettings().catch((err) => {
-        console.log('onLoadSettings error: ' + err);
+        showErrorMessage('onLoadSettings error: ' + err);
         return Promise.reject();
     });
 };
 
 kpxcEvent.onLoadKeyRing = async function() {
     const item = await browser.storage.local.get({ 'keyRing': {} }).catch((err) => {
-        console.log('kpxcEvent.onLoadKeyRing error: ' + err);
+        showErrorMessage('kpxcEvent.onLoadKeyRing error: ' + err);
         return Promise.reject();
     });
 
@@ -79,7 +79,7 @@ kpxcEvent.onGetStatus = async function(tab, args = []) {
         const configured = await keepass.isConfigured();
         return kpxcEvent.showStatus(tab, configured, internalPoll);
     } catch (err) {
-        console.log('Error: No status shown: ' + err);
+        showErrorMessage('No status shown: ' + err);
         return Promise.reject();
     }
 };
@@ -90,7 +90,7 @@ kpxcEvent.onReconnect = async function(tab) {
         browser.tabs.sendMessage(tab.id, {
             action: 'redetect_fields'
         }).catch((err) => {
-            console.log(err);
+            showErrorMessage(err);
             return;
         });
     }
@@ -103,7 +103,7 @@ kpxcEvent.lockDatabase = async function(tab) {
         await keepass.lockDatabase(tab);
         return kpxcEvent.showStatus(tab, false);
     } catch (err) {
-        console.log('kpxcEvent.lockDatabase error: ' + err);
+        showErrorMessage('kpxcEvent.lockDatabase error: ' + err);
         return false;
     }
 };

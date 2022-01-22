@@ -75,6 +75,7 @@ kpxcTOTPIcons.isValid = function(field, forced) {
             || field.placeholder.match(ignoreRegex)
             || field.readOnly
             || field.inputMode === 'email') {
+            debugLog('Error: TOTP field found but it is not valid:', field);
             return false;
         }
     } else {

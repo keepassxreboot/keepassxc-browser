@@ -153,7 +153,7 @@ page.initSettings = async function() {
         await browser.storage.local.set({ 'settings': page.settings });
         return page.settings;
     } catch (err) {
-        console.log('page.initSettings error: ' + err);
+        showErrorMessage('page.initSettings error: ' + err);
         return Promise.reject();
     }
 };
@@ -174,7 +174,7 @@ page.initOpenedTabs = async function() {
         page.currentTabId = currentTabs[0].id;
         browserAction.showDefault(currentTabs[0]);
     } catch (err) {
-        console.log('page.initOpenedTabs error: ' + err);
+        showErrorMessage('page.initOpenedTabs error: ' + err);
         return Promise.reject();
     }
 };
@@ -210,7 +210,7 @@ page.switchTab = async function(tab) {
 
     browserAction.showDefault(tab);
     browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
-        console.log('Cannot send activated_tab message: ', e);
+        showErrorMessage('Cannot send activated_tab message: ' + e.message);
     });
 };
 
@@ -377,9 +377,15 @@ const createContextMenuItem = function({action, args, ...options}) {
                 action: action,
                 args: args
             }).catch((err) => {
-                console.log(err);
+                showErrorMessage(err);
             });
         },
         ...options
     });
+};
+
+const debugLog = function(message, extra) {
+    if (page.settings.debugLogging) {
+        showDebugMessage(message, extra);
+    }
 };

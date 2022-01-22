@@ -205,7 +205,7 @@ keepassClient.verifyKeyResponse = function(response, key, nonce) {
     }
 
     if (!keepassClient.checkNonceLength(response.nonce)) {
-        console.log(`${EXTENSION_NAME}: Error. Invalid nonce length`);
+        showErrorMessage('Invalid nonce length.');
         return false;
     }
 
@@ -233,7 +233,7 @@ keepassClient.verifyResponse = function(response, nonce, id) {
 
     keepass.associated.value = (response.nonce === nonce);
     if (keepass.associated.value === false) {
-        console.log(`${EXTENSION_NAME}: Error. Nonce compare failed`);
+        showErrorMessage('Nonce compare failed');
         return false;
     }
 
@@ -252,12 +252,12 @@ keepassClient.verifyDatabaseResponse = function(response, nonce) {
     }
 
     if (!keepassClient.checkNonceLength(response.nonce)) {
-        console.log(`${EXTENSION_NAME}: Error. Invalid nonce length`);
+        showErrorMessage('Invalid nonce length.');
         return false;
     }
 
     if (response.nonce !== nonce) {
-        console.log(`${EXTENSION_NAME}: Error- Nonce compare failed`);
+        showErrorMessage('Nonce compare failed.');
         return false;
     }
 
@@ -322,12 +322,10 @@ function onDisconnected() {
     page.clearCredentials(page.currentTabId, true);
     keepass.updatePopup('cross');
     keepass.updateDatabaseHashToContent();
-    console.log(`${EXTENSION_NAME}: Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message)}`);
+    showErrorMessage(`Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message)}`);
 }
 
 keepassClient.onNativeMessage = function(response) {
-    //console.log('Received message: ' + JSON.stringify(response));
-
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.updateDatabase();

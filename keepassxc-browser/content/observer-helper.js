@@ -181,6 +181,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         }
     }
 
+    debugLog('Input fields found:', inputs);
     return inputs;
 };
 

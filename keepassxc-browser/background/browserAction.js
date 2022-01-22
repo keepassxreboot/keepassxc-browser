@@ -29,7 +29,7 @@ browserAction.showDefault = async function(tab) {
     };
 
     const response = await keepass.isConfigured().catch((err) => {
-        console.log('Error: Cannot show default popup: ' + err);
+        showErrorMessage('Cannot show default popup: ' + err);
     });
 
     if (!response && !keepass.isKeePassXCAvailable) {
