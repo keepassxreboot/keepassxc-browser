@@ -12,6 +12,7 @@ const defaultSettings = {
     clearCredentialsTimeout: 10,
     colorTheme: 'system',
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
+    debugLogging: false,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
@@ -91,6 +92,10 @@ page.initSettings = async function() {
 
         if (!('credentialSorting' in page.settings)) {
             page.settings.credentialSorting = defaultSettings.credentialSorting;
+        }
+
+        if (!('debugLogging' in page.settings)) {
+            page.settings.debugLogging = defaultSettings.debugLogging;
         }
 
         if (!('defaultGroup' in page.settings)) {
