@@ -12,6 +12,7 @@ const defaultSettings = {
     clearCredentialsTimeout: 10,
     colorTheme: 'system',
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
+    debugLogging: false,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
@@ -93,6 +94,10 @@ page.initSettings = async function() {
             page.settings.credentialSorting = defaultSettings.credentialSorting;
         }
 
+        if (!('debugLogging' in page.settings)) {
+            page.settings.debugLogging = defaultSettings.debugLogging;
+        }
+
         if (!('defaultGroup' in page.settings)) {
             page.settings.defaultGroup = defaultSettings.defaultGroup;
         }
@@ -148,7 +153,7 @@ page.initSettings = async function() {
         await browser.storage.local.set({ 'settings': page.settings });
         return page.settings;
     } catch (err) {
-        console.log('page.initSettings error: ' + err);
+        logError('page.initSettings error: ' + err);
         return Promise.reject();
     }
 };
@@ -169,7 +174,7 @@ page.initOpenedTabs = async function() {
         page.currentTabId = currentTabs[0].id;
         browserAction.showDefault(currentTabs[0]);
     } catch (err) {
-        console.log('page.initOpenedTabs error: ' + err);
+        logError('page.initOpenedTabs error: ' + err);
         return Promise.reject();
     }
 };
@@ -205,7 +210,7 @@ page.switchTab = async function(tab) {
 
     browserAction.showDefault(tab);
     browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
-        console.log('Cannot send activated_tab message: ', e);
+        logError('Cannot send activated_tab message: ' + e.message);
     });
 };
 
@@ -372,9 +377,15 @@ const createContextMenuItem = function({action, args, ...options}) {
                 action: action,
                 args: args
             }).catch((err) => {
-                console.log(err);
+                logError(err);
             });
         },
         ...options
     });
+};
+
+const logDebug = function(message, extra) {
+    if (page.settings.debugLogging) {
+        debugLogMessage(message, extra);
+    }
 };

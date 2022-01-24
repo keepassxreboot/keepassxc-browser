@@ -40,7 +40,7 @@ class Icon {
                 kpxcUI.updateFromIntersectionObserver(this, entries);
             });
         } catch (err) {
-            console.log(err);
+            logError(err);
         }
     }
 
@@ -210,6 +210,8 @@ kpxcUI.createNotification = function(type, message) {
         return;
     }
 
+    logDebug(message);
+
     const notification = kpxcUI.createElement('div', 'kpxc-notification kpxc-notification-' + type, {});
     type = type.charAt(0).toUpperCase() + type.slice(1) + '!';
 
@@ -272,6 +274,12 @@ const createStylesheet = function(file) {
     return stylesheet;
 };
 
+const logDebug = function(message, extra) {
+    if (kpxc.settings.debugLogging) {
+        debugLogMessage(message, extra);
+    }
+};
+
 // Enables dragging
 document.addEventListener('mousemove', function(e) {
     if (!kpxcUI.mouseDown) {
@@ -332,7 +340,7 @@ Element.prototype.attachShadow = function () {
     try {
         return this._attachShadow({ mode: 'closed' });
     } catch (e) {
-        console.log('Error: ', e);
+        logError(e);
     }
 };
 
