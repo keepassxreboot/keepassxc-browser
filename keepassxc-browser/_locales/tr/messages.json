@@ -1,6 +1,6 @@
 {
     "extensionDescription": {
-        "message": "Modern web tarayıcıları için KeePassXC bütünleştirmesi",
+        "message": "Modern web tarayıcıları için KeePassXC bütünleşmesi",
         "description": "Name of the extension."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -60,7 +60,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "KeePassXC bağlantısı kurulamadı. KeePassXC ayarlarından tarayıcı bütünleştirmesinin etkinleştirilmiş olduğundan emin olun.",
+        "message": "KeePassXC bağlantısı kurulamadı. KeePassXC ayarlarından tarayıcı bütünleşmesinin etkinleştirilmiş olduğundan emin olun.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -663,6 +663,14 @@
         "message": "HTTP temel kimlik doğrulama pencereleri otomatik olarak doldurulup gönderilsin.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "Hata ayıklama günlüğü",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Hata ayıklama günlüğünü etkinleştirir. Arka planda ve içerik betiklerinde ek konsol iletileri görüntülenir.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
         "message": "KeePassXC güncelleme denetimi:",
         "description": "Text above radio buttons in the settings page."
@@ -776,11 +784,11 @@
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
-        "message": "Kaydedildikten sonra favicon indirilsin",
+        "message": "Kaydedildikten sonra site simgesi indirilsin",
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Yeni kimlik doğrulama bilgileri için favicon dosyasını otomatik olarak indirir.",
+        "message": "Yeni kimlik doğrulama bilgileri için site simgesini otomatik olarak indirir.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
@@ -1068,11 +1076,11 @@
         "description": "Supporters label text."
     },
     "optionsErrorInvalidValue": {
-        "message": "Geçersiz değer. Lütfen girişi kontrol edin.",
+        "message": "Değer geçersiz. Lütfen girişi denetleyin.",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Geçersiz URL. Lütfen girişi kontrol edin.",
+        "message": "Adres geçersiz. Lütfen girişi denetleyin.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
@@ -1084,11 +1092,11 @@
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Kimlik bilgilerini doldur",
+        "message": "Kimlik bilgilerini doldurma",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Kimlik bilgilerini kaydet",
+        "message": "Kimlik bilgilerini kaydetme",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {
@@ -1108,7 +1116,7 @@
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "HTTP Temel Kimlik Doğrulama iletişim kutusu",
+        "message": "HTTP temel kimlik doğrulama penceresi",
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
