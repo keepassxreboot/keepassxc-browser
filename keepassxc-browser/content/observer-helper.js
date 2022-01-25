@@ -149,6 +149,12 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         inputFields.push(target);
     }
 
+    // Traverse children
+    const traversedChildren = kpxcObserverHelper.findInputsFromChildren(target);
+    for (const child of traversedChildren) {
+        inputFields.push(child);
+    }
+
     // Append any input fields in Shadow DOM
     if (target.shadowRoot && typeof target.shadowSelectorAll === 'function') {
         target.shadowSelectorAll('input').forEach(e => {
@@ -188,6 +194,12 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
 // Checks if the input field has already identified at page load
 kpxcObserverHelper.alreadyIdentified = function(target) {
     return kpxc.inputs.some(e => e === target);
+};
+
+kpxcObserverHelper.findInputsFromChildren = function(target) {
+    const children = [];
+    traverseChildren(target, children);
+    return children;
 };
 
 // Adds elements to a monitor array. Identifies the input fields.
@@ -269,4 +281,18 @@ kpxcObserverHelper.ignoredNode = function(target) {
     }
 
     return false;
+};
+
+// Traverses all children, including Shadow DOM elements
+const traverseChildren = function(target, children) {
+    for (const child of target.childNodes) {
+        if (child.nodeName === 'INPUT' && child.type !== 'hidden' && !child.disabled ) {
+            children.push(child);
+        }
+
+        traverseChildren(child, children);
+        if (child.shadowRoot) {
+            traverseChildren(child.shadowRoot, children);
+        }
+    }
 };
