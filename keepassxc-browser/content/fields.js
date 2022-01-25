@@ -64,6 +64,9 @@ kpxcFields.getAllCombinations = async function(inputs) {
 
 // Adds segmented TOTP fields to the combination if found
 kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
+    if (!kpxc.settings.showOTPIcon) {
+        return;
+    }
     const addTotpFieldsToCombination = function(inputFields) {
         const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password');
         if (totpInputs.length === 6) {
