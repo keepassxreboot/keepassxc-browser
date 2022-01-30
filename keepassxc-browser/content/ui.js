@@ -7,14 +7,19 @@ const MIN_INPUT_FIELD_OFFSET_WIDTH = 60;
 const MIN_OPACITY = 0.7;
 const MAX_OPACITY = 1;
 
-let notificationWrapper;
-let notificationTimeout;
+const BLUE_BUTTON = 'kpxc-button kpxc-blue-button';
+const GREEN_BUTTON = 'kpxc-button kpxc-green-button';
+const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
+const RED_BUTTON = 'kpxc-button kpxc-red-button';
 
 const DatabaseState = {
     DISCONNECTED: 0,
     LOCKED: 1,
     UNLOCKED: 2
 };
+
+let notificationWrapper;
+let notificationTimeout;
 
 // jQuery style wrapper for querySelector()
 const $ = function(elem) {
@@ -260,6 +265,12 @@ kpxcUI.createNotification = function(type, message) {
     }, 5000);
 };
 
+kpxcUI.createButton = function(color, textContent, callback) {
+    const button = kpxcUI.createElement('button', color, {}, textContent);
+    button.addEventListener('click', callback);
+    return button;
+};
+
 const DOMRectToArray = function(domRect) {
     return [ domRect.bottom, domRect.height, domRect.left, domRect.right, domRect.top, domRect.width, domRect.x, domRect.y ];
 };
@@ -267,8 +278,11 @@ const DOMRectToArray = function(domRect) {
 const initColorTheme = function(elem) {
     const colorTheme = kpxc.settings['colorTheme'];
 
-    if (colorTheme === undefined || colorTheme === 'system') {
+    if (colorTheme === undefined) {
         elem.removeAttribute('data-color-theme');
+    } else if (colorTheme === 'system') {
+        const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        elem.setAttribute('data-color-theme', theme);
     } else {
         elem.setAttribute('data-color-theme', colorTheme);
     }
@@ -302,16 +316,6 @@ document.addEventListener('mousemove', function(e) {
             kpxcPasswordDialog.dialog.style.top = Pixels(yPos);
         }
     }
-
-    if (kpxcDefine.selected === kpxcDefine.dialog) {
-        const xPos = e.clientX - kpxcDefine.diffX;
-        const yPos = e.clientY - kpxcDefine.diffY;
-
-        if (kpxcDefine.selected && kpxcDefine.dialog) {
-            kpxcDefine.dialog.style.left = Pixels(xPos);
-            kpxcDefine.dialog.style.top = Pixels(yPos);
-        }
-    }
 });
 
 document.addEventListener('mousedown', function(e) {
@@ -328,7 +332,6 @@ document.addEventListener('mouseup', function(e) {
     }
 
     kpxcPasswordDialog.selected = null;
-    kpxcDefine.selected = null;
     kpxcUI.mouseDown = false;
 });
 

@@ -47,9 +47,10 @@
 }
 
 .kpxc-button:disabled {
-    border-color: #ccc !important;
+    background-color: #777777 !important;
+    border-color: #444444 !important;
 }
 
 .kpxc-button:disabled:hover {
-    background-color: #fff !important;
+    background-color: #777777 !important;
 }

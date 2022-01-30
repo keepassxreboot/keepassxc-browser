@@ -279,6 +279,11 @@ kpxc.initCombinations = async function(inputs = []) {
         }
     }
 
+    // Update the fields in Custom Login Fields banner if it's open
+    if (kpxcCustomLoginFieldsBanner.created) {
+        kpxcCustomLoginFieldsBanner.updateFieldSelections();
+    }
+
     logDebug('Login field combinations identified:', combinations);
     return combinations;
 };
@@ -803,7 +808,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'check_database_hash' && 'hash' in req) {
             kpxc.detectDatabaseChange(req);
         } else if (req.action === 'choose_credential_fields') {
-            kpxcDefine.init();
+            kpxcCustomLoginFieldsBanner.create();
         } else if (req.action === 'clear_credentials') {
             kpxc.clearAllFromPage();
         } else if (req.action === 'fill_user_pass_with_specific_login') {

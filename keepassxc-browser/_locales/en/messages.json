@@ -211,9 +211,9 @@
         "message": "Login fields for this page are already selected and will be overwritten.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Discard selection",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Clear saved data",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
         "message": "String field #",
@@ -231,9 +231,9 @@
         "message": "3. Choose a TOTP field",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Confirm selection",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "4. Choose String Fields or confirm",
+        "description": "Choose String Fields or confirm a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "Please confirm your selection or choose more fields as String fields.",
@@ -243,6 +243,10 @@
         "message": "You can also use the numbers to choose the input fields from keyboard.",
         "description": "Help text when choosing custom login fields."
     },
+    "definePickOneInfoText": {
+      "message": "Choose a single selection:",
+      "description": "Help text for single pick buttons."
+  },
     "username": {
         "message": "Username",
         "description": "General text for username."
@@ -250,6 +254,10 @@
     "password": {
         "message": "Password",
         "description": "General text for password."
+    },
+    "stringFields": {
+      "message": "String Fields",
+      "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- no username -",

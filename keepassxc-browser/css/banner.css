@@ -64,10 +64,31 @@ div.kpxc-banner .kpxc-banner-icon-moz {
     background-size: contain;
 }
 
+div.kpxc-banner .kpxc-help-icon {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/help.svg') right no-repeat;
+    background-size: contain;
+}
+
+div.kpxc-banner .kpxc-help-icon-moz {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    background: url('moz-extension://__MSG_@@extension_id__/icons/help.svg') right no-repeat;
+    background-size: contain;
+}
+
 .kpxc-separator {
     border-left: 1px solid #ccc;
     height: 100% !important;
     margin: 10px !important;
+}
+
+.kpxc-pick-info-text {
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 div.kpxc-banner .kpxc-checkbox {
@@ -141,6 +162,27 @@ div.kpxc-banner-dialog .list-group-item:last-child {
 div.kpxc-banner-dialog .list-group-item:hover {
     cursor: pointer !important;
     background-color: var(--kpxc-table-hover-color) !important;
+}
+
+div.kpxc-banner-keyboardHelp {
+    background-color: var(--kpxc-background-color) !important;
+    border: var(--kpxc-container-border) !important;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
+    box-sizing: border-box !important;
+    color: var(--kpxc-text-color) !important;
+    font-size: 1em;
+    line-height: 1.8em;
+    padding: 8px;
+    position: absolute;
+}
+
+div.kpxc-banner-keyboardHelp kbd {
+    background-color: #eee !important;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    color: #333;
+    padding: 2px 4px;
+    white-space: nowrap;
 }
 
 @media (prefers-color-scheme: dark) {
