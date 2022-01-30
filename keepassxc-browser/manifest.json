@@ -59,7 +59,6 @@
                 "content/autocomplete.js",
                 "content/credential-autocomplete.js",
                 "content/custom-fields-banner.js",
-                "content/define.js",
                 "content/fields.js",
                 "content/fill.js",
                 "content/form.js",
