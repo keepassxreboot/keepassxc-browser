@@ -1,5 +1,10 @@
-.kpxcAutocomplete-items {
+#kpxcAutocomplete-container {
+    display: none;
+    z-index: 2147483646;
     position: absolute !important;
+}
+
+.kpxcAutocomplete-items {
     max-height: 250px;
     overflow-y: auto;
 }
@@ -12,7 +17,7 @@
     border-top-width: 0px !important;
     width: auto;
     color: var(--kpxc-text-color);
-    font-size: .9em !important;
+    font-size: max(10px, .9em) !important;
     letter-spacing: normal !important;
     word-spacing: normal !important;
     text-rendering: auto !important;
@@ -23,19 +28,19 @@
     border-bottom-left-radius: 4px !important;
 }
 
-.kpxcAutocomplete-items footer {
+.kpxcAutocomplete-active {
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+}
+
+#kpxcAutocomplete-container footer {
     padding: 5px;
     background-color: #ddd;
     border: 1px solid rgba(0,0,0,.125) !important;
     width: auto;
     color: #000;
-    font-size: .8em !important;
+    font-size: max(9px, .8em) !important;
     font-style: italic;
-}
-
-.kpxcAutocomplete-active {
-    background-color: #28a745 !important;
-    color: #ffffff !important;
 }
 
 @media (prefers-color-scheme: dark) {

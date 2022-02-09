@@ -12,8 +12,10 @@ const defaultSettings = {
     clearCredentialsTimeout: 10,
     colorTheme: 'system',
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
+    debugLogging: false,
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
+    downloadFaviconAfterSave: false,
     redirectAllowance: 1,
     saveDomainOnly: true,
     showLoginFormIcon: true,
@@ -31,7 +33,6 @@ page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
-page.loginId = -1;
 page.manualFill = ManualFill.NONE;
 page.passwordFilled = false;
 page.redirectCount = 0;
@@ -93,12 +94,20 @@ page.initSettings = async function() {
             page.settings.credentialSorting = defaultSettings.credentialSorting;
         }
 
+        if (!('debugLogging' in page.settings)) {
+            page.settings.debugLogging = defaultSettings.debugLogging;
+        }
+
         if (!('defaultGroup' in page.settings)) {
             page.settings.defaultGroup = defaultSettings.defaultGroup;
         }
 
         if (!('defaultGroupAlwaysAsk' in page.settings)) {
             page.settings.defaultGroupAlwaysAsk = defaultSettings.defaultGroupAlwaysAsk;
+        }
+
+        if (!('downloadFaviconAfterSave' in page.settings)) {
+            page.settings.downloadFaviconAfterSave = defaultSettings.downloadFaviconAfterSave;
         }
 
         if (!('redirectAllowance' in page.settings)) {
@@ -144,7 +153,7 @@ page.initSettings = async function() {
         await browser.storage.local.set({ 'settings': page.settings });
         return page.settings;
     } catch (err) {
-        console.log('page.initSettings error: ' + err);
+        logError('page.initSettings error: ' + err);
         return Promise.reject();
     }
 };
@@ -165,7 +174,7 @@ page.initOpenedTabs = async function() {
         page.currentTabId = currentTabs[0].id;
         browserAction.showDefault(currentTabs[0]);
     } catch (err) {
-        console.log('page.initOpenedTabs error: ' + err);
+        logError('page.initOpenedTabs error: ' + err);
         return Promise.reject();
     }
 };
@@ -201,7 +210,7 @@ page.switchTab = async function(tab) {
 
     browserAction.showDefault(tab);
     browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
-        console.log('Cannot send activated_tab message: ', e);
+        logError('Cannot send activated_tab message: ' + e.message);
     });
 };
 
@@ -260,30 +269,12 @@ page.createTabEntry = function(tabId) {
     page.tabs[tabId] = {
         credentials: [],
         errorMessage: null,
-        loginList: []
+        loginList: [],
+        loginId: -1
     };
 
     page.clearSubmittedCredentials();
     browser.contextMenus.update('fill_attribute', { visible: false });
-};
-
-page.removePageInformationFromNotExistingTabs = async function() {
-    const rand = Math.floor(Math.random() * 1001);
-    if (rand === 28) {
-        const tabs = await browser.tabs.query({});
-        const tabIds = [];
-        const infoIds = Object.keys(page.tabs);
-
-        for (const t of tabs) {
-            tabIds[t.id] = true;
-        }
-
-        for (const i of infoIds) {
-            if (!(i in tabIds)) {
-                delete page.tabs[i];
-            }
-        }
-    }
 };
 
 // Retrieves the credentials. Returns cached values when found.
@@ -310,17 +301,17 @@ page.retrieveCredentials = async function(tab, args = []) {
 
 page.getLoginId = async function(tab) {
     // If there's only one credential available and loginId is not set
-    if (page.loginId < 0
+    if (page.tabs[tab.id] && page.tabs[tab.id].loginId < 0
         && page.tabs[tab.id]
         && page.tabs[tab.id].credentials.length === 1) {
         return 0; // Index to the first credential
     }
 
-    return page.loginId;
+    return page.tabs[tab.id] ? page.tabs[tab.id].loginId : undefined;
 };
 
 page.setLoginId = async function(tab, loginId) {
-    page.loginId = loginId;
+    page.tabs[tab.id].loginId = loginId;
 };
 
 page.getManualFill = async function(tab) {
@@ -386,9 +377,15 @@ const createContextMenuItem = function({action, args, ...options}) {
                 action: action,
                 args: args
             }).catch((err) => {
-                console.log(err);
+                logError(err);
             });
         },
         ...options
     });
+};
+
+const logDebug = function(message, extra) {
+    if (page.settings.debugLogging) {
+        debugLogMessage(message, extra);
+    }
 };

@@ -231,7 +231,7 @@ Response message data (success, decrypted):
 ```
 
 ### set-login
-Unencrypted message:
+Unencrypted message (downloadFavicon supported in KeePassXC 2.7.0 and later, but not when updating credentials):
 ```json
 {
     "action": "set-login",
@@ -243,7 +243,8 @@ Unencrypted message:
     "password": "passwd1",
     "group": "<group name>",
     "groupUuid": "<group UUID>",
-    "uuid": "<entry UUID>"
+    "uuid": "<entry UUID>",
+    "downloadFavicon": "true"
 }
 ```
 

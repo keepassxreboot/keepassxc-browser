@@ -56,13 +56,17 @@ const PREDEFINED_SITELIST = [
     'https://login.yahoo.com/*',
     'https://id.atlassian.com/*',
     'https://www.fidelity.com/*',
-    'https://twitter.com/i/flow/login'
+    'https://twitter.com/i/flow/login',
+    'https://login3.id.hp.com/*',
+    'https://secure.fnac.com/identity/server/gateway/*'
 ];
 
+const awsUrl = 'signin.aws.amazon.com';
+const ebayUrl = 'https://www.ebay.';
+const googleUrl = 'https://accounts.google.com';
+
 const kpxcSites = {};
-kpxcSites.ebayUrl = 'https://www.ebay.';
 kpxcSites.googlePasswordFormUrl = 'https://accounts.google.com/signin/v2/challenge/password';
-kpxcSites.googleUrl = 'https://accounts.google.com';
 kpxcSites.savedForm = undefined;
 
 /**
@@ -138,4 +142,50 @@ kpxcSites.expectedTOTPMaxLength = function() {
     }
 
     return MAX_TOTP_INPUT_LENGTH;
+};
+
+/**
+ * Handles a few exceptions for certain sites where form submit button is not regognized properly.
+ * @param {object} form     Form element
+ * @returns {object}        Button element
+ */
+kpxcSites.formSubmitButtonExceptionFound = function(form) {
+    if (form.action.startsWith(googleUrl)) {
+        const findDiv = $('#identifierNext, #passwordNext');
+        if (!findDiv) {
+            return undefined;
+        }
+
+        const buttons = findDiv.getElementsByTagName('button');
+        kpxcSites.savedForm = form;
+        return buttons.length > 0 ? buttons[0] : undefined;
+    } else if (form.action.startsWith(ebayUrl)) {
+        // For eBay we must return the first button.
+        for (const i of form.elements) {
+            if (i.type === 'button') {
+                return i;
+            }
+        }
+    } else if (form.action.includes(awsUrl)) {
+        // For Amazon AWS the button is outside the form.
+        const button = $('#signin_button');
+        if (button) {
+            return button;
+        }
+    }
+
+    return undefined;
+};
+
+/**
+ * Handles a few exceptions for certain sites where popup fill is not working properly.
+ * @param {object} form     Form element
+ * @returns {boolean}       True if exception found
+ */
+kpxcSites.popupExceptionFound = function(combinations) {
+    if (combinations.length > 1 && combinations[0].form && combinations[0].form.action.startsWith(googleUrl)) {
+        return true;
+    }
+
+    return false;
 };

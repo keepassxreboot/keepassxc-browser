@@ -49,7 +49,7 @@ httpAuth.handleRequestCallback = function(details, callback) {
 
 httpAuth.retrieveCredentials = async function(tabId, url, submitUrl) {
     return await keepass.retrieveCredentials(tabId, [ url, submitUrl, false, true ]).catch((err) => {
-        console.log('httpAuth.retrieveCredentials error: ' + err);
+        logError('httpAuth.retrieveCredentials error: ' + err);
         return Promise.reject();
     });
 };
@@ -93,6 +93,7 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
             kpxcEvent.onHTTPAuthPopup({ 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
         }
     } else {
+        logError('No logins found for HTTP Basic Auth.');
         reject({ cancel: false }); // No logins found
     }
 };

@@ -38,14 +38,14 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
 
 kpxcEvent.onLoadSettings = async function() {
     return await page.initSettings().catch((err) => {
-        console.log('onLoadSettings error: ' + err);
+        logError('onLoadSettings error: ' + err);
         return Promise.reject();
     });
 };
 
 kpxcEvent.onLoadKeyRing = async function() {
     const item = await browser.storage.local.get({ 'keyRing': {} }).catch((err) => {
-        console.log('kpxcEvent.onLoadKeyRing error: ' + err);
+        logError('kpxcEvent.onLoadKeyRing error: ' + err);
         return Promise.reject();
     });
 
@@ -79,7 +79,7 @@ kpxcEvent.onGetStatus = async function(tab, args = []) {
         const configured = await keepass.isConfigured();
         return kpxcEvent.showStatus(tab, configured, internalPoll);
     } catch (err) {
-        console.log('Error: No status shown: ' + err);
+        logError('No status shown: ' + err);
         return Promise.reject();
     }
 };
@@ -90,7 +90,7 @@ kpxcEvent.onReconnect = async function(tab) {
         browser.tabs.sendMessage(tab.id, {
             action: 'redetect_fields'
         }).catch((err) => {
-            console.log(err);
+            logError(err);
             return;
         });
     }
@@ -103,7 +103,7 @@ kpxcEvent.lockDatabase = async function(tab) {
         await keepass.lockDatabase(tab);
         return kpxcEvent.showStatus(tab, false);
     } catch (err) {
-        console.log('kpxcEvent.lockDatabase error: ' + err);
+        logError('kpxcEvent.lockDatabase error: ' + err);
         return false;
     }
 };
@@ -135,7 +135,7 @@ kpxcEvent.onCheckUpdateKeePassXC = async function() {
 };
 
 kpxcEvent.onUpdateAvailableKeePassXC = async function() {
-    return (page.settings.checkUpdateKeePassXC != CHECK_UPDATE_NEVER) ? keepass.keePassXCUpdateAvailable() : false;
+    return (page.settings.checkUpdateKeePassXC !== CHECK_UPDATE_NEVER) ? keepass.keePassXCUpdateAvailable() : false;
 };
 
 kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
@@ -198,6 +198,10 @@ kpxcEvent.compareVersion = async function(tab, args = []) {
     return keepass.compareVersion(args[0], args[1]);
 };
 
+kpxcEvent.getIsKeePassXCAvailable = async function() {
+    return keepass.isKeePassXCAvailable;
+};
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -218,7 +222,7 @@ kpxcEvent.messageHandlers = {
     'get_tab_information': kpxcEvent.onGetTabInformation,
     'get_totp': keepass.getTotp,
     'init_http_auth': kpxcEvent.initHttpAuth,
-    'is_connected': keepass.getIsKeePassXCAvailable,
+    'is_connected': kpxcEvent.getIsKeePassXCAvailable,
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,

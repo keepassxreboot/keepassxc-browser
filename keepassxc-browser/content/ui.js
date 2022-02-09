@@ -40,7 +40,7 @@ class Icon {
                 kpxcUI.updateFromIntersectionObserver(this, entries);
             });
         } catch (err) {
-            console.log(err);
+            logError(err);
         }
     }
 
@@ -210,6 +210,8 @@ kpxcUI.createNotification = function(type, message) {
         return;
     }
 
+    logDebug(message);
+
     const notification = kpxcUI.createElement('div', 'kpxc-notification kpxc-notification-' + type, {});
     type = type.charAt(0).toUpperCase() + type.slice(1) + '!';
 
@@ -230,6 +232,10 @@ kpxcUI.createNotification = function(type, message) {
     const styleSheet = createStylesheet('css/notification.css');
     notificationWrapper = notificationWrapper || document.createElement('div');
     this.shadowRoot = notificationWrapper.attachShadow({ mode: 'closed' });
+    if (!this.shadowRoot) {
+        return;
+    }
+
     this.shadowRoot.append(styleSheet);
     this.shadowRoot.append(notification);
     document.body.append(notificationWrapper);
@@ -266,6 +272,12 @@ const createStylesheet = function(file) {
     stylesheet.setAttribute('rel', 'stylesheet');
     stylesheet.setAttribute('href', browser.runtime.getURL(file));
     return stylesheet;
+};
+
+const logDebug = function(message, extra) {
+    if (kpxc.settings.debugLogging) {
+        debugLogMessage(message, extra);
+    }
 };
 
 // Enables dragging
@@ -325,7 +337,11 @@ Element.prototype.getLowerCaseAttribute = function(attr) {
 
 Element.prototype._attachShadow = Element.prototype.attachShadow;
 Element.prototype.attachShadow = function () {
-    return this._attachShadow({ mode: 'closed' });
+    try {
+        return this._attachShadow({ mode: 'closed' });
+    } catch (e) {
+        logError(e);
+    }
 };
 
 Object.prototype.shadowSelector = function(value) {

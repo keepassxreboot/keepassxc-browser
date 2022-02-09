@@ -48,6 +48,7 @@ kpxcBanner.create = async function(credentials = {}) {
         return;
     }
 
+    credentials.username = credentials.username.trim();
     kpxcBanner.credentials = credentials;
 
     const banner = kpxcUI.createElement('div', 'kpxc-banner', { 'id': 'container' });
@@ -148,7 +149,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
 
     const result = await sendMessage('get_database_groups');
     if (!result || !result.groups) {
-        console.log('Error: Empty result from get_database_groups');
+        logError('Empty result from get_database_groups');
         await saveToDefaultGroup(credentials);
         return;
     }

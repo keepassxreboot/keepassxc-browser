@@ -663,6 +663,14 @@
         "message": "Automatically fill in HTTP Basic Auth dialogs and submit them.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "Debug logging",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Enable debug logging. Additional console messages will be visible in both background and content scripts.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
         "message": "Check for updates of KeePassXC:",
         "description": "Text above radio buttons in the settings page."
@@ -774,6 +782,14 @@
     "optionsSaveDomainOnlyCustomLoginHelpText": {
         "message": "When saving new custom login fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Download favicon after save",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Favicon will be automatically downloaded for the new credential.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "If credentials are found for a page and the login-type is an HTTP Basic Auth request, KeePassXC-Browser tries to login automatically with the first given credentials. When multiple credentials are present, the extension popup can be used to choose the correct one. Even when this feature is enabled, it is still possible to enter HTTP Basic Auth login manually.",

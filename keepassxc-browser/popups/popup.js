@@ -109,6 +109,6 @@ $(async () => {
     statusResponse(await browser.runtime.sendMessage({
         action: 'get_status'
     }).catch((err) => {
-        console.log('Error: Could not get status: ' + err);
+        logError('Could not get status: ' + err);
     }));
 });

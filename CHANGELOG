@@ -1,3 +1,14 @@
+1.7.11 (11-12-2021)
+=========================
+- Add new Predefined Sites (FNAC, HP) [#1469]
+- Add support for download favicon after save option (KeePassXC 2.7.0 and later) [#1472]
+- Fix auto-submit with Amazon AWS [#1487]
+- Fix minimum font size with Autocomplete Menu [#1470]
+- Fix notification issues [#1496]
+- Fix translations
+- Fix username issue when saving new credentials [#1486]
+- Improve 2FA field detection [#1465]
+
 1.7.10.1 (17-11-2021)
 =========================
 - Fix interfering with mouse events [#1447]
