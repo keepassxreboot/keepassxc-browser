@@ -5,7 +5,6 @@ keepassClient.keySize = 24;
 keepassClient.messageTimeout = 500; // Milliseconds
 keepassClient.nativeHostName = 'org.keepassxc.keepassxc_browser';
 keepassClient.nativePort = null;
-keepassClient.requestIdSize = 8;
 
 const kpErrors = {
     UNKNOWN_ERROR: 0,
@@ -184,7 +183,7 @@ keepassClient.getNonce = function() {
     return nacl.util.encodeBase64(nacl.randomBytes(keepassClient.keySize));
 };
 
-// Creates a random 8-byte data for Request ID
+// Creates a random 8 character string for Request ID
 keepassClient.getRequestId = function() {
     return Math.random().toString(16).substring(2, 10);
 };
@@ -339,8 +338,6 @@ function onDisconnected() {
 }
 
 keepassClient.onNativeMessage = function(response) {
-    console.log(JSON.stringify(response));
-
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.updateDatabase();

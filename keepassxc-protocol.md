@@ -20,7 +20,7 @@ Encrypted messages are built with these JSON parameters:
 - message - Encrypted message, base64 encoded
 - nonce - 24 bytes long random data, base64 encoded. This is incremented to the response.
 - clientID - 24 bytes long random data, base64 encoded. This is used for a single session to identify different browsers if multiple are used with proxy application.
-- requestID (optional) - A random 8 byte alphanumeric data. Used to identify error responses. Currently used only with `generate-password`.
+- requestID (optional) - A random 8 character string. Used to identify error responses. Currently used only with `generate-password`.
 
 Currently these messages are implemented:
 - `change-public-keys`: Request for passing public keys from client to server and back.
