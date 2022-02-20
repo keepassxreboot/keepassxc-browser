@@ -184,9 +184,9 @@ keepassClient.getNonce = function() {
     return nacl.util.encodeBase64(nacl.randomBytes(keepassClient.keySize));
 };
 
-// Creates a random number for Request ID
+// Creates a random 8-byte data for Request ID
 keepassClient.getRequestId = function() {
-    return String(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+    return Math.random().toString(16).substring(2, 10);
 };
 
 keepassClient.incrementedNonce = function(nonce) {
