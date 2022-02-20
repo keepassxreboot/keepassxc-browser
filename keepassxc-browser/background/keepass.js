@@ -193,7 +193,8 @@ keepass.generatePassword = async function(tab) {
         const messageData = {
             action: kpAction,
             nonce: nonce,
-            clientID: keepass.clientID
+            clientID: keepass.clientID,
+            requestID: keepassClient.getRequestId()
         };
 
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
