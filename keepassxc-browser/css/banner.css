@@ -164,27 +164,6 @@ div.kpxc-banner-dialog .list-group-item:hover {
     background-color: var(--kpxc-table-hover-color) !important;
 }
 
-div.kpxc-banner-keyboardHelp {
-    background-color: var(--kpxc-background-color) !important;
-    border: var(--kpxc-container-border) !important;
-    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
-    box-sizing: border-box !important;
-    color: var(--kpxc-text-color) !important;
-    font-size: 1em;
-    line-height: 1.8em;
-    padding: 8px;
-    position: absolute;
-}
-
-div.kpxc-banner-keyboardHelp kbd {
-    background-color: #eee !important;
-    border-radius: 3px;
-    border: 1px solid #b4b4b4;
-    color: #333;
-    padding: 2px 4px;
-    white-space: nowrap;
-}
-
 @media (prefers-color-scheme: dark) {
     div.kpxc-banner, div.kpxc-banner-dialog {
         background-color: var(--kpxc-input-background-color) !important;

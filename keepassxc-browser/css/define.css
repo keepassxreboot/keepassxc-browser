@@ -25,12 +25,18 @@
 }
 
 .kpxcDefine-fixed-username-field {
+    border: 2px solid yellow;
+    background-color: rgba(232, 252, 3, 0.4);
+    color: #efefef;
+}
+
+.kpxcDefine-fixed-totp-field {
     border: 2px solid limegreen;
     background-color: rgba(50,205,50,0.4);
     color: #efefef;
 }
 
-.kpxcDefine-fixed-string-field, .kpxcDefine-fixed-totp-field {
+.kpxcDefine-fixed-string-field {
     border: 2px solid deepskyblue;
     background-color: rgba(30,144,255,0.4);
     color: #efefef;

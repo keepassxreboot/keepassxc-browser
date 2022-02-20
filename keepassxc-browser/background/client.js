@@ -338,6 +338,8 @@ function onDisconnected() {
 }
 
 keepassClient.onNativeMessage = function(response) {
+    console.log(JSON.stringify(response));
+
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.updateDatabase();
