@@ -3,41 +3,43 @@
 }
 
 .kpxcDefine-fixed-field {
+    align-items: center;
     background-color: rgba(239,239,239,0.4);
     border: 2px solid #efefef;
     color: #fff;
     cursor: pointer;
+    display: flex;
     font-weight: bold;
+    justify-content: center;
     position: absolute;
-    text-align: center;
     z-index: 2147483646;
 }
 
 .kpxcDefine-fixed-hover-field {
-    border: 2px solid orange;
     background-color: rgba(255,165,239,0.4);
+    border: 2px solid orange;
 }
 
 .kpxcDefine-fixed-password-field {
-    border: 2px solid red;
     background-color: rgba(255,0,0,0.4);
+    border: 2px solid red;
     color: #efefef;
 }
 
 .kpxcDefine-fixed-username-field {
-    border: 2px solid yellow;
     background-color: rgba(232, 252, 3, 0.4);
+    border: 2px solid yellow;
     color: #efefef;
 }
 
 .kpxcDefine-fixed-totp-field {
-    border: 2px solid limegreen;
     background-color: rgba(50,205,50,0.4);
+    border: 2px solid limegreen;
     color: #efefef;
 }
 
 .kpxcDefine-fixed-string-field {
-    border: 2px solid deepskyblue;
     background-color: rgba(30,144,255,0.4);
+    border: 2px solid deepskyblue;
     color: #efefef;
 }
