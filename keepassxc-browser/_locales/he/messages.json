@@ -663,6 +663,14 @@
         "message": "מילוי תיבות דו־שיח אימות HTTP בסיסי באופן אוטומטי ושיגורן.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "יומן ניפוי־תקלים",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "איפשור רישום ביומן ניפוי־תקלים. הודעות עמדת בקרה נוספות תהינה גלויות הן בתהליכי רקע והן בתסריטי הקשר.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
         "message": "בדיקת זמינות עדכוני KeePassXC:",
         "description": "Text above radio buttons in the settings page."
@@ -774,6 +782,14 @@
     "optionsSaveDomainOnlyCustomLoginHelpText": {
         "message": "בעת שמירת שדות להעדפות האתר מותאמים אישית חדשים, לשמור רק את שם המתחם במקום את מען ה־URL המלא.",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "הורדת פאביקון לאחר שמירה",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "פאביקון ירד באופו אוטומטי עבור ההרשאה החדשה.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "אם נמצאו אישורים עבור עמוד, וסוג ההתחברות הוא בקשת אימות בסיסית של HTTP, KeePassXCדפדפן־ מנסה להתחבר באופן אוטומטי עם האישורים הראשונים שניתנו. כאשר קיימים אישורים מרובים, ניתן להשתמש בהרחבה הצצה כדי לבחור את האישור הנכון. גם כאשר תכונה זו מופעלת, עדיין ניתן להזין התחברויות ל־HTTP Basic Auth באופן ידני.",
