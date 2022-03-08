@@ -46,9 +46,10 @@
     transition: all .15s;
 }
 
-.kpxc-button:disabled {
+.kpxc-button:disabled, .kpxc-gray-button {
     background-color: #777777 !important;
     border-color: #444444 !important;
+    color: #fff !important;
 }
 
 .kpxc-button:disabled:hover {
