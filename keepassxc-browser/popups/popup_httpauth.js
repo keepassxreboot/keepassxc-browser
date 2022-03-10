@@ -7,6 +7,7 @@ const getLoginData = async () => {
 };
 
 (async () => {
+    resizePopup();
     await initColorTheme();
 
     const data = await getLoginData();

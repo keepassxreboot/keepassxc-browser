@@ -1,6 +1,7 @@
 'use strict';
 
 (async () => {
+    resizePopup();
     await initColorTheme();
 
     const global = await browser.runtime.getBackgroundPage();

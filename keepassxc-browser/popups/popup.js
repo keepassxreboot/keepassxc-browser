@@ -75,6 +75,7 @@ const sendMessageToTab = async function(message) {
 };
 
 (async () => {
+    resizePopup();
     await initColorTheme();
 
     $('#connect-button').addEventListener('click', async () => {
