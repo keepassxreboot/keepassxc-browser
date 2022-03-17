@@ -760,7 +760,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Uyarı! Otomatik doldurmayı kullanmak güvenli değildir. Kullanmanın sorumluluğu size aittir.",
+        "message": "Uyarı! Otomatik doldurmayı kullanmanın güvenli olmadığını bilerek kullanın. KeePassXC-Browser, oturum açma alanlarını otomatik olarak algılamaya çalışır. Ancak bazen bu alanlar hatalı olarak algılanabilir ve hassas veriler güvenli olmayan alanlara doldurularak görülebilir.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
