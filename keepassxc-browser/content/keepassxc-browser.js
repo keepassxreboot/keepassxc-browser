@@ -788,62 +788,58 @@ if (document.readyState === 'complete' || (document.readyState !== 'loading' && 
 }
 
 // These are executed in each frame. Try/catch is for tests where browser can be undefined.
-try {
-    browser.runtime.onMessage.addListener(async function(req, sender) {
-        if ('action' in req) {
-            // Don't allow any actions if the site is ignored
-            if (await kpxc.siteIgnored()) {
-                logDebug('This site is ignored in Site Preferences.');
-                return;
-            }
-
-            if (req.action === 'activated_tab') {
-                kpxc.triggerActivatedTab();
-            } else if (req.action === 'add_username_only_option') {
-                kpxc.addToSitePreferences();
-            } else if (req.action === 'check_database_hash' && 'hash' in req) {
-                kpxc.detectDatabaseChange(req);
-            } else if (req.action === 'choose_credential_fields') {
-                kpxcDefine.init();
-            } else if (req.action === 'clear_credentials') {
-                kpxc.clearAllFromPage();
-            } else if (req.action === 'fill_user_pass_with_specific_login') {
-                kpxcFill.fillFromPopup(req.id, req.uuid);
-            } else if (req.action === 'fill_username_password') {
-                sendMessage('page_set_manual_fill', ManualFill.BOTH);
-                await kpxc.receiveCredentialsIfNecessary();
-                kpxcFill.fillInFromActiveElement();
-            } else if (req.action === 'fill_password') {
-                sendMessage('page_set_manual_fill', ManualFill.PASSWORD);
-                await kpxc.receiveCredentialsIfNecessary();
-                kpxcFill.fillInFromActiveElement(true); // passOnly to true
-            } else if (req.action === 'fill_totp') {
-                await kpxc.receiveCredentialsIfNecessary();
-                kpxcFill.fillFromTOTP();
-            } else if (req.action === 'fill_attribute' && req.args) {
-                await kpxc.receiveCredentialsIfNecessary();
-                kpxcFill.fillAttributeToActiveElementWith(req.args);
-            } else if (req.action === 'ignore_site') {
-                kpxc.ignoreSite(req.args);
-            } else if (req.action === 'redetect_fields') {
-                const response = await sendMessage('load_settings');
-                kpxc.settings = response;
-                kpxc.inputs = [];
-                kpxc.combinations = [];
-                kpxc.initCredentialFields();
-            } else if (req.action === 'reload_extension') {
-                sendMessage('reconnect');
-            } else if (req.action === 'save_credentials') {
-                kpxc.rememberCredentialsFromContextMenu();
-            } else if (req.action === 'retrive_credentials_forced') {
-                await kpxc.retrieveCredentials(true);
-            } else if (req.action === 'show_password_generator') {
-                kpxcPasswordDialog.trigger();
-            } else if (req.action === 'request_autotype') {
-                sendMessage('request_autotype', [ window.location.hostname ]);
-            }
+browser.runtime.onMessage.addListener(async function(req, sender) {
+    if ('action' in req) {
+        // Don't allow any actions if the site is ignored
+        if (await kpxc.siteIgnored()) {
+            logDebug('This site is ignored in Site Preferences.');
+            return;
         }
-    });
-} catch (e) {
-    console.log(e.message);
-}
+
+        if (req.action === 'activated_tab') {
+            kpxc.triggerActivatedTab();
+        } else if (req.action === 'add_username_only_option') {
+            kpxc.addToSitePreferences();
+        } else if (req.action === 'check_database_hash' && 'hash' in req) {
+            kpxc.detectDatabaseChange(req);
+        } else if (req.action === 'choose_credential_fields') {
+            kpxcDefine.init();
+        } else if (req.action === 'clear_credentials') {
+            kpxc.clearAllFromPage();
+        } else if (req.action === 'fill_user_pass_with_specific_login') {
+            kpxcFill.fillFromPopup(req.id, req.uuid);
+        } else if (req.action === 'fill_username_password') {
+            sendMessage('page_set_manual_fill', ManualFill.BOTH);
+            await kpxc.receiveCredentialsIfNecessary();
+            kpxcFill.fillInFromActiveElement();
+        } else if (req.action === 'fill_password') {
+            sendMessage('page_set_manual_fill', ManualFill.PASSWORD);
+            await kpxc.receiveCredentialsIfNecessary();
+            kpxcFill.fillInFromActiveElement(true); // passOnly to true
+        } else if (req.action === 'fill_totp') {
+            await kpxc.receiveCredentialsIfNecessary();
+            kpxcFill.fillFromTOTP();
+        } else if (req.action === 'fill_attribute' && req.args) {
+            await kpxc.receiveCredentialsIfNecessary();
+            kpxcFill.fillAttributeToActiveElementWith(req.args);
+        } else if (req.action === 'ignore_site') {
+            kpxc.ignoreSite(req.args);
+        } else if (req.action === 'redetect_fields') {
+            const response = await sendMessage('load_settings');
+            kpxc.settings = response;
+            kpxc.inputs = [];
+            kpxc.combinations = [];
+            kpxc.initCredentialFields();
+        } else if (req.action === 'reload_extension') {
+            sendMessage('reconnect');
+        } else if (req.action === 'save_credentials') {
+            kpxc.rememberCredentialsFromContextMenu();
+        } else if (req.action === 'retrive_credentials_forced') {
+            await kpxc.retrieveCredentials(true);
+        } else if (req.action === 'show_password_generator') {
+            kpxcPasswordDialog.trigger();
+        } else if (req.action === 'request_autotype') {
+            sendMessage('request_autotype', [ window.location.hostname ]);
+        }
+    }
+});
