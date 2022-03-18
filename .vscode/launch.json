@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Run Script: Playwright tests",
+      "request": "launch",
+      "command": "npx playwright test",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
