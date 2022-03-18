@@ -1,11 +1,11 @@
 'use script';
 
-document.getElementById('toggle').addEventListener('click', function(e) {
-    const loginForm = document.getElementById('loginForm');
+document.getElementById('toggle4').addEventListener('click', function(e) {
+    const loginForm = document.getElementById('loginForm4');
 
     if (!loginForm) {
         const dialog = document.createElement('div');
-        dialog.setAttribute('id', 'loginForm');
+        dialog.setAttribute('id', 'loginForm4');
         dialog.style.position = 'fixed';
         dialog.style.zIndex = '1002';
 
@@ -48,8 +48,6 @@ document.getElementById('toggle').addEventListener('click', function(e) {
         wrapper.append(innerDiv);
         dialog.append(wrapper);
 
-        document.body.appendChild(dialog);
-    } else {
-        document.body.removeChild(loginForm);
+        e.currentTarget.parentElement.appendChild(dialog);
     }
 });

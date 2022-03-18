@@ -1,6 +1,6 @@
 'use strict';
 
-const { chromium, test, expect } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 const fileUrl = require('file-url');
 
 const DEST = 'keepassxc-browser/tests';

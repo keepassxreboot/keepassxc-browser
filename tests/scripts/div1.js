@@ -1,7 +1,7 @@
 'use script';
 
-document.getElementById('toggle').addEventListener('click', function(e) {
-    const loginForm = document.getElementById('loginForm');
+document.getElementById('toggle1').addEventListener('click', function(e) {
+    const loginForm = document.getElementById('loginForm1');
 
     if (loginForm.style.display === 'none') {
         loginForm.style.display = 'block';

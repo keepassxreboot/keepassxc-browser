@@ -8,7 +8,7 @@ const config = {
     },
     forbidOnly: !!process.env.CI,
     globalSetup: require.resolve('./tests/global-setup'),
-    //globalTeardown: require.resolve('./tests/global-teardown'),
+    globalTeardown: require.resolve('./tests/global-teardown'),
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
     reporter: 'list',
@@ -23,12 +23,12 @@ const config = {
             ...devices['Desktop Chrome'],
             },
         },
-        /*{
+        {
             name: 'firefox',
             use: {
             ...devices['Desktop Firefox'],
             },
-        },*/
+        },
     ],
 };
 

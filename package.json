@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "node build.js",
-    "tests": "npx playwright test"
+    "tests": "npx playwright test tests/tests.js"
   },
   "repository": {
     "type": "git",

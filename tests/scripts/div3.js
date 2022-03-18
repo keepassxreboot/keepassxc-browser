@@ -1,6 +1,6 @@
 'use script';
 
-document.getElementById('toggle').addEventListener('click', function(e) {
+document.getElementById('toggle3').addEventListener('click', function(e) {
     const loginForm = document.getElementById('loginForm');
 
     if (!loginForm) {
@@ -19,8 +19,6 @@ document.getElementById('toggle').addEventListener('click', function(e) {
         passwordInput.setAttribute('placeholder', 'password');
         dialog.append(passwordInput);
 
-        document.body.appendChild(dialog);
-    } else {
-        document.body.removeChild(loginForm);
+        e.currentTarget.parentElement.appendChild(dialog);
     }
 });
