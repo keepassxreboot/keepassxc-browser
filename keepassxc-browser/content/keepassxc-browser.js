@@ -787,7 +787,7 @@ if (document.readyState === 'complete' || (document.readyState !== 'loading' && 
     document.addEventListener('DOMContentLoaded', initContentScript);
 }
 
-// These are executed in each frame. Try/catch is for tests where browser can be undefined.
+// These are executed in each frame
 browser.runtime.onMessage.addListener(async function(req, sender) {
     if ('action' in req) {
         // Don't allow any actions if the site is ignored
