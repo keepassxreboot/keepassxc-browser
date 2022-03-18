@@ -30,6 +30,7 @@ const config = {
             },
         },
     ],
+    testMatch: 'content-script-tests.js',
 };
 
 module.exports = config;
