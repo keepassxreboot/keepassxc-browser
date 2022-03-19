@@ -60,13 +60,14 @@
         filter.focus();
     }
 
-    $('#lock-database-button').click((e) => {
+    $('#lock-database-button').addEventListener('click', (e) => {
         browser.runtime.sendMessage({
             action: 'lock_database'
         });
+
         $('#credentialsList').hide();
         $('#database-not-opened').show();
-        $('#database-error-message').html(tr('errorMessageDatabaseNotOpened'));
+        $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
     });
 
     $('#reopen-database-button').click((e) => {

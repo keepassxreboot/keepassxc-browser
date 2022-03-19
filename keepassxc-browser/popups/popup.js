@@ -102,7 +102,7 @@ const sendMessageToTab = async function(message) {
         }));
     });
 
-    $('#lock-database-button').click(async () => {
+    $('#lock-database-button').addEventListener('click', async () => {
         statusResponse(await browser.runtime.sendMessage({
             action: 'lock_database'
         }));

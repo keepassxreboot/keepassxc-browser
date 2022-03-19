@@ -4,14 +4,6 @@ const $ = function(elem) {
     return document.querySelector(elem);
 };
 
-HTMLDivElement.prototype.show = function() {
-    this.style.display = 'block';
-};
-
-HTMLDivElement.prototype.hide = function() {
-    this.style.display = 'none';
-};
-
 function updateAvailableResponse(available) {
     if (available) {
         $('#update-available').show();
