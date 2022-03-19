@@ -15,10 +15,16 @@ const getLoginData = async () => {
         const a = document.createElement('a');
         a.setAttribute('class', 'list-group-item');
         a.textContent = data.logins[i].login + ' (' + data.logins[i].name + ')';
-        $(a).data('creds', data.logins[i]);
-        $(a).click(function() {
+        a.setAttribute('id', '' + i);
+
+        a.addEventListener('click', (e) => {
+            if (!e.isTrusted) {
+                return;
+            }
+
             if (data.resolve) {
-                const creds = $(this).data('creds');
+                const id = e.target.id;
+                const creds = data.logins[Number(id)];
                 data.resolve({
                     authCredentials: {
                         username: creds.login,
@@ -31,13 +37,18 @@ const getLoginData = async () => {
         ll.appendChild(a);
     }
 
-    $('#lock-database-button').click(function() {
+    $('#lock-database-button').addEventListener('click', function() {
         browser.runtime.sendMessage({
             action: 'lock_database'
-        }).then(statusResponse);
+        });
+
+        $('.credentials').hide();
+        $('#btn-dismiss').hide();
+        $('#database-not-opened').show();
+        $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
     });
 
-    $('#btn-dismiss').click(async () => {
+    $('#btn-dismiss').addEventListener('click', async () => {
         const loginData = await getLoginData();
         // Using reject won't work with every browser. So return empty credentials instead.
         if (loginData.resolve) {
