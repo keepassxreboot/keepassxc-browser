@@ -4,21 +4,19 @@
   "description": "KeePassXC-Browser",
   "main": "build.js",
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "@playwright/test": "^1.20.0",
+    "eslint": "^8.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.24.2",
-    "mocha": "^8.4.0",
-    "zip-a-folder": "0.0.12"
+    "eslint-plugin-import": "^2.24.2"
   },
   "dependencies": {
     "file-url": "^3.0.0",
     "fs-extra": "^8.1.0",
-    "selenium-webdriver": "^3.6.0",
-    "soft-assert": "^0.2.6"
+    "zip-a-folder": "0.0.12"
   },
   "scripts": {
     "build": "node build.js",
-    "tests": "./node_modules/mocha/bin/mocha run_tests.js"
+    "tests": "npx playwright test"
   },
   "repository": {
     "type": "git",
