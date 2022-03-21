@@ -843,3 +843,19 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         }
     }
 });
+
+// Webauthn
+const webauthn = document.createElement('script');
+webauthn.src = browser.runtime.getURL('content/webauthn.js');
+document.documentElement.appendChild(webauthn);
+
+window.addEventListener('message', (ev) => {
+    if (ev.data.action === 'webauthn-create') {
+        console.log('Request from: ', ev.origin);
+
+        // Send a test response after a delay
+        setInterval(() => {
+            window.postMessage({ action: 'webauthn-create-response' }, window.location.origin);
+        }, 2000);
+    }
+});

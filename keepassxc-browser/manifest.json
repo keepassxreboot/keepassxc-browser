@@ -136,7 +136,8 @@
         "css/notification.css",
         "css/pwgen.css",
         "css/username.css",
-        "css/totp.css"
+        "css/totp.css",
+        "content/webauthn.js"
     ],
     "permissions": [
         "activeTab",
