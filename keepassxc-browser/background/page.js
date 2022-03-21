@@ -18,7 +18,9 @@ const defaultSettings = {
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
-    redirectAllowance: 3,
+    passkeys: false,
+    passkeysFallback: true,
+    redirectAllowance: 1,
     saveDomainOnly: true,
     showGettingStartedGuideAlert: true,
     showTroubleshootingGuideAlert: true,
@@ -29,7 +31,7 @@ const defaultSettings = {
     showOTPIcon: true,
     useObserver: true,
     usePredefinedSites: true,
-    usePasswordGeneratorIcons: false
+    usePasswordGeneratorIcons: false,
 };
 
 const AUTO_SUBMIT_TIMEOUT = 5000;

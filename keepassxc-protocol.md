@@ -23,65 +23,22 @@ Encrypted messages are built with these JSON parameters:
 - requestID (optional) - A random 8 character string. Used to identify error responses. Currently used only with `generate-password`.
 
 Currently these messages are implemented:
-- `change-public-keys`: Request for passing public keys from client to server and back.
-- `get-databasehash`: Request for receiving the database hash (SHA256) of the current active database.
 - `associate`: Request for associating a new client with KeePassXC.
-- `test-associate`: Request for testing if the client has been associated with KeePassXC.
-- `generate-password`: Request for generating a password. KeePassXC's settings are used.
-- `get-logins`: Requests for receiving credentials for the current URL match.
-- `set-login`: Request for adding or updating credentials to the database.
-- `lock-database`: Request for locking the database from client.
+- `change-public-keys`: Request for passing public keys from client to server and back.
+- `create-new-group`: Request for creating a new group to database.
 - `database-locked`: A signal from KeePassXC, the current active database is locked.
 - `database-unlocked`: A signal from KeePassXC, the current active database is unlocked.
+- `generate-password`: Request for generating a password. KeePassXC's settings are used.
+- `get-database-groups`: Returns all groups from the active database.
+- `get-databasehash`: Request for receiving the database hash (SHA256) of the current active database.
+- `get-logins`: Requests for receiving credentials for the current URL match.
 - `get-totp`: Request for receiving the current TOTP.
-
-### change-public-keys
-Request:
-```json
-{
-    "action": "change-public-keys",
-    "publicKey": "<client public key>",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "clientID": "<clientID>"
-}
-```
-
-Response (success):
-```json
-{
-    "action": "change-public-keys",
-    "version": "2.7.0",
-    "publicKey": "<host public key>",
-    "success": "true"
-}
-```
-
-### get-databasehash
-Unencrypted message:
-```json
-{
-    "action": "get-databasehash"
-}
-```
-
-Request:
-```json
-{
-    "action": "get-databasehash",
-    "message": "<encrypted message>",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "clientID": "<clientID>"
-}
-```
-
-Response message data (success, decrypted):
-```json
-{
-    "action": "hash",
-    "hash": "29234e32274a32276e25666a42",
-    "version": "2.2.0"
-}
-```
+- `lock-database`: Request for locking the database from client.
+- `passkeys-get`: Request for Passkeys authentication.
+- `passkeys-register`: Request for Passkeys credential registration.
+- `request-autotype`: Performs Global Auto-Type.
+- `set-login`: Request for adding or updating credentials to the database.
+- `test-associate`: Request for testing if the client has been associated with KeePassXC.
 
 ### associate
 Unencrypted message:
@@ -114,20 +71,40 @@ Response message data (success, decrypted):
 }
 ```
 
-### test-associate
+### change-public-keys
+Request:
+```json
+{
+    "action": "change-public-keys",
+    "publicKey": "<client public key>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
+}
+```
+
+Response (success):
+```json
+{
+    "action": "change-public-keys",
+    "version": "2.7.0",
+    "publicKey": "<host public key>",
+    "success": "true"
+}
+```
+
+### create-new-group
 Unencrypted message:
 ```json
 {
-    "action": "test-associate",
-    "id": "<saved database identifier received from associate>",
-    "key": "<saved identification public key>"
+    "action": "create-new-group",
+    "groupName": "<group name or path>"
 }
 ```
 
 Request:
 ```json
 {
-    "action": "test-associate",
+    "action": "create-new-group",
     "message": "<encrypted message>",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "clientID": "<clientID>"
@@ -137,11 +114,8 @@ Request:
 Response message data (success, decrypted):
 ```json
 {
-    "version": "2.7.0",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "hash": "29234e32274a32276e25666a42",
-    "id": "testclient",
-    "success": "true"
+    "name": "<group name>",
+    "uuid": "<group UUID>"
 }
 ```
 
@@ -172,126 +146,6 @@ Response message data (success, decrypted, KeePassXC 2.7.0 and later):
     "version": "2.7.0",
     "password": "thePassword",
     "success": "true",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
-}
-```
-
-### get-logins
-Unencrypted message:
-```json
-{
-    "action": "get-logins",
-    "url": "<snip>",
-    "submitUrl": "<optional>",
-    "httpAuth": "<optional>",
-    "keys": [
-        {
-            "id": "<saved database identifier received from associate>",
-            "key": "<saved identification public key>"
-        },
-        ...
-    ]
-}
-```
-
-Request:
-```json
-{
-    "action": "get-logins",
-    "message": "<encrypted message>",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "clientID": "<clientID>"
-}
-```
-
-Response message data (success, decrypted):
-```json
-{
-    "count": "2",
-    "entries" : [
-    {
-        "login": "user1",
-        "name": "user1",
-        "password": "passwd1"
-    },
-    {
-        "login": "user2",
-        "name": "user2",
-        "password": "passwd2",
-        "expired": "true"
-    }],
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "success": "true",
-    "hash": "29234e32274a32276e25666a42",
-    "version": "2.2.0"
-}
-```
-
-### set-login
-Unencrypted message (downloadFavicon supported in KeePassXC 2.7.0 and later, but not when updating credentials):
-```json
-{
-    "action": "set-login",
-    "url": "<snip>",
-    "submitUrl": "<snip>",
-    "id": "testclient",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "login": "user1",
-    "password": "passwd1",
-    "group": "<group name>",
-    "groupUuid": "<group UUID>",
-    "uuid": "<entry UUID>",
-    "downloadFavicon": "true"
-}
-```
-
-Request:
-```json
-{
-    "action": "set-login",
-    "message": "<encrypted message>",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "clientID": "<clientID>"
-}
-```
-
-Response message data (success, decrypted):
-```json
-{
-    "count": null,
-    "entries" : null,
-    "error": "",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "success": "true",
-    "hash": "29234e32274a32276e25666a42",
-    "version": "2.2.0"
-}
-```
-
-### lock-database
-Unencrypted message:
-```json
-{
-    "action": "lock-database"
-}
-```
-
-Request:
-```json
-{
-    "action": "lock-database",
-    "message": "<encrypted message>",
-    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "clientID": "<clientID>"
-}
-```
-
-Response message data (success always returns an error, decrypted):
-```json
-{
-    "action": "lock-database",
-    "errorCode": 1,
-    "error": "Database not opened",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```
@@ -367,19 +221,19 @@ Response message data (success, decrypted):
     ]
 }
 ```
-### create-new-group
+
+### get-databasehash
 Unencrypted message:
 ```json
 {
-    "action": "create-new-group",
-    "groupName": "<group name or path>"
+    "action": "get-databasehash"
 }
 ```
 
 Request:
 ```json
 {
-    "action": "create-new-group",
+    "action": "get-databasehash",
     "message": "<encrypted message>",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "clientID": "<clientID>"
@@ -389,8 +243,60 @@ Request:
 Response message data (success, decrypted):
 ```json
 {
-    "name": "<group name>",
-    "uuid": "<group UUID>"
+    "action": "hash",
+    "hash": "29234e32274a32276e25666a42",
+    "version": "2.2.0"
+}
+```
+
+### get-logins
+Unencrypted message:
+```json
+{
+    "action": "get-logins",
+    "url": "<snip>",
+    "submitUrl": "<optional>",
+    "httpAuth": "<optional>",
+    "keys": [
+        {
+            "id": "<saved database identifier received from associate>",
+            "key": "<saved identification public key>"
+        },
+        ...
+    ]
+}
+```
+
+Request:
+```json
+{
+    "action": "get-logins",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
+}
+```
+
+Response message data (success, decrypted):
+```json
+{
+    "count": "2",
+    "entries" : [
+    {
+        "login": "user1",
+        "name": "user1",
+        "password": "passwd1"
+    },
+    {
+        "login": "user2",
+        "name": "user2",
+        "password": "passwd2",
+        "expired": "true"
+    }],
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "success": "true",
+    "hash": "29234e32274a32276e25666a42",
+    "version": "2.2.0"
 }
 ```
 
@@ -406,9 +312,37 @@ Request (no unencrypted message is needed):
 Response message data (success, decrypted):
 ```json
 {
-    "totp": <TOTP>,
+    "totp": "<TOTP>",
     "version": "2.2.0",
     "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+}
+```
+
+### lock-database
+Unencrypted message:
+```json
+{
+    "action": "lock-database"
+}
+```
+
+Request:
+```json
+{
+    "action": "lock-database",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
+}
+```
+
+Response message data (success always returns an error, decrypted):
+```json
+{
+    "action": "lock-database",
+    "errorCode": 1,
+    "error": "Database not opened",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }
 ```
@@ -428,5 +362,155 @@ Response message data (success, decrypted):
     "version": "2.7.0",
     "success": "true",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+}
+```
+
+### set-login
+Unencrypted message (downloadFavicon supported in KeePassXC 2.7.0 and later, but not when updating credentials):
+```json
+{
+    "action": "set-login",
+    "url": "<snip>",
+    "submitUrl": "<snip>",
+    "id": "testclient",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "login": "user1",
+    "password": "passwd1",
+    "group": "<group name>",
+    "groupUuid": "<group UUID>",
+    "uuid": "<entry UUID>",
+    "downloadFavicon": "true"
+}
+```
+
+Request:
+```json
+{
+    "action": "set-login",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
+}
+```
+
+Response message data (success, decrypted):
+```json
+{
+    "count": null,
+    "entries" : null,
+    "error": "",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "success": "true",
+    "hash": "29234e32274a32276e25666a42",
+    "version": "2.2.0"
+}
+```
+
+### test-associate
+Unencrypted message:
+```json
+{
+    "action": "test-associate",
+    "id": "<saved database identifier received from associate>",
+    "key": "<saved identification public key>"
+}
+```
+
+Request:
+```json
+{
+    "action": "test-associate",
+    "message": "<encrypted message>",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "clientID": "<clientID>"
+}
+```
+
+Response message data (success, decrypted):
+```json
+{
+    "version": "2.7.0",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "hash": "29234e32274a32276e25666a42",
+    "id": "testclient",
+    "success": "true"
+}
+```
+
+### passkeys-get (decrypted, KeePassXC 2.8.0 and newer)
+Unencrypted message:
+```json
+{
+    "action": "passkeys-get",
+    "publicKey": PublicKeyCredentialRequestOptions,
+    "origin": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "keys: [
+        {
+            "id": "<saved database identifier received from associate>",
+            "key": "<saved identification public key>"
+        },
+        ...
+    ]
+}
+```
+
+Response (success, decrypted):
+```json
+{
+    "version": "2.8.0",
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "response": PublicKeyCredential
+}
+```
+
+Response (error, decrypted):
+```json
+{
+    "version": "2.8.0",
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "response": {
+        "errorCode": "<error code>"
+    }
+}
+```
+
+### passkeys-register (decrypted, KeePassXC 2.8.0 and newer)
+Unencrypted message:
+```json
+{
+    "action": "passkeys-register",
+    "publicKey": PublicKeyCredentialCreationOptions,
+    "origin": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "keys: [
+        {
+            "id": "<saved database identifier received from associate>",
+            "key": "<saved identification public key>"
+        },
+        ...
+    ]
+}
+```
+
+Response (success, decrypted):
+```json
+{
+    "version": "2.8.0",
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
+    "response": PublicKeyCredential
+}
+```
+
+Response (error, decrypted):
+```json
+{
+    "version": "2.8.0",
+    "success": "true",
+    "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "response": {
+        "errorCode": "<error code>"
+    }
 }
 ```
