@@ -123,11 +123,17 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     const size = Number(icon.getAttribute('size'));
     const offset = kpxcUI.calculateIconOffset(field, size);
     let left = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
-    const top = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
+    let top = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
 
     // Add more space for the icon to show it at the right side of the field if TOTP fields are segmented
     if (segmented) {
         left += size + 10;
+    }
+
+    const iconException = kpxcSites.iconExceptionFound(left, top, size);
+    if (iconException) {
+        left = iconException[0];
+        top = iconException[1];
     }
 
     const scrollTop = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
