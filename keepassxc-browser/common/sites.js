@@ -183,9 +183,8 @@ kpxcSites.popupExceptionFound = function(combinations) {
  * @param {number} iconSize Size of the icon
  * @returns {array}         New left and top values as an Array
  */
-kpxcSites.iconExceptionFound = function(left, top, iconSize) {
-    if (document.location.hostname.includes('idmsa.apple.com'))
-    {
+kpxcSites.iconOffset = function(left, top, iconSize) {
+    if (document.location.hostname.includes('idmsa.apple.com')) {
         return [ left - (iconSize + 10), top + 3 ];
     }
 

@@ -130,10 +130,11 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
         left += size + 10;
     }
 
-    const iconException = kpxcSites.iconExceptionFound(left, top, size);
-    if (iconException) {
-        left = iconException[0];
-        top = iconException[1];
+    // Adjusts the icon offset for certain sites
+    const iconOffset = kpxcSites.iconOffset(left, top, size);
+    if (iconOffset) {
+        left = iconOffset[0];
+        top = iconOffset[1];
     }
 
     const scrollTop = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
