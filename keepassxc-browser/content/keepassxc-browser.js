@@ -72,15 +72,21 @@ kpxc.clearAllFromPage = function() {
 };
 
 // Creates a new combination manually from active element
-kpxc.createCombination = async function(activeElement) {
+kpxc.createCombination = async function(activeElement, passOnly) {
     const combination = {
         username: null,
         password: null,
         passwordInputs: [],
-        form: activeElement.form
+        form: null
     };
 
-    if (activeElement.getLowerCaseAttribute('type') === 'password') {
+    if (!activeElement) {
+        return combination;
+    }
+
+    combination.form = activeElement.form;
+
+    if (passOnly || activeElement.getLowerCaseAttribute('type') === 'password') {
         combination.password = activeElement;
     } else {
         combination.username = activeElement;

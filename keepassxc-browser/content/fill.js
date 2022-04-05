@@ -23,6 +23,7 @@ kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
 
 // Fill requested from the context menu. Active element is used for combination detection
 kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
+    await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
         logDebug('Error: Credential list is empty.');
         return;
@@ -37,13 +38,7 @@ kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
 
     // No previous combinations detected. Create a new one from active element
     const el = document.activeElement;
-    const combination = await kpxc.createCombination(el);
-
-    // Do not allow filling password to a non-password field
-    if (passOnly && combination && !combination.password) {
-        kpxcUI.createNotification('warning', tr('fieldsNoPasswordField'));
-        return;
-    }
+    const combination = await kpxc.createCombination(el, passOnly);
 
     await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
     kpxcFill.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
