@@ -900,10 +900,15 @@ keepass.compareVersion = function(minimum, current, canBeEqual = true) {
         return false;
     }
 
-    // Handle snapshot builds as stable version
+    // Handle beta/snapshot builds as stable version
     const snapshot = '-snapshot';
+    const beta = '-beta';
     if (current.endsWith(snapshot)) {
         current = current.slice(0, -snapshot.length);
+    }
+
+    if (current.endsWith(beta)) {
+        current = current.slice(0, -beta.length);
     }
 
     const min = minimum.split('.', 3).map(s => s.padStart(4, '0')).join('.');

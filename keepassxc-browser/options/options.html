@@ -14,7 +14,6 @@
     <script src="../common/browser-polyfill.min.js"></script>
     <script src="../common/global.js"></script>
     <script src="../common/sites.js"></script>
-    <script src="../bootstrap/jquery-3.4.1.min.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="options.js"></script>
     <script src="../common/translate.js" defer></script>
@@ -36,14 +35,39 @@
           <div class="collapse d-none d-md-block" id="sidebar">
             <h1 class="text-uppercase text-white-50 d-none d-md-flex px-3 pb-4 mt-4 mb-1 ">KeePassXC-Browser</h1>
             <ul class="nav flex-column mb-2 text-uppercase">
-              <li class="active nav-item"><a class="nav-link text-light rounded-sm" href="#general-settings" tabindex="1"><i class="fa fa-ellipsis-h fa-lg pr-2" aria-hidden="true"></i><span data-i18n="optionsMenuGeneral"></span></a></li>
-              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#connected-databases" tabindex="2"><i class="fa fa-link fa-lg pr-2" aria-hidden="true"></i><span data-i18n="optionsMenuConnectedDatabases"></span></a></li>
-              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#custom-fields" tabindex="3"><i class="fa fa-sign-in fa-lg pr-2" aria-hidden="true"></i><span data-i18n="optionsMenuCustomFields"></span></a></li>
-              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#site-preferences" tabindex="4"><i class="fa fa-wrench fa-lg pr-2" aria-hidden="true"></i><span data-i18n="optionsMenuSitePreferences"></span></a></li>
-              <li class="nav-item"><a class="nav-link text-light rounded-sm" href="#about" tabindex="5"><i class="fa fa-info-circle fa-lg pr-2" aria-hidden="true"></i><span data-i18n="optionsMenuAbout"></span></a></li>
+              <li class="active nav-item">
+                <a class="nav-link text-light rounded-sm" href="#general-settings" tabindex="1">
+                  <i class="fa fa-ellipsis-h fa-lg pe-2" aria-hidden="true"></i>
+                  <span class="menu-item" data-i18n="optionsMenuGeneral"></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light rounded-sm" href="#connected-databases" tabindex="2">
+                  <i class="fa fa-link fa-lg pe-2" aria-hidden="true"></i>
+                  <span class="menu-item" data-i18n="optionsMenuConnectedDatabases"></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light rounded-sm" href="#custom-fields" tabindex="3">
+                  <i class="fa fa-sign-in fa-lg pe-2" aria-hidden="true"></i>
+                  <span class="menu-item" data-i18n="optionsMenuCustomFields"></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light rounded-sm" href="#site-preferences" tabindex="4">
+                  <i class="fa fa-wrench fa-lg pe-2" aria-hidden="true"></i>
+                  <span class="menu-item" data-i18n="optionsMenuSitePreferences"></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light rounded-sm" href="#about" tabindex="5">
+                  <i class="fa fa-info-circle fa-lg pe-2" aria-hidden="true"></i>
+                  <span class="menu-item" data-i18n="optionsMenuAbout"></span>
+                </a>
+              </li>
             </ul>
-            <footer class="d-none d-md-flex px-3 mt-4 mb-1 text-uppercase position-absolute small text-muted">
-              (C) 2017-2022 - KeePassXC Team
+            <footer class="px-3 mt-4 mb-1 text-uppercase position-absolute small text-muted">
+              © 2017-2022 - KeePassXC Team
             </footer>
           </div>
         </nav>
@@ -64,8 +88,8 @@
                 <div class="card-body">
 
                   <!-- Color theme -->
-                  <div class="form-group">
-                    <label for="colorTheme" data-i18n="optionsThemeSelectionHeader"></label>
+                  <div class="form-group col-sm-3 pb-2">
+                    <label for="colorTheme" class="form-label" data-i18n="optionsThemeSelectionHeader"></label>
                     <select class="form-control form-control-sm col-md-3 col-lg-2" id="colorTheme" data-i18n="[title]optionsThemeSelection">
                       <option value="system" data-i18n="optionsThemeSystem"></option>
                       <option value="dark" data-i18n="optionsThemeDark"></option>
@@ -78,7 +102,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showLoginFormIcon" id="usernameIconsCheckBox" value="true" />
                       <label class="form-check-label" for="usernameIconsCheckBox" data-i18n="optionsCheckboxUsernameIcons"></label>
-                      <span class="form-text text-muted" data-i18n="optionsShowLoginFormIconHelpText"></span>
+                      <div id="passwordHelpBlock" class="form-text" data-i18n="optionsShowLoginFormIconHelpText"></div>
                     </div>
                   </div>
 
@@ -87,8 +111,8 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="usePasswordGeneratorIcons" id="passwordIconsCheckBox" value="true" />
                       <label class="form-check-label" for="passwordIconsCheckBox" data-i18n="optionsCheckboxUsePasswordGenerator"></label>
-                      <span class="form-text text-muted" data-i18n="optionsUsePasswordGeneratorHelpText"></span>
-                      <span class="form-text text-muted" data-i18n="optionsUsePasswordGeneratorHelpTextSecond"></span>
+                      <div class="form-text" data-i18n="optionsUsePasswordGeneratorHelpText"></div>
+                      <div class="form-text" data-i18n="optionsUsePasswordGeneratorHelpTextSecond"></div>
                     </div>
                   </div>
 
@@ -97,7 +121,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showOTPIcon" id="totpIconsCheckBox" value="true" />
                       <label class="form-check-label" for="totpIconsCheckBox"  data-i18n="optionsCheckboxOTPIcons"></label>
-                      <span class="form-text text-muted" data-i18n="optionsShowOTPIconHelpText"></span>
+                      <div class="form-text" data-i18n="optionsShowOTPIconHelpText"></div>
                     </div>
                   </div>
 
@@ -106,7 +130,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showNotifications" id="notificationCheckBox" value="true" />
                       <label class="form-check-label" for="notificationCheckBox" data-i18n="optionsCheckboxShowNotifications"></label>
-                      <span class="form-text text-muted" data-i18n="optionsShowNotificationsHelpText"></span>
+                      <div class="form-text" data-i18n="optionsShowNotificationsHelpText"></div>
                     </div>
                   </div>
                 </div>
@@ -146,7 +170,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoRetrieveCredentials" id="autoRetrieveCredentials" value="true" />
                       <label class="form-check-label" for="autoRetrieveCredentials" data-i18n="optionsCheckboxAutoRetrieveCredentials"></label>
-                      <span class="form-text text-muted" data-i18n="optionsAutoRetrieveCredentialsHelpText"></span>
+                      <div class="form-text" data-i18n="optionsAutoRetrieveCredentialsHelpText"></div>
                     </div>
                   </div>
 
@@ -155,28 +179,27 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoCompleteUsernames" id="autoCompleteUsernames" value="true" />
                       <label class="form-check-label" for="autoCompleteUsernames" data-i18n="optionsCheckboxAutoCompleteUsernames"></label>
-                      <span class="form-text text-muted" data-i18n="optionsAutocompleteUsernamesHelpText"></span>
+                      <div class="form-text" data-i18n="optionsAutocompleteUsernamesHelpText"></div>
                     </div>
+                  </div>
+
+                  <!-- Sort credentials by -->
+                  <div class="form-group col-sm-3 pb-2">
+                    <label for="credentialSorting" class="py-2" data-i18n="optionsCredentialSortSelectionHeader"></label>
+                    <select class="form-control form-control-sm col-md-2" id="credentialSorting" data-i18n="[title]optionsCredentialSortSelection">
+                      <option value="sortByTitle" data-i18n="optionsSortByTitle"></option>
+                      <option value="sortByUsername" data-i18n="optionsSortByUsername"></option>
+                      <option value="sortByGroupAndTitle" data-i18n="optionsSortByGroupAndTitle"></option>
+                      <option value="sortByGroupAndUsername" data-i18n="optionsSortByGroupAndUsername"></option>
+                    </select>
                   </div>
 
                   <!-- Use Auto-Submit -->
                   <div class="form-group">
                     <div class="form-check">
-                      <label for="credentialSorting" data-i18n="optionsCredentialSortSelectionHeader"></label>
-                      <select class="form-control form-control-sm col-md-2" id="credentialSorting" data-i18n="[title]optionsCredentialSortSelection">
-                        <option value="sortByTitle" data-i18n="optionsSortByTitle"></option>
-                        <option value="sortByUsername" data-i18n="optionsSortByUsername"></option>
-                        <option value="sortByGroupAndTitle" data-i18n="optionsSortByGroupAndTitle"></option>
-                        <option value="sortByGroupAndUsername" data-i18n="optionsSortByGroupAndUsername"></option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoSubmit" id="autoSubmit" value="true" />
                       <label class="form-check-label" for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
-                      <span class="form-text text-muted" data-i18n="optionsAutoSubmitHelpText"></span>
+                      <div class="form-text" data-i18n="optionsAutoSubmitHelpText"></div>
                     </div>
                   </div>
 
@@ -185,7 +208,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoFillSingleEntry" id="autoFillSingleEntry" value="true" />
                       <label class="form-check-label" for="autoFillSingleEntry" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
-                      <span class="form-text text-muted" data-i18n="optionsAutoFillSingleEntryHelpText"></span>
+                      <div class="form-text" data-i18n="optionsAutoFillSingleEntryHelpText"></div>
                       <div class="alert alert-warning mt-3 col-lg-9" role="alert">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <span data-i18n="optionsAutoFillSingleEntryWarning"></span>
@@ -198,8 +221,8 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoFillAndSend" id="autoFillAndSend" value="true">
                       <label class="form-check-label" for="autoFillAndSend" data-i18n="optionsCheckboxAutoFillAndSend"></label>
-                      <span class="form-text text-muted" data-i18n="optionsAutoFillAndSendHelpText"></span>
-                      <span class="form-text text-muted" data-i18n="optionsAutoFillAndSendHelpTextSecond"></span>
+                      <div class="form-text" data-i18n="optionsAutoFillAndSendHelpText"></div>
+                      <div class="form-text" data-i18n="optionsAutoFillAndSendHelpTextSecond"></div>
                       <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog" class="img-fluid mt-2"/>
                     </div>
                   </div>
@@ -227,21 +250,19 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="defaultGroupAlwaysAsk" id="defaultGroupAlwaysAsk" value="true">
                       <label class="form-check-label" for="defaultGroupAlwaysAsk" data-i18n="optionsLabelDefaultGroupCheckboxText"></label>
-                      <span class="form-text text-muted" data-i18n="optionsLabelDefaultGroupCheckboxHelpText"></span>
+                      <div class="form-text" data-i18n="optionsLabelDefaultGroupCheckboxHelpText"></div>
                     </div>
                   </div>
 
                   <!-- Default group for saving -->
-                  <div class="form-group">
-                    <label for="defaultGroup" data-i18n="optionsLabelDefaultGroup"></label>
-                    <div class="input-group">
-                      <input class="form-control form-control-sm col-md-8 col-lg-6" type="text" id="defaultGroup" placeholder="KeePassXC-Browser Passwords">
-                      <div class="input-group-append">
-                        <button class="btn btn-sm btn-primary" type="button" id="defaultGroupButton"><i class="fa fa-save" aria-hidden="true"></i><span data-i18n="optionsButtonSave"></span></button>
-                        <button class="btn btn-sm btn-danger" type="button" id="defaultGroupButtonReset"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonReset"></span></button>
-                      </div>
-                      <span class="form-text text-muted w-100" data-i18n="optionsDefaultGroupHelpText"></span>
+                  <div class="form-group pb-2">
+                    <label for="defaultGroup" class="pb-2" data-i18n="optionsLabelDefaultGroup"></label>
+                    <div class="input-group w-75">
+                      <input class="form-control form-control-sm" type="text" id="defaultGroup" placeholder="KeePassXC-Browser Passwords">
+                      <button class="btn btn-sm btn-primary" type="button" id="defaultGroupButton"><i class="fa fa-save" aria-hidden="true"></i><span data-i18n="optionsButtonSave"></span></button>
+                      <button class="btn btn-sm btn-danger" type="button" id="defaultGroupButtonReset"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonReset"></span></button>
                     </div>
+                    <div class="form-text help-text" data-i18n="optionsDefaultGroupHelpText"></div>
                   </div>
 
                   <!-- Save domain only -->
@@ -249,7 +270,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnlyNewCreds" id="saveDomainOnlyNewCreds" value="true">
                       <label class="form-check-label" for="saveDomainOnlyNewCreds" data-i18n="optionsSaveDomainOnly"></label>
-                      <span class="form-text text-muted" data-i18n="optionsSaveDomainOnlyHelpText"></span>
+                      <div class="form-text" data-i18n="optionsSaveDomainOnlyHelpText"></div>
                     </div>
                   </div>
 
@@ -258,16 +279,16 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="downloadFaviconAfterSave" id="downloadFaviconAfterSave" value="true">
                       <label class="form-check-label" for="downloadFaviconAfterSave" data-i18n="optionsDownloadFaviconAfterSave"></label>
-                      <span class="form-text text-muted" data-i18n="optionsDownloadFaviconAfterSaveHelpText"></span>
+                      <div class="form-text" data-i18n="optionsDownloadFaviconAfterSaveHelpText"></div>
                     </div>
                   </div>
 
                   <!-- Number of allowed redirects -->
-                  <div class="form-group">
+                  <div class="form-group w-50">
                     <label id="redirectAllowanceLabel" class="font-weight-normal" for="redirectAllowance" data-i18n="optionsRedirectAllowance" i18n-placeholder="1"></label>
-                    <input type="range" class="form-control-range col-md-6 col-lg-4" id="redirectAllowance" name="redirectAllowance" min="1" max="11" step="1" value="1" />
+                    <input type="range" class="form-range" id="redirectAllowance" name="redirectAllowance" min="1" max="11" step="1" value="1" />
+                    <div class="form-text help-text" data-i18n="optionsRedirectAllowanceHelpText"></div>
                   </div>
-                  <span class="form-text text-muted" data-i18n="optionsRedirectAllowanceHelpText"></span>
                 </div>
               </div>
 
@@ -327,7 +348,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="useObserver" id="useObserver" value="true" />
                       <label class="form-check-label" for="useObserver" data-i18n="optionsUseObserver"></label>
-                      <span class="form-text text-muted" data-i18n="optionsUseObserverHelpText"></span>
+                      <div class="form-text" data-i18n="optionsUseObserverHelpText"></div>
                     </div>
                   </div>
 
@@ -336,7 +357,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showGroupNameInAutocomplete" id="showGroupNameInAutocomplete" value="true" />
                       <label class="form-check-label" for="showGroupNameInAutocomplete" data-i18n="optionsCheckboxShowGroupNameInAutocomplete"></label>
-                      <span class="form-text text-muted" data-i18n="optionsShowGroupNameInAutocompleteHelpText"></span>
+                      <div class="form-text" data-i18n="optionsShowGroupNameInAutocompleteHelpText"></div>
                       <div class="alert alert-info mt-3 col-lg-9" role="alert" id="versionRequiredAlert">
                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         <span data-i18n="optionsKeePassXCVersionRequired" i18n-placeholder="2.6.0"></span>
@@ -349,7 +370,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoReconnect" id="autoReconnect" value="true" />
                       <label class="form-check-label" for="autoReconnect" data-i18n="optionsCheckboxAutomaticReconnect"></label>
-                      <span class="form-text text-muted" data-i18n="optionsAutomaticReconnectHelpText"></span>
+                      <div class="form-text" data-i18n="optionsAutomaticReconnectHelpText"></div>
                       <div class="alert alert-warning mt-3 col-lg-9" role="alert">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <span data-i18n="optionsAutomaticReconnectWarning"></span>
@@ -362,7 +383,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnly" id="saveDomainOnly" value="true" />
                       <label class="form-check-label" for="saveDomainOnly" data-i18n="optionsSaveDomainOnly"></label>
-                      <span class="form-text text-muted" data-i18n="optionsSaveDomainOnlyCustomLoginHelpText"></span>
+                      <div class="form-text" data-i18n="optionsSaveDomainOnlyCustomLoginHelpText"></div>
                     </div>
                   </div>
 
@@ -371,7 +392,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="usePredefinedSites" id="usePredefinedSites" value="true" />
                       <label class="form-check-label" for="usePredefinedSites" data-i18n="optionsUsePredefinedSites"></label>
-                      <span class="form-text text-muted" data-i18n="optionsUsePredefinedSitesHelpText"></span>
+                      <div class="form-text" data-i18n="optionsUsePredefinedSitesHelpText"></div>
                       <details id="predefinedSiteList">
                         <summary><span data-i18n="optionsPredefinedSiteList"></span></summary>
                       </details>
@@ -380,11 +401,11 @@
 
                   <!-- Clear credential timeout -->
                   <div class="form-group">
-                    <form>
+                    <form class="pt-2">
                       <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
-                      <div class="form-check">
+                      <div class="form-check py-2">
                         <input class="form-input" type="number" id="clearCredentialTimeout" min="0" max="3600" required/>
-                        <span class="form-text text-muted" data-i18n="optionsClearCredentialsTimeoutHelpText"></span>
+                        <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
                       </div>
                     </form>
                   </div>
@@ -394,7 +415,7 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="debugLogging" id="debugLogging" value="false" />
                       <label class="form-check-label" for="debugLogging" data-i18n="optionsDebugLogging"></label>
-                      <span class="form-text text-muted" data-i18n="optionsDebugLoggingHelpText"></span>
+                      <div class="form-text" data-i18n="optionsDebugLoggingHelpText"></div>
                     </div>
                   </div>
                 </div>
@@ -420,14 +441,14 @@
                   <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel" data-i18n="optionsImportSettingsDialogTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                       <p data-i18n="optionsImportSettingsDialogText"></p>
                   </div>
                   <div class="modal-footer">
-                      <button class="btn btn-sm btn-secondary" data-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                      <button class="btn btn-sm yes btn-success" autofocus><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonImport"></span></button>
+                      <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
+                      <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonImport"></span></button>
                   </div>
                   </div>
                 </div>
@@ -475,15 +496,15 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" data-i18n="optionsDatabasesRemoveIdentifier"></h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <p><span data-i18n="optionsDatabasesRemoveIdentifierConfirmFirst" i18n-placeholder="<strong></strong>"></span></p>
                           <p class="help-block" data-i18n="optionsDatabasesRemoveIdentifierConfirmSecond"></p>
                         </div>
                         <div class="modal-footer">
-                          <button class="btn btn-sm btn-secondary" data-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                          <button class="btn btn-sm yes btn-success" autofocus><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
+                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
+                          <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
                         </div>
                       </div>
                     </div>
@@ -524,20 +545,20 @@
                     </table>
                   </div>
 
-                  <div id="dialogDeleteCustomCredentialFields" class="modal fade" tabindex="-1" role="dialog">
+                  <div id="dialogDeleteCustomLoginFields" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 data-i18n="optionsCustomFieldsRemove"></h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <p><span data-i18n="optionsCustomFieldsConfirmation" i18n-placeholder="<strong></strong>"></span></p>
                           <p class="help-block" data-i18n="optionsCustomFieldsConfirmationHelpText"></p>
                         </div>
                         <div class="modal-footer">
-                          <button class="btn btn-sm btn-secondary" data-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                          <button class="btn btn-sm yes btn-success" autofocus><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
+                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
+                          <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
                         </div>
                       </div>
                     </div>
@@ -566,11 +587,9 @@
                   <form class="was-validated">
                     <div class="form-group">
                         <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
-                      <div class="input-group" id="manualUrlGroup">
-                        <input class="form-control form-control-sm col-lg-10" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
-                        <div class="input-group-append">
-                          <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd"><i class="fa fa-plus" aria-hidden="true"></i><span data-i18n="optionsButtonAdd"></span></button>
-                        </div>
+                      <div class="input-group w-75" id="manualUrlGroup">
+                        <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
+                        <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd"><i class="fa fa-plus" aria-hidden="true"></i><span data-i18n="optionsButtonAdd"></span></button>
                       </div>
                       <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
                     </div>
@@ -601,7 +620,7 @@
                               <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
                             </select>
                           </td>
-                          <td><input type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"/></td>
+                          <td><input class="form-check-input" type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"/></td>
                           <td class="text-nowrap"><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
                         </tr>
                       </tbody>
@@ -613,15 +632,15 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 data-i18n="optionsSitePreferencesRemove"></h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <p><span data-i18n="optionsSitePreferencesConfirmation" i18n-placeholder="<strong></strong>"></span></p>
                           <p class="help-block" data-i18n="optionsSitePreferencesConfirmationHelpText"></p>
                         </div>
                         <div class="modal-footer">
-                          <button class="btn btn-sm btn-secondary" data-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                          <button class="btn btn-sm yes btn-success" autofocus><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
+                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
+                          <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
                         </div>
                       </div>
                     </div>
@@ -629,7 +648,6 @@
                 </div>
               </div>
             </div>
-
 
             <!-- About -->
             <div class="tab d-none" id="tab-about">
@@ -713,8 +731,8 @@
                     <pre>
                       The MIT License (MIT)
 
-                      Copyright (c) 2011-2018 Twitter, Inc.
-                      Copyright (c) 2011-2018 The Bootstrap Authors
+                      Copyright (c) 2011-2022 Twitter, Inc.
+                      Copyright (c) 2011-2022 The Bootstrap Authors
 
                       Permission is hereby granted, free of charge, to any person obtaining a copy
                       of this software and associated documentation files (the "Software"), to deal
@@ -733,32 +751,6 @@
                       LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
                       OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
                       THE SOFTWARE.
-                    </pre>
-                  </details>
-
-                  <details>
-                    <summary>jQuery</summary>
-                    <pre>
-                      Copyright JS Foundation and other contributors, https://js.foundation/
-
-                      Permission is hereby granted, free of charge, to any person obtaining
-                      a copy of this software and associated documentation files (the
-                      "Software"), to deal in the Software without restriction, including
-                      without limitation the rights to use, copy, modify, merge, publish,
-                      distribute, sublicense, and/or sell copies of the Software, and to
-                      permit persons to whom the Software is furnished to do so, subject to
-                      the following conditions:
-
-                      The above copyright notice and this permission notice shall be
-                      included in all copies or substantial portions of the Software.
-
-                      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-                      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-                      MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-                      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-                      LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-                      OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-                      WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                     </pre>
                   </details>
 
