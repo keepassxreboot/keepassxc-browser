@@ -175,3 +175,18 @@ kpxcSites.popupExceptionFound = function(combinations) {
 
     return false;
 };
+
+/**
+ * Handles a few exceptions for certain sites where Username Icon is not placed properly.
+ * @param {number} left     Absolute left position of the icon
+ * @param {number} top      Absolute top position of the icon
+ * @param {number} iconSize Size of the icon
+ * @returns {array}         New left and top values as an Array
+ */
+kpxcSites.iconOffset = function(left, top, iconSize) {
+    if (document.location.hostname.includes('idmsa.apple.com')) {
+        return [ left - (iconSize + 10), top + 3 ];
+    }
+
+    return undefined;
+};
