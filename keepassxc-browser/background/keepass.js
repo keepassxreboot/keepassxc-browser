@@ -334,11 +334,15 @@ keepass.generatePassword = async function(tab) {
         const kpAction = kpActions.GENERATE_PASSWORD;
         const [ nonce, incrementedNonce ] = keepass.getNonces();
 
-        const request = {
+        const messageData = {
             action: kpAction,
             nonce: nonce,
-            clientID: keepass.clientID
+            clientID: keepass.clientID,
+            requestID: keepass.getRequestId(),
         };
+
+        const request = keepass.buildRequest(kpAction, keepass.encrypt(messageData, nonce), nonce, messageData.clientID);
+        request["requestID"] = messageData.requestID;
 
         const response = await keepass.sendNativeMessage(request);
         if (response.message && response.nonce) {
@@ -900,6 +904,11 @@ keepass.requestAutotype = async function(tab, args = []) {
 keepass.generateNewKeyPair = function() {
     keepass.keyPair = nacl.box.keyPair();
     //console.log(nacl.util.encodeBase64(keepass.keyPair.publicKey) + ' ' + nacl.util.encodeBase64(keepass.keyPair.secretKey));
+};
+
+// Creates a random 8 character string for Request ID
+keepass.getRequestId = function() {
+    return Math.random().toString(16).substring(2, 10);
 };
 
 keepass.isConfigured = async function() {
