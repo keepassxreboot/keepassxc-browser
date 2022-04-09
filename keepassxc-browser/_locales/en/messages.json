@@ -103,6 +103,10 @@
         "message": "No logins found.",
         "description": "No logins found."
     },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Filled password is longer than field's allowed max length.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
+    },
     "errorNotConnected": {
         "message": "Not connected to KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
