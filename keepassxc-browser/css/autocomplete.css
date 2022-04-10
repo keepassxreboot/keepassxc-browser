@@ -21,6 +21,7 @@
     letter-spacing: normal !important;
     word-spacing: normal !important;
     text-rendering: auto !important;
+    text-align: start !important;
 }
 
 .kpxcAutocomplete-items div:last-child {
