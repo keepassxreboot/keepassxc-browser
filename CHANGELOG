@@ -1,3 +1,7 @@
+1.7.12 (07-04-2022)
+=========================
+- Add support for the new password generator with KeePassXC 2.7.0.
+
 1.7.11 (11-12-2021)
 =========================
 - Add new Predefined Sites (FNAC, HP) [#1469]
