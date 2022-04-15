@@ -5,6 +5,7 @@ const extra = require('fs-extra');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const zaf = require('zip-a-folder');
+const { minimizeDirectory: minimizeLocalesDirectory } = require('minimize-webext-i18n-json');
 
 const DEST = 'keepassxc-browser';
 const DEFAULT = 'manifest_default.json';
@@ -49,7 +50,15 @@ async function updateTranslations() {
         const fileName = adjustManifest(BROWSERS[browser]);
         fs.copyFileSync(BROWSERS[browser], `${DEST}/manifest.json`);
         extra.removeSync(fileName);
+
+        const originalLocalesPath = `_locales_original`;
+        const localesPath = `${DEST}/_locales`;
+        fs.cpSync(localesPath, originalLocalesPath, { recursive: true, preserveTimestamps: true });
+        await minimizeLocalesDirectory(localesPath);
+
         await zaf.zip(DEST, fileName);
+        extra.rmSync(localesPath, { recursive: true })
+        fs.renameSync(originalLocalesPath, localesPath);
         extra.removeSync(BROWSERS[browser]);
         console.log('Done');
     }
