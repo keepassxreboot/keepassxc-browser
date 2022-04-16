@@ -32,7 +32,8 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         associated: keepass.isAssociated(),
         error: errorMessage || null,
-        usernameFieldDetected: page.tabs[tab.id].usernameFieldDetected
+        usernameFieldDetected: page.tabs[tab.id].usernameFieldDetected,
+        showGettingStartedGuideAlert: page.settings.showGettingStartedGuideAlert,
     };
 };
 
@@ -202,6 +203,13 @@ kpxcEvent.getIsKeePassXCAvailable = async function() {
     return keepass.isKeePassXCAvailable;
 };
 
+kpxcEvent.hideGettingStartedGuideAlert = async function(tab) {
+    const settings = await kpxcEvent.onLoadSettings();
+    settings.showGettingStartedGuideAlert = false;
+
+    await kpxcEvent.onSaveSettings(tab, settings);
+};
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -221,6 +229,7 @@ kpxcEvent.messageHandlers = {
     'get_status': kpxcEvent.onGetStatus,
     'get_tab_information': kpxcEvent.onGetTabInformation,
     'get_totp': keepass.getTotp,
+    'hide_getting_started_guide_alert': kpxcEvent.hideGettingStartedGuideAlert,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
     'load_keyring': kpxcEvent.onLoadKeyRing,

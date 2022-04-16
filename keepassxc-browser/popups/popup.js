@@ -16,10 +16,15 @@ function statusResponse(r) {
     $('#configured-and-associated').hide();
     $('#configured-not-associated').hide();
     $('#lock-database-button').hide();
+    $('#getting-started-guide').hide();
 
     if (!r.keePassXCAvailable) {
         $('#error-message').textContent = r.error;
         $('#error-encountered').show();
+
+        if (r.showGettingStartedGuideAlert) {
+            $('#getting-started-guide').show();
+        }
     } else if (r.keePassXCAvailable && r.databaseClosed) {
         $('#database-error-message').textContent = r.error;
         $('#database-not-opened').show();
@@ -112,6 +117,12 @@ const sendMessageToTab = async function(message) {
         await sendMessageToTab('add_username_only_option');
         await sendMessageToTab('redetect_fields');
         $('#username-field-detected').hide();
+    });
+
+    $('#getting-started-alert-close-button').addEventListener('click', async () => {
+        await browser.runtime.sendMessage({
+            action: 'hide_getting_started_guide_alert'
+        });
     });
 
     statusResponse(await browser.runtime.sendMessage({
