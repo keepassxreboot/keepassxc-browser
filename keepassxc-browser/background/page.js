@@ -18,6 +18,7 @@ const defaultSettings = {
     downloadFaviconAfterSave: false,
     redirectAllowance: 1,
     saveDomainOnly: true,
+    showGettingStartedGuideAlert: true,
     showLoginFormIcon: true,
     showLoginNotifications: true,
     showNotifications: true,
@@ -116,6 +117,10 @@ page.initSettings = async function() {
 
         if (!('saveDomainOnly' in page.settings)) {
             page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
+        }
+
+        if (!('showGettingStartedGuideAlert' in page.settings)) {
+            page.settings.showGettingStartedGuideAlert = defaultSettings.showGettingStartedGuideAlert;
         }
 
         if (!('showLoginFormIcon' in page.settings)) {

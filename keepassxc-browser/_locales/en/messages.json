@@ -343,6 +343,18 @@
         "message": "Please download the latest version from keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Are you a first time user? Please check our Getting Started Guide.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Getting Started Guide - Setup Browser Integration",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupGettingStartedHide": {
+      "message": "Hide and don't show again.",
+      "description": "Getting Started Guide alert close button title."
+  },
     "popupCheckingStatus": {
         "message": "Checking status...",
         "description": "Checking status message in popup."
