@@ -28,7 +28,7 @@ function statusResponse(r) {
             $('#getting-started-guide').show();
         }
 
-        if (r.showTroubleshootingGuideAlert && reloadCount === 2) {
+        if (r.showTroubleshootingGuideAlert && reloadCount >= 2) {
             $('#troubleshooting-guide').show();
         }
         else {
