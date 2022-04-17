@@ -351,10 +351,18 @@
         "message": "Getting Started Guide - Setup Browser Integration",
         "description": "Popup Getting Started Guide link text."
     },
-    "popupGettingStartedHide": {
+    "popupAlertHide": {
       "message": "Hide and don't show again.",
-      "description": "Getting Started Guide alert close button title."
-  },
+      "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+      "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+      "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+      "message": "Troubleshooting Guide",
+      "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Checking status...",
         "description": "Checking status message in popup."

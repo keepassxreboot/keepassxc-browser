@@ -34,6 +34,7 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         error: errorMessage || null,
         usernameFieldDetected: page.tabs[tab.id].usernameFieldDetected,
         showGettingStartedGuideAlert: page.settings.showGettingStartedGuideAlert,
+        showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert
     };
 };
 
@@ -210,6 +211,13 @@ kpxcEvent.hideGettingStartedGuideAlert = async function(tab) {
     await kpxcEvent.onSaveSettings(tab, settings);
 };
 
+kpxcEvent.hideTroubleshootingGuideAlert = async function(tab) {
+    const settings = await kpxcEvent.onLoadSettings();
+    settings.showTroubleshootingGuideAlert = false;
+
+    await kpxcEvent.onSaveSettings(tab, settings);
+};
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -230,6 +238,7 @@ kpxcEvent.messageHandlers = {
     'get_tab_information': kpxcEvent.onGetTabInformation,
     'get_totp': keepass.getTotp,
     'hide_getting_started_guide_alert': kpxcEvent.hideGettingStartedGuideAlert,
+    'hide_troubleshooting_guide_alert': kpxcEvent.hideTroubleshootingGuideAlert,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
     'load_keyring': kpxcEvent.onLoadKeyRing,

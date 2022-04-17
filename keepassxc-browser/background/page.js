@@ -19,6 +19,7 @@ const defaultSettings = {
     redirectAllowance: 1,
     saveDomainOnly: true,
     showGettingStartedGuideAlert: true,
+    showTroubleshootingGuideAlert: true,
     showLoginFormIcon: true,
     showLoginNotifications: true,
     showNotifications: true,
@@ -121,6 +122,10 @@ page.initSettings = async function() {
 
         if (!('showGettingStartedGuideAlert' in page.settings)) {
             page.settings.showGettingStartedGuideAlert = defaultSettings.showGettingStartedGuideAlert;
+        }
+
+        if (!('showTroubleshootingGuideAlert' in page.settings)) {
+            page.settings.showTroubleshootingGuideAlert = defaultSettings.showTroubleshootingGuideAlert;
         }
 
         if (!('showLoginFormIcon' in page.settings)) {
