@@ -1055,6 +1055,10 @@
         "message": "Visit KeePassXC-Browser in the Mozilla Add-ons directory.",
         "description": "About page link to AMO."
     },
+    "optionsAboutEdge": {
+        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "description": "About page link to Edge Add-ons page."
+    },
     "optionsAboutGitHub": {
         "message": "Visit KeePassXC-Browser on GitHub.",
         "description": "About page link to GitHub."
