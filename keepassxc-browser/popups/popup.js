@@ -56,6 +56,8 @@ function statusResponse(r) {
         if (r.usernameFieldDetected) {
             $('#username-field-detected').show();
         }
+
+        reloadCount = 0;
     }
 }
 
