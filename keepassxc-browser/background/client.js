@@ -122,7 +122,9 @@ keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeo
 
         // Send the request
         if (keepass.isSafari) {
-            browser.runtime.sendNativeMessage(keepass.nativeHostName, { message: JSON.stringify(request) });
+            chrome.runtime.sendNativeMessage(keepass.nativeHostName, { message: JSON.stringify(request) }, function(response) {
+                resolve(JSON.parse(response));
+            });
         } else if (keepass.nativePort) {
             keepass.nativePort.postMessage(request);
         }
