@@ -10,6 +10,8 @@ const getLoginData = async () => {
     resizePopup();
     await initColorTheme();
 
+    $('#lock-database-button').show();
+
     const data = await getLoginData();
     const ll = document.getElementById('login-list');
     for (let i = 0; i < data.logins.length; ++i) {
@@ -46,6 +48,7 @@ const getLoginData = async () => {
         $('.credentials').hide();
         $('#btn-dismiss').hide();
         $('#database-not-opened').show();
+        $('#lock-database-button').hide();
         $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
     });
 

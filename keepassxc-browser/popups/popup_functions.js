@@ -57,7 +57,7 @@ function setDefaultPopupSize() {
 
 // Resizes the popup to the default size if the width is too small
 function resizePopup() {
-    if (document.body.offsetWidth > 0 && document.body.offsetWidth < 180) {
+    if (document.body.offsetWidth > 0 && document.body.offsetWidth < 100) {
         document.body.style.width = isFirefox() ? PINNED_POPUP_SIZE : DEFAULT_POPUP_SIZE;
     } else {
         document.body.style.width = DEFAULT_POPUP_SIZE;
