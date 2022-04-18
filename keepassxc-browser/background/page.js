@@ -51,6 +51,7 @@ page.initSettings = async function() {
     try {
         const item = await browser.storage.local.get({ 'settings': {} });
         page.settings = item.settings;
+        page.settings.autoReconnect = false;
 
         if (!('autoCompleteUsernames' in page.settings)) {
             page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
@@ -66,10 +67,6 @@ page.initSettings = async function() {
 
         if (!('autoFillSingleEntry' in page.settings)) {
             page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
-        }
-
-        if (!('autoReconnect' in page.settings)) {
-            page.settings.autoReconnect = defaultSettings.autoReconnect;
         }
 
         if (!('autoRetrieveCredentials' in page.settings)) {
