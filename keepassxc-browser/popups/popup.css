@@ -102,11 +102,9 @@ code {
     text-align: start;
 }
 
-#update-available {
-    display: none;
-}
-
-#getting-started-guide {
+#update-available,
+#getting-started-guide,
+#troubleshooting-guide {
     display: none;
 }
 
