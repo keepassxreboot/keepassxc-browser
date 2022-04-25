@@ -73,7 +73,7 @@ kpxcIcons.addIconsFromForm = async function(form) {
     };
 
     const addCCIcons = async function(c) {
-        if (c.ccInputs.ccName/* && kpxc.settings.showCCIcons*/) {
+        if (c.ccInputs && c.ccInputs.ccName/* && kpxc.settings.showCCIcons*/) {
             kpxcIcons.addIcon(c.ccInputs.ccName, kpxcIcons.iconTypes.CC);
         }
     };
