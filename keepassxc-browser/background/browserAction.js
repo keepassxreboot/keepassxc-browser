@@ -10,7 +10,6 @@ browserAction.show = function(tab, popupData) {
     page.popupData = popupData;
 
     browser.browserAction.setIcon({
-        tabId: tab.id,
         path: browserAction.generateIconName(popupData.iconType)
     });
 
