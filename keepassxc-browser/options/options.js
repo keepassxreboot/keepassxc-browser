@@ -128,6 +128,8 @@ options.initGeneralSettings = function() {
         options.settings['redirectAllowance'] === 11 ? 'Infinite' : String(options.settings['redirectAllowance']));
 
     $('#tab-general-settings select#credentialSorting').value = options.settings['credentialSorting'];
+    $('#tab-general-settings select#afterFillSorting').value = options.settings['afterFillSorting'];
+    $('#tab-general-settings select#afterFillSortingTotp').value = options.settings['afterFillSortingTotp'];
     $('#tab-general-settings input#defaultGroup').value = options.settings['defaultGroup'];
     $('#tab-general-settings input#clearCredentialTimeout').value = options.settings['clearCredentialsTimeout'];
 
@@ -150,6 +152,16 @@ options.initGeneralSettings = function() {
 
     $('#tab-general-settings select#credentialSorting').addEventListener('change', async function(e) {
         options.settings['credentialSorting'] = e.currentTarget.value;
+        await options.saveSettings();
+    });
+
+    $('#tab-general-settings select#afterFillSorting').addEventListener('change', async function(e) {
+        options.settings['afterFillSorting'] = e.currentTarget.value;
+        await options.saveSettings();
+    });
+
+    $('#tab-general-settings select#afterFillSortingTotp').addEventListener('change', async function(e) {
+        options.settings['afterFillSortingTotp'] = e.currentTarget.value;
         await options.saveSettings();
     });
 

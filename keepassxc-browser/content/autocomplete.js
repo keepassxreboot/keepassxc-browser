@@ -4,6 +4,7 @@ const MAX_AUTOCOMPLETE_NAME_LEN = 50;
 
 class Autocomplete {
     constructor() {
+        this.afterFillSort = SORT_BY_DEFAULT;
         this.autocompleteList = [];
         this.autoSubmit = false;
         this.elements = [];
@@ -30,12 +31,13 @@ class Autocomplete {
 
     }
 
-    async create(input, showListInstantly = false, autoSubmit = false) {
+    async create(input, showListInstantly = false, autoSubmit = false, afterFillSort = SORT_BY_DEFAULT) {
         if (input.readOnly) {
             return;
         }
 
         this.autoSubmit = autoSubmit;
+        this.afterFillSort = afterFillSort;
 
         if (!this.autocompleteList.includes(input)) {
             input.addEventListener('click', e => this.click(e));
@@ -96,10 +98,13 @@ class Autocomplete {
             // It also helps with multi-page login flows
             const username = kpxcSites.detectUsernameFromPage();
 
+            const pageUuid = await sendMessage('page_get_login_id');
             await kpxc.updateTOTPList();
+
             for (const c of this.elements) {
                 const item = document.createElement('div');
                 item.textContent = c.label;
+
                 const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
                 item.append(itemInput);
                 item.addEventListener('click', e => this.itemClick(e, this.input, c.uuid));
@@ -110,9 +115,12 @@ class Autocomplete {
                 item.addEventListener('mousedown', e => e.stopPropagation());
                 item.addEventListener('mouseup', e => e.stopPropagation());
 
-                if (username === c.value) {
+                // If this page has an associated uuid and it matches this credential, then put it on top of the list
+                if (username === c.value
+                    || (this.afterFillSort === SORT_BY_RELEVANT && c.uuid === pageUuid)) {
                     this.list.prepend(item);
-                } else {
+                }
+                else {
                     this.list.appendChild(item);
                 }
             }

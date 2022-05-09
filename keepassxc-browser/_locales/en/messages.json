@@ -961,19 +961,43 @@
     },
     "optionsSortByTitle": {
         "message": "Title",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Username",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Group and title",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Group and username",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Sort credentials after fill by",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Sort credentials after fill for TOTP by",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortDefault": {
+        "message": "Default",
+        "description": "Default option for Sort after fill."
+    },
+    "optionsFillSortRelevant": {
+        "message": "Relevant credential first",
+        "description": "Relevatn credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "No saved custom login fields found.",

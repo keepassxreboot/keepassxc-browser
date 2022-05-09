@@ -13,6 +13,8 @@ const SORT_BY_TITLE = 'sortByTitle';
 const SORT_BY_USERNAME = 'sortByUsername';
 const SORT_BY_GROUP_AND_TITLE = 'sortByGroupAndTitle';
 const SORT_BY_GROUP_AND_USERNAME = 'sortByGroupAndUsername';
+const SORT_BY_DEFAULT = 'sortByDefault';
+const SORT_BY_RELEVANT = 'sortByRelevant';
 
 // Update check intervals
 const CHECK_UPDATE_NEVER = 0;

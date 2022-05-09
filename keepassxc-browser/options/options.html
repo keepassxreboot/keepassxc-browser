@@ -194,8 +194,32 @@
                     </select>
                   </div>
 
+                  <!-- Credential sorting after fill -->
+                  <div class="form-group col-sm-3 pb-2">
+                    <label for="afterFillSorting" class="py-2" data-i18n="optionsFillSortPriority"></label>
+                    <select class="form-control form-control-sm col-md-2" id="afterFillSorting" data-i18n="[title]optionsFillSortPriority">
+                      <option value="sortByDefault" data-i18n="optionsFillSortDefault"></option>
+                      <option value="sortByRelevant" data-i18n="optionsFillSortRelevant"></option>
+                    </select>
+                  </div>
+                  <div>
+                    <span class="form-text text-muted" data-i18n="optionsFillSortPriorityHelpText"></span>
+                  </div>
+
+                  <!-- Credential sorting after fill for TOTP -->
+                  <div class="form-group col-sm-3 pb-2">
+                    <label for="afterFillSortingTotp" class="py-2" data-i18n="optionsFillSortPriorityTotp"></label>
+                    <select class="form-control form-control-sm col-md-2" id="afterFillSortingTotp" data-i18n="[title]optionsFillSortPriorityTotp">
+                      <option value="sortByDefault" data-i18n="optionsFillSortDefault"></option>
+                      <option value="sortByRelevant" data-i18n="optionsFillSortRelevant"></option>
+                    </select>
+                  </div>
+                  <div>
+                    <span class="form-text text-muted" data-i18n="optionsFillSortPriorityTotpHelpText"></span>
+                  </div>
+
                   <!-- Use Auto-Submit -->
-                  <div class="form-group">
+                  <div class="form-group py-2">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="autoSubmit" id="autoSubmit" value="true" />
                       <label class="form-check-label" for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
