@@ -505,8 +505,7 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
 
     for (const i of inputs) {
         if (kpxcCustomLoginFieldsBanner.isFieldSelected(i)
-            || inputFieldIsSelected(i)
-            || !kpxcFields.isVisible(i)) {
+            || inputFieldIsSelected(i)) {
             continue;
         }
 

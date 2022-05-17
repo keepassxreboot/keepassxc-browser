@@ -249,11 +249,11 @@ kpxc.initAutocomplete = function() {
 
 // Looks for any username & password combinations from the detected input fields
 kpxc.initCombinations = async function(inputs = []) {
-    if (inputs.length === 0) {
+    const isCustomLoginFieldsUsed = kpxcFields.isCustomLoginFieldsUsed();
+    if (inputs.length === 0 && !isCustomLoginFieldsUsed) {
         return [];
     }
 
-    const isCustomLoginFieldsUsed = kpxcFields.isCustomLoginFieldsUsed();
     const combinations = isCustomLoginFieldsUsed
                        ? await kpxcFields.useCustomLoginFields()
                        : await kpxcFields.getAllCombinations(inputs);
@@ -295,7 +295,7 @@ kpxc.initCredentialFields = async function() {
 
     // Search all remaining inputs from the page, ignore the previous input fields
     const pageInputs = await kpxcFields.getAllPageInputs(formInputs);
-    if (formInputs.length === 0 && pageInputs.length === 0) {
+    if (formInputs.length === 0 && pageInputs.length === 0 && !kpxcFields.isCustomLoginFieldsUsed()) {
         // Run 'redetect_credentials' manually if no fields are found after a page load
         setTimeout(async function() {
             if (_called.automaticRedetectCompleted) {

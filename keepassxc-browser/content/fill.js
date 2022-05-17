@@ -116,7 +116,7 @@ kpxcFill.fillFromPopup = async function(id, uuid) {
     }
 
     const foundCombination = kpxcFields.getCombinationFromAllInputs();
-    kpxc.fillInCredentials(foundCombination, selectedCredentials.login, uuid);
+    kpxcFill.fillInCredentials(foundCombination, selectedCredentials.login, uuid);
     kpxcUserAutocomplete.closeList();
 };
 
