@@ -11,6 +11,7 @@ const acceptedOTPFields = [
     'code',
     'idvpin',
     'mfa',
+    'one_time_password',
     'otp',
     'token',
     'twofa',
