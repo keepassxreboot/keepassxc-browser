@@ -111,9 +111,9 @@ class Autocomplete {
                 item.addEventListener('mouseup', e => e.stopPropagation());
 
                 if (username === c.value) {
-                    div.prepend(item);
+                    this.list.prepend(item);
                 } else {
-                    div.appendChild(item);
+                    this.list.appendChild(item);
                 }
             }
 
