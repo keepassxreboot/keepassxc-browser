@@ -74,8 +74,8 @@ kpxcSites.savedForm = undefined;
  * @returns {string}   Returns the detected username if there is one, undefined otherwise.
  */
 kpxcSites.detectUsername = function() {
-    if (document.location.origin === kpxcSites.googleUrl) {
-        const profileIdentifier = document.getElementById('profileIdentifier');
+    if (document.location.origin === googleUrl) {
+        const profileIdentifier = document.querySelector('[data-profile-identifier]');
         if (profileIdentifier) {
             return profileIdentifier.textContent.trim();
         }
