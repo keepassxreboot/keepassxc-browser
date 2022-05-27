@@ -1,7 +1,6 @@
 'use strict';
 
-const fs = require('fs');
-const extra = require('fs-extra');
+const fs = require('@npmcli/fs')
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const zaf = require('zip-a-folder');
@@ -13,8 +12,8 @@ const BROWSERS = {
     'Chromium': 'manifest_chromium.json',
 };
 
-function adjustManifest(manifest) {
-    const manifestFile = fs.readFileSync(DEFAULT, 'utf8');
+async function adjustManifest(manifest) {
+    const manifestFile = await fs.readFile(DEFAULT, { encoding: 'utf8' });
     const data = JSON.parse(manifestFile);
     const browser = manifest.substring(manifest.indexOf('_') + 1, manifest.indexOf('.'));
 
@@ -30,7 +29,7 @@ function adjustManifest(manifest) {
         delete data['applications'];
     }
 
-    fs.writeFileSync(manifest, JSON.stringify(data, null, 4));
+    await fs.writeFile(manifest, JSON.stringify(data, null, 4));
     return `keepassxc-browser_${data['version']}_${browser}.zip`;
 }
 
@@ -42,15 +41,20 @@ async function updateTranslations() {
 
 (async() => {
     await updateTranslations();
-    fs.copyFileSync(`${DEST}/manifest.json`, `./${DEFAULT}`);
+    await fs.copyFile(`${DEST}/manifest.json`, `./${DEFAULT}`);
 
     for (const browser in BROWSERS) {
         console.log(`KeePassXC-Browser: Creating extension package for ${browser}`);
-        const fileName = adjustManifest(BROWSERS[browser]);
-        fs.copyFileSync(BROWSERS[browser], `${DEST}/manifest.json`);
-        extra.removeSync(fileName);
+
+        const fileName = await adjustManifest(BROWSERS[browser]);
+        await fs.copyFile(BROWSERS[browser], `${DEST}/manifest.json`);
+
+        if (await fs.exists(fileName)) {
+            await fs.rm(fileName);
+        }
+
         await zaf.zip(DEST, fileName);
-        extra.removeSync(BROWSERS[browser]);
+        await fs.rm(BROWSERS[browser], { recursive: true });
         console.log('Done');
     }
 

@@ -18,6 +18,8 @@ const defaultSettings = {
     downloadFaviconAfterSave: false,
     redirectAllowance: 1,
     saveDomainOnly: true,
+    showGettingStartedGuideAlert: true,
+    showTroubleshootingGuideAlert: true,
     showLoginFormIcon: true,
     showLoginNotifications: true,
     showNotifications: true,
@@ -49,6 +51,7 @@ page.initSettings = async function() {
     try {
         const item = await browser.storage.local.get({ 'settings': {} });
         page.settings = item.settings;
+        page.settings.autoReconnect = false;
 
         if (!('autoCompleteUsernames' in page.settings)) {
             page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
@@ -64,10 +67,6 @@ page.initSettings = async function() {
 
         if (!('autoFillSingleEntry' in page.settings)) {
             page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
-        }
-
-        if (!('autoReconnect' in page.settings)) {
-            page.settings.autoReconnect = defaultSettings.autoReconnect;
         }
 
         if (!('autoRetrieveCredentials' in page.settings)) {
@@ -116,6 +115,14 @@ page.initSettings = async function() {
 
         if (!('saveDomainOnly' in page.settings)) {
             page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
+        }
+
+        if (!('showGettingStartedGuideAlert' in page.settings)) {
+            page.settings.showGettingStartedGuideAlert = defaultSettings.showGettingStartedGuideAlert;
+        }
+
+        if (!('showTroubleshootingGuideAlert' in page.settings)) {
+            page.settings.showTroubleshootingGuideAlert = defaultSettings.showTroubleshootingGuideAlert;
         }
 
         if (!('showLoginFormIcon' in page.settings)) {

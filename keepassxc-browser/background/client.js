@@ -82,8 +82,11 @@ keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeo
         const listener = ((port, action) => {
             const handler = (msg) => {
                 if (msg && msg.action === action) {
+                    // If the request has a separate requestID, check if it matches when there's no nonce (an error message)
+                    const isNotificationOrError = !msg.nonce && request.requestID === msg.requestID;
+
                     // Only resolve a matching response or a notification (without nonce)
-                    if (!msg.nonce || messageBuffer.matchAndRemove(msg)) {
+                    if (isNotificationOrError || messageBuffer.matchAndRemove(msg)) {
                         port.removeListener(handler);
                         if (enableTimeout) {
                             clearTimeout(timeout);
@@ -162,9 +165,13 @@ keepassClient.buildRequest = function(action, encrypted, nonce, clientID, trigge
 
 keepassClient.sendMessage = async function(kpAction, tab, messageData, nonce, enableTimeout = false, triggerUnlock = false) {
     const request = keepassClient.buildRequest(kpAction, keepassClient.encrypt(messageData, nonce), nonce, keepass.clientID, triggerUnlock);
-    const response = await keepassClient.sendNativeMessage(request, enableTimeout);
+    if (messageData.requestID) {
+        request["requestID"] = messageData.requestID;
+    }
 
+    const response = await keepassClient.sendNativeMessage(request, enableTimeout);
     const incrementedNonce = keepassClient.incrementedNonce(nonce);
+
     return keepassClient.handleResponse(response, incrementedNonce, tab);
 };
 
@@ -174,6 +181,11 @@ keepassClient.sendMessage = async function(kpAction, tab, messageData, nonce, en
 
 keepassClient.getNonce = function() {
     return nacl.util.encodeBase64(nacl.randomBytes(keepassClient.keySize));
+};
+
+// Creates a random 8 character string for Request ID
+keepassClient.getRequestId = function() {
+    return Math.random().toString(16).substring(2, 10);
 };
 
 keepassClient.incrementedNonce = function(nonce) {

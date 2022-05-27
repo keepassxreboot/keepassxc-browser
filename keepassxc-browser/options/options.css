@@ -10,6 +10,14 @@ a {
     text-decoration: none !important;
 }
 
+h1, span.menu-item {
+    font-size: 0.65rem;
+}
+
+footer {
+    font-size: 0.65rem !important;
+}
+
 a:hover {
     color: var(--kpxc-link-hover-color);
 }
@@ -23,9 +31,14 @@ main {
     background: var(--kpxc-background-color);
 }
 
-input,
-input[type="checkbox"] {
+input {
     background-color: var(--kpxc-background-color) !important;
+    border-color: var(--kpxc-input-main-border-color) !important;
+    color: var(--kpxc-text-color) !important;
+}
+
+input[type="range"] {
+    background-color: var(--kpxc-card-background-color) !important;
     border-color: var(--kpxc-input-main-border-color) !important;
     color: var(--kpxc-text-color) !important;
 }
@@ -78,8 +91,9 @@ tbody {
     color: var(--kpxc-text-color);
 }
 
-.table-striped > tbody > tr:nth-of-type(odd) {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
     background-color: var(--kpxc-table-odd-color);
+    color: var(--kpxc-text-color);
 }
 
 .table tbody td {
@@ -115,6 +129,14 @@ table td:last-of-type {
     color: var(--kpxc-text-color);
 }
 
+.form-check-input:checked {
+    background-color: var(--kpxc-checkbox-color) !important;
+}
+
+.help-text {
+    margin-left: 1.725em;
+}
+
 .invalid-feedback {
     color: var(--kpxc-link-color);
 }
@@ -144,7 +166,6 @@ table td:last-of-type {
     background-color: var(--kpxc-sidebar-background-color) !important;
 }
 
-h1,
 .nav-item,
 .sidebar-heading {
     font-size: .75rem;

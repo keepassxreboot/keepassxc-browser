@@ -253,6 +253,13 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
 
     // Fill password
     if (combination.password) {
+        // Show a notification if password length exceeds the length defined in input
+        if (combination.password.maxLength
+            && combination.password.maxLength > 0
+            && selectedCredentials.password.length > combination.password.maxLength) {
+            kpxcUI.createNotification('error', tr('errorMessagePaswordLengthExceeded'));
+        }
+
         kpxc.setValueWithChange(combination.password, selectedCredentials.password);
         await kpxc.setPasswordFilled(true);
     }

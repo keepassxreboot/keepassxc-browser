@@ -20,6 +20,7 @@ Encrypted messages are built with these JSON parameters:
 - message - Encrypted message, base64 encoded
 - nonce - 24 bytes long random data, base64 encoded. This is incremented to the response.
 - clientID - 24 bytes long random data, base64 encoded. This is used for a single session to identify different browsers if multiple are used with proxy application.
+- requestID (optional) - A random 8 character string. Used to identify error responses. Currently used only with `generate-password`.
 
 Currently these messages are implemented:
 - `change-public-keys`: Request for passing public keys from client to server and back.
@@ -49,7 +50,7 @@ Response (success):
 ```json
 {
     "action": "change-public-keys",
-    "version": "2.2.0",
+    "version": "2.7.0",
     "publicKey": "<host public key>",
     "success": "true"
 }
@@ -106,7 +107,7 @@ Response message data (success, decrypted):
 ```json
 {
     "hash": "29234e32274a32276e25666a42",
-    "version": "2.2.0",
+    "version": "2.7.0",
     "success": "true",
     "id": "testclient",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
@@ -136,7 +137,7 @@ Request:
 Response message data (success, decrypted):
 ```json
 {
-    "version": "2.2.0",
+    "version": "2.7.0",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "hash": "29234e32274a32276e25666a42",
     "id": "testclient",
@@ -150,20 +151,16 @@ Request (no unencrypted message is needed):
 {
     "action": "generate-password",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
-    "clientID": "<clientID>"
+    "clientID": "<clientID>",
+    "requestID": "<request ID>"
 }
 ```
 
 Response message data (success, decrypted):
 ```json
 {
-    "version": "2.2.0",
-    "entries": [
-        {
-            "login": 144,
-            "password": "testclientpassword"
-        }
-    ],
+    "version": "2.7.0",
+    "password": "testclientpassword"
     "success": "true",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
 }

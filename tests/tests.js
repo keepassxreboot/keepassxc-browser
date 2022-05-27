@@ -9,7 +9,7 @@ const Tests = {
 };
 
 function createResult(card, res, text) {
-    const icon = kpxcUI.createElement('i', res ? 'fa fa-check' : 'fa fa-close');
+    const icon = kpxcUI.createElement('i', res ? 'fa fa-check' : 'fa fa-close', { id: text });
     const span = kpxcUI.createElement('span', '', '', text);
     const br = document.createElement('br');
 
@@ -61,25 +61,23 @@ async function testGeneral() {
 
 // Input field matching (keepassxc-browser.js)
 async function testInputFields() {
-    // Local filename, expected fields, action element ID (a button to be clicked)
-    const localFiles = [
-        [ 'html/basic1.html', 2 ], // Username/passwd fields
-        [ 'html/basic2.html', 1 ], // Only username field
-        [ 'html/basic3.html', 1 ], // Only password field
-        [ 'html/basic4.html', 3 ], // Username/passwd/TOTP fields
-        [ 'html/div1.html', 2, '#toggle' ], // Fields are behind a button that must be pressed
-        [ 'html/div2.html', 2, '#toggle' ], // Fields are behind a button that must be pressed behind a JavaScript
-        [ 'html/div3.html', 2, '#toggle' ], // Fields are behind a button that must be pressed
-        [ 'html/div4.html', 2, '#toggle' ], // Fields are behind a button that must be pressed
-        [ 'html/hidden_fields1.html', 0 ], // Two hidden fields
-        [ 'html/hidden_fields2.html', 1 ], // Two hidden fields with one visible
+    // Div ID, expected fields, action element ID (a button to be clicked)
+    const testDivs = [
+        [ 'basic1', 2 ], // Username/passwd fields
+        [ 'basic2', 1 ], // Only username field
+        [ 'basic3', 1 ], // Only password field
+        [ 'basic4', 3 ], // Username/passwd/TOTP fields
+        [ 'div1', 2, '#toggle1' ], // Fields are behind a button that must be pressed
+        [ 'div2', 2, '#toggle2' ], // Fields are behind a button that must be pressed behind a JavaScript
+        [ 'div3', 2, '#toggle3' ], // Fields are behind a button that must be pressed
+        [ 'div4', 2, '#toggle4' ], // Fields are behind a button that must be pressed
+        [ 'hiddenFields1', 0 ], // Two hidden fields
+        [ 'hiddenFields2', 1 ], // Two hidden fields with one visible
     ];
 
-    for (const file of localFiles) {
-        await assertInputFields(file[0], file[1], file[2]);
+    for (const div of testDivs) {
+        await assertInputFields(div[0], div[1], div[2]);
     }
-
-    document.getElementById('testFile').hidden = true;
 }
 
 // Search fields (kpxcFields
@@ -140,20 +138,18 @@ async function testTotpFields() {
 
 // Password change
 async function testPasswordChange() {
-    // Local filename, expected new password
-    const localFiles = [
-        [ 'html/passwordchange1.html', 'newPassword' ], // Default order without form
-        [ 'html/passwordchange2.html', 'newPassword' ], // Reversed order without form
-        [ 'html/passwordchange3.html', 'newPassword' ], // Default order with form
-        [ 'html/passwordchange4.html', 'newPassword' ], // Reversed order with form
-        [ 'html/passwordchange5.html', 'newPassword' ], // Each field has own form
+    // Div ID, expected new password
+    const localDivs = [
+        [ 'passwordChange1', 'newPassword' ], // Default order without form
+        [ 'passwordChange2', 'newPassword' ], // Reversed order without form
+        [ 'passwordChange3', 'newPassword' ], // Default order with form
+        [ 'passwordChange4', 'newPassword' ], // Reversed order with form
+        [ 'passwordChange5', 'newPassword' ], // Each field has own form
     ];
 
-    for (const file of localFiles) {
-        await assertPasswordChangeFields(file[0], file[1]);
+    for (const div of localDivs) {
+        await assertPasswordChangeFields(div[0], div[1]);
     }
-
-    document.getElementById('testFile').hidden = true;
 }
 
 // Run tests

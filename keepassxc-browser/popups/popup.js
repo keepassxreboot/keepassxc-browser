@@ -1,5 +1,15 @@
 'use strict';
 
+let reloadCount = 0;
+
+HTMLElement.prototype.show = function() {
+    this.style.display = 'block';
+};
+
+HTMLElement.prototype.hide = function() {
+    this.style.display = 'none';
+};
+
 function statusResponse(r) {
     $('#initial-state').hide();
     $('#error-encountered').hide();
@@ -8,32 +18,46 @@ function statusResponse(r) {
     $('#configured-and-associated').hide();
     $('#configured-not-associated').hide();
     $('#lock-database-button').hide();
+    $('#getting-started-guide').hide();
 
     if (!r.keePassXCAvailable) {
-        $('#error-message').html(r.error);
+        $('#error-message').textContent = r.error;
         $('#error-encountered').show();
+
+        if (r.showGettingStartedGuideAlert) {
+            $('#getting-started-guide').show();
+        }
+
+        if (r.showTroubleshootingGuideAlert && reloadCount >= 2) {
+            $('#troubleshooting-guide').show();
+        }
+        else {
+            $('#troubleshooting-guide').hide();
+        }
     } else if (r.keePassXCAvailable && r.databaseClosed) {
-        $('#database-error-message').html(r.error);
+        $('#database-error-message').textContent = r.error;
         $('#database-not-opened').show();
     } else if (!r.configured) {
         $('#not-configured').show();
     } else if (r.encryptionKeyUnrecognized) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').html(r.error);
+        $('#need-reconfigure-message').textContent = r.error;
     } else if (!r.associated) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').html(r.error);
+        $('#need-reconfigure-message').textContent = r.error;
     } else if (r.error !== null) {
         $('#error-encountered').show();
-        $('#error-message').html(r.error);
+        $('#error-message').textContent = r.error;
     } else {
         $('#configured-and-associated').show();
-        $('#associated-identifier').html(r.identifier);
+        $('#associated-identifier').textContent = r.identifier;
         $('#lock-database-button').show();
 
         if (r.usernameFieldDetected) {
             $('#username-field-detected').show();
         }
+
+        reloadCount = 0;
     }
 }
 
@@ -50,10 +74,10 @@ const sendMessageToTab = async function(message) {
     return true;
 };
 
-$(async () => {
+(async () => {
     await initColorTheme();
 
-    $('#connect-button').click(async () => {
+    $('#connect-button').addEventListener('click', async () => {
         await browser.runtime.sendMessage({
             action: 'associate'
         });
@@ -63,27 +87,33 @@ $(async () => {
         close();
     });
 
-    $('#reconnect-button').click(async () => {
+    $('#reconnect-button').addEventListener('click', async () => {
         await browser.runtime.sendMessage({
             action: 'associate'
         });
         close();
     });
 
-    $('#reload-status-button').click(async () => {
+    $('#reload-status-button').addEventListener('click', async () => {
         statusResponse(await browser.runtime.sendMessage({
             action: 'reconnect'
         }));
+
+        // Shows the Troubleshooting Guide alert every third time Reload button is pressed when popup is open
+        if (reloadCount > 2) {
+            reloadCount = 0;
+        }
+        reloadCount++;
     });
 
-    $('#reopen-database-button').click(async () => {
+    $('#reopen-database-button').addEventListener('click', async () => {
         statusResponse(await browser.runtime.sendMessage({
             action: 'get_status',
             args: [ false, true ] // Set forcePopup to true
         }));
     });
 
-    $('#redetect-fields-button').click(async () => {
+    $('#redetect-fields-button').addEventListener('click', async () => {
         const res = await sendMessageToTab('redetect_fields');
         if (!res) {
             return;
@@ -94,16 +124,28 @@ $(async () => {
         }));
     });
 
-    $('#lock-database-button').click(async () => {
+    $('#lock-database-button').addEventListener('click', async () => {
         statusResponse(await browser.runtime.sendMessage({
             action: 'lock_database'
         }));
     });
 
-    $('#username-only-button').click(async () => {
+    $('#username-only-button').addEventListener('click', async () => {
         await sendMessageToTab('add_username_only_option');
         await sendMessageToTab('redetect_fields');
         $('#username-field-detected').hide();
+    });
+
+    $('#getting-started-alert-close-button').addEventListener('click', async () => {
+        await browser.runtime.sendMessage({
+            action: 'hide_getting_started_guide_alert'
+        });
+    });
+
+    $('#troubleshooting-guide-alert-close-button').addEventListener('click', async () => {
+        await browser.runtime.sendMessage({
+            action: 'hide_troubleshooting_guide_alert'
+        });
     });
 
     statusResponse(await browser.runtime.sendMessage({
@@ -111,4 +153,4 @@ $(async () => {
     }).catch((err) => {
         logError('Could not get status: ' + err);
     }));
-});
+})();

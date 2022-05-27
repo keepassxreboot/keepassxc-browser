@@ -97,15 +97,15 @@ code {
     border-top: 0px;
 }
 
-#update-available {
+#popup-alerts {
     margin-top: 10px;
-    text-align: left;
-    display: none;
+    text-align: start;
 }
 
-#update-available a:hover,
-#update-available a:active {
-    text-decoration: underline;
+#update-available,
+#getting-started-guide,
+#troubleshooting-guide {
+    display: none;
 }
 
 #lock-database-button {

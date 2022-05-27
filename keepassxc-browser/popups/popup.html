@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
     <script src="../common/browser-polyfill.min.js"></script>
     <script src="../common/global.js"></script>
-    <script src="../bootstrap/jquery-3.4.1.min.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="popup_functions.js"></script>
     <script src="popup.js"></script>
@@ -22,10 +21,26 @@
         <button id="btn-choose-credential-fields" class="btn btn-sm btn-warning"><i class="fa fa-list-alt" aria-hidden="true"></i> <span data-i18n="popupChooseCredentialsText"></span></button>
         <button id="lock-database-button" class="btn btn-sm btn-danger" data-i18n="[title]lockDatabase"><i class="fa fa-lock" aria-hidden="true"></i></button>
 
-        <div id="update-available" class="alert alert-warning">
-          <span data-i18n="popupUpdateAvailable"></span>
-          <br />
-          <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"></span></a>.
+        <div id="popup-alerts">
+          <div id="update-available" class="alert alert-warning">
+            <span data-i18n="popupUpdateAvailable"></span>
+            <br />
+            <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"></span></a>.
+          </div>
+
+          <div id="getting-started-guide" class="alert alert-info alert-dismissible">
+            <span data-i18n="popupGettingStartedText"></span>
+            <br />
+            <a target="_blank" class="alert-link" href="https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_setup_browser_integration"><span data-i18n="popupGettingStartedLinkText"></span></a>
+            <button type="button" id="getting-started-alert-close-button" class="btn-close" data-bs-dismiss="alert" data-i18n="[title]popupAlertHide"></button>
+          </div>
+
+          <div id="troubleshooting-guide" class="alert alert-info alert-dismissible">
+            <span data-i18n="popupTroubleshootingText"></span>
+            <br />
+            <a target="_blank" class="alert-link" href="https://github.com/keepassxreboot/keepassxc-browser/wiki/Troubleshooting-guide"><span data-i18n="popupTroubleshootingLinkText"></span></a>
+            <button type="button" id="troubleshooting-guide-alert-close-button" class="btn-close" data-bs-dismiss="alert" data-i18n="[title]popupAlertHide"></button>
+          </div>
         </div>
       </div>
 
