@@ -51,3 +51,7 @@ Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keep
 ## Development and testing
 
 See [wiki](https://github.com/keepassxreboot/keepassxc-browser/wiki/Loading-the-extension-manually).
+
+## Help!
+
+See our [Troubleshooting Guide](https://github.com/keepassxreboot/keepassxc-browser/wiki/Troubleshooting-guide) for solving problems if previously listed issues and solutions are not working.
