@@ -1,6 +1,6 @@
 'use strict';
 
-const MAX_CHILDREN = 100;
+const MAX_CHILDREN = 50;
 const MAX_INPUTS = 100;
 const MAX_MUTATIONS = 200;
 
@@ -285,7 +285,14 @@ kpxcObserverHelper.ignoredNode = function(target) {
 };
 
 // Traverses all children, including Shadow DOM elements
-const traverseChildren = function(target, children) {
+const traverseChildren = function(target, children, depth = 1) {
+    depth++;
+
+    // Children can be scripts etc. so ignoredElement() is needed here
+    if (depth >= MAX_CHILDREN || kpxcObserverHelper.ignoredElement(target)) {
+        return;
+    }
+
     for (const child of target.childNodes) {
         if (child.type === 'hidden' || child.disabled) {
             continue;
@@ -295,18 +302,9 @@ const traverseChildren = function(target, children) {
             children.push(child);
         }
 
-        if (children.length === 0) {
-            continue;
-        }
-
-        // Limit the maximum number children
-        if (children.length > MAX_CHILDREN) {
-            children = children.slice(0, MAX_CHILDREN);
-        }
-
-        traverseChildren(child, children);
+        traverseChildren(child, children, depth);
         if (child.shadowRoot) {
-            traverseChildren(child.shadowRoot, children);
+            traverseChildren(child.shadowRoot, children, depth);
         }
     }
 };
