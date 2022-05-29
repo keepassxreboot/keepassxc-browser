@@ -50,7 +50,7 @@ class Icon {
         }
 
         if (state === DatabaseState.UNLOCKED) {
-            this.icon.style.filter = 'saturate(100%)';
+            this.icon.style.filter = kpxc.credentials.length === 0 ? 'saturate(0%)' : 'saturate(100%)';
         } else {
             this.icon.style.filter = 'saturate(0%)';
         }
