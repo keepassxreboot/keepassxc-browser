@@ -91,6 +91,11 @@ class Autocomplete {
             this.shadowRoot.append(this.container);
             document.body.append(this.wrapper);
 
+            // Try to detect a username from the webpage in order to show it first in the list
+            // This is useful when a website prompts you to enter the password again, and the username is already filled in
+            // It also helps with multi-page login flows
+            const username = kpxcSites.detectUsernameFromPage();
+
             await kpxc.updateTOTPList();
             for (const c of this.elements) {
                 const item = document.createElement('div');
@@ -105,7 +110,11 @@ class Autocomplete {
                 item.addEventListener('mousedown', e => e.stopPropagation());
                 item.addEventListener('mouseup', e => e.stopPropagation());
 
-                this.list.appendChild(item);
+                if (username === c.value) {
+                    this.list.prepend(item);
+                } else {
+                    this.list.appendChild(item);
+                }
             }
 
             // Add a footer message for auto-submit
