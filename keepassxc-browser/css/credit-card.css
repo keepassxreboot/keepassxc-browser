@@ -1,0 +1,14 @@
+.kpxc-cc-icon {
+    position: absolute;
+    cursor: pointer;
+}
+
+.kpxc-cc-icon.default {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/credit-card.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-cc-icon.moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/credit-card.svg') right no-repeat;
+    background-size: contain;
+}
