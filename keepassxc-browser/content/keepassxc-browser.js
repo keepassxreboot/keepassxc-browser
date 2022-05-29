@@ -588,6 +588,14 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 // If credentials are not received, request them again
 kpxc.receiveCredentialsIfNecessary = async function() {
     if (kpxc.credentials.length === 0 && !_called.retrieveCredentials) {
+        // Check for Cross-domain security error when inspecting window.top.location.href. We should ignore these requests.
+        try {
+            const currentLocation = window.top.location.href;
+        } catch (err) {
+            logDebug('Error: Credential request ignored from another domain: ', window.self.location.host);
+            return [];
+        }
+
         if (!kpxc.url) {
             kpxc.url = document.location.href;
         }
