@@ -119,8 +119,7 @@ class Autocomplete {
                 if (username === c.value
                     || (this.afterFillSort === SORT_BY_RELEVANT && c.uuid === pageUuid)) {
                     this.list.prepend(item);
-                }
-                else {
+                } else {
                     this.list.appendChild(item);
                 }
             }

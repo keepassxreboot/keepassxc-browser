@@ -2,7 +2,7 @@
 
 const defaultSettings = {
     afterFillSorting: SORT_BY_DEFAULT,
-    afterFillSortingTotp: SORT_BY_DEFAULT,
+    afterFillSortingTotp: SORT_BY_RELEVANT,
     autoCompleteUsernames: true,
     showGroupNameInAutocomplete: true,
     autoFillAndSend: false,
