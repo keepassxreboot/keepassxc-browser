@@ -1,5 +1,6 @@
 'use strict';
 
+const MAX_CHILDREN = 100;
 const MAX_INPUTS = 100;
 const MAX_MUTATIONS = 200;
 
@@ -168,9 +169,9 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         return [];
     }
 
-    // Do not allow more visible inputs than _maximumInputs (default value: 100) -> return the first 100
+    // Do not allow more visible inputs than MAX_INPUTS (default value: 100) -> return the first 100
     if (inputFields.length > MAX_INPUTS) {
-        return inputFields.slice(0, MAX_INPUTS);
+        inputFields = inputFields.slice(0, MAX_INPUTS);
     }
 
     // Only include input fields that match with kpxcObserverHelper.inputTypes
@@ -286,8 +287,21 @@ kpxcObserverHelper.ignoredNode = function(target) {
 // Traverses all children, including Shadow DOM elements
 const traverseChildren = function(target, children) {
     for (const child of target.childNodes) {
-        if (child.nodeName === 'INPUT' && child.type !== 'hidden' && !child.disabled ) {
+        if (child.type === 'hidden' || child.disabled) {
+            continue;
+        }
+
+        if (child.nodeName === 'INPUT') {
             children.push(child);
+        }
+
+        if (children.length === 0) {
+            continue;
+        }
+
+        // Limit the maximum number children
+        if (children.length > MAX_CHILDREN) {
+            children = children.slice(0, MAX_CHILDREN);
         }
 
         traverseChildren(child, children);
