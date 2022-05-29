@@ -1,7 +1,10 @@
 'use strict';
 
 (async () => {
+    resizePopup();
     await initColorTheme();
+
+    $('#lock-database-button').show();
 
     const global = await browser.runtime.getBackgroundPage();
     const tabs = await browser.tabs.query({ active: true, currentWindow: true });
@@ -67,10 +70,11 @@
 
         $('#credentialsList').hide();
         $('#database-not-opened').show();
+        $('#lock-database-button').hide();
         $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
     });
 
-    $('#reopen-database-button').click((e) => {
+    $('#reopen-database-button').addEventListener('click', (e) => {
         browser.runtime.sendMessage({
             action: 'get_status',
             args: [ false, true ] // Set forcePopup to true

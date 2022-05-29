@@ -1,13 +1,13 @@
 body {
-    font-family: sans-serif;
-    overflow-x: hidden;
     background-color: var(--kpxc-background-color) !important;
     color: var(--kpxc-text-color) !important;
+    display: flex;
+    font-family: sans-serif;
     font-size: 14px !important;
-    padding: 8px;
-    min-width: 440px;
-    max-width: 460px;
-    width: auto;
+    overflow: hidden;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: fit-content;
 }
 
 code {
@@ -15,9 +15,9 @@ code {
 }
 
 .container {
-    min-width: 440px;
+    display: flex;
+    flex-direction: column;
     max-width: 460px;
-    width: auto;
 }
 
 .loader {
@@ -56,6 +56,9 @@ code {
 }
 
 .settings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #333;
@@ -84,6 +87,16 @@ code {
     color: #787878;
 }
 
+.action-buttons-area {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.lock-button-area {
+    display: flex;
+    justify-content: flex-end;
+}
+
 #list {
     padding-left: 0px;
 }
@@ -108,8 +121,32 @@ code {
     display: none;
 }
 
+#options-button {
+    width: 2.5rem;
+}
+
+#choose-custom-login-fields-button {
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/custom_login_fields.svg') center no-repeat;
+    background-size: 70%;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #212529 !important;
+    height: 31px;
+    width: 2.5rem;
+}
+
+#choose-custom-login-fields-button-moz {
+    background: url('moz-extension://__MSG_@@extension_id__/icons/custom_login_fields.svg') center no-repeat;
+    background-size: 70%;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #212529 !important;
+    height: 31px;
+    width: 2.5rem;
+}
+
 #lock-database-button {
-    float: right;
+    display: none;
     width: 2.5rem;
 }
 
@@ -120,6 +157,10 @@ code {
 	margin-bottom: 5px;
 	padding: 2px 10px;
 	width: 100%;
+}
+
+#right-align {
+    text-align: right;
 }
 
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {

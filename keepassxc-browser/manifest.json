@@ -154,6 +154,7 @@
         "https://api.github.com/"
     ],
     "content_security_policy": "script-src 'self' 'sha256-UD5WN2QEhRDEZ6vkLdHKFlkHwzbemzW2ppJiOLooI8o='; object-src 'none'",
+    "content_security_policy": "script-src 'self' 'sha256-4nJ8uLezzRE3SiBFdkVN/uNwV9YTOGCqRXg6AvB5rCY='; object-src 'none'",
     "applications": {
        "gecko": {
            "id": "keepassxc-browser@keepassxc.org",
