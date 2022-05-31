@@ -23,60 +23,56 @@ kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
 
 // Fill requested from the context menu. Active element is used for combination detection
 kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
+    await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
         logDebug('Error: Credential list is empty.');
         return;
     }
 
     if (kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
-        const combination = passOnly
-            ? kpxc.combinations.find(c => c.password)
-            : kpxc.combinations.find(c => c.username);
-        if (!combination) {
-            logDebug('Error: No combination found.');
-            return;
-        }
-
-        const field = passOnly ? combination.password : combination.username;
-        if (!field) {
-            logDebug('Error: No input field found.');
-            return;
-        }
-
-        // Set focus to the input field
-        field.focus();
-
-        if (kpxc.credentials.length > 1) {
-            // More than one credential -> show autocomplete list
-            kpxcUserAutocomplete.showList(field);
-            return;
-        } else {
-            // Just one credential -> fill the first combination found
-            await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
-            kpxcFill.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
+        if (await kpxcFill.fillFromCombination(passOnly)) {
+            // Combination found and filled
             return;
         }
     }
 
     // No previous combinations detected. Create a new one from active element
     const el = document.activeElement;
-    let combination;
-    if (kpxc.combinations.length === 0) {
-        combination = await kpxc.createCombination(el);
-    } else {
-        combination = el.type === 'password'
-                    ? await kpxcFields.getCombination(el, 'password')
-                    : await kpxcFields.getCombination(el, 'username');
-    }
-
-    // Do not allow filling password to a non-password field
-    if (passOnly && combination && !combination.password) {
-        kpxcUI.createNotification('warning', tr('fieldsNoPasswordField'));
-        return;
-    }
+    const combination = await kpxc.createCombination(el, passOnly);
 
     await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
     kpxcFill.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
+};
+
+// Fill from combination, if found
+kpxcFill.fillFromCombination = async function(passOnly) {
+    const combination = passOnly
+        ? kpxc.combinations.find(c => c.password)
+        : kpxc.combinations.find(c => c.username);
+    if (!combination) {
+        logDebug('Error: No combination found.');
+        return false;
+    }
+
+    const field = passOnly ? combination.password : combination.username;
+    if (!field) {
+        logDebug('Error: No input field found.');
+        return false;
+    }
+
+    // Set focus to the input field
+    field.focus();
+
+    if (kpxc.credentials.length > 1) {
+        // More than one credential -> show autocomplete list
+        kpxcUserAutocomplete.showList(field);
+    } else {
+        // Just one credential -> fill the first combination found
+        await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
+        kpxcFill.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
+    }
+
+    return true;
 };
 
 // Fill requested by Auto-Fill
