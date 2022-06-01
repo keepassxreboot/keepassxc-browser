@@ -4,7 +4,7 @@ const MAX_AUTOCOMPLETE_NAME_LEN = 50;
 
 class Autocomplete {
     constructor() {
-        this.afterFillSort = SORT_BY_DEFAULT;
+        this.afterFillSort = SORT_BY_MATCHING_CREDENTIALS_SETTING;
         this.autocompleteList = [];
         this.autoSubmit = false;
         this.elements = [];
@@ -31,7 +31,7 @@ class Autocomplete {
 
     }
 
-    async create(input, showListInstantly = false, autoSubmit = false, afterFillSort = SORT_BY_DEFAULT) {
+    async create(input, showListInstantly = false, autoSubmit = false, afterFillSort = SORT_BY_MATCHING_CREDENTIALS_SETTING) {
         if (input.readOnly) {
             return;
         }
@@ -117,7 +117,7 @@ class Autocomplete {
 
                 // If this page has an associated uuid and it matches this credential, then put it on top of the list
                 if (username === c.value
-                    || (this.afterFillSort === SORT_BY_RELEVANT && c.uuid === pageUuid)) {
+                    || (this.afterFillSort === SORT_BY_RELEVANT_ENTRY && c.uuid === pageUuid)) {
                     this.list.prepend(item);
                 } else {
                     this.list.appendChild(item);

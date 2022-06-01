@@ -991,11 +991,11 @@
         "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
-    "optionsFillSortDefault": {
-        "message": "Default",
-        "description": "Default option for Sort after fill."
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Matching credentials setting",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
     },
-    "optionsFillSortRelevant": {
+    "optionsFillSortByRelevantEntry": {
         "message": "Relevant credential first",
         "description": "Relevatn credential first option for Sort after fill."
     },

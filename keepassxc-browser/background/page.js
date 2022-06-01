@@ -1,8 +1,8 @@
 'use strict';
 
 const defaultSettings = {
-    afterFillSorting: SORT_BY_DEFAULT,
-    afterFillSortingTotp: SORT_BY_RELEVANT,
+    afterFillSorting: SORT_BY_MATCHING_CREDENTIALS_SETTING,
+    afterFillSortingTotp: SORT_BY_RELEVANT_ENTRY,
     autoCompleteUsernames: true,
     showGroupNameInAutocomplete: true,
     autoFillAndSend: false,
