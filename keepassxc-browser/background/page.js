@@ -1,6 +1,8 @@
 'use strict';
 
 const defaultSettings = {
+    afterFillSorting: SORT_BY_MATCHING_CREDENTIALS_SETTING,
+    afterFillSortingTotp: SORT_BY_RELEVANT_ENTRY,
     autoCompleteUsernames: true,
     showGroupNameInAutocomplete: true,
     autoFillAndSend: false,
@@ -55,6 +57,14 @@ page.initSettings = async function() {
         const item = await browser.storage.local.get({ 'settings': {} });
         page.settings = item.settings;
         page.settings.autoReconnect = false;
+
+        if (!('afterFillSorting' in page.settings)) {
+            page.settings.afterFillSorting = defaultSettings.afterFillSorting;
+        }
+
+        if (!('afterFillSortingTotp' in page.settings)) {
+            page.settings.afterFillSortingTotp = defaultSettings.afterFillSortingTotp;
+        }
 
         if (!('autoCompleteUsernames' in page.settings)) {
             page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;

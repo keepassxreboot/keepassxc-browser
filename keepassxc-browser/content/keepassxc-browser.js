@@ -241,14 +241,14 @@ kpxc.initAutocomplete = function() {
 
     for (const c of kpxc.combinations) {
         if (c.username) {
-            kpxcUserAutocomplete.create(c.username, false, kpxc.settings.autoSubmit);
+            kpxcUserAutocomplete.create(c.username, false, kpxc.settings.autoSubmit, kpxc.settings.afterFillSorting);
         } else if (!c.username && c.password) {
             // Single password field
-            kpxcUserAutocomplete.create(c.password, false, kpxc.settings.autoSubmit);
+            kpxcUserAutocomplete.create(c.password, false, kpxc.settings.autoSubmit, kpxc.settings.afterFillSorting);
         }
 
         if (c.totp) {
-            kpxcTOTPAutocomplete.create(c.totp, false, kpxc.settings.autoSubmit);
+            kpxcTOTPAutocomplete.create(c.totp, false, kpxc.settings.autoSubmit, kpxc.settings.afterFillSortingTotp);
         }
     }
 };
