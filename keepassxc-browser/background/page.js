@@ -29,7 +29,10 @@ const defaultSettings = {
     usePasswordGeneratorIcons: false
 };
 
+const AUTO_SUBMIT_TIMEOUT = 5000;
+
 var page = {};
+page.autoSubmitPerformed = false;
 page.attributeMenuItemIds = [];
 page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
@@ -341,6 +344,21 @@ page.getSubmitted = async function(tab) {
 page.setSubmitted = async function(tab, args = []) {
     const [ submitted, username, password, url, oldCredentials ] = args;
     page.setSubmittedCredentials(submitted, username, password, url, oldCredentials, tab.id);
+};
+
+page.getAutoSubmitPerformed = async function(tab) {
+    return page.autoSubmitPerformed;
+};
+
+// Set autoSubmitPerformed to false after 5 seconds, preventing possible endless loops
+page.setAutoSubmitPerformed = async function(tab) {
+    if (!page.autoSubmitPerformed) {
+        page.autoSubmitPerformed = true;
+
+        setTimeout(() => {
+            page.autoSubmitPerformed = false;
+        }, AUTO_SUBMIT_TIMEOUT);
+    }
 };
 
 // Update context menu for attribute filling
