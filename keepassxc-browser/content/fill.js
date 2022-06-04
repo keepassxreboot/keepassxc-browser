@@ -278,18 +278,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
     // Reset ManualFill
     await sendMessage('page_set_manual_fill', ManualFill.NONE);
 
-    // Auto-submit
-    const autoSubmitIgnoredForSite = await kpxc.siteIgnored(IGNORE_AUTOSUBMIT);
-    if (kpxc.settings.autoSubmit && !skipAutoSubmit && !autoSubmitIgnoredForSite) {
-        const submitButton = kpxcForm.getFormSubmitButton(combination.form);
-        if (submitButton !== undefined) {
-            submitButton.click();
-        } else if (combination.form) {
-            combination.form.submit();
-        }
-    } else {
-        (combination.username || combination.password).focus();
-    }
+    await kpxcFill.performAutoSubmit(combination, skipAutoSubmit);
 };
 
 // Fills StringFields defined in Custom Fields
@@ -307,3 +296,25 @@ kpxcFill.fillInStringFields = function(fields, stringFields) {
         }
     }
 };
+
+// Performs Auto-Submit. If filling single credentials is enabled, a 5 second timeout will be needed for fill
+kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
+    const isAutoSubmitPerformed = await sendMessage('page_get_autosubmit_performed');
+    if (isAutoSubmitPerformed && kpxc.settings.autoFillSingleEntry) {
+        return;
+    }
+
+    const autoSubmitIgnoredForSite = await kpxc.siteIgnored(IGNORE_AUTOSUBMIT);
+    if (kpxc.settings.autoSubmit && !skipAutoSubmit && !autoSubmitIgnoredForSite) {
+        await sendMessage('page_set_autosubmit_performed');
+
+        const submitButton = kpxcForm.getFormSubmitButton(combination.form);
+        if (submitButton !== undefined) {
+            submitButton.click();
+        } else if (combination.form) {
+            combination.form.submit();
+        }
+    } else {
+        (combination.username || combination.password).focus();
+    }
+}
