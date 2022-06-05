@@ -108,8 +108,10 @@ kpxcIcons.hasIcon = function(field) {
 };
 
 // Sets the icons to corresponding database lock status
-kpxcIcons.switchIcons = function() {
-    kpxcUsernameIcons.switchIcon(kpxc.databaseState);
-    kpxcPasswordIcons.switchIcon(kpxc.databaseState);
-    kpxcTOTPIcons.switchIcon(kpxc.databaseState);
+kpxcIcons.switchIcons = async function() {
+    const uuid = await sendMessage('page_get_login_id');
+
+    kpxcUsernameIcons.switchIcon(kpxc.databaseState, uuid);
+    kpxcPasswordIcons.switchIcon(kpxc.databaseState, uuid);
+    kpxcTOTPIcons.switchIcon(kpxc.databaseState, uuid);
 };

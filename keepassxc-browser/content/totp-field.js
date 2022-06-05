@@ -31,8 +31,8 @@ kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECT
     kpxcTOTPIcons.icons.push(new TOTPFieldIcon(field, databaseState, segmented));
 };
 
-kpxcTOTPIcons.switchIcon = function(state) {
-    kpxcTOTPIcons.icons.forEach(u => u.switchIcon(state));
+kpxcTOTPIcons.switchIcon = function(state, uuid) {
+    kpxcTOTPIcons.icons.forEach(u => u.switchIcon(state, uuid));
 };
 
 kpxcTOTPIcons.deleteHiddenIcons = function() {
@@ -127,6 +127,8 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
 
     if (this.databaseState === DatabaseState.DISCONNECTED || this.databaseState === DatabaseState.LOCKED) {
         icon.style.filter = 'saturate(0%)';
+    } else {
+        icon.style.filter = 'saturate(100%)';
     }
 
     icon.addEventListener('click', async function(e) {
