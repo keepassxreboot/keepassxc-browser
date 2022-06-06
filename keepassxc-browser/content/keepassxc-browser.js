@@ -696,13 +696,14 @@ kpxc.siteIgnored = async function(condition) {
 // Updates database status and icons when tab is activated again
 kpxc.triggerActivatedTab = async function() {
     await kpxc.updateDatabaseState();
-    kpxcIcons.switchIcons();
 
     if (kpxc.databaseState === DatabaseState.UNLOCKED && kpxc.credentials.length === 0) {
         await kpxc.retrieveCredentials();
     } else if (kpxc.credentials.length > 0) {
         kpxc.initLoginPopup();
     }
+
+    kpxcIcons.switchIcons();
 };
 
 // Updates the database state to the content script
