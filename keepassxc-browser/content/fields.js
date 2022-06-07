@@ -149,7 +149,8 @@ kpxcFields.getCombination = async function(field, givenType) {
         if (!givenType && Object.values(combination).find(c => c === field)) {
             return combination;
         } else if (givenType && combination[givenType]) {
-            if (combination[givenType] === field || combination[givenType].includes(field)) {
+            if (combination[givenType] === field
+                || (Array.isArray(combination[givenType]) && combination[givenType].includes(field))) {
                 return combination;
             }
         }
