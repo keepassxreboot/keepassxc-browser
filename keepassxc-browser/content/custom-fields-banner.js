@@ -51,10 +51,10 @@ kpxcCustomLoginFieldsBanner.destroy = async function() {
     kpxcCustomLoginFieldsBanner.created = false;
     kpxcCustomLoginFieldsBanner.close();
 
-    if (kpxcCustomLoginFieldsBanner.wrapper && window.parent.document.body.contains(kpxcCustomLoginFieldsBanner.wrapper)) {
-        window.parent.document.body.removeChild(kpxcCustomLoginFieldsBanner.wrapper);
+    if (kpxcCustomLoginFieldsBanner.wrapper && window.self.document.body.contains(kpxcCustomLoginFieldsBanner.wrapper)) {
+        window.self.document.body.removeChild(kpxcCustomLoginFieldsBanner.wrapper);
     } else {
-        window.parent.document.body.removeChild(window.parent.document.body.querySelector('#kpxc-banner'));
+        window.self.document.body.removeChild(window.parent.document.body.querySelector('#kpxc-banner'));
     }
 };
 
@@ -112,6 +112,9 @@ kpxcCustomLoginFieldsBanner.create = async function() {
     kpxcCustomLoginFieldsBanner.buttons.clearData.style.display
         = kpxc.settings['defined-custom-fields'] && kpxc.settings['defined-custom-fields'][location]
             ? 'inline-block' : 'none';
+    if (window.self !== window.top && kpxcCustomLoginFieldsBanner.buttons.clearData.style.display === 'inline-block') {
+        sendMessageToParent('enable_clear_data_button');
+    }
 
     initColorTheme(banner);
 
@@ -126,13 +129,26 @@ kpxcCustomLoginFieldsBanner.create = async function() {
     this.shadowRoot.append(bannerStyleSheet);
     this.shadowRoot.append(defineStyleSheet);
     this.shadowRoot.append(buttonStyleSheet);
-    this.shadowRoot.append(banner);
+
+    // Only create the banner to top window
+    if (window.self === window.top) {
+        this.shadowRoot.append(banner);
+    }
+
     this.shadowRoot.append(kpxcCustomLoginFieldsBanner.chooser);
     kpxcCustomLoginFieldsBanner.wrapper = wrapper;
 
-    if (window.self === window.top && !kpxcCustomLoginFieldsBanner.created) {
-        window.parent.document.body.appendChild(wrapper);
+    if (!kpxcCustomLoginFieldsBanner.created) {
+        window.self.document.body.appendChild(wrapper);
         kpxcCustomLoginFieldsBanner.created = true;
+
+        if (window.self === window.top) {
+            // Listen messages from iframes
+            window.addEventListener('message', handleTopWindowMessage, false);
+        } else {
+            // Listen messages from top window
+            window.addEventListener('message', handleParentWindowMessage, false);
+        }
     }
 
     document.addEventListener('keydown', kpxcCustomLoginFieldsBanner.keyDown);
@@ -168,6 +184,8 @@ kpxcCustomLoginFieldsBanner.usernameButtonClicked = function(e) {
 
     kpxcCustomLoginFieldsBanner.prepareUsernameSelection();
     kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = true;
+
+    sendMessageToFrames('username_button_clicked');
 };
 
 kpxcCustomLoginFieldsBanner.passwordButtonClicked = function(e) {
@@ -184,6 +202,8 @@ kpxcCustomLoginFieldsBanner.passwordButtonClicked = function(e) {
 
     kpxcCustomLoginFieldsBanner.preparePasswordSelection();
     kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = true;
+
+    sendMessageToFrames('password_button_clicked');
 };
 
 kpxcCustomLoginFieldsBanner.totpButtonClicked = function(e) {
@@ -200,6 +220,8 @@ kpxcCustomLoginFieldsBanner.totpButtonClicked = function(e) {
 
     kpxcCustomLoginFieldsBanner.prepareTOTPSelection();
     kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = true;
+
+    sendMessageToFrames('totp_button_clicked');
 };
 
 kpxcCustomLoginFieldsBanner.stringFieldsButtonClicked = function(e) {
@@ -208,7 +230,7 @@ kpxcCustomLoginFieldsBanner.stringFieldsButtonClicked = function(e) {
         return;
     }
 
-    // Reset TOTP field selection if already set
+    // Reset String Field selection if already set
     if (kpxcCustomLoginFieldsBanner.selection.fields.length > 0) {
         for (const field of kpxcCustomLoginFieldsBanner.selection.fields) {
             kpxcCustomLoginFieldsBanner.removeSelection(field, `div.${STRING_FIELD_CLASS}`);
@@ -219,6 +241,8 @@ kpxcCustomLoginFieldsBanner.stringFieldsButtonClicked = function(e) {
 
     kpxcCustomLoginFieldsBanner.prepareStringFieldSelection();
     kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = true;
+
+    sendMessageToFrames('string_field_button_clicked');
 };
 
 kpxcCustomLoginFieldsBanner.closeButtonClicked = function(e) {
@@ -227,6 +251,8 @@ kpxcCustomLoginFieldsBanner.closeButtonClicked = function(e) {
     }
 
     kpxcCustomLoginFieldsBanner.destroy();
+
+    sendMessageToFrames('close_button_clicked');
 };
 
 // Updates the possible selections if the page content has been changed
@@ -258,6 +284,8 @@ kpxcCustomLoginFieldsBanner.reset = function() {
     kpxcCustomLoginFieldsBanner.dataStep = STEP_NONE;
 
     kpxcCustomLoginFieldsBanner.enableAllButtons();
+
+    sendMessageToFrames('reset_button_clicked');
 };
 
 // Confirm and save the selections
@@ -317,6 +345,8 @@ kpxcCustomLoginFieldsBanner.confirm = async function() {
 
     await sendMessage('save_settings', kpxc.settings);
     kpxcCustomLoginFieldsBanner.destroy();
+
+    sendMessageToFrames('confirm_button_clicked');
 };
 
 // Clears the previously saved data from settings
@@ -328,6 +358,8 @@ kpxcCustomLoginFieldsBanner.clearData = async function() {
     await sendMessage('load_settings');
 
     kpxcCustomLoginFieldsBanner.buttons.clearData.style.display = 'none';
+
+    sendMessageToFrames('clear_data_button_clicked');
 };
 
 // Resets all selections and marked fields
@@ -407,7 +439,10 @@ kpxcCustomLoginFieldsBanner.getSelectedField = function(e, elem) {
 };
 
 kpxcCustomLoginFieldsBanner.setSelectedField = function(elem) {
-    kpxcCustomLoginFieldsBanner.markedFields.push(elem);
+    if (elem) {
+        kpxcCustomLoginFieldsBanner.markedFields.push(elem);
+    }
+
     kpxcCustomLoginFieldsBanner.buttons.confirm.disabled = false;
     kpxcCustomLoginFieldsBanner.buttons.close.textContent = tr('optionsButtonCancel');
 };
@@ -429,6 +464,7 @@ kpxcCustomLoginFieldsBanner.selectUserNameField = function() {
         kpxcCustomLoginFieldsBanner.backToStart();
 
         kpxcCustomLoginFieldsBanner.buttons.username.classList.add(GRAY_BUTTON_CLASS);
+        sendMessageToParent('username_selected', kpxcCustomLoginFieldsBanner.selection.username);
     };
 
     kpxcCustomLoginFieldsBanner.markFields();
@@ -451,6 +487,7 @@ kpxcCustomLoginFieldsBanner.selectPasswordField = function() {
         kpxcCustomLoginFieldsBanner.backToStart();
 
         kpxcCustomLoginFieldsBanner.buttons.password.classList.add(GRAY_BUTTON_CLASS);
+        sendMessageToParent('password_selected', kpxcCustomLoginFieldsBanner.selection.password);
     };
 
     kpxcCustomLoginFieldsBanner.markFields();
@@ -473,6 +510,7 @@ kpxcCustomLoginFieldsBanner.selectTOTPField = function() {
         kpxcCustomLoginFieldsBanner.backToStart();
 
         kpxcCustomLoginFieldsBanner.buttons.totp.classList.add(GRAY_BUTTON_CLASS);
+        sendMessageToParent('totp_selected', kpxcCustomLoginFieldsBanner.selection.totp);
     };
 
     kpxcCustomLoginFieldsBanner.markFields();
@@ -493,6 +531,7 @@ kpxcCustomLoginFieldsBanner.selectStringFields = function() {
         field.onclick = undefined;
 
         kpxcCustomLoginFieldsBanner.buttons.stringFields.classList.add(GRAY_BUTTON_CLASS);
+        sendMessageToParent('string_field_selected', kpxcCustomLoginFieldsBanner.selection.fields);
     };
 
     kpxcCustomLoginFieldsBanner.markFields();
@@ -604,3 +643,98 @@ const inputFieldIsSelected = function(field) {
 
     return false;
 };
+
+//--------------------------------------------------------------------------
+// IFrame support
+//--------------------------------------------------------------------------
+
+// A simple check for top-level-domain
+const topLevelDomainMatches = function(host) {
+    if (!host) {
+        return false;
+    }
+
+    const originUrl = new URL(host);
+    const frameUrl = new URL(window.self.document.location.origin);
+    const urlParts = originUrl.host.split('.');
+    const dotCount = urlParts.length - 1;
+
+    // Simple host like google.com, check directly
+    if (dotCount < 1) {
+        return false;
+    } else if (dotCount === 1) {
+        return frameUrl.host.includes(originUrl.host);
+    }
+
+    // Get the top-level-domain using counts of '.' but backwards, max 3.
+    // A basic host is like idmsa.apple.com, a more complex one like www.bbva.com.ar.
+    const index = Math.min(dotCount, 3);
+    const subDomain = `${urlParts[dotCount - index]}.`;
+    const topLevelDomain = originUrl.host.substring(originUrl.host.indexOf(subDomain) + subDomain.length);
+
+    return frameUrl.host.includes(topLevelDomain);
+};
+
+// Handles messages sent from iframes to the top window
+const handleTopWindowMessage = function(e) {
+    if (!topLevelDomainMatches(e.origin)) {
+        return;
+    }
+
+    if (e.data.message === 'username_selected') {
+        kpxcCustomLoginFieldsBanner.selection.username = e.data.selection;
+        kpxcCustomLoginFieldsBanner.setSelectedField();
+    } else if (e.data.message === 'password_selected') {
+        kpxcCustomLoginFieldsBanner.selection.password = e.data.selection;
+        kpxcCustomLoginFieldsBanner.setSelectedField();
+    } else if (e.data.message === 'totp_selected') {
+        kpxcCustomLoginFieldsBanner.selection.totp = e.data.selection;
+        kpxcCustomLoginFieldsBanner.setSelectedField();
+    } else if (e.data.message === 'string_field_selected') {
+        kpxcCustomLoginFieldsBanner.selection.stringFields = e.data.selection;
+        kpxcCustomLoginFieldsBanner.setSelectedField();
+    } else if (e.data.message === 'enable_clear_data_button') {
+        kpxcCustomLoginFieldsBanner.buttons.clearData.style.display = 'inline-block';
+    }
+};
+
+// Handle Banner button clicks from the top window
+const handleParentWindowMessage = function(e) {
+    if (!topLevelDomainMatches(e.origin)) {
+        return;
+    }
+
+    if (e.data === 'username_button_clicked') {
+        kpxcCustomLoginFieldsBanner.usernameButtonClicked(e);
+    } else if (e.data === 'password_button_clicked') {
+        kpxcCustomLoginFieldsBanner.passwordButtonClicked(e);
+    } else if (e.data === 'totp_button_clicked') {
+        kpxcCustomLoginFieldsBanner.totpButtonClicked(e);
+    } else if (e.data === 'string_field_button_clicked') {
+        kpxcCustomLoginFieldsBanner.stringFieldsButtonClicked(e);
+    } else if (e.data === 'reset_button_clicked') {
+        kpxcCustomLoginFieldsBanner.reset();
+    } else if (e.data === 'close_button_clicked') {
+        kpxcCustomLoginFieldsBanner.closeButtonClicked(e);
+    } else if (e.data === 'confirm_button_clicked') {
+        kpxcCustomLoginFieldsBanner.confirm();
+    } else if (e.data === 'clear_data_button_clicked') {
+        kpxcCustomLoginFieldsBanner.clearData();
+    }
+};
+
+// Sends messages to all iframes. Works only from the top window.
+const sendMessageToFrames = function(message) {
+    if (window.self === window.top) {
+        for (var i = 0; i < window.frames.length; i++) {
+            frames[i].postMessage(message, '*');
+        }
+    }
+};
+
+// Sends message to parent window. Works only from iframes.
+const sendMessageToParent = function(message, selection) {
+    if (window.self !== window.top) {
+        window.top.postMessage({ message, selection }, '*');
+    }
+}
