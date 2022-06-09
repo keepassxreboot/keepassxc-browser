@@ -37,11 +37,16 @@ browser.tabs.onCreated.addListener((tab) => {
  * @param {integer} tabId
  * @param {object} removeInfo
  */
-browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
-    delete page.tabs[tabId];
+browser.tabs.onRemoved.addListener(async function(tabId, removeInfo) {
     if (page.currentTabId === tabId) {
-        page.currentTabId = -1;
+        const activeTabs = await browser.tabs.query({ active: true, currentWindow: true });
+        if (activeTabs.length > 0) {
+            page.currentTabId = activeTabs[0].id;
+        } else {
+            page.currentTabId = -1;
+        }
     }
+    delete page.tabs[tabId];
 });
 
 /**
