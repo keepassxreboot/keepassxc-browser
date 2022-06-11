@@ -146,13 +146,14 @@ kpxcFields.getAllPageInputs = async function(previousInputs = []) {
 kpxcFields.getCombination = async function(field, givenType) {
     // If givenType is not set, return the combination that uses the selected field
     for (const combination of kpxc.combinations) {
-        if (!givenType && Object.values(combination).find(c => c === field)) {
-            return combination;
-        } else if (givenType && combination[givenType]) {
-            if (combination[givenType] === field
-                || (Array.isArray(combination[givenType]) && combination[givenType].includes(field))) {
+        if (givenType) {
+            // Strictly search a given type
+            const c = combination[givenType];
+            if (c && (c === field || (Array.isArray(c) && c.includes(field)))) {
                 return combination;
             }
+        } else if (Object.values(combination).find(c => c === field)) {
+            return combination;
         }
     }
 
