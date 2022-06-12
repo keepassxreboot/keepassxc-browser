@@ -179,6 +179,10 @@
         "message": "Username field icon",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "Fill TOTP from KeePassXC",
         "description": "OTP field icon hover text."

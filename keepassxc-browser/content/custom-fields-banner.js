@@ -6,8 +6,12 @@ const STEP_SELECT_PASSWORD = 2;
 const STEP_SELECT_TOTP = 3;
 const STEP_SELECT_STRING_FIELDS = 4;
 
+const DEFINED_CUSTOM_FIELDS = 'defined-custom-fields';
 const FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field';
+const DARK_FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field-dark';
 const HOVER_FIELD_CLASS = 'kpxcDefine-fixed-hover-field';
+const DARK_HOVER_FIELD_CLASS = 'kpxcDefine-fixed-hover-field-dark';
+const DARK_TEXT_CLASS = 'kpxcDefine-dark-text';
 const USERNAME_FIELD_CLASS = 'kpxcDefine-fixed-username-field';
 const PASSWORD_FIELD_CLASS = 'kpxcDefine-fixed-password-field';
 const TOTP_FIELD_CLASS = 'kpxcDefine-fixed-totp-field';
@@ -110,7 +114,7 @@ kpxcCustomLoginFieldsBanner.create = async function() {
 
     const location = kpxc.getDocumentLocation();
     kpxcCustomLoginFieldsBanner.buttons.clearData.style.display
-        = kpxc.settings['defined-custom-fields'] && kpxc.settings['defined-custom-fields'][location]
+        = kpxc.settings[DEFINED_CUSTOM_FIELDS] && kpxc.settings[DEFINED_CUSTOM_FIELDS][location]
             ? 'inline-block' : 'none';
     if (window.self !== window.top && kpxcCustomLoginFieldsBanner.buttons.clearData.style.display === 'inline-block') {
         sendMessageToParent('enable_clear_data_button');
@@ -290,19 +294,19 @@ kpxcCustomLoginFieldsBanner.reset = function() {
 
 // Confirm and save the selections
 kpxcCustomLoginFieldsBanner.confirm = async function() {
-    if (!kpxc.settings['defined-custom-fields']) {
-        kpxc.settings['defined-custom-fields'] = {};
+    if (!kpxc.settings[DEFINED_CUSTOM_FIELDS]) {
+        kpxc.settings[DEFINED_CUSTOM_FIELDS] = {};
     }
 
     // If the new selection is already used in some other field, clear it
     const clearIdenticalField = function(path, location) {
-        const currentSite = kpxc.settings['defined-custom-fields'][location];
+        const currentSite = kpxc.settings[DEFINED_CUSTOM_FIELDS][location];
         if (currentSite.username && currentSite.username[0] === path[0]) {
-            kpxc.settings['defined-custom-fields'][location].username = undefined;
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].username = undefined;
         } else if (currentSite.password && currentSite.password[0] === path[0]) {
-            kpxc.settings['defined-custom-fields'][location].password = undefined;
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].password = undefined;
         } else if (currentSite.totp && currentSite.totp[0] === path[0]) {
-            kpxc.settings['defined-custom-fields'][location].totp = undefined;
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].totp = undefined;
         }
     };
 
@@ -311,31 +315,31 @@ kpxcCustomLoginFieldsBanner.confirm = async function() {
     const totpPath = kpxcCustomLoginFieldsBanner.selection.totp;
     const stringFieldsPaths = kpxcCustomLoginFieldsBanner.selection.fields;
     const location = kpxc.getDocumentLocation();
-    const currentSettings = kpxc.settings['defined-custom-fields'][location];
+    const currentSettings = kpxc.settings[DEFINED_CUSTOM_FIELDS][location];
 
     if (currentSettings) {
         // Update the single selection to current settings
         if (usernamePath) {
             clearIdenticalField(usernamePath, location);
-            kpxc.settings['defined-custom-fields'][location].username = usernamePath;
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].username = usernamePath;
         }
 
         if (passwordPath) {
             clearIdenticalField(passwordPath, location);
-            kpxc.settings['defined-custom-fields'][location].password = passwordPath;
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].password = passwordPath;
         }
 
         if (totpPath) {
             clearIdenticalField(totpPath, location);
-            kpxc.settings['defined-custom-fields'][location].totp = totpPath;
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].totp = totpPath;
         }
 
         if (stringFieldsPaths.length > 0) {
-            kpxc.settings['defined-custom-fields'][location].fields = stringFieldsPaths;
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].fields = stringFieldsPaths;
         }
     } else {
         // Override all fields (default)
-        kpxc.settings['defined-custom-fields'][location] = {
+        kpxc.settings[DEFINED_CUSTOM_FIELDS][location] = {
             username: usernamePath,
             password: passwordPath,
             totp: totpPath,
@@ -352,7 +356,7 @@ kpxcCustomLoginFieldsBanner.confirm = async function() {
 // Clears the previously saved data from settings
 kpxcCustomLoginFieldsBanner.clearData = async function() {
     const location = kpxc.getDocumentLocation();
-    delete kpxc.settings['defined-custom-fields'][location];
+    delete kpxc.settings[DEFINED_CUSTOM_FIELDS][location];
 
     await sendMessage('save_settings', kpxc.settings);
     await sendMessage('load_settings');
@@ -386,21 +390,21 @@ kpxcCustomLoginFieldsBanner.prepareUsernameSelection = function() {
     kpxcCustomLoginFieldsBanner.infoText.textContent = tr('defineChooseUsername');
     kpxcCustomLoginFieldsBanner.dataStep = STEP_SELECT_USERNAME;
     kpxcCustomLoginFieldsBanner.buttons.username.classList.remove(GRAY_BUTTON_CLASS);
-    kpxcCustomLoginFieldsBanner.selectUserNameField();
+    kpxcCustomLoginFieldsBanner.selectField('username');
 };
 
 kpxcCustomLoginFieldsBanner.preparePasswordSelection = function() {
     kpxcCustomLoginFieldsBanner.infoText.textContent = tr('defineChoosePassword');
     kpxcCustomLoginFieldsBanner.dataStep = STEP_SELECT_PASSWORD;
     kpxcCustomLoginFieldsBanner.buttons.password.classList.remove(GRAY_BUTTON_CLASS);
-    kpxcCustomLoginFieldsBanner.selectPasswordField();
+    kpxcCustomLoginFieldsBanner.selectField('password');
 };
 
 kpxcCustomLoginFieldsBanner.prepareTOTPSelection = function() {
     kpxcCustomLoginFieldsBanner.infoText.textContent = tr('defineChooseTOTP');
     kpxcCustomLoginFieldsBanner.dataStep = STEP_SELECT_TOTP;
     kpxcCustomLoginFieldsBanner.buttons.totp.classList.remove(GRAY_BUTTON_CLASS);
-    kpxcCustomLoginFieldsBanner.selectTOTPField();
+    kpxcCustomLoginFieldsBanner.selectField('totp');
 };
 
 kpxcCustomLoginFieldsBanner.prepareStringFieldSelection = function() {
@@ -447,80 +451,43 @@ kpxcCustomLoginFieldsBanner.setSelectedField = function(elem) {
     kpxcCustomLoginFieldsBanner.buttons.close.textContent = tr('optionsButtonCancel');
 };
 
-kpxcCustomLoginFieldsBanner.selectUserNameField = function() {
-    kpxcCustomLoginFieldsBanner.eventFieldClick = function(e, elem) {
-        const field = kpxcCustomLoginFieldsBanner.getSelectedField(e, elem);
+// Expects 'username', 'password' or 'totp'
+kpxcCustomLoginFieldsBanner.selectField = function(fieldType) {
+    kpxcCustomLoginFieldsBanner.eventFieldClick = function(e) {
+        const field = kpxcCustomLoginFieldsBanner.getSelectedField(e);
         if (!field) {
             return;
         }
 
-        field.classList.add(USERNAME_FIELD_CLASS);
-        field.textContent = tr('username');
-        field.onclick = undefined;
-
-        kpxcCustomLoginFieldsBanner.selection.username = kpxcFields.setId(field.originalElement);
-        kpxcCustomLoginFieldsBanner.selection.usernameElement = field.originalElement;
-        kpxcCustomLoginFieldsBanner.setSelectedField(field.originalElement);
-        kpxcCustomLoginFieldsBanner.backToStart();
-
-        kpxcCustomLoginFieldsBanner.buttons.username.classList.add(GRAY_BUTTON_CLASS);
-        sendMessageToParent('username_selected', kpxcCustomLoginFieldsBanner.selection.username);
-    };
-
-    kpxcCustomLoginFieldsBanner.markFields();
-};
-
-kpxcCustomLoginFieldsBanner.selectPasswordField = function() {
-    kpxcCustomLoginFieldsBanner.eventFieldClick = function(e, elem) {
-        const field = kpxcCustomLoginFieldsBanner.getSelectedField(e, elem);
-        if (!field) {
-            return;
+        if (isLightThemeBackground(field.originalElement)) {
+            field.classList.add(DARK_TEXT_CLASS);
         }
 
-        field.classList.add(PASSWORD_FIELD_CLASS);
-        field.textContent = tr('password');
+        field.classList.add(`kpxcDefine-fixed-${fieldType}-field`);
+        field.textContent = tr(fieldType);
         field.onclick = undefined;
 
-        kpxcCustomLoginFieldsBanner.selection.password = kpxcFields.setId(field.originalElement);
-        kpxcCustomLoginFieldsBanner.selection.passwordElement = field.originalElement;
+        kpxcCustomLoginFieldsBanner.selection[fieldType] = kpxcFields.setId(field.originalElement);
+        kpxcCustomLoginFieldsBanner.selection[`${fieldType}Element`] = field.originalElement;
         kpxcCustomLoginFieldsBanner.setSelectedField(field.originalElement);
         kpxcCustomLoginFieldsBanner.backToStart();
 
-        kpxcCustomLoginFieldsBanner.buttons.password.classList.add(GRAY_BUTTON_CLASS);
-        sendMessageToParent('password_selected', kpxcCustomLoginFieldsBanner.selection.password);
-    };
-
-    kpxcCustomLoginFieldsBanner.markFields();
-};
-
-kpxcCustomLoginFieldsBanner.selectTOTPField = function() {
-    kpxcCustomLoginFieldsBanner.eventFieldClick = function(e, elem) {
-        const field = kpxcCustomLoginFieldsBanner.getSelectedField(e, elem);
-        if (!field) {
-            return;
-        }
-
-        field.classList.add(TOTP_FIELD_CLASS);
-        field.textContent = 'TOTP';
-        field.onclick = undefined;
-
-        kpxcCustomLoginFieldsBanner.selection.totp = kpxcFields.setId(field.originalElement);
-        kpxcCustomLoginFieldsBanner.selection.totpElement = field.originalElement;
-        kpxcCustomLoginFieldsBanner.setSelectedField(field.originalElement);
-        kpxcCustomLoginFieldsBanner.backToStart();
-
-        kpxcCustomLoginFieldsBanner.buttons.totp.classList.add(GRAY_BUTTON_CLASS);
-        sendMessageToParent('totp_selected', kpxcCustomLoginFieldsBanner.selection.totp);
+        kpxcCustomLoginFieldsBanner.buttons[fieldType].classList.add(GRAY_BUTTON_CLASS);
+        sendMessageToParent(`${fieldType}_selected`, kpxcCustomLoginFieldsBanner.selection[fieldType]);
     };
 
     kpxcCustomLoginFieldsBanner.markFields();
 };
 
 kpxcCustomLoginFieldsBanner.selectStringFields = function() {
-    kpxcCustomLoginFieldsBanner.eventFieldClick = function(e, elem) {
-        const field = kpxcCustomLoginFieldsBanner.getSelectedField(e, elem);
+    kpxcCustomLoginFieldsBanner.eventFieldClick = function(e) {
+        const field = kpxcCustomLoginFieldsBanner.getSelectedField(e);
         if (!field) {
             return;
+        }
+
+        if (isLightThemeBackground(field.originalElement)) {
+            field.classList.add(DARK_TEXT_CLASS);
         }
 
         kpxcCustomLoginFieldsBanner.selection.fields.push(kpxcFields.setId(field.originalElement));
@@ -558,16 +525,22 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
         field.style.height = Pixels(rect.height);
         field.textContent = String(index);
 
+        // Change selection theme if needed
+        const isLightTheme = isLightThemeBackground(i);
+        if (isLightTheme) {
+            field.classList.add(DARK_FIXED_FIELD_CLASS);
+        }
+
         field.addEventListener('click', function(e) {
             kpxcCustomLoginFieldsBanner.eventFieldClick(e);
         });
 
         field.addEventListener('mouseenter', function() {
-            field.classList.add(HOVER_FIELD_CLASS);
+            field.classList.add(isLightTheme ? DARK_HOVER_FIELD_CLASS : HOVER_FIELD_CLASS);
         });
 
         field.addEventListener('mouseleave', function() {
-            field.classList.remove(HOVER_FIELD_CLASS);
+            field.classList.remove(HOVER_FIELD_CLASS, DARK_HOVER_FIELD_CLASS);
         });
 
         i.addEventListener('focus', function() {
@@ -642,6 +615,18 @@ const inputFieldIsSelected = function(field) {
     }
 
     return false;
+};
+
+// Checks if an element has a light background, using luminance. Luminance with >= 0.5 is considered 'light'.
+const isLightThemeBackground = function(elem) {
+    const inputStyle = getComputedStyle(elem);
+    const bgColor = inputStyle.backgroundColor.match(/[\.\d]+/g).map(e => Number(e));
+    if (bgColor.length < 3) {
+        return false;
+    }
+
+    const luminance = 0.299 * bgColor[0] + 0.587 * bgColor[1] + 0.114 * bgColor[2];
+    return luminance >= 128;
 };
 
 //--------------------------------------------------------------------------
