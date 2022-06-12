@@ -127,8 +127,8 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     const rect = field.getBoundingClientRect();
     const size = Number(icon.getAttribute('size'));
     const offset = kpxcUI.calculateIconOffset(field, size);
-    let left = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
-    let top = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
+    let left = kpxcUI.getRelativeLeftPosition(rect);
+    let top = kpxcUI.getRelativeTopPosition(rect);
 
     // Add more space for the icon to show it at the right side of the field if TOTP fields are segmented
     if (segmented) {
@@ -148,6 +148,14 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     icon.style.left = rtl
                     ? Pixels((left + scrollLeft) + offset)
                     : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
+};
+
+kpxcUI.getRelativeLeftPosition = function(rect) {
+    return kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
+};
+
+kpxcUI.getRelativeTopPosition = function(rect) {
+    return kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
 };
 
 kpxcUI.deleteHiddenIcons = function(iconList, attr) {

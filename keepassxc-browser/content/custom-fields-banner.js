@@ -544,14 +544,17 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
         });
 
         i.addEventListener('focus', function() {
-            field.classList.add(HOVER_FIELD_CLASS);
+            field.classList.add(isLightTheme ? DARK_HOVER_FIELD_CLASS : HOVER_FIELD_CLASS);
         });
 
         i.addEventListener('blur', function() {
-            field.classList.remove(HOVER_FIELD_CLASS);
+            field.classList.remove(HOVER_FIELD_CLASS, DARK_HOVER_FIELD_CLASS);
         });
 
         if (kpxcCustomLoginFieldsBanner.chooser) {
+            kpxcCustomLoginFieldsBanner.setSelectionPosition(field);
+            kpxcCustomLoginFieldsBanner.monitorSelectionPosition(field);
+
             kpxcCustomLoginFieldsBanner.chooser.append(field);
             firstInput = field;
             ++index;
@@ -599,6 +602,32 @@ kpxcCustomLoginFieldsBanner.keyDown = function(e) {
         }
     }
 };
+
+// Detect page scroll or resize changes
+kpxcCustomLoginFieldsBanner.monitorSelectionPosition = function(selection) {
+    // Handle icon position on resize
+    window.addEventListener('resize', function(e) {
+        kpxcCustomLoginFieldsBanner.setSelectionPosition(selection);
+    });
+
+    // Handle icon position on scroll
+    window.addEventListener('scroll', function(e) {
+        kpxcCustomLoginFieldsBanner.setSelectionPosition(selection);
+    });
+};
+
+// Set selection input field position dynamically including the scroll position
+kpxcCustomLoginFieldsBanner.setSelectionPosition = function(field) {
+    const rect = field.originalElement.getBoundingClientRect();
+    const left = kpxcUI.getRelativeLeftPosition(rect);
+    const top = kpxcUI.getRelativeTopPosition(rect);
+    const scrollTop = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
+    const scrollLeft = document.scrollingElement ? document.scrollingElement.scrollLeft : 0;
+
+    field.style.top = Pixels(top + scrollTop);
+    field.style.left = Pixels(left + scrollLeft);
+};
+
 
 const removeContent = function(pattern) {
     const elems = kpxcCustomLoginFieldsBanner.chooser.querySelectorAll(pattern);
