@@ -642,7 +642,7 @@ const inputFieldIsSelected = function(field) {
     return false;
 };
 
-// Checks if an element has a light background, using luminance. Luminance with >= 0.5 is considered 'light'.
+// Checks if an element has a light background, using luminance. Luminance with >= 127 is considered 'light'.
 const isLightThemeBackground = function(elem) {
     const inputStyle = getComputedStyle(elem);
     const bgColor = inputStyle.backgroundColor.match(/[\.\d]+/g).map(e => Number(e));
