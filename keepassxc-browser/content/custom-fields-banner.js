@@ -27,6 +27,7 @@ kpxcCustomLoginFieldsBanner.infoText = undefined;
 kpxcCustomLoginFieldsBanner.wrapper = undefined;
 kpxcCustomLoginFieldsBanner.inputQueryPattern = 'input:not([type=button]):not([type=checkbox]):not([type=color]):not([type=date]):not([type=datetime-local]):not([type=file]):not([type=hidden]):not([type=image]):not([type=month]):not([type=range]):not([type=reset]):not([type=submit]):not([type=time]):not([type=week]), select, textarea';
 kpxcCustomLoginFieldsBanner.markedFields = [];
+kpxcCustomLoginFieldsBanner.nonSelectedElementsPattern = `div.${FIXED_FIELD_CLASS}:not(.${USERNAME_FIELD_CLASS}):not(.${PASSWORD_FIELD_CLASS}):not(.${TOTP_FIELD_CLASS}):not(.${STRING_FIELD_CLASS})`;
 
 kpxcCustomLoginFieldsBanner.selection = {
     username: undefined,
@@ -494,7 +495,7 @@ kpxcCustomLoginFieldsBanner.selectStringFields = function() {
         kpxcCustomLoginFieldsBanner.setSelectedField(field.originalElement);
 
         field.classList.add(STRING_FIELD_CLASS);
-        field.textContent = tr('defineStringField') + String(kpxcCustomLoginFieldsBanner.selection.fields.length);
+        field.textContent = `${tr('defineStringField')} #${String(kpxcCustomLoginFieldsBanner.selection.fields.length)}`;
         field.onclick = undefined;
 
         kpxcCustomLoginFieldsBanner.buttons.stringFields.classList.add(GRAY_BUTTON_CLASS);
@@ -510,8 +511,12 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
     const inputs = document.querySelectorAll(kpxcCustomLoginFieldsBanner.inputQueryPattern);
 
     for (const i of inputs) {
-        if (kpxcCustomLoginFieldsBanner.isFieldSelected(i)
-            || inputFieldIsSelected(i)) {
+        if (kpxcCustomLoginFieldsBanner.isFieldSelected(i) || inputFieldIsSelected(i)) {
+            // Switch texts to current selection type
+            for (const selection of kpxcCustomLoginFieldsBanner.getNonSelectedElements()) {
+                selection.textContent = dataStepToString();
+            }
+
             continue;
         }
 
@@ -523,7 +528,7 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
         field.style.left = Pixels(rect.left);
         field.style.width = Pixels(rect.width);
         field.style.height = Pixels(rect.height);
-        field.textContent = String(index);
+        field.textContent = dataStepToString();
 
         // Change selection theme if needed
         const isLightTheme = isLightThemeBackground(i);
@@ -568,7 +573,7 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
 
 // Returns to start after a single selection
 kpxcCustomLoginFieldsBanner.backToStart = function() {
-    removeContent(`div.${FIXED_FIELD_CLASS}:not(.${USERNAME_FIELD_CLASS}):not(.${PASSWORD_FIELD_CLASS}):not(.${TOTP_FIELD_CLASS}):not(.${STRING_FIELD_CLASS})`);
+    removeContent(kpxcCustomLoginFieldsBanner.nonSelectedElementsPattern);
     kpxcCustomLoginFieldsBanner.infoText.textContent = tr('defineChooseCustomLoginFieldText');
     kpxcCustomLoginFieldsBanner.dataStep = STEP_NONE;
 
@@ -587,18 +592,6 @@ kpxcCustomLoginFieldsBanner.keyDown = function(e) {
             kpxcCustomLoginFieldsBanner.destroy();
         } else {
             kpxcCustomLoginFieldsBanner.backToStart();
-        }
-    } else if (e.keyCode >= 49 && e.keyCode <= 57) {
-        // Select input field by number
-        e.preventDefault();
-
-        const index = e.keyCode - 48;
-        const inputFields
-            = [ ...kpxcCustomLoginFieldsBanner.chooser.children ].filter(c => !c.classList.contains(USERNAME_FIELD_CLASS)
-                && !c.classList.contains(PASSWORD_FIELD_CLASS) && !c.classList.contains(TOTP_FIELD_CLASS));
-
-        if (inputFields.length >= index) {
-            kpxcCustomLoginFieldsBanner.eventFieldClick(e, inputFields[index - 1]);
         }
     }
 };
@@ -628,6 +621,9 @@ kpxcCustomLoginFieldsBanner.setSelectionPosition = function(field) {
     field.style.left = Pixels(left + scrollLeft);
 };
 
+kpxcCustomLoginFieldsBanner.getNonSelectedElements = function() {
+    return kpxcCustomLoginFieldsBanner.chooser.querySelectorAll(kpxcCustomLoginFieldsBanner.nonSelectedElementsPattern);
+};
 
 const removeContent = function(pattern) {
     const elems = kpxcCustomLoginFieldsBanner.chooser.querySelectorAll(pattern);
@@ -657,6 +653,18 @@ const isLightThemeBackground = function(elem) {
     const luminance = 0.299 * bgColor[0] + 0.587 * bgColor[1] + 0.114 * bgColor[2];
     return luminance >= 128;
 };
+
+const dataStepToString = function() {
+    if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_USERNAME) {
+        return tr('username');
+    } else if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_PASSWORD) {
+        return tr('password');
+    } else if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_TOTP) {
+        return tr('totp');
+    } else if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_STRING_FIELDS) {
+        return tr('defineStringField');
+    }
+}
 
 //--------------------------------------------------------------------------
 // IFrame support

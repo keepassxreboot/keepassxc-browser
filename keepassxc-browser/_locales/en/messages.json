@@ -220,7 +220,7 @@
         "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "String field #",
+        "message": "String field",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
