@@ -88,7 +88,7 @@ keepass.updateCredentials = async function(tab, args = []) {
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
         if (response) {
             // KeePassXC versions lower than 2.5.0 will have an empty parsed.error
-            let successMessage = parsed.error;
+            let successMessage = response.error;
             if (response.error === 'success' || response.error === '') {
                 successMessage = entryId ? 'updated' : 'created';
             }
