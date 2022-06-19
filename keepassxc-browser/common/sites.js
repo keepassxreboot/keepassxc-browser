@@ -34,6 +34,7 @@ const PREDEFINED_SITELIST = [
     'https://idmsa.apple.com/*',
     'https://secure.soundcloud.com/*',
     'https://icloud.com/*',
+    'https://signin.benl.ebay.be/*',
     'https://signin.ebay.de/*',
     'https://signin.ebay.com/*',
     'https://signin.ebay.com.au/*',
