@@ -139,7 +139,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     }
 
     // Filter out any input fields with type 'hidden' right away
-    const inputFields = [];
+    let inputFields = [];
     Array.from(target.getElementsByTagName('input')).forEach(e => {
         if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
             inputFields.push(e);
