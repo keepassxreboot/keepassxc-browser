@@ -6,6 +6,12 @@ const STEP_SELECT_PASSWORD = 2;
 const STEP_SELECT_TOTP = 3;
 const STEP_SELECT_STRING_FIELDS = 4;
 
+const BLUE_BUTTON = 'kpxc-button kpxc-blue-button';
+const GREEN_BUTTON = 'kpxc-button kpxc-green-button';
+const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
+const RED_BUTTON = 'kpxc-button kpxc-red-button';
+const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
+
 const DEFINED_CUSTOM_FIELDS = 'defined-custom-fields';
 const FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field';
 const DARK_FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field-dark';
@@ -16,7 +22,6 @@ const USERNAME_FIELD_CLASS = 'kpxcDefine-fixed-username-field';
 const PASSWORD_FIELD_CLASS = 'kpxcDefine-fixed-password-field';
 const TOTP_FIELD_CLASS = 'kpxcDefine-fixed-totp-field';
 const STRING_FIELD_CLASS = 'kpxcDefine-fixed-string-field';
-const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
 
 const kpxcCustomLoginFieldsBanner = {};
 kpxcCustomLoginFieldsBanner.banner = undefined;

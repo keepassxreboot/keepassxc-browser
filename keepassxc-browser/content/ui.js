@@ -7,11 +7,6 @@ const MIN_INPUT_FIELD_OFFSET_WIDTH = 60;
 const MIN_OPACITY = 0.7;
 const MAX_OPACITY = 1;
 
-const BLUE_BUTTON = 'kpxc-button kpxc-blue-button';
-const GREEN_BUTTON = 'kpxc-button kpxc-green-button';
-const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
-const RED_BUTTON = 'kpxc-button kpxc-red-button';
-
 const DatabaseState = {
     DISCONNECTED: 0,
     LOCKED: 1,
