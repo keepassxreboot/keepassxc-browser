@@ -99,7 +99,7 @@
         "kpxc": true,
         "kpActions": true,
         "kpxcBanner": true,
-        "kpxcDefine": true,
+        "kpxcCustomLoginFieldsBanner": true,
         "kpxcFields": true,
         "kpxcFill": true,
         "kpxcForm": true,

@@ -64,10 +64,31 @@ div.kpxc-banner .kpxc-banner-icon-moz {
     background-size: contain;
 }
 
+div.kpxc-banner .kpxc-help-icon {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    background: url('chrome-extension://__MSG_@@extension_id__/icons/help.svg') right no-repeat;
+    background-size: contain;
+}
+
+div.kpxc-banner .kpxc-help-icon-moz {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    background: url('moz-extension://__MSG_@@extension_id__/icons/help.svg') right no-repeat;
+    background-size: contain;
+}
+
 .kpxc-separator {
     border-left: 1px solid #ccc;
     height: 100% !important;
     margin: 10px !important;
+}
+
+.kpxc-pick-info-text {
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 div.kpxc-banner .kpxc-checkbox {

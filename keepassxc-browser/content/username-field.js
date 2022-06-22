@@ -21,7 +21,7 @@ kpxcUsernameIcons.isValid = function(field) {
         || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
         || field.readOnly
         || kpxcIcons.hasIcon(field)
-        || !kpxcFields.isVisible(field)) {
+        || (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field))) {
         return false;
     }
 
@@ -117,7 +117,7 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 };
 
 const iconClicked = async function(field, icon) {
-    if (!kpxcFields.isVisible(field)) {
+    if (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field)) {
         icon.parentNode.removeChild(icon);
         field.removeAttribute('kpxc-username-field');
         return;

@@ -255,11 +255,11 @@ kpxc.initAutocomplete = function() {
 
 // Looks for any username & password combinations from the detected input fields
 kpxc.initCombinations = async function(inputs = []) {
-    if (inputs.length === 0) {
+    const isCustomLoginFieldsUsed = kpxcFields.isCustomLoginFieldsUsed();
+    if (inputs.length === 0 && !isCustomLoginFieldsUsed) {
         return [];
     }
 
-    const isCustomLoginFieldsUsed = kpxcFields.isCustomLoginFieldsUsed();
     const combinations = isCustomLoginFieldsUsed
                        ? await kpxcFields.useCustomLoginFields()
                        : await kpxcFields.getAllCombinations(inputs);
@@ -285,6 +285,11 @@ kpxc.initCombinations = async function(inputs = []) {
         }
     }
 
+    // Update the fields in Custom Login Fields banner if it's open
+    if (kpxcCustomLoginFieldsBanner.created) {
+        kpxcCustomLoginFieldsBanner.updateFieldSelections();
+    }
+
     logDebug('Login field combinations identified:', combinations);
     return combinations;
 };
@@ -296,7 +301,7 @@ kpxc.initCredentialFields = async function() {
 
     // Search all remaining inputs from the page, ignore the previous input fields
     const pageInputs = await kpxcFields.getAllPageInputs(formInputs);
-    if (formInputs.length === 0 && pageInputs.length === 0) {
+    if (formInputs.length === 0 && pageInputs.length === 0 && !kpxcFields.isCustomLoginFieldsUsed()) {
         // Run 'redetect_credentials' manually if no fields are found after a page load
         setTimeout(async function() {
             if (_called.automaticRedetectCompleted) {
@@ -821,7 +826,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'check_database_hash' && 'hash' in req) {
             kpxc.detectDatabaseChange(req);
         } else if (req.action === 'choose_credential_fields') {
-            kpxcDefine.init();
+            kpxcCustomLoginFieldsBanner.create();
         } else if (req.action === 'clear_credentials') {
             kpxc.clearAllFromPage();
         } else if (req.action === 'fill_user_pass_with_specific_login') {

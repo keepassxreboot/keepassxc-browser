@@ -111,7 +111,8 @@ kpxcFill.fillFromPopup = async function(id, uuid) {
         combination = kpxc.combinations[1];
     }
 
-    kpxcFill.fillInCredentials(combination, selectedCredentials.login, uuid);
+    const foundCombination = kpxcFields.getCombinationFromAllInputs();
+    kpxcFill.fillInCredentials(foundCombination, selectedCredentials.login, uuid);
     kpxcUserAutocomplete.closeList();
 };
 
@@ -222,7 +223,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
         return;
     }
 
-    if (!combination || (!combination.username && !combination.password)) {
+    if (!combination) {
         logDebug('Error: Empty login combination.');
         return;
     }
@@ -286,8 +287,12 @@ kpxcFill.fillInStringFields = function(fields, stringFields) {
     const filledInFields = [];
     if (fields && stringFields && fields.length > 0 && stringFields.length > 0) {
         for (let i = 0; i < fields.length; i++) {
-            const currentField = fields[i];
+            if (i >= stringFields.length) {
+                continue;
+            }
+
             const stringFieldValue = Object.values(stringFields[i]);
+            const currentField = fields[i];
 
             if (currentField && stringFieldValue[0]) {
                 kpxc.setValue(currentField, stringFieldValue[0]);
