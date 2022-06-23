@@ -1,3 +1,38 @@
+1.8.0 (23-06-2022)
+=========================
+
+- Add search feature to Autocomplete Menu [#1511]
+- Add debug logging option [#1540]
+- Add notification when filled password length exceeds allowed max length [#1596]
+- Add link to Getting Started guide for new users [#1604]
+- Add link to Edge Add-ons page [#1607]
+- Add link to Troubleshooting Guide when extension reload fails [#1606]
+- Add new sorting options for credentials after fill [#1441]
+- Add a new Custom Login Fields selector [#1390]
+- Change Auto-Fill warning message [#1575]
+- Change tests to use Playwright [#1577, #1605]
+- Change Automatic Reconnect option to hidden [#1609]
+- Change gray username icon on pages with no credentials [#1490]
+- Fix removing icon from parent document [#1512]
+- Fix scrolling issue with login popup [#1518]
+- Fix password fill with Google [#1525]
+- Fix TOTP filling [#1530, #1573]
+- Fix handling error responses from KeePassXC [#1561]
+- Fix username icon position on Apple login page [#1590]
+- Fix username detection for Google login [#1477]
+- Fix setting icons to all tabs [#1621]
+- Fix popup sizes with Firefox owerflow menu [#1571]
+- Fix allowing Cross-Origin credential requests to KeePassXC [#1634]
+- Fix filling fields that are not detected by the extension [#1580]
+- Fix possible endless loops with Auto-Submit [#1637]
+- Refactor background and content scripts [#1510, #1520]
+- Update webextension-polyfill library [#1551]
+- Update Bootstrap to version 5, remove jQuery [#1578]
+
+1.7.12 (07-04-2022)
+=========================
+- Add support for the new password generator with KeePassXC 2.7.0 [#1599]
+
 1.7.11 (11-12-2021)
 =========================
 - Add new Predefined Sites (FNAC, HP) [#1469]
