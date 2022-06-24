@@ -30,7 +30,7 @@ const config = {
             },
         },
     ],
-    testMatch: 'content-script-tests.js',
+    testMatch: 'content-script-tests.mjs',
 };
 
 module.exports = config;

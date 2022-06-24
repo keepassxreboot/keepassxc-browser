@@ -1,9 +1,9 @@
-const fs = require('fs-extra');
+const fs = require('@npmcli/fs')
 
 const DEST = 'keepassxc-browser/tests';
 
 module.exports = async config => {
     // Create a temporary directory and copy tests/* to keepassxc-browser/tests
-    await fs.ensureDir(DEST);
-    await fs.copy('./tests', DEST);
+    await fs.exists(DEST);
+    await fs.cp('./tests', DEST, { recursive: true });
 };

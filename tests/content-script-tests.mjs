@@ -1,7 +1,7 @@
 'use strict';
 
-const { test, expect } = require('@playwright/test');
-const fileUrl = require('file-url');
+import { test, expect } from '@playwright/test';
+import fileUrl from 'file-url';
 
 const DEST = 'keepassxc-browser/tests';
 
