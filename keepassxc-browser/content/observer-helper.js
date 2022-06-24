@@ -153,7 +153,9 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     // Traverse children
     const traversedChildren = kpxcObserverHelper.findInputsFromChildren(target);
     for (const child of traversedChildren) {
-        inputFields.push(child);
+        if (!inputFields.includes(child)) {
+            inputFields.push(child);
+        }
     }
 
     // Append any input fields in Shadow DOM
