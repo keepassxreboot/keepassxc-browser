@@ -113,7 +113,7 @@ function shortCutChanged(e) {
 }
 
 
-$(async function() {
+(async function() {
     try {
         const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
         if (settings['colorTheme'] === undefined) {
@@ -128,7 +128,7 @@ $(async function() {
     } catch (err) {
         console.log('Error loading options page: ' + err);
     }
-});
+})();
 
 const saveButtons = document.querySelectorAll('.btn-primary');
 for (const b of saveButtons) {
