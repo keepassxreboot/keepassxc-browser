@@ -660,11 +660,6 @@ options.initAbout = function() {
     $('#tab-about span.kpxcbrVersion').textContent = version;
     $('#tab-about span.kpxcbrOS').textContent = platform;
     $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
-
-    // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
-    if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1, 2)) < 60) {
-        $('#chrome-only').remove();
-    }
 };
 
 options.initTheme = function() {
