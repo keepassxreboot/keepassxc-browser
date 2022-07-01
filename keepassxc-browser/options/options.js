@@ -662,7 +662,7 @@ options.initAbout = function() {
     $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
 
     // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
-    if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1, 2)) < 60) {
+    if (isFirefox() && Number(navigator.userAgent.substring(navigator.userAgent.lastIndexOf('/') + 1)) < 60) {
         $('#chrome-only').remove();
     }
 };
