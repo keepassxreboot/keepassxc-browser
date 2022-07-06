@@ -96,6 +96,12 @@ tbody {
     color: var(--kpxc-text-color);
 }
 
+.table-striped > tbody > tr:nth-of-type(odd) input[type="checkbox"] {
+    background-color: var(--kpxc-card-background-color) !important;
+    border-color: var(--kpxc-input-main-border-color) !important;
+    color: var(--kpxc-text-color) !important;
+}
+
 .table tbody td {
     vertical-align: middle;
 }
@@ -106,6 +112,7 @@ tbody {
 }
 
 #tab-site-preferences td:nth-of-type(3),
+#tab-site-preferences td:nth-of-type(4),
 table td:last-of-type {
     width: 1px;
 }

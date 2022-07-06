@@ -20,6 +20,7 @@ kpxc.combinations = [];
 kpxc.credentials = [];
 kpxc.databaseState = DatabaseState.DISCONNECTED;
 kpxc.detectedFields = 0;
+kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
 kpxc.settings = {};
 kpxc.singleInputEnabledForPage = false;
@@ -682,6 +683,7 @@ kpxc.siteIgnored = async function(condition) {
                 }
 
                 kpxc.singleInputEnabledForPage = site.usernameOnly;
+                kpxc.improvedFieldDetectionEnabledForPage = site.improvedFieldDetection;
             }
         }
 

@@ -526,7 +526,11 @@ options.initSitePreferences = function() {
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
-                site.usernameOnly = this.checked;
+                if (this.name === 'usernameOnly') {
+                    site.usernameOnly = this.checked;
+                } else if (this.name === 'improvedFieldDetection') {
+                    site.improvedFieldDetection = this.checked;
+                }
             }
         }
 
@@ -554,7 +558,7 @@ options.initSitePreferences = function() {
         }
     };
 
-    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly) {
+    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
         row.setAttribute('id', 'tr-scf' + newIndex);
@@ -563,7 +567,9 @@ options.initSitePreferences = function() {
         row.children[1].children[0].addEventListener('change', selectionChanged);
         row.children[2].children['usernameOnly'].checked = usernameOnly;
         row.children[2].children['usernameOnly'].addEventListener('change', checkboxClicked);
-        row.children[3].addEventListener('click', removeButtonClicked);
+        row.children[3].children['improvedFieldDetection'].checked = improvedFieldDetection;
+        row.children[3].children['improvedFieldDetection'].addEventListener('change', checkboxClicked);
+        row.children[4].addEventListener('click', removeButtonClicked);
 
         $('#tab-site-preferences table tbody').append(row);
     };
@@ -628,10 +634,10 @@ options.initSitePreferences = function() {
         const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
         rowClone.classList.remove('clone', 'd-none');
 
-        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false);
+        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false);
         $('#tab-site-preferences table tbody tr.empty').hide();
 
-        options.settings['sitePreferences'].push({ url: value, ignore: IGNORE_NOTHING, usernameOnly: false });
+        options.settings['sitePreferences'].push({ url: value, ignore: IGNORE_NOTHING, usernameOnly: false, improvedFieldDetection: false });
         options.saveSettings();
         manualUrl.value = '';
     });
@@ -641,7 +647,7 @@ options.initSitePreferences = function() {
     let counter = 1;
     if (options.settings['sitePreferences']) {
         for (const site of options.settings['sitePreferences']) {
-            addNewRow(rowClone, counter, site.url, site.ignore, site.usernameOnly);
+            addNewRow(rowClone, counter, site.url, site.ignore, site.usernameOnly, site.improvedFieldDetection);
             ++counter;
         }
     }
