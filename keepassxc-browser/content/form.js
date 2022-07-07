@@ -118,11 +118,11 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     // Prevent multiple simultaneous submits
-    if (!kpxcForm.submitTriggered) {
-        kpxcForm.submitTriggered = true;
-    } else {
+    if (kpxcForm.submitTriggered) {
         return;
     }
+
+    kpxcForm.submitTriggered = true;
 
     const searchForm = f => {
         if (f.nodeName === 'FORM') {
