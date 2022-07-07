@@ -7,6 +7,7 @@
 const kpxcForm = {};
 kpxcForm.formButtonQuery = 'button[type=button], button[type=submit], input[type=button], input[type=submit], button:not([type]), div[role=button]';
 kpxcForm.savedForms = [];
+kpxcForm.submitTriggered = false;
 
 // Returns true if form has been already saved
 kpxcForm.formIdentified = function(form) {
@@ -116,6 +117,13 @@ kpxcForm.onSubmit = async function(e) {
         return;
     }
 
+    // Prevent multiple simultaneous submits
+    if (kpxcForm.submitTriggered) {
+        return;
+    }
+
+    kpxcForm.submitTriggered = true;
+
     const searchForm = f => {
         if (f.nodeName === 'FORM') {
             return f;
@@ -137,6 +145,7 @@ kpxcForm.onSubmit = async function(e) {
 
     if (!form) {
         logDebug('Error: No form found for submit detection.');
+        kpxcForm.submitTriggered = false;
         return;
     }
 
@@ -161,6 +170,7 @@ kpxcForm.onSubmit = async function(e) {
 
     // Return if credentials are already found
     if (kpxc.credentials.some(c => c.login === usernameValue && c.password === passwordValue)) {
+        kpxcForm.submitTriggered = false;
         return;
     }
 
@@ -173,6 +183,7 @@ kpxcForm.onSubmit = async function(e) {
 
     // Show the banner if the page does not reload
     kpxc.rememberCredentials(usernameValue, passwordValue);
+    kpxcForm.submitTriggered = false;
 };
 
 // Save form to Object array
