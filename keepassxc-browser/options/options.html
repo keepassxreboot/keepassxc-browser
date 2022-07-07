@@ -599,12 +599,10 @@
                 <div class="card-body">
                   <p>
                     <span data-i18n="optionsSitePreferencesTabHelpTextFirst"></span>
-                    <br />
-                    <span data-i18n="optionsSitePreferencesTabHelpTextSecond"></span>
-                    <br />
-                    <span data-i18n="optionsSitePreferencesTabHelpTextThird"></span>
-                    <br />
-                    <span data-i18n="optionsSitePreferencesTabHelpTextFourth"></span>
+                    <li><span data-i18n="optionsSitePreferencesTabHelpTextSecond"></span></li>
+                    <li><span data-i18n="optionsSitePreferencesTabHelpTextThird"></span></li>
+                    <li><span data-i18n="optionsSitePreferencesTabHelpTextFourth"></span></li>
+                    <li><span data-i18n="optionsSitePreferencesImprovedInputFieldDetectionHelpText"></span></li>
                   </p>
                   <hr class="mt-0" />
 
@@ -627,12 +625,13 @@
                           <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
                           <th scope="col"><span data-i18n="optionsColumnIgnore"></span></th>
                           <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
+                          <th scope="col"><span data-i18n="optionsColumnImprovedInputFieldDetection"></span></th>
                           <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr class="empty">
-                          <td colspan="4"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
+                          <td colspan="5"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
                         </tr>
                         <tr class="clone d-none">
                           <td class="text-nowrap"></td>
@@ -645,6 +644,7 @@
                             </select>
                           </td>
                           <td><input class="form-check-input" type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"/></td>
+                          <td><input class="form-check-input" type="checkbox" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection"/></td>
                           <td class="text-nowrap"><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
                         </tr>
                       </tbody>

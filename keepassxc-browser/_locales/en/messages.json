@@ -951,6 +951,10 @@
         "message": "Username-only Detection",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Improved Input Field Detection",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
         "message": "Delete",
         "description": "Site preferences list column title."
@@ -1066,6 +1070,10 @@
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Username-only detection allows KeePassXC-Browser to fill in login details on websites with separate pages for username and password.",
         "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Add URL manually",
