@@ -105,6 +105,12 @@ kpxcUI.monitorIconPosition = function(iconClass) {
     window.addEventListener('scroll', function(e) {
         kpxcUI.updateIconPosition(iconClass);
     });
+
+    window.addEventListener('transitionend', function(e) {
+        if (e.target && (e.target.nodeName === 'INPUT' || e.target.nodeName === 'TEXTAREA')) {
+            kpxcUI.updateIconPosition(iconClass);
+        }
+    });
 };
 
 kpxcUI.updateIconPosition = function(iconClass) {
