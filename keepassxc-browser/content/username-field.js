@@ -123,10 +123,14 @@ const iconClicked = async function(field, icon) {
         return;
     }
 
+    // Try to reconnect if KeePassXC is not currently connected
     const connected = await sendMessage('is_connected');
     if (!connected) {
-        kpxcUI.createNotification('error', tr('errorNotConnected'));
-        return;
+        const reconnectResponse = await sendMessage('reconnect');
+        if (!reconnectResponse.keePassXCAvailable) {
+            kpxcUI.createNotification('error', tr('errorNotConnected'));
+            return;
+        }
     }
 
     const databaseHash = await sendMessage('check_database_hash');
