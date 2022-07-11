@@ -1,6 +1,13 @@
+1.8.1 (11-07-2022)
+=========================
+- Add more PayPal URL's to Predefined Sites [#1673]
+- Change Improved Input Field Detection to an optional feature [#1666]
+- Fix closing Credential Banner when multiple submits happen [#1667]
+- Fix reconnecting the extension on Username Icon click [#1676]
+- Fix setting icon position/visibility on transitionend event [#1677]
+
 1.8.0 (23-06-2022)
 =========================
-
 - Add search feature to Autocomplete Menu [#1511]
 - Add debug logging option [#1540]
 - Add notification when filled password length exceeds allowed max length [#1596]
