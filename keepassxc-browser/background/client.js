@@ -166,7 +166,7 @@ keepassClient.buildRequest = function(action, encrypted, nonce, clientID, trigge
 keepassClient.sendMessage = async function(kpAction, tab, messageData, nonce, enableTimeout = false, triggerUnlock = false) {
     const request = keepassClient.buildRequest(kpAction, keepassClient.encrypt(messageData, nonce), nonce, keepass.clientID, triggerUnlock);
     if (messageData.requestID) {
-        request["requestID"] = messageData.requestID;
+        request['requestID'] = messageData.requestID;
     }
 
     const response = await keepassClient.sendNativeMessage(request, enableTimeout);
