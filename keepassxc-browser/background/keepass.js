@@ -137,7 +137,8 @@ keepass.retrieveCredentials = async function(tab, args = []) {
             action: kpAction,
             id: dbid,
             url: url,
-            keys: keys
+            keys: keys,
+            requestID: keepassClient.getRequestId()
         };
 
         if (submiturl) {
