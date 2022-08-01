@@ -56,7 +56,6 @@ browserAction.updateIcon = async function(tab, iconType) {
     }
 
     browser.browserAction.setIcon({
-        tabId: tab.id,
         path: browserAction.generateIconName(iconType)
     });
 };
