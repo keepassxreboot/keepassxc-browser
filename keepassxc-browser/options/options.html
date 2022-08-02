@@ -13,18 +13,11 @@
     <link rel="icon" type="image/png" href="../icons/keepassxc_96x96.png" sizes="96x96">
     <script src="../common/browser-polyfill.min.js"></script>
     <script src="../common/global.js"></script>
+    <script src="../common/global_ui.js"></script>
     <script src="../common/sites.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="options.js"></script>
     <script src="../common/translate.js" defer></script>
-    <script>
-    // We eagerly load the theme here to avoid a white flash
-    let theme = localStorage.getItem('colorTheme') || 'system';
-    if (theme === 'system') {
-        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    document.documentElement.setAttribute('data-bs-theme', theme);
-    </script>
   </head>
   <body class="pt-3 pb-5">
     <div class="container-fluid">

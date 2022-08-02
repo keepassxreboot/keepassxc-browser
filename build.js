@@ -13,25 +13,11 @@ const BROWSERS = {
     'Chromium': 'manifest_chromium.json',
 };
 
-async function adjustManifest(manifest) {
+async function getDestinationFilename(manifest) {
     const manifestFile = await fs.readFile(DEFAULT, { encoding: 'utf8' });
     const data = JSON.parse(manifestFile);
     const browser = manifest.substring(manifest.indexOf('_') + 1, manifest.indexOf('.'));
 
-    if (manifest.includes('firefox')) {
-        for (const elem in data['icons']) {
-            data['icons'][elem] = 'icons/keepassxc.svg';
-        }
-        for (const elem in data['browser_action']['default_icon']) {
-            data['browser_action']['default_icon'][elem] = 'icons/keepassxc.svg';
-        }
-        delete data['version_name'];
-        delete data['minimum_chrome_version'];
-    } else if (manifest.includes('chromium')) {
-        delete data['applications'];
-    }
-
-    await fs.writeFile(manifest, JSON.stringify(data, null, 4));
     return `keepassxc-browser_${data['version']}_${browser}.zip`;
 }
 
@@ -52,15 +38,14 @@ async function updateTranslations() {
     for (const browser in BROWSERS) {
         console.log(`KeePassXC-Browser: Creating extension package for ${browser}`);
 
-        const fileName = await adjustManifest(BROWSERS[browser]);
-        await fs.copyFile(BROWSERS[browser], `${DEST}/manifest.json`);
+        const fileName = await getDestinationFilename(BROWSERS[browser]);
+        await fs.copyFile(`./dist/${BROWSERS[browser]}`, `${DEST}/manifest.json`);
 
         if (await fs.exists(fileName)) {
             await fs.rm(fileName);
         }
 
         await zaf.zip(DEST, fileName);
-        await fs.rm(BROWSERS[browser], { recursive: true });
         console.log('Done');
     }
 

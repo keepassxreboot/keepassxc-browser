@@ -38,7 +38,7 @@ const AUTO_SUBMIT_TIMEOUT = 5000;
 
 const page = {};
 page.autoSubmitPerformed = false;
-page.attributeMenuItemIds = [];
+page.attributeMenuItems = [];
 page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
 page.currentRequest = {};
@@ -295,9 +295,10 @@ page.fillHttpAuth = async function(tab, credentials) {
 // Update context menu for attribute filling
 page.updateContextMenu = async function(tab, credentials) {
     // Remove any old attribute items
-    while (page.attributeMenuItemIds.length) {
-        browser.contextMenus.remove(page.attributeMenuItemIds.pop());
-    }
+    page.attributeMenuItems.forEach(item => {
+        browser.contextMenus.remove(item?.action);
+    });
+    page.attributeMenuItems = [];
 
     // Set parent item visibility
     browser.contextMenus.update('fill_attribute', { visible: true });
@@ -315,12 +316,15 @@ page.updateContextMenu = async function(tab, credentials) {
                 ? `[${cred.login}] ${attributeName}`
                 : attributeName;
 
-            page.attributeMenuItemIds.push(createContextMenuItem({
-                action: 'fill_attribute',
+            const menuItem = {
+                action: `fill_attribute_${finalName}`,
                 args: attribute,
                 parentId: 'fill_attribute',
                 title: finalName
-            }));
+            };
+
+            createContextMenuItem(menuItem);
+            page.attributeMenuItems.push(menuItem);
         }
     }
 };
@@ -332,14 +336,7 @@ page.updatePopup = function(tab) {
 const createContextMenuItem = function({ action, args, ...options }) {
     return browser.contextMenus.create({
         contexts: menuContexts,
-        onclick: (info, tab) => {
-            browser.tabs.sendMessage(tab.id, {
-                action: action,
-                args: args
-            }).catch((err) => {
-                logError(err);
-            });
-        },
+        id: action,
         ...options
     });
 };

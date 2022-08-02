@@ -1,17 +1,18 @@
 'use strict';
 
+const browserActionWrapper = browser.action || browser.browserAction;
 const browserAction = {};
 
-browserAction.show = function(tab, popupData) {
+browserAction.show = async function(tab, popupData) {
     popupData ??= page.popupData;
     page.popupData = popupData;
 
-    browser.browserAction.setIcon({
-        path: browserAction.generateIconName(popupData.iconType)
+    browserActionWrapper.setIcon({
+        path: await browserAction.generateIconName(popupData.iconType)
     });
 
     if (popupData.popup) {
-        browser.browserAction.setPopup({
+        browserActionWrapper.setPopup({
             tabId: tab.id,
             popup: `popups/${popupData.popup}.html`
         });
@@ -47,12 +48,27 @@ browserAction.showDefault = async function(tab) {
         popupData.popup = 'popup_login';
     }
 
-    browserAction.show(tab, popupData);
+    await browserAction.show(tab, popupData);
 };
 
-browserAction.generateIconName = function(iconType) {
+browserAction.updateIcon = async function(tab, iconType) {
+    if (!tab) {
+        const tabs = await browser.tabs.query({ 'active': true, 'currentWindow': true });
+        if (tabs.length === 0) {
+            return;
+        }
+
+        tab = tabs[0];
+    }
+
+    browserActionWrapper.setIcon({
+        path: browserAction.generateIconName(iconType)
+    });
+};
+
+browserAction.generateIconName = async function(iconType) {
     let name = 'icon_';
-    name += (keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
+    name += (await keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
     name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
 
     let style = 'colored';
@@ -72,7 +88,6 @@ browserAction.ignoreSite = async function(url) {
     const tab = await getCurrentTab();
 
     // Send the message to the current tab's content script
-    await browser.runtime.getBackgroundPage();
     browser.tabs.sendMessage(tab.id, {
         action: 'ignore_site',
         args: [ url ]

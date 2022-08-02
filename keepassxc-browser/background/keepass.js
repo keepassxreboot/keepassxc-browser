@@ -715,6 +715,7 @@ keepass.saveKey = function(hash, id, key) {
         keepass.keyRing[hash].created = new Date().valueOf();
         keepass.keyRing[hash].lastUsed = new Date().valueOf();
     }
+
     browser.storage.local.set({ 'keyRing': keepass.keyRing });
 };
 
@@ -861,13 +862,13 @@ keepass.setcurrentKeePassXCVersion = function(version) {
     }
 };
 
-keepass.keePassXCUpdateAvailable = function() {
+keepass.keePassXCUpdateAvailable = async function() {
     const checkUpdate = Number(page.settings.checkUpdateKeePassXC);
     if (checkUpdate !== CHECK_UPDATE_NEVER) {
         const lastChecked = (keepass.latestKeePassXC.lastChecked) ? new Date(keepass.latestKeePassXC.lastChecked) : new Date(1986, 11, 21);
         const daysSinceLastCheck = Math.floor(((new Date()).getTime() - lastChecked.getTime()) / 86400000);
         if (daysSinceLastCheck >= checkUpdate) {
-            keepass.checkForNewKeePassXCVersion();
+            await keepass.checkForNewKeePassXCVersion();
         }
 
         return keepass.compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version, false);
@@ -876,33 +877,18 @@ keepass.keePassXCUpdateAvailable = function() {
     return false;
 };
 
-keepass.checkForNewKeePassXCVersion = function() {
-    const xhr = new XMLHttpRequest();
+keepass.checkForNewKeePassXCVersion = async function() {
     let version = -1;
 
-    xhr.onload = function(e) {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            const json = JSON.parse(xhr.responseText);
-            if (json.tag_name && json.prerelease === false) {
-                version = json.tag_name;
-                keepass.latestKeePassXC.version = version;
-            }
-        }
-
-        if (version !== -1) {
-            browser.storage.local.set({ 'latestKeePassXC': keepass.latestKeePassXC });
-        }
-    };
-
-    xhr.onerror = function(err) {
-        logError(`checkForNewKeePassXCVersion error: ${err}`);
-    };
-
     try {
-        xhr.open('GET', keepass.latestVersionUrl, true);
-        xhr.send();
+        const response = await fetch(keepass.latestVersionUrl);
+        const jsonData = await response.json();
+        if (jsonData?.tag_name && jsonData?.prerelease === false) {
+            version = jsonData.tag_name;
+            keepass.latestKeePassXC.version = version;
+        }
     } catch (ex) {
-        logError(ex);
+        logError(`checkForNewKeePassXCVersion error: ${ex}`);
     }
     keepass.latestKeePassXC.lastChecked = new Date().valueOf();
 };

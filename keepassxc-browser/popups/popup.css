@@ -116,6 +116,14 @@ code {
     text-align: start;
 }
 
+#filter-block,
+#not-configured,
+#need-reconfigure,
+#configured-not-associated,
+#configured-and-associated,
+#error-encountered,
+#database-not-opened,
+#username-field-detected,
 #update-available,
 #getting-started-guide,
 #troubleshooting-guide {
@@ -161,6 +169,10 @@ code {
 
 .right-align {
     text-align: right;
+}
+
+#left-margin {
+    margin-left: 1em;
 }
 
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {

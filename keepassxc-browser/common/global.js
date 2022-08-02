@@ -37,7 +37,7 @@ const isEdge = function() {
 const showNotification = function(message) {
     browser.notifications.create({
         'type': 'basic',
-        'iconUrl': browser.extension.getURL('icons/keepassxc_64x64.png'),
+        'iconUrl': browser.runtime.getURL('icons/keepassxc_64x64.png'),
         'title': 'KeePassXC-Browser',
         'message': message
     });
@@ -157,12 +157,4 @@ const getFileAndLine = function() {
 const getCurrentTab = async function() {
     const tabs = await browser.tabs.query({ active: true, currentWindow: true });
     return tabs.length > 0 ? tabs[0] : undefined;
-};
-
-HTMLElement.prototype.show = function() {
-    this.style.display = 'block';
-};
-
-HTMLElement.prototype.hide = function() {
-    this.style.display = 'none';
 };

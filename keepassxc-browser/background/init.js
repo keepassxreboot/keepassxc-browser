@@ -130,14 +130,7 @@ for (const item of contextMenuItems) {
         title: item.title,
         contexts: menuContexts,
         visible: item.visible,
-        id: item.id,
-        onclick: (info, tab) => {
-            browser.tabs.sendMessage(tab.id, {
-                action: item.action
-            }).catch((err) => {
-                logError(err);
-            });
-        }
+        id: item.id || item.action
     });
 }
 
@@ -153,4 +146,26 @@ browser.commands.onCommand.addListener(async (command) => {
             browser.tabs.sendMessage(tab.id, { action: command });
         }
     }
+});
+
+browser.contextMenus.onClicked.addListener(async (item, tab) => {
+    if (item?.menuItemId?.startsWith('fill_attribute')) {
+        const menuItem = page.attributeMenuItems.find(i => i?.action === item?.menuItemId);
+        if (menuItem) {
+            browser.tabs.sendMessage(tab.id, {
+                action: 'fill_attribute',
+                args: menuItem?.args
+            }).catch((err) => {
+                logError(err);
+            });
+        }
+
+        return;
+    }
+
+    browser.tabs.sendMessage(tab.id, {
+        action: item.menuItemId
+    }).catch((err) => {
+        logError(err);
+    });
 });

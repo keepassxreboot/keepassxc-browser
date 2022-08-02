@@ -10,7 +10,6 @@ const sendMessage = async function(action, args) {
     return await browser.runtime.sendMessage({ action: action, args: args });
 };
 
-
 /**
  * @Object kpxc
  * The main content script object.

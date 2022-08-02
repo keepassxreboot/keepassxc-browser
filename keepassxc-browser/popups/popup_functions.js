@@ -21,10 +21,7 @@ async function initSettings() {
     }
 
     customLoginFieldsButton.addEventListener('click', async () => {
-        await browser.windows.getCurrent();
         const tab = await getCurrentTab();
-        await browser.runtime.getBackgroundPage();
-
         browser.tabs.sendMessage(tab?.id, {
             action: 'choose_credential_fields'
         });
@@ -49,7 +46,8 @@ async function getLoginData() {
     }
 
     const logins = await browser.runtime.sendMessage({
-        action: 'get_login_list'
+        action: 'get_login_list',
+        args: tab.id
     });
 
     return logins;
