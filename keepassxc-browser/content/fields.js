@@ -93,7 +93,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         return;
     }
     const addTotpFieldsToCombination = function(inputFields) {
-        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password');
+        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden');
         if (totpInputs.length === 6) {
             const combination = {
                 form: form,
