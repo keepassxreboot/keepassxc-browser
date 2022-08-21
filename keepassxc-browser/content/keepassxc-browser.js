@@ -446,10 +446,19 @@ kpxc.prepareCredentials = async function() {
         logDebug('Error: No combination found.');
         return;
     }
-
-    if (kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) {
-        kpxcFill.fillFromAutofill();
-        return;
+    
+    if (kpxc.credentials.length === 1) {
+        let autoFillSingle = kpxc.settings.autoFillSingleEntry;
+        for (const f of kpxc.credentials[0].stringFields) {
+            if (f['KPH: kpxc_allow_autofill'] === '1') {
+                autoFillSingle = true;
+            }
+        }
+        
+        if (autoFillSingle) {
+            kpxcFill.fillFromAutofill();
+            return;
+        }
     }
 
     kpxc.initLoginPopup();
