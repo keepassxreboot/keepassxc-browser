@@ -397,7 +397,7 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-Browser is connected to KeePassXC and has been configured using the following identifier: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Only a single username field was detected. Add the URL to Site Preferences with Username-only option enabled?",
@@ -417,7 +417,7 @@
     },
     "rememberUsernameExists": {
         "message": "The credentials with the used username are marked bold: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Please choose the credentials you want to update.",
@@ -457,7 +457,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Credentials with username $1 updated.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Identical credentials already exists. Nothing to update.",
@@ -796,7 +796,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrently, possibly filling sensitive data to unsafe input fields.",
+        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -1013,7 +1013,7 @@
     },
     "optionsFillSortByRelevantEntry": {
         "message": "Relevant credential first",
-        "description": "Relevatn credential first option for Sort after fill."
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "No saved custom login fields found.",
