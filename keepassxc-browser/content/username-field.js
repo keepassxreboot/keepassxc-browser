@@ -123,6 +123,8 @@ const iconClicked = async function(field, icon) {
         return;
     }
 
+    let reconnected = false;
+
     // Try to reconnect if KeePassXC is not currently connected
     const connected = await sendMessage('is_connected');
     if (!connected) {
@@ -131,6 +133,8 @@ const iconClicked = async function(field, icon) {
             kpxcUI.createNotification('error', tr('errorNotConnected'));
             return;
         }
+
+        reconnected = true;
     }
 
     const databaseHash = await sendMessage('check_database_hash');
@@ -141,7 +145,7 @@ const iconClicked = async function(field, icon) {
         field.focus();
     }
 
-    if (icon.className.includes('unlock')) {
+    if (icon.className.includes('unlock') || reconnected) {
         fillCredentials(field);
     }
 };
