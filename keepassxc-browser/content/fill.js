@@ -92,7 +92,7 @@ kpxcFill.fillFromAutofill = async function() {
 
 // Fill requested by selecting credentials from the popup
 kpxcFill.fillFromPopup = async function(id, uuid) {
-    if (!kpxc.credentials.length === 0 || !kpxc.credentials[id] || kpxc.combinations.length === 0) {
+    if (kpxc.credentials.length === 0 || !kpxc.credentials[id] || kpxc.combinations.length === 0) {
         logDebug('Error: Credential list is empty.');
         return;
     }
@@ -304,13 +304,17 @@ kpxcFill.fillInStringFields = function(fields, stringFields) {
 
 // Performs Auto-Submit. If filling single credentials is enabled, a 5 second timeout will be needed for fill
 kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
+    if (!kpxc.settings.autoSubmit) {
+        return;
+    }
+
     const isAutoSubmitPerformed = await sendMessage('page_get_autosubmit_performed');
     if (isAutoSubmitPerformed && kpxc.settings.autoFillSingleEntry) {
         return;
     }
 
     const autoSubmitIgnoredForSite = await kpxc.siteIgnored(IGNORE_AUTOSUBMIT);
-    if (kpxc.settings.autoSubmit && !skipAutoSubmit && !autoSubmitIgnoredForSite) {
+    if (!skipAutoSubmit && !autoSubmitIgnoredForSite) {
         await sendMessage('page_set_autosubmit_performed');
 
         const submitButton = kpxcForm.getFormSubmitButton(combination.form);
