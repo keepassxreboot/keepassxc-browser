@@ -175,7 +175,7 @@ kpxcFill.setTOTPValue = function(elem, val) {
     }
 
     for (const comb of kpxc.combinations) {
-        if (comb.totpInputs && comb.totpInputs.length === 6) {
+        if (comb.totpInputs && comb.totpInputs.length > 0) {
             kpxcFill.fillSegmentedTotp(elem, val, comb.totpInputs);
             return;
         }
@@ -186,11 +186,11 @@ kpxcFill.setTOTPValue = function(elem, val) {
 
 // Fill TOTP in parts
 kpxcFill.fillSegmentedTotp = function(elem, val, totpInputs) {
-    if (!totpInputs.includes(elem)) {
+    if (!totpInputs.includes(elem) || val.length < totpInputs.length) {
         return;
     }
 
-    for (let i = 0; i < 6; ++i) {
+    for (let i = 0; i < totpInputs.length; ++i) {
         kpxc.setValue(totpInputs[i], val[i]);
     }
 };
