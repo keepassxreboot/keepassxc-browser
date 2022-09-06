@@ -92,9 +92,12 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
     if (!kpxc.settings.showOTPIcon) {
         return;
     }
-    const addTotpFieldsToCombination = function(inputFields) {
+
+    let exceptionFound = false;
+
+    const addTotpFieldsToCombination = function(inputFields, ignoreLength = false) {
         const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden');
-        if (totpInputs.length === 6) {
+        if (totpInputs.length === 6 || ignoreLength) {
             const combination = {
                 form: form,
                 totpInputs: totpInputs,
@@ -132,6 +135,12 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
             return true;
         }
 
+        // Accept any other site-specific exceptions
+        if (kpxcSites.segmentedTotpExceptionFound(currentForm)) {
+            exceptionFound = true;
+            return true;
+        }
+
         return false;
     };
 
@@ -141,7 +150,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         || (form.name && typeof(form.name) === 'string' && form.name.includes(f))
         || formLengthMatches(form)))) {
         // Use the form's elements
-        addTotpFieldsToCombination(form.elements);
+        addTotpFieldsToCombination(form.elements, exceptionFound);
     } else if (inputs.length === 6 && inputs.every(i => (i.inputMode === 'numeric' && i.pattern.includes('0-9'))
                 || (i.type === 'text' && i.maxLength === 1)
                 || i.type === 'tel')) {
