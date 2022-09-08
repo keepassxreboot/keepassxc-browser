@@ -1,3 +1,15 @@
+1.8.2.1 (08-09-2022)
+=========================
+- Revert a change required for KeePassXC 2.7.2 [#1714]
+
+1.8.2 (06-09-2022)
+=========================
+- Fix setting toolbar icon on database lock/unlock [#1690]
+- Fix for ignoring hidden fields with segmented TOTP [#1693]
+- Fix fill after reconnect from username icon [#1708]
+- Fix new PayPal 2FA page [#1704]
+- Fix new Steam 2FA page [#1711]
+
 1.8.1 (11-07-2022)
 =========================
 - Add more PayPal URL's to Predefined Sites [#1673]
