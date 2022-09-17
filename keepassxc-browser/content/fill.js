@@ -169,7 +169,7 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
 
 // Set normal or segmented TOTP value
 kpxcFill.setTOTPValue = function(elem, val) {
-    if (kpxc.combinations.length === 0) {
+    if (kpxc.credentials.length === 0) {
         logDebug('Error: Credential list is empty.');
         return;
     }
