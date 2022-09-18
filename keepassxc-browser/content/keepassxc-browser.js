@@ -833,16 +833,20 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'clear_credentials') {
             kpxc.clearAllFromPage();
         } else if (req.action === 'fill_user_pass_with_specific_login') {
+            await reconnect();
             kpxcFill.fillFromPopup(req.id, req.uuid);
         } else if (req.action === 'fill_username_password') {
+            await reconnect();
             sendMessage('page_set_manual_fill', ManualFill.BOTH);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement();
         } else if (req.action === 'fill_password') {
+            await reconnect();
             sendMessage('page_set_manual_fill', ManualFill.PASSWORD);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement(true); // passOnly to true
         } else if (req.action === 'fill_totp') {
+            await reconnect();
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillFromTOTP();
         } else if (req.action === 'fill_attribute' && req.args) {
