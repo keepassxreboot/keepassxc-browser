@@ -833,20 +833,28 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'clear_credentials') {
             kpxc.clearAllFromPage();
         } else if (req.action === 'fill_user_pass_with_specific_login') {
-            await reconnect();
+            try {
+                await kpxc.reconnect();
+            } catch (_) {}
             kpxcFill.fillFromPopup(req.id, req.uuid);
         } else if (req.action === 'fill_username_password') {
-            await reconnect();
+            try {
+                await kpxc.reconnect();
+            } catch (_) {}
             sendMessage('page_set_manual_fill', ManualFill.BOTH);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement();
         } else if (req.action === 'fill_password') {
-            await reconnect();
+            try {
+                await kpxc.reconnect();
+            } catch (_) {}
             sendMessage('page_set_manual_fill', ManualFill.PASSWORD);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement(true); // passOnly to true
         } else if (req.action === 'fill_totp') {
-            await reconnect();
+            try {
+                await kpxc.reconnect();
+            } catch (_) {}
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillFromTOTP();
         } else if (req.action === 'fill_attribute' && req.args) {
@@ -873,3 +881,19 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         }
     }
 });
+
+// automatically reconnect to KeePassXC
+// returns true if reconnected
+kpxc.reconnect = async function() {
+    // Try to reconnect if KeePassXC is not currently connected
+    const connected = await sendMessage('is_connected');
+    if (!connected) {
+        const reconnectResponse = await sendMessage('reconnect');
+        if (!reconnectResponse.keePassXCAvailable) {
+            kpxcUI.createNotification('error', tr('errorNotConnected'));
+            throw "not connected";
+        }
+        return true;
+    }
+    return false;
+}

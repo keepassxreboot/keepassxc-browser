@@ -194,18 +194,3 @@ HTMLElement.prototype.show = function() {
 HTMLElement.prototype.hide = function() {
     this.style.display = 'none';
 };
-
-// automatically reconnect to KeePassXC
-// returns true if reconnected
-async function reconnect() {
-    // Try to reconnect if KeePassXC is not currently connected
-    const connected = await sendMessage('is_connected');
-    if (!connected) {
-        const reconnectResponse = await sendMessage('reconnect');
-        if (!reconnectResponse.keePassXCAvailable) {
-            kpxcUI.createNotification('error', tr('errorNotConnected'));
-            return false;
-        }
-    }
-    return true;
-}
