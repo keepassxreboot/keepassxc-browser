@@ -119,7 +119,7 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 const iconClicked = async function(field, icon) {
     if (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field)) {
         icon.parentNode.removeChild(icon);
-        field.removeAttribute("kpxc-username-field");
+        field.removeAttribute('kpxc-username-field');
         return;
     }
 
@@ -131,15 +131,15 @@ const iconClicked = async function(field, icon) {
         return;
     }
 
-    const databaseHash = await sendMessage("check_database_hash");
-    if (databaseHash === "") {
+    const databaseHash = await sendMessage('check_database_hash');
+    if (databaseHash === '') {
         // Triggers database unlock
-        await sendMessage("page_set_manual_fill", ManualFill.BOTH);
-        await sendMessage("get_database_hash", [false, true]); // Set triggerUnlock to true
+        await sendMessage('page_set_manual_fill', ManualFill.BOTH);
+        await sendMessage('get_database_hash', [ false, true ]); // Set triggerUnlock to true
         field.focus();
     }
 
-    if (icon.className.includes("unlock") || reconnected) {
+    if (icon.className.includes('unlock') || reconnected) {
         fillCredentials(field);
     }
 };
