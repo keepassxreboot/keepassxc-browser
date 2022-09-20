@@ -123,11 +123,9 @@ const iconClicked = async function(field, icon) {
         return;
     }
 
-    // Try to reconnect if KeePassXC is not currently connected
-    let reconnected = false;
-    try {
-        reconnected = await kpxc.reconnect();
-    } catch (_) {
+    // Try to reconnect if KeePassXC for the case we're not currently connected
+    const connected = await kpxc.reconnect();
+    if (!connected) {
         return;
     }
 
@@ -139,7 +137,7 @@ const iconClicked = async function(field, icon) {
         field.focus();
     }
 
-    if (icon.className.includes('unlock') || reconnected) {
+    if (icon.className.includes('unlock') || connected) {
         fillCredentials(field);
     }
 };
