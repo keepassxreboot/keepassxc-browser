@@ -137,7 +137,7 @@ const iconClicked = async function(field, icon) {
         field.focus();
     }
 
-    if (icon.className.includes('unlock') || connected) {
+    if (icon.className.includes('unlock')) {
         fillCredentials(field);
     }
 };
