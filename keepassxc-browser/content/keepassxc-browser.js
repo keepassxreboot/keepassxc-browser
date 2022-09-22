@@ -833,16 +833,20 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'clear_credentials') {
             kpxc.clearAllFromPage();
         } else if (req.action === 'fill_user_pass_with_specific_login') {
+            await kpxc.reconnect();
             kpxcFill.fillFromPopup(req.id, req.uuid);
         } else if (req.action === 'fill_username_password') {
+            await kpxc.reconnect();
             sendMessage('page_set_manual_fill', ManualFill.BOTH);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement();
         } else if (req.action === 'fill_password') {
+            await kpxc.reconnect();
             sendMessage('page_set_manual_fill', ManualFill.PASSWORD);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement(true); // passOnly to true
         } else if (req.action === 'fill_totp') {
+            await kpxc.reconnect();
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillFromTOTP();
         } else if (req.action === 'fill_attribute' && req.args) {
@@ -869,3 +873,18 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         }
     }
 });
+
+// Automatically reconnect to KeePassXC
+// returns true if connected afterwards
+kpxc.reconnect = async function() {
+    // Try to reconnect if KeePassXC is not currently connected
+    const connected = await sendMessage('is_connected');
+    if (!connected) {
+        const reconnectResponse = await sendMessage('reconnect');
+        if (!reconnectResponse.keePassXCAvailable) {
+            kpxcUI.createNotification('error', tr('errorNotConnected'));
+            return false;
+        }
+    }
+    return true;
+};

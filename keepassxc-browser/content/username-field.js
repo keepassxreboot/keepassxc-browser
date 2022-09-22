@@ -123,18 +123,10 @@ const iconClicked = async function(field, icon) {
         return;
     }
 
-    let reconnected = false;
-
-    // Try to reconnect if KeePassXC is not currently connected
-    const connected = await sendMessage('is_connected');
+    // Try to reconnect if KeePassXC for the case we're not currently connected
+    const connected = await kpxc.reconnect();
     if (!connected) {
-        const reconnectResponse = await sendMessage('reconnect');
-        if (!reconnectResponse.keePassXCAvailable) {
-            kpxcUI.createNotification('error', tr('errorNotConnected'));
-            return;
-        }
-
-        reconnected = true;
+        return;
     }
 
     const databaseHash = await sendMessage('check_database_hash');
@@ -145,7 +137,7 @@ const iconClicked = async function(field, icon) {
         field.focus();
     }
 
-    if (icon.className.includes('unlock') || reconnected) {
+    if (icon.className.includes('unlock')) {
         fillCredentials(field);
     }
 };
