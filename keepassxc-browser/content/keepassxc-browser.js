@@ -883,7 +883,8 @@ kpxc.reconnect = async function() {
         const reconnectResponse = await sendMessage('reconnect');
         if (!reconnectResponse.keePassXCAvailable) {
             kpxcUI.createNotification('error', tr('errorNotConnected'));
+            return false;
         }
     }
-    return await sendMessage('is_connected');
+    return true;
 };
