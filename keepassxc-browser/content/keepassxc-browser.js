@@ -874,7 +874,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
     }
 });
 
-// automatically reconnect to KeePassXC
+// Automatically reconnect to KeePassXC
 // returns true if connected afterwards
 kpxc.reconnect = async function() {
     // Try to reconnect if KeePassXC is not currently connected
