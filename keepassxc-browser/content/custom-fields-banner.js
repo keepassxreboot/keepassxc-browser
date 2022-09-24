@@ -323,39 +323,41 @@ kpxcCustomLoginFieldsBanner.confirm = async function() {
     const location = kpxc.getDocumentLocation();
     const currentSettings = kpxc.settings[DEFINED_CUSTOM_FIELDS][location];
 
-    if (currentSettings) {
-        // Update the single selection to current settings
-        if (usernamePath) {
-            clearIdenticalField(usernamePath, location);
-            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].username = usernamePath;
+    if (usernamePath || passwordPath || totpPath || stringFieldsPaths.length > 0) {
+        if (currentSettings) {
+            // Update the single selection to current settings
+            if (usernamePath) {
+                clearIdenticalField(usernamePath, location);
+                kpxc.settings[DEFINED_CUSTOM_FIELDS][location].username = usernamePath;
+            }
+
+            if (passwordPath) {
+                clearIdenticalField(passwordPath, location);
+                kpxc.settings[DEFINED_CUSTOM_FIELDS][location].password = passwordPath;
+            }
+
+            if (totpPath) {
+                clearIdenticalField(totpPath, location);
+                kpxc.settings[DEFINED_CUSTOM_FIELDS][location].totp = totpPath;
+            }
+
+            if (stringFieldsPaths.length > 0) {
+                kpxc.settings[DEFINED_CUSTOM_FIELDS][location].fields = stringFieldsPaths;
+            }
+        } else {
+            // Override all fields (default, because there's no currentSettings available)
+            kpxc.settings[DEFINED_CUSTOM_FIELDS][location] = {
+                username: usernamePath,
+                password: passwordPath,
+                totp: totpPath,
+                fields: stringFieldsPaths
+            };
         }
 
-        if (passwordPath) {
-            clearIdenticalField(passwordPath, location);
-            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].password = passwordPath;
-        }
-
-        if (totpPath) {
-            clearIdenticalField(totpPath, location);
-            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].totp = totpPath;
-        }
-
-        if (stringFieldsPaths.length > 0) {
-            kpxc.settings[DEFINED_CUSTOM_FIELDS][location].fields = stringFieldsPaths;
-        }
-    } else {
-        // Override all fields (default)
-        kpxc.settings[DEFINED_CUSTOM_FIELDS][location] = {
-            username: usernamePath,
-            password: passwordPath,
-            totp: totpPath,
-            fields: stringFieldsPaths
-        };
+        await sendMessage('save_settings', kpxc.settings);
     }
 
-    await sendMessage('save_settings', kpxc.settings);
     kpxcCustomLoginFieldsBanner.destroy();
-
     sendMessageToFrames('confirm_button_clicked');
 };
 
@@ -511,7 +513,6 @@ kpxcCustomLoginFieldsBanner.selectStringFields = function() {
 };
 
 kpxcCustomLoginFieldsBanner.markFields = function() {
-    let index = 1;
     let firstInput;
     const inputs = document.querySelectorAll(kpxcCustomLoginFieldsBanner.inputQueryPattern);
 
@@ -567,7 +568,6 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
 
             kpxcCustomLoginFieldsBanner.chooser.append(field);
             firstInput = field;
-            ++index;
         }
     }
 
