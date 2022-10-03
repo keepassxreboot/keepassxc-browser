@@ -193,6 +193,17 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
         if (button) {
             return button;
         }
+    } else if (
+        [
+            'outlook.live.com',
+            'login.live.com',
+            'odc.officeapps.live.com',
+            'login.microsoftonline.com',
+        ].some(u => form.action.includes(u))) {
+        const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery));
+        if (buttons && buttons.length > 1) {
+            return buttons[1];
+        }
     }
 
     return undefined;
