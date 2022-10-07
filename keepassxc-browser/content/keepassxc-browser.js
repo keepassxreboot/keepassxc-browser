@@ -388,6 +388,14 @@ kpxc.initLoginPopup = function() {
     const loginItems = [];
     for (let i = 0; i < kpxc.credentials.length; i++) {
         const loginItem = getLoginItem(kpxc.credentials[i], showGroupNameInAutocomplete, i);
+
+        // Ignore a duplicate entry if the password is empty, but there's already a similar entry with a password.
+        // An usual use case with TOTP in a separate database.
+        const similarEntryFound = kpxc.credentials.some(c => c.password !== '' && c.login === loginItem.login);
+        if (kpxc.credentials[i].password === '' && similarEntryFound) {
+            continue;
+        }
+
         loginItems.push(loginItem);
     }
 
