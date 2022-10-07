@@ -10,6 +10,7 @@ const PREDEFINED_SITELIST = [
     'https://login.live.com/*',
     'https://odc.officeapps.live.com/*',
     'https://login.microsoftonline.com/*',
+    'https://login.microsoftonline.us/*',
     'https://www.amazon.ae/ap/*',
     'https://www.amazon.ca/ap/*',
     'https://www.amazon.cn/ap/*',
@@ -192,6 +193,18 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
         const button = $('#signin_button');
         if (button) {
             return button;
+        }
+    } else if (
+        [
+            'outlook.live.com',
+            'login.live.com',
+            'odc.officeapps.live.com',
+            'login.microsoftonline.com',
+            'login.microsoftonline.us',
+        ].some(u => form.action.includes(u))) {
+        const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery));
+        if (buttons && buttons.length > 1) {
+            return buttons[1];
         }
     }
 
