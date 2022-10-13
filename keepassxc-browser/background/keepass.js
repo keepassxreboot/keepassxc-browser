@@ -33,7 +33,9 @@ const kpActions = {
     GET_DATABASE_GROUPS: 'get-database-groups',
     CREATE_NEW_GROUP: 'create-new-group',
     GET_TOTP: 'get-totp',
-    REQUEST_AUTOTYPE: 'request-autotype'
+    REQUEST_AUTOTYPE: 'request-autotype',
+    WEBAUTHN_REGISTER: 'webauthn-register',
+    WEBAUTHN_GET: 'webauthn-get'
 };
 
 browser.storage.local.get({ 'latestKeePassXC': { 'version': '', 'lastChecked': null }, 'keyRing': {} }).then((item) => {
@@ -620,6 +622,40 @@ keepass.requestAutotype = async function(tab, args = []) {
         logError(`requestAutotype failed: ${err}`);
         return false;
     }
+};
+
+keepass.webauthnRegister = async function(tab, publicKey) {
+    try {
+        const taResponse = await keepass.testAssociation(tab, [ false ]);
+        if (!taResponse || !keepass.isConnected) {
+            browserAction.showDefault(tab);
+            return [];
+        }
+
+        const kpAction = kpActions.WEBAUTHN_REGISTER;
+        const nonce = keepassClient.getNonce();
+
+        const messageData = {
+            action: kpAction,
+            publicKey: JSON.parse(JSON.stringify(publicKey))
+        };
+
+        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        if (response) {
+
+            return [];
+        }
+
+        browserAction.showDefault(tab);
+        return [];
+    } catch (err) {
+        logError(`webauthnRegister failed: ${err}`);
+        return [];
+    }
+};
+
+keepass.webauthnGet = async function(tab) {
+    return [];
 };
 
 //--------------------------------------------------------------------------

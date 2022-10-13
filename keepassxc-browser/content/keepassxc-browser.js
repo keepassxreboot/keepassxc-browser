@@ -852,9 +852,12 @@ document.documentElement.appendChild(webauthn);
 window.addEventListener('message', (ev) => {
     if (ev.data.action === 'webauthn-create') {
         console.log('Request from: ', ev.origin);
+        console.log(ev.data.publicKey);
 
-        // Send a test response after a delay
-        setInterval(() => {
+        sendMessage('webauthn-register', ev.data.publicKey);
+
+        // Send a test response after a delay. webauthn.js should wait for this.
+        setTimeout(() => {
             window.postMessage({ action: 'webauthn-create-response' }, window.location.origin);
         }, 2000);
     }

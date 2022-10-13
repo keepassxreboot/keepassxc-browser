@@ -247,5 +247,7 @@ kpxcEvent.messageHandlers = {
     'username_field_detected': kpxcEvent.onUsernameFieldDetected,
     'save_settings': kpxcEvent.onSaveSettings,
     'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC,
-    'update_context_menu': page.updateContextMenu
+    'update_context_menu': page.updateContextMenu,
+    'webauthn-get': keepass.webauthnGet,
+    'webauthn-register': keepass.webauthnRegister
 };
