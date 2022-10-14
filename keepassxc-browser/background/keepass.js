@@ -624,20 +624,23 @@ keepass.requestAutotype = async function(tab, args = []) {
     }
 };
 
-keepass.webauthnRegister = async function(tab, publicKey) {
+keepass.webauthnRegister = async function(tab, args = []) {
     try {
         const taResponse = await keepass.testAssociation(tab, [ false ]);
-        if (!taResponse || !keepass.isConnected) {
+        if (!taResponse || !keepass.isConnected || args.length < 2) {
             browserAction.showDefault(tab);
             return [];
         }
 
         const kpAction = kpActions.WEBAUTHN_REGISTER;
         const nonce = keepassClient.getNonce();
+        const publicKey = args[0];
+        const origin = args[1];
 
         const messageData = {
             action: kpAction,
-            publicKey: JSON.parse(JSON.stringify(publicKey))
+            publicKey: JSON.parse(JSON.stringify(publicKey)),
+            origin: origin
         };
 
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);

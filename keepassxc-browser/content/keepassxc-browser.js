@@ -854,7 +854,7 @@ window.addEventListener('message', (ev) => {
         console.log('Request from: ', ev.origin);
         console.log(ev.data.publicKey);
 
-        sendMessage('webauthn-register', ev.data.publicKey);
+        sendMessage('webauthn-register', [ ev.data.publicKey, ev.origin ]);
 
         // Send a test response after a delay. webauthn.js should wait for this.
         setTimeout(() => {

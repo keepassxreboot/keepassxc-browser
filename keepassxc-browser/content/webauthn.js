@@ -8,19 +8,15 @@
             const publicKey = {};
             publicKey.attestation = options.publicKey.attestation;
             publicKey.authenticatorSelection = options.publicKey.authenticatorSelection;
-            publicKey.challenge = new Uint8Array(options.publicKey.challenge).toString();
+            publicKey.challenge = window.btoa(options.publicKey.challenge); // Use b64 instead
             publicKey.pubKeyCredParams = options.publicKey.pubKeyCredParams;
             publicKey.rp = options.publicKey.rp;
             publicKey.timeout = options.publicKey.timeout;
             publicKey.user = options.publicKey.user;
-            publicKey.user.id = options.publicKey.user.id.toString();
-
-            /*const credential = await navigator.credentials.create({
-                publicKey: publicKey
-            });*/
+            publicKey.user.id = window.btoa(options.publicKey.user.id); // Use b64 instead
 
             window.postMessage({ action: 'webauthn-create', publicKey: publicKey }, window.location.origin);
-            //await waitForCreateResponse();
+            //await waitForCreateResponse(); // How to do this?
         },
         async get(options) {
             console.log('Overridden get');
