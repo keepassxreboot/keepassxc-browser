@@ -645,8 +645,7 @@ keepass.webauthnRegister = async function(tab, args = []) {
 
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
         if (response) {
-
-            return [];
+            return response;
         }
 
         browserAction.showDefault(tab);
