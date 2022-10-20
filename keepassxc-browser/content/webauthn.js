@@ -9,7 +9,7 @@ const postMessageToExtension = function(request) {
             const handler = (msg) => {
                 if (msg && msg.data && msg.data.action === messageRequest + '-response') {
                     messageEvent.removeEventListener('message', listener);
-                    resolve(msg.data);
+                    resolve(msg.data.data);
                     return;
                 }
             };
@@ -20,6 +20,20 @@ const postMessageToExtension = function(request) {
         // Send the request
         window.postMessage(request, window.location.origin);
     });
+};
+
+const stringToArrayBuffer = function(str) {
+    const arr = Uint8Array.from(str, c => c.charCodeAt(0));
+    return arr.buffer;
+};
+
+const arrayToArrayBuffer = function(arr) {
+    const buf = Uint8Array.from(arr);
+    return buf.buffer;
+}
+
+const base64ToArrayBuffer = function(str) {
+    return stringToArrayBuffer(atob(str));
 };
 
 (async () => {
@@ -37,13 +51,16 @@ const postMessageToExtension = function(request) {
             publicKey.user = options.publicKey.user;
             publicKey.user.id = window.btoa(options.publicKey.user.id); // Use b64 instead
 
-            const response = await postMessageToExtension({ action: 'webauthn-create', publicKey: publicKey });
-            console.log('Response: ', response);
+            const publicKeyCredential = await postMessageToExtension({ action: 'webauthn-create', publicKey: publicKey });
+            console.log('Response: ', publicKeyCredential);
 
             // Parse the response and change needed variables from b64 to ArrayBuffer/UInt8Array etc.
+            publicKeyCredential.rawId = base64ToArrayBuffer(publicKeyCredential.id);
+            publicKeyCredential.response.attestationObject.authData = arrayToArrayBuffer(publicKeyCredential.response.attestationObject.authData);
+            publicKeyCredential.response.clientDataJSON = stringToArrayBuffer(JSON.stringify(publicKeyCredential.response.clientDataJSON));
 
-
-            return [];
+            console.log('Final response: ', publicKeyCredential);
+            return publicKeyCredential;
         },
         async get(options) {
             console.log('Overridden get');

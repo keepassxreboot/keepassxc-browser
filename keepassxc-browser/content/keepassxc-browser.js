@@ -856,7 +856,7 @@ window.addEventListener('message', async (ev) => {
 
         const ret = await sendMessage('webauthn-register', [ ev.data.publicKey, ev.origin ]);
         if (ret.response) {
-            window.postMessage({ action: 'webauthn-create-response', data: ret.response.response }, window.location.origin);
+            window.postMessage({ action: 'webauthn-create-response', data: ret.response }, window.location.origin);
         }
     }
 });
