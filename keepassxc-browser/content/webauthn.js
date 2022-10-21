@@ -9,7 +9,7 @@ const postMessageToExtension = function(request) {
             const handler = (msg) => {
                 if (msg && msg.data && msg.data.action === messageRequest + '-response') {
                     messageEvent.removeEventListener('message', listener);
-                    resolve(msg.data.data);
+                    resolve(msg.data.response);
                     return;
                 }
             };
@@ -30,47 +30,110 @@ const stringToArrayBuffer = function(str) {
 const arrayToArrayBuffer = function(arr) {
     const buf = Uint8Array.from(arr);
     return buf.buffer;
-}
+};
 
+// URL encoding needs some characters replaced
 const base64ToArrayBuffer = function(str) {
-    return stringToArrayBuffer(atob(str));
+    return stringToArrayBuffer(window.atob(str.replaceAll('-', '+').replaceAll('_', '/')));
+};
+
+// URL encoding needs some characters replaced
+const arrayBufferToBase64 = function(arr) {
+    var clonedArr = new ArrayBuffer(arr.byteLength);
+    new Uint8Array(clonedArr).set(new Uint8Array(arr));
+
+    return window.btoa(clonedArr).replaceAll('\\', '-').replaceAll('/', '_').replaceAll('=', '');
+};
+
+/*const arrayBufferToBase64HexString = function(arr) {
+    return window.btoa(arrayBufferToHexString(arr));
+};*/
+
+const arrayBufferToHexString = function(arr) {
+    return [ ...new Uint8Array(arr) ].map(c => c.toString(16).padStart(2, '0')).join('');
+};
+
+const buildCredentialCreationOptions = function(options) {
+    const publicKey = {};
+    publicKey.attestation = options.publicKey.attestation;
+    publicKey.authenticatorSelection = options.publicKey.authenticatorSelection;
+    //publicKey.challenge = arrayBufferToBase64(options.publicKey.challenge);
+    publicKey.challenge = arrayBufferToHexString(options.publicKey.challenge);
+    publicKey.extensions = options.publicKey.extensions;
+    publicKey.pubKeyCredParams = options.publicKey.pubKeyCredParams;
+    publicKey.rp = options.publicKey.rp;
+    publicKey.timeout = options.publicKey.timeout;
+
+    publicKey.excludeCredentials = [];
+    for (const cred of options.publicKey.excludeCredentials) {
+        const arr = {
+            //id: arrayBufferToBase64(cred.id),
+            id: arrayBufferToHexString(cred.id),
+            transports: cred.transports,
+            type: cred.type
+        };
+
+        publicKey.excludeCredentials.push(arr);
+    }
+
+    publicKey.user = {};
+    publicKey.user.displayName = options.publicKey.user.displayName;
+    //publicKey.user.id = arrayBufferToBase64(options.publicKey.user.id);
+    publicKey.user.id = arrayBufferToHexString(options.publicKey.user.id);
+    publicKey.user.name = options.publicKey.user.name;
+
+    return publicKey;
+};
+
+const buildCredentialRequestOptions = function(options) {
+    const publicKey = {};
+
+    return publicKey;
 };
 
 (async () => {
+    const originalCredentials = navigator.credentials;
+
     const webauthnCredentials = {
         async create(options) {
-            console.log('Overridden create');
+            if (options.publicKey) {
+                console.log(options.publicKey);
+                const publicKey = buildCredentialCreationOptions(options);
+                console.log(publicKey);
+                const response = await postMessageToExtension({ action: 'webauthn-create', publicKey: publicKey });
+                if (response.length === 0 || response.response === 'canceled') {
+                    return;
+                }
 
-            const publicKey = {};
-            publicKey.attestation = options.publicKey.attestation;
-            publicKey.authenticatorSelection = options.publicKey.authenticatorSelection;
-            publicKey.challenge = window.btoa(options.publicKey.challenge); // Use b64 instead
-            publicKey.pubKeyCredParams = options.publicKey.pubKeyCredParams;
-            publicKey.rp = options.publicKey.rp;
-            publicKey.timeout = options.publicKey.timeout;
-            publicKey.user = options.publicKey.user;
-            publicKey.user.id = window.btoa(options.publicKey.user.id); // Use b64 instead
+                // Parse
+                const publicKeyCredential = response.response;
+                publicKeyCredential.rawId = base64ToArrayBuffer(publicKeyCredential.id);
+                publicKeyCredential.response.attestationObject.authData = arrayToArrayBuffer(publicKeyCredential.response.attestationObject.authData);
+                publicKeyCredential.response.clientDataJSON = stringToArrayBuffer(JSON.stringify(publicKeyCredential.response.clientDataJSON));
+                publicKeyCredential.getClientExtensionResults = () => {};
+                return publicKeyCredential;
+            }
 
-            const publicKeyCredential = await postMessageToExtension({ action: 'webauthn-create', publicKey: publicKey });
-            console.log('Response: ', publicKeyCredential);
-
-            // Parse the response and change needed variables from b64 to ArrayBuffer/UInt8Array etc.
-            publicKeyCredential.rawId = base64ToArrayBuffer(publicKeyCredential.id);
-            publicKeyCredential.response.attestationObject.authData = arrayToArrayBuffer(publicKeyCredential.response.attestationObject.authData);
-            publicKeyCredential.response.clientDataJSON = stringToArrayBuffer(JSON.stringify(publicKeyCredential.response.clientDataJSON));
-
-            console.log('Final response: ', publicKeyCredential);
-            return publicKeyCredential;
+            //const createResponse = await originalCredentials.create(options);
+            //console.log(createResponse);
+            //return createResponse;
+            return originalCredentials.create(options);
         },
         async get(options) {
-            console.log('Overridden get');
+            if (options.publicKey) {
+                console.log(options.publicKey);
+
+                const publicKey = buildCredentialRequestOptions(options);
+            }
+
+            return originalCredentials.get(options);
         }
     };
 
     // Overwrite navigator.credentials
     try {
-        Object.assign(navigator.credentials, webauthnCredentials);
+        Object.defineProperty(navigator, 'credentials', { value: webauthnCredentials });
     } catch (err) {
-        console.log(err);
+        console.log('Cannot override navigator.credentials: ', err);
     }
 })();

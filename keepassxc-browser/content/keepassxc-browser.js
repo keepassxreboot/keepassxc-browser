@@ -845,6 +845,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
 });
 
 // Webauthn
+// TODO: Add an option for this. Don't do it for every page.
 const webauthn = document.createElement('script');
 webauthn.src = browser.runtime.getURL('content/webauthn.js');
 document.documentElement.appendChild(webauthn);
@@ -855,8 +856,8 @@ window.addEventListener('message', async (ev) => {
         console.log(ev.data.publicKey);
 
         const ret = await sendMessage('webauthn-register', [ ev.data.publicKey, ev.origin ]);
-        if (ret.response) {
-            window.postMessage({ action: 'webauthn-create-response', data: ret.response }, window.location.origin);
+        if (ret) {
+            window.postMessage({ action: 'webauthn-create-response', response: ret }, window.location.origin);
         }
     }
 });
