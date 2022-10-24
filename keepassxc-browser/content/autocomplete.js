@@ -147,9 +147,7 @@ class Autocomplete {
 
     deselectItem() {
         const items = this.list.querySelectorAll('div.kpxcAutocomplete-active');
-        for (const item of items) {
-            item.classList.remove('kpxcAutocomplete-active');
-        }
+        items.forEach(item =>  item.classList.remove('kpxcAutocomplete-active'));
     }
 
     closeList() {
