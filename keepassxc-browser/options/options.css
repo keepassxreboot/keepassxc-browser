@@ -103,6 +103,10 @@ tbody {
     color: var(--kpxc-text-color) !important;
 }
 
+.table-striped > tbody > tr:nth-of-type(odd) .form-check-input:checked {
+    background-color: var(--kpxc-checkbox-background-color) !important;
+}
+
 .table tbody td {
     vertical-align: middle;
 }

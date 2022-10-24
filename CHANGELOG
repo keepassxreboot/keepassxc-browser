@@ -1,3 +1,12 @@
+1.8.3 (24-10-2022)
+=========================
+- Fix filling TOTP without detecting a input field combination [#1726]
+- Fix saving Custom Login Fields with iframes [#1731]
+- Fix options page checkbox colors [#1722]
+- Fix options page hamburger menu with small resolutions [#1735]
+- Fix hiding a duplicate TOTP entry [#1724]
+- Fix detecting submit button on Microsoft Login page [#1741]
+
 1.8.2.2 (11-09-2022)
 =========================
 - Add support for new Access Confirm Dialog with KeePassXC 2.7.2 [#1719]

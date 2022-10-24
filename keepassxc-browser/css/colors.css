@@ -4,6 +4,7 @@
     --kpxc-card-border-color: rgba(0,0,0,.125);
     --kpxc-card-header-color: #fafafa;
     --kpxc-checkbox-color: #5b5b5d;
+    --kpxc-checkbox-background-color: #2b2a2a;
     --kpxc-container-border: 1px solid #ccc;
     --kpxc-input-active-border-color: #2b4d1a;
     --kpxc-input-background-color: #fff;
@@ -26,6 +27,7 @@
         --kpxc-card-border-color: #292a2a;
         --kpxc-card-header-color: #27272a;
         --kpxc-checkbox-color: #3b3b3d;
+        --kpxc-checkbox-background-color: #5b5b5d;
         --kpxc-container-border: 1px solid #000;
         --kpxc-input-active-border-color: #2b4d1a;
         --kpxc-input-background-color: #27272a;
@@ -48,6 +50,7 @@
     --kpxc-card-border-color: #292a2a;
     --kpxc-card-header-color: #27272a;
     --kpxc-checkbox-color: #3b3b3d;
+    --kpxc-checkbox-background-color: #2b2a2a;
     --kpxc-container-border: 1px solid #000;
     --kpxc-input-active-border-color: #2b4d1a;
     --kpxc-input-background-color: #27272a;
@@ -68,6 +71,7 @@
     --kpxc-card-border-color: rgba(0,0,0,.125);
     --kpxc-card-header-color: #fafafa;
     --kpxc-checkbox-color: #5b5b5d;
+    --kpxc-checkbox-background-color: #5b5b5d;
     --kpxc-container-border: 1px solid #ccc;
     --kpxc-input-active-border-color: #2b4d1a;
     --kpxc-input-background-color: #fff;
