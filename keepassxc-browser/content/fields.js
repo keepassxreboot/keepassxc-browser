@@ -154,7 +154,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         // Use the form's elements
         addTotpFieldsToCombination(form.elements, exceptionFound);
     } else if (inputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS && inputs.every(i => (i.inputMode === 'numeric' && i.pattern.includes('0-9'))
-                || (i.type === 'text' && i.maxLength === 1)
+                || ((i.type === 'text' || i.type === 'number') && i.maxLength === 1)
                 || i.type === 'tel')) {
         // No form is found, but input fields are possibly segmented TOTP fields
         addTotpFieldsToCombination(inputs);
