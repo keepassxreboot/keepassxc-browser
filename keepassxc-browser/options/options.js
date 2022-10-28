@@ -31,8 +31,6 @@ options.initMenu = function() {
 
     sideBarLinks.forEach(function(elem) {
         elem.addEventListener('click', function(e) {
-            e.preventDefault();
-
             sideBarLinks.forEach(t => t.parentElement.classList.remove('active'));
             elem.parentElement.classList.add('active');
             tabs.forEach(t => t.hide());
@@ -44,6 +42,10 @@ options.initMenu = function() {
     });
 
     $('div.tab').show();
+
+    if (window.location.hash !== '') {
+        document.querySelector(`a[href='${window.location.hash}']`)?.click();
+    }
 };
 
 options.saveSetting = async function(name) {
