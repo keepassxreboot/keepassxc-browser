@@ -823,11 +823,11 @@
         "message": "O atalho para $1foi mudado com successo",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "O atalho para $1foi reposto",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Erro: O atalho para $1não foi mudado!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -887,11 +887,11 @@
         "message": "URL da página",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignorar",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Deteção apenas de nome de utilizador",
         "description": "Site preferences list column title."
     },

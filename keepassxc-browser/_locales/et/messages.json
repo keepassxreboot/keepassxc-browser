@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "",
-      "description": "Global Auto-Type shortcut text."
+        "message": "",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "",
@@ -827,11 +827,11 @@
         "message": "Otsetee $1 jaoks on edukalt muudetud.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Otsetee $1 jaoks on lähtestatud.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Tõrge: Otseteed $1 jaoks pole muudetud!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -891,11 +891,11 @@
         "message": "Lehe URL",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Eiramine",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Ainult kasutajanime tuvastus",
         "description": "Site preferences list column title."
     },

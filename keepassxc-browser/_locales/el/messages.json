@@ -823,11 +823,11 @@
         "message": "Η συντόμευση για $1 έχει αλλάξει με επιτυχία.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Έγινε επαναφορά της συντόμευσης για $1",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Σφάλμα: Η συντόμευση για το $1 δεν έχει αλλάξει!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -887,11 +887,11 @@
         "message": "Διεύθυνση URL σελίδας",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Αγνοήστε",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Ανίχνευση μόνο-όνομα χρήστη",
         "description": "Site preferences list column title."
     },

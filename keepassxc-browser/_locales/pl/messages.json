@@ -823,11 +823,11 @@
         "message": "Skrót do $1 został pomyślnie zmieniony.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Skrót dla $1 został zresetowany.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Błąd: Skrót dla $1 nie został zmieniony!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -887,11 +887,11 @@
         "message": "Adres URL strony",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignorowanie",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Wykrywanie tylko nazwy użytkownika",
         "description": "Site preferences list column title."
     },

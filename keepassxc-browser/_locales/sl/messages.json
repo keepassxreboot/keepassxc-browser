@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "",
-      "description": "Global Auto-Type shortcut text."
+        "message": "",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "Zaznana je HTTP avtentikacija z več povernicami. Kliknite na ikono razširitve, da izberete želeno povernico.",
@@ -827,11 +827,11 @@
         "message": "Bližnjica za $1 je bila uspešno spremenjena.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Bližnjica za $1 je bila ponastavjena.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Napaka: Bližnjica za $1 ni bila spremenjena!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -891,11 +891,11 @@
         "message": "URL spletna mesta",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Prezri",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Zaznavanje samo uporabniškega imena",
         "description": "Site preferences list column title."
     },

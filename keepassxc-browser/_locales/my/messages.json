@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "ကမ္ဘာသုံး အလိုအလျောက်စာရိုက်ခြင်းကို တောင်းဆိုရန်",
-      "description": "Global Auto-Type shortcut text."
+        "message": "ကမ္ဘာသုံး အလိုအလျောက်စာရိုက်ခြင်းကို တောင်းဆိုရန်",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "အထောက်အထားများစွာဖြင့် HTTP စစ်မှန်ကြောင်းအတည်ပြုခြင်းကို တွေ့ရှိထားသည်။ မှန်ကန်သော အထောက်အထားကိုရွေးရန် အဆက်အိုင်ကွန်ပေါ်တွင် နှိပ်ပါ။",
@@ -827,11 +827,11 @@
         "message": "$1 အတွက် ရှော့(တ်)ကတ်ကို အောင်မြင်စွာ ပြောင်းပြီးပါပြီ။",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "$1 အတွက် ရှော့(တ်)ကတ်ကို ပြန်လည် သတ်မှတ်ပြီးပါပြီ။",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "ပြဿနာ - $1 အတွက် ရှော့(တ်)ကတ်ကို မပြောင်းရသေးပါ။",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -891,11 +891,11 @@
         "message": "စာမျက်နှာ URL",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "လျစ်လျူရှုရန်",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "အသုံးပြုသူအမည် သီးသန့် ရှာတွေ့ခြင်း",
         "description": "Site preferences list column title."
     },

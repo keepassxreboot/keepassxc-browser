@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "",
-      "description": "Global Auto-Type shortcut text."
+        "message": "",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "Открито е HTTP удостоверяване с множество идентификационни данни. Кликнете върху иконата на разширението, за да изберете правилните.",
@@ -827,11 +827,11 @@
         "message": "Комбинацията за $1 е променена успешно.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Комбинацията за $1 е нулирана.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Грешка: Комбинацията за $1 не е променена!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -891,11 +891,11 @@
         "message": "Адрес на страница",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Игнориране",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Откриване само по потребителско име",
         "description": "Site preferences list column title."
     },

@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "",
-      "description": "Global Auto-Type shortcut text."
+        "message": "",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "HTTP-authenticatie met meerdere inloggegevens gedetecteerd. Klik op het extensiepictogram om de juiste te kiezen.",
@@ -827,11 +827,11 @@
         "message": "Sneltoets voor $1 is veranderd.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Sneltoets voor $1 is hersteld.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Fout: Sneltoets voor $1 is niet veranderd!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -891,11 +891,11 @@
         "message": "Pagina-URL",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Negeren",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Alleen-gebruikersnaam-detectie",
         "description": "Site preferences list column title."
     },

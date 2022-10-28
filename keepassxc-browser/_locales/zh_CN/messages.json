@@ -823,11 +823,11 @@
         "message": "$1 的快捷方式已成功更改。",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "$1 的快捷方式已重置。",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "错误: $1 的快捷方式未更改!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -887,11 +887,11 @@
         "message": "页面网址",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "忽略",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "仅用户名检测",
         "description": "Site preferences list column title."
     },

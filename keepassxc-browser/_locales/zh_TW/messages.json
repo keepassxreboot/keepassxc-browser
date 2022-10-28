@@ -463,7 +463,7 @@
         "message": "取消",
         "description": "Cancel button text when removing database key or custom login fields."
     },
-     "optionsButtonReset": {
+    "optionsButtonReset": {
         "message": "重設",
         "description": "Reset button text for keyboard shortcuts."
     },
@@ -639,11 +639,11 @@
         "message": "$1 的快速鍵已成功更改。",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "$1 的快速鍵已重設。",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Error: Shortcut for $1 has not been changed!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -691,11 +691,11 @@
         "message": "網頁 URL",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "忽略",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Username-only Detection",
         "description": "Site preferences list column title."
     },

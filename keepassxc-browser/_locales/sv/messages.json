@@ -463,7 +463,7 @@
         "message": "Avbryt",
         "description": "Cancel button text when removing database key or custom login fields."
     },
-     "optionsButtonReset": {
+    "optionsButtonReset": {
         "message": "Återställ",
         "description": "Reset button text for keyboard shortcuts."
     },
@@ -639,11 +639,11 @@
         "message": "Genväg för $1 har ändrats framgångsrikt.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Genväg för $1 har återställts.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Fel: Genväg för $1 har inte ändrats!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -691,11 +691,11 @@
         "message": "Sid-URL",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignorera",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Identifiera endast användarnamn",
         "description": "Site preferences list column title."
     },

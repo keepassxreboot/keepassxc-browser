@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "",
-      "description": "Global Auto-Type shortcut text."
+        "message": "",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "Autentificare HTTP cu mai multe acreditări detectate. Faceți clic pe pictograma de prelungire pentru a alege una corectă.",
@@ -827,11 +827,11 @@
         "message": "Comanda rapidă pentru $1 s-a modificat cu succes.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Comandă rapidă pentru $1 a fost resetat.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Eroare: shortcut pentru $1 nu a fost schimbat!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -891,11 +891,11 @@
         "message": "URL pagină",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignora",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Detectarea numai a numelui de utilizator",
         "description": "Site preferences list column title."
     },
