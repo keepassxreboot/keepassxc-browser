@@ -20,38 +20,32 @@ function assertRegex(func, expected, card, testName) {
 }
 
 async function assertInputFields(localDiv, expectedFieldCount, actionElementId) {
-    return new Promise(async (resolve) => {
-        const div = document.getElementById(localDiv);
-        div.style.display = 'block';
+    const div = document.getElementById(localDiv);
+    div.style.display = 'block';
 
-        // An user interaction is required before testing
-        if (actionElementId) {
-            const actionElement = div.querySelector(actionElementId);
-            if (actionElement) {
-                actionElement.click();
-            }
+    // An user interaction is required before testing
+    if (actionElementId) {
+        const actionElement = div.querySelector(actionElementId);
+        if (actionElement) {
+            actionElement.click();
         }
+    }
 
-        const inputs = kpxcObserverHelper.getInputs(div);
-        kpxcAssert(inputs.length, expectedFieldCount, Tests.INPUT_FIELDS, `getInputs() for ${localDiv} with ${expectedFieldCount} fields`);
+    const inputs = kpxcObserverHelper.getInputs(div);
+    kpxcAssert(inputs.length, expectedFieldCount, Tests.INPUT_FIELDS, `getInputs() for ${localDiv} with ${expectedFieldCount} fields`);
 
-        div.style.display = 'none';
-        resolve();
-    });
+    div.style.display = 'none';
 }
 
 async function assertPasswordChangeFields(localDiv, expectedNewPassword) {
-    return new Promise(async (resolve) => {
-        const div = document.getElementById(localDiv);
-        div.style.display = 'block';
+    const div = document.getElementById(localDiv);
+    div.style.display = 'block';
 
-        const inputs = kpxcObserverHelper.getInputs(div, true);
-        const newPassword = kpxcForm.getNewPassword(inputs);
-        kpxcAssert(newPassword, expectedNewPassword, Tests.PASSWORD_CHANGE, `New password matches for ${localDiv}`);
+    const inputs = kpxcObserverHelper.getInputs(div, true);
+    const newPassword = kpxcForm.getNewPassword(inputs);
+    kpxcAssert(newPassword, expectedNewPassword, Tests.PASSWORD_CHANGE, `New password matches for ${localDiv}`);
 
-        div.style.display = 'none';
-        resolve();
-    });
+    div.style.display = 'none';
 }
 
 async function assertTOTPField(classStr, properties, testName, expectedResult) {
