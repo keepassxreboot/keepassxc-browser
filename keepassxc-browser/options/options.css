@@ -129,6 +129,7 @@ table td:last-of-type {
 .card {
     background-color: var(--kpxc-card-background-color);
     border-color: var(--kpxc-card-border-color);
+    overflow: hidden; /* fix border radius looking fuzzy */
 }
 
 .card-header {
