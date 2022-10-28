@@ -559,7 +559,7 @@ keepass.createNewGroup = async function(tab, args = []) {
             keepass.updateLastUsed(keepass.databaseHash);
             return response;
         } else {
-            logError(`getDatabaseGroups rejected`);
+            logError('getDatabaseGroups rejected');
         }
 
         browserAction.showDefault(tab);
@@ -890,7 +890,7 @@ keepass.updateDatabaseHashToContent = async function() {
                 hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
                 connected: keepass.isKeePassXCAvailable
             }).catch((err) => {
-                logError(`No content script available for this tab.`);
+                logError('No content script available for this tab.');
             });
             keepass.previousDatabaseHash = keepass.databaseHash;
         }
