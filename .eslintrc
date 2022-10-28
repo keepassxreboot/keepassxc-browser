@@ -1,5 +1,6 @@
 {
     "extends": ["eslint-config-airbnb-base" ],
+    "ignorePatterns": ["**/*.min.js"],
     "env": {
         "browser": true,
         "es6": true,
