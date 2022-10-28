@@ -151,8 +151,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     }
 
     // Traverse children, only if Improved Field Detection is enabled for the site
-    if (kpxc.improvedFieldDetectionEnabledForPage)
-    {
+    if (kpxc.improvedFieldDetectionEnabledForPage) {
         const traversedChildren = kpxcObserverHelper.findInputsFromChildren(target);
         for (const child of traversedChildren) {
             if (!inputFields.includes(child)) {

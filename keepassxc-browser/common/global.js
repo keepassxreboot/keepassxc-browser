@@ -77,8 +77,7 @@ const matchPatternToRegExp = function(pattern) {
         pattern = pattern.replace(/\./g, '\\.');
         if (pattern.endsWith('*')) {
             regex += pattern.slice(0, -1);
-        }
-        else {
+        } else {
             regex += `${pattern}$`;
         }
         return new RegExp(regex);
