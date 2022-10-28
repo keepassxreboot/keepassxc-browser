@@ -232,7 +232,7 @@ options.initGeneralSettings = function() {
     const dialogImportSettingsModal = new bootstrap.Modal($('#dialogImportSettings'),
         { keyboard: true, show: false, backdrop: true });
 
-    $('#importSettingsButton').addEventListener('click', function(e) {
+    $('#importSettingsButton').addEventListener('click', function() {
         var link = document.createElement('input');
         link.setAttribute('type', 'file');
         link.onchange = function(e) {
