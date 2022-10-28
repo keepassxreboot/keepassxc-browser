@@ -69,7 +69,7 @@ kpxcForm.getFormSubmitButton = function(form) {
 // Retrieve new password from a form with three elements: Current, New, Repeat New
 kpxcForm.getNewPassword = function(passwordInputs = []) {
     if (passwordInputs.length < 2) {
-        logDebug('Error: Not enough input fields to detect possible new password.')
+        logDebug('Error: Not enough input fields to detect possible new password.');
         return '';
     }
 

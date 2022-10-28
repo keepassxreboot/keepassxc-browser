@@ -1,4 +1,4 @@
-const fs = require('@npmcli/fs')
+const fs = require('@npmcli/fs');
 
 const DEST = 'keepassxc-browser/tests';
 

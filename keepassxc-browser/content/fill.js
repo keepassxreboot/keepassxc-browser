@@ -326,4 +326,4 @@ kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
     } else {
         (combination.username || combination.password).focus();
     }
-}
+};
