@@ -8,7 +8,7 @@
         "webextensions": true
     },
     "parserOptions": {
-        "ecmaVersion": 2017
+        "ecmaVersion": 2020
     },
     "rules": {
         "array-bracket-spacing": ["error", "always"],
