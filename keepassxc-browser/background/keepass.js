@@ -754,9 +754,7 @@ keepass.disableAutomaticReconnect = function() {
 keepass.reconnect = async function(tab, connectionTimeout) {
     keepassClient.connectToNative();
     keepass.generateNewKeyPair();
-    const keyChangeResult = await keepass.changePublicKeys(tab, true, connectionTimeout).catch((e) => {
-        return false;
-    });
+    const keyChangeResult = await keepass.changePublicKeys(tab, true, connectionTimeout).catch(() => false);
 
     // Change public keys timeout
     if (!keyChangeResult) {
