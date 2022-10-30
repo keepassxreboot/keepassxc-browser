@@ -140,10 +140,6 @@ keepass.retrieveCredentials = async function(tab, args = []) {
             keys: keys
         };
 
-        if (keepass.compareVersion('2.7.2', keepass.currentKeePassXC)) {
-            messageData.requestID = keepassClient.getRequestId();
-        }
-
         if (submiturl) {
             messageData.submitUrl = submiturl;
         }
