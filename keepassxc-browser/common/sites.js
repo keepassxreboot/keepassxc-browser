@@ -2,6 +2,8 @@
 
 const PREDEFINED_SITELIST = [
     'https://accounts.google.com/*',
+    'https://www.paypal.com/*/cgi-bin/webscr*',
+    'https://www.paypal.com/*/checkoutnow*',
     'https://www.paypal.com/*/signin*',
     'https://www.paypal.com/cgi-bin/webscr*',
     'https://www.paypal.com/checkoutnow*',
