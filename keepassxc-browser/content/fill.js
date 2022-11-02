@@ -104,13 +104,6 @@ kpxcFill.fillFromPopup = async function(id, uuid) {
         return;
     }
 
-    // For Google password field we need to do some special handling. The password field is actually in the
-    // second combination that was just detected after a username fill.
-    let combination = kpxc.combinations[0]; // BUG? This variable is unused since https://github.com/stefansundin/keepassxc-browser/commit/ba5a7141fba456ee409446ef32da2b19c416cee3#diff-b6dc310afe6e36d10e60a76ebd2e1d07ee0eeda631e4430aeab384fbd37cdb4cL114
-    if (kpxcSites.popupExceptionFound(kpxc.combinations)) {
-        combination = kpxc.combinations[1];
-    }
-
     const foundCombination = kpxcFields.getCombinationFromAllInputs();
     kpxcFill.fillInCredentials(foundCombination, selectedCredentials.login, uuid);
     kpxcUserAutocomplete.closeList();
