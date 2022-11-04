@@ -2,6 +2,12 @@
 
 const MAX_AUTOCOMPLETE_NAME_LEN = 50;
 
+function cancelEvent(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+}
+
 class Autocomplete {
     constructor() {
         this.afterFillSort = SORT_BY_MATCHING_CREDENTIALS_SETTING;
@@ -177,7 +183,7 @@ class Autocomplete {
 
         const inputField = e.target;
         if (e.key === 'ArrowDown') {
-            e.preventDefault();
+            cancelEvent(e);
             // If the list is not visible, show it
             if (!this.input) {
                 await this.showList(inputField);
@@ -193,18 +199,14 @@ class Autocomplete {
                 this.selectItem();
             }
         } else if (e.key === 'ArrowUp' && this.list) {
-            e.preventDefault();
+            cancelEvent(e);
             const items = this.getAllItems();
             this.index = (this.index > 0 ? this.index : items.length) - 1;
             this.selectItem();
         } else if (e.key === 'Enter' && this.input) {
-            if (inputField.value === '') {
-                e.preventDefault();
-            }
-
             const items = this.getAllItems();
             if (this.index >= 0 && items[this.index] !== undefined) {
-                e.preventDefault();
+                cancelEvent(e);
 
                 await this.itemEnter(this.index, this.elements);
                 this.closeList();
