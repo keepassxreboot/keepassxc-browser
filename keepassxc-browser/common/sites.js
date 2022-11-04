@@ -152,7 +152,8 @@ kpxcSites.segmentedTotpExceptionFound = function(form) {
         return false;
     }
 
-    if (document.location.href.startsWith('https://store.steampowered.com') && form.length === 5) {
+    if ((document.location.href.startsWith('https://store.steampowered.com')
+        || document.location.href.startsWith('https://steamcommunity.com/login')) && form.length === 5) {
         return true;
     }
 
