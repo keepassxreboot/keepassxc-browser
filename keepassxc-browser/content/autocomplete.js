@@ -93,7 +93,7 @@ class Autocomplete {
             this.shadowRoot.append(styleSheet);
 
             this.list = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
-            initColorTheme(this.list);
+            initColorTheme(this.container);
 
             this.container.append(this.list);
             this.shadowRoot.append(this.container);
