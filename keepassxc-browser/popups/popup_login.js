@@ -1,7 +1,6 @@
 'use strict';
 
 (async () => {
-    resizePopup();
     await initColorTheme();
 
     $('#lock-database-button').show();
