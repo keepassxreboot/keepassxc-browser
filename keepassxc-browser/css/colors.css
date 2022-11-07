@@ -1,4 +1,5 @@
 :root, :host {
+    --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
     --kpxc-card-background-color: #fff;
     --kpxc-card-border-color: rgba(0,0,0,.125);
@@ -22,6 +23,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root, :host {
+        --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
         --kpxc-background-color: #3b3b3d;
         --kpxc-card-background-color: #2b2a2a;
         --kpxc-card-border-color: #292a2a;
@@ -45,6 +47,7 @@
 
 /* Same colors for manual switching */
 [data-color-theme='dark'] {
+    --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
     --kpxc-background-color: #3b3b3d;
     --kpxc-card-background-color: #2b2a2a;
     --kpxc-card-border-color: #292a2a;
@@ -66,6 +69,7 @@
 }
 
 [data-color-theme='light'] {
+    --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
     --kpxc-card-background-color: #fff;
     --kpxc-card-border-color: rgba(0,0,0,.125);
