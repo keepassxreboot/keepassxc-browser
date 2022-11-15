@@ -44,10 +44,13 @@ kpxc.addToSitePreferences = async function() {
 
     if (!siteExists) {
         // Add wildcard to the URL
-        site = site.slice(0, site.lastIndexOf('/') + 1) + '*';
+        const url = new URL(window.top.location.href);
+        url.pathname = '/*';
+        url.search = '';
+        url.hash = '';
 
         kpxc.settings['sitePreferences'].push({
-            url: site,
+            url: url.toString(),
             ignore: IGNORE_NOTHING,
             usernameOnly: true
         });
