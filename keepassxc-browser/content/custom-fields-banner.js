@@ -669,7 +669,7 @@ const dataStepToString = function() {
     } else if (kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_STRING_FIELDS) {
         return tr('defineStringField');
     }
-}
+};
 
 //--------------------------------------------------------------------------
 // IFrame support
@@ -764,4 +764,4 @@ const sendMessageToParent = function(message, selection) {
     if (window.self !== window.top) {
         window.top.postMessage({ message, selection }, '*');
     }
-}
+};

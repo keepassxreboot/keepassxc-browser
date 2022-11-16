@@ -404,7 +404,7 @@ page.updateContextMenu = async function(tab, credentials) {
     }
 };
 
-const createContextMenuItem = function({action, args, ...options}) {
+const createContextMenuItem = function({ action, args, ...options }) {
     return browser.contextMenus.create({
         contexts: menuContexts,
         onclick: (info, tab) => {

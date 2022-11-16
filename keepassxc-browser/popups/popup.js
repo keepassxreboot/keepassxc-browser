@@ -30,8 +30,7 @@ function statusResponse(r) {
 
         if (r.showTroubleshootingGuideAlert && reloadCount >= 2) {
             $('#troubleshooting-guide').show();
-        }
-        else {
+        } else {
             $('#troubleshooting-guide').hide();
         }
     } else if (r.keePassXCAvailable && r.databaseClosed) {

@@ -463,7 +463,7 @@
         "message": "Отмена",
         "description": "Cancel button text when removing database key or custom login fields."
     },
-     "optionsButtonReset": {
+    "optionsButtonReset": {
         "message": "Сброс",
         "description": "Reset button text for keyboard shortcuts."
     },
@@ -639,11 +639,11 @@
         "message": "Ярлык для $1 был успешно изменен.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Ярлык для $1 был сброшен.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Ошибка: Ярлык для $1 изменен не был!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -691,11 +691,11 @@
         "message": "URL страницы",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Пропустить",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Определение только по логину",
         "description": "Site preferences list column title."
     },

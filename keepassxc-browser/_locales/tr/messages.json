@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "Genel otomatik yazma isteği",
-      "description": "Global Auto-Type shortcut text."
+        "message": "Genel otomatik yazma isteği",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "HTTP kimlik doğrulaması için kullanılabilecek birden çok kimlik doğrulama bilgisi bulundu. Doğru bilgileri seçmek için uzantı simgesine tıklayın.",
@@ -843,11 +843,11 @@
         "message": "$1 kısayolu değiştirildi.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "$1 kısayolu sıfırlandı.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Hata: $1 kısayolu değiştirilmedi!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -907,11 +907,11 @@
         "message": "Sayfa adresi",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Yok say",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Yalnız kullanıcı adı algılaması",
         "description": "Site preferences list column title."
     },

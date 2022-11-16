@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "Request Global Auto-Type",
-      "description": "Global Auto-Type shortcut text."
+        "message": "Request Global Auto-Type",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.",
@@ -252,9 +252,9 @@
         "description": "Help text when choosing custom login fields."
     },
     "defineChooseCustomLoginFieldText": {
-      "message": "Choose a Custom Login Field",
-      "description": "Help text for Custom Login Field banner."
-  },
+        "message": "Choose a Custom Login Field",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "Username",
         "description": "General text for username."
@@ -264,8 +264,8 @@
         "description": "General text for password."
     },
     "stringFields": {
-      "message": "String Fields",
-      "description": "General text for a String Fields."
+        "message": "String Fields",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- no username -",
@@ -364,16 +364,16 @@
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
-      "message": "Hide and don't show again.",
-      "description": "Hide alert close button title."
+        "message": "Hide and don't show again.",
+        "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-      "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
-      "description": "Popup information message about Troubleshooting Guide."
+        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
-      "message": "Troubleshooting Guide",
-      "description": "Popup Troubleshooting Guide link text."
+        "message": "Troubleshooting Guide",
+        "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
         "message": "Checking status...",
@@ -879,11 +879,11 @@
         "message": "Shortcut for $1 has been successfully changed.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Shortcut for $1 has been reset.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Error: Shortcut for $1 has not been changed!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -943,11 +943,11 @@
         "message": "Page URL",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignore",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Username-only Detection",
         "description": "Site preferences list column title."
     },

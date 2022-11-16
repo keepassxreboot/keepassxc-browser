@@ -32,8 +32,8 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "בקשת הקלדה־אוטומטית כללית",
-      "description": "Global Auto-Type shortcut text."
+        "message": "בקשת הקלדה־אוטומטית כללית",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "זוהה אימות HTTP עם אישורים מרובים. נא להקיש על סמל ההרחבה כדי לבחור את הסמל הנכון.",
@@ -843,11 +843,11 @@
         "message": "קיצור הדרך ל־$1 השתנה בהצלחה.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "קיצור הדרך ל־$1 אופס.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "שגיאה: קיצור הדרך ל־$1 לא השתנה!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -907,11 +907,11 @@
         "message": "מען URL עמוד",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "להתעלם",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "זיהוי שמות משתמשים בלבד",
         "description": "Site preferences list column title."
     },

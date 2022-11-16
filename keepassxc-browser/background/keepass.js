@@ -555,7 +555,7 @@ keepass.createNewGroup = async function(tab, args = []) {
             keepass.updateLastUsed(keepass.databaseHash);
             return response;
         } else {
-            logError(`getDatabaseGroups rejected`);
+            logError('getDatabaseGroups rejected');
         }
 
         browserAction.showDefault(tab);
@@ -750,9 +750,7 @@ keepass.disableAutomaticReconnect = function() {
 keepass.reconnect = async function(tab, connectionTimeout) {
     keepassClient.connectToNative();
     keepass.generateNewKeyPair();
-    const keyChangeResult = await keepass.changePublicKeys(tab, true, connectionTimeout).catch((e) => {
-        return false;
-    });
+    const keyChangeResult = await keepass.changePublicKeys(tab, true, connectionTimeout).catch(() => false);
 
     // Change public keys timeout
     if (!keyChangeResult) {
@@ -802,7 +800,7 @@ keepass.setcurrentKeePassXCVersion = function(version) {
 };
 
 keepass.keePassXCUpdateAvailable = function() {
-    if (page.settings.checkUpdateKeePassXC && page.settings.checkUpdateKeePassXC != CHECK_UPDATE_NEVER) {
+    if (page.settings.checkUpdateKeePassXC && page.settings.checkUpdateKeePassXC !== CHECK_UPDATE_NEVER) {
         const lastChecked = (keepass.latestKeePassXC.lastChecked) ? new Date(keepass.latestKeePassXC.lastChecked) : new Date(1986, 11, 21);
         const daysSinceLastCheck = Math.floor(((new Date()).getTime() - lastChecked.getTime()) / 86400000);
         if (daysSinceLastCheck >= page.settings.checkUpdateKeePassXC) {
@@ -886,7 +884,7 @@ keepass.updateDatabaseHashToContent = async function() {
                 hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
                 connected: keepass.isKeePassXCAvailable
             }).catch((err) => {
-                logError(`No content script available for this tab.`);
+                logError('No content script available for this tab.');
             });
             keepass.previousDatabaseHash = keepass.databaseHash;
         }

@@ -3,10 +3,10 @@
   <head>
     <title data-i18n="popupTitle"></title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/colors.css" />
-    <link rel="stylesheet" href="popup.css" />
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="../fonts/fork-awesome.min.css" />
+    <link rel="stylesheet" href="../css/colors.css">
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css">
     <script src="../common/browser-polyfill.min.js"></script>
     <script src="../common/global.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
@@ -32,38 +32,32 @@
       <div id="popup-alerts">
         <div id="update-available" class="alert alert-warning">
           <span data-i18n="popupUpdateAvailable"></span>
-          <br />
+          <br>
           <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"></span></a>.
         </div>
 
         <div id="getting-started-guide" class="alert alert-info alert-dismissible">
           <span data-i18n="popupGettingStartedText"></span>
-          <br />
+          <br>
           <a target="_blank" class="alert-link" href="https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_setup_browser_integration"><span data-i18n="popupGettingStartedLinkText"></span></a>
           <button type="button" id="getting-started-alert-close-button" class="btn-close" data-bs-dismiss="alert" data-i18n="[title]popupAlertHide"></button>
         </div>
 
         <div id="troubleshooting-guide" class="alert alert-info alert-dismissible">
           <span data-i18n="popupTroubleshootingText"></span>
-          <br />
+          <br>
           <a target="_blank" class="alert-link" href="https://github.com/keepassxreboot/keepassxc-browser/wiki/Troubleshooting-guide"><span data-i18n="popupTroubleshootingLinkText"></span></a>
           <button type="button" id="troubleshooting-guide-alert-close-button" class="btn-close" data-bs-dismiss="alert" data-i18n="[title]popupAlertHide"></button>
         </div>
       </div>
 
-      <div id="update-available" class="alert alert-warning">
-        <span data-i18n="popupUpdateAvailable"></span>
-        <br />
-        <a target="_blank" class="alert-link" href="https://keepassxc.org/download"><span data-i18n="popupDownloadNewVersion"></span></a>.
-      </div>
-
       <div id="initial-state">
-        <p><div class="loader"></div> <span data-i18n="popupCheckingStatus"/></p>
+        <div class="loader"></div> <p data-i18n="popupCheckingStatus"></p>
       </div>
 
       <div id="not-configured" style="display: none">
         <p data-i18n="popupNotConfigured"></p>
-        <div id="right-align">
+        <div class="right-align">
           <button id="connect-button" class="btn btn-sm btn-primary"><i class="fa fa-link" aria-hidden="true"></i> <span data-i18n="popupConnectButton"></span></button>
         </div>
       </div>
@@ -74,18 +68,18 @@
           <code id="need-reconfigure-message"></code>
         </p>
         <p data-i18n="popupNeedReconfigureMessage"></p>
-        <div id="right-align">
+        <div class="right-align">
           <button id="reconnect-button" class="btn btn-sm btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> <span data-i18n="popupReconnectButton"></span></button>
         </div>
       </div>
 
       <div id="configured-not-associated" style="display: none">
-        <span data-i18n="popupConfiguredNotAssociated" i18n-placeholder="<span class='bg-warning' id='unassociated-identifier'></span>"></span>
+        <span data-i18n="popupConfiguredNotAssociated" data-i18n-placeholder="<span class='bg-warning' id='unassociated-identifier'></span>"></span>
       </div>
 
       <div id="configured-and-associated" style="display: none">
-        <p data-i18n="popupConfiguredAndAssociated" i18n-placeholder="<span class='bg-success' id='associated-identifier'></span>"></p>
-        <div id="right-align">
+        <p data-i18n="popupConfiguredAndAssociated" data-i18n-placeholder="<span class='bg-success' id='associated-identifier'></span>"></p>
+        <div class="right-align">
           <button id="redetect-fields-button" class="btn btn-sm btn-primary"><i class="fa fa-list-alt" aria-hidden="true"></i> <span data-i18n="popupRedetectButton"></span></button>
         </div>
       </div>
@@ -95,7 +89,7 @@
         <p style="margin-left: 1em">
           <code id="error-message"></code>
         </p>
-        <div id="right-align">
+        <div class="right-align">
           <button id="reload-status-button" class="btn btn-sm btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> <span data-i18n="popupReloadButton"></span></button>
         </div>
       </div>
@@ -105,17 +99,17 @@
         <p style="margin-left: 1em">
           <code id="database-error-message"></code>
         </p>
-        <div id="right-align">
+        <div class="right-align">
           <button id="reopen-database-button" class="btn btn-sm btn-primary"><i class="fa fa-lock" aria-hidden="true"></i> <span data-i18n="popupReopenButton"></span></button>
         </div>
       </div>
 
       <div id="username-field-detected" style="display: none">
-        <hr />
+        <hr>
         <p data-i18n="popupUsernameFieldDetected"></p>
-        <div id="right-align">
-            <button id="username-only-button" class="btn btn-sm btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> <span data-i18n="popupUsernameButton"></span></button>
-          </div>
+        <div class="right-align">
+          <button id="username-only-button" class="btn btn-sm btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> <span data-i18n="popupUsernameButton"></span></button>
+        </div>
       </div>
     </div>
   </body>

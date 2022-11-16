@@ -1,0 +1,6 @@
+# This repository does not use prettier for formatting but if you want to use it for testing then you can comment out the following line:
+*
+
+# Should never format these files:
+*.min.js
+*.min.css

@@ -823,11 +823,11 @@
         "message": "Klávesová zkratka $1 byla úspěšně změněna.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Klávesová zkratka pro $1 byla resetována.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Chyba: Klávesová zkratka pro $1 nebyla změněna!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -887,11 +887,11 @@
         "message": "URL adresa stránky",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignorovat",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Zjišťování pouze uživatelského jména",
         "description": "Site preferences list column title."
     },

@@ -188,7 +188,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
         }
     }
 
-    const addChildren = function(group, parentElement, depth) {
+    const addChildren = function(group, parentElement, depth = 0) {
         ++depth;
         const padding = depth * 20;
 
@@ -227,13 +227,12 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
     kpxcBanner.createGroupDialog();
 
     // Create the link list for group selection
-    let depth = 0;
     for (const g of result.groups) {
         const a = createLink(g.name, g.uuid, g.children.length > 0);
         a.setAttribute('id', 'root');
 
         kpxcBanner.shadowSelector('ul#list').appendChild(a);
-        addChildren(g, a, depth);
+        addChildren(g, a);
     }
 
     kpxcBanner.shadowSelector('.kpxc-banner-dialog').style.display = 'block';
@@ -325,7 +324,7 @@ kpxcBanner.verifyResult = async function(code) {
 
 // Traverse the groups and ensure all paths are found
 kpxcBanner.getDefaultGroup = function(groups, defaultGroup) {
-    const getGroup = function(group, splitted, depth) {
+    const getGroup = function(group, splitted, depth = -1) {
         ++depth;
         for (const g of group) {
             if (g.name === splitted[depth]) {
@@ -338,9 +337,8 @@ kpxcBanner.getDefaultGroup = function(groups, defaultGroup) {
         return [ '', '' ];
     };
 
-    let depth = -1;
     const splitted = defaultGroup.split('/');
-    return getGroup(groups, splitted, depth);
+    return getGroup(groups, splitted);
 };
 
 kpxcBanner.createCredentialDialog = async function() {

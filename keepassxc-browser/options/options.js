@@ -31,8 +31,6 @@ options.initMenu = function() {
 
     sideBarLinks.forEach(function(elem) {
         elem.addEventListener('click', function(e) {
-            e.preventDefault();
-
             sideBarLinks.forEach(t => t.parentElement.classList.remove('active'));
             elem.parentElement.classList.add('active');
             tabs.forEach(t => t.hide());
@@ -44,6 +42,10 @@ options.initMenu = function() {
     });
 
     $('div.tab').show();
+
+    if (window.location.hash !== '') {
+        document.querySelector(`a[href='${window.location.hash}']`)?.click();
+    }
 };
 
 options.saveSetting = async function(name) {
@@ -232,7 +234,7 @@ options.initGeneralSettings = function() {
     const dialogImportSettingsModal = new bootstrap.Modal($('#dialogImportSettings'),
         { keyboard: true, show: false, backdrop: true });
 
-    $('#importSettingsButton').addEventListener('click', function(e) {
+    $('#importSettingsButton').addEventListener('click', function() {
         var link = document.createElement('input');
         link.setAttribute('type', 'file');
         link.onchange = function(e) {
