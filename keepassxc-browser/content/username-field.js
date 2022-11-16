@@ -109,6 +109,8 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 
     const styleSheet = createStylesheet('css/username.css');
     const wrapper = document.createElement('div');
+    wrapper.style.display = 'none';
+    styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
 
     this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
     this.shadowRoot.append(styleSheet);

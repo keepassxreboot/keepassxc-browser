@@ -126,6 +126,8 @@ kpxcBanner.create = async function(credentials = {}) {
     const colorStyleSheet = createStylesheet('css/colors.css');
 
     const wrapper = document.createElement('div');
+    wrapper.style.display = 'none';
+    styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
     this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
     this.shadowRoot.append(colorStyleSheet);
     this.shadowRoot.append(styleSheet);
