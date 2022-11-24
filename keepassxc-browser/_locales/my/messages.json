@@ -103,6 +103,10 @@
         "message": "လော့ဂ်အင်ဝင်ရောက်မှုများ မတွေ့ပါ။",
         "description": "No logins found."
     },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Filled password is longer than field's allowed max length.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
+    },
     "errorNotConnected": {
         "message": "KeePassXC နှင့် ချိတ်ဆက်မထားပါ။",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -179,6 +183,10 @@
         "message": "အသုံးပြုသူအမည်ထည့်ရန် အကွက်၏ အိုင်ကွန်",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "KeePassXC မှ TOTP ကို ဖြည့်ပါ",
         "description": "OTP field icon hover text."
@@ -187,9 +195,9 @@
         "message": "TOTP ဖြည့်ရန်အကွက် အိုင်ကွန်",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
-        "message": "ပယ်ရန်",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Close",
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "ကျော်ရန်",
@@ -199,9 +207,9 @@
         "message": "ပိုမိုပြသရန်",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "နောက်တစ်ကြိမ်",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Reset",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "အတည်ပြုရန်",
@@ -211,29 +219,29 @@
         "message": "ဤစာမျက်နှာအတွက် လော့ဂ်အင်ဝင်ရောက်ရန် အကွက်များကို ရွေးချယ်ပြီးဖြစ်သောကြောင့် အသစ်ရေးပါမည်။",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "ရွေးချယ်မှုကို ပယ်ရန်",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Clear saved data",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "စာကြောင်း အကွက် #",
+        "message": "String field",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "၁။ အသုံးပြုသူအမည် အကွက်ကို ရွေးပါ",
+        "message": "Choose a username field",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "၂။ စကားဝှက်အကွက်ကို အခု ရွေးပါ",
+        "message": "Choose a password field",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "၃။ TOTP အကွက်ကို ရွေးပါ",
+        "message": "Choose a TOTP field",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "၄။ ရွေးချယ်မှုကို အတည်ပြုပါ",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Choose String Fields",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "သင့်ရွေးချယ်မှုကို အတည်ပြုပါ သို့မဟုတ် စာကြောင်းဖြည့်ရန် အကွက်များအဖြစ် နောက်ထပ်အကွက်များကို ရွေးပါ။",
@@ -243,6 +251,10 @@
         "message": "ဖြည့်သွင်းရန် အကွက်များကို ကီးဘုတ်မှ ရွေးရန် ဂဏန်းများကိုလည်း အသုံးပြုနိုင်သည်။",
         "description": "Help text when choosing custom login fields."
     },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Choose a Custom Login Field",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "အသုံးပြုသူအမည်",
         "description": "General text for username."
@@ -250,6 +262,10 @@
     "password": {
         "message": "စကားဝှက်",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "String Fields",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- အသုံးပြုသူအမည် မရှိပါ -",
@@ -339,6 +355,26 @@
         "message": "ကျေးဇူးပြု၍ နောက်ဆုံးပေါ် ဗားရှင်းကို keepassxc.org မှ ဒေါင်းလုဒ်လုပ်ပါ",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Are you a first time user? Please check our Getting Started Guide.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Getting Started Guide - Setup Browser Integration",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Hide and don't show again.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Troubleshooting Guide",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "အခြေအနေ စစ်ဆေးနေသည်…",
         "description": "Checking status message in popup."
@@ -361,7 +397,7 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-ဘရောက်ဇာကို KeePassXC နှင့် ချိတ်ဆက်ထားပြီး ဤကိုယ်ပိုင်အမှတ်သင်္ကေတကို သုံး၍ ချိန်ညှိထားသည် - $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "အသုံးပြုသူအမည် အကွက်တစ်ခုတည်းသာ ရှာတွေ့သည်။ ဝက်ဘ်ဆိုက် ဦးစားပေးမှုများသို့ အသုံးပြုသူအမည်သီးသန့်ဖြင့် URL ထည့်ရန် ရွေးချယ်မှုကို ဖွင့်ထားပါသလား။",
@@ -381,7 +417,7 @@
     },
     "rememberUsernameExists": {
         "message": "သုံးထားပြီးသော အသုံးပြုသူအမည်နှင့် အထောက်အထားများကို စာလုံးမည်းဖြင့် အမှတ်အသားပြုထားသည် - $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "ကျေးဇူးပြု၍ သင်အပ်ဒိတ်လုပ်လိုသော အထောက်အထားများကို ရွေးပါ။",
@@ -421,7 +457,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "အသုံးပြုသူအမည် $1 နှင့် အထောက်အထားများကို အပ်ဒိတ်လုပ်ပြီးပါပြီ။",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "ထပ်တူကျသော အထောက်အထားများ ရှိပြီးသားဖြစ်သည်။ အပ်ဒိတ်လုပ်စရာ မရှိပါ။",
@@ -663,6 +699,14 @@
         "message": "HTTP Basic Auth ဝင်းဒိုးငယ်များကို အလိုအလျောက် ဖြည့်ပြီး တင်သွင်းပါ။",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "Debug logging",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Enable debug logging. Additional console messages will be visible in both background and content scripts.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
         "message": "KeePassXC အပ်ဒိတ်များကို စစ်ဆေးရန် -",
         "description": "Text above radio buttons in the settings page."
@@ -752,7 +796,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "သတိပေးချက် - အလိုအလျောက်ဖြည့်ခြင်းသည် စိတ်မချရပါ။ ပြဿနာ တစ်စုံတစ်ရာဖြစ်ပါက တာဝန်မယူပါ။",
+        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -774,6 +818,14 @@
     "optionsSaveDomainOnlyCustomLoginHelpText": {
         "message": "စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်သည့် အကွက်သစ်များကို သိမ်းချိန်တွင် URL အပြည့်အစုံအစား ဒိုမိန်းကိုသာ သိမ်းပါ။",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Download favicon after save",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Favicon will be automatically downloaded for the new credential.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "စာမျက်နှာတစ်ခုအတွက် အထောက်အထားများကို ရှာတွေ့ပြီး လော့ဂ်အင်ဝင်ရောက်မှုအမျိုးအစားသည် HTTP Basic Auth တောင်းဆိုမှု ဖြစ်ပါက KeePassXC-ဘရောက်ဇာသည် ပထမဆုံး ပေးထားသော အထောက်အထားများဖြင့် အလိုအလျောက် လော့ဂ်အင်ဝင်ရန် ကြိုးစားသည်။ အထောက်အထားများစွာ ရှိသည့်အခါ မှန်ကန်သည့်အထောက်အထားကို ရွေးရန် အဆက်အသိပေးချက်ကို အသုံးပြုနိုင်သည်။ ဤအပြင်အဆင်ကို ဖွင့်ထားသည့်တိုင်အောင် HTTP Basic Auth လော့ဂ်အင်ဝင်ရောက်မှုကို ကိုယ်တိုင် ရိုက်ထည့်နိုင်ပါသေးသည်။",
@@ -899,6 +951,10 @@
         "message": "အသုံးပြုသူအမည် သီးသန့် ရှာတွေ့ခြင်း",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Improved Input Field Detection",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
         "message": "ဖျက်ရန်",
         "description": "Site preferences list column title."
@@ -921,19 +977,43 @@
     },
     "optionsSortByTitle": {
         "message": "ခေါင်းစဉ်",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "အသုံးပြုသူအမည်",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "အုပ်စုနှင့် ခေါင်းစဉ်",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "အုပ်စုနှင့် အသုံးပြုသူအမည်",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Sort credentials after fill by",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Sort credentials after fill for TOTP by",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Matching credentials setting",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Relevant credential first",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "သိမ်းထားသော စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များ မတွေ့ပါ။",
@@ -991,6 +1071,10 @@
         "message": "အသုံးပြုသူအမည်သီးသန့် ရှာဖွေခြင်းဖြင့် KeePassXC-ဘရောက်ဇာသည် အသုံးပြုသူအမည်နှင့် စကားဝှက်အတွက် သီးခြားစာမျက်နှာများပါသည့် ဝက်ဘ်ဆိုက်များတွင် လော့ဂ်အင်ဝင်ရောက်မှု အသေးစိတ်များကို ဖြည့်နိုင်သည်။",
         "description": "Site preferences info text, fourth part."
     },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "description": "Improved Input Field Detection help text."
+    },
     "optionsSitePreferencesManualAddText": {
         "message": "URL ကို ကိုယ်တိုင်ထည့်ရန်",
         "description": "Label for adding site manually on Site preferences tab."
@@ -1022,6 +1106,10 @@
     "optionsAboutMozilla": {
         "message": "Mozilla Add-ons လမ်းညွှန်တွင် KeePassXC-ဘရောက်ဇာကို ဝင်ကြည့်ပါ။",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "GitHub တွင် KeePassXC-ဘရောက်ဇာကို ဝင်ကြည့်ပါ။",

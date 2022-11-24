@@ -31,6 +31,10 @@
         "message": "Vyplnit atributy...",
         "description": "Context menu parent item for filling a custom attribute."
     },
+    "contextMenuRequestGlobalAutoType": {
+        "message": "Vyžádat globální automatické vyplnění",
+        "description": "Global Auto-Type shortcut text."
+    },
     "multipleCredentialsDetected": {
         "message": "Zjištěno HTTP ověření s vícero přihlašovacími údaji. Klikněte na ikonu rozšíření a zvolte to správné.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
@@ -98,6 +102,10 @@
     "errorMessageNoLogins": {
         "message": "Nenalezena žádná uživatelská jména.",
         "description": "No logins found."
+    },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Filled password is longer than field's allowed max length.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorNotConnected": {
         "message": "Nepřipojeno ke KeePassXC.",
@@ -175,6 +183,10 @@
         "message": "Ikona kolonky pro uživatelské jméno",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "Vyplnit TOTP z KeePassXC",
         "description": "OTP field icon hover text."
@@ -183,9 +195,9 @@
         "message": "Ikona kolonky pro TOTP heslo",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
-        "message": "Zahodit",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Close",
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "Přeskočit",
@@ -195,9 +207,9 @@
         "message": "Show more",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "Znovu",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Reset",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "Potvrdit",
@@ -207,29 +219,29 @@
         "message": "Přihlašovací kolonky na této stránce už byly vybrány a budou přepsány.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Zahodit výběr",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Clear saved data",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "Číslo kolonky řetězce",
+        "message": "String field",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Zvolte kolonku pro uživatelské jméno",
+        "message": "Choose a username field",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Zvolte kolonku pro heslo",
+        "message": "Choose a password field",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Zvolte kolonku pro TOTP heslo",
+        "message": "Choose a TOTP field",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "3. Potvrďte výběr",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Choose String Fields",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "Potvrďte svůj výběr nebo zvolte více kolonek jako <em>Kolonky řetězců</em>.",
@@ -239,6 +251,10 @@
         "message": "You can also use the numbers to choose the input fields from keyboard.",
         "description": "Help text when choosing custom login fields."
     },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Choose a Custom Login Field",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "Uživatelské jméno",
         "description": "General text for username."
@@ -246,6 +262,10 @@
     "password": {
         "message": "Heslo",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "String Fields",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- žádné uživatelské jméno -",
@@ -335,6 +355,26 @@
         "message": "Stáhněte si nejnovější verzi z keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Are you a first time user? Please check our Getting Started Guide.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Getting Started Guide - Setup Browser Integration",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Hide and don't show again.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Troubleshooting Guide",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Zjišťování stavu…",
         "description": "Checking status message in popup."
@@ -357,7 +397,7 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-Browser je připojený ke KeePassXC a byl nastaven s použitím následujícího identifikátoru: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Byla zjištěna pouze jedna kolonka pro uživatelské jméno. Přidat URL do předvoleb pro stránku se zapnutou volbou „pouze uživatelské jméno“?",
@@ -377,7 +417,7 @@
     },
     "rememberUsernameExists": {
         "message": "Přihlašovací údaje s použitým uživatelským jménem jsou vyznačeny tučně: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Vyberte přihlašovací údaje, které chcete aktualizovat.",
@@ -417,7 +457,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Přihlašovací údaje s uživatelským jménem $1 zaktualizovány.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Už existují stejné přihlašovací údaje. Není co aktualizovat.",
@@ -659,6 +699,14 @@
         "message": "Automaticky vyplňovat HTTP Basic Auth dialogy a odesílat je.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "Zaznamenávat ladících informací",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Zapnout zaznamenávání ladících informací. Další zprávy z konzole budou viditelné jak na pozadí tak v skriptech obsahu.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
         "message": "Zjišťovat případné aktualizace KeePassXC:",
         "description": "Text above radio buttons in the settings page."
@@ -748,7 +796,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Varování! Použití automatického vyplnění není bezpečné. Použijte pouze na vlastní nebezpečí.",
+        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -770,6 +818,14 @@
     "optionsSaveDomainOnlyCustomLoginHelpText": {
         "message": "Při ukládání nových uživatelsky určených kolonek přihlášení, uložit pouze doménu namísto úplné URL adresy.",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Po uložení si stáhnout ikonu webu",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Po vytvoření nových přihlašovacích údajů bude pro ně automaticky stažena ikona daného webu.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "Pokud jsou nalezeny přihlašovací údaje pro stránku a typ přihlášení je HTTP Basic Auth, KeePassXC-Browser se pokusí přihlásit pomocí prvního ze zadaných přihlašovacích údajů.",
@@ -895,6 +951,10 @@
         "message": "Zjišťování pouze uživatelského jména",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Improved Input Field Detection",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
         "message": "Smazat",
         "description": "Site preferences list column title."
@@ -917,19 +977,43 @@
     },
     "optionsSortByTitle": {
         "message": "Titulek",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Uživatelské jméno",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Skupina a titulek",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Skupina a uživatelské jméno",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Sort credentials after fill by",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Sort credentials after fill for TOTP by",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Matching credentials setting",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Relevant credential first",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "Nebyly nalezeny žádné uživatelsky určené kolonky přihlášení.",
@@ -987,6 +1071,10 @@
         "message": "Zjišťování pouze uživatelského jména umožňuje KeePassXC-Browser vyplnit podrobnosti přihlášení na webech, které mají oddělené stránky pro uživatelské jméno a heslo.",
         "description": "Site preferences info text, fourth part."
     },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "description": "Improved Input Field Detection help text."
+    },
     "optionsSitePreferencesManualAddText": {
         "message": "Add URL manually",
         "description": "Label for adding site manually on Site preferences tab."
@@ -1018,6 +1106,10 @@
     "optionsAboutMozilla": {
         "message": "Navštívit KeePassXC-Browser v katalogu doplňků pro prohlížeč Mozilla.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Navštívit KeePassXC-Browser na portálu GitHub.",
