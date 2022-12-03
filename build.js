@@ -40,7 +40,8 @@ async function updateTranslations() {
 }
 
 (async() => {
-    if (process.argv.slice(2)[0] !== '--skip-translations') {
+    const params = process.argv.slice(2);
+    if (!params.includes('--skip-translations')) {
         await updateTranslations();
     }
 
