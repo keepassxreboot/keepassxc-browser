@@ -16,11 +16,11 @@
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "Икона за генератора на пароли",
+        "message": "Пиктограма за генератора на пароли",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Запазване на данни за вход",
+        "message": "Запазване на регистрация",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -32,11 +32,11 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "",
+        "message": "Искане за глобално автоматично въвеждане",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Открито е HTTP удостоверяване с множество идентификационни данни. Кликнете върху иконата на разширението, за да изберете правилните.",
+        "message": "Удостоверяване по HTTP с множество съвпадащи регистрации. За да изберете правилната регистрация, щракнете върху иконата на разширението.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -48,7 +48,7 @@
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "",
+        "message": "Не е получен отпечатък от банката за данни.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
@@ -72,11 +72,11 @@
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
-        "message": "KeePassXC асоциацията се провали, опитайте отново.\nГрешка при свързване с приложението KeePassXC, опитайте отново.",
+        "message": "Неуспешно свързване с приложението KeePassXC, опитайте отново.",
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
-        "message": "Обменът на ключове не е успешен.",
+        "message": "Неуспешен обмен на ключове.",
         "description": "Key exchange was not successful."
     },
     "errorMessageEncryptionKey": {
@@ -103,12 +103,16 @@
         "message": "Не са намерени данни за вход.",
         "description": "No logins found."
     },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Попълнената парола е по-дълга от разрешената дължина на съдържание в полето.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
+    },
     "errorNotConnected": {
         "message": "Няма връзка с KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
-        "message": "Икона за генератор на парола",
+        "message": "Пиктограма за генератор на парола",
         "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorPlaceholder": {
@@ -144,7 +148,7 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
-        "message": "Била е отрязана, за да се събере.",
+        "message": "Отрязана е, за да се събере.",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongRemember": {
@@ -164,7 +168,7 @@
         "description": "Password generator error text when KeePassXC is closed."
     },
     "usernameFieldText": {
-        "message": "Попълнете идентификационните данни от KeePassXC",
+        "message": "Попълва регистрация от KeePassXC",
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
@@ -176,20 +180,24 @@
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
-        "message": "Икона в полето за потребителско име",
+        "message": "Пиктограма в полето за потребителско име",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
-        "message": "Попълване на TOTP от KeePassXC",
+        "message": "Попълва TOTP от KeePassXC",
         "description": "OTP field icon hover text."
     },
     "totpFieldIcon": {
-        "message": "Икона в полето за TOTP",
+        "message": "Пиктограма в полето за TOTP",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
+    "defineClose": {
         "message": "Затваряне",
-        "description": "Dismiss button text when choosing custom login fields."
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "Пропускане",
@@ -199,9 +207,9 @@
         "message": "Повече",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "Отново",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Нулиране",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "Потвърждаване",
@@ -211,29 +219,29 @@
         "message": "Полетата за вход в тази страница вече са избрани и ще бъдат презаписани.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Отхвърляне на избраните",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Премахване на запазените данни",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "Поле за низ #",
+        "message": "Поле за низ",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Изберете поле за потребителското име",
+        "message": "Избиране поле за потребителското име",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Сега изберете поле за парола",
+        "message": "Избиране на поле за парола",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Изберете поле за TOTP",
+        "message": "Избиране на поле за TOTP",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Потвърдете избора",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Избиране на поле за низ",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "Потвърдете избора си или изберете повече полета като полета за низ.",
@@ -243,6 +251,10 @@
         "message": "Също можете да използвате цифрите, за да избирате полета посредством клавиатурата.",
         "description": "Help text when choosing custom login fields."
     },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Изберете поле за вход",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "Потребителско име",
         "description": "General text for username."
@@ -250,6 +262,10 @@
     "password": {
         "message": "Парола",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "Полета за низове",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- без потребителско име -",
@@ -268,7 +284,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Няма идентификационни данни за дадено потребителско име, което е намерено.",
+        "message": "Не е намерена регистрация за потребителското име.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
@@ -280,15 +296,15 @@
         "description": "If a credential is expired, this is appended to the title label."
     },
     "fieldsFill": {
-        "message": "Грешка: Не може да се намерят полета за попълване.",
+        "message": "Грешка: Не са намерени полета, които да бъдат попълнени.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "Грешка: Не може да се намери поле за парола.",
+        "message": "Грешка: Не е намерено поле за парола.",
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "Грешка: Не може да се открият променени идентификационни данни.",
+        "message": "Грешка: Не е намерена променена регистрация.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -300,7 +316,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Избиране на полета за влизане",
+        "message": "Избиране на полета за вход",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -324,7 +340,7 @@
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
-        "message": "Добавяне на опция само с потребителско име за сайта",
+        "message": "Добавяне на настройка за вход в страницата единствено с потребителско име",
         "description": "Button text for adding Username-only option."
     },
     "popupErrorEncountered": {
@@ -339,12 +355,32 @@
         "message": "Изтеглете последното издание от keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Използвате за първи път? Прочетете ръководството за първи стъпки.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Ръководството за първи стъпки - настройка на интеграцията с мрежовия четец",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Скрива без възможност за повторно показване.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Не можете да се свържете с KeePassXC? Може би нашата страница може да ви помогне.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Отстраняване на неизправности",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Проверка на състоянието…",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "Добавката KeePassXC-Browser не е настроена. Изберете бутона за свързване, за да бъде свързана с KeePassXC.",
+        "message": "Добавката KeePassXC-Browser не е настроена. Изберете бутона за свързване, за да свържете с KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -356,19 +392,19 @@
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "Добавката KeePassXC-Browser не е свързана към KeePassXC, но е настроена чрез идентификатора $1",
+        "message": "Добавката KeePassXC-Browser не е свързана с KeePassXC, но е настроена чрез идентификатора $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "Добавката KeePassXC-Browser е свързана към KeePassXC и е настроена чрез идентификатора $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "message": "Добавката KeePassXC-Browser е свързана с KeePassXC и е настроена чрез идентификатора $1",
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "",
+        "message": "Само поле за потребителско име е намерено. Адресът на страницата да бъде ли добавен към „Предпочитания за сайтове“ с настройка за вход единствено с потребителско име?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "rememberInfoText": {
-        "message": "Променени потребител или парола! Да бъдат ли запазени?",
+        "message": "Променени са данни за вход! Да бъдат ли запазени?",
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
@@ -380,8 +416,8 @@
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "Регистрациите с потребителското име са отбелязани с получер шрифт: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "message": "Регистрациите с използваното потребителско име са отбелязани с получер шрифт: $1",
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Изберете регистрациите, които да бъдат обновени.",
@@ -400,31 +436,31 @@
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "Идентификационните данни не са актуализирани. Паролата не е променена.",
+        "message": "Не са обновени регистрации. Паролата не е променена.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
-        "message": "Идентификационните данни не могат да се запишат или актуализират.",
+        "message": "Регистрациите не могат да бъдат запазени или обновени.",
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Регистрации не могат да бъдат запазвани или обновяване в затворена банка от данни.",
+        "message": "Регистрации не могат да бъдат запазвани или обновявани при затворена банка от данни.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
-        "message": "Операцията е отменена. Идентификационните данни не са актуализирани.",
+        "message": "Операцията е отменена. Регистрациите не са обновени.",
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "Нови идентификационни данни с потребителско име $1 са записани.",
+        "message": "Запазена е нова регистрация с потребителско име $1. ",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
-        "message": "Идентификационните данни с потребителско име $1 са актуализирани.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "message": "Регистрацията с потребителско име $1 е обновена.",
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "Вече съществуват идентични идентификационни данни. Нищо за актуализиране.",
+        "message": "Има подобна регистрация. Нищо не е обновено.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
@@ -432,7 +468,7 @@
         "description": "Means an empty username."
     },
     "rememberNoPassword": {
-        "message": "Попълнете полето за парола преди да запишете идентификационните данни.",
+        "message": "Попълнете полето за парола преди да запазите регистрацията.",
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
@@ -448,7 +484,7 @@
         "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
     },
     "popupMultiplePasswordFields": {
-        "message": "На тази страница е намерено повече от едно поле за парола. Щракнете с десния бутон на мишката върху някое от полетата за парола и изберете едно от следните:",
+        "message": "На тази страница е намерено повече от едно поле за парола. Щракнете с десния бутон на мишката върху някое от тях и изберете едно от следните:",
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupURL": {
@@ -480,7 +516,7 @@
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": "Отхвърляне и показване на диалоговия прозорец по подразбиране за удостоверяване",
+        "message": "Отхвърляне и показване на подразбирания диалогов прозорец за удостоверяване",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
@@ -496,7 +532,7 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Полета за влизане",
+        "message": "Потребителски полета за вход",
         "description": "Saved custom login fields tab text."
     },
     "optionsSitePreferencesTab": {
@@ -516,7 +552,7 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Потребителски полета за влизане",
+        "message": "Полета за вход",
         "description": "Custom login fields page header."
     },
     "optionsMenuSitePreferences": {
@@ -572,7 +608,7 @@
         "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
-        "message": "Група по подразбиране за добавяне на регистрации:",
+        "message": "Група по подразбиране при добавяне на регистрации:",
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
@@ -584,15 +620,15 @@
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "Когато е включено, изскачащият прозорец показва списък с групите.",
+        "message": "Когато е отметнато, изскачащият прозорец показва списък с групите.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Активиране на иконите на генератора на пароли.",
+        "message": "Пиктограма за генератора на пароли",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Активиране на икони на полето за потребителско име.",
+        "message": "Пиктограма в полето за потребителско име",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
@@ -600,19 +636,19 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Полезно със страници, които използват изскачащи прозорци или динамични диалози. Изключената функция намаляв натоварването на процесора на по-бавни машини. Когато са изключени идентификационни данни могат да бъдат вмъкнати само с помощта на клавишни комбинации, контекстното меню или изскачащия прозорец на разширението.",
+        "message": "Полезно за страници, които използват изскачащи прозорци или динамични диалози. Ако е изключено се намаляв натоварването на процесора при по-бавни машини. Когато е изключено регистрации могат да бъдат добавяни само с помощта на клавишни комбинации, контекстуалното меню или изскачащия прозорец на разширението.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Активирайте иконите на полетата 2FA/OTP.",
+        "message": "Пиктограма в полето 2FA/OTP",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Автоматично извличане на идентификационни данни.",
+        "message": "Автоматично извличане на регистрации",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Автоматично повторно свързване с KeePassXC.",
+        "message": "Автоматично повторно свързване с KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -620,35 +656,35 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Автоматично попълване на записи с единични идентификационни данни.",
+        "message": "Автоматично попълване на единични съвпадения",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Активирайте автоматичното попълване за полетата с потребителско име.",
+        "message": "Автоматично попълване за полета с потребителско име",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Показвайте името на групата в списъка за автоматично довършване, когато идентификационните данни са от различни групи.",
+        "message": "При регистрации от различни групи името на групата е видимо в списъка за автоматично довършване",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
-        "message": "Автоматично пращане на логин форми",
+        "message": "Автоматично изпращане на формуляри за вход",
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Автоматично праща избраните идентификационни данни. Това е забранено за автоматично попълване на единичен запис.",
+        "message": "Автоматично изпраща избраните регистрации. Изключено при автоматично попълване на единични съвпадения.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Показване на известия.",
+        "message": "Показване на известия",
         "description": "Show notifications checkbox text."
     },
     "optionsSaveDomainOnly": {
-        "message": "Запазване само на домейна.",
+        "message": "Запазване само на домейна",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Показване на банер в страницата, когато в банката от данни могат да бъдат запазвани нови регистрации",
+        "message": "Показване на лента в страницата, когато могат да бъдат запазвани нови регистрации",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -656,19 +692,27 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Колко пренасочвания са позволени, докато банерът изчезне. Стойността по подразбиране е 1. Максимумът е безкраен.",
+        "message": "След колко пренасочвания да бъде скрита лентата? Стойността по подразбиране е 1. Максимумът е безкраен.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Автоматично попълване на HTTP Basic Auth диалози и пращането им.",
+        "message": "Автоматично попълване и изпращане на запитвания за HTTP Basic Auth",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "Дневник за отстраняване на грешки",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Включва зсписване в дневника за отстраняване на грешки. В конзолата ще има допълнителни съобщения от скрипта във фонов режим и скрипта за съдържание.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
-        "message": "Проверка за актуализации на KeePassXC:",
+        "message": "Проверка за обновяване на KeePassXC:",
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "на всеки 3 дни",
+        "message": "на всеки 3 дена",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -684,15 +728,15 @@
         "description": "Radio button text."
     },
     "optionsThemeSelectionHeader": {
-        "message": "Цветова тема",
+        "message": "Тема",
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Подреждане на намерените регистрации по",
+        "message": "Съвпадащите регистрации се подреждат по",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
-        "message": "Избор на цветова тема",
+        "message": "Изберете цветова тема",
         "description": "Theme selection title text."
     },
     "optionsThemeSystem": {
@@ -704,7 +748,7 @@
         "description": "Dark theme text."
     },
     "optionsThemeLight": {
-        "message": "Света",
+        "message": "Светла",
         "description": "Light theme text."
     },
     "optionsKeyboardShortcutsHeader": {
@@ -712,59 +756,59 @@
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Добавя икона към полетата за парола за генериране на нова парола.",
+        "message": "Добавя се икона към полето за парола за генериране на нова парола.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
-        "message": "Паролите се генерирани от KeePassXC с помощта на профила за генериране на пароли.",
+        "message": "Паролите се генерират от KeePassXC с помощта на профила за генериране на пароли.",
         "description": "Password Generator option help text, second part."
     },
     "optionsPredefinedSiteList": {
-        "message": "Предварително набелязани страници",
+        "message": "Предварително определени страници",
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Използване на предварително набелязаните страници с цел съвместимост",
+        "message": "Използване на предварително определените страници с цел съвместимост",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Добавя към предпочитанията към сайтовете често срещаните страници, които имат формуляр за вход само с потребителско име.",
+        "message": "Добавя към „Предпочитания за сайтове“ често срещаните страници, които имат формуляр за вход единствено с потребителско име.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Добавя икона към полетата за потребителското име за попълване на идентификационни данни с едно щракване на мишката.",
+        "message": "Добавя се икона към полето за потребителско име, чрез която с едно действие се попълват регистрации.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Добавя икона за въвеждане на полета, които се разпознават като OTP/2FA.",
+        "message": "Добавя се икона към полета, които се разпознават като OTP/2FA.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser веднага ще извлече идентификационни данни, когато е раздела е активен.",
+        "message": "KeePassXC-Browser ще зареди регистрациите веднага щом разделът стане активен.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
-        "message": "При откриване на KeePassXC автоматично да се свързва.",
+        "message": "При откриване на KeePassXC се свързва автоматично.",
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Нека KeePassXC-браузър автоматично попълва идентификационните данни, ако получи само един запис.",
+        "message": "KeePassXC-Browser автоматично попълва регистрацията при едно съвпадение.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Внимание! Използването на автоматично запълване не е безопасно. Използвайте на собствен риск.",
+        "message": "Внимание! Автоматичното попълване не е безопасно. Използвайте го на свой риск. KeePassXC-Browser се опитва автоматично да открие полетата за вход. Обаче те могат да не бъдат открити правилно, като е възможно да бъдат попълнени чувствителни данни в грешните полета.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Показване на падащ списък, съдържащ наличните идентификационни данни за всички полета за потребителско име на страницата.",
+        "message": "Показва падащ списък с наличните регистрации за всички полета за потребителско име на страницата.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Когато идентификационните данни се връщат от различни групи, името на групата ще се покаже.",
+        "message": "При регистрации от различни групи името на групата е видимо в списъка.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Показване на известия за грешки, когато е необходимо взаимодействие с потребителя.",
+        "message": "Показват се известия при грешки и при необходимост от взаимодействие с потребителя.",
         "description": "Show notifications option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -772,11 +816,19 @@
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "При добавяне на потребителски полета за влизане да бъде запазван само домейна вместо целия адрес.",
+        "message": "При добавяне на потребителски полета за вход да бъде запазен само домейна вместо целия адрес.",
         "description": "Save domain only option help text."
     },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Изтегляне на иконата на страницата след запазване",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Иконите на страниците ще бъдат изтегляни автоматично при нови регистрации.",
+        "description": "Download favicon after save help text."
+    },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Ако се открият идентификационни данни за страница и типът на вход е HTTP Basic Auth, KeePassXC-Browser се опитва да се логне автоматично с първите дадени идентификационни данни. Когато има няколко идентификационни данни, разширението може да се използва за избор на правилния. Дори когато тази функция е активирана, все още е възможно да въведете данните ръчно.",
+        "message": "Ако има съвпадащи регистрации и вида на удостоверяване е HTTP Basic Auth, KeePassXC-Browser автоматично ще направи опит за вход с първата намерена. Ако има повече регистрации, необходимата може да бъде избрана от изскачащия прозорец на разширението. Дори и да е включена тази функция пак е възможно да въведете данните ръчно.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -784,15 +836,15 @@
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "",
+        "message": "Изчистване на попълнените регистрации за неактивните раздели след (секунди, 0-3600)",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "",
+        "message": "Попълнените регистрации се изчистват от неактивните раздели след изтичане на времето и отново ще бъде поискано разрешение за тези раздели.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "KeePassXC-Browser се нуждае от KeePassXC за извличане на идентификационни данни.",
+        "message": "KeePassXC-Browser се нуждае от KeePassXC за достъп до регистрации.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
@@ -800,7 +852,7 @@
         "description": "Settings page download link."
     },
     "optionsVersionRunning": {
-        "message": "Използвате с KeePassXC издание: $1",
+        "message": "Използвате KeePassXC издание: $1",
         "description": "Settings page info text of user's KeePassXC version."
     },
     "optionsLatestVersion": {
@@ -824,15 +876,15 @@
         "description": "Recommended setting text."
     },
     "optionsShortcutsSuccess": {
-        "message": "Комбинацията за $1 е променена успешно.",
+        "message": "Клавишната комбинация за $1 е променена успешно.",
         "description": "Message for successful keyboard shortcut change."
     },
     "optionsShortcutsInfo": {
-        "message": "Комбинацията за $1 е нулирана.",
+        "message": "Клавишната комбинация за $1 е нулирана.",
         "description": "Info message for changing keyboard shortcuts."
     },
     "optionsShortcutsDanger": {
-        "message": "Грешка: Комбинацията за $1 не е променена!",
+        "message": "Грешка: Клавишната комбинация за $1 не е променена!",
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
@@ -860,7 +912,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "",
+        "message": "Наистина ли желаете да премахнете следния идентификатор от списъка: $1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -892,15 +944,19 @@
         "description": "Site preferences list column title."
     },
     "optionsColumnIgnore": {
-        "message": "Игнориране",
+        "message": "Пренебрегване",
         "description": "Site preferences list column title."
     },
     "optionsColumnUsernameOnly": {
-        "message": "Откриване само по потребителско име",
+        "message": "Намиране на формуляри за вход единствено с потребителско име",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Подобрено откриване на полета за вход",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
-        "message": "Изтриеване",
+        "message": "Изтриване",
         "description": "Site preferences list column title."
     },
     "optionsSelectionNothing": {
@@ -908,11 +964,11 @@
         "description": "Site preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "Изключване на нови/променени идентификационни данни",
+        "message": " Пренебрегване на нови и променени регистрации",
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
-        "message": "",
+        "message": "Изключване на автоматично изпращане",
         "description": "Site preferences option selection."
     },
     "optionsSelectionFull": {
@@ -921,26 +977,50 @@
     },
     "optionsSortByTitle": {
         "message": "Заглавие",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Потребителско име",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Група и заглавие",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Група и потребителско име",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "След попълване, регистрациите се подреждат по",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "Когато е избрана възможността „Първо съответстващите регистрации“, попълнените регистрации при предишен вход биват премествани в началото на списъка за автоматично попълване.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "След попълване на TOTP, регистрациите се подреждат по",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "Когато е избрана възможността „Първо съответстващите регистрации“, попълнените TOTP при предишен вход биват премествани в началото на списъка за автоматично попълване.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Настройките за съвпадение на регистрации",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Първо съответстващите регистрации",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Не са намерени запазени потребителски полета за влизане.",
+        "message": "Липсват запазени потребителски полета за вход.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Можете да управлявате записаните потребителски полета за влизане с помощта на таблицата.",
+        "message": "Можете да управлявате запазените потребителски полета за вход с помощта на таблицата.",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
@@ -952,15 +1032,15 @@
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "На тази страница можете да управлявате записаните потребителски полета за влизане.",
+        "message": "На тази страница  управлявате запазените потребителски полета за вход.",
         "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Премахване на запазените потребителски полета за влизане?",
+        "message": "Премахване на запазените потребителски полета за вход?",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Наистина ли желаете да бъдат премахнати запазените потребителски полета за влизане в страницата: $1",
+        "message": "Наистина ли желаете да бъдат премахнати запазените потребителски полета за вход в страницата: $1",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
@@ -968,7 +1048,7 @@
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Няма настройки на сайтове.",
+        "message": "Липсват предпочитания за сайтове.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -980,7 +1060,7 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "",
+        "message": "За да пренебрегнете на новите и променените регистрации за определена страница я добавете по-долу или от лентата в страницата изберете <em>Спиране на въпроса за страницата</em>.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
@@ -988,15 +1068,19 @@
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Откриването на отделното поле за потребителско име позволява KeePassXC-Browser да попълните данни за вход в уебсайтове с отделни страници за потребителско име и парола.",
+        "message": "Намирането на формуляри за вход единствено с потребителско име дава възможност на KeePassXC-Browser да попълва данни за вход в сайтове с отделни страници за потребителя и паролата.",
         "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Подобреното откриване на полета за вход дава възможност за по-подробно динамично откриване на полета за вход. Това обаче може да повлияе на производителността на страницата. Използвайте с повишено внимание.",
+        "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Ръчно добавяне на адрес",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "",
+        "message": "Адресът трябва да започва с <code>https://</code>, <code>http://</code>, <code>file://</code>, или <code>ftp://</code> и трябва да е с дължина най-малко 5 знака.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
@@ -1004,11 +1088,11 @@
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser ще включи всички функции за този сайт и ще премахне откриването на отделното поле за потребителско име.",
+        "message": "KeePassXC-Browser ще използва всички възможности на страницата и няма да търси формуляри за вход единствено с потребителско име.",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Можете да управлявате записаните предпочитания за сайта с помощта на таблицата.",
+        "message": "Можете да управлявате предпочитанията за сайтиве с помощта на таблицата.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1022,6 +1106,10 @@
     "optionsAboutMozilla": {
         "message": "Посетете KeePassXC-Browser в страницата за добавки на Mozilla.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Посетете KeePassXC-Browser в страницата с добавки на Edge.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Посетете KeePassXC-Browser в GitHub.",
@@ -1072,15 +1160,15 @@
         "description": "Error shown when trying to add a duplicate value to the list."
     },
     "optionsUserInterfaceTitle": {
-        "message": "Потребителски интерфейс",
+        "message": "Интерфейс",
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Попълване на идентификационни данни",
+        "message": "Попълване на регистрации",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Записване на идентификационни данни",
+        "message": "Запазване на регистрации",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {

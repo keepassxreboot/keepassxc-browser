@@ -1,490 +1,490 @@
 {
     "extensionDescription": {
-        "message": "Integração KeepassXC para os navegadores modernos",
+        "message": "KeePassXC integracija šiuolaikinėse naršyklėse",
         "description": "Name of the extension."
     },
     "contextMenuFillUsernameAndPassword": {
-        "message": "Preencher nome de utilizador e palavra-passe",
+        "message": "Užpildyti naudotojo vardą ir slaptažodį",
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
-        "message": "Preencher palavra-passe",
+        "message": "Užpildyti tik slaptažodį",
         "description": "Context menu item for filling password."
     },
     "contextMenuFillTOTP": {
-        "message": "Preencher TOTP",
+        "message": "Užpildykite TOTP",
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "Mostrar ícones do gerador de palavra-passe",
+        "message": "Rodyti slaptažodžio generatoriaus ikoną",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Guardar credenciais",
+        "message": "Įrašyti prisijungimo duomenis",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Show password generator",
+        "message": "Rodyti slaptažodžių generatorių",
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Fill attribute…",
+        "message": "Užpildyti atributą...",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "Request Global Auto-Type",
+        "message": "Visuotinio automatinio tipo užklausa",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Detetada autenticação HTTP com múltiplas credenciais. Clique no ícone da extensão para escolher as corretas.",
+        "message": "HTTP autentifikavimas su aptiktais keliais kredencialais. Spustelėkite plėtinio piktogramą, kad pasirinktumėte tinkamą.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
-        "message": "Erro desconhecido.",
+        "message": "Nežinoma klaida.",
         "description": "Unknown error."
     },
     "errorMessageDatabaseNotOpened": {
-        "message": "Base de dados não aberta.",
+        "message": "Duomenų bazė neatverta.",
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "'Hash' da base de dados não recebida.",
+        "message": "Negauta duomenų bazės maiša.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "Chave pública do cliente não recebida.",
+        "message": "Negautas kliento viešasis raktas.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
-        "message": "Não foi possível decifrar a mensagem.",
+        "message": "Nepavyksta iššifruoti žinutės.",
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings.",
+        "message": "Nepavyksta prisijungti prie KeePassXC. Patikrinkite, ar \"KeePassXC\" nustatymuose įjungta naršyklės integracija.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
-        "message": "Ação cancelada ou recusada.",
+        "message": "Veiksmas atmestas arba jo atsisakyta.",
         "description": "Action canceled or denied."
     },
     "errorMessageEncrypt": {
-        "message": "Message encryption failed. Is KeePassXC running?",
+        "message": "Pranešimų šifravimas nepavyko. Ar veikia KeePassXC?",
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
-        "message": "Falha ao associar o KeePassXC. Tente novamente.",
+        "message": "KeePassXC asociacija nepavyko, bandykite dar kartą.",
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
-        "message": "Troca de chaves não efetuada com sucesso.",
+        "message": "Raktų mainai nebuvo sėkmingi.",
         "description": "Key exchange was not successful."
     },
     "errorMessageEncryptionKey": {
-        "message": "Chave de cifra não reconhecida.",
+        "message": "Šifravimo raktas neatpažintas.",
         "description": "Encryption key is not recognized."
     },
     "errorMessageSavedDatabases": {
-        "message": "Não existem bases de dados guardadas.",
+        "message": "Nerasta jokių įrašytų duomenų bazių.",
         "description": "No saved databases found."
     },
     "errorMessageIncorrectAction": {
-        "message": "Ação incorreta.",
+        "message": "Neteisingas veiksmas.",
         "description": "Incorrect action."
     },
     "errorMessageEmptyMessage": {
-        "message": "Recebida uma mensagem vazia.",
+        "message": "Gauta tuščia žinutė.",
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
-        "message": "Nenhum URL indicado.",
+        "message": "Nepateiktas URL.",
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
-        "message": "Credenciais não encontradas.",
+        "message": "Nerasta jokių prisijungimų.",
         "description": "No logins found."
     },
     "errorMessagePaswordLengthExceeded": {
-        "message": "Filled password is longer than field's allowed max length.",
+        "message": "Užpildytas slaptažodis yra ilgesnis nei lauko leidžiamas maksimalus ilgis.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorNotConnected": {
-        "message": "Não existe uma ligação a KeePassXC.",
+        "message": "Neprisijungta prie KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
-        "message": "Password generator icon",
+        "message": "Slaptažodžio generatoriaus ikona",
         "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorPlaceholder": {
-        "message": "Palavra-passe gerada",
+        "message": "Generuoti slaptažodį",
         "description": "Input field placeholder for generated password."
     },
     "passwordGeneratorLabel": {
-        "message": "Preencher também o campo seguinte da palavra-passe",
+        "message": "Taip pat užpildykite kitą slaptažodžio lauką",
         "description": "Checkbox text below the password generator input field."
     },
     "passwordGeneratorTitle": {
-        "message": "Gerador de palavra-passe",
+        "message": "Slaptažodžio generatorius",
         "description": "Password generator dialog title."
     },
     "passwordGeneratorGenerate": {
-        "message": "Gerar",
+        "message": "Generuoti",
         "description": "Generate button text in password generator."
     },
     "passwordGeneratorTryAgain": {
-        "message": "Tentar novamente",
+        "message": "Bandyti dar kartą",
         "description": "Generate button text in password generator when not connected."
     },
     "passwordGeneratorCopy": {
-        "message": "Copiar",
+        "message": "Kopijuoti",
         "description": "Copy button text in password generator."
     },
     "passwordGeneratorFill": {
-        "message": "Preencher palavra-passe",
+        "message": "Užpildyti slaptažodį",
         "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Erro:\nA palavra-passe gerada tem um tamanho superior ao permitido.\nO tamanho foi ajustado.\n\nPor favor memorize a nova palavra-passe!",
+        "message": "Klaida: sugeneruotas slaptažodis yra ilgesnis nei leistinas ilgis!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
-        "message": "O tamanho foi ajustado.",
+        "message": "Jis buvo supjaustytas, kad atitiktų ilgį.",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongRemember": {
-        "message": "Não se esqueça da nova palavra-passe!",
+        "message": "Prašome atsiminti naują slaptažodį",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Gerar palavra-passe",
+        "message": "Generuoti slaptažodį",
         "description": "Password icon title text."
     },
     "passwordGeneratorError": {
-        "message": "A palavra-passe gerada não foi recebida.<br />O KeepassXC está em execução?",
+        "message": "Nepavyksta gauti sugeneruoto slaptažodžio.",
         "description": "Password generator error text when KeePassXC is closed."
     },
     "passwordGeneratorErrorIsRunning": {
-        "message": "O KeePassXC está a ser executado e está conectado?",
+        "message": "Ar KeePassXC yra veikiantis ir prisijungęs?",
         "description": "Password generator error text when KeePassXC is closed."
     },
     "usernameFieldText": {
-        "message": "Preencher credenciais com KeePassXC",
+        "message": "Užpildyti prisjungimo duomenis iš KeePassXC",
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
-        "message": "Base de dados está bloqueada",
+        "message": "Duomenų bazė yra užrakinta",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC está desconectado",
+        "message": "KeePassXC yra neprisijungęs",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
-        "message": "Ícone do campo Nome de utilizador",
+        "message": "Naudotojo vardo lauko piktograma",
         "description": "Username field icon text."
     },
     "totp": {
-        "message": "TOTP",
+        "message": "TOTP (angl.",
         "description": "TOTP text."
     },
     "totpFieldText": {
-        "message": "Prrencher TOTP a partir de KeePassXC",
+        "message": "Užpildykite TOTP iš KeePassXC",
         "description": "OTP field icon hover text."
     },
     "totpFieldIcon": {
-        "message": "Ícone do campo TOTP",
+        "message": "LAUKO TOTP piktograma",
         "description": "OTP field icon text."
     },
     "defineClose": {
-        "message": "Close",
+        "message": "Uždaryti",
         "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
-        "message": "Ignorar",
+        "message": "Praleisti",
         "description": "Skip button text when choosing custom login fields."
     },
     "defineMore": {
-        "message": "Show more",
+        "message": "Rodyti daugiau",
         "description": "More button text when choosing custom login fields."
     },
     "defineReset": {
-        "message": "Reset",
+        "message": "Atstatyti",
         "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
-        "message": "Confirmação",
+        "message": "Patvirtinti",
         "description": "Confirm button text when choosing custom login fields."
     },
     "defineAlreadySelected": {
-        "message": "Os campo para esta página já foram selecionados e serão substituídos.",
+        "message": "Prisijungimo laukai šiam puslapiui jau yra pasirinkti ir bus perrašyti.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
     "defineClearData": {
-        "message": "Clear saved data",
+        "message": "Išsaugotų duomenų išvalymas",
         "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "String field",
+        "message": "Eilutės laukas",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "Choose a username field",
+        "message": "Pasirinkite vartotojo vardo lauką",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "Choose a password field",
+        "message": "Slaptažodžio lauko pasirinkimas",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "Choose a TOTP field",
+        "message": "Lauko TOTP pasirinkimas",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
     "defineChooseStringFields": {
-        "message": "Choose String Fields",
+        "message": "Pasirinkite eilučių laukus",
         "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
-        "message": "Confirme a sua seleção ou escolha mais campos como <em>campos de cadeia</em>.",
+        "message": "Patvirtinkite savo pasirinkimą arba pasirinkite daugiau laukų kaip eilutės laukus.",
         "description": "Confirm a selection text when choosing custom login fields which contains string fields."
     },
     "defineKeyboardText": {
-        "message": "You can also use the numbers to choose the input fields from keyboard.",
+        "message": "Taip pat galite naudoti skaičius, kad pasirinktumėte įvesties laukus iš klaviatūros.",
         "description": "Help text when choosing custom login fields."
     },
     "defineChooseCustomLoginFieldText": {
-        "message": "Choose a Custom Login Field",
+        "message": "Pasirinkite pasirinktinį prisijungimo lauką",
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
-        "message": "Nome de utilizador",
+        "message": "Naudotojo vardas",
         "description": "General text for username."
     },
     "password": {
-        "message": "Palavra-passe",
+        "message": "Slaptažodis",
         "description": "General text for password."
     },
     "stringFields": {
-        "message": "String Fields",
+        "message": "Eilučių laukai",
         "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
-        "message": "- sem nome de utilizador -",
+        "message": "- nėra naudotojo vardo -",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Erro:\nCredenciais não encontradas.",
+        "message": "Nerasta jokių prisijungimų.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Erro:\nExiste mais do que uma credencial no KeePassXC!\nPrima no ícone KeePassXC-Browser para ver mais opções.",
+        "message": "KeePassXC buvo rastas daugiau nei vienas prisijungimas!",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Prima o ícone do KeePassXC-Browser para mais informações.",
+        "message": "Paspauskite \"KeePassXC-Browser\" piktogramą, kad gautumėte daugiau parinkčių.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Erro:\nNão existem credenciais para o nome de utilizador encontrado.",
+        "message": "Nerasta jokių nurodyto vartotojo vardo kredencialų.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
-        "message": "No TOTP found.",
+        "message": "Nerastas TOTP.",
         "description": "Alert message when no TOTP is found."
     },
     "credentialExpired": {
-        "message": "Caducada",
+        "message": "Nebegalioja",
         "description": "If a credential is expired, this is appended to the title label."
     },
     "fieldsFill": {
-        "message": "Erro:\nNão foram encontrados campos que possam ser preenchidos.",
+        "message": "Klaida: nepavyksta rasti pildomų laukų.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "Erro:\nNão foi possível detetar o campo de palavra-passe.",
+        "message": "Klaida: nepavyko rasti slaptažodžio lauko.",
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "Erro:\nNão foi possível detetar as credenciais alteradas.",
+        "message": "Klaida: nepavyko aptikti pakeistų kredencialų.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
-        "message": "KeePassXC - Alerta",
+        "message": "KeePassXC - Iškylantysis langas",
         "description": "Popup window title."
     },
     "popupSettingsText": {
-        "message": "Definições",
+        "message": "Nustatymai",
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Escolha os campos de autenticação personalizados para esta página",
+        "message": "Pasirinkite pasirinktinius prisijungimo laukus",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
-        "message": "Conetar",
+        "message": "Prisijungti",
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": "Reconetar",
+        "message": "Prisijungti iš naujo",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
-        "message": "Redetetar campos de autenticação",
+        "message": "Iš naujo aptikti prisijungimo laukus",
         "description": "Popup Redetect login fields button text."
     },
     "popupReloadButton": {
-        "message": "Recarregar",
+        "message": "Įkelti iš naujo",
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": "Reabrir base de dados",
+        "message": "Iš naujo atverti duomenų bazę",
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
-        "message": "Utilizar apenas 'Username-only' para este site",
+        "message": "Svetainės parinktis Pridėti tik vartotojo vardą",
         "description": "Button text for adding Username-only option."
     },
     "popupErrorEncountered": {
-        "message": "KeePassXC-Browser encontrou um erro:",
+        "message": "KeePassXC-Browser susidūrė su klaida:",
         "description": "A text shown above error message in the popup."
     },
     "popupUpdateAvailable": {
-        "message": "Está a usar uma versão antiga do KeePassXC.",
+        "message": "Naudojate seną KeePassXC versiją.",
         "description": "Popup warning message about old version of KeePassXC."
     },
     "popupDownloadNewVersion": {
-        "message": "Descarregue a versão mais recente em keepassxc.org",
+        "message": "Atsisiųskite naujausią versiją iš keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "Are you a first time user? Please check our Getting Started Guide.",
+        "message": "Ar esate pirmą kartą vartotojas? Peržiūrėkite mūsų darbo pradžios vadovą.",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "Getting Started Guide - Setup Browser Integration",
+        "message": "Darbo pradžios vadovas - sąrankos naršyklės integravimas",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
-        "message": "Hide and don't show again.",
+        "message": "Slėpkitės ir daugiau nerodykite.",
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "message": "Negalite prisijungti prie KeePassXC? Galbūt mūsų wiki puslapis galėtų padėti.",
         "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
-        "message": "Troubleshooting Guide",
+        "message": "Trikčių šalinimo vadovas",
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
-        "message": "A verificar o estado...",
+        "message": "Tikrinama būsena...",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "O KeePassXC-Browser não foi configurado. Pressione o botão de conexão para emparelhar com o KeePassXC.",
+        "message": "KeePassXC-Browser nebuvo sukonfigūruota. Paspauskite prisijungimo mygtuką, norėdami suporuoti su KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
-        "message": "O KeePassXC-Browser foi desconectado do KeePassXC.",
+        "message": "KeePassXC-Browser buvo atjungta nuo KeePassXC.",
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Prima o botão Reconectar para estabelecer uma nova ligação.",
+        "message": "Norėdami užmegzti naują ryšį, paspauskite prisijungimo iš naujo mygtuką.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "O KeePassXC-Browser ainda não se conectou ao KeePassXC, mas foi configurado utilizando o identificador: $1",
+        "message": "KeePassXC-Browser kol kas neprisijungė prie KeePassXC, tačiau yra sukonfigūruota naudojant identifikatorių: $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "O KeePassXC-Browser está conectado ao KeePassXC e foi configurado utilizando o seguinte identificador: $1",
+        "message": "KeePassXC-Browser yra prisijungusi prie KeePassXC, ir yra sukonfigūruota naudojant identifikatorių: $1",
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "Apenas foi detetado um campo para o nome de utilizador. Adicionar URL às preferências do site com a opção 'Username-only' ativada?",
+        "message": "Buvo aptiktas tik vienas vartotojo vardo laukas. Pridėti URL prie svetainės nuostatų, kai įjungta parinktis tik vartotojo vardas?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "rememberInfoText": {
-        "message": "Nome de utilizador ou palavra-passe alterada. Guardar alterações?",
+        "message": "Naudotojo vardas ar slaptažodis pasikeitė! Įrašyti jį?",
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "As credenciais serão guardadas na base de dados conectada com o identificador $1",
+        "message": "Kredencialai bus išsaugoti prijungtoje duomenų bazėje su identifikatoriumi $1",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
-        "message": "O seguinte nome de utilizador não está guardado: $1",
+        "message": "Šis vartotojo vardas šiuo metu nėra išsaugotas: $1",
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "As credenciais para o nome de utilizador utilizado estão marcadas a negrito: $1",
+        "message": "Kredencialai su naudojamu vartotojo vardu pažymėti paryškintu šriftu: $1",
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "Por favor escolha as credenciais que deseja atualizar.",
+        "message": "Pasirinkite kredencialus, kuriuos norite atnaujinti.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Por favor escolha o grupo no qual quer adicionar as novas credenciais.",
+        "message": "Pasirinkite grupę, į kurią norite įtraukti naujus kredencialus.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
-        "message": "Grupo padrão criado na base de dados conectada.",
+        "message": "Numatytoji grupė, sukurta prijungtoje duomenų bazėje.",
         "description": "Info message shown when default group set cannot be found."
     },
     "rememberErrorCreatingNewGroup": {
-        "message": "Não é possível criar novos grupos.",
+        "message": "Negalima sukurti naujos (-ų) grupės (-ių).",
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "Credenciais não atualizadas. A palavra-passe não foi alterada.",
+        "message": "Kredencialai neatnaujinami. Slaptažodis nebuvo pakeistas.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
-        "message": "Não foi possível guardar e/ou atualizar as credenciais.",
+        "message": "Kredencialų negalima įrašyti arba atnaujinti.",
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Não foi possível guardar e/ou atualizar as credenciais porque a base de dados não está aberta.",
+        "message": "Kredencialų negalima įrašyti arba atnaujinti uždaroje duomenų bazėje.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
-        "message": "Operação cancelada. Credenciais não atualizadas.",
+        "message": "Operacija atšaukta. Kredencialai neatnaujinami.",
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "Guardadas novas credenciais com o nome de utilizador $1.",
+        "message": "Išsaugoti nauji kredencialai su vartotojo vardu $1.",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
-        "message": "Credenciais atualizadas com o nome de utilizador $1.",
+        "message": "Atnaujinti kredencialai su vartotojo vardu $1.",
         "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "Já existem credenciais idênticas. Não há quaisquer alterações para guardar.",
+        "message": "Identiški kredencialai jau egzistuoja. Nieko nereikia atnaujinti.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
-        "message": "(vazio)",
+        "message": "(tuščias)",
         "description": "Means an empty username."
     },
     "rememberNoPassword": {
-        "message": "Tem que preencher o nome de utilizador para poder guardar as credenciais.",
+        "message": "Prieš išsaugodami kredencialus, užpildykite slaptažodžio lauką.",
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
-        "message": "Selecione a informação que deseja guardar para esta página.",
+        "message": "Pasirinkite prisijungimo informaciją, kurią norėtumėte įvesti į puslapį.",
         "description": "A popup message shown when one or multiple credentials are present."
     },
     "popupFilterText": {
-        "message": "Filtrar:",
+        "message": "Filtruoti:",
         "description": "Text for login credentials quick filter."
     },
     "popupAuthText": {
-        "message": "Selecione as informações de autenticação com as quais gostaria de se autenticar.",
+        "message": "Pasirinkite prisijungimo informaciją su kurią norėtumėte prisijungti.",
         "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
     },
     "popupMultiplePasswordFields": {
-        "message": "Foi encontrado mais do que um campo de palavra-passe nesta página. Clique com o botão direito do rato num dos campos de palavra-passe e escolha um dos seguintes:",
+        "message": "Šiame puslapyje rastas daugiau nei vienas slaptažodžio laukas. Dešiniuoju pelės mygtuku spustelėkite vieną iš slaptažodžio laukų ir pasirinkite vieną iš šių parinkčių:",
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupURL": {
@@ -492,251 +492,251 @@
         "description": "URL. Might not need any translation."
     },
     "popupUsername": {
-        "message": "Nome de utilizador:",
+        "message": "Naudotojo vardas: ",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
-        "message": "Nova",
+        "message": "Nauji",
         "description": "New button text in popup when updating credentials."
     },
     "popupButtonUpdate": {
-        "message": "Atualizar",
+        "message": "Atnaujinti",
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonDismiss": {
-        "message": "Rejeitar",
+        "message": "Atmesti",
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Não voltar a perguntar para esta página",
+        "message": "Daugiau neprašykite šios svetainės",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
-        "message": "Fechar",
+        "message": "Užverti",
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": "Rejeitar e mostrar o diálogo de autenticação padrão.",
+        "message": "Numatytojo autentifikavimo dialogo atmetimas ir rodymas",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
-        "message": "Definições | KeePassXC-Browser",
+        "message": "Nustatymai | KeePassXC-Browser",
         "description": "Options page title."
     },
     "optionsGeneralSettingsTab": {
-        "message": "Definições gerais",
+        "message": "Bendri nustatymai",
         "description": "General Settings tab text."
     },
     "optionsConnectedDatabasesTab": {
-        "message": "Bases de dados conectadas",
+        "message": "Prijungtos duomenų bazės",
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Campos personalizados de autenticação",
+        "message": "Tinkinti prisijungimo laukai",
         "description": "Saved custom login fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Preferências do site",
+        "message": "Svetainės nuostatos",
         "description": "Site preferences fields tab text."
     },
     "optionsAboutTab": {
-        "message": "Acerca",
+        "message": "Apie",
         "description": "About tab text."
     },
     "optionsMenuGeneral": {
-        "message": "Geral",
+        "message": "Bendra",
         "description": "General settings page header."
     },
     "optionsMenuConnectedDatabases": {
-        "message": "Bases de dados conectadas",
+        "message": "Prijungtos duomenų bazės",
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Campos personalizados de autenticação",
+        "message": "Tinkinti prisijungimo laukai",
         "description": "Custom login fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Preferências do site",
+        "message": "Svetainės nuostatos",
         "description": "Site preferences page header."
     },
     "optionsMenuAbout": {
-        "message": "Acerca",
+        "message": "Apie",
         "description": "About page header."
     },
     "optionsConfigureShortcuts": {
-        "message": "Configurar atalhos",
+        "message": " Konfigūruokite sparčiuosius klavišus",
         "description": "Keyboard shortcut button and title text."
     },
     "optionsButtonSave": {
-        "message": "Guardar",
+        "message": "Įrašyti",
         "description": "Save button text."
     },
     "optionsButtonConnect": {
-        "message": "Conetar",
+        "message": "Prisijungti",
         "description": "Connect button text."
     },
     "optionsButtonRemove": {
-        "message": "Remover",
+        "message": "Šalinti",
         "description": "Remove button text."
     },
     "optionsButtonAdd": {
-        "message": "Adicionar",
+        "message": "Pridėti",
         "description": "Add button text."
     },
     "optionsButtonUpdate": {
-        "message": "Procurar atualizações",
+        "message": "Tikrinti ar yra atnaujinimų",
         "description": "Check for updates button text."
     },
     "optionsButtonRemoveNow": {
-        "message": "Sim, remover agora",
+        "message": "Taip, šalinti dabar",
         "description": "Confirm button text when removing database key or custom login fields."
     },
     "optionsButtonCancel": {
-        "message": " Cancelar",
+        "message": "Atsisakyti",
         "description": "Cancel button text when removing database key or custom login fields."
     },
     "optionsButtonReset": {
-        "message": "Repôr",
+        "message": "Atstatyti",
         "description": "Reset button text for keyboard shortcuts."
     },
     "optionsButtonImport": {
-        "message": "Importar definições",
+        "message": "Importuoti nustatymus",
         "description": "Import settings button text."
     },
     "optionsButtonExport": {
-        "message": "Exportar definições",
+        "message": "Eksportuoti nustatymus",
         "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
-        "message": "Default group for saving new passwords:",
+        "message": "Numatytoji naujų slaptažodžių įrašymo grupė:",
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Separate the group with slashes, for example: Group/ChildGroup.",
+        "message": "Atskirkite grupę pasviraisiais brūkšniais, pvz., grupė / vaikų grupė.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Always ask where to save new credentials",
+        "message": "Visada klauskite, kur išsaugoti naujus kredencialus",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "When enabled, the popup shows a group listing.",
+        "message": "Įjungus iššokantįjį langą rodomas grupės įrašas.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Ativar gerador de palavras-passe.",
+        "message": "Aktyvuoti slaptažodžio generatoriaus ikonas.",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Ativar ícones do campo Nome de utilizador.",
+        "message": "Suaktyvinkite vartotojo vardo lauko piktogramas.",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Utilizar deteção dinâmica de campos.",
+        "message": "Naudokite dinaminį įvesties lauko aptikimą.",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Útil para páginas que utilizem pop-ups ou diálogos dinâmicos. Desative esta funcionalidade para poupar recursos do CPU em máquinas lentas. Se as credenciais desativadas apenas puderem ser introduzidas através do teclado, surge o menu de contexto ou a extensão.",
+        "message": "Naudinga su puslapiais, kuriuose naudojami iššokantys langai arba dinaminiai dialogai. Išjunkite funkciją, kad sumažintumėte procesoriaus apkrovą lėtesnėse mašinose. Išjungus kredencialus galima įterpti tik naudojant sparčiuosius klavišus, kontekstinį meniu arba plėtinio iššokantįjį langą.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Ativar ícones para o campo 2FA/OTP.",
+        "message": "Suaktyvinkite 2FA/OTP laukų piktogramas.",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Obter credenciais automaticamente.",
+        "message": "Automatiškai gaukite kredencialus.",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Tornar a conectar automaticamente ao KeePassXC.",
+        "message": "Automatiškai iš naujo prisijunkite prie KeePassXC.",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
-        "message": "Atenção! Esta funcionalidade é experimental. Use-a por sua conta e risco.",
+        "message": "Įspėjimas! Ši funkcija yra eksperimentinė. Naudokite savo pačių rizika.",
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Preencher automaticamente as entradas de credenciais únicas.",
+        "message": "Automatiškai užpildykite vieno kredencialo įrašus.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Ativar conclusão automática para o campo nome de utilizador.",
+        "message": "Suaktyvinkite vartotojo vardo laukų automatinį užbaigimą.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Mostrar nome do grupo na lista de conclusão automática se as credenciais estiverem em grupos diferentes.",
+        "message": "Rodyti grupės pavadinimą automatinio užbaigimo sąraše, kai kredencialai yra iš skirtingų grupių.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
-        "message": "Submeter automaticamente formulários de autenticação",
+        "message": "Automatinio pateikimo prisijungimo formos",
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Submete automaticamente as credenciais selecionadas. Isto é desativado para o preenchimento automático de uma única entrada.",
+        "message": "Automatiškai pateikia pasirinktus kredencialus. Tai išjungta vieno įrašo automatiniam užpildymui.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Mostrar notificações.",
+        "message": "Rodyti pranešimus.",
         "description": "Show notifications checkbox text."
     },
     "optionsSaveDomainOnly": {
-        "message": "Guardar apenas domínio.",
+        "message": "Įrašykite tik domeną.",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Mostrar uma notificação se as novas credenciais puderem ser guardadas.",
+        "message": "Puslapyje rodykite reklamjuostę, kai duomenų bazėje galima įrašyti naujus kredencialus.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
-        "message": "Número de reencaminhamentos permitidos: $1",
+        "message": "Leidžiamų peradresavimų skaičius: $1",
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Quantas páginas deve o separador percorrer após o atraso de redirecionamento antes de desativar o ícone",
+        "message": "Kiek peradresavimų leidžiama, kol reklamjuostė išnyks. Numatytoji reikšmė yra 1. Maksimalus yra begalinis.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Preencher e enviar automaticamente as caixas de diálogo de autenticação básica HTTP.",
+        "message": "Automatiškai užpildykite HTTP Basic Auth dialogus ir pateikite juos.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
     "optionsDebugLogging": {
-        "message": "Debug logging",
+        "message": "Derinimo registravimas",
         "description": "Debug logging checkbox text."
     },
     "optionsDebugLoggingHelpText": {
-        "message": "Enable debug logging. Additional console messages will be visible in both background and content scripts.",
+        "message": "Įgalinti derinimo registravimą. Papildomi konsolės pranešimai bus matomi tiek fone, tiek turinio scenarijuose.",
         "description": "Debug logging help text."
     },
     "optionsRadioText": {
-        "message": "Procurar por atualizações do KeePassXC:",
+        "message": "Tikrinti ar yra KeePassXC atnaujinimų:",
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "a cada 3 dias",
+        "message": "kas 3 dienas",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
-        "message": "a cada semana",
+        "message": "kas savaitę",
         "description": "Radio button text."
     },
     "optionsRadioMonth": {
-        "message": "a cada mês",
+        "message": "kas mėnesį",
         "description": "Radio button text."
     },
     "optionsRadioNever": {
-        "message": "nunca",
+        "message": "niekada",
         "description": "Radio button text."
     },
     "optionsThemeSelectionHeader": {
-        "message": "Tema",
+        "message": "Spalvų tema",
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Sort matching credentials by",
+        "message": "Sutampančių kredencialų rūšiavimas pagal",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
-        "message": "Selecionar tema",
+        "message": "Pasirinkite temą",
         "description": "Theme selection title text."
     },
     "optionsThemeSystem": {
@@ -744,55 +744,55 @@
         "description": "System theme text."
     },
     "optionsThemeDark": {
-        "message": "Escuro",
+        "message": "Tamsi",
         "description": "Dark theme text."
     },
     "optionsThemeLight": {
-        "message": "Claro",
+        "message": "Šviesi",
         "description": "Light theme text."
     },
     "optionsKeyboardShortcutsHeader": {
-        "message": "Teclas de atalho",
+        "message": "Spartieji klavišai",
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Adiciona um botão aos campos de palavras-passe para gerar uma nova palavra-passe.",
+        "message": "Prideda piktogramą prie slaptažodžio laukų naujam slaptažodžiui generuoti.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
-        "message": "As palavras-passe serão geradas no KeePassXC utilizando o seu perfil de criação de palavras-passe.",
+        "message": "Slaptažodžius generuoja \"KeePassXC\", naudodama jūsų slaptažodžio generavimo profilį.",
         "description": "Password Generator option help text, second part."
     },
     "optionsPredefinedSiteList": {
-        "message": "Predefined sites",
+        "message": "Iš anksto nustatytos svetainės",
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Use predefined sites for compatibility.",
+        "message": "Suderinamumui naudokite iš anksto nustatytas svetaines.",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the site preferences.",
+        "message": "Prie svetainės nuostatų prideda įprastas svetaines, kuriose yra tik vartotojo vardo prisijungimo formos.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Adiciona um ícone aos campos Nome de utilizador para poder preencher as credenciais com um clique.",
+        "message": "Prideda piktogramą prie vartotojo vardo laukų, kad vienu pelės paspaudimu užpildytų kredencialus.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Adiciona um ícone aos campos que sejam reconhecidos como 2FA/OTP.",
+        "message": "Prideda piktogramą prie įvesties laukų, kurie atpažįstami kaip OTP/2FA.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser irá obter automaticamente as credenciais quando um separador for ativado.",
+        "message": "\"KeePassXC-Browser\" iškart gaus kredencialus, kai bus suaktyvintas skirtukas.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
-        "message": "Tornar a conectar automaticamente ao KeePassXC quando for detetado.",
+        "message": "Iš naujo automatiškai prisijungia prie KeePassXC, kai jis aptinkamas.",
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Deixar o KeePassXC-Browser preencher automaticamente as credenciais se receber apenas uma única entrada.",
+        "message": "Leiskite \"KeePassXC-Browser\" automatiškai užpildyti kredencialus, jei ji gauna tik vieną įrašą.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -800,403 +800,403 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Mostrar uma lista suspensa contendo as credenciais disponíveis para todos os campos nome de utilizador de uma página.",
+        "message": "Rodyti išplečiamąjį sąrašą, kuriame yra galimi visų puslapio vartotojo vardo laukų kredencialai.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Se forem devolvidas credenciais de diversos grupos, mostra o nome do grupo.",
+        "message": "Kai kredencialai grąžinami iš skirtingų grupių, bus rodomas grupės pavadinimas.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Mostrar notificações para erros e quando for necessária qualquer interação.",
+        "message": "Rodyti pranešimus apie klaidas ir kada reikia vartotojo sąveikos.",
         "description": "Show notifications option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "Ao guardar as novas credenciais, guardar apenas o domínio e não o URL.",
+        "message": "Įrašydami naujus kredencialus, įrašykite tik domeną, o ne visą URL.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Ao guardar novos campos de acesso personalizados, guardar apenas o domínio em vez do URL completo.",
+        "message": "Išsaugodami naujus pasirinktinius prisijungimo laukus, išsaugokite tik domeną, o ne visą URL.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
-        "message": "Download favicon after save",
+        "message": "Atsisiųskite favicon po išsaugojimo",
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Favicon will be automatically downloaded for the new credential.",
+        "message": "\"Favicon\" bus automatiškai atsisiųstas, kad gautų naują kredencialą.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Se forem encontradas credenciais para uma página e o tipo de autenticação for uma solicitação de autenticação básica HTTP, o KeePassXC-Browser tentará fazer a autenticação com as primeiras credenciais encontradas.",
+        "message": "Jei randama puslapio kredencialų, o prisijungimo tipas yra HTTP Basic Auth užklausa, KeePassXC-Browser bando automatiškai prisijungti naudodama pirmuosius nurodytus kredencialus. Kai yra keli kredencialai, plėtinio iššokantįjį langą galima naudoti norint pasirinkti tinkamą. Net kai ši funkcija įjungta, vis tiek galima rankiniu būdu įvesti HTTP Basic Auth prisijungimą.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
-        "message": "Um diálogo de autenticação básica HTTP é parecido com este:",
+        "message": "HTTP basic Auth dialogo langas atrodo taip:",
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Clear credentials from non-active tabs after (seconds, 0-3600).",
+        "message": "Išvalykite kredencialus iš neaktyvių skirtukų po (sekundžių, 0–3600).",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Credentials are cleared from background tabs after the timeout and permissions for those pages will be asked again.",
+        "message": "Kredencialai išvalomi iš fono skirtukų po skirtojo laiko ir tų puslapių leidimai bus vėl paprašyti.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "KeePassXC-Browser necessita do KeePassXC para obter as credenciais.",
+        "message": "\"KeePassXC-Browser\" reikia \"KeePassXC\", kad gautų kredencialus.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
-        "message": "Pode descarregar a versão mais recente em $1",
+        "message": "Naujausią stabilią versiją galite atsisiųsti iš $1",
         "description": "Settings page download link."
     },
     "optionsVersionRunning": {
-        "message": "Está a utilizar o KeePassXC, versão: $1 ",
+        "message": "Naudojate KeePassXC versiją: $1",
         "description": "Settings page info text of user's KeePassXC version."
     },
     "optionsLatestVersion": {
-        "message": "A versão mais recente do KeePassXC é a:$1",
+        "message": "Naujausia prieinama KeePassXC versija: $1",
         "description": "Settings page info text about the latest KeePassXC version."
     },
     "optionsKeePassXCVersionRequired": {
-        "message": "Necessita de KeePassXC, versão: $1",
+        "message": "Reikalinga KeePassXC versija: $1",
         "description": "KeePassXC version requirement text."
     },
     "optionsDefault": {
-        "message": "Padrão: $1",
+        "message": "Numatytoji reikšmė: $1",
         "description": "Default setting text."
     },
     "optionsInfinite": {
-        "message": "Infinito: $1",
+        "message": "Begalinis: $1",
         "description": "Infinite setting text."
     },
     "optionsRecommended": {
-        "message": "Recomendado: $1",
+        "message": "Rekomenduojama: $1",
         "description": "Recommended setting text."
     },
     "optionsShortcutsSuccess": {
-        "message": "O atalho para $1foi mudado com successo",
+        "message": "$1 spartusis klavišas buvo sėkmingai pakeistas.",
         "description": "Message for successful keyboard shortcut change."
     },
     "optionsShortcutsInfo": {
-        "message": "O atalho para $1foi reposto",
+        "message": "$1 spartusis klavišas buvo nustatytas iš naujo.",
         "description": "Info message for changing keyboard shortcuts."
     },
     "optionsShortcutsDanger": {
-        "message": "Erro: O atalho para $1não foi mudado!",
+        "message": "Klaida: $1 nuoroda nebuvo pakeista!",
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
-        "message": "Importar/exportar definições",
+        "message": "Importavimo / eksportavimo parametrai",
         "description": "Settings page header text for import/export."
     },
     "optionsImportSettingsDialogTitle": {
-        "message": "Importar definições de um ficheiro externo?",
+        "message": "Importuoti nustatymus iš išorinio failo?",
         "description": "Import settings confirmation dialog title text."
     },
     "optionsImportSettingsDialogText": {
-        "message": "As definições atuais serão substituídas. Tem a certeza de que deseja importar os dados do ficheiro?",
+        "message": "Dabartiniai nustatymai bus nepaisomi. Ar tikrai norite importuoti nustatymų failą?",
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
-        "message": "As seguintes bases de dados do KeePassXC estão conectadas ao KeePassXC-Browser.",
+        "message": "Duomenų bazės, prijungtos prie \"KeePassXC-Browser\".",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
-        "message": "Não foi encontrada uma base de dados conectada.",
+        "message": "Nerasta jokių prijungtų duomenų bazių.",
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
-        "message": "Remover identificador da lista de bases de dados?",
+        "message": "Šalinti identifikatorių iš duomenų bazių sąrašo?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Tem a certeza de que deseja remover o seguinte identificador da lista da base de dados?",
+        "message": "Ar tikrai norite iš duomenų bazių sąrašo pašalinti šį identifikatorių: $1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
-        "message": "Pode reconectar a sua base de dados a qualquer momento.",
+        "message": "Galite bet kada iš naujo prijungti savo duomenų bazę.",
         "description": "Confirmation text when removing database from the list, second part."
     },
     "optionsDatabaseIdentifier": {
-        "message": "Identificador",
+        "message": "Identifikatorius",
         "description": "Database list column title."
     },
     "optionsDatabaseKey": {
-        "message": "Chave",
+        "message": "Raktas",
         "description": "Database list column title."
     },
     "optionsDatabaseLastUsed": {
-        "message": "Última utilização",
+        "message": "Paskutinį kartą naudotas",
         "description": "Database list column title."
     },
     "optionsDatabaseCreated": {
-        "message": "Criada",
+        "message": "Sukurtas",
         "description": "Database list column title."
     },
     "optionsDatabaseDelete": {
-        "message": "Apagar",
+        "message": "Ištrinti",
         "description": "Database list column title."
     },
     "optionsColumnPageURL": {
-        "message": "URL da página",
+        "message": "Puslapio URL",
         "description": "Site preferences list column title."
     },
     "optionsColumnIgnore": {
-        "message": "Ignorar",
+        "message": "Nepaisyti",
         "description": "Site preferences list column title."
     },
     "optionsColumnUsernameOnly": {
-        "message": "Deteção apenas de nome de utilizador",
+        "message": "Tik vartotojo vardo aptikimas",
         "description": "Site preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
-        "message": "Improved Input Field Detection",
+        "message": "Patobulintas įvesties lauko aptikimas",
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnDelete": {
-        "message": "Apagar",
+        "message": "Ištrinti",
         "description": "Site preferences list column title."
     },
     "optionsSelectionNothing": {
-        "message": "Ativar todas as funcionalidades",
+        "message": "Įjungti visas ypatybes",
         "description": "Site preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "Desativar credenciais novas/modificadas.",
+        "message": "Išjungti naujus / pakeistus kredencialus",
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
-        "message": "Disable Auto-Submit",
+        "message": "Automatinio pateikimo išjungimas",
         "description": "Site preferences option selection."
     },
     "optionsSelectionFull": {
-        "message": "Desativar todas as funcionalidades",
+        "message": "Išjungti visas ypatybes",
         "description": "Site preferences option selection."
     },
     "optionsSortByTitle": {
-        "message": "Title",
+        "message": "Pavadinimas",
         "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
-        "message": "Username",
+        "message": "Vartotojas",
         "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
-        "message": "Group and title",
+        "message": "Grupė ir pavadinimas",
         "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
-        "message": "Group and username",
+        "message": "Grupė ir vartotojo vardas",
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Sort credentials after fill by",
+        "message": "Kredencialų rūšiavimas užpildžius pagal",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
-        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "message": "Pasirinkus parinktį Atitinkamas kredencialas pirmoji, anksčiau užpildyto prisijungimo duomenys automatinio užbaigimo meniu sąraše nustatomi kaip pirmieji.",
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Sort credentials after fill for TOTP by",
+        "message": "Kredencialų rūšiavimas užpildžius TOTP pagal",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
-        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "message": "Pasirinkus parinktį Atitinkamas kredencialas pirmoji, totp anksčiau užpildytam prisijungimui nustatoma kaip pirmoji automatinio užbaigimo meniu sąraše.",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
     "optionsFillSortByMatchingCredentials": {
-        "message": "Matching credentials setting",
+        "message": "Sutampančių kredencialų nustatymas",
         "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
     },
     "optionsFillSortByRelevantEntry": {
-        "message": "Relevant credential first",
+        "message": "Pirmiausia atitinkami kredencialai",
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Não foi encontrado um campo de autenticação personalizado guardado.",
+        "message": "Nerasta išsaugotų pasirinktinių prisijungimo laukų.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table below.",
+        "message": "Išsaugotus pasirinktinius prisijungimo laukus galite tvarkyti naudodami lentelę.",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": "Se o KeePassXC-Browser detetar os campos de autenticação errados, você poderá especificar os campos corretos.",
+        "message": "Jei \"KeePassXC-Browser\" aptinka neteisingus prisijungimo laukus, teisingus laukus galite nurodyti patys.",
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Aceda à página, clique no ícone KeePassXC-Browser e selecione",
+        "message": "Eikite į puslapį ir spustelėkite \"KeePassXC-Browser\" piktogramą, tada pasirinkite ",
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "Nesta página pode gerir os campos personalizados das credenciais.",
+        "message": "Šiame puslapyje galite tvarkyti išsaugotus pasirinktinius prisijungimo laukus.",
         "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remover campos de autenticação personalizados guardados?",
+        "message": "Pašalinti išsaugotus pasirinktinius prisijungimo laukus?",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Tem a certeza de que deseja remover os campos personalizados de autenticação guardados para a página: $1",
+        "message": "Ar tikrai norite pašalinti išsaugotus pasirinktinius prisijungimo laukus puslapyje: $1",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
-        "message": "O KeePassXC-Browser detetará automaticamente os campos de autenticação na próxima vez que visitar esta página.",
+        "message": "KeePassXC-Browser automatiškai aptiks prisijungimo laukus kitą kartą, kai apsilankysite šiame puslapyje.",
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Não existem sites ignorados.",
+        "message": "Nerasta jokių svetainės nuostatų.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
-        "message": "Remover site?",
+        "message": "Šalinti svetainę?",
         "description": "Confirmation text when removing ignored sites from the list."
     },
     "optionsSitePreferencesTabHelpTextFirst": {
-        "message": "Os sites nesta página têm métodos especiais de manipulação associados.",
+        "message": "Šiame puslapyje esančios svetainės turi specialius su jomis susijusius tvarkymo metodus.",
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Para ignorar credenciais novas/alteradas num site específico, adicione-as abaixo ou clique no ícone do KeePassXC-Browser intermitente e selecione",
+        "message": "Norėdami nepaisyti naujų / modifikuotų kredencialų konkrečioje svetainėje, pridėkite juos žemiau arba, kai naudojate kredencialų reklamjuostę puslapyje, pasirinkite <em>Daugiau neprašyti šios svetainės</em>.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Se um site for totalmente ignorado (se a opção <em>Desativar todas as funcionalidades </em> for selecionada), o suplemento não fará nada ao visitar este site.",
+        "message": "Jei svetainė yra visiškai ignoruojama (pasirinkta <em>Išjungti visas funkcijas</em> ), tada papildinys nieko nedarys lankydamasis toje svetainėje.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "A deteção de apenas nome de utilizador permite que o KeePassXC-Browser preencha os detalhes de autenticação em sites com páginas distintas para nome de utilizador e palavra-passe.",
+        "message": "Tik vartotojo vardo aptikimas leidžia \"KeePassXC-Browser\" užpildyti prisijungimo duomenis svetainėse su atskirais vartotojo vardo ir slaptažodžio puslapiais.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "message": "Patobulintas įvesties lauko aptikimas leidžia išsamiau aptikti dinaminį įvesties lauką. Tačiau tai gali turėti įtakos puslapio našumui. Naudokite atsargiai.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesManualAddText": {
-        "message": "Add URL manually",
+        "message": "Pridėkite URL rankiniu būdu",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> and must be at least 5 characters long.",
+        "message": "URL turi prasidėti arba <code>https://</code>, <code>http://</code>, <code>file://</code>, , arba <code>ftp://</code> ir turi būti bent 5 simbolių ilgio.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
-        "message": "Tem a certeza de que deseja remover o site especificado da lista$1?",
+        "message": "Ar tikrai norite pašalinti nurodytą svetainę iš sąrašo: $1",
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "O KeePassXC-Browser irá ativar todos as funcionalidades para este site e removerá a deteção única do nome de utilizador.",
+        "message": "\"KeePassXC-Browser\" įgalins visas šios svetainės funkcijas ir pašalins tik vartotojo vardo aptikimą.",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table below.",
+        "message": "Išsaugotas svetainės nuostatas galite tvarkyti naudodami lentelę.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Option to ignore extension features for the page.",
+        "message": "Parinktis nepaisyti puslapio plėtinio funkcijų.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
-        "message": "Aceder a KeePassXC-Browser na Chrome Web Store.",
+        "message": "Apsilankykite \"KeePassXC-Browser\" naršyklėje \"Chrome\" internetinėje parduotuvėje.",
         "description": "About page link to Chrome Web Store."
     },
     "optionsAboutMozilla": {
-        "message": "Aceder a KeePassXC-Browser no diretório de extras Mozilla.",
+        "message": "Apsilankykite \"KeePassXC-Browser\" \"Mozilla\" priedų kataloge.",
         "description": "About page link to AMO."
     },
     "optionsAboutEdge": {
-        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "message": "Apsilankykite \"KeePassXC-Browser\" \"Edge\" priedų puslapyje.",
         "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
-        "message": "Aceda a KeePassXC-Browser no GitHub.",
+        "message": "Apsilankykite \"KeePassXC-Browser\" \"GitHub\".",
         "description": "About page link to GitHub."
     },
     "optionsAboutExtensionVersion": {
-        "message": "KeePassXC-Browser versão: $1",
+        "message": "KeePassXC-Browser versija: $1",
         "description": "About page text of extension version."
     },
     "optionsAboutKeePassXCVersion": {
-        "message": "KeePassXC versão: $1",
+        "message": "KeePassXC versija: $1",
         "description": "About page text of KeePassXC version."
     },
     "optionsAboutContributors": {
-        "message": "Contributors",
+        "message": "Autoriai",
         "description": "About page text of contributors."
     },
     "optionsAboutLicenses": {
-        "message": "Licenses",
+        "message": "Licenzijos",
         "description": "About page text of licenses."
     },
     "optionsAboutReportBugs": {
-        "message": "Report bugs",
+        "message": "Praneškite apie klaidas",
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Create new issue on GitHub",
+        "message": "Sukurkite naują problemą \"GitHub\".",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
-        "message": "The following debug info can be used",
+        "message": "Galima naudoti šią derinimo informaciją",
         "description": "Debug info text."
     },
     "optionsAboutSupporters": {
-        "message": "Supporters",
+        "message": "Sirgalių",
         "description": "Supporters label text."
     },
     "optionsErrorInvalidValue": {
-        "message": "Invalid value. Please check the input.",
+        "message": "Neteisinga reikšmė. Patikrinkite įvestį.",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Invalid URL. Please check the input.",
+        "message": "Neteisingas URL. Patikrinkite įvestį.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
-        "message": "The value already exists in the list.",
+        "message": "Reikšmė jau yra sąraše.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
     "optionsUserInterfaceTitle": {
-        "message": "Interface",
+        "message": "Vartotojo sąsaja",
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Preenchimento de credenciais",
+        "message": "Kredencialų pildymas",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Armazenamento de credenciais",
+        "message": "Kredencialų įrašymas",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {
-        "message": "Atualizações",
+        "message": "Naujiniai",
         "description": "Updates title in settings page"
     },
     "optionsAdvancedSettingsTitle": {
-        "message": "Definições avançadas",
+        "message": "Išplėstiniai nustatymai",
         "description": "Advanced settings title in settings page"
     },
     "optionsExtensionTitle": {
-        "message": "Extensão",
+        "message": "Įskiepis",
         "description": "Extension title in settings page"
     },
     "openNewTab": {
-        "message": "Opens a new tab",
+        "message": "Atidaro naują skirtuką",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "HTTP Basic Authentication dialog",
+        "message": "HTTP pagrindinio autentifikavimo dialogo langas",
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
-        "message": "A sua seleção será submetida automaticamente",
+        "message": "Jūsų pasirinkimas bus pateiktas automatiškai",
         "description": "Message shown at the bottom of autocomplete menu."
     },
     "lockDatabase": {
-        "message": "Bloquear base de dados",
+        "message": "Užrakinti duomenų bazę",
         "description": "Lock database button title text."
     }
 }

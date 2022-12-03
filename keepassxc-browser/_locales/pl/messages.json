@@ -31,6 +31,10 @@
         "message": "Wypełnij atrybut…",
         "description": "Context menu parent item for filling a custom attribute."
     },
+    "contextMenuRequestGlobalAutoType": {
+        "message": "Zażądaj globalnego autowpisywania",
+        "description": "Global Auto-Type shortcut text."
+    },
     "multipleCredentialsDetected": {
         "message": "Uwierzytelnianie HTTP z wykrytymi wieloma danymi uwierzytelniającymi. Kliknij ikonę rozszerzenia, aby wybrać właściwe.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
@@ -56,7 +60,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Nie można połączyć się z KeePassXC. Sprawdź, czy integracja przeglądarki jest włączona w ustawieniach KeePassXC.",
+        "message": "Nie można połączyć się z KeePassXC. Sprawdź, czy integracja z przeglądarką jest włączona w ustawieniach KeePassXC.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -96,8 +100,12 @@
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
-        "message": "Nie znaleziono loginów.",
+        "message": "Nie znaleziono danych logowania.",
         "description": "No logins found."
+    },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Wprowadzone hasło jest dłuższe niż dozwolona maksymalna długość pola.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorNotConnected": {
         "message": "Brak połączenia z KeePassXC.",
@@ -175,6 +183,10 @@
         "message": "Ikona pola nazwy użytkownika",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "Wypełnij TOTP z KeePassXC",
         "description": "OTP field icon hover text."
@@ -183,9 +195,9 @@
         "message": "Ikona pola TOTP",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
-        "message": "Odwołaj",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Zamknij",
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "Pomiń",
@@ -195,9 +207,9 @@
         "message": "Pokaż więcej",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "Jeszcze raz",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Resetuj",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "Potwierdź",
@@ -207,29 +219,29 @@
         "message": "Pola logowania dla tej strony są już wybrane i zostaną nadpisane.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Odrzuć wybór",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Wyczyść zapisane dane",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "Pole ciągów #",
+        "message": "Pole ciągu",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Wybierz pole nazwy użytkownika",
+        "message": "Wybierz pole nazwy użytkownika",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Teraz wybierz pole hasła",
+        "message": "Wybierz pole hasła",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Wybierz pole TOTP",
+        "message": "Wybierz pole TOTP",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Potwierdź wybór",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Wybierz pola ciągów",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "Potwierdź swój wybór lub wybierz więcej pól jako <em>Pola ciągów</em>.",
@@ -239,6 +251,10 @@
         "message": "Możesz także użyć liczb, aby wybrać pola wprowadzania z klawiatury.",
         "description": "Help text when choosing custom login fields."
     },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Wybierz niestandardowe pole logowania",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "Nazwa użytkownika",
         "description": "General text for username."
@@ -247,16 +263,20 @@
         "message": "Hasło",
         "description": "General text for password."
     },
+    "stringFields": {
+        "message": "Pola ciągów",
+        "description": "General text for a String Fields."
+    },
     "credentialsNoUsername": {
         "message": "- brak nazwy użytkownika -",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Nie znaleziono loginów.",
+        "message": "Nie znaleziono danych logowania.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Znaleziono więcej niż jeden login w KeePassXC!",
+        "message": "Znaleziono więcej niż jedne dane logowania w KeePassXC!",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
@@ -288,7 +308,7 @@
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
-        "message": "KeePassXC - popup",
+        "message": "KeePassXC - Wyskakujące okienko",
         "description": "Popup window title."
     },
     "popupSettingsText": {
@@ -335,6 +355,26 @@
         "message": "Pobierz najnowszą wersję z keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Czy używasz tego programu po raz pierwszy? Zapoznaj się z naszym Przewodnikiem dla początkujących.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Przewodnik dla początkujących - konfiguracja integracji z przeglądarką",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Ukryj i nie pokazuj ponownie.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Nie można połączyć się z KeePassXC? Może nasza strona wiki będzie w stanie pomóc.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Przewodnik rozwiązywania problemów",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Sprawdzanie stanu...",
         "description": "Checking status message in popup."
@@ -357,7 +397,7 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-Browser jest połączony z KeePassXC i został skonfigurowany przy użyciu następującego identyfikatora: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Wykryto tylko jedno pole nazwy użytkownika. Dodać adres URL do Ustawień witryn z włączoną opcją Tylko nazwa użytkownika?",
@@ -377,7 +417,7 @@
     },
     "rememberUsernameExists": {
         "message": "Dane uwierzytelniające z używaną nazwą użytkownika są oznaczone pogrubieniem: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Wybierz dane uwierzytelniające, które chcesz zaktualizować.",
@@ -417,7 +457,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Zaktualizowano dane uwierzytelniające z nazwą użytkownika $1.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Identyczne dane uwierzytelniające już istnieją. Nic do aktualizacji.",
@@ -580,7 +620,7 @@
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "Po włączeniu popup pokazuje listę grup.",
+        "message": "Po włączeniu wyskakujące okienko pokazuje listę grup.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
@@ -596,7 +636,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Przydatne w przypadku stron korzystających z wyskakujących okienek lub dynamicznych okien dialogowych. Wyłącz tę funkcję, aby zmniejszyć obciążenie procesora na wolniejszych komputerach. Gdy wyłączone, dane uwierzytelniające można wstawić tylko za pomocą skrótów klawiaturowych, menu kontekstowego lub wyskakującego okienka rozszerzenia.",
+        "message": "Przydatne w przypadku stron korzystających z wyskakujących okienek lub dynamicznych okien dialogowych. Wyłącz tę funkcję, aby zmniejszyć obciążenie procesora na wolniejszych komputerach. Po wyłączeniu dane uwierzytelniające można wstawić tylko za pomocą skrótów klawiaturowych, menu kontekstowego lub wyskakującego okienka rozszerzenia.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -620,7 +660,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Aktywuj autouzupełnianie dla pól nazwy użytkownika.",
+        "message": "Aktywuj autouzupełnianie pól nazwy użytkownika.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
@@ -658,6 +698,14 @@
     "optionsCheckboxAutoFillAndSend": {
         "message": "Automatycznie wypełniaj okna dialogowe podstawowego uwierzytelniania HTTP i przesyłaj je.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+    },
+    "optionsDebugLogging": {
+        "message": "Rejestrowanie debugowania",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Włącz rejestrowanie debugowania. Dodatkowe komunikaty konsoli będą widoczne zarówno w skryptach tła, jak i treści.",
+        "description": "Debug logging help text."
     },
     "optionsRadioText": {
         "message": "Sprawdź dostępność aktualizacji KeePassXC:",
@@ -748,7 +796,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Ostrzeżenie! Korzystanie z automatycznego wypełniania nie jest bezpieczne. Używaj na własne ryzyko.",
+        "message": "Ostrzeżenie! Korzystanie z automatycznego wypełniania nie jest bezpieczne. Używaj na własne ryzyko. KeePassXC-Browser automatycznie próbuje wykryć pola logowania. Mogą jednak zostać nieprawidłowo wykryte, prawdopodobnie wypełniając poufne dane w niebezpiecznych polach wejściowych.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -770,6 +818,14 @@
     "optionsSaveDomainOnlyCustomLoginHelpText": {
         "message": "Podczas zapisywania nowych niestandardowych pól logowania zapisz tylko domenę zamiast pełnego adresu URL.",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Pobierz ikonę ulubionych po zapisaniu",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Ikona ulubionych zostanie automatycznie pobrana dla nowego poświadczenia.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "Jeśli znaleziono dane uwierzytelniające dla strony, a typem logowania jest żądanie podstawowego uwierzytelniania HTTP, KeePassXC-Browser spróbuje zalogować się automatycznie przy użyciu pierwszych podanych danych uwierzytelniających. Gdy występuje wiele danych uwierzytelniających, może być użyte wyskakujące okno rozszerzenia, aby wybrać odpowiednie dane. Nawet gdy ta funkcja jest włączona, nadal można zalogować się ręcznie przy użyciu podstawowego uwierzytelniania HTTP.",
@@ -895,6 +951,10 @@
         "message": "Wykrywanie tylko nazwy użytkownika",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Ulepszone wykrywanie pól wejściowych",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
         "message": "Usuwanie",
         "description": "Site preferences list column title."
@@ -917,19 +977,43 @@
     },
     "optionsSortByTitle": {
         "message": "Tytuł",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Nazwa użytkownika",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Grupa i tytuł",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Grupa i nazwa użytkownika",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Sortuj dane uwierzytelniające po wypełnieniu według",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "Po wybraniu opcji „Najpierw odpowiednie dane uwierzytelniające” poświadczenie dla poprzednio wypełnionych danych logowania jest ustawiane jako pierwsze na liście menu autouzupełniania.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Sortuj dane uwierzytelniające po wypełnieniu dla TOTP według",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "Po wybraniu opcji „Najpierw odpowiednie dane uwierzytelniające” TOTP dla poprzednio wypełnionych danych logowania jest ustawiane jako pierwsze na liście menu autouzupełniania.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Ustawienie pasujących danych uwierzytelniających",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Najpierw odpowiednie dane uwierzytelniające",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "Nie znaleziono zapisanych niestandardowych pól logowania.",
@@ -987,6 +1071,10 @@
         "message": "Wykrywanie tylko nazwy użytkownika pozwala KeePassXC-Browser na wpełnienie danych logowania na witrynach internetowych z osobnymi stronami dla nazwy użytkownika i hasła.",
         "description": "Site preferences info text, fourth part."
     },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Ulepszone wykrywanie pól wejściowych pozwala na bardziej szczegółowe dynamiczne wykrywanie pól wejściowych. Może to jednak wpłynąć na wydajność strony. Używaj z ostrożnością.",
+        "description": "Improved Input Field Detection help text."
+    },
     "optionsSitePreferencesManualAddText": {
         "message": "Dodaj ręcznie adres URL",
         "description": "Label for adding site manually on Site preferences tab."
@@ -1018,6 +1106,10 @@
     "optionsAboutMozilla": {
         "message": "Odwiedź KeePassXC-Browser w katalogu Dodatki do Firefoksa.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Odwiedź KeePassXC-Browser na stronie Dodatki programu Edge.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Odwiedź KeePassXC-Browser na GitHubie.",

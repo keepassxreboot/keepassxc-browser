@@ -32,7 +32,7 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "",
+        "message": "Request Global Auto-Type",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
@@ -102,6 +102,10 @@
     "errorMessageNoLogins": {
         "message": "Ni prijavnih podatkov.",
         "description": "No logins found."
+    },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Filled password is longer than field's allowed max length.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorNotConnected": {
         "message": "Ni vzpostavljena povezava s KeePassXC.",
@@ -179,6 +183,10 @@
         "message": "Ikona polja za uporabniško ime",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "Vnesi TOTP iz KeePassXC",
         "description": "OTP field icon hover text."
@@ -187,9 +195,9 @@
         "message": "Ikona polja TOTP",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
-        "message": "Odpusti",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Close",
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "Preskoči",
@@ -199,9 +207,9 @@
         "message": "Pokaži več",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "Ponovno",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Reset",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "Potrdi",
@@ -211,29 +219,29 @@
         "message": "Polja za prijavo za to stran so že izbrana in bodo prepisana.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Zavrzi izbor",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Clear saved data",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "Polje niza #",
+        "message": "String field",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Izberite polje za uporabniško ime",
+        "message": "Choose a username field",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Zdaj izberite polje za geslo",
+        "message": "Choose a password field",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Izberite polje TOTP",
+        "message": "Choose a TOTP field",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Potrdite izbiro",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Choose String Fields",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "Potrdite svojo izbiro ali izberite več polj kot polja nizov.",
@@ -243,6 +251,10 @@
         "message": "Za izbiro polja za vnos lahko uporabite številke na tipkovnici.",
         "description": "Help text when choosing custom login fields."
     },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Choose a Custom Login Field",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "Uporabniško ime",
         "description": "General text for username."
@@ -250,6 +262,10 @@
     "password": {
         "message": "Geslo",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "String Fields",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- brez uporabniškega imena -",
@@ -339,6 +355,26 @@
         "message": "Prosimo, prenesite najnovejšo različico iz keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Are you a first time user? Please check our Getting Started Guide.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Getting Started Guide - Setup Browser Integration",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Hide and don't show again.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Troubleshooting Guide",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Preverjanje stanja ...",
         "description": "Checking status message in popup."
@@ -361,7 +397,7 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-Browser je povezan s KeePassXC in je nastavljen z uporabo naslednjega identifikatorja: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Najdeno je bilo samo eno polje za uporabniško ime. Dodam URL v nastavitve za spletna mesta z omogočeno možnostjo »samo uporabniško ime«?",
@@ -381,7 +417,7 @@
     },
     "rememberUsernameExists": {
         "message": "Poverilnice z uporabljenim uporabniškim imenom so označene krepko: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Prosimo, izberite povernice, ki jih želite posodobiti.",
@@ -421,7 +457,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Poverilnice z uporabniškim imenom  $1 posodobljene.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Enake poverilnice že obstajajo. Ničesar za posodobiti.",
@@ -663,6 +699,14 @@
         "message": "Samodejno izpolni pogovorna okna HTTP Basic Auth in oddaj prijavo.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "Debug logging",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Enable debug logging. Additional console messages will be visible in both background and content scripts.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
         "message": "Preveri, ali so na voljo posodobitve za KeePassXC:",
         "description": "Text above radio buttons in the settings page."
@@ -752,7 +796,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Opozorilo! Uporaba samodejnega izpolnjevanja ni varna. Uporaba na lastno odgovornost.",
+        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -774,6 +818,14 @@
     "optionsSaveDomainOnlyCustomLoginHelpText": {
         "message": "Pri shranjevanju novih uporabniško določenih polj za prijavo, namesto celotnega URL-ja shrani samo domeno spletnega mesta.",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Download favicon after save",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Favicon will be automatically downloaded for the new credential.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "Če so za stran najdene poverilnice in je vrsta prijave zahtevek za HTTP Basic Auth, se bo KeePassXC-Browser poskušal samodejno prijaviti s prvo od vnesenih poverilnic. Če je na voljo več poverilnic, se lahko uporabi pojavno okno v meniju razširitve, za izbiro zahtevane poverilnice. Poverilnice za HTTP Basic Auth prijavo lahko vnesete ročno, tudi če je ta funkcija omogočena.",
@@ -899,6 +951,10 @@
         "message": "Zaznavanje samo uporabniškega imena",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Improved Input Field Detection",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
         "message": "Izbriši",
         "description": "Site preferences list column title."
@@ -921,19 +977,43 @@
     },
     "optionsSortByTitle": {
         "message": "Naslov",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Uporabniško ime",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Skupina in naslov",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Skupina in uporabniško ime",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Sort credentials after fill by",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Sort credentials after fill for TOTP by",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Matching credentials setting",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Relevant credential first",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "Ni shranjenih uporabniško določenih prijavnih polj.",
@@ -991,12 +1071,16 @@
         "message": "Zaznavanje samo uporabniškega imena omogoča, da KeePassXC-Browser izpolni prijavne podatke na spletnih mestih, ki imajo ločene strani za uporabniško ime in geslo.",
         "description": "Site preferences info text, fourth part."
     },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "description": "Improved Input Field Detection help text."
+    },
     "optionsSitePreferencesManualAddText": {
         "message": "Ročno dodajanje URL-ja",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "",
+        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> and must be at least 5 characters long.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
@@ -1022,6 +1106,10 @@
     "optionsAboutMozilla": {
         "message": "Obišči KeePassXC-Browser v Mozilla Add-ons.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Obišči KeePassXC-Browser na GitHub-u.",

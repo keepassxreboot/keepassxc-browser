@@ -31,6 +31,10 @@
         "message": "Συμπλήρωση χαρακτηριστικού…",
         "description": "Context menu parent item for filling a custom attribute."
     },
+    "contextMenuRequestGlobalAutoType": {
+        "message": "Αίτημα Καθολικής Αυτόματης-Πληκτρολόγησης",
+        "description": "Global Auto-Type shortcut text."
+    },
     "multipleCredentialsDetected": {
         "message": "Έλεγχος ταυτότητας HTTP με πολλαπλά διαπιστευτήρια. Κάντε κλικ στο εικονίδιο επέκτασης για να επιλέξετε το σωστό.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
@@ -98,6 +102,10 @@
     "errorMessageNoLogins": {
         "message": "Δεν βρέθηκαν συνδέσεις.",
         "description": "No logins found."
+    },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Ο συμπληρωμένος κωδικός πρόσβασης είναι μεγαλύτερος από το μέγιστο επιτρεπόμενο μήκος του πεδίου.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorNotConnected": {
         "message": "Δεν είναι συνδεδεμένο με το KeePassXC.",
@@ -175,6 +183,10 @@
         "message": "Εικονίδιο πεδίου ονόματος χρήστη",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "Συμπληρώστε το TOTP από το KeePassXC",
         "description": "OTP field icon hover text."
@@ -183,9 +195,9 @@
         "message": "Εικονίδιο πεδίου TOTP",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
-        "message": "Απόρριψη",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Κλείσιμο",
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "Παράλειψη",
@@ -195,9 +207,9 @@
         "message": "Εμφάνιση περισσότερων",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "Ξανά",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Επαναφορά",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "Επιβεβαίωση ",
@@ -207,29 +219,29 @@
         "message": "Τα πεδία σύνδεσης για αυτήν τη σελίδα είναι ήδη επιλεγμένα και θα αντικατασταθούν.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Απόρριψη επιλογής",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Εκκαθάριση αποθηκευμένων δεδομένων",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "Πεδίο String #",
+        "message": "Πεδίο String",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Επιλέξτε ένα πεδίο ονόματος χρήστη",
+        "message": "Επιλέξτε ένα πεδίο ονόματος χρήστη",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Τώρα επιλέξτε ένα πεδίο κωδικού πρόσβασης",
+        "message": "Επιλέξτε ένα πεδίο κωδικού πρόσβασης",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Επιλέξτε ένα πεδίο TOTP",
+        "message": "Επιλέξτε ένα πεδίο TOTP",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Επιβεβαίωση επιλογής",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Επιλέξτε Πεδία Strings",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "Επιβεβαιώστε την επιλογή σας ή επιλέξτε περισσότερα πεδία ως πεδία String.",
@@ -239,6 +251,10 @@
         "message": "Μπορείτε επίσης να χρησιμοποιήσετε τους αριθμούς για να επιλέξετε τα πεδία εισαγωγής από το πληκτρολόγιο.",
         "description": "Help text when choosing custom login fields."
     },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Επιλέξτε ένα Προσαρμοσμένο Πεδίο Σύνδεσης",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "Όνομα χρήστη",
         "description": "General text for username."
@@ -246,6 +262,10 @@
     "password": {
         "message": "Κωδικό πρόσβασης",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "Πεδία Strings",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- χωρίς όνομα χρήστη -",
@@ -335,6 +355,26 @@
         "message": "Κατεβάστε την πιο πρόσφατη έκδοση από keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Είστε για πρώτη φορά χρήστης; Παρακαλώ ελέγξτε τον Οδηγό Έναρξης.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Οδηγός Έναρξης - Ρύθμιση Ενσωμάτωσης Προγράμματος περιήγησης",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Απόκρυψη και να μην εμφανιστεί ξανά.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Δεν μπορείτε να συνδεθείτε στο KeePassXC; Ίσως η σελίδα μας στο wiki θα μπορούσε να βοηθήσει.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Οδηγός Επίλυσης προβλημάτων",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Έλεγχος κατάστασης...",
         "description": "Checking status message in popup."
@@ -357,7 +397,7 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "Το KeePassXC-Browser είναι συνδεδεμένο με KeePassXC και έχει ρυθμιστεί χρησιμοποιώντας το ακόλουθο αναγνωριστικό: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Εντοπίστηκε μόνο ένα πεδίο ονόματος χρήστη. Προσθήκη της διεύθυνσης URL στις Προτιμήσεις Ιστότοπου με ενεργοποιημένη την επιλογή Μόνο-Όνομα χρήστη;",
@@ -377,7 +417,7 @@
     },
     "rememberUsernameExists": {
         "message": "Τα διαπιστευτήρια με το όνομα χρήστη που χρησιμοποιείται επισημαίνονται με έντονη γραφή: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Επιλέξτε τα διαπιστευτήρια που θέλετε να ενημερώσετε.",
@@ -417,7 +457,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Τα διαπιστευτήρια με όνομα χρήστη $1 ενημερώθηκαν.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Πανομοιότυπο διαπιστευτήρια υπάρχουν ήδη. Δεν υπάρχει κάτι για ενημέρωση.",
@@ -659,6 +699,14 @@
         "message": "Συμπληρώστε αυτόματα διαλόγους HTTP Basic Auth και υποβάλετέ τους.",
         "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
     },
+    "optionsDebugLogging": {
+        "message": "Καταγραφή εντοπισμού σφαλμάτων",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Ενεργοποίηση καταγραφής εντοπισμού σφαλμάτων. Πρόσθετα μηνύματα κονσόλας θα είναι ορατά τόσο στο παρασκήνιο όσο και σε scripts περιεχομένου.",
+        "description": "Debug logging help text."
+    },
     "optionsRadioText": {
         "message": "Ελέγξτε για ενημερώσεις του KeePassXC:",
         "description": "Text above radio buttons in the settings page."
@@ -748,7 +796,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Προειδοποίηση! Η χρήση αυτόματης συμπλήρωσης δεν είναι ασφαλής. Χρησιμοποιήστε το με δική σας ευθύνη.",
+        "message": "Προειδοποίηση! Η χρήση της αυτόματης συμπλήρωσης δεν είναι ασφαλής. Χρησιμοποιήστε το με δική σας ευθύνη. Το KeePassXC-Browser προσπαθεί αυτόματα να εντοπίσει πεδία σύνδεσης. Ωστόσο, ενδέχεται να εντοπιστούν εσφαλμένα, ενδεχομένως γεμίζοντας ευαίσθητα δεδομένα σε μη ασφαλή πεδία εισαγωγής.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -770,6 +818,14 @@
     "optionsSaveDomainOnlyCustomLoginHelpText": {
         "message": "Κατά την αποθήκευση νέων προσαρμοσμένων πεδίων σύνδεσης, αποθηκεύστε μόνο το domain αντί για την πλήρη διεύθυνση URL.",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Κατεβάστε το favicon μετά την αποθήκευση",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Το Favicon θα ληφθεί αυτόματα για τα νέα διαπιστευτήρια.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "Εάν βρεθούν διαπιστευτήρια για μια σελίδα και ο τύπος σύνδεσης είναι αίτημα HTTP Basic Auth, το KeePassXC-Browser προσπαθεί να συνδεθεί αυτόματα με τα πρώτα διαπιστευτήρια. Όταν υπάρχουν πολλά διαπιστευτήρια, το αναδυόμενο παράθυρο επέκτασης μπορεί να χρησιμοποιηθεί για να επιλέξετε το σωστό. Ακόμα και όταν είναι ενεργοποιημένη αυτή η δυνατότητα, μπορείτε να εισαγάγετε χειροκίνητα τη σύνδεση HTTP Basic Auth.",
@@ -895,6 +951,10 @@
         "message": "Ανίχνευση μόνο-όνομα χρήστη",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Βελτιωμένη Ανίχνευση Πεδίου Εισόδου",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
         "message": "Διαγραφή",
         "description": "Site preferences list column title."
@@ -917,19 +977,43 @@
     },
     "optionsSortByTitle": {
         "message": "Τίτλος",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Όνομα χρήστη",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Ομάδα και τίτλος",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Ομάδα και όνομα χρήστη",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Ταξινόμηση διαπιστευτηρίων μετά τη συμπλήρωση από",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "Όταν έχει επιλεγεί η πρώτη επιλογή Σχετικό διαπιστευτήριο, τα διαπιστευτήρια για τη σύνδεση που συμπληρώθηκαν προηγουμένως ορίζεται ως πρώτη στην καταχώρηση του Μενού Αυτόματης Συμπλήρωσης.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Ταξινόμηση διαπιστευτηρίων μετά τη συμπλήρωση για TOTP από",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "Όταν έχει επιλεγεί η πρώτη επιλογή Σχετικό διαπιστευτήριο, το TOTP για τη σύνδεση που είχε συμπληρωθεί προηγουμένως ορίζεται ως πρώτο στην καταχώριση του Μενού Αυτόματης Συμπλήρωσης.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Ρύθμιση αντιστοίχισης διαπιστευτηρίων",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Σχετικό διαπιστευτήριο πρώτα",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "Δεν βρέθηκαν αποθηκευμένα προσαρμοσμένα πεδία σύνδεσης.",
@@ -987,6 +1071,10 @@
         "message": "Η ανίχνευση μόνο-όνομα χρήστη επιτρέπει στο KeePassXC-Browser να συμπληρώνει τα στοιχεία σύνδεσης σε ιστότοπους με ξεχωριστές σελίδες για όνομα χρήστη και κωδικό πρόσβασης.",
         "description": "Site preferences info text, fourth part."
     },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Η Βελτιωμένη Ανίχνευση Πεδίου Εισόδου επιτρέπει πιο λεπτομερή ανίχνευση δυναμικού πεδίου εισόδου. Ωστόσο, μπορεί να επηρεάσει την απόδοση της σελίδας. Χρησιμοποιήστε με προσοχή.",
+        "description": "Improved Input Field Detection help text."
+    },
     "optionsSitePreferencesManualAddText": {
         "message": "Προσθήκη διεύθυνσης URL χειροκίνητα",
         "description": "Label for adding site manually on Site preferences tab."
@@ -1018,6 +1106,10 @@
     "optionsAboutMozilla": {
         "message": "Επισκεφθείτε το KeePassXC-Browser στον κατάλογο Πρόσθετων Mozilla.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Επισκεφτείτε το KeePassXC-Browser στη σελίδα πρόσθετων Edge.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Επισκεφτείτε το KeePassXC-Browser στο GitHub.",

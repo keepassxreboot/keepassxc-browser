@@ -40,7 +40,11 @@ async function updateTranslations() {
 }
 
 (async() => {
-    await updateTranslations();
+    const params = process.argv.slice(2);
+    if (!params.includes('--skip-translations')) {
+        await updateTranslations();
+    }
+
     await fs.copyFile(`${DEST}/manifest.json`, `./${DEFAULT}`);
 
     for (const browser in BROWSERS) {

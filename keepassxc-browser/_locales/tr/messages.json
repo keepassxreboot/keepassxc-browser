@@ -103,6 +103,10 @@
         "message": "Herhangi bir oturum açma bulunamadı.",
         "description": "No logins found."
     },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Doldurulan parola, alanın kabul ettiği karakter sayısından uzun.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
+    },
     "errorNotConnected": {
         "message": "KeePassXC ile bağlantı kurulmamış.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -179,6 +183,10 @@
         "message": "Kullanıcı adı alanı simgesi",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "Tek kullanımlık parola",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "KeePassXC ile tek kullanımlık parolayı doldur",
         "description": "OTP field icon hover text."
@@ -187,9 +195,9 @@
         "message": "Tek kullanımlık parola alanı simgesi",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
-        "message": "Yok say",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Kapat",
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "Atla",
@@ -199,9 +207,9 @@
         "message": "Ayrıntıları görüntüle",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "Yinele",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Sıfırla",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "Onayla",
@@ -211,29 +219,29 @@
         "message": "Bu sayfa için oturum açma alanları zaten seçilmiş ve üzerine yazılacak.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Seçimi bırak",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Kaydedilmiş verileri sil",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "Dizge alanı no",
+        "message": "Metin alanı",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Bir kullanıcı adı alanı seçin",
+        "message": "Kullanıcı adı alanını seçin",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Şimdi bir parola alanı seçin",
+        "message": "Parola alanını seçin",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Bir tek kullanımlık parola alanı seçin",
+        "message": "Tek kullanımlık parola alanını seçin",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Seçimi onaylayın",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Metin alanlarını seçin",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
         "message": "Lütfen seçiminizi onaylayın ya da dizge alanları olarak ek alanlar seçin.",
@@ -243,6 +251,10 @@
         "message": "Giriş alanlarını tuş takımıyla seçmek için sayıları kullanabilirsiniz.",
         "description": "Help text when choosing custom login fields."
     },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Özel oturum açma alanını seçin",
+        "description": "Help text for Custom Login Field banner."
+    },
     "username": {
         "message": "Kullanıcı adı",
         "description": "General text for username."
@@ -250,6 +262,10 @@
     "password": {
         "message": "Parola",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "Metin alanları",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- kullanıcı adı yok -",
@@ -339,6 +355,26 @@
         "message": "Lütfen keepassxc.org adresinden güncel sürümü indirin.",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "İlk kez mi kullanıyorsunuz? Başlangıç rehberimize bakın.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Başlangıç rehberi - Web tarayıcı bütünleştirmesini kurmak",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Gizle ve bir daha gösterme.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "KeePassXC bağlantısını kuramadınız mı? Belki Wiki sayfamız yardımcı olabilir.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Sorun giderme rehberi",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Durum denetleniyor...",
         "description": "Checking status message in popup."
@@ -361,7 +397,7 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-Browser ile KeePassXC bağlı ve şu tanımlayıcı kullanılarak yapılandırılmış: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Yalnız tek bir kullanıcı adı alanı algılandı. Bu adresi yalnız kullanıcı adı seçeneği etkinleştirilmiş site ayarlarına ekleyin.",
@@ -381,7 +417,7 @@
     },
     "rememberUsernameExists": {
         "message": "Kullanılan kullanıcı adının geçtiği kimlik doğrulama bilgileri koyu görüntülenir: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Lütfen güncellemek istediğiniz kimlik doğrulama bilgilerini seçin.",
@@ -421,7 +457,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "$1 kullanıcı adını kullanan kimlik doğrulama bilgileri güncellendi.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Aynı kimlik doğrulama bilgileri zaten var. Güncellenecek bir şey yok.",
@@ -760,7 +796,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Uyarı! Otomatik doldurmayı kullanmak güvenli değildir. Kullanmanın sorumluluğu size aittir.",
+        "message": "Uyarı! Otomatik doldurmayı kullanmanın güvenli olmadığını bilerek kullanın. KeePassXC-Browser, oturum açma alanlarını otomatik olarak algılamaya çalışır. Ancak bazen bu alanlar hatalı olarak algılanabilir ve hassas veriler güvenli olmayan alanlara doldurularak görülebilir.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -915,6 +951,10 @@
         "message": "Yalnız kullanıcı adı algılaması",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Geliştirilmiş giriş alanı algılaması",
+        "description": "Improved Input Field Detection column text."
+    },
     "optionsColumnDelete": {
         "message": "Dil",
         "description": "Site preferences list column title."
@@ -937,19 +977,43 @@
     },
     "optionsSortByTitle": {
         "message": "Başlık",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Kullanıcı adı",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Grup ve başlık",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Grup ve kullanıcı adı",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Kimlik doğrulama bilgileri doldurulan sonrasında sıralansın",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "Öncelikli kimlik doğrulama bilgileri seçeneği seçildiğinde, otomatik tamamlama listesinin ilk sırasında daha önce doldurulmuş oturum açma bilgileri görüntülenir.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Kimlik doğrulama bilgileri TOTP sonrasında sıralansın",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "Öncelikli kimlik doğrulama bilgileri seçeneği seçildiğinde, otomatik tamamlama listesinin ilk sırasında daha önce doldurulmuş oturum açma bilgileri için TOTP görüntülenir.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Eşleşen kimlik doğrulama bilgileri ayarı",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Öncelikli kimlik doğrulama bilgileri",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "Kaydedilmiş bir özel oturum açma alanı bulunamadı.",
@@ -1007,6 +1071,10 @@
         "message": "Yalnız kullanıcı adı algılaması, KeePassXC-Browser uzantısının, kullanıcı adı ve parola için ayrı sayfalar kullanan web sitelerinde oturum açma bilgilerini doldurabilmesini sağlar.",
         "description": "Site preferences info text, fourth part."
     },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Geliştirilmiş giriş alanı algılaması giriş alanlarının daha ayrıntılı bir şekilde devingen olarak algılanmasını sağlar. Ancak sayfa başarımı olumsuz etkilenebilir. Kullanırken dikkatli olun.",
+        "description": "Improved Input Field Detection help text."
+    },
     "optionsSitePreferencesManualAddText": {
         "message": "Adresi el ile ekle",
         "description": "Label for adding site manually on Site preferences tab."
@@ -1038,6 +1106,10 @@
     "optionsAboutMozilla": {
         "message": "Mozilla eklentileri dizininde KeePassXC-Browser uzantısına bakın.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Edge eklentileri dizininde KeePassXC-Browser uzantısına bakın.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "GitHub üzerinde KeePassXC-Browser projesine bakın.",
