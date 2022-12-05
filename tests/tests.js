@@ -103,6 +103,7 @@ async function testTotpFields() {
         [ '', { id: '2fa', type: 'text', maxLength: '6' }, 'Generic 2FA field', true ],
         [ '', { id: '2fa', type: 'text', maxLength: '4' }, 'Ignore if field maxLength too small', false ],
         [ '', { id: '2fa', type: 'text', maxLength: '12' }, 'Ignore if field maxLength too long', false ],
+        [ '', { id: '2fa', type: 'text', maxLength: '12', autocomplete: 'one-time-code' }, 'Accept if one-time-code', true ],
         [ '', { id: 'username', type: 'text', }, 'Ignore a generic input field', false ],
         [ '', { type: 'password', }, 'Ignore a password input field', false ],
         [ // Protonmail
