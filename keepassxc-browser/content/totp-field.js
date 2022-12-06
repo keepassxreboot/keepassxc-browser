@@ -39,17 +39,23 @@ kpxcTOTPIcons.deleteHiddenIcons = function() {
     kpxcUI.deleteHiddenIcons(kpxcTOTPIcons.icons, 'kpxc-totp-field');
 };
 
+kpxcTOTPIcons.autoCompleteIsOneTimeCode = function(field) {
+    if (!field) {
+        return false;
+    }
+
+    return field.getLowerCaseAttribute('autocomplete') === 'one-time-code';
+};
+
 // Quick check for a valid TOTP field
 kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
     const id = field.getLowerCaseAttribute('id');
     const name = field.getLowerCaseAttribute('name');
-    const autocomplete = field.getLowerCaseAttribute('autocomplete');
     const placeholder = field.getLowerCaseAttribute('placeholder');
 
     // Checks if the field id, name or placeholder includes some of the acceptedOTPFields but not any from ignoredTypes
-    if (autocomplete === 'one-time-code'
-        || (acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f))) || acceptedParents.some(s => field.closest(s)))
-            && !ignoredTypes.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f)))) {
+    if ((acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f))) || acceptedParents.some(s => field.closest(s)))
+        && !ignoredTypes.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f)))) {
         return true;
     }
 
@@ -61,6 +67,11 @@ kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
 };
 
 kpxcTOTPIcons.isValid = function(field, forced) {
+    // Always accept 'one-time-code'
+    if (kpxcTOTPIcons.autoCompleteIsOneTimeCode(field)) {
+        return true;
+    }
+
     if (!field || !kpxcTOTPIcons.isAcceptedTOTPField(field)) {
         return false;
     }

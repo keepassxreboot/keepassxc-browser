@@ -52,11 +52,10 @@ async function assertTOTPField(classStr, properties, testName, expectedResult) {
     const input = kpxcUI.createElement('input', classStr, properties);
     document.body.appendChild(input);
 
-    const isAccepted = kpxcTOTPIcons.isAcceptedTOTPField(input);
     const isValid = kpxcTOTPIcons.isValid(input);
 
     document.body.removeChild(input);
-    kpxcAssert(isAccepted && isValid, expectedResult, Tests.TOTP_FIELDS, testName);
+    kpxcAssert(isValid, expectedResult, Tests.TOTP_FIELDS, testName);
 }
 
 async function assertSearchField(classStr, properties, testName, expectedResult) {
