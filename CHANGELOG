@@ -1,3 +1,19 @@
+1.8.4 (19-12-2022)
+=========================
+- Add more PayPal addresses to Predefines Sites [#1765]
+- Add new ESLint rules and file formatting [#1756]
+- Change TOTP field to be always accepted with autocomplete=one-time-code [#1797]
+- Fix TOTP with steamcommunity.com [#1769]
+- Fix segmented TOTP detection with Epic Games [#1755]
+- Fix enter key issue with Google login [#1758]
+- Fix Autocomplete Menu colors on dark theme [#1770]
+- Fix stylesheet loading on Shadow DOM elements [#1773]
+- Update translations to repository [#1791]
+
+1.8.3.1 (30-10-2022)
+=========================
+- Remove request id from retrieve credentials request [#1761]
+
 1.8.3 (24-10-2022)
 =========================
 - Fix filling TOTP without detecting a input field combination [#1726]

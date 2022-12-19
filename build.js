@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('@npmcli/fs')
+const fs = require('@npmcli/fs');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const zaf = require('zip-a-folder');
