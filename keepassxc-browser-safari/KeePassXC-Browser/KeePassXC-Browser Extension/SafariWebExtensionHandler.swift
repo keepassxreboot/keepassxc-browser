@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2022 KeePassXC Team <team@keepassxc.org>
+ *  Copyright (C) 2023 KeePassXC Team <team@keepassxc.org>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ var maxMessageLength: Int32 = 1024 * 1024;
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     func getSocketPath() -> String {
-        let homePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "KeePassXC")?.path
+        let homePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "org.keepassxc.KeePassXC")?.path
         return homePath! + "/" + SocketFileName;
     }
     
@@ -95,7 +95,8 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         }
         
         if (result == -1) {
-            os_log(.error, "Cannot connect socket %d", errno)
+            let strError = String(utf8String: strerror(errno)) ?? "Unknown error"
+            os_log(.error, "Cannot connect socket: %s", strError)
             return false
         }
         

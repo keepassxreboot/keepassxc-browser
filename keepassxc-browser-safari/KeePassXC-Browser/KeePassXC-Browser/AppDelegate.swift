@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  KeePassXC-Browser
 //
-//  Created by Humanoid on 21.9.2020.
+//  Created by varjolintu on 21.9.2020.
 //
 
 import Cocoa
