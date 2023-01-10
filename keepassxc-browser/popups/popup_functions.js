@@ -48,6 +48,19 @@ async function initColorTheme() {
     }
 }
 
+async function getLoginData() {
+    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tabs.length === 0) {
+        return [];
+    }
+
+    const logins = await browser.runtime.sendMessage({
+        action: 'get_login_list'
+    });
+
+    return logins;
+}
+
 // Sets default popup size for Chromium based browsers to prevent flash on popup open
 function setDefaultPopupSize() {
     if (!isFirefox()) {
