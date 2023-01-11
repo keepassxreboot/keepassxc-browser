@@ -371,6 +371,14 @@ page.setAutoSubmitPerformed = async function(tab) {
     }
 };
 
+page.getLoginList = async function(tab) {
+    if (page.tabs[tab.id]) {
+        return page.tabs[tab.id].loginList;
+    }
+
+    return [];
+};
+
 // Update context menu for attribute filling
 page.updateContextMenu = async function(tab, credentials) {
     // Remove any old attribute items

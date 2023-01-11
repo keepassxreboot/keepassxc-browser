@@ -1,11 +1,5 @@
 'use strict';
 
-const getLoginData = async () => {
-    const global = await browser.runtime.getBackgroundPage();
-    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-    return global.page.tabs[tabs[0].id].loginList;
-};
-
 (async () => {
     resizePopup();
     await initColorTheme();

@@ -234,6 +234,7 @@ kpxcEvent.messageHandlers = {
     'get_database_hash': keepass.getDatabaseHash,
     'get_database_groups': keepass.getDatabaseGroups,
     'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
+    'get_login_list': page.getLoginList,
     'get_status': kpxcEvent.onGetStatus,
     'get_tab_information': kpxcEvent.onGetTabInformation,
     'get_totp': keepass.getTotp,

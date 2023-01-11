@@ -6,14 +6,12 @@
 
     $('#lock-database-button').show();
 
-    const global = await browser.runtime.getBackgroundPage();
     const tabs = await browser.tabs.query({ active: true, currentWindow: true });
     if (tabs.length === 0) {
-        return; // For example: only the background devtools or a popup are opened
+        return [];
     }
 
-    const tab = tabs[0];
-    const logins = global.page.tabs[tab.id].loginList;
+    const logins = await getLoginData();
     const ll = document.getElementById('login-list');
 
     for (let i = 0; i < logins.length; i++) {
@@ -29,7 +27,7 @@
             }
 
             const id = e.target.id;
-            browser.tabs.sendMessage(tab.id, {
+            browser.tabs.sendMessage(tabs[0].id, {
                 action: 'fill_user_pass_with_specific_login',
                 id: Number(id),
                 uuid: uuid
