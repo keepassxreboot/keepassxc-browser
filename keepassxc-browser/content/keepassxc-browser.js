@@ -103,7 +103,7 @@ kpxc.detectDatabaseChange = async function(response) {
     kpxcIcons.switchIcons();
 
     if (document.visibilityState !== 'hidden') {
-        if (response.hash.new !== '' && response.hash.new !== response.hash.old) {
+        if (response.hash.new !== '') {
             _called.retrieveCredentials = false;
             const settings = await sendMessage('load_settings');
             kpxc.settings = settings;
