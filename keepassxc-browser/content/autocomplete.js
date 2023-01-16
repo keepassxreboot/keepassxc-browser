@@ -82,6 +82,7 @@ class Autocomplete {
 
         this.input = inputField;
 
+        // Create the Autocomplete Menu if needed
         if (!this.wrapper) {
             const styleSheet = createStylesheet('css/autocomplete.css');
             const colorStyleSheet = createStylesheet('css/colors.css');
@@ -101,37 +102,6 @@ class Autocomplete {
             this.shadowRoot.append(this.container);
             document.body.append(this.wrapper);
 
-            // Try to detect a username from the webpage in order to show it first in the list
-            // This is useful when a website prompts you to enter the password again, and the username is already filled in
-            // It also helps with multi-page login flows
-            const username = kpxcSites.detectUsernameFromPage();
-
-            const pageUuid = await sendMessage('page_get_login_id');
-            await kpxc.updateTOTPList();
-
-            for (const c of this.elements) {
-                const item = document.createElement('div');
-                item.textContent = c.label;
-
-                const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
-                item.append(itemInput);
-                item.addEventListener('click', e => this.itemClick(e, this.input, c.uuid));
-
-                // These events prevent the double hover effect if both keyboard and mouse are used
-                item.addEventListener('mousemove', e => this.mouseMove(e));
-
-                item.addEventListener('mousedown', e => e.stopPropagation());
-                item.addEventListener('mouseup', e => e.stopPropagation());
-
-                // If this page has an associated uuid and it matches this credential, then put it on top of the list
-                if (username === c.value
-                    || (this.afterFillSort === SORT_BY_RELEVANT_ENTRY && c.uuid === pageUuid)) {
-                    this.list.prepend(item);
-                } else {
-                    this.list.appendChild(item);
-                }
-            }
-
             // Add a footer message for auto-submit
             if (this.autoSubmit) {
                 const footer = kpxcUI.createElement('footer', '', {}, tr('autocompleteSubmitMessage'));
@@ -139,8 +109,48 @@ class Autocomplete {
             }
         }
 
+        this.updateList();
         this.updatePosition();
         this.container.style.display = 'block';
+    }
+
+    async updateList() {
+        // Try to detect a username from the webpage in order to show it first in the list
+        // This is useful when a website prompts you to enter the password again, and the username is already filled in
+        // It also helps with multi-page login flows
+        const username = kpxcSites.detectUsernameFromPage();
+
+        const pageUuid = await sendMessage('page_get_login_id');
+        await kpxc.updateTOTPList();
+
+        // Clear the login items from div
+        while (this.list.hasChildNodes()) {
+            this.list.removeChild(this.list.lastChild);
+        }
+
+        // Update credentials to menu div
+        for (const c of this.elements) {
+            const item = document.createElement('div');
+            item.textContent = c.label;
+
+            const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
+            item.append(itemInput);
+            item.addEventListener('click', e => this.itemClick(e, this.input, c.uuid));
+
+            // These events prevent the double hover effect if both keyboard and mouse are used
+            item.addEventListener('mousemove', e => this.mouseMove(e));
+
+            item.addEventListener('mousedown', e => e.stopPropagation());
+            item.addEventListener('mouseup', e => e.stopPropagation());
+
+            // If this page has an associated uuid and it matches this credential, then put it on top of the list
+            if (username === c.value
+                || (this.afterFillSort === SORT_BY_RELEVANT_ENTRY && c.uuid === pageUuid)) {
+                this.list.prepend(item);
+            } else {
+                this.list.appendChild(item);
+            }
+        }
     }
 
     selectItem() {
