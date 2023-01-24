@@ -37,17 +37,9 @@ browserAction.showDefault = async function(tab) {
         popupData.iconType = 'locked';
     }
 
-    if (page.tabs[tab.id] && page.tabs[tab.id].loginList.length > 0) {
-        popupData.iconType = 'questionmark';
-        popupData.popup = 'popup_login';
-    }
-
-    browserAction.show(tab, popupData);
-};
-
-browserAction.updateIcon = async function(tab, iconType) {
+    // Get the current tab if no tab given
     if (!tab) {
-        const tabs = await browser.tabs.query({ 'active': true, 'currentWindow': true });
+        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
         if (tabs.length === 0) {
             return;
         }
@@ -55,9 +47,12 @@ browserAction.updateIcon = async function(tab, iconType) {
         tab = tabs[0];
     }
 
-    browser.browserAction.setIcon({
-        path: browserAction.generateIconName(iconType)
-    });
+    if (page.tabs[tab.id] && page.tabs[tab.id].loginList.length > 0) {
+        popupData.iconType = 'questionmark';
+        popupData.popup = 'popup_login';
+    }
+
+    browserAction.show(tab, popupData);
 };
 
 browserAction.generateIconName = function(iconType) {
@@ -72,7 +67,7 @@ browserAction.ignoreSite = async function(url) {
     await browser.windows.getCurrent();
 
     // Get current active window
-    const tabs = await browser.tabs.query({ 'active': true, 'currentWindow': true });
+    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
     const tab = tabs[0];
 
     // Send the message to the current tab's content script

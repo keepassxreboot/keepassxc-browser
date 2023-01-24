@@ -855,9 +855,9 @@ keepass.handleError = function(tab, errorCode, errorMessage = '') {
     }
 };
 
-keepass.updatePopup = function(iconType) {
+keepass.updatePopup = function() {
     if (page && page.tabs.length > 0) {
-        browserAction.updateIcon(undefined, iconType);
+        browserAction.showDefault();
     }
 };
 
@@ -868,9 +868,8 @@ keepass.updateDatabase = async function() {
     page.clearAllLogins();
 
     await keepass.testAssociation(null, [ true ]);
-    const configured = await keepass.isConfigured();
 
-    keepass.updatePopup(configured ? 'normal' : 'locked');
+    keepass.updatePopup();
     keepass.updateDatabaseHashToContent();
 };
 
