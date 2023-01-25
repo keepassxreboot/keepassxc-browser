@@ -235,6 +235,8 @@ kpxcObserverHelper.handleObserverAdd = async function(target) {
 
         kpxc.prepareCredentials();
     }
+
+    kpxcIcons.deleteHiddenIcons();
 };
 
 // Removes monitored elements

@@ -167,6 +167,12 @@ kpxcUI.deleteHiddenIcons = function(iconList, attr) {
             icon.removeIcon(attr);
             iconList.splice(index, 1);
             deletedIcons.push(icon.inputField);
+
+            // Delete the input field from detected fields so the icon can be detected again
+            const inputFieldIndex = kpxc.inputs.indexOf(icon.inputField);
+            if (inputFieldIndex >= 0) {
+                kpxc.inputs.splice(inputFieldIndex, 1);
+            }
         }
     }
 
