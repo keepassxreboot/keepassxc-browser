@@ -663,6 +663,10 @@ kpxc.setValue = function(field, value) {
 
 // Sets a new value to input field and triggers necessary events
 kpxc.setValueWithChange = function(field, value) {
+    if (field.readOnly) {
+        return;
+    }
+
     field.value = value;
     field.dispatchEvent(new Event('input', { bubbles: true }));
     field.dispatchEvent(new Event('change', { bubbles: true }));
