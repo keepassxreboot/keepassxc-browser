@@ -18,7 +18,7 @@ const defaultSettings = {
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
-    redirectAllowance: 1,
+    redirectAllowance: 3,
     saveDomainOnly: true,
     showGettingStartedGuideAlert: true,
     showTroubleshootingGuideAlert: true,
