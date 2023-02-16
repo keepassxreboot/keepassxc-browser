@@ -54,10 +54,18 @@ async function testGeneral() {
         [ 'https://*.com/*', 'https://example.com/$/login_page', true ],
         [ 'https://*.com/*', 'https://example.org/$/login_page', false ],
         [ 'https://*.*/*', 'https://example.org/$/login_page', false ],
+        // IP based URL's
+        [ 'https://127.128.129.130:8448/', 'https://127.128.129.130:8448/', true ],
+        [ 'https://127.128.129.*:8448/', 'https://127.128.129.130:8448/', true ],
+        [ 'https://127.128.*/', 'https://127.128.129.130/', true ],
+        [ 'https://127.128.*/', 'https://127.1.129.130/', false ],
+        [ 'https://127.128.129.130/', 'https://127.128.129.130:8448/', false ],
+        [ 'https://127.128.129.*/', 'https://127.128.129.130:8448/', false ],
         // Invalid URL's
         [ '', 'https://example.com', false ],
         [ 'abcdefgetc', 'https://example.com', false ],
-        [ '{TOTP}\\no', 'https://example.com', false ]
+        [ '{TOTP}\\no', 'https://example.com', false ],
+        [ 'https://320.320.320.320', 'https://example.com', false ]
     ];
 
     for (const m of matches) {
