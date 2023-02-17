@@ -57,19 +57,19 @@ const ManualFill = {
 };
 
 // Match hostname or path with wildcards
-const matchWithRegex = function(firstUrlPart, secondUrlPart, separator) {
+const matchWithRegex = function(firstUrlPart, secondUrlPart, hostnameUsed = false) {
     if (firstUrlPart === secondUrlPart) {
         return true;
     }
 
     // If there's no wildcard with hostname, just compare directly
-    if (separator === '.' && !firstUrlPart.includes(URL_WILDCARD) && firstUrlPart !== secondUrlPart) {
+    if (hostnameUsed && !firstUrlPart.includes(URL_WILDCARD) && firstUrlPart !== secondUrlPart) {
         return false;
     }
 
     // Escape illegal characters
     let re = firstUrlPart.replaceAll(/[!\^$\+\-\(\)@<>]/g, '\\$&');
-    if (separator === '.') {
+    if (hostnameUsed) {
         // Replace all host parts with wildcards so e.g. https://*.example.com is accepted with https://example.com
         re = re.replaceAll(`${URL_WILDCARD}.`, '(.*?)');
     }
@@ -93,8 +93,8 @@ const siteMatch = function(site, url) {
         }
 
         // Match hostname and path
-        if (!matchWithRegex(siteUrl.hostname, currentUrl.hostname, '.')
-            || !matchWithRegex(siteUrl.pathname, currentUrl.pathname, '/')) {
+        if (!matchWithRegex(siteUrl.hostname, currentUrl.hostname, true)
+            || !matchWithRegex(siteUrl.pathname, currentUrl.pathname)) {
             return false;
         }
 
