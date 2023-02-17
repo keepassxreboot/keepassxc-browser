@@ -29,15 +29,43 @@ async function testGeneral() {
     // Consider using slighly different URL's for the tests cases.
     const matches = [
         [ 'https://example.com/*', 'https://example.com/login_page', true ],
+        [ 'https://*.lexample.com/*', 'https://example.com/login_page', false ],
         [ 'https://example.com/*', 'https://example2.com/login_page', false ],
         [ 'https://example.com/*', 'https://subdomain.example.com/login_page', false ],
+        [ 'https://example.com', 'https://subdomain.example.com/login_page', false ],
         [ 'https://*.example.com/*', 'https://example.com/login_page', true ],
         [ 'https://*.example.com/*', 'https://test.example.com/login_page', true ],
         [ 'https://test.example.com/*', 'https://subdomain.example.com/login_page', false ],
         [ 'https://test.example.com/page/*', 'https://test.example.com/page/login_page', true ],
+        [ 'https://test.example.com/page/*', 'https://test.example.com/page/login_page?dontcare=aboutme', true ],
         [ 'https://test.example.com/page/another_page/*', 'https://test.example.com/page/login', false ],
         [ 'https://test.example.com/path/another/a/', 'https://test.example.com/path/another/a/', true ],
         [ 'https://test.example.com/path/another/a/', 'https://test.example.com/path/another/b/', false ],
+        [ 'https://test.example.com/*/another/a/', 'https://test.example.com/path/another/a/', true ],
+        [ 'https://test.example.com/path/*/a/', 'https://test.example.com/path/another/a/', true ],
+        [ 'https://test.example.com/path2/*/a/', 'https://test.example.com/path/another/a/', false ],
+        [ 'https://example.com:8448/', 'https://example.com/', false ],
+        [ 'https://example.com:8448/', 'https://example.com:8448/', true ],
+        [ 'https://example.com:8448/login/page', 'https://example.com/login/page', false ],
+        [ 'https://example.com:8448/*', 'https://example.com:8448/login/page', true ],
+        [ 'https://example.com/$/*', 'https://example.com/$/login_page', true ], // Special character in URL
+        [ 'https://example.com/*/*', 'https://example.com/$/login_page', true ],
+        [ 'https://example.com/*/*', 'https://example.com/login_page', false ],
+        [ 'https://*.com/*', 'https://example.com/$/login_page', true ],
+        [ 'https://*.com/*', 'https://example.org/$/login_page', false ],
+        [ 'https://*.*/*', 'https://example.org/$/login_page', false ],
+        // IP based URL's
+        [ 'https://127.128.129.130:8448/', 'https://127.128.129.130:8448/', true ],
+        [ 'https://127.128.129.*:8448/', 'https://127.128.129.130:8448/', true ],
+        [ 'https://127.128.*/', 'https://127.128.129.130/', true ],
+        [ 'https://127.128.*/', 'https://127.1.129.130/', false ],
+        [ 'https://127.128.129.130/', 'https://127.128.129.130:8448/', false ],
+        [ 'https://127.128.129.*/', 'https://127.128.129.130:8448/', false ],
+        // Invalid URL's
+        [ '', 'https://example.com', false ],
+        [ 'abcdefgetc', 'https://example.com', false ],
+        [ '{TOTP}\\no', 'https://example.com', false ],
+        [ 'https://320.320.320.320', 'https://example.com', false ]
     ];
 
     for (const m of matches) {

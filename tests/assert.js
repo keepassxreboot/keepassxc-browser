@@ -9,14 +9,15 @@ function kpxcAssert(func, expected, card, testName) {
     createResult(card, false, `Test failed: ${testName}. Result is: ${func}`);
 }
 
-function assertRegex(func, expected, card, testName) {
-    if ((func === null && expected === false)
-        || (func && (func.length > 0) === expected)) {
+function assertRegex(res, expected, card, testName) {
+    if ((res === null && expected === false)
+        || (res && (res.length > 0) === expected)
+        || (res === expected)) {
         createResult(card, true, `Test passed: ${testName}`);
         return;
     }
 
-    createResult(card, false, `Test failed: ${testName}. Result is: ${func}`);
+    createResult(card, false, `Test failed: ${testName}. Result is: ${res}`);
 }
 
 async function assertInputFields(localDiv, expectedFieldCount, actionElementId) {

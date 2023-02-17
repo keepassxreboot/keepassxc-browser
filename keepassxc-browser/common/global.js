@@ -22,9 +22,9 @@ const CHECK_UPDATE_THREE_DAYS = 3;
 const CHECK_UPDATE_ONE_WEEK = 7;
 const CHECK_UPDATE_ONE_MONTH = 30;
 
+const URL_WILDCARD = '1kpxcwc1';
 const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
-const pathSegment = '(.*)';
 
 const isFirefox = function() {
     return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
@@ -56,86 +56,54 @@ const ManualFill = {
     BOTH: 2
 };
 
-/**
- * Transforms a valid match pattern into a regular expression
- * which matches all URLs included by that pattern.
- *
- * @param  {string}  pattern  The pattern to transform.
- * @return {RegExp}           The pattern's equivalent as a RegExp.
- * @throws {TypeError}        If the pattern is not a valid MatchPattern
- *
- * https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Match_patterns
- */
-const matchPatternToRegExp = function(pattern) {
-    if (pattern === '') {
-        return (/^(?:http|https|file|ftp|app):\/\//);
+// Match hostname or path with wildcards
+const matchWithRegex = function(firstUrlPart, secondUrlPart, hostnameUsed = false) {
+    if (firstUrlPart === secondUrlPart) {
+        return true;
     }
 
-    // special handling of file:// since there is no host
-    if (pattern.startsWith('file://')) {
-        let regex = '^';
-        pattern = pattern.replace(/\./g, '\\.');
-        if (pattern.endsWith('*')) {
-            regex += pattern.slice(0, -1);
-        } else {
-            regex += `${pattern}$`;
-        }
-        return new RegExp(regex);
+    // If there's no wildcard with hostname, just compare directly
+    if (hostnameUsed && !firstUrlPart.includes(URL_WILDCARD) && firstUrlPart !== secondUrlPart) {
+        return false;
     }
 
-    const matchPatternRegExp = new RegExp(
-        `^${schemeSegment}://${hostSegment}/${pathSegment}$`
-    );
-
-    const match = matchPatternRegExp.exec(pattern);
-    if (!match) {
-        throw new TypeError(`"${pattern}" is not a valid MatchPattern`);
+    // Escape illegal characters
+    let re = firstUrlPart.replaceAll(/[!\^$\+\-\(\)@<>]/g, '\\$&');
+    if (hostnameUsed) {
+        // Replace all host parts with wildcards so e.g. https://*.example.com is accepted with https://example.com
+        re = re.replaceAll(`${URL_WILDCARD}.`, '(.*?)');
     }
 
-    let [ , scheme, host, path ] = match;
-    if (!host) {
-        throw new TypeError(`"${pattern}" does not have a valid host`);
-    }
+    // Replace any remaining wildcards for paths
+    re = re.replaceAll(URL_WILDCARD, '(.*?)');
 
-    let regex = '^';
-
-    if (scheme === '*') {
-        regex += '(http|https)';
-    } else {
-        regex += scheme;
-    }
-
-    regex += '://';
-
-    if (host && host === '*') {
-        regex += '[^/]+?';
-    } else if (host) {
-        if (host.match(/^\*\./)) {
-            regex += '[^/]*?';
-            host = host.substring(2);
-        }
-        regex += host.replace(/\./g, '\\.');
-    }
-
-    if (path) {
-        path = trimURL(path);
-
-        if (path === '*') {
-            regex += '(/.*)?';
-        } else if (path.charAt(0) !== '/') {
-            regex += '/';
-            regex += path.replace(/\./g, '\\.').replace(/\*/g, '.*?');
-            regex += '/?';
-        }
-    }
-
-    regex += '$';
-    return new RegExp(regex);
+    return secondUrlPart.match(new RegExp(re));
 };
 
+// Matches URL in Site Preferences with the current URL
 const siteMatch = function(site, url) {
-    const rx = matchPatternToRegExp(site);
-    return url.match(rx);
+    try {
+        site = site.replaceAll('*', URL_WILDCARD);
+        const siteUrl = new URL(site);
+        const currentUrl = new URL(url);
+
+        // Match scheme and port
+        if (siteUrl.protocol !== currentUrl.protocol || siteUrl.port !== currentUrl.port) {
+            return false;
+        }
+
+        // Match hostname and path
+        if (!matchWithRegex(siteUrl.hostname, currentUrl.hostname, true)
+            || !matchWithRegex(siteUrl.pathname, currentUrl.pathname)) {
+            return false;
+        }
+
+        return true;
+    } catch(e) {
+        logError(e);
+    }
+
+    return false;
 };
 
 const slashNeededForUrl = function(pattern) {
