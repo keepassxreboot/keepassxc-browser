@@ -288,7 +288,7 @@ kpxcFill.fillInStringFields = function(fields, stringFields) {
             const currentField = fields[i];
 
             if (currentField && stringFieldValue[0]) {
-                kpxc.setValue(currentField, stringFieldValue[0]);
+                kpxc.setValue(currentField, stringFieldValue[0], true);
                 filledInFields.push(currentField);
             }
         }
