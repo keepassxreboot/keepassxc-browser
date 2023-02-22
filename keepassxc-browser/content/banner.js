@@ -32,14 +32,10 @@ kpxcBanner.destroy = async function() {
 
 kpxcBanner.create = async function(credentials = {}) {
     const connectedDatabase = await sendMessage('get_connected_database');
-    if (!kpxc.settings.showLoginNotifications || kpxcBanner.created || connectedDatabase.identifier === null) {
-        return;
-    }
-
-    // Check if database is closed
-    const state = await sendMessage('check_database_hash');
-    if (state === '') {
-        //kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));
+    if (!kpxc.settings.showLoginNotifications
+        || kpxcBanner.created
+        || connectedDatabase.identifier === null
+        || kpxc.databaseState !== DatabaseState.UNLOCKED) {
         return;
     }
 

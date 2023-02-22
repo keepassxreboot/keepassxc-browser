@@ -131,8 +131,7 @@ const iconClicked = async function(field, icon) {
         return;
     }
 
-    const databaseHash = await sendMessage('check_database_hash');
-    if (databaseHash === '') {
+    if (kpxc.databaseState !== DatabaseState.UNLOCKED) {
         // Triggers database unlock
         await sendMessage('page_set_manual_fill', ManualFill.BOTH);
         await sendMessage('get_database_hash', [ false, true ]); // Set triggerUnlock to true
@@ -148,7 +147,7 @@ const getIconClassName = function(state = DatabaseState.UNLOCKED) {
     if (state === DatabaseState.LOCKED) {
         return (isFirefox() ? 'lock-moz' : 'lock');
     } else if (state === DatabaseState.DISCONNECTED) {
-        return (isFirefox() ? 'lock-disconnected' : 'disconnected');
+        return (isFirefox() ? 'disconnected-moz' : 'disconnected');
     }
 
     return (isFirefox() ? 'unlock-moz' : 'unlock');

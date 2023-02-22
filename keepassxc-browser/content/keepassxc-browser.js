@@ -115,7 +115,7 @@ kpxc.detectDatabaseChange = async function(response) {
             // If user has requested a manual fill through context menu the actual credential filling
             // is handled here when the opened database has been regognized. It's not a pretty hack.
             const manualFill = await sendMessage('page_get_manual_fill');
-            if (manualFill !== ManualFill.NONE) {
+            if (manualFill !== ManualFill.NONE && kpxc.combinations.length > 0) {
                 await kpxcFill.fillInFromActiveElement(manualFill === ManualFill.PASSWORD);
                 await sendMessage('page_set_manual_fill', ManualFill.NONE);
             }
