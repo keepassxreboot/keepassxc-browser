@@ -643,7 +643,7 @@ kpxc.setPasswordFilled = async function(state) {
 };
 
 // Special handling for settings value to select element
-kpxc.setValue = function(field, value) {
+kpxc.setValue = function(field, value, forced = false) {
     if (field.matches('select')) {
         value = value.toLowerCase().trim();
         const options = field.querySelectorAll('option');
@@ -658,12 +658,12 @@ kpxc.setValue = function(field, value) {
         return;
     }
 
-    kpxc.setValueWithChange(field, value);
+    kpxc.setValueWithChange(field, value, forced);
 };
 
 // Sets a new value to input field and triggers necessary events
-kpxc.setValueWithChange = function(field, value) {
-    if (field.readOnly) {
+kpxc.setValueWithChange = function(field, value, forced = false) {
+    if (!forced && field.readOnly) {
         return;
     }
 
