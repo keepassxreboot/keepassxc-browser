@@ -158,6 +158,15 @@ kpxcForm.onSubmit = async function(e) {
     } else if (kpxc.credentials.length === 1) {
         // Single entry found for the page, use the username of it instead of an empty one
         usernameValue = kpxc.credentials[0].login;
+    } else {
+        // Multiple entries found for the page, try to find out which one might have been used
+        const pageUuid = await sendMessage('page_get_login_id');
+        if (pageUuid) {
+            const credential = kpxc.credentials.find(c => c.uuid === pageUuid);
+            if (credential) {
+                usernameValue = credential.login;
+            }
+        }
     }
 
     // Check if the form has three password fields -> a possible password change form
