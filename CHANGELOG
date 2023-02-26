@@ -1,7 +1,7 @@
 1.8.5 (26-02-2023)
 =========================
 - Add adf.ly TOTP to Predefined Sites
-- Change default redicet value from 1 to 3 with Credential Banner [#1842]
+- Change default redirect value from 1 to 3 with Credential Banner [#1842]
 - Fix filling String Fields to readonly fields [#1857]
 - Fix filling from Username Icon at reconnect [#1856]
 - Fix possible false-positives with Credential Banner [#1782]
