@@ -1,3 +1,20 @@
+1.8.5 (26-02-2023)
+=========================
+- Add adf.ly TOTP to Predefined Sites
+- Change default redirect value from 1 to 3 with Credential Banner [#1842]
+- Fix filling String Fields to readonly fields [#1857]
+- Fix filling from Username Icon at reconnect [#1856]
+- Fix possible false-positives with Credential Banner [#1782]
+- Fix update interval check [#1848]
+- Fix allowing fill to readonly fields [#1841]
+- Fix removing icon from internal lists after hiding it [#1836]
+- Fix showing an empty login popup after database lock [#1835]
+- Fix updating Autocomplete Menu on database lock [#1827]
+- Fix extension behavior for Auto-Open [#1825]
+- Refactor Site Preferences wildcards with a new implementation [#1851]
+- Refactor popup code to use Manifest V3 compatible API calls [#1822]
+- Update ESLint to use recommended ruleset instead of airbrb-base [#1816]
+
 1.8.4 (19-12-2022)
 =========================
 - Add more PayPal addresses to Predefines Sites [#1765]
