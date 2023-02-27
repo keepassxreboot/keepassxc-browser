@@ -110,8 +110,8 @@ class Autocomplete {
         }
 
         this.updateList();
-        this.updatePosition();
         this.container.style.display = 'block';
+        this.updatePosition();
     }
 
     async updateList() {
@@ -273,11 +273,16 @@ class Autocomplete {
         const rect = this.input.getBoundingClientRect();
         this.container.style.minWidth = Pixels(this.input.offsetWidth);
 
+        // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
+        const menuRect = this.container.getBoundingClientRect();
+        const totalHeight = menuRect.height + rect.height;
+        const menuOffset = (totalHeight + rect.y) > window.top.visualViewport.height ? totalHeight : 0;
+
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
-            this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + this.input.offsetHeight);
+            this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + this.input.offsetHeight - menuOffset);
             this.container.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + document.scrollingElement.scrollLeft);
         } else {
-            this.container.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + this.input.offsetHeight);
+            this.container.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + this.input.offsetHeight - menuOffset);
             this.container.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);
         }
     }
