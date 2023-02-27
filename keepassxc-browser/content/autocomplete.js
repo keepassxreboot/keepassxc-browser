@@ -277,6 +277,11 @@ class Autocomplete {
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
         const menuOffset = (totalHeight + rect.y) > window.top.visualViewport.height ? totalHeight : 0;
+        if (menuOffset > 0) {
+            this.container.classList.add('kpxcAutocomplete-container-on-top');
+        } else {
+            this.container.classList.remove('kpxcAutocomplete-container-on-top');
+        }
 
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
             this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + this.input.offsetHeight - menuOffset);
