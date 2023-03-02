@@ -379,6 +379,17 @@ page.getLoginList = async function(tab) {
     return [];
 };
 
+page.fillHttpAuth = async function(tab, credentials) {
+    if (page.tabs[tab.id] && page.tabs[tab.id].loginList.resolve) {
+        page.tabs[tab.id].loginList.resolve({
+            authCredentials: {
+                username: credentials.login,
+                password: credentials.password
+            }
+        });
+    }
+};
+
 // Update context menu for attribute filling
 page.updateContextMenu = async function(tab, credentials) {
     // Remove any old attribute items

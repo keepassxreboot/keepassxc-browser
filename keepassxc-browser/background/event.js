@@ -228,6 +228,7 @@ kpxcEvent.messageHandlers = {
     'create_new_group': keepass.createNewGroup,
     'enable_automatic_reconnect': keepass.enableAutomaticReconnect,
     'disable_automatic_reconnect': keepass.disableAutomaticReconnect,
+    'fill_http_auth': page.fillHttpAuth,
     'generate_password': keepass.generatePassword,
     'get_color_theme': kpxcEvent.getColorTheme,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
