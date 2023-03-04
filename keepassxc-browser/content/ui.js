@@ -143,8 +143,8 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
         top = iconOffset[1];
     }
 
-    const scrollTop = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
-    const scrollLeft = document.scrollingElement ? document.scrollingElement.scrollLeft : 0;
+    const scrollTop = document.defaultView ? document.defaultView.scrollY : document.scrollingElement.scrollTop;
+    const scrollLeft = document.defaultView ? document.defaultView.scrollX : document.scrollingElement.scrollLeft;
     icon.style.top = Pixels(top + scrollTop + offset + 1);
     icon.style.left = rtl
                     ? Pixels((left + scrollLeft) + offset)
