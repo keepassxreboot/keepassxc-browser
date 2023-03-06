@@ -283,8 +283,8 @@ class Autocomplete {
             this.container.classList.remove('kpxcAutocomplete-container-on-top');
         }
 
-        const scrollTop = document.defaultView ? document.defaultView.scrollY : document.scrollingElement.scrollTop;
-        const scrollLeft = document.defaultView ? document.defaultView.scrollX : document.scrollingElement.scrollLeft;
+        const scrollTop = document.defaultView?.scrollY ?? document.scrollingElement?.scrollTop ?? 0;
+        const scrollLeft = document.defaultView?.scrollX ?? document.scrollingElement?.scrollLeft ?? 0;
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
             this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + scrollTop + this.input.offsetHeight - menuOffset);
             this.container.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + scrollLeft);
