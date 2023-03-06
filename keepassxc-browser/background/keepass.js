@@ -112,9 +112,7 @@ keepass.retrieveCredentials = async function(tab, args = []) {
             return [];
         }
 
-        if (tab && page.tabs[tab.id]) {
-            page.tabs[tab.id].errorMessage = null;
-        }
+        keepass.clearErrorMessage(tab);
 
         if (!keepass.isConnected) {
             return [];
@@ -223,9 +221,7 @@ keepass.associate = async function(tab) {
             return AssociatedAction.NOT_ASSOCIATED;
         }
 
-        if (tab && page.tabs[tab.id]) {
-            page.tabs[tab.id].errorMessage = null;
-        }
+        keepass.clearErrorMessage(tab);
 
         const kpAction = kpActions.ASSOCIATE;
         const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
@@ -261,9 +257,7 @@ keepass.associate = async function(tab) {
 };
 
 keepass.testAssociation = async function(tab, args = []) {
-    if (tab && page.tabs[tab.id]) {
-        page.tabs[tab.id].errorMessage = null;
-    }
+    keepass.clearErrorMessage(tab);
 
     try {
         const [ enableTimeout = false, triggerUnlock = false ] = args;
@@ -316,9 +310,7 @@ keepass.testAssociation = async function(tab, args = []) {
             keepass.handleError(tab, kpErrors.ASSOCIATION_FAILED);
         } else {
             keepass.isEncryptionKeyUnrecognized = false;
-            if (tab && page.tabs[tab.id]) {
-                delete page.tabs[tab.id].errorMessage;
-            }
+            keepass.clearErrorMessage(tab);
         }
 
         return keepass.isAssociated();
@@ -492,9 +484,7 @@ keepass.getDatabaseGroups = async function(tab) {
             return [];
         }
 
-        if (tab && page.tabs[tab.id]) {
-            page.tabs[tab.id].errorMessage = null;
-        }
+        keepass.clearErrorMessage(tab);
 
         if (!keepass.isConnected) {
             return [];
@@ -534,9 +524,7 @@ keepass.createNewGroup = async function(tab, args = []) {
             return [];
         }
 
-        if (tab && page.tabs[tab.id]) {
-            page.tabs[tab.id].errorMessage = null;
-        }
+        keepass.clearErrorMessage(tab);
 
         if (!keepass.isConnected) {
             return [];
@@ -758,8 +746,8 @@ keepass.reconnect = async function(tab, connectionTimeout) {
     }
 
     const hash = await keepass.getDatabaseHash(tab);
-    if (hash !== '' && tab && page.tabs[tab.id]) {
-        delete page.tabs[tab.id].errorMessage;
+    if (hash !== '') {
+        keepass.clearErrorMessage(tab);
     }
 
     await keepass.testAssociation();
@@ -843,6 +831,12 @@ keepass.checkForNewKeePassXCVersion = function() {
         logError(ex);
     }
     keepass.latestKeePassXC.lastChecked = new Date().valueOf();
+};
+
+keepass.clearErrorMessage = function(tab) {
+    if (tab && page.tabs[tab.id]) {
+        page.tabs[tab.id].errorMessage = undefined;
+    }
 };
 
 keepass.handleError = function(tab, errorCode, errorMessage = '') {

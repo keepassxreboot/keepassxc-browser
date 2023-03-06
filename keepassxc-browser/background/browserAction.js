@@ -47,7 +47,7 @@ browserAction.showDefault = async function(tab) {
         tab = tabs[0];
     }
 
-    if (page.tabs[tab.id] && page.tabs[tab.id].loginList.length > 0) {
+    if (page.tabs[tab.id]?.loginList.length > 0) {
         popupData.iconType = 'questionmark';
         popupData.popup = 'popup_login';
     }

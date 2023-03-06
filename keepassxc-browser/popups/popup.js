@@ -44,7 +44,7 @@ function statusResponse(r) {
     } else if (!r.associated) {
         $('#need-reconfigure').show();
         $('#need-reconfigure-message').textContent = r.error;
-    } else if (r.error !== null) {
+    } else if (r.error) {
         $('#error-encountered').show();
         $('#error-message').textContent = r.error;
     } else {
