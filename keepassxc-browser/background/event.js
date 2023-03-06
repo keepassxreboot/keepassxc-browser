@@ -23,7 +23,9 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         browserAction.showDefault(tab);
     }
 
-    const errorMessage = page.tabs[tab.id].errorMessage;
+    const errorMessage = page.tabs[tab.id]?.errorMessage ?? undefined;
+    const usernameFieldDetected = page.tabs[tab.id]?.usernameFieldDetected ?? false;
+
     return {
         identifier: keyId,
         configured: configured,
@@ -31,8 +33,8 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         keePassXCAvailable: keepass.isKeePassXCAvailable,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         associated: keepass.isAssociated(),
-        error: errorMessage || null,
-        usernameFieldDetected: page.tabs[tab.id].usernameFieldDetected,
+        error: errorMessage,
+        usernameFieldDetected: usernameFieldDetected,
         showGettingStartedGuideAlert: page.settings.showGettingStartedGuideAlert,
         showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert
     };

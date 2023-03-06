@@ -302,7 +302,7 @@ page.createTabEntry = function(tabId) {
 // If the retrieval is forced (from Credential Banner), get new credentials normally.
 page.retrieveCredentials = async function(tab, args = []) {
     const [ url, submitUrl, force ] = args;
-    if (page.tabs[tab.id] && page.tabs[tab.id].credentials.length > 0 && !force) {
+    if (page.tabs[tab.id]?.credentials.length > 0 && !force) {
         return page.tabs[tab.id].credentials;
     }
 
@@ -380,7 +380,7 @@ page.getLoginList = async function(tab) {
 };
 
 page.fillHttpAuth = async function(tab, credentials) {
-    if (page.tabs[tab.id] && page.tabs[tab.id].loginList.resolve) {
+    if (page.tabs[tab.id]?.loginList.resolve) {
         page.tabs[tab.id].loginList.resolve({
             authCredentials: {
                 username: credentials.login,
