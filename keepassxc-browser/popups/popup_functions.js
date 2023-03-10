@@ -25,11 +25,10 @@ async function initSettings() {
 
     customLoginFieldsButton.addEventListener('click', async () => {
         await browser.windows.getCurrent();
-        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-        const tab = tabs[0];
+        const tab = await getCurrentTab();
         await browser.runtime.getBackgroundPage();
 
-        browser.tabs.sendMessage(tab.id, {
+        browser.tabs.sendMessage(tab?.id, {
             action: 'choose_credential_fields'
         });
         close();
@@ -49,8 +48,8 @@ async function initColorTheme() {
 }
 
 async function getLoginData() {
-    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-    if (tabs.length === 0) {
+    const tab = getCurrentTab();
+    if (!tab) {
         return [];
     }
 

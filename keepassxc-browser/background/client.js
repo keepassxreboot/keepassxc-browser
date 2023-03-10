@@ -81,7 +81,7 @@ keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeo
 
         const listener = ((port, action) => {
             const handler = (msg) => {
-                if (msg && msg.action === action) {
+                if (msg && msg?.action === action) {
                     // If the request has a separate requestID, check if it matches when there's no nonce (an error message)
                     const isNotificationOrError = !msg.nonce && request.requestID === msg.requestID;
 

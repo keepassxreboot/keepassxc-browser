@@ -51,7 +51,7 @@ kpxcForm.getFormSubmitButton = function(form) {
     // If any formaction overriding the default action is set, ignore those buttons.
     const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery)).filter(b => !b.getAttribute('formAction'));
     if (buttons.length > 0) {
-        return buttons[buttons.length - 1];
+        return buttons.at(-1);
     }
 
     // Try to find similar buttons outside the form which are added via 'form' property

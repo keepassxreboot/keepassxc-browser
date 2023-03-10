@@ -153,7 +153,7 @@ kpxc.getFormActionUrl = function(combination) {
     }
 
     let action = null;
-    if (combination.form && combination.form.length > 0) {
+    if (combination.form?.length > 0) {
         action = combination.form.action;
     }
 
@@ -386,13 +386,13 @@ kpxc.initLoginPopup = function() {
 
     // Initialize login items
     const loginItems = [];
-    for (let i = 0; i < kpxc.credentials.length; i++) {
-        const loginItem = getLoginItem(kpxc.credentials[i], showGroupNameInAutocomplete, i);
+    for (const [ i, login ] of kpxc.credentials.entries()) {
+        const loginItem = getLoginItem(login, showGroupNameInAutocomplete, i);
 
         // Ignore a duplicate entry if the password is empty, but there's already a similar entry with a password.
         // An usual use case with TOTP in a separate database.
         const similarEntryFound = kpxc.credentials.some(c => c.password !== '' && c.login === loginItem.login);
-        if (kpxc.credentials[i].password === '' && similarEntryFound) {
+        if (login.password === '' && similarEntryFound) {
             continue;
         }
 
@@ -586,7 +586,7 @@ kpxc.retrieveCredentials = async function(force = false) {
 // Handles credentials from 'retrieve_credentials' response
 kpxc.retrieveCredentialsCallback = async function(credentials) {
     _called.retrieveCredentials = true;
-    if (credentials && credentials.length > 0) {
+    if (credentials?.length > 0) {
         kpxc.credentials = credentials;
         await kpxc.prepareCredentials();
     }
@@ -599,7 +599,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 
     // Retrieve submitted credentials if available
     const creds = await sendMessage('page_get_submitted');
-    if (creds && creds.submitted) {
+    if (creds?.submitted) {
         await sendMessage('page_clear_submitted');
         kpxc.rememberCredentials(creds.username, creds.password, creds.url, creds.oldCredentials);
     }

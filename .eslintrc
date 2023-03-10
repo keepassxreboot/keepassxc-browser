@@ -3,12 +3,12 @@
     "ignorePatterns": ["**/*.min.js"],
     "env": {
         "browser": true,
-        "es6": true,
+        "es2022": true,
         "jquery": true,
         "webextensions": true
     },
     "parserOptions": {
-        "ecmaVersion": 2020
+        "ecmaVersion": 13
     },
     "rules": {
         "array-bracket-spacing": ["error", "always"],
@@ -101,6 +101,7 @@
         "DatabaseState": true,
         "debugLogMessage": true,
         "EXTENSION_NAME": true,
+        "getCurrentTab": true,
         "getTopLevelDomainFromUrl": true,
         "httpAuth": true,
         "Icon": true,

@@ -61,12 +61,12 @@ function statusResponse(r) {
 }
 
 const sendMessageToTab = async function(message) {
-    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-    if (tabs.length === 0) {
+    const tab = await getCurrentTab();
+    if (!tab) {
         return false; // Only the background devtools or a popup are opened
     }
 
-    await browser.tabs.sendMessage(tabs[0].id, {
+    await browser.tabs.sendMessage(tab.id, {
         action: message
     });
 

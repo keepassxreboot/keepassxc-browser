@@ -6,18 +6,18 @@
 
     $('#lock-database-button').show();
 
-    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-    if (tabs.length === 0) {
+    const tab = await getCurrentTab();
+    if (!tab) {
         return [];
     }
 
     const logins = await getLoginData();
     const ll = document.getElementById('login-list');
 
-    for (let i = 0; i < logins.length; i++) {
-        const uuid = logins[i].uuid;
+    for (const [ i, login ] of logins.entries()) {
+        const uuid = login.uuid;
         const a = document.createElement('a');
-        a.textContent = logins[i].text;
+        a.textContent = login.text;
         a.setAttribute('class', 'list-group-item');
         a.setAttribute('id', '' + i);
 
@@ -27,7 +27,7 @@
             }
 
             const id = e.target.id;
-            browser.tabs.sendMessage(tabs[0].id, {
+            browser.tabs.sendMessage(tab.id, {
                 action: 'fill_user_pass_with_specific_login',
                 id: Number(id),
                 uuid: uuid

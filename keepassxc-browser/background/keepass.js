@@ -644,7 +644,7 @@ keepass.migrateKeyRing = function() {
 };
 
 keepass.saveKey = function(hash, id, key) {
-    if (!(hash in keepass.keyRing)) {
+    if (!Object.hasOwn(keepass.keyRing, hash)) {
         keepass.keyRing[hash] = {
             id: id,
             key: key,
@@ -663,7 +663,7 @@ keepass.saveKey = function(hash, id, key) {
 };
 
 keepass.updateLastUsed = function(hash) {
-    if ((hash in keepass.keyRing)) {
+    if (Object.hasOwn(keepass.keyRing, hash)) {
         keepass.keyRing[hash].lastUsed = new Date().valueOf();
         browser.storage.local.set({ 'keyRing': keepass.keyRing });
     }
@@ -691,6 +691,7 @@ keepass.deleteKey = function(hash) {
 keepass.getCryptoKey = function() {
     let dbkey = null;
     let dbid = null;
+
     if (!(keepass.databaseHash in keepass.keyRing)) {
         return [ dbid, dbkey ];
     }
@@ -712,7 +713,7 @@ keepass.setCryptoKey = function(id, key) {
 // Connection
 //--------------------------------------------------------------------------
 
-keepass.enableAutomaticReconnect = function() {
+keepass.enableAutomaticReconnect = async function() {
     // Disable for Windows if KeePassXC is older than 2.3.4
     if (!page.settings.autoReconnect
         || (navigator.platform.toLowerCase().includes('win')
@@ -767,7 +768,7 @@ keepass.generateNewKeyPair = function() {
 keepass.isConfigured = async function() {
     if (typeof(keepass.databaseHash) === 'undefined') {
         const hash = keepass.getDatabaseHash();
-        return hash in keepass.keyRing;
+        return Object.hasOwn(keepass.keyRing, hash);
     }
 
     return keepass.databaseHash in keepass.keyRing;
@@ -870,10 +871,10 @@ keepass.updateDatabase = async function() {
 
 keepass.updateDatabaseHashToContent = async function() {
     try {
-        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-        if (tabs.length) {
+        const tab = await getCurrentTab();
+        if (tab) {
             // Send message to content script
-            browser.tabs.sendMessage(tabs[0].id, {
+            browser.tabs.sendMessage(tab.id, {
                 action: 'check_database_hash',
                 hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
                 connected: keepass.isKeePassXCAvailable
