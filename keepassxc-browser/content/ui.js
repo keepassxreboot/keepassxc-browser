@@ -143,12 +143,20 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
         top = iconOffset[1];
     }
 
-    const scrollTop = document.defaultView?.scrollY ?? document.scrollingElement?.scrollTop ?? 0;
-    const scrollLeft = document.defaultView?.scrollX ?? document.scrollingElement?.scrollLeft ?? 0;
+    const scrollTop = kpxcUI.getScrollTop();
+    const scrollLeft = kpxcUI.getScrollLeft();
     icon.style.top = Pixels(top + scrollTop + offset + 1);
     icon.style.left = rtl
                     ? Pixels((left + scrollLeft) + offset)
                     : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
+};
+
+kpxcUI.getScrollTop = function() {
+    return document.defaultView?.scrollY ?? document.scrollingElement?.scrollTop ?? 0;
+};
+
+kpxcUI.getScrollLeft = function() {
+    return document.defaultView?.scrollX ?? document.scrollingElement?.scrollLeft ?? 0;
 };
 
 kpxcUI.getRelativeLeftPosition = function(rect) {
