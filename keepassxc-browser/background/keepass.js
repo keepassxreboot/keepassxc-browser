@@ -15,8 +15,6 @@ keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassx
 keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.databaseHash = '';
 keepass.previousDatabaseHash = '';
-keepass.keyId = 'keepassxc-browser-cryptokey-name';
-keepass.keyBody = 'keepassxc-browser-key';
 keepass.reconnectLoop = null;
 
 const kpActions = {
