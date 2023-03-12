@@ -283,12 +283,14 @@ class Autocomplete {
             this.container.classList.remove('kpxcAutocomplete-container-on-top');
         }
 
+        const scrollTop = kpxcUI.getScrollTop();
+        const scrollLeft = kpxcUI.getScrollLeft();
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
-            this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + document.scrollingElement.scrollTop + this.input.offsetHeight - menuOffset);
-            this.container.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + document.scrollingElement.scrollLeft);
+            this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + scrollTop + this.input.offsetHeight - menuOffset);
+            this.container.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + scrollLeft);
         } else {
-            this.container.style.top = Pixels(rect.top + document.scrollingElement.scrollTop + this.input.offsetHeight - menuOffset);
-            this.container.style.left = Pixels(rect.left + document.scrollingElement.scrollLeft);
+            this.container.style.top = Pixels(rect.top + scrollTop + this.input.offsetHeight - menuOffset);
+            this.container.style.left = Pixels(rect.left + scrollLeft);
         }
     }
 }

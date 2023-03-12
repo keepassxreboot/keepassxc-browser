@@ -621,8 +621,8 @@ kpxcCustomLoginFieldsBanner.setSelectionPosition = function(field) {
     const rect = field.originalElement.getBoundingClientRect();
     const left = kpxcUI.getRelativeLeftPosition(rect);
     const top = kpxcUI.getRelativeTopPosition(rect);
-    const scrollTop = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
-    const scrollLeft = document.scrollingElement ? document.scrollingElement.scrollLeft : 0;
+    const scrollTop = kpxcUI.getScrollTop();
+    const scrollLeft = kpxcUI.getScrollLeft();
 
     field.style.top = Pixels(top + scrollTop);
     field.style.left = Pixels(left + scrollLeft);
