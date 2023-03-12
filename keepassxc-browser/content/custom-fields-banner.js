@@ -6,12 +6,6 @@ const STEP_SELECT_PASSWORD = 2;
 const STEP_SELECT_TOTP = 3;
 const STEP_SELECT_STRING_FIELDS = 4;
 
-const BLUE_BUTTON = 'kpxc-button kpxc-blue-button';
-const GREEN_BUTTON = 'kpxc-button kpxc-green-button';
-const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
-const RED_BUTTON = 'kpxc-button kpxc-red-button';
-const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
-
 const DEFINED_CUSTOM_FIELDS = 'defined-custom-fields';
 const FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field';
 const DARK_FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field-dark';
@@ -309,11 +303,11 @@ kpxcCustomLoginFieldsBanner.confirm = async function() {
     // If the new selection is already used in some other field, clear it
     const clearIdenticalField = function(path, location) {
         const currentSite = kpxc.settings[DEFINED_CUSTOM_FIELDS][location];
-        if (currentSite.username && currentSite.username[0] === path[0]) {
+        if (currentSite.username?.[0] === path[0]) {
             kpxc.settings[DEFINED_CUSTOM_FIELDS][location].username = undefined;
-        } else if (currentSite.password && currentSite.password[0] === path[0]) {
+        } else if (currentSite.password?.[0] === path[0]) {
             kpxc.settings[DEFINED_CUSTOM_FIELDS][location].password = undefined;
-        } else if (currentSite.totp && currentSite.totp[0] === path[0]) {
+        } else if (currentSite.totp?.[0] === path[0]) {
             kpxc.settings[DEFINED_CUSTOM_FIELDS][location].totp = undefined;
         }
     };

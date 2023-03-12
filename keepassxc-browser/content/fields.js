@@ -111,9 +111,9 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
             combinations.push(combination);
 
             // Create an icon to the right side of the segmented fields
-            kpxcTOTPIcons.newIcon(totpInputs[totpInputs.length - 1], kpxc.databaseState, true);
+            kpxcTOTPIcons.newIcon(totpInputs.at(-1), kpxc.databaseState, true);
             kpxcIcons.icons.push({
-                field: totpInputs[totpInputs.length - 1],
+                field: totpInputs.at(-1),
                 iconType: kpxcIcons.iconTypes.TOTP,
                 segmented: true
             });
@@ -272,7 +272,7 @@ kpxcFields.getIdFromProperties = function(target) {
         return `${target.nodeName} ${target.type} ${target.name} ${target.placeholder}`;
     }
 
-    if (target.classList && target.classList.length > 0) {
+    if (target.classList?.length > 0) {
         return `${target.nodeName} ${target.type} ${target.classList.value} ${target.placeholder}`;
     }
 
@@ -285,11 +285,11 @@ kpxcFields.getIdFromProperties = function(target) {
 
 // Legacy unique ID generation for converting
 kpxcFields.getLegacyId = function(target) {
-    if (target.classList.length > 0) {
+    if (target.classList?.length > 0) {
         return `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
     }
 
-    if (target.id && target.id !== '') {
+    if (target.id && target?.id !== '') {
         return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.name} ${target.placeholder}`;
     }
 
@@ -316,14 +316,13 @@ kpxcFields.isCustomLoginFieldsUsed = function() {
 kpxcFields.isSearchForm = function(form) {
     // Check form action
     const formAction = form.getLowerCaseAttribute('action');
-    if (formAction && (formAction.includes('search') && !formAction.includes('research'))) {
+    if (formAction?.includes('search') && !formAction?.includes('research')) {
         return true;
     }
 
     // Ignore form with search classes
     const formId = form.getLowerCaseAttribute('id');
-    if (form.className && (form.className.includes('search')
-        || (formId && formId.includes('search') && !formId.includes('research')))) {
+    if (form.className?.includes('search') || (formId?.includes('search') && !formId?.includes('research'))) {
         return true;
     }
 

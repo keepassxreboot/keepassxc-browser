@@ -4,7 +4,7 @@ const kpxcEvent = {};
 
 kpxcEvent.onMessage = async function(request, sender) {
     if (request.action in kpxcEvent.messageHandlers) {
-        if (!sender.hasOwnProperty('tab') || sender.tab.id < 1) {
+        if (!Object.hasOwn(sender, 'tab') || sender.tab.id < 1) {
             sender.tab = {};
             sender.tab.id = page.currentTabId;
         }
@@ -56,8 +56,8 @@ kpxcEvent.onLoadKeyRing = async function() {
     keepass.keyRing = item.keyRing;
     if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
         keepass.associated = {
-            'value': false,
-            'hash': null
+            value: false,
+            hash: null
         };
     }
 
@@ -113,7 +113,7 @@ kpxcEvent.lockDatabase = async function(tab) {
 };
 
 kpxcEvent.onGetTabInformation = async function(tab) {
-    const id = tab.id || page.currentTabId;
+    const id = tab?.id || page.currentTabId;
     return page.tabs[id];
 };
 
@@ -143,7 +143,7 @@ kpxcEvent.onUpdateAvailableKeePassXC = async function() {
 };
 
 kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
-    const id = tab.id || page.currentTabId;
+    const id = tab?.id || page.currentTabId;
     page.clearCredentials(id);
     page.clearSubmittedCredentials();
 };

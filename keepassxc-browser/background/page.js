@@ -58,116 +58,11 @@ page.initSettings = async function() {
         page.settings = item.settings;
         page.settings.autoReconnect = false;
 
-        if (!('afterFillSorting' in page.settings)) {
-            page.settings.afterFillSorting = defaultSettings.afterFillSorting;
-        }
-
-        if (!('afterFillSortingTotp' in page.settings)) {
-            page.settings.afterFillSortingTotp = defaultSettings.afterFillSortingTotp;
-        }
-
-        if (!('autoCompleteUsernames' in page.settings)) {
-            page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
-        }
-
-        if (!('showGroupNameInAutocomplete' in page.settings)) {
-            page.settings.showGroupNameInAutocomplete = defaultSettings.showGroupNameInAutocomplete;
-        }
-
-        if (!('autoFillAndSend' in page.settings)) {
-            page.settings.autoFillAndSend = defaultSettings.autoFillAndSend;
-        }
-
-        if (!('autoFillSingleEntry' in page.settings)) {
-            page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
-        }
-
-        if (!('autoRetrieveCredentials' in page.settings)) {
-            page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
-        }
-
-        if (!('autoSubmit' in page.settings)) {
-            page.settings.autoSubmit = defaultSettings.autoSubmit;
-        }
-
-        if (!('checkUpdateKeePassXC' in page.settings)) {
-            page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
-        }
-
-        if (!('colorTheme' in page.settings)) {
-            page.settings.colorTheme = defaultSettings.colorTheme;
-        }
-
-        if (!('clearCredentialsTimeout' in page.settings)) {
-            page.settings.clearCredentialsTimeout = defaultSettings.clearCredentialsTimeout;
-        }
-
-        if (!('credentialSorting' in page.settings)) {
-            page.settings.credentialSorting = defaultSettings.credentialSorting;
-        }
-
-        if (!('debugLogging' in page.settings)) {
-            page.settings.debugLogging = defaultSettings.debugLogging;
-        }
-
-        if (!('defaultGroup' in page.settings)) {
-            page.settings.defaultGroup = defaultSettings.defaultGroup;
-        }
-
-        if (!('defaultGroupAlwaysAsk' in page.settings)) {
-            page.settings.defaultGroupAlwaysAsk = defaultSettings.defaultGroupAlwaysAsk;
-        }
-
-        if (!('downloadFaviconAfterSave' in page.settings)) {
-            page.settings.downloadFaviconAfterSave = defaultSettings.downloadFaviconAfterSave;
-        }
-
-        if (!('redirectAllowance' in page.settings)) {
-            page.settings.redirectAllowance = defaultSettings.redirectAllowance;
-        }
-
-        if (!('saveDomainOnly' in page.settings)) {
-            page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
-        }
-
-        if (!('showGettingStartedGuideAlert' in page.settings)) {
-            page.settings.showGettingStartedGuideAlert = defaultSettings.showGettingStartedGuideAlert;
-        }
-
-        if (!('showTroubleshootingGuideAlert' in page.settings)) {
-            page.settings.showTroubleshootingGuideAlert = defaultSettings.showTroubleshootingGuideAlert;
-        }
-
-        if (!('showLoginFormIcon' in page.settings)) {
-            page.settings.showLoginFormIcon = defaultSettings.showLoginFormIcon;
-        }
-
-        if (!('showLoginNotifications' in page.settings)) {
-            page.settings.showLoginNotifications = defaultSettings.showLoginNotifications;
-        }
-
-        if (!('showNotifications' in page.settings)) {
-            page.settings.showNotifications = defaultSettings.showNotifications;
-        }
-
-        if (!('showOTPIcon' in page.settings)) {
-            page.settings.showOTPIcon = defaultSettings.showOTPIcon;
-        }
-
-        if (!('usePasswordGeneratorIcons' in page.settings)) {
-            page.settings.usePasswordGeneratorIcons = defaultSettings.usePasswordGeneratorIcons;
-        }
-
-        if (!('useObserver' in page.settings)) {
-            page.settings.useObserver = defaultSettings.useObserver;
-        }
-
-        if (!('usePasswordGeneratorIcons' in page.settings)) {
-            page.settings.usePasswordGeneratorIcons = defaultSettings.usePasswordGeneratorIcons;
-        }
-
-        if (!('usePredefinedSites' in page.settings)) {
-            page.settings.usePredefinedSites = defaultSettings.usePredefinedSites;
+        // Set default settings if needed
+        for (const [ key, value ] of Object.entries(defaultSettings)) {
+            if (!Object.hasOwn(page.settings, key)) {
+                page.settings[key] = value;
+            }
         }
 
         await browser.storage.local.set({ 'settings': page.settings });
@@ -186,13 +81,13 @@ page.initOpenedTabs = async function() {
         }
 
         // Set initial tab-ID
-        const currentTabs = await browser.tabs.query({ active: true, currentWindow: true });
-        if (currentTabs.length === 0) {
+        const currentTab = await getCurrentTab();
+        if (!currentTab) {
             return;
         }
 
-        page.currentTabId = currentTabs[0].id;
-        browserAction.showDefault(currentTabs[0]);
+        page.currentTabId = currentTab.id;
+        browserAction.showDefault(currentTab);
     } catch (err) {
         logError('page.initOpenedTabs error: ' + err);
         return Promise.reject();
@@ -372,11 +267,7 @@ page.setAutoSubmitPerformed = async function(tab) {
 };
 
 page.getLoginList = async function(tab) {
-    if (page.tabs[tab.id]) {
-        return page.tabs[tab.id].loginList;
-    }
-
-    return [];
+    return page.tabs[tab.id] ? page.tabs[tab.id].loginList : [];
 };
 
 page.fillHttpAuth = async function(tab, credentials) {
@@ -410,8 +301,8 @@ page.updateContextMenu = async function(tab, credentials) {
             // Show username inside [] if there are KPH attributes inside multiple credentials
             const attributeName = Object.keys(attribute)[0].slice(5);
             const finalName = credentials.length > 1
-                       ? `[${cred.login}] ${attributeName}`
-                       : attributeName;
+                            ? `[${cred.login}] ${attributeName}`
+                            : attributeName;
 
             page.attributeMenuItemIds.push(createContextMenuItem({
                 action: 'fill_attribute',

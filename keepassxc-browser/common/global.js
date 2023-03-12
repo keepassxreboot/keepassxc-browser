@@ -148,10 +148,15 @@ const logError = function(message) {
 // Returns file name and line number from error stack
 const getFileAndLine = function() {
     const err = new Error().stack.split('\n');
-    const line = err[4] ?? err[err.length - 1];
+    const line = err[4] ?? err.at(-1);
     const result = line.substring(line.lastIndexOf('/') + 1, line.lastIndexOf(':'));
 
     return result;
+};
+
+const getCurrentTab = async function() {
+    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    return tabs.length > 0 ? tabs[0] : undefined;
 };
 
 HTMLElement.prototype.show = function() {

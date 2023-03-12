@@ -114,12 +114,12 @@ kpxcFill.fillFromTOTP = async function(target) {
     const el = target || document.activeElement;
     const credentialList = await kpxc.updateTOTPList();
 
-    if (credentialList && credentialList.length === 0) {
+    if (credentialList?.length === 0) {
         kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
         return;
     }
 
-    if (credentialList && credentialList.length === 1) {
+    if (credentialList?.length === 1) {
         kpxcFill.fillTOTPFromUuid(el, credentialList[0].uuid);
         return;
     }
@@ -140,7 +140,7 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
         return;
     }
 
-    if (user.totp && user.totp.length > 0) {
+    if (user.totp?.length > 0) {
         // Retrieve a new TOTP value
         const totp = await sendMessage('get_totp', [ user.uuid, user.totp ]);
         if (!totp) {
@@ -149,7 +149,7 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
         }
 
         kpxcFill.setTOTPValue(el, totp);
-    } else if (user.stringFields && user.stringFields.length > 0) {
+    } else if (user.stringFields?.length > 0) {
         const stringFields = user.stringFields;
         for (const s of stringFields) {
             const val = s['KPH: {TOTP}'];
@@ -168,7 +168,7 @@ kpxcFill.setTOTPValue = function(elem, val) {
     }
 
     for (const comb of kpxc.combinations) {
-        if (comb.totpInputs && comb.totpInputs.length > 0) {
+        if (comb.totpInputs?.length > 0) {
             kpxcFill.fillSegmentedTotp(elem, val, comb.totpInputs);
             return;
         }
@@ -223,10 +223,9 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
 
     // Use predefined username as default
     let usernameValue = predefinedUsername;
-    if (!usernameValue) {
-        // With single password field the combination.password is used instead
-        usernameValue = combination.username ? combination.username.value : combination.password.value;
-    }
+
+    // With single password field the combination.password is used instead
+    usernameValue ??= combination.username ? combination.username.value : combination.password.value;
 
     // Find the correct credentials
     const selectedCredentials = kpxc.credentials.find(c => c.uuid === uuid);
@@ -262,7 +261,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
     }
 
     // Fill StringFields
-    if (selectedCredentials.stringFields && selectedCredentials.stringFields.length > 0) {
+    if (selectedCredentials.stringFields?.length > 0) {
         kpxcFill.fillInStringFields(combination.fields, selectedCredentials.stringFields);
     }
 
@@ -278,7 +277,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
 // Fills StringFields defined in Custom Fields
 kpxcFill.fillInStringFields = function(fields, stringFields) {
     const filledInFields = [];
-    if (fields && stringFields && fields.length > 0 && stringFields.length > 0) {
+    if (fields && stringFields && fields?.length > 0 && stringFields?.length > 0) {
         for (let i = 0; i < fields.length; i++) {
             if (i >= stringFields.length) {
                 continue;

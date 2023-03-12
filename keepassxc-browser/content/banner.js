@@ -61,9 +61,9 @@ kpxcBanner.create = async function(credentials = {}) {
     const usernameText = kpxcUI.createElement('span', 'small', {}, tr('popupUsername') + ' ');
     const usernameSpan = kpxcUI.createElement('span', 'small info information-username', {}, credentials.username);
 
-    const newButton = kpxcUI.createElement('button', 'kpxc-button kpxc-green-button', { 'id': 'kpxc-banner-btn-new' }, tr('popupButtonNew'));
-    const updateButton = kpxcUI.createElement('button', 'kpxc-button kpxc-orange-button', { 'id': 'kpxc-banner-btn-update' }, tr('popupButtonUpdate'));
-    const dismissButton = kpxcUI.createElement('button', 'kpxc-button kpxc-red-button', { 'id': 'kpxc-banner-btn-dismiss' }, tr('popupButtonDismiss'));
+    const newButton = kpxcUI.createElement('button', GREEN_BUTTON, { 'id': 'kpxc-banner-btn-new' }, tr('popupButtonNew'));
+    const updateButton = kpxcUI.createElement('button', ORANGE_BUTTON, { 'id': 'kpxc-banner-btn-update' }, tr('popupButtonUpdate'));
+    const dismissButton = kpxcUI.createElement('button', RED_BUTTON, { 'id': 'kpxc-banner-btn-dismiss' }, tr('popupButtonDismiss'));
 
     const separator = kpxcUI.createElement('div', 'kpxc-separator');
     const ignoreCheckbox = kpxcUI.createElement('input', 'kpxc-checkbox', { type: 'checkbox', name: 'ignoreCheckbox', id: 'kpxc-banner-ignoreCheckbox' });
@@ -238,11 +238,9 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
 
 kpxcBanner.updateCredentials = async function(credentials = {}) {
     //  Only one entry which could be updated
-    if (credentials.list.length === 1) {
+    if (credentials.list?.length === 1) {
         // Use the current username if it's empty
-        if (!credentials.username) {
-            credentials.username = credentials.list[0].login;
-        }
+        credentials.username ??= credentials.list[0].login;
 
         const res = await sendMessage('update_credentials', [ credentials.list[0].uuid, credentials.username, credentials.password, credentials.url ]);
         kpxcBanner.verifyResult(res);
@@ -259,8 +257,8 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
             kpxcBanner.shadowSelector('.kpxc-banner-dialog .username-exists').style.display = 'none';
         }
 
-        for (let i = 0; i < credentials.list.length; i++) {
-            const a = kpxcUI.createElement('a', 'list-group-item', { 'href': '#', 'entryId': i }, `${credentials.list[i].login} (${credentials.list[i].name})`);
+        for (const [ i, cred ] of credentials.list.entries()) {
+            const a = kpxcUI.createElement('a', 'list-group-item', { 'href': '#', 'entryId': i }, `${cred.login} (${cred.name})`);
             a.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (!e.isTrusted) {
@@ -271,7 +269,7 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
 
                 // Use the current username if it's empty
                 if (!credentials.username) {
-                    credentials.username = credentials.list[entryId].login;
+                    credentials.username = cred.login;
                 }
 
                 let url = credentials.url;
@@ -292,7 +290,7 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
                 });
             });
 
-            if (credentials.usernameExists && credentials.username === credentials.list[i].login) {
+            if (credentials.usernameExists && credentials.username === cred.login) {
                 a.style.fontWeight = 'bold';
             }
 

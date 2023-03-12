@@ -8,10 +8,11 @@
 
     const data = await getLoginData();
     const ll = document.getElementById('login-list');
-    for (let i = 0; i < data.logins.length; ++i) {
+
+    for (const [ i, login ] of data.logins.entries()) {
         const a = document.createElement('a');
         a.setAttribute('class', 'list-group-item');
-        a.textContent = data.logins[i].login + ' (' + data.logins[i].name + ')';
+        a.textContent = login.login + ' (' + login.name + ')';
         a.setAttribute('id', '' + i);
 
         a.addEventListener('click', (e) => {

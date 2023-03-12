@@ -54,8 +54,8 @@ kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
     const placeholder = field.getLowerCaseAttribute('placeholder');
 
     // Checks if the field id, name or placeholder includes some of the acceptedOTPFields but not any from ignoredTypes
-    if ((acceptedOTPFields.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f))) || acceptedParents.some(s => field.closest(s)))
-        && !ignoredTypes.some(f => (id && id.includes(f)) || (name && name.includes(f) || placeholder && placeholder.includes(f)))) {
+    if ((acceptedOTPFields.some(f => id?.includes(f) || (name?.includes(f) || placeholder?.includes(f))) || acceptedParents.some(s => field.closest(s)))
+        && !ignoredTypes.some(f => id?.includes(f) || (name?.includes(f) || placeholder?.includes(f)))) {
         return true;
     }
 
