@@ -678,24 +678,11 @@ const topLevelDomainMatches = function(host) {
     }
 
     const originUrl = new URL(host);
-    const frameUrl = new URL(window.self.document.location.origin);
-    const urlParts = originUrl.host.split('.');
-    const dotCount = urlParts.length - 1;
+    const frameUrl = new URL(window.location.origin);
 
-    // Simple host like google.com, check directly
-    if (dotCount < 1) {
-        return false;
-    } else if (dotCount === 1) {
-        return frameUrl.host.includes(originUrl.host);
-    }
-
-    // Get the top-level-domain using counts of '.' but backwards, max 3.
-    // A basic host is like idmsa.apple.com, a more complex one like www.bbva.com.ar.
-    const index = Math.min(dotCount, 3);
-    const subDomain = `${urlParts[dotCount - index]}.`;
-    const topLevelDomain = originUrl.host.substring(originUrl.host.indexOf(subDomain) + subDomain.length);
-
-    return frameUrl.host.includes(topLevelDomain);
+    // Use the last two parts of the host name as "domain"
+    const domain = frameUrl.host.split('.').slice(-2).join('.');
+    return originUrl.host == domain || originUrl.host.endsWith('.' + domain);
 };
 
 // Handles messages sent from iframes to the top window
