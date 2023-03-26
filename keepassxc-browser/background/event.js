@@ -220,6 +220,11 @@ kpxcEvent.hideTroubleshootingGuideAlert = async function(tab) {
     await kpxcEvent.onSaveSettings(tab, settings);
 };
 
+// Bounce message back to all frames
+kpxcEvent.sendBackToTabs = async function(tab, args = []) {
+    await browser.tabs.sendMessage(tab.id, { action: 'frame_message', args: args });
+};
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -231,6 +236,7 @@ kpxcEvent.messageHandlers = {
     'enable_automatic_reconnect': keepass.enableAutomaticReconnect,
     'disable_automatic_reconnect': keepass.disableAutomaticReconnect,
     'fill_http_auth': page.fillHttpAuth,
+    'frame_message': kpxcEvent.sendBackToTabs,
     'generate_password': keepass.generatePassword,
     'get_color_theme': kpxcEvent.getColorTheme,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
