@@ -864,6 +864,12 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'fill_attribute' && req.args) {
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillAttributeToActiveElementWith(req.args);
+        } else if (req.action === 'frame_message') {
+            if (req.args?.[0] === 'frame_request_to_frames' && window.self !== window.top) {
+                kpxcCustomLoginFieldsBanner.handleParentWindowMessage(req.args);
+            } else if (req.args?.[0] === 'frame_request_to_parent' && window.self === window.top) {
+                kpxcCustomLoginFieldsBanner.handleTopWindowMessage(req.args);
+            }
         } else if (req.action === 'ignore_site') {
             kpxc.ignoreSite(req.args);
         } else if (req.action === 'redetect_fields') {
