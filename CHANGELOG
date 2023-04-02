@@ -1,4 +1,17 @@
-1.8.5 (26-02-2023)
+1.8.6 (2023-04-03)
+=========================
+- Add support for showing Autocomplete Menu on top [#1866]
+- Change using defaultView instead of scrollingElement when positioning icons and menus [#1873]
+- Change iframe messaging to use sendMessage() instead of postMessage() [#1886]
+- Fix a bug with page.tabs check [#1877]
+- Refactor and code cleanup [#1880]
+- Update webextension-polyfill from 0.8.0 to 0.10.0 [#1881]
+
+1.8.5.1 (2023-03-02)
+=========================
+- Fix filling Basic HTTP Auth [#1869]
+
+1.8.5 (2023-02-26)
 =========================
 - Add adf.ly TOTP to Predefined Sites
 - Change default redirect value from 1 to 3 with Credential Banner [#1842]
@@ -15,7 +28,7 @@
 - Refactor popup code to use Manifest V3 compatible API calls [#1822]
 - Update ESLint to use recommended ruleset instead of airbrb-base [#1816]
 
-1.8.4 (19-12-2022)
+1.8.4 (2022-12-19)
 =========================
 - Add more PayPal addresses to Predefines Sites [#1765]
 - Add new ESLint rules and file formatting [#1756]
@@ -27,11 +40,11 @@
 - Fix stylesheet loading on Shadow DOM elements [#1773]
 - Update translations to repository [#1791]
 
-1.8.3.1 (30-10-2022)
+1.8.3.1 (2022-10-30)
 =========================
 - Remove request id from retrieve credentials request [#1761]
 
-1.8.3 (24-10-2022)
+1.8.3 (2022-10-24)
 =========================
 - Fix filling TOTP without detecting a input field combination [#1726]
 - Fix saving Custom Login Fields with iframes [#1731]
@@ -40,15 +53,15 @@
 - Fix hiding a duplicate TOTP entry [#1724]
 - Fix detecting submit button on Microsoft Login page [#1741]
 
-1.8.2.2 (11-09-2022)
+1.8.2.2 (2022-09-11)
 =========================
 - Add support for new Access Confirm Dialog with KeePassXC 2.7.2 [#1719]
 
-1.8.2.1 (08-09-2022)
+1.8.2.1 (2022-09-08)
 =========================
 - Revert a change required for KeePassXC 2.7.2 [#1714]
 
-1.8.2 (06-09-2022)
+1.8.2 (2022-09-06)
 =========================
 - Fix setting toolbar icon on database lock/unlock [#1690]
 - Fix for ignoring hidden fields with segmented TOTP [#1693]
@@ -56,7 +69,7 @@
 - Fix new PayPal 2FA page [#1704]
 - Fix new Steam 2FA page [#1711]
 
-1.8.1 (11-07-2022)
+1.8.1 (2022-07-11)
 =========================
 - Add more PayPal URL's to Predefined Sites [#1673]
 - Change Improved Input Field Detection to an optional feature [#1666]
@@ -64,7 +77,7 @@
 - Fix reconnecting the extension on Username Icon click [#1676]
 - Fix setting icon position/visibility on transitionend event [#1677]
 
-1.8.0 (23-06-2022)
+1.8.0 (2022-06-23)
 =========================
 - Add search feature to Autocomplete Menu [#1511]
 - Add debug logging option [#1540]
@@ -94,11 +107,11 @@
 - Update webextension-polyfill library [#1551]
 - Update Bootstrap to version 5, remove jQuery [#1578]
 
-1.7.12 (07-04-2022)
+1.7.12 (2022-04-07)
 =========================
 - Add support for the new password generator with KeePassXC 2.7.0 [#1599]
 
-1.7.11 (11-12-2021)
+1.7.11 (2021-12-11)
 =========================
 - Add new Predefined Sites (FNAC, HP) [#1469]
 - Add support for download favicon after save option (KeePassXC 2.7.0 and later) [#1472]
@@ -109,11 +122,11 @@
 - Fix username issue when saving new credentials [#1486]
 - Improve 2FA field detection [#1465]
 
-1.7.10.1 (17-11-2021)
+1.7.10.1 (2021-11-17)
 =========================
 - Fix interfering with mouse events [#1447]
 
-1.7.10 (16-11-2021)
+1.7.10 (2021-11-16)
 =========================
 - Add support for resolving TOTP field by parent selector [#1381]
 - Add support for triggering Global Auto-Type from the extension (2.7.0 and newer) [#1265]
@@ -131,11 +144,11 @@
 - Fix some general CSS theme issues [#1389, #1435]
 - Update libraries for scripts [#1407]
 
-1.7.9.1 (22-07-2021)
+1.7.9.1 (2021-07-22)
 =========================
 - Revert form visibility check [#1380]
 
-1.7.9. (21-07-2021)
+1.7.9. (2021-07-21)
 =========================
 - Add support for file:// protocol in Site Preferences [#1317]
 - Fix for checking Custom Fields [#1320]
@@ -148,11 +161,11 @@
 - Ignore transparent forms [#1368]
 - TOTP fixes [#1350, #1363]
 
-1.7.8.1. (12-04-2021)
+1.7.8.1. (2021-04-12)
 =========================
 - Fix TOTP sorting [#1304]
 
-1.7.8 (10-04-2021)
+1.7.8 (2021-04-10)
 =========================
 - Fix filling Autocomplete Menu from keyboard [#1294]
 - Fix ID and Name check for page form [#1290]
@@ -160,7 +173,7 @@
 - Accepted OTP fields addition [#1301]
 - Improve eBay login flow [#1299]
 
-1.7.7 (30-03-2021)
+1.7.7 (2021-03-30)
 =========================
 - Add support for credential sorting (KeePassXC side option will be removed) [#1280]
 - Add support for additional keyboard shortcuts [#1256]
@@ -173,11 +186,11 @@
 - Site Preferences improvements [#1252, #1278]
 - Predefined Sites additions [#1251, #1261, #1264]
 
-1.7.6 (04-02-2021)
+1.7.6 (2021-02-04)
 =========================
 - Fixes for the new Autocomplete implementation [#1206, #1208]
 
-1.7.5 (31-01-2021)
+1.7.5 (2021-01-31)
 =========================
 - Add support for filling TOTP from another database [#1173]
 - TOTP detection fixes [#1168, #1188]
@@ -188,7 +201,7 @@
 - Ignore form buttons with different formaction [#1193]
 - New translations: Slovenian
 
-1.7.4 (21-12-2020)
+1.7.4 (2020-12-21)
 =========================
 - Update tweetnacl.js to 1.0.3 [#1125]
 - Improve keyboard shortcuts page for Firefox [#1104]
@@ -200,13 +213,13 @@
 - Fix showing Autocomplete Menu when not focused [#1086]
 - Define maximum entry name length for Autocomplete Menu [#1154]
 
-1.7.3 (07-11-2020)
+1.7.3 (2020-11-07)
 =========================
 - Fix submitting username from Autocomplete Menu [#1094]
 - Fix TOTP field identification [#1085]
 - Fix Predefined Sites [#1084, #1090]
 
-1.7.2 (02-11-2020)
+1.7.2 (2020-11-02)
 =========================
 - Add predefined sites option to improve the login flow with multiple pages [#1010]
 - Adjustments for input types [#1022, #1040, #1071]
@@ -215,7 +228,7 @@
 - Fix Google login page submit detection [#1015]
 - Fix relative icon positions with dir="rtl" [#1021]
 
-1.7.1 (13-09-2020)
+1.7.1 (2020-09-13)
 =========================
 - Fix fill from username icon when Automatically retrieve credentials is disabled [#990]
 - Fix Custom Login Field behavior [#1000]
@@ -224,7 +237,7 @@
 - Fix Auto-Submit (wrong function call) [#1000]
 - Fix Auto-Fill (e.g. with Google) [#1000]
 
-1.7.0 (02-09-2020)
+1.7.0 (2020-09-02)
 =========================
 
 Major content script refactor. See https://github.com/keepassxreboot/keepassxc-browser/pull/961 for details.
@@ -234,19 +247,18 @@ Major content script refactor. See https://github.com/keepassxreboot/keepassxc-b
 - Add support for CSS animations [#961]
 - Fixed possible extension slowdowns [#961]
 
-1.6.6 (13-07-2020)
+1.6.6 (2020-07-13)
 =========================
 - Fix document max size calculation, affects input field detection [#937]
 
-1.6.5 (11-07-2020)
+1.6.5 (2020-07-11)
 =========================
 - Icon and translation fixes [#934, #924]
 - Add wilcard to ignored URL [#915]
 - Make groups scrollable when saving credentials [#918]
 - High CPU usage fixes [#931, #928, #920]
 
-Changelog:
-1.6.4 (15-06-2020)
+1.6.4 (2020-06-15)
 =========================
 - Fix allow filling readonly fields [#878]
 - Fix saving credentials to a new group [#909]
@@ -255,7 +267,7 @@ Changelog:
 - Improve form handling [#898, #892]
 - Update some icons and add database locked icon [#903]
 
-1.6.3 (28-04-2020)
+1.6.3 (2020-04-28)
 =========================
 - Fix auto-reconnect with Windows [#832]
 - Fix credential saving check [#843]
@@ -268,17 +280,17 @@ Changelog:
 - Fix relative autocomplete position [#840]
 - Code cleaning on settings page [#872]
 
-1.6.2 (26-03-2020)
+1.6.2 (2020-03-26)
 =========================
 - Fix TOTP icon check [#821]
 - Fix saving issues with settings page [#823, #828]
 
-1.6.1 (22-03-2020)
+1.6.1 (2020-03-22)
 =========================
 - Fix CSS root variable collide [#816]
 - Disable group name option with older KeePassXC releases [#817]
 
-1.6.0 (21-03-2020)
+1.6.0 (2020-03-21)
 =========================
 - TOTP icon and keyboard shortcut fixes [#716, #784, #786, #798]
 - Move all DOM elements to Shadow DOM [#719]
@@ -290,7 +302,7 @@ Changelog:
 - Fix import settings [#773]
 - Fix updating datetime on reconnect [#814]
 
-1.5.4 (09-12-2019
+1.5.4 (2019-12-09)
 =========================
 - Add support for filling TOTP using an icon [#625] [#710]
 - Add support for icon positioning with right-to-left pages [#702]
@@ -300,20 +312,20 @@ Changelog:
 - Fix using Site Preferences with the new Credential Banner [#694]
 - Remove XML exclude from the manifest [#666]
 
-1.5.3 (21-10-2019)
+1.5.3 (2019-10-21)
 =========================
 - Add undefined type to the input field list [#637]
 - Fix association with databases and hash upgrade [#638] [#641] [#647]
 - Fix returning Promise with TOTP filling [#646]
 - Add a feature for import/export settings [#642]
 
-1.5.2 (13-10-2019)
+1.5.2 (2019-10-13)
 =========================
 - Fix missing await when filling a TOTP [#632]
 - Fix connection issues and "Cannot decrypt message" related problems [#630]
 - Fix update button handling from Credential Banner [#620]
 
-1.5.1 (27-09-2019)
+1.5.1 (2019-09-27)
 =========================
 - Username field icon is now optional (enabled by default) [#614]
 - Fix CSS separator [#614]
@@ -322,7 +334,7 @@ Changelog:
 
 For detailed information about the changes, please see https://github.com/keepassxreboot/keepassxc-browser/wiki/What's-new-in-1.5.0
 
-1.5.0 (26-09-2019)
+1.5.0 (2019-09-26)
 =========================
 - New username field icon and behaviour [#351]
 - New notifications [#351]
@@ -334,25 +346,25 @@ For detailed information about the changes, please see https://github.com/keepas
 
 For detailed information about the changes, please see https://github.com/keepassxreboot/keepassxc-browser/wiki/What's-new-in-1.5.0
 
-1.4.7 (28-07-2019)
+1.4.7 (2019-07-28)
 =========================
 - Improve password change detection [#566]
 - Fix password fill [#577]
 - Focus to input field after keyboard fill [#578]
 - Support for updating legacy database hashes [#581]
 
-1.4.6 (02-06-2019)
+1.4.6 (2019-06-02)
 =========================
 - Fix password fill from context menu [#556]
 - More reconnect fixes [#561]
 
-1.4.5 (27-05-2019)
+1.4.5 (2019-05-27)
 =========================
 - Fix reconnect issues [#549]
 - Add support for fixed entropy display [#552]
 - Fix filling an option value [#554]
 
-1.4.4 (16-05-2019)
+1.4.4 (2019-05-16)
 =========================
 - Allow filling username only from keyboard shortcut [#520]
 - Fix reconnect from popup [#529]
@@ -361,21 +373,21 @@ For detailed information about the changes, please see https://github.com/keepas
 - Add support for displaying expired credentials [#537]
 - Fix using Tab with Autocomplete [#539]
 
-1.4.3 (26-04-2019)
+1.4.3 (2019-04-26)
 =========================
 - Remove document event overrides [#495]
 - Fix filling String Fields [#498]
 - Fix using Tab command with autocomplete [#504]
 - Add username as accepted non-standard input type [#505]
 
-1.4.2 (23-04-2019)
+1.4.2 (2019-04-23)
 =========================
 - Add option for Auto-submit [#480]
 - Prevent onclick override [#487]
 - Allow disabling IntersectionObserver [#491]
 - Fix password-only fill with autocomplete [#493]
 
-1.4.0 (21-04-2019)
+1.4.0 (2019-04-21)
 =========================
  - Add translations from Transifex
  - Show HiDPI toolbar icon in Chrome [#471]
@@ -383,7 +395,7 @@ For detailed information about the changes, please see https://github.com/keepas
  - Fix ignored sites in Firefox [#458]
  - Add "Show more" button for selecting arbitrary custom fields [#360]
 
-1.3.3 (26-03-2019)
+1.3.3 (2019-03-26)
 =========================
  - Prevent page scripts from using added DOM elements [#438]
  - Clear credentials when screen is locked [#358]
@@ -392,14 +404,14 @@ For detailed information about the changes, please see https://github.com/keepas
  - Improve error messages [#392]
  - Fix shortcuts [#414]
 
-1.3.2 (11-01-2019)
+1.3.2 (2019-01-11)
 =========================
  - Fix KeePassXC version check [#376]
  - Fix race condition when web page has multiple frames [#371]
  - Remove check for aria-hidden [#365]
  - Reduce CPU usage [#349]
 
-1.3.1 (11-01-2019)
+1.3.1 (2019-01-11)
 =========================
  - Fix database unlocking [#309]
  - Add new key icon [#333]
@@ -411,7 +423,7 @@ For detailed information about the changes, please see https://github.com/keepas
  - HTTP auth credential requests are now handled separately (requires KeePassXC 2.4.0) [#343]
  - Site preferences fixes [#338]
 
-1.3.0 (07-10-2018)
+1.3.0 (2018-10-07)
 =========================
  - Add support for translations [#37]
  - Add quick-filter bar to credentials selection popup [#252]
@@ -429,7 +441,7 @@ For detailed information about the changes, please see https://github.com/keepas
  - Fix discard button not being shown when selection custom login fields [#307]
  - Update webextension polyfill to a newer version, which fixes various errors [#296]
 
-1.2.0 (29-07-2018)
+1.2.0 (2018-07-29)
 =========================
 - Replace "Ignored Sites" with new "Site Preferences" settings page [#208]
 - Fix checks throwing errors [#207, #222]
@@ -439,21 +451,21 @@ For detailed information about the changes, please see https://github.com/keepas
 - Minor user interface adjustments [#233, #230, #213]
 - Improve search field detection [#195]
 
-1.1.7 (13-06-2018)
+1.1.7 (2018-06-13)
 =========================
 - Fix credential field detection regression [#199]
 
-1.1.6 (12-06-2018)
+1.1.6 (2018-06-12)
 =========================
 - Disable single username field detection [#194]
 - Fix ignored sites [#196]
 - Detect credential fields without type [#198]
 
-1.1.5 (11-06-2018)
+1.1.5 (2018-06-11)
 =========================
 - Fix search fields being detected as username fields [#189]
 
-1.1.4 (10-06-2018)
+1.1.4 (2018-06-10)
 =========================
 - Improve performance of field detection and limit it to 100 fields [#166,#157,185]
 - Improve option to ignore fields [#170]
@@ -464,23 +476,23 @@ For detailed information about the changes, please see https://github.com/keepas
 - Allow filling of TOTP fields when they are on a separate page [#162]
 - Ignore invisible input fields more strictly [#176]
 
-1.1.3 (11-05-2018)
+1.1.3 (2018-05-11)
 =========================
 - Remove autoreconnect to prevent proxy process leakage on Windows [#147]
 - Fix browser becoming unresponsive due to constant field polling [#148]
 
-1.1.2 (10-05-2018)
+1.1.2 (2018-05-10)
 =========================
 - Fix credentials being requested for non-login fields [#144]
 
-1.1.1 (10-05-2018)
+1.1.1 (2018-05-10)
 =========================
 - Improve dynamic input field detection [#117]
 - Fix HTTP Basic Auth dialog [#121]
 - Fix incorrect update notification [#141]
 - Do not try to detect database changes on page load [#142]
 
-1.1.0 (09-05-2018)
+1.1.0 (2018-05-09)
 =========================
 - Allow specifying ignored sites
 - Add new notification options
@@ -492,29 +504,29 @@ For detailed information about the changes, please see https://github.com/keepas
 - Fix various resource leaks
 - Fix searching in all databases
 
-1.0.1 (04-03-2018)
+1.0.1 (2018-03-04)
 =========================
 - Don't fill password fields if they already have data
 - Fix custom placeholders
 - Fix input type checks
 - Fix custom input fields with multiple tabs
 
-1.0.0 (27-02-2018)
+1.0.0 (2018-02-27)
 =========================
 - First stable release
 
-0.5.2 (02-02-2018)
+0.5.2 (2018-02-02)
 =========================
 - Choose own credential fields saves the full URL instead of host
 - HTTP Auth no longer gets stuck when there are no credentials available
 - Added option to show notifications (enabled by default)
 - Added notifications for HTTP Auth and saving new credentialsList (new permission needed)
 
-0.5.1 (23-01-2018)
+0.5.1 (2018-01-23)
 =========================
 - Fixed unnecessary credential retrieving when input fields are not available
 
-0.5.0 (22-01-2018)
+0.5.0 (2018-01-22)
 =========================
 - Fixed an error when filling only a password
 - Credential retrieval is allowed when only one input field is visible (TOTP)
@@ -526,89 +538,89 @@ For detailed information about the changes, please see https://github.com/keepas
 - Fixed identation
 - Added support for credential filling through user interaction when database is closed
 
-0.4.8 (06-01-2018)
+0.4.8 (2018-01-06)
 =========================
 - Changed native messaging host name to org.keepassxc.keepassxc_browser
 - Exclude XSD files from content scripts
 - Switched default keyboard shortcuts to Alt+Shift+U and Alt+Shift+P
 
-0.4.5 (28-12-2017)
+0.4.5 (2017-12-28)
 =========================
 - Added support for aria-hidden attribute when checking input field visibility
 - Fixed a bug in redetecting credentials
 - Small CSS fixes
 
-0.4.4 (17-12-2017)
+0.4.4 (2017-12-17)
 =========================
 - Added support for OTP codes via context menu
 - Fixed HTTP auth
 - General content script code cleaning
 
-0.4.3 (9-12-2017)
+0.4.3 (2017-12-09)
 =========================
 - Create password generator dialog only when clicking the icon
 - Some adjustments to jQuery CSS scope
 
-0.4.2 (27-11-2017)
+0.4.2 (2017-11-27)
 =========================
 - Fixed HTTP authentication with multiple credentials (credits to smorks)
 - Fixed error handling when decrypt fails
 - Fixed database-locked response handling
 - Fixed nonce increment when encrypting messages
 
-0.4.1 (18-11-2017)
+0.4.1 (2017-11-18)
 =========================
 - Added support for the credentials dropdown menu with only password field visible
 - Fixed jQuery overriding with custom scoped CSS
 - Fixed non-necessary destroying of autocomplete on autofill
 
-0.4.0 (13-11-2017)
+0.4.0 (2017-11-13)
 =========================
 - Fixed showing context menu on password fields with Firefox
 - Ignore XML files on content scripts (Firefox shows them incorrectly)
 - UDP features removed as KeePassXC switched them to Unix domain sockets and named pipes
 
-0.3.9 (04-11-2017)
+0.3.9 (2017-11-04)
 =========================
 - Removed incorrect timeout waiting on init
 
-0.3.8 (01-11-2017)
+0.3.8 (2017-11-01)
 =========================
 - Use browser.storage.local instead of localStorage
 - Switched some functions to promise
 
-0.3.7 (22-10-2017)
+0.3.7 (2017-10-22)
 =========================
 - Improved credentials check (does not use protocol requests for polling)
 
-0.3.6 (20-10-2017)
+0.3.6 (2017-10-20)
 =========================
 - Restricted page credentials polling to active tab
 
-0.3.5 (19-10-2017)
+0.3.5 (2017-10-19)
 =========================
 - Removed database locked/unlocked status polling and replaced it with message handling from KeePassXC signals
 - Clear or change page credentials if a database is changed or locked
 
-0.3.4 (14-10-2017)
+0.3.4 (2017-10-14)
 =========================
 - Added support for Lock Database button
 - Fixed some error message handling
 
-0.3.3 (12-10-2017)
+0.3.3 (2017-10-12)
 =========================
 - Fixed database reloading when KeePassXC has restarted and database is opened
 - New buttons with glyphicons
 
-0.3.2 (30-09-2017)
+0.3.2 (2017-09-30)
 =========================
 - Improved timeout handling
 
-0.3.1 (29-09-2017)
+0.3.1 (2017-09-29)
 =========================
 - Added timeout handling for postMessage(). Allows proxy application to be reloaded.
 
-0.3.0 (18-09-2017)
+0.3.0 (2017-09-18)
 =========================
 - Added Mozilla's browser-polyfill for making WebExtension compatibility easier
 - Merged changes from the latest passifox (credits to smorks/keepasshttp-connector)
@@ -617,17 +629,17 @@ For detailed information about the changes, please see https://github.com/keepas
 - Automatic detection of div's with forms that are non-hidden by user interaction
 - Verified the source code via JSHint
 
-0.2.9 (27-08-2017)
+0.2.9 (2017-08-27)
 =========================
 - Code cleaning, global functions moved to global.js
 - New popup state and button when database is closed or locked
 - Fixed HTTP auth login with Chrome/Chromium/Vivaldi
 
-0.2.8 (08-08-2017)
+0.2.8 (2017-08-08)
 =========================
 - Changed Firefox's minimum version to 55.0
 
-0.2.7 (31-07-2017)
+0.2.7 (2017-07-31)
 =========================
 - Some Firefox related changes (credits to projectgus)
 - Fixed Skip button function when choosing own credential fields
@@ -636,17 +648,17 @@ For detailed information about the changes, please see https://github.com/keepas
 - Added null checking for onDisconnected()
 - Any Chrome related stuff is now disabled on options pages when using Firefox
 
-0.2.6 (23-07-2017)
+0.2.6 (2017-07-23)
 =========================
 - Fixed error message variables
 
-0.2.5 (21-07-2017)
+0.2.5 (2017-07-21)
 =========================
 - Fixed incorrect return value in keepass.getCryptoKey
 - Added a better error message handling
 - Added an error message when Native Messaging is disabled in KeePassXC
 
-0.2.4 (11-07-2017)
+0.2.4 (2017-07-11)
 =========================
 - Changed comparison operators to strict ones (and some code cleaning)
 - Copy and Fill & copy buttons are now hidden when Password Generator has an error
@@ -654,11 +666,11 @@ For detailed information about the changes, please see https://github.com/keepas
 - Fix for password generator (error is now shown immediately instead of a blank dialog)
 - Use a single password generator icon
 
-0.2.3 (05-07-2017)
+0.2.3 (2017-07-05)
 =========================
 - Fixed a few variables
 
-0.2.2 (04-07-2017)
+0.2.2 (2017-07-04)
 =========================
 - Some code cleaning and rewriting
 - Fixed displaying 'Database not opened' error message
@@ -666,71 +678,71 @@ For detailed information about the changes, please see https://github.com/keepas
 - Added support for UDP port selector for proxy applications
 - Fixed strict_min_version for Firefox Nightly
 
-0.2.1 (27-06-2017)
+0.2.1 (2017-06-27)
 =========================
 - get-databasehash request/response is now encrypted
 
-0.2.0 (26-06-2017)
+0.2.0 (2017-06-26)
 =========================
 - Added JSON install files and script for Windows
 - New version checking function
 - Added error message handling
 - Added support for reloading KeePassXC (or proxy) with new public keys
 
-0.1.10 (14-06-2017)
+0.1.10 (2017-06-14)
 =========================
 - Updated manifest and json files up to date
 
-0.1.9 (14-06-2017)
+0.1.9 (2017-06-14)
 =========================
 - Renamed the project to keepassxc-browser
 
-0.1.8 (13-06-2017)
+0.1.8 (2017-06-13)
 =========================
 - Fixed showing wrong status messages
 - Enable relaunching and reconnecting to KeePassXC (create new keys on the fly)
 
-0.1.7 (28-05-2017)
+0.1.7 (2017-05-28)
 =========================
 - Removed debug logging messages
 - Removed unnecessary permissions from manifest
 
-0.1.6 (27-05-2017)
+0.1.6 (2017-05-27)
 =========================
 - Upgraded tweetnacl-js to 1.0.0
 - Upgraded tweetnacl-utils-js to 0.15.0
 - Some code fixes concerning encryption and decryption
 - Redesigned simpler password generator dialog
 
-0.1.5 (22-05-2017)
+0.1.5 (2017-05-22)
 =========================
 - Fixed a few deprecated functions
 - Added some more Firefox compatible code (Firefox now works 90%!)
 - Removed an unncecessary .map file
 
-0.1.4 (21-05-2017)
+0.1.4 (2017-05-21)
 =========================
 - Upgraded manifest options to V2
 - Added some more Firefox compatible code
 
-0.1.3 (19-05-2017)
+0.1.3 (2017-05-19)
 =========================
 - Fixed a bug showing correct status in the popup
 - Added a license for a quick method to determine which browser is used in API calls
 
-0.1.2 (18-05-2017)
+0.1.2 (2017-05-18)
 =========================
 - Upgraded jquery from 3.2.0 to 3.2.1
 - Removed unnecessary images
 - Upgraded deprecated API calls (extension -> runtime, so from synchronous to asynchronous)
 - Partial Firefox support (the extension can be loaded but functionality is still limited)
 
-0.1.1 (28-04-2017)
+0.1.1 (2017-04-28)
 =========================
 - This version works with the KeePassXC fork
 - Upgraded JavaScripts to work asynchronously
 
-0.1.0 (12-04-2017)
+0.1.0 (2017-04-12)
 =========================
 - Replaced crypto libraries with tweetnacl-js
 - New application and popup icons
