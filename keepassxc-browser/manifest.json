@@ -1,8 +1,9 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.8.6",
-    "version_name": "1.8.6",
+    "version": "1.8.6.1",
+    "version_name": "1.8.6.1",
+    "minimum_chrome_version": "93",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {
@@ -158,7 +159,7 @@
     "applications": {
         "gecko": {
             "id": "keepassxc-browser@keepassxc.org",
-            "strict_min_version": "91.0"
+            "strict_min_version": "93.0"
         }
     },
     "default_locale": "en"

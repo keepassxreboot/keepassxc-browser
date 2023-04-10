@@ -25,6 +25,7 @@ async function adjustManifest(manifest) {
             data['browser_action']['default_icon'][elem] = 'icons/keepassxc.svg';
         }
         delete data['version_name'];
+        delete data['minimum_chrome_version'];
     } else if (manifest.includes('chromium')) {
         delete data['applications'];
     }
