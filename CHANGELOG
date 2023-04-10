@@ -1,3 +1,7 @@
+1.8.6.1 (2023-04-10)
+=========================
+- Change minimum browser version requirements [#1895]
+
 1.8.6 (2023-04-03)
 =========================
 - Add support for showing Autocomplete Menu on top [#1866]
