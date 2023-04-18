@@ -28,7 +28,8 @@ const PREDEFINED_SITELIST = [
     'https://www.fidelity.com/*',
     'https://twitter.com/i/flow/login',
     'https://login3.id.hp.com/*',
-    'https://secure.fnac.com/identity/server/gateway/*'
+    'https://secure.fnac.com/identity/server/gateway/*',
+    'https://*.openai.com/u/login/*'
 ];
 
 const awsUrl = 'signin.aws.amazon.com';
