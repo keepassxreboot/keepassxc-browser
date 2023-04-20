@@ -16,6 +16,7 @@ keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.databaseHash = '';
 keepass.previousDatabaseHash = '';
 keepass.reconnectLoop = null;
+keepass.protocolV2 = false;
 
 const kpActions = {
     SET_LOGIN: 'set-login',
@@ -31,7 +32,10 @@ const kpActions = {
     GET_DATABASE_GROUPS: 'get-database-groups',
     CREATE_NEW_GROUP: 'create-new-group',
     GET_TOTP: 'get-totp',
-    REQUEST_AUTOTYPE: 'request-autotype'
+    REQUEST_AUTOTYPE: 'request-autotype',
+    // V2
+    CREATE_CREDENTIALS: 'create-credentials',
+    GET_CREDENTIALS: 'get-credentials'
 };
 
 browser.storage.local.get({ 'latestKeePassXC': { 'version': '', 'lastChecked': null }, 'keyRing': {} }).then((item) => {
@@ -146,7 +150,7 @@ keepass.retrieveCredentials = async function(tab, args = []) {
 
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
         if (response) {
-            entries = removeDuplicateEntries(response.entries);
+            entries = keepass.removeDuplicateEntries(response.entries);
             keepass.updateLastUsed(keepass.databaseHash);
 
             if (entries.length === 0) {
@@ -783,6 +787,7 @@ keepass.isAssociated = function() {
 keepass.setcurrentKeePassXCVersion = function(version) {
     if (version) {
         keepass.currentKeePassXC = version;
+        keepass.protocolV2 = keepass.compareVersion('2.8.0', version);
     }
 };
 
@@ -907,7 +912,7 @@ keepass.compareVersion = function(minimum, current, canBeEqual = true) {
     return (canBeEqual ? (min <= cur) : (min < cur));
 };
 
-const removeDuplicateEntries = function(arr) {
+keepass.removeDuplicateEntries = function(arr) {
     const newArray = [];
 
     for (const a of arr) {

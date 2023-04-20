@@ -66,6 +66,17 @@ const messageBuffer = {
         }
 
         return false;
+    },
+
+    matchAndRemoveV2(msg) {
+        for (let i = 0; i < this.buffer.length; ++i) {
+            if (msg?.requestID === this.buffer[i].requestID) {
+                this.buffer.splice(i, 1);
+                return true;
+            }
+        }
+
+        return false;
     }
 };
 
@@ -86,7 +97,7 @@ keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeo
                     const isNotificationOrError = !msg.nonce && request.requestID === msg.requestID;
 
                     // Only resolve a matching response or a notification (without nonce)
-                    if (isNotificationOrError || messageBuffer.matchAndRemove(msg)) {
+                    if (isNotificationOrError || messageBuffer.matchAndRemoveV2(msg)) {
                         port.removeListener(handler);
                         if (enableTimeout) {
                             clearTimeout(timeout);
@@ -173,6 +184,118 @@ keepassClient.sendMessage = async function(kpAction, tab, messageData, nonce, en
     const incrementedNonce = keepassClient.incrementedNonce(nonce);
 
     return keepassClient.handleResponse(response, incrementedNonce, tab);
+};
+
+//--------------------------------------------------------------------------
+// Protocol V2
+//--------------------------------------------------------------------------
+
+keepassClient.sendNativeMessageV2 = function(requestAction, request, enableTimeout = false, timeoutValue) {
+    return new Promise((resolve, reject) => {
+        let timeout;
+        const ev = keepassClient.nativePort.onMessage;
+
+        const listener = ((port) => {
+            const handler = (msg) => {
+                if (msg && msg?.requestID === request.requestID) {
+                    // Only resolve a matching response
+                    if (messageBuffer.matchAndRemove(msg)) {
+                        port.removeListener(handler);
+                        if (enableTimeout) {
+                            clearTimeout(timeout);
+                        }
+
+                        resolve(msg);
+                        return;
+                    }
+                }
+            };
+            return handler;
+        })(ev);
+        ev.addListener(listener);
+
+        const messageTimeout = timeoutValue || keepassClient.messageTimeout;
+
+        // Handle timeouts
+        if (enableTimeout) {
+            timeout = setTimeout(() => {
+                const errorMessage = {
+                    action: requestAction,
+                    error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
+                    errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
+                };
+                keepass.isKeePassXCAvailable = false;
+                ev.removeListener(listener.handler);
+                resolve(errorMessage);
+            }, messageTimeout);
+        }
+
+        // Store the request to the buffer
+        messageBuffer.addMessage(request);
+
+        // Send the request
+        if (keepassClient.nativePort) {
+            keepassClient.nativePort.postMessage(request);
+        }
+    });
+};
+
+keepassClient.sendMessageV2 = async function(kpAction, tab, messageData, nonce, enableTimeout = false, triggerUnlock = false) {
+    const request = keepassClient.buildRequestV2(keepassClient.encrypt(messageData, nonce), nonce, keepass.clientID, messageData.requestID, triggerUnlock);
+    const response = await keepassClient.sendNativeMessageV2(kpAction, request, enableTimeout);
+    const incrementedNonce = keepassClient.incrementedNonce(nonce);
+
+    return keepassClient.handleResponseV2(response, incrementedNonce, tab);
+};
+
+keepassClient.buildRequestV2 = function(encryptedMessage, nonce, clientID, requestID, triggerUnlock = false) {
+    const request = {
+        message: encryptedMessage,
+        nonce: nonce,
+        clientID: clientID,
+        requestID: requestID
+    };
+
+    if (triggerUnlock) {
+        request.triggerUnlock = 'true';
+    }
+
+    return request;
+};
+
+keepassClient.handleResponseV2 = function(response, incrementedNonce, tab) {
+    if (response.message && response.nonce) {
+        const res = keepassClient.decrypt(response.message, response.nonce);
+        if (!res) {
+            keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+            return undefined;
+        }
+
+        const message = nacl.util.encodeUTF8(res);
+        const parsed = JSON.parse(message);
+
+        if (keepassClient.verifyResponseV2(parsed, incrementedNonce)) {
+            return parsed;
+        }
+    } else if (response.error && response.errorCode) {
+        keepass.handleError(tab, response.errorCode, response.error);
+    }
+
+    return undefined;
+};
+
+keepassClient.verifyResponseV2 = function(response, nonce) {
+    if (!keepassClient.checkNonceLength(response.nonce)) {
+        logError('Incorrect nonce length');
+        return false;
+    }
+
+    if (response.nonce !== nonce) {
+        logError('Nonce compare failed');
+        return false;
+    }
+
+    return true;
 };
 
 //--------------------------------------------------------------------------

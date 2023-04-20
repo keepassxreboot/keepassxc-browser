@@ -134,6 +134,7 @@ const iconClicked = async function(field, icon) {
     if (kpxc.databaseState !== DatabaseState.UNLOCKED) {
         // Triggers database unlock
         await sendMessage('page_set_manual_fill', ManualFill.BOTH);
+        // TODO: Replace with open-database?
         await sendMessage('get_database_hash', [ false, true ]); // Set triggerUnlock to true
         field.focus();
     }
