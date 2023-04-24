@@ -1,10 +1,12 @@
 'use strict';
 
+//--------------------------------------------------------------------------
+// Protocol V2
+//--------------------------------------------------------------------------
+
 const protocol = {};
 
 protocol.associate = async function(tab, args = []) {
-    console.log('associate');
-
     if (!keepass.isKeePassXCAvailable) {
         return AssociatedAction.NOT_ASSOCIATED;
     }
@@ -14,7 +16,6 @@ protocol.associate = async function(tab, args = []) {
 
         const kpAction = kpActions.ASSOCIATE;
         const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
-        const nonce = keepassClient.getNonce();
         const idKeyPair = nacl.box.keyPair();
         const idKey = nacl.util.encodeBase64(idKeyPair.publicKey);
 
@@ -24,7 +25,7 @@ protocol.associate = async function(tab, args = []) {
             idKey: idKey
         };
 
-        const response = await keepassClient.sendMessageV2(kpAction, tab, messageData, nonce, false, true);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData, false, true);
         if (response && response.id && response.hash) {
             keepass.setCryptoKey(response.id, key); // Save the new identification public key as id key for the database
 
@@ -42,8 +43,6 @@ protocol.associate = async function(tab, args = []) {
 };
 
 protocol.changePublicKeys = async function(tab, enableTimeout = false, connectionTimeout) {
-    console.log('change-public-keys');
-
     if (!keepass.isConnected) {
         keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
         return false;
@@ -58,15 +57,17 @@ protocol.changePublicKeys = async function(tab, enableTimeout = false, connectio
         action: kpAction,
         publicKey: key,
         nonce: nonce,
-        clientID: keepass.clientID
+        clientID: keepass.clientID,
+        requestID: keepassClient.getRequestId()
     };
 
     try {
-        const response = await keepassClient.sendNativeMessageV2(kpAction, request, enableTimeout, connectionTimeout);
+        const response = await protocolClient.sendNativeMessage(kpAction, request, enableTimeout, connectionTimeout);
         keepass.setcurrentKeePassXCVersion(response.version);
+        keepass.protocolV2 = response?.protocolVersion === 2;
 
         const verified = keepass.protocolV2
-            ? keepassClient.verifyResponseV2(response, incrementedNonce)
+            ? protocolClient.verifyNonce(response, incrementedNonce)
             : keepassClient.verifyKeyResponse(response, key, incrementedNonce);
         if (!response?.publicKey || !verified) {
             if (tab && page.tabs[tab.id]) {
@@ -88,33 +89,30 @@ protocol.changePublicKeys = async function(tab, enableTimeout = false, connectio
 };
 
 protocol.createCredentials = async function(tab, args = []) {
-    console.log('create-credentials');
-
     const [ username, password, url, group, groupUuid ] = args;
     return protocol.updateCredentials(tab, [ null, username, password, url, group, groupUuid ]);
 };
 
 protocol.createNewGroup = async function(tab, args = []) {
-    console.log('create-new-group');
-
     if (!keepass.isConnected) {
         return [];
     }
 
     keepass.clearErrorMessage(tab);
 
-    const [ groupName ] = args;
     const kpAction = kpActions.CREATE_NEW_GROUP;
-    const nonce = keepassClient.getNonce();
+    const [ groupName ] = args;
+    const [ dbid ] = keepass.getCryptoKey();
 
     const messageData = {
         action: kpAction,
-        groupName: groupName
+        id: dbid,
+        groupName: groupName,
     };
 
     try {
         // TODO: Handle errors
-        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
         if (response) {
             keepass.updateLastUsed(keepass.databaseHash); // ?
             return response;
@@ -131,8 +129,6 @@ protocol.createNewGroup = async function(tab, args = []) {
 };
 
 protocol.generatePassword = async function(tab, args = []) {
-    console.log('generate-password');
-
     if (!keepass.isConnected) {
         return [];
     }
@@ -141,19 +137,17 @@ protocol.generatePassword = async function(tab, args = []) {
         return [];
     }
 
-    let password;
     const kpAction = kpActions.GENERATE_PASSWORD;
-    const nonce = keepassClient.getNonce();
+    let password;
 
     const messageData = {
         action: kpAction,
-        nonce: nonce,
         clientID: keepass.clientID,
-        requestID: keepassClient.getRequestId()
+        requestID: keepassClient.getRequestId() // Needed?
     };
 
     try {
-        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
         if (response) {
             password = response.entries ?? response.password;
             keepass.updateLastUsed(keepass.databaseHash); // ?
@@ -169,25 +163,20 @@ protocol.generatePassword = async function(tab, args = []) {
 };
 
 protocol.getCredentials = async function(tab, args = []) {
-    console.log('get-credentials');
-
     if (!keepass.isConnected) {
         return [];
     }
 
     keepass.clearErrorMessage(tab);
 
+    const kpAction = kpActions.GET_CREDENTIALS;
     const [ url, submiturl, triggerUnlock = false, httpAuth = false ] = args;
     let entries = [];
-    const kpAction = kpActions.GET_CREDENTIALS;
-    const nonce = keepassClient.getNonce();
-    const [ dbid ] = keepass.getCryptoKey();
 
     const messageData = {
         action: kpAction,
-        id: dbid,
         url: url,
-        keys: keepass.getKeys()
+        keys: protocol.getKeys()
     };
 
     if (submiturl) {
@@ -200,7 +189,7 @@ protocol.getCredentials = async function(tab, args = []) {
 
     try {
         // TODO: Handle errors
-        const response = await keepassClient.sendMessageV2(kpAction, tab, messageData, nonce, false, triggerUnlock);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData, false, triggerUnlock);
         if (response) {
             entries = keepass.removeDuplicateEntries(response.entries);
             keepass.updateLastUsed(keepass.databaseHash); // What about this?
@@ -223,25 +212,24 @@ protocol.getCredentials = async function(tab, args = []) {
 };
 
 protocol.getDatabaseGroups = async function(tab, args = []) {
-    console.log('get-database-groups');
-
     if (!keepass.isConnected) {
         return [];
     }
 
     keepass.clearErrorMessage(tab);
 
-    let groups = [];
     const kpAction = kpActions.GET_DATABASE_GROUPS;
-    const nonce = keepassClient.getNonce();
+    const [ dbid ] = keepass.getCryptoKey();
+    let groups = [];
 
     const messageData = {
-        action: kpAction
+        action: kpAction,
+        id: dbid
     };
 
     try {
         // TODO: Handle errors
-        const response = await keepassClient.sendMessageV2(kpAction, tab, messageData, nonce);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
         if (response) {
             groups = response.groups;
             groups.defaultGroup = page.settings.defaultGroup;
@@ -258,25 +246,64 @@ protocol.getDatabaseGroups = async function(tab, args = []) {
     }
 };
 
-// Obsolete? This should be checked inside KeePassXC
 protocol.getDatabaseStatuses = async function(tab, args = []) {
-    console.log('get-database-statuses');
+    if (!keepass.isConnected) {
+        keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
+        return;
+    }
+
+    if (!keepass.serverPublicKey) {
+        await protocol.changePublicKeys(tab);
+    }
+
+    const kpAction = kpActions.GET_DATABASE_STATUSES;
+    const [ enableTimeout = false, triggerUnlock = false ] = args;
+
+    const messageData = {
+        action: kpAction,
+        keys: protocol.getKeys()
+    };
+
+    try {
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData, enableTimeout, triggerUnlock);
+        if (response) {
+            keepass.databaseHash = response.hash;
+
+            // Return this error only if all databases are closed
+            if (response?.statuses.every(s => s.locked)) {
+                keepass.databaseHash = '';
+                keepass.isDatabaseClosed = true;
+                keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
+            }
+
+            return response;
+        }
+
+        // TODO: Check if these are even possible ..?
+        keepass.databaseHash = '';
+        keepass.isDatabaseClosed = true;
+        if (response.message && response.message === '') {
+            // ..?
+            keepass.isKeePassXCAvailable = false;
+            keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
+        } else {
+            keepass.handleError(tab, response.errorCode, response.error);
+        }
+    } catch (err) {
+        logError(`getDatabaseStatuses failed: ${err}`);
+    }
 };
 
 protocol.getTotp = async function(tab, args = []) {
-    console.log('get-totp');
-
     if (!keepass.isConnected) {
         return [];
     }
 
+    const kpAction = kpActions.GET_TOTP;
     const [ uuid, oldTotp ] = args;
     if (!keepass.compareVersion('2.6.1', keepass.currentKeePassXC, true)) {
         return oldTotp;
     }
-
-    const kpAction = kpActions.GET_TOTP;
-    const nonce = keepassClient.getNonce();
 
     const messageData = {
         action: kpAction,
@@ -284,7 +311,7 @@ protocol.getTotp = async function(tab, args = []) {
     };
 
     try {
-        const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
         if (response) {
             keepass.updateLastUsed(keepass.databaseHash);
             return response.totp;
@@ -297,22 +324,18 @@ protocol.getTotp = async function(tab, args = []) {
 };
 
 protocol.lockDatabase = async function(tab, args = []) {
-    console.log('lock-database');
-
     if (!keepass.isConnected) {
         keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
         return false;
     }
 
     const kpAction = kpActions.LOCK_DATABASE;
-    const nonce = keepassClient.getNonce();
-
     const messageData = {
         action: kpAction
     };
 
     try {
-        const response = await keepassClient.sendMessageV2(kpAction, tab, messageData, nonce);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
         if (response) {
             //keepass.isDatabaseClosed = true; // ?
             keepass.updateDatabase();
@@ -332,15 +355,12 @@ protocol.lockDatabase = async function(tab, args = []) {
 };
 
 protocol.requestAutotype = async function(tab, args = []) {
-    console.log('request-autotype');
-
     if (!keepass.isConnected) {
         keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
         return false;
     }
 
     const kpAction = kpActions.REQUEST_AUTOTYPE;
-    const nonce = keepassClient.getNonce();
     const search = getTopLevelDomainFromUrl(args[0]);
 
     const messageData = {
@@ -349,12 +369,61 @@ protocol.requestAutotype = async function(tab, args = []) {
     };
 
     try {
-        const response = await keepassClient.sendMessageV2(kpAction, tab, messageData, nonce);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
         return response?.result;
     } catch (err) {
         logError(`requestAutotype failed: ${err}`);
         return false;
     }
+};
+
+protocol.testAssociationFromDatabaseStatuses = async function(tab, args = []) {
+    const databaseStatuses = await protocol.getDatabaseStatuses(tab, args);
+    console.log(databaseStatuses);
+
+    const result = {
+        areAllLocked: true,
+        associationNeeded: false,
+        databaseHash: undefined,
+        isAnyAssociated: false
+    };
+
+    // TODO: Handle this already in getDatabaseStatuses?
+    if (!databaseStatuses || databaseStatuses.statuses.length === 0) {
+        keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
+        return result;
+    }
+
+    const currentDatabaseStatus = databaseStatuses.statuses.filter(s => s.hash === databaseStatuses.hash);
+    const isCurrentAssociated = currentDatabaseStatus[0]?.associated;
+    const isCurrentLocked = currentDatabaseStatus[0]?.locked;
+
+    const isAnyAssociated = databaseStatuses.statuses.some(s => s.associated);
+    const areAllLocked = databaseStatuses.statuses.every(s => s.locked);
+
+    // TODO: Add a warning notification if two databases with identical hashes are regognized.
+    //       To where? DOM? KeePassXC? Popup? Maybe this feature should be in KeePassXC instead when making the request and not here.
+    if (currentDatabaseStatus.length > 1) {
+        console.log('Identical databases found.');
+    }
+
+    // TODO: If the current one is not associated, activate the Connect button in the popup?
+    //       But only if the current database is not locked..
+    if (!isCurrentAssociated && !isCurrentLocked) {
+        console.log('Current one is not associated');
+
+    }
+
+    // This should be true only if all databases are locked
+    keepass.isDatabaseClosed = areAllLocked; // ?
+
+    result.areAllLocked = areAllLocked;
+    result.associationNeeded = !isCurrentAssociated && !isCurrentLocked;
+    result.databaseHash = databaseStatuses.hash;
+    result.isAnyAssociated = isAnyAssociated;
+
+    keepass.databaseAssosiationStatuses = result;
+    return result;
 };
 
 protocol.updateCredentials = async function(tab, args = []) {
@@ -364,10 +433,9 @@ protocol.updateCredentials = async function(tab, args = []) {
         return [];
     }
 
-    const [ entryId, username, password, url, group, groupUuid ] = args;
     const kpAction = kpActions.CREATE_CREDENTIALS;
+    const [ entryId, username, password, url, group, groupUuid ] = args;
     const [ dbid ] = keepass.getCryptoKey();
-    const nonce = keepassClient.getNonce();
 
     const messageData = {
         action: kpAction,
@@ -393,7 +461,7 @@ protocol.updateCredentials = async function(tab, args = []) {
 
     try {
         // TODO: Check response messages
-        const response = await keepassClient.sendMessageV2(kpAction, tab, messageData, nonce);
+        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
         if (response) {
             // KeePassXC versions lower than 2.5.0 will have an empty parsed.error
             let successMessage = response.error;
@@ -409,4 +477,21 @@ protocol.updateCredentials = async function(tab, args = []) {
         logError(`updateCredentials failed: ${err}`);
         return [];
     }
+};
+
+//--------------------------------------------------------------------------
+// Utils
+//--------------------------------------------------------------------------
+
+protocol.getKeys = function() {
+    const keys = [];
+
+    for (const keyHash in keepass.keyRing) {
+        keys.push({
+            id: keepass.keyRing[keyHash].id,
+            key: keepass.keyRing[keyHash].key
+        });
+    }
+
+    return keys;
 };

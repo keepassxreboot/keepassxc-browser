@@ -37,14 +37,16 @@
             "common/sites.js",
             "background/nacl.min.js",
             "background/nacl-util.min.js",
-            "background/client.js",
             "background/keepass.js",
             "background/httpauth.js",
             "background/browserAction.js",
             "background/page.js",
             "background/event.js",
             "background/init.js",
-            "background/protocol.js"
+            "background/protocol.js",
+            "background/protocolClient.js",
+            "background/legacyProtocol.js",
+            "background/legacyProtocolClient.js"
         ]
     },
     "content_scripts": [

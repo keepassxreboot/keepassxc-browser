@@ -140,7 +140,7 @@ kpxcBanner.create = async function(credentials = {}) {
 kpxcBanner.saveNewCredentials = async function(credentials = {}) {
     const saveToDefaultGroup = async function(creds) {
         const args = [ creds.username, creds.password, creds.url ];
-        const res = await sendMessage('add_credentials', args);
+        const res = await sendMessage('create_credentials', args);
         kpxcBanner.verifyResult(res);
     };
 
@@ -170,7 +170,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                     // Create a new group
                     const newGroup = await sendMessage('create_new_group', [ result.defaultGroup ]);
                     if (newGroup.name && newGroup.uuid) {
-                        const res = await sendMessage('add_credentials', [ credentials.username, credentials.password, credentials.url, newGroup.name, newGroup.uuid ]);
+                        const res = await sendMessage('create_credentials', [ credentials.username, credentials.password, credentials.url, newGroup.name, newGroup.uuid ]);
                         kpxcBanner.verifyResult(res);
                     } else {
                         kpxcUI.createNotification('error', tr('rememberErrorCreatingNewGroup'));
@@ -180,7 +180,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                 }
             }
 
-            const res = await sendMessage('add_credentials', [ credentials.username, credentials.password, credentials.url, gname, guuid ]);
+            const res = await sendMessage('create_credentials', [ credentials.username, credentials.password, credentials.url, gname, guuid ]);
             kpxcBanner.verifyResult(res);
             return;
         }
@@ -212,7 +212,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                 return;
             }
 
-            const res = await sendMessage('add_credentials', [ credentials.username, credentials.password, credentials.url, group, groupUuid ]);
+            const res = await sendMessage('create_credentials', [ credentials.username, credentials.password, credentials.url, group, groupUuid ]);
             kpxcBanner.verifyResult(res);
         });
 

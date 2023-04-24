@@ -10,7 +10,7 @@ HTMLElement.prototype.hide = function() {
     this.style.display = 'none';
 };
 
-function statusResponse(r) {
+function statusResponse(status) {
     $('#initial-state').hide();
     $('#error-encountered').hide();
     $('#need-reconfigure').hide();
@@ -20,39 +20,70 @@ function statusResponse(r) {
     $('#lock-database-button').hide();
     $('#getting-started-guide').hide();
 
-    if (!r.keePassXCAvailable) {
-        $('#error-message').textContent = r.error;
+    if (!status.keePassXCAvailable) {
+        $('#error-message').textContent = status.error;
         $('#error-encountered').show();
 
-        if (r.showGettingStartedGuideAlert) {
+        if (status.showGettingStartedGuideAlert) {
             $('#getting-started-guide').show();
         }
 
-        if (r.showTroubleshootingGuideAlert && reloadCount >= 2) {
+        if (status.showTroubleshootingGuideAlert && reloadCount >= 2) {
             $('#troubleshooting-guide').show();
         } else {
             $('#troubleshooting-guide').hide();
         }
-    } else if (r.keePassXCAvailable && r.databaseClosed) {
-        $('#database-error-message').textContent = r.error;
+
+        return;
+    }
+
+    // Only supported with Protocol V2
+    if (status.databaseAssociationStatuses) {
+        // This can be also shown when isAnyAssociated is true?
+        if (status.databaseAssociationStatuses.associationNeeded) {
+            $('#not-configured').show();
+        }
+
+        if (status.keePassXCAvailable && status.databaseAssociationStatuses.areAllLocked) {
+            $('#database-error-message').textContent = status.error;
+            $('#database-not-opened').show();
+        }
+
+        if (status.databaseAssociationStatuses.isAnyAssociated) {
+            $('#configured-and-associated').show();
+            $('#associated-identifier').textContent = status.identifier;
+            $('#lock-database-button').show();
+
+            if (status.usernameFieldDetected) {
+                $('#username-field-detected').show();
+            }
+
+            reloadCount = 0;
+        }
+
+        return;
+    }
+
+    if (status.keePassXCAvailable && status.databaseClosed) {
+        $('#database-error-message').textContent = status.error;
         $('#database-not-opened').show();
-    } else if (!r.configured) {
+    } else if (!status.configured) {
         $('#not-configured').show();
-    } else if (r.encryptionKeyUnrecognized) {
+    } else if (status.encryptionKeyUnrecognized) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').textContent = r.error;
-    } else if (!r.associated) {
+        $('#need-reconfigure-message').textContent = status.error;
+    } else if (!status.associated) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').textContent = r.error;
-    } else if (r.error) {
+        $('#need-reconfigure-message').textContent = status.error;
+    } else if (status.error !== null) {
         $('#error-encountered').show();
-        $('#error-message').textContent = r.error;
+        $('#error-message').textContent = status.error;
     } else {
         $('#configured-and-associated').show();
-        $('#associated-identifier').textContent = r.identifier;
+        $('#associated-identifier').textContent = status.identifier;
         $('#lock-database-button').show();
 
-        if (r.usernameFieldDetected) {
+        if (status.usernameFieldDetected) {
             $('#username-field-detected').show();
         }
 

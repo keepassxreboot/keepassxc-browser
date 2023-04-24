@@ -209,7 +209,8 @@ page.retrieveCredentials = async function(tab, args = []) {
         page.currentRequest.submitUrl = submitUrl;
     }
 
-    const credentials = await keepass.retrieveCredentials(tab, args);
+    // TODO: Make keepass.js to handle protocol/protocolClient and legacyProtocol/legacyProcotolClient
+    const credentials = await keepass.getCredentials(tab, args);
     page.tabs[tab.id].credentials = credentials;
     return credentials;
 };

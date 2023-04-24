@@ -102,12 +102,23 @@ kpxc.detectDatabaseChange = async function(response) {
     kpxc.clearAllFromPage();
     kpxcIcons.switchIcons();
 
+    // TODO: This doesn't work well anymore.
     if (document.visibilityState !== 'hidden') {
         if (response.hash.new !== '') {
             _called.retrieveCredentials = false;
+
+            // Why is this needed? For the Connection Keys?
             const settings = await sendMessage('load_settings');
             kpxc.settings = settings;
-            kpxc.databaseState = DatabaseState.UNLOCKED;
+
+            // TODO: Cleanup this..
+            if (response.associateResult) {
+                if (!response.associateResult.areAllLocked) {
+                    kpxc.databaseState = DatabaseState.UNLOCKED;
+                }
+            } else {
+                kpxc.databaseState = DatabaseState.UNLOCKED; // This is important to set correctly!
+            }
 
             await kpxc.initCredentialFields();
             kpxcIcons.switchIcons();
@@ -115,7 +126,7 @@ kpxc.detectDatabaseChange = async function(response) {
             // If user has requested a manual fill through context menu the actual credential filling
             // is handled here when the opened database has been regognized. It's not a pretty hack.
             const manualFill = await sendMessage('page_get_manual_fill');
-            if (manualFill !== ManualFill.NONE && kpxc.combinations.length > 0) {
+            if (manualFill !== ManualFill.NONE) {
                 await kpxcFill.fillInFromActiveElement(manualFill === ManualFill.PASSWORD);
                 await sendMessage('page_set_manual_fill', ManualFill.NONE);
             }

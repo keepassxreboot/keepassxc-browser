@@ -134,7 +134,7 @@ const iconClicked = async function(field, icon) {
     if (kpxc.databaseState !== DatabaseState.UNLOCKED) {
         // Triggers database unlock
         await sendMessage('page_set_manual_fill', ManualFill.BOTH);
-        // TODO: Replace with open-database?
+        // TODO: Replace with open-database or get-database-statuses? With legacyProtocol keepass.getDatabaseHash must be used.
         await sendMessage('get_database_hash', [ false, true ]); // Set triggerUnlock to true
         field.focus();
     }

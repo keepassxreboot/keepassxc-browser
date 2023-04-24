@@ -15,7 +15,7 @@ kpxcEvent.onMessage = async function(request, sender) {
 
 kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     let keyId = null;
-    if (configured && keepass.databaseHash !== '') {
+    if (configured && keepass.databaseHash !== '' && keepass.keyRing[keepass.databaseHash]) {
         keyId = keepass.keyRing[keepass.databaseHash].id;
     }
 
@@ -27,16 +27,17 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     const usernameFieldDetected = page.tabs[tab.id]?.usernameFieldDetected ?? false;
 
     return {
-        identifier: keyId,
+        associated: keepass.isAssociated(),
         configured: configured,
         databaseClosed: keepass.isDatabaseClosed,
-        keePassXCAvailable: keepass.isKeePassXCAvailable,
+        databaseAssociationStatuses: keepass.databaseAssosiationStatuses,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
-        associated: keepass.isAssociated(),
-        error: errorMessage,
-        usernameFieldDetected: usernameFieldDetected,
+        error: errorMessage || null,
+        identifier: keyId,
+        keePassXCAvailable: keepass.isKeePassXCAvailable,
         showGettingStartedGuideAlert: page.settings.showGettingStartedGuideAlert,
-        showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert
+        showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert,
+        usernameFieldDetected: usernameFieldDetected
     };
 };
 
@@ -54,6 +55,7 @@ kpxcEvent.onLoadKeyRing = async function() {
     });
 
     keepass.keyRing = item.keyRing;
+    // TODO: What to do here?
     if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
         keepass.associated = {
             value: false,
@@ -73,14 +75,22 @@ kpxcEvent.onGetStatus = async function(tab, args = []) {
     // When internalPoll is true the event is triggered from content script in intervals -> don't poll KeePassXC
     try {
         const [ internalPoll = false, triggerUnlock = false ] = args;
-        if (!internalPoll) {
-            const response = await keepass.testAssociation(tab, [ true, triggerUnlock ]);
-            if (!response) {
-                return kpxcEvent.showStatus(tab, false);
+        let configured = false;
+
+        if (keepass.protocolV2) {
+            const response = await protocol.testAssociationFromDatabaseStatuses(tab, [ true, triggerUnlock ]);
+            configured = response.isAnyAssociated;
+        } else {
+            if (!internalPoll) {
+                const response = await keepassProtocol.testAssociation(tab, [ true, triggerUnlock ]);
+                if (!response) {
+                    return kpxcEvent.showStatus(tab, false);
+                }
             }
+
+            configured = await keepass.isConfigured();
         }
 
-        const configured = await keepass.isConfigured();
         return kpxcEvent.showStatus(tab, configured, internalPoll);
     } catch (err) {
         logError('No status shown: ' + err);
@@ -125,10 +135,11 @@ kpxcEvent.onGetConnectedDatabase = async function() {
 };
 
 kpxcEvent.onGetKeePassXCVersions = async function(tab) {
-    if (keepass.currentKeePassXC === '') {
-        await keepass.getDatabaseHash(tab);
+    // TODO: Maybe this is not needed?
+    /*if (keepass.currentKeePassXC === '') {
+        await keepass.getDatabaseHash(tab); // TODO: How to get just the version? A separate API call?
         return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
-    }
+    }*/
 
     return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
 };
@@ -227,11 +238,11 @@ kpxcEvent.sendBackToTabs = async function(tab, args = []) {
 
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
-    'add_credentials': keepass.addCredentials,
     'associate': keepass.associate,
     'check_database_hash': keepass.checkDatabaseHash,
     'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
     'compare_version': kpxcEvent.compareVersion,
+    'create_credentials': keepass.createCredentials,
     'create_new_group': keepass.createNewGroup,
     'enable_automatic_reconnect': keepass.enableAutomaticReconnect,
     'disable_automatic_reconnect': keepass.disableAutomaticReconnect,
@@ -240,7 +251,7 @@ kpxcEvent.messageHandlers = {
     'generate_password': keepass.generatePassword,
     'get_color_theme': kpxcEvent.getColorTheme,
     'get_connected_database': kpxcEvent.onGetConnectedDatabase,
-    'get_database_hash': keepass.getDatabaseHash,
+    'get_database_hash': keepass.getDatabaseHash, // TODO ?
     'get_database_groups': keepass.getDatabaseGroups,
     'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
     'get_login_list': page.getLoginList,
