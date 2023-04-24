@@ -15,7 +15,7 @@ protocol.associate = async function(tab, args = []) {
         keepass.clearErrorMessage(tab);
 
         const kpAction = kpActions.ASSOCIATE;
-        const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
+        const key = protocolClient.getPublicConnectionKey();
         const idKeyPair = nacl.box.keyPair();
         const idKey = nacl.util.encodeBase64(idKeyPair.publicKey);
 
@@ -42,6 +42,7 @@ protocol.associate = async function(tab, args = []) {
     return AssociatedAction.NOT_ASSOCIATED;
 };
 
+// Unencrypted
 protocol.changePublicKeys = async function(tab, enableTimeout = false, connectionTimeout) {
     if (!keepass.isConnected) {
         keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
@@ -49,16 +50,16 @@ protocol.changePublicKeys = async function(tab, enableTimeout = false, connectio
     }
 
     const kpAction = kpActions.CHANGE_PUBLIC_KEYS;
-    const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
-    const [ nonce, incrementedNonce ] = keepassClient.getNonces();
-    keepass.clientID = nacl.util.encodeBase64(nacl.randomBytes(keepassClient.keySize));
+    const key = protocolClient.getPublicConnectionKey();
+    const [ nonce, incrementedNonce ] = protocolClient.getNonces();
+    keepass.clientID = protocolClient.generateClientId();
 
     const request = {
         action: kpAction,
         publicKey: key,
         nonce: nonce,
         clientID: keepass.clientID,
-        requestID: keepassClient.getRequestId()
+        requestID: protocolClient.getRequestId()
     };
 
     try {
@@ -143,7 +144,7 @@ protocol.generatePassword = async function(tab, args = []) {
     const messageData = {
         action: kpAction,
         clientID: keepass.clientID,
-        requestID: keepassClient.getRequestId() // Needed?
+        requestID: protocolClient.getRequestId() // Needed?
     };
 
     try {

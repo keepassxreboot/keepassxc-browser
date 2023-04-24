@@ -88,7 +88,8 @@ protocolClient.sendNativeMessage = function(requestAction, request, enableTimeou
 
 protocolClient.sendMessage = async function(kpAction, tab, messageData, enableTimeout = false, triggerUnlock = false) {
     const nonce = protocolClient.getNonce();
-    const request = protocolClient.buildRequest(protocolClient.encrypt(messageData, nonce), nonce, keepass.clientID, triggerUnlock);
+    const encryptedMessage = protocolClient.encrypt(messageData, nonce);
+    const request = protocolClient.buildRequest(encryptedMessage, nonce, keepass.clientID, triggerUnlock);
     const response = await protocolClient.sendNativeMessage(kpAction, request, enableTimeout);
     const incrementedNonce = keepassClient.incrementedNonce(nonce);
 
@@ -110,6 +111,7 @@ protocolClient.buildRequest = function(encryptedMessage, nonce, clientID, trigge
     return request;
 };
 
+// Verifies nonces, decrypts and parses the response
 protocolClient.handleResponse = function(response, incrementedNonce, tab) {
     if (response.message && protocolClient.verifyNonce(response, incrementedNonce)) {
         const res = keepassClient.decrypt(response.message, response.nonce);
@@ -130,7 +132,7 @@ protocolClient.handleResponse = function(response, incrementedNonce, tab) {
 
 protocolClient.verifyNonce = function(response, nonce) {
     if (!response.nonce) {
-        logError('No nonce in reponse');
+        logError('No nonce in response');
         return false;
     }
 
@@ -190,6 +192,14 @@ protocolClient.generateNewKeyPair = function() {
     keepass.keyPair = nacl.box.keyPair();
 };
 
+protocolClient.getPublicConnectionKey = function() {
+    return nacl.util.encodeBase64(keepass.keyPair.publicKey);
+};
+
+protocolClient.generateClientId = function() {
+    return nacl.util.encodeBase64(nacl.randomBytes(keepassClient.keySize));
+};
+
 //--------------------------------------------------------------------------
 // Encrypt/Decrypt
 //--------------------------------------------------------------------------
@@ -245,7 +255,7 @@ function onDisconnected() {
     keepass.databaseHash = '';
 
     page.clearAllLogins();
-    keepass.updatePopup('cross');
+    keepass.updatePopup();
     keepass.updateDatabaseHashToContent();
     logError(`Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message)}`);
 }

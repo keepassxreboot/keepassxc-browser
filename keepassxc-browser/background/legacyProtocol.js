@@ -26,7 +26,7 @@ keepassProtocol.associate = async function(tab) {
         keepass.clearErrorMessage(tab);
 
         const kpAction = kpActions.ASSOCIATE;
-        const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
+        const key = protocolClient.getPublicConnectionKey();
         const nonce = protocolClient.getNonce();
         const idKeyPair = nacl.box.keyPair();
         const idKey = nacl.util.encodeBase64(idKeyPair.publicKey);
@@ -105,9 +105,9 @@ keepassProtocol.changePublicKeys = async function(tab, enableTimeout = false, co
     }
 
     const kpAction = kpActions.CHANGE_PUBLIC_KEYS;
-    const key = nacl.util.encodeBase64(keepass.keyPair.publicKey);
+    const key = protocolClient.getPublicConnectionKey();
     const [ nonce, incrementedNonce ] = protocolClient.getNonces();
-    keepass.clientID = nacl.util.encodeBase64(nacl.randomBytes(protocolClient.keySize));
+    keepass.clientID = protocolClient.generateClientId();
 
     const request = {
         action: kpAction,
