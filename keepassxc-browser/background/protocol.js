@@ -14,18 +14,14 @@ protocol.associate = async function(tab, args = []) {
     try {
         keepass.clearErrorMessage(tab);
 
-        const kpAction = kpActions.ASSOCIATE;
         const key = protocolClient.getPublicConnectionKey();
-        const idKeyPair = nacl.box.keyPair();
-        const idKey = nacl.util.encodeBase64(idKeyPair.publicKey);
-
         const messageData = {
-            action: kpAction,
+            action: kpActions.ASSOCIATE,
             key: key,
-            idKey: idKey
+            idKey: protocolClient.generateIdKey()
         };
 
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData, false, true);
+        const response = await protocolClient.sendMessage(tab, messageData, false, true);
         if (response && response.id && response.hash) {
             keepass.setCryptoKey(response.id, key); // Save the new identification public key as id key for the database
 
@@ -101,19 +97,17 @@ protocol.createNewGroup = async function(tab, args = []) {
 
     keepass.clearErrorMessage(tab);
 
-    const kpAction = kpActions.CREATE_NEW_GROUP;
     const [ groupName ] = args;
     const [ dbid ] = keepass.getCryptoKey();
-
     const messageData = {
-        action: kpAction,
+        action: kpActions.CREATE_NEW_GROUP,
         id: dbid,
         groupName: groupName,
     };
 
     try {
         // TODO: Handle errors
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
+        const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
             keepass.updateLastUsed(keepass.databaseHash); // ?
             return response;
@@ -138,17 +132,16 @@ protocol.generatePassword = async function(tab, args = []) {
         return [];
     }
 
-    const kpAction = kpActions.GENERATE_PASSWORD;
+    // TODO: Return '' or [] ..?
     let password;
-
     const messageData = {
-        action: kpAction,
+        action: kpActions.GENERATE_PASSWORD,
         clientID: keepass.clientID,
         requestID: protocolClient.getRequestId() // Needed?
     };
 
     try {
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
+        const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
             password = response.entries ?? response.password;
             keepass.updateLastUsed(keepass.databaseHash); // ?
@@ -170,12 +163,10 @@ protocol.getCredentials = async function(tab, args = []) {
 
     keepass.clearErrorMessage(tab);
 
-    const kpAction = kpActions.GET_CREDENTIALS;
     const [ url, submiturl, triggerUnlock = false, httpAuth = false ] = args;
     let entries = [];
-
     const messageData = {
-        action: kpAction,
+        action: kpActions.GET_CREDENTIALS,
         url: url,
         keys: protocol.getKeys()
     };
@@ -190,7 +181,7 @@ protocol.getCredentials = async function(tab, args = []) {
 
     try {
         // TODO: Handle errors
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData, false, triggerUnlock);
+        const response = await protocolClient.sendMessage(tab, messageData, false, triggerUnlock);
         if (response) {
             entries = keepass.removeDuplicateEntries(response.entries);
             keepass.updateLastUsed(keepass.databaseHash); // What about this?
@@ -219,18 +210,16 @@ protocol.getDatabaseGroups = async function(tab, args = []) {
 
     keepass.clearErrorMessage(tab);
 
-    const kpAction = kpActions.GET_DATABASE_GROUPS;
     const [ dbid ] = keepass.getCryptoKey();
     let groups = [];
-
     const messageData = {
-        action: kpAction,
+        action: kpActions.GET_DATABASE_GROUPS,
         id: dbid
     };
 
     try {
         // TODO: Handle errors
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
+        const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
             groups = response.groups;
             groups.defaultGroup = page.settings.defaultGroup;
@@ -257,16 +246,14 @@ protocol.getDatabaseStatuses = async function(tab, args = []) {
         await protocol.changePublicKeys(tab);
     }
 
-    const kpAction = kpActions.GET_DATABASE_STATUSES;
     const [ enableTimeout = false, triggerUnlock = false ] = args;
-
     const messageData = {
-        action: kpAction,
+        action: kpActions.GET_DATABASE_STATUSES,
         keys: protocol.getKeys()
     };
 
     try {
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData, enableTimeout, triggerUnlock);
+        const response = await protocolClient.sendMessage(tab, messageData, enableTimeout, triggerUnlock);
         if (response) {
             keepass.databaseHash = response.hash;
 
@@ -300,19 +287,18 @@ protocol.getTotp = async function(tab, args = []) {
         return [];
     }
 
-    const kpAction = kpActions.GET_TOTP;
     const [ uuid, oldTotp ] = args;
     if (!keepass.compareVersion('2.6.1', keepass.currentKeePassXC, true)) {
         return oldTotp;
     }
 
     const messageData = {
-        action: kpAction,
+        action: kpActions.GET_TOTP,
         uuid: uuid
     };
 
     try {
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
+        const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
             keepass.updateLastUsed(keepass.databaseHash);
             return response.totp;
@@ -330,13 +316,12 @@ protocol.lockDatabase = async function(tab, args = []) {
         return false;
     }
 
-    const kpAction = kpActions.LOCK_DATABASE;
     const messageData = {
-        action: kpAction
+        action: kpActions.LOCK_DATABASE
     };
 
     try {
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
+        const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
             //keepass.isDatabaseClosed = true; // ?
             keepass.updateDatabase();
@@ -361,16 +346,14 @@ protocol.requestAutotype = async function(tab, args = []) {
         return false;
     }
 
-    const kpAction = kpActions.REQUEST_AUTOTYPE;
     const search = getTopLevelDomainFromUrl(args[0]);
-
     const messageData = {
-        action: kpAction,
+        action: kpActions.REQUEST_AUTOTYPE,
         search: search
     };
 
     try {
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
+        const response = await protocolClient.sendMessage(tab, messageData);
         return response?.result;
     } catch (err) {
         logError(`requestAutotype failed: ${err}`);
@@ -428,18 +411,14 @@ protocol.testAssociationFromDatabaseStatuses = async function(tab, args = []) {
 };
 
 protocol.updateCredentials = async function(tab, args = []) {
-    console.log('update-credentials');
-
     if (!keepass.isConnected) {
         return [];
     }
 
-    const kpAction = kpActions.CREATE_CREDENTIALS;
     const [ entryId, username, password, url, group, groupUuid ] = args;
     const [ dbid ] = keepass.getCryptoKey();
-
     const messageData = {
-        action: kpAction,
+        action: kpActions.CREATE_CREDENTIALS,
         id: dbid,
         login: username,
         password: password,
@@ -462,7 +441,7 @@ protocol.updateCredentials = async function(tab, args = []) {
 
     try {
         // TODO: Check response messages
-        const response = await protocolClient.sendMessage(kpAction, tab, messageData);
+        const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
             // KeePassXC versions lower than 2.5.0 will have an empty parsed.error
             let successMessage = response.error;

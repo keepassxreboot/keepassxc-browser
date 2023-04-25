@@ -86,11 +86,11 @@ protocolClient.sendNativeMessage = function(requestAction, request, enableTimeou
     });
 };
 
-protocolClient.sendMessage = async function(kpAction, tab, messageData, enableTimeout = false, triggerUnlock = false) {
+protocolClient.sendMessage = async function(tab, messageData, enableTimeout = false, triggerUnlock = false) {
     const nonce = protocolClient.getNonce();
     const encryptedMessage = protocolClient.encrypt(messageData, nonce);
     const request = protocolClient.buildRequest(encryptedMessage, nonce, keepass.clientID, triggerUnlock);
-    const response = await protocolClient.sendNativeMessage(kpAction, request, enableTimeout);
+    const response = await protocolClient.sendNativeMessage(messageData.action, request, enableTimeout);
     const incrementedNonce = keepassClient.incrementedNonce(nonce);
 
     return protocolClient.handleResponse(response, incrementedNonce, tab);
@@ -194,6 +194,11 @@ protocolClient.generateNewKeyPair = function() {
 
 protocolClient.getPublicConnectionKey = function() {
     return nacl.util.encodeBase64(keepass.keyPair.publicKey);
+};
+
+protocolClient.generateIdKey = function() {
+    const idKeyPair = nacl.box.keyPair();
+    return nacl.util.encodeBase64(idKeyPair.publicKey);
 };
 
 protocolClient.generateClientId = function() {
