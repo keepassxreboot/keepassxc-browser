@@ -90,7 +90,7 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
             if (page.settings.showNotifications) {
                 showNotification(tr('multipleCredentialsDetected'));
             }
-            kpxcEvent.onHTTPAuthPopup({ 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
+            kpxcEvent.initHttpAuthPopup({ 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
         }
     } else {
         logError('No logins found for HTTP Basic Auth.');

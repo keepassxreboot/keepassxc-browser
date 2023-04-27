@@ -140,7 +140,7 @@ const sendMessageToTab = async function(message) {
     $('#reopen-database-button').addEventListener('click', async () => {
         statusResponse(await browser.runtime.sendMessage({
             action: 'get_status',
-            args: [ false, true ] // Set forcePopup to true
+            args: [ false, true ] // Set triggerUnlock to true
         }));
     });
 

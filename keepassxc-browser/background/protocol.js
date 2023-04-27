@@ -14,16 +14,18 @@ protocol.associate = async function(tab, args = []) {
     try {
         keepass.clearErrorMessage(tab);
 
-        const key = protocolClient.getPublicConnectionKey();
+        const publicKey = protocolClient.getPublicConnectionKey();
+        const idKey = protocolClient.generateIdKey();
+
         const messageData = {
             action: kpActions.ASSOCIATE,
-            key: key,
-            idKey: protocolClient.generateIdKey()
+            publicKey: publicKey,
+            idKey: idKey
         };
 
         const response = await protocolClient.sendMessage(tab, messageData, false, true);
         if (response && response.id && response.hash) {
-            keepass.setCryptoKey(response.id, key); // Save the new identification public key as id key for the database
+            keepass.setCryptoKey(response.id, idKey);
 
             browserAction.show(tab);
             return AssociatedAction.NEW_ASSOCIATION;
@@ -99,6 +101,7 @@ protocol.createNewGroup = async function(tab, args = []) {
 
     const [ groupName ] = args;
     const [ dbid ] = keepass.getCryptoKey();
+
     const messageData = {
         action: kpActions.CREATE_NEW_GROUP,
         id: dbid,
@@ -134,6 +137,7 @@ protocol.generatePassword = async function(tab, args = []) {
 
     // TODO: Return '' or [] ..?
     let password;
+
     const messageData = {
         action: kpActions.GENERATE_PASSWORD,
         clientID: keepass.clientID,
@@ -165,6 +169,7 @@ protocol.getCredentials = async function(tab, args = []) {
 
     const [ url, submiturl, triggerUnlock = false, httpAuth = false ] = args;
     let entries = [];
+
     const messageData = {
         action: kpActions.GET_CREDENTIALS,
         url: url,
@@ -183,6 +188,11 @@ protocol.getCredentials = async function(tab, args = []) {
         // TODO: Handle errors
         const response = await protocolClient.sendMessage(tab, messageData, false, triggerUnlock);
         if (response) {
+            if (response.error && response.errorCode) {
+                keepass.handleError(tab, response.errorCode);
+                return [];
+            }
+
             entries = keepass.removeDuplicateEntries(response.entries);
             keepass.updateLastUsed(keepass.databaseHash); // What about this?
 
@@ -198,7 +208,7 @@ protocol.getCredentials = async function(tab, args = []) {
         browserAction.showDefault(tab);
         return [];
     } catch (err) {
-        logError(`retrieveCredentials failed: ${err}`);
+        logError(`getCredentials failed: ${err}`);
         return [];
     }
 };
@@ -212,6 +222,7 @@ protocol.getDatabaseGroups = async function(tab, args = []) {
 
     const [ dbid ] = keepass.getCryptoKey();
     let groups = [];
+
     const messageData = {
         action: kpActions.GET_DATABASE_GROUPS,
         id: dbid
@@ -247,6 +258,7 @@ protocol.getDatabaseStatuses = async function(tab, args = []) {
     }
 
     const [ enableTimeout = false, triggerUnlock = false ] = args;
+
     const messageData = {
         action: kpActions.GET_DATABASE_STATUSES,
         keys: protocol.getKeys()
@@ -255,7 +267,7 @@ protocol.getDatabaseStatuses = async function(tab, args = []) {
     try {
         const response = await protocolClient.sendMessage(tab, messageData, enableTimeout, triggerUnlock);
         if (response) {
-            keepass.databaseHash = response.hash;
+            keepass.databaseHash = response?.hash;
 
             // Return this error only if all databases are closed
             if (response?.statuses.every(s => s.locked)) {
@@ -267,16 +279,10 @@ protocol.getDatabaseStatuses = async function(tab, args = []) {
             return response;
         }
 
-        // TODO: Check if these are even possible ..?
-        keepass.databaseHash = '';
         keepass.isDatabaseClosed = true;
-        if (response.message && response.message === '') {
-            // ..?
-            keepass.isKeePassXCAvailable = false;
-            keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
-        } else {
-            keepass.handleError(tab, response.errorCode, response.error);
-        }
+        keepass.isKeePassXCAvailable = false;
+        keepass.databaseHash = '';
+        keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
     } catch (err) {
         logError(`getDatabaseStatuses failed: ${err}`);
     }
@@ -346,10 +352,9 @@ protocol.requestAutotype = async function(tab, args = []) {
         return false;
     }
 
-    const search = getTopLevelDomainFromUrl(args[0]);
     const messageData = {
         action: kpActions.REQUEST_AUTOTYPE,
-        search: search
+        search: getTopLevelDomainFromUrl(args[0])
     };
 
     try {
@@ -364,6 +369,9 @@ protocol.requestAutotype = async function(tab, args = []) {
 protocol.testAssociationFromDatabaseStatuses = async function(tab, args = []) {
     const databaseStatuses = await protocol.getDatabaseStatuses(tab, args);
     console.log(databaseStatuses);
+    if (!databaseStatuses) {
+        return {};
+    }
 
     const result = {
         areAllLocked: true,
@@ -395,7 +403,6 @@ protocol.testAssociationFromDatabaseStatuses = async function(tab, args = []) {
     //       But only if the current database is not locked..
     if (!isCurrentAssociated && !isCurrentLocked) {
         console.log('Current one is not associated');
-
     }
 
     // This should be true only if all databases are locked
@@ -417,6 +424,7 @@ protocol.updateCredentials = async function(tab, args = []) {
 
     const [ entryId, username, password, url, group, groupUuid ] = args;
     const [ dbid ] = keepass.getCryptoKey();
+
     const messageData = {
         action: kpActions.CREATE_CREDENTIALS,
         id: dbid,

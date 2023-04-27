@@ -2,6 +2,7 @@
 
 const keepass = {};
 keepass.associated = { 'value': false, 'hash': null };
+keepass.databaseAssosiationStatuses = {};
 keepass.keyPair = { publicKey: null, secretKey: null };
 keepass.serverPublicKey = '';
 keepass.clientID = '';
@@ -88,7 +89,7 @@ browser.storage.local.get({ 'latestKeePassXC': { 'version': '', 'lastChecked': n
 });
 
 //--------------------------------------------------------------------------
-// Command wrappers
+// Command wrappers for events
 //--------------------------------------------------------------------------
 
 keepass.associate = async function(tab, args = []) {
@@ -121,6 +122,10 @@ keepass.getTotp = async function(tab, args = []) {
 
 keepass.lockDatabase = async function(tab, args = []) {
     return keepass.protocolV2 ? await protocol.lockDatabase(tab, args) : await keepassProtocol.lockDatabase(tab, args);
+};
+
+keepass.requestAutotype = async function(tab, args = []) {
+    return keepass.protocolV2 ? await protocol.requestAutotype(tab, args) : await keepassProtocol.requestAutotype(tab, args);
 };
 
 keepass.updateCredentials = async function(tab, args = []) {
@@ -205,6 +210,7 @@ keepass.deleteKey = function(hash) {
     browser.storage.local.set({ 'keyRing': keepass.keyRing });
 };
 
+// Returns keys for the current active database
 keepass.getCryptoKey = function() {
     let dbkey = null;
     let dbid = null;
@@ -263,7 +269,6 @@ keepass.reconnect = async function(tab, connectionTimeout) {
         return false;
     }
 
-    // What to do here?
     if (!keepass.protocolV2) {
         // Needed?
         const hash = await keepass.getDatabaseHash(tab);
@@ -271,9 +276,11 @@ keepass.reconnect = async function(tab, connectionTimeout) {
             keepass.clearErrorMessage(tab);
         }
 
-        await keepass.testAssociation();
+        await keepassProtocol.testAssociation();
         await keepass.isConfigured();
     }
+
+    // TODO: What to do with Protocol V2?
     keepass.updateDatabaseHashToContent();
     return true;
 };
@@ -312,7 +319,7 @@ keepass.isConfigured = async function() {
     return keepass.databaseHash in keepass.keyRing;
 };
 
-keepass.checkDatabaseHash = async function(tab) {
+keepass.checkDatabaseHash = async function() {
     return keepass.databaseHash;
 };
 

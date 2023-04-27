@@ -16,7 +16,7 @@ const protocolBuffer = {
     matchAndRemove(msg) {
         for (let i = 0; i < this.buffer.length; ++i) {
             if (msg?.requestID === this.buffer[i].requestID
-                || (msg.action === 'change-public-keys' && msg?.action === this.buffer[i].action)) {
+                || (msg.action === kpActions.CHANGE_PUBLIC_KEYS && msg?.action === this.buffer[i].action)) {
                 this.buffer.splice(i, 1);
                 return true;
             }
@@ -43,7 +43,7 @@ protocolClient.sendNativeMessage = function(requestAction, request, enableTimeou
 
         const listener = ((port) => {
             const handler = (msg) => {
-                if (msg && (msg?.requestID === request.requestID || msg?.action === 'change-public-keys')) {
+                if (msg && (msg?.requestID === request.requestID || msg?.action === kpActions.CHANGE_PUBLIC_KEYS)) {
                     // Only resolve a matching response
                     if (protocolBuffer.matchAndRemove(msg)) {
                         port.removeListener(handler);
@@ -91,7 +91,7 @@ protocolClient.sendMessage = async function(tab, messageData, enableTimeout = fa
     const encryptedMessage = protocolClient.encrypt(messageData, nonce);
     const request = protocolClient.buildRequest(encryptedMessage, nonce, keepass.clientID, triggerUnlock);
     const response = await protocolClient.sendNativeMessage(messageData.action, request, enableTimeout);
-    const incrementedNonce = keepassClient.incrementedNonce(nonce);
+    const incrementedNonce = protocolClient.incrementedNonce(nonce);
 
     return protocolClient.handleResponse(response, incrementedNonce, tab);
 };
@@ -101,7 +101,7 @@ protocolClient.buildRequest = function(encryptedMessage, nonce, clientID, trigge
         message: encryptedMessage,
         nonce: nonce,
         clientID: clientID,
-        requestID: keepassClient.getRequestId()
+        requestID: protocolClient.getRequestId()
     };
 
     if (triggerUnlock) {
@@ -114,7 +114,7 @@ protocolClient.buildRequest = function(encryptedMessage, nonce, clientID, trigge
 // Verifies nonces, decrypts and parses the response
 protocolClient.handleResponse = function(response, incrementedNonce, tab) {
     if (response.message && protocolClient.verifyNonce(response, incrementedNonce)) {
-        const res = keepassClient.decrypt(response.message, response.nonce);
+        const res = protocolClient.decrypt(response.message, response.nonce);
         if (!res) {
             keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
             return undefined;
@@ -136,7 +136,7 @@ protocolClient.verifyNonce = function(response, nonce) {
         return false;
     }
 
-    if (!keepassClient.checkNonceLength(response.nonce)) {
+    if (!protocolClient.checkNonceLength(response.nonce)) {
         logError('Incorrect nonce length');
         return false;
     }
@@ -202,7 +202,7 @@ protocolClient.generateIdKey = function() {
 };
 
 protocolClient.generateClientId = function() {
-    return nacl.util.encodeBase64(nacl.randomBytes(keepassClient.keySize));
+    return nacl.util.encodeBase64(nacl.randomBytes(protocolClient.keySize));
 };
 
 //--------------------------------------------------------------------------

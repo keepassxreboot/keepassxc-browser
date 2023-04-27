@@ -2,6 +2,166 @@
 
 const kpxcEvent = {};
 
+kpxcEvent.checkUpdateKeePassXC = async function() {
+    keepass.checkForNewKeePassXCVersion();
+    return { current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version };
+};
+
+kpxcEvent.compareVersion = async function(tab, args = []) {
+    return keepass.compareVersion(args[0], args[1]);
+};
+
+kpxcEvent.getColorTheme = async function(tab) {
+    return page.settings.colorTheme;
+};
+
+kpxcEvent.getConnectedDatabase = async function() {
+    return Promise.resolve({
+        count: Object.keys(keepass.keyRing).length,
+        identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
+    });
+};
+
+kpxcEvent.getIsKeePassXCAvailable = async function() {
+    return keepass.isKeePassXCAvailable;
+};
+
+kpxcEvent.getKeePassXCVersions = async function(tab) {
+    // TODO: Maybe this is not needed?
+    /*if (keepass.currentKeePassXC === '') {
+        await keepass.getDatabaseHash(tab); // TODO: How to get just the version? A separate API call?
+        return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
+    }*/
+
+    return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
+};
+
+// TODO: Refactor. This is ugly. internalPoll needs to be handled with V2.
+kpxcEvent.getStatus = async function(tab, args = []) {
+    // When internalPoll is true the event is triggered from content script in intervals -> don't poll KeePassXC
+    try {
+        const [ internalPoll = false, triggerUnlock = false ] = args;
+        let configured = false;
+
+        if (keepass.protocolV2) {
+            if (!internalPoll) {
+                const response = await protocol.testAssociationFromDatabaseStatuses(tab, [ true, triggerUnlock ]);
+                configured = response.isAnyAssociated;
+            } else {
+                // TODO: This does not update when db is locked or just opened
+                configured = keepass.databaseAssosiationStatuses?.isAnyAssociated; // ?
+            }
+        } else {
+            if (!internalPoll) {
+                const response = await keepassProtocol.testAssociation(tab, [ true, triggerUnlock ]);
+                if (!response) {
+                    return kpxcEvent.showStatus(tab, false);
+                }
+            }
+
+            configured = await keepass.isConfigured();
+        }
+
+        /*if (keepass.protocolV2) {
+            const response = await protocol.testAssociationFromDatabaseStatuses(tab, [ true, triggerUnlock ]);
+            configured = response.isAnyAssociated;
+        } else {
+            if (!internalPoll) {
+                const response = await keepassProtocol.testAssociation(tab, [ true, triggerUnlock ]);
+                if (!response) {
+                    return kpxcEvent.showStatus(tab, false);
+                }
+            }
+
+            configured = await keepass.isConfigured();
+        }*/
+
+        return kpxcEvent.showStatus(tab, configured, internalPoll);
+    } catch (err) {
+        logError('No status shown: ' + err);
+        return Promise.reject();
+    }
+};
+
+kpxcEvent.getTabInformation = async function(tab) {
+    const id = tab?.id || page.currentTabId;
+    return page.tabs[id];
+};
+
+kpxcEvent.hideGettingStartedGuideAlert = async function(tab) {
+    const settings = await kpxcEvent.loadSettings();
+    settings.showGettingStartedGuideAlert = false;
+
+    await kpxcEvent.saveSettings(tab, settings);
+};
+
+kpxcEvent.hideTroubleshootingGuideAlert = async function(tab) {
+    const settings = await kpxcEvent.loadSettings();
+    settings.showTroubleshootingGuideAlert = false;
+
+    await kpxcEvent.saveSettings(tab, settings);
+};
+
+kpxcEvent.initHttpAuth = async function() {
+    httpAuth.init();
+};
+
+kpxcEvent.initHttpAuthPopup = async function(tab, data) {
+    const popupData = {
+        iconType: 'questionmark',
+        popup: 'popup_httpauth'
+    };
+
+    page.tabs[tab.id].loginList = data;
+    browserAction.show(tab, popupData);
+};
+
+kpxcEvent.initLoginPopup = async function(tab, logins) {
+    const popupData = {
+        iconType: 'questionmark',
+        popup: 'popup_login'
+    };
+
+    page.tabs[tab.id].loginList = logins;
+    browserAction.show(tab, popupData);
+};
+
+kpxcEvent.loadKeyRing = async function() {
+    const item = await browser.storage.local.get({ 'keyRing': {} }).catch((err) => {
+        logError('kpxcEvent.loadKeyRing error: ' + err);
+        return Promise.reject();
+    });
+
+    keepass.keyRing = item.keyRing;
+    // TODO: What to do here?
+    if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
+        keepass.associated = {
+            value: false,
+            hash: null
+        };
+    }
+
+    return item.keyRing;
+};
+
+kpxcEvent.loadSettings = async function() {
+    return await page.initSettings().catch((err) => {
+        logError('loadSettings error: ' + err);
+        return Promise.reject();
+    });
+};
+
+kpxcEvent.lockDatabase = async function(tab) {
+    try {
+        await keepass.lockDatabase(tab);
+        return kpxcEvent.showStatus(tab, false);
+    } catch (err) {
+        logError('kpxcEvent.lockDatabase error: ' + err);
+        return false;
+    }
+};
+
+// Message handler
 kpxcEvent.onMessage = async function(request, sender) {
     if (request.action in kpxcEvent.messageHandlers) {
         if (!Object.hasOwn(sender, 'tab') || sender.tab.id < 1) {
@@ -11,6 +171,54 @@ kpxcEvent.onMessage = async function(request, sender) {
 
         return await kpxcEvent.messageHandlers[request.action](sender.tab, request.args);
     }
+};
+
+kpxcEvent.pageClearLogins = async function(tab, alreadyCalled) {
+    if (!alreadyCalled) {
+        page.clearLogins(tab.id);
+    }
+};
+
+kpxcEvent.pageGetRedirectCount = async function() {
+    return page.redirectCount;
+};
+
+kpxcEvent.passwordGetFilled = async function() {
+    return page.passwordFilled;
+};
+
+kpxcEvent.passwordSetFilled = async function(tab, state) {
+    page.passwordFilled = state;
+};
+
+kpxcEvent.reconnect = async function(tab) {
+    const configured = await keepass.reconnect(tab);
+    if (configured) {
+        browser.tabs.sendMessage(tab.id, {
+            action: 'redetect_fields'
+        }).catch((err) => {
+            logError(err);
+            return;
+        });
+    }
+
+    return kpxcEvent.showStatus(tab, configured);
+};
+
+kpxcEvent.removeCredentialsFromTabInformation = async function(tab) {
+    const id = tab?.id || page.currentTabId;
+    page.clearCredentials(id);
+    page.clearSubmittedCredentials();
+};
+
+kpxcEvent.saveSettings = async function(tab, settings) {
+    browser.storage.local.set({ 'settings': settings });
+    kpxcEvent.loadSettings(tab);
+};
+
+// Bounce message back to all frames
+kpxcEvent.sendBackToTabs = async function(tab, args = []) {
+    await browser.tabs.sendMessage(tab.id, { action: 'frame_message', args: args });
 };
 
 kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
@@ -41,206 +249,19 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     };
 };
 
-kpxcEvent.onLoadSettings = async function() {
-    return await page.initSettings().catch((err) => {
-        logError('onLoadSettings error: ' + err);
-        return Promise.reject();
-    });
-};
-
-kpxcEvent.onLoadKeyRing = async function() {
-    const item = await browser.storage.local.get({ 'keyRing': {} }).catch((err) => {
-        logError('kpxcEvent.onLoadKeyRing error: ' + err);
-        return Promise.reject();
-    });
-
-    keepass.keyRing = item.keyRing;
-    // TODO: What to do here?
-    if (keepass.isAssociated() && !keepass.keyRing[keepass.associated.hash]) {
-        keepass.associated = {
-            value: false,
-            hash: null
-        };
-    }
-
-    return item.keyRing;
-};
-
-kpxcEvent.onSaveSettings = async function(tab, settings) {
-    browser.storage.local.set({ 'settings': settings });
-    kpxcEvent.onLoadSettings(tab);
-};
-
-kpxcEvent.onGetStatus = async function(tab, args = []) {
-    // When internalPoll is true the event is triggered from content script in intervals -> don't poll KeePassXC
-    try {
-        const [ internalPoll = false, triggerUnlock = false ] = args;
-        let configured = false;
-
-        if (keepass.protocolV2) {
-            const response = await protocol.testAssociationFromDatabaseStatuses(tab, [ true, triggerUnlock ]);
-            configured = response.isAnyAssociated;
-        } else {
-            if (!internalPoll) {
-                const response = await keepassProtocol.testAssociation(tab, [ true, triggerUnlock ]);
-                if (!response) {
-                    return kpxcEvent.showStatus(tab, false);
-                }
-            }
-
-            configured = await keepass.isConfigured();
-        }
-
-        return kpxcEvent.showStatus(tab, configured, internalPoll);
-    } catch (err) {
-        logError('No status shown: ' + err);
-        return Promise.reject();
-    }
-};
-
-kpxcEvent.onReconnect = async function(tab) {
-    const configured = await keepass.reconnect(tab);
-    if (configured) {
-        browser.tabs.sendMessage(tab.id, {
-            action: 'redetect_fields'
-        }).catch((err) => {
-            logError(err);
-            return;
-        });
-    }
-
-    return kpxcEvent.showStatus(tab, configured);
-};
-
-kpxcEvent.lockDatabase = async function(tab) {
-    try {
-        await keepass.lockDatabase(tab);
-        return kpxcEvent.showStatus(tab, false);
-    } catch (err) {
-        logError('kpxcEvent.lockDatabase error: ' + err);
-        return false;
-    }
-};
-
-kpxcEvent.onGetTabInformation = async function(tab) {
-    const id = tab?.id || page.currentTabId;
-    return page.tabs[id];
-};
-
-kpxcEvent.onGetConnectedDatabase = async function() {
-    return Promise.resolve({
-        count: Object.keys(keepass.keyRing).length,
-        identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
-    });
-};
-
-kpxcEvent.onGetKeePassXCVersions = async function(tab) {
-    // TODO: Maybe this is not needed?
-    /*if (keepass.currentKeePassXC === '') {
-        await keepass.getDatabaseHash(tab); // TODO: How to get just the version? A separate API call?
-        return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
-    }*/
-
-    return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
-};
-
-kpxcEvent.onCheckUpdateKeePassXC = async function() {
-    keepass.checkForNewKeePassXCVersion();
-    return { current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version };
-};
-
-kpxcEvent.onUpdateAvailableKeePassXC = async function() {
+kpxcEvent.updateAvailableKeePassXC = async function() {
     return (Number(page.settings.checkUpdateKeePassXC) !== CHECK_UPDATE_NEVER) ? keepass.keePassXCUpdateAvailable() : false;
 };
 
-kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
-    const id = tab?.id || page.currentTabId;
-    page.clearCredentials(id);
-    page.clearSubmittedCredentials();
-};
-
-kpxcEvent.onLoginPopup = async function(tab, logins) {
-    const popupData = {
-        iconType: 'questionmark',
-        popup: 'popup_login'
-    };
-
-    page.tabs[tab.id].loginList = logins;
-    browserAction.show(tab, popupData);
-};
-
-kpxcEvent.initHttpAuth = async function() {
-    httpAuth.init();
-};
-
-kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
-    const popupData = {
-        iconType: 'questionmark',
-        popup: 'popup_httpauth'
-    };
-
-    page.tabs[tab.id].loginList = data;
-    browserAction.show(tab, popupData);
-};
-
-kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {
+kpxcEvent.usernameFieldDetected = async function(tab, detected) {
     page.tabs[tab.id].usernameFieldDetected = detected;
-};
-
-kpxcEvent.passwordGetFilled = async function() {
-    return page.passwordFilled;
-};
-
-kpxcEvent.passwordSetFilled = async function(tab, state) {
-    page.passwordFilled = state;
-};
-
-kpxcEvent.getColorTheme = async function(tab) {
-    return page.settings.colorTheme;
-};
-
-kpxcEvent.pageGetRedirectCount = async function() {
-    return page.redirectCount;
-};
-
-kpxcEvent.pageClearLogins = async function(tab, alreadyCalled) {
-    if (!alreadyCalled) {
-        page.clearLogins(tab.id);
-    }
-};
-
-kpxcEvent.compareVersion = async function(tab, args = []) {
-    return keepass.compareVersion(args[0], args[1]);
-};
-
-kpxcEvent.getIsKeePassXCAvailable = async function() {
-    return keepass.isKeePassXCAvailable;
-};
-
-kpxcEvent.hideGettingStartedGuideAlert = async function(tab) {
-    const settings = await kpxcEvent.onLoadSettings();
-    settings.showGettingStartedGuideAlert = false;
-
-    await kpxcEvent.onSaveSettings(tab, settings);
-};
-
-kpxcEvent.hideTroubleshootingGuideAlert = async function(tab) {
-    const settings = await kpxcEvent.onLoadSettings();
-    settings.showTroubleshootingGuideAlert = false;
-
-    await kpxcEvent.onSaveSettings(tab, settings);
-};
-
-// Bounce message back to all frames
-kpxcEvent.sendBackToTabs = async function(tab, args = []) {
-    await browser.tabs.sendMessage(tab.id, { action: 'frame_message', args: args });
 };
 
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'associate': keepass.associate,
     'check_database_hash': keepass.checkDatabaseHash,
-    'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
+    'check_update_keepassxc': kpxcEvent.checkUpdateKeePassXC,
     'compare_version': kpxcEvent.compareVersion,
     'create_credentials': keepass.createCredentials,
     'create_new_group': keepass.createNewGroup,
@@ -250,20 +271,20 @@ kpxcEvent.messageHandlers = {
     'frame_message': kpxcEvent.sendBackToTabs,
     'generate_password': keepass.generatePassword,
     'get_color_theme': kpxcEvent.getColorTheme,
-    'get_connected_database': kpxcEvent.onGetConnectedDatabase,
+    'get_connected_database': kpxcEvent.getConnectedDatabase,
     'get_database_hash': keepass.getDatabaseHash, // TODO ?
     'get_database_groups': keepass.getDatabaseGroups,
-    'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
+    'get_keepassxc_versions': kpxcEvent.getKeePassXCVersions,
     'get_login_list': page.getLoginList,
-    'get_status': kpxcEvent.onGetStatus,
-    'get_tab_information': kpxcEvent.onGetTabInformation,
+    'get_status': kpxcEvent.getStatus,
+    'get_tab_information': kpxcEvent.getTabInformation,
     'get_totp': keepass.getTotp,
     'hide_getting_started_guide_alert': kpxcEvent.hideGettingStartedGuideAlert,
     'hide_troubleshooting_guide_alert': kpxcEvent.hideTroubleshootingGuideAlert,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
-    'load_keyring': kpxcEvent.onLoadKeyRing,
-    'load_settings': kpxcEvent.onLoadSettings,
+    'load_keyring': kpxcEvent.loadKeyRing,
+    'load_settings': kpxcEvent.loadSettings,
     'lock_database': kpxcEvent.lockDatabase,
     'page_clear_logins': kpxcEvent.pageClearLogins,
     'page_clear_submitted': page.clearSubmittedCredentials,
@@ -278,15 +299,15 @@ kpxcEvent.messageHandlers = {
     'page_set_submitted': page.setSubmitted,
     'password_get_filled': kpxcEvent.passwordGetFilled,
     'password_set_filled': kpxcEvent.passwordSetFilled,
-    'popup_login': kpxcEvent.onLoginPopup,
-    'reconnect': kpxcEvent.onReconnect,
-    'remove_credentials_from_tab_information': kpxcEvent.onRemoveCredentialsFromTabInformation,
+    'popup_login': kpxcEvent.initLoginPopup,
+    'reconnect': kpxcEvent.reconnect,
+    'remove_credentials_from_tab_information': kpxcEvent.removeCredentialsFromTabInformation,
     'request_autotype': keepass.requestAutotype,
     'retrieve_credentials': page.retrieveCredentials,
     'show_default_browseraction': browserAction.showDefault,
     'update_credentials': keepass.updateCredentials,
-    'username_field_detected': kpxcEvent.onUsernameFieldDetected,
-    'save_settings': kpxcEvent.onSaveSettings,
-    'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC,
+    'username_field_detected': kpxcEvent.usernameFieldDetected,
+    'save_settings': kpxcEvent.saveSettings,
+    'update_available_keepassxc': kpxcEvent.updateAvailableKeePassXC,
     'update_context_menu': page.updateContextMenu
 };

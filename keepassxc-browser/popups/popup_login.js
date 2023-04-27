@@ -75,7 +75,7 @@
     $('#reopen-database-button').addEventListener('click', (e) => {
         browser.runtime.sendMessage({
             action: 'get_status',
-            args: [ false, true ] // Set forcePopup to true
+            args: [ false, true ] // Set triggerUnlock to true
         });
     });
 })();
