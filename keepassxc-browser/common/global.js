@@ -56,6 +56,13 @@ const ManualFill = {
     BOTH: 2
 };
 
+const AddCredentials = {
+    CANCELED: 0,
+    CREATED: 1,
+    ERROR: 2,
+    UPDATED: 3
+};
+
 // Match hostname or path with wildcards
 const matchWithRegex = function(firstUrlPart, secondUrlPart, hostnameUsed = false) {
     if (firstUrlPart === secondUrlPart) {

@@ -281,7 +281,7 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
                     args: [ url, '', true ] // Sets triggerUnlock to true
                 }).then(async creds => {
                     if (!creds || creds.length !== credentials.list.length) {
-                        kpxcBanner.verifyResult('error');
+                        kpxcBanner.verifyResult(AddCredentials.ERROR);
                         return;
                     }
 
@@ -302,15 +302,15 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
 };
 
 kpxcBanner.verifyResult = async function(code) {
-    if (code === 'error') {
+    if (code === AddCredentials.ERROR) {
         kpxcUI.createNotification('error', tr('rememberErrorCannotSaveCredentials'));
-    } else if (code === 'created') {
+    } else if (code === AddCredentials.CREATED) {
         kpxcUI.createNotification('success', tr('rememberCredentialsSaved', kpxcBanner.credentials.username || tr('rememberEmptyUsername')));
         await kpxc.retrieveCredentials(true); // Forced reload
-    } else if (code === 'updated') {
+    } else if (code === AddCredentials.UPDATED) {
         kpxcUI.createNotification('success', tr('rememberCredentialsUpdated', kpxcBanner.credentials.username || tr('rememberEmptyUsername')));
         await kpxc.retrieveCredentials(true); // Forced reload
-    } else if (code === 'canceled') {
+    } else if (code === AddCredentials.CANCELED) {
         kpxcUI.createNotification('warning', tr('rememberCredentialsNotSaved'));
     } else {
         kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));

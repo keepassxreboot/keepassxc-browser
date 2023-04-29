@@ -16,6 +16,17 @@ kpxcEvent.getColorTheme = async function(tab) {
 };
 
 kpxcEvent.getConnectedDatabase = async function() {
+    /*let hash = keepass.associated.hash;
+
+    // Check if one database is open but not active
+    // TODO: Does not work if two are open and active one is closed and non-associated
+    const associatedDatabases = keepass.databaseStatuses.statuses.filter(ds => ds.associated);
+    if (associatedDatabases.length === 1
+        && keepass.databaseAssociationStatuses.isAnyAssociated
+        && !keepass.associated.value) {
+        hash = associatedDatabases[0].hash;
+    }*/
+
     return Promise.resolve({
         count: Object.keys(keepass.keyRing).length,
         identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
@@ -49,7 +60,7 @@ kpxcEvent.getStatus = async function(tab, args = []) {
                 configured = response.isAnyAssociated;
             } else {
                 // TODO: This does not update when db is locked or just opened
-                configured = keepass.databaseAssosiationStatuses?.isAnyAssociated; // ?
+                configured = keepass.databaseAssociationStatuses?.isAnyAssociated; // ?
             }
         } else {
             if (!internalPoll) {
@@ -238,7 +249,7 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         associated: keepass.isAssociated(),
         configured: configured,
         databaseClosed: keepass.isDatabaseClosed,
-        databaseAssociationStatuses: keepass.databaseAssosiationStatuses,
+        databaseAssociationStatuses: keepass.databaseAssociationStatuses,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         error: errorMessage || null,
         identifier: keyId,

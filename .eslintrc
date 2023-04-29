@@ -87,6 +87,7 @@
         "assertSearchField": true,
         "assertSearchForm": true,
         "assertTOTPField": true,
+        "AddCredentials": true,
         "AssociatedAction": true,
         "Autocomplete": true,
         "bootstrap": true,

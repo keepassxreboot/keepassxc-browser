@@ -1,8 +1,9 @@
 'use strict';
 
 const keepass = {};
-keepass.associated = { 'value': false, 'hash': null };
-keepass.databaseAssosiationStatuses = {};
+keepass.associated = { value: false, hash: null };
+keepass.databaseAssociationStatuses = {};
+keepass.databaseStatuses = [];
 keepass.keyPair = { publicKey: null, secretKey: null };
 keepass.serverPublicKey = '';
 keepass.clientID = '';
@@ -102,6 +103,10 @@ keepass.createCredentials = async function(tab, args = []) {
 
 keepass.createNewGroup = async function(tab, args = []) {
     return keepass.protocolV2 ? await protocol.createNewGroup(tab, args) : await keepassProtocol.createNewGroup(tab, args);
+};
+
+keepass.generatePassword = async function(tab, args = []) {
+    return keepass.protocolV2 ? await protocol.generatePassword(tab, args) : await keepassProtocol.generatePassword(tab, args);
 };
 
 keepass.getCredentials = async function(tab, args = []) {

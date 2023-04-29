@@ -239,16 +239,15 @@ keepassProtocol.getDatabaseHash = async function(tab, args = []) {
         connectedKeys: Object.keys(keepass.keyRing) // This will be removed in the future
     };
 
-    // Why is this here?
-    /*const encrypted = protocolClient.encrypt(messageData, nonce);
+    const encrypted = protocolClient.encrypt(messageData, nonce);
     if (encrypted.length <= 0) {
         keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
         keepass.updateDatabaseHashToContent();
         return keepass.databaseHash;
-    }*/
+    }
 
     try {
-        const request = keepassClient.buildRequest(kpAction, protocolClient.encrypt(messageData, nonce), nonce, keepass.clientID, triggerUnlock);
+        const request = keepassClient.buildRequest(kpAction, encrypted, nonce, keepass.clientID, triggerUnlock);
         const response = await keepassClient.sendNativeMessage(request, enableTimeout);
         if (response.message && response.nonce) {
             const res = protocolClient.decrypt(response.message, response.nonce);
@@ -562,12 +561,12 @@ keepassProtocol.updateCredentials = async function(tab, args = []) {
             // KeePassXC versions lower than 2.5.0 will have an empty parsed.error
             let successMessage = response.error;
             if (response.error === 'success' || response.error === '') {
-                successMessage = entryId ? 'updated' : 'created';
+                successMessage = entryId ? AddCredentials.UPDATED : AddCredentials.CREATED;
             }
 
             return successMessage;
         } else {
-            return 'error';
+            return AddCredentials.ERROR;
         }
     } catch (err) {
         logError(`updateCredentials failed: ${err}`);

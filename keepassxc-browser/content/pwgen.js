@@ -303,18 +303,9 @@ kpxcPasswordDialog.fill = function(e) {
         }
     }
 
-    kpxcPasswordDialog.input.value = password.value;
-    kpxcPasswordDialog.input.dispatchEvent(new Event('keydown', { bubbles: true }));
-    kpxcPasswordDialog.input.dispatchEvent(new Event('keyup', { bubbles: true }));
-    kpxcPasswordDialog.input.dispatchEvent(new Event('input', { bubbles: true }));
-    kpxcPasswordDialog.input.dispatchEvent(new Event('change', { bubbles: true }));
-
+    fillPassword(kpxcPasswordDialog.input, password.value);
     if (kpxcPasswordDialog.nextField) {
-        kpxcPasswordDialog.nextField.value = password.value;
-        kpxcPasswordDialog.nextField.dispatchEvent(new Event('keydown', { bubbles: true }));
-        kpxcPasswordDialog.nextField.dispatchEvent(new Event('keyup', { bubbles: true }));
-        kpxcPasswordDialog.nextField.dispatchEvent(new Event('input', { bubbles: true }));
-        kpxcPasswordDialog.nextField.dispatchEvent(new Event('change', { bubbles: true }));
+        fillPassword(kpxcPasswordDialog.nextField, password.value);
     }
 };
 
@@ -339,9 +330,7 @@ kpxcPasswordDialog.newFill = function(elem, password) {
         }
     }
 
-    elem.value = password;
-    elem.dispatchEvent(new Event('input', { bubbles: true }));
-    elem.dispatchEvent(new Event('change', { bubbles: true }));
+    fillPassword(elem, password);
 };
 
 kpxcPasswordDialog.copyPasswordToClipboard = function() {
@@ -404,4 +393,12 @@ const useKeePassXCPasswordGenerator = async function() {
     });
 
     return result;
+};
+
+const fillPassword = function(elem, password) {
+    elem.value = password;
+    elem.dispatchEvent(new Event('keydown', { bubbles: true }));
+    elem.dispatchEvent(new Event('keyup', { bubbles: true }));
+    elem.dispatchEvent(new Event('input', { bubbles: true }));
+    elem.dispatchEvent(new Event('change', { bubbles: true }));
 };
