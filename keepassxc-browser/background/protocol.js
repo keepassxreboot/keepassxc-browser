@@ -62,6 +62,11 @@ protocol.changePublicKeys = async function(tab, enableTimeout = false, connectio
 
     try {
         const response = await protocolClient.sendNativeMessage(kpAction, request, enableTimeout, connectionTimeout);
+        if (response.error && response.errorCode) {
+            keepass.handleError(tab, kpErrors.KEY_CHANGE_FAILED);
+            return false;
+        }
+
         keepass.setcurrentKeePassXCVersion(response.version);
         keepass.protocolV2 = response?.protocolVersion === 2;
 
@@ -189,7 +194,6 @@ protocol.getCredentials = async function(tab, args = []) {
     }
 
     try {
-        // TODO: Handle errors
         const response = await protocolClient.sendMessage(tab, messageData, false, triggerUnlock);
         if (response) {
             if (response.error && response.errorCode) {
@@ -258,7 +262,7 @@ protocol.getDatabaseGroups = async function(tab, args = []) {
 };
 
 protocol.getDatabaseStatuses = async function(tab, args = []) {
-    if (!keepass.isConnected) {
+    if (!keepass.isKeePassXCAvailable) {
         keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
         return;
     }
@@ -289,10 +293,10 @@ protocol.getDatabaseStatuses = async function(tab, args = []) {
             return response;
         }
 
-        keepass.isDatabaseClosed = true;
-        keepass.isKeePassXCAvailable = false;
-        keepass.databaseHash = '';
-        keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
+        //keepass.isDatabaseClosed = true;
+        //keepass.isKeePassXCAvailable = false;
+        //keepass.databaseHash = '';
+        keepass.handleError(tab, kpErrors.ACTION_TIMEOUT);
     } catch (err) {
         logError(`getDatabaseStatuses failed: ${err}`);
     }

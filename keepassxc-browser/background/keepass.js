@@ -58,6 +58,7 @@ const kpErrors = {
     EMPTY_MESSAGE_RECEIVED: 13,
     NO_URL_PROVIDED: 14,
     NO_LOGINS_FOUND: 15,
+    ACTION_TIMEOUT: 16,
 
     errorMessages: {
         0: { msg: tr('errorMessageUnknown') },
@@ -75,7 +76,8 @@ const kpErrors = {
         12: { msg: tr('errorMessageIncorrectAction') },
         13: { msg: tr('errorMessageEmptyMessage') },
         14: { msg: tr('errorMessageNoURL') },
-        15: { msg: tr('errorMessageNoLogins') }
+        15: { msg: tr('errorMessageNoLogins') },
+        16: { msg: tr('errorActionTimeout') }
     },
 
     getError(errorCode) {
@@ -392,6 +394,10 @@ keepass.updatePopup = function() {
 
 // Updates the database hashes to content script
 keepass.updateDatabase = async function() {
+    if (!keepass.isKeePassXCAvailable) {
+        return;
+    }
+
     keepass.associated.value = false;
     keepass.associated.hash = null;
     page.clearAllLogins();

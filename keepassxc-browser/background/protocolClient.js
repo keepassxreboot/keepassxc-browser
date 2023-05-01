@@ -36,13 +36,14 @@ protocolClient.messageTimeout = 500; // Milliseconds
 protocolClient.nativeHostName = 'org.keepassxc.keepassxc_browser';
 protocolClient.nativePort = null;
 
-protocolClient.sendNativeMessage = function(requestAction, request, enableTimeout = false, timeoutValue) {
+protocolClient.sendNativeMessage = function(requestAction, request, enableTimeout = false, timeoutValue = protocolClient.messageTimeout) {
     return new Promise((resolve, reject) => {
         let timeout;
         const ev = protocolClient.nativePort.onMessage;
 
         const listener = ((port) => {
             const handler = (msg) => {
+                console.log('msg recevied: ', msg);
                 if (msg && (msg?.requestID === request.requestID || msg?.action === kpActions.CHANGE_PUBLIC_KEYS)) {
                     // Only resolve a matching response
                     if (protocolBuffer.matchAndRemove(msg)) {
@@ -60,20 +61,22 @@ protocolClient.sendNativeMessage = function(requestAction, request, enableTimeou
         })(ev);
         ev.addListener(listener);
 
-        const messageTimeout = timeoutValue || protocolClient.messageTimeout;
-
         // Handle timeouts
         if (enableTimeout) {
             timeout = setTimeout(() => {
-                const errorMessage = {
+                let error = kpErrors.ACTION_TIMEOUT;
+                if (requestAction === kpActions.CHANGE_PUBLIC_KEYS) {
+                    error = kpErrors.TIMEOUT_OR_NOT_CONNECTED;
+                    keepass.isKeePassXCAvailable = false;
+                }
+
+                resolve({
                     action: requestAction,
-                    error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
-                    errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
-                };
-                keepass.isKeePassXCAvailable = false;
+                    error: kpErrors.getError(error),
+                    errorCode: error
+                });
                 ev.removeListener(listener.handler);
-                resolve(errorMessage);
-            }, messageTimeout);
+            }, timeoutValue);
         }
 
         // Store the request to the buffer
@@ -93,7 +96,7 @@ protocolClient.sendMessage = async function(tab, messageData, enableTimeout = fa
     const response = await protocolClient.sendNativeMessage(messageData.action, request, enableTimeout);
     const incrementedNonce = protocolClient.incrementedNonce(nonce);
 
-    return protocolClient.handleResponse(response, incrementedNonce, tab);
+    return protocolClient.handleResponse(response, incrementedNonce, request.requestID, tab);
 };
 
 protocolClient.buildRequest = function(encryptedMessage, nonce, clientID, triggerUnlock = false) {
@@ -112,11 +115,12 @@ protocolClient.buildRequest = function(encryptedMessage, nonce, clientID, trigge
 };
 
 // Verifies nonces, decrypts and parses the response
-protocolClient.handleResponse = function(response, incrementedNonce, tab) {
+protocolClient.handleResponse = function(response, incrementedNonce, requestID, tab) {
     if (response.message && protocolClient.verifyNonce(response, incrementedNonce)) {
         const res = protocolClient.decrypt(response.message, response.nonce);
         if (!res) {
             keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
+            protocolBuffer.matchAndRemove({ requestID: requestID });
             return undefined;
         }
 
@@ -125,6 +129,7 @@ protocolClient.handleResponse = function(response, incrementedNonce, tab) {
         return parsed;
     } else if (response.error && response.errorCode) {
         keepass.handleError(tab, response.errorCode, response.error);
+        protocolBuffer.matchAndRemove({ requestID: requestID });
     }
 
     return undefined;

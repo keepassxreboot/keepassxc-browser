@@ -103,7 +103,11 @@
         "message": "No logins found.",
         "description": "No logins found."
     },
-    "errorMessagePaswordLengthExceeded": {
+    "errorActionTimeout": {
+        "message": "Action timeout.",
+        "description": "Action timeout."
+    },
+    "errorMessagePasswordLengthExceeded": {
         "message": "Filled password is longer than field's allowed max length.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
