@@ -56,10 +56,8 @@ kpxcFields.getAllCombinations = async function(inputs) {
         combinations.push(combination);
     }
 
-    // Check for multiple segmented TOTP fields
-    if (combinations.length === 0) {
-        kpxcFields.getSegmentedTOTPFields(inputs, combinations);
-    }
+    // Check for segmented TOTP fields
+    kpxcFields.handleSegmentedTOTPFields(inputs, combinations);
 
     return combinations;
 };
@@ -98,7 +96,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
     let exceptionFound = false;
 
     const addTotpFieldsToCombination = function(inputFields, ignoreLength = false) {
-        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden');
+        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden' && e.type !== 'submit');
         if (totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS || ignoreLength) {
             const combination = {
                 form: form,
@@ -298,6 +296,26 @@ kpxcFields.getLegacyId = function(target) {
 
 kpxcFields.getElementFromXPathId = function(xpath) {
     return (new XPathEvaluator()).evaluate(xpath, document.documentElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+};
+
+// Checks if inputs or combinations contain segmented TOTP fields
+kpxcFields.handleSegmentedTOTPFields = function(inputs, combinations) {
+    // Check for multiple segmented TOTP fields when there are no inputs, or combination contains the segemented fields
+    const segmentedFields = combinations.filter(c => c.totp);
+    if (combinations.length === 0 || segmentedFields.length === DEFAULT_SEGMENTED_TOTP_FIELDS) {
+        kpxcFields.getSegmentedTOTPFields(inputs, combinations);
+    }
+
+    // Remove previously detected segmented TOTP fields from the combination.
+    // This prevents adding icons to each single field when segmented fields are used.
+    if (segmentedFields.length === DEFAULT_SEGMENTED_TOTP_FIELDS) {
+        const firstTotpField = combinations.findIndex(c => c.totp);
+        if (firstTotpField >= 0) {
+            combinations.splice(firstTotpField, DEFAULT_SEGMENTED_TOTP_FIELDS);
+        }
+    }
+
+    return combinations;
 };
 
 // Check for new password via autocomplete attribute
