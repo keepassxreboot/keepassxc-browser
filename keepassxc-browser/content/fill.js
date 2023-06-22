@@ -192,7 +192,8 @@ kpxcFill.fillSegmentedTotp = function(elem, val, totpInputs) {
 kpxcFill.fillFromUsernameIcon = async function(combination) {
     await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
-        logDebug('Error: Credential list is empty.');
+        logDebug(`Error: Credential list is empty for: ${document.location.origin}`);
+        kpxcUI.createNotification('error', `${tr('credentialsNoLoginsFound')} ${document.location.origin}`);
         return;
     } else if (kpxc.credentials.length > 1 && kpxc.settings.autoCompleteUsernames) {
         kpxcUserAutocomplete.showList(combination.username || combination.password);
