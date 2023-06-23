@@ -25,7 +25,8 @@ kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
 kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
     await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
-        logDebug('Error: Credential list is empty.');
+        logDebug(`Error: Credential list is empty for: ${document.location.origin}`);
+        kpxcUI.createNotification('error', `${tr('credentialsNoLoginsFound')} ${document.location.origin}`);
         return;
     }
 
