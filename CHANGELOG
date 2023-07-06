@@ -1,3 +1,10 @@
+1.8.7 (2023-07-06)
+=========================
+- Add OpenAI login page to Predefined Sites [#1901]
+- Add a notification during fill when credentials are not found [#1928]
+- Fix segmented TOTP field detection [#1909]
+- Fix adding Username Icon to non-identified forms [#1902]
+
 1.8.6.1 (2023-04-10)
 =========================
 - Change minimum browser version requirements [#1895]
