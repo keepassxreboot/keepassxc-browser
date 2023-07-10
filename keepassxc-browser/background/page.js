@@ -196,17 +196,25 @@ page.createTabEntry = function(tabId) {
 // Page reload or tab switch clears the cache.
 // If the retrieval is forced (from Credential Banner), get new credentials normally.
 page.retrieveCredentials = async function(tab, args = []) {
+    if (!tab?.active) {
+        return [];
+    }
+
     const [ url, submitUrl, force ] = args;
     if (page.tabs[tab.id]?.credentials.length > 0 && !force) {
         return page.tabs[tab.id].credentials;
     }
 
-    // Ignore duplicate requests
-    if (page.currentRequest.url === url && page.currentRequest.submitUrl === submitUrl && !force) {
+    // Ignore duplicate requests from the same tab
+    if (page.currentRequest.url === url
+        && page.currentRequest.submitUrl === submitUrl
+        && page.currentRequest.tabId === tab.id
+        && !force) {
         return [];
     } else {
         page.currentRequest.url = url;
         page.currentRequest.submitUrl = submitUrl;
+        page.currentRequest.tabId = tab.id;
     }
 
     const credentials = await keepass.retrieveCredentials(tab, args);
