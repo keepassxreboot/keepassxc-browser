@@ -52,8 +52,9 @@ browserAction.generateIconName = function(iconType) {
     let name = 'icon_';
     name += (keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
     name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
-
-    return `/icons/toolbar/${name}.png`;
+    
+    let style = 'colored'
+    return `/icons/toolbar/${style}/${name}.png`;
 };
 
 browserAction.ignoreSite = async function(url) {
