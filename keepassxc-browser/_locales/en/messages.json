@@ -679,6 +679,10 @@
         "message": "Show notifications.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Save domain only.",
         "description": "Save domain only checkbox text."
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Show notifications for errors and when user interaction is required.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use monochrome icon in toolbar that adapts to light/dark browser theme. Requires browser restart.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "When saving new credentials, save only the domain instead of full URL.",

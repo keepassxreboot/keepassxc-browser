@@ -54,6 +54,9 @@ browserAction.generateIconName = function(iconType) {
     name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
     
     let style = 'colored'
+    if (page.settings.useMonochromeToolbarIcon) {
+        style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
     return `/icons/toolbar/${style}/${name}.png`;
 };
 

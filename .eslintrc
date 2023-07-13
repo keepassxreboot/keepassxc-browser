@@ -154,6 +154,7 @@
         "resizePopup": true,
         "sendMessage": true,
         "showNotification": true,
+        "useMonochromToolbarIcon": false,
         "siteMatch": true,
         "slashNeededForUrl": true,
         "SORT_BY_GROUP_AND_TITLE": true,

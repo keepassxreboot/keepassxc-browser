@@ -25,6 +25,7 @@ const defaultSettings = {
     showLoginFormIcon: true,
     showLoginNotifications: true,
     showNotifications: true,
+    useMonochromeToolbarIcon: false,
     showOTPIcon: true,
     useObserver: true,
     usePredefinedSites: true,
