@@ -57,7 +57,8 @@ browserAction.generateIconName = function(iconType) {
     if (page.settings.useMonochromeToolbarIcon) {
         style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    return `/icons/toolbar/${style}/${name}.png`;
+    let filetype = (isFirefox() ? 'svg' : 'png')
+    return `/icons/toolbar/${style}/${name}.${filetype}`;
 };
 
 browserAction.ignoreSite = async function(url) {
