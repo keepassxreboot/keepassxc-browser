@@ -55,7 +55,11 @@ browserAction.generateIconName = function(iconType) {
     
     let style = 'colored'
     if (page.settings.useMonochromeToolbarIcon) {
-        style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (page.settings.colorTheme == 'system') {
+            style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+       } else {
+            style = page.settings.colorTheme; 
+       }
     }
     let filetype = (isFirefox() ? 'svg' : 'png')
     return `/icons/toolbar/${style}/${name}.${filetype}`;
