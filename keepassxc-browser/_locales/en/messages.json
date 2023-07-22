@@ -816,7 +816,7 @@
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme. Might require browser restart.",
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {

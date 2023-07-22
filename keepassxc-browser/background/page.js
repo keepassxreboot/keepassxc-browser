@@ -323,6 +323,10 @@ page.updateContextMenu = async function(tab, credentials) {
     }
 };
 
+page.updatePopup = function(tab) {
+    browserAction.showDefault(tab);
+}
+
 const createContextMenuItem = function({ action, args, ...options }) {
     return browser.contextMenus.create({
         contexts: menuContexts,

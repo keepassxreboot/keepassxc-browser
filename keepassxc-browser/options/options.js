@@ -93,6 +93,8 @@ options.initGeneralSettings = function() {
         } else if (name === 'autoReconnect') {
             const message = updated.autoReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
             browser.runtime.sendMessage({ action: message });
+        } else if (name === 'useMonochromeToolbarIcon') {
+            browser.runtime.sendMessage({ action: 'update_popup' });
         }
     };
 
