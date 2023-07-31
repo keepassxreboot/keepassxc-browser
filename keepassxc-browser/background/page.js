@@ -25,6 +25,7 @@ const defaultSettings = {
     showLoginFormIcon: true,
     showLoginNotifications: true,
     showNotifications: true,
+    useMonochromeToolbarIcon: false,
     showOTPIcon: true,
     useObserver: true,
     usePredefinedSites: true,
@@ -321,6 +322,10 @@ page.updateContextMenu = async function(tab, credentials) {
         }
     }
 };
+
+page.updatePopup = function(tab) {
+    browserAction.showDefault(tab);
+}
 
 const createContextMenuItem = function({ action, args, ...options }) {
     return browser.contextMenus.create({

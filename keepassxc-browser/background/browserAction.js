@@ -52,8 +52,17 @@ browserAction.generateIconName = function(iconType) {
     let name = 'icon_';
     name += (keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
     name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
-
-    return `/icons/toolbar/${name}.png`;
+    
+    let style = 'colored'
+    if (page.settings.useMonochromeToolbarIcon) {
+        if (page.settings.colorTheme == 'system') {
+            style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+       } else {
+            style = page.settings.colorTheme; 
+       }
+    }
+    let filetype = (isFirefox() ? 'svg' : 'png')
+    return `/icons/toolbar/${style}/${name}.${filetype}`;
 };
 
 browserAction.ignoreSite = async function(url) {
