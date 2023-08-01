@@ -30,6 +30,8 @@ browserAction.showDefault = async function(tab) {
 
     if (!response && !keepass.isKeePassXCAvailable) {
         popupData.iconType = 'cross';
+    } else if (!keepass.isAssociated() && !keepass.isDatabaseClosed) {
+        popupData.iconType = 'bang';
     } else if (keepass.isKeePassXCAvailable && keepass.isDatabaseClosed) {
         popupData.iconType = 'locked';
     }

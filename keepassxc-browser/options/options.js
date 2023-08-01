@@ -380,6 +380,7 @@ options.initConnectedDatabases = function() {
         });
 
         hideEmptyMessageRow();
+        browser.runtime.sendMessage({ action: 'update_popup' });
     });
 
     const removeButtonClicked = function(e) {
