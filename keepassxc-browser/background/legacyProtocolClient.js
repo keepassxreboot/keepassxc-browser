@@ -37,7 +37,7 @@ keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeo
             const handler = (msg) => {
                 if (msg && msg?.action === action) {
                     // If the request has a separate requestID, check if it matches when there's no nonce (an error message)
-                    const isNotificationOrError = !msg.nonce && request.requestID === msg.requestID;
+                    const isNotificationOrError = !msg.nonce && (request.requestID === msg.requestID || (msg.error && msg.errorCode));
 
                     // Only resolve a matching response or a notification (without nonce)
                     if (isNotificationOrError || messageBuffer.matchAndRemove(msg)) {

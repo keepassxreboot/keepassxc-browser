@@ -45,7 +45,7 @@ keepassProtocol.associate = async function(tab) {
             keepass.associated.value = true;
             keepass.associated.hash = response.hash || 0;
 
-            browserAction.show(tab);
+            browserAction.showDefault(tab);
             return AssociatedAction.NEW_ASSOCIATION;
         }
 
