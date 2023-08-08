@@ -320,5 +320,6 @@ kpxcEvent.messageHandlers = {
     'username_field_detected': kpxcEvent.usernameFieldDetected,
     'save_settings': kpxcEvent.saveSettings,
     'update_available_keepassxc': kpxcEvent.updateAvailableKeePassXC,
-    'update_context_menu': page.updateContextMenu
+    'update_context_menu': page.updateContextMenu,
+    'update_popup': page.updatePopup
 };
