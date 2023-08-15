@@ -190,7 +190,7 @@ protocol.getCredentials = async function(tab, args = []) {
     }
 
     if (httpAuth) {
-        messageData.httpAuth = 'true';
+        messageData.httpAuth = true;
     }
 
     try {
@@ -302,19 +302,21 @@ protocol.getDatabaseStatuses = async function(tab, args = []) {
     }
 };
 
+// TODO: Finish this
 protocol.getTotp = async function(tab, args = []) {
     if (!keepass.isConnected) {
         return [];
     }
 
-    const [ uuid, oldTotp ] = args;
+    /*const [ uuids, oldTotp ] = args;
+    // KeePassXC 2.6.1 and older does not support retrieving
     if (!keepass.compareVersion('2.6.1', keepass.currentKeePassXC, true)) {
         return oldTotp;
-    }
+    }*/
 
     const messageData = {
         action: kpActions.GET_TOTP,
-        uuid: uuid,
+        uuids: args,
         keys: protocol.getKeys(), // Added
         hash: keepass.databaseHash // Added
     };
@@ -323,7 +325,7 @@ protocol.getTotp = async function(tab, args = []) {
         const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
             keepass.updateLastUsed(keepass.databaseHash);
-            return response.totp;
+            return response.totpList;
         }
 
         return;
@@ -444,7 +446,7 @@ protocol.updateCredentials = async function(tab, args = []) {
     }
 
     const [ entryId, username, password, url, group, groupUuid ] = args;
-    const [ dbid ] = keepass.getCryptoKey();
+    //const [ dbid ] = keepass.getCryptoKey();
 
     const messageData = {
         action: kpActions.CREATE_CREDENTIALS,

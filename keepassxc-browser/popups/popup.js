@@ -38,7 +38,7 @@ function statusResponse(status) {
     }
 
     // Only supported with Protocol V2
-    if (status.databaseAssociationStatuses) {
+    if (status.databaseAssociationStatuses && Object.keys(status.databaseAssociationStatuses).length > 0) {
         // This can be also shown when isAnyAssociated is true?
         if (status.databaseAssociationStatuses.associationNeeded) {
             $('#not-configured').show();

@@ -748,35 +748,34 @@ kpxc.updateDatabaseState = async function() {
     kpxc.databaseState = res.databaseClosed ? DatabaseState.LOCKED : DatabaseState.UNLOCKED;
 };
 
-// Updates the TOTP Autocomplete Menu
+// Updates the TOTP Autocomplete Menu. All TOTP's will be listed
+// TODO: Check that the latest TOTP is actually updated with Protocol V1
 kpxc.updateTOTPList = async function() {
-    let uuid = await sendMessage('page_get_login_id');
-    if (uuid === undefined || kpxc.credentials.length === 0) {
-        // Credential haven't been selected
-        logDebug('Error: No credentials selected for TOTP.');
-        return;
+    const hasTotp = function(cred) {
+        return cred.totp || (cred.stringFields && cred.stringFields.some(s => s['KPH: {TOTP}']));
+    };
+
+    // Filter credentials with TOTP set
+    const credentialList = kpxc.credentials.filter(c => hasTotp(c));
+
+    // Check for duplicate entries (TOTP might be in another database with identical username and title)
+    const duplicates = credentialList.filter(c =>
+        kpxc.credentials.some(l => l.login === c.login && l.name === c.name && l.uuid !== c.uuid)
+    );
+
+    // Use the UUID from the duplicate (if it contains the TOTP) for Autocomplete menu instead of the original
+    for (const e of kpxcUserAutocomplete.elements) {
+        const duplicate = duplicates.find(d => d.login === e.value);
+        if (duplicate) {
+            e.uuid = duplicate.uuid;
+        }
     }
 
-    // Use the first credential available if not set
-    if (uuid === '') {
-        uuid = kpxc.credentials[0].uuid;
-    }
+    // Filter the User Autocomplete menu items to those which contains TOTP
+    kpxcTOTPAutocomplete.elements = kpxcUserAutocomplete.elements.filter(e => credentialList.find(u => u.uuid === e.uuid));
 
-    const credentials = kpxc.credentials.find(c => c.uuid === uuid);
-    if (credentials) {
-        const username = credentials.login;
-        const password = credentials.password;
-
-        // If no username is set, compare with a password
-        const credentialList = kpxc.credentials.filter(c => (c.totp || (c.stringFields && c.stringFields.some(s => s['KPH: {TOTP}'])))
-            && (c.login === username || (!username && c.password === password)));
-
-        // Filter TOTP Autocomplete Menu with matching 2FA credentials
-        kpxcTOTPAutocomplete.elements = kpxcUserAutocomplete.elements.filter(e => credentialList.some(u => u.uuid === e.uuid));
-        return credentialList;
-    }
-
-    return [];
+    // Return filtered list of kpxc.credentials with TOTP set
+    return credentialList;
 };
 
 

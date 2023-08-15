@@ -137,6 +137,10 @@ kpxcEvent.initLoginPopup = async function(tab, logins) {
     browserAction.show(tab, popupData);
 };
 
+kpxcEvent.isProtocolV2 = async function(tab) {
+    return keepass.protocolV2;
+};
+
 kpxcEvent.loadKeyRing = async function() {
     const item = await browser.storage.local.get({ 'keyRing': {} }).catch((err) => {
         logError('kpxcEvent.loadKeyRing error: ' + err);
@@ -294,12 +298,15 @@ kpxcEvent.messageHandlers = {
     'hide_troubleshooting_guide_alert': kpxcEvent.hideTroubleshootingGuideAlert,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
+    'is_protocol_v2': kpxcEvent.isProtocolV2,
     'load_keyring': kpxcEvent.loadKeyRing,
     'load_settings': kpxcEvent.loadSettings,
     'lock_database': kpxcEvent.lockDatabase,
+    'page_clear_auto_lock_requested': page.clearAutoLockRequested,
     'page_clear_logins': kpxcEvent.pageClearLogins,
     'page_clear_submitted': page.clearSubmittedCredentials,
     'page_get_autosubmit_performed': page.getAutoSubmitPerformed,
+    'page_get_auto_lock_requested': page.getAutoLockRequested,
     'page_get_login_id': page.getLoginId,
     'page_get_manual_fill': page.getManualFill,
     'page_get_redirect_count': kpxcEvent.pageGetRedirectCount,
