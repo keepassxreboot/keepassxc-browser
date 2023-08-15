@@ -51,80 +51,85 @@ const kpErrors = {
 const messageBuffer = {
     buffer: [],
 
-    addMessage(msg) {
-        if (!this.buffer.includes(msg)) {
-            this.buffer.push(msg);
-        }
+    addMessage(message) {
+        this.buffer.push(message);
     },
 
-    matchAndRemove(msg) {
-        for (let i = 0; i < this.buffer.length; ++i) {
-            if (msg.nonce && msg.nonce === keepassClient.incrementedNonce(this.buffer[i].nonce)) {
-                this.buffer.splice(i, 1);
-                return true;
-            }
+    removeMessageFromIndex(index) {
+        if (this.buffer.length >= index + 1) {
+            this.buffer.splice(index, 1);
         }
-
-        return false;
     }
 };
+
+// Basic class for a message to be sent. The Promise inside the class will be resolved when
+// the response to the message is received.
+class Message {
+    constructor(request, enableTimeout, timeoutValue) {
+        this.promise = new Promise((resolve, reject) => {
+            this.reject = reject;
+            this.resolve = resolve;
+            this.enableTimeout = enableTimeout;
+
+            const messageTimeout = timeoutValue || keepassClient.messageTimeout;
+
+            // Handle timeout
+            if (enableTimeout) {
+                this.timeout = setTimeout(() => {
+                    const errorMessage = {
+                        action: request.action,
+                        error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
+                        errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
+                    };
+
+                    keepass.isKeePassXCAvailable = false;
+                    resolve(errorMessage);
+                }, messageTimeout);
+            }
+        });
+    }
+}
 
 //--------------------------------------------------------------------------
 // Messaging
 //--------------------------------------------------------------------------
 
-keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeoutValue) {
-    return new Promise((resolve, reject) => {
-        let timeout;
-        const requestAction = request.action;
-        const ev = keepassClient.nativePort.onMessage;
+keepassClient.sendNativeMessage = async function(request, enableTimeout = false, timeoutValue) {
+    const message = new Message(request, enableTimeout, timeoutValue);
+    messageBuffer.addMessage({ request: request, message: message });
 
-        const listener = ((port, action) => {
-            const handler = (msg) => {
-                if (msg && msg?.action === action) {
-                    // If the request has a separate requestID, check if it matches when there's no nonce (an error message)
-                    const isNotificationOrError = !msg.nonce && (request.requestID === msg.requestID || (msg.error && msg.errorCode));
+    // Send the request
+    if (keepassClient.nativePort) {
+        keepassClient.nativePort.postMessage(request);
+    }
 
-                    // Only resolve a matching response or a notification (without nonce)
-                    if (isNotificationOrError || messageBuffer.matchAndRemove(msg)) {
-                        port.removeListener(handler);
-                        if (enableTimeout) {
-                            clearTimeout(timeout);
-                        }
+    // Wait for response
+    return await message.promise;
+};
 
-                        resolve(msg);
-                        return;
-                    }
-                }
-            };
-            return handler;
-        })(ev, requestAction);
-        ev.addListener(listener);
+keepassClient.handleNativeMessage = function(response) {
+    const isError = Boolean(!response.nonce && response.error && response.errorCode);
 
-        const messageTimeout = timeoutValue || keepassClient.messageTimeout;
-
-        // Handle timeouts
-        if (enableTimeout) {
-            timeout = setTimeout(() => {
-                const errorMessage = {
-                    action: requestAction,
-                    error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
-                    errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
-                };
-                keepass.isKeePassXCAvailable = false;
-                ev.removeListener(listener.handler);
-                resolve(errorMessage);
-            }, messageTimeout);
+    // Parse through the message buffer to find the corresponding Promise.
+    for (let i = 0; i < messageBuffer.buffer.length; ++i) {
+        if (! messageBuffer.buffer[i]) {
+            continue;
         }
 
-        // Store the request to the buffer
-        messageBuffer.addMessage(request);
+        const request = messageBuffer.buffer[i]?.request;
+        const message = messageBuffer.buffer[i]?.message;
+        const errorFound = isError && request?.action === response?.action;
 
-        // Send the request
-        if (keepassClient.nativePort) {
-            keepassClient.nativePort.postMessage(request);
+        if ((response.nonce && response.nonce === keepassClient.incrementedNonce(request.nonce)) || errorFound) {
+            if (message.enableTimeout) {
+                clearTimeout(message.timeout);
+            }
+
+            message.resolve(response);
+            messageBuffer.removeMessageFromIndex(i);
+            return;
         }
-    });
+    }
 };
 
 keepassClient.handleResponse = function(response, incrementedNonce, tab) {
@@ -341,5 +346,9 @@ keepassClient.onNativeMessage = function(response) {
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.updateDatabase();
+        return;
     }
+
+    // Generic response handling
+    keepassClient.handleNativeMessage(response);
 };
