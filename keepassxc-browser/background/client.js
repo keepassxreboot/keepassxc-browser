@@ -96,7 +96,9 @@ class Message {
 
 keepassClient.sendNativeMessage = async function(request, enableTimeout = false, timeoutValue) {
     const message = new Message(request, enableTimeout, timeoutValue);
-    messageBuffer.addMessage({ request: request, message: message });
+    await navigator.locks.request('messageBuffer', async (lock) => {
+        messageBuffer.addMessage({ request: request, message: message });
+    });
 
     // Send the request
     if (keepassClient.nativePort) {
@@ -107,29 +109,31 @@ keepassClient.sendNativeMessage = async function(request, enableTimeout = false,
     return await message.promise;
 };
 
-keepassClient.handleNativeMessage = function(response) {
+keepassClient.handleNativeMessage = async function(response) {
     const isError = Boolean(!response.nonce && response.error && response.errorCode);
 
     // Parse through the message buffer to find the corresponding Promise.
-    for (let i = 0; i < messageBuffer.buffer.length; ++i) {
-        if (! messageBuffer.buffer[i]) {
-            continue;
-        }
-
-        const request = messageBuffer.buffer[i]?.request;
-        const message = messageBuffer.buffer[i]?.message;
-        const errorFound = isError && request?.action === response?.action;
-
-        if ((response.nonce && response.nonce === keepassClient.incrementedNonce(request.nonce)) || errorFound) {
-            if (message.enableTimeout) {
-                clearTimeout(message.timeout);
+    await navigator.locks.request('messageBuffer', async (lock) => {
+        for (let i = 0; i < messageBuffer.buffer.length; ++i) {
+            if (! messageBuffer.buffer[i]) {
+                continue;
             }
 
-            message.resolve(response);
-            messageBuffer.removeMessageFromIndex(i);
-            return;
+            const request = messageBuffer.buffer[i]?.request;
+            const message = messageBuffer.buffer[i]?.message;
+            const errorFound = isError && request?.action === response?.action;
+
+            if ((response.nonce && response.nonce === keepassClient.incrementedNonce(request.nonce)) || errorFound) {
+                if (message.enableTimeout) {
+                    clearTimeout(message.timeout);
+                }
+
+                message.resolve(response);
+                messageBuffer.removeMessageFromIndex(i);
+                return;
+            }
         }
-    }
+    });
 };
 
 keepassClient.handleResponse = function(response, incrementedNonce, tab) {
