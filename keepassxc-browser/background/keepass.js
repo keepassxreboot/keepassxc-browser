@@ -15,6 +15,7 @@ keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassx
 keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.databaseHash = '';
 keepass.previousDatabaseHash = '';
+keepass.passwordRequestSent = false;
 keepass.reconnectLoop = null;
 
 const kpActions = {
@@ -168,18 +169,24 @@ keepass.retrieveCredentials = async function(tab, args = []) {
 
 keepass.generatePassword = async function(tab) {
     if (!keepass.isConnected) {
-        return [];
+        return '';
+    }
+
+    if (keepass.passwordRequestSent) {
+        return undefined;
+    } else {
+        keepass.passwordRequestSent = true;
     }
 
     try {
         const taResponse = await keepass.testAssociation(tab);
         if (!taResponse) {
             browserAction.showDefault(tab);
-            return [];
+            return '';
         }
 
         if (!keepass.compareVersion(keepass.requiredKeePassXC, keepass.currentKeePassXC)) {
-            return [];
+            return '';
         }
 
         let password;
@@ -201,10 +208,12 @@ keepass.generatePassword = async function(tab) {
             logError('generatePassword rejected');
         }
 
+        keepass.passwordRequestSent = false;
         return password;
     } catch (err) {
         logError(`generatePassword failed: ${err}`);
-        return [];
+        keepass.passwordRequestSent = false;
+        return undefined;
     }
 };
 
