@@ -56,7 +56,7 @@ const messageBuffer = {
     },
 
     removeMessageFromIndex(index) {
-        if (this.buffer.length >= index + 1) {
+        if (index >= 0 && index < this.buffer.length) {
             this.buffer.splice(index, 1);
         }
     }
@@ -95,17 +95,16 @@ class Message {
 //--------------------------------------------------------------------------
 
 keepassClient.sendNativeMessage = async function(request, enableTimeout = false, timeoutValue) {
+    if (!keepassClient.nativePort) {
+        return;
+    }
+
     const message = new Message(request, enableTimeout, timeoutValue);
     await navigator.locks.request('messageBuffer', async (lock) => {
         messageBuffer.addMessage({ request: request, message: message });
     });
 
-    // Send the request
-    if (keepassClient.nativePort) {
-        keepassClient.nativePort.postMessage(request);
-    }
-
-    // Wait for response
+    keepassClient.nativePort.postMessage(request);
     return await message.promise;
 };
 
@@ -115,7 +114,7 @@ keepassClient.handleNativeMessage = async function(response) {
     // Parse through the message buffer to find the corresponding Promise.
     await navigator.locks.request('messageBuffer', async (lock) => {
         for (let i = 0; i < messageBuffer.buffer.length; ++i) {
-            if (! messageBuffer.buffer[i]) {
+            if (!messageBuffer.buffer[i]) {
                 continue;
             }
 
