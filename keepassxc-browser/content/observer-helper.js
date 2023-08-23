@@ -202,9 +202,9 @@ kpxcObserverHelper.alreadyIdentified = function(target) {
 };
 
 kpxcObserverHelper.findInputsFromChildren = function(target) {
-    const children = [];
-    traverseChildren(target, children);
-    return children;
+    const inputFields = [];
+    traverseChildren(target, inputFields);
+    return inputFields;
 };
 
 // Adds elements to a monitor array. Identifies the input fields.
@@ -291,26 +291,26 @@ kpxcObserverHelper.ignoredNode = function(target) {
 };
 
 // Traverses all children, including Shadow DOM elements
-const traverseChildren = function(target, children, depth = 1) {
+const traverseChildren = function(target, inputFields, depth = 1) {
     depth++;
 
-    // Children can be scripts etc. so ignoredElement() is needed here
-    if (depth >= MAX_CHILDREN || kpxcObserverHelper.ignoredElement(target)) {
+    // Children can be scripts etc. so ignoredNode() is needed here
+    if (depth >= MAX_CHILDREN || kpxcObserverHelper.ignoredNode(target)) {
         return;
     }
 
     for (const child of target.childNodes) {
-        if (child.type === 'hidden' || child.disabled) {
+        if (child.type === 'hidden' || child.disabled || kpxcObserverHelper.ignoredNode(child)) {
             continue;
         }
 
         if (child.nodeName === 'INPUT') {
-            children.push(child);
+            inputFields.push(child);
         }
 
-        traverseChildren(child, children, depth);
+        traverseChildren(child, inputFields, depth);
         if (child.shadowRoot) {
-            traverseChildren(child.shadowRoot, children, depth);
+            traverseChildren(child.shadowRoot, inputFields, depth);
         }
     }
 };
