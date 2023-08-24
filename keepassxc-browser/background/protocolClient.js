@@ -36,6 +36,7 @@ protocolClient.messageTimeout = 500; // Milliseconds
 protocolClient.nativeHostName = 'org.keepassxc.keepassxc_browser';
 protocolClient.nativePort = null;
 
+// TODO: Merge with fix/refactor_messaging
 protocolClient.sendNativeMessage = function(requestAction, request, enableTimeout = false, timeoutValue = protocolClient.messageTimeout) {
     return new Promise((resolve, reject) => {
         let timeout;
@@ -43,7 +44,6 @@ protocolClient.sendNativeMessage = function(requestAction, request, enableTimeou
 
         const listener = ((port) => {
             const handler = (msg) => {
-                console.log('msg recevied: ', msg);
                 if (msg && (msg?.requestID === request.requestID || msg?.action === kpActions.CHANGE_PUBLIC_KEYS)) {
                     // Only resolve a matching response
                     if (protocolBuffer.matchAndRemove(msg)) {

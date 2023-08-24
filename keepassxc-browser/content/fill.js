@@ -143,24 +143,20 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
     let totpFound = false;
     if (user.totp?.length > 0) {
         const protocolV2 = await sendMessage('is_protocol_v2');
-        if (protocolV2) {
-            const totpList = await sendMessage('get_totp', [ user.uuid ]);
-            if (!totpList) {
-                kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
-                return;
-            }
 
-            const result = totpList.find(t => t.uuid === uuid);
+        const totp = await sendMessage('get_totp', (protocolV2 ? [ user.uuid ] : [ user.uuid, user.totp ]));
+        if (!totp) {
+            kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
+            return;
+        }
+
+        if (protocolV2) {
+            const result = totp.find(t => t.uuid === uuid);
             kpxcFill.setTOTPValue(el, result?.totp);
         } else {
-            const totp = await sendMessage('get_totp', [ user.uuid, user.totp ]);
-            if (!totp) {
-                kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
-                return;
-            }
-
             kpxcFill.setTOTPValue(el, totp);
         }
+
         return;
     } else if (user.stringFields?.length > 0) {
         const stringFields = user.stringFields;

@@ -19,8 +19,8 @@ protocol.associate = async function(tab, args = []) {
 
         const messageData = {
             action: kpActions.ASSOCIATE,
-            publicKey: publicKey,
-            idKey: idKey
+            idKey: idKey,
+            publicKey: publicKey
         };
 
         const response = await protocolClient.sendMessage(tab, messageData, false, true);
@@ -54,9 +54,9 @@ protocol.changePublicKeys = async function(tab, enableTimeout = false, connectio
 
     const request = {
         action: kpAction,
-        publicKey: key,
-        nonce: nonce,
         clientID: keepass.clientID,
+        nonce: nonce,
+        publicKey: key,
         requestID: protocolClient.getRequestId()
     };
 
@@ -105,21 +105,18 @@ protocol.createNewGroup = async function(tab, args = []) {
     keepass.clearErrorMessage(tab);
 
     const [ groupName ] = args;
-    //const [ dbid ] = keepass.getCryptoKey();
 
     const messageData = {
         action: kpActions.CREATE_NEW_GROUP,
-        //id: dbid,
         groupName: groupName,
-        keys: protocol.getKeys(), // Added
-        hash: keepass.databaseHash // Added
+        keys: protocol.getCurrentKey()
     };
 
     try {
         // TODO: Handle errors
         const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
-            keepass.updateLastUsed(keepass.databaseHash); // ?
+            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
             return response;
         } else {
             logError('getDatabaseGroups rejected');
@@ -142,8 +139,6 @@ protocol.generatePassword = async function(tab, args = []) {
         return undefined;
     }
 
-    let password;
-
     const messageData = {
         action: kpActions.GENERATE_PASSWORD,
     };
@@ -156,13 +151,14 @@ protocol.generatePassword = async function(tab, args = []) {
                 return undefined;
             }
 
-            password = response.entries ?? response.password;
-            keepass.updateLastUsed(keepass.databaseHash); // ?
+            const password = response.entries ?? response.password;
+            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
+            return password;
         } else {
             logError('generatePassword rejected');
         }
 
-        return password;
+        return undefined;
     } catch (err) {
         logError(`generatePassword failed: ${err}`);
         return undefined;
@@ -181,8 +177,8 @@ protocol.getCredentials = async function(tab, args = []) {
 
     const messageData = {
         action: kpActions.GET_CREDENTIALS,
-        url: url,
-        keys: protocol.getKeys()
+        keys: protocol.getKeys(),
+        url: url
     };
 
     if (submiturl) {
@@ -202,7 +198,7 @@ protocol.getCredentials = async function(tab, args = []) {
             }
 
             entries = keepass.removeDuplicateEntries(response.entries);
-            keepass.updateLastUsed(keepass.databaseHash); // What about this?
+            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
 
             if (entries.length === 0) {
                 // Questionmark-icon is not triggered, so we have to trigger for the normal symbol
@@ -228,14 +224,11 @@ protocol.getDatabaseGroups = async function(tab, args = []) {
 
     keepass.clearErrorMessage(tab);
 
-    //const [ dbid ] = keepass.getCryptoKey();
     let groups = [];
 
     const messageData = {
         action: kpActions.GET_DATABASE_GROUPS,
-        //id: dbid,
-        keys: protocol.getKeys(), // Added
-        hash: keepass.databaseHash // Added
+        keys: protocol.getCurrentKey()
     };
 
     try {
@@ -249,7 +242,7 @@ protocol.getDatabaseGroups = async function(tab, args = []) {
             groups = response.groups;
             groups.defaultGroup = page.settings.defaultGroup;
             groups.defaultGroupAlwaysAsk = page.settings.defaultGroupAlwaysAsk;
-            keepass.updateLastUsed(keepass.databaseHash); // ?
+            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
             return groups;
         }
 
@@ -293,32 +286,21 @@ protocol.getDatabaseStatuses = async function(tab, args = []) {
             return response;
         }
 
-        //keepass.isDatabaseClosed = true;
-        //keepass.isKeePassXCAvailable = false;
-        //keepass.databaseHash = '';
         keepass.handleError(tab, kpErrors.ACTION_TIMEOUT);
     } catch (err) {
         logError(`getDatabaseStatuses failed: ${err}`);
     }
 };
 
-// TODO: Finish this
 protocol.getTotp = async function(tab, args = []) {
     if (!keepass.isConnected) {
         return [];
     }
 
-    /*const [ uuids, oldTotp ] = args;
-    // KeePassXC 2.6.1 and older does not support retrieving
-    if (!keepass.compareVersion('2.6.1', keepass.currentKeePassXC, true)) {
-        return oldTotp;
-    }*/
-
     const messageData = {
         action: kpActions.GET_TOTP,
-        uuids: args,
-        keys: protocol.getKeys(), // Added
-        hash: keepass.databaseHash // Added
+        keys: protocol.getKeys(),
+        uuids: args
     };
 
     try {
@@ -398,7 +380,6 @@ protocol.testAssociationFromDatabaseStatuses = async function(tab, args = []) {
         isAnyAssociated: false
     };
 
-    // TODO: Handle this already in getDatabaseStatuses?
     if (!databaseStatuses || databaseStatuses.statuses.length === 0) {
         keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
         return result;
@@ -446,17 +427,14 @@ protocol.updateCredentials = async function(tab, args = []) {
     }
 
     const [ entryId, username, password, url, group, groupUuid ] = args;
-    //const [ dbid ] = keepass.getCryptoKey();
 
     const messageData = {
         action: kpActions.CREATE_CREDENTIALS,
-        hash: keepass.databaseHash, // Added
-        keys: protocol.getKeys(), // Added
-        //id: dbid, // Needed?
+        keys: protocol.getCurrentKey(),
         login: username,
         password: password,
-        url: url,
         submitUrl: url,
+        url: url,
     };
 
     if (entryId) {
@@ -504,4 +482,15 @@ protocol.getKeys = function() {
     }
 
     return keys;
+};
+
+// Gets the key only from the current active database
+protocol.getCurrentKey = function() {
+    const [ id, key ] = keepass.getCryptoKey();
+    return [
+        {
+            id: id,
+            key: key
+        }
+    ];
 };
