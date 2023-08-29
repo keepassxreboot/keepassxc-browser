@@ -121,7 +121,7 @@ function resizePopup() {
             return;
         }
 
-        if (e.target.id !== 'kpxc-dropdown-item') {
+        if (e.target.id !== 'kpxc-dropdown-item' && e.target.id !== 'dropdown-button') {
             $('.kpxc-dropdown-menu')?.hide();
         }
     });
