@@ -24,8 +24,14 @@
           <button id="options-button" class="btn btn-sm btn-success" data-i18n="[title]popupSettingsText"><i class="fa fa-cog" aria-hidden="true"></i></button>
           <button id="choose-custom-login-fields-button" class="btn btn-sm btn-warning" data-i18n="[title]popupChooseCredentialsText"></button>
         </div>
-        <div class="lock-button-area">
+        <div class="btn-group lock-button-area">
           <button id="lock-database-button" class="btn btn-sm btn-danger" data-i18n="[title]lockDatabase"><i class="fa fa-lock" aria-hidden="true"></i></button>
+          <select id="dropdown-button" class="btn btn-sm btn-danger dropdown-toggle" style="display: none"></select>
+        </div>
+        <div class="kpxc-dropdown-menu" style="display: none">
+          <div class="kpxc-dropdown-item">
+            <span id="kpxc-dropdown-item" data-i18n="lockAllDatabases"></span>
+          </div>
         </div>
       </div>
 

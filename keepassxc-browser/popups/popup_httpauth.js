@@ -5,6 +5,7 @@
     await initColorTheme();
 
     $('#lock-database-button').show();
+    await showDropdownButton();
 
     const data = await getLoginData();
     const ll = document.getElementById('login-list');
@@ -31,16 +32,14 @@
         ll.appendChild(a);
     }
 
-    $('#lock-database-button').addEventListener('click', function() {
-        browser.runtime.sendMessage({
-            action: 'lock_database'
-        });
+    $('#lock-database-button').addEventListener('click', () => {
+        lockDatabase();
+        hideElementsOnDatabaseLock();
+    });
 
-        $('.credentials').hide();
-        $('#btn-dismiss').hide();
-        $('#database-not-opened').show();
-        $('#lock-database-button').hide();
-        $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
+    $('.kpxc-dropdown-item').addEventListener('click', () => {
+        lockDatabase(false);
+        hideElementsOnDatabaseLock();
     });
 
     $('#btn-dismiss').addEventListener('click', async () => {

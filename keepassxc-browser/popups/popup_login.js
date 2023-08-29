@@ -4,12 +4,13 @@
     resizePopup();
     await initColorTheme();
 
-    $('#lock-database-button').show();
-
     const tab = await getCurrentTab();
     if (!tab) {
         return [];
     }
+
+    $('#lock-database-button').show();
+    showDropdownButton();
 
     const logins = await getLoginData();
     const ll = document.getElementById('login-list');
@@ -61,15 +62,14 @@
         filter.focus();
     }
 
-    $('#lock-database-button').addEventListener('click', (e) => {
-        browser.runtime.sendMessage({
-            action: 'lock_database'
-        });
+    $('#lock-database-button').addEventListener('click', () => {
+        lockDatabase();
+        hideElementsOnDatabaseLock();
+    });
 
-        $('#credentialsList').hide();
-        $('#database-not-opened').show();
-        $('#lock-database-button').hide();
-        $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
+    $('.kpxc-dropdown-item').addEventListener('click', () => {
+        lockDatabase(false);
+        hideElementsOnDatabaseLock();
     });
 
     $('#reopen-database-button').addEventListener('click', (e) => {

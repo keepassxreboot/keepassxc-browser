@@ -60,6 +60,39 @@ async function getLoginData() {
     return logins;
 }
 
+async function lockDatabase(lockSingle = true) {
+    return await browser.runtime.sendMessage({
+        action: 'lock_database',
+        args: [ lockSingle ]
+    });
+}
+
+// Show the dropdown button if protocol is supported
+async function showDropdownButton(isV2) {
+    const isProtocolV2 = isV2 || await browser.runtime.sendMessage({ action: 'is_protocol_v2' });
+    if (isProtocolV2) {
+        $('.lock-button-area')?.classList.add('btn-group');
+        $('#dropdown-button')?.show();
+    } else {
+        $('.lock-button-area')?.classList.remove('btn-group');
+        $('#dropdown-button')?.hide();
+    }
+}
+
+function hideDropdownButton() {
+    $('.lock-button-area')?.classList.remove('btn-group');
+    $('#dropdown-button')?.hide();
+}
+
+function hideElementsOnDatabaseLock() {
+    $('.credentials').hide();
+    $('#database-not-opened').show();
+    $('#lock-database-button').hide();
+    $('#dropdown-button').hide();
+    $('#btn-dismiss')?.hide();
+    $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
+}
+
 // Sets default popup size for Chromium based browsers to prevent flash on popup open
 function setDefaultPopupSize() {
     if (!isFirefox()) {
@@ -83,7 +116,36 @@ function resizePopup() {
         document.addEventListener('DOMContentLoaded', initSettings);
     }
 
+    document.addEventListener('mouseup', function(e) {
+        if (!e.isTrusted) {
+            return;
+        }
+
+        if (e.target.id !== 'kpxc-dropdown-item') {
+            $('.kpxc-dropdown-menu')?.hide();
+        }
+    });
+
     updateAvailableResponse(await browser.runtime.sendMessage({
         action: 'update_available_keepassxc'
     }));
+
+    $('#dropdown-button').addEventListener('click', (e) => {
+        const dropdownMenu = $('.kpxc-dropdown-menu');
+        if (!dropdownMenu) {
+            return;
+        }
+
+        if (dropdownMenu.style.display === 'none') {
+            dropdownMenu.show();
+        } else {
+            dropdownMenu.hide();
+        }
+
+        e.target.blur();
+    });
+
+    $('.kpxc-dropdown-item').addEventListener('click', () => {
+        $('.kpxc-dropdown-menu')?.hide();
+    });
 })();

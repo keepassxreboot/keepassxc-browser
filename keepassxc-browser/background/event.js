@@ -166,10 +166,10 @@ kpxcEvent.loadSettings = async function() {
     });
 };
 
-kpxcEvent.lockDatabase = async function(tab) {
+kpxcEvent.lockDatabase = async function(tab, args) {
     try {
-        await keepass.lockDatabase(tab);
-        return kpxcEvent.showStatus(tab, false);
+        await keepass.lockDatabase(tab, args);
+        return kpxcEvent.getStatus(tab);
     } catch (err) {
         logError('kpxcEvent.lockDatabase error: ' + err);
         return false;
@@ -258,6 +258,7 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         error: errorMessage || null,
         identifier: keyId,
         keePassXCAvailable: keepass.isKeePassXCAvailable,
+        protocolV2: keepass.protocolV2,
         showGettingStartedGuideAlert: page.settings.showGettingStartedGuideAlert,
         showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert,
         usernameFieldDetected: usernameFieldDetected

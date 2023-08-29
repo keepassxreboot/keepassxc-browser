@@ -19,6 +19,7 @@ function statusResponse(status) {
     $('#configured-not-associated').hide();
     $('#lock-database-button').hide();
     $('#getting-started-guide').hide();
+    hideDropdownButton();
 
     if (!status.keePassXCAvailable) {
         $('#error-message').textContent = status.error;
@@ -38,7 +39,9 @@ function statusResponse(status) {
     }
 
     // Only supported with Protocol V2
-    if (status.databaseAssociationStatuses && Object.keys(status.databaseAssociationStatuses).length > 0) {
+    if (status.protocolV2
+        && status.databaseAssociationStatuses
+        && Object.keys(status.databaseAssociationStatuses).length > 0) {
         // This can be also shown when isAnyAssociated is true?
         if (status.databaseAssociationStatuses.associationNeeded) {
             $('#not-configured').show();
@@ -53,6 +56,7 @@ function statusResponse(status) {
             $('#configured-and-associated').show();
             $('#associated-identifier').textContent = status.identifier;
             $('#lock-database-button').show();
+            showDropdownButton(status.protocolV2);
 
             if (status.usernameFieldDetected) {
                 $('#username-field-detected').show();
@@ -156,9 +160,11 @@ const sendMessageToTab = async function(message) {
     });
 
     $('#lock-database-button').addEventListener('click', async () => {
-        statusResponse(await browser.runtime.sendMessage({
-            action: 'lock_database'
-        }));
+        statusResponse(await lockDatabase());
+    });
+
+    $('.kpxc-dropdown-item').addEventListener('click', async () => {
+        statusResponse(await lockDatabase(false));
     });
 
     $('#username-only-button').addEventListener('click', async () => {

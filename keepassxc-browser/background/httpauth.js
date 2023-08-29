@@ -48,7 +48,7 @@ httpAuth.handleRequestCallback = function(details, callback) {
 };
 
 httpAuth.retrieveCredentials = async function(tabId, url, submitUrl) {
-    return await keepass.retrieveCredentials(tabId, [ url, submitUrl, false, true ]).catch((err) => {
+    return await keepass.getCredentials(tabId, [ url, submitUrl, false, true ]).catch((err) => {
         logError('httpAuth.retrieveCredentials error: ' + err);
         return Promise.reject();
     });

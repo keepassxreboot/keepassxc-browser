@@ -386,14 +386,14 @@ keepass.checkForNewKeePassXCVersion = function() {
     keepass.latestKeePassXC.lastChecked = new Date().valueOf();
 };
 
-keepass.updatePopup = function() {
+keepass.updatePopup = function(tab) {
     if (page && page.tabs.length > 0) {
-        browserAction.showDefault();
+        browserAction.showDefault(tab);
     }
 };
 
 // Updates the database hashes to content script
-keepass.updateDatabase = async function() {
+keepass.updateDatabase = async function(tab) {
     if (!keepass.isKeePassXCAvailable) {
         return;
     }
@@ -406,14 +406,14 @@ keepass.updateDatabase = async function() {
         // TODO: Only show "Connect" if the active database is not connected?
         // TODO: What if there are credentials from another database but the selected one is not connected?
         const result = await protocol.testAssociationFromDatabaseStatuses();
-        keepass.updatePopup();
+        keepass.updatePopup(tab);
         keepass.updateDatabaseHashToContent(result);
         return;
     }
 
     // Legacy protocol
     await keepassProtocol.testAssociation(null, [ true ]);
-    keepass.updatePopup();
+    keepass.updatePopup(tab);
     keepass.updateDatabaseHashToContent();
 };
 

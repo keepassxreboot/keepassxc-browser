@@ -322,23 +322,21 @@ protocol.lockDatabase = async function(tab, args = []) {
         return false;
     }
 
+    const [ lockSingle ] = args;
+
     const messageData = {
-        action: kpActions.LOCK_DATABASE
+        action: kpActions.LOCK_DATABASE,
+        lockSingle: lockSingle
     };
 
     try {
         const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
-            //keepass.isDatabaseClosed = true; // ?
-            keepass.updateDatabase();
-
-            // Display error message in the popup
-            keepass.handleError(tab, kpErrors.DATABASE_NOT_OPENED);
+            keepass.updateDatabase(tab);
             return true;
-        } else {
-            //keepass.isDatabaseClosed = true; // ?
         }
 
+        keepass.isDatabaseClosed = true;
         return false;
     } catch (err) {
         logError(`lockDatabase failed: ${err}`);

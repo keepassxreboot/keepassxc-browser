@@ -38,7 +38,7 @@ browserAction.showDefault = async function(tab) {
 
     // Get the current tab if no tab given
     tab ??= await getCurrentTab();
-    if (!tab) {
+    if (!tab || tab.id < 0) {
         return;
     }
 

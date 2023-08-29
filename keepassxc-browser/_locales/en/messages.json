@@ -1202,5 +1202,13 @@
     "lockDatabase": {
         "message": "Lock database",
         "description": "Lock database button title text."
+    },
+    "lockAllDatabases": {
+        "message": "Lock all databases",
+        "description": "Lock all databases button title text."
+    },
+    "noAction": {
+      "message": "No action",
+      "description": "No action text."
     }
 }
