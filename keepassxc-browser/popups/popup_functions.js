@@ -123,6 +123,7 @@ function resizePopup() {
 
         if (e.target.id !== 'kpxc-dropdown-item' && e.target.id !== 'dropdown-button') {
             $('.kpxc-dropdown-menu')?.hide();
+            $('#dropdown-button').style.borderBottomRightRadius = '4px';
         }
     });
 
@@ -138,8 +139,10 @@ function resizePopup() {
 
         if (dropdownMenu.style.display === 'none') {
             dropdownMenu.show();
+            $('#dropdown-button').style.borderBottomRightRadius = '0px';
         } else {
             dropdownMenu.hide();
+            $('#dropdown-button').style.borderBottomRightRadius = '4px';
         }
 
         e.target.blur();
