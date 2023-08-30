@@ -16,17 +16,6 @@ kpxcEvent.getColorTheme = async function(tab) {
 };
 
 kpxcEvent.getConnectedDatabase = async function() {
-    /*let hash = keepass.associated.hash;
-
-    // Check if one database is open but not active
-    // TODO: Does not work if two are open and active one is closed and non-associated
-    const associatedDatabases = keepass.databaseStatuses.statuses.filter(ds => ds.associated);
-    if (associatedDatabases.length === 1
-        && keepass.databaseAssociationStatuses.isAnyAssociated
-        && !keepass.associated.value) {
-        hash = associatedDatabases[0].hash;
-    }*/
-
     return Promise.resolve({
         count: Object.keys(keepass.keyRing).length,
         identifier: (keepass.keyRing[keepass.associated.hash]) ? keepass.keyRing[keepass.associated.hash].id : null
@@ -38,16 +27,9 @@ kpxcEvent.getIsKeePassXCAvailable = async function() {
 };
 
 kpxcEvent.getKeePassXCVersions = async function(tab) {
-    // TODO: Maybe this is not needed?
-    /*if (keepass.currentKeePassXC === '') {
-        await keepass.getDatabaseHash(tab); // TODO: How to get just the version? A separate API call?
-        return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
-    }*/
-
     return { 'current': keepass.currentKeePassXC, 'latest': keepass.latestKeePassXC.version };
 };
 
-// TODO: Refactor. This is ugly. internalPoll needs to be handled with V2.
 kpxcEvent.getStatus = async function(tab, args = []) {
     // When internalPoll is true the event is triggered from content script in intervals -> don't poll KeePassXC
     try {
@@ -55,38 +37,21 @@ kpxcEvent.getStatus = async function(tab, args = []) {
         let configured = false;
 
         if (keepass.protocolV2) {
-            if (!internalPoll) {
-                const response = await protocol.testAssociationFromDatabaseStatuses(tab, [ true, triggerUnlock ]);
-                configured = response.isAnyAssociated;
-            } else {
-                // TODO: This does not update when db is locked or just opened
-                configured = keepass.databaseAssociationStatuses?.isAnyAssociated; // ?
-            }
-        } else {
-            if (!internalPoll) {
-                const response = await keepassProtocol.testAssociation(tab, [ true, triggerUnlock ]);
-                if (!response) {
-                    return kpxcEvent.showStatus(tab, false);
-                }
-            }
-
-            configured = await keepass.isConfigured();
+            configured = internalPoll
+                       ? keepass.databaseAssociationStatuses?.isAnyAssociated
+                       : await protocol.testAssociationFromDatabaseStatuses(tab, [ true, triggerUnlock ])?.isAnyAssociated;
+            return kpxcEvent.showStatus(tab, configured, internalPoll);
         }
 
-        /*if (keepass.protocolV2) {
-            const response = await protocol.testAssociationFromDatabaseStatuses(tab, [ true, triggerUnlock ]);
-            configured = response.isAnyAssociated;
-        } else {
-            if (!internalPoll) {
-                const response = await keepassProtocol.testAssociation(tab, [ true, triggerUnlock ]);
-                if (!response) {
-                    return kpxcEvent.showStatus(tab, false);
-                }
+        // Protocol V1
+        if (!internalPoll) {
+            const response = await keepassProtocol.testAssociation(tab, [ true, triggerUnlock ]);
+            if (!response) {
+                return kpxcEvent.showStatus(tab, false);
             }
+        }
 
-            configured = await keepass.isConfigured();
-        }*/
-
+        configured = await keepass.isConfigured();
         return kpxcEvent.showStatus(tab, configured, internalPoll);
     } catch (err) {
         logError('No status shown: ' + err);

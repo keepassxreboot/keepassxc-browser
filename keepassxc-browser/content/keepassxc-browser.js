@@ -16,6 +16,7 @@ const sendMessage = async function(action, args) {
  * The main content script object.
  */
 const kpxc = {};
+kpxc.associationStatus = undefined;
 kpxc.combinations = [];
 kpxc.credentials = [];
 kpxc.databaseState = DatabaseState.DISCONNECTED;
@@ -24,8 +25,8 @@ kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
 kpxc.settings = {};
 kpxc.singleInputEnabledForPage = false;
-kpxc.submitUrl = null;
-kpxc.url = null;
+kpxc.submitUrl = null; // TODO: To undefined
+kpxc.url = null; // TODO: To undefined
 
 // Add page to Site Preferences with Username-only detection enabled. Set from the popup
 kpxc.addToSitePreferences = async function() {
@@ -98,27 +99,20 @@ kpxc.createCombination = async function(activeElement, passOnly) {
 
 // Switch credentials if database is changed or closed
 kpxc.detectDatabaseChange = async function(response) {
+    kpxc.associationStatus = response?.associateResult;
     kpxc.databaseState = DatabaseState.LOCKED;
     kpxc.clearAllFromPage();
     kpxcIcons.switchIcons();
 
-    // TODO: This doesn't work well anymore.
     if (document.visibilityState !== 'hidden') {
         if (response.hash.new !== '') {
             _called.retrieveCredentials = false;
 
-            // Why is this needed? For the Connection Keys?
             const settings = await sendMessage('load_settings');
             kpxc.settings = settings;
 
-            // TODO: Cleanup this..
-            if (response.associateResult) {
-                if (!response.associateResult.areAllLocked) {
-                    kpxc.databaseState = DatabaseState.UNLOCKED;
-                }
-            } else {
-                kpxc.databaseState = DatabaseState.UNLOCKED; // This is important to set correctly!
-            }
+            kpxc.databaseState = response?.associateResult?.areAllLocked
+                ? DatabaseState.LOCKED : DatabaseState.UNLOCKED;
 
             await kpxc.initCredentialFields();
             kpxcIcons.switchIcons();
@@ -340,6 +334,16 @@ kpxc.initCredentialFields = async function() {
 
     await kpxcIcons.initIcons(kpxc.combinations);
 
+    // TODO: In optimal case, this should only trigger when a database is opened. How to detect that?
+    // Protocol V2
+    if (kpxc.associationStatus) {
+        if (!kpxc.associationStatus.isCurrentLocked) {
+            await kpxc.retrieveCredentials();
+        }
+        return;
+    }
+
+    // Protocol V1
     if (kpxc.databaseState === DatabaseState.UNLOCKED) {
         await kpxc.retrieveCredentials();
     }

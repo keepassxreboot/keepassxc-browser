@@ -116,7 +116,7 @@ protocol.createNewGroup = async function(tab, args = []) {
         // TODO: Handle errors
         const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
-            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
+            keepass.updateLastUsed(keepass.databaseHash);
             return response;
         } else {
             logError('getDatabaseGroups rejected');
@@ -152,7 +152,7 @@ protocol.generatePassword = async function(tab, args = []) {
             }
 
             const password = response.entries ?? response.password;
-            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
+            keepass.updateLastUsed(keepass.databaseHash);
             return password;
         } else {
             logError('generatePassword rejected');
@@ -198,7 +198,7 @@ protocol.getCredentials = async function(tab, args = []) {
             }
 
             entries = keepass.removeDuplicateEntries(response.entries);
-            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
+            keepass.updateLastUsed(keepass.databaseHash);
 
             if (entries.length === 0) {
                 // Questionmark-icon is not triggered, so we have to trigger for the normal symbol
@@ -242,7 +242,7 @@ protocol.getDatabaseGroups = async function(tab, args = []) {
             groups = response.groups;
             groups.defaultGroup = page.settings.defaultGroup;
             groups.defaultGroupAlwaysAsk = page.settings.defaultGroupAlwaysAsk;
-            keepass.updateLastUsed(keepass.databaseHash); // TODO: Remove?
+            keepass.updateLastUsed(keepass.databaseHash);
             return groups;
         }
 
@@ -375,7 +375,8 @@ protocol.testAssociationFromDatabaseStatuses = async function(tab, args = []) {
         areAllLocked: true,
         associationNeeded: false,
         databaseHash: undefined,
-        isAnyAssociated: false
+        isAnyAssociated: false,
+        isCurrentLocked: true
     };
 
     if (!databaseStatuses || databaseStatuses.statuses.length === 0) {
@@ -407,12 +408,13 @@ protocol.testAssociationFromDatabaseStatuses = async function(tab, args = []) {
     keepass.associated.value = isCurrentAssociated;
 
     // This should be true only if all databases are locked
-    keepass.isDatabaseClosed = areAllLocked; // ?
+    keepass.isDatabaseClosed = areAllLocked;
 
     result.areAllLocked = areAllLocked;
     result.associationNeeded = !isCurrentAssociated && !isCurrentLocked;
     result.databaseHash = databaseStatuses.hash;
     result.isAnyAssociated = isAnyAssociated;
+    result.isCurrentLocked = isCurrentLocked;
 
     keepass.databaseStatuses = databaseStatuses;
     keepass.databaseAssociationStatuses = result;
@@ -451,6 +453,8 @@ protocol.updateCredentials = async function(tab, args = []) {
     try {
         const response = await protocolClient.sendMessage(tab, messageData);
         if (response) {
+            keepass.updateLastUsed(keepass.databaseHash);
+
             if (response?.result === true) {
                 return entryId ? AddCredentials.UPDATED : AddCredentials.CREATED;
             }
