@@ -195,10 +195,9 @@ kpxcFields.getAllPageInputs = async function(previousInputs = []) {
 /**
  * Returns the combination where input field is used
  * @param {HTMLElement} field Input field
- * @param {String} givenType 'username' or 'password'
+ * @param {String} givenType For example: 'username', 'password', 'totp', 'totpInputs'
  */
 kpxcFields.getCombination = async function(field, givenType) {
-    // If givenType is not set, return the combination that uses the selected field
     for (const combination of kpxc.combinations) {
         if (givenType) {
             // Strictly search a given type

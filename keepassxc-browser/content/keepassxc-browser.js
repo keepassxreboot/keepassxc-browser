@@ -546,22 +546,27 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
 
 // Save credentials triggered fron the context menu
 kpxc.rememberCredentialsFromContextMenu = async function() {
+    if (kpxc.databaseState === DatabaseState.LOCKED) {
+        kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));
+        return;
+    }
+
     const el = document.activeElement;
     if (el.nodeName !== 'INPUT') {
         return;
     }
 
-    const type = el.getAttribute('type');
-    const combination = await kpxcFields.getCombination(el, (type === 'password' ? type : 'username'));
+    const combination = await kpxcFields.getCombination(el);
     if (!combination) {
         logDebug('Error: No combination found.');
         return;
     }
 
-    const usernameValue = combination.username ? combination.username.value : '';
-    const passwordValue = combination.password ? combination.password.value : '';
+    const usernameValue = combination.username?.value ?? '';
+    const passwordValue = combination.password?.value ?? '';
 
-    const result = await kpxc.rememberCredentials(usernameValue, passwordValue, undefined, undefined, kpxc.settings.showLoginNotifications);
+    const result = await kpxc.rememberCredentials(usernameValue, passwordValue, undefined, undefined,
+        kpxc.settings.showLoginNotifications);
     if (result === undefined) {
         kpxcUI.createNotification('error', tr('rememberNoPassword'));
         return;
