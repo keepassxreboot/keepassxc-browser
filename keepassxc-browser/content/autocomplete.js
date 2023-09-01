@@ -33,7 +33,7 @@ class Autocomplete {
 
     }
 
-    async itemEnter(index, elements) {
+    async itemEnter(index, item) {
 
     }
 
@@ -132,6 +132,7 @@ class Autocomplete {
         for (const c of this.elements) {
             const item = document.createElement('div');
             item.textContent = c.label;
+            item.setAttribute('uuid', c.uuid);
 
             const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
             item.append(itemInput);
@@ -220,7 +221,7 @@ class Autocomplete {
             if (this.index >= 0 && items[this.index] !== undefined) {
                 cancelEvent(e);
 
-                await this.itemEnter(this.index, this.elements);
+                await this.itemEnter(this.index, items[this.index]);
                 this.closeList();
             }
         } else if (e.key === 'Tab' && this.input) {
