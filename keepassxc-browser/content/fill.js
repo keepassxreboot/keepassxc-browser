@@ -30,7 +30,7 @@ kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
         return;
     }
 
-    if (kpxc.combinations.length > 0 && kpxc.settings.autoCompleteUsernames) {
+    if (kpxc.combinations.length > 0) {
         if (await kpxcFill.fillFromCombination(passOnly)) {
             // Combination found and filled
             return;
@@ -64,7 +64,7 @@ kpxcFill.fillFromCombination = async function(passOnly) {
     // Set focus to the input field
     field.focus();
 
-    if (kpxc.credentials.length > 1) {
+    if (kpxc.credentials.length > 1 && kpxc.settings.autoCompleteUsernames) {
         // More than one credential -> show autocomplete list
         kpxcUserAutocomplete.showList(field);
     } else {
