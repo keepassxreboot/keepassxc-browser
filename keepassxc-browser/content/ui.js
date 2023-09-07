@@ -251,6 +251,29 @@ kpxcUI.createNotification = function(type, message) {
         return;
     }
 
+    // Removes notification from the body element
+    const removeNotification = function() {
+        // Catch cross-domain exception
+        let parentBody;
+        try {
+            parentBody = window.parent.document.body;
+        } catch(e) {
+            parentBody = window.document.body;
+        }
+
+        if (notificationWrapper && parentBody.contains(notificationWrapper)) {
+            parentBody.removeChild(notificationWrapper);
+            notificationWrapper = undefined;
+            return;
+        }
+
+        // Notification is not in the parent
+        if (notificationWrapper && parentBody !== window.document.body && window.document.body.contains(notificationWrapper)) {
+            window.document.body.removeChild(notificationWrapper);
+            notificationWrapper = undefined;
+        }
+    };
+
     logDebug(message);
 
     const notification = kpxcUI.createElement('div', 'kpxc-notification kpxc-notification-' + type, {});
@@ -262,10 +285,7 @@ kpxcUI.createNotification = function(type, message) {
     const msg = kpxcUI.createElement('span', '', {}, message);
 
     notification.addEventListener('click', function() {
-        if (notificationWrapper && window.parent.document.body.contains(notificationWrapper)) {
-            window.parent.document.body.removeChild(notificationWrapper);
-            notificationWrapper = undefined;
-        }
+        removeNotification();
     });
 
     notification.appendMultiple(icon, label, msg);
@@ -289,10 +309,7 @@ kpxcUI.createNotification = function(type, message) {
 
     // Destroy the banner after five seconds
     notificationTimeout = setTimeout(() => {
-        if (notificationWrapper && window.parent.document.body.contains(notificationWrapper)) {
-            window.parent.document.body.removeChild(notificationWrapper);
-            notificationWrapper = undefined;
-        }
+        removeNotification();
     }, 5000);
 };
 
