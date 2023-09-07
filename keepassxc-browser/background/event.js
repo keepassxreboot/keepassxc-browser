@@ -135,7 +135,7 @@ kpxcEvent.onGetKeePassXCVersions = async function(tab) {
 
 kpxcEvent.onCheckUpdateKeePassXC = async function() {
     keepass.checkForNewKeePassXCVersion();
-    return { current: keepass.currentKeePassXC.version, latest: keepass.latestKeePassXC.version };
+    return { current: keepass.currentKeePassXC, latest: keepass.latestKeePassXC.version };
 };
 
 kpxcEvent.onUpdateAvailableKeePassXC = async function() {
