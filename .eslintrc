@@ -175,5 +175,13 @@
         "tr": true,
         "trimURL": true,
         "useMonochromToolbarIcon": true
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.js"],
+            "env": {
+                "node": true
+            }
+        }
+    ]
 }
