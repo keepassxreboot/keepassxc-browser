@@ -5,7 +5,7 @@
   "main": "build.js",
   "devDependencies": {
     "@playwright/test": "^1.22.0",
-    "eslint": "^8.31.0"
+    "eslint": "^8.49.0"
   },
   "dependencies": {
     "@npmcli/fs": "^2.1.0",
