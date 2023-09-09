@@ -577,10 +577,6 @@ options.initSitePreferences = function() {
         hideEmptyMessageRow();
     });
 
-    $('.was-validated').addEventListener('submit', function(e) {
-        e.preventDefault();
-    });
-
     $('#manualUrl').addEventListener('keyup', function(event) {
         if (event.key === 'Enter') {
             $('#sitePreferencesManualAdd').click();

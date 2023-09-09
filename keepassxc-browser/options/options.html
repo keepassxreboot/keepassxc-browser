@@ -443,14 +443,12 @@
                   </div>
 
                   <!-- Clear credential timeout -->
-                  <div class="form-group">
-                    <form class="pt-2">
-                      <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
-                      <div class="form-check py-2">
-                        <input class="form-input" type="number" id="clearCredentialTimeout" min="0" max="3600" required>
-                        <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
-                      </div>
-                    </form>
+                  <div class="form-group pt-2">
+                    <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
+                    <div class="form-check py-2">
+                      <input class="form-input" type="number" id="clearCredentialTimeout" min="0" max="3600" required>
+                      <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
+                    </div>
                   </div>
 
                   <!-- Debug logging -->
@@ -664,19 +662,17 @@
                   </div>
                   <hr class="mt-0">
 
-                  <form class="was-validated">
-                    <div class="form-group">
-                      <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
-                      <div class="input-group w-75" id="manualUrlGroup">
-                        <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
-                        <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd">
-                          <i class="fa fa-plus" aria-hidden="true"></i>
-                          <span data-i18n="optionsButtonAdd"></span>
-                        </button>
-                      </div>
-                      <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
+                  <div class="form-group was-validated">
+                    <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
+                    <div class="input-group w-75" id="manualUrlGroup">
+                      <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
+                      <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span data-i18n="optionsButtonAdd"></span>
+                      </button>
                     </div>
-                  </form>
+                    <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
+                  </div>
 
                   <div class="table-responsive">
                     <table class="table table-sm table-striped table-bordered">
