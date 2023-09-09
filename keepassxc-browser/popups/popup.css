@@ -90,6 +90,7 @@ code {
 .action-buttons-area {
     display: flex;
     justify-content: flex-start;
+    gap: 6px;
 }
 
 .lock-button-area {
