@@ -9,4 +9,4 @@
 .bz
 .bz2
 .xz
-node_modules/*
+node_modules
