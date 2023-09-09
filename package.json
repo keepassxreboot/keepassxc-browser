@@ -22,6 +22,7 @@
   },
   "author": "KeePassXC Team",
   "license": "GPL-3.0",
+  "private": true,
   "bugs": {
     "url": "https://github.com/keepassxreboot/keepassxc-browser/issues"
   },
