@@ -20,13 +20,13 @@ const config = {
         {
             name: 'chromium',
             use: {
-            ...devices['Desktop Chrome'],
+                ...devices['Desktop Chrome'],
             },
         },
         {
             name: 'firefox',
             use: {
-            ...devices['Desktop Firefox'],
+                ...devices['Desktop Firefox'],
             },
         },
     ],

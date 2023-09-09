@@ -1,29 +1,10 @@
 'use strict';
 
+const options = {};
+
 const $ = function(elem) {
     return document.querySelector(elem);
 };
-
-(async() => {
-    try {
-        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
-        options.settings = settings;
-
-        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
-        options.keyRing = keyRing;
-        options.initMenu();
-        options.initGeneralSettings();
-        options.initConnectedDatabases();
-        options.initCustomLoginFields();
-        options.initSitePreferences();
-        options.initAbout();
-        options.initTheme();
-    } catch (err) {
-        console.log('Error loading options page: ' + err);
-    }
-})();
-
-var options = options || {};
 
 options.initMenu = function() {
     const tabs = [].slice.call(document.querySelectorAll('div.tab'));
@@ -237,7 +218,7 @@ options.initGeneralSettings = function() {
         { keyboard: true, show: false, backdrop: true });
 
     $('#importSettingsButton').addEventListener('click', function() {
-        var link = document.createElement('input');
+        const link = document.createElement('input');
         link.setAttribute('type', 'file');
         link.onchange = function(e) {
             const reader = new FileReader();
@@ -719,3 +700,22 @@ const getBrowserId = function() {
 
     return 'Other/Unknown';
 };
+
+(async() => {
+    try {
+        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
+        options.settings = settings;
+
+        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+        options.keyRing = keyRing;
+        options.initMenu();
+        options.initGeneralSettings();
+        options.initConnectedDatabases();
+        options.initCustomLoginFields();
+        options.initSitePreferences();
+        options.initAbout();
+        options.initTheme();
+    } catch (err) {
+        console.log('Error loading options page: ' + err);
+    }
+})();

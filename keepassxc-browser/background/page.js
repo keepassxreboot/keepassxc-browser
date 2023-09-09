@@ -34,7 +34,7 @@ const defaultSettings = {
 
 const AUTO_SUBMIT_TIMEOUT = 5000;
 
-var page = {};
+const page = {};
 page.autoSubmitPerformed = false;
 page.attributeMenuItemIds = [];
 page.blockedTabs = [];
@@ -310,8 +310,8 @@ page.updateContextMenu = async function(tab, credentials) {
             // Show username inside [] if there are KPH attributes inside multiple credentials
             const attributeName = Object.keys(attribute)[0].slice(5);
             const finalName = credentials.length > 1
-                            ? `[${cred.login}] ${attributeName}`
-                            : attributeName;
+                ? `[${cred.login}] ${attributeName}`
+                : attributeName;
 
             page.attributeMenuItemIds.push(createContextMenuItem({
                 action: 'fill_attribute',
@@ -325,7 +325,7 @@ page.updateContextMenu = async function(tab, credentials) {
 
 page.updatePopup = function(tab) {
     browserAction.showDefault(tab);
-}
+};
 
 const createContextMenuItem = function({ action, args, ...options }) {
     return browser.contextMenus.create({
