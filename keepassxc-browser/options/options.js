@@ -300,9 +300,9 @@ options.showKeePassXCVersions = async function(response) {
         response.latest = 'unknown';
     }
 
-    $('#tab-general-settings .kphVersion em.yourVersion').textContent = response.current;
-    $('#tab-general-settings .kphVersion em.latestVersion').textContent = response.latest;
-    $('#tab-about em.versionKPH').textContent = response.current;
+    $('#tab-general-settings .kphVersion span.yourVersion').textContent = response.current;
+    $('#tab-general-settings .kphVersion span.latestVersion').textContent = response.latest;
+    $('#tab-about span.versionKPH').textContent = response.current;
     $('#tab-about span.kpxcVersion').textContent = response.current;
     $('#tab-general-settings button.checkUpdateKeePassXC').disabled = false;
 
@@ -644,7 +644,7 @@ options.initAbout = function() {
         platform = 'Win64';
     }
 
-    $('#tab-about em.versionCIP').textContent = version;
+    $('#tab-about span.versionCIP').textContent = version;
     $('#tab-about span.kpxcbrVersion').textContent = version;
     $('#tab-about span.kpxcbrOS').textContent = platform;
     $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
