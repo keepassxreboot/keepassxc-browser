@@ -134,7 +134,7 @@ keepassClient.handleNativeMessage = async function(response) {
             }
         }
 
-        logError('Corresponding request not found in the message buffer for response: ', response);
+        debugLogMessage('Corresponding request not found in the message buffer for response: ', response);
     });
 };
 
