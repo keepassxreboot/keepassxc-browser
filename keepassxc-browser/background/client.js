@@ -96,6 +96,7 @@ class Message {
 
 keepassClient.sendNativeMessage = async function(request, enableTimeout = false, timeoutValue) {
     if (!keepassClient.nativePort) {
+        logError('No native messaging port defined.');
         return;
     }
 
@@ -132,6 +133,8 @@ keepassClient.handleNativeMessage = async function(response) {
                 return;
             }
         }
+
+        logError('Corresponding request not found in the message buffer for response: ', response);
     });
 };
 
