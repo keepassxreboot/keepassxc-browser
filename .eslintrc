@@ -178,7 +178,7 @@
     },
     "overrides": [
         {
-            "files": ["*.js"],
+            "files": ["./*.js"],
             "env": {
                 "node": true
             }
