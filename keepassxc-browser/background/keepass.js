@@ -16,6 +16,7 @@ keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.databaseHash = '';
 keepass.previousDatabaseHash = '';
 keepass.reconnectLoop = null;
+keepass.isSafari = isSafari();
 
 const kpActions = {
     SET_LOGIN: 'set-login',
