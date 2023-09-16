@@ -652,9 +652,9 @@ options.initAbout = function() {
 
 options.initTheme = function() {
     if (options.settings['colorTheme'] === undefined) {
-        document.body.removeAttribute('data-color-theme');
+        document.documentElement.removeAttribute('data-bs-theme');
     } else {
-        document.body.setAttribute('data-color-theme', options.settings['colorTheme']);
+        document.documentElement.setAttribute('data-bs-theme', options.settings['colorTheme']);
     }
     // Sync localStorage setting
     const localStorageTheme = localStorage.getItem('colorTheme');

@@ -327,12 +327,12 @@ const initColorTheme = function(elem) {
     const colorTheme = kpxc.settings['colorTheme'];
 
     if (colorTheme === undefined) {
-        elem.removeAttribute('data-color-theme');
+        elem.removeAttribute('data-bs-theme');
     } else if (colorTheme === 'system') {
         const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        elem.setAttribute('data-color-theme', theme);
+        elem.setAttribute('data-bs-theme', theme);
     } else {
-        elem.setAttribute('data-color-theme', colorTheme);
+        elem.setAttribute('data-bs-theme', colorTheme);
     }
 };
 

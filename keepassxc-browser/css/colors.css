@@ -46,7 +46,7 @@
 }
 
 /* Same colors for manual switching */
-[data-color-theme='dark'] {
+[data-bs-theme='dark'] {
     --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
     --kpxc-background-color: #3b3b3d;
     --kpxc-card-background-color: #2b2a2a;
@@ -68,7 +68,7 @@
     --kpxc-text-color: #cbcfcb;
 }
 
-[data-color-theme='light'] {
+[data-bs-theme='light'] {
     --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
     --kpxc-card-background-color: #fff;

@@ -41,9 +41,9 @@ async function initColorTheme() {
     });
 
     if (colorTheme === undefined || colorTheme === 'system') {
-        document.body.removeAttribute('data-color-theme');
+        document.documentElement.removeAttribute('data-bs-theme');
     } else {
-        document.body.setAttribute('data-color-theme', colorTheme);
+        document.documentElement.setAttribute('data-bs-theme', colorTheme);
     }
 }
 

@@ -23,7 +23,7 @@
     // We eagerly load the theme here to avoid a white flash
     let colorTheme = localStorage.getItem('colorTheme');
     if (colorTheme) {
-      document.body.setAttribute('data-color-theme', colorTheme);
+      document.documentElement.setAttribute('data-bs-theme', colorTheme);
     }
     </script>
     <div class="container-fluid">

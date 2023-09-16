@@ -117,9 +117,9 @@ function shortCutChanged(e) {
     try {
         const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
         if (settings['colorTheme'] === undefined) {
-            document.body.removeAttribute('data-color-theme');
+            document.documentElement.removeAttribute('data-bs-theme');
         } else {
-            document.body.setAttribute('data-color-theme', settings['colorTheme']);
+            document.documentElement.setAttribute('data-bs-theme', settings['colorTheme']);
         }
 
         document.querySelectorAll('input').forEach((b) => {
