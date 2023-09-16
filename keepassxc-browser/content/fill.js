@@ -30,28 +30,28 @@ kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
         return;
     }
 
+    const elem = document.activeElement;
     if (kpxc.combinations.length > 0) {
-        if (await kpxcFill.fillFromCombination(passOnly)) {
+        if (await kpxcFill.fillFromCombination(elem, passOnly)) {
             // Combination found and filled
             return;
         }
     }
 
     // No previous combinations detected. Create a new one from active element
-    const el = document.activeElement;
-    const combination = await kpxc.createCombination(el, passOnly);
+    const combination = await kpxc.createCombination(elem, passOnly);
 
     await sendMessage('page_set_login_id', kpxc.credentials[0].uuid);
     kpxcFill.fillInCredentials(combination, kpxc.credentials[0].login, kpxc.credentials[0].uuid, passOnly);
 };
 
 // Fill from combination, if found
-kpxcFill.fillFromCombination = async function(passOnly) {
+kpxcFill.fillFromCombination = async function(elem, passOnly) {
     const combination = passOnly
-        ? kpxc.combinations.find(c => c.password)
-        : kpxc.combinations.find(c => c.username);
+        ? kpxc.combinations.find(c => c.password === elem)
+        : kpxc.combinations.find(c => c.username === elem);
     if (!combination) {
-        logDebug('Error: No combination found.');
+        logDebug('Error: No username/password field combination found.');
         return false;
     }
 
