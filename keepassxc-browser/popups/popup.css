@@ -90,6 +90,7 @@ code {
 .action-buttons-area {
     display: flex;
     justify-content: flex-start;
+    gap: 6px;
 }
 
 .lock-button-area {
@@ -127,21 +128,19 @@ code {
 }
 
 #choose-custom-login-fields-button {
-    background: url('chrome-extension://__MSG_@@extension_id__/icons/custom_login_fields.svg') center no-repeat;
+    background-image: url('chrome-extension://__MSG_@@extension_id__/icons/custom_login_fields.svg');
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: 70%;
-    background-color: #ffc107 !important;
-    border-color: #ffc107 !important;
-    color: #212529 !important;
     height: 31px;
     width: 2.5rem;
 }
 
 #choose-custom-login-fields-button-moz {
-    background: url('moz-extension://__MSG_@@extension_id__/icons/custom_login_fields.svg') center no-repeat;
+    background-image: url('moz-extension://__MSG_@@extension_id__/icons/custom_login_fields.svg');
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: 70%;
-    background-color: #ffc107 !important;
-    border-color: #ffc107 !important;
-    color: #212529 !important;
     height: 31px;
     width: 2.5rem;
 }

@@ -1,29 +1,10 @@
 'use strict';
 
+const options = {};
+
 const $ = function(elem) {
     return document.querySelector(elem);
 };
-
-(async() => {
-    try {
-        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
-        options.settings = settings;
-
-        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
-        options.keyRing = keyRing;
-        options.initMenu();
-        options.initGeneralSettings();
-        options.initConnectedDatabases();
-        options.initCustomLoginFields();
-        options.initSitePreferences();
-        options.initAbout();
-        options.initTheme();
-    } catch (err) {
-        console.log('Error loading options page: ' + err);
-    }
-})();
-
-var options = options || {};
 
 options.initMenu = function() {
     const tabs = [].slice.call(document.querySelectorAll('div.tab'));
@@ -237,7 +218,7 @@ options.initGeneralSettings = function() {
         { keyboard: true, show: false, backdrop: true });
 
     $('#importSettingsButton').addEventListener('click', function() {
-        var link = document.createElement('input');
+        const link = document.createElement('input');
         link.setAttribute('type', 'file');
         link.onchange = function(e) {
             const reader = new FileReader();
@@ -319,9 +300,9 @@ options.showKeePassXCVersions = async function(response) {
         response.latest = 'unknown';
     }
 
-    $('#tab-general-settings .kphVersion em.yourVersion').textContent = response.current;
-    $('#tab-general-settings .kphVersion em.latestVersion').textContent = response.latest;
-    $('#tab-about em.versionKPH').textContent = response.current;
+    $('#tab-general-settings .kphVersion span.yourVersion').textContent = response.current;
+    $('#tab-general-settings .kphVersion span.latestVersion').textContent = response.latest;
+    $('#tab-about span.versionKPH').textContent = response.current;
     $('#tab-about span.kpxcVersion').textContent = response.current;
     $('#tab-general-settings button.checkUpdateKeePassXC').disabled = false;
 
@@ -596,10 +577,6 @@ options.initSitePreferences = function() {
         hideEmptyMessageRow();
     });
 
-    $('.was-validated').addEventListener('submit', function(e) {
-        e.preventDefault();
-    });
-
     $('#manualUrl').addEventListener('keyup', function(event) {
         if (event.key === 'Enter') {
             $('#sitePreferencesManualAdd').click();
@@ -667,7 +644,7 @@ options.initAbout = function() {
         platform = 'Win64';
     }
 
-    $('#tab-about em.versionCIP').textContent = version;
+    $('#tab-about span.versionCIP').textContent = version;
     $('#tab-about span.kpxcbrVersion').textContent = version;
     $('#tab-about span.kpxcbrOS').textContent = platform;
     $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
@@ -719,3 +696,22 @@ const getBrowserId = function() {
 
     return 'Other/Unknown';
 };
+
+(async() => {
+    try {
+        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
+        options.settings = settings;
+
+        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+        options.keyRing = keyRing;
+        options.initMenu();
+        options.initGeneralSettings();
+        options.initConnectedDatabases();
+        options.initCustomLoginFields();
+        options.initSitePreferences();
+        options.initAbout();
+        options.initTheme();
+    } catch (err) {
+        console.log('Error loading options page: ' + err);
+    }
+})();

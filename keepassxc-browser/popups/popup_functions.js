@@ -48,7 +48,7 @@ async function initColorTheme() {
 }
 
 async function getLoginData() {
-    const tab = getCurrentTab();
+    const tab = await getCurrentTab();
     if (!tab) {
         return [];
     }

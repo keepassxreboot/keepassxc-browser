@@ -19,6 +19,7 @@ function statusResponse(r) {
     $('#configured-not-associated').hide();
     $('#lock-database-button').hide();
     $('#getting-started-guide').hide();
+    $('#database-not-opened').hide();
 
     if (!r.keePassXCAvailable) {
         $('#error-message').textContent = r.error;
@@ -111,6 +112,7 @@ const sendMessageToTab = async function(message) {
             action: 'get_status',
             args: [ false, true ] // Set forcePopup to true
         }));
+        window.close();
     });
 
     $('#redetect-fields-button').addEventListener('click', async () => {

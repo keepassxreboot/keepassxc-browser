@@ -50,6 +50,7 @@
         "no-param-reassign": "off",
         "no-plusplus": "off",
         "no-prototype-builtins": "off",
+        "no-redeclare": "off",
         "no-restricted-globals": "off",
         "no-restricted-syntax": "off",
         "no-return-await": "off",
@@ -59,11 +60,12 @@
         "no-use-before-define": "off",
         "no-useless-escape": "off",
         "no-useless-return": "off",
-        "no-var": "off",
+        "no-var": "error",
         "object-curly-spacing": ["warn", "always"],
         "object-shorthand": "off",
         "operator-linebreak": "off",
         "prefer-arrow-callback": "off",
+        "prefer-const": "warn",
         "prefer-destructuring": "off",
         "prefer-template": "off",
         "quote-props": "off",
@@ -89,6 +91,7 @@
         "assertTOTPField": true,
         "AssociatedAction": true,
         "Autocomplete": true,
+        "BLUE_BUTTON": true,
         "bootstrap": true,
         "browser": true,
         "browserAction": true,
@@ -102,7 +105,10 @@
         "debugLogMessage": true,
         "EXTENSION_NAME": true,
         "getCurrentTab": true,
+        "getLoginData": true,
         "getTopLevelDomainFromUrl": true,
+        "GRAY_BUTTON_CLASS": true,
+        "GREEN_BUTTON": true,
         "httpAuth": true,
         "Icon": true,
         "IGNORE_AUTOSUBMIT": true,
@@ -148,13 +154,14 @@
         "MIN_OPACITY": true,
         "MIN_TOTP_INPUT_LENGTH": true,
         "nacl": true,
+        "ORANGE_BUTTON": true,
         "page": true,
         "Pixels": true,
         "PREDEFINED_SITELIST": true,
+        "RED_BUTTON": true,
         "resizePopup": true,
         "sendMessage": true,
         "showNotification": true,
-        "useMonochromToolbarIcon": false,
         "siteMatch": true,
         "slashNeededForUrl": true,
         "SORT_BY_GROUP_AND_TITLE": true,
@@ -166,6 +173,15 @@
         "statusResponse": true,
         "Tests": true,
         "tr": true,
-        "trimURL": true
-    }
+        "trimURL": true,
+        "useMonochromToolbarIcon": true
+    },
+    "overrides": [
+        {
+            "files": ["./*.js"],
+            "env": {
+                "node": true
+            }
+        }
+    ]
 }

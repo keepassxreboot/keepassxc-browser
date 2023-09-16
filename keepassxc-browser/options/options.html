@@ -33,34 +33,34 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse d-none d-md-block" id="sidebar">
-            <h1 class="text-uppercase text-white-50 d-none d-md-flex px-3 pb-4 mt-4 mb-1 ">KeePassXC-Browser</h1>
+            <h1 class="text-uppercase text-white-50 d-none d-md-flex px-3 pb-4 mt-4 mb-1">KeePassXC-Browser</h1>
             <ul class="nav flex-column mb-2 text-uppercase">
               <li class="active nav-item">
-                <a class="nav-link text-light rounded-sm" href="#general-settings" tabindex="1">
+                <a class="nav-link text-light rounded-sm" href="#general-settings">
                   <i class="fa fa-ellipsis-h fa-lg pe-2" aria-hidden="true"></i>
                   <span class="menu-item" data-i18n="optionsMenuGeneral"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light rounded-sm" href="#connected-databases" tabindex="2">
+                <a class="nav-link text-light rounded-sm" href="#connected-databases">
                   <i class="fa fa-link fa-lg pe-2" aria-hidden="true"></i>
                   <span class="menu-item" data-i18n="optionsMenuConnectedDatabases"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light rounded-sm" href="#custom-fields" tabindex="3">
+                <a class="nav-link text-light rounded-sm" href="#custom-fields">
                   <i class="fa fa-sign-in fa-lg pe-2" aria-hidden="true"></i>
                   <span class="menu-item" data-i18n="optionsMenuCustomFields"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light rounded-sm" href="#site-preferences" tabindex="4">
+                <a class="nav-link text-light rounded-sm" href="#site-preferences">
                   <i class="fa fa-wrench fa-lg pe-2" aria-hidden="true"></i>
                   <span class="menu-item" data-i18n="optionsMenuSitePreferences"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light rounded-sm" href="#about" tabindex="5">
+                <a class="nav-link text-light rounded-sm" href="#about">
                   <i class="fa fa-info-circle fa-lg pe-2" aria-hidden="true"></i>
                   <span class="menu-item" data-i18n="optionsMenuAbout"></span>
                 </a>
@@ -90,7 +90,7 @@
                   <!-- Color theme -->
                   <div class="form-group col-sm-3 pb-2">
                     <label for="colorTheme" class="form-label" data-i18n="optionsThemeSelectionHeader"></label>
-                    <select class="form-control form-control-sm col-md-3 col-lg-2" id="colorTheme" data-i18n="[title]optionsThemeSelection">
+                    <select class="form-select form-select-sm col-md-3 col-lg-2" id="colorTheme" data-i18n="[title]optionsThemeSelection">
                       <option value="system" data-i18n="optionsThemeSystem"></option>
                       <option value="dark" data-i18n="optionsThemeDark"></option>
                       <option value="light" data-i18n="optionsThemeLight"></option>
@@ -120,7 +120,7 @@
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="showOTPIcon" id="totpIconsCheckBox" value="true">
-                      <label class="form-check-label" for="totpIconsCheckBox"  data-i18n="optionsCheckboxOTPIcons"></label>
+                      <label class="form-check-label" for="totpIconsCheckBox" data-i18n="optionsCheckboxOTPIcons"></label>
                       <div class="form-text" data-i18n="optionsShowOTPIconHelpText"></div>
                     </div>
                   </div>
@@ -133,12 +133,12 @@
                       <div class="form-text" data-i18n="optionsShowNotificationsHelpText"></div>
                     </div>
                   </div>
-                  
+
                   <!-- Use monochrome toolbar icons -->
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="useMonochromeToolbarIcon" id="useMonochromeToolbarIconCheckBox" value="true">
-                      <label class="form-check-label" for="useMonochromeToolbarIcon" data-i18n="optionsCheckboxUseMonochromeToolbarIcon"></label>
+                      <label class="form-check-label" for="useMonochromeToolbarIconCheckBox" data-i18n="optionsCheckboxUseMonochromeToolbarIcon"></label>
                       <div class="form-text" data-i18n="optionsUseMonochromeToolbarIconHelpText"></div>
                     </div>
                   </div>
@@ -160,7 +160,8 @@
                   </p>
                   <p>
                     <button class="btn btn-sm btn-success" id="configureCommands" type="button" data-i18n="[title]openNewTab">
-                      <i class="fa fa-keyboard-o" aria-hidden="true"></i><span data-i18n="optionsConfigureShortcuts"></span>
+                      <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                      <span data-i18n="optionsConfigureShortcuts"></span>
                     </button>
                   </p>
                 </div>
@@ -195,7 +196,7 @@
                   <!-- Sort credentials by -->
                   <div class="form-group col-sm-3 pb-2">
                     <label for="credentialSorting" class="py-2" data-i18n="optionsCredentialSortSelectionHeader"></label>
-                    <select class="form-control form-control-sm col-md-2" id="credentialSorting" data-i18n="[title]optionsCredentialSortSelection">
+                    <select class="form-select form-select-sm col-md-2" id="credentialSorting" data-i18n="[title]optionsCredentialSortSelection">
                       <option value="sortByTitle" data-i18n="optionsSortByTitle"></option>
                       <option value="sortByUsername" data-i18n="optionsSortByUsername"></option>
                       <option value="sortByGroupAndTitle" data-i18n="optionsSortByGroupAndTitle"></option>
@@ -206,7 +207,7 @@
                   <!-- Credential sorting after fill -->
                   <div class="form-group col-sm-3 pb-2">
                     <label for="afterFillSorting" class="py-2" data-i18n="optionsFillSortPriority"></label>
-                    <select class="form-control form-control-sm col-md-2" id="afterFillSorting" data-i18n="[title]optionsFillSortPriority">
+                    <select class="form-select form-select-sm col-md-2" id="afterFillSorting" data-i18n="[title]optionsFillSortPriority">
                       <option value="sortByMatchingCredentials" data-i18n="optionsFillSortByMatchingCredentials"></option>
                       <option value="sortByRelevantEntry" data-i18n="optionsFillSortByRelevantEntry"></option>
                     </select>
@@ -218,7 +219,7 @@
                   <!-- Credential sorting after fill for TOTP -->
                   <div class="form-group col-sm-3 pb-2">
                     <label for="afterFillSortingTotp" class="py-2" data-i18n="optionsFillSortPriorityTotp"></label>
-                    <select class="form-control form-control-sm col-md-2" id="afterFillSortingTotp" data-i18n="[title]optionsFillSortPriorityTotp">
+                    <select class="form-select form-select-sm col-md-2" id="afterFillSortingTotp" data-i18n="[title]optionsFillSortPriorityTotp">
                       <option value="sortByMatchingCredentials" data-i18n="optionsFillSortByMatchingCredentials"></option>
                       <option value="sortByRelevantEntry" data-i18n="optionsFillSortByRelevantEntry"></option>
                     </select>
@@ -256,7 +257,7 @@
                       <label class="form-check-label" for="autoFillAndSend" data-i18n="optionsCheckboxAutoFillAndSend"></label>
                       <div class="form-text" data-i18n="optionsAutoFillAndSendHelpText"></div>
                       <div class="form-text" data-i18n="optionsAutoFillAndSendHelpTextSecond"></div>
-                      <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog" class="img-fluid mt-2"/>
+                      <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog" class="img-fluid mt-2">
                     </div>
                   </div>
                 </div>
@@ -292,8 +293,14 @@
                     <label for="defaultGroup" class="pb-2" data-i18n="optionsLabelDefaultGroup"></label>
                     <div class="input-group w-75">
                       <input class="form-control form-control-sm" type="text" id="defaultGroup" placeholder="KeePassXC-Browser Passwords">
-                      <button class="btn btn-sm btn-primary" type="button" id="defaultGroupButton"><i class="fa fa-save" aria-hidden="true"></i><span data-i18n="optionsButtonSave"></span></button>
-                      <button class="btn btn-sm btn-danger" type="button" id="defaultGroupButtonReset"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonReset"></span></button>
+                      <button class="btn btn-sm btn-primary" type="button" id="defaultGroupButton">
+                        <i class="fa fa-save" aria-hidden="true"></i>
+                        <span data-i18n="optionsButtonSave"></span>
+                      </button>
+                      <button class="btn btn-sm btn-danger" type="button" id="defaultGroupButtonReset">
+                        <i class="fa fa-remove" aria-hidden="true"></i>
+                        <span data-i18n="optionsButtonReset"></span>
+                      </button>
                     </div>
                     <div class="form-text help-text" data-i18n="optionsDefaultGroupHelpText"></div>
                   </div>
@@ -339,12 +346,15 @@
                       <span data-i18n="optionsVersionDownload" data-i18n-placeholder="<a target='_blank' href='https://keepassxc.org/'>https://keepassxc.org/</a>"></span>
                     </p>
                     <p>
-                      <span data-i18n="optionsVersionRunning" data-i18n-placeholder="<em class='yourVersion'></em>"></span>
+                      <span data-i18n="optionsVersionRunning" data-i18n-placeholder="<span class='yourVersion'></span>"></span>
                     </p>
                     <p>
-                      <span data-i18n="optionsLatestVersion" data-i18n-placeholder="<em class='latestVersion'></em>"></span>
+                      <span data-i18n="optionsLatestVersion" data-i18n-placeholder="<span class='latestVersion'></span>"></span>
                     </p>
-                      <button class="btn btn-sm btn-success checkUpdateKeePassXC"><i class="fa fa-refresh" aria-hidden="true"></i><span data-i18n="optionsButtonUpdate"></span></button>
+                      <button class="btn btn-sm btn-success checkUpdateKeePassXC">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                        <span data-i18n="optionsButtonUpdate"></span>
+                      </button>
                     <div class="mt-3">
                       <div data-i18n="optionsRadioText"></div>
                       <div class="form-check form-check-inline">
@@ -433,18 +443,16 @@
                   </div>
 
                   <!-- Clear credential timeout -->
-                  <div class="form-group">
-                    <form class="pt-2">
-                      <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
-                      <div class="form-check py-2">
-                        <input class="form-input" type="number" id="clearCredentialTimeout" min="0" max="3600" required/>
-                        <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
-                      </div>
-                    </form>
+                  <div class="form-group mt-2">
+                    <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
+                    <div class="input-group w-25 mt-2">
+                      <input class="form-control form-control-sm" type="number" id="clearCredentialTimeout" min="0" max="3600" required>
+                    </div>
+                    <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
                   </div>
 
                   <!-- Debug logging -->
-                  <div class="form-group">
+                  <div class="form-group mt-2">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="debugLogging" id="debugLogging" value="false">
                       <label class="form-check-label" for="debugLogging" data-i18n="optionsDebugLogging"></label>
@@ -463,8 +471,14 @@
 
                 <div class="card-body">
                   <div class="form-group">
-                    <button class="btn btn-sm btn-primary" id="importSettingsButton"><i class="fa fa-arrow-down" aria-hidden="true"></i><span data-i18n="optionsButtonImport"></span></button>
-                    <button class="btn btn-sm btn-primary" id="exportSettingsButton"><i class="fa fa-arrow-up" aria-hidden="true"></i><span data-i18n="optionsButtonExport"></span></button>
+                    <button class="btn btn-sm btn-primary" id="importSettingsButton">
+                      <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                      <span data-i18n="optionsButtonImport"></span>
+                    </button>
+                    <button class="btn btn-sm btn-primary" id="exportSettingsButton">
+                      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                      <span data-i18n="optionsButtonExport"></span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -480,8 +494,14 @@
                       <p data-i18n="optionsImportSettingsDialogText"></p>
                   </div>
                   <div class="modal-footer">
-                      <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                      <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonImport"></span></button>
+                      <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-remove" aria-hidden="true"></i>
+                        <span data-i18n="optionsButtonCancel"></span>
+                      </button>
+                      <button class="btn btn-sm yes btn-success">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <span data-i18n="optionsButtonImport"></span>
+                      </button>
                   </div>
                   </div>
                 </div>
@@ -515,13 +535,21 @@
                           <td class="key text-nowrap"></td>
                           <td class="last-used text-nowrap"></td>
                           <td class="created text-nowrap"></td>
-                          <td class="text-nowrap"><button class="btn btn-sm delete btn-danger"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
+                          <td class="text-nowrap">
+                            <button class="btn btn-sm delete btn-danger">
+                              <i class="fa fa-remove" aria-hidden="true"></i>
+                              <span data-i18n="optionsButtonRemove"></span>
+                            </button>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <div>
-                    <button id="connect-button" class="btn btn-sm btn-success"><i class="fa fa-link" aria-hidden="true"></i><span data-i18n="optionsButtonConnect"></span></button>
+                    <button id="connect-button" class="btn btn-sm btn-success">
+                      <i class="fa fa-link" aria-hidden="true"></i>
+                      <span data-i18n="optionsButtonConnect"></span>
+                    </button>
                   </div>
 
                   <div id="dialogDeleteConnectedDatabase" class="modal fade" tabindex="-1" role="dialog">
@@ -536,8 +564,14 @@
                           <p class="help-block" data-i18n="optionsDatabasesRemoveIdentifierConfirmSecond"></p>
                         </div>
                         <div class="modal-footer">
-                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                          <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
+                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-remove" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonCancel"></span>
+                          </button>
+                          <button class="btn btn-sm yes btn-success">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonRemoveNow"></span>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -572,7 +606,12 @@
                         </tr>
                         <tr class="clone d-none">
                           <td></td>
-                          <td class="text-nowrap"><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
+                          <td class="text-nowrap">
+                            <button class="btn btn-sm delete btn-danger btn">
+                              <i class="fa fa-remove" aria-hidden="true"></i>
+                              <span data-i18n="optionsButtonRemove"></span>
+                            </button>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -590,8 +629,14 @@
                           <p class="help-block" data-i18n="optionsCustomFieldsConfirmationHelpText"></p>
                         </div>
                         <div class="modal-footer">
-                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                          <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
+                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-remove" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonCancel"></span>
+                          </button>
+                          <button class="btn btn-sm yes btn-success">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonRemoveNow"></span>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -617,16 +662,17 @@
                   </div>
                   <hr class="mt-0">
 
-                  <form class="was-validated">
-                    <div class="form-group">
-                        <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
-                      <div class="input-group w-75" id="manualUrlGroup">
-                        <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
-                        <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd"><i class="fa fa-plus" aria-hidden="true"></i><span data-i18n="optionsButtonAdd"></span></button>
-                      </div>
-                      <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
+                  <div class="form-group was-validated">
+                    <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
+                    <div class="input-group w-75" id="manualUrlGroup">
+                      <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
+                      <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span data-i18n="optionsButtonAdd"></span>
+                      </button>
                     </div>
-                  </form>
+                    <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
+                  </div>
 
                   <div class="table-responsive">
                     <table class="table table-sm table-striped table-bordered">
@@ -647,16 +693,21 @@
                         <tr class="clone d-none">
                           <td class="text-nowrap"></td>
                           <td>
-                            <select class="form-control form-control-sm" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
+                            <select class="form-select form-select-sm" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
                               <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
                               <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
                               <option value="ignoreAutoSubmit" data-i18n="optionsSelectionAutoSubmit"></option>
                               <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
                             </select>
                           </td>
-                          <td><input class="form-check-input" type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"/></td>
-                          <td><input class="form-check-input" type="checkbox" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection"/></td>
-                          <td class="text-nowrap"><button class="btn btn-sm delete btn-danger btn"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonRemove"></span></button></td>
+                          <td><input class="form-check-input" type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"></td>
+                          <td><input class="form-check-input" type="checkbox" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection"></td>
+                          <td class="text-nowrap">
+                            <button class="btn btn-sm delete btn-danger btn">
+                              <i class="fa fa-remove" aria-hidden="true"></i>
+                              <span data-i18n="optionsButtonRemove"></span>
+                            </button>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -674,8 +725,14 @@
                           <p class="help-block" data-i18n="optionsSitePreferencesConfirmationHelpText"></p>
                         </div>
                         <div class="modal-footer">
-                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-remove" aria-hidden="true"></i><span data-i18n="optionsButtonCancel"></span></button>
-                          <button class="btn btn-sm yes btn-success"><i class="fa fa-check" aria-hidden="true"></i><span data-i18n="optionsButtonRemoveNow"></span></button>
+                          <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-remove" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonCancel"></span>
+                          </button>
+                          <button class="btn btn-sm yes btn-success">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <span data-i18n="optionsButtonRemoveNow"></span>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -695,33 +752,37 @@
                 </div>
                 <div class="card-body">
                   <p>
-                    <span data-i18n="optionsAboutExtensionVersion" data-i18n-placeholder="<em class='versionCIP'></em>"></span>
+                    <span data-i18n="optionsAboutExtensionVersion" data-i18n-placeholder="<span class='versionCIP'></span>"></span>
                     <br>
-                    <span data-i18n="optionsAboutKeePassXCVersion" data-i18n-placeholder="<em class='versionKPH'></em>"></span>
+                    <span data-i18n="optionsAboutKeePassXCVersion" data-i18n-placeholder="<span class='versionKPH'></span>"></span>
                   </p>
                   <hr class="mt-0">
                   <p>
-                    <a target="_blank" href="https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk" data-i18n="[title]openNewTab" tabindex="6">
-                    <span data-i18n="optionsAboutChrome"></span></a>
+                    <a target="_blank" href="https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk" data-i18n="[title]openNewTab">
+                      <span data-i18n="optionsAboutChrome"></span>
+                    </a>
                     <br>
-                    <a target="_blank" href="https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/" data-i18n="[title]openNewTab" tabindex="7">
-                    <span data-i18n="optionsAboutMozilla"></span></a>
+                    <a target="_blank" href="https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/" data-i18n="[title]openNewTab">
+                      <span data-i18n="optionsAboutMozilla"></span>
+                    </a>
                     <br>
-                    <a target="_blank" href="https://microsoftedge.microsoft.com/addons/detail/keepassxcbrowser/pdffhmdngciaglkoonimfcmckehcpafo" data-i18n="[title]openNewTab" tabindex="8">
-                    <span data-i18n="optionsAboutEdge"></span></a>
+                    <a target="_blank" href="https://microsoftedge.microsoft.com/addons/detail/keepassxcbrowser/pdffhmdngciaglkoonimfcmckehcpafo" data-i18n="[title]openNewTab">
+                      <span data-i18n="optionsAboutEdge"></span>
+                    </a>
                     <br>
-                    <a target="_blank" href="https://github.com/keepassxreboot/keepassxc-browser" data-i18n="[title]openNewTab" tabindex="9">
-                    <span data-i18n="optionsAboutGitHub"></span></a>
+                    <a target="_blank" href="https://github.com/keepassxreboot/keepassxc-browser" data-i18n="[title]openNewTab">
+                      <span data-i18n="optionsAboutGitHub"></span>
+                    </a>
                   </p>
                   <hr class="mt-0">
                   <p>
                     <span data-i18n="optionsAboutContributors"></span>:
-                    <br><a target="_blank" href="https://github.com/varjolintu/" data-i18n="[title]openNewTab" tabindex="13">Sami Vänttinen</a>
-                    <br><a target="_blank" href="https://github.com/smorks" data-i18n="[title]openNewTab" tabindex="12">Andy Brandt</a>
-                    <br><a target="_blank" href="https://github.com/pfn/" data-i18n="[title]openNewTab" tabindex="10">Perry Nguyen</a>
-                    <br><a target="_blank" href="http://lukas-schulze.de" data-i18n="[title]openNewTab" tabindex="11">Lukas Schulze</a>
-                    <br><a target="_blank" href="https://github.com/stefansundin" data-i18n="[title]openNewTab" tabindex="12">Stefan Sundin</a>
-                    <br><a target="_blank" href="https://github.com/dynobo" data-i18n="[title]openNewTab" tabindex="12">dynobo</a>
+                    <br><a target="_blank" href="https://github.com/varjolintu" data-i18n="[title]openNewTab">Sami Vänttinen</a>
+                    <br><a target="_blank" href="https://github.com/smorks" data-i18n="[title]openNewTab">Andy Brandt</a>
+                    <br><a target="_blank" href="https://github.com/pfn" data-i18n="[title]openNewTab">Perry Nguyen</a>
+                    <br><a target="_blank" href="http://lukas-schulze.de" data-i18n="[title]openNewTab">Lukas Schulze</a>
+                    <br><a target="_blank" href="https://github.com/stefansundin" data-i18n="[title]openNewTab">Stefan Sundin</a>
+                    <br><a target="_blank" href="https://github.com/dynobo" data-i18n="[title]openNewTab">dynobo</a>
                   </p>
 
                   <details>
@@ -744,7 +805,7 @@
                 </div>
                 <div class="card-body">
                   <p>
-                    <a target="_blank" href="https://github.com/keepassxreboot/keepassxc-browser/issues/new" tabindex="14"><span data-i18n="optionsAboutCreateNewIssue"></span></a>
+                    <a target="_blank" href="https://github.com/keepassxreboot/keepassxc-browser/issues/new"><span data-i18n="optionsAboutCreateNewIssue"></span></a>
                     <br><span data-i18n="optionsAboutDebugInfo"></span>:
                   </p>
                   <p id="versionInfo" class="float-left">KeePassXC - <span class="kpxcVersion"></span>
@@ -752,7 +813,9 @@
                     <br>Operating system: <span class="kpxcbrOS"></span>
                     <br>Browser: <span class="kpxcbrBrowser"></span>
                   </p>
-                  <button id="copyVersionToClipboard" class="btn btn btn-sm btn-primary ml-3"><i class="fa fa-clipboard"></i></button>
+                  <button id="copyVersionToClipboard" class="btn btn btn-sm btn-primary ml-3">
+                    <i class="fa fa-clipboard"></i>
+                  </button>
                 </div>
               </div>
 

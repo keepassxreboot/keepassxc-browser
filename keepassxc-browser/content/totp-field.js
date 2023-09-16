@@ -24,7 +24,7 @@ const acceptedParents = [
     '.mfa-verify',
 ];
 
-var kpxcTOTPIcons = {};
+const kpxcTOTPIcons = {};
 kpxcTOTPIcons.icons = [];
 
 kpxcTOTPIcons.newIcon = function(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {

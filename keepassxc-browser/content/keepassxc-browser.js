@@ -262,8 +262,8 @@ kpxc.initCombinations = async function(inputs = []) {
     }
 
     const combinations = isCustomLoginFieldsUsed
-                       ? await kpxcFields.useCustomLoginFields()
-                       : await kpxcFields.getAllCombinations(inputs);
+        ? await kpxcFields.useCustomLoginFields()
+        : await kpxcFields.getAllCombinations(inputs);
     if (!combinations || combinations.length === 0) {
         if (isCustomLoginFieldsUsed) {
             kpxcUI.createNotification('warning', tr('optionsCustomFieldsNotFound'));
@@ -343,8 +343,8 @@ kpxc.initLoginPopup = function() {
     // Returns a login item with additional information for sorting
     const getLoginItem = function(credential, withGroup, loginId) {
         const title = credential.name.length < MAX_AUTOCOMPLETE_NAME_LEN
-                   ? credential.name
-                   : credential.name.substr(0, MAX_AUTOCOMPLETE_NAME_LEN) + '…';
+            ? credential.name
+            : credential.name.substr(0, MAX_AUTOCOMPLETE_NAME_LEN) + '…';
         const group = (withGroup && credential.group) ? `[${credential.group}] ` : '';
         const visibleLogin = (credential.login.length > 0) ? credential.login : tr('credentialsNoUsername');
         let text = `${group}${title} (${visibleLogin})`;
