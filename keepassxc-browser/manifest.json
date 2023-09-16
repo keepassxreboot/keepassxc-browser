@@ -159,7 +159,7 @@
     "applications": {
         "gecko": {
             "id": "keepassxc-browser@keepassxc.org",
-            "strict_min_version": "93.0"
+            "strict_min_version": "96.0"
         }
     },
     "default_locale": "en"
