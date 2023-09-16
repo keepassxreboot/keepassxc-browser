@@ -672,12 +672,23 @@ kpxc.setValueWithChange = function(field, value, forced = false) {
         return;
     }
 
+    const dispatchLegacyEvent = function(elem, eventName) {
+        const legacyEvent = elem.ownerDocument.createEvent('Event');
+        legacyEvent.initEvent(eventName, true, false);
+        elem.dispatchEvent(legacyEvent);
+    };
+
+    field.focus();
+    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new Event('input', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new Event('change', { bubbles: true, cancelable: false }));
     field.value = value;
-    field.dispatchEvent(new Event('input', { bubbles: true }));
-    field.dispatchEvent(new Event('change', { bubbles: true }));
-    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false, key: '', char: '' }));
-    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false, key: '', char: '' }));
-    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false, key: '', char: '' }));
+
+    // Some pages will not accept the value change without dispatching events directly to the document
+    dispatchLegacyEvent(field, 'input');
+    dispatchLegacyEvent(field, 'change');
 };
 
 // Returns true if site is ignored
