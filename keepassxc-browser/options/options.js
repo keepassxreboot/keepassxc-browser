@@ -658,6 +658,7 @@ options.updateTheme = function() {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     document.documentElement.setAttribute('data-bs-theme', theme);
+    browser.runtime.sendMessage({ action: 'update_popup' });
 };
 
 options.createWarning = function(elem, text) {
