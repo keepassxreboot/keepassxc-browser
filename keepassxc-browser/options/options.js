@@ -84,11 +84,7 @@ options.initGeneralSettings = function() {
         options.saveSettings();
     };
 
-    if (options.settings['colorTheme'] === undefined) {
-        $('#tab-general-settings select#colorTheme').value = 'system';
-    } else {
-        $('#tab-general-settings select#colorTheme').value = options.settings['colorTheme'];
-    }
+    $('#tab-general-settings select#colorTheme').value = options.settings['colorTheme'];
 
     const generalSettingsCheckboxes = document.querySelectorAll('#tab-general-settings input[type=checkbox]');
     for (const checkbox of generalSettingsCheckboxes) {
@@ -133,6 +129,12 @@ options.initGeneralSettings = function() {
         localStorage.setItem('colorTheme', options.settings['colorTheme']);
         await options.saveSettings();
         location.reload();
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (options.settings['colorTheme'] === 'system') {
+            options.initTheme();
+        }
     });
 
     $('#tab-general-settings select#credentialSorting').addEventListener('change', async function(e) {
@@ -651,11 +653,11 @@ options.initAbout = function() {
 };
 
 options.initTheme = function() {
-    if (options.settings['colorTheme'] === undefined) {
-        document.documentElement.removeAttribute('data-bs-theme');
-    } else {
-        document.documentElement.setAttribute('data-bs-theme', options.settings['colorTheme']);
+    let theme = options.settings['colorTheme'];
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+    document.documentElement.setAttribute('data-bs-theme', theme);
     // Sync localStorage setting
     const localStorageTheme = localStorage.getItem('colorTheme');
     if (localStorageTheme !== options.settings['colorTheme']) {

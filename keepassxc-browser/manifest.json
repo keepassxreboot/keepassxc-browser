@@ -155,7 +155,7 @@
         "http://*/*",
         "https://api.github.com/"
     ],
-    "content_security_policy": "script-src 'self' 'sha256-4E4q0yTsZ55doa5aYkw6Zj2MU5BUWtOKaxnQRwX64cg=' 'sha256-4nJ8uLezzRE3SiBFdkVN/uNwV9YTOGCqRXg6AvB5rCY='; object-src 'none'",
+    "content_security_policy": "script-src 'self' 'sha256-2ABhQnPz+1v1TPfpfCRP+T7ZwVbVt6LE9tEUlSZ3t+c=' 'sha256-4nJ8uLezzRE3SiBFdkVN/uNwV9YTOGCqRXg6AvB5rCY='; object-src 'none'",
     "applications": {
         "gecko": {
             "id": "keepassxc-browser@keepassxc.org",

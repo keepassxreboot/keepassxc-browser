@@ -324,16 +324,11 @@ const DOMRectToArray = function(domRect) {
 };
 
 const initColorTheme = function(elem) {
-    const colorTheme = kpxc.settings['colorTheme'];
-
-    if (colorTheme === undefined) {
-        elem.removeAttribute('data-bs-theme');
-    } else if (colorTheme === 'system') {
-        const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        elem.setAttribute('data-bs-theme', theme);
-    } else {
-        elem.setAttribute('data-bs-theme', colorTheme);
+    let theme = kpxc.settings['colorTheme'];
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+    elem.setAttribute('data-bs-theme', theme);
 };
 
 const createStylesheet = function(file) {
