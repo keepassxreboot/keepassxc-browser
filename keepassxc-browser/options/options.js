@@ -658,11 +658,6 @@ options.initTheme = function() {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     document.documentElement.setAttribute('data-bs-theme', theme);
-    // Sync localStorage setting
-    const localStorageTheme = localStorage.getItem('colorTheme');
-    if (localStorageTheme !== options.settings['colorTheme']) {
-        localStorage.setItem('colorTheme', options.settings['colorTheme']);
-    }
 };
 
 options.createWarning = function(elem, text) {
