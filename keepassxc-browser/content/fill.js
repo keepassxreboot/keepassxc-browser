@@ -48,8 +48,8 @@ kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
 // Fill from combination, if found
 kpxcFill.fillFromCombination = async function(elem, passOnly) {
     const combination = passOnly
-        ? kpxc.combinations.find(c => c.password === elem)
-        : kpxc.combinations.find(c => c.username === elem);
+        ? kpxc.combinations.find(c => c.password === elem) ?? kpxc.combinations.find(c => c.password)
+        : kpxc.combinations.find(c => c.username === elem) ?? kpxc.combinations.find(c => c.username);
     if (!combination) {
         logDebug('Error: No username/password field combination found.');
         return false;
