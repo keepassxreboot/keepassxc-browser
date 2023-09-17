@@ -128,7 +128,7 @@ options.initGeneralSettings = function() {
         // The theme is also stored in localStorage to prevent a white flash when the settings are first opened
         localStorage.setItem('colorTheme', options.settings['colorTheme']);
         await options.saveSettings();
-        location.reload();
+        options.initTheme();
     });
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
