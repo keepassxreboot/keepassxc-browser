@@ -128,12 +128,12 @@ options.initGeneralSettings = function() {
         // The theme is also stored in localStorage to prevent a white flash when the settings are first opened
         localStorage.setItem('colorTheme', options.settings['colorTheme']);
         await options.saveSettings();
-        options.initTheme();
+        options.updateTheme();
     });
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         if (options.settings['colorTheme'] === 'system') {
-            options.initTheme();
+            options.updateTheme();
         }
     });
 
@@ -652,7 +652,7 @@ options.initAbout = function() {
     $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
 };
 
-options.initTheme = function() {
+options.updateTheme = function() {
     let theme = options.settings['colorTheme'];
     if (theme === 'system') {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
