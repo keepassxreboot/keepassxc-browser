@@ -707,7 +707,6 @@ const getBrowserId = function() {
         options.initCustomLoginFields();
         options.initSitePreferences();
         options.initAbout();
-        options.initTheme();
     } catch (err) {
         console.log('Error loading options page: ' + err);
     }
