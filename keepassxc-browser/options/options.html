@@ -21,7 +21,7 @@
   <body class="pt-3 pb-5">
     <script>
     // We eagerly load the theme here to avoid a white flash
-    let theme = localStorage.getItem('colorTheme');
+    let theme = localStorage.getItem('colorTheme') || 'system';
     if (theme === 'system') {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
