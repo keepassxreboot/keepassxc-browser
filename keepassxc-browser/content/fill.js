@@ -115,7 +115,7 @@ kpxcFill.fillFromTOTP = async function(target) {
     const el = target || document.activeElement;
     const credentialList = await kpxc.updateTOTPList();
 
-    if (credentialList?.length === 0) {
+    if (!credentialList || credentialList?.length === 0) {
         kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
         return;
     }
