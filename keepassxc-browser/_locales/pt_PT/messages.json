@@ -224,7 +224,7 @@
         "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "String field",
+        "message": "Campo de cadeia",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
@@ -240,7 +240,7 @@
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
     "defineChooseStringFields": {
-        "message": "Choose String Fields",
+        "message": "Escolher campos de cadeia",
         "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
@@ -264,7 +264,7 @@
         "description": "General text for password."
     },
     "stringFields": {
-        "message": "String Fields",
+        "message": "Campos de cadeia",
         "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
@@ -679,6 +679,10 @@
         "message": "Mostrar notificações.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Utilizar ícone monocromático na barra de ferramentas.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Guardar apenas domínio.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Quantas páginas deve o separador percorrer após o atraso de redirecionamento antes de desativar o ícone",
+        "message": "Número máximo de encaminhamentos até que o 'banner' desapareça. O valor padrão é 3 e infinito é o máximo.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Preencher e enviar automaticamente as caixas de diálogo de autenticação básica HTTP.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Permitir preenchimentos de credenciais 'HTTP Basic Auth'.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Registo de depuração",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Mostrar notificações para erros e quando for necessária qualquer interação.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Utilizar, na barra de ferramentas, um ícone monocromático com símbolos coloridos e adaptar ao tema do navegador (claro/escuro).",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Ao guardar as novas credenciais, guardar apenas o domínio e não o URL.",

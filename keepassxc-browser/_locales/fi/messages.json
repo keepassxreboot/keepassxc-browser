@@ -679,6 +679,10 @@
         "message": "Näytä ilmoitukset.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Käytä mustavalkoisia ikoneita työkalupalkissa",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Tallenna vain verkkotunnus.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Kuinka monta sivun latausta sallitaan ennen kuin ikonin vilkkuminen lakkaa",
+        "message": "Kuinka monta sivun uudelleenohjasuta sallitaan ennen kuin palkki katoaa näkyvistä. Vakioasetus on 3, maksimi ääretön.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Täytä HTTP-autentikaation dialogit automaattisesti.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Salli HTTP-autentikaatiotietojen täyttäminen.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Virheenkorjausloki",
@@ -796,7 +800,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
+        "message": "Varoitus! Automaattinen täydennys ei ole turvallinen. Käytä omalla vastuulla. KeePassXC-Browser yrittää automaattisesti tunnistaa kirjautumiskentät. On mahollista, että yksityistä tietoa täydennetään kenttiin jotka eivät ole turvallisia.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Näyttää ilmoituksen virheistä, ja tilanteista jolloin käyttäjältä vaaditaan toimia.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Käytä värillisten ikoneiden lisäksi mustavalkoisia ikoneita työkalupalkissa, jotka muuttuvat selaimen vaalean tai tumman teeman mukaisesti.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Uusia tietueita tallentaessa tallenna vain verkkotunnus koko osoitteen sijasta.",

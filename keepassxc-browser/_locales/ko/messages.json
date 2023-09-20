@@ -679,6 +679,10 @@
         "message": "알림을 표시합니다.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "단색 도구 모음 아이콘을 사용합니다.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "도메인만 저장합니다.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "전환 위치 이후 아이콘을 비활성화하기 전까지 탭을 순환할 회수",
+        "message": "배너를 숨길 때까지 허용할 최대 전환 수입니다. 기본값은 3이며 최댓값은 무한대입니다.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "자동으로 HTTP 기본 인증 정보 항목을 입력하고 제출합니다.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "HTTP 기본 인증 정보 항목 입력을 허용합니다.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Debug logging",
@@ -796,7 +800,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
+        "message": "경고! 자동 입력은 안전하지 않을 수 있습니다. 주의하여 사용하십시오. KeePassXC-브라우저에서는 로그인 필드 자동 감지를 시도하지만, 필드가 잘못 감지되었을 경우에는 안전하지 않은 입력 필드에 민감한 정보를 입력할 수도 있습니다.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "사용자 동작이 필요하거나 오류가 발생했을 때 알림을 표시합니다.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "브라우저의 밝은/어두운 테마에 맞춰지는 단색 아이콘과 색상 있는 배지를 사용합니다.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "새 인증 정보를 저장할 때 전체 URL 대신 도메인만 저장합니다.",
@@ -952,7 +960,7 @@
         "description": "Site preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
-        "message": "Improved Input Field Detection",
+        "message": "향상된 입력 필드 감지",
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnDelete": {
@@ -1072,7 +1080,7 @@
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "message": "향상된 입력 필드 감지 설정을 활성화하면 동적 입력 필드 감지를 개선합니다. 페이지 성능에 영향을 줄 수도 있으므로 주의해서 사용하십시오.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesManualAddText": {

@@ -679,6 +679,10 @@
         "message": "顯示通知。",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "使用單色工具列圖示。",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "只儲存網域。",
         "description": "Save domain only checkbox text."
@@ -688,16 +692,16 @@
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
-        "message": "允許的重新導向數： $1",
+        "message": "允許的重新定向數： $1",
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "橫幅消失前所允許的最大重定向次數。預設值為 1。最大值為無限。",
+        "message": "橫幅消失前允許的重新定向數。預設值爲 3，最大值爲無限。",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "自定填入 HTTP 基礎身份驗證對話視窗並提交。",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "允許填入 HTTP 基本認證憑證。",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "偵錯日誌",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "出錯或需要用戶操作時顯示提醒。",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "使用單色工具列圖示和彩色標記，對應瀏覽器的亮暗色彩主題。",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "儲存新憑證時，只儲存域名而非完整的網址 (URL)。",

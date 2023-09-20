@@ -679,6 +679,10 @@
         "message": "Εμφάνιση ειδοποιήσεων.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Χρησιμοποιήστε μονόχρωμος εικονίδιο στην γραμμή εργαλείων.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Αποθήκευση domain μόνο.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Πόσες ανακατευθύνσεις επιτρέπονται έως ότου να εξαφανιστεί το banner. Η προεπιλεγμένη τιμή είναι 1. Το μέγιστο είναι άπειρο.",
+        "message": "Πόσες ανακατευθύνσεις επιτρέπονται μέχρι να εξαφανιστεί το banner.  Η προεπιλεγμένη τιμή είναι 3. Η μέγιστη είναι άπειρη.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Συμπληρώστε αυτόματα διαλόγους HTTP Basic Auth και υποβάλετέ τους.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Να επιτρέπεται η συμπλήρωση διαπιστευτηρίων HTTP Basic Auth.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Καταγραφή εντοπισμού σφαλμάτων",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Εμφάνιση ειδοποιήσεων για σφάλματα και όταν απαιτείται αλληλεπίδραση του χρήστη.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Χρησιμοποιήστε ένα μονόχρωμο εικονίδιο με χρωματιστά σήματα στη γραμμή εργαλείων που προσαρμόζεται στο ανοιχτό/σκοτεινό θέμα του προγράμματος περιήγησης.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Κατά την αποθήκευση νέων διαπιστευτηρίων, αποθηκεύστε μόνο το domain αντί για την πλήρη διεύθυνση URL.",

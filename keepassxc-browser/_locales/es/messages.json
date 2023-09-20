@@ -32,11 +32,11 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "Solicitar autoescritura gobal",
+        "message": "Solicitar auto-tecleo global",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Autenticación HTTP con múltiples credenciales detectadas. Haga clic en el icono de la extensión de elegir la correcta.",
+        "message": "Autenticación HTTP con múltiples credenciales detectadas. Pulse en el icono de la extensión de elegir la correcta.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -76,7 +76,7 @@
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
-        "message": "Intercambio de claves no fue correcto.",
+        "message": "Intercambio de clave no fue correcto.",
         "description": "Key exchange was not successful."
     },
     "errorMessageEncryptionKey": {
@@ -256,7 +256,7 @@
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
-        "message": "Nombre de usuario",
+        "message": "Usuario",
         "description": "General text for username."
     },
     "password": {
@@ -588,7 +588,7 @@
         "description": "Check for updates button text."
     },
     "optionsButtonRemoveNow": {
-        "message": "Sí, eliminar ahora",
+        "message": "Sí, retirar ahora",
         "description": "Confirm button text when removing database key or custom login fields."
     },
     "optionsButtonCancel": {
@@ -600,11 +600,11 @@
         "description": "Reset button text for keyboard shortcuts."
     },
     "optionsButtonImport": {
-        "message": "Opciones de importación",
+        "message": "Importar configuración",
         "description": "Import settings button text."
     },
     "optionsButtonExport": {
-        "message": "Configuración de exportación",
+        "message": "Exportar configuración",
         "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
@@ -612,7 +612,7 @@
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Separe el grupo con barras diagonales, por ejemplo: Grupo/GrupoHijo.",
+        "message": "Separe el grupo con barras diagonales, por ejemplo: Grupo/Grupo-Hijo.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
@@ -656,19 +656,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Rellenar automáticamente las entradas de una sola credencial.",
+        "message": "Rellenar automáticamente los apuntes de una sola credencial.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Activar autocompletar para los campos de nombre de usuario.",
+        "message": "Activar auto-completar para los campos de nombre de usuario.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Mostrar el nombre del grupo en la lista de autocompletado cuando las credenciales son de diferentes grupos.",
+        "message": "Mostrar el nombre del grupo en el listado de auto-completado cuando las credenciales son de diferentes grupos.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
-        "message": "Autoenvía formularios de inicio de sesión",
+        "message": "Autoenvíar formularios de inicio de sesión",
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
@@ -678,6 +678,10 @@
     "optionsCheckboxShowNotifications": {
         "message": "Mostrar notificaciones.",
         "description": "Show notifications checkbox text."
+    },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Usar barra de herramientas monocromo.",
+        "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
         "message": "Guardar el dominio únicamente.",
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Cuántas redirecciones se permiten antes de que el aviso desaparezca. El valor predeterminado es 1. El máximo es infinito.",
+        "message": "Cuantas redirecciones se permiten hasta que el aviso desaparece. El valor predeterminado es 3. Máximo es infinito. ",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Rellene automáticamente los cuadros de diálogo de autenticación básica de HTTP y envíelos.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Permite rellenar credenciales de Autenticación Básica de HTTP.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Trazas de depuración",
@@ -756,7 +760,7 @@
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Añade un icono a los campos de contraseña para generar una nueva contraseña.",
+        "message": "Añade un icono a los campos de contraseña para generar una contraseña nueva.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Mostrar notificaciones de errores y cuándo es necesaria la interacción del usuario.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Usar iconos monocromo con insignias en color en la barra de herramientas que se adapte al tema claro/oscuro.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Al guardar nuevas credenciales, guarde solo el dominio en lugar de la URL completa.",
@@ -888,7 +896,7 @@
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
-        "message": "Configuración de importación/exportación",
+        "message": "Importar y exportar configuración",
         "description": "Settings page header text for import/export."
     },
     "optionsImportSettingsDialogTitle": {
@@ -936,7 +944,7 @@
         "description": "Database list column title."
     },
     "optionsDatabaseDelete": {
-        "message": "Eliminar",
+        "message": "Borrar",
         "description": "Database list column title."
     },
     "optionsColumnPageURL": {
@@ -1060,7 +1068,7 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Para ignorar las credenciales nuevas/modificadas en un sitio específico, agréguelas a continuación o al usar el anuncio en la página seleccione <em>No preguntrar de nuevo para este sitio</em>.",
+        "message": "Para ignorar las credenciales nuevas/modificadas en un sitio específico, agréguelas a continuación o al usar el anuncio en la página seleccione <em>No preguntar de nuevo para este sitio</em>.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {

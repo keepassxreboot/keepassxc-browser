@@ -679,6 +679,10 @@
         "message": "Visa notifieringar.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Använd monokrom verktygsfältsikon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Spara endast domän.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Hur många sidor som fliken ska bläddra efter en redirect offset innan ikonen deaktiveras",
+        "message": "Hur många omdirigeringar som tillåts innan banderollen försvinner. Standardvärdet är 3. Max är oändligt.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Fyll automatiskt i HTTP Basic Auth-dialoger och skicka dem.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Tillåt ifyllning av HTTP-autentiseringsuppgifter",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Felsökningslogg",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Visa notifieringar för fel och när användaren behöver interagera.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Använd en monokrom ikon med färgade märken i verktygsfältet som anpassar sig till ljust/mörkt webbläsartema.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Spara enbart domänen istället för hela URL:en när nya inloggningsuppgifter sparas.",

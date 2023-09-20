@@ -679,6 +679,10 @@
         "message": "通知を表示する。",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "ドメインのみを保存する。",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "指定した回数リダイレクトが行われるとバナーが非表示になります。デフォルト値は 1 で、上限はありません。",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "HTTP ベーシック認証ダイアログに自動入力して送信する。",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "デバッグログ",
@@ -800,7 +804,7 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "ページにある全てのユーザー名フィールドに、利用可能な資格情報を含んだドロップダウンリストを表示します。",
+        "message": "ページにあるすべてのユーザー名フィールドに、利用可能な資格情報を含んだドロップダウンリストを表示します。",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "エラーが発生した場合や、ユーザーによる操作が必要な場合は通知を表示します。",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "新しい資格情報を保存する場合、完全な URL の代わりにドメインのみを保存します。",
@@ -960,7 +968,7 @@
         "description": "Site preferences list column title."
     },
     "optionsSelectionNothing": {
-        "message": "全ての機能を有効にする",
+        "message": "すべての機能を有効にする",
         "description": "Site preferences option selection."
     },
     "optionsSelectionNormal": {
@@ -972,7 +980,7 @@
         "description": "Site preferences option selection."
     },
     "optionsSelectionFull": {
-        "message": "全ての機能を無効にする",
+        "message": "すべての機能を無効にする",
         "description": "Site preferences option selection."
     },
     "optionsSortByTitle": {
@@ -1064,7 +1072,7 @@
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "サイトを完全に無視する (「<em>全ての機能を無効にする</em>」を選択している) 場合は、そのサイトを訪問してもプラグインは何もしません。",
+        "message": "サイトを完全に無視する (「<em>すべての機能を無効にする</em>」を選択している) 場合は、そのサイトを訪問してもプラグインは何もしません。",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
@@ -1088,7 +1096,7 @@
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser はユーザー名のみの検出を削除し、このサイトの全ての機能を有効にします。",
+        "message": "KeePassXC-Browser はユーザー名のみの検出を削除し、このサイトのすべての機能を有効にします。",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {

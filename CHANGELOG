@@ -1,3 +1,24 @@
+1.8.8 (2023-09-21)
+=========================
+- Add support for monochrome toolbar icons (Contributor PR) [#1938]
+- Add support for using a separate icon for non-connected status [#1952]
+- Change HTTP Basic Auth message text [#1936]
+- Change contributors list and About page [#1944]
+- Change Improved Field Detection to handle Shadow DOM [#1968]
+- Delete obsolete icons [#1941]
+- Fix retrieving credentials from background tabs [#1937]
+- Fix handling errors when waiting for response [#1940]
+- Fix getting Custom Login Fields combination during credential saving [#1976]
+- Fix Autocomplete Menu fill on Enter when list is sorted [#1978]
+- Fix filling whole combination when Autocomplete Menu is disabled [#1974]
+- Fix Check for Updates button response [#1982]
+- Fix removing notifications from DOM [#1981]
+- Fix UI/UX cosmetic issues (Contributor PR) [#1983]
+- Fix dispatching events during credential fill [#1986]
+- Fix using active element during fill [#1985, #1988]
+- Fix showing TOTP error message [#1989]
+- Refactor extension messaging [#1961]
+
 1.8.7 (2023-07-06)
 =========================
 - Add OpenAI login page to Predefined Sites [#1901]

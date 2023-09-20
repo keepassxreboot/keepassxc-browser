@@ -679,6 +679,10 @@
         "message": "הצגת הודעות.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "שמירת תחום בלבד.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "מספר הסטות המותר עד שהכרזה תעלם. ערך ברירת המחדל הוא 1. ערך מירבי הוא אינסוף.",
+        "message": "מספר הסטות מותרות עד שהכרזה תעלם. ערך ברירת המחדל הוא 1. ערך מירבי הוא אינסוף.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "מילוי תיבות דו־שיח אימות HTTP בסיסי באופן אוטומטי ושיגורן.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "יומן ניפוי־תקלים",
@@ -796,7 +800,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
+        "message": "אזהרה! השימוש באפשרות מילוי־אוטומטי אינה בטוחה. השימוש על אחריות המשתמש בלבד. KeePassXC-Browser מנסה לזהות באופן אוטומטי שדות התחברות. יחד עם זאת, שדות ההתחברות עלולות להיות מזוהות באופן שגוי, דבר שעשוי אולי לאכלס נתונים רגישים, בשדות קלט לא בטוחים.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "הצגת הודעות שגיאה ואם נדרשת התערבות משתמש.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "בעת שמירת נתוני־אמנה חדשים, לשמור רק את שם המתחם במקום את מען ה־URL המלא.",
@@ -1064,7 +1072,7 @@
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "אם המערכת מתעלמת לחלוטין מאתר (אפשרות <em>יש לבטל את כל התכונות</em> נבחרה), המתקע לא יעשה דבר בעת ביקור באתר זה.",
+        "message": "אם המערכת התעלמה לחלוטין מאתר כלשהוא (נבחרה <em>אפשרות ביטול כל התכונות</em> ), המתקע לא יעשה דבר בעת ביקור באתר זה.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {

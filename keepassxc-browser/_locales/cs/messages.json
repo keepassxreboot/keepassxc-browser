@@ -196,7 +196,7 @@
         "description": "OTP field icon text."
     },
     "defineClose": {
-        "message": "Close",
+        "message": "Zavřít",
         "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
@@ -679,6 +679,10 @@
         "message": "Zobrazit oznámení.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Uložit pouze doménu.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Kolik stránek by měl panel cyklovat po posunu přesměrování před vypnutím ikony",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Automaticky vyplňovat HTTP Basic Auth dialogy a odesílat je.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Zaznamenávat ladících informací",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Zobrazovat oznámení chyb a když je třeba interakce s uživatelem.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Při ukládání nových přihlašovacích údajů, uložit pouze doménu namísto úplné URL adresy.",

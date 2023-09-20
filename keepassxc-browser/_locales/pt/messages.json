@@ -679,6 +679,10 @@
         "message": "Mostrar notificações.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Guardar apenas domínio.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Quantas páginas deve o separador percorrer após o atraso de redirecionamento antes de desativar o ícone",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Preencher e enviar automaticamente as caixas de diálogo de autenticação básica HTTP.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Debug logging",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Mostrar notificações para erros e quando for necessária qualquer interação.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Ao guardar as novas credenciais, guardar apenas o domínio e não o URL.",

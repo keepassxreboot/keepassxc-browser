@@ -679,6 +679,10 @@
         "message": "Vis notater.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Lagre bare domene.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Hvor mange omdirigeringer som er tillatt før banneret forsvinner. Standardverdien er 1. Maksimum er uendelig.",
+        "message": "Hvor mange viderekoblinger som er tillatt til banneret forsvinner. Standardverdien er 3. Maksimum er uendelig.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Fyll ut HTTP Basic Auth-dialogbokser automatisk og send dem inn.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Tillat utfylling av HTTP Basic Auth-identifikasjon.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Logging for feilsøking",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Vis meldinger ved feil og når brukermedvirkning er nødvendig.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Ved lagring av ny identifikasjon, lagres bare domenet i stedet for fullstendig URL.",

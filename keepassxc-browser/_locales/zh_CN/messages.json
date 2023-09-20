@@ -679,6 +679,10 @@
         "message": "显示通知。",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "使用单色工具栏图标。",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "只保存域名。",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "横幅消失前所允许的最大重定向次数。默认值为 1，最大值为无限。",
+        "message": "横幅消失前所允许的最大重定向次数。默认值为 3，最大值为无限。",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "自动填充 HTTP Basic 认证对话框并提交。",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "允许填充 HTTP Basic 认证凭据。",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "调试日志",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "出错或需要用户操作时显示提醒。",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "在工具栏中显示带彩色标记的单色图标，以适应浏览器的明亮/暗黑主题。",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "保存新凭据时，只保存域名而非完整 URL。",
