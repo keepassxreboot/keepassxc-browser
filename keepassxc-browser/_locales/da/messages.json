@@ -404,7 +404,7 @@
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "rememberInfoText": {
-        "message": "Brugernavn eller adgangskode ændret! Gem den?",
+        "message": "Brugernavn eller adgangskode ændret! Gem det?",
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
@@ -679,6 +679,10 @@
         "message": "Vis underretninger.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Gem kun domæne.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Hvor mange omdirigeringer er tilladt før banneret forsvinder. Standard er 1. Maksimum er uendeligt.",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Udfyld automatisk HTTP Basic Auth-dialoger og indsend dem.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Logning til fejlretning",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Vis underretninger for fejl når der kræves brugerinteraktion.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Når nye loginoplysninger gemmes, så gem kun domænet i stedet for den fulde URL.",

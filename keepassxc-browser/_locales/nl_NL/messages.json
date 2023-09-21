@@ -679,6 +679,10 @@
         "message": "Meldingen tonen",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Monochroom werkbalkpictogram gebruiken",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Alleen domeinnaam opslaan",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Hoeveel omleidingen mogen plaatsvinden totdat de KeepassXC-Browser balk verdwijnt. Standaardwaarde is 1. Maximumwaarde is oneindig.",
+        "message": "Het aantal omleidingen dat is toegestaan voordat de banner verdwijnt. Standaardwaarde is 3. Maximum is oneindig.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "HTTP Basic Auth-velden automatisch invullen en indien",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Sta het invullen van HTTP Basic Auth-inloggegevens toe.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Logboek aanleggen voor foutopsporing",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Toont een melding bij foutmeldingen en als gebruikersacties vereist zijn.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Gebruik een monochroom pictogram met gekleurde emblemen dat zich aanpast aan lichte en donkere browserthema's.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Bewaar bij nieuwe inloggegevens alleen de domeinnaam in plaats van de volledige url.",

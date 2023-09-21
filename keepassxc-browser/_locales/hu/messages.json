@@ -352,7 +352,7 @@
         "description": "Popup warning message about old version of KeePassXC."
     },
     "popupDownloadNewVersion": {
-        "message": "Töltse le a legújabb verziót a keepassxc.org oldalról.",
+        "message": "Töltse le a legújabb verziót a keepassxc.org oldalról",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
@@ -679,6 +679,10 @@
         "message": "Értesítések megjelenítése.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Monokróm eszköztár ikon alkalmazása. ",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Csak tartomány mentése.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Hány oldalon kell a lapnak végiglépkednie az átirányítási eltolás után, mielőtt kikapcsolná az ikont.",
+        "message": "Hány átirányítás engedélyezett az értesítési sáv eltűnéséig. Az alapértelmezett érték 3. A felső korlát végtelen.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Alap HTTP hitelesítési párbeszédablakok automatikus kitöltése és beküldése.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "A HTTP Basic Auth hitelesítési adatok kitöltésének engedélyezése.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Hibakeresési naplózás",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Értesítések megjelenítése a hibáknál és amikor felhasználói beavatkozás szükséges.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Monokróm ikon alkalmazása színes jelképekkel az eszköztárban, amely alkalmazkodik a böngésző világos, ill. sötét témájához.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Új hitelesítési adatok mentésekor csak a tartományt mentse el a teljes URL helyett.",

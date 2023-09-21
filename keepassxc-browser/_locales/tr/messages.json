@@ -1,6 +1,6 @@
 {
     "extensionDescription": {
-        "message": "Modern web tarayıcıları için KeePassXC bütünleşmesi",
+        "message": "Modern tarayıcılar için KeePassXC bütünleşmesi",
         "description": "Name of the extension."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -8,7 +8,7 @@
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
-        "message": "Yalnız parolayı doldur",
+        "message": "Yalnızca parolayı doldur",
         "description": "Context menu item for filling password."
     },
     "contextMenuFillTOTP": {
@@ -44,11 +44,11 @@
         "description": "Unknown error."
     },
     "errorMessageDatabaseNotOpened": {
-        "message": "Veritabanı açılamadı.",
+        "message": "Veri tabanı açılamadı.",
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "Veritabanı karması alınamadı.",
+        "message": "Veri tabanı karması alınamadı.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
@@ -84,7 +84,7 @@
         "description": "Encryption key is not recognized."
     },
     "errorMessageSavedDatabases": {
-        "message": "Kayıtlı bir veritabanı bulunamadı.",
+        "message": "Kayıtlı bir veri tabanı bulunamadı.",
         "description": "No saved databases found."
     },
     "errorMessageIncorrectAction": {
@@ -172,7 +172,7 @@
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
-        "message": "Veritabanı kilitli",
+        "message": "Veri tabanı kilitli",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
@@ -336,11 +336,11 @@
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": "Veritabanını yeniden aç",
+        "message": "Veri tabanını yeniden aç",
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
-        "message": "Site için yalnız kullanıcı adı seçeneği ekle",
+        "message": "Site için yalnızca kullanıcı adı seçeneği ekle",
         "description": "Button text for adding Username-only option."
     },
     "popupErrorEncountered": {
@@ -360,7 +360,7 @@
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "Başlangıç rehberi - Web tarayıcı bütünleştirmesini kurmak",
+        "message": "Başlangıç rehberi - Tarayıcı bütünleştirmesini kurmak",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
@@ -400,7 +400,7 @@
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "Yalnız tek bir kullanıcı adı alanı algılandı. Bu adresi yalnız kullanıcı adı seçeneği etkinleştirilmiş site ayarlarına ekleyin.",
+        "message": "Yalnızca tek bir kullanıcı adı alanı algılandı. Bu adresi yalnızca kullanıcı adı seçeneği etkinleştirilmiş site ayarlarına ekleyin.",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "rememberInfoText": {
@@ -408,7 +408,7 @@
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "Kimlik doğrulama bilgileri, $1 tanımlayıcısıyla bağlı veritabanına kaydedilecek",
+        "message": "Kimlik doğrulama bilgileri, $1 tanımlayıcısıyla bağlı veri tabanına kaydedilecek",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
@@ -428,7 +428,7 @@
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
-        "message": "Bağlı veritabanında oluşturulan varsayılan küme.",
+        "message": "Bağlı veri tabanında oluşturulan varsayılan küme.",
         "description": "Info message shown when default group set cannot be found."
     },
     "rememberErrorCreatingNewGroup": {
@@ -444,7 +444,7 @@
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Kapatılmış bir veritabanındaki kimlik doğrulama bilgileri kaydedilemez ya da güncellenemez.",
+        "message": "Kapatılmış bir veri tabanındaki kimlik doğrulama bilgileri kaydedilemez ya da güncellenemez.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
@@ -636,7 +636,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Açılır pencereler ya da devingen iletişim kutuları bulunan sayfalarda kullanışlıdır. Yavaş bilgisayarlarda işlemci yükünü azaltmak için bu özelliği devre dışı bırakın. Devre dışı bırakıldığında, kimlik doğrulama bilgileri yalnız tuş takımı kısayolları, sağ tık menüsü ya da uzantının açılır penceresi kullanılarak doldurulabilir.",
+        "message": "Açılır pencereler ya da devingen iletişim kutuları bulunan sayfalarda kullanışlıdır. Yavaş bilgisayarlarda işlemci yükünü azaltmak için bu özelliği devre dışı bırakın. Devre dışı bırakıldığında, kimlik doğrulama bilgileri yalnızca tuş takımı kısayolları, sağ tık menüsü ya da uzantının açılır penceresi kullanılarak doldurulabilir.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -679,12 +679,16 @@
         "message": "Bildirimler görüntülensin.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Tek renkli araç çubuğu simgesi kullanılsın",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Yalnız etki alanı kaydedilsin.",
+        "message": "Yalnızca etki alanı kaydedilsin.",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Veritabanına yeni kimlik bilgileri kaydedildiğinde bildirim görüntülensin.",
+        "message": "Veri tabanına yeni kimlik bilgileri kaydedildiğinde bildirim görüntülensin.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Bildirim kaybolana kadar kaç yönlendirme yapılabileceğini belirtin. Varsayılan değer: 1. En fazla sonsuz olabilir.",
+        "message": "Bildirim kaybolana kadar kaç yönlendirme yapılabileceğini belirtin. Varsayılan değer: 3. En fazla sonsuz olabilir.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "HTTP temel kimlik doğrulama pencereleri otomatik olarak doldurulup gönderilsin.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "HTTP temel kimlik doğrulama bilgileri yazılabilsin.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Hata ayıklama günlüğü",
@@ -772,7 +776,7 @@
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Site ayarlarına, yalnız kullanıcı adı oturum açma formları bulunduğu bilinen siteleri ekler.",
+        "message": "Site ayarlarına, yalnızca kullanıcı adı oturum açma formları bulunduğu bilinen siteleri ekler.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -792,7 +796,7 @@
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Yalnız tek bir kayıt alınırsa KeePassXC-Browser otomatik olarak kimlik bilgilerini doldurabilsin.",
+        "message": "Yalnızca tek bir kayıt alınırsa KeePassXC-Browser otomatik olarak kimlik bilgilerini doldurabilsin.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -811,12 +815,16 @@
         "message": "Hata bildirimlerini ve gerektiğinde kullanıcı etkileşimini görüntüler.",
         "description": "Show notifications option help text."
     },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Renkleri tarayıcının açık/koyu tarayıcı temasına uyan tek renkli bir simge kullanılır.",
+        "description": "Use monochrome toolbar icon option help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "Yeni kimlik doğrulama bilgileri kaydedilirken, tam adres yerine yalnız etki alanını kaydeder.",
+        "message": "Yeni kimlik doğrulama bilgileri kaydedilirken, tam adres yerine yalnızca etki alanını kaydeder.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Yeni özel oturum açma alanları kaydedilirken, tam adres yerine yalnız etki alanını kaydeder.",
+        "message": "Yeni özel oturum açma alanları kaydedilirken, tam adres yerine yalnızca etki alanını kaydeder.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -904,11 +912,11 @@
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
-        "message": "Bağlantı kurulmuş bir veritabanı bulunamadı.",
+        "message": "Bağlantı kurulmuş bir veri tabanı bulunamadı.",
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
-        "message": "Tanımlayıcı veritabanı listesinden kaldırılsın mı?",
+        "message": "Tanımlayıcı veri tabanı listesinden kaldırılsın mı?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
@@ -916,7 +924,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
-        "message": "Veritabanı ile istediğiniz zaman yeniden bağlantı kurabilirsiniz.",
+        "message": "Veri tabanı ile istediğiniz zaman yeniden bağlantı kurabilirsiniz.",
         "description": "Confirmation text when removing database from the list, second part."
     },
     "optionsDatabaseIdentifier": {
@@ -948,7 +956,7 @@
         "description": "Site preferences list column title."
     },
     "optionsColumnUsernameOnly": {
-        "message": "Yalnız kullanıcı adı algılaması",
+        "message": "Yalnızca kullanıcı adı algılaması",
         "description": "Site preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
@@ -1068,7 +1076,7 @@
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Yalnız kullanıcı adı algılaması, KeePassXC-Browser uzantısının, kullanıcı adı ve parola için ayrı sayfalar kullanan web sitelerinde oturum açma bilgilerini doldurabilmesini sağlar.",
+        "message": "Yalnızca kullanıcı adı algılaması, KeePassXC-Browser uzantısının, kullanıcı adı ve parola için ayrı sayfalar kullanan sitelerde oturum açma bilgilerini doldurabilmesini sağlar.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
@@ -1088,7 +1096,7 @@
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser bu site için tüm özellikleri etkinleştirecek ve yalnız kullanıcı adı algılamasını kaldıracak.",
+        "message": "KeePassXC-Browser bu site için tüm özellikleri etkinleştirecek ve yalnızca kullanıcı adı algılamasını kaldıracak.",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
@@ -1196,7 +1204,7 @@
         "description": "Message shown at the bottom of autocomplete menu."
     },
     "lockDatabase": {
-        "message": "Veritabanını kilitle",
+        "message": "Veri tabanını kilitle",
         "description": "Lock database button title text."
     }
 }

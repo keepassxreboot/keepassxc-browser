@@ -679,6 +679,10 @@
         "message": "Afișarea notificărilor.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Salvarea numai domeniului.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Câte redirecții sunt permise până la dispariția bannerului. Valoarea implicită este 1. Maximul este infinit.",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Completarea automat dialogurilor HTTP Basic auth și trimiteți-le.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Funcție de logare si remediere a erorilor",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Afișați notificările pentru erori și atunci când este necesară interacțiunea utilizatorului.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Când salvați acreditările noi, Salvați numai domeniul în loc de URL-ul complet.",

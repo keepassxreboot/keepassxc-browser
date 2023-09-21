@@ -28,7 +28,7 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Attribut ausfüllen…",
+        "message": "Attribut ausfüllen …",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -180,7 +180,7 @@
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
-        "message": "Symbol für das Benutzername Feld",
+        "message": "Symbol für das Benutzername-Feld",
         "description": "Username field icon text."
     },
     "totp": {
@@ -336,11 +336,11 @@
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": " Datenbank erneut öffnen",
+        "message": "Datenbank erneut öffnen",
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
-        "message": "Nur-Benutzername Option für diese Seite hinzufügen",
+        "message": "Option Nur-Benutzername für diese Seite hinzufügen",
         "description": "Button text for adding Username-only option."
     },
     "popupErrorEncountered": {
@@ -376,7 +376,7 @@
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
-        "message": " Status wird überprüft...",
+        "message": " Status wird überprüft …",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
@@ -496,11 +496,11 @@
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
-        "message": " Neu",
+        "message": "Neu",
         "description": "New button text in popup when updating credentials."
     },
     "popupButtonUpdate": {
-        "message": " Aktualisieren",
+        "message": "Aktualisieren",
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonDismiss": {
@@ -516,7 +516,7 @@
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": " Verwerfen und Standard-Authentifizierungsdialog anzeigen",
+        "message": "Verwerfen und Standard-Authentifizierungsdialog anzeigen",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
@@ -592,7 +592,7 @@
         "description": "Confirm button text when removing database key or custom login fields."
     },
     "optionsButtonCancel": {
-        "message": " Abbrechen",
+        "message": "Abbrechen",
         "description": "Cancel button text when removing database key or custom login fields."
     },
     "optionsButtonReset": {
@@ -679,6 +679,10 @@
         "message": "Benachrichtigungen anzeigen.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Monochromes Symbol in der Symbolleiste verwenden.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Nur Domain speichern.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Wie viele Weiterleitungsseiten der Tab durchlaufen darf, bevor das Icon deaktiviert wird",
+        "message": "Wie viele Weiterleitungsseiten der Tab durchlaufen darf, bevor das Icon deaktiviert wird. Der Standard ist 3, das Maximum ist unendlich.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "HTTP-Basisauthentifizierungsdialoge automatisch ausfüllen und absenden.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Ausfüllen von HTTP-Basisauthentifizierunganmeldedaten erlauben.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Debug-Protokollierung",
@@ -712,7 +716,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": " alle 3 Tage",
+        "message": "alle 3 Tage",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -724,7 +728,7 @@
         "description": "Radio button text."
     },
     "optionsRadioNever": {
-        "message": " nie",
+        "message": "nie",
         "description": "Radio button text."
     },
     "optionsThemeSelectionHeader": {
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Benachrichtigungen bei Fehlern, und wenn Benutzerinteraktion erforderlich ist, anzeigen.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Verwenden Sie ein monochromes Symbol mit farbigen Markierungen in der Symbolleiste, das sich dem hellen/dunklen Browserdesign anpasst.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Beim Speichern neuer Anmeldedaten nur die Domain anstatt der vollständigen URL speichern.",

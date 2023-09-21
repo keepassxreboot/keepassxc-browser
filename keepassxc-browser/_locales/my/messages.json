@@ -679,6 +679,10 @@
         "message": "အသိပေးချက်များကို ပြသပါ။",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "ဒိုမိန်းကိုသာ သိမ်းပါ။",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "နဖူးစည်းစာတမ်း ပျောက်သည်အထိ ခွင့်ပြုထားသော ပြန်လည်လမ်းညွှန်မှု အရေအတွက်ဖြစ်သည်။ နဂိုမူလ တန်ဖိုးမှာ 1 ဖြစ်သည်။ အများဆုံးအရေအတွက်မှာ အဆုံးမရှိပါ။",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "HTTP Basic Auth ဝင်းဒိုးငယ်များကို အလိုအလျောက် ဖြည့်ပြီး တင်သွင်းပါ။",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Debug logging",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "ပြဿနာများ ဖြစ်ပေါ်သည့်အခါ၊ အသုံးပြုသူ ပြန်လှန်တုံ့ပြန်မှု လိုအပ်သည့်အခါ အသိပေးချက်များကို ပြပါ။",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "အထောက်အထားသစ်များ သိမ်းချိန်တွင် URL အပြည့်အစုံအစား ဒိုမိန်းကိုသာ သိမ်းပါ။",

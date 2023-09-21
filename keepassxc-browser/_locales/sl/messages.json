@@ -679,6 +679,10 @@
         "message": "Pokaži obvestila.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Shrani samo domeno.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Koliko preusmeritev je dovoljenih, preden obvestilo izgine. Privzeta vrednost je 1. Najvišja možna vrednost je neskončno.",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Samodejno izpolni pogovorna okna HTTP Basic Auth in oddaj prijavo.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Debug logging",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Prikaži obvestila o napakah in ko je potrebna interakcija uporabnika.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Pri shranjevanju novih povernic, namesto celotnega URL-ja shranite samo domeno spletnega mesta.",

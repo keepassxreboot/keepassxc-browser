@@ -24,7 +24,7 @@
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Показувати генератор паролів",
+        "message": "Показати генератор паролів",
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
@@ -316,7 +316,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Оберіть власні поля облікових даних",
+        "message": "Обрати власні поля облікових даних",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -536,7 +536,7 @@
         "description": "Saved custom login fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Налаштування сайту",
+        "message": "Налаштування сайтів",
         "description": "Site preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -556,7 +556,7 @@
         "description": "Custom login fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Налаштування сайту",
+        "message": "Налаштування сайтів",
         "description": "Site preferences page header."
     },
     "optionsMenuAbout": {
@@ -600,11 +600,11 @@
         "description": "Reset button text for keyboard shortcuts."
     },
     "optionsButtonImport": {
-        "message": "Налаштування імпортування",
+        "message": "Імпортувати налаштування",
         "description": "Import settings button text."
     },
     "optionsButtonExport": {
-        "message": "Налаштування експортування",
+        "message": "Експортувати налаштування",
         "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
@@ -624,7 +624,7 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Увімкнути піктограми генератора паролів.",
+        "message": "Активувати піктограми генератора паролів.",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
@@ -660,7 +660,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Увімкнути автозаповнення для полів з іменем користувача.",
+        "message": "Активувати автозаповнення для полів з іменем користувача.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
@@ -679,6 +679,10 @@
         "message": "Показувати сповіщення.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Використовуйте монохромну іконку на панелі інструментів.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Зберігати лише домен.",
         "description": "Save domain only checkbox text."
@@ -696,8 +700,8 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Автоматично заповнювати й відправляти діалогові вікна HTTP Basic Auth.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Дозволити заповнення облікових даних HTTP Basic Auth.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Журнал зневадження",
@@ -732,7 +736,7 @@
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Сортувати відповідні облікові дані за",
+        "message": "Спосіб сортування відповідних облікових даних",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
@@ -756,7 +760,7 @@
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Додає піктограму до полів для генерування нового пароля.",
+        "message": "Показувати піктограму у відповідних полях для генерування нового пароля.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
@@ -776,11 +780,11 @@
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Додає піктограму до полів імені користувача для заповнення облікових даних одним натиском миші.",
+        "message": "Показувати піктограму в полях імені користувача для заповнення облікових даних одним натиском миші.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Додає піктограму до полів введення, розпізнаних як OTP/2FA.",
+        "message": "Показувати піктограму в полях введення, розпізнаних як OTP/2FA.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -808,8 +812,12 @@
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Показувати сповіщення про помилки та за необхідності дії користувача.",
+        "message": "Показувати сповіщення про помилки та, за потреби, дії користувача.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Використовуйте монохромну іконку з кольоровими значками на панелі інструментів, яка адаптується до світлої/темної теми браузера.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Для нових облікових даних зберігати лише домен, а не URL-адресу цілком.",
@@ -940,7 +948,7 @@
         "description": "Database list column title."
     },
     "optionsColumnPageURL": {
-        "message": "URL сторінки",
+        "message": "URL-адреса сторінки",
         "description": "Site preferences list column title."
     },
     "optionsColumnIgnore": {
@@ -992,7 +1000,7 @@
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Сортувати облікові дані після заповнення за",
+        "message": "Спосіб сортування облікових даних після заповнення",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
@@ -1000,7 +1008,7 @@
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Сортувати облікові дані після заповнення для TOTP за",
+        "message": "Спосіб сортування облікових даних після заповнення TOTP",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
@@ -1028,7 +1036,7 @@
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Відкрийте сторінку й натисніть піктограму KeePassXC-Browser, а потім оберіть ",
+        "message": "Відкрийте сторінку й натисніть піктограму розширення KeePassXC-Browser, а потім натисніть ",
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
@@ -1048,7 +1056,7 @@
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Не знайдено налаштувань сайту.",
+        "message": "Не знайдено налаштувань сайтів.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -1064,7 +1072,7 @@
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Якщо сайт повністю ігнорується (вибрано <em>Вимкнути всі можливості</em>), то під час відвідування цього сайту плагін не виконуватиме жодних дій.",
+        "message": "Якщо сайт цілком ігнорується (вибрано <em>Вимкнути всі можливості</em>), то під час його відвідування плагін не виконуватиме жодних дій.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
@@ -1092,7 +1100,7 @@
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Ви можете керувати збереженими налаштуваннями сайту за допомогою таблиці.",
+        "message": "Ви можете керувати збереженими налаштуваннями сайтів за допомогою таблиці.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1100,19 +1108,19 @@
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
-        "message": "Відвідати сторінку KeePassXC-Browser у Веб-магазині Chrome.",
+        "message": "Сторінка KeePassXC-Browser у веб-магазині Chrome.",
         "description": "About page link to Chrome Web Store."
     },
     "optionsAboutMozilla": {
-        "message": "Відвідати сторінку KeePassXC-Browser у каталозі додатків Mozilla.",
+        "message": "Сторінка KeePassXC-Browser у каталозі додатків Mozilla.",
         "description": "About page link to AMO."
     },
     "optionsAboutEdge": {
-        "message": "Відвідайте KeePassXC-Browser на сторінці розширень Edge.",
+        "message": "Сторінка KeePassXC-Browser у каталозі надбудов для Edge.",
         "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
-        "message": "Відвідати KeePassXC-Browser на GitHub.",
+        "message": "Сторінка KeePassXC-Browser на GitHub.",
         "description": "About page link to GitHub."
     },
     "optionsAboutExtensionVersion": {
@@ -1132,7 +1140,7 @@
         "description": "About page text of licenses."
     },
     "optionsAboutReportBugs": {
-        "message": "Повідомляти про помилки",
+        "message": "Повідомити про помилки",
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {

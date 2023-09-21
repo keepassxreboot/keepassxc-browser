@@ -124,7 +124,7 @@
         "description": "Checkbox text below the password generator input field."
     },
     "passwordGeneratorTitle": {
-        "message": "Generator hasła",
+        "message": "Generator haseł",
         "description": "Password generator dialog title."
     },
     "passwordGeneratorGenerate": {
@@ -679,6 +679,10 @@
         "message": "Pokaż powiadomienia.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Użyj monochromatycznej ikony paska narzędzi.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Zapisz tylko domenę.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Liczba dozwolonych przekierowań do czasu zniknięcia banera. Wartość domyślna to 1. Wartość maksymalna jest nieskończona.",
+        "message": "Ile przekierowań jest dozwolonych, zanim baner zniknie. Wartość domyślna to 3. Maksymalna to nieskończoność.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Automatycznie wypełniaj okna dialogowe podstawowego uwierzytelniania HTTP i przesyłaj je.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Zezwalaj na wypełnianie danych uwierzytelniających podstawowego uwierzytelniania HTTP.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Rejestrowanie debugowania",
@@ -808,8 +812,12 @@
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Pokaż powiadomienia o błędach, i gdy wymagana jest interakcja użytkownika.",
+        "message": "Pokaż powiadomienia o błędach i gdy wymagana jest interakcja użytkownika.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Użyj monochromatycznej ikony z kolorowymi plakietkami na pasku narzędzi, która dostosowuje się do jasnego/ciemnego motywu przeglądarki.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Zapisując nowe dane uwierzytelniające, zapisz tylko domenę zamiast pełnego adresu URL.",

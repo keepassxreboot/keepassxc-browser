@@ -4,7 +4,7 @@
         "description": "Name of the extension."
     },
     "contextMenuFillUsernameAndPassword": {
-        "message": "Isi Nama pengguna dan Sandi",
+        "message": "Isi Nama Pengguna dan Sandi",
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
@@ -44,7 +44,7 @@
         "description": "Unknown error."
     },
     "errorMessageDatabaseNotOpened": {
-        "message": "Basisdata tidak terbuka.",
+        "message": "Basis data tidak terbuka.",
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
@@ -84,7 +84,7 @@
         "description": "Encryption key is not recognized."
     },
     "errorMessageSavedDatabases": {
-        "message": "Tidak ada basisdata tersimpan yang ditemukan.",
+        "message": "Tidak ada basis data tersimpan yang ditemukan.",
         "description": "No saved databases found."
     },
     "errorMessageIncorrectAction": {
@@ -172,7 +172,7 @@
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
-        "message": "Basisdata dikunci",
+        "message": "Basis data dikunci",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
@@ -336,7 +336,7 @@
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": "Buka ulang basisdata",
+        "message": "Buka ulang basis data",
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
@@ -420,15 +420,15 @@
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "Harap pilih kredensial yang ingin anda perbaharui",
+        "message": "Harap pilih kredensial yang ingin Anda perbaharui",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Harap pilih grup yang ingin anda tambahkan kredensial baru.",
+        "message": "Harap pilih grup yang ingin Anda tambahkan kredensial baru.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
-        "message": "Grup default dibuat dalam basisdata terhubung.",
+        "message": "Grup default dibuat dalam basis data terhubung.",
         "description": "Info message shown when default group set cannot be found."
     },
     "rememberErrorCreatingNewGroup": {
@@ -444,7 +444,7 @@
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Kredensial tidak dapat di simpan atau diperbarui ke sebuah basisdata yang tertutup.",
+        "message": "Kredensial tidak dapat di simpan atau diperbarui ke sebuah basis data yang tertutup.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
@@ -472,7 +472,7 @@
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
-        "message": "Pilih informasi login yang ingin anda sematkan ke dalam halaman.",
+        "message": "Pilih informasi login yang ingin Anda sematkan ke dalam halaman.",
         "description": "A popup message shown when one or multiple credentials are present."
     },
     "popupFilterText": {
@@ -528,7 +528,7 @@
         "description": "General Settings tab text."
     },
     "optionsConnectedDatabasesTab": {
-        "message": "Basisdata Tersambung",
+        "message": "Basis Data Tersambung",
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
@@ -548,7 +548,7 @@
         "description": "General settings page header."
     },
     "optionsMenuConnectedDatabases": {
-        "message": "Basisdata Tersambung",
+        "message": "Basis Data Tersambung",
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
@@ -679,12 +679,16 @@
         "message": "Tampilkan notifikasi.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Hanya simpan domain.",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Tampilkan banner pada laman ketika kredensial baru dapat disimpan ke basisdata.",
+        "message": "Tampilkan banner pada laman ketika kredensial baru dapat disimpan ke basis data.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Berapa pengalihan yang diperbolehkan sampai banner hilang. Nilai default adalah 1. Maksimum adalah tak terbatas.",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Isi dialog Autentikasi HTTP Dasar dan kirim secara otomatis.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Catat pengawakutu",
@@ -811,6 +815,10 @@
         "message": "Show notifications for errors and when user interaction is required.",
         "description": "Show notifications option help text."
     },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
         "message": "When saving new credentials, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
@@ -896,7 +904,7 @@
         "description": "Import settings confirmation dialog title text."
     },
     "optionsImportSettingsDialogText": {
-        "message": "Pengaturan saat ini akan diganti. Apakah anda benar-benar ingin mengimpor berkas pengaturan?",
+        "message": "Pengaturan saat ini akan diganti. Apakah Anda benar-benar ingin mengimpor berkas pengaturan?",
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
@@ -912,11 +920,11 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Apakah anda benar-benar ingin menghapus pengidentifikasi berikut dari daftar basis data: $1",
+        "message": "Apakah Anda benar-benar ingin menghapus pengidentifikasi berikut dari daftar basis data: $1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
-        "message": "Anda dapat menghubungkan kembali basis data anda kapan saja.",
+        "message": "Anda dapat menghubungkan kembali basis data Anda kapan saja.",
         "description": "Confirmation text when removing database from the list, second part."
     },
     "optionsDatabaseIdentifier": {

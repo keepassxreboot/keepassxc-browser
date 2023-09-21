@@ -1,10 +1,10 @@
 {
     "extensionDescription": {
-        "message": "Интеграция KeePassXC в современные веб-браузеры",
+        "message": "Интеграция KeePassXC в современные браузеры",
         "description": "Name of the extension."
     },
     "contextMenuFillUsernameAndPassword": {
-        "message": "Заполнить логин и пароль",
+        "message": "Заполнить имя пользователя и пароль",
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
@@ -20,7 +20,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Сохранить учетные данные",
+        "message": "Сохранить учётные данные",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -60,7 +60,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Не удается соединиться с KeePassXC. Убедитесь, что интеграция с браузером включена в настройках KeePassXC.",
+        "message": "Не удаётся соединиться с KeePassXC. Убедитесь, что интеграция с браузером включена в настройках KeePassXC.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -72,7 +72,7 @@
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
-        "message": "Ошибка ассоциирования KeePassXC, попробуйте еще раз.",
+        "message": "Ошибка соотношения с KeePassXC, попробуйте ещё раз.",
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
@@ -84,7 +84,7 @@
         "description": "Encryption key is not recognized."
     },
     "errorMessageSavedDatabases": {
-        "message": "Нет сохраненных баз данных.",
+        "message": "Нет сохранённых баз данных.",
         "description": "No saved databases found."
     },
     "errorMessageIncorrectAction": {
@@ -104,11 +104,11 @@
         "description": "No logins found."
     },
     "errorMessagePaswordLengthExceeded": {
-        "message": "Длина пароля превышает максимально допустимую длину поля.",
+        "message": "Длина пароля превышает предельно допустимую длину поля.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorNotConnected": {
-        "message": "Не подключен к KeePassXC.",
+        "message": "Не подключён к KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
@@ -144,11 +144,11 @@
         "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "ОШИБКА:\nСгенерированный пароль длиннее допустимого!",
+        "message": "ОШИБКА:\nсгенерированный пароль длиннее допустимого!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
-        "message": "Он был усечен до предельной длины.",
+        "message": "Он был усечён до предельной длины.",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongRemember": {
@@ -164,11 +164,11 @@
         "description": "Password generator error text when KeePassXC is closed."
     },
     "passwordGeneratorErrorIsRunning": {
-        "message": "KeePassXC запущен и подключен?",
+        "message": "KeePassXC запущен и подключён?",
         "description": "Password generator error text when KeePassXC is closed."
     },
     "usernameFieldText": {
-        "message": "Заполнить учетные данные из KeePassXC",
+        "message": "Заполнить учётные данные из KeePassXC",
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
@@ -176,7 +176,7 @@
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC отключен",
+        "message": "KeePassXC отключён",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
@@ -256,7 +256,7 @@
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
-        "message": "Логин",
+        "message": "Имя пользователя",
         "description": "General text for username."
     },
     "password": {
@@ -268,7 +268,7 @@
         "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
-        "message": "- нет логина -",
+        "message": "- нет имени пользователя -",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
@@ -280,11 +280,11 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Нажмите значок KeePassXC-Browser для дополнительных опций.",
+        "message": "Нажмите на значок KeePassXC-Browser для дополнительных опций.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Для указанного логина нет учетных данных.",
+        "message": "Для указанного имени пользователя нет учётных данных.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
@@ -296,15 +296,15 @@
         "description": "If a credential is expired, this is appended to the title label."
     },
     "fieldsFill": {
-        "message": "ОШИБКА: Нет полей для заполнения.",
+        "message": "ОШИБКА: нет полей для заполнения.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "ОШИБКА: Не найдено поле пароля.",
+        "message": "ОШИБКА: не найдено поле пароля.",
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "ОШИБКА: Не обнаружены измененные учетные данные.",
+        "message": "ОШИБКА: не обнаружены изменённые учётные данные.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -356,11 +356,11 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "Используете впервые? Пожалуйста, ознакомьтесь с Руководством по началу работы.",
+        "message": "Используете впервые? Пожалуйста, ознакомьтесь с «Руководством по началу работы».",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "Руководство по началу работы - Настройка интеграции с браузером",
+        "message": "«Руководство по началу работы» — Настройка интеграции с браузером",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
@@ -368,7 +368,7 @@
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-        "message": "Не удается подключиться к KeePassXC? Возможно, вам поможет наша вики-страница.",
+        "message": "Не удаётся подключиться к KeePassXC? Возможно, вам поможет наша вики-страница.",
         "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
@@ -376,7 +376,7 @@
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
-        "message": "Проверка статуса...",
+        "message": "Проверка состояния...",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
@@ -392,11 +392,11 @@
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "KeePassXC-Browser еще не подключен к KeePassXC, но настроен с помощью идентификатора: $1",
+        "message": "KeePassXC-Browser ещё не подключён к KeePassXC, но настроен с помощью идентификатора: $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "KeePassXC-Browser подключен к KeePassXC и настроен с помощью этого идентификатора: $1",
+        "message": "KeePassXC-Browser подключён к KeePassXC и настроен с помощью этого идентификатора: $1",
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
@@ -408,27 +408,27 @@
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "Учетные данные будут сохранены в подключенной базе данных с идентификатором $1",
+        "message": "Учётные данные будут сохранены в подключённой базе данных с идентификатором $1",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
-        "message": "Это имя пользователя в данный момент не сохранено: $1",
+        "message": "Это имя пользователя в данное время не сохранено: $1",
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "Учетные данные с использованным именем пользователя выделены жирным шрифтом: $1",
+        "message": "Учётные данные с использованным именем пользователя выделены жирным шрифтом: $1",
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "Пожалуйста, выберите учетные данные, которые вы хотите обновить.",
+        "message": "Пожалуйста, выберите учётные данные, которые вы хотите обновить.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Пожалуйста, выберите группу, в которую вы хотите добавить новые учетные данные.",
+        "message": "Пожалуйста, выберите группу, в которую вы хотите добавить новые учётные данные.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
-        "message": "Группа по умолчанию создана в подключенной базе данных.",
+        "message": "Группа по умолчанию создана в подключённой базе данных.",
         "description": "Info message shown when default group set cannot be found."
     },
     "rememberErrorCreatingNewGroup": {
@@ -436,31 +436,31 @@
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "Учетные данные не обновлены. Пароль не был изменен.",
+        "message": "Учётные данные не обновлены. Пароль не был изменён.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
-        "message": "Учетные данные не могут быть сохранены или обновлены.",
+        "message": "Учётные данные не могут быть сохранены или обновлены.",
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Учетные данные не могут быть сохранены или обновлены в закрытой базе данных.",
+        "message": "Учётные данные не могут быть сохранены или обновлены в закрытой базе данных.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
-        "message": "Операция отменена. Учетные данные не обновлены.",
+        "message": "Операция отменена. Учётные данные не обновлены.",
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "Новые учетные данные для имени пользователя $1 сохранены.",
+        "message": "Новые учётные данные для имени пользователя $1 сохранены.",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
-        "message": "Учетные данные для имени пользователя $1 обновлены.",
+        "message": "Учётные данные для имени пользователя $1 обновлены.",
         "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "Идентичные учетные данные уже существуют. Нечего обновлять.",
+        "message": "Идентичные учётные данные уже существуют. Нечего обновлять.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
@@ -468,7 +468,7 @@
         "description": "Means an empty username."
     },
     "rememberNoPassword": {
-        "message": "Пожалуйста, заполните поле пароля перед сохранением учетных данных.",
+        "message": "Пожалуйста, заполните поле пароля перед сохранением учётных данных.",
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
@@ -492,7 +492,7 @@
         "description": "URL. Might not need any translation."
     },
     "popupUsername": {
-        "message": "Логин:",
+        "message": "Имя пользователя:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -548,7 +548,7 @@
         "description": "General settings page header."
     },
     "optionsMenuConnectedDatabases": {
-        "message": "Подключенные базы данных",
+        "message": "Подключённые базы данных",
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
@@ -564,7 +564,7 @@
         "description": "About page header."
     },
     "optionsConfigureShortcuts": {
-        "message": "Настроить ярлыки",
+        "message": "Настроить горячие клавиши",
         "description": "Keyboard shortcut button and title text."
     },
     "optionsButtonSave": {
@@ -612,11 +612,11 @@
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Разделите группу слэшами, например: Группа/ДочерняяГруппа.",
+        "message": "Разделите группу косыми чертам, например: Группа/ДочерняяГруппа.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Всегда спрашивать, куда сохранять новые учетные данные",
+        "message": "Всегда спрашивать, куда сохранять новые учётные данные",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
@@ -636,7 +636,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Полезно для страниц, использующих всплывающие окна или динамические диалоговые окна. Отключите эту функцию, чтобы снизить нагрузку процессора на медленных устройствах. Когда отключено, учетные данные можно вставлять только с помощью комбинаций клавиш, контекстного меню или всплывающего окна расширения.",
+        "message": "Полезно для страниц, использующих всплывающие окна или динамические диалоговые окна. Отключите эту функцию, чтобы снизить нагрузку процессора на медленных устройствах. Когда отключено, учётные данные можно вставлять только с помощью сочетаний клавиш, контекстного меню или всплывающего окна расширения.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -644,7 +644,7 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Автоматически извлекать учетные данные.",
+        "message": "Автоматически извлекать учётные данные.",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
@@ -652,7 +652,7 @@
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
-        "message": "Внимание! Эта функция является экспериментальной. Используйте ее на свой страх и риск.",
+        "message": "Внимание! Эта функция является пробной. Используйте её на своё усмотрение.",
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
@@ -679,25 +679,29 @@
         "message": "Показывать уведомления.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Использовать монохромный значок на панели инструментов.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Сохранять только домен.",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Показывать баннер на странице, когда новые учетные данные могут быть сохранены в базе данных.",
+        "message": "Показывать баннер на странице, когда новые учётные данные могут быть сохранены в базе данных.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
-        "message": "Количество разрешенных перенаправлений: $1",
+        "message": "Количество разрешённых перенаправлений: $1",
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Количество разрешенных перенаправлений до исчезновения баннера. Значение по умолчанию - 1. Максимальное - бесконечность.",
+        "message": "Количество разрешенных перенаправлений до исчезновения баннера. Значение по умолчанию - 3. Максимальное - бесконечность.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Автозаполнение окон с простой HTTP-аутентификацией и отправка данных.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Разрешить автозаполнение учётных данных HTTP Basic Auth.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Ведение журнала отладки",
@@ -764,7 +768,7 @@
         "description": "Password Generator option help text, second part."
     },
     "optionsPredefinedSiteList": {
-        "message": "Предопределенные сайты",
+        "message": "Предопределённые сайты",
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
@@ -776,15 +780,15 @@
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Добавляет значок в поля логина для заполнения учетных данных одним щелчком мыши.",
+        "message": "Добавляет значок в поля имени пользователя для заполнения учётных данных одним щелчком мыши.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Добавляет значок в поля ввода, которые идентифицируются как OTP/2FA.",
+        "message": "Добавляет значок в поля ввода, которые распознаются как OTP/2FA.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser будет извлекать учетные данные сразу при активации вкладки.",
+        "message": "KeePassXC-Browser будет извлекать учётные данные сразу при активации вкладки.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
@@ -792,27 +796,31 @@
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Разрешить KeePassXC-Browser автоматически заполнять учетные данные, если он получает только одну запись.",
+        "message": "Разрешить KeePassXC-Browser автоматически заполнять учётные данные, если он получает только одну запись.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Внимание! Использование автозаполнения небезопасно. Используйте его на свой страх и риск. KeePassXC-Browser автоматически пытается обнаружить поля ввода учетных данных. Однако они могут быть обнаружены некорректно, что может привести к заполнению конфиденциальных данных в небезопасных полях.",
+        "message": "Внимание! Использование автозаполнения небезопасно. Используйте его на своё усмотрение. KeePassXC-Browser автоматически пытается обнаружить поля ввода учётных данных. Однако они могут быть обнаружены неправильно, что может привести к заполнению конфиденциальных данных в небезопасных полях.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Показывать выпадающий список с доступными учетными данными для всех полей логина на странице.",
+        "message": "Показывать выпадающий список с доступными учётными данными для всех полей логина на странице.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "При заполнении учетных данных из разных групп, будет показано имя группы.",
+        "message": "При заполнении учётных данных из разных групп, будет показано имя группы.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
         "message": "Уведомлять об ошибках, когда требуется вмешательство пользователя.",
         "description": "Show notifications option help text."
     },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Использовать монохромный значок с цветными бейджами на панели инструментов, для адаптации к светлой/тёмной теме браузера.",
+        "description": "Use monochrome toolbar icon option help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "При сохранении новых учетных данных сохранять только домен, а не полный URL.",
+        "message": "При сохранении новых учётных данных сохранять только домен, а не полный URL.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
@@ -828,7 +836,7 @@
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Если на странице есть учетные данные, и тип входа - запрос простой HTTP-аутентификации, KeePassXC-Browser войти с первыми указанными учетными данными.",
+        "message": "Если на странице есть учётные данные, и тип входа - запрос простой HTTP-аутентификации, KeePassXC-Browser войти с первыми указанными учётными данными.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -836,15 +844,15 @@
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Очищать учетные данные с неактивных вкладок через (в секундах, от 0 до 3600)",
+        "message": "Очищать учётные данные с неактивных вкладок через (в секундах, от 0 до 3600)",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Учетные данные очищаются из фоновых вкладок через определенное время. Разрешения для этих страниц будут запрошены вновь.",
+        "message": "Учётные данные очищаются из фоновых вкладок через определённое время. Разрешения для этих страниц будут запрошены вновь.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "Для извлечения учетных данных KeePassXC-Browser требуется KeePassXC.",
+        "message": "Для извлечения учётных данных KeePassXC-Browser требуется KeePassXC.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
@@ -872,19 +880,19 @@
         "description": "Infinite setting text."
     },
     "optionsRecommended": {
-        "message": "Рекомендуется: $1",
+        "message": "Желательно: $1",
         "description": "Recommended setting text."
     },
     "optionsShortcutsSuccess": {
-        "message": "Ярлык для $1 был успешно изменен.",
+        "message": "Горячая клавиша для $1 была успешно изменена.",
         "description": "Message for successful keyboard shortcut change."
     },
     "optionsShortcutsInfo": {
-        "message": "Ярлык для $1 был сброшен.",
+        "message": "Горячая клавиша для $1 была сброшена.",
         "description": "Info message for changing keyboard shortcuts."
     },
     "optionsShortcutsDanger": {
-        "message": "Ошибка: Ярлык для $1 изменен не был!",
+        "message": "Ошибка: горячая клавиша для $1 не была изменена!",
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
@@ -904,7 +912,7 @@
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
-        "message": "Нет подключенных баз данных.",
+        "message": "Нет подключённых баз данных.",
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
@@ -912,7 +920,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Вы действительно хотите удалить следующий идентификатор из списка баз данных?",
+        "message": "Вы действительно хотите удалить следующий идентификатор из списка базы данных:$1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -940,7 +948,7 @@
         "description": "Database list column title."
     },
     "optionsColumnPageURL": {
-        "message": "URL страницы",
+        "message": "Адрес страницы",
         "description": "Site preferences list column title."
     },
     "optionsColumnIgnore": {
@@ -992,19 +1000,19 @@
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Сортировка учётных данных после заполнения",
+        "message": "Упорядочивание учётных данных после заполнения",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
-        "message": "Если выбрана опция \"Сначала соответствующие учётные данные\", учётные данные для ранее заполненного входа в систему устанавливаются первыми в списке меню автозаполнения.",
+        "message": "Если выбрана опция «Сначала соответствующие учётные данные», учётные данные для ранее заполненного входа в систему устанавливаются первыми в списке меню автозаполнения.",
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Сортировка учётных данных после заполнения для разового пароля",
+        "message": "Упорядочивание учётных данных после заполнения для разового пароля",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
-        "message": "Если выбрана опция \"Сначала соответствующие учётные данные\", одноразовый пароль для ранее заполненного логина устанавливается первым в списке меню автозаполнения.",
+        "message": "Если выбрана опция «Сначала соответствующие учётные данные», одноразовый пароль для ранее заполненного логина устанавливается первым в списке меню автозаполнения.",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
     "optionsFillSortByMatchingCredentials": {
@@ -1016,11 +1024,11 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Нет сохраненных пользовательских полей логина.",
+        "message": "Нет сохранённых пользовательских полей логина.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Вы можете управлять сохраненными пользовательскими полями логина, используя таблицу ниже.",
+        "message": "Вы можете управлять сохранёнными пользовательскими полями логина, используя таблицу ниже.",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
@@ -1032,7 +1040,7 @@
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "Здесь можно управлять сохраненными пользовательскими полями входа.",
+        "message": "Здесь можно управлять сохранёнными пользовательскими полями входа.",
         "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
@@ -1048,7 +1056,7 @@
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Нет игнорируемых сайтов.",
+        "message": "Нет неучитываемых сайтов.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -1060,27 +1068,27 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Для игнорирования новых/измененных учетных данных на каком-либо сайте добавьте их ниже или щелкните по мерцающему значку KeePassXC-Browser и выберите ",
+        "message": "Для неучитывания новых/изменённых учётных данных на каком-либо сайте добавьте их ниже или щёлкните по мерцающему значку KeePassXC-Browser и выберите ",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Если сайт полностью игнорируется (выбрано <em>Отключить все функции</em>), то при посещении такого сайта плагин ничего не будет делать.",
+        "message": "Если сайт полностью неучитывается (выбрано <em>Отключить все функции</em>), то при посещении такого сайта расширение ничего не будет делать.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Определение только по логину позволяет KeePassXC-Browser заполнять детали входа на сайтах, где логин и пароль находятся на разных страницах.",
+        "message": "Определение только по имени пользователя позволяет KeePassXC-Browser заполнять данные для входа на сайтах, где имя пользователя и пароль находятся на разных страницах.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Улучшенное обнаружение полей ввода позволяет более детально определять динамические поля ввода. Однако это может повлиять на производительность страницы. Используйте с осторожностью.",
+        "message": "Улучшенное обнаружение полей ввода позволяет более подробно определять динамические поля ввода. Однако это может повлиять на производительность страницы. Используйте с осторожностью.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesManualAddText": {
-        "message": "Добавить URL вручную",
+        "message": "Добавить адрес вручную",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "URL-адрес должен начинаться с <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> и должен содержать не менее 5 символов.",
+        "message": "Сетевой адрес должен начинаться с <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> и должен содержать не менее 5 символов.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
@@ -1088,15 +1096,15 @@
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser включит все функции для этого сайта и удалит определение только по логину.",
+        "message": "KeePassXC-Browser включит все функции для этого сайта и удалит определение только по имени пользователя.",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Вы можете управлять сохраненными настройками сайтов, используя таблицу ниже.",
+        "message": "Вы можете управлять сохранёнными настройками сайтов, используя таблицу ниже.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Опция для игнорирования деталей расширения для страницы.",
+        "message": "Опция для неучитывания деталей расширения для страницы.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
@@ -1140,7 +1148,7 @@
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
-        "message": "Может быть использована следующая отладочная информация",
+        "message": "Могут быть использованы следующие отладочные сведения",
         "description": "Debug info text."
     },
     "optionsAboutSupporters": {
@@ -1152,7 +1160,7 @@
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Неверный URL. Пожалуйста, проверьте ввод.",
+        "message": "Неверный адрес. Пожалуйста, проверьте ввод.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
@@ -1164,11 +1172,11 @@
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Заполнение учетных данных",
+        "message": "Заполнение учётных данных",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Сохранение учетных данных",
+        "message": "Сохранение учётных данных",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {

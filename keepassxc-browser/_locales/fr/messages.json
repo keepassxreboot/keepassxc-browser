@@ -679,6 +679,10 @@
         "message": "Afficher les notifications.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Enregistrer le domaine seulement.",
         "description": "Save domain only checkbox text."
@@ -692,12 +696,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Combien de pages l'onglet doit-il parcourir après le décalage de redirection avant de désactiver l'icône ?",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Remplir et soumettre automatiquement les dialogues d’authentification HTTP Basic.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Journalisation de débogage",
@@ -810,6 +814,10 @@
     "optionsShowNotificationsHelpText": {
         "message": "Affiche une notification pour les erreurs ou lorsqu'une interaction avec l'utilisateur est nécessaire.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Lorsqu'un nouvel identifiant est ajouté, n'enregistrer que le domaine au lieu de l'URL complète.",
