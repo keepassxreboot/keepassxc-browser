@@ -29,7 +29,8 @@ const PREDEFINED_SITELIST = [
     'https://twitter.com/i/flow/login',
     'https://login3.id.hp.com/*',
     'https://secure.fnac.com/identity/server/gateway/*',
-    'https://*.openai.com/u/login/*'
+    'https://*.openai.com/u/login/*',
+    'https://www.patreon.com/login'
 ];
 
 const awsUrl = 'signin.aws.amazon.com';
@@ -58,9 +59,10 @@ kpxcSites.detectUsernameFromPage = function() {
  * Handles a few exceptions for certain sites where password form is inside a div
  * or another element that is not detected directly. Triggered by MutationObserver.
  * @param {string} identifier   Usually a classList or element id
+ * @param {object} field        The target element
  * @returns {boolean}           True if an Element has a match with the identifier and document location
  */
-kpxcSites.exceptionFound = function(identifier) {
+kpxcSites.exceptionFound = function(identifier, field) {
     if (!identifier || identifier.length === 0) {
         return;
     }
@@ -81,6 +83,8 @@ kpxcSites.exceptionFound = function(identifier) {
     } else if (document.location.origin.startsWith('https://app.protonmail.ch')
               || document.location.origin.startsWith('https://mail.protonmail.com')
               && identifier === 'mailboxPassword') {
+        return true;
+    } else if (document.location.origin === 'https://www.patreon.com' && field?.name === 'current-password') {
         return true;
     }
 
