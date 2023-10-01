@@ -55,26 +55,38 @@ const messageBuffer = {
         this.buffer.push(message);
     },
 
-    removeMessageFromIndex(index) {
+    // Returns corresponding message from the response. If the response is an error,
+    // return the first matching action from the buffer.
+    getMessage(response) {
+        const isError = Boolean(!response.nonce && response.error && response.errorCode);
+        return this.buffer.find(b => keepassClient.incrementedNonce(b.request.nonce) === response.nonce
+                                || (isError && b.request?.action === response?.action));
+    },
+
+    removeMessage(message) {
+        const index = this.buffer.indexOf(message);
         if (index >= 0 && index < this.buffer.length) {
             this.buffer.splice(index, 1);
         }
-    }
+    },
 };
 
 // Basic class for a message to be sent. The Promise inside the class will be resolved when
 // the response to the message is received.
 class Message {
     constructor(request, enableTimeout, timeoutValue) {
+        this.enableTimeout = enableTimeout;
+        this.request = request;
+        this.timeout = undefined;
+
         this.promise = new Promise((resolve, reject) => {
             this.reject = reject;
             this.resolve = resolve;
-            this.enableTimeout = enableTimeout;
 
             const messageTimeout = timeoutValue || keepassClient.messageTimeout;
 
             // Handle timeout
-            if (enableTimeout) {
+            if (this.enableTimeout) {
                 this.timeout = setTimeout(() => {
                     const errorMessage = {
                         action: request.action,
@@ -87,6 +99,11 @@ class Message {
                 }, messageTimeout);
             }
         });
+    }
+
+    cancelTimeout() {
+        this.enableTimeout = false;
+        clearTimeout(this.timeout);
     }
 }
 
@@ -102,36 +119,33 @@ keepassClient.sendNativeMessage = async function(request, enableTimeout = false,
 
     const message = new Message(request, enableTimeout, timeoutValue);
     await navigator.locks.request('messageBuffer', async (lock) => {
-        messageBuffer.addMessage({ request: request, message: message });
+        messageBuffer.addMessage(message);
     });
 
     keepassClient.nativePort.postMessage(request);
-    return await message.promise;
+
+    const response = await message.promise;
+
+    // Remove a timeouted message
+    if (response.error && response?.errorCode === kpErrors.TIMEOUT_OR_NOT_CONNECTED) {
+        messageBuffer.removeMessage(message);
+    }
+
+    return response;
 };
 
 keepassClient.handleNativeMessage = async function(response) {
-    const isError = Boolean(!response.nonce && response.error && response.errorCode);
-
     // Parse through the message buffer to find the corresponding Promise.
     await navigator.locks.request('messageBuffer', async (lock) => {
-        for (let i = 0; i < messageBuffer.buffer.length; ++i) {
-            if (!messageBuffer.buffer[i]) {
-                continue;
+        const message = messageBuffer.getMessage(response);
+        if (message) {
+            if (message.enableTimeout) {
+                message.cancelTimeout();
             }
 
-            const request = messageBuffer.buffer[i]?.request;
-            const message = messageBuffer.buffer[i]?.message;
-            const errorFound = isError && request?.action === response?.action;
-
-            if ((response.nonce && response.nonce === keepassClient.incrementedNonce(request.nonce)) || errorFound) {
-                if (message.enableTimeout) {
-                    clearTimeout(message.timeout);
-                }
-
-                message.resolve(response);
-                messageBuffer.removeMessageFromIndex(i);
-                return;
-            }
+            message.resolve(response);
+            messageBuffer.removeMessage(message);
+            return;
         }
 
         debugLogMessage('Corresponding request not found in the message buffer for response: ', response);

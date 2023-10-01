@@ -387,8 +387,9 @@ keepass.getDatabaseHash = async function(tab, args = []) {
 
         keepass.databaseHash = '';
         keepass.isDatabaseClosed = true;
-        if (response.message && response.message === '') {
+        if ((response.message && response.message === '') || response.errorCode === kpErrors.TIMEOUT_OR_NOT_CONNECTED) {
             keepass.isKeePassXCAvailable = false;
+            keepass.isConnected = false;
             keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
         } else {
             keepass.handleError(tab, response.errorCode, response.error);
