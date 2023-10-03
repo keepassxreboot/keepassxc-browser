@@ -268,10 +268,6 @@ keepass.testAssociation = async function(tab, args = []) {
             return false;
         }
 
-        if (keepass.isAssociated()) {
-            return true;
-        }
-
         if (!keepass.serverPublicKey) {
             if (tab && page.tabs[tab.id]) {
                 keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
@@ -387,8 +383,9 @@ keepass.getDatabaseHash = async function(tab, args = []) {
 
         keepass.databaseHash = '';
         keepass.isDatabaseClosed = true;
-        if (response.message && response.message === '') {
+        if ((response.message && response.message === '') || response.errorCode === kpErrors.TIMEOUT_OR_NOT_CONNECTED) {
             keepass.isKeePassXCAvailable = false;
+            keepass.isConnected = false;
             keepass.handleError(tab, kpErrors.TIMEOUT_OR_NOT_CONNECTED);
         } else {
             keepass.handleError(tab, response.errorCode, response.error);
