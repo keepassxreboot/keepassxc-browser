@@ -268,10 +268,6 @@ keepass.testAssociation = async function(tab, args = []) {
             return false;
         }
 
-        if (keepass.isAssociated()) {
-            return true;
-        }
-
         if (!keepass.serverPublicKey) {
             if (tab && page.tabs[tab.id]) {
                 keepass.handleError(tab, kpErrors.PUBLIC_KEY_NOT_FOUND);
