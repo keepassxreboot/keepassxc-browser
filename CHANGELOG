@@ -1,3 +1,7 @@
+1.8.8.1 (2023-10-03)
+=========================
+- Fix handling message timeouts [#1999]
+
 1.8.8 (2023-09-21)
 =========================
 - Add support for monochrome toolbar icons (Contributor PR) [#1938]
