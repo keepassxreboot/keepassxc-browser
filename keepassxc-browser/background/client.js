@@ -75,8 +75,17 @@ const messageBuffer = {
     // return the first matching action from the buffer.
     getMessage(response) {
         const isError = Boolean(!response.nonce && response.error && response.errorCode);
-        return this.buffer.find(b => keepassClient.incrementedNonce(b.request.nonce) === response.nonce
-                                || (isError && b.request?.action === response?.action));
+        return this.buffer.find(message => {
+            if (keepassClient.incrementedNonce(message.request.nonce) === response.nonce
+                || (isError && message.request?.action === response?.action)) {
+                // Cancel timeout
+                if (message.enableTimeout) {
+                    message.cancelTimeout();
+                }
+
+                return message;
+            }}
+        );
     },
 
     removeMessage(message) {
@@ -155,10 +164,6 @@ keepassClient.handleNativeMessage = async function(response) {
     await navigator.locks.request('messageBuffer', async (lock) => {
         const message = messageBuffer.getMessage(response);
         if (message) {
-            if (message.enableTimeout) {
-                message.cancelTimeout();
-            }
-
             message.resolve(response);
             messageBuffer.removeMessage(message);
             return;
