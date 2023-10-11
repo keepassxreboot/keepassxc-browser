@@ -370,7 +370,11 @@ options.initConnectedDatabases = function() {
         const closestTr = this.closest('tr');
         $('#dialogDeleteConnectedDatabase').setAttribute('hash', closestTr.getAttribute('hash'));
         $('#dialogDeleteConnectedDatabase').setAttribute('tr-id', closestTr.getAttribute('id'));
-        $('#dialogDeleteConnectedDatabase .modal-body strong').textContent = closestTr.children[0].textContent;
+
+        const identifier = $('#dialogDeleteConnectedDatabase .modal-body strong');
+        if (identifier) {
+            identifier.textContent = closestTr.children[0].textContent;
+        }
 
         dialogDeleteConnectedDatabaseModal.show();
         $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {

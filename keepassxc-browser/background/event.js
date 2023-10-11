@@ -15,7 +15,8 @@ kpxcEvent.onMessage = async function(request, sender) {
 
 kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     let keyId = null;
-    if (configured && keepass.databaseHash !== '') {
+    if (configured && keepass.databaseHash !== ''
+        && Object.hasOwn(keepass.databaseHash, keepass.databaseHash)) {
         keyId = keepass.keyRing[keepass.databaseHash].id;
     }
 
@@ -91,7 +92,7 @@ kpxcEvent.onGetStatus = async function(tab, args = []) {
 kpxcEvent.onReconnect = async function(tab) {
     const configured = await keepass.reconnect(tab);
     if (configured) {
-        browser.tabs.sendMessage(tab.id, {
+        browser.tabs.sendMessage(tab?.id, {
             action: 'redetect_fields'
         }).catch((err) => {
             logError(err);
