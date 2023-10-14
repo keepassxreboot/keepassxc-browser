@@ -784,6 +784,44 @@ kpxc.updateTOTPList = async function() {
     return [];
 };
 
+// Apply a script to the page for intercepting Passkeys (WebAuthn) requests
+kpxc.enablePasskeys = function() {
+    const passkeys = document.createElement('script');
+    passkeys.src = browser.runtime.getURL('content/passkeys.js');
+    document.documentElement.appendChild(passkeys);
+
+    document.addEventListener('kpxc-passkeys-request', async (ev) => {
+        if (ev.detail.action === 'passkeys_create') {
+            const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(ev.detail.publicKey);
+            logDebug('publicKey', publicKey);
+
+            const ret = await sendMessage('passkeys_register', [ publicKey, window.location.origin ]);
+            if (ret) {
+                if (ret.response && ret.response.errorCode) {
+                    const errorMessage = await sendMessage('get_error_message', ret.response.errorCode);
+                    kpxcUI.createNotification('error', errorMessage);
+                }
+
+                const responsePublicKey = kpxcPasskeysUtils.parsePublicKeyCredential(ret.response);
+                kpxcPasskeysUtils.sendPasskeysResponse(responsePublicKey);
+            }
+        } else if (ev.detail.action === 'passkeys_get') {
+            const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(ev.detail.publicKey);
+            logDebug('publicKey', publicKey);
+
+            const ret = await sendMessage('passkeys_get', [ publicKey, window.location.origin ]);
+            if (ret) {
+                if (ret.response && ret.response.errorCode) {
+                    const errorMessage = await sendMessage('get_error_message', ret.response.errorCode);
+                    kpxcUI.createNotification('error', errorMessage);
+                }
+
+                const responsePublicKey = kpxcPasskeysUtils.parseGetPublicKeyCredential(ret.response);
+                kpxcPasskeysUtils.sendPasskeysResponse(responsePublicKey);
+            }
+        }
+    });
+};
 
 /**
  * Content script initialization.
@@ -801,6 +839,10 @@ const initContentScript = async function() {
         if (await kpxc.siteIgnored()) {
             logDebug('This site is ignored in Site Preferences.');
             return;
+        }
+
+        if (kpxc.settings.passkeys) {
+            kpxc.enablePasskeys();
         }
 
         await kpxc.updateDatabaseState();

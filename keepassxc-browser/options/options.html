@@ -332,6 +332,33 @@
                 </div>
               </div>
 
+              <!-- Passkeys -->
+              <div class="card my-4 shadow" id="passkeysOptionsCard">
+                <div class="card-header h6 rounded-0">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span data-i18n="optionsPasskeysTitle"></span>
+                </div>
+                <div class="card-body">
+                  <!-- Enable Passkeys -->
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="passkeys" id="passkeys" value="true" />
+                      <label class="form-check-label" for="passkeys" data-i18n="optionsPasskeysEnable"></label>
+                      <div class="form-text help-text" data-i18n="optionsPasskeysEnableHelpText"></div>
+                    </div>
+                  </div>
+
+                  <!-- Enable Passkeys fallback -->
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="passkeysFallback" id="passkeysFallback" value="true" />
+                      <label class="form-check-label" for="passkeysFallback" data-i18n="optionsPasskeysEnableFallback"></label>
+                      <div class="form-text help-text" data-i18n="optionsPasskeysEnableFallbackHelpText"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- Updates -->
               <div class="card my-4 shadow">
                 <div class="card-header h6 rounded-0">
