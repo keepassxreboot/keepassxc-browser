@@ -793,7 +793,7 @@ kpxc.enablePasskeys = function() {
     document.addEventListener('kpxc-passkeys-request', async (ev) => {
         if (ev.detail.action === 'passkeys_create') {
             const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(ev.detail.publicKey);
-            logDebug(publicKey);
+            logDebug('publicKey', publicKey);
 
             const ret = await sendMessage('passkeys_register', [ publicKey, window.location.origin ]);
             if (ret) {
@@ -807,7 +807,7 @@ kpxc.enablePasskeys = function() {
             }
         } else if (ev.detail.action === 'passkeys_get') {
             const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(ev.detail.publicKey);
-            logDebug(publicKey);
+            logDebug('publicKey', publicKey);
 
             const ret = await sendMessage('passkeys_get', [ publicKey, window.location.origin ]);
             if (ret) {
