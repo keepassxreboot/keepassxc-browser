@@ -107,6 +107,38 @@
         "message": "填入的密碼超出了欄位允許的長度上限。",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "找不到群組。",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "無法建立新群組。",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "未提供有效的 UUID。",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "未支援密鑰證明。",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "憑證被排除。",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "通行密鑰請求被取消。",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "無效的使用者認證。",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "空的公開金鑰。",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "未連接至 KeePassXC。",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "擴充",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "通行密鑰",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "啟用通行密鑰",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "啟用 Web Authentication 支援",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "啟用通行密鑰備案",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "若啟用此項，向 KeePassXC 的請求一旦失敗或被取消，將觸發瀏覽器自身的通行密鑰請求。若停用此項，與 KeePassXC 的連接為必須，請求被取消則視為失敗。預設為啟用。",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "開新分頁",

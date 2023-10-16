@@ -107,6 +107,38 @@
         "message": "Le mot de passe indiqué dépasse la longueur maximale autorisée du champ.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Aucun groupe trouvé.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Impossible de créer un nouveau groupe.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "UUID invalide.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Certificat non prise en charge.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "L'identifiant a été exclus.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Demande de mot de passé abandonnée.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Utilisateur invalide.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Clé publique vide.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Non connecté à KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -196,7 +228,7 @@
         "description": "OTP field icon text."
     },
     "defineClose": {
-        "message": "Close",
+        "message": "Fermer",
         "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
@@ -208,7 +240,7 @@
         "description": "More button text when choosing custom login fields."
     },
     "defineReset": {
-        "message": "Reset",
+        "message": "Réinitialiser",
         "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
@@ -220,27 +252,27 @@
         "description": "A text shown when custom credentials fields are already set for the page."
     },
     "defineClearData": {
-        "message": "Clear saved data",
+        "message": "Effacer les données enregistrées",
         "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "String field",
+        "message": "Champ de type chaîne",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "Choose a username field",
+        "message": "Choisissez un champ de nom d'utilisateur",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "Choose a password field",
+        "message": "Choisissez un champ de mot de passe",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "Choose a TOTP field",
+        "message": "Choisissez un champ TOTP",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
     "defineChooseStringFields": {
-        "message": "Choose String Fields",
+        "message": "Choisissez des champs de type chaîne",
         "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
@@ -252,7 +284,7 @@
         "description": "Help text when choosing custom login fields."
     },
     "defineChooseCustomLoginFieldText": {
-        "message": "Choose a Custom Login Field",
+        "message": "Choisissez un champ d'identification personnalisé",
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
@@ -264,7 +296,7 @@
         "description": "General text for password."
     },
     "stringFields": {
-        "message": "String Fields",
+        "message": "Champs de type chaîne",
         "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
@@ -680,7 +712,7 @@
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon.",
+        "message": "Utiliser une barre d'outils avec icônes monochromes.",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
@@ -696,11 +728,11 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
+        "message": "Nombre de redirections autorisées avant disparition du bandeau. 3 par défaut. Maximum illimité.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials.",
+        "message": "Autoriser le remplissage des identifiants HTTP Basic Auth.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -800,7 +832,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
+        "message": "Attention ! Le remplissage automatique n'est pas recommandé. Vous l'utilisez à vos risques. KeePassXC-Browser tente de détecter automatiquement les champs d'identification. Cependant, la détection peut être erronée et entraîner le remplissage de champs non sûrs avec des données sensibles.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -816,7 +848,7 @@
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "message": "Utilisez une icône monochrome avec badges colorés dans la barre d'outils pour s'adapter au thème clair/sombre du navigateur.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -960,7 +992,7 @@
         "description": "Site preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
-        "message": "Improved Input Field Detection",
+        "message": "Détection des champs de saisie accrue",
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnDelete": {
@@ -1080,7 +1112,7 @@
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "message": "La détection de champs de saisie accrue est type de détection dynamique plus précis. Cependant, cela peut affecter les performances. À utiliser avec parcimonie.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesManualAddText": {
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Extension",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Mots de passe",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Activer les mots de passe",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Activer l'authentification HTTP.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Autoriser des mots de passé de secours",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "Si activé, le mot de passe du navigateur sera utilisé en cas d'échec de requête vers KeePassXC. Si désactivé, la connexion avec KeePassXC reste nécessaire et toute requête infructueuse se soldera par un échec. Activé par défaut.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Opens a new tab",

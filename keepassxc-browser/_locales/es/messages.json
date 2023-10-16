@@ -107,6 +107,38 @@
         "message": "La contraseña introducida es más larga que la longitud máxima permitida del campo.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "No se encontraron grupos.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "No se puede crear un grupo nuevo.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "No se ha proporcionado un UUID válido.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Atestación no admitida.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Se excluye la credencial.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Solicitud de claves de acceso cancelada.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Verificación de usuario no válida.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Clave pública vacía.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "No conectado a KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Extensión",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Claves de acceso",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Habilitar claves de acceso",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Habilitar soporte para Web Authentication.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Habilitar respaldo Passkeys",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "Al estar habilitado, una petición fallida o cancelada a KeePassXC provocará una petición interna al Passkeys del navegador. Si está deshabilitada, es requerido una conexión a KeePassXC y la petición cancelada fallará. Por defecto: habilitado.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Se abre una nueva pestaña",

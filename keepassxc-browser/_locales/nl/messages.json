@@ -1,218 +1,218 @@
 {
     "extensionDescription": {
-        "message": "KeePassXC-integrering til moderne webbrowsere",
+        "message": "KeePassXC-integratie voor moderne webbrowsers",
         "description": "Name of the extension."
     },
     "contextMenuFillUsernameAndPassword": {
-        "message": "Udfyld brugernavn og adgangskode",
+        "message": "Gebruikersnaam en wachtwoord invullen",
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
-        "message": "Udfyld kun adgangskode",
+        "message": "Alleen wachtwoord invullen",
         "description": "Context menu item for filling password."
     },
     "contextMenuFillTOTP": {
-        "message": "Udfyld TOTP",
+        "message": "TOTP invullen",
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "Vis adgangskodegenerator-ikoner",
+        "message": "Wachtwoordgenerator-pictogrammen tonen",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Gem loginoplysninger",
+        "message": "Inloggegevens opslaan",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Vis adgangskodegenerator",
+        "message": "Wachtwoordgenerator openen",
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Udfyld attribut...",
+        "message": "Kenmerk invullen…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "Anmod Global autoskriv",
+        "message": "Algemeen automatisch typen aanvragen",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Registrerede HTTP-autentifikation med flere loginoplysninger. Klik på udvidelses-ikonet for at vælge den korrekte.",
+        "message": "Er zijn meerdere inloggegevens bij deze http-authenticatie gedetecteerd. Klik op het extensiepictogram om de juiste te kiezen.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
-        "message": "Ukendt fejl.",
+        "message": "Onbekende fout.",
         "description": "Unknown error."
     },
     "errorMessageDatabaseNotOpened": {
-        "message": "Database ikke åbnet.",
+        "message": "Database niet geopend.",
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "Databasehash ikke modtaget.",
+        "message": "Database-controlegetal niet ontvangen.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "Klientens offentlige nøgle ikke modtaget.",
+        "message": "Openbare clientsleutel niet ontvangen.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
-        "message": "Kan ikke dekryptere meddelelse.",
+        "message": "Kan bericht niet ontcijferen.",
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Kan ikke oprette forbindelse til KeePassXC. Tjek at browserintegrering er aktiveret i indstillingerne i KeePassXC.",
+        "message": "Geen verbinding met KeePassXC. Controleer in KeePassXC-instellingen of browserintegratie geactiveerd is.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
-        "message": "Handling annulleret eller nægtet.",
+        "message": "Actie geannuleerd of geweigerd.",
         "description": "Action canceled or denied."
     },
     "errorMessageEncrypt": {
-        "message": "Kryptering af meddelelse mislykkedes. Kører KeePassXC?",
+        "message": "Berichtversleuteling mislukt. Is KeePassXC wel gestart?",
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
-        "message": "KeePassXC-tilknytning mislykkedes, prøv igen.",
+        "message": "De KeePassXC-toewijzing is mislukt. Probeer het opnieuw.",
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
-        "message": "Nøgleudveksling lykkedes ikke.",
+        "message": "De sleuteluitwisseling is mislukt.",
         "description": "Key exchange was not successful."
     },
     "errorMessageEncryptionKey": {
-        "message": "Krypteringsnøglen er ikke genkendt.",
+        "message": "Beveiligingssleutel wordt niet herkend.",
         "description": "Encryption key is not recognized."
     },
     "errorMessageSavedDatabases": {
-        "message": "Fandt ingen gemte databaser.",
+        "message": "Geen opgeslagen databases aangetroffen.",
         "description": "No saved databases found."
     },
     "errorMessageIncorrectAction": {
-        "message": "Ukorrekt handling.",
+        "message": "Onjuiste actie.",
         "description": "Incorrect action."
     },
     "errorMessageEmptyMessage": {
-        "message": "Tom meddelelse modtaget.",
+        "message": "Leeg bericht ontvangen.",
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
-        "message": "Ingen URL angivet.",
+        "message": "Geen URL opgegeven.",
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
-        "message": "Fandt ingen logins.",
+        "message": "Geen inloggegevens aangetroffen.",
         "description": "No logins found."
     },
     "errorMessagePaswordLengthExceeded": {
-        "message": "Den udfyldte adgangskode er længere end feltets maksimalt tilladte længde.",
+        "message": "Het ingevoerde wachtwoord is langer dan de toegestane lengte.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
-        "message": "Ingen grupper fundet.",
+        "message": "Geen groepen gevonden.",
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Kan ikke oprette ny gruppe.",
+        "message": "Geen nieuwe groep kunnen aanmaken.",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "Ingen gyldig UUID angivet.",
+        "message": "Geen geldige UUID opgegeven.",
         "description": "No valid UUID provided."
     },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "Attestation understøttes ikke.",
+        "message": "Getuigschrift niet ondersteund.",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Loginoplysning er udelukket.",
+        "message": "Referentie is uitgesloten.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Anmodning om adgangsnøgler annulleret.",
+        "message": "Passkey-verzoek geannuleerd.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Ugyldig brugerbekræftelse.",
+        "message": "Ongeldige gebruikersverificatie.",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Tom offentlig nøgle.",
+        "message": "Lege openbare sleutel.",
         "description": "Empty public key."
     },
     "errorNotConnected": {
-        "message": "Ikke forbundet til KeePassXC.",
+        "message": "Geen verbinding met KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
-        "message": "Adgangskodegenerator-ikon",
+        "message": "Wachtwoordgenerator-pictogram",
         "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorPlaceholder": {
-        "message": "Genereret adgangskode",
+        "message": "Gegenereerd wachtwoord",
         "description": "Input field placeholder for generated password."
     },
     "passwordGeneratorLabel": {
-        "message": "Udfyld også i det næste adgangskodefelt",
+        "message": "Volgend wachtwoordveld ook invullen",
         "description": "Checkbox text below the password generator input field."
     },
     "passwordGeneratorTitle": {
-        "message": "Adgangskodegenerator",
+        "message": "Wachtwoordgenerator",
         "description": "Password generator dialog title."
     },
     "passwordGeneratorGenerate": {
-        "message": "Generér",
+        "message": "Genereren",
         "description": "Generate button text in password generator."
     },
     "passwordGeneratorTryAgain": {
-        "message": "Prøv igen",
+        "message": "Opnieuw proberen",
         "description": "Generate button text in password generator when not connected."
     },
     "passwordGeneratorCopy": {
-        "message": "Kopiér",
+        "message": "Kopiëren",
         "description": "Copy button text in password generator."
     },
     "passwordGeneratorFill": {
-        "message": "Udfyld adgangskode",
+        "message": "Wachtwoord invullen",
         "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Fejl: den generet adgangskode er længere end den tilladte længde!",
+        "message": "Foutmelding: Het gegenereerde wachtwoord is langer dan is toegestaan!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
-        "message": "Det er bliver afkortet for at passe til længden.",
+        "message": "Het wachtwoord is daarom ingekort.",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongRemember": {
-        "message": "Husk venligst den nye adgangskode!",
+        "message": "Onthoud het nieuwe wachtwoord!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Generér adgangskode",
+        "message": "Wachtwoord genereren",
         "description": "Password icon title text."
     },
     "passwordGeneratorError": {
-        "message": "Kan ikke modtage genereret adgangskode.",
+        "message": "Kan geen gegenereerd wachtwoord ontvangen.",
         "description": "Password generator error text when KeePassXC is closed."
     },
     "passwordGeneratorErrorIsRunning": {
-        "message": "Kører KeePassXC og er der oprettet forbindelse?",
+        "message": "Is KeePassXC actief en verbonden?",
         "description": "Password generator error text when KeePassXC is closed."
     },
     "usernameFieldText": {
-        "message": "Udfyld loginoplysninger fra KeePassXC",
+        "message": "Inloggegevens invullen vanuit KeePassXC",
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
-        "message": "Databasen er låst",
+        "message": "Database is vergrendeld",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC er afbrudt",
+        "message": "KeePassXC is niet verbonden",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
-        "message": "Ikon for brugernavnfelt",
+        "message": "Gebruikersnaampictogram",
         "description": "Username field icon text."
     },
     "totp": {
@@ -220,291 +220,291 @@
         "description": "TOTP text."
     },
     "totpFieldText": {
-        "message": "Udfyld TOTP fra KeePassXC",
+        "message": "TOTP invullen met behulp van KeePassXC",
         "description": "OTP field icon hover text."
     },
     "totpFieldIcon": {
-        "message": "Ikon for TOTP-felt",
+        "message": "TOTP-pictogram",
         "description": "OTP field icon text."
     },
     "defineClose": {
-        "message": "Luk",
+        "message": "Sluiten",
         "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
-        "message": "Spring over",
+        "message": "Overslaan",
         "description": "Skip button text when choosing custom login fields."
     },
     "defineMore": {
-        "message": "Vis mere",
+        "message": "Meer",
         "description": "More button text when choosing custom login fields."
     },
     "defineReset": {
-        "message": "Nulstil",
+        "message": "Herstellen",
         "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
-        "message": "Bekræft",
+        "message": "Bevestigen",
         "description": "Confirm button text when choosing custom login fields."
     },
     "defineAlreadySelected": {
-        "message": "Loginfelterne på denne side er allerede valgt og vil blive overskrevet.",
+        "message": "De inlogvelden op deze pagina zijn al geselecteerd en worden overschreven.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
     "defineClearData": {
-        "message": "Ryd gemte data",
+        "message": "Opgeslagen gegevens wissen",
         "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "Strengfelt",
+        "message": "Tekenreeksveld",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "Vælg et brugernavnsfelt",
+        "message": "Kies een gebruikersnaamveld",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "Vælg et adgangskodefelt",
+        "message": "Kies een wachtwoordveld",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "Vælg et TOTP-felt",
+        "message": "Kies een TOTP-veld",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
     "defineChooseStringFields": {
-        "message": "Vælg strengfelter",
+        "message": "Tekenreeksvelden kiezen",
         "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
-        "message": "Bekræft venligst dine valg eller vælge flere felter as strengfelter.",
+        "message": "Bevestig je selectie of stel meerdere velden in als <em>tekenreeksvelden</em>.",
         "description": "Confirm a selection text when choosing custom login fields which contains string fields."
     },
     "defineKeyboardText": {
-        "message": "Du kan også bruge nummeret til at vælge inputfelterne fra tastaturet.",
+        "message": "Je kunt tevens gebruikmaken van de numerieke toetsen op je toetsenbord.",
         "description": "Help text when choosing custom login fields."
     },
     "defineChooseCustomLoginFieldText": {
-        "message": "Vælg et brugerdefineret loginfelt",
+        "message": "Kies een aangepast inlogveld",
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
-        "message": "Brugernavn",
+        "message": "Gebruikersnaam",
         "description": "General text for username."
     },
     "password": {
-        "message": "Adgangskode",
+        "message": "Wachtwoord",
         "description": "General text for password."
     },
     "stringFields": {
-        "message": "Strengfelter",
+        "message": "Tekenreeksvelden",
         "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
-        "message": "- intet brugernavn -",
+        "message": "- geen gebruikersnaam -",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Fandt ingen logins.",
+        "message": "Geen inloggegevens aangetroffen.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Fandt mere end ét login i KeePassXC!",
+        "message": "Er zijn meerdere inloggegevens aangetroffen in KeePassXC!",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Tryk på KeePassXC-Browser-ikonet for flere valgmuligheder.",
+        "message": "Klik op het KeePassXC-browserpictogram voor meer opties.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Fandt ingen loginoplysninger for det angivne brugernavn.",
+        "message": "Er zijn geen inloggegevens aangetroffen bij de opgegeven gebruikersnaam.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
-        "message": "Fandt ingen TOTP.",
+        "message": "Geen TOTP aangetroffen.",
         "description": "Alert message when no TOTP is found."
     },
     "credentialExpired": {
-        "message": "Udløbet",
+        "message": "Verlopen",
         "description": "If a credential is expired, this is appended to the title label."
     },
     "fieldsFill": {
-        "message": "Fejl: Kan ikke finde felterne som skal udfyldes.",
+        "message": "Foutmelding: geen in te vullen velden aangetroffen.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "Fejl: Kan ikke finde et adgangskodefelt.",
+        "message": "Foutmelding: geen wachtwoordveld aangetroffen.",
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "Fejl: Kunne ikke registrere ændret loginoplysninger.",
+        "message": "Foutmelding: de gewijzigde inloggegevens kunnen niet worden vastgesteld.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
-        "message": "KeePassXC - Popop",
+        "message": "KeePassXC - Pop-up",
         "description": "Popup window title."
     },
     "popupSettingsText": {
-        "message": "Indstillinger",
+        "message": "Instellingen",
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Vælg tilpasset loginfelter",
+        "message": "Kies aangepaste inlogvelden voor deze pagina",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
-        "message": "Opret forbindelse",
+        "message": "Koppelen",
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": "Genopret forbindelse",
+        "message": "Opnieuw koppelen",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
-        "message": "Genregistrer loginfelter",
+        "message": "Inlogvelden opnieuw vaststellen",
         "description": "Popup Redetect login fields button text."
     },
     "popupReloadButton": {
-        "message": "Genindlæs",
+        "message": "Herladen",
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": "Genåbn database",
+        "message": "Database opnieuw openen",
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
-        "message": "Tilføj valgmulighed kun for brugernavn til stedet",
+        "message": "Optie ‘alleen-gebruikersnaam’ toevoegen voor deze website",
         "description": "Button text for adding Username-only option."
     },
     "popupErrorEncountered": {
-        "message": "KeePassXC-Browser er stødt på en fejl:",
+        "message": "Er is een fout opgetreden in KeePassXC-Browser:",
         "description": "A text shown above error message in the popup."
     },
     "popupUpdateAvailable": {
-        "message": "Du bruger en gammel version af KeePassXC.",
+        "message": "Je maakt gebruik van een oude versie van KeePassXC.",
         "description": "Popup warning message about old version of KeePassXC."
     },
     "popupDownloadNewVersion": {
-        "message": "Download venligst den seneste version fra keepassxc.org",
+        "message": "Download de nieuwste versie op keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "Er du førstegangsbruger? Se vores Starter vejledning for at komme i gang.",
+        "message": "Gebruik je deze extensie voor het eerst? Lees dan onze snelstartgids (in het Engels).",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "Startervejledning - Integration af opsætning af browser",
+        "message": "Snelstartgids - Browserintegratie instellen",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
-        "message": "Skjul og vis ikke igen.",
+        "message": "Niet meer tonen",
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-        "message": "Kan du ikke oprette forbindelse til KeePassXC? Måske vores wiki-side kan hjælpe.",
+        "message": "Lukt het niet om KeePassXC te koppelen? Wellicht biedt onze wiki raad.",
         "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
-        "message": "Fejlfindingsvejledning",
+        "message": "Probleemoplossing",
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
-        "message": "Tjekker status ...",
+        "message": "Bezig met controleren van status…",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser er ikke blevet konfigureret. Tryk på opret forbindelse-knappen for at parre med KeePassXC.",
+        "message": "KeePassXC-Browser is nog niet ingesteld. Klik op ‘Koppelen’ om te KeePassXC te koppelen.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
-        "message": "Forbindelsen mellem KeePassXC-Browser og KeePassXC er blevet afbrudt.",
+        "message": "KeePassXC-Browser is niet meer gekoppeld aan KeePassXC.",
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Tryk på genopret forbindelse-knappen for at etablere en ny forbindelse.",
+        "message": "Druk op de ‘Opnieuw koppelen’ om een nieuwe koppeling te maken.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "KeePassXC-Browser har endnu ikke oprettet forbindelse til KeePassXC men er blevet konfigureret med identifikatoren: $1",
+        "message": "KeePassXC-Browser is nog niet gekoppeld aan KeePassXC, maar is wél ingesteld met de identificatie: $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "KeePassXC-Browser har oprettet forbindelse til KeePassXC og er blevet konfigureret til at bruge følgende identifikator: $1",
+        "message": "KeePassXC-Browser is gekoppeld aan KeePassXC en is ingesteld met de volgende identificatie: $1",
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "Registrerede kun ét brugernavnfelt. Tilføj URL'en til stedpræferencerne med valgmulighed kun for brugernavn aktiveret?",
+        "message": "Er is slechts één gebruikersnaamveld aangetroffen. Wil je deze url toevoegen aan de websitevoorkeuren met de optie ‘Alleen-gebruikersnaam’ ingeschakeld?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "rememberInfoText": {
-        "message": "Brugernavn eller adgangskode ændret! Gem det?",
+        "message": "Gebruikersnaam of wachtwoord gewijzigd! Wil je de wijziging opslaan?",
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "Loginoplysningerne gemmes i den database der er oprettet forbindelse til med identifikatoren $1",
+        "message": "De inloggegevens worden opgeslagen in de gekoppelde database met de identificatie $1",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
-        "message": "Følgende brugernavn er ikke gemt på nuværende tidspunkt: $1",
+        "message": "De volgende gebruikersnaam is momenteel niet opgeslagen: $1",
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "Loginoplysningerne med brugernavnet er mærket med fed skrift: $1",
+        "message": "De inloggegevens met de gebruikte gebruikersnaam zijn vetgedrukt: $1",
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "Vælg venligst de loginoplysninger du vil opdatere.",
+        "message": "Kies de bij te werken inloggegevens.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Vælg venligst den gruppe som de nye loginoplysninger skal tilføjes til.",
+        "message": "Kies de groep waaraan je de nieuwe inloggegevens wil toevoegen.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
-        "message": "Standardgruppe oprettet i database som der er oprettet forbindelse til.",
+        "message": "De standaardgroep is aangemaakt in de gekoppelde database.",
         "description": "Info message shown when default group set cannot be found."
     },
     "rememberErrorCreatingNewGroup": {
-        "message": "Kan ikke oprette ny gruppe(r).",
+        "message": "De nieuwe groepen kunnen niet worden aangemaakt.",
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "Loginoplysninger blev ikke opdateret. Adgangskoden er ikke blevet ændret.",
+        "message": "De inloggegevens worden niet bijgewerkt; het wachtwoord is niet gewijzigd.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
-        "message": "Loginoplysningerne kan ikke gemmes eller opdateres.",
+        "message": "De inloggegevens kunnen niet worden opgeslagen of bijgewerkt.",
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Loginoplysningerne kan ikke gemmes eller opdateres til en lukket database.",
+        "message": "De inloggegevens kunnen niet worden opgeslagen of bijgewerkt in een gesloten database.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
-        "message": "Handlingen blev annulleret. Loginoplysningerne er ikke blevet opdateret.",
+        "message": "De actie is afgebroken; de inloggegevens zijn niet bijgewerkt.",
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "Gemte nye loginoplysninger med brugernavnet $1.",
+        "message": "De nieuwe inloggegevens met de gebruikersnaam ‘$1’ zijn opgeslagen.",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
-        "message": "Opdaterede loginoplysninger med brugernavnet $1.",
+        "message": "De inloggegevens met de gebruikersnaam ‘$1’ zijn bijgewerkt.",
         "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "Identiske loginoplysninger findes allerede. Intet at opdatere.",
+        "message": "Deze inloggegevens zijn al opgeslagen. Er valt dus niets bij te werken.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
-        "message": "(tom)",
+        "message": "(blanco)",
         "description": "Means an empty username."
     },
     "rememberNoPassword": {
-        "message": "Udfyld venligst adgangskodefeltet uden loginoplysningerne gemmes.",
+        "message": "Voer het wachtwoordveld in alvorens op te slaan.",
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
-        "message": "Vælg de logininformationer som skal indtastes på siden.",
+        "message": "Kies de inloggegevens die je wil invullen op de pagina.",
         "description": "A popup message shown when one or multiple credentials are present."
     },
     "popupFilterText": {
@@ -512,751 +512,751 @@
         "description": "Text for login credentials quick filter."
     },
     "popupAuthText": {
-        "message": "Vælg de logininformationer som du vil logges ind med.",
+        "message": "Kies de inloggegevens waarmee je wil inloggen.",
         "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
     },
     "popupMultiplePasswordFields": {
-        "message": "Fandt mere end et adgangskodefelt på siden. Højdeklik på et af adgangskodefelterne og vælg en af:",
+        "message": "Er is meer dan één wachtwoordveld aangetroffen op deze pagina. Klik met de rechtermuisknop op een van de velden en kies een van de:",
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupURL": {
-        "message": "URL: ",
+        "message": "Url:",
         "description": "URL. Might not need any translation."
     },
     "popupUsername": {
-        "message": "Brugernavn: ",
+        "message": "Gebruikersnaam:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
-        "message": "Ny",
+        "message": "Nieuw",
         "description": "New button text in popup when updating credentials."
     },
     "popupButtonUpdate": {
-        "message": "Opdater",
+        "message": "Bijwerken",
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonDismiss": {
-        "message": "Afvis",
+        "message": "Negeren",
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Spørg ikke igen for dette sted",
+        "message": "Nooit vragen op deze pagina",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
-        "message": "Luk",
+        "message": "Sluiten",
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": "Afvis og vis standard autentifikationsdialogen",
+        "message": "Sluiten en standaard inlogvenster tonen",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
-        "message": "Indstillinger | KeePassXC-Browser",
+        "message": "Instellingen | KeePassXC-Browser",
         "description": "Options page title."
     },
     "optionsGeneralSettingsTab": {
-        "message": "Generelle indstillinger",
+        "message": "Algemene instellingen",
         "description": "General Settings tab text."
     },
     "optionsConnectedDatabasesTab": {
-        "message": "Databaser som der er oprettet forbindelse til",
+        "message": "Gekoppelde databases",
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Tilpasset loginfelter",
+        "message": "Aangepaste inlogvelden",
         "description": "Saved custom login fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Stedpræferencer",
+        "message": "Websitevoorkeuren",
         "description": "Site preferences fields tab text."
     },
     "optionsAboutTab": {
-        "message": "Om",
+        "message": "Over",
         "description": "About tab text."
     },
     "optionsMenuGeneral": {
-        "message": "Generelt",
+        "message": "Algemeen",
         "description": "General settings page header."
     },
     "optionsMenuConnectedDatabases": {
-        "message": "Databaser som der er oprettet forbindelse til",
+        "message": "Gekoppelde databases",
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Tilpasset loginfelter",
+        "message": "Aangepaste inlogvelden",
         "description": "Custom login fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Stedpræferencer",
+        "message": "Websitevoorkeuren",
         "description": "Site preferences page header."
     },
     "optionsMenuAbout": {
-        "message": "Om",
+        "message": "Over",
         "description": "About page header."
     },
     "optionsConfigureShortcuts": {
-        "message": "Konfigurer genveje",
+        "message": "Sneltoetsen instellen",
         "description": "Keyboard shortcut button and title text."
     },
     "optionsButtonSave": {
-        "message": "Gem",
+        "message": "Opslaan",
         "description": "Save button text."
     },
     "optionsButtonConnect": {
-        "message": "Opret forbindelse",
+        "message": "Koppelen",
         "description": "Connect button text."
     },
     "optionsButtonRemove": {
-        "message": "Fjern",
+        "message": "Verwijderen",
         "description": "Remove button text."
     },
     "optionsButtonAdd": {
-        "message": "Tilføj",
+        "message": "Toevoegen",
         "description": "Add button text."
     },
     "optionsButtonUpdate": {
-        "message": "Søg efter opdateringer",
+        "message": "Controleren op updates",
         "description": "Check for updates button text."
     },
     "optionsButtonRemoveNow": {
-        "message": "Ja, fjern nu",
+        "message": "Ja, nu verwijderen",
         "description": "Confirm button text when removing database key or custom login fields."
     },
     "optionsButtonCancel": {
-        "message": "Annuller",
+        "message": "Annuleren",
         "description": "Cancel button text when removing database key or custom login fields."
     },
     "optionsButtonReset": {
-        "message": "Nulstil",
+        "message": "Standaardwaarden",
         "description": "Reset button text for keyboard shortcuts."
     },
     "optionsButtonImport": {
-        "message": "Importér indstillinger",
+        "message": "Instellingen importeren",
         "description": "Import settings button text."
     },
     "optionsButtonExport": {
-        "message": "Eksportér indstillinger",
+        "message": "Instellingen exporteren",
         "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
-        "message": "Standardgruppe for gemte nye adgangskoder:",
+        "message": "Standaardgroep voor het opslaan van nieuwe wachtwoorden:",
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Separer gruppen med skråstreg, f.eks.: Gruppe/Undergruppe.",
+        "message": "Scheid groepsnamen met schuine strepen. Voorbeeld: groep/onderliggende groep.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Spørg altid hvor nye loginoplysninger skal gemmes",
+        "message": "Altijd vragen waar nieuwe inloggegevens moeten worden opgeslagen",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "Når den er aktiveret viser popopen en gruppevisning.",
+        "message": "Schakel in om een pop-up met beschikbare groepen te tonen.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Aktivér ikoner for adgangskodegenerator.",
+        "message": "Pictogrammen tonen in wachtwoordgenerator",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Aktivér ikoner for brugernavnfelt.",
+        "message": "Pictogrammen tonen in gebruikersnaamvelden",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Brug dynamisk registrering af inputfelt.",
+        "message": "Invoervelden dynamisch detecteren",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Nyttigt med sider som bruger pop op'er eller dynamiske dialoger. Deaktivér funktionaliteten for at reducerer CPU-belastningen på langsomme maskiner. Når den er deaktiveret, så kan loginoplysninger kun indsættes med tastaturgenveje, genvejsmenuen eller udvidelsens pop op.",
+        "message": "Handig op webpagina's met pop-ups of dynamische dialoogvensters. Schakel deze functie uit om de processor van oudere pc's minder te belasten. Let op: indien uitgeschakeld, kunnen de inloggegevens alléén worden ingevoegd met sneltoetsen, het rechtermuisknopmenu of de extensiepop-up.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Aktivér ikoner for 2FA/OTP-felt.",
+        "message": "2FA-/OTP-pictogrammen tonen",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Indhent automatisk loginoplysninger.",
+        "message": "Inloggegevens automatisch ophalen",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Genopret automatisk forbindelse til KeePassXC.",
+        "message": "Automatisch opnieuw verbinden met KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
-        "message": "Advarsel! Funktionaliteten er eksperimentel. Brug den på egen risiko.",
+        "message": "Waarschuwing: deze functie is experimenteel! Gebruik hiervan is op eigen risico.",
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Udfyld automatisk indtastninger når der kun er én loginoplysning.",
+        "message": "Automatisch invullen gebruiken op pagina's met één inlogveld",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Aktivér automatisk udførsel af brugernavnfelter.",
+        "message": "Gebruikersnaamvelden automatisch invullen",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Vis gruppenavnet i listen over automatisk udførsel når loginoplysninger er fra andre grupper.",
+        "message": "Groepsnaam tonen op de aanvullijst als inloggegevens in verschillende groepen staan",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
-        "message": "Indsend automatisk loginformularer",
+        "message": "Inlogformulieren automatisch indienen",
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Indsender automatisk valgte loginoplysninger. Det deaktiveres for automatisk udfyldning når der kun er én indtastning.",
+        "message": "Hiermee worden de gekozen inloggegevens automatisch ingediend. Dit is uitgeschakeld bij automatisch invullen op pagina's met één inlogveld.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Vis underretninger.",
+        "message": "Meldingen tonen",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Brug monokromt ikon på værktøjslinjen.",
+        "message": "Monochroom werkbalkpictogram gebruiken",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
-        "message": "Gem kun domæne.",
+        "message": "Alleen domeinnaam opslaan",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Vis et banner på siden når nye loginoplysninger kan gemmes i databasen.",
+        "message": "KeepassXC-Browser balk tonen als er nieuwe inloggegevens kunnen worden opgeslagen in de database",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
-        "message": "Antal tilladte omdirigeringer: $1",
+        "message": "Aantal toegestane omleidingen: $1",
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Hvor mange omdirigeringer er tilladt, indtil banneret forsvinder. Standardværdien er 3. Maksimum er uendeligt.",
+        "message": "Het aantal omleidingen dat is toegestaan voordat de banner verdwijnt. Standaardwaarde is 3. Maximum is oneindig.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Tillad udfyldning af HTTP Basic Auth-loginoplysninger.",
+        "message": "Sta het invullen van HTTP Basic Auth-inloggegevens toe.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
-        "message": "Logning til fejlretning",
+        "message": "Logboek aanleggen voor foutopsporing",
         "description": "Debug logging checkbox text."
     },
     "optionsDebugLoggingHelpText": {
-        "message": "Aktiver logning til fejlretning. Supplerende konsolbeskeder vil være synlige i både baggrunds- og indholdsscripts.",
+        "message": "Leg een logboek aan voor foutopsporing. Aanvullende opdrachtregelberichten zijn zichtbaar in zowel achtergrond- als inhoudsscripts.",
         "description": "Debug logging help text."
     },
     "optionsRadioText": {
-        "message": "Søg efter opdateringer til KeePassXC:",
+        "message": "Controleren op updates:",
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "hver 3. dag",
+        "message": "elke 3 dagen",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
-        "message": "hver uge",
+        "message": "elke week",
         "description": "Radio button text."
     },
     "optionsRadioMonth": {
-        "message": "hver måned",
+        "message": "elke maand",
         "description": "Radio button text."
     },
     "optionsRadioNever": {
-        "message": "aldrig",
+        "message": "nooit",
         "description": "Radio button text."
     },
     "optionsThemeSelectionHeader": {
-        "message": "Farvetema",
+        "message": "Thema",
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Sortér matchende loginoplysninger ud fra",
+        "message": "Overeenkomstige inloggegevens sorteren op",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
-        "message": "Vælg farvetema",
+        "message": "Kies een thema",
         "description": "Theme selection title text."
     },
     "optionsThemeSystem": {
-        "message": "Systemets",
+        "message": "Systeemthema",
         "description": "System theme text."
     },
     "optionsThemeDark": {
-        "message": "Mørkt",
+        "message": "Donker",
         "description": "Dark theme text."
     },
     "optionsThemeLight": {
-        "message": "Lyst",
+        "message": "Licht",
         "description": "Light theme text."
     },
     "optionsKeyboardShortcutsHeader": {
-        "message": "Tastaturgenveje",
+        "message": "Sneltoetsen",
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Tilføjer et ikon til adgangskodefelterne for at generere en ny adgangskode.",
+        "message": "Toont een knop in wachtwoordvelden om een nieuw wachtwoord te genereren.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
-        "message": "Adgangskoder genereres af KeePassXC med din adgangskodegenereringsprofil.",
+        "message": "Wachtwoorden worden gegenereerd door KeePassXC op basis van uw wachtwoordgeneratieprofiel.",
         "description": "Password Generator option help text, second part."
     },
     "optionsPredefinedSiteList": {
-        "message": "Foruddefinerede steder",
+        "message": "Vooringestelde websites",
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Anvend foruddefinerede steder for kompatibilitet",
+        "message": "Voorgedefinieerde websites gebruiken omwille van compatibiliteit",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Tilføj typiske steder med loginformularer kun med brugernavn til stedpræferencer",
+        "message": "Voegt bekende websites met ‘Alleen-gebruikersnaam’-inlogformulieren toe aan de websitevoorkeuren.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Tilføjer et ikon til brugernavnfelter til udfyldelse af loginoplysninger med et enkelt klik med musen.",
+        "message": "Toont een pictogram in het gebruikersnaaminvoerveld zodat de inloggegevens met een enkele muisklik kunnen worden ingevuld.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Tilføjer et ikon til inputfelter som genkendes som OTP/2FA.",
+        "message": "Toont een pictogram in invoervelden die worden herkend als OTP/2FA.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser indhenter automatisk loginoplysninger når et faneblad aktiveres.",
+        "message": "KeePassXC-Browser haalt inloggegevens automatisch op als een tabblad wordt geactiveerd.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
-        "message": "Genopret automatisk forbindelse til KeePassXC når den registreres.",
+        "message": "Maakt automatisch opnieuw verbinding met KeePassXC als het programma wordt gedetecteerd.",
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Lad KeePassXC-Browser udfylde loginoplysninger automatisk hvis den kun modtager én indtastning.",
+        "message": "Vul inloggegevens automatisch in als er slechts één veld wordt gedetecteerd.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Advarsel! Automatisk udfyldning er ikke sikker. Brug funktionen på eget ansvar. KeePassXC-Browser forsøger automatisk at detektere loginfelter. Felter kan dog blive detekteret ukorrekt, hvilken muligvis udfylder usikre felter med følsomme data.",
+        "message": "Waarschuwing! Het gebruik van automatisch invullen is niet veilig. Gebruik op eigen risico. KeePassXC-Browser probeert automatisch inlogvelden te detecteren. Deze kunnen echter onjuist worden gedetecteerd waarna gevoelige inloggegevens worden ingevuld bij mogelijk onveilige invoervelden.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Vis en nedrulningsliste med tilgængelige loginoplysninger til alle brugernavnefelter på en side.",
+        "message": "Toon een uitklapmenu met beschikbare inloggegevens voor alle gebruikersnaamvelden op de pagina.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Når der returneres loginoplysninger fra forskellige grupper, så vises kun gruppenavnet.",
+        "message": "Als inloggegevens in verschillende groepen worden aangetroffen, dan wordt de groepsnaam getoond.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Vis underretninger for fejl når der kræves brugerinteraktion.",
+        "message": "Toont een melding bij foutmeldingen en als gebruikersacties vereist zijn.",
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Brug et monokromt ikon med farvede badges i værktøjslinjen, der tilpasser sig det lyse/mørke browsertema.",
+        "message": "Gebruik een monochroom pictogram met gekleurde emblemen dat zich aanpast aan lichte en donkere browserthema's.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "Når nye loginoplysninger gemmes, så gem kun domænet i stedet for den fulde URL.",
+        "message": "Bewaar bij nieuwe inloggegevens alleen de domeinnaam in plaats van de volledige url.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Når nye tilpasset loginoplysninger gemmes, så gem kun domænet i stedet for den fulde URL.",
+        "message": "Bewaar bij aangepaste inlogvelden alleen de domeinnaam in plaats van de volledige url.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
-        "message": "Hent favicon efter lagring",
+        "message": "Favicon ophalen na opslaan",
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Favicon vil automatisk blive hentet for den nye loginoplysning.",
+        "message": "De favicon van nieuwe inloggegevens wordt automatisch opgehaald.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Hvis der findes loginoplysninger til en side og logintypen er en HTTP Basic Auth-anmodning, så prøver KeePassXC-Browser at logge ind med de loginoplysninger som først blev givet. Når der findes flere loginoplysninger, så kan udvidelsens pop op bruges til at vælge den korrekte. Selv når funktionaliteten er aktiveret, så er det stadigvæk muligt at indtaste HTTP Basic Auth-login manuelt.",
+        "message": "Als inloggegevens worden aangetroffen voor een pagina en de inlogsoort is HTTP Basic Auth is, dan probeert KeePassXC-Browser in te loggen met de eerste de beste inloggegevens. Als er meerdere gegevens zijn aangetroffen, dan kan gekozen worden uit de juiste. Let op: zelfs als deze functie is ingeschakeld, kan HTTP Basic Auth handmatig worden gebruikt.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
-        "message": "En HTTP Basic Auth-dialog ser sådan her ud:",
+        "message": "Een HTTP Basic Auth-venster ziet er zo uit:",
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Ryd loginoplysninger fra ikke-aktive faner efter (sekunder, 0-3600).",
+        "message": "Wis inloggegevens van inactieve tabbladen na (in seconden, 0-3600).",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Loginoplysninger ryddes fra baggrundsfaner efter tidsudløbet og der vil blive spurgt om tilladelser til disse sider igen.",
+        "message": "Inloggegevens worden na de time-out van de achtergrondtabbladen gewist en de bevoegdheden van die pagina's worden opnieuw gevraagd.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "KeePassXC-Browser behøver KeePassXC for at indhente loginoplysninger.",
+        "message": "KeePassXC is vereist om de inloggegevens op te halen.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
-        "message": "Du kan downloade den seneste stabile version fra $1",
+        "message": "Je kunt de nieuwste stabiele versie downloaden op $1",
         "description": "Settings page download link."
     },
     "optionsVersionRunning": {
-        "message": "Du kører KeePassXC-version: $1",
+        "message": "Je gebruikt KeePassXC, versie: $1",
         "description": "Settings page info text of user's KeePassXC version."
     },
     "optionsLatestVersion": {
-        "message": "Seneste tilgængelige version af KeePassXC: $1",
+        "message": "Nieuwste beschikbare KeePassXC-versie: $1",
         "description": "Settings page info text about the latest KeePassXC version."
     },
     "optionsKeePassXCVersionRequired": {
-        "message": "Kræver KeePassXC-version: $1",
+        "message": "Vereiste KeePassXC-versie: $1",
         "description": "KeePassXC version requirement text."
     },
     "optionsDefault": {
-        "message": "Standard: $1",
+        "message": "Standaard: $1",
         "description": "Default setting text."
     },
     "optionsInfinite": {
-        "message": "Uendeligt: $1",
+        "message": "Oneindig: $1",
         "description": "Infinite setting text."
     },
     "optionsRecommended": {
-        "message": "Anbefales: $1",
+        "message": "Aanbevolen: $1",
         "description": "Recommended setting text."
     },
     "optionsShortcutsSuccess": {
-        "message": "Genvejen for $1 er blevet ændret.",
+        "message": "De sneltoets omtrent het gebruik van $1 is gewijzigd.",
         "description": "Message for successful keyboard shortcut change."
     },
     "optionsShortcutsInfo": {
-        "message": "Genvejen for $1 er blevet nulstillet.",
+        "message": "De sneltoets omtrent het gebruik van $1 is hersteld.",
         "description": "Info message for changing keyboard shortcuts."
     },
     "optionsShortcutsDanger": {
-        "message": "Fejl: Genvejen for $1 er ikke blevet ændret!",
+        "message": "Foutmelding: de sneltoets omtrent het gebruik van $1 kan niet worden gewijzigd!",
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
-        "message": "Importér/eksportér indstillinger",
+        "message": "Instellingen importeren/exporteren",
         "description": "Settings page header text for import/export."
     },
     "optionsImportSettingsDialogTitle": {
-        "message": "Importér indstillinger fra ekstern fil?",
+        "message": "WIl je de instellingen uit een extern bestand importeren?",
         "description": "Import settings confirmation dialog title text."
     },
     "optionsImportSettingsDialogText": {
-        "message": "De nuværende indstillinger tilsidesættes. Vil du virkelig importere indstillingsfilen?",
+        "message": "De huidige instellingen worden overschreven. Weet je zeker dat je het instellingenbestand wilt importeren?",
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
-        "message": "Databaser som er forbundet til KeePassXC-Browser.",
+        "message": "De volgende KeePassXC-databases zijn gekoppeld aan KeePassXC-Browser.",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
-        "message": "Der blev ikke fundet nogen databaser som der er oprettet forbindelse til.",
+        "message": "Geen gekoppelde databases aangetroffen.",
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
-        "message": "Fjern identifikator fra databaseliste.",
+        "message": "Wil je de identificatie verwijderen van de databaselijst?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Vil du virkelig fjerne følgende identifikator fra databaselisten: $1",
+        "message": "Weet je zeker dat je de volgende identificatie wilt verwijderen van de databaselijst? $1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
-        "message": "Du kan altid genoprette forbindelsen med din database",
+        "message": "Je kunt de database altijd opnieuw koppelen.",
         "description": "Confirmation text when removing database from the list, second part."
     },
     "optionsDatabaseIdentifier": {
-        "message": "Identifikator",
+        "message": "Identificatie",
         "description": "Database list column title."
     },
     "optionsDatabaseKey": {
-        "message": "Nøgle",
+        "message": "Sleutel",
         "description": "Database list column title."
     },
     "optionsDatabaseLastUsed": {
-        "message": "Sidst brugt",
+        "message": "Laatst gebruikt op",
         "description": "Database list column title."
     },
     "optionsDatabaseCreated": {
-        "message": "Oprettet",
+        "message": "Aangemaakt op",
         "description": "Database list column title."
     },
     "optionsDatabaseDelete": {
-        "message": "Slet",
+        "message": "Verwijderen",
         "description": "Database list column title."
     },
     "optionsColumnPageURL": {
-        "message": "Sidens URL",
+        "message": "Pagina-url",
         "description": "Site preferences list column title."
     },
     "optionsColumnIgnore": {
-        "message": "Ignorer",
+        "message": "Negeren",
         "description": "Site preferences list column title."
     },
     "optionsColumnUsernameOnly": {
-        "message": "Kun registrering af brugernavn",
+        "message": "Alleen gebruikersnamen detecteren",
         "description": "Site preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
-        "message": "Forbedret Detektion af Inputfelter",
+        "message": "Verbeterde invoervelddetectie",
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnDelete": {
-        "message": "Slet",
+        "message": "Verwijderen",
         "description": "Site preferences list column title."
     },
     "optionsSelectionNothing": {
-        "message": "Aktivér alle funktionaliteter",
+        "message": "Alle functies inschakelen",
         "description": "Site preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "Deaktivér nye/ændret loginoplysninger",
+        "message": "Nieuwe/Gewijzigde inloggegevens uitschakelen",
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
-        "message": "Slå autoindsendelse fra",
+        "message": "Automatisch versturen uitschakelen",
         "description": "Site preferences option selection."
     },
     "optionsSelectionFull": {
-        "message": "Deaktivér alle funktionaliteter",
+        "message": "Alle functies uitschakelen",
         "description": "Site preferences option selection."
     },
     "optionsSortByTitle": {
-        "message": "Titel",
+        "message": "Naam",
         "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
-        "message": "Brugernavn",
+        "message": "Gebruikersnaam",
         "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
-        "message": "Gruppe og titel",
+        "message": "Groep en naam",
         "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
-        "message": "Gruppe og brugernavn",
+        "message": "Groep en gebruikersnaam",
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Sortér loginoplysninger efter udfyldning efter",
+        "message": "Inloggegevens na invullen sorteren op",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
-        "message": "Når første mulighed i Relevante loginoplysninger er valgt, angives loginoplysninger for tidligere udfyldt login som første i Autofuldførelsesmenuens liste.",
+        "message": "Als je kiest voor ‘Relevante inloggegevens’, dan worden de eerder gebruikte inloggegevens gebruikt (zie het menu ‘Automatisch aanvullen’).",
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Sortér loginoplysninger efter udfyldning for TOTP efter",
+        "message": "Inloggegevens na TOTP-invullen sorteren op",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
-        "message": "Når første mulighed i Relevante loginoplysninger er valgt, angives TOTP for tidligere udfyldt login som første i Autofuldførelsesmenuens liste.",
+        "message": "Als je kiest voor ‘Relevante inloggegevens’, dan wordt de TOTP van de eerder gebruikte inloggegevens gebruikt (zie het menu ‘Automatisch aanvullen’).",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
     "optionsFillSortByMatchingCredentials": {
-        "message": "Indstilling for matchende loginoplysninger",
+        "message": "Overeenkomstige inloggegevens",
         "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
     },
     "optionsFillSortByRelevantEntry": {
-        "message": "Relevant loginoplysning først",
+        "message": "Relevante inloggegevens",
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Fandt ingen tilpasset loginfelter.",
+        "message": "Er zijn geen aangepaste inlogvelden aangetroffen.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Du kan håndtere gemte loginfelter med tabellen.",
+        "message": "Je kunt bewaarde aangepaste inlogvelden beheren met behulp van de tabel. ",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": "Hvis KeePassXC-Browser registrerer de forkerte loginfelter, så kan du selv angive de korrekte felter.",
+        "message": "Als KeePassXC-Browser de verkeerde inlogvelden detecteert, dan kun je zelf de juiste velden opgeven.",
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Gå til siden og klik på KeePassXC-Browser-ikonet og vælg så ",
+        "message": "Ga naar de pagina, klik op het KeePassXC-browserpictogram en klik op",
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "På denne side kan du håndtere gemte tilpasset loginfelter.",
+        "message": "Op deze pagina kun je aangepaste inlogvelden beheren.",
         "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Fjern gemte tilpasset loginfelter?",
+        "message": "Opgeslagen aangepaste inlogvelden verwijderen?",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Vil du virkelig fjerne de gemte tilpasset loginfelter på siden: $1",
+        "message": "Weet je zeker dat je de opgeslagen aangepaste inlogvelden wilt verwijderen op de volgende pagina: $1",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
-        "message": "KeePassXC-Browser registrerer automatisk loginfelterne næste gang du besøger siden.",
+        "message": "KeePassXC-Browser detecteert automatisch de inlogvelden de volgende keer je deze pagina bezoekt.",
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Ingen stedpræferencer fundet.",
+        "message": "Er zijn geen websitevoorkeuren aangetroffen.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
-        "message": "Fjern sted?",
+        "message": "Website verwijderen?",
         "description": "Confirmation text when removing ignored sites from the list."
     },
     "optionsSitePreferencesTabHelpTextFirst": {
-        "message": "Steder på siden har specielle håndteringsmetoder tilknyttet.",
+        "message": "Websites op deze pagina hebben speciale behandelingsmethoden toegewezen gekregen.",
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Tilføj et websted nedenfor hvis du vil ignorere nye eller ændrede loginoplysninger for dette websted. Alternativt kan du vælge <em>Spørg ikke igen for dette sted</em> i loginbanneret på siden.",
+        "message": "Als je nieuwe/aangepaste inloggegevens op een specifieke website wilt negeren, voeg deze dan hieronder toe of selecteer <em>Niet meer vragen op deze website</em> als de KeepassXC-Browser balk zichtbaar is.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Hvis et sted ignoreres fuldt ud (<em>Deaktivér alle funktionaliteter</em> er valgt), så gør pluginet ikke noget når stedet besøges.",
+        "message": "Als een website volledig genegeerd wordt (via <em>Alle functies uitschakelen</em>), dan zal deze extensie niks doen als je deze website bezoekt.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Registrering kun af brugernavn giver KeePassXC-Browser mulighed for at udfylde logindetaljerne på websteder som bruger separate sider til brugernavn og adgangskode.",
+        "message": "Alleen gebruikersnaamen detecteren laat KeePassXC-Browser inloggegevens invullen op websites met aparte pagina's voor gebruikersnaam en wachtwoord.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Forbedret detektion af inputfelter giver mulighed for mere detaljeret dynamisk detektion af inputfelter. Det kan dog påvirke sidens ydeevne. Brug den med forsigtighed.",
+        "message": "Verbeterde invoervelddetectie maakt meer gedetailleerde dynamische detectie van invoervelden mogelijk. Dit kan echter van invloed zijn op de prestaties van de pagina. Gebruik met mate.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesManualAddText": {
-        "message": "Tilføj URL manuelt",
+        "message": "Url handmatig toevoegen",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "URL-adressen skal starte med enten <code>https://</code>, <code>http://</code>, <code>file://</code>, eller <code>ftp://</code> og skal være mindst 5 tegn lang.",
+        "message": "De url moet beginnen met <code>https://</code>, <code>http://</code>, <code>file://</code> of <code>ftp://</code> en dient ten minste 5 tekens lang te zijn.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
-        "message": "Vil du virkelig fjerne det angivne sted fra listen: $1",
+        "message": "Weet je zeker dat je de gekozen website wilt verwijderen van de lijst: $1",
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser aktiverer alle funktionaliteter for stedet og fjerner registrering kun af brugernavn.",
+        "message": "KeePassXC-Browser zal alle functies op deze website inschakelen en alleen-gebruikersnaamdetectie uitschakelen",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Du kan håndtere gemte stedpræferencer med tabellen.",
+        "message": "Je kunt de opgeslagen websitevoorkeuren beheren aan de hand van de tabel.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Valgmulighed til at ignorere udvidelsesfunktionaliteter på siden.",
+        "message": "Optie om extensiefuncties op de pagina te negeren.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
-        "message": "Besøg KeePassXC-Browser i Chrome Webshop.",
+        "message": "Bekijk KeePassXC-Browser in de Chrome Web Store",
         "description": "About page link to Chrome Web Store."
     },
     "optionsAboutMozilla": {
-        "message": "Besøg KeePassXC-Browser i Mozillas Add-ons.",
+        "message": "Bekijk KeePassXC-Browser op de Mozilla-add-onspagina",
         "description": "About page link to AMO."
     },
     "optionsAboutEdge": {
-        "message": "Besøg KeePassXC-Browser i Edge Add-ons.",
+        "message": "Bekijk KeePassXC-Browser op de Edge-add-onspagina",
         "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
-        "message": "Besøg KeePassXC-Browser på GitHub.",
+        "message": "Bekijk KeePassXC-Browser op GitHub",
         "description": "About page link to GitHub."
     },
     "optionsAboutExtensionVersion": {
-        "message": "KeePassXC-Browser-version: $1",
+        "message": "KeePassXC-Browser-versie: $1",
         "description": "About page text of extension version."
     },
     "optionsAboutKeePassXCVersion": {
-        "message": "KeePassXC-version: $1",
+        "message": "KeePassXC-versie: $1",
         "description": "About page text of KeePassXC version."
     },
     "optionsAboutContributors": {
-        "message": "Bidragydere",
+        "message": "Bijdragers",
         "description": "About page text of contributors."
     },
     "optionsAboutLicenses": {
-        "message": "Licenser",
+        "message": "Licenties",
         "description": "About page text of licenses."
     },
     "optionsAboutReportBugs": {
-        "message": "Rapportér fejl",
+        "message": "Bugs en problemen melden",
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Opret nyt issue på GitHub",
+        "message": "Open een nieuwe ‘issue’ op GitHub",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
-        "message": "Følgende fejlretningsinformation kan bruges",
+        "message": "De volgende foutopsporingsinformatie kan worden gebruikt",
         "description": "Debug info text."
     },
     "optionsAboutSupporters": {
-        "message": "Støtter",
+        "message": "Ondersteuners",
         "description": "Supporters label text."
     },
     "optionsErrorInvalidValue": {
-        "message": "Ugyldig værdi. Tjek venligst inputtet.",
+        "message": "Ongeldige waarde - controleer de invoer.",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Ugyldig URL. Tjek venligst inputtet.",
+        "message": "Ongeldige url - controleer de invoer.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
-        "message": "Værdien findes allerede i listen.",
+        "message": "Dit item staat al op de lijst.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
     "optionsUserInterfaceTitle": {
-        "message": "Brugerflade",
+        "message": "Vormgeving",
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Udfyldning af loginoplysninger",
+        "message": "Inloggegevens invullen",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Lagring af loginoplysninger",
+        "message": "Inloggegevens opslaan",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {
-        "message": "Opdateringer",
+        "message": "Updates",
         "description": "Updates title in settings page"
     },
     "optionsAdvancedSettingsTitle": {
-        "message": "Avancerede indstillinger",
+        "message": "Geavanceerde instellingen",
         "description": "Advanced settings title in settings page"
     },
     "optionsExtensionTitle": {
-        "message": "Udvidelse",
+        "message": "Extensie",
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Adgangsnøgler",
+        "message": "Passkeys",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Aktivér adgangsnøgler",
+        "message": "Passkeys inschakelen",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Aktivér understøttelse af webgodkendelse.",
+        "message": "Ondersteuning voor webverificatie inschakelen.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Aktivér adgangsnøgle-alternativ",
+        "message": "Passkey-terugval inschakelen",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Når aktiveret, vil en mislykket eller annulleret anmodning til KeePassXC udløse browserens egen interne Adgangsnøgle-anmodning. Hvis deaktiveret, kræves der forbindelse til KeePassXC, og en annulleret anmodning vil mislykkes. Standard: aktiveret.",
+        "message": "Indien ingeschakeld, zal een mislukt of geannuleerd verzoek aan KeePassXC het eigen interne Passkeys-verzoek van de browser activeren. Indien uitgeschakeld, is verbinding met KeePassXC vereist en mislukt het geannuleerde verzoek. Standaard: ingeschakeld.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
-        "message": "Åbner et nyt faneblad",
+        "message": "Opent een nieuw tabblad",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "HTTP Basic Authentication-dialog",
+        "message": "HTTP Basic Authentication-dialoogvenster",
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
-        "message": "Din markering indsendes automatisk",
+        "message": "Jouw keuze wordt automatisch ingediend",
         "description": "Message shown at the bottom of autocomplete menu."
     },
     "lockDatabase": {
-        "message": "Lås database",
+        "message": "Database vergrendelen",
         "description": "Lock database button title text."
     }
 }

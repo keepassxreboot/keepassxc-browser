@@ -107,6 +107,38 @@
         "message": "Kata sandi lebih panjang dari ruas yang tersedia.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Tidak ada grup yang ditemukan.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Tidak bisa membuat grup baru.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Tidak ada UUID yang valid yang disediakan.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Atestasi tidak didukung.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Kredensial dikecualikan.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Permintaan Passkey dibatalkan.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Verifikasi pengguna tidak valid.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Kunci publik kosong.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Tidak tersambung dengan KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -240,7 +272,7 @@
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
     "defineChooseStringFields": {
-        "message": "Choose String Fields",
+        "message": "Pilih Ruas String",
         "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
@@ -252,7 +284,7 @@
         "description": "Help text when choosing custom login fields."
     },
     "defineChooseCustomLoginFieldText": {
-        "message": "Choose a Custom Login Field",
+        "message": "Pilih suatu Ruas Log Masuk Ubahan",
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
@@ -264,7 +296,7 @@
         "description": "General text for password."
     },
     "stringFields": {
-        "message": "String Fields",
+        "message": "Ruas String",
         "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
@@ -360,11 +392,11 @@
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "Getting Started Guide - Setup Browser Integration",
+        "message": "Panduan Memulai - Menyiapkan Integrasi Peramban",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
-        "message": "Hide and don't show again.",
+        "message": "Sembunyikan dan jangan tampilkan lagi.",
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Ekstensi",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Enable Passkeys",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Enable support for Web Authentication.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Enable Passkeys fallback",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Buka tab baru",

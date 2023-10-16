@@ -107,6 +107,38 @@
         "message": "Попълнената парола е по-дълга от разрешената дължина на съдържание в полето.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Не са намерени групи.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Нова група не може да бъде създадена.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Не е предоставен валиден универсален уникален идентификатор.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Не се поддържа атестация.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Данните за удостоверяване са изключени.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Заявката за Passkeys е отказана.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Потребителят не може да бъде потвърден.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Въведете публичен ключ.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Няма връзка с KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -528,7 +560,7 @@
         "description": "General Settings tab text."
     },
     "optionsConnectedDatabasesTab": {
-        "message": "Свързани банки",
+        "message": "Свързани хранилища",
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
@@ -588,7 +620,7 @@
         "description": "Check for updates button text."
     },
     "optionsButtonRemoveNow": {
-        "message": "Да, премахване",
+        "message": "Премахване",
         "description": "Confirm button text when removing database key or custom login fields."
     },
     "optionsButtonCancel": {
@@ -944,7 +976,7 @@
         "description": "Database list column title."
     },
     "optionsDatabaseDelete": {
-        "message": "Изтриване",
+        "message": "Премахване",
         "description": "Database list column title."
     },
     "optionsColumnPageURL": {
@@ -964,7 +996,7 @@
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnDelete": {
-        "message": "Изтриване",
+        "message": "Премахване",
         "description": "Site preferences list column title."
     },
     "optionsSelectionNothing": {
@@ -1044,7 +1076,7 @@
         "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Премахване на запазените потребителски полета за вход?",
+        "message": "Да бъдат ли премахнати запазените потребителски полета за вход?",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmation": {
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Разширение",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Включване на Passkeys",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Поддръжане на Web Authentication.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Резервен вариант на Passkeys",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "Когато е отметнато, грешна или отказана заявка към KeePassXC ще задейства вградената в четеца заявка към Passkeys. Ако не е отметнато, връзка към KeePassXC е задължителна и отказаната заявка ще води до грешка. По подразбиране: отметнато.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Отваря нов раздел",

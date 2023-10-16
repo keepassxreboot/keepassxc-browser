@@ -1,3 +1,10 @@
+1.8.9 (2023-10-16)
+=========================
+- Add Patreon to predefined sites [#1993]
+- Add checks when removing a connection [#2005]
+- Add support for Passkeys (KeePassXC 2.8.0 required) [#1786]
+- Fix canceling message timeout [#2007]
+
 1.8.8.1 (2023-10-03)
 =========================
 - Fix handling message timeouts [#1999]

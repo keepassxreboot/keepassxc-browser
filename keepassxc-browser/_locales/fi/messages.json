@@ -4,7 +4,7 @@
         "description": "Name of the extension."
     },
     "contextMenuFillUsernameAndPassword": {
-        "message": "Täytä käyttäjänimi ja salasana",
+        "message": "Täytä käyttäjätunnus ja salasana",
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
@@ -20,7 +20,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Tallenna tietueet",
+        "message": "Tallenna kirjautumistiedot",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -36,7 +36,7 @@
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Havaittiin useita tietueita HTTP-autentikaation yhteydessä. Klikkaa selainlaajennuksen ikonia valitaksesi oikeat tunnukset.",
+        "message": "Havaittiin useita kirjautumistietoja sisältävä HTTP-todennus. Valitse haluamasi klikkaamalla laajennuksen kuvaketta.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -107,6 +107,38 @@
         "message": "Täytetyn salasanan pituus on sallittua pidempi.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Ryhmiä ei löytynyt.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Uutta ryhmää ei voitu luoda.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Validia UUID:tä ei annettu.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Attestation ei ole tuettu.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Kirjautumistieto on lisätty poikkeuksiin.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Passkeys-pyyntö on peruttu.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Virheellinen käyttäjän varmennus.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Tyhjä julkinen avain.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Ei yhteyttä KeePassXC:hen.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -168,7 +200,7 @@
         "description": "Password generator error text when KeePassXC is closed."
     },
     "usernameFieldText": {
-        "message": "Täytä tietueita KeePassXC:stä",
+        "message": "Täytä kirjautumistiedot KeePassXC:stä",
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
@@ -180,7 +212,7 @@
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
-        "message": "Käyttäjänimikentän ikoni",
+        "message": "käyttäjätunnuskentän kuvake",
         "description": "Username field icon text."
     },
     "totp": {
@@ -228,7 +260,7 @@
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "Valitse käyttäjänimen kenttä",
+        "message": "Valitse käyttäjätunnuksen kenttä",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
@@ -256,7 +288,7 @@
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
-        "message": "Käyttäjänimi",
+        "message": "Käyttäjätunnus",
         "description": "General text for username."
     },
     "password": {
@@ -268,7 +300,7 @@
         "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
-        "message": "- ei käyttäjänimeä -",
+        "message": "- ei käyttäjätunnusta -",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
@@ -284,7 +316,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Virhe:\nTunnuksia annetulle käyttäjänimelle ei löydy.",
+        "message": "Annetulle käyttäjätunnukselle ei löydy kirjautumistietoja.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
@@ -304,7 +336,7 @@
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "Virhe:\nMuutoksia tietueessa ei havaittu.",
+        "message": "Virhe: Muuttuneita kirjautumistietoja ei havaittu.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -340,7 +372,7 @@
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
-        "message": "Lisää pelkän käyttäjänimikentän tunnistus sivustolle",
+        "message": "Lisää sivustolle \"Vain käyttäjätunnus\" -asetus",
         "description": "Button text for adding Username-only option."
     },
     "popupErrorEncountered": {
@@ -400,31 +432,31 @@
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "Vain yksi käyttäjänimikenttä havaittiin. Lisätäänkö sivun URL Sivustojen asetuksiin, ja pelkän käyttäjänimikentän tunnistus otetaan käyttöön?",
+        "message": "Havaittiin vain yksittäinen käyttäjätunnuskenttä. Lisätäänkö sivuston URL-osoite sivustoasetuksiin \"Vain käyttäjätunnus\" -asetuksella?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "rememberInfoText": {
-        "message": "Käyttäjänimi tai salasana on muuttunut! Tallennetaanko?",
+        "message": "Käyttäjätunnus tai salasana on muuttunut. Tallennetaanko muutos?",
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "Tietueet tallennetaan yhdistettyyn tietokantaan tunnisteella $1",
+        "message": "Kirjautumistiedot tallennetaan yhdistettyyn tietokantaan tunnisteella $1",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
-        "message": "Seuraava käyttäjänimi ei ole tällä hetkellä tallennettu: $1",
+        "message": "Seuraavaa käyttäjätunnusta ei ole vielä tallennettu: $1",
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "Tietueet tämän hetkisellä käyttäjänimellä on lihavoitu: $1",
+        "message": "Käytetyn käyttäjätunnuksen sisältävät kirjautumistiedot on lihavoitu: $1",
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "Valitse tietueet jotka haluat päivittää.",
+        "message": "Valitse kirjautumistiedot, jotka haluat päivittää.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Valitse ryhmä johon haluat lisätä uuden tietueen.",
+        "message": "Valitse ryhmä johon haluat lisätä uudet kirjautumistiedot.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -436,31 +468,31 @@
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "Tietueita ei päivitetty. Salasana ei ole muuttunut.",
+        "message": "Kirjautumistietoja ei päivitetty. Salasanaa ei ole vaihdettu.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
-        "message": "Tietueita ei voitu tallentaa tai päivittää.",
+        "message": "Kirjautumistietoja ei voida tallentaa tai päivittää.",
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Tietueita ei voi tallentaa tai päivittää suljettuun tietokantaan.",
+        "message": "Kirjautumistietoja ei voida tallentaa tai päivittää suljettuun tietokantaan.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
-        "message": "Toiminto peruutettu. Tietueita ei ole päivitetty.",
+        "message": "Toiminto peruuttiin, eikä kirjautumistietoja päivitetty.",
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "Tallennettu uusi tietue käyttäjänimellä $1 ",
+        "message": "Uudet kirjautumistiedot käyttäjätunnuksella $1 tallennettiin.",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
-        "message": "Päivitettiin tietue käyttäjänimellä $1",
+        "message": "Kirjautumistiedot käyttäjätunnuksella $1 päivitettiin.",
         "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "Identtinen tietue on jo olemassa. Ei päivitettävää.",
+        "message": "Identtiset kirjautumistiedot ovat jo olemassa. Päivitettävää ei ole.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
@@ -468,7 +500,7 @@
         "description": "Means an empty username."
     },
     "rememberNoPassword": {
-        "message": "Täytä salasanakenttä ennen tietueiden tallentamista.",
+        "message": "Täytä salasanakenttä ennen kirjautumistietojen tallennusta.",
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
@@ -492,7 +524,7 @@
         "description": "URL. Might not need any translation."
     },
     "popupUsername": {
-        "message": "Käyttäjänimi:",
+        "message": "Käyttäjätunnus:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -508,7 +540,7 @@
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Älä kysy koskaan tälle sivustolle",
+        "message": "Älä kysy enää tällä sivustolla",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -536,7 +568,7 @@
         "description": "Saved custom login fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Sivustojen asetukset",
+        "message": "Sivustoasetukset",
         "description": "Site preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -556,7 +588,7 @@
         "description": "Custom login fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Sivustojen asetukset",
+        "message": "Sivustoasetukset",
         "description": "Site preferences page header."
     },
     "optionsMenuAbout": {
@@ -616,7 +648,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Kysy aina minne uudet tietueet tallennetaan.",
+        "message": "Kysy aina minne uudet kirjautumistiedot tallennetaan.",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
@@ -628,7 +660,7 @@
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Aktivoi käyttäjänimikentän ikonit.",
+        "message": "Aktivoi käyttäjätunnuskenttien kuvake.",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
@@ -636,7 +668,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Hyödyllinen sivustoilla jotka käyttävät ponnahdusikkunoita tai dynaamisia dialogeja. Poista ominaisuus käytöstä vähentääksesi CPU-kuormaa vanhemmilla koneilla. Kun ominaisuus ei ole käytössä, tietueet voidaan täyttää vain käyttämällä näppäinoikoteitä, pikavalikkoa tai selainlaajennuksen ponnahdusikkunaa ikonin kautta. ",
+        "message": "Hyödyllinen sivustoilla jotka käyttävät ponnahduksia tai dynaamisia valintaruutuja. Poista ominaisuus käytöstä vähentääksesi prosessorin kuormitusta vanhemmilla koneilla. Kun ominaisuus ei ole käytössä, kirjautumistiedot voidaan täyttää vain pikanäppäimillä, sisältövalikosta tai laajennuksen kuvakkeen ponnahduksesta. ",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -644,7 +676,7 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Hae tietueet automaattisesti.",
+        "message": "Nouda kirjautumistiedot automaattisesti.",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
@@ -656,15 +688,15 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Täytä yhden tietueen sisältävät tiedot automaattisesti.",
+        "message": "Täytä yksittäisen kirjautumistiedon kentät automaattisesti.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Aktivoi käyttäjänimikenttien valikko.",
+        "message": "Aktivoi käyttäjätunnuskenttien automaattitäyttö.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Näytä ryhmän nimi käyttäjänimikenttien valikossa, jos se sisältää tietueita eri ryhmistä.",
+        "message": "Näytä ryhmän nimi automaattitäytön listauksessa, kun kirjautumistiedot ovat eri ryhmistä.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -672,7 +704,7 @@
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Kirjautuu automaattisesti sisään valituilla tunnuksilla. Tämä toiminto ei ole aktiivinen yhden tietueen automaattisen täytön kanssa.",
+        "message": "Lähettää lomakkeen automaattisesti valituilla tunnuksilla. Toimintoa ei käytetä yksittäisen tiedon automaattitäytössä.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
@@ -688,7 +720,7 @@
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Näytä ilmoitus, kun uusia tietueita voidaan tallettaa tietokantaan.",
+        "message": "Näytä ilmoituspalkki kun tietokantaan voidaan tallentaa uudet kirjautumistiedot.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -696,11 +728,11 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Kuinka monta sivun uudelleenohjasuta sallitaan ennen kuin palkki katoaa näkyvistä. Vakioasetus on 3, maksimi ääretön.",
+        "message": "Sallittu uudelleenohjausten määrä ennen kuin palkki katoaa. Oletus on 3. Enimmäismäärä on ääretön.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Salli HTTP-autentikaatiotietojen täyttäminen.",
+        "message": "Salli HTTP Basic Auth -kirjautumistietojen täyttäminen.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -736,7 +768,7 @@
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Järjestä tietueet seuraavasti",
+        "message": "Täsmäävien kirjautumistietojen järjestysperuste",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
@@ -776,11 +808,11 @@
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Lisää pelkän käyttäjänimen tunnistuksen automaattisesti yleisille sivustoille.",
+        "message": "Lisää sivustoasetuksiin tunnettuja sivustoja, joiden kirjautumislomakkeet sisältävät vain käyttäjätunnuskentän.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Lisää ikonin käyttäjänimikenttiin, jota kautta tietueet voi täyttää yhdellä hiiren painalluksella.",
+        "message": "Lisää käyttäjätunnuskenttiin kuvake, josta kirjautumistiedot voidaan täyttää yhdellä hiiren painalluksella.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
@@ -788,7 +820,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser hakee tietueet heti kun välilehti on aktivoitu.",
+        "message": "KeePassXC-Browser noutaa kirjautumistiedot heti välilehden aktivoituessa.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
@@ -796,7 +828,7 @@
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Sallii KeePassXC-Browser:in täyttää tietue automaattisesti, jos niitä on sivustolle vain yksi.",
+        "message": "Salli KeePassXC-Browserin täyttää kirjautumistiedot automaattisesti, jos se noutaa vain yksittäisen tiedon.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -804,11 +836,11 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Näyttää pudotusvalikon käyttäjänimikentässä kaikista saatavilla olevista tietueista kyseiselle sivulle.",
+        "message": "Näytä pudotuslista, joka sisältää kaikkiin sivulla oleviin käyttäjätunnuskenttiin sopivat kirjautumistiedot.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Jos tietueita on löytynyt useista eri ryhmistä, ryhmän nimi näytetään.",
+        "message": "Kun kirjautumistietoja löytyy eri ryhmistä, näytetään ryhmän nimi.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -820,7 +852,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "Uusia tietueita tallentaessa tallenna vain verkkotunnus koko osoitteen sijasta.",
+        "message": "Kun tallennetaan uusia kirjautumistietoja, tallenna täydellisen URL-osoitteen sijaan vain sivuston verkkotunnus.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
@@ -832,11 +864,11 @@
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Uudelle tietueelle ladataan favicon automaattisesti tallennuksen yhteydessä.",
+        "message": "Uudelle kirjautumistiedolle ladataan favicon-kuvake automaattisesti.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Jos HTTP-autentikaatiota vaativalle sivustolle löydetään tietue, KeePassXC-Browser yrittää automaattisesti kirjautua niitä käyttäen.",
+        "message": "Jos sivulle löytyy kirjautumistietoja ja kirjautuminen on toteutettu HTTP Basic Auth -pyynnöllä, pyrkii KeePassXC-Browser kirjautua automaattisesti ensimmäisillä annetuilla kirjautumistiedoilla. Jos kirjautumistietoja on useita, voidaan haluttu tieto valita laajennuksen ponnahduksesta. HTTP basic Auth -kirjautuminen on mahdollista täyttää myös manuaalisesti vaikka tämä ominaisuus ei olisikaan käytössä.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -844,15 +876,15 @@
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Tyhjennä tietueet ei-aktiivisilta välilehdiltä (sekunti, 0-3600)",
+        "message": "Tyhjennä kirjautumistiedot ei-aktiivisilta välilehdiltä (sekuntia, 0-3600)",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Tietueet tyhjennetään selaimen muistista taustalla olevista välilehdistä aikakatkaisun jälkeen, ja niiden käyttölupa kysytään uudelleen välilehden aktivoituessa.",
+        "message": "Kirjautumistiedot tyhjennetään taustavälilehdiltä määritetyn ajan kuluttua ja välilehtien sivuille pyydetään käyttöoikeus uudelleen.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "KeePassXC-Browser tarvitsee KeePassXC:tä hakeakseen tietueita.",
+        "message": "KeePassXC-Browser tarvitsee tietueiden noutoon KeePassXC:n.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
@@ -956,7 +988,7 @@
         "description": "Site preferences list column title."
     },
     "optionsColumnUsernameOnly": {
-        "message": "Pelkän käyttäjänimikentän tunnistus",
+        "message": "Vain käyttäjätunnus -tunnistus",
         "description": "Site preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
@@ -972,7 +1004,7 @@
         "description": "Site preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "Poista uusien/muokattujen tietueiden tunnistus käytöstä",
+        "message": "Poista uudet/muokatut kirjautumistiedot käytöstä",
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
@@ -988,7 +1020,7 @@
         "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
-        "message": "Käyttäjänimi",
+        "message": "Käyttäjätunnus",
         "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
@@ -996,31 +1028,31 @@
         "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
-        "message": "Ryhmä ja käyttäjänimi",
+        "message": "Ryhmä ja käyttäjätunnus",
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Lajittele tietueen täytön jälkeen",
+        "message": "Kirjautumistietojen täytön jälkeinen järjestysperuste",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
-        "message": "Kun Olennainen tietue ensin -vaihtoehto on valittu, aiemmin täytetty tietue näytetään käyttäjänimikienttien valikossa ensimmäisenä.",
+        "message": "Kun \"Sopivin kirjautumistieto ensin\" on valittu, näytetään viimeksi täytetty tieto automaattitäytön valikossa ensimmäisenä.",
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Lajittele tietueet TOTP:in täytön jälkeen",
+        "message": "Kirjautumistietojen täytönjälkeinen TOTP-järjestysperuste",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
-        "message": "Kun Olennainen tietue ensin -vaihtoehto on valittu, aiemmin täytettyyn tietueeseen liittyvät TOTP-vaihtoehto näytetään käyttäjänimikienttien valikossa ensimmäisenä.",
+        "message": "Kun \"Sopivin kirjautumistieto ensin\" on valittu, näytetään viimeksi täytetyn tiedon TOTP automaattitäytön valikossa ensimmäisenä.",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
     "optionsFillSortByMatchingCredentials": {
-        "message": "Käytä Järjestä tietueet -asetusta",
+        "message": "Täsmäävät kirjautumistiedot -asetus",
         "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
     },
     "optionsFillSortByRelevantEntry": {
-        "message": "Olennainen tietue ensin",
+        "message": "Sopivin kirjautumistieto ensin",
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
@@ -1056,7 +1088,7 @@
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Hyljättyjä sivustoja ei löydetty.",
+        "message": "Sivustoasetuksia ei löytynyt.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -1068,7 +1100,7 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Poistaaksesi uusien/muokattujen tietueiden tunnistuksen käytöstä tietyllä sivulla, lisää sivusto alle tai käytä KeePassXC-Browserin ponnahdusikkunaa ja valitse",
+        "message": "Ohittaaksesi uusien kirjautumistietojen tallennuksen tai olemassa olevien muokkauksen tietyillä sivustoilla, lisää sivustot alle tai valitse sivulla näytettävästä ilmoituspalkista <em>Älä kysy enää tällä sivustolla</em>.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
@@ -1076,7 +1108,7 @@
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Pelkän käyttäjänimikentän tunnistus mahdollistaa KeePassXC-Browser:in käytön sivustoilla joissa käyttäjänimi- ja salasanakenttä on jaoteltu eri sivuille.",
+        "message": "\"Vain käyttäjätunnus\" -asetuksen avulla KeePassXC-Browser voi täyttää kirjautumistiedot sivustoilla, joiden käyttäjätunnus- ja salasanakentät on sijoitettu eri sivuille.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
@@ -1096,11 +1128,11 @@
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser käyttää tällä sivustolla kaikkia ominaisuuksia ja poistaa pelkän käyttäjänimikentän tunnistuksen käytöstä.",
+        "message": "KeePassXC-Browser käyttää tällä sivustolla kaikkia ominaisuuksiaan ja poistaa \"Vain käyttäjätunnus\" -asetuksen käytöstä.",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Voit hallita tallennettuja sivustojen asetuksia käyttämällä alla olevaa taulukkoa.",
+        "message": "Voit hallita tallennettuja sivustoasetuksia taulukon avulla.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1172,11 +1204,11 @@
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Tietueiden täyttö",
+        "message": "Kirjautumistietojen täyttäminen",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Tietueiden tallennus",
+        "message": "Kirjautumistietojen tallentaminen",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Selainlaajennus",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeyt",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Ota käyttöön Passkeyt",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Ota käyttöön turvallinen verkkotodennus.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Tue Passkeyn perääntymistä",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "Kun aktivoitu, epäonnistunut tai peruutettu pyyntö KeePassXC:lle ohjaa selaimen omaan Passkeys-pyyntöön. Mikäli asetus on pois päältä, yhteys KeePassXC:hen on vaadittu, ja peruutettu pyyntö epäonnistuu suoraan. Oletus: aktivoitu.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Avaa uuden välilehden",
