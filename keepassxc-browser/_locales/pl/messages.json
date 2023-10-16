@@ -107,6 +107,38 @@
         "message": "Wprowadzone hasło jest dłuższe niż dozwolona maksymalna długość pola.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Nie znaleziono grup.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Nie można utworzyć nowej grupy.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Nie podano prawidłowego UUID.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Zaświadczenie nie jest obsługiwane.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Poświadczenie jest wykluczone.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Żądanie kluczy dostępu zostało anulowane.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Nieprawidłowa weryfikacja użytkownika.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Pusty klucz publiczny.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Brak połączenia z KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Rozszerzenie",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Klucze dostępu",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Włącz klucze dostępu",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Włącz obsługę Web Authentication.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Włącz rezerwowe klucze dostępu",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "Po włączeniu nieudane lub anulowane żądanie do KeePassXC spowoduje wygenerowanie wewnętrznego żądania kluczy dostępu przeglądarki. Jeśli ta opcja jest wyłączona, wymagane jest połączenie z KeePassXC, a anulowanie żądania nie powiedzie się. Wartość domyślna: włączone.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Otwiera nową kartę",

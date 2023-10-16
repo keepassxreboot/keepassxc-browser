@@ -107,6 +107,38 @@
         "message": "Angivet lösenord är längre än fältets maxlängd.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Inga grupper hittades.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Kan inte skapa ny grupp.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Ingen giltig UUID tillhandahållen.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Attestering stöds inte.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Referensuppgift är undantagen.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Begäran om passnycklar annullerad.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Ogiltig användarverifiering.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Tom offentlig nyckel.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Inte ansluten till KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Tillägg",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passnycklar",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Aktivera passnycklar",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Aktivera stöd för webbautentisering.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Aktivera reservnycklar",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "När detta är aktiverat kommer en misslyckad eller avbruten begäran till KeePassXC att utlösa webbläsarens egen interna passnyckelbegäran. Om det är inaktiverat krävs anslutning till KeePassXC och en avbruten begäran kommer att misslyckas. Standard: Aktiverat.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Opens a new tab",

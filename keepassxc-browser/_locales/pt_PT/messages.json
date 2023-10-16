@@ -107,6 +107,38 @@
         "message": "A palavra-passe preenchida é maior que o comprimento máximo permitido do campo.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Nenhum grupo foi encontrado.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Não é possível criar um novo grupo.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Nenhum UUID válido foi fornecido.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Attestation not supported.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Credential is excluded.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "A solicitação de Passkeys foi cancelada.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Verificação inválida do utilizador.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Chave pública vazia.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Não existe uma ligação a KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Extensão",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Ativar Passkeys",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Ative o suporte para autenticação na web.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Enable Passkeys fallback",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Abre um  novo separador",

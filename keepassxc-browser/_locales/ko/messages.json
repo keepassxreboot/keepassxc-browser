@@ -107,6 +107,38 @@
         "message": "입력된 암호가 암호 필드의 최대 길이보다 깁니다.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "No groups found.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Cannot create new group.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "No valid UUID provided.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Attestation not supported.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Credential is excluded.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Passkeys request canceled.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Invalid user verification.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Empty public key.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "KeePassXC에 연결되지 않았습니다.",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "확장 기능",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Enable Passkeys",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Enable support for Web Authentication.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Enable Passkeys fallback",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "새 탭 열기",

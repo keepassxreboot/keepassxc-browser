@@ -107,6 +107,38 @@
         "message": "Het ingevoerde wachtwoord is langer dan de toegestane lengte.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "Geen groepen gevonden.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "De nieuwe groep kan niet worden aangemaakt.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Geen geldige UUID opgegeven.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Getuigschrift niet ondersteund.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Referentie is uitgesloten.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Passkey-verzoek geannuleerd.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Ongeldige gebruikersverificatie.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Lege openbare sleutel.",
+        "description": "Empty public key."
+    },
     "errorNotConnected": {
         "message": "Niet verbonden met KeePassXC",
         "description": "Error notification shown when not connected to KeePassXC"
@@ -1190,6 +1222,26 @@
     "optionsExtensionTitle": {
         "message": "Extensie",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Passkeys inschakelen",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Ondersteuning voor webverificatie inschakelen.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Passkey-terugval inschakelen",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "Indien ingeschakeld, zal een mislukt of geannuleerd verzoek aan KeePassXC het eigen interne Passkeys-verzoek van de browser activeren. Indien uitgeschakeld, is verbinding met KeePassXC vereist en mislukt het geannuleerde verzoek. Standaard: ingeschakeld.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Opent een nieuw tabblad",

@@ -36,7 +36,7 @@
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "HTTP kimlik doğrulaması için kullanılabilecek birden çok kimlik doğrulama bilgisi bulundu. Doğru bilgileri seçmek için uzantı simgesine tıklayın.",
+        "message": "HTTP kimlik doğrulaması için kullanılabilecek birden çok kimlik doğrulama bilgisi bulundu. Doğru bilgileri seçmek için eklenti simgesine tıklayın.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -60,7 +60,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "KeePassXC bağlantısı kurulamadı. KeePassXC ayarlarından tarayıcı bütünleşmesinin etkinleştirilmiş olduğundan emin olun.",
+        "message": "KeePassXC bağlantısı kurulamadı. KeePassXC ayarlarından tarayıcı bütünleşmesinin açık olduğundan emin olun.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -106,6 +106,38 @@
     "errorMessagePaswordLengthExceeded": {
         "message": "Doldurulan parola, alanın kabul ettiği karakter sayısından uzun.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
+    },
+    "errorMessageNoGroupsFound": {
+        "message": "Herhangi bir grup bulunamadı.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Yeni grup eklenemedi.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Geçerli bir UUID belirtilmemiş.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Onay desteklenmiyor.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Kimlik doğrulama bilgisi katılmayacak.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Parola anahtarları isteği iptal edildi.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Kullanıcı doğrulaması geçersiz.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Herkese açık anahtar boş.",
+        "description": "Empty public key."
     },
     "errorNotConnected": {
         "message": "KeePassXC ile bağlantı kurulmamış.",
@@ -400,7 +432,7 @@
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "Yalnızca tek bir kullanıcı adı alanı algılandı. Bu adresi yalnızca kullanıcı adı seçeneği etkinleştirilmiş site ayarlarına ekleyin.",
+        "message": "Yalnızca tek bir kullanıcı adı alanı algılandı. Bu adresi yalnızca kullanıcı adı seçeneği açık ise site ayarlarına ekleyin.",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "rememberInfoText": {
@@ -636,7 +668,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Açılır pencereler ya da devingen iletişim kutuları bulunan sayfalarda kullanışlıdır. Yavaş bilgisayarlarda işlemci yükünü azaltmak için bu özelliği devre dışı bırakın. Devre dışı bırakıldığında, kimlik doğrulama bilgileri yalnızca tuş takımı kısayolları, sağ tık menüsü ya da uzantının açılır penceresi kullanılarak doldurulabilir.",
+        "message": "Açılır pencereler ya da etkileşimli pencereler bulunan sayfalarda kullanışlıdır. Yavaş bilgisayarlarda işlemci yükünü azaltmak için bu özelliği kapatın. Kapatıldığında, kimlik doğrulama bilgileri yalnızca klavye kısayolları, sağ tık menüsü ya da eklentinin açılır penceresi kullanılarak doldurulabilir.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -672,7 +704,7 @@
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Seçilmiş kimlik doğrulama bilgilerini otomatik olarak gönderir. Tek kayıttan otomatik doldurma için devre dışıdır.",
+        "message": "Seçilmiş kimlik doğrulama bilgilerini otomatik olarak gönderir. Tek kayıttan otomatik doldurma için kapalıdır.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
@@ -708,7 +740,7 @@
         "description": "Debug logging checkbox text."
     },
     "optionsDebugLoggingHelpText": {
-        "message": "Hata ayıklama günlüğünü etkinleştirir. Arka planda ve içerik betiklerinde ek konsol iletileri görüntülenir.",
+        "message": "Hata ayıklama günlüğünü açar. Arka planda ve içerik betiklerinde ek konsol iletileri görüntülenir.",
         "description": "Debug logging help text."
     },
     "optionsRadioText": {
@@ -836,7 +868,7 @@
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Bir sayfa için kimlik doğrulama bilgileri bulunursa ve oturum açam türü bir HTTP temel kimlik doğrulama isteği ise, KeePassXC-Browser ilk verilen kimlik doğrulama bilgileriyle oturum açmayı dener. Birden çok kimlik doğrulama bilgisi varsa, doğru bilgileri seçmek için uzantı açılan penceresi kullanılabilir. Bu özellik etkinleştirilmiş olsa bile, el ile HTTP temel kimlik doğrulamasına giriş yapılabilir.",
+        "message": "Bir sayfa için kimlik doğrulama bilgileri bulunursa ve oturum açma türü bir HTTP temel kimlik doğrulama isteği ise, KeePassXC-Browser ilk verilen kimlik doğrulama bilgileriyle oturum açmayı dener. Birden çok kimlik doğrulama bilgisi varsa, doğru bilgileri seçmek için eklenti açılan penceresi kullanılabilir. Bu özellik açık olsa bile, el ile HTTP temel kimlik doğrulamasına giriş yapılabilir.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -968,11 +1000,11 @@
         "description": "Site preferences list column title."
     },
     "optionsSelectionNothing": {
-        "message": "Tüm özellikleri etkinleştir",
+        "message": "Tüm özellikleri aç",
         "description": "Site preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "Yeni/değiştirilmiş kimlik doğrulama bilgileri devre dışı bırakılsın",
+        "message": "Yeni/değiştirilmiş kimlik doğrulama bilgileri kapatılsın",
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
@@ -980,7 +1012,7 @@
         "description": "Site preferences option selection."
     },
     "optionsSelectionFull": {
-        "message": "Tüm özellikleri devre dışı bırak",
+        "message": "Tüm özellikleri kapat",
         "description": "Site preferences option selection."
     },
     "optionsSortByTitle": {
@@ -1072,11 +1104,11 @@
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Bir site tamamen yok sayılırsa (<em>Tüm özellikleri devre dışı bırak</em> seçilmişse), bu site ziyaret edildiğinde uzantı tarafından herhangi bir işlem yapılmaz.",
+        "message": "Bir site tamamen yok sayılırsa (<em>Tüm özellikleri kapat</em> seçilmişse), bu site ziyaret edildiğinde eklenti tarafından herhangi bir işlem yapılmaz.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Yalnızca kullanıcı adı algılaması, KeePassXC-Browser uzantısının, kullanıcı adı ve parola için ayrı sayfalar kullanan sitelerde oturum açma bilgilerini doldurabilmesini sağlar.",
+        "message": "Yalnızca kullanıcı adı algılaması, KeePassXC-Browser eklentisinin, kullanıcı adı ve parola için ayrı sayfalar kullanan sitelerde oturum açma bilgilerini doldurabilmesini sağlar.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
@@ -1096,7 +1128,7 @@
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser bu site için tüm özellikleri etkinleştirecek ve yalnızca kullanıcı adı algılamasını kaldıracak.",
+        "message": "KeePassXC-Browser bu site için tüm özellikleri açacak ve yalnızca kullanıcı adı algılamasını kaldıracak.",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
@@ -1104,19 +1136,19 @@
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Sayfa için uzantı özelliklerini yok sayma seçeneği.",
+        "message": "Sayfa için eklenti özelliklerini yok sayma seçeneği.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
-        "message": "Chrome web mağazasında KeePassXC-Browser uzantısına bakın.",
+        "message": "Chrome web mağazasında KeePassXC-Browser eklentisini bulun.",
         "description": "About page link to Chrome Web Store."
     },
     "optionsAboutMozilla": {
-        "message": "Mozilla eklentileri dizininde KeePassXC-Browser uzantısına bakın.",
+        "message": "Mozilla eklentileri dizininde KeePassXC-Browser eklentisini bulun.",
         "description": "About page link to AMO."
     },
     "optionsAboutEdge": {
-        "message": "Edge eklentileri dizininde KeePassXC-Browser uzantısına bakın.",
+        "message": "Edge eklentileri dizininde KeePassXC-Browser eklentisini bulun.",
         "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
@@ -1188,8 +1220,28 @@
         "description": "Advanced settings title in settings page"
     },
     "optionsExtensionTitle": {
-        "message": "Uzantı",
+        "message": "Eklenti",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Parola anahtarları",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Parola anahtarları kullanılsın",
+        "description": "Enabled Passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "İnternet kimlik doğrulaması desteği kullanılsın.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Varsayılan parola anahtarları kullanılsın",
+        "description": "Enabled Passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "Bu seçenek açılırsa, KeePassXC için yapılan başarısız ya da iptal edilen bir istek, tarayıcının kendi iç parola anahtarı isteğini tetikler. Kapatılırsa KeePassXC bağlantısının kurulması gereklidir ve iptal edilen istek başarısız olur. Varsayılan olarak açıktır.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Yeni bir sekme açar",
