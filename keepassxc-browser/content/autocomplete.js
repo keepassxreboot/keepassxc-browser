@@ -152,6 +152,8 @@ class Autocomplete {
                 this.list.appendChild(item);
             }
         }
+
+        this.selectItem();
     }
 
     selectItem() {
