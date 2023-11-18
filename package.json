@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "node build.js",
+    "lint": "npx eslint keepassxc-browser/**/*.js",
     "tests": "npx playwright test"
   },
   "repository": {

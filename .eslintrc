@@ -99,6 +99,7 @@
         "CHECK_UPDATE_ONE_MONTH": true,
         "CHECK_UPDATE_ONE_WEEK": true,
         "CHECK_UPDATE_THREE_DAYS": true,
+        "cloneInto": true,
         "createResult": true,
         "createStylesheet": true,
         "DatabaseState": true,
