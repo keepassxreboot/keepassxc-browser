@@ -301,7 +301,9 @@ kpxcFields.getElementFromXPathId = function(xpath) {
 kpxcFields.handleSegmentedTOTPFields = function(inputs, combinations) {
     // Check for multiple segmented TOTP fields when there are no inputs, or combination contains the segemented fields
     const segmentedFields = combinations.filter(c => c.totp);
-    if (combinations.length === 0 || segmentedFields.length === DEFAULT_SEGMENTED_TOTP_FIELDS) {
+    if (combinations.length === 0
+        || segmentedFields.length === DEFAULT_SEGMENTED_TOTP_FIELDS
+        || inputs?.length === DEFAULT_SEGMENTED_TOTP_FIELDS) {
         kpxcFields.getSegmentedTOTPFields(inputs, combinations);
     }
 
