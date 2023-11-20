@@ -92,7 +92,12 @@ tbody {
     color: var(--kpxc-text-color);
 }
 
+.table>:not(caption)>*>* {
+    color: var(--kpxc-text-color);
+}
+
 .table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-bg-type: var(--kpxc-table-odd-color);
     background-color: var(--kpxc-table-odd-color);
     color: var(--kpxc-text-color);
 }

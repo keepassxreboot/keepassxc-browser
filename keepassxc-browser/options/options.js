@@ -84,11 +84,7 @@ options.initGeneralSettings = function() {
         options.saveSettings();
     };
 
-    if (options.settings['colorTheme'] === undefined) {
-        $('#tab-general-settings select#colorTheme').value = 'system';
-    } else {
-        $('#tab-general-settings select#colorTheme').value = options.settings['colorTheme'];
-    }
+    $('#tab-general-settings select#colorTheme').value = options.settings['colorTheme'];
 
     const generalSettingsCheckboxes = document.querySelectorAll('#tab-general-settings input[type=checkbox]');
     for (const checkbox of generalSettingsCheckboxes) {
@@ -132,7 +128,13 @@ options.initGeneralSettings = function() {
         // The theme is also stored in localStorage to prevent a white flash when the settings are first opened
         localStorage.setItem('colorTheme', options.settings['colorTheme']);
         await options.saveSettings();
-        location.reload();
+        options.updateTheme();
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (options.settings['colorTheme'] === 'system') {
+            options.updateTheme();
+        }
     });
 
     $('#tab-general-settings select#credentialSorting').addEventListener('change', async function(e) {
@@ -664,17 +666,13 @@ options.initAbout = function() {
     $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
 };
 
-options.initTheme = function() {
-    if (options.settings['colorTheme'] === undefined) {
-        document.body.removeAttribute('data-color-theme');
-    } else {
-        document.body.setAttribute('data-color-theme', options.settings['colorTheme']);
+options.updateTheme = function() {
+    let theme = options.settings['colorTheme'];
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    // Sync localStorage setting
-    const localStorageTheme = localStorage.getItem('colorTheme');
-    if (localStorageTheme !== options.settings['colorTheme']) {
-        localStorage.setItem('colorTheme', options.settings['colorTheme']);
-    }
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    browser.runtime.sendMessage({ action: 'update_popup' });
 };
 
 options.createWarning = function(elem, text) {
@@ -724,7 +722,6 @@ const getBrowserId = function() {
         options.initCustomLoginFields();
         options.initSitePreferences();
         options.initAbout();
-        options.initTheme();
     } catch (err) {
         console.log('Error loading options page: ' + err);
     }

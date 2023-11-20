@@ -40,13 +40,13 @@
         --kpxc-link-hover-color: #429f14;
         --kpxc-table-border-color: #a0a0a0;
         --kpxc-table-hover-color: #474948;
-        --kpxc-table-odd-color: #3b3d3c;
+        --kpxc-table-odd-color: #383a39;
         --kpxc-text-color: #cbcfcb;
     }
 }
 
 /* Same colors for manual switching */
-[data-color-theme='dark'] {
+[data-bs-theme='dark'] {
     --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
     --kpxc-background-color: #3b3b3d;
     --kpxc-card-background-color: #2b2a2a;
@@ -64,11 +64,11 @@
     --kpxc-link-hover-color: #429f14;
     --kpxc-table-border-color: #a0a0a0;
     --kpxc-table-hover-color: #474948;
-    --kpxc-table-odd-color: #3b3b3d;
+    --kpxc-table-odd-color: #383a39;
     --kpxc-text-color: #cbcfcb;
 }
 
-[data-color-theme='light'] {
+[data-bs-theme='light'] {
     --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
     --kpxc-card-background-color: #fff;

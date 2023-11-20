@@ -116,11 +116,11 @@ function shortCutChanged(e) {
 (async function() {
     try {
         const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
-        if (settings['colorTheme'] === undefined) {
-            document.body.removeAttribute('data-color-theme');
-        } else {
-            document.body.setAttribute('data-color-theme', settings['colorTheme']);
+        let theme = settings['colorTheme'];
+        if (theme === 'system') {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
+        document.documentElement.setAttribute('data-bs-theme', theme);
 
         document.querySelectorAll('input').forEach((b) => {
             b.addEventListener('keydown', e => shortCutChanged(e));

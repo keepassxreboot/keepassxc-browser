@@ -21,10 +21,11 @@
   <body class="pt-3 pb-5">
     <script>
     // We eagerly load the theme here to avoid a white flash
-    let colorTheme = localStorage.getItem('colorTheme');
-    if (colorTheme) {
-      document.body.setAttribute('data-color-theme', colorTheme);
+    let theme = localStorage.getItem('colorTheme') || 'system';
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+    document.documentElement.setAttribute('data-bs-theme', theme);
     </script>
     <div class="container-fluid">
       <div class="row">
@@ -857,8 +858,7 @@
                     <pre>
                       The MIT License (MIT)
 
-                      Copyright (c) 2011-2022 Twitter, Inc.
-                      Copyright (c) 2011-2022 The Bootstrap Authors
+                      Copyright (c) 2011-2023 The Bootstrap Authors
 
                       Permission is hereby granted, free of charge, to any person obtaining a copy
                       of this software and associated documentation files (the "Software"), to deal

@@ -36,15 +36,13 @@ async function initSettings() {
 }
 
 async function initColorTheme() {
-    const colorTheme = await browser.runtime.sendMessage({
+    let theme = await browser.runtime.sendMessage({
         action: 'get_color_theme'
     });
-
-    if (colorTheme === undefined || colorTheme === 'system') {
-        document.body.removeAttribute('data-color-theme');
-    } else {
-        document.body.setAttribute('data-color-theme', colorTheme);
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+    document.documentElement.setAttribute('data-bs-theme', theme);
 }
 
 async function getLoginData() {
