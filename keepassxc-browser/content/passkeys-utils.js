@@ -64,8 +64,8 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions) {
         }
 
         const publicKey = {};
-        publicKey.attestation = pkOptions.attestation;
-        publicKey.authenticatorSelection = pkOptions.authenticatorSelection;
+        publicKey.attestation = pkOptions.attestation || 'none';
+        publicKey.authenticatorSelection = pkOptions.authenticatorSelection || { userVerification: 'preferred' };
         publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
         publicKey.extensions = pkOptions.extensions;
         publicKey.pubKeyCredParams = pkOptions.pubKeyCredParams;
@@ -111,7 +111,7 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions) {
         publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
         publicKey.rpId = pkOptions.rpId;
         publicKey.timeout = pkOptions.timeout;
-        publicKey.userVerification = pkOptions.userVerification;
+        publicKey.userVerification = pkOptions.userVerification || 'preferred';
 
         publicKey.allowCredentials = [];
         if (pkOptions.allowCredentials && pkOptions.allowCredentials.length > 0) {
@@ -146,7 +146,8 @@ kpxcPasskeysUtils.parsePublicKeyCredential = function(publicKeyCredential) {
     }
 
     publicKeyCredential.rawId = base64ToArrayBuffer(publicKeyCredential.id);
-    publicKeyCredential.response.attestationObject = base64ToArrayBuffer(publicKeyCredential.response.attestationObject);
+    publicKeyCredential.response.attestationObject =
+        base64ToArrayBuffer(publicKeyCredential.response.attestationObject);
     publicKeyCredential.response.clientDataJSON = base64ToArrayBuffer(publicKeyCredential.response.clientDataJSON);
 
     return publicKeyCredential;
@@ -159,7 +160,8 @@ kpxcPasskeysUtils.parseGetPublicKeyCredential = function(publicKeyCredential) {
     }
 
     publicKeyCredential.rawId = base64ToArrayBuffer(publicKeyCredential.id);
-    publicKeyCredential.response.authenticatorData = base64ToArrayBuffer(publicKeyCredential.response.authenticatorData);
+    publicKeyCredential.response.authenticatorData =
+        base64ToArrayBuffer(publicKeyCredential.response.authenticatorData);
     publicKeyCredential.response.clientDataJSON = base64ToArrayBuffer(publicKeyCredential.response.clientDataJSON);
     publicKeyCredential.response.signature = base64ToArrayBuffer(publicKeyCredential.response.signature);
 
