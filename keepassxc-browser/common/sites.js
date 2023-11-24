@@ -30,7 +30,8 @@ const PREDEFINED_SITELIST = [
     'https://login3.id.hp.com/*',
     'https://secure.fnac.com/identity/server/gateway/*',
     'https://*.openai.com/u/login/*',
-    'https://www.patreon.com/login'
+    'https://www.patreon.com/login',
+    'https://*.wordpress.com/log-in/'
 ];
 
 const awsUrl = 'signin.aws.amazon.com';
@@ -85,6 +86,8 @@ kpxcSites.exceptionFound = function(identifier, field) {
               && identifier === 'mailboxPassword') {
         return true;
     } else if (document.location.origin === 'https://www.patreon.com' && field?.name === 'current-password') {
+        return true;
+    } else if (document.location.origin === 'https://wordpress.com' && identifier?.value === 'login__form-password') {
         return true;
     }
 
