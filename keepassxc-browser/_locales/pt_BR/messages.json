@@ -119,6 +119,10 @@
         "message": "Nenhum UUID válido foi fornecido.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Atestado não compatível.",
         "description": "Attestation not supported."
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "Chave pública vazia.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Não conectado ao KeePassXC.",

@@ -116,28 +116,40 @@
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "No valid UUID provided.",
+        "message": "Non è stato fornito un UUID valido.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "Attestation not supported.",
+        "message": "Attestazione non supportata.",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credential is excluded.",
+        "message": "Le credenziali sono escluse.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Passkeys request canceled.",
+        "message": "Richiesta passkey annullata.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Invalid user verification.",
+        "message": "Verifica utente non valido.",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Empty public key.",
+        "message": "Chiave pubblica vuota.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Non connesso a KeePassXC",
@@ -712,7 +724,7 @@
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon.",
+        "message": "Usa icona della barra degli strumenti monocromatica.",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
@@ -732,7 +744,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials.",
+        "message": "Permetti la compilazione delle credenziali per l’autenticazione di base HTTP.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -848,7 +860,7 @@
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "message": "Usa un’icona monocromatica con badge colorati nella barra degli strumenti che si adatta ai temi charo/scuro del browser.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -1224,23 +1236,23 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Passkey",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable Passkeys",
+        "message": "Abilita le passkey",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Enable support for Web Authentication.",
+        "message": "Abilita il supporto all’autenticazione web.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable Passkeys fallback",
+        "message": "Abilita alternativa alle passkey",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Se abilitata, una richiesta annullata o interrotta a KeePassXC comporterà la richiesta della passkey interna del browser. Se disabilitata, la connessione a KeePassXC è obbligatoria e una richiesta annullata fallirà. Valore predefinito: abilitata.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

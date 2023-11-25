@@ -20,7 +20,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "인증 정보 저장",
+        "message": "자격 증명 저장",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -36,7 +36,7 @@
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "여러 개의 인증 정보를 사용할 수 있습니다. 확장 기능 아이콘을 눌러서 사용할 인증 정보를 선택하십시오.",
+        "message": "여러 개의 자격 증명을 사용할 수 있습니다. 확장 기능 아이콘을 눌러서 사용할 자격 증명을 선택하십시오.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -108,36 +108,48 @@
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
-        "message": "No groups found.",
+        "message": "그룹을 찾을 수 없습니다.",
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Cannot create new group.",
+        "message": "새 그룹을 만들 수 없습니다.",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "No valid UUID provided.",
+        "message": "올바른 UUID가 제공되지 않았습니다.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "Attestation not supported.",
+        "message": "증명이 지원되지 않습니다.",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credential is excluded.",
+        "message": "자격 증명이 제외되었습니다.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Passkeys request canceled.",
+        "message": "Passkey 요청이 취소되었습니다.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Invalid user verification.",
+        "message": "잘못된 사용자 검증입니다.",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Empty public key.",
+        "message": "공개 키가 비어 있습니다.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "KeePassXC에 연결되지 않았습니다.",
@@ -200,7 +212,7 @@
         "description": "Password generator error text when KeePassXC is closed."
     },
     "usernameFieldText": {
-        "message": "KeePassXC에서 인증 정보 입력",
+        "message": "KeePassXC에서 자격 증명 입력",
         "description": "Username field icon hover text."
     },
     "usernameLockedFieldText": {
@@ -316,7 +328,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "오류:\n지정한 사용자 이름과 일치하는 인증 정보를 찾을 수 없습니다.",
+        "message": "오류:\n지정한 사용자 이름과 일치하는 자격 증명을 찾을 수 없습니다.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
@@ -336,7 +348,7 @@
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "오류:\n변경된 인증 정보를 감지할 수 없습니다.",
+        "message": "오류:\n변경된 자격 증명을 감지할 수 없습니다.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -440,7 +452,7 @@
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "인증 정보를 연결된 데이터베이스에 식별자 $1(으)로 저장합니다",
+        "message": "자격 증명을 연결된 데이터베이스에 식별자 $1(으)로 저장합니다",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
@@ -448,15 +460,15 @@
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "지정한 사용자 이름을 사용하는 인증 정보는 굵게 표시됩니다: $1",
+        "message": "지정한 사용자 이름을 사용하는 자격 증명은 굵게 표시됩니다: $1",
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "업데이트할 인증 정보를 선택하십시오.",
+        "message": "업데이트할 자격 증명을 선택하십시오.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "새 인증 정보를 추가할 그룹을 선택하십시오.",
+        "message": "새 자격 증명을 추가할 그룹을 선택하십시오.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -468,31 +480,31 @@
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "인증 정보를 업데이트하지 않았습니다. 암호가 변경되지 않았습니다.",
+        "message": "자격 증명을 업데이트하지 않았습니다. 암호가 변경되지 않았습니다.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
-        "message": "인증 정보를 저장하거나 업데이트할 수 없습니다.",
+        "message": "자격 증명을 저장하거나 업데이트할 수 없습니다.",
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "닫힌 데이터베이스에 인증 정보를 저장하거나 업데이트할 수 없습니다.",
+        "message": "닫힌 데이터베이스에 자격 증명을 저장하거나 업데이트할 수 없습니다.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
-        "message": "작업이 취소되었습니다. 인증 정보를 업데이트하지 않았습니다.",
+        "message": "작업이 취소되었습니다. 자격 증명을 업데이트하지 않았습니다.",
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "사용자 이름 $1의 새로운 인증 정보를 저장했습니다.",
+        "message": "사용자 이름 $1의 새로운 자격 증명을 저장했습니다.",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
-        "message": "사용자 이름 $1의 인증 정보를 업데이트했습니다.",
+        "message": "사용자 이름 $1의 자격 증명을 업데이트했습니다.",
         "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "같은 인증 정보가 이미 존재합니다. 업데이트하지 않습니다.",
+        "message": "같은 자격 증명이 이미 존재합니다. 업데이트하지 않습니다.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
@@ -500,7 +512,7 @@
         "description": "Means an empty username."
     },
     "rememberNoPassword": {
-        "message": "인증 정보를 저장하기 전에 암호를 입력하십시오.",
+        "message": "자격 증명을 저장하기 전에 암호를 입력하십시오.",
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
@@ -648,7 +660,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "항상 새 인증 정보를 추가할 그룹 묻기",
+        "message": "항상 새 자격 증명을 추가할 그룹 묻기",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
@@ -668,7 +680,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "팝업이나 동적 대화 상자를 사용하는 페이지에 유용합니다. 느린 컴퓨터에서 CPU 점유율을 줄이려면 선택을 해제하십시오. 이 옵션을 사용하지 않으면 인증 정보를 키보드 단축키, 콘텍스트 메뉴 및 확장 기능의 팝업으로만 입력할 수 있습니다.",
+        "message": "팝업이나 동적 대화 상자를 사용하는 페이지에 유용합니다. 느린 컴퓨터에서 CPU 점유율을 줄이려면 선택을 해제하십시오. 이 옵션을 사용하지 않으면 자격 증명을 키보드 단축키, 콘텍스트 메뉴 및 확장 기능의 팝업으로만 입력할 수 있습니다.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -676,7 +688,7 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "자동으로 인증 정보를 가져옵니다.",
+        "message": "자동으로 자격 증명을 가져옵니다.",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
@@ -688,7 +700,7 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "자동으로 단일 인증 정보 항목을 입력합니다.",
+        "message": "자동으로 단일 자격 증명 항목을 입력합니다.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
@@ -696,7 +708,7 @@
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "서로 다른 그룹의 인증 정보를 표시할 때 자동 완성 목록에 그룹 이름을 표시합니다.",
+        "message": "서로 다른 그룹의 자격 증명을 표시할 때 자동 완성 목록에 그룹 이름을 표시합니다.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -704,7 +716,7 @@
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "선택한 인증 정보를 자동으로 제출합니다. 자동 입력 항목이 하나만 있을 때에는 비활성화됩니다.",
+        "message": "선택한 자격 증명을 자동으로 제출합니다. 자동 입력 항목이 하나만 있을 때에는 비활성화됩니다.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
@@ -720,7 +732,7 @@
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "데이터베이스에 새 인증 정보를 저장할 수 있을 때 알림을 표시합니다.",
+        "message": "데이터베이스에 새 자격 증명을 저장할 수 있을 때 알림을 표시합니다.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -732,7 +744,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "HTTP 기본 인증 정보 항목 입력을 허용합니다.",
+        "message": "HTTP 기본 인증 자격 증명 항목 입력을 허용합니다.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -768,7 +780,7 @@
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "일치하는 인증 정보 정렬 순서",
+        "message": "일치하는 자격 증명 정렬 순서",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
@@ -812,7 +824,7 @@
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "사용자 이름 필드에 마우스 클릭으로 인증 정보를 입력하는 아이콘을 추가합니다.",
+        "message": "사용자 이름 필드에 마우스 클릭으로 자격 증명을 입력하는 아이콘을 추가합니다.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
@@ -820,7 +832,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "탭을 활성화할 때 KeePassXC-브라우저에서 인증 정보를 즉시 가져옵니다.",
+        "message": "탭을 활성화할 때 KeePassXC-브라우저에서 자격 증명을 즉시 가져옵니다.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
@@ -828,7 +840,7 @@
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "인증 정보가 하나만 있을 때 KeePassXC-브라우저에서 자동으로 입력합니다.",
+        "message": "자격 증명이 하나만 있을 때 KeePassXC-브라우저에서 자동으로 입력합니다.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -836,11 +848,11 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "페이지에 있는 모든 사용자 이름 필드에 입력할 수 있는 인증 정보 드롭다운 목록을 표시합니다.",
+        "message": "페이지에 있는 모든 사용자 이름 필드에 입력할 수 있는 자격 증명 드롭다운 목록을 표시합니다.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "서로 다른 그룹에 있는 인증 정보를 구분하기 위해 그룹 이름을 표시합니다.",
+        "message": "서로 다른 그룹에 있는 자격 증명을 구분하기 위해 그룹 이름을 표시합니다.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -852,7 +864,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "새 인증 정보를 저장할 때 전체 URL 대신 도메인만 저장합니다.",
+        "message": "새 자격 증명을 저장할 때 전체 URL 대신 도메인만 저장합니다.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
@@ -864,11 +876,11 @@
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Favicon will be automatically downloaded for the new credential.",
+        "message": "새 자격 증명에 대한 파비콘을 자동으로 다운로드합니다.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "페이지 인증 정보를 찾았고 로그인 형식이 HTTP 기본 인증일 때 KeePassXC-브라우저에서 최초로 지정한 인증 정보로 로그인을 시도합니다.",
+        "message": "페이지에 대한 자격 증명을 찾았고 로그인 형식이 HTTP 기본 인증일 때 KeePassXC-브라우저에서 최초로 지정한 자격 증명으로 로그인을 시도합니다. 만약 자격 증명이 여러 개 있다면 확장 기능 팝업을 사용하여 올바른 자격 증명을 선택할 수 있습니다. 이 기능을 활성화해도 HTTP 기본 인증 자격 증명을 직접 입력할 수 있습니다.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -876,15 +888,15 @@
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "다음 시간 이후 비활성 탭의 인증 정보를 삭제합니다(초 단위, 0-3600).",
+        "message": "다음 시간 이후 비활성 탭의 자격 증명을 삭제합니다(초 단위, 0-3600).",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "제한 시간이 초과한 후 배경 탭의 인증 정보를 삭제하고 해당 페이지의 권한을 다시 물어 봅니다.",
+        "message": "제한 시간이 초과한 후 배경 탭의 자격 증명을 삭제하고 해당 페이지의 권한을 다시 물어 봅니다.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "KeePassXC-브라우저에서 인증 정보를 가져오려면 KeePassXC가 필요합니다.",
+        "message": "KeePassXC-브라우저에서 자격 증명을 가져오려면 KeePassXC가 필요합니다.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
@@ -1004,7 +1016,7 @@
         "description": "Site preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "새로운/수정된 인증 정보 비활성화",
+        "message": "새로운/수정된 자격 증명 비활성화",
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
@@ -1032,27 +1044,27 @@
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "입력했던 인증 정보 다음에 다음 순으로 인증 정보 정렬",
+        "message": "입력했던 자격 증명 다음에 다음 순으로 자격 증명 정렬",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
-        "message": "관련 있는 인증 정보부터 표시 옵션을 선택했다면 자동 완성 메뉴의 목록에 이전에 사용했던 로그인의 인증 정보를 먼저 표시합니다.",
+        "message": "관련 있는 자격 증명부터 표시 옵션을 선택했다면 자동 완성 메뉴의 목록에 이전에 사용했던 로그인의 자격 증명을 먼저 표시합니다.",
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "입력했던 인증 정보 다음에 다음 순으로 TOTP 정렬",
+        "message": "입력했던 자격 증명 다음에 다음 순으로 TOTP 정렬",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
-        "message": "관련 있는 인증 정보부터 표시 옵션을 선택했다면 자동 완성 메뉴의 목록에 이전에 사용했던 로그인의 TOTP를 먼저 표시합니다.",
+        "message": "관련 있는 자격 증명부터 표시 옵션을 선택했다면 자동 완성 메뉴의 목록에 이전에 사용했던 로그인의 TOTP를 먼저 표시합니다.",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
     "optionsFillSortByMatchingCredentials": {
-        "message": "일치하는 인증 정보 설정",
+        "message": "일치하는 자격 증명 설정",
         "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
     },
     "optionsFillSortByRelevantEntry": {
-        "message": "관련 있는 인증 정보부터 표시",
+        "message": "관련 있는 자격 증명부터 표시",
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
@@ -1100,7 +1112,7 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "지정한 사이트에서 새로운/수정된 인증 정보를 무시하려면 아래에 추가하거나 깜빡이는 KeePassXC-브라우저 아이콘을 누른 다음 선택하십시오",
+        "message": "지정한 사이트에서 새로운/수정된 자격 증명을 무시하려면 아래에 추가하거나 깜빡이는 KeePassXC-브라우저 아이콘을 누른 다음 선택하십시오",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
@@ -1204,11 +1216,11 @@
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "인증 정보 입력",
+        "message": "자격 증명 입력",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "인증 정보 저장",
+        "message": "자격 증명 저장",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {
@@ -1224,23 +1236,23 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Passkey",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable Passkeys",
+        "message": "Passkey 활성화",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Enable support for Web Authentication.",
+        "message": "Web Authentication 지원을 활성화합니다.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable Passkeys fallback",
+        "message": "Passkey 폴백 활성화",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "이 옵션을 사용하면 KeePassXC 요청이 실패했거나 취소되었을 때 브라우저 내부 Passkey 요청을 트리거합니다. 이 옵션을 사용하지 않으면 KeePassXC에 연결되어 있어야 하며 취소된 요청이 실표합니다. 기본값: 활성화",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

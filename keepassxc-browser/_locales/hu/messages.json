@@ -108,36 +108,48 @@
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
-        "message": "No groups found.",
+        "message": "Nem találhatók csoportok.",
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Cannot create new group.",
+        "message": "Nem hozható létre új csoport.",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "No valid UUID provided.",
+        "message": "Nincs érvényed UUID megadva.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "Attestation not supported.",
+        "message": "A tanúsítás nem támogatott.",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credential is excluded.",
+        "message": "Hitelesítési adat kizárva.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Passkeys request canceled.",
+        "message": "Jelkulcskérelem törölve.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Invalid user verification.",
+        "message": "Érvénytelen felhasználói ellenőrzés.",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Empty public key.",
+        "message": "Üres nyilvános kulcs.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Nincs kapcsolat a KeePassXC-vel.",
@@ -1224,23 +1236,23 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Jelkulcsok",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable Passkeys",
+        "message": "Jelkulcsok engedélyezése",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Enable support for Web Authentication.",
+        "message": "Webes autentikáció engedélyezése.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable Passkeys fallback",
+        "message": "Tartalék jelkulcsok engedélyezése",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Ha engedélyezve van, a KeePassXC-hez intézett sikertelen vagy törölt kérés a böngésző saját belső jelkulcs-kérelmét indítja el. Ha le van tiltva, a KeePassXC-hez való csatlakozás szükséges, és a törölt kérés sikertelen lesz. Alapértelmezett: engedélyezve.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

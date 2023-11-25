@@ -119,6 +119,10 @@
         "message": "Tidak ada UUID yang valid yang disediakan.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Atestasi tidak didukung.",
         "description": "Attestation not supported."
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "Kunci publik kosong.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Tidak tersambung dengan KeePassXC.",

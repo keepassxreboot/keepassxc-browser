@@ -119,6 +119,10 @@
         "message": "Nie podano prawidłowego UUID.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Dostęp do wszystkich wpisów odrzucony.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Zaświadczenie nie jest obsługiwane.",
         "description": "Attestation not supported."
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "Pusty klucz publiczny.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Podano nieprawidłowy adres URL.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Klucze rezydentne nie są obsługiwane.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Brak połączenia z KeePassXC.",

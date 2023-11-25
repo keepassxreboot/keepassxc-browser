@@ -1,3 +1,13 @@
+1.8.10 (2023-11-25)
+=========================
+- Add Wordpress to Site Preferences [#2039]
+- Add eslint to scripts [#2032]
+- Fix for segmented TOTP fields [#2034]
+- Fix selecting first item when opening Autocomplete Menu [#2029]
+- Fix reverting Passkeys to default values [#2038]
+- Fix Passkey error messages [#2036]
+- Update Bootstrap for improved dark mode support (Contributor PR) [#1987]
+
 1.8.9 (2023-10-16)
 =========================
 - Add Patreon to predefined sites [#1993]

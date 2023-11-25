@@ -119,6 +119,10 @@
         "message": "Geçerli bir UUID belirtilmemiş.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Tüm kayıtlara erişim reddedildi.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Onay desteklenmiyor.",
         "description": "Attestation not supported."
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "Herkese açık anahtar boş.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Belirtilen adres geçersiz.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Kalıcı anahtarlar desteklenmiyor.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "KeePassXC ile bağlantı kurulmamış.",

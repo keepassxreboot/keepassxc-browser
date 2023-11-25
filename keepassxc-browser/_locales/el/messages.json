@@ -108,36 +108,48 @@
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
-        "message": "No groups found.",
+        "message": "Δεν βρέθηκαν ομάδες.",
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Cannot create new group.",
+        "message": "Δεν είναι δυνατή η δημιουργία νέας ομάδας.",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "No valid UUID provided.",
+        "message": "Δεν παρέχεται έγκυρο UUID.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "Attestation not supported.",
+        "message": "Η βεβαίωση δεν υποστηρίζεται.",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credential is excluded.",
+        "message": "Τα Διαπιστευτήρια εξαιρούνται.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Passkeys request canceled.",
+        "message": "Το αίτημα για Passkeys ακυρώθηκε.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Invalid user verification.",
+        "message": "Μη έγκυρη επαλήθευση χρήστη.",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Empty public key.",
+        "message": "Κενό δημόσιο κλειδί.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Δεν είναι συνδεδεμένο με το KeePassXC.",
@@ -1228,19 +1240,19 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable Passkeys",
+        "message": "Ενεργοποίηση Passkeys",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Enable support for Web Authentication.",
+        "message": "Ενεργοποιήστε την υποστήριξη για έλεγχο ταυτότητας Web.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable Passkeys fallback",
+        "message": "Ενεργοποίηση εναλλακτικών Passkeys",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Όταν είναι ενεργοποιημένο, ένα αίτημα που απέτυχε ή ακυρώθηκε προς το KeePassXC θα ενεργοποιήσει το εσωτερικό αίτημα Passkeys του προγράμματος περιήγησης. Εάν είναι απενεργοποιημένο, απαιτείται σύνδεση με το KeePassXC και το ακυρωμένο αίτημα θα αποτύχει. Προεπιλογή: ενεργοποιημένο.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
