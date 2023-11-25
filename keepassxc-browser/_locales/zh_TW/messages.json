@@ -119,8 +119,12 @@
         "message": "未提供有效的 UUID。",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "存取所有項目被拒絕。",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "未支援密鑰證明。",
+        "message": "未支援密鑰證明 (Attestation)。",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "空的公開金鑰。",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "提供的網址無效。",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "未支援常駐金鑰 (Resident Key)。",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "未連接至 KeePassXC。",

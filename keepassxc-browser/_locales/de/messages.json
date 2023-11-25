@@ -119,6 +119,10 @@
         "message": "Keine gültige UUID bereitgestellt.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Beglaubigung wird nicht unterstützt.",
         "description": "Attestation not supported."
@@ -128,7 +132,7 @@
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Generalschlüssel-Abfrage abgebrochen.",
+        "message": "Passkeys-Abfrage abgebrochen.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "Kein öffentlicher Schlüssel.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Nicht mit KeePassXC verbunden.",
@@ -408,7 +420,7 @@
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
-        "message": " Status wird überprüft …",
+        "message": "Status wird überprüft …",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
@@ -696,7 +708,7 @@
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Zeige den Gruppennamen in der Autocomplete Liste an, wenn Anmeldedaten aus verschiedenen Grupppen kommen.",
+        "message": "Den Gruppennamen in der Autovervollständigungsliste anzeigen, wenn Anmeldedaten aus verschiedenen Gruppen kommen.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -732,7 +744,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Ausfüllen von HTTP-Basisauthentifizierunganmeldedaten erlauben.",
+        "message": "Ausfüllen von HTTP-Basisauthentifizierungsanmeldedaten erlauben.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -748,7 +760,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "alle 3 Tage",
+        "message": "alle drei Tage",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -832,7 +844,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warnung! Die Verwendung des automatischen Ausfüllens ist nicht sicher. Die Verwendung erfolgt auf eigene Gefahr. KeePassXC-Browser versucht automatisch, Anmeldefelder zu erkennen. Allerdings kann es vorkommen, dass sie ungewollt erkannt werden, wodurch möglicherweise sensible Daten in unsichere Eingabefelder eingetragen werden.",
+        "message": "Warnung! Die Verwendung des automatischen Ausfüllens ist nicht sicher. Die Verwendung erfolgt auf eigene Gefahr. KeePassXC-Browser versucht automatisch, Anmeldefelder zu erkennen. Sie können jedoch falsch erkannt werden, wodurch möglicherweise sensible Daten in unsichere Eingabefelder eingetragen werden.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -1224,11 +1236,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Generalschlüssel",
+        "message": "Passkeys",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Generalschlüssel aktivieren",
+        "message": "Passkeys aktivieren",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1236,11 +1248,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Generalschlüssel-Umleitung aktivieren",
+        "message": "Passkeys-Fallback aktivieren",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Wenn aktiviert, werden missglückte oder abgebrochene Abfragen an KeePassXC die browser-eigene Generalschlüssel-Abfrage veranlassen. Wenn deaktiviert, ist die Verbindung mit KeePassXC erforderlich und abgebrochene Abfragen werden fehlschlagen. Voreinstellung: aktiviert.",
+        "message": "Wenn aktiviert, werden missglückte oder abgebrochene Abfragen an KeePassXC die browsereigene Passkeys-Abfrage veranlassen. Wenn deaktiviert, ist die Verbindung mit KeePassXC erforderlich und abgebrochene Abfragen werden fehlschlagen. Voreinstellung: aktiviert.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

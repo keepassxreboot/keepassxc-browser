@@ -108,36 +108,48 @@
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
-        "message": "No groups found.",
+        "message": "Ingen grupper funnet.",
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Cannot create new group.",
+        "message": "Kan ikke opprette ny gruppe.",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "No valid UUID provided.",
+        "message": "Ingen gyldig UUID er oppgitt.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "Attestation not supported.",
+        "message": "Attestasjon støttes ikke.",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credential is excluded.",
+        "message": "Identifikasjon er ekskludert.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Passkeys request canceled.",
+        "message": "Forespørsel om adgangsnøkkel er kansellert.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Invalid user verification.",
+        "message": "Ugyldig brukerverifisering.",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Empty public key.",
+        "message": "Tom offentlig nøkkel.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Ikke koblet til KeePassXC.",
@@ -712,7 +724,7 @@
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon.",
+        "message": "Bruk monokromt verktøylinjeikon.",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
@@ -848,7 +860,7 @@
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "message": "Bruk et monokromt ikon med fargede merker på verktøylinjen som tilpasser seg lyst/mørkt nettlesertema.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -1224,23 +1236,23 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Passnøkler",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable Passkeys",
+        "message": "Aktiver passnøkler",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Enable support for Web Authentication.",
+        "message": "Aktiver støtte for web-autentisering.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable Passkeys fallback",
+        "message": "Aktiver passnøkkel-reserveløsning",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Når aktivert, vil en mislykket eller kansellert forespørsel til KeePassXC utløse nettleserens egen interne passnøkkelforespørsel. Hvis deaktivert, så kreves tilkobling til KeePassXC, og den avbrutte forespørselen mislykkes. Standard: aktivert.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

@@ -108,16 +108,20 @@
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
-        "message": "No groups found.",
+        "message": "グループが見つかりませんでした。",
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Cannot create new group.",
+        "message": "新しいグループを作成できません。",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "No valid UUID provided.",
+        "message": "有効な UUID が提供されませんでした。",
         "description": "No valid UUID provided."
+    },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestation not supported.",
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "Empty public key.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident Keys are not supported.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "KeePassXC に接続していません。",

@@ -119,6 +119,10 @@
         "message": "Validia UUID:tä ei annettu.",
         "description": "No valid UUID provided."
     },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Pääsy kaikkiin tietueisiin on kielletty.",
+      "description": "Access to all entries denied."
+    },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestation ei ole tuettu.",
         "description": "Attestation not supported."
@@ -138,6 +142,14 @@
     "errorMessagePasskeysEmptyPublicKey": {
         "message": "Tyhjä julkinen avain.",
         "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Sivuston URL ei ole validi.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysResidentKeyNotSupported": {
+        "message": "Resident-avaimet eivät ole tuettuja.",
+        "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Ei yhteyttä KeePassXC:hen.",
