@@ -46,9 +46,9 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions) {
         }
 
         if (!pkOptions.rp.id) {
-            pkOptions.rp.id = window.location.host;
-            pkOptions.rp.name = window.location.host;
-        } else if (!window.location.host.endsWith(pkOptions.rp.id)) {
+            pkOptions.rp.id = window.location.hostname;
+            pkOptions.rp.name = window.location.hostname;
+        } else if (!window.location.hostname.endsWith(pkOptions.rp.id)) {
             throw new DOMException('Site domain differs from RP ID', DOMException.SecurityError);
         }
 
@@ -102,8 +102,8 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions) {
         checkErrors(pkOptions);
 
         if (!pkOptions.rpId) {
-            pkOptions.rpId = window.location.host;
-        } else if (!window.location.host.endsWith(pkOptions.rpId)) {
+            pkOptions.rpId = window.location.hostname;
+        } else if (!window.location.hostname.endsWith(pkOptions.rpId)) {
             throw new DOMException('Site domain differs from RP ID', DOMException.SecurityError);
         }
 
