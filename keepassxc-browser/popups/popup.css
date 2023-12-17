@@ -4,10 +4,9 @@ body {
     display: flex;
     font-family: sans-serif;
     font-size: 14px !important;
-    overflow: hidden;
     padding-top: 8px;
     padding-bottom: 8px;
-    width: fit-content;
+    width: 460px;
 }
 
 code {
