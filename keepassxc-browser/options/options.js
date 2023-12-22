@@ -217,7 +217,7 @@ options.initGeneralSettings = function() {
 
     let temporarySettings;
     const dialogImportSettingsModal = new bootstrap.Modal($('#dialogImportSettings'),
-        { keyboard: true, show: false, backdrop: true });
+        { keyboard: true, focus: false, backdrop: true });
 
     $('#importSettingsButton').addEventListener('click', function() {
         const link = document.createElement('input');
@@ -347,7 +347,7 @@ options.getPartiallyHiddenKey = function(key) {
 
 options.initConnectedDatabases = function() {
     const dialogDeleteConnectedDatabaseModal = new bootstrap.Modal($('#dialogDeleteConnectedDatabase'),
-        { keyboard: true, show: false, backdrop: true });
+        { keyboard: true, focus: false, backdrop: true });
 
     const hideEmptyMessageRow = function() {
         if ($('#tab-connected-databases table tbody').children.length > 2) {
@@ -445,7 +445,7 @@ options.initConnectedDatabases = function() {
 
 options.initCustomLoginFields = function() {
     const dialogDeleteCustomLoginFieldsModal = new bootstrap.Modal($('#dialogDeleteCustomLoginFields'),
-        { keyboard: true, show: false, backdrop: true });
+        { keyboard: true, focus: false, backdrop: true });
 
     const hideEmptyMessageRow = function() {
         if ($('#tab-custom-fields table tbody').children.length > 2) {
@@ -506,7 +506,7 @@ options.initSitePreferences = function() {
     }
 
     const dialogDeleteSiteModal = new bootstrap.Modal($('#dialogDeleteSite'),
-        { keyboard: true, show: false, backdrop: true });
+        { keyboard: true, focus: false, backdrop: true });
 
     const removeButtonClicked = function(e) {
         e.preventDefault();
