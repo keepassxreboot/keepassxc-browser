@@ -245,7 +245,7 @@ options.initGeneralSettings = function() {
                     temporarySettings = contents;
                     dialogImportSettingsModal.show();
                     $('#dialogImportSettings').addEventListener('shown.bs.modal', function(modalEvent) {
-                        modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
+                        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
                     });
                 } catch (err) {
                     console.log('Error loading JSON settings file.');
@@ -390,7 +390,7 @@ options.initConnectedDatabases = function() {
 
         dialogDeleteConnectedDatabaseModal.show();
         $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
+            modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
         });
     };
 
@@ -465,7 +465,7 @@ options.initCustomLoginFields = function() {
 
         dialogDeleteCustomLoginFieldsModal.show();
         $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
+            modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
         });
     };
 
@@ -518,7 +518,7 @@ options.initSitePreferences = function() {
 
         dialogDeleteSiteModal.show();
         $('#dialogDeleteSite').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
+            modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
         });
     };
 
