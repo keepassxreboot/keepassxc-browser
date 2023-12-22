@@ -17,8 +17,6 @@
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="options.js"></script>
     <script src="../common/translate.js" defer></script>
-  </head>
-  <body class="pt-3 pb-5">
     <script>
     // We eagerly load the theme here to avoid a white flash
     let theme = localStorage.getItem('colorTheme') || 'system';
@@ -27,6 +25,8 @@
     }
     document.documentElement.setAttribute('data-bs-theme', theme);
     </script>
+  </head>
+  <body class="pt-3 pb-5">
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-3 col-lg-2 sidebar">
