@@ -216,8 +216,12 @@ options.initGeneralSettings = function() {
     });
 
     let temporarySettings;
-    const dialogImportSettingsModal = new bootstrap.Modal($('#dialogImportSettings'),
+    const dialogImportSettingsModal = new bootstrap.Modal('#dialogImportSettings',
         { keyboard: true, focus: false, backdrop: true });
+
+    $('#dialogImportSettings').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     $('#importSettingsButton').addEventListener('click', function() {
         const link = document.createElement('input');
@@ -244,9 +248,6 @@ options.initGeneralSettings = function() {
                     // Verify the import
                     temporarySettings = contents;
                     dialogImportSettingsModal.show();
-                    $('#dialogImportSettings').addEventListener('shown.bs.modal', function(modalEvent) {
-                        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
-                    });
                 } catch (err) {
                     console.log('Error loading JSON settings file.');
                 }
@@ -346,8 +347,12 @@ options.getPartiallyHiddenKey = function(key) {
 };
 
 options.initConnectedDatabases = function() {
-    const dialogDeleteConnectedDatabaseModal = new bootstrap.Modal($('#dialogDeleteConnectedDatabase'),
+    const dialogDeleteConnectedDatabaseModal = new bootstrap.Modal('#dialogDeleteConnectedDatabase',
         { keyboard: true, focus: false, backdrop: true });
+
+    $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     const hideEmptyMessageRow = function() {
         if ($('#tab-connected-databases table tbody').children.length > 2) {
@@ -389,9 +394,6 @@ options.initConnectedDatabases = function() {
         }
 
         dialogDeleteConnectedDatabaseModal.show();
-        $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
-        });
     };
 
     const rowClone = $('#tab-connected-databases table tr.clone').cloneNode(true);
@@ -444,8 +446,12 @@ options.initConnectedDatabases = function() {
 };
 
 options.initCustomLoginFields = function() {
-    const dialogDeleteCustomLoginFieldsModal = new bootstrap.Modal($('#dialogDeleteCustomLoginFields'),
+    const dialogDeleteCustomLoginFieldsModal = new bootstrap.Modal('#dialogDeleteCustomLoginFields',
         { keyboard: true, focus: false, backdrop: true });
+
+    $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     const hideEmptyMessageRow = function() {
         if ($('#tab-custom-fields table tbody').children.length > 2) {
@@ -464,9 +470,6 @@ options.initCustomLoginFields = function() {
         $('#dialogDeleteCustomLoginFields .modal-body strong').textContent = closestTr.children[0].textContent;
 
         dialogDeleteCustomLoginFieldsModal.show();
-        $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
-        });
     };
 
     $('#dialogDeleteCustomLoginFields .modal-footer button.yes').addEventListener('click', function(e) {
@@ -505,8 +508,12 @@ options.initSitePreferences = function() {
         options.settings['sitePreferences'] = [];
     }
 
-    const dialogDeleteSiteModal = new bootstrap.Modal($('#dialogDeleteSite'),
+    const dialogDeleteSiteModal = new bootstrap.Modal('#dialogDeleteSite',
         { keyboard: true, focus: false, backdrop: true });
+
+    $('#dialogDeleteSite').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     const removeButtonClicked = function(e) {
         e.preventDefault();
@@ -517,9 +524,6 @@ options.initSitePreferences = function() {
         $('#dialogDeleteSite .modal-body strong').textContent = closestTr.children[0].textContent;
 
         dialogDeleteSiteModal.show();
-        $('#dialogDeleteSite').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
-        });
     };
 
     const checkboxClicked = function() {
