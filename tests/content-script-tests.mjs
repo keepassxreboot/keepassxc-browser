@@ -38,7 +38,7 @@ const verifyResults = async(selector) => {
     const resultCount = await page.locator(`css=#${selector} >> css=.fa`).count();
     await expect.soft(resultCount).toBeGreaterThan(0);
 
-    for (var i = 0; i < resultCount; i++) {
+    for (let i = 0; i < resultCount; i++) {
         const elem = await page.locator(`css=#${selector} >> css=.fa`).nth(i);
         const id = await elem.getAttribute('id');
         await expect.soft(elem, id).toHaveClass('fa fa-check');

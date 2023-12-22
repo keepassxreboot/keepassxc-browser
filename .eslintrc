@@ -81,7 +81,6 @@
     },
     "globals": {
         "_called": true,
-        "_f": true,
         "acceptedOTPFields": true,
         "assertInputFields": true,
         "assertPasswordChangeFields": true,
@@ -119,7 +118,6 @@
         "initColorTheme": true,
         "isEdge": true,
         "isFirefox": true,
-        "jQuery": true,
         "keepass": true,
         "keepassClient": true,
         "kpActions": true,
@@ -141,7 +139,6 @@
         "kpxcTOTPIcons": true,
         "kpxcUI": true,
         "kpxcUserAutocomplete": true,
-        "kpxcUsernameField": true,
         "kpxcUsernameIcons": true,
         "logDebug": true,
         "logError": true,
@@ -161,7 +158,6 @@
         "Pixels": true,
         "PREDEFINED_SITELIST": true,
         "RED_BUTTON": true,
-        "resizePopup": true,
         "sendMessage": true,
         "showNotification": true,
         "siteMatch": true,
@@ -175,8 +171,7 @@
         "statusResponse": true,
         "Tests": true,
         "tr": true,
-        "trimURL": true,
-        "useMonochromToolbarIcon": true
+        "trimURL": true
     },
     "overrides": [
         {
