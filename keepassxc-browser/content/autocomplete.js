@@ -87,8 +87,8 @@ class Autocomplete {
             const styleSheet = createStylesheet('css/autocomplete.css');
             const colorStyleSheet = createStylesheet('css/colors.css');
             this.wrapper = kpxcUI.createElement('div');
-            this.wrapper.style.display = 'none';
             this.wrapper.style.all = 'unset';
+            this.wrapper.style.display = 'none';
             styleSheet.addEventListener('load', () => this.wrapper.style.display = 'block');
             this.container = kpxcUI.createElement('div', 'kpxcAutocomplete-container', { 'id': 'kpxcAutocomplete-container' });
 

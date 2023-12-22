@@ -160,8 +160,8 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
 
     const styleSheet = createStylesheet('css/totp.css');
     const wrapper = document.createElement('div');
-    wrapper.style.display = 'none';
     wrapper.style.all = 'unset';
+    wrapper.style.display = 'none';
     styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
 
     this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
