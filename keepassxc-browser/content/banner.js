@@ -123,6 +123,7 @@ kpxcBanner.create = async function(credentials = {}) {
 
     const wrapper = document.createElement('div');
     wrapper.style.display = 'none';
+    wrapper.style.all = 'unset';
     styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
     this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
     this.shadowRoot.append(colorStyleSheet);

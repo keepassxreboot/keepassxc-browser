@@ -293,6 +293,7 @@ kpxcUI.createNotification = function(type, message) {
     const styleSheet = createStylesheet('css/notification.css');
     notificationWrapper = notificationWrapper || document.createElement('div');
     notificationWrapper.style.display = 'none';
+    notificationWrapper.style.all = 'unset';
     styleSheet.addEventListener('load', () => notificationWrapper.style.display = 'block');
     this.shadowRoot = notificationWrapper.attachShadow({ mode: 'closed' });
     if (!this.shadowRoot) {
