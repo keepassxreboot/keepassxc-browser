@@ -354,14 +354,6 @@ options.initConnectedDatabases = function() {
         modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
     });
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-connected-databases table tbody').children.length > 2) {
-            $('#tab-connected-databases table tbody tr.empty').hide();
-        } else {
-            $('#tab-connected-databases table tbody tr.empty').style.display = '';
-        }
-    };
-
     $('#dialogDeleteConnectedDatabase .modal-footer button.yes').addEventListener('click', async function(e) {
         dialogDeleteConnectedDatabaseModal.hide();
 
@@ -377,7 +369,6 @@ options.initConnectedDatabases = function() {
             console.log(err);
         });
 
-        hideEmptyMessageRow();
         browser.runtime.sendMessage({ action: 'update_popup' });
     });
 
@@ -441,8 +432,6 @@ options.initConnectedDatabases = function() {
             }
         }
     });
-
-    hideEmptyMessageRow();
 };
 
 options.initCustomLoginFields = function() {
@@ -452,14 +441,6 @@ options.initCustomLoginFields = function() {
     $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
         modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
     });
-
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-custom-fields table tbody').children.length > 2) {
-            $('#tab-custom-fields table tbody tr.empty').hide();
-        } else {
-            $('#tab-custom-fields table tbody tr.empty').style.display = '';
-        }
-    };
 
     const removeButtonClicked = function(e) {
         e.preventDefault();
@@ -481,8 +462,6 @@ options.initCustomLoginFields = function() {
 
         delete options.settings['defined-custom-fields'][url];
         options.saveSettings();
-
-        hideEmptyMessageRow();
     });
 
     const rowClone = $('#tab-custom-fields table tr.clone').cloneNode(true);
@@ -499,8 +478,6 @@ options.initCustomLoginFields = function() {
         row.children[1].addEventListener('click', removeButtonClicked);
         $('#tab-custom-fields table tbody').append(row);
     }
-
-    hideEmptyMessageRow();
 };
 
 options.initSitePreferences = function() {
@@ -556,14 +533,6 @@ options.initSitePreferences = function() {
         options.saveSettings();
     };
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-site-preferences table tbody').children.length > 2) {
-            $('#tab-site-preferences table tbody tr.empty').hide();
-        } else {
-            $('#tab-site-preferences table tbody tr.empty').style.display = '';
-        }
-    };
-
     const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
@@ -594,7 +563,6 @@ options.initSitePreferences = function() {
         }
 
         options.saveSettings();
-        hideEmptyMessageRow();
     });
 
     $('#manualUrl').addEventListener('keyup', function(event) {
@@ -653,8 +621,6 @@ options.initSitePreferences = function() {
             ++counter;
         }
     }
-
-    hideEmptyMessageRow();
 };
 
 options.initAbout = function() {
