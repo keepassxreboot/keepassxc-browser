@@ -128,13 +128,14 @@ kpxcCustomLoginFieldsBanner.create = async function() {
     const colorStyleSheet = createStylesheet('css/colors.css');
 
     const wrapper = document.createElement('div');
+    wrapper.style.all = 'unset';
     wrapper.style.display = 'none';
     styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
     this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
     this.shadowRoot.append(colorStyleSheet);
-    this.shadowRoot.append(styleSheet);
     this.shadowRoot.append(defineStyleSheet);
     this.shadowRoot.append(buttonStyleSheet);
+    this.shadowRoot.append(styleSheet);
 
     // Only create the banner to top window
     if (window.self === window.top) {
