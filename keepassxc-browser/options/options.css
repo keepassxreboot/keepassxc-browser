@@ -116,6 +116,11 @@ tbody {
     vertical-align: middle;
 }
 
+/* Hide the row saying that the table is empty when there are other rows */
+table tbody tr.empty:not(:nth-last-child(2)) {
+  display: none;
+}
+
 #tab-site-preferences td:nth-of-type(2),
 #tab-site-preferences td:nth-of-type(2) select {
     width: 200px;

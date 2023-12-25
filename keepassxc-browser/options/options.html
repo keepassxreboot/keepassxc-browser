@@ -17,8 +17,6 @@
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="options.js"></script>
     <script src="../common/translate.js" defer></script>
-  </head>
-  <body class="pt-3 pb-5">
     <script>
     // We eagerly load the theme here to avoid a white flash
     let theme = localStorage.getItem('colorTheme') || 'system';
@@ -27,6 +25,8 @@
     }
     document.documentElement.setAttribute('data-bs-theme', theme);
     </script>
+  </head>
+  <body class="pt-3 pb-5">
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-3 col-lg-2 sidebar">
@@ -503,7 +503,7 @@
                       <i class="fa fa-arrow-down" aria-hidden="true"></i>
                       <span data-i18n="optionsButtonImport"></span>
                     </button>
-                    <button class="btn btn-sm btn-primary" id="exportSettingsButton">
+                    <button class="btn btn-sm btn-primary ms-2" id="exportSettingsButton">
                       <i class="fa fa-arrow-up" aria-hidden="true"></i>
                       <span data-i18n="optionsButtonExport"></span>
                     </button>
@@ -596,7 +596,7 @@
                             <i class="fa fa-remove" aria-hidden="true"></i>
                             <span data-i18n="optionsButtonCancel"></span>
                           </button>
-                          <button class="btn btn-sm yes btn-success">
+                          <button class="btn btn-sm yes btn-danger">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             <span data-i18n="optionsButtonRemoveNow"></span>
                           </button>
@@ -620,7 +620,7 @@
                     <span data-i18n="optionsCustomFieldsTabHelpTextSecond"></span><em><span data-i18n="popupChooseCredentialsText"></span></em>.
                   </p>
                   <div class="table-responsive">
-                     <table class="table table-sm table-striped table-bordered">
+                    <table class="table table-sm table-striped table-bordered">
                       <caption data-i18n="optionsCustomFieldsTableCaption"></caption>
                       <thead>
                         <tr>
@@ -661,7 +661,7 @@
                             <i class="fa fa-remove" aria-hidden="true"></i>
                             <span data-i18n="optionsButtonCancel"></span>
                           </button>
-                          <button class="btn btn-sm yes btn-success">
+                          <button class="btn btn-sm yes btn-danger">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             <span data-i18n="optionsButtonRemoveNow"></span>
                           </button>
@@ -757,7 +757,7 @@
                             <i class="fa fa-remove" aria-hidden="true"></i>
                             <span data-i18n="optionsButtonCancel"></span>
                           </button>
-                          <button class="btn btn-sm yes btn-success">
+                          <button class="btn btn-sm yes btn-danger">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             <span data-i18n="optionsButtonRemoveNow"></span>
                           </button>
@@ -786,7 +786,7 @@
                   </p>
                   <hr class="mt-0">
                   <p>
-                    <a target="_blank" href="https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk" data-i18n="[title]openNewTab">
+                    <a target="_blank" href="https://chromewebstore.google.com/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk" data-i18n="[title]openNewTab">
                       <span data-i18n="optionsAboutChrome"></span>
                     </a>
                     <br>

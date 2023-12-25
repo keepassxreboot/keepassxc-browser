@@ -216,8 +216,12 @@ options.initGeneralSettings = function() {
     });
 
     let temporarySettings;
-    const dialogImportSettingsModal = new bootstrap.Modal($('#dialogImportSettings'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogImportSettingsModal = new bootstrap.Modal('#dialogImportSettings',
+        { keyboard: true, focus: false, backdrop: true });
+
+    $('#dialogImportSettings').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     $('#importSettingsButton').addEventListener('click', function() {
         const link = document.createElement('input');
@@ -244,9 +248,6 @@ options.initGeneralSettings = function() {
                     // Verify the import
                     temporarySettings = contents;
                     dialogImportSettingsModal.show();
-                    $('#dialogImportSettings').addEventListener('shown.bs.modal', function(modalEvent) {
-                        modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-                    });
                 } catch (err) {
                     console.log('Error loading JSON settings file.');
                 }
@@ -346,16 +347,12 @@ options.getPartiallyHiddenKey = function(key) {
 };
 
 options.initConnectedDatabases = function() {
-    const dialogDeleteConnectedDatabaseModal = new bootstrap.Modal($('#dialogDeleteConnectedDatabase'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogDeleteConnectedDatabaseModal = new bootstrap.Modal('#dialogDeleteConnectedDatabase',
+        { keyboard: true, focus: false, backdrop: true });
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-connected-databases table tbody').children.length > 2) {
-            $('#tab-connected-databases table tbody tr.empty').hide();
-        } else {
-            $('#tab-connected-databases table tbody tr.empty').style.display = '';
-        }
-    };
+    $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     $('#dialogDeleteConnectedDatabase .modal-footer button.yes').addEventListener('click', async function(e) {
         dialogDeleteConnectedDatabaseModal.hide();
@@ -372,7 +369,6 @@ options.initConnectedDatabases = function() {
             console.log(err);
         });
 
-        hideEmptyMessageRow();
         browser.runtime.sendMessage({ action: 'update_popup' });
     });
 
@@ -389,9 +385,6 @@ options.initConnectedDatabases = function() {
         }
 
         dialogDeleteConnectedDatabaseModal.show();
-        $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-        });
     };
 
     const rowClone = $('#tab-connected-databases table tr.clone').cloneNode(true);
@@ -439,21 +432,15 @@ options.initConnectedDatabases = function() {
             }
         }
     });
-
-    hideEmptyMessageRow();
 };
 
 options.initCustomLoginFields = function() {
-    const dialogDeleteCustomLoginFieldsModal = new bootstrap.Modal($('#dialogDeleteCustomLoginFields'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogDeleteCustomLoginFieldsModal = new bootstrap.Modal('#dialogDeleteCustomLoginFields',
+        { keyboard: true, focus: false, backdrop: true });
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-custom-fields table tbody').children.length > 2) {
-            $('#tab-custom-fields table tbody tr.empty').hide();
-        } else {
-            $('#tab-custom-fields table tbody tr.empty').style.display = '';
-        }
-    };
+    $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     const removeButtonClicked = function(e) {
         e.preventDefault();
@@ -464,9 +451,6 @@ options.initCustomLoginFields = function() {
         $('#dialogDeleteCustomLoginFields .modal-body strong').textContent = closestTr.children[0].textContent;
 
         dialogDeleteCustomLoginFieldsModal.show();
-        $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-        });
     };
 
     $('#dialogDeleteCustomLoginFields .modal-footer button.yes').addEventListener('click', function(e) {
@@ -478,8 +462,6 @@ options.initCustomLoginFields = function() {
 
         delete options.settings['defined-custom-fields'][url];
         options.saveSettings();
-
-        hideEmptyMessageRow();
     });
 
     const rowClone = $('#tab-custom-fields table tr.clone').cloneNode(true);
@@ -496,8 +478,6 @@ options.initCustomLoginFields = function() {
         row.children[1].addEventListener('click', removeButtonClicked);
         $('#tab-custom-fields table tbody').append(row);
     }
-
-    hideEmptyMessageRow();
 };
 
 options.initSitePreferences = function() {
@@ -505,8 +485,12 @@ options.initSitePreferences = function() {
         options.settings['sitePreferences'] = [];
     }
 
-    const dialogDeleteSiteModal = new bootstrap.Modal($('#dialogDeleteSite'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogDeleteSiteModal = new bootstrap.Modal('#dialogDeleteSite',
+        { keyboard: true, focus: false, backdrop: true });
+
+    $('#dialogDeleteSite').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     const removeButtonClicked = function(e) {
         e.preventDefault();
@@ -517,9 +501,6 @@ options.initSitePreferences = function() {
         $('#dialogDeleteSite .modal-body strong').textContent = closestTr.children[0].textContent;
 
         dialogDeleteSiteModal.show();
-        $('#dialogDeleteSite').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-        });
     };
 
     const checkboxClicked = function() {
@@ -552,14 +533,6 @@ options.initSitePreferences = function() {
         options.saveSettings();
     };
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-site-preferences table tbody').children.length > 2) {
-            $('#tab-site-preferences table tbody tr.empty').hide();
-        } else {
-            $('#tab-site-preferences table tbody tr.empty').style.display = '';
-        }
-    };
-
     const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
@@ -590,7 +563,6 @@ options.initSitePreferences = function() {
         }
 
         options.saveSettings();
-        hideEmptyMessageRow();
     });
 
     $('#manualUrl').addEventListener('keyup', function(event) {
@@ -649,8 +621,6 @@ options.initSitePreferences = function() {
             ++counter;
         }
     }
-
-    hideEmptyMessageRow();
 };
 
 options.initAbout = function() {
