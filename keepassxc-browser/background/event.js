@@ -16,7 +16,7 @@ kpxcEvent.onMessage = async function(request, sender) {
 kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     let keyId = null;
     if (configured && keepass.databaseHash !== ''
-        && Object.hasOwn(keepass.databaseHash, keepass.databaseHash)) {
+        && Object.hasOwn(keepass.keyRing, keepass.databaseHash)) {
         keyId = keepass.keyRing[keepass.databaseHash].id;
     }
 
