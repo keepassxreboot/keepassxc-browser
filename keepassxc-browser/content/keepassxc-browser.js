@@ -580,11 +580,17 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
 // The basic function for retrieving credentials from KeePassXC.
 // Credential Banner can force the retrieval for reloading new/modified credentials.
 kpxc.retrieveCredentials = async function(force = false) {
+    if (!isIframeAllowed()) {
+        return [];
+    }
+
     kpxc.url = document.location.href;
     kpxc.submitUrl = kpxc.getFormActionUrl(kpxc.combinations[0]);
 
     if (kpxc.settings.autoRetrieveCredentials && kpxc.url && kpxc.submitUrl) {
-        await kpxc.retrieveCredentialsCallback(await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, force ]));
+        await kpxc.retrieveCredentialsCallback(
+            await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, force ]),
+        );
     }
 };
 
@@ -613,11 +619,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 // If credentials are not received, request them again
 kpxc.receiveCredentialsIfNecessary = async function() {
     if (kpxc.credentials.length === 0 && !_called.retrieveCredentials) {
-        // Check for Cross-domain security error when inspecting window.top.location.href. We should ignore these requests.
-        try {
-            const currentLocation = window.top.location.href;
-        } catch (err) {
-            logDebug('Error: Credential request ignored from another domain: ', window.self.location.host);
+        if (!isIframeAllowed()) {
             return [];
         }
 
@@ -632,7 +634,8 @@ kpxc.receiveCredentialsIfNecessary = async function() {
             return [];
         }
 
-        // If the database was locked, this is scope never met. In these cases the response is met at kpxc.detectDatabaseChange
+        // If the database was locked, this is scope never met.
+        // In these cases the response is met at kpxc.detectDatabaseChange
         await sendMessage('page_set_manual_fill', ManualFill.NONE);
         await kpxc.retrieveCredentialsCallback(credentials);
 
@@ -963,4 +966,15 @@ kpxc.reconnect = async function() {
         }
     }
     return true;
+};
+
+// Check for Cross-domain security error when inspecting window.top.location.href
+const isIframeAllowed = function() {
+    try {
+        const currentLocation = window.top.location.href;
+        return true;
+    } catch (err) {
+        logDebug(`Error: Credential request ignored from another domain: ${window.self.location.host}`);
+        return false;
+    }
 };
