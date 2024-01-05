@@ -34,8 +34,6 @@ const PREDEFINED_SITELIST = [
     'https://*.wordpress.com/log-in/'
 ];
 
-const awsUrl = 'signin.aws.amazon.com';
-const ebayUrl = 'https://www.ebay.';
 const googleUrl = 'https://accounts.google.com';
 
 const kpxcSites = {};
@@ -158,14 +156,14 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
         const buttons = findDiv.getElementsByTagName('button');
         kpxcSites.savedForm = form;
         return buttons.length > 0 ? buttons[0] : undefined;
-    } else if (form.action.startsWith(ebayUrl)) {
+    } else if (form.action.startsWith('https://www.ebay.')) {
         // For eBay we must return the first button.
         for (const i of form.elements) {
             if (i.type === 'button') {
                 return i;
             }
         }
-    } else if (form.action.includes(awsUrl)) {
+    } else if (form.action.includes('signin.aws.amazon.com')) {
         // For Amazon AWS the button is outside the form.
         const button = $('#signin_button');
         if (button) {
@@ -183,6 +181,9 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
         if (buttons?.length > 1) {
             return buttons[1];
         }
+    } else if (form.action.startsWith('https://barmerid.id.bconnect.barmer.de')) {
+        const loginButton = $('#btn-login');
+        return loginButton?.shadowRoot?.children?.[0];
     }
 
     return undefined;
