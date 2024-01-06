@@ -437,7 +437,7 @@ Response message data (success, decrypted):
 }
 ```
 
-### passkeys-get (decrypted, KeePassXC 2.8.0 and newer)
+### passkeys-get (decrypted, KeePassXC 2.7.7 and newer)
 Unencrypted message:
 ```json
 {
@@ -457,7 +457,7 @@ Unencrypted message:
 Response (success, decrypted):
 ```json
 {
-    "version": "2.8.0",
+    "version": "2.7.7",
     "success": "true",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "response": PublicKeyCredential
@@ -467,7 +467,7 @@ Response (success, decrypted):
 Response (error, decrypted):
 ```json
 {
-    "version": "2.8.0",
+    "version": "2.7.7",
     "success": "true",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "response": {
@@ -476,7 +476,7 @@ Response (error, decrypted):
 }
 ```
 
-### passkeys-register (decrypted, KeePassXC 2.8.0 and newer)
+### passkeys-register (decrypted, KeePassXC 2.7.7 and newer)
 Unencrypted message:
 ```json
 {
@@ -496,7 +496,7 @@ Unencrypted message:
 Response (success, decrypted):
 ```json
 {
-    "version": "2.8.0",
+    "version": "2.7.7",
     "success": "true",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q"
     "response": PublicKeyCredential
@@ -506,7 +506,7 @@ Response (success, decrypted):
 Response (error, decrypted):
 ```json
 {
-    "version": "2.8.0",
+    "version": "2.7.7",
     "success": "true",
     "nonce": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
     "response": {

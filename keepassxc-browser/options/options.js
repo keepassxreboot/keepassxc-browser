@@ -331,13 +331,13 @@ options.showKeePassXCVersions = async function(response) {
         $('#tab-general-settings #downloadFaviconAfterSaveFormGroup').hide();
     }
 
-    // Hide certain options with older KeePassXC versions than 2.8.0
-    const version280Result = await browser.runtime.sendMessage({
+    // Hide certain options with older KeePassXC versions than 2.7.7
+    const version277Result = await browser.runtime.sendMessage({
         action: 'compare_version',
-        args: [ '2.8.0', response.current ]
+        args: [ '2.7.7', response.current ]
     });
 
-    if (!version280Result) {
+    if (!version277Result) {
         $('#tab-general-settings #passkeysOptionsCard').hide();
     }
 };
