@@ -47,7 +47,7 @@ kpxcBanner.create = async function(credentials = {}) {
     credentials.username = credentials.username.trim();
     kpxcBanner.credentials = credentials;
 
-    const banner = kpxcUI.createElement('div', 'kpxc-banner', { 'id': 'container' });
+    const banner = kpxcUI.createElement('div', 'kpxc-banner', { 'id': 'kpxc-banner-container' });
     initColorTheme(banner);
     banner.style.zIndex = '2147483646';
 
@@ -61,13 +61,32 @@ kpxcBanner.create = async function(credentials = {}) {
     const usernameText = kpxcUI.createElement('span', 'small', {}, tr('popupUsername') + ' ');
     const usernameSpan = kpxcUI.createElement('span', 'small info information-username', {}, credentials.username);
 
-    const newButton = kpxcUI.createElement('button', GREEN_BUTTON, { 'id': 'kpxc-banner-btn-new' }, tr('popupButtonNew'));
-    const updateButton = kpxcUI.createElement('button', ORANGE_BUTTON, { 'id': 'kpxc-banner-btn-update' }, tr('popupButtonUpdate'));
-    const dismissButton = kpxcUI.createElement('button', RED_BUTTON, { 'id': 'kpxc-banner-btn-dismiss' }, tr('popupButtonDismiss'));
+    const newButton = kpxcUI.createElement('button', GREEN_BUTTON, { id: 'kpxc-banner-btn-new' }, tr('popupButtonNew'));
+    const updateButton = kpxcUI.createElement(
+        'button',
+        ORANGE_BUTTON,
+        { id: 'kpxc-banner-btn-update' },
+        tr('popupButtonUpdate'),
+    );
+    const dismissButton = kpxcUI.createElement(
+        'button',
+        RED_BUTTON,
+        { id: 'kpxc-banner-btn-dismiss' },
+        tr('popupButtonDismiss'),
+    );
 
     const separator = kpxcUI.createElement('div', 'kpxc-separator');
-    const ignoreCheckbox = kpxcUI.createElement('input', 'kpxc-checkbox', { type: 'checkbox', name: 'ignoreCheckbox', id: 'kpxc-banner-ignoreCheckbox' });
-    const checkboxLabel = kpxcUI.createElement('label', 'kpxc-checkbox-label', { for: 'kpxc-banner-ignoreCheckbox' }, tr('popupButtonIgnore'));
+    const ignoreCheckbox = kpxcUI.createElement('input', 'kpxc-checkbox', {
+        type: 'checkbox',
+        name: 'ignoreCheckbox',
+        id: 'kpxc-banner-ignoreCheckbox',
+    });
+    const checkboxLabel = kpxcUI.createElement(
+        'label',
+        'kpxc-checkbox-label',
+        { for: 'kpxc-banner-ignoreCheckbox' },
+        tr('popupButtonIgnore'),
+    );
 
     // No existing credentials to update --> disable Update button
     if (credentials.list.length === 0) {
@@ -170,7 +189,13 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                     // Create a new group
                     const newGroup = await sendMessage('create_new_group', [ result.defaultGroup ]);
                     if (newGroup.name && newGroup.uuid) {
-                        const res = await sendMessage('add_credentials', [ credentials.username, credentials.password, credentials.url, newGroup.name, newGroup.uuid ]);
+                        const res = await sendMessage('add_credentials', [
+                            credentials.username,
+                            credentials.password,
+                            credentials.url,
+                            newGroup.name,
+                            newGroup.uuid,
+                        ]);
                         kpxcBanner.verifyResult(res);
                     } else {
                         kpxcUI.createNotification('error', tr('rememberErrorCreatingNewGroup'));
@@ -180,7 +205,13 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                 }
             }
 
-            const res = await sendMessage('add_credentials', [ credentials.username, credentials.password, credentials.url, gname, guuid ]);
+            const res = await sendMessage('add_credentials', [
+                credentials.username,
+                credentials.password,
+                credentials.url,
+                gname,
+                guuid,
+            ]);
             kpxcBanner.verifyResult(res);
             return;
         }
@@ -212,7 +243,13 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                 return;
             }
 
-            const res = await sendMessage('add_credentials', [ credentials.username, credentials.password, credentials.url, group, groupUuid ]);
+            const res = await sendMessage('add_credentials', [
+                credentials.username,
+                credentials.password,
+                credentials.url,
+                group,
+                groupUuid,
+            ]);
             kpxcBanner.verifyResult(res);
         });
 
@@ -242,7 +279,12 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
         // Use the current username if it's empty
         credentials.username ??= credentials.list[0].login;
 
-        const res = await sendMessage('update_credentials', [ credentials.list[0].uuid, credentials.username, credentials.password, credentials.url ]);
+        const res = await sendMessage('update_credentials', [
+            credentials.list[0].uuid,
+            credentials.username,
+            credentials.password,
+            credentials.url,
+        ]);
         kpxcBanner.verifyResult(res);
     } else {
         await kpxcBanner.createCredentialDialog();
@@ -258,7 +300,12 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
         }
 
         for (const [ i, cred ] of credentials.list.entries()) {
-            const a = kpxcUI.createElement('a', 'list-group-item', { 'href': '#', 'entryId': i }, `${cred.login} (${cred.name})`);
+            const a = kpxcUI.createElement(
+                'a',
+                'list-group-item',
+                { href: '#', entryId: i },
+                `${cred.login} (${cred.name})`,
+            );
             a.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (!e.isTrusted) {
@@ -285,7 +332,12 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
                         return;
                     }
 
-                    const res = await sendMessage('update_credentials', [ credentials.list[entryId].uuid, credentials.username, credentials.password, credentials.url ]);
+                    const res = await sendMessage('update_credentials', [
+                        credentials.list[entryId].uuid,
+                        credentials.username,
+                        credentials.password,
+                        credentials.url,
+                    ]);
                     kpxcBanner.verifyResult(res);
                 });
             });
@@ -305,10 +357,16 @@ kpxcBanner.verifyResult = async function(code) {
     if (code === 'error') {
         kpxcUI.createNotification('error', tr('rememberErrorCannotSaveCredentials'));
     } else if (code === 'created') {
-        kpxcUI.createNotification('success', tr('rememberCredentialsSaved', kpxcBanner.credentials.username || tr('rememberEmptyUsername')));
+        kpxcUI.createNotification(
+            'success',
+            tr('rememberCredentialsSaved', kpxcBanner.credentials.username || tr('rememberEmptyUsername')),
+        );
         await kpxc.retrieveCredentials(true); // Forced reload
     } else if (code === 'updated') {
-        kpxcUI.createNotification('success', tr('rememberCredentialsUpdated', kpxcBanner.credentials.username || tr('rememberEmptyUsername')));
+        kpxcUI.createNotification(
+            'success',
+            tr('rememberCredentialsUpdated', kpxcBanner.credentials.username || tr('rememberEmptyUsername')),
+        );
         await kpxc.retrieveCredentials(true); // Forced reload
     } else if (code === 'canceled') {
         kpxcUI.createNotification('warning', tr('rememberCredentialsNotSaved'));

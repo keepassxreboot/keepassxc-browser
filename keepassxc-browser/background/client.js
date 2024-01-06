@@ -88,8 +88,8 @@ const messageBuffer = {
                 }
 
                 return message;
-            }}
-        );
+            }
+        });
     },
 
     removeMessage(message) {
