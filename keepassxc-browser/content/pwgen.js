@@ -342,6 +342,20 @@ kpxcPasswordDialog.newFill = function(elem, password) {
     elem.value = password;
     elem.dispatchEvent(new Event('input', { bubbles: true }));
     elem.dispatchEvent(new Event('change', { bubbles: true }));
+
+    // Fill next password field if found
+    if (kpxc.inputs.length > 0) {
+        const index = kpxc.inputs.indexOf(elem);
+        const nextField = kpxc.inputs[index + 1];
+
+        kpxcPasswordDialog.nextField =
+            nextField && nextField.getLowerCaseAttribute('type') === 'password' ? nextField : undefined;
+        if (kpxcPasswordDialog.nextField) {
+            kpxcPasswordDialog.nextField.value = password;
+            kpxcPasswordDialog.nextField.dispatchEvent(new Event('input', { bubbles: true }));
+            kpxcPasswordDialog.nextField.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
 };
 
 kpxcPasswordDialog.copyPasswordToClipboard = function() {
