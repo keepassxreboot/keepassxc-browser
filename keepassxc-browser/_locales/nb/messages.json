@@ -96,7 +96,7 @@
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
-        "message": "Ingen URL oppgitt.",
+        "message": "Ingen URL angitt.",
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Tilgang til alle oppføringer nektet.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,11 +144,11 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "Ugyldig URL angitt.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
+        "message": "Innbygde (resident) nøkler støttes ikke.",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {

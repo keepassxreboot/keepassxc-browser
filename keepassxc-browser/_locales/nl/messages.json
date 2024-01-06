@@ -16,7 +16,7 @@
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "Wachtwoordgenerator-pictogrammen tonen",
+        "message": "Pictogram voor wachtwoordgenerator tonen",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
@@ -112,7 +112,7 @@
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Geen nieuwe groep kunnen aanmaken.",
+        "message": "Kan geen nieuwe groep aanmaken.",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Toegang tot alle items geweigerd.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,19 +144,19 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "Ongeldige URL opgegeven.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
+        "message": "Resident Keys worden niet ondersteund.",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
-        "message": "Geen verbinding met KeePassXC.",
+        "message": "Niet verbonden met KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
-        "message": "Wachtwoordgenerator-pictogram",
+        "message": "Pictogram voor wachtwoordgenerator",
         "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorPlaceholder": {
@@ -188,7 +188,7 @@
         "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Foutmelding: Het gegenereerde wachtwoord is langer dan is toegestaan!",
+        "message": "Fout: Het gegenereerde wachtwoord is langer dan is toegestaan!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
@@ -204,7 +204,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorError": {
-        "message": "Kan geen gegenereerd wachtwoord ontvangen.",
+        "message": "Gegenereerd wachtwoord niet ontvangen.",
         "description": "Password generator error text when KeePassXC is closed."
     },
     "passwordGeneratorErrorIsRunning": {
@@ -220,7 +220,7 @@
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "Geen verbinding met KeePassXC",
+        "message": "KeePassXC is niet verbonden.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "usernameFieldIcon": {
@@ -340,15 +340,15 @@
         "description": "If a credential is expired, this is appended to the title label."
     },
     "fieldsFill": {
-        "message": "Foutmelding: geen invulvelden aangetroffen.",
+        "message": "Fout: geen invulvelden aangetroffen.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "Foutmelding: geen wachtwoordveld aangetroffen.",
+        "message": "Fout: geen wachtwoordveld aangetroffen.",
         "description": "Message shown when no password fields are found."
     },
     "rememberNothingChanged": {
-        "message": "Foutmelding: geen gewijzigde inloggegevens geconstateerd.",
+        "message": "Fout: geen gewijzigde inloggegevens gedetecteerd.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -400,7 +400,7 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "Gebruik je deze extensie voor het eerst? Lees dan onze snelstartgids (in het Engels).",
+        "message": "Gebruik je deze extensie voor het eerst? Lees dan onze snelstartgids (Getting Started Guide).",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
@@ -412,7 +412,7 @@
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-        "message": "Geen verbinding met KeePassXC? Wellicht biedt onze wiki raad.",
+        "message": "Geen verbinding met KeePassXC? Mogelijk biedt onze wiki-pagina raad.",
         "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
@@ -668,7 +668,7 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Wachtwoordgenerator-pictogrammen inschakelen.",
+        "message": "Pictogrammen voor wachtwoordgenerator inschakelen.",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
@@ -684,7 +684,7 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Pictogrammen bij 2FA-/OTP-velden activeren.",
+        "message": "Pictogrammen bij 2FA-/OTP-velden inschakelen.",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
