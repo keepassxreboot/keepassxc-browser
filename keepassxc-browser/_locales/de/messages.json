@@ -36,7 +36,7 @@
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "HTTP-Authentifizierung mit mehreren Anmeldedaten erkannt. Klicken Sie auf das Erweiterungssymbol, um die Richtigen auszuwählen.",
+        "message": "HTTP-Authentifizierung mit mehreren Anmeldedaten erkannt. Klicken Sie auf das Erweiterungssymbol, um die richtigen auszuwählen.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -52,7 +52,7 @@
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "Öffentlicher Client-Schlüssel nicht erhalten.",
+        "message": "Öffentlichen Client-Schlüssel nicht erhalten.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Zugriff auf alle Einträge verweigert.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,11 +144,11 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "Ungültige URL angegeben.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
+        "message": "Residente Schlüssel werden nicht unterstützt.",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
@@ -320,11 +320,11 @@
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Fehler:\nIn KeePassXC wurde mehr als eine Anmeldung gefunden!\nDrücken Sie auf das KeePassXC-Browser-Symbol für weitere Optionen.",
+        "message": "Fehler:\nIn KeePassXC wurde mehr als eine Anmeldung gefunden!\nKlicken Sie auf das KeePassXC-Browser-Symbol für weitere Optionen.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Drücken Sie auf das KeePassXC-Browser-Symbol für weitere Optionen.",
+        "message": "Klicken Sie auf das KeePassXC-Browser-Symbol für weitere Optionen.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -424,7 +424,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser wurde nicht konfiguriert. Drücken Sie auf die Schaltfläche Verbinden, um eine Verbindung mit KeePassXC herzustellen.",
+        "message": "KeePassXC-Browser wurde nicht konfiguriert. Klicken Sie auf die Schaltfläche Verbinden, um eine Verbindung mit KeePassXC herzustellen.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -432,7 +432,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Drücken Sie auf die Schaltfläche Wiederverbinden, um eine neue Verbindung herzustellen.",
+        "message": "Klicken Sie auf die Schaltfläche Wiederverbinden, um eine neue Verbindung herzustellen.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -668,7 +668,7 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Passwortgenerator aktivieren.",
+        "message": "Symbole für Passwortgenerator aktivieren.",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
@@ -680,7 +680,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Nützlich für Seiten, die Popups oder dynamische Dialoge verwenden. Deaktiviere diese Funktion, um die CPU-Last auf langsameren Geräten zu reduzieren. Wenn die Funktion deaktiviert ist, können Anmeldedaten nur mittels Tastaturkürzel, Kontextmenü oder dem Erweiterungs-Popup eingegeben werden.",
+        "message": "Nützlich für Seiten, die Popups oder dynamische Dialoge verwenden. Deaktivieren Sie die Funktion, um die CPU-Last auf langsameren Geräten zu reduzieren. Wenn die Funktion deaktiviert ist, können Anmeldedaten nur über Tastaturkürzel, Kontextmenü oder das Erweiterungs-Popup eingefügt werden.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -716,7 +716,7 @@
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Sendet automatisch die gewählten Anmeldedaten ab. Dies ist für Autoausfüllen von einem einzelnen Eintrag deaktiviert.",
+        "message": "Übermittelt automatisch die ausgewählten Anmeldeinformationen. Diese Funktion ist für das automatische Ausfüllen von einzelnen Einträgen deaktiviert.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
@@ -808,7 +808,7 @@
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
-        "message": "Passwörter werden von KeePassXC mit Hilfe Ihres Passwortgenerierungsprofils generiert.",
+        "message": "Passwörter werden von KeePassXC mithilfe Ihres Passwortgenerierungsprofils generiert.",
         "description": "Password Generator option help text, second part."
     },
     "optionsPredefinedSiteList": {
@@ -828,7 +828,7 @@
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Fügt Eingabenfeldern, die als OTP/2FA erkannt werden, ein Symbol hinzu.",
+        "message": "Fügt Eingabefeldern, die als OTP/2FA erkannt werden, ein Symbol hinzu.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -844,11 +844,11 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warnung! Die Verwendung des automatischen Ausfüllens ist nicht sicher. Die Verwendung erfolgt auf eigene Gefahr. KeePassXC-Browser versucht automatisch, Anmeldefelder zu erkennen. Sie können jedoch falsch erkannt werden, wodurch möglicherweise sensible Daten in unsichere Eingabefelder eingetragen werden.",
+        "message": "Warnung! Die Verwendung des automatischen Ausfüllens ist nicht sicher und erfolgt auf eigene Gefahr. KeePassXC-Browser versucht automatisch, Anmeldefelder zu erkennen. Sie können jedoch falsch erkannt werden, wodurch möglicherweise sensible Daten in unsichere Eingabefelder eingetragen werden.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Eine Dropdown-Liste mit verfügbaren Anmeldedaten für alle Benutzernamensfelder auf einer Seite anzeigen.",
+        "message": "Eine Drop-down-Liste mit verfügbaren Anmeldedaten für alle Benutzernamensfelder auf einer Seite anzeigen.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
@@ -856,7 +856,7 @@
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Benachrichtigungen bei Fehlern, und wenn Benutzerinteraktion erforderlich ist, anzeigen.",
+        "message": "Benachrichtigungen bei Fehlern und wenn eine Benutzerinteraktion erforderlich ist, anzeigen.",
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
@@ -868,7 +868,7 @@
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Wenn neue, benutzerdefinierte Anmeldefelder gespeichert werden, nur die Domain anstatt der ganzen URL speichern, ",
+        "message": "Beim Speichern neuer benutzerdefinierter Anmeldefelder nur die Domain anstatt der vollständigen URL speichern.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -888,11 +888,11 @@
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Anmeldedaten aus nicht-aktiven Tabs entfernen nach (Sekunden, 0-3600)",
+        "message": "Anmeldedaten aus nicht aktiven Tabs entfernen nach (Sekunden, 0 - 3600).",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Anmeldedaten werden nach dem Timeout aus Hintergrund-Tabs entfernt, und für diese Seiten wird erneut um Erlaubnis gebeten.",
+        "message": "Anmeldedaten werden nach dem Timeout aus Hintergrund-Tabs entfernt. Für diese Seiten wird erneut um Erlaubnis gebeten.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
@@ -1080,7 +1080,7 @@
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Gehen Sie auf die Seite und klicken Sie auf das Symbol KeePassXC-Browser, und wählen Sie anschließend",
+        "message": "Gehen Sie auf die Seite, klicken Sie auf das Symbol KeePassXC-Browser und wählen Sie anschließend",
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
@@ -1108,7 +1108,7 @@
         "description": "Confirmation text when removing ignored sites from the list."
     },
     "optionsSitePreferencesTabHelpTextFirst": {
-        "message": "Webseiten auf dieser Seite haben spezielle Handhabungsmethoden, die mit ihnen verknüpft sind.",
+        "message": "Webseiten auf dieser Seite sind mit besonderen Bearbeitungsmethoden verbunden.",
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
@@ -1216,11 +1216,11 @@
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Trage Anmeldedaten ein",
+        "message": "Anmeldedaten eintragen",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Speichere Anmeldedaten",
+        "message": "Anmeldedaten speichern",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {
@@ -1264,7 +1264,7 @@
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
-        "message": "Dein Auswahl wird automatisch gesendet.",
+        "message": "Ihre Auswahl wird automatisch gesendet.",
         "description": "Message shown at the bottom of autocomplete menu."
     },
     "lockDatabase": {

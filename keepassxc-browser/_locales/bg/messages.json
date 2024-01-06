@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Достъпът до всички записи е отказан.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,11 +144,11 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "Предоставен е недействителен адрес.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
+        "message": "Постоянни ключове не се поддържат.",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
@@ -1080,7 +1080,7 @@
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Отидете на страницата и кликнете върху иконата На KeePassXC-Browser, след което да изберете",
+        "message": "Отидете на страницата и щракнете върху пиктограмата на KeePassXC-Browser, след което да изберете ",
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {

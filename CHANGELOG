@@ -1,3 +1,15 @@
+1.8.11 (2024-01-06)
+=========================
+- Add barmer.de to form submit button exception list [#2068]
+- Fix Credential Banner container id [#2069]
+- Fix filling next password from the new password generator [#2070]
+- Fix to disallow iframes from another domain [#2059]
+- Fix showing keyId in the popup (Thanks stefansundin) [#2056]
+- Fix options page CSS (Thanks stefansundin) [#2054]
+- Fix possibility to style extension's Shadow DOM elements from the page styles (Thanks stefansundin) [#2055]
+- Fix using hostname instead of host with Passkeys [#2042]
+- Remove special handling for Firefox's overflow/hamburger menu [#1771]
+
 1.8.10 (2023-11-25)
 =========================
 - Add Wordpress to Site Preferences [#2039]
