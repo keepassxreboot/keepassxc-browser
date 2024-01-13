@@ -253,6 +253,7 @@ kpxcEvent.messageHandlers = {
     'hide_troubleshooting_guide_alert': kpxcEvent.hideTroubleshootingGuideAlert,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
+    'is_iframe_allowed': page.isIframeAllowed,
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,

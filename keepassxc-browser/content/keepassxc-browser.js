@@ -580,7 +580,7 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
 // The basic function for retrieving credentials from KeePassXC.
 // Credential Banner can force the retrieval for reloading new/modified credentials.
 kpxc.retrieveCredentials = async function(force = false) {
-    if (!isIframeAllowed()) {
+    if (!await isIframeAllowed()) {
         return [];
     }
 
@@ -619,7 +619,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 // If credentials are not received, request them again
 kpxc.receiveCredentialsIfNecessary = async function() {
     if (kpxc.credentials.length === 0 && !_called.retrieveCredentials) {
-        if (!isIframeAllowed()) {
+        if (!await isIframeAllowed()) {
             return [];
         }
 
@@ -968,12 +968,19 @@ kpxc.reconnect = async function() {
     return true;
 };
 
-// Check for Cross-domain security error when inspecting window.top.location.href
-const isIframeAllowed = function() {
+const isIframeAllowed = async function() {
     try {
+        // Check for Cross-domain security error when inspecting window.top.location.href
         const currentLocation = window.top.location.href;
         return true;
     } catch (err) {
+        // Inspect iframe using TLD and the tab's original URL
+        const allowed = await sendMessage('is_iframe_allowed', [ window.location.href, window.location.hostname ]);
+        if (allowed) {
+            return true;
+        }
+
+        // TODO: Allow user to add a manual exception for iframes with this tab URL
         logDebug(`Error: Credential request ignored from another domain: ${window.self.location.host}`);
         return false;
     }

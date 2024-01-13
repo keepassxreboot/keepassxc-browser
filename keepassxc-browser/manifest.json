@@ -145,6 +145,7 @@
     "permissions": [
         "activeTab",
         "contextMenus",
+        "cookies",
         "clipboardWrite",
         "nativeMessaging",
         "notifications",

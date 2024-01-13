@@ -582,7 +582,7 @@ keepass.requestAutotype = async function(tab, args = []) {
 
     const kpAction = kpActions.REQUEST_AUTOTYPE;
     const nonce = keepassClient.getNonce();
-    const search = getTopLevelDomainFromUrl(args[0]);
+    const search = page.getTopLevelDomainFromUrl(args[0]);
 
     const messageData = {
         action: kpAction,

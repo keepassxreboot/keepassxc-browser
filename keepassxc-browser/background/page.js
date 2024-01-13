@@ -329,6 +329,87 @@ page.updatePopup = function(tab) {
     browserAction.showDefault(tab);
 };
 
+page.isIframeAllowed = async function(tab, args = []) {
+    const [ url, hostname ] = args;
+    const baseDomain = await page.getBaseDomainFromUrl(hostname, url);
+
+    // Allow iframe if the base domain is included in iframes' and tab's hostname
+    const tabUrl = new URL(tab?.url);
+    return hostname.endsWith(baseDomain) && tabUrl.hostname?.endsWith(baseDomain);
+};
+
+/**
+ * Gets the top level domain from URL.
+ * @param {string} domain   Current iframe's hostname
+ * @param {string} url      Current iframe's full URL
+ * @returns {string}        TLD e.g. https://another.example.co.uk -> co.uk
+ */
+page.getTopLevelDomainFromUrl = async function(domain, url) {
+    // A simple check for IPv4 address. TLD cannot be numeric, and if hostname is just numbers, it's probably an IPv4.
+    // TODO: Handle IPv6 addresses. Is there some internal API for these?
+    if (!isNaN(Number(domain?.replaceAll('.', '')))) {
+        return domain;
+    }
+
+    // Only loop the amount of different domain parts found
+    const numberOfDomainParts = domain?.split('.')?.length;
+    for (let i = 0; i < numberOfDomainParts; ++i) {
+        // Cut the first part from host
+        const index = domain?.indexOf('.');
+        if (index < 0) {
+            continue;
+        }
+
+        // Check if dummy cookie's domain/TLD matches with public suffix list.
+        // If setting the cookie fails, TLD has been found.
+        try {
+            domain = domain?.substring(index + 1);
+            const reply = await browser.cookies.set({
+                domain: domain,
+                name: 'kpxc',
+                sameSite: 'strict',
+                url: url,
+                value: ''
+            });
+
+            // Delete the temporary cookie immediately
+            if (reply) {
+                await browser.cookies.remove({
+                    name: 'kpxc',
+                    url: url
+                });
+            }
+        } catch (e) {
+            return domain;
+        }
+    }
+
+    return domain;
+};
+
+/**
+ * Gets the base domain of URL or hostname.
+ * Up-to-date list can be found: https://publicsuffix.org/list/public_suffix_list.dat
+ * @param {string} domain   Current iframe's hostname
+ * @param {string} url      Current iframe's full URL
+ * @returns {string}        The base domain, e.g. https://another.example.co.uk -> example.co.uk
+ */
+page.getBaseDomainFromUrl = async function(hostname, url) {
+    const tld = await page.getTopLevelDomainFromUrl(hostname, url);
+    if (tld.length === 0 || tld === hostname) {
+        return hostname;
+    }
+
+    // Remove the top level domain part from the hostname, e.g. https://another.example.co.uk -> https://another.example
+    const finalDomain = hostname.slice(0, hostname.indexOf(tld) - 1);
+    // Split the URL and select the last part, e.g. https://another.example -> example
+    let baseDomain = finalDomain.split('.')?.at(-1);
+    // Append the top level domain back to the URL, e.g. example -> example.co.uk
+    baseDomain = baseDomain + '.' + tld;
+
+    return baseDomain;
+};
+
 const createContextMenuItem = function({ action, args, ...options }) {
     return browser.contextMenus.create({
         contexts: menuContexts,
@@ -343,6 +424,7 @@ const createContextMenuItem = function({ action, args, ...options }) {
         ...options
     });
 };
+
 
 const logDebug = function(message, extra) {
     if (page.settings.debugLogging) {
