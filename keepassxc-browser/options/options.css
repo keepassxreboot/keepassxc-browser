@@ -128,6 +128,7 @@ table tbody tr.empty:not(:nth-last-child(2)) {
 
 #tab-site-preferences td:nth-of-type(3),
 #tab-site-preferences td:nth-of-type(4),
+#tab-site-preferences td:nth-of-type(5),
 table td:last-of-type {
     width: 1px;
 }

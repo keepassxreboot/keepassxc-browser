@@ -154,6 +154,7 @@ page.clearLogins = function(tabId) {
         return;
     }
 
+    page.tabs[tabId].allowIframes = false;
     page.tabs[tabId].credentials = [];
     page.tabs[tabId].loginList = [];
     page.currentRequest = {};
@@ -185,6 +186,7 @@ page.clearSubmittedCredentials = async function() {
 
 page.createTabEntry = function(tabId) {
     page.tabs[tabId] = {
+        allowIframes: false,
         credentials: [],
         errorMessage: null,
         loginList: [],
@@ -329,9 +331,23 @@ page.updatePopup = function(tab) {
     browserAction.showDefault(tab);
 };
 
+page.setAllowIframes = async function(tab, args = []) {
+    const [ allowIframes, site ] = args;
+
+    // Only set when main windows' URL is used
+    if (tab?.url === site) {
+        page.tabs[tab.id].allowIframes = allowIframes;
+    }
+};
+
 page.isIframeAllowed = async function(tab, args = []) {
     const [ url, hostname ] = args;
     const baseDomain = await page.getBaseDomainFromUrl(hostname, url);
+
+    // Allow if exception has been set from Site Preferences
+    if (page.tabs[tab.id]?.allowIframes) {
+        return true;
+    }
 
     // Allow iframe if the base domain is included in iframes' and tab's hostname
     const tabUrl = new URL(tab?.url);
