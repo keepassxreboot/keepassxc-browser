@@ -66,6 +66,10 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions) {
         const publicKey = {};
         publicKey.attestation = pkOptions.attestation || 'none';
         publicKey.authenticatorSelection = pkOptions.authenticatorSelection || { userVerification: 'preferred' };
+        if (!publicKey.authenticatorSelection.userVerification) {
+            publicKey.authenticatorSelection.userVerification = 'preferred';
+        }
+
         publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
         publicKey.extensions = pkOptions.extensions;
         publicKey.pubKeyCredParams = pkOptions.pubKeyCredParams;
