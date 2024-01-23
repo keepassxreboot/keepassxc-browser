@@ -126,6 +126,10 @@ kpxc.detectDatabaseChange = async function(response) {
     }
 };
 
+kpxc.entryHasTotp = function(entry) {
+    return entry.totp || (entry.stringFields && entry.stringFields.some(s => s['KPH: {TOTP}']));
+};
+
 // Get location URL by domain or full URL
 kpxc.getDocumentLocation = function() {
     return kpxc.settings.saveDomainOnly ? document.location.origin : document.location.href;
@@ -776,7 +780,7 @@ kpxc.updateTOTPList = async function() {
         const password = credentials.password;
 
         // If no username is set, compare with a password
-        const credentialList = kpxc.credentials.filter(c => (c.totp || (c.stringFields && c.stringFields.some(s => s['KPH: {TOTP}'])))
+        const credentialList = kpxc.credentials.filter(c => kpxc.entryHasTotp(c)
             && (c.login === username || (!username && c.password === password)));
 
         // Filter TOTP Autocomplete Menu with matching 2FA credentials

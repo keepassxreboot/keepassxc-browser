@@ -7,6 +7,7 @@ const defaultSettings = {
     showGroupNameInAutocomplete: true,
     autoFillAndSend: false,
     autoFillSingleEntry: false,
+    autoFillSingleTotp: false,
     autoReconnect: false,
     autoRetrieveCredentials: true,
     autoSubmit: false,

@@ -267,6 +267,14 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
         kpxcFill.fillInStringFields(combination.fields, selectedCredentials.stringFields);
     }
 
+    // Fill TOTP
+    if (kpxc.settings.autoFillSingleTotp && kpxc.entryHasTotp(selectedCredentials)) {
+        const totpCombination = combination?.totp || kpxc.combinations?.find(c => c.totp);
+        if (totpCombination?.totp) {
+            kpxcFill.fillTOTPFromUuid(totpCombination.totp, selectedCredentials.uuid);
+        }
+    }
+
     // Close autocomplete menu after fill
     kpxcUserAutocomplete.closeList();
 

@@ -108,7 +108,7 @@ class TOTPFieldIcon extends Icon {
     }
 }
 
-TOTPFieldIcon.prototype.initField = function(field, segmented) {
+TOTPFieldIcon.prototype.initField = async function(field, segmented) {
     // Observer the visibility
     if (this.observer) {
         this.observer.observe(field);
@@ -116,6 +116,17 @@ TOTPFieldIcon.prototype.initField = function(field, segmented) {
 
     this.createIcon(field, segmented);
     this.inputField = field;
+
+    // Fill TOTP automatically if option is enabled
+    if (kpxc.settings.autoFillSingleTotp) {
+        if (kpxc.credentials.length === 0) {
+            await kpxc.receiveCredentialsIfNecessary();
+        }
+
+        if (kpxc.credentials?.length === 1 && kpxc.entryHasTotp(kpxc.credentials[0])) {
+            kpxcFill.fillTOTPFromUuid(field, kpxc.credentials[0].uuid);
+        }
+    }
 };
 
 TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
