@@ -57,6 +57,10 @@ function statusResponse(r) {
             $('#username-field-detected').show();
         }
 
+        if (r.iframeDetected) {
+            $('#iframe-detected').show();
+        }
+
         reloadCount = 0;
     }
 }
@@ -135,6 +139,12 @@ const sendMessageToTab = async function(message) {
         await sendMessageToTab('add_username_only_option');
         await sendMessageToTab('redetect_fields');
         $('#username-field-detected').hide();
+    });
+
+    $('#allow-iframe-button').addEventListener('click', async () => {
+        await sendMessageToTab('add_allow_iframes_option');
+        await sendMessageToTab('redetect_fields');
+        $('#iframe-detected').hide();
     });
 
     $('#getting-started-alert-close-button').addEventListener('click', async () => {

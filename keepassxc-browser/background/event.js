@@ -26,18 +26,21 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
 
     const errorMessage = page.tabs[tab.id]?.errorMessage ?? undefined;
     const usernameFieldDetected = page.tabs[tab.id]?.usernameFieldDetected ?? false;
+    const iframeDetected = page.tabs[tab.id]?.iframeDetected ?? false;
 
     return {
-        identifier: keyId,
+        associated: keepass.isAssociated(),
+
         configured: configured,
         databaseClosed: keepass.isDatabaseClosed,
-        keePassXCAvailable: keepass.isKeePassXCAvailable,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
-        associated: keepass.isAssociated(),
         error: errorMessage,
-        usernameFieldDetected: usernameFieldDetected,
+        iframeDetected: iframeDetected,
+        identifier: keyId,
+        keePassXCAvailable: keepass.isKeePassXCAvailable,
         showGettingStartedGuideAlert: page.settings.showGettingStartedGuideAlert,
-        showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert
+        showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert,
+        usernameFieldDetected: usernameFieldDetected
     };
 };
 
@@ -177,6 +180,10 @@ kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {
     page.tabs[tab.id].usernameFieldDetected = detected;
 };
 
+kpxcEvent.onIframeDetected = async function(tab, detected) {
+    page.tabs[tab.id].iframeDetected = detected;
+};
+
 kpxcEvent.passwordGetFilled = async function() {
     return page.passwordFilled;
 };
@@ -251,8 +258,10 @@ kpxcEvent.messageHandlers = {
     'get_totp': keepass.getTotp,
     'hide_getting_started_guide_alert': kpxcEvent.hideGettingStartedGuideAlert,
     'hide_troubleshooting_guide_alert': kpxcEvent.hideTroubleshootingGuideAlert,
+    'iframe_detected': kpxcEvent.onIframeDetected,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
+    'is_iframe_allowed': page.isIframeAllowed,
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,
@@ -263,6 +272,7 @@ kpxcEvent.messageHandlers = {
     'page_get_manual_fill': page.getManualFill,
     'page_get_redirect_count': kpxcEvent.pageGetRedirectCount,
     'page_get_submitted': page.getSubmitted,
+    'page_set_allow_iframes': page.setAllowIframes,
     'page_set_autosubmit_performed': page.setAutoSubmitPerformed,
     'page_set_login_id': page.setLoginId,
     'page_set_manual_fill': page.setManualFill,

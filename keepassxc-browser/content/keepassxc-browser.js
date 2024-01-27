@@ -27,8 +27,8 @@ kpxc.singleInputEnabledForPage = false;
 kpxc.submitUrl = null;
 kpxc.url = null;
 
-// Add page to Site Preferences with Username-only detection enabled. Set from the popup
-kpxc.addToSitePreferences = async function() {
+// Add page to Site Preferences with a selected option enabled. Set from the popup.
+kpxc.addToSitePreferences = async function(optionName, addWildcard = false) {
     // Returns a predefined URL for certain sites
     let site = trimURL(window.top.location.href).toLowerCase();
 
@@ -37,24 +37,32 @@ kpxc.addToSitePreferences = async function() {
     for (const existingSite of kpxc.settings['sitePreferences']) {
         if (existingSite.url === site) {
             existingSite.ignore = IGNORE_NOTHING;
-            existingSite.usernameOnly = true;
+            existingSite[optionName] = true;
             siteExists = true;
         }
     }
 
     if (!siteExists) {
         // Add wildcard to the URL
-        site = site.slice(0, site.lastIndexOf('/') + 1) + '*';
+        if (addWildcard) {
+            site = site.slice(0, site.lastIndexOf('/') + 1) + '*';
+        }
 
         kpxc.settings['sitePreferences'].push({
             url: site,
             ignore: IGNORE_NOTHING,
-            usernameOnly: true
+            [optionName]: true
         });
     }
 
     await sendMessage('save_settings', kpxc.settings);
-    sendMessage('username_field_detected', false);
+
+    if (optionName === 'allowIframes') {
+        await sendMessage('page_set_allow_iframes', [ true, site ]);
+        await sendMessage('iframe_detected', false);
+    } else if (optionName === 'usernameOnly') {
+        await sendMessage('username_field_detected', false);
+    }
 };
 
 // Clears all from the content and background scripts, including autocomplete
@@ -584,7 +592,7 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
 // The basic function for retrieving credentials from KeePassXC.
 // Credential Banner can force the retrieval for reloading new/modified credentials.
 kpxc.retrieveCredentials = async function(force = false) {
-    if (!isIframeAllowed()) {
+    if (!await isIframeAllowed()) {
         return [];
     }
 
@@ -623,7 +631,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 // If credentials are not received, request them again
 kpxc.receiveCredentialsIfNecessary = async function() {
     if (kpxc.credentials.length === 0 && !_called.retrieveCredentials) {
-        if (!isIframeAllowed()) {
+        if (!await isIframeAllowed()) {
             return [];
         }
 
@@ -710,6 +718,7 @@ kpxc.siteIgnored = async function(condition) {
             currentLocation = window.self.location.href.toLowerCase();
         }
 
+        // Refresh current settings for the site
         const currentSetting = condition || IGNORE_FULL;
         for (const site of kpxc.settings.sitePreferences) {
             if (siteMatch(site.url, currentLocation) || site.url === currentLocation) {
@@ -719,6 +728,7 @@ kpxc.siteIgnored = async function(condition) {
 
                 kpxc.singleInputEnabledForPage = site.usernameOnly;
                 kpxc.improvedFieldDetectionEnabledForPage = site.improvedFieldDetection;
+                await sendMessage('page_set_allow_iframes', [ site.allowIframes, currentLocation ]);
             }
         }
 
@@ -901,8 +911,10 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
 
         if (req.action === 'activated_tab') {
             kpxc.triggerActivatedTab();
+        } else if (req.action === 'add_allow_iframes_option') {
+            kpxc.addToSitePreferences('allowIframes');
         } else if (req.action === 'add_username_only_option') {
-            kpxc.addToSitePreferences();
+            kpxc.addToSitePreferences('usernameOnly', true);
         } else if (req.action === 'check_database_hash' && 'hash' in req) {
             kpxc.detectDatabaseChange(req);
         } else if (req.action === 'choose_credential_fields') {
@@ -972,13 +984,21 @@ kpxc.reconnect = async function() {
     return true;
 };
 
-// Check for Cross-domain security error when inspecting window.top.location.href
-const isIframeAllowed = function() {
+const isIframeAllowed = async function() {
+    sendMessage('iframe_detected', false);
     try {
+        // Check for Cross-domain security error when inspecting window.top.location.href
         const currentLocation = window.top.location.href;
         return true;
     } catch (err) {
+        // Inspect iframe using TLD and the tab's original URL
+        const allowed = await sendMessage('is_iframe_allowed', [ window.location.href, window.location.hostname ]);
+        if (allowed) {
+            return true;
+        }
+
         logDebug(`Error: Credential request ignored from another domain: ${window.self.location.host}`);
+        sendMessage('iframe_detected', true);
         return false;
     }
 };

@@ -28,6 +28,7 @@ KeePassXC-Browser extension requests the following permissions:
 | ----- | ----- |
 | `activeTab`               | To get URL of the current tab |
 | `contextMenus`            | To show context menu items |
+| `cookies`                 | To access browser's internal Public Suffix List |
 | `clipboardWrite`          | Allows password to be copied from password generator to clipboard |
 | `nativeMessaging`         | Allows communication with KeePassXC application |
 | `notifications`           | To show browser notifications |
@@ -42,7 +43,7 @@ KeePassXC-Browser extension requests the following permissions:
 
 ## Protocol
 
-The details about the messaging protocol used with the browser extension and KeePassXC can be found [here](keepassxc-protocol.md).
+Check [keepassxc-protocol](keepassxc-protocol.md) for the details about the messaging protocol used between the browser extension and KeePassXC.
 
 ## Translations
 
