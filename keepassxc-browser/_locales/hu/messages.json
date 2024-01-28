@@ -387,6 +387,10 @@
         "message": "Csak felhasználónév beállítás hozzáadása ehhez a weboldalhoz",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "A KeePassXC-böngésző hibát észlelt:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Csak egyetlen felhasználónév mező lett felismerve. Legyen az URL „csak felhasználónév” beállítással hozzáadva az oldal beállításaihoz?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "A felhasználónév vagy a jelszó változott? Legyen elmentve?",
@@ -703,6 +711,10 @@
         "message": "Önálló hitelesítésiadat-bejegyzések automatikus kitöltése.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Automatikus kiegészítés bekapcsolása a felhasználónév mezőknél.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Figyelmeztetés! Az automatikus kitöltés használata nem biztonságos! Saját felelősségére használja. A KeePassXC-böngésző megpróbálja automatikusan érzékelni a belépési mezőket. Azonban, lehet, hogy ezek rosszul kerülnek felderítésre és így az érzékeny adatok nem biztonságos bemeneti mezőkbe lesznek feltöltve.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Az elérhető hitelesítési adatokat tartalmazó legördülő lista megjelenítése az összes felhasználónév mezőnél egy adott oldalon.",
@@ -1007,6 +1023,10 @@
         "message": "Továbbfejlesztett bemenetimező-észlelés",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Törlés",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "A továbbfejlesztett bemenetimező-észlelés részletesebb dinamikus észlelést tesz lehetővé. Viszont ez hatással lehet az oldal teljesítményére. Használja óvatosan.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "URL kézi hozzáadása",

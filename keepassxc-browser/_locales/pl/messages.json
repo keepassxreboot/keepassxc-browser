@@ -72,7 +72,7 @@
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
-        "message": "Powiązanie KeePassXC nie powiodło się, spróbuj ponownie.",
+        "message": "Skojarzenie KeePassXC nie powiodło się, spróbuj ponownie.",
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
@@ -128,7 +128,7 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Poświadczenie jest wykluczone.",
+        "message": "Dane uwierzytelniające są wyłączone.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
@@ -387,6 +387,10 @@
         "message": "Dodaj opcję Tylko nazwa użytkownika dla witryny",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Zezwalaj na ramki iframe z różnych źródeł dla witryny",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser napotkał błąd:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Wykryto tylko jedno pole nazwy użytkownika. Dodać adres URL do Ustawień witryn z włączoną opcją Tylko nazwa użytkownika?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "Wykryto ramkę iframe z różnych źródeł. Dodać adres URL do Ustawień witryn z włączoną opcją Zezwalaj na ramki iframe z różnych źródeł?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Nazwa użytkownika lub hasło zostały zmienione! Zapisać to?",
@@ -552,7 +560,7 @@
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Nigdy nie pytaj o tę stronę",
+        "message": "Nie pytaj ponownie o tę witrynę",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -580,7 +588,7 @@
         "description": "Saved custom login fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Ustawienia witryny",
+        "message": "Ustawienia witryn",
         "description": "Site preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -600,7 +608,7 @@
         "description": "Custom login fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Ustawienia witryny",
+        "message": "Ustawienia witryn",
         "description": "Site preferences page header."
     },
     "optionsMenuAbout": {
@@ -702,6 +710,10 @@
     "optionsCheckboxAutoFillSingleEntry": {
         "message": "Automatycznie wypełnij pojedyncze wpisy.",
         "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatycznie wypełniaj pojedyncze wpisy TOTP.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Aktywuj autouzupełnianie pól nazwy użytkownika.",
@@ -844,8 +856,12 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Ostrzeżenie! Korzystanie z automatycznego wypełniania nie jest bezpieczne. Używaj na własne ryzyko. KeePassXC-Browser automatycznie próbuje wykryć pola logowania. Mogą jednak zostać nieprawidłowo wykryte, prawdopodobnie wypełniając poufne dane w niebezpiecznych polach wejściowych.",
+        "message": "Ostrzeżenie! Korzystanie z automatycznego wypełniania nie jest bezpieczne. Używaj na własne ryzyko. KeePassXC‑Browser automatycznie próbuje wykryć pola logowania. Mogą jednak zostać nieprawidłowo wykryte, prawdopodobnie wypełniając poufne dane w niebezpiecznych polach wejściowych.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Pozwól KeePassXC-Browser automatycznie wypełnić pola TOTP, jeśli otrzyma tylko jeden wpis.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Pokaż listę rozwijaną zawierającą dostępne dane uwierzytelniające dla wszystkich pól nazwy użytkownika na stronie.",
@@ -876,7 +892,7 @@
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Ikona ulubionych zostanie automatycznie pobrana dla nowego poświadczenia.",
+        "message": "Ikona ulubionych zostanie automatycznie pobrana dla nowych danych uwierzytelniających.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
@@ -1007,6 +1023,10 @@
         "message": "Ulepszone wykrywanie pól wejściowych",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Zezwalaj na ramki iframe z różnych źródeł",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Usuwanie",
         "description": "Site preferences list column title."
@@ -1100,7 +1120,7 @@
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Nie znaleziono ignorowanych witryn.",
+        "message": "Nie znaleziono ustawień witryn.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -1120,12 +1140,16 @@
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Wykrywanie tylko nazwy użytkownika pozwala KeePassXC-Browser na wpełnienie danych logowania na witrynach internetowych z osobnymi stronami dla nazwy użytkownika i hasła.",
+        "message": "Wykrywanie tylko nazwy użytkownika pozwala KeePassXC-Browser na wpełnienie danych logowania w witrynach internetowych z osobnymi stronami dla nazwy użytkownika i hasła.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Ulepszone wykrywanie pól wejściowych pozwala na bardziej szczegółowe dynamiczne wykrywanie pól wejściowych. Może to jednak wpłynąć na wydajność strony. Używaj z ostrożnością.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Zezwolenie na ramki iframe z różnych źródeł umożliwi pobieranie danych uwierzytelniających dla ramek iframe z innej domeny. Używaj na własne ryzyko.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Dodaj ręcznie adres URL",
@@ -1144,7 +1168,7 @@
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Możesz zarządzać zapisanymi preferencjami witryny, korzystając z poniższej tabeli.",
+        "message": "Możesz zarządzać zapisanymi ustawieniami witryn, korzystając z tabeli.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {

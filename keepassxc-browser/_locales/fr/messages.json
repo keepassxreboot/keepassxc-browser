@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Accès refusé à toutes les entrées.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,11 +144,11 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "URL renseignée invalide.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
+        "message": "Les clés fixes ne sont pas prises en charge.",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
@@ -387,6 +387,10 @@
         "message": "Ajouter l’option Nom d’utilisateur seulement pour le site",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Autoriser les iframes Cross-Origin pour le site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser a rencontré une erreur :",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Seul un champ unique de nom d’utilisateur a été détecté. Ajouter l’URL aux préférences de site avec l’option « Nom d’utilisateur seulement » ? ",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "Un iframe Cross–Origin a été détecté. Ajouter l'URL aux préférences du site avec l'option iframes Cross–Origin autorisée activée ?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Le nom d’utilisateur ou le mot de passe a été modifié. L’enregistrer ?",
@@ -703,6 +711,10 @@
         "message": "Remplir automatiquement les entrées ne contenant qu'un identifiant.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Remplir automatiquement les entrées avec TOTP unique.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Activer l’auto-complétion pour les champs de nom d'utilisateur.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Attention ! Le remplissage automatique n'est pas recommandé. Vous l'utilisez à vos risques. KeePassXC-Browser tente de détecter automatiquement les champs d'identification. Cependant, la détection peut être erronée et entraîner le remplissage de champs non sûrs avec des données sensibles.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Laisser KeePassXC–Browser remplir automatiquement les champs TOTP si une seule entrée est reçue.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Affiche une liste déroulante contenant tous les identifiants pour tous les champs de nom d'utilisateur sur la page.",
@@ -1007,6 +1023,10 @@
         "message": "Détection des champs de saisie accrue",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Autoriser les iframes Cross–Origin",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Supprimer",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "La détection de champs de saisie accrue est type de détection dynamique plus précis. Cependant, cela peut affecter les performances. À utiliser avec parcimonie.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Autoriser les iframes Cross–Origin implique que les informations d’identification peuvent être récupérées à partir d'iframes d’un autre domaine. À utiliser à vos risques et périls.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Ajouter l’URL manuellement",

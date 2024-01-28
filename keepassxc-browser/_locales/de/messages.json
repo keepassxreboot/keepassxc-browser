@@ -387,6 +387,10 @@
         "message": "Option Nur-Benutzername für diese Seite hinzufügen",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Cross-Origin iframes für diese Seite zulassen",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser hat einen Fehler festgestellt:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Es wurde nur das Feld für den Benutzernamen erkannt. Die URL zu den Seiteneinstellungen mit Nur-Benutzername Option aktiviert hinzufügen?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "Ein Cross-Origin iframe wurde entdeckt. Möchten Sie die URL zu den Seiteneinstellungen hinzufügen und die Option Cross-Origin-iframes zulassen aktivieren?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Benutzername oder Passwort geändert! Speichern?",
@@ -703,6 +711,10 @@
         "message": "Einträge mit einzelnen Anmeldedaten automatisch ausfüllen.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Einzelne TOTP-Einträge automatisch ausfüllen.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Autovervollständigung für Benutzernamensfelder aktivieren.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Warnung! Die Verwendung des automatischen Ausfüllens ist nicht sicher und erfolgt auf eigene Gefahr. KeePassXC-Browser versucht automatisch, Anmeldefelder zu erkennen. Sie können jedoch falsch erkannt werden, wodurch möglicherweise sensible Daten in unsichere Eingabefelder eingetragen werden.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "KeePassXC-Browser soll die TOTP-Felder automatisch ausfüllen, wenn er nur einen einzigen Eintrag erhält.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Eine Drop-down-Liste mit verfügbaren Anmeldedaten für alle Benutzernamensfelder auf einer Seite anzeigen.",
@@ -1007,6 +1023,10 @@
         "message": "Verbesserte Erkennung von Eingabefeldern",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Cross-Origin iframes zulassen",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Löschen",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Die verbesserte Erkennung von Eingabefeldern ermöglicht eine detailliertere dynamische Erkennung von Eingabefeldern. Dies kann jedoch die Leistung der Seite beeinträchtigen. Mit Vorsicht verwenden.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Das Zulassen von Cross-Origin iframes ermöglicht den Abruf von Anmeldeinformationen für iframes von einer anderen Domain. Die Verwendung erfolgt auf eigene Gefahr.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "URL manuell hinzufügen",

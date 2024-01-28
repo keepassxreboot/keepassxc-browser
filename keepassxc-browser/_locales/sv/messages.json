@@ -387,6 +387,10 @@
         "message": "Lägg till alternativet Endast användarnamn för denna sida",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Tillåt iframes från webbplatsen",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser har påträffat ett fel:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Endast ett användarnamn har identifierats. Vill du lägga till URL:en i sidinställningarna, med alternativet \"Endast användarnamn\" aktiverat?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "En iframe identifierades. Vill du lägga till URL:en i webbplatsinställningarna med alternativet Tillåt iframes aktiverat?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Användarnamnet eller lösenordet har ändrats! Vill du spara det?",
@@ -703,6 +711,10 @@
         "message": "Fyll automatiskt i single-credential uppgifter.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Fyll automatiskt i enstaka TOTP-poster.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Aktivera autokomplettering av fält för användarnamn.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Varning! Användning av auto-skriv är inte säkert. Använd det på egen risk. KeePassXC-Browser försöker automatiskt identifiera inloggningsfält. De kan dock identifieras felaktigt och eventuellt fyllas i med känslig data i osäkra indatafält.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Låt KeePassXC-Browser automatiskt fylla i TOTP-fält om den bara tar emot en enda post.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Visa en rull-lista innehållande tillgängliga inloggningsuppgifter för alla användarnamnsfält på en sida.",
@@ -1007,6 +1023,10 @@
         "message": "Förbättrad identifiering av inmatningsfält",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Tillåt iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Ta bort",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Förbättrad identifiering av inmatningsfält möjliggör mer detaljerad dynamisk identifiering av inmatningsfält. Det kan dock påverka sidans prestanda. Används med försiktighet.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Om du tillåter iframes aktiveras hämtning av autentiseringsuppgifter för iframes från en annan domän. Använd på egen risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Add URL manually",

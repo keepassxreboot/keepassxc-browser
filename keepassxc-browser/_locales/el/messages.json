@@ -387,6 +387,10 @@
         "message": "Προσθήκη επιλογής μόνο Όνομα χρήστη για τον ιστότοπο",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Να επιτρέπονται τα Cross-Origin iframes για τον ιστότοπο",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "Το KeePassXC-Browser αντιμετώπισε σφάλμα:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Εντοπίστηκε μόνο ένα πεδίο ονόματος χρήστη. Προσθήκη της διεύθυνσης URL στις Προτιμήσεις Ιστότοπου με ενεργοποιημένη την επιλογή Μόνο-Όνομα χρήστη;",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "Εντοπίστηκε ένα Cross-Origin iframe. Θέλετε ν προσθέστε τη διεύθυνση URL στις Προτιμήσεις Ιστότοπου με ενεργοποιημένη την επιλογή Αποδοχή Cross-Origin iframes;",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Το όνομα χρήστη ή ο κωδικός πρόσβασης άλλαξαν! Αποθήκευση;",
@@ -703,6 +711,10 @@
         "message": "Αυτόματη συμπλήρωση καταχωρήσεων με ένα διαπιστευτήριο ",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Αυτόματη συμπλήρωση μεμονωμένων καταχωρήσεων TOTP.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Ενεργοποίηση αυτόματης συμπλήρωσης για πεδία ονόματος χρήστη.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Προειδοποίηση! Η χρήση της αυτόματης συμπλήρωσης δεν είναι ασφαλής. Χρησιμοποιήστε το με δική σας ευθύνη. Το KeePassXC-Browser προσπαθεί αυτόματα να εντοπίσει πεδία σύνδεσης. Ωστόσο, ενδέχεται να εντοπιστούν εσφαλμένα, ενδεχομένως γεμίζοντας ευαίσθητα δεδομένα σε μη ασφαλή πεδία εισαγωγής.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Αφήστε το KeePassXC-Browser να συμπληρώνει αυτόματα τα πεδία TOTP εάν λάβει μόνο μία καταχώρηση.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Εμφάνιση μιας αναπτυσσόμενης λίστας που περιέχει διαθέσιμα διαπιστευτήρια για όλα τα πεδία ονόματος χρήστη σε μια σελίδα.",
@@ -1007,6 +1023,10 @@
         "message": "Βελτιωμένη Ανίχνευση Πεδίου Εισόδου",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Να επιτρέπονται τα Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Διαγραφή",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Η Βελτιωμένη Ανίχνευση Πεδίου Εισόδου επιτρέπει πιο λεπτομερή ανίχνευση δυναμικού πεδίου εισόδου. Ωστόσο, μπορεί να επηρεάσει την απόδοση της σελίδας. Χρησιμοποιήστε με προσοχή.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Επιτρέποντας τα iframes Cross-Origin θα ενεργοποιηθεί η ανάκτηση διαπιστευτηρίων για iframe από άλλο τομέα. Χρησιμοποιήστε το με δική σας ευθύνη.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Προσθήκη διεύθυνσης URL χειροκίνητα",

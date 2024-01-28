@@ -387,6 +387,10 @@
         "message": "הוספת האפשרות 'שם משתמש בלבד' לאתר",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "דפדפן־KeePassXC נתקל בשגיאה:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "זוהה שדה שם משתמש יחיד בלבד. האם להוסיף את מען ה־URL להעדפות האתר כאשר האפשרות שם משתמש בלבד זמינה?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "שם המשתמש או הססמה השתנו! האם לשמור את זה?",
@@ -703,6 +711,10 @@
         "message": "מילוי אוטומטי של רשומות עם אישור יחיד.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "שפעול השלמה אוטומטית בשדות שם משתמש.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "אזהרה! השימוש באפשרות מילוי־אוטומטי אינה בטוחה. השימוש על אחריות המשתמש בלבד. KeePassXC-Browser מנסה לזהות באופן אוטומטי שדות התחברות. יחד עם זאת, שדות ההתחברות עלולות להיות מזוהות באופן שגוי, דבר שעשוי אולי לאכלס נתונים רגישים, בשדות קלט לא בטוחים.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "הצגת תיבת רשימה־נפתחת המכילה נתוני־אמנה זמינים לכל שדות שם המשתמש בעמוד.",
@@ -1007,6 +1023,10 @@
         "message": "מנגנון זיהוי שדות קלט משופר",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "מחיקה",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "מנגנון זיהוי שדות קלט משופר מאפשר זיהוי שדה קלט דינמי מפורט יותר. עם זאת, זה עשוי להשפיע על ביצועי העמוד. נא להשתמש בזהירות.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "הוספת מען URL באופן ידני",

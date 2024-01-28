@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Adgang til alle loginoplysninger afvist.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,11 +144,11 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "Udgyldig URL angivet.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
+        "message": "Resident Keys er ikke understøttet.",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
@@ -387,6 +387,10 @@
         "message": "Tilføj valgmulighed kun for brugernavn til stedet",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Tillad Cross-Origin iframes for webstedet",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser er stødt på en fejl:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Registrerede kun ét brugernavnfelt. Tilføj URL'en til stedpræferencerne med valgmulighed kun for brugernavn aktiveret?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "En Cross-Origin iframe er fundet. Tilføj URL'en til Stedpreferæncer med Tillad Cross-Origin iframes valgmuligheden slået til?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Brugernavn eller adgangskode ændret! Gem det?",
@@ -703,6 +711,10 @@
         "message": "Udfyld automatisk indtastninger når der kun er én loginoplysning.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Udfyld enkelte TOTP loginoplysninger automatisk.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Aktivér automatisk udførsel af brugernavnfelter.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Advarsel! Automatisk udfyldning er ikke sikker. Brug funktionen på eget ansvar. KeePassXC-Browser forsøger automatisk at detektere loginfelter. Felter kan dog blive detekteret ukorrekt, hvilken muligvis udfylder usikre felter med følsomme data.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Lad KeePassXC-Browser automatisk udfylde TOTP-felter hvis kun en enkelt loginoplysning findes.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Vis en nedrulningsliste med tilgængelige loginoplysninger til alle brugernavnefelter på en side.",
@@ -1007,6 +1023,10 @@
         "message": "Forbedret Detektion af Inputfelter",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Tillad Cross-Origin iframes.",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Slet",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Forbedret detektion af inputfelter giver mulighed for mere detaljeret dynamisk detektion af inputfelter. Det kan dog påvirke sidens ydeevne. Brug den med forsigtighed.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Hvis Cross-Origin iframes tillades vil loginoplysninger for iframes fra et andet domæne kunne hentes. Brug af dette er dit eget ansvar.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Tilføj URL manuelt",

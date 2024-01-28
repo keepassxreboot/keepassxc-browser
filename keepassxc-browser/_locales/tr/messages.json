@@ -387,6 +387,10 @@
         "message": "Site için yalnızca kullanıcı adı seçeneği ekle",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Tarayıcı bir sorunla karşılaştı:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Yalnızca tek bir kullanıcı adı alanı algılandı. Bu adresi yalnızca kullanıcı adı seçeneği açık ise site ayarlarına ekleyin.",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Kullanıcı adı veya parola değiştirildi! Kaydedilsin mi?",
@@ -703,6 +711,10 @@
         "message": "Tek kimlik doğrulama bilgisi kayıtları otomatik olarak doldurulsun.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Kullanıcı adı alanları için otomatik tamamlama kullanılsın.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Uyarı! Otomatik doldurmayı kullanmanın güvenli olmadığını bilerek kullanın. KeePassXC-Browser, oturum açma alanlarını otomatik olarak algılamaya çalışır. Ancak bazen bu alanlar hatalı olarak algılanabilir ve hassas veriler güvenli olmayan alanlara doldurularak görülebilir.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Bir sayfadaki tüm kullanıcı adı alanları için var olan bilgilerin bulunduğu bir açılan liste görüntüler.",
@@ -1007,6 +1023,10 @@
         "message": "Geliştirilmiş giriş alanı algılaması",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Dil",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Geliştirilmiş giriş alanı algılaması giriş alanlarının daha ayrıntılı bir şekilde devingen olarak algılanmasını sağlar. Ancak sayfa başarımı olumsuz etkilenebilir. Kullanırken dikkatli olun.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Adresi el ile ekle",

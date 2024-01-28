@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "모든 항목 접근이 거부되었습니다.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,11 +144,11 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "잘못된 URL을 지정했습니다.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
+        "message": "상주 키는 지원하지 않습니다.",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
@@ -387,6 +387,10 @@
         "message": "사이트에 사용자 이름만 입력 옵션 추가",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "이 사이트에 교차 출처 iframe 허용",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-브라우저에서 오류가 발생했습니다:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "사용자 이름 필드 한 개만 감지되었습니다. 사이트 환경 설정의 URL에 사용자 이름만 입력 옵션을 지정하시겠습니까?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "교차 출처 iframe이 감지되었습니다. 교차 출처 iframe 허용 옵션을 활성화하고 사이트 설정에 URL을 추가하시겠습니까?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "사용자 이름이나 암호가 변경되었습니다! 저장하시겠습니까?",
@@ -703,6 +711,10 @@
         "message": "자동으로 단일 자격 증명 항목을 입력합니다.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "자동으로 모든 TOTP 항목을 입력합니다.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "사용자 이름 필드 자동 완성을 사용합니다.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "경고! 자동 입력은 안전하지 않을 수 있습니다. 주의하여 사용하십시오. KeePassXC-브라우저에서는 로그인 필드 자동 감지를 시도하지만, 필드가 잘못 감지되었을 경우에는 안전하지 않은 입력 필드에 민감한 정보를 입력할 수도 있습니다.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "KeePassXC-브라우저에서 단일 항목만 수신했을 때 자동으로 TOTP 필드를 입력하도록 합니다.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "페이지에 있는 모든 사용자 이름 필드에 입력할 수 있는 자격 증명 드롭다운 목록을 표시합니다.",
@@ -1007,6 +1023,10 @@
         "message": "향상된 입력 필드 감지",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "교차 출처 iframe 허용",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "삭제",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "향상된 입력 필드 감지 설정을 활성화하면 동적 입력 필드 감지를 개선합니다. 페이지 성능에 영향을 줄 수도 있으므로 주의해서 사용하십시오.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "교차 출처 iframe을 허용하면 다른 도메인의 iframe에서 자격 증명을 가져갈 수도 있습니다. 사용에 주의하십시오.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "직접 URL 추가",

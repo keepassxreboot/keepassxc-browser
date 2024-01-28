@@ -387,6 +387,10 @@
         "message": "为这个网站添加“仅用户名”选项",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "此网站允许跨域 iframe 框架",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser 遇到错误：",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "只检测到一个用户名字段。将该 URL 添加到网站设置，并开启“仅用户名”选项？",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "检测到跨域 iframe 框架。将该 URL 添加到网站设置，并开启“允许跨域 iframe 框架”选项？",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "用户名或密码已更改！是否保存？",
@@ -703,6 +711,10 @@
         "message": "自动填充单凭据条目。",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "自动填充单 TOTP 条目。",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "激活用户名字段的自动填充功能。",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "警告！使用自动填充并不安全。您需要自担风险。KeePassXC-Browser 会尝试自动检测登录字段。但是，自动检测可能不准确，导致在不安全的输入字段内填写敏感信息。",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "只接收到一条条目时，KeePassXC-Browser 将自动填充 TOTP 字段。",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "为页面上所有用户名字段显示一个包含可用凭据的下拉列表。",
@@ -1007,6 +1023,10 @@
         "message": "改进的输入框检测",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "允许跨域 iframe 框架",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "删除",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "改进的输入框检测允许更详细的动态输入框检测。但可能会影响页面性能。请小心使用。",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "允许跨域 iframe 框架将允许从其他域名的 iframe 框架中获取凭据。使用风险自负。",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "手动添加 URL",
