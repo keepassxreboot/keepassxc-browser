@@ -124,7 +124,7 @@
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
-        "message": "未支援密鑰證明 (Attestation)。",
+        "message": "證明不受支援。",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
@@ -148,7 +148,7 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "未支援常駐金鑰 (Resident Key)。",
+        "message": "Resident Key 不受支援。",
         "description": "Resident Keys are not supported."
     },
     "errorNotConnected": {
@@ -387,6 +387,10 @@
         "message": "將此網站加入「僅用戶名稱」選項",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "此網站允許跨來源 iframe 框架",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser 遇到錯誤：",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "偵測到單獨的用戶名稱欄位。將網址加入至網站設定並啟用「僅用戶名稱」選項？",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "偵測到跨來源 iframe 框架。將網址加入至網站設定並啟用「允許跨來源 iframe 框架」選項？",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "用戶名稱或密碼已被更改！是否儲存？",
@@ -703,6 +711,10 @@
         "message": "自動填入單一憑證條目。",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "自動填入單一 TOTP 條目。",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "啟用用戶名稱欄位的自動完成。",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "警告！使用自動填入並不安全。使用請自擔風險。KeePassXC-Browser 會嘗試自動偵測登錄欄位。然而，自動偵測可能不準確，導致在不安全的輸入欄位內填寫敏感資料。",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "只接受到一個項目時，KeePassXC-Browser 將自動填入 TOTP 欄位。",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "在頁面上所有用戶名稱欄位顯示一個包含可用憑證的下拉式清單。",
@@ -1007,6 +1023,10 @@
         "message": "改進的輸入框偵測",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "允許跨來源 iframe 框架",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "刪除",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "改進的輸入框偵測允許更詳細的動態輸入框偵測。但可能會影響頁面效能。請小心使用。",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "允許跨來源 iframe 框架將允許從其他域名的 iframe 框架接受憑證。使用請自擔風險。",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "手動新增網址",

@@ -387,6 +387,10 @@
         "message": "ဤဝက်ဘ်ဆိုက်အတွက် အသုံးပြုသူအမည်သီးသန့် ရွေးချယ်မှုကို ထည့်ပါ",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-ဘရောက်ဇာတွင် ပြဿနာတစ်ခု တွေ့ရသည် -",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "အသုံးပြုသူအမည် အကွက်တစ်ခုတည်းသာ ရှာတွေ့သည်။ ဝက်ဘ်ဆိုက် ဦးစားပေးမှုများသို့ အသုံးပြုသူအမည်သီးသန့်ဖြင့် URL ထည့်ရန် ရွေးချယ်မှုကို ဖွင့်ထားပါသလား။",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "အသုံးပြုသူအမည် သို့မဟုတ် စကားဝှက် ပြောင်းထားသည်။ ၎င်းကို သိမ်းမလား။",
@@ -703,6 +711,10 @@
         "message": "အထောက်အထားတစ်ခုတည်း ဖြည့်သွင်းစရာများကို အလိုအလျောက် ဖြည့်ပါ။",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "အသုံးပြုသူအမည်အကွက်များအား အလိုအလျောက်ဖြည့်ခြင်းကို သက်ဝင်လုပ်ဆောင်ပါ။",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "စာမျက်နှာတစ်ခုပေါ်ရှိ အသုံးပြုသူအမည်အကွက်အားလုံးအတွက် ရရှိနိုင်သော အထောက်အထားများ ပါဝင်သည့် ဖြန့်ချနိုင်သောစာရင်းကို ပြသပါ။",
@@ -1007,6 +1023,10 @@
         "message": "Improved Input Field Detection",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "ဖျက်ရန်",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "URL ကို ကိုယ်တိုင်ထည့်ရန်",

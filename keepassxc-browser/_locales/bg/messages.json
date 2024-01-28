@@ -387,6 +387,10 @@
         "message": "Добавяне на настройка за вход в страницата единствено с потребителско име",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser се натъкна на грешка:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Само поле за потребителско име е намерено. Адресът на страницата да бъде ли добавен към „Предпочитания за сайтове“ с настройка за вход единствено с потребителско име?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Данни за вход са променени! Да бъдат ли запазени?",
@@ -703,6 +711,10 @@
         "message": "Автоматично попълване на единични съвпадения",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Автоматично попълване за полета с потребителско име",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Внимание! Автоматичното попълване не е безопасно. Използвайте го на свой риск. KeePassXC-Browser се опитва автоматично да открие полетата за вход. Обаче те могат да не бъдат открити правилно, като е възможно да бъдат попълнени чувствителни данни в грешните полета.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Показва падащ списък с наличните регистрации за всички полета за потребителско име на страницата.",
@@ -1007,6 +1023,10 @@
         "message": "Подобрено откриване на полета за вход",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Премахване",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Подобреното откриване на полета за вход дава възможност за по-внимателно, динамично откриване на полета за вход. Това обаче може да повлияе на бързодействието на страницата. Използвайте с повишено внимание.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Ръчно добавяне на адрес",

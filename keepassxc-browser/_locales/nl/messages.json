@@ -387,6 +387,10 @@
         "message": "Optie ‘alleen-gebruikersnaam’ toevoegen voor deze website",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Niet-oorspronkelijke iframes toestaan voor de website",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "Er is een fout opgetreden in KeePassXC-Browser:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Er is maar één gebruikersnaamveld gedetecteerd. Wil je deze URL toevoegen aan de websitevoorkeuren met de optie ‘Alleen-gebruikersnaam’ ingeschakeld?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "Een niet-oorspronkelijk iframe is gedetecteerd. De URL toevoegen aan sitevoorkeuren met de optie Niet-oorspronkelijke iframes toestaan ingeschakeld?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Gebruikersnaam of wachtwoord gewijzigd! Opslaan?",
@@ -703,6 +711,10 @@
         "message": "Pagina's met één inlogveld automatisch invullen.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Enkelvoudige TOTP-items automatisch invullen.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Gebruikersnaamvelden automatisch aanvullen.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Waarschuwing! Het gebruik van Automatisch invullen is niet veilig. Gebruik op eigen risico. KeePassXC-Browser probeert automatisch inlogvelden te detecteren. Ze kunnen echter onjuist worden gedetecteerd, waardoor mogelijk gevoelige gegevens worden ingevuld naar onveilige invoervelden.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Laat KeePassXC-browser TOTP-velden automatisch invullen als deze maar een item vereisen.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Toon een vervolgkeuzelijst met beschikbare inloggegevens voor alle gebruikersnaamvelden op een pagina.",
@@ -1007,6 +1023,10 @@
         "message": "Verbeterde detectie van invoervelden",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Niet-oorspronkelijke iframes toestaan",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Verwijderen",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Verbeterde detectie maakt meer gedetailleerde dynamische detectie van invoervelden mogelijk. Dit kan echter van invloed zijn op de prestaties van de pagina. Gebruik met mate.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Het toestaan van Niet-oorspronkelijke iframes stelt iframes van een ander domein in staat om inloggegevens te achterhalen. Gebruik op eigen risico.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "URL handmatig toevoegen",

@@ -387,6 +387,10 @@
         "message": "Legg til bare brukernavn for nettstedet",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC–Browser har oppdaget en feil:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Bare ett enkelt brukernavnfelt ble oppdaget. Vil du legge URL'en til i områdeinnstillinger med bare brukernavn-alternativet aktivert?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Brukernavn eller passord er endret! Vil du lagre?",
@@ -703,6 +711,10 @@
         "message": "Fyll ut oppføringer med enkel identifikasjon automatisk.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Aktiver autofullføring for brukernavnfelt.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Advarsel! Det er ikke trygt å bruke automatisk utfylling. Bruk på egen risiko. KeePassXC-Browser prøver automatisk å oppdage påloggingsfelt. De kan imidlertid oppdages feil, og muligens fylle ut sensitive data til usikre inndatafelt.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Viser en rullegardinliste som inneholder tilgjengelige identifikasjoner for alle brukernavnfelt på en side.",
@@ -1007,6 +1023,10 @@
         "message": "Forbedret gjenkjenning av inndatafelt",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Slette",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Forbedret gjenkjenning av inndatafelt gir mer detaljert dynamisk gjenkjenning av inndatafelt. Det kan imidlertid påvirke sideytelsen. Bruk med forsiktighet.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Legg til URL manuelt",

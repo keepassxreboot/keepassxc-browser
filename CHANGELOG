@@ -1,3 +1,9 @@
+1.8.12 (2024-01-28)
+=========================
+- Add support for TLD check and allowing Cross-Origin iframes option [#2079]
+- Add option to fill TOTP automatically [#2093]
+- Passkeys: Fix setting userVerification to default value if not found [#2082]
+
 1.8.11 (2024-01-06)
 =========================
 - Add barmer.de to form submit button exception list [#2068]

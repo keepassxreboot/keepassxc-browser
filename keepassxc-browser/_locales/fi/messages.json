@@ -387,6 +387,10 @@
         "message": "Lisää sivustolle \"Vain käyttäjätunnus\" -asetus",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Salli iframe-upotukset muilta sivustoilta tälle osoitteelle",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser havaitsi virheen:",
         "description": "A text shown above error message in the popup."
@@ -446,6 +450,10 @@
     "popupUsernameFieldDetected": {
         "message": "Havaittiin vain yksittäinen käyttäjätunnuskenttä. Lisätäänkö sivuston URL-osoite sivustoasetuksiin \"Vain käyttäjätunnus\" -asetuksella?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "Havaittiin toiselta sivustolta oleva iframe-upotus. Lisätäänkö URL-osoite sivustoasetuksiin \"Salli iframe-upotukset muilta sivuistoilta\" -asetuksella?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Käyttäjätunnus tai salasana on muuttunut. Tallennetaanko muutos?",
@@ -703,6 +711,10 @@
         "message": "Täytä yksittäisen kirjautumistiedon kentät automaattisesti.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Täytä yksittäiset TOTP-kentät automaattisesti.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Aktivoi käyttäjätunnuskenttien automaattitäyttö.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -846,6 +858,10 @@
     "optionsAutoFillSingleEntryWarning": {
         "message": "Varoitus! Automaattinen täydennys ei ole turvallinen. Käytä omalla vastuulla. KeePassXC-Browser yrittää automaattisesti tunnistaa kirjautumiskentät. On mahollista, että yksityistä tietoa täydennetään kenttiin jotka eivät ole turvallisia.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Salli KeePassXC-Browserin täyttää TOTP-kentät automaattisesti, jos sopivia tietueita löytyy vain yksi.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Näytä pudotuslista, joka sisältää kaikkiin sivulla oleviin käyttäjätunnuskenttiin sopivat kirjautumistiedot.",
@@ -1007,6 +1023,10 @@
         "message": "Kehittynyt kenttien tunnistus",
         "description": "Improved Input Field Detection column text."
     },
+    "optionsColumnAllowIframes": {
+        "message": "Salli iframe-upotukset muilta sivustoilta",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Poista",
         "description": "Site preferences list column title."
@@ -1126,6 +1146,10 @@
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Kehittynyt kenttien tunnistus on yksityiskohtaisempi tapa tunnistaa sivujen kirjautumiskenttiä. Se saattaa kuitenkin vaikuttaa sivuston nopeuteen. Käytä harkiten.",
         "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Muilta sivustoilta peräisin olevien iframe-upotusten sallinta mahdollistaa kirjautumistietojen noudon eri verkkotunnukselta. Käytä omalla vastuulla.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Lisää URL manuaalisesti",
