@@ -347,6 +347,10 @@
         "message": "Error: Unable to find a password field.",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Filling password to a plain text field is prevented.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
         "message": "Error: Could not detect changed credentials.",
         "description": "Message shown when trying to save credentials that haven't changed."

@@ -23,6 +23,12 @@ kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
 
 // Fill requested from the context menu. Active element is used for combination detection
 kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
+    const elem = document.activeElement;
+    if (passOnly && !passwordFillIsAllowed(elem)) {
+        kpxcUI.createNotification('warning', tr('fieldsPasswordFillNotAccepted'));
+        return;
+    }
+
     await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
         logDebug(`Error: Credential list is empty for: ${document.location.origin}`);
@@ -30,7 +36,6 @@ kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
         return;
     }
 
-    const elem = document.activeElement;
     if (kpxc.combinations.length > 0) {
         if (await kpxcFill.fillFromCombination(elem, passOnly)) {
             // Combination found and filled
@@ -88,7 +93,9 @@ kpxcFill.fillFromAutofill = async function() {
     kpxcFill.fillInCredentials(kpxc.combinations[index], kpxc.credentials[0].login, kpxc.credentials[0].uuid);
 
     // Generate popup-list of usernames + descriptions
-    sendMessage('popup_login', [ { text: `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})`, uuid: kpxc.credentials[0].uuid } ]);
+    sendMessage('popup_login', [
+        { text: `${kpxc.credentials[0].login} (${kpxc.credentials[0].name})`, uuid: kpxc.credentials[0].uuid },
+    ]);
 };
 
 // Fill requested by selecting credentials from the popup
@@ -329,4 +336,22 @@ kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
     } else {
         (combination.username || combination.password).focus();
     }
+};
+
+// Check if password fill is done to a plain text field
+const passwordFillIsAllowed = function(elem) {
+    const elementIsPasswordField =
+        kpxc.combinations?.some(c => c.password === elem || c?.passwordInputs.some(p => p === elem));
+
+    // Allow if Custom Login fields are used
+    if (kpxcFields.isCustomLoginFieldsUsed() && elementIsPasswordField) {
+        return true;
+    }
+
+    if (elem?.getLowerCaseAttribute('type') !== 'password') {
+        kpxcUI.createNotification('warning', tr('fieldsPasswordFillNotAccepted'));
+        return false;
+    }
+
+    return true;
 };
