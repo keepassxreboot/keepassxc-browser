@@ -60,7 +60,7 @@ const kpErrors = {
         23: { msg: tr('errorMessagePasskeysInvalidUserVerification') },
         24: { msg: tr('errorMessagePasskeysEmptyPublicKey') },
         25: { msg: tr('errorMessagePasskeysInvalidUrlProvided') },
-        26: { msg: tr('errorMessagePasskeysResidentKeyNotSupported') },
+        26: { msg: tr('errorMessagePasskeysNonResidentKeysNotSupported') },
     },
 
     getError(errorCode) {
