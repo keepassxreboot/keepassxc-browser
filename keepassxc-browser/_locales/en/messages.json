@@ -147,9 +147,9 @@
         "message": "Invalid URL provided.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysNonResidentKeysNotSupported": {
+        "message": "Non-Resident Keys are not supported.",
+        "description": "Non-Resident Keys are not supported."
     },
     "errorNotConnected": {
         "message": "Not connected to KeePassXC.",
