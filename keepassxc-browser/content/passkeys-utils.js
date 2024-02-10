@@ -1,5 +1,9 @@
 'use strict';
 
+const MINIMUM_TIMEOUT = 15000;
+const DEFAULT_TIMEOUT = 30000;
+const DISCOURAGED_TIMEOUT = 120000;
+
 const stringToArrayBuffer = function(str) {
     const arr = Uint8Array.from(str, c => c.charCodeAt(0));
     return arr.buffer;
@@ -16,10 +20,17 @@ const arrayBufferToBase64 = function(buf) {
     return window.btoa(str).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
 };
 
-// Error checks for both registration and authentication
-const checkErrors = function(pkOptions) {
-    if (pkOptions.sameOriginWithAncestors !== undefined && pkOptions.sameOriginWithAncestors === false) {
-        throw new DOMException('Cross-origin register is not allowed.', DOMException.NotAllowedError);
+const checkErrors = function(pkOptions, sameOriginWithAncestors) {
+    if (!pkOptions) {
+        throw new Error('No publicKey configuration options were provided');
+    }
+
+    if (pkOptions.signal && pkOptions.signal.aborted) {
+        throw new DOMException('Abort signalled', DOMException.AbortError);
+    }
+
+    if (!sameOriginWithAncestors) {
+        throw new DOMException('Cross-origin register or authentication is not allowed.', DOMException.NotAllowedError);
     }
 
     if (pkOptions.challenge.length < 16) {
@@ -27,54 +38,43 @@ const checkErrors = function(pkOptions) {
     }
 };
 
+const getTimeout = function(userVerification, timeout) {
+    if (!timeout || Number(timeout) === 0 || isNaN(Number(timeout))) {
+        return userVerification === 'discouraged' ? DISCOURAGED_TIMEOUT : DEFAULT_TIMEOUT;
+    }
+
+    // Note: A suggested reasonable range for the timeout member of options is 15 seconds to 120 seconds.
+    if (Number(timeout) < MINIMUM_TIMEOUT || Number(timeout) > DISCOURAGED_TIMEOUT) {
+        return DEFAULT_TIMEOUT;
+    }
+
+    return Number(timeout);
+};
+
 const kpxcPasskeysUtils = {};
 
 // Sends response from KeePassXC back to the injected script
-kpxcPasskeysUtils.sendPasskeysResponse = function(publicKey) {
-    const response = { publicKey: publicKey, fallback: kpxc.settings.passkeysFallback };
+kpxcPasskeysUtils.sendPasskeysResponse = function(publicKey, errorCode, errorMessage) {
+    const response = errorCode
+        ? { errorCode: errorCode, errorMessage: errorMessage }
+        : { publicKey: publicKey, fallback: kpxc.settings.passkeysFallback };
     const details = isFirefox() ? cloneInto(response, document.defaultView) : response;
     document.dispatchEvent(new CustomEvent('kpxc-passkeys-response', { detail: details }));
 };
 
 // Create a new object with base64 strings for KeePassXC
-kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions) {
+kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOriginWithAncestors) {
     try {
-        checkErrors(pkOptions);
-
-        if (pkOptions.user.id && (pkOptions.user.id.length < 1 || pkOptions.user.id.length > 64)) {
-            throw new TypeError('user.id does not match the required length.');
-        }
-
-        if (!pkOptions.rp.id) {
-            pkOptions.rp.id = window.location.hostname;
-            pkOptions.rp.name = window.location.hostname;
-        } else if (!window.location.hostname.endsWith(pkOptions.rp.id)) {
-            throw new DOMException('Site domain differs from RP ID', DOMException.SecurityError);
-        }
-
-        if (!pkOptions.pubKeyCredParams || pkOptions.pubKeyCredParams.length === 0) {
-            pkOptions.pubKeyCredParams.push({
-                'type': 'public-key',
-                'alg': -7
-            });
-            pkOptions.pubKeyCredParams.push({
-                'type': 'public-key',
-                'alg': -257
-            });
-        }
+        checkErrors(pkOptions, sameOriginWithAncestors);
 
         const publicKey = {};
-        publicKey.attestation = pkOptions.attestation || 'none';
-        publicKey.authenticatorSelection = pkOptions.authenticatorSelection || { userVerification: 'preferred' };
-        if (!publicKey.authenticatorSelection.userVerification) {
-            publicKey.authenticatorSelection.userVerification = 'preferred';
-        }
-
+        publicKey.attestation = pkOptions?.attestation;
+        publicKey.authenticatorSelection = pkOptions?.authenticatorSelection;
         publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
-        publicKey.extensions = pkOptions.extensions;
-        publicKey.pubKeyCredParams = pkOptions.pubKeyCredParams;
-        publicKey.rp = pkOptions.rp;
-        publicKey.timeout = pkOptions.timeout;
+        publicKey.extensions = pkOptions?.extensions;
+        publicKey.pubKeyCredParams = pkOptions?.pubKeyCredParams;
+        publicKey.rp = pkOptions?.rp;
+        publicKey.timeout = getTimeout(publicKey?.authenticatorSelection?.userVerification, pkOptions?.timeout);
 
         publicKey.excludeCredentials = [];
         if (pkOptions.excludeCredentials && pkOptions.excludeCredentials.length > 0) {
@@ -101,21 +101,17 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions) {
 };
 
 // Create a new object with base64 strings for KeePassXC
-kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions) {
+kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOriginWithAncestors) {
     try {
-        checkErrors(pkOptions);
-
-        if (!pkOptions.rpId) {
-            pkOptions.rpId = window.location.hostname;
-        } else if (!window.location.hostname.endsWith(pkOptions.rpId)) {
-            throw new DOMException('Site domain differs from RP ID', DOMException.SecurityError);
-        }
+        checkErrors(pkOptions, sameOriginWithAncestors);
 
         const publicKey = {};
         publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
-        publicKey.rpId = pkOptions.rpId;
-        publicKey.timeout = pkOptions.timeout;
-        publicKey.userVerification = pkOptions.userVerification || 'preferred';
+        publicKey.enterpriseAttestationPossible = false;
+        publicKey.extensions = pkOptions?.extensions;
+        publicKey.rpId = pkOptions?.rpId;
+        publicKey.timeout = getTimeout(publicKey?.userVerification, pkOptions?.timeout);
+        publicKey.userVerification = pkOptions?.userVerification;
 
         publicKey.allowCredentials = [];
         if (pkOptions.allowCredentials && pkOptions.allowCredentials.length > 0) {
