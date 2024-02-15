@@ -22,7 +22,11 @@
     overflow-y: auto;
 }
 
-.kpxcAutocomplete-items div {
+.kpxcAutocomplete-items > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px;
     cursor: pointer;
     background-color: var(--kpxc-background-color);
     border-bottom: 1px solid rgba(0, 0, 0, .125);
@@ -35,8 +39,17 @@
     text-align: start !important;
 }
 
-.kpxcAutocomplete-items div:last-child {
+.kpxcAutocomplete-items > div:last-child {
     border-bottom: none;
+}
+
+.kpxcAutocomplete-items > div > .kpxcAutocomplete-item-label {
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.kpxcAutocomplete-items > div > .kpxcAutocomplete-item-value {
+    pointer-events: none;
 }
 
 .kpxcAutocomplete-active {

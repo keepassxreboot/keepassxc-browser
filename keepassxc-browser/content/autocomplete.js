@@ -63,9 +63,14 @@ class Autocomplete {
             return;
         }
         this.deselectItem();
-        e.target.classList.add('kpxcAutocomplete-active');
+
+        const itemContainer = e.target.classList.contains('kpxcAutocomplete-item')
+            ? e.target
+            : e.target.parentElement;
+
+        itemContainer.classList.add('kpxcAutocomplete-active');
         const items = this.getAllItems();
-        this.index = Array.from(items).indexOf(e.target);
+        this.index = Array.from(items).indexOf(itemContainer);
     }
 
     async showList(inputField) {
@@ -131,8 +136,18 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
+            const itemLabel = document.createElement('div');
+            itemLabel.classList.add('kpxcAutocomplete-item-label');
+            itemLabel.textContent = c.label;
+
+            const itemValue = document.createElement('div');
+            itemValue.classList.add('kpxcAutocomplete-item-value');
+            itemValue.textContent = c.value;
+
             const item = document.createElement('div');
-            item.textContent = c.label;
+            item.classList.add('kpxcAutocomplete-item');
+            item.append(itemLabel);
+            item.append(itemValue);
             item.setAttribute('uuid', c.uuid);
 
             const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
@@ -182,7 +197,7 @@ class Autocomplete {
     }
 
     getAllItems() {
-        return this.list.getElementsByTagName('div');
+        return this.list.getElementsByClassName('kpxcAutocomplete-item');
     }
 
     /**
