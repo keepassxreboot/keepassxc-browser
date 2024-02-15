@@ -23,9 +23,9 @@
 }
 
 .kpxcAutocomplete-items > div {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 6px;
     padding: 12px;
     cursor: pointer;
     background-color: var(--kpxc-background-color);
@@ -43,17 +43,30 @@
     border-bottom: none;
 }
 
+.kpxcAutocomplete-items > div > .kpxcAutocomplete-item-group {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    text-transform: uppercase;
+    font-size: .8em;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+}
+
 .kpxcAutocomplete-items > div > .kpxcAutocomplete-item-label {
     font-weight: bold;
     pointer-events: none;
+    font-size: 1.2em;
 }
 
 .kpxcAutocomplete-items > div > .kpxcAutocomplete-item-value {
     pointer-events: none;
+    margin-top: 4px;
+    opacity: .75;
 }
 
 .kpxcAutocomplete-active {
-    background-color: #28a745 !important;
+    background-color: hsl(134, 61%, 41%) !important;
     color: #ffffff !important;
 }
 
