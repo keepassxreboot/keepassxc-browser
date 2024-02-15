@@ -1,18 +1,22 @@
 .kpxcAutocomplete-container {
-    display: none;
-    z-index: 2147483646;
-    position: absolute !important;
+    background-color: var(--kpxc-background-color);
     border: var(--kpxc-autocomplete-menu-border);
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    overflow: hidden; /* this fixes an issue with the border radius not showing up clearly */
+    border-radius: 8px;
+    box-shadow: var(--kpxc-box-shadow);
+    box-sizing: border-box;
+    display: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 1em;
+    min-width: 20rem;
+    overflow: hidden; /* Prevent the content from bleeding over the border radius. */
+    padding: 6px;
+    position: absolute !important;
+    z-index: 2147483646;
 }
 
-.kpxcAutocomplete-container-on-top {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+.kpxcAutocomplete-container--visible {
+    display: block;
 }
 
 .kpxcAutocomplete-items {
@@ -20,37 +24,109 @@
     overflow-y: auto;
 }
 
-.kpxcAutocomplete-items div {
-    padding: 5px;
-    cursor: pointer;
+.kpxcAutocomplete-item {
     background-color: var(--kpxc-background-color);
-    border-bottom: 1px solid rgba(0,0,0,.125);
-    width: auto;
+    border-radius: 4px;
     color: var(--kpxc-text-color);
-    font-size: max(10px, .9em) !important;
+    cursor: pointer;
     letter-spacing: normal !important;
-    word-spacing: normal !important;
-    text-rendering: auto !important;
+    max-width: 28rem;
+    padding: 12px;
     text-align: start !important;
+    text-rendering: auto !important;
+    width: auto;
+    word-spacing: normal !important;
 }
 
-.kpxcAutocomplete-items div:last-child {
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-items {
+    display: grid;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item {
+    align-items: center;
+    column-gap: 1rem;
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    padding: 6px;
+}
+
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__header {
+    display: grid;
+    grid-row: auto;
+}
+
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__group {
+    justify-self: end;
+    max-width: 100%;
+}
+
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__value {
+    justify-self: start;
+    margin: 0;
+    max-width: 100%;
+}
+
+.kpxcAutocomplete-item:last-child {
     border-bottom: none;
 }
 
-.kpxcAutocomplete-active {
-    background-color: #28a745 !important;
+.kpxcAutocomplete-item__header {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 6px;
+    justify-content: space-between;
+}
+
+.kpxcAutocomplete-item__group {
+    font-size: .7em;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    line-height: .7em;
+    opacity: .5;
+    overflow: hidden;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.kpxcAutocomplete-item__label {
+    font-size: .9em;
+    font-weight: bold;
+    overflow: hidden;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.kpxcAutocomplete-item__value {
+    font-size: .8em;
+    line-height: 1em;
+    margin-top: 4px;
+    opacity: .8;
+    overflow: hidden;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.kpxcAutocomplete-item--active {
+    background-color: hsl(134, 61%, 41%) !important;
     color: #ffffff !important;
 }
 
 .kpxcAutocomplete-container footer {
-    padding: 5px;
+
     background-color: #ddd;
-    border-top: 1px solid rgba(0,0,0,.125) !important;
-    width: auto;
+    border-top: 1px solid rgba(0, 0, 0, .125) !important;
     color: #000;
-    font-size: max(9px, .8em) !important;
     font-style: italic;
+    font-size: max(9px, .8em) !important;
+    padding: 5px;
+    width: auto;
 }
 
 @media (prefers-color-scheme: dark) {

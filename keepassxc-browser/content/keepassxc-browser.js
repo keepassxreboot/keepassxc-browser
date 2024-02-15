@@ -263,14 +263,35 @@ kpxc.initAutocomplete = function() {
 
     for (const c of kpxc.combinations) {
         if (c.username) {
-            kpxcUserAutocomplete.create(c.username, false, kpxc.settings.autoSubmit, kpxc.settings.afterFillSorting);
+            kpxcUserAutocomplete.create(
+                c.username,
+                false,
+                kpxc.settings.autoSubmit,
+                kpxc.settings.useCompactMode,
+                kpxc.settings.showGroupNameInAutocomplete,
+                kpxc.settings.afterFillSorting,
+            );
         } else if (!c.username && c.password) {
             // Single password field
-            kpxcUserAutocomplete.create(c.password, false, kpxc.settings.autoSubmit, kpxc.settings.afterFillSorting);
+            kpxcUserAutocomplete.create(
+                c.password,
+                false,
+                kpxc.settings.autoSubmit,
+                kpxc.settings.useCompactMode,
+                kpxc.settings.showGroupNameInAutocomplete,
+                kpxc.settings.afterFillSorting,
+            );
         }
 
         if (c.totp) {
-            kpxcTOTPAutocomplete.create(c.totp, false, kpxc.settings.autoSubmit, kpxc.settings.afterFillSortingTotp);
+            kpxcTOTPAutocomplete.create(
+                c.totp,
+                false,
+                kpxc.settings.autoSubmit,
+                kpxc.settings.useCompactMode,
+                kpxc.settings.showGroupNameInAutocomplete,
+                kpxc.settings.afterFillSortingTotp,
+            );
         }
     }
 };
@@ -376,7 +397,7 @@ kpxc.initLoginPopup = function() {
 
         return {
             title: title,
-            group: group,
+            group: credential.group,
             visibleLogin: visibleLogin,
             login: credential.login,
             loginId: loginId,
@@ -434,6 +455,8 @@ kpxc.initLoginPopup = function() {
         popupLoginItems.push({ text: l.text, uuid: l.uuid });
 
         kpxcUserAutocomplete.elements.push({
+            group: l.group,
+            title: l.title,
             label: l.text,
             value: l.login,
             uuid: l.uuid,

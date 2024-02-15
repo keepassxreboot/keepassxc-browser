@@ -23,7 +23,7 @@ CredentialAutocomplete.prototype.itemClick = async function(e, input, uuid) {
     e.stopPropagation();
 
     const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
-    const usernameValue = e.target.getElementsByTagName('input')[0].value;
+    const usernameValue = e.currentTarget.getElementsByTagName('input')[0]?.value;
     await this.fillPassword(usernameValue, index, uuid);
 
     this.closeList();
