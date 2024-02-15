@@ -140,8 +140,6 @@ class Autocomplete {
             item.classList.add('kpxcAutocomplete-item');
             item.setAttribute('uuid', c.uuid);
 
-            console.log(c);
-
             if (c.group !== null) {
                 const itemGroup = document.createElement('div');
                 itemGroup.classList.add('kpxcAutocomplete-item-group');
