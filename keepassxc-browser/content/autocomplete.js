@@ -136,19 +136,28 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
+            const item = document.createElement('div');
+            item.classList.add('kpxcAutocomplete-item');
+            item.setAttribute('uuid', c.uuid);
+
+            console.log(c);
+
+            if (c.group !== null) {
+                const itemGroup = document.createElement('div');
+                itemGroup.classList.add('kpxcAutocomplete-item-group');
+                itemGroup.textContent = c.group;
+                item.append(itemGroup);
+            }
+
             const itemLabel = document.createElement('div');
             itemLabel.classList.add('kpxcAutocomplete-item-label');
-            itemLabel.textContent = c.label;
+            itemLabel.textContent = c.title;
+            item.append(itemLabel);
 
             const itemValue = document.createElement('div');
             itemValue.classList.add('kpxcAutocomplete-item-value');
             itemValue.textContent = c.value;
-
-            const item = document.createElement('div');
-            item.classList.add('kpxcAutocomplete-item');
-            item.append(itemLabel);
             item.append(itemValue);
-            item.setAttribute('uuid', c.uuid);
 
             const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
             item.append(itemInput);
