@@ -7,6 +7,10 @@
     box-shadow: var(--kpxc-box-shadow);
     overflow: hidden;
     /* this fixes an issue with the border radius not showing up clearly */
+
+    font-size: 14px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1em;
 }
 
 /* TODO: Remove this as the new popup floats with full rounded corners */
