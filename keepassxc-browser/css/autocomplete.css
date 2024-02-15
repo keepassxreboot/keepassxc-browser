@@ -3,11 +3,13 @@
     z-index: 2147483646;
     position: absolute !important;
     border: var(--kpxc-autocomplete-menu-border);
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    overflow: hidden; /* this fixes an issue with the border radius not showing up clearly */
+    border-radius: 8px;
+    box-shadow: var(--kpxc-box-shadow);
+    overflow: hidden;
+    /* this fixes an issue with the border radius not showing up clearly */
 }
 
+/* TODO: Remove this as the new popup floats with full rounded corners */
 .kpxcAutocomplete-container-on-top {
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -21,10 +23,9 @@
 }
 
 .kpxcAutocomplete-items div {
-    padding: 5px;
     cursor: pointer;
     background-color: var(--kpxc-background-color);
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
     width: auto;
     color: var(--kpxc-text-color);
     font-size: max(10px, .9em) !important;
@@ -46,7 +47,7 @@
 .kpxcAutocomplete-container footer {
     padding: 5px;
     background-color: #ddd;
-    border-top: 1px solid rgba(0,0,0,.125) !important;
+    border-top: 1px solid rgba(0, 0, 0, .125) !important;
     width: auto;
     color: #000;
     font-size: max(9px, .8em) !important;
