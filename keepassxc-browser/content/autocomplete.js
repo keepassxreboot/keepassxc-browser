@@ -68,7 +68,7 @@ class Autocomplete {
             ? e.target
             : e.target.parentElement;
 
-        itemContainer.classList.add('kpxcAutocomplete-active');
+        itemContainer.classList.add('kpxcAutocomplete-item--active');
         const items = this.getAllItems();
         this.index = Array.from(items).indexOf(itemContainer);
     }
@@ -210,14 +210,14 @@ class Autocomplete {
         const items = this.getAllItems();
         const item = items[this.index];
         if (item !== undefined) {
-            item.classList.add('kpxcAutocomplete-active');
+            item.classList.add('kpxcAutocomplete-item--active');
             item.scrollIntoView({ block: 'nearest' });
         }
     }
 
     deselectItem() {
-        const items = this.list.querySelectorAll('div.kpxcAutocomplete-active');
-        items.forEach(item => item.classList.remove('kpxcAutocomplete-active'));
+        const items = this.list.querySelectorAll('div.kpxcAutocomplete-item--active');
+        items.forEach(item => item.classList.remove('kpxcAutocomplete-item--active'));
     }
 
     closeList() {
