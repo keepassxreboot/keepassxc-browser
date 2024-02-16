@@ -136,26 +136,7 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
-            const item = document.createElement('div');
-            item.classList.add('kpxcAutocomplete-item');
-            item.setAttribute('uuid', c.uuid);
-
-            if (c.group !== null) {
-                const itemGroup = document.createElement('div');
-                itemGroup.classList.add('kpxcAutocomplete-item-group');
-                itemGroup.textContent = c.group;
-                item.append(itemGroup);
-            }
-
-            const itemLabel = document.createElement('div');
-            itemLabel.classList.add('kpxcAutocomplete-item-label');
-            itemLabel.textContent = c.title;
-            item.append(itemLabel);
-
-            const itemValue = document.createElement('div');
-            itemValue.classList.add('kpxcAutocomplete-item-value');
-            itemValue.textContent = c.value;
-            item.append(itemValue);
+            const item = this.generateListItem(c);
 
             const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
             item.append(itemInput);
@@ -177,6 +158,35 @@ class Autocomplete {
         }
 
         this.selectItem();
+    }
+
+    generateListItem(credential) {
+        // Create the DOM element for the list item wrapper.
+        const item = document.createElement('div');
+        item.classList.add('kpxcAutocomplete-item');
+        item.setAttribute('uuid', credential.uuid);
+
+        // Create the DOM element for showing the group only when the group name is available.
+        if (credential.group !== null) {
+            const itemGroup = document.createElement('div');
+            itemGroup.classList.add('kpxcAutocomplete-item-group');
+            itemGroup.textContent = credential.group;
+            item.append(itemGroup);
+        }
+
+        // Create the DOM element for showing the credentials name.
+        const itemLabel = document.createElement('div');
+        itemLabel.classList.add('kpxcAutocomplete-item-label');
+        itemLabel.textContent = credential.title;
+        item.append(itemLabel);
+
+        // Create the DOM element for showing the credentials username field.
+        const itemValue = document.createElement('div');
+        itemValue.classList.add('kpxcAutocomplete-item-value');
+        itemValue.textContent = credential.value;
+        item.append(itemValue);
+
+        return item;
     }
 
     selectItem() {
