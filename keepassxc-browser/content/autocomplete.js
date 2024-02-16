@@ -136,7 +136,6 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
-            console.log(kpxc.settings, kpxc.settings.useCompactMode);
             const item = kpxc.settings.useCompactMode
                 ? this.generateCompactItem(c)
                 : this.generateItem(c);
@@ -147,7 +146,6 @@ class Autocomplete {
 
             // These events prevent the double hover effect if both keyboard and mouse are used
             item.addEventListener('mousemove', e => this.mouseMove(e));
-
             item.addEventListener('mousedown', e => e.stopPropagation());
             item.addEventListener('mouseup', e => e.stopPropagation());
 
@@ -331,11 +329,6 @@ class Autocomplete {
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
         const menuOffset = (totalHeight + rect.y) > window.self.visualViewport.height ? totalHeight : 0;
-        if (menuOffset > 0) {
-            this.container.classList.add('kpxcAutocomplete-container-on-top');
-        } else {
-            this.container.classList.remove('kpxcAutocomplete-container-on-top');
-        }
 
         const scrollTop = kpxcUI.getScrollTop();
         const scrollLeft = kpxcUI.getScrollLeft();

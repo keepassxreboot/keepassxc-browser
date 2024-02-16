@@ -13,14 +13,6 @@
     line-height: 1em;
 }
 
-/* TODO: Remove this as the new popup floats with full rounded corners */
-.kpxcAutocomplete-container-on-top {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-}
-
 .kpxcAutocomplete-items {
     max-height: 250px;
     overflow-y: auto;
