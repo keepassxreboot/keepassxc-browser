@@ -26,7 +26,7 @@
     padding: 12px;
     cursor: pointer;
     background-color: var(--kpxc-background-color);
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: var(--kpxc-autocomplete-menu-border);
     width: auto;
     color: var(--kpxc-text-color);
     font-size: max(10px, .9em) !important;
