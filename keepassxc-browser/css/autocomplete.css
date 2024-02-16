@@ -26,7 +26,7 @@
     overflow-y: auto;
 }
 
-.kpxcAutocomplete-items > div {
+.kpxcAutocomplete-item {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -43,11 +43,15 @@
     text-align: start !important;
 }
 
-.kpxcAutocomplete-items > div:last-child {
+.kpxcAutocomplete-item--compact {
+    padding: 6px;
+}
+
+.kpxcAutocomplete-item:last-child {
     border-bottom: none;
 }
 
-.kpxcAutocomplete-items > div > .kpxcAutocomplete-item-group {
+.kpxcAutocomplete-item__group {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -57,13 +61,13 @@
     letter-spacing: 0.05em;
 }
 
-.kpxcAutocomplete-items > div > .kpxcAutocomplete-item-label {
+.kpxcAutocomplete-item__label {
     font-weight: bold;
     pointer-events: none;
     font-size: 1.2em;
 }
 
-.kpxcAutocomplete-items > div > .kpxcAutocomplete-item-value {
+.kpxcAutocomplete-item__value {
     pointer-events: none;
     margin-top: 4px;
     opacity: .75;

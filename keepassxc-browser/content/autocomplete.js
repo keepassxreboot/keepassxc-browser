@@ -136,7 +136,10 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
-            const item = this.generateListItem(c);
+            console.log(kpxc.settings, kpxc.settings.useCompactMode);
+            const item = kpxc.settings.useCompactMode
+                ? this.generateCompactItem(c)
+                : this.generateItem(c);
 
             const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
             item.append(itemInput);
@@ -160,7 +163,7 @@ class Autocomplete {
         this.selectItem();
     }
 
-    generateListItem(credential) {
+    generateItem(credential) {
         // Create the DOM element for the list item wrapper.
         const item = document.createElement('div');
         item.classList.add('kpxcAutocomplete-item');
@@ -169,22 +172,37 @@ class Autocomplete {
         // Create the DOM element for showing the group only when the group name is available.
         if (credential.group !== null) {
             const itemGroup = document.createElement('div');
-            itemGroup.classList.add('kpxcAutocomplete-item-group');
+            itemGroup.classList.add('kpxcAutocomplete-item__group');
             itemGroup.textContent = credential.group;
             item.append(itemGroup);
         }
 
         // Create the DOM element for showing the credentials name.
         const itemLabel = document.createElement('div');
-        itemLabel.classList.add('kpxcAutocomplete-item-label');
+        itemLabel.classList.add('kpxcAutocomplete-item__label');
         itemLabel.textContent = credential.title;
         item.append(itemLabel);
 
         // Create the DOM element for showing the credentials username field.
         const itemValue = document.createElement('div');
-        itemValue.classList.add('kpxcAutocomplete-item-value');
+        itemValue.classList.add('kpxcAutocomplete-item__value');
         itemValue.textContent = credential.value;
         item.append(itemValue);
+
+        return item;
+    }
+
+    generateCompactItem(credential) {
+        // Create the DOM element for the list item wrapper.
+        const item = document.createElement('div');
+        item.classList.add('kpxcAutocomplete-item');
+        item.classList.add('kpxcAutocomplete-item--compact');
+        item.setAttribute('uuid', credential.uuid);
+
+        // Create the DOM element to show the compact credential name.
+        const itemContent = document.createElement('div');
+        itemContent.textContent = credential.label;
+        item.append(itemContent);
 
         return item;
     }
