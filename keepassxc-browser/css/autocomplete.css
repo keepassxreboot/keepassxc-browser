@@ -29,7 +29,6 @@
 
 .kpxcAutocomplete-item {
     border-radius: 4px;
-    flex-direction: column;
     padding: 12px;
     background-color: var(--kpxc-background-color);
     cursor: pointer;
@@ -67,7 +66,9 @@
 
 .kpxcAutocomplete-item__header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
     gap: 6px;
 }
 
