@@ -115,6 +115,7 @@
         "IGNORE_FULL": true,
         "IGNORE_NORMAL": true,
         "IGNORE_NOTHING": true,
+        "importScripts": true,
         "initColorTheme": true,
         "isEdge": true,
         "isFirefox": true,

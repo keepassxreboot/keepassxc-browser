@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../fonts/fork-awesome.min.css">
     <script src="../common/browser-polyfill.min.js"></script>
     <script src="../common/global.js"></script>
+    <script src="../common/global_ui.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="popup_functions.js"></script>
     <script defer src="popup_login.js"></script>
@@ -38,14 +39,14 @@
 
       <div id="credentialsList" class="credentials">
         <p data-i18n="popupLoginText"></p>
-        <div id="filter-block" style="display: none;">
+        <div id="filter-block">
           <label for="login-filter" data-i18n="popupFilterText"></label>
           <input type="text" id="login-filter">
         </div>
         <div id="login-list" class="list-group"></div>
       </div>
 
-       <div id="database-not-opened" style="display: none">
+       <div id="database-not-opened">
         <p data-i18n="popupErrorEncountered"></p>
         <p style="margin-left: 1em">
           <code id="database-error-message"></code>

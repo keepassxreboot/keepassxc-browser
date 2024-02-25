@@ -58,7 +58,7 @@ options.saveKeyRing = async function() {
     });
 };
 
-options.initGeneralSettings = function() {
+options.initGeneralSettings = async function() {
     const changeCheckboxValue = async function(e) {
         const name = e.currentTarget.name;
         const isChecked = e.currentTarget.checked;
@@ -173,7 +173,7 @@ options.initGeneralSettings = function() {
         await options.saveSettings();
     });
 
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'get_keepassxc_versions'
     }).then(options.showKeePassXCVersions);
 
@@ -703,13 +703,20 @@ const getBrowserId = function() {
 
 (async() => {
     try {
+        // We eagerly load the theme here to avoid a white flash
+        let theme = localStorage.getItem('colorTheme') || 'system';
+        if (theme === 'system') {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-bs-theme', theme);
+
         const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
         options.settings = settings;
 
         const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
         options.keyRing = keyRing;
         options.initMenu();
-        options.initGeneralSettings();
+        await options.initGeneralSettings();
         options.initConnectedDatabases();
         options.initCustomLoginFields();
         options.initSitePreferences();

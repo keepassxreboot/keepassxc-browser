@@ -1,0 +1,166 @@
+{
+    "manifest_version": 2,
+    "name": "KeePassXC-Browser",
+    "version": "1.8.11",
+    "description": "__MSG_extensionDescription__",
+    "author": "KeePassXC Team",
+    "icons": {
+        "16": "icons/keepassxc.svg",
+        "48": "icons/keepassxc.svg",
+        "64": "icons/keepassxc.svg",
+        "96": "icons/keepassxc.svg",
+        "128": "icons/keepassxc.svg"
+    },
+    "browser_action": {
+        "default_icon": {
+            "16": "icons/keepassxc.svg",
+            "18": "icons/keepassxc.svg",
+            "19": "icons/keepassxc.svg",
+            "32": "icons/keepassxc.svg",
+            "36": "icons/keepassxc.svg",
+            "38": "icons/keepassxc.svg",
+            "64": "icons/keepassxc.svg"
+        },
+        "default_title": "KeePassXC-Browser",
+        "default_popup": "popups/popup.html"
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab": true
+    },
+    "background": {
+        "scripts": [
+            "common/browser-polyfill.min.js",
+            "common/global.js",
+            "common/sites.js",
+            "background/nacl.min.js",
+            "background/nacl-util.min.js",
+            "background/client.js",
+            "background/keepass.js",
+            "background/httpauth.js",
+            "background/browserAction.js",
+            "background/page.js",
+            "background/event.js",
+            "background/init.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "common/browser-polyfill.min.js",
+                "common/global.js",
+                "common/sites.js",
+                "content/ui.js",
+                "content/banner.js",
+                "content/autocomplete.js",
+                "content/credential-autocomplete.js",
+                "content/custom-fields-banner.js",
+                "content/fields.js",
+                "content/fill.js",
+                "content/form.js",
+                "content/icons.js",
+                "content/keepassxc-browser.js",
+                "content/observer-helper.js",
+                "content/pwgen.js",
+                "content/totp-autocomplete.js",
+                "content/totp-field.js",
+                "content/username-field.js",
+                "content/passkeys-utils.js"
+            ],
+            "run_at": "document_idle",
+            "all_frames": true
+        }
+    ],
+    "commands": {
+        "fill_username_password": {
+            "description": "__MSG_contextMenuFillUsernameAndPassword__",
+            "suggested_key": {
+                "default": "Alt+Shift+U",
+                "mac": "MacCtrl+Shift+U"
+            }
+        },
+        "fill_password": {
+            "description": "__MSG_contextMenuFillPassword__",
+            "suggested_key": {
+                "default": "Alt+Shift+I",
+                "mac": "MacCtrl+Shift+I"
+            }
+        },
+        "fill_totp": {
+            "description": "__MSG_contextMenuFillTOTP__",
+            "suggested_key": {
+                "default": "Alt+Shift+O",
+                "mac": "MacCtrl+Shift+O"
+            }
+        },
+        "show_password_generator": {
+            "description": "__MSG_contextMenuShowPasswordGenerator__",
+            "suggested_key": {
+                "default": "Alt+Shift+G",
+                "mac": "MacCtrl+Shift+G"
+            }
+        },
+        "save_credentials": {
+            "description": "__MSG_contextMenuSaveCredentials__"
+        },
+        "redetect_fields": {
+            "description": "__MSG_popupRedetectButton__"
+        },
+        "choose_credential_fields": {
+            "description": "__MSG_popupChooseCredentialsText__"
+        },
+        "retrive_credentials_forced": {
+            "description": "__MSG_popupReopenButton__"
+        },
+        "request_autotype": {
+            "description": "__MSG_contextMenuRequestGlobalAutoType__"
+        },
+        "reload_extension": {
+            "description": "__MSG_popupReloadButton__"
+        }
+    },
+    "web_accessible_resources": [
+        "icons/disconnected.svg",
+        "icons/help.svg",
+        "icons/keepassxc.svg",
+        "icons/key.svg",
+        "icons/locked.svg",
+        "icons/otp.svg",
+        "css/autocomplete.css",
+        "css/banner.css",
+        "css/button.css",
+        "css/colors.css",
+        "css/define.css",
+        "css/notification.css",
+        "css/pwgen.css",
+        "css/username.css",
+        "css/totp.css",
+        "content/passkeys.js"
+    ],
+    "permissions": [
+        "activeTab",
+        "contextMenus",
+        "clipboardWrite",
+        "nativeMessaging",
+        "notifications",
+        "storage",
+        "tabs",
+        "webNavigation",
+        "webRequest",
+        "webRequestBlocking",
+        "https://*/*",
+        "http://*/*",
+        "https://api.github.com/"
+    ],
+    "content_security_policy": "script-src 'self' 'sha256-4nJ8uLezzRE3SiBFdkVN/uNwV9YTOGCqRXg6AvB5rCY='; object-src 'none'",
+    "applications": {
+        "gecko": {
+            "id": "keepassxc-browser@keepassxc.org",
+            "strict_min_version": "67.0"
+        }
+    },
+    "default_locale": "en"
+}

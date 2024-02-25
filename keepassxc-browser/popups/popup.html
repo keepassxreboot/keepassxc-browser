@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../fonts/fork-awesome.min.css">
     <script src="../common/browser-polyfill.min.js"></script>
     <script src="../common/global.js"></script>
+    <script src="../common/global_ui.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="popup_functions.js"></script>
     <script defer src="popup.js"></script>
@@ -56,7 +57,7 @@
         <div class="loader"></div> <p data-i18n="popupCheckingStatus"></p>
       </div>
 
-      <div id="not-configured" style="display: none">
+      <div id="not-configured">
         <p data-i18n="popupNotConfigured"></p>
         <div class="right-align">
           <button id="connect-button" class="btn btn-sm btn-primary">
@@ -66,9 +67,9 @@
         </div>
       </div>
 
-      <div id="need-reconfigure" style="display: none">
+      <div id="need-reconfigure">
         <p data-i18n="popupNeedReconfigure"></p>
-        <p style="margin-left: 1em">
+        <p id="left-margin">
           <code id="need-reconfigure-message"></code>
         </p>
         <p data-i18n="popupNeedReconfigureMessage"></p>
@@ -80,11 +81,11 @@
         </div>
       </div>
 
-      <div id="configured-not-associated" style="display: none">
+      <div id="configured-not-associated">
         <span data-i18n="popupConfiguredNotAssociated" data-i18n-placeholder="<span class='bg-warning' id='unassociated-identifier'></span>"></span>
       </div>
 
-      <div id="configured-and-associated" style="display: none">
+      <div id="configured-and-associated">
         <p data-i18n="popupConfiguredAndAssociated" data-i18n-placeholder="<span class='bg-success' id='associated-identifier'></span>"></p>
         <div class="right-align">
           <button id="redetect-fields-button" class="btn btn-sm btn-primary">
@@ -94,9 +95,9 @@
         </div>
       </div>
 
-      <div id="error-encountered" style="display: none">
+      <div id="error-encountered">
         <p data-i18n="popupErrorEncountered"></p>
-        <p style="margin-left: 1em">
+        <p id="left-margin">
           <code id="error-message"></code>
         </p>
         <div class="right-align">
@@ -107,9 +108,9 @@
         </div>
       </div>
 
-      <div id="database-not-opened" style="display: none">
+      <div id="database-not-opened">
         <p data-i18n="popupErrorEncountered"></p>
-        <p style="margin-left: 1em">
+        <p id="left-margin">
           <code id="database-error-message"></code>
         </p>
         <div class="right-align">
@@ -120,7 +121,7 @@
         </div>
       </div>
 
-      <div id="username-field-detected" style="display: none">
+      <div id="username-field-detected">
         <hr>
         <p data-i18n="popupUsernameFieldDetected"></p>
         <div class="right-align">
