@@ -62,8 +62,7 @@ class Icon {
         }
     }
 
-    removeIcon(attr) {
-        this.inputField.removeAttribute(attr);
+    removeIcon() {
         this.shadowRoot.removeChild(this.icon);
         document.body.removeChild(this.shadowRoot.host);
     }
@@ -173,12 +172,12 @@ kpxcUI.getRelativeTopPosition = function(rect) {
     return kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
 };
 
-kpxcUI.deleteHiddenIcons = function(iconList, attr) {
+kpxcUI.deleteHiddenIcons = function(iconList) {
     const deletedIcons = [];
     for (const icon of iconList) {
         if (icon.inputField && !kpxcFields.isVisible(icon.inputField)) {
             const index = iconList.indexOf(icon);
-            icon.removeIcon(attr);
+            icon.removeIcon();
             iconList.splice(index, 1);
             deletedIcons.push(icon.inputField);
 
@@ -345,23 +344,6 @@ const logDebug = function(message, extra) {
     }
 };
 
-// Enables dragging
-document.addEventListener('mousemove', function(e) {
-    if (!kpxcUI.mouseDown) {
-        return;
-    }
-
-    if (kpxcPasswordDialog.selected === kpxcPasswordDialog.titleBar) {
-        const xPos = e.clientX - kpxcPasswordDialog.diffX;
-        const yPos = e.clientY - kpxcPasswordDialog.diffY;
-
-        if (kpxcPasswordDialog.selected !== null) {
-            kpxcPasswordDialog.dialog.style.left = Pixels(xPos);
-            kpxcPasswordDialog.dialog.style.top = Pixels(yPos);
-        }
-    }
-});
-
 document.addEventListener('mousedown', function(e) {
     if (!e.isTrusted) {
         return;
@@ -375,7 +357,6 @@ document.addEventListener('mouseup', function(e) {
         return;
     }
 
-    kpxcPasswordDialog.selected = null;
     kpxcUI.mouseDown = false;
 });
 

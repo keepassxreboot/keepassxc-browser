@@ -36,7 +36,7 @@ kpxcTOTPIcons.switchIcon = function(state, uuid) {
 };
 
 kpxcTOTPIcons.deleteHiddenIcons = function() {
-    kpxcUI.deleteHiddenIcons(kpxcTOTPIcons.icons, 'kpxc-totp-field');
+    kpxcUI.deleteHiddenIcons(kpxcTOTPIcons.icons);
 };
 
 kpxcTOTPIcons.autoCompleteIsOneTimeCode = function(field) {
@@ -88,10 +88,6 @@ kpxcTOTPIcons.isValid = function(field, forced) {
             || field.readOnly
             || field.inputMode === 'email') {
             logDebug('Error: TOTP field found but it is not valid:', field);
-            return false;
-        }
-    } else {
-        if (field.getAttribute('kpxc-totp-field') === 'true') {
             return false;
         }
     }

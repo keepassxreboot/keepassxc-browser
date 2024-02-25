@@ -13,7 +13,7 @@ kpxcUsernameIcons.switchIcon = function(state) {
 };
 
 kpxcUsernameIcons.deleteHiddenIcons = function() {
-    kpxcUI.deleteHiddenIcons(kpxcUsernameIcons.icons, 'kpxc-username-field');
+    kpxcUI.deleteHiddenIcons(kpxcUsernameIcons.icons);
 };
 
 kpxcUsernameIcons.isValid = function(field) {
@@ -122,7 +122,6 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 const iconClicked = async function(field, icon) {
     if (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field)) {
         icon.parentNode.removeChild(icon);
-        field.removeAttribute('kpxc-username-field');
         return;
     }
 

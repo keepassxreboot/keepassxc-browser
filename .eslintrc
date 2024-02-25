@@ -133,7 +133,7 @@
         "kpxcForm": true,
         "kpxcIcons": true,
         "kpxcObserverHelper": true,
-        "kpxcPasswordDialog": true,
+        "kpxcPasswordGenerator": true,
         "kpxcPasswordIcons": true,
         "kpxcSites": true,
         "kpxcTOTPAutocomplete": true,

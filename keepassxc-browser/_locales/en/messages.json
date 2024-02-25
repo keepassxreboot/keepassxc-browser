@@ -159,34 +159,6 @@
         "message": "Password generator icon",
         "description": "Alt attribute text of the password generator icon."
     },
-    "passwordGeneratorPlaceholder": {
-        "message": "Generated password",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Also fill in the next password-field",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Password Generator",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Generate",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Try again",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Copy",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Fill password",
-        "description": "Fill a password in password generator."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "Error: The generated password is longer than the allowed length!",
         "description": "A warning text shown in the password generator."
@@ -203,13 +175,8 @@
         "message": "Generate password",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Cannot receive generated password.",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Is KeePassXC running and connected?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "Fill credentials from KeePassXC",

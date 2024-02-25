@@ -961,7 +961,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'retrive_credentials_forced') {
             await kpxc.retrieveCredentials(true);
         } else if (req.action === 'show_password_generator') {
-            kpxcPasswordDialog.trigger();
+            kpxcPasswordGenerator.showPasswordGenerator();
         } else if (req.action === 'request_autotype') {
             sendMessage('request_autotype', [ window.location.hostname ]);
         }
