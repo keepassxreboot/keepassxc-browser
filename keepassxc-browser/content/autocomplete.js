@@ -121,7 +121,7 @@ class Autocomplete {
         }
 
         this.updateList();
-        this.container.style.display = 'block';
+        this.container.classList.add('kpxcAutocomplete-container--visible');
         this.updatePosition();
     }
 
@@ -221,7 +221,7 @@ class Autocomplete {
             return;
         }
 
-        this.container.style.display = 'none';
+        this.container.classList.remove('kpxcAutocomplete-container--visible');
     }
 
     getAllItems() {
