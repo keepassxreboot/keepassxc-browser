@@ -29,7 +29,6 @@
 
 .kpxcAutocomplete-item {
     border-radius: 4px;
-    transition: background-color .1s ease, color .1s ease;
     flex-direction: column;
     padding: 12px;
     background-color: var(--kpxc-background-color);
@@ -43,11 +42,18 @@
 }
 
 .kpxcAutocomplete-container--compact {
-    padding: 4px;
+    padding: 0px;
 }
 
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-item {
-    padding: 4px;
+    border-radius: 0;
+    padding: 6px;
+    border-bottom: var(--kpxc-autocomplete-menu-border);
+}
+
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item--active,
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item:has(+.kpxcAutocomplete-item--active) {
+    border-color: hsl(134, 61%, 41%);
 }
 
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-item__header {
