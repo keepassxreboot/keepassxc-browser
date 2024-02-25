@@ -126,7 +126,7 @@ kpxcUI.updateIconPosition = function(iconClass) {
 };
 
 kpxcUI.calculateIconOffset = function(field, size) {
-    const offset = Math.floor((field.offsetHeight - size) / 3);
+    const offset = Math.floor((field.offsetHeight / 2) - (size / 2) - 1);
     return (offset < 0) ? 0 : offset;
 };
 
