@@ -2,9 +2,12 @@
     display: none;
     z-index: 2147483646;
     position: absolute !important;
-    border: var(--kpxc-autocomplete-menu-border);
+    padding: 6px;
     border-radius: 8px;
+    border: var(--kpxc-autocomplete-menu-border);
     box-shadow: var(--kpxc-box-shadow);
+    background-color: var(--kpxc-background-color);
+    box-sizing: border-box;
 
     /* Prevent the content from bleeding over the border radius. */
     overflow: hidden;
@@ -20,50 +23,64 @@
 }
 
 .kpxcAutocomplete-item {
-    position: relative;
-    display: flex;
+    border-radius: 4px;
+    transition: background-color .1s ease, color .1s ease;
     flex-direction: column;
     padding: 12px;
-    cursor: pointer;
     background-color: var(--kpxc-background-color);
-    border-bottom: var(--kpxc-autocomplete-menu-border);
+    cursor: pointer;
     width: auto;
     color: var(--kpxc-text-color);
-    font-size: max(10px, .9em) !important;
     letter-spacing: normal !important;
     word-spacing: normal !important;
     text-rendering: auto !important;
     text-align: start !important;
 }
 
-.kpxcAutocomplete-item--compact {
-    padding: 6px;
+.kpxcAutocomplete-container--compact {
+    padding: 4px;
+}
+
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item {
+    padding: 4px;
+}
+
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__header {
+    font-size: .9rem;
+    line-height: 1em;
 }
 
 .kpxcAutocomplete-item:last-child {
     border-bottom: none;
 }
 
+.kpxcAutocomplete-item__header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
 .kpxcAutocomplete-item__group {
-    position: absolute;
-    top: 12px;
-    right: 12px;
     text-transform: uppercase;
-    font-size: .8em;
+    font-size: .7em;
+    line-height: .7em;
     pointer-events: none;
     letter-spacing: 0.05em;
+    font-weight: bold;
+    opacity: .5;
 }
 
 .kpxcAutocomplete-item__label {
     font-weight: bold;
     pointer-events: none;
-    font-size: 1.2em;
 }
 
 .kpxcAutocomplete-item__value {
     pointer-events: none;
     margin-top: 4px;
-    opacity: .75;
+    line-height: 1em;
+    font-size: .8em;
+    opacity: .8;
 }
 
 .kpxcAutocomplete-item--active {

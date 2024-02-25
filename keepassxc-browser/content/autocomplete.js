@@ -97,6 +97,11 @@ class Autocomplete {
             styleSheet.addEventListener('load', () => this.wrapper.style.display = 'block');
             this.container = kpxcUI.createElement('div', 'kpxcAutocomplete-container', { 'id': 'kpxcAutocomplete-container' });
 
+            // Apply compact mode class
+            if (kpxc.settings.useCompactMode) {
+                this.container.classList.add('kpxcAutocomplete-container--compact');
+            }
+
             this.shadowRoot = this.wrapper.attachShadow({ mode: 'closed' });
             this.shadowRoot.append(colorStyleSheet);
             this.shadowRoot.append(styleSheet);
@@ -136,9 +141,7 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
-            const item = kpxc.settings.useCompactMode
-                ? this.generateCompactItem(c)
-                : this.generateItem(c);
+            const item = this.generateItem(c);
 
             const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
             item.append(itemInput);
@@ -167,40 +170,32 @@ class Autocomplete {
         item.classList.add('kpxcAutocomplete-item');
         item.setAttribute('uuid', credential.uuid);
 
+        // Create the DOM element for the list item header.
+        const itemHeader = document.createElement('div');
+        itemHeader.classList.add('kpxcAutocomplete-item__header');
+
         // Create the DOM element for showing the group only when the group name is available.
         if (credential.group !== null) {
             const itemGroup = document.createElement('div');
             itemGroup.classList.add('kpxcAutocomplete-item__group');
             itemGroup.textContent = credential.group;
-            item.append(itemGroup);
+            itemHeader.append(itemGroup);
         }
 
         // Create the DOM element for showing the credentials name.
         const itemLabel = document.createElement('div');
         itemLabel.classList.add('kpxcAutocomplete-item__label');
         itemLabel.textContent = credential.title;
-        item.append(itemLabel);
+        itemHeader.append(itemLabel);
+
+        // Append the header to the list item.
+        item.append(itemHeader);
 
         // Create the DOM element for showing the credentials username field.
         const itemValue = document.createElement('div');
         itemValue.classList.add('kpxcAutocomplete-item__value');
         itemValue.textContent = credential.value;
         item.append(itemValue);
-
-        return item;
-    }
-
-    generateCompactItem(credential) {
-        // Create the DOM element for the list item wrapper.
-        const item = document.createElement('div');
-        item.classList.add('kpxcAutocomplete-item');
-        item.classList.add('kpxcAutocomplete-item--compact');
-        item.setAttribute('uuid', credential.uuid);
-
-        // Create the DOM element to show the compact credential name.
-        const itemContent = document.createElement('div');
-        itemContent.textContent = credential.label;
-        item.append(itemContent);
 
         return item;
     }
@@ -330,7 +325,7 @@ class Autocomplete {
         const totalHeight = menuRect.height + rect.height;
         const menuOffset = (totalHeight + rect.y) > window.self.visualViewport.height ? totalHeight : 0;
 
-        const scrollTop = kpxcUI.getScrollTop();
+        const scrollTop = kpxcUI.getScrollTop() + 6;
         const scrollLeft = kpxcUI.getScrollLeft();
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
             this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + scrollTop + this.input.offsetHeight - menuOffset);
