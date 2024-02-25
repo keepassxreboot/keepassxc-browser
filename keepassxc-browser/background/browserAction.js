@@ -16,6 +16,9 @@ browserAction.show = async function(tab, popupData) {
             tabId: tab.id,
             popup: `popups/${popupData.popup}.html`
         });
+
+        const badgeText = popupData.popup === 'popup_login' ? String(page.tabs[tab.id]?.loginList?.length) : '';
+        browserAction.setBadgeText(tab?.id, badgeText);
     }
 };
 
@@ -44,8 +47,9 @@ browserAction.showDefault = async function(tab) {
     }
 
     if (page.tabs[tab.id]?.loginList.length > 0) {
-        popupData.iconType = 'questionmark';
+        popupData.iconType = 'normal';
         popupData.popup = 'popup_login';
+        browserAction.setBadgeText(tab?.id, String(page.tabs[tab.id]?.loginList.length));
     }
 
     await browserAction.show(tab, popupData);
@@ -64,6 +68,11 @@ browserAction.updateIcon = async function(tab, iconType) {
     browserActionWrapper.setIcon({
         path: browserAction.generateIconName(iconType)
     });
+};
+
+browserAction.setBadgeText = function(tabId, badgeText) {
+    browserActionWrapper.setBadgeBackgroundColor({ color: '#666666' });
+    browserActionWrapper.setBadgeText({ text: badgeText, tabId: tabId });
 };
 
 browserAction.generateIconName = async function(iconType) {

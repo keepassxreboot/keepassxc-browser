@@ -154,7 +154,7 @@ kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
 
 kpxcEvent.onLoginPopup = async function(tab, logins) {
     const popupData = {
-        iconType: 'questionmark',
+        iconType: 'normal',
         popup: 'popup_login'
     };
 
@@ -168,7 +168,7 @@ kpxcEvent.initHttpAuth = async function() {
 
 kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
     const popupData = {
-        iconType: 'questionmark',
+        iconType: 'normal',
         popup: 'popup_httpauth'
     };
 
