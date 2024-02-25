@@ -71,8 +71,8 @@ browserAction.updateIcon = async function(tab, iconType) {
 };
 
 browserAction.setBadgeText = function(tabId, badgeText) {
-    browser.browserAction.setBadgeBackgroundColor({ color: '#666666' });
-    browser.browserAction.setBadgeText({ text: badgeText, tabId: tabId });
+    browserActionWrapper.setBadgeBackgroundColor({ color: '#666666' });
+    browserActionWrapper.setBadgeText({ text: badgeText, tabId: tabId });
 };
 
 browserAction.generateIconName = async function(iconType) {
