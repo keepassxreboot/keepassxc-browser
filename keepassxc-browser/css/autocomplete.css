@@ -40,24 +40,20 @@
     text-align: start !important;
 }
 
-.kpxcAutocomplete-container--compact {
-    padding: 0px;
-}
-
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-item {
-    border-radius: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     padding: 6px;
-    border-bottom: var(--kpxc-autocomplete-menu-border);
 }
 
-.kpxcAutocomplete-container--compact .kpxcAutocomplete-item--active,
-.kpxcAutocomplete-container--compact .kpxcAutocomplete-item:has(+.kpxcAutocomplete-item--active) {
-    border-color: hsl(134, 61%, 41%);
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__group {
+    display: none;
 }
 
-.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__header {
-    font-size: .9rem;
-    line-height: 1em;
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__value {
+    margin: 0;
 }
 
 .kpxcAutocomplete-item:last-child {
