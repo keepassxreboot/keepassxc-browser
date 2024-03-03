@@ -1,5 +1,6 @@
 'use strict';
 
+const PASSKEYS_NO_LOGINS_FOUND = 15;
 const PASSKEYS_WAIT_FOR_LIFETIMER = 21;
 const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 30;
 
@@ -821,8 +822,12 @@ kpxc.enablePasskeys = function() {
         }
     };
 
-    const letTimerRunOut = function(errorCode) {
-        return errorCode === PASSKEYS_WAIT_FOR_LIFETIMER || errorCode === PASSKEYS_CREDENTIAL_IS_EXCLUDED;
+    const letTimerRunOut = function (errorCode) {
+        return (
+            errorCode === PASSKEYS_WAIT_FOR_LIFETIMER ||
+            errorCode === PASSKEYS_CREDENTIAL_IS_EXCLUDED ||
+            errorCode === PASSKEYS_NO_LOGINS_FOUND
+        );
     };
 
     const sendResponse = async function(command, publicKey, callback) {
