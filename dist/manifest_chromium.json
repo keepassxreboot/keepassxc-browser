@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "KeePassXC-Browser",
-    "version": "1.8.11",
-    "version_name": "1.8.11",
+    "version": "1.9.0",
+    "version_name": "1.9.0",
     "minimum_chrome_version": "93",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
