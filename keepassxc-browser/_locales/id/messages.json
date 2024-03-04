@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Akses ke semua entri tidak diperbolehkan.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,12 +144,44 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "URL yang disediakan tidak valid.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Tidak tersambung dengan KeePassXC.",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "Ikon pembuat sandi",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Sandi yang dibuat",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Juga isi ruas sandi berikutnya",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Pembuat Sandi",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Buat",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Coba lagi",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Salin",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "isi sandi",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Galat: Sandi yang dibuat melebihi panjang maksimum yang diizinkan!",
@@ -203,13 +207,8 @@
         "message": "Buat sandi",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Tidak bisa menerima sandi yang dibuat.",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Apakah KeePassXC telah berjalan dan tersambung?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "Isi kredensial dari KeePassXC",
@@ -347,6 +346,10 @@
         "message": "Error: Tidak dapat menemukan bidang kata sandi.",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Filling password to a plain text field is prevented.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
         "message": "Error: Tidak dapat mendeteksi perubahan kredensial.",
         "description": "Message shown when trying to save credentials that haven't changed."
@@ -388,7 +391,7 @@
         "description": "Button text for adding Username-only option."
     },
     "popupAllowIframeButton": {
-        "message": "Allow Cross-Origin iframes for the site",
+        "message": "Perbolehkan iframe lintas sumber untuk situs",
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
@@ -416,11 +419,11 @@
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "message": "Tidak dapat menghubungkan ke KeePassXC? Mungkin laman wiki kami dapat membantu.",
         "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
-        "message": "Troubleshooting Guide",
+        "message": "Petunjuk Pemecahan Masalah",
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
@@ -452,7 +455,7 @@
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "popupIframeDetected": {
-        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "message": "Sebuah iframe lintas sumber telah terdeteksi. Tambahkan URL ke Preferensi Situs dengan opsi Perbolehkan iframe lintas sumber diaktifkan?",
         "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
@@ -712,7 +715,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries.",
+        "message": "Isi entri TOTP satuan secara otomatis.",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
@@ -736,7 +739,7 @@
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon.",
+        "message": "Gunakan ikon bilah alat monokrom.",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
@@ -752,11 +755,11 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
+        "message": "Jumlah penerusan ulang yang diperbolehkan sampai banner hilang. Nilai bawaan adalah 3. Maksimal tak terbatas.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials.",
+        "message": "Perbolehkan pengisian kredensial Autentikasi HTTP Dasar.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -832,59 +835,59 @@
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the site preferences.",
+        "message": "Menambahkan situs ternama yang memiliki formulir hanya nama pengguna ke preferensi situs.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Adds an icon to username fields for filling credentials with a single mouse click.",
+        "message": "Menambahkan ikon ke kolom nama pengguna untuk mengisi kredensial dengan satu klik tetikus.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Adds an icon to input fields that are recognized as OTP/2FA.",
+        "message": "Menambahkan ikon ke kolom masukan yang dikenal sebagai OTP/2FA.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",
+        "message": "KeePassXC-Browser akan menerima kredensial secara otomatis ketika sebuah tab diaktifkan.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
-        "message": "Reconnects automatically to KeePassXC when it is detected.",
+        "message": "Menghubungkan ulang secara otomatis ke KeePassXC ketika terdeteksi.",
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in credentials if it receives only a single entry.",
+        "message": "Biarkan KeePassXC-Browser mengisi kredensial secara otomatis ketika hanya menerima satu entri.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
+        "message": "Peringatan! Menggunakan pengisian otomatis tidak aman. Gunakan dengan risiko Anda sendiri. KeePassXC-Browser mendeteksi kolom masuk secara otomatis. Tetapi, mereka dapat dideteksi secara salah, kemungkinan dapat mengisi data sensitif ke kolom masukan yang berbahaya.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "message": "Biarkan KeePassXC-Browser mengisi kolom TOTP secara otomatis ketika hanya menerima satu entri.",
         "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Show a dropdown list containing available credentials for all username fields on a page.",
+        "message": "Tampilkan daftar dropdown berisi kredensial yang tersedia untuk semua kolom nama pengguna di sebuah laman.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown.",
+        "message": "Ketika kredensial diminta dari kelompok yang berbeda, nama kelompok akan ditampilkan.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Show notifications for errors and when user interaction is required.",
+        "message": "Tampilkan notifikasi atau kesalahan dan ketika interaksi pengguna diperlukan.",
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "message": "Gunakan ikon monokrom dengan lencana berwarna di bilah alat yang beradaptasi dengan tema terang/gelap peramban.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "When saving new credentials, save only the domain instead of full URL.",
+        "message": "Ketika menyimpan kredensial baru, hanya simpan domainnya daripada URL penuhnya.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "When saving new custom login fields, save only the domain instead of full URL.",
+        "message": "Ketika menyimpan kolom masuk kustom baru, hanya simpan domainnya daripada URL penuhnya.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -896,23 +899,23 @@
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "If credentials are found for a page and the login-type is an HTTP Basic Auth request, KeePassXC-Browser tries to login automatically with the first given credentials. When multiple credentials are present, the extension popup can be used to choose the correct one. Even when this feature is enabled, it is still possible to enter HTTP Basic Auth login manually.",
+        "message": "Jika kredensial ditemukan untuk sebuah laman dan jenis masuk merupakan permintaan Autentikasi HTTP Dasar, KeePassXC-Browser akan mencoba masuk secara otomatis dengan kredensial pertama yang diberikan. Ketika tersedia beberapa kredensial, popup pengaya dapat digunakan untuk memilih yang benar. Bahkan ketika fitur ini diaktifkan, masih dimungkinkan untuk memasukkan entri masuk Autentikasi HTTP Dasar secara manual.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
-        "message": "An HTTP Basic Auth dialog looks like this:",
+        "message": "Dialog Autentikasi HTTP Dasar terlihat seperti berikut:",
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Clear credentials from non-active tabs after (seconds, 0-3600).",
+        "message": "Hapus kredensial dari tab non-aktif setelah (detik, 0-3600).",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Credentials are cleared from background tabs after the timeout and permissions for those pages will be asked again.",
+        "message": "Kredensial dihapus dari tab latar belakang setelah waktu habis dan perizinan untuk laman tersebut akan ditanyakan lagi.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "KeePassXC-Browser needs KeePassXC to retrieve credentials.",
+        "message": "KeePassXC-Browser memerlukan KeePassXC untuk menerima kredensial.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
@@ -1020,11 +1023,11 @@
         "description": "Site preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
-        "message": "Improved Input Field Detection",
+        "message": "Deteksi Kolom Masukan yang Ditingkatkan",
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
-        "message": "Allow Cross-Origin iframes",
+        "message": "Perbolehkan iframe lintas sumber",
         "description": "Allow iframes column text."
   },
     "optionsColumnDelete": {
@@ -1040,7 +1043,7 @@
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
-        "message": "Disable Auto-Submit",
+        "message": "Nonaktifkan Pengiriman Otomatis",
         "description": "Site preferences option selection."
     },
     "optionsSelectionFull": {
@@ -1064,63 +1067,63 @@
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Sort credentials after fill by",
+        "message": "Urutkan kredensial setelah pengisian berdasarkan",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
-        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "message": "Ketika Kredensial relevan pertama dipilih, kredensial untuk entri masuk yang diisi sebelumnya akan ditetapkan sebagai pertama dalam pendaftaran Menu Isi Otomatis.",
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Sort credentials after fill for TOTP by",
+        "message": "Urutkan kredensial setelah mengisi TOTP berdasarkan",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
-        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "message": "Ketika opsi Kredensial relevan pertama dipilih, TOTP untuk entri masuk yang sebelumnya diisi akan ditetapkan sebagai pertama dalam pendaftaran Menu Isi Otomatis. ",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
     "optionsFillSortByMatchingCredentials": {
-        "message": "Matching credentials setting",
+        "message": "Pengaturan pencocokan kredensial",
         "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
     },
     "optionsFillSortByRelevantEntry": {
-        "message": "Relevant credential first",
+        "message": "Kredensial relevan yang pertama",
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved custom login fields found.",
+        "message": "Tidak ada kolom masuk kustom yang ditemukan.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table.",
+        "message": "Anda dapat mengelola kolom masuk kustom yang tersimpan menggunakan tabel.",
         "description": "Table caption of Custom login fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": "If KeePassXC-Browser detects the wrong login fields, you are able to specify the correct fields yourself.",
+        "message": "Jika KeePassXC-Browser mendeteksi kolom masuk yang salah, Anda dapat menentukan kolom yang benar.",
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Go to the page and click on the KeePassXC-Browser icon, then select ",
+        "message": "Pergi ke laman dan klik pada ikon KeePassXC-Browser, lalu pilih",
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "On this page you can manage saved custom login fields.",
+        "message": "Di laman ini Anda dapat mengelola kolom masuk kustom yang tersimpan.",
         "description": "Saved custom login fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remove saved custom login fields?",
+        "message": "Hapus kolom masuk kustom yang tersimpan?",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Do you really want to remove the saved custom login fields on the page: $1",
+        "message": "Apakah Anda ingin menghilangkan kolom masuk kustom yang tersimpan di laman: $1",
         "description": "Confirmation text when removing saved custom login fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
-        "message": "KeePassXC-Browser will automatically detect the login fields next time you visit this page.",
+        "message": "KeePassXC-Browser akan mendeteksi kolom masuk secara otomatis ketika Anda mengunjungi laman ini lagi.",
         "description": "Part of confirmation text when removing saved custom login fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "No site preferences found.",
+        "message": "Tidak ada preferensi situs yang ditemukan.",
         "description": "Shown when no site preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -1128,27 +1131,27 @@
         "description": "Confirmation text when removing ignored sites from the list."
     },
     "optionsSitePreferencesTabHelpTextFirst": {
-        "message": "Sites on this page have special handling methods associated with them.",
+        "message": "Situs di laman ini memiliki metode penanganan yang khusus yang berkaitan dengan mereka.",
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "To ignore new/modified credentials on a specific site, add them below or when using the credential banner on the page select <em>Don't ask again for this site</em>.",
+        "message": "Untuk mengabaikan kredensial baru/termodifikasi di laman khusus, tambahkan mereka di bawah atau ketika menggunakan banner kredensial di laman pilih <em>Jangan tanyakan lagi untuk situs ini</em>.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "If a site is fully ignored (<em>Disable all features</em> is selected), then the plugin will do nothing when visiting that site.",
+        "message": "Jika sebuah situs diabaikan secara penuh (<em>Nonaktifkan semua fitur</em> dipilih), lalu plugin tidak akan melakukan apa pun ketika mengunjungi situs tersebut.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Username-only detection allows KeePassXC-Browser to fill in login details on websites with separate pages for username and password.",
+        "message": "Deteksi hanya nama pengguna memperbolehkan KeePassXC-Browser untuk mengisi detail masuk di situs web dengan laman terpisah untuk nama pengguna dan kata sandi.",
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "message": "Deteksi Kolom Masukan yang Ditingkatkan memungkinkan deteksi kolom masukan dinamis yang lebih detail. Tetapi, ini dapat memengaruhi performa laman. Gunakan dengan hati-hati.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
-        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "message": "Memperbolehkan iframe lintas sumber akan mengaktifkan pengambilan kredensial untuk iframe dari domain lain. Gunakan dengan risiko Anda sendiri.",
         "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
@@ -1156,35 +1159,35 @@
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> and must be at least 5 characters long.",
+        "message": "URL harus berawalan entah dengan <code>https://</code>, <code>http://</code>, <code>file://</code>, atau <code>ftp://</code> dan harus setidaknya 5 karakter panjang.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
-        "message": "Do you really want to remove the specified site from the list: $1",
+        "message": "Apakah Anda ingin menghilangkan situs yang ditentukan dari daftar: $1",
         "description": "Confirmation text when removing site from site preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser will enable all features for this site and remove username-only detection.",
+        "message": "KeePassXC-Browser akan mengaktifkan semua fitur untuk situs ini dan menghilangkan deteksi hanya nama pengguna.",
         "description": "Part of confirmation text when removing site preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table.",
+        "message": "Anda dapat mengelola preferensi situs yang tersimpan menggunakan tabel.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Option to ignore extension features for the page.",
+        "message": "Opsi mengabaikan fitur pengaya untuk laman.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
-        "message": "Visit KeePassXC-Browser in the Chrome Web Store.",
+        "message": "Kunjungi KeePassXC-Browser di Chrome Web Store.",
         "description": "About page link to Chrome Web Store."
     },
     "optionsAboutMozilla": {
-        "message": "Visit KeePassXC-Browser in the Mozilla Add-ons directory.",
+        "message": "Kunjungi KeePassXC-Browser di direktori Mozilla Add-ons.",
         "description": "About page link to AMO."
     },
     "optionsAboutEdge": {
-        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "message": "Kunjungi KeePassXC-Browser di laman Add-on Edge.",
         "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
@@ -1260,23 +1263,23 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Passkey",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable Passkeys",
+        "message": "Aktifkan Passkey",
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Enable support for Web Authentication.",
+        "message": "Aktifkan dukungan untuk Autentikasi Web.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable Passkeys fallback",
+        "message": "Aktifkan cadangan Passkey",
         "description": "Enabled Passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal Passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Ketika diaktifkan, sebuah permintaan gagal atau terbatalkan ke KeePassXC akan memicu permintaan Passkey internal peramban. Jika dinonaktifkan, koneksi ke KeePassXC diperlukan dan permintaan yang dibatalkan akan gagal. Bawaan: diaktifkan.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
@@ -1284,11 +1287,11 @@
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "HTTP Basic Authentication dialog",
+        "message": "Dialog Autentikasi HTTP Dasar",
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
-        "message": "Your selection will be auto-submitted",
+        "message": "Seleksi Anda akan dikirim secara otomatis",
         "description": "Message shown at the bottom of autocomplete menu."
     },
     "lockDatabase": {

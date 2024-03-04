@@ -147,9 +147,41 @@
         "message": "Invalid URL provided.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "KeePassXC နှင့် ချိတ်ဆက်မထားပါ။",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "စကားဝှက် ထုတ်လုပ်ကိရိယာ အိုင်ကွန်",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "ထုတ်လုပ်ထားသော စကားဝှက်",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "နောက်လာမည့် စကားဝှက်အကွက်၌ပါ ဖြည့်ရန်",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "စကားဝှက် ထုတ်လုပ်ကိရိယာ",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "ထုတ်လုပ်ရန်",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "ထပ်မံကြိုးစားပါ",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "မိတ္တူကူးရန်",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "စကားဝှက် ဖြည့်ရန်",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "ပြဿနာ - ထုတ်လုပ်လိုက်သော စကားဝှက်သည် ခွင့်ပြုထားသည့်အရှည်ထက် ပိုနေသည်။",
@@ -203,13 +207,8 @@
         "message": "စကားဝှက် ထုတ်လုပ်ရန်",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "ထုတ်လုပ်လိုက်သော စကားဝှက်ကို လက်ခံမရရှိနိုင်ပါ။",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "KeePassXC လည်ပတ်နေပြီး ချိတ်ဆက်ထားသလား။",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "KeePassXC မှ အထောက်အထားများကို ဖြည့်ပါ",
@@ -346,6 +345,10 @@
     "fieldsNoPasswordField": {
         "message": "ပြဿနာ - စကားဝှက် အကွက် ရှာမတွေ့ပါ။",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Filling password to a plain text field is prevented.",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "ပြဿနာ - ပြောင်းလဲထားသော အထောက်အထားများကို မသိရှိနိုင်ပါ။",
