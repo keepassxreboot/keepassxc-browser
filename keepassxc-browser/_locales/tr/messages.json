@@ -147,9 +147,41 @@
         "message": "Belirtilen adres geçersiz.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Kalıcı anahtarlar desteklenmiyor.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "KeePassXC ile bağlantı kurulmamış.",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "Parola oluşturucu simgesi",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Oluşturulan parola",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Sonraki parola alanı da doldurulsun",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Parola oluşturucu",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Oluştur",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Yeniden dene",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Kopyala",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Parolayı doldur",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Hata: Oluşturulan parola izin verilen boyuttan daha uzun!",
@@ -203,13 +207,8 @@
         "message": "Parola oluştur",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Oluşturulan parola alınamadı.",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "KeePassXC çalışıyor mu ve bağlantı kurulmuş mu?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "KeePassXC ile kimlik doğrulama bilgilerini doldur",
@@ -347,6 +346,10 @@
         "message": "Hata: Parola alanı bulunamadı",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Parolanın bir düz metin alanına yazılması engellenir.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
         "message": "Hata: Değiştirilmiş kimlik doğrulama bilgileri algılanamadı.",
         "description": "Message shown when trying to save credentials that haven't changed."
@@ -388,7 +391,7 @@
         "description": "Button text for adding Username-only option."
     },
     "popupAllowIframeButton": {
-        "message": "Allow Cross-Origin iframes for the site",
+        "message": "Sitede başka siteden iframe bulunabilsin",
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
@@ -452,7 +455,7 @@
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "popupIframeDetected": {
-        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "message": "Kaynağı başka bir sitede bulunan bir iframe algılandı. Adres Sitede başka siteden iframe bulunabilsin  seçeneği etkinleştirilerek site ayarlarına eklensin mi?",
         "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
@@ -712,7 +715,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries.",
+        "message": "Tekil tek kullanımlık parola kayıtları otomatik olarak doldurulsun",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
@@ -860,7 +863,7 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "message": "Yalnızca tek bir kayıt alınırsa KeePassXC-Browser otomatik olarak tek kullanımlık parolayı doldurabilsin.",
         "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -1024,7 +1027,7 @@
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
-        "message": "Allow Cross-Origin iframes",
+        "message": "Başka siteden iframe bulunabilsin",
         "description": "Allow iframes column text."
   },
     "optionsColumnDelete": {
@@ -1148,7 +1151,7 @@
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
-        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "message": "Kaynağı başka sitede bulunan iframe kullanımına izin vermek, kimlik doğrulama bilgilerinin başka bir etki alanındaki iframe içinden alınmasını sağlar. Bu kullanımdan doğacak riskler size aittir.",
         "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {

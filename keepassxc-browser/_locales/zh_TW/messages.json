@@ -147,9 +147,41 @@
         "message": "提供的網址無效。",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Key 不受支援。",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "未連接至 KeePassXC。",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "密碼產生器圖示",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "產生密碼",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "同時填入下一個密碼欄位",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "密碼產生器",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "產生",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "再試一次",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "複製",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "填入密碼",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "錯誤：\n產生的密碼超出允許的長度！\n已將其截斷已符合長度。\n\n請記住新的密碼！",
@@ -203,13 +207,8 @@
         "message": "產生密碼",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "無法接收產生的密碼。<br />KeePassXC 正在執行嗎？",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "KeePassXC 是否正在執行並已連線？",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "此版本 KeePassXC 不支援運行密碼產生器。請將 KeePassXC 更新到新版本。"
     },
     "usernameFieldText": {
         "message": "從 KeePassXC 填入憑證",
@@ -346,6 +345,10 @@
     "fieldsNoPasswordField": {
         "message": "錯誤：\n無法找到密碼欄位。",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "已阻止向純文字欄位填入密碼。",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "錯誤：\n無法找到修改後的憑證。",
@@ -1268,7 +1271,7 @@
         "description": "Enabled Passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "啟用 Web Authentication 支援",
+        "message": "啟用對網路身份驗證 (WebAuthn) 的支援",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {

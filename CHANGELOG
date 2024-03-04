@@ -1,3 +1,13 @@
+1.9.0 (2024-03-04)
+=========================
+- Add support for Manifest V3 with Chromium-based browsers [#1723]
+- Add support for showing number of credentials in the extension icon [#2125]
+- Fix calculation of icon offset (Thanks tinyoverflow) [#2120]
+- Fix for disallowing fill to plain text fields [#2107]
+- Fix clearing username field if an entry has no username set [#2106]
+- Refactor Passkeys implementation [#2121] [#2114]
+- Remove internal password generator [#1966]
+
 1.8.12 (2024-01-28)
 =========================
 - Add support for TLD check and allowing Cross-Origin iframes option [#2079]

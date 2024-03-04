@@ -147,9 +147,41 @@
         "message": "Παρέχεται μη έγκυρη διεύθυνση URL.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Τα Resident Keys δεν υποστηρίζονται.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Δεν είναι συνδεδεμένο με το KeePassXC.",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "Εικονίδιο γεννήτριας κωδικών πρόσβασης",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Δημιουργήθηκε κωδικός πρόσβασης",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Επίσης, συμπληρώστε το επόμενο πεδίο κωδικού πρόσβασης",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Γεννήτρια Κωδικών Πρόσβασης",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Δημιουργία",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Προσπάθησε ξανά",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Αντιγραφή",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Συμπληρώστε τον κωδικό πρόσβασης",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Σφάλμα: Ο κωδικός πρόσβασης που δημιουργήθηκε είναι μεγαλύτερος από το επιτρεπόμενο μήκος!",
@@ -203,13 +207,8 @@
         "message": "Δημιουργία κωδικού πρόσβασης",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Λειτουργεί και συνδέεται το KeePassXC;",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Το KeePassXC εκτελείται και είναι συνδεδεμένο;",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "Συμπληρώστε διαπιστευτήρια από το KeePassXC",
@@ -346,6 +345,10 @@
     "fieldsNoPasswordField": {
         "message": "Σφάλμα: Δεν είναι δυνατή η εύρεση ενός πεδίου κωδικού πρόσβασης.",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Αποτρέπεται η συμπλήρωση κωδικού πρόσβασης σε πεδίο απλού κειμένου.",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "Σφάλμα: Δεν ήταν δυνατός ο εντοπισμός αλλαγμένων διαπιστευτηρίων.",

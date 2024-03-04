@@ -24,11 +24,11 @@
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Ver gerador de palavras-passe",
+        "message": "Mostrar gerador de palavras-passe",
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Preencher atributo",
+        "message": "Preencher atributo...",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -36,7 +36,7 @@
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Detetada autenticação HTTP com múltiplas credenciais. Clique no ícone da extensão para escolher as corretas.",
+        "message": "Detetada autenticação HTTP com várias credenciais. Clique no ícone da extensão para escolher a correta.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -60,7 +60,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Não é possível ligar a KeePassXC. Verifique se a integração do browser está ativada nas definições do KeePassXC.",
+        "message": "Não foi possível ligar a KeePassXC. Verifique se a integração com o navegador está ativada nas definições KeePassXC.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -72,7 +72,7 @@
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
-        "message": "Falha ao associar o KeePassXC. Tente novamente.",
+        "message": "Falha ao associar KeePassXC. Tente novamente.",
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
@@ -92,7 +92,7 @@
         "description": "Incorrect action."
     },
     "errorMessageEmptyMessage": {
-        "message": "Recebida uma mensagem vazia",
+        "message": "Recebeu uma mensagem vazia",
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
@@ -104,7 +104,7 @@
         "description": "No logins found."
     },
     "errorMessagePaswordLengthExceeded": {
-        "message": "A palavra-passe preenchida é maior do que o comprimento máximo permitido do campo",
+        "message": "A palavra-passe preenchida é maior do que o comprimento máximo permitido pelo campo",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
@@ -116,11 +116,11 @@
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "Nenhum UUID válido foi fornecido",
+        "message": "Nenhum UUID válido foi indicado",
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "Recusado o acesso a todas as entradas",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -128,15 +128,15 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credencial excluída ",
+        "message": "Credencial eliminada",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "O pedido de chave-mestra foi cancelada",
+        "message": "O pedido de chave-mestra foi cancelado",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Verificação inválida do utilizador",
+        "message": "Verificação de utilizador inválida",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
@@ -144,48 +144,52 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "Indicou um URL inválido",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Não existe uma ligação a KeePassXC",
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
-        "message": "Ícone do gerador de palavra-passe",
+        "message": "Ícone do gerador de palavras-passe",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Palavra-passe gerada",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Preencher também o campo seguinte da palavra-passe",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Gerador de palavras-passe",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Gerar",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Tentar novamente",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Copiar",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Preencher palavra-passe",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Erro: a palavra-passe gerada tem um tamanho superior ao permitido!",
@@ -203,13 +207,8 @@
         "message": "Gerar palavra-passe",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "A palavra-passe gerada não foi recebida",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "KeePassXC está a ser executado e conectado?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "Preencher credenciais com KeePassXC",
@@ -288,7 +287,7 @@
         "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
-        "message": "Confirme a sua seleção ou escolha mais campos como campos de cadeia.",
+        "message": "Confirme a sua seleção ou escolha mais campos como campos de cadeia",
         "description": "Confirm a selection text when choosing custom login fields which contains string fields."
     },
     "defineKeyboardText": {
@@ -347,6 +346,10 @@
         "message": "Erro: não foi possível detetar o campo de palavra-passe",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Filling password to a plain text field is prevented.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
         "message": "Erro: não foi possível detetar as credenciais alteradas",
         "description": "Message shown when trying to save credentials that haven't changed."
@@ -364,11 +367,11 @@
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
-        "message": "Ligar",
+        "message": "Conectar",
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": "Ligar novamente",
+        "message": "Conectar novamente",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
@@ -388,7 +391,7 @@
         "description": "Button text for adding Username-only option."
     },
     "popupAllowIframeButton": {
-        "message": "Allow Cross-Origin iframes for the site",
+        "message": "Permitir molduras \"Cross-Origin\" para este site",
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
@@ -428,19 +431,19 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser não foi configurado. Prima o botão de ligação para emparelhar com KeePassXC.",
+        "message": "KeePassXC-Browser não foi configurado. Prima o botão Conectar para emparelhar com KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
-        "message": "KeePassXC-Browser foi desligado de KeePassXC.",
+        "message": "KeePassXC-Browser foi desconectado de KeePassXC.",
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Prima o botão 'Ligar novamente' para estabelecer uma nova ligação",
+        "message": "Prima o botão 'Conectar novamente' para estabelecer uma nova ligação",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "KeePassXC-Browser ainda não se conectou a KeePassXC, mas foi configurado utilizando o identificador: $1",
+        "message": "KeePassXC-Browser ainda não se conectou a KeePassXC, mas foi configurado com o identificador: $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
@@ -452,7 +455,7 @@
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "popupIframeDetected": {
-        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "message": "Detetada uma moldura \"Cross-Origin\". Adicionar URL às preferências do site com a opção 'Permitir molduras \"Cross-Origin\" para este site' ativada?",
         "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
@@ -532,11 +535,11 @@
         "description": "Text for login credentials quick filter."
     },
     "popupAuthText": {
-        "message": "Selecione as informações de autenticação com as quais gostaria de se autenticar",
+        "message": "Selecione as informações de autenticação para a autenticação",
         "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
     },
     "popupMultiplePasswordFields": {
-        "message": "Foi encontrado mais do que um campo de palavra-passe nesta página. Clique com o botão direito do rato num dos campos de palavra-passe e escolha um dos seguintes:",
+        "message": "Encontrado mais do que um campo de palavra-passe nesta página. Clique com o botão direito do rato num dos campos e escolha um dos seguintes:",
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupURL": {
@@ -560,7 +563,7 @@
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Não voltar a perguntar para esta página",
+        "message": "Não voltar a perguntar para este site",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -624,7 +627,7 @@
         "description": "Save button text."
     },
     "optionsButtonConnect": {
-        "message": "Ligar",
+        "message": "Conectar",
         "description": "Connect button text."
     },
     "optionsButtonRemove": {
@@ -660,7 +663,7 @@
         "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
-        "message": "Grupo padrão para guardar novas palavras-passe:",
+        "message": "Grupo padrão para as novas palavras-passe:",
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
@@ -668,7 +671,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Perguntar sempre o local para guardar novas credenciais",
+        "message": "Perguntar sempre para guardar novas credenciais",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
@@ -712,7 +715,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries.",
+        "message": "Preencher automaticamente as entradas TOTP únicas",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
@@ -752,7 +755,7 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Número máximo de encaminhamentos até que o 'banner' desapareça. O valor padrão é 3 e infinito é o máximo.",
+        "message": "Número máximo de reencaminhamentos até que o 'banner' desapareça. O valor padrão é 3 e infinito é o máximo.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
@@ -768,7 +771,7 @@
         "description": "Debug logging help text."
     },
     "optionsRadioText": {
-        "message": "Procurar por atualizações do KeePassXC:",
+        "message": "Procurar por atualizações KeePassXC:",
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
@@ -792,7 +795,7 @@
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Ordenar credenciais correspondentes por",
+        "message": "Ordenar credenciais coincidentes por",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
@@ -860,7 +863,7 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "message": "Permitir que KeePassXC-Browser preencha os campos TOTP se receber apenas uma entrada.",
         "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -944,15 +947,15 @@
         "description": "Recommended setting text."
     },
     "optionsShortcutsSuccess": {
-        "message": "O atalho para $1foi alterado com sucesso",
+        "message": "O atalho para $1 foi alterado com sucesso",
         "description": "Message for successful keyboard shortcut change."
     },
     "optionsShortcutsInfo": {
-        "message": "O atalho para $1foi reposto",
+        "message": "O atalho para $1 foi reposto",
         "description": "Info message for changing keyboard shortcuts."
     },
     "optionsShortcutsDanger": {
-        "message": "Erro: o atalho para $1não foi alterado",
+        "message": "Erro: o atalho para $1 não foi alterado",
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
@@ -1024,7 +1027,7 @@
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
-        "message": "Allow Cross-Origin iframes",
+        "message": "Permitir molduras \"Cross-Origin\"",
         "description": "Allow iframes column text."
   },
     "optionsColumnDelete": {
@@ -1148,7 +1151,7 @@
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
-        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "message": "A permissão de molduras \"Cross-Origin\" ativa a obtenção de credenciais para 'iframes' de outros domínios. Utilize por sua conta e risco.",
         "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {

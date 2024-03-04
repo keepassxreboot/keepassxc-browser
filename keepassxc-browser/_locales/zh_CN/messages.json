@@ -147,9 +147,41 @@
         "message": "提供的 URL 无效。",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "不支持常驻密钥（Resident Key）。",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "未连接到 KeePassXC。",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "密码生成器图标",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "生成的密码",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "同时填充下一个密码字段",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "密码生成器",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "生成",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "重试",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "复制",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "填充密码",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "错误：生成的密码超过了允许的长度！",
@@ -203,13 +207,8 @@
         "message": "生成密码",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "无法收到生成的密码。",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "KeePassXC 是否正在运行并已连接？",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "此版本 KeePassXC 不支持运行密码生成器。请将 KeePassXC 更新到新版本。"
     },
     "usernameFieldText": {
         "message": "从 KeePassXC 填充凭据",
@@ -346,6 +345,10 @@
     "fieldsNoPasswordField": {
         "message": "错误：无法找到密码字段。",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "已阻止向纯文本字段填充密码。",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "错误：未检测到凭据变更。",

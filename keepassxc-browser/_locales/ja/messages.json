@@ -147,9 +147,41 @@
         "message": "Invalid URL provided.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys are not supported.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "KeePassXC に接続していません。",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "パスワード生成アイコン",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "生成されたパスワード",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "次のパスワードフィールドにも入力する",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "パスワード生成",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "生成",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "再試行",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "コピー",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "パスワードを入力",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "エラー: 許可された長さよりも長いパスワードが生成されました！",
@@ -203,13 +207,8 @@
         "message": "パスワード生成",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "生成されたパスワードを受信できません。",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "KeePassXC の実行と接続を確認してください。",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "KeePassXC から資格情報を入力",
@@ -346,6 +345,10 @@
     "fieldsNoPasswordField": {
         "message": "エラー: パスワードフィールドを見つけられません。",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Filling password to a plain text field is prevented.",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "エラー: 変更された資格情報を検出できませんでした。",

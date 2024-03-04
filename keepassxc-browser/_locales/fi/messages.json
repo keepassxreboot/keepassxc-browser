@@ -147,9 +147,41 @@
         "message": "Sivuston URL ei ole validi.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident-avaimet eivät ole tuettuja.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Alkuperä on tyhjä tai ei sallittu.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Verkkotunnus ei ole validi.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Alkuperä tai RP ID eivät ole samat.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "Tuettuja algoritmeja ei annettu.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Odotetaan ajastimen loppumista.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Tuntematon Passkeys-virhe.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge on lyhyempi kuin vaadittu pituus.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id on eri mittainen kuin vaadittu.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Konteksti ei ole turvallinen.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Ei yhteyttä KeePassXC:hen.",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "Salasalageneraattorin ikoni",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Luotu salasana",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Täytä myös seuraava salasanakenttä",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Salasanageneraattori",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Luo",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Yritä uudelleen",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Kopioi",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Täytä salasana",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Virhe:\nLuotu salasana on sallittua pidempi!\nSalasana on leikattu sopivan pituiseksi.\n\nMuista uusi salasana!",
@@ -203,13 +207,8 @@
         "message": "Luo salasana",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Salasanaa ei voitu luoda.<br />Onko KeePassXC käynnissä?",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Onko KeePassXC käynnissä ja yhdistetty?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Salasanageneraattori ei ole tuettu tässä KeePassXC-versiossa. Ole hyvä ja päivitä KeePassXC uudempaan versioon."
     },
     "usernameFieldText": {
         "message": "Täytä kirjautumistiedot KeePassXC:stä",
@@ -346,6 +345,10 @@
     "fieldsNoPasswordField": {
         "message": "Virhe:\nSalasanakenttää ei löytynyt.",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Salasanan täyttö selkotekstiseen kenttään on estetty.",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "Virhe: Muuttuneita kirjautumistietoja ei havaittu.",

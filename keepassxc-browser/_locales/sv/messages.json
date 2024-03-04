@@ -147,9 +147,41 @@
         "message": "Ogiltig URL tillhandahållen.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Residentnycklar stöds ej.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Inte ansluten till KeePassXC.",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "Password generator icon",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Genererat lösenord",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Fyll även i nästa lösenords-fält",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Lösenords-generator",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Generera",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Försök igen",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Kopiera",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Ange lösenord",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Fel:\nDet genererade lösenordet är längre än den tillåtna längden!\nDet har kortats ned för att passa längden.\n\nVänligen kom ihåg det nya lösenordet!",
@@ -203,13 +207,8 @@
         "message": "Generera lösenord",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Kan inte ta emot det genererade lösenordet.<br />Är KeePassXC igångstartat?",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Är KeePassXC startat och anslutet?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Lösenordsgeneratorn stöds inte i denna KeePassCX-version. Du behöver uppgradera KeePassXC till en nyare version."
     },
     "usernameFieldText": {
         "message": "Ange autentiseringsuppgifter från KeePassXC",
@@ -346,6 +345,10 @@
     "fieldsNoPasswordField": {
         "message": "Fel:\nKan inte hitta ett lösenordsfält.",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Det går inte att fylla i lösenord i ett oformaterat textfält.",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "Fel:\nKan inte hitta ändrade autentiseringsuppgifter.",

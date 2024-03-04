@@ -147,9 +147,41 @@
         "message": "Ongeldige URL opgegeven.",
         "description": "Invalid URL provided."
     },
-    "errorMessagePasskeysResidentKeyNotSupported": {
-        "message": "Resident Keys worden niet ondersteund.",
-        "description": "Resident Keys are not supported."
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown Passkeys error.",
+        "description": "Unknown Passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Niet verbonden met KeePassXC.",
@@ -158,34 +190,6 @@
     "passwordGeneratorIcon": {
         "message": "Pictogram voor wachtwoordgenerator",
         "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Gegenereerd wachtwoord",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Volgend wachtwoordveld ook invullen",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Wachtwoordgenerator",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Genereren",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Opnieuw proberen",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Kopiëren",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Wachtwoord invullen",
-        "description": "Fill a password in password generator."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Fout: Het gegenereerde wachtwoord is langer dan is toegestaan!",
@@ -203,13 +207,8 @@
         "message": "Wachtwoord genereren",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Gegenereerd wachtwoord niet ontvangen.",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Is KeePassXC actief en verbonden?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Het starten van de wachtwoordgenerator wordt niet ondersteund in deze KeePassXC-versie. Werk KeePassXC bij naar een nieuwere versie."
     },
     "usernameFieldText": {
         "message": "Inloggegevens invullen vanuit KeePassXC",
@@ -347,6 +346,10 @@
         "message": "Fout: geen wachtwoordveld aangetroffen.",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Wachtwoordinvoer bij veld met platte tekst voorkomen.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
         "message": "Fout: geen gewijzigde inloggegevens gedetecteerd.",
         "description": "Message shown when trying to save credentials that haven't changed."
@@ -388,7 +391,7 @@
         "description": "Button text for adding Username-only option."
     },
     "popupAllowIframeButton": {
-        "message": "Niet-oorspronkelijke iframes toestaan voor de website",
+        "message": "Cross-origin iframes toestaan voor de website",
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
@@ -452,7 +455,7 @@
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "popupIframeDetected": {
-        "message": "Een niet-oorspronkelijk iframe is gedetecteerd. De URL toevoegen aan sitevoorkeuren met de optie Niet-oorspronkelijke iframes toestaan ingeschakeld?",
+        "message": "Een cross-origin iframe is gedetecteerd. De URL toevoegen aan sitevoorkeuren met de optie 'Cross-origin iframes toestaan' ingeschakeld?",
         "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
@@ -1024,7 +1027,7 @@
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
-        "message": "Niet-oorspronkelijke iframes toestaan",
+        "message": "Cross-origin iframes toestaan",
         "description": "Allow iframes column text."
   },
     "optionsColumnDelete": {
@@ -1148,7 +1151,7 @@
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
-        "message": "Het toestaan van Niet-oorspronkelijke iframes stelt iframes van een ander domein in staat om inloggegevens te achterhalen. Gebruik op eigen risico.",
+        "message": "Het toestaan van cross-origin iframes stelt iframes van een ander domein in staat om inloggegevens te achterhalen. Gebruik op eigen risico.",
         "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
