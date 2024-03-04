@@ -1,5 +1,9 @@
 'use strict';
 
+const PASSKEYS_NO_LOGINS_FOUND = 15;
+const PASSKEYS_WAIT_FOR_LIFETIMER = 21;
+const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 30;
+
 // Contains already called method names
 const _called = {};
 _called.automaticRedetectCompleted = false;
@@ -806,35 +810,70 @@ kpxc.enablePasskeys = function() {
     passkeys.src = browser.runtime.getURL('content/passkeys.js');
     document.documentElement.appendChild(passkeys);
 
+    const startTimer = function(timeout) {
+        return setTimeout(() => {
+            throw new DOMException('lifetimeTimer has expired', 'NotAllowedError');
+        }, timeout);
+    };
+
+    const stopTimer = function(lifetimeTimer) {
+        if (lifetimeTimer) {
+            clearTimeout(lifetimeTimer);
+        }
+    };
+
+    const letTimerRunOut = function (errorCode) {
+        return (
+            errorCode === PASSKEYS_WAIT_FOR_LIFETIMER ||
+            errorCode === PASSKEYS_CREDENTIAL_IS_EXCLUDED ||
+            errorCode === PASSKEYS_NO_LOGINS_FOUND
+        );
+    };
+
+    const sendResponse = async function(command, publicKey, callback) {
+        const lifetimeTimer = startTimer(publicKey?.timeout);
+
+        const ret = await sendMessage(command, [ publicKey, window.location.origin ]);
+        if (ret) {
+            let errorMessage;
+            if (ret.response && ret.response.errorCode) {
+                errorMessage = await sendMessage('get_error_message', ret.response.errorCode);
+                // Do not create a notification for this error
+                if (ret?.response?.errorCode !== PASSKEYS_WAIT_FOR_LIFETIMER) {
+                    kpxcUI.createNotification('error', errorMessage);
+                }
+
+                if (letTimerRunOut(ret?.response?.errorCode)) {
+                    return;
+                }
+            }
+
+            const responsePublicKey = callback(ret.response);
+            kpxcPasskeysUtils.sendPasskeysResponse(responsePublicKey, ret.response?.errorCode, errorMessage);
+            stopTimer(lifetimeTimer);
+        }
+    };
+
     document.addEventListener('kpxc-passkeys-request', async (ev) => {
+        if (!window.isSecureContext) {
+            kpxcUI.createNotification('error', tr('errorMessagePasskeysContextIsNotSecure'));
+            return;
+        }
+
         if (ev.detail.action === 'passkeys_create') {
-            const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(ev.detail.publicKey);
+            const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(
+                ev.detail.publicKey,
+                ev.detail.sameOriginWithAncestors,
+            );
             logDebug('publicKey', publicKey);
-
-            const ret = await sendMessage('passkeys_register', [ publicKey, window.location.origin ]);
-            if (ret) {
-                if (ret.response && ret.response.errorCode) {
-                    const errorMessage = await sendMessage('get_error_message', ret.response.errorCode);
-                    kpxcUI.createNotification('error', errorMessage);
-                }
-
-                const responsePublicKey = kpxcPasskeysUtils.parsePublicKeyCredential(ret.response);
-                kpxcPasskeysUtils.sendPasskeysResponse(responsePublicKey);
-            }
+            await sendResponse('passkeys_register', publicKey, kpxcPasskeysUtils.parsePublicKeyCredential);
         } else if (ev.detail.action === 'passkeys_get') {
-            const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(ev.detail.publicKey);
+            const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(
+                ev.detail.publicKey,
+                ev.detail.sameOriginWithAncestors,
+            );
             logDebug('publicKey', publicKey);
-
-            const ret = await sendMessage('passkeys_get', [ publicKey, window.location.origin ]);
-            if (ret) {
-                if (ret.response && ret.response.errorCode) {
-                    const errorMessage = await sendMessage('get_error_message', ret.response.errorCode);
-                    kpxcUI.createNotification('error', errorMessage);
-                }
-
-                const responsePublicKey = kpxcPasskeysUtils.parseGetPublicKeyCredential(ret.response);
-                kpxcPasskeysUtils.sendPasskeysResponse(responsePublicKey);
-            }
+            await sendResponse('passkeys_get', publicKey, kpxcPasskeysUtils.parseGetPublicKeyCredential);
         }
     });
 };
