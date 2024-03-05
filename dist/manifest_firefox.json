@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.9.0",
+    "version": "1.9.0.1",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {
@@ -142,8 +142,9 @@
     ],
     "permissions": [
         "activeTab",
-        "contextMenus",
         "clipboardWrite",
+        "contextMenus",
+        "cookies",
         "nativeMessaging",
         "notifications",
         "storage",
