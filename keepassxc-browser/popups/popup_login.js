@@ -39,7 +39,7 @@
     }
 
     if (logins.length > 1) {
-        document.getElementById('filter-block').style = '';
+        $('#filter-block').show();
         const filter = document.getElementById('login-filter');
         filter.addEventListener('keyup', (e) => {
             if (!e.isTrusted) {
