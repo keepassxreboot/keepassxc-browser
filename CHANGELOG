@@ -1,3 +1,8 @@
+1.9.0.1 (2024-03-06)
+=========================
+- Add cookies permission to missing manifest file [#2134]
+- Fix showing filter logins input in the extension popup [#2137]
+
 1.9.0 (2024-03-04)
 =========================
 - Add support for Manifest V3 with Chromium-based browsers [#1723]

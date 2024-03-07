@@ -13,19 +13,33 @@ const BROWSERS = {
     'Chromium': 'manifest_chromium.json',
 };
 
-async function getDestinationFilename(manifest) {
+const getVersion = async () => {
     const manifestFile = await fs.readFile(DEFAULT, { encoding: 'utf8' });
     const data = JSON.parse(manifestFile);
+    return data['version'];
+};
+
+const setVersion = async (manifest, version) => {
+    const manifestFile = await fs.readFile(manifest, { encoding: 'utf8' });
+    const data = JSON.parse(manifestFile);
+
+    data['version'] = version;
+    if (Object.hasOwn(data, 'version_name')) {
+        data['version_name'] = version;
+    }
+    fs.writeFile(manifest, JSON.stringify(data, null, 4));
+};
+
+const getDestinationFilename = async (manifest, version) => {
     const browser = manifest.substring(manifest.indexOf('_') + 1, manifest.indexOf('.'));
+    return `keepassxc-browser_${version}_${browser}.zip`;
+};
 
-    return `keepassxc-browser_${data['version']}_${browser}.zip`;
-}
-
-async function updateTranslations() {
+const updateTranslations = async () => {
     console.log('Pulling translations from Transifex, please wait...');
     const { stdout } = await exec('tx pull -af');
     console.log(stdout);
-}
+};
 
 (async() => {
     const params = process.argv.slice(2);
@@ -34,11 +48,13 @@ async function updateTranslations() {
     }
 
     await fs.copyFile(`${DEST}/manifest.json`, `./${DEFAULT}`);
+    const version = await getVersion();
 
     for (const browser in BROWSERS) {
         console.log(`KeePassXC-Browser: Creating extension package for ${browser}`);
 
-        const fileName = await getDestinationFilename(BROWSERS[browser]);
+        const fileName = await getDestinationFilename(BROWSERS[browser], version);
+        setVersion(`./dist/${BROWSERS[browser]}`, version);
         await fs.copyFile(`./dist/${BROWSERS[browser]}`, `${DEST}/manifest.json`);
 
         if (await fs.exists(fileName)) {
