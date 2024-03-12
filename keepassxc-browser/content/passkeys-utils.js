@@ -56,7 +56,7 @@ const kpxcPasskeysUtils = {};
 // Sends response from KeePassXC back to the injected script
 kpxcPasskeysUtils.sendPasskeysResponse = function(publicKey, errorCode, errorMessage) {
     const response = errorCode
-        ? { errorCode: errorCode, errorMessage: errorMessage }
+        ? { errorCode: errorCode, errorMessage: errorMessage, fallback: kpxc.settings.passkeysFallback }
         : { publicKey: publicKey, fallback: kpxc.settings.passkeysFallback };
     const details = isFirefox() ? cloneInto(response, document.defaultView) : response;
     document.dispatchEvent(new CustomEvent('kpxc-passkeys-response', { detail: details }));

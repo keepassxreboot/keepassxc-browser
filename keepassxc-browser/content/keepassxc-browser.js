@@ -843,7 +843,9 @@ kpxc.enablePasskeys = function() {
                     kpxcUI.createNotification('error', errorMessage);
                 }
 
-                if (letTimerRunOut(ret?.response?.errorCode)) {
+                if (kpxc.settings.passkeysFallback) {
+                    kpxcPasskeysUtils.sendPasskeysResponse(undefined, ret.response?.errorCode, errorMessage);
+                } else if (letTimerRunOut(ret?.response?.errorCode)) {
                     return;
                 }
             }
