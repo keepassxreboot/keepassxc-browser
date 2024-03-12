@@ -94,6 +94,11 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
         publicKey.user.id = arrayBufferToBase64(pkOptions.user.id);
         publicKey.user.name = pkOptions.user.name;
 
+        // TODO: Disable after fixed in KeePassXC side
+        if (!publicKey.rp.id) {
+            publicKey.rp.id = window.location.hostname;
+        }
+
         return publicKey;
     } catch (e) {
         console.log(e);
@@ -125,12 +130,17 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOrigin
 
                 const arr = {
                     id: arrayBufferToBase64(cred.id),
-                    transports: transports,
+                    transports: [ ...transports, 'internal' ],
                     type: cred.type
                 };
 
                 publicKey.allowCredentials.push(arr);
             }
+        }
+
+        // TODO: Disable after fixed in KeePassXC side
+        if (!publicKey.rpId) {
+            publicKey.rpId = window.location.hostname;
         }
 
         return publicKey;
