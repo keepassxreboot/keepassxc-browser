@@ -46,7 +46,7 @@ const isSameOriginWithAncestors = function() {
 };
 
 // Throws errors to a correct exceptions
-const handleError = function(errorCode, errorMessage) {
+const throwError = function(errorCode, errorMessage) {
     if ((!errorCode && !errorMessage) || errorCode === PASSKEYS_REQUEST_CANCELED) {
         // No error or canceled by user. Stop the timer but throw no exception. Fallback with be called instead.
         return;
@@ -103,7 +103,9 @@ const handleError = function(errorCode, errorMessage) {
             });
 
             if (!response.publicKey) {
-                handleError(response?.errorCode, response?.errorMessage);
+                if (!response.fallback) {
+                    throwError(response?.errorCode, response?.errorMessage);
+                }
                 return response.fallback ? originalCredentials.create(options) : null;
             }
 
@@ -129,7 +131,9 @@ const handleError = function(errorCode, errorMessage) {
             });
 
             if (!response.publicKey) {
-                handleError(response?.errorCode, response?.errorMessage);
+                if (!response.fallback) {
+                    throwError(response?.errorCode, response?.errorMessage);
+                }
                 return response.fallback ? originalCredentials.get(options) : null;
             }
 
