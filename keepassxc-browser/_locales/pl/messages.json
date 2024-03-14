@@ -168,8 +168,8 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Nieznany błąd klucza dostępu.",
-        "description": "Unknown Passkeys error."
+        "message": "Nieznany błąd kluczy dostępu.",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
         "message": "Wyzwanie jest krótsze niż wymagana długość minimalna.",
@@ -1268,15 +1268,15 @@
     },
     "optionsPasskeysEnable": {
         "message": "Włącz klucze dostępu",
-        "description": "Enabled Passkeys option text."
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Włącz obsługę Web Authentication.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Włącz rezerwowe klucze dostępu",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Włącz zastępstwo kluczy dostępu",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
         "message": "Po włączeniu nieudane lub anulowane żądanie do KeePassXC spowoduje wygenerowanie wewnętrznego żądania kluczy dostępu przeglądarki. Jeśli ta opcja jest wyłączona, wymagane jest połączenie z KeePassXC, a anulowanie żądania nie powiedzie się. Wartość domyślna: włączone.",

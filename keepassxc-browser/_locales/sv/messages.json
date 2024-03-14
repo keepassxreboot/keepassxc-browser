@@ -169,7 +169,7 @@
     },
     "errorMessagePasskeysUnknownError": {
         "message": "Okänt passnyckelfel.",
-        "description": "Unknown Passkeys error."
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
         "message": "Utmaningen är kortare än den minimilängd som krävs.",
@@ -1268,15 +1268,15 @@
     },
     "optionsPasskeysEnable": {
         "message": "Aktivera passnycklar",
-        "description": "Enabled Passkeys option text."
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Aktivera stöd för webbautentisering.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Aktivera reservnycklar",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Aktivera reservpassnycklar",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
         "message": "När detta är aktiverat kommer en misslyckad eller avbruten begäran till KeePassXC att utlösa webbläsarens egen interna passnyckelbegäran. Om det är inaktiverat krävs anslutning till KeePassXC och en avbruten begäran kommer att misslyckas. Standard: Aktiverat.",
