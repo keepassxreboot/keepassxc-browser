@@ -148,39 +148,39 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "Η προέλευση είναι κενή ή μη επιτρεπτή.",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
+      "message": "Ο αποτελεσματικός τομέας δεν είναι έγκυρος τομέας.",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
+      "message": "Η προέλευση και το RP ID δεν ταιριάζουν.",
       "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
+      "message": "Δεν παρέχονται υποστηριζόμενοι αλγόριθμοι.",
       "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "Περιμένετε να λήξει ο χρονοδιακόπτης.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown Passkeys error.",
-        "description": "Unknown Passkeys error."
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "Η πρόκληση είναι μικρότερη από το ελάχιστο απαιτούμενο μήκος.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "Το user.id δεν αντιστοιχεί στο απαιτούμενο μήκος.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "Ο περιβάλλοντος χώρος δεν είναι ασφαλής.",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
@@ -208,7 +208,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "Η εκκίνηση της γεννήτριας κωδικών πρόσβασης δεν υποστηρίζεται σε αυτήν την έκδοση του KeePassXC. Παρακαλούμε ενημερώστε το KeePassXC σε μια νεότερη έκδοση."
     },
     "usernameFieldText": {
         "message": "Συμπληρώστε διαπιστευτήρια από το KeePassXC",
@@ -1267,19 +1267,19 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Ενεργοποίηση Passkeys",
-        "description": "Enabled Passkeys option text."
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Ενεργοποιήστε την υποστήριξη για έλεγχο ταυτότητας Web.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Ενεργοποίηση εναλλακτικών Passkeys",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Όταν είναι ενεργοποιημένο, ένα αίτημα που απέτυχε ή ακυρώθηκε προς το KeePassXC θα ενεργοποιήσει το εσωτερικό αίτημα Passkeys του προγράμματος περιήγησης. Εάν είναι απενεργοποιημένο, απαιτείται σύνδεση με το KeePassXC και το ακυρωμένο αίτημα θα αποτύχει. Προεπιλογή: ενεργοποιημένο.",
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

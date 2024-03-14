@@ -148,39 +148,39 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "Ursprung ist leer oder nicht erlaubt.",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
+      "message": "Tatsächliche Domain ist keine gültige Domain.",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
+      "message": "Ursprung und RP-ID stimmen nicht überein.",
       "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
+      "message": "Es wurden keine unterstützten Algorithmen bereitgestellt.",
       "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "Warten, bis der Timer abgelaufen ist.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown Passkeys error.",
-        "description": "Unknown Passkeys error."
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "Challenge ist kürzer als die erforderliche Mindestlänge.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "user.id entspricht nicht der erforderlichen Länge.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "Kontext ist nicht sicher.",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
@@ -208,7 +208,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "Das Starten des Passwortgenerators wird in dieser KeePassXC-Version nicht unterstützt. Bitte aktualisieren Sie KeePassXC auf eine neuere Version."
     },
     "usernameFieldText": {
         "message": "Anmeldedaten aus KeePassXC ausfüllen",
@@ -347,7 +347,7 @@
         "description": "Message shown when no password fields are found."
     },
     "fieldsPasswordFillNotAccepted": {
-        "message": "Filling password to a plain text field is prevented.",
+        "message": "Das Eintragen des Passworts in ein Klartextfeld wird verhindert.",
         "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
@@ -1267,19 +1267,19 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Passkeys aktivieren",
-        "description": "Enabled Passkeys option text."
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Unterstützung für Web-Authentifizierung aktivieren",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Passkeys-Fallback aktivieren",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Wenn aktiviert, werden missglückte oder abgebrochene Abfragen an KeePassXC die browsereigene Passkeys-Abfrage veranlassen. Wenn deaktiviert, ist die Verbindung mit KeePassXC erforderlich und abgebrochene Abfragen werden fehlschlagen. Voreinstellung: aktiviert.",
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

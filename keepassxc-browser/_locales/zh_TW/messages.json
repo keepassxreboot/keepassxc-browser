@@ -152,7 +152,7 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "有效域名是無效的域名。",
+      "message": "Effective Domain 不是有效的域名。",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
@@ -169,10 +169,10 @@
     },
     "errorMessagePasskeysUnknownError": {
         "message": "未知的通行密鑰錯誤。",
-        "description": "Unknown Passkeys error."
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "挑戰不滿足所需最小長度。",
+        "message": "挑戰短於所需最小長度。",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
@@ -1268,7 +1268,7 @@
     },
     "optionsPasskeysEnable": {
         "message": "啟用通行密鑰",
-        "description": "Enabled Passkeys option text."
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "啟用對網路身份驗證 (WebAuthn) 的支援",
@@ -1276,10 +1276,10 @@
     },
     "optionsPasskeysEnableFallback": {
         "message": "啟用通行密鑰備案",
-        "description": "Enabled Passkeys fallback option text."
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "若啟用此項，向 KeePassXC 的請求一旦失敗或被取消，將觸發瀏覽器自身的通行密鑰請求。若停用此項，與 KeePassXC 的連接為必須，請求被取消則視為失敗。預設為啟用。",
+        "message": "啟用時，如果對 KeePassXC 的請求失敗或被取消，將觸發瀏覽器自身的內置通行密鑰請求。如果停用，則必須與 KeePassXC 建立連接，並將被取消的請求視為失敗。預設為啟用。",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

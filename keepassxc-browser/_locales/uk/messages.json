@@ -168,8 +168,8 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown Passkeys error.",
-        "description": "Unknown Passkeys error."
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
         "message": "Challenge is shorter than required minimum length.",
@@ -1267,19 +1267,19 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Увімкнути Passkey-ключі",
-        "description": "Enabled Passkeys option text."
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Увімкнути підтримку Web Authentication.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Увімкнути Passkey-ключі через резервний механізм браузера",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Якщо увімкнено, тоді невдалий або скасований запит до KeePassXC викличе запит Passkey-ключа через внутрішній механізм у браузері. Якщо вимкнено, тоді необхідне підключення до KeePassXC, і скасований запит буде невдалим. За замовчуванням: увімкнено.",
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

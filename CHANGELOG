@@ -1,3 +1,8 @@
+1.9.0.2 (2024-03-14)
+=========================
+- Add temporary exceptions for passkeys handling [#2141]
+- Fix forwarding to fallback on passkey errors [#2143]
+
 1.9.0.1 (2024-03-06)
 =========================
 - Add cookies permission to missing manifest file [#2134]

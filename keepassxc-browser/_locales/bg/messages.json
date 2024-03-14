@@ -168,8 +168,8 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Неочаквана грешка на Passkey.",
-        "description": "Unknown Passkeys error."
+        "message": "Неочаквана грешка на Passkeys.",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
         "message": "Предизвикването е по-късо от изискваната минимална дължина.",
@@ -1268,7 +1268,7 @@
     },
     "optionsPasskeysEnable": {
         "message": "Включване на Passkeys",
-        "description": "Enabled Passkeys option text."
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Поддръжане на Web Authentication.",
@@ -1276,10 +1276,10 @@
     },
     "optionsPasskeysEnableFallback": {
         "message": "Резервен вариант на Passkeys",
-        "description": "Enabled Passkeys fallback option text."
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Когато е отметнато, грешна или отказана заявка към KeePassXC ще задейства вградената в четеца заявка към Passkeys. Ако не е отметнато, връзка към KeePassXC е задължителна и отказаната заявка ще води до грешка. По подразбиране: отметнато.",
+        "message": "Когато е отметнато, грешна или отказана заявка към KeePassXC ще задейства вградената в четеца заявка за Passkeys. Ако не е отметнато, връзка към KeePassXC е задължителна и отказаната заявка ще води до грешка. По подразбиране: отметнато.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
@@ -1291,7 +1291,7 @@
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
-        "message": "Вашият избор ще бъде автоматично пратен",
+        "message": "Изборът ви ще бъде автоматично изпратен",
         "description": "Message shown at the bottom of autocomplete menu."
     },
     "lockDatabase": {

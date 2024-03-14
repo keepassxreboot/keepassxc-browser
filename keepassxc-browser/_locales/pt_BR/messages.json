@@ -168,8 +168,8 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown Passkeys error.",
-        "description": "Unknown Passkeys error."
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
         "message": "Challenge is shorter than required minimum length.",
@@ -1267,19 +1267,19 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Ativar Passkeys",
-        "description": "Enabled Passkeys option text."
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Ative o suporte para autenticação na web.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Ativar a retirada dos Passkeys",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Quando ativado, uma solicitação com problemas ou que foi cancelada ao KeePassXC acionará a solicitação interna do Passkeys do próprio navegador. Se desativada, a conexão com o KeePassXC é necessária e a solicitação cancelada falhará. Padrão: ativado.",
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

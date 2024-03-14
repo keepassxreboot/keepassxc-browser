@@ -152,7 +152,7 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "有效域名是无效的域名。",
+      "message": "Effective Domain 不是有效的域名。",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
@@ -168,11 +168,11 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "未知 Passkey 错误。",
-        "description": "Unknown Passkeys error."
+        "message": "未知通行密钥错误。",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "挑战不满足所需最小长度。",
+        "message": "挑战短于所需最小长度。",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
@@ -1268,7 +1268,7 @@
     },
     "optionsPasskeysEnable": {
         "message": "启用通行密钥",
-        "description": "Enabled Passkeys option text."
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "启用对 Web 身份认证的支持。",
@@ -1276,7 +1276,7 @@
     },
     "optionsPasskeysEnableFallback": {
         "message": "启用通行密钥备用方案",
-        "description": "Enabled Passkeys fallback option text."
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
         "message": "启用时，如果对 KeePassXC 的请求失败或被取消，将触发浏览器自身的内置通行密钥请求。如果禁用，则必须与 KeePassXC 建立连接，并且被取消的请求将视为失败。默认为启用。",

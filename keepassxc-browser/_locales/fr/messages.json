@@ -132,7 +132,7 @@
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Demande de mot de passé abandonnée.",
+        "message": "Demande de passkeys abandonnée.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -148,39 +148,39 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "L’origine est vide ou non autorisée",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
+      "message": "Le domaine effectif n’est pas un domaine valide.",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
+      "message": "L’origine et RP ID ne correspondent pas",
       "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
+      "message": "Des algorithmes non supportés ont été ajoutés.",
       "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "Attente de l’expiration",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown Passkeys error.",
-        "description": "Unknown Passkeys error."
+        "message": "Erreur inconnue de passkeys",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "Le challenge est plus court que celui requis par la taille minimum",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "user.id ne correspond pas la longueur requise.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "Le contexte n’est pas sécurisé",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
@@ -208,7 +208,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "Lancer le générateur de mot de passe n’est pas supporté dans cette version de KeePassXC. Veuillez mettre à jour KeePassXC vers une nouvelle version."
     },
     "usernameFieldText": {
         "message": "Remplir les identifiants à partir de KeePassXC",
@@ -347,7 +347,7 @@
         "description": "Message shown when no password fields are found."
     },
     "fieldsPasswordFillNotAccepted": {
-        "message": "Filling password to a plain text field is prevented.",
+        "message": "Le remplissage de mot de passe vers un champ de saisie plain/text est empêchée.",
         "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
@@ -1139,7 +1139,7 @@
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Si un site est ignoré complètement (<em>Désactiver toutes les fonctions</em> est sélectionnée), l’extension ne fera rien si lors de l’accès au site.",
+        "message": "Si un site est ignoré complètement (<em>Désactiver toutes les fonctions</em> est sélectionnée), l’extension ne fera rien lors de l’accès au site.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
@@ -1147,7 +1147,7 @@
         "description": "Site preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "La détection de champs de saisie accrue est type de détection dynamique plus précis. Cependant, cela peut affecter les performances. À utiliser avec parcimonie.",
+        "message": "La détection de champs de saisie accrue est un type de détection dynamique plus précis. Cependant, cela peut affecter les performances. À utiliser avec parcimonie.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
@@ -1195,7 +1195,7 @@
         "description": "About page link to GitHub."
     },
     "optionsAboutExtensionVersion": {
-        "message": "KeePassXC-Browser version : $1",
+        "message": "Version de KeePassXC-Browser : $1",
         "description": "About page text of extension version."
     },
     "optionsAboutKeePassXCVersion": {
@@ -1207,7 +1207,7 @@
         "description": "About page text of contributors."
     },
     "optionsAboutLicenses": {
-        "message": "Licenses",
+        "message": "Licences",
         "description": "About page text of licenses."
     },
     "optionsAboutReportBugs": {
@@ -1215,7 +1215,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Créer une nouvelle édition sur GitHub",
+        "message": "Créer un nouveau besoin sur GitHub",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
@@ -1263,27 +1263,27 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Mots de passe",
+        "message": "Passkeys",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Activer les mots de passe",
-        "description": "Enabled Passkeys option text."
+        "message": "Activer les passkeys",
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
-        "message": "Activer l'authentification HTTP.",
+        "message": "Activer l'authentification Webauthn.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Autoriser des mots de passé de secours",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Activer les mécanismes de secours des passkeys",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Si activé, le mot de passe du navigateur sera utilisé en cas d'échec de requête vers KeePassXC. Si désactivé, la connexion avec KeePassXC reste nécessaire et toute requête infructueuse se soldera par un échec. Activé par défaut.",
+        "message": "Quand activé, une requête échouée ou annulée vers KeePassXC va déclencher le processus interne de passkeys du navigateur. Si désactivé, la connexion à KeePassXC est requise et les requêtes annulées vont échouer. Défaut: activé.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
-        "message": "Opens a new tab",
+        "message": "Ouvrir un nouvel onglet",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {

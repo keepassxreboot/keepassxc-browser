@@ -168,8 +168,8 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Tuntematon Passkeys-virhe.",
-        "description": "Unknown Passkeys error."
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
         "message": "Challenge on lyhyempi kuin vaadittu pituus.",
@@ -1267,19 +1267,19 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Ota käyttöön Passkeyt",
-        "description": "Enabled Passkeys option text."
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
         "message": "Ota käyttöön turvallinen verkkotodennus.",
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Tue Passkeyn perääntymistä",
-        "description": "Enabled Passkeys fallback option text."
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Kun aktivoitu, epäonnistunut tai peruutettu pyyntö KeePassXC:lle ohjaa selaimen omaan Passkeys-pyyntöön. Mikäli asetus on pois päältä, yhteys KeePassXC:hen on vaadittu, ja peruutettu pyyntö epäonnistuu suoraan. Oletus: aktivoitu.",
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
