@@ -122,8 +122,12 @@ kpxcPasswordGenerator.fill = function(elem, password) {
 
     if (elem.getAttribute('maxlength')) {
         if (password.length > elem.getAttribute('maxlength')) {
-            const message = tr('passwordGeneratorErrorTooLong') + '\r\n'
-                            + tr('passwordGeneratorErrorTooLongCut') + '\r\n' + tr('passwordGeneratorErrorTooLongRemember');
+            const message =
+                tr('passwordGeneratorErrorTooLong') +
+                '\r\n' +
+                tr('passwordGeneratorErrorTooLongCut') +
+                '\r\n' +
+                tr('passwordGeneratorErrorTooLongRemember');
             message.style.whiteSpace = 'pre';
             kpxcUI.createNotification('error', message);
             return;
@@ -137,14 +141,13 @@ kpxcPasswordGenerator.fill = function(elem, password) {
     // Fill next password field if found
     if (kpxc.inputs.length > 0) {
         const index = kpxc.inputs.indexOf(elem);
-        const nextField = kpxc.inputs[index + 1];
+        const next = kpxc.inputs[index + 1];
 
-        kpxcPasswordDialog.nextField =
-            nextField && nextField.getLowerCaseAttribute('type') === 'password' ? nextField : undefined;
-        if (kpxcPasswordDialog.nextField) {
-            kpxcPasswordDialog.nextField.value = password;
-            kpxcPasswordDialog.nextField.dispatchEvent(new Event('input', { bubbles: true }));
-            kpxcPasswordDialog.nextField.dispatchEvent(new Event('change', { bubbles: true }));
+        const nextField = next && next.getLowerCaseAttribute('type') === 'password' ? next : undefined;
+        if (nextField) {
+            nextField.value = password;
+            nextField.dispatchEvent(new Event('input', { bubbles: true }));
+            nextField.dispatchEvent(new Event('change', { bubbles: true }));
         }
     }
 };
