@@ -370,7 +370,7 @@ kpxc.initLoginPopup = function() {
 
         return {
             title: title,
-            group: group,
+            group: credential.group,
             visibleLogin: visibleLogin,
             login: credential.login,
             loginId: loginId,
@@ -433,6 +433,8 @@ kpxc.initLoginPopup = function() {
         popupLoginItems.push({ text: l.text, uuid: l.uuid });
 
         kpxcUserAutocomplete.elements.push({
+            group: showGroupNameInAutocomplete ? l.group : null,
+            title: l.title,
             label: l.text,
             value: l.login,
             uuid: l.uuid,

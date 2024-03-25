@@ -63,9 +63,14 @@ class Autocomplete {
             return;
         }
         this.deselectItem();
-        e.target.classList.add('kpxcAutocomplete-active');
+
+        const itemContainer = e.target.classList.contains('kpxcAutocomplete-item')
+            ? e.target
+            : e.target.parentElement;
+
+        itemContainer.classList.add('kpxcAutocomplete-item--active');
         const items = this.getAllItems();
-        this.index = Array.from(items).indexOf(e.target);
+        this.index = Array.from(items).indexOf(itemContainer);
     }
 
     async showList(inputField) {
@@ -92,6 +97,11 @@ class Autocomplete {
             styleSheet.addEventListener('load', () => this.wrapper.style.display = 'block');
             this.container = kpxcUI.createElement('div', 'kpxcAutocomplete-container', { 'id': 'kpxcAutocomplete-container' });
 
+            // Apply compact mode class
+            if (kpxc.settings.useCompactMode) {
+                this.container.classList.add('kpxcAutocomplete-container--compact');
+            }
+
             this.shadowRoot = this.wrapper.attachShadow({ mode: 'closed' });
             this.shadowRoot.append(colorStyleSheet);
             this.shadowRoot.append(styleSheet);
@@ -111,7 +121,7 @@ class Autocomplete {
         }
 
         this.updateList();
-        this.container.style.display = 'block';
+        this.container.classList.add('kpxcAutocomplete-container--visible');
         this.updatePosition();
     }
 
@@ -131,9 +141,7 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
-            const item = document.createElement('div');
-            item.textContent = c.label;
-            item.setAttribute('uuid', c.uuid);
+            const item = this.generateItem(c);
 
             const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
             item.append(itemInput);
@@ -141,7 +149,6 @@ class Autocomplete {
 
             // These events prevent the double hover effect if both keyboard and mouse are used
             item.addEventListener('mousemove', e => this.mouseMove(e));
-
             item.addEventListener('mousedown', e => e.stopPropagation());
             item.addEventListener('mouseup', e => e.stopPropagation());
 
@@ -157,19 +164,55 @@ class Autocomplete {
         this.selectItem();
     }
 
+    generateItem(credential) {
+        // Create the DOM element for the list item wrapper.
+        const item = document.createElement('div');
+        item.classList.add('kpxcAutocomplete-item');
+        item.setAttribute('uuid', credential.uuid);
+
+        // Create the DOM element for the list item header.
+        const itemHeader = document.createElement('div');
+        itemHeader.classList.add('kpxcAutocomplete-item__header');
+
+        // Create the DOM element for showing the group only when the group name is available.
+        if (credential.group !== null) {
+            const itemGroup = document.createElement('div');
+            itemGroup.classList.add('kpxcAutocomplete-item__group');
+            itemGroup.textContent = credential.group;
+            itemHeader.append(itemGroup);
+        }
+
+        // Create the DOM element for showing the credentials name.
+        const itemLabel = document.createElement('div');
+        itemLabel.classList.add('kpxcAutocomplete-item__label');
+        itemLabel.textContent = credential.title;
+        itemHeader.append(itemLabel);
+
+        // Append the header to the list item.
+        item.append(itemHeader);
+
+        // Create the DOM element for showing the credentials username field.
+        const itemValue = document.createElement('div');
+        itemValue.classList.add('kpxcAutocomplete-item__value');
+        itemValue.textContent = credential.value;
+        item.append(itemValue);
+
+        return item;
+    }
+
     selectItem() {
         this.deselectItem();
         const items = this.getAllItems();
         const item = items[this.index];
         if (item !== undefined) {
-            item.classList.add('kpxcAutocomplete-active');
+            item.classList.add('kpxcAutocomplete-item--active');
             item.scrollIntoView({ block: 'nearest' });
         }
     }
 
     deselectItem() {
-        const items = this.list.querySelectorAll('div.kpxcAutocomplete-active');
-        items.forEach(item => item.classList.remove('kpxcAutocomplete-active'));
+        const items = this.list.querySelectorAll('div.kpxcAutocomplete-item--active');
+        items.forEach(item => item.classList.remove('kpxcAutocomplete-item--active'));
     }
 
     closeList() {
@@ -178,11 +221,11 @@ class Autocomplete {
             return;
         }
 
-        this.container.style.display = 'none';
+        this.container.classList.remove('kpxcAutocomplete-container--visible');
     }
 
     getAllItems() {
-        return this.list.getElementsByTagName('div');
+        return this.list.getElementsByClassName('kpxcAutocomplete-item');
     }
 
     /**
@@ -281,13 +324,8 @@ class Autocomplete {
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
         const menuOffset = (totalHeight + rect.y) > window.self.visualViewport.height ? totalHeight : 0;
-        if (menuOffset > 0) {
-            this.container.classList.add('kpxcAutocomplete-container-on-top');
-        } else {
-            this.container.classList.remove('kpxcAutocomplete-container-on-top');
-        }
 
-        const scrollTop = kpxcUI.getScrollTop();
+        const scrollTop = kpxcUI.getScrollTop() + 6;
         const scrollLeft = kpxcUI.getScrollLeft();
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
             this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + scrollTop + this.input.offsetHeight - menuOffset);
