@@ -143,6 +143,7 @@
         "cookies",
         "nativeMessaging",
         "notifications",
+        "offscreen",
         "storage",
         "tabs",
         "webNavigation",

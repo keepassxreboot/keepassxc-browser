@@ -89,7 +89,7 @@ browserAction.generateIconName = async function(iconType) {
     let style = 'colored';
     if (page.settings.useMonochromeToolbarIcon) {
         if (page.settings.colorTheme === 'system') {
-            style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            style = await retrieveColorScheme();
         } else {
             style = page.settings.colorTheme;
         }

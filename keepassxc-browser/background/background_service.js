@@ -10,6 +10,7 @@ try {
         'client.js',
         'keepass.js',
         'httpauth.js',
+        'offscreen.js',
         'browserAction.js',
         'page.js',
         'event.js',
