@@ -132,7 +132,7 @@
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Parola anahtarları isteği iptal edildi.",
+        "message": "Geçiş anahtarları isteği iptal edildi.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -148,39 +148,39 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "Kaynak boş ya da izin verilmiyor.",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
+      "message": "Etkin etki alanı geçerli bir etki alanı değil.",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
+      "message": "Kaynak ve RP kimliği aynı değil.",
       "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
+      "message": "Desteklenen bir algoritma belirtilmemiş.",
       "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "Zamanlayıcının sona ermesini bekleyin.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown passkeys error.",
+        "message": "Bilinmeyen geçiş anahtarı sorunu.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "Yanıt istenilen en az uzunluktan kısa.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "user.id istenilen uzunluğa uygun değil.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "Bağlam güvenli değil.",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
@@ -208,7 +208,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "Bu KeePassXC sürümünde şifre oluşturucunun başlatılması desteklenmiyor. Lütfen KeePassXC uygulamasının sürümünü güncelleyin."
     },
     "usernameFieldText": {
         "message": "KeePassXC ile kimlik doğrulama bilgilerini doldur",
@@ -1263,11 +1263,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Parola anahtarları",
+        "message": "Geçiş anahtarları",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable passkeys",
+        "message": "Geçiş anahtarları kullanılsın",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1275,11 +1275,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable passkeys fallback",
+        "message": "Varsayılan geçiş anahtarları kullanılsın",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Bu seçenek açılırsa, KeePassXC için yapılan başarısız ya da iptal edilen bir istek, tarayıcının kendi iç geçiş anahtarı isteğini tetikler. Kapatılırsa KeePassXC bağlantısının kurulması gereklidir ve iptal edilen istek başarısız olur. Varsayılan olarak açıktır.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

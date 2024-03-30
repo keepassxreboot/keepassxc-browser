@@ -1,3 +1,8 @@
+1.9.0.3 (2024-03-30)
+=========================
+- Fix incorrect minimum version with Firefox [#2161]
+- Passkeys: Fix compatibility with alg provided as string [#2161]
+
 1.9.0.2 (2024-03-14)
 =========================
 - Add temporary exceptions for passkeys handling [#2141]
