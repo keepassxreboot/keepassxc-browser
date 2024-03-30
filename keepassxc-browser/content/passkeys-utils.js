@@ -72,20 +72,30 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
         publicKey.authenticatorSelection = pkOptions?.authenticatorSelection;
         publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
         publicKey.extensions = pkOptions?.extensions;
-        publicKey.pubKeyCredParams = pkOptions?.pubKeyCredParams;
+
+        // Make sure integers are used for "alg". Set to reserved if not found.
+        // https://www.iana.org/assignments/cose/cose.xhtml#algorithms
+        publicKey.pubKeyCredParams = [];
+        if (pkOptions.pubKeyCredParams) {
+            for (const credParam of pkOptions.pubKeyCredParams) {
+                publicKey.pubKeyCredParams.push({
+                    type: credParam?.type,
+                    alg: credParam.alg ? Number(credParam.alg) : 0
+                });
+            }
+        }
+
         publicKey.rp = pkOptions?.rp;
         publicKey.timeout = getTimeout(publicKey?.authenticatorSelection?.userVerification, pkOptions?.timeout);
 
         publicKey.excludeCredentials = [];
         if (pkOptions.excludeCredentials && pkOptions.excludeCredentials.length > 0) {
             for (const cred of pkOptions.excludeCredentials) {
-                const arr = {
+                publicKey.excludeCredentials.push({
                     id: arrayBufferToBase64(cred.id),
                     transports: cred.transports,
                     type: cred.type
-                };
-
-                publicKey.excludeCredentials.push(arr);
+                });
             }
         }
 
