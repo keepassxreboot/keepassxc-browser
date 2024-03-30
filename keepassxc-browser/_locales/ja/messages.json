@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
+      "message": "すべてのエントリーへのアクセスが拒否されました。",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,11 +144,11 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "無効な URL が指定されました。",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "オリジンが空である、または許可されていません。",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
@@ -391,7 +391,7 @@
         "description": "Button text for adding Username-only option."
     },
     "popupAllowIframeButton": {
-        "message": "Allow Cross-Origin iframes for the site",
+        "message": "サイトのクロスオリジン iframe を許可する",
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
@@ -715,7 +715,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries.",
+        "message": "TOTP が単一のエントリーに自動入力する。",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
@@ -739,7 +739,7 @@
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon.",
+        "message": "モノクロのツールバーアイコンを使用",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
@@ -759,7 +759,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials.",
+        "message": "HTTP Basic 認証の資格情報の入力を許可する",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -1027,7 +1027,7 @@
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
-        "message": "Allow Cross-Origin iframes",
+        "message": "クロスオリジン iframe を許可する",
         "description": "Allow iframes column text."
   },
     "optionsColumnDelete": {
@@ -1151,7 +1151,7 @@
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
-        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "message": "クロスオリジン iframe を許可すると、別のドメインからの iframe の資格情報が取得可能になります。自己責任で使用してください。",
         "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
@@ -1275,7 +1275,7 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable passkeys fallback",
+        "message": "パスキーのフォールバックを有効にする",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {

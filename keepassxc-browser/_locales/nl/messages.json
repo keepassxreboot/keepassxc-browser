@@ -168,7 +168,7 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown passkeys error.",
+        "message": "Onbekende passkeys-fout.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -1267,7 +1267,7 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable passkeys",
+        "message": "Passkeys inschakelen",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1275,11 +1275,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable passkeys fallback",
+        "message": "Passkey-terugval inschakelen",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Indien ingeschakeld, zal een mislukt of geannuleerd verzoek aan KeePassXC het eigen interne passkeys-verzoek van de browser activeren. Indien uitgeschakeld, is verbinding met KeePassXC vereist en mislukt het geannuleerde verzoek. Standaard: ingeschakeld.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

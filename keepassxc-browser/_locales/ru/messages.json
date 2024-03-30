@@ -132,7 +132,7 @@
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Запрос ключей доступа отменен.",
+        "message": "Запрос passkeys отменен.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -168,7 +168,7 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown passkeys error.",
+        "message": "Неизвестная ошибка passskeys.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -1263,11 +1263,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Ключи доступа",
+        "message": "Passkeys",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable passkeys",
+        "message": "Включить passkeys",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1275,11 +1275,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable passkeys fallback",
+        "message": "Включить возврат passkeys",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Если эта опция включена, то при неудачном или отмененном запросе к KeePassXC будет срабатывать собственный внутренний запрос passkeys. Если этот параметр отключен, то будет требоваться подключение к KeePassXC, и отмененный запрос не будет выполнен. По умолчанию: включено.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
