@@ -33,7 +33,13 @@ kpxc.url = null;
 // Add page to Site Preferences with a selected option enabled. Set from the popup.
 kpxc.addToSitePreferences = async function(optionName, addWildcard = false) {
     // Returns a predefined URL for certain sites
-    let site = trimURL(window.top.location.href);
+    let site;
+    try {
+        site = trimURL(window.top.location.href);
+    } catch (err) {
+        logDebug('Adding to Site Preferences denied from iframe.');
+        return;
+    }
 
     // Check if the site already exists -> update the current settings
     let siteExists = false;
