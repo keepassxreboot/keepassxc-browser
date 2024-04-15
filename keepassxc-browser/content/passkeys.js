@@ -15,6 +15,58 @@ const PASSKEYS_UNKNOWN_ERROR = 31;
 const PASSKEYS_INVALID_CHALLENGE = 32;
 const PASSKEYS_INVALID_USER_ID = 33;
 
+const stringToArrayBuffer = function(str) {
+    const arr = Uint8Array.from(str, c => c.charCodeAt(0));
+    return arr.buffer;
+};
+
+// From URL encoded base64 string to ArrayBuffer
+const base64ToArrayBuffer = function(str) {
+    return stringToArrayBuffer(window.atob(str?.replaceAll('-', '+').replaceAll('_', '/')));
+};
+
+// Wraps response to AuthenticatorAttestationResponse object
+const createAttestationResponse = function(publicKey) {
+    const response = {
+        attestationObject: base64ToArrayBuffer(publicKey.response.attestationObject),
+        clientDataJSON: base64ToArrayBuffer(publicKey.response.clientDataJSON),
+        getAuthenticatorData: () => base64ToArrayBuffer(publicKey.response?.authenticatorData),
+        getTransports: () => [ 'internal' ]
+    };
+
+    return Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
+};
+
+// Wraps response to AuthenticatorAssertionResponse object
+const createAssertionResponse = function(publicKey) {
+    const response = {
+        authenticatorData: base64ToArrayBuffer(publicKey.response?.authenticatorData),
+        clientDataJSON: base64ToArrayBuffer(publicKey.response?.clientDataJSON),
+        signature: base64ToArrayBuffer(publicKey.response?.signature),
+        userHandle: publicKey.response?.userHandle ? base64ToArrayBuffer(publicKey.response?.userHandle) : null
+    };
+
+    return Object.setPrototypeOf(response, AuthenticatorAssertionResponse.prototype);
+};
+
+// Wraps public key to PublicKeyCredential object
+const createPublicKeyCredential = function(publicKey) {
+    const authenticatorResponse = publicKey?.response?.attestationObject
+        ? createAttestationResponse(publicKey)
+        : createAssertionResponse(publicKey);
+    const publicKeyCredential = {
+        authenticatorAttachment: publicKey.authenticatorAttachment,
+        id: publicKey.id,
+        rawId: base64ToArrayBuffer(publicKey.id),
+        response: authenticatorResponse,
+        type: publicKey.type,
+        clientExtensionResults: () => publicKey?.response?.clientExtensionResults || {},
+        getClientExtensionResults: () => publicKey?.response?.clientExtensionResults || {}
+    };
+
+    return Object.setPrototypeOf(publicKeyCredential, PublicKeyCredential.prototype);
+};
+
 // Posts a message to extension's content script and waits for response
 const postMessageToExtension = function(request) {
     return new Promise((resolve, reject) => {
@@ -109,10 +161,7 @@ const throwError = function(errorCode, errorMessage) {
                 return response.fallback ? originalCredentials.create(options) : null;
             }
 
-            response.publicKey.getClientExtensionResults = () => {};
-            response.publicKey.clientExtensionResults = () => {};
-            response.publicKey.response.getTransports = () => [];
-            return response.publicKey;
+            return createPublicKeyCredential(response.publicKey);
         },
         async get(options) {
             if (!options.publicKey || options?.mediation === 'silent') {
@@ -137,9 +186,7 @@ const throwError = function(errorCode, errorMessage) {
                 return response.fallback ? originalCredentials.get(options) : null;
             }
 
-            response.publicKey.getClientExtensionResults = () => {};
-            response.publicKey.clientExtensionResults = () => {};
-            return response.publicKey;
+            return createPublicKeyCredential(response.publicKey);
         }
     };
 

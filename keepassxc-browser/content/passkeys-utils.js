@@ -4,16 +4,6 @@ const MINIMUM_TIMEOUT = 15000;
 const DEFAULT_TIMEOUT = 30000;
 const DISCOURAGED_TIMEOUT = 120000;
 
-const stringToArrayBuffer = function(str) {
-    const arr = Uint8Array.from(str, c => c.charCodeAt(0));
-    return arr.buffer;
-};
-
-// From URL encoded base64 string to ArrayBuffer
-const base64ToArrayBuffer = function(str) {
-    return stringToArrayBuffer(window.atob(str.replaceAll('-', '+').replaceAll('_', '/')));
-};
-
 // From ArrayBuffer to URL encoded base64 string
 const arrayBufferToBase64 = function(buf) {
     const str = [ ...new Uint8Array(buf) ].map(c => String.fromCharCode(c)).join('');
@@ -157,37 +147,4 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOrigin
     } catch (e) {
         console.log(e);
     }
-};
-
-// Parse register response back from base64 strings to ByteArrays
-kpxcPasskeysUtils.parsePublicKeyCredential = function(publicKeyCredential) {
-    if (!publicKeyCredential || !publicKeyCredential.type) {
-        return undefined;
-    }
-
-    publicKeyCredential.rawId = base64ToArrayBuffer(publicKeyCredential.id);
-    publicKeyCredential.response.attestationObject =
-        base64ToArrayBuffer(publicKeyCredential.response.attestationObject);
-    publicKeyCredential.response.clientDataJSON = base64ToArrayBuffer(publicKeyCredential.response.clientDataJSON);
-
-    return publicKeyCredential;
-};
-
-// Parse authentication response back from base64 strings to ByteArrays
-kpxcPasskeysUtils.parseGetPublicKeyCredential = function(publicKeyCredential) {
-    if (!publicKeyCredential || !publicKeyCredential.type) {
-        return undefined;
-    }
-
-    publicKeyCredential.rawId = base64ToArrayBuffer(publicKeyCredential.id);
-    publicKeyCredential.response.authenticatorData =
-        base64ToArrayBuffer(publicKeyCredential.response.authenticatorData);
-    publicKeyCredential.response.clientDataJSON = base64ToArrayBuffer(publicKeyCredential.response.clientDataJSON);
-    publicKeyCredential.response.signature = base64ToArrayBuffer(publicKeyCredential.response.signature);
-
-    if (publicKeyCredential.response.userHandle) {
-        publicKeyCredential.response.userHandle = base64ToArrayBuffer(publicKeyCredential.response.userHandle);
-    }
-
-    return publicKeyCredential;
 };
