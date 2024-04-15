@@ -111,7 +111,7 @@ const throwError = function(errorCode, errorMessage) {
 
             response.publicKey.getClientExtensionResults = () => {};
             response.publicKey.clientExtensionResults = () => {};
-            response.publicKey.response.getTransports = () => [];
+            response.publicKey.response.getTransports = () => [ 'internal' ];
             return response.publicKey;
         },
         async get(options) {
