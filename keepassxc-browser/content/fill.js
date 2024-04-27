@@ -348,10 +348,5 @@ const passwordFillIsAllowed = function(elem) {
         return true;
     }
 
-    if (elem?.getLowerCaseAttribute('type') !== 'password') {
-        kpxcUI.createNotification('warning', tr('fieldsPasswordFillNotAccepted'));
-        return false;
-    }
-
-    return true;
+    return elem?.getLowerCaseAttribute('type') === 'password';
 };
