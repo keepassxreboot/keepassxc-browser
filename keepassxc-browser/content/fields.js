@@ -391,17 +391,55 @@ kpxcFields.isVisible = function(elem) {
     if (elemStyle.visibility && (elemStyle.visibility === 'hidden' || elemStyle.visibility === 'collapse')
         || (opacity < MIN_OPACITY || opacity > MAX_OPACITY)
         || parseInt(elemStyle.width, 10) <= MIN_INPUT_FIELD_WIDTH_PX
-        || parseInt(elemStyle.height, 10) <= MIN_INPUT_FIELD_WIDTH_PX) {
+        || parseInt(elemStyle.height, 10) <= MIN_INPUT_FIELD_WIDTH_PX
+        // [FIX #2184] added by felix
+        || kpxcFields.isElementClipped(elem)
+    ) {
         return false;
     }
 
-    // Check for parent opacity
-    if (kpxcFields.traverseParents(elem, f => f.style.opacity === '0')) {
+    // [FIX #2184] added by felix
+    // Check for parent visibility
+    if (
+        kpxcFields.traverseParents(
+            elem,
+            (f) => {
+                const fStyle = getComputedStyle(f, null);
+                const isVisible = fStyle.visibility !== 'hidden' && fStyle.visibility !== 'collapse';
+                const isOpaqueEnough = Number(fStyle.opacity) >= MIN_OPACITY && Number(fStyle.opacity) <= MAX_OPACITY;
+                const hasValidSize = parseInt(fStyle.width, 10) > MIN_INPUT_FIELD_WIDTH_PX && parseInt(fStyle.height, 10) > MIN_INPUT_FIELD_WIDTH_PX;
+                const isNotClipped = !kpxcFields.isElementClipped(f);
+                return !(isVisible && isOpaqueEnough && hasValidSize && isNotClipped);
+            }
+        )
+    ) {
         return false;
     }
 
     return true;
 };
+
+// [FIX #2184] added by felix
+// TODO: This set is limited, but can cover many cases
+kpxcFields.isElementClipped = function(elem) {
+    var clipPathStyles = new Set([
+        "inset(50%)",
+        "inset(100%)",
+        "inset(100% 100% 0% 0%)",
+        "circle(0)",
+        "circle(0px)",
+        "circle(0px at 50% 50%)",
+        "polygon(0 0, 0 0, 0 0, 0 0)",
+        "polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px)"
+    ]);
+    var clipStyles = new Set([
+        "rect(0px, 0px, 0px, 0px)"
+    ]);
+    const eStyle = getComputedStyle(elem, 'null');
+    const clipPath = eStyle.clipPath;
+    const clip = eStyle.clip;
+    return clipPathStyles.has(clipPath) || clipStyles.has(clip);
+}
 
 kpxcFields.prepareId = function(id) {
     return (id + '').replace(kpxcFields.rcssescape, kpxcFields.fcssescape);
