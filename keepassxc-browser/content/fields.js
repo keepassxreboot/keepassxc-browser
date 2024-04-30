@@ -392,53 +392,61 @@ kpxcFields.isVisible = function(elem) {
         || (opacity < MIN_OPACITY || opacity > MAX_OPACITY)
         || parseInt(elemStyle.width, 10) <= MIN_INPUT_FIELD_WIDTH_PX
         || parseInt(elemStyle.height, 10) <= MIN_INPUT_FIELD_WIDTH_PX
-        // [FIX #2184] added by felix
-        || kpxcFields.isElementClipped(elem)
+        || kpxcFields.isElementClipped(elem) 
     ) {
         return false;
     }
 
-    // [FIX #2184] added by felix
     // Check for parent visibility
-    if (
-        kpxcFields.traverseParents(
-            elem,
-            (f) => {
-                const fStyle = getComputedStyle(f, null);
-                const isVisible = fStyle.visibility !== 'hidden' && fStyle.visibility !== 'collapse';
-                const isOpaqueEnough = Number(fStyle.opacity) >= MIN_OPACITY && Number(fStyle.opacity) <= MAX_OPACITY;
-                const hasValidSize = parseInt(fStyle.width, 10) > MIN_INPUT_FIELD_WIDTH_PX && parseInt(fStyle.height, 10) > MIN_INPUT_FIELD_WIDTH_PX;
-                const isNotClipped = !kpxcFields.isElementClipped(f);
-                return !(isVisible && isOpaqueEnough && hasValidSize && isNotClipped);
-            }
-        )
-    ) {
+    if (kpxcFields.traverseParents(elem, (f) => {
+        const fStyle = getComputedStyle(elem, null);
+        return !(
+            kpxcFields.isElementInvisible(elem, fStyle) &&
+            kpxcFields.isElementOpaqueEnough(elem, fStyle) &&
+            kpxcFields.isElementHasValidSize(elem, fStyle) &&
+            !kpxcFields.isElementClipped(f) 
+        )})) {
         return false;
     }
 
     return true;
 };
 
-// [FIX #2184] added by felix
-// TODO: This set is limited, but can cover many cases
-kpxcFields.isElementClipped = function(elem) {
-    var clipPathStyles = new Set([
-        "inset(50%)",
-        "inset(100%)",
-        "inset(100% 100% 0% 0%)",
-        "circle(0)",
-        "circle(0px)",
-        "circle(0px at 50% 50%)",
-        "polygon(0 0, 0 0, 0 0, 0 0)",
-        "polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px)"
-    ]);
-    var clipStyles = new Set([
-        "rect(0px, 0px, 0px, 0px)"
-    ]);
-    const eStyle = getComputedStyle(elem, 'null');
-    const clipPath = eStyle.clipPath;
+kpxcFields.isElementInvisible = function(elem, fStyle) {
+    if (fStyle === null) {
+        const fStyle = getComputedStyle(elem, null);
+    }
+    return fStyle.visibility !== 'hidden' && fStyle.visibility !== 'collapse';
+}
+
+kpxcFields.isElementOpaqueEnough = function(elem, fStyle) {
+    if (fStyle === null) {
+        const fStyle = getComputedStyle(f, null);
+    }
+    return Number(fStyle.opacity) >= MIN_OPACITY && Number(fStyle.opacity) <= MAX_OPACITY;
+}
+
+kpxcFields.isElementHasValidSize = function(elem, fStyle) {
+    if (fStyle === null) {
+        const fStyle = getComputedStyle(f, null);
+    }
+    return parseInt(fStyle.width, 10) > MIN_INPUT_FIELD_WIDTH_PX && parseInt(fStyle.height, 10) > MIN_INPUT_FIELD_WIDTH_PX;
+}
+
+kpxcFields.isElementClipped = function(elem, fStyle) {
+    const eStyle = getComputedStyle(elem, null);
     const clip = eStyle.clip;
-    return clipPathStyles.has(clipPath) || clipStyles.has(clip);
+    const clipPath = eStyle.clipPath;
+    // if the value is not auto, in this case, password are considered invisible
+    if (clip !== 'auto' && clip.trim() !== '') {
+        return true;
+    }
+    // if the value is not none, in this case, password are considered invisible
+    if (clipPath !== 'none' && clipPath.trim() !== '') {
+        return true;
+    }
+
+    return false;
 }
 
 kpxcFields.prepareId = function(id) {
