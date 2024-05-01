@@ -392,19 +392,19 @@ kpxcFields.isVisible = function(elem) {
         || (opacity < MIN_OPACITY || opacity > MAX_OPACITY)
         || parseInt(elemStyle.width, 10) <= MIN_INPUT_FIELD_WIDTH_PX
         || parseInt(elemStyle.height, 10) <= MIN_INPUT_FIELD_WIDTH_PX
-        || kpxcFields.isElementClipped(elem) 
+        || kpxcFields.isElementClipped(elemStyle) 
     ) {
         return false;
     }
 
     // Check for parent visibility
     if (kpxcFields.traverseParents(elem, (f) => {
-        const fStyle = getComputedStyle(elem, null);
+        const fStyle = getComputedStyle(f, null);
         return !(
-            kpxcFields.isElementInvisible(elem, fStyle) &&
-            kpxcFields.isElementOpaqueEnough(elem, fStyle) &&
-            kpxcFields.isElementHasValidSize(elem, fStyle) &&
-            !kpxcFields.isElementClipped(f) 
+            kpxcFields.isElementInvisible(fStyle) &&
+            kpxcFields.isElementOpaqueEnough(fStyle) &&
+            kpxcFields.isElementHasValidSize(fStyle) &&
+            !kpxcFields.isElementClipped(fStyle) 
         )})) {
         return false;
     }
@@ -412,40 +412,96 @@ kpxcFields.isVisible = function(elem) {
     return true;
 };
 
-kpxcFields.isElementInvisible = function(elem, fStyle) {
-    if (fStyle === null) {
-        const fStyle = getComputedStyle(elem, null);
-    }
+kpxcFields.isElementInvisible = function(fStyle) {
     return fStyle.visibility !== 'hidden' && fStyle.visibility !== 'collapse';
 }
 
-kpxcFields.isElementOpaqueEnough = function(elem, fStyle) {
-    if (fStyle === null) {
-        const fStyle = getComputedStyle(f, null);
-    }
+kpxcFields.isElementOpaqueEnough = function(fStyle) {
+
     return Number(fStyle.opacity) >= MIN_OPACITY && Number(fStyle.opacity) <= MAX_OPACITY;
 }
 
-kpxcFields.isElementHasValidSize = function(elem, fStyle) {
-    if (fStyle === null) {
-        const fStyle = getComputedStyle(f, null);
-    }
+kpxcFields.isElementHasValidSize = function(fStyle) {
     return parseInt(fStyle.width, 10) > MIN_INPUT_FIELD_WIDTH_PX && parseInt(fStyle.height, 10) > MIN_INPUT_FIELD_WIDTH_PX;
 }
 
-kpxcFields.isElementClipped = function(elem, fStyle) {
-    const eStyle = getComputedStyle(elem, null);
+kpxcFields.isElementClipped = function(eStyle) {
     const clip = eStyle.clip;
     const clipPath = eStyle.clipPath;
-    // if the value is not auto, in this case, password are considered invisible
-    if (clip !== 'auto' && clip.trim() !== '') {
-        return true;
-    }
-    // if the value is not none, in this case, password are considered invisible
-    if (clipPath !== 'none' && clipPath.trim() !== '') {
+    const position = eStyle.position;
+    const isClipped = kpxcFields.isClipped(clip, position);
+    const isClippedPath = kpxcFields.isClippedPath(clipPath);
+
+    if (isClipped || isClippedPath) {
         return true;
     }
 
+    return false;
+}
+
+kpxcFields.isClipped = function(clip, position) {
+    if (clip !== "auto" && clip.trim() !== "" && (position === "absolute" || position === "fixed")) {
+        const clipMatches = clip.match(/rect\((\d+)\s*\D*(\d+)\s*\D*(\d+)\s*\D*(\d+)\s*\D*\)/);
+        if (clipMatches) {
+            const [top, right, bottom, left] = clipMatches.slice(1, 5).map(Number);
+            if (Math.abs(top - bottom) <= 0 || Math.abs(right - left) <= 0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+kpxcFields.isClippedPath = function(clipPath) {
+    clipPath = clipPath.trim();
+    const ret = false;
+    if (clipPath.startsWith("inset")) {
+        ret = kpxcFields.isClippedPathInset(clipPath);
+    } else if (clipPath.startsWith("circle")) {
+        ret = kpxcFields.isClippedPathCircle(clipPath);
+    }
+    return ret;
+}
+
+kpxcFields.isClippedPathInset = function(clipPath) {
+    const insetRegex = /inset\(([^)]+?)(?:\sround.*)?\)/;
+    const percentRegex = /\b(0|(\d+\.?\d*%))/g; 
+    const insetMatch = clipPath.match(insetRegex);
+    if (insetMatch) {
+        const insetParams = insetMatch[1];
+        let percentValues = [];
+        let percentMatch;
+        let i = 0;
+        while ((percentMatch = percentRegex.exec(insetParams)) !== null) {
+            i += 1;
+            percentValues.push(percentMatch[1]);
+            if (i > 4) { return false; }
+        }
+        if (percentValues.length === 0) {
+            return false;
+        } else if (percentValues.length === 1) {
+            let number = parseInt(percentValues[0].replace(/\D/g, ''), 10);
+            if (number >= 50) { return true; }
+        } else if (percentValues.length === 2) {
+            const topBottom = parseInt(percentValues[0].replace(/\D/g, ''), 10);
+            const leftRight = parseInt(percentValues[1].replace(/\D/g, ''), 10);
+            if (topBottom >= 50 || leftRight >= 50) {return true;}
+        } else if (percentValues.length === 4) {
+            const top = parseInt(percentValues[0].replace(/\D/g, ''), 10);
+            const right = parseInt(percentValues[1].replace(/\D/g, ''), 10);
+            const bottom = parseInt(percentValues[2].replace(/\D/g, ''), 10);
+            const left = parseInt(percentValues[3].replace(/\D/g, ''), 10);
+            if ((top + bottom) >= 100 || (right + left) >= 50) {return true;}
+        }
+    }
+    return false;
+}
+
+kpxcFields.isClippedPathCircle = function(clipPath) {
+    const circleRegex = /circle\(\s*0[^)]*\)/i;
+    if (circleRegex.test(clipPath)) {
+        return true;
+    }
     return false;
 }
 
