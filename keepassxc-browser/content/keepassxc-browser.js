@@ -838,10 +838,7 @@ kpxc.enablePasskeys = function() {
             let errorMessage;
             if (ret.response && ret.response.errorCode) {
                 errorMessage = await sendMessage('get_error_message', ret.response.errorCode);
-                // Do not create a notification for this error
-                if (ret?.response?.errorCode !== PASSKEYS_WAIT_FOR_LIFETIMER) {
-                    kpxcUI.createNotification('error', errorMessage);
-                }
+                kpxcUI.createNotification('error', errorMessage);
 
                 if (kpxc.settings.passkeysFallback) {
                     kpxcPasskeysUtils.sendPasskeysResponse(undefined, ret.response?.errorCode, errorMessage);
@@ -850,8 +847,8 @@ kpxc.enablePasskeys = function() {
                 }
             }
 
-            const responsePublicKey = callback(ret.response);
-            kpxcPasskeysUtils.sendPasskeysResponse(responsePublicKey, ret.response?.errorCode, errorMessage);
+            logDebug('Passkey response', ret.response);
+            kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
             stopTimer(lifetimeTimer);
         }
     };
@@ -867,15 +864,15 @@ kpxc.enablePasskeys = function() {
                 ev.detail.publicKey,
                 ev.detail.sameOriginWithAncestors,
             );
-            logDebug('publicKey', publicKey);
-            await sendResponse('passkeys_register', publicKey, kpxcPasskeysUtils.parsePublicKeyCredential);
+            logDebug('Passkey request', publicKey);
+            await sendResponse('passkeys_register', publicKey);
         } else if (ev.detail.action === 'passkeys_get') {
             const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(
                 ev.detail.publicKey,
                 ev.detail.sameOriginWithAncestors,
             );
-            logDebug('publicKey', publicKey);
-            await sendResponse('passkeys_get', publicKey, kpxcPasskeysUtils.parseGetPublicKeyCredential);
+            logDebug('Passkey request', publicKey);
+            await sendResponse('passkeys_get', publicKey);
         }
     });
 };
