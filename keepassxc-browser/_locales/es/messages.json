@@ -32,7 +32,7 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "Solicitar auto-tecleo global",
+        "message": "Solicitar autoescritura global",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
@@ -148,39 +148,39 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "Origen está vacío o no permitido.",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
+      "message": "El dominio efectivo no es un dominio válido.",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
+      "message": "El origen y RP ID no coinciden.",
       "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
+      "message": "No se han proporcionado algoritmos soportados.",
       "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "Esperar a que el temporizador expire.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown passkeys error.",
+        "message": "Error desconocido de passkey.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "El desafío es más corto que la longitud mínima requerida.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "El user.id no coincide con la longitud requerida.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "El contexto no es seguro.",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
@@ -188,11 +188,11 @@
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
-        "message": "Icono del generador de contraseña",
+        "message": "Icono del generador de contraseñas",
         "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Error:\nLa contraseña generada es más larga que la longitud permitida!\nSe ha cortado para adaptarse a la longitud.\n\nPor favor, recuerde la nueva contraseña!",
+        "message": "Error:\nLa contraseña generada es más larga que la longitud permitida!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
@@ -208,7 +208,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "Iniciar el generador de contraseñas no está soportado en esta versión de KeePassXC. Actualice a una nueva versión de KeePassXC."
     },
     "usernameFieldText": {
         "message": "Rellenar credenciales de KeePassXC",
@@ -243,7 +243,7 @@
         "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
-        "message": "Descartar",
+        "message": "Omitir",
         "description": "Skip button text when choosing custom login fields."
     },
     "defineMore": {
@@ -295,7 +295,7 @@
         "description": "Help text when choosing custom login fields."
     },
     "defineChooseCustomLoginFieldText": {
-        "message": "Elija un Campo de Acceso Personalizado",
+        "message": "Campo de presentaciónElija un campo de presentación Personalizado",
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
@@ -691,7 +691,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Útil con páginas que usan ventanas emergentes o diálogos dinámicos. Deshabilitar la característica para reducir la carga de CPU en máquinas lentas. Cuando se deshabilitan las credenciales solo pueden ser insertadas usando atajos de teclado, el menú contextual o la extensión emergente.",
+        "message": "Útil con páginas que usan ventanas emergentes o diálogos dinámicos. Deshabilitar la característica para reducir la carga de CPU en máquinas lentas. Cuando se desactivan las credenciales solo pueden ser insertadas usando atajos de teclado, el menú contextual o la extensión emergente.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -719,11 +719,11 @@
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Activar auto-completar para los campos de nombre de usuario.",
+        "message": "Activar autocompletado para los campos de nombre de usuario.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Mostrar el nombre del grupo en el listado de auto-completado cuando las credenciales son de diferentes grupos.",
+        "message": "Mostrar el nombre del grupo en el listado de autocompletado cuando las credenciales son de diferentes grupos.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -739,7 +739,7 @@
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Usar barra de herramientas monocromo.",
+        "message": "Usar barra de icono monocromo.",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsSaveDomainOnly": {
@@ -863,7 +863,7 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
-        "message": "Permitir a KeePassXC-Browser rellenar los campos TOTP automáticamente en caso de recibir una sola entrada.",
+        "message": "Permitir a KeePassXC-Browser rellenar los campos TOTP automáticamente en caso de recibir un solo apunte.",
         "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -1267,7 +1267,7 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable passkeys",
+        "message": "Habilitar passkeys.",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1275,11 +1275,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable passkeys fallback",
+        "message": "Habilitar respaldo passkeys.",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Habilitado, una petición fallida o cancelada a KeePassXC provocará la petición del navegador a los propios passkeys internos. Deshabilitado, la conexión a KeePassXC es requerida y la petición cancelada fallará. Prederterminado: habilitado.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

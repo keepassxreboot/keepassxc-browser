@@ -148,39 +148,39 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "A origem está vazia ou não é permitida.",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
+      "message": "Domínio efetivo não é um domínio válido.",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
+      "message": "A origem e o ID de RP não coincidem.",
       "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
+      "message": "Não foi fornecido nenhum algoritmo suportado.",
       "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "Aguarde que o tempo expire.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown passkeys error.",
+        "message": "Erro desconhecido de chave-mestra.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "O desafio é menor que o comprimento mínimo exigido.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "user.id não corresponde ao comprimento necessário.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "O contexto não é seguro.",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
@@ -208,7 +208,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "O lançamento do gerador de palavra-passe não é compatível com esta versão do KeePassXC. Atualize o KeePassXC para uma versão mais recente."
     },
     "usernameFieldText": {
         "message": "Preencher credenciais com KeePassXC",
@@ -347,7 +347,7 @@
         "description": "Message shown when no password fields are found."
     },
     "fieldsPasswordFillNotAccepted": {
-        "message": "Filling password to a plain text field is prevented.",
+        "message": "É evitado o preenchimento de palavra-passes num campo de texto simples.",
         "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
@@ -1267,7 +1267,7 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable passkeys",
+        "message": "Ativar chaves-mestras",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1275,11 +1275,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable passkeys fallback",
+        "message": "Ativar alternativa para chave-mestra",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "Se ativado, um pedido efetuado a KeePassXC que tenha falhado ou sido cancelado, ativa um pedido de chave-mestra do navegador. Se desativado, é necessária uma ligação ao KeePassXC e, se não acontecer, irá falhar. A opção está ativada por omissão.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

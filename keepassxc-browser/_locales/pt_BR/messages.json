@@ -8,27 +8,27 @@
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
-        "message": "Preencher apenas senha",
+        "message": "Preencher apenas a senha",
         "description": "Context menu item for filling password."
     },
     "contextMenuFillTOTP": {
-        "message": "Preencher TOTP",
+        "message": "Preencher o TOTP",
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "Mostrar ícones do gerador de senhas",
+        "message": "Mostrar os ícones do gerador de senhas",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Salvar credenciais",
+        "message": "Salvar as credenciais",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Exibir gerador de senhas",
+        "message": "Exibir o gerador de senhas",
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Preencher atributo...",
+        "message": "Preencher o atributo...",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -52,7 +52,7 @@
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "Chave pública do cliente não recebida.",
+        "message": "A chave pública do cliente não foi recebida.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
@@ -64,11 +64,11 @@
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
-        "message": "Ação cancelada ou negada.",
+        "message": "A ação foi cancelada ou foi negada.",
         "description": "Action canceled or denied."
     },
     "errorMessageEncrypt": {
-        "message": "A criptografia de mensagens falhou. O KeePassXC está em execução?",
+        "message": "A criptografia das mensagens falhou. O KeePassXC está em execução?",
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
@@ -92,15 +92,15 @@
         "description": "Incorrect action."
     },
     "errorMessageEmptyMessage": {
-        "message": "Mensagem vazia recebida.",
+        "message": "Uma mensagem vazia foi recebida.",
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
-        "message": "Nenhuma URL fornecida.",
+        "message": "Nenhuma URL foi fornecida.",
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
-        "message": "Nenhum login encontrado.",
+        "message": "Nenhum login foi encontrado.",
         "description": "No logins found."
     },
     "errorMessagePaswordLengthExceeded": {
@@ -120,7 +120,7 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Acesso a todas as entradas negado.",
+      "message": "O acesso a todas as entradas foi negado.",
       "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -144,7 +144,7 @@
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "URL inválida fornecida.",
+        "message": "Uma URL inválida foi fornecida.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
@@ -152,7 +152,7 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Domínio efetivo não é um domínio válido.",
+      "message": "O domínio efetivo não é um domínio válido.",
       "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
@@ -168,7 +168,7 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Erro de chave de acesso desconhecida.",
+        "message": "Erro desconhecido da chave de acesso.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -184,7 +184,7 @@
         "description": "Context is not secure."
     },
     "errorNotConnected": {
-        "message": "Não conectado ao KeePassXC.",
+        "message": "Não está conectado ao KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorIcon": {
