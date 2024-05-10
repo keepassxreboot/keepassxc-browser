@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.9.0.4",
-    "version_name": "1.9.0.4",
+    "version": "1.9.0.5",
+    "version_name": "1.9.0.5",
     "minimum_chrome_version": "93",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
@@ -158,7 +158,6 @@
         "http://*/*",
         "https://api.github.com/"
     ],
-    "content_security_policy": "script-src 'self' 'sha256-o4BRBtP28Aof7Hm1dUp+wlMic7aYLfwjS3E5vTxthQU=' 'sha256-4nJ8uLezzRE3SiBFdkVN/uNwV9YTOGCqRXg6AvB5rCY='; object-src 'none'",
     "applications": {
         "gecko": {
             "id": "keepassxc-browser@keepassxc.org",
