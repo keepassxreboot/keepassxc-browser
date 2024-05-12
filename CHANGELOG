@@ -1,3 +1,7 @@
+1.9.0.5 (2024-05-12)
+=========================
+-  Remove obsolete hashed scripts from manifest [#2195]
+
 1.9.0.4 (2024-05-03)
 =========================
 - Passkeys: Wrap response to PublicKeyCredential [#2178]
