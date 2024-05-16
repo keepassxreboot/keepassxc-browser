@@ -806,6 +806,10 @@ kpxc.updateTOTPList = async function() {
 
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests
 kpxc.enablePasskeys = function() {
+    if (document?.documentElement?.ownerDocument?.contentType === 'text/xml') {
+        return;
+    }
+
     const passkeys = document.createElement('script');
     passkeys.src = browser.runtime.getURL('content/passkeys.js');
     document.documentElement.appendChild(passkeys);
