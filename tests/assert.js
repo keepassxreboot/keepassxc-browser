@@ -1,35 +1,23 @@
 'use strict';
 
 function kpxcAssert(func, expected, card, testName) {
-    if (func === expected) {
-        createResult(card, true, `Test passed: ${testName}`);
-        return;
-    }
-
-    createResult(card, false, `Test failed: ${testName}. Result is: ${func}`);
+    const result = func === expected;
+    createResult(card, result, `Test ${result ? 'passed' : 'failed'}: ${testName}. Result is: ${func}`);
 }
 
 function assertRegex(res, expected, card, testName) {
-    if ((res === null && expected === false)
-        || (res && (res.length > 0) === expected)
-        || (res === expected)) {
-        createResult(card, true, `Test passed: ${testName}`);
-        return;
-    }
-
-    createResult(card, false, `Test failed: ${testName}. Result is: ${res}`);
+    const result = (res === null && expected === false) || (res && (res.length > 0) === expected) || (res === expected);
+    createResult(card, result, `Test ${result ? 'passed' : 'failed'}: ${testName}. Result is: ${res}`);
 }
 
 async function assertInputFields(localDiv, expectedFieldCount, actionElementId) {
     const div = document.getElementById(localDiv);
+    if (!div) throw new Error(`Element with id ${localDiv} not found`);
     div.style.display = 'block';
 
-    // An user interaction is required before testing
     if (actionElementId) {
         const actionElement = div.querySelector(actionElementId);
-        if (actionElement) {
-            actionElement.click();
-        }
+        if (actionElement) actionElement.click();
     }
 
     const inputs = kpxcObserverHelper.getInputs(div);
@@ -40,6 +28,7 @@ async function assertInputFields(localDiv, expectedFieldCount, actionElementId) 
 
 async function assertPasswordChangeFields(localDiv, expectedNewPassword) {
     const div = document.getElementById(localDiv);
+    if (!div) throw new Error(`Element with id ${localDiv} not found`);
     div.style.display = 'block';
 
     const inputs = kpxcObserverHelper.getInputs(div, true);
@@ -54,7 +43,6 @@ async function assertTOTPField(classStr, properties, testName, expectedResult) {
     document.body.appendChild(input);
 
     const isValid = kpxcTOTPIcons.isValid(input);
-
     document.body.removeChild(input);
     kpxcAssert(isValid, expectedResult, Tests.TOTP_FIELDS, testName);
 }
@@ -64,7 +52,6 @@ async function assertSearchField(classStr, properties, testName, expectedResult)
     document.body.appendChild(input);
 
     const isSearchfield = kpxcFields.isSearchField(input);
-
     document.body.removeChild(input);
     kpxcAssert(isSearchfield, expectedResult, Tests.SEARCH_FIELDS, testName);
 }
@@ -76,7 +63,6 @@ async function assertSearchForm(properties, testName, expectedResult) {
     document.body.appendChild(form);
 
     const isSearchfield = kpxcFields.isSearchField(input);
-
     document.body.removeChild(form);
     kpxcAssert(isSearchfield, expectedResult, Tests.SEARCH_FIELDS, testName);
 }
