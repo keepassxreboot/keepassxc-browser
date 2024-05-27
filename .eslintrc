@@ -159,6 +159,7 @@
         "Pixels": true,
         "PREDEFINED_SITELIST": true,
         "RED_BUTTON": true,
+        "retrieveColorScheme": true,
         "sendMessage": true,
         "showNotification": true,
         "siteMatch": true,
