@@ -87,8 +87,8 @@ const siteMatch = function(site, url) {
         const siteUrl = new URL(site);
         const currentUrl = new URL(url);
 
-        // Match scheme and port
-        if (siteUrl.protocol !== currentUrl.protocol || siteUrl.port !== currentUrl.port) {
+        // Match scheme and port. If Site Preferences does not use a port, all ports are ignored.
+        if (siteUrl.protocol !== currentUrl.protocol || (siteUrl.port && siteUrl.port !== currentUrl.port)) {
             return false;
         }
 
