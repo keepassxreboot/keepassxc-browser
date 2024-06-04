@@ -22,6 +22,9 @@ const stringToArrayBuffer = function(str) {
 
 // From URL encoded base64 string to ArrayBuffer
 const base64ToArrayBuffer = function(str) {
+    if (!str) {
+        return new ArrayBuffer();
+    }
     return stringToArrayBuffer(window.atob(str?.replaceAll('-', '+').replaceAll('_', '/')));
 };
 
@@ -31,6 +34,7 @@ const createAttestationResponse = function(publicKey) {
         attestationObject: base64ToArrayBuffer(publicKey.response.attestationObject),
         clientDataJSON: base64ToArrayBuffer(publicKey.response.clientDataJSON),
         getAuthenticatorData: () => base64ToArrayBuffer(publicKey.response?.authenticatorData),
+        getPublicKeyAlgorithm: () => publicKey.response?.publicKeyAlgorithm,
         getTransports: () => [ 'internal' ]
     };
 
