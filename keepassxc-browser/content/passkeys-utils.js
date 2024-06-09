@@ -5,7 +5,7 @@ const DEFAULT_TIMEOUT = 30000;
 const DISCOURAGED_TIMEOUT = 120000;
 
 // From ArrayBuffer to URL encoded base64 string
-const arrayBufferToBase64 = function(buf) {
+const kpxcArrayBufferToBase64 = function(buf) {
     const str = [ ...new Uint8Array(buf) ].map(c => String.fromCharCode(c)).join('');
     return window.btoa(str).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
 };
@@ -60,7 +60,7 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
         const publicKey = {};
         publicKey.attestation = pkOptions?.attestation;
         publicKey.authenticatorSelection = pkOptions?.authenticatorSelection;
-        publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
+        publicKey.challenge = kpxcArrayBufferToBase64(pkOptions.challenge);
         publicKey.extensions = pkOptions?.extensions;
 
         // Make sure integers are used for "alg". Set to reserved if not found.
@@ -82,7 +82,7 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
         if (pkOptions.excludeCredentials && pkOptions.excludeCredentials.length > 0) {
             for (const cred of pkOptions.excludeCredentials) {
                 publicKey.excludeCredentials.push({
-                    id: arrayBufferToBase64(cred.id),
+                    id: kpxcArrayBufferToBase64(cred.id),
                     transports: cred.transports,
                     type: cred.type
                 });
@@ -91,7 +91,7 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
 
         publicKey.user = {};
         publicKey.user.displayName = pkOptions.user.displayName;
-        publicKey.user.id = arrayBufferToBase64(pkOptions.user.id);
+        publicKey.user.id = kpxcArrayBufferToBase64(pkOptions.user.id);
         publicKey.user.name = pkOptions.user.name;
 
         return publicKey;
@@ -106,7 +106,7 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOrigin
         checkErrors(pkOptions, sameOriginWithAncestors);
 
         const publicKey = {};
-        publicKey.challenge = arrayBufferToBase64(pkOptions.challenge);
+        publicKey.challenge = kpxcArrayBufferToBase64(pkOptions.challenge);
         publicKey.enterpriseAttestationPossible = false;
         publicKey.extensions = pkOptions?.extensions;
         publicKey.rpId = pkOptions?.rpId;
@@ -124,7 +124,7 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOrigin
                 }
 
                 const arr = {
-                    id: arrayBufferToBase64(cred.id),
+                    id: kpxcArrayBufferToBase64(cred.id),
                     transports: [ ...transports, 'internal' ],
                     type: cred.type
                 };
