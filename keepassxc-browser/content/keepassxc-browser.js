@@ -146,6 +146,12 @@ kpxc.getDocumentLocation = function() {
     return kpxc.settings.saveDomainOnly ? document.location.origin : document.location.href;
 };
 
+kpxc.getUniqueGroupCount = function(creds) {
+    const groups = creds.map(c => c.group || '');
+    const uniqueGroups = new Set(groups);
+    return uniqueGroups.size;
+};
+
 // Returns the form that includes the inputField
 kpxc.getForm = function(inputField) {
     if (inputField.form) {
@@ -391,13 +397,8 @@ kpxc.initLoginPopup = function() {
             : first.localeCompare(second);
     };
 
-    const getUniqueGroupCount = function(creds) {
-        const groups = creds.map(c => c.group || '');
-        const uniqueGroups = new Set(groups);
-        return uniqueGroups.size;
-    };
-
-    const showGroupNameInAutocomplete = kpxc.settings.showGroupNameInAutocomplete && (getUniqueGroupCount(kpxc.credentials) > 1);
+    const showGroupNameInAutocomplete =
+        kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(kpxc.credentials) > 1;
 
     // Initialize login items
     const loginItems = [];
@@ -506,10 +507,13 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
         }
     }
 
+    const showGroupNameInAutocomplete =
+        kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(credentials) > 1;
+
     const credentialsList = [];
     for (const c of credentials) {
         credentialsList.push({
-            login: c.login,
+            login: showGroupNameInAutocomplete ? `[${c.group}] ${c.login}` : c.login,
             name: c.name,
             uuid: c.uuid
         });
