@@ -72,7 +72,7 @@ kpxcBanner.create = async function(credentials = {}) {
         'button',
         RED_BUTTON,
         { id: 'kpxc-banner-btn-dismiss' },
-        tr('popupButtonDismiss'),
+        tr('popupButtonCancel'),
     );
 
     const separator = kpxcUI.createElement('div', 'kpxc-separator');
@@ -106,6 +106,7 @@ kpxcBanner.create = async function(credentials = {}) {
             return;
         }
         kpxcBanner.updateCredentials(credentials);
+        dismissButton.textContent = tr('popupButtonBack');
     });
 
     dismissButton.addEventListener('click', function(e) {
@@ -120,6 +121,7 @@ kpxcBanner.create = async function(credentials = {}) {
             kpxcBanner.shadowSelector('#kpxc-banner-btn-update').hidden = false;
             kpxcBanner.shadowSelector('.kpxc-checkbox').disabled = false;
             kpxcBanner.banner.removeChild(dialog);
+            dismissButton.textContent = tr('popupButtonCancel');
         } else {
             if (ignoreCheckbox.checked) {
                 const ignoreUrl = window.location.href.slice(0, window.location.href.lastIndexOf('/') + 1) + '*';

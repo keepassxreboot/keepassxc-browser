@@ -558,9 +558,13 @@
         "message": "Update",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "Dismiss",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Cancel",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Back",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Don't ask again for this site",
