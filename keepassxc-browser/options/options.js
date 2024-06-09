@@ -112,6 +112,7 @@ options.initGeneralSettings = async function() {
     $('#tab-general-settings select#afterFillSorting').value = options.settings['afterFillSorting'];
     $('#tab-general-settings select#afterFillSortingTotp').value = options.settings['afterFillSortingTotp'];
     $('#tab-general-settings input#defaultGroup').value = options.settings['defaultGroup'];
+    $('#tab-general-settings input#defaultPasskeyGroup').value = options.settings['defaultPasskeyGroup'];
     $('#tab-general-settings input#clearCredentialTimeout').value = options.settings['clearCredentialsTimeout'];
 
     const generalSettingsRadioInputs = document.querySelectorAll('#tab-general-settings input[type=radio]');
@@ -203,6 +204,7 @@ options.initGeneralSettings = async function() {
         });
     });
 
+    // Default group
     $('#defaultGroupButton').addEventListener('click', async function() {
         const value = $('#defaultGroup').value;
         options.settings['defaultGroup'] = (value.length > 0 ? value : '');
@@ -212,6 +214,19 @@ options.initGeneralSettings = async function() {
     $('#defaultGroupButtonReset').addEventListener('click', async function() {
         $('#defaultGroup').value = '';
         options.settings['defaultGroup'] = '';
+        await options.saveSettings();
+    });
+
+    // Default passkey group
+    $('#defaultPasskeyGroupButton').addEventListener('click', async function() {
+        const value = $('#defaultPasskeyGroup').value;
+        options.settings['defaultPasskeyGroup'] = (value.length > 0 ? value : '');
+        await options.saveSettings();
+    });
+
+    $('#defaultPasskeyGroupButtonReset').addEventListener('click', async function() {
+        $('#defaultPasskeyGroup').value = '';
+        options.settings['defaultPasskeyGroup'] = '';
         await options.saveSettings();
     });
 

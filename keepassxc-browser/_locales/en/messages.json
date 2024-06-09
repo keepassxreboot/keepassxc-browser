@@ -714,6 +714,10 @@
         "message": "Separate the group with slashes, for example: Group/ChildGroup.",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Default group for saving new passkeys:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Always ask where to save new credentials",
         "description": "Default group checkbox help text."
