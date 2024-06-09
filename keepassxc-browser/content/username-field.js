@@ -160,7 +160,7 @@ const getIconText = function(state) {
         return tr('usernameDisconnectedFieldText');
     }
 
-    return tr('usernameFieldText');
+    return kpxc.credentials.length === 0 ? tr('usernameFieldTextNoCredentials') : tr('usernameFieldText');
 };
 
 const fillCredentials = async function(field) {
