@@ -28,7 +28,7 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Fill attribute…",
+        "message": "Fill Attribute…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
