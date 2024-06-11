@@ -795,7 +795,7 @@ keepass.enableAutomaticReconnect = async function() {
     if (keepass.reconnectLoop === null) {
         keepass.reconnectLoop = setInterval(async () => {
             if (!keepass.isKeePassXCAvailable) {
-                keepass.reconnect();
+                keepass.reconnect(null, 1500); // 1.5 seconds timeout for reconnect
             }
         }, 1000);
     }
@@ -806,7 +806,7 @@ keepass.disableAutomaticReconnect = function() {
     keepass.reconnectLoop = null;
 };
 
-keepass.reconnect = async function(tab, connectionTimeout) {
+keepass.reconnect = async function(tab = null, connectionTimeout = null) {
     keepassClient.connectToNative();
     keepass.generateNewKeyPair();
     const keyChangeResult = await keepass.changePublicKeys(tab, !!connectionTimeout, connectionTimeout).catch(() => false);
