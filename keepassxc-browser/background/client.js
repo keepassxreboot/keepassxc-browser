@@ -2,7 +2,7 @@
 
 const keepassClient = {};
 keepassClient.keySize = 24;
-keepassClient.messageTimeout = 5000; // Milliseconds
+keepassClient.messageTimeout = 1500; // Milliseconds
 keepassClient.nativeHostName = 'org.keepassxc.keepassxc_browser';
 keepassClient.nativePort = null;
 
