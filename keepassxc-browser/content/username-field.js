@@ -83,7 +83,6 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-username-icon ' + className,
         {
             'title': getIconText(this.databaseState),
-            'alt': tr('usernameFieldIcon'),
             'size': size,
             'offset': offset,
             'kpxc-pwgen-field-id': field.getAttribute('data-kpxc-id')

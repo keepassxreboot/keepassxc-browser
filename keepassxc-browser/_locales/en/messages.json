@@ -226,10 +226,6 @@
         "message": "KeePassXC is disconnected.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
-    "usernameFieldIcon": {
-        "message": "Username field icon.",
-        "description": "Username field icon text."
-    },
     "totp": {
         "message": "TOTP",
         "description": "TOTP text."
