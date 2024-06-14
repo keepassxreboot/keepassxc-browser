@@ -56,7 +56,6 @@ PasswordIcon.prototype.createIcon = function(field) {
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-pwgen-icon ' + className,
         {
             'title': tr('passwordGeneratorGenerateText'),
-            'alt': tr('passwordGeneratorIcon'),
             'size': size,
             'offset': offset,
             'kpxc-pwgen-field-id': field.getAttribute('data-kpxc-id') // Needed?
