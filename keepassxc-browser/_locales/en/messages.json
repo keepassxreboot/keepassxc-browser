@@ -1168,7 +1168,7 @@
     },
     "optionsSitePreferencesNotFound": {
         "message": "No Site Preferences found.",
-        "description": "Shown when no Site Sreferences are saved."
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Remove site?",
