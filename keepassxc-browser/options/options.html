@@ -296,11 +296,11 @@
                     <label for="defaultGroup" class="pb-2" data-i18n="optionsLabelDefaultGroup"></label>
                     <div class="input-group w-75">
                       <input class="form-control form-control-sm" type="text" id="defaultGroup" placeholder="KeePassXC-Browser Passwords">
-                      <button class="btn btn-sm btn-primary" type="button" id="defaultGroupButton">
+                      <button class="btn btn-sm btn-primary" type="button" id="defaultGroupButton" data-i18n="[title]optionsButtonSave">
                         <i class="fa fa-save" aria-hidden="true"></i>
                         <span data-i18n="optionsButtonSave"></span>
                       </button>
-                      <button class="btn btn-sm btn-danger" type="button" id="defaultGroupButtonReset">
+                      <button class="btn btn-sm btn-danger" type="button" id="defaultGroupButtonReset" data-i18n="[title]optionsButtonReset">
                         <i class="fa fa-remove" aria-hidden="true"></i>
                         <span data-i18n="optionsButtonReset"></span>
                       </button>
@@ -501,11 +501,11 @@
 
                 <div class="card-body">
                   <div class="form-group">
-                    <button class="btn btn-sm btn-primary" id="importSettingsButton">
+                    <button class="btn btn-sm btn-primary" id="importSettingsButton" data-i18n="[title]optionsButtonImport">
                       <i class="fa fa-arrow-down" aria-hidden="true"></i>
                       <span data-i18n="optionsButtonImport"></span>
                     </button>
-                    <button class="btn btn-sm btn-primary ms-2" id="exportSettingsButton">
+                    <button class="btn btn-sm btn-primary ms-2" id="exportSettingsButton" data-i18n="[title]optionsButtonExport">
                       <i class="fa fa-arrow-up" aria-hidden="true"></i>
                       <span data-i18n="optionsButtonExport"></span>
                     </button>
@@ -566,7 +566,7 @@
                           <td class="last-used text-nowrap"></td>
                           <td class="created text-nowrap"></td>
                           <td class="text-nowrap">
-                            <button class="btn btn-sm delete btn-danger">
+                            <button class="btn btn-sm delete btn-danger" data-i18n="[title]removeConnectedDatabaseButtonTitle">
                               <i class="fa fa-remove" aria-hidden="true"></i>
                               <span data-i18n="optionsButtonRemove"></span>
                             </button>
@@ -576,7 +576,7 @@
                     </table>
                   </div>
                   <div>
-                    <button id="connect-button" class="btn btn-sm btn-success">
+                    <button id="connect-button" class="btn btn-sm btn-success" data-i18n="[title]connectButtonTitle">
                       <i class="fa fa-link" aria-hidden="true"></i>
                       <span data-i18n="optionsButtonConnect"></span>
                     </button>
@@ -637,7 +637,7 @@
                         <tr class="clone d-none">
                           <td></td>
                           <td class="text-nowrap">
-                            <button class="btn btn-sm delete btn-danger btn">
+                            <button class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeCustomLoginFieldsButtonTitle">
                               <i class="fa fa-remove" aria-hidden="true"></i>
                               <span data-i18n="optionsButtonRemove"></span>
                             </button>
@@ -697,7 +697,7 @@
                     <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
                     <div class="input-group w-75" id="manualUrlGroup">
                       <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
-                      <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd">
+                      <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesManualAdd" data-i18n="[title]addSitePreferenceButtonTitle">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         <span data-i18n="optionsButtonAdd"></span>
                       </button>
@@ -736,7 +736,7 @@
                           <td><input class="form-check-input" type="checkbox" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection"></td>
                           <td><input class="form-check-input" type="checkbox" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes"></td>
                           <td class="text-nowrap">
-                            <button class="btn btn-sm delete btn-danger btn">
+                            <button class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeSitePreferencesButtonTitle">
                               <i class="fa fa-remove" aria-hidden="true"></i>
                               <span data-i18n="optionsButtonRemove"></span>
                             </button>
@@ -846,7 +846,7 @@
                     <br>Operating system: <span class="kpxcbrOS"></span>
                     <br>Browser: <span class="kpxcbrBrowser"></span>
                   </p>
-                  <button id="copyVersionToClipboard" class="btn btn btn-sm btn-primary ml-3">
+                  <button id="copyVersionToClipboard" class="btn btn btn-sm btn-primary ml-3" data-i18n="[title]copyDebugInfoButtonTitle">
                     <i class="fa fa-clipboard"></i>
                   </button>
                 </div>

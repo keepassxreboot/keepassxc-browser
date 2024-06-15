@@ -3,6 +3,58 @@
         "message": "KeePassXC integration for modern web browsers",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Add Site Preferences for this URL.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Allows Cross-Origin iframes for the current page.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Connect current active database to KeePassXC-Browser.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Copy debug info to clipboard.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Dismisses Basic HTTP Auth.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Redetects all input fields on the page.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Remove connected database from KeePassXC-Browser.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Remove Custom Login Fields for this URL.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Remove Site Preferences for this URL.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Reopen current active database.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Adds Username-only Detection to the current page.",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Fill Username and Password",
         "description": "Context menu item for filling both username and password."
@@ -120,8 +172,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
-      "description": "Access to all entries denied."
+        "message": "Access to all entries denied.",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestation not supported.",
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
-      "description": "Effective domain is not a valid domain."
+        "message": "Effective domain is not a valid domain.",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
-      "description": "Origin and RP ID do not match."
+        "message": "Origin and RP ID do not match.",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
-      "description": "No supported algorithms were provided."
+        "message": "No supported algorithms were provided.",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Wait for timer to expire.",
@@ -186,10 +238,6 @@
     "errorNotConnected": {
         "message": "Not connected to KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
-    },
-    "passwordGeneratorIcon": {
-        "message": "Password generator icon",
-        "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Error: The generated password is longer than the allowed length!",
@@ -234,29 +282,25 @@
         "message": "Fill TOTP from KeePassXC",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "TOTP field icon",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
         "message": "Close",
-        "description": "Close button text when choosing custom login fields."
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "Skip",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Show more",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
         "message": "Reset",
-        "description": "Reset button text when choosing custom login fields."
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "Confirm",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Login fields for this page are already selected and will be overwritten.",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "Clear saved data",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "String field",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "Choose a username field",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "Choose a password field",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "Choose a TOTP field",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "Choose String Fields",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Please confirm your selection or choose more fields as String fields.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "You can also use the numbers to choose the input fields from keyboard.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "Choose a Custom Login Field",
@@ -363,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Choose custom login fields",
+        "message": "Choose Custom Login Fields",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -587,12 +631,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Custom login fields",
-        "description": "Saved custom login fields tab text."
+        "message": "Custom Login Fields",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Site preferences",
-        "description": "Site preferences fields tab text."
+        "message": "Site Preferences",
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "About",
@@ -607,12 +651,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Custom login fields",
-        "description": "Custom login fields page header."
+        "message": "Custom Login Fields",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Site preferences",
-        "description": "Site preferences page header."
+        "message": "Site Preferences",
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "About",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Yes, remove now",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "Cancel",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Reset",
@@ -835,7 +879,7 @@
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the site preferences.",
+        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -887,7 +931,7 @@
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "When saving new custom login fields, save only the domain instead of full URL.",
+        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1012,15 +1056,15 @@
     },
     "optionsColumnPageURL": {
         "message": "Page URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "Ignore",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "Username-only Detection",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "Improved Input Field Detection",
@@ -1032,23 +1076,23 @@
   },
     "optionsColumnDelete": {
         "message": "Delete",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Enable all features",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Disable new/modified credentials",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Disable Auto-Submit",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Disable all features",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Title",
@@ -1091,40 +1135,40 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved custom login fields found.",
+        "message": "No saved Custom Login Fields found.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table.",
-        "description": "Table caption of Custom login fields page."
+        "message": "You can manage saved Custom Login Fields using the table.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "If KeePassXC-Browser detects the wrong login fields, you are able to specify the correct fields yourself.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Go to the page and click on the KeePassXC-Browser icon, then select ",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "On this page you can manage saved custom login fields.",
-        "description": "Saved custom login fields info text, third part."
+        "message": "On this page you can manage saved Custom Login Fields.",
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remove saved custom login fields?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Remove saved Custom Login Fields?",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Do you really want to remove the saved custom login fields on the page: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "KeePassXC-Browser will automatically detect the login fields next time you visit this page.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "No site preferences found.",
-        "description": "Shown when no site preferences are saved."
+        "message": "No Site Preferences found.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Remove site?",
@@ -1132,19 +1176,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Sites on this page have special handling methods associated with them.",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "To ignore new/modified credentials on a specific site, add them below or when using the credential banner on the page select <em>Don't ask again for this site</em>.",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "If a site is fully ignored (<em>Disable all features</em> is selected), then the plugin will do nothing when visiting that site.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Username-only detection allows KeePassXC-Browser to fill in login details on websites with separate pages for username and password.",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
@@ -1156,22 +1200,22 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Add URL manually",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "The URL must start with either <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> and must be at least 5 characters long.",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Do you really want to remove the specified site from the list: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-Browser will enable all features for this site and remove username-only detection.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table.",
+        "message": "You can manage saved Site Preferences using the table.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
