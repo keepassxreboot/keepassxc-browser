@@ -795,7 +795,7 @@ keepass.enableAutomaticReconnect = async function() {
     if (keepass.reconnectLoop === null) {
         keepass.reconnectLoop = setInterval(async () => {
             if (!keepass.isKeePassXCAvailable) {
-                keepass.reconnect(null, 1500); // 1.5 seconds timeout for reconnect
+                keepass.reconnect();
             }
         }, 1000);
     }
