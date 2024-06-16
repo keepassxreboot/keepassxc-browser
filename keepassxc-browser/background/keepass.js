@@ -806,10 +806,10 @@ keepass.disableAutomaticReconnect = function() {
     keepass.reconnectLoop = null;
 };
 
-keepass.reconnect = async function(tab, connectionTimeout) {
+keepass.reconnect = async function(tab = null, connectionTimeout = 1500) {
     keepassClient.connectToNative();
     keepass.generateNewKeyPair();
-    const keyChangeResult = await keepass.changePublicKeys(tab, true, connectionTimeout).catch(() => false);
+    const keyChangeResult = await keepass.changePublicKeys(tab, !!connectionTimeout, connectionTimeout).catch(() => false);
 
     // Change public keys timeout
     if (!keyChangeResult) {
