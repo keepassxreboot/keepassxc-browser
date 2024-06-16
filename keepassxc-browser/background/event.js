@@ -292,5 +292,6 @@ kpxcEvent.messageHandlers = {
     'save_settings': kpxcEvent.onSaveSettings,
     'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC,
     'update_context_menu': page.updateContextMenu,
-    'update_popup': page.updatePopup
+    'update_popup': page.updatePopup,
+    'add_content_scripts': page.addContentScripts
 };

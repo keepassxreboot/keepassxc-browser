@@ -84,6 +84,9 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         if (!page.tabs[tab.id]) {
             page.createTabEntry(tab.id);
         }
+        if(!page.settings.noContentScripts) {
+            page.addContentScripts(tab);
+        }
     }
 });
 

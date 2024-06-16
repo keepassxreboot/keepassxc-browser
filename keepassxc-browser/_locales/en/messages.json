@@ -706,6 +706,10 @@
         "message": "Automatically retrieve credentials",
         "description": "Automatically retrieve credentials checkbox text."
     },
+    "optionsCheckboxNoContentScripts": {
+        "message": "Do not load content scripts on every page.  Need to manually start via the redetect button.",
+        "description": "No content scripts checkbox text."
+    },
     "optionsCheckboxAutomaticReconnect": {
         "message": "Automatically reconnect to KeePassXC",
         "description": "Auto-reconnect checkbox text."
@@ -853,6 +857,10 @@
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",
         "description": "Auto-Retrive Credentials option help text."
+    },
+    "optionsNoContentScriptsHelpText": {
+        "message": "Used if this extension is slowing down or freezing the browser.",
+        "description": "No content scripts option help text."
     },
     "optionsAutomaticReconnectHelpText": {
         "message": "Reconnects automatically to KeePassXC when it is detected.",

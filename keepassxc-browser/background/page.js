@@ -19,6 +19,7 @@ const defaultSettings = {
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
+    noContentScripts: false,
     passkeys: false,
     passkeysFallback: true,
     redirectAllowance: 1,
@@ -334,6 +335,33 @@ page.updateContextMenu = async function(tab, credentials) {
 
 page.updatePopup = function(tab) {
     browserAction.showDefault(tab);
+};
+
+page.addContentScripts = function(tab) {
+    return browser.scripting.executeScript({
+        target : { tabId:tab.id, allFrames: true },
+        files : [
+            '../common/browser-polyfill.min.js',
+            '../common/global.js',
+            '../common/sites.js',
+            '../content/ui.js',
+            '../content/banner.js',
+            '../content/autocomplete.js',
+            '../content/credential-autocomplete.js',
+            '../content/custom-fields-banner.js',
+            '../content/fields.js',
+            '../content/fill.js',
+            '../content/form.js',
+            '../content/icons.js',
+            '../content/keepassxc-browser.js',
+            '../content/observer-helper.js',
+            '../content/pwgen.js',
+            '../content/totp-autocomplete.js',
+            '../content/totp-field.js',
+            '../content/username-field.js',
+            '../content/passkeys-utils.js'
+        ]
+    });
 };
 
 page.setAllowIframes = async function(tab, args = []) {

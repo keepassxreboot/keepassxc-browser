@@ -118,7 +118,9 @@ const sendMessageToTab = async function(message) {
         window.close();
     });
 
+
     $('#redetect-fields-button').addEventListener('click', async () => {
+        await browser.runtime.sendMessage({ action: 'add_content_scripts' });
         const res = await sendMessageToTab('redetect_fields');
         if (!res) {
             return;
