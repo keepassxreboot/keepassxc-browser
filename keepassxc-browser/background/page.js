@@ -340,7 +340,7 @@ page.setAllowIframes = async function(tab, args = []) {
     const [ allowIframes, site ] = args;
 
     // Only set when main windows' URL is used
-    if (tab?.url === site) {
+    if (trimURL(tab?.url) === trimURL(site)) {
         page.tabs[tab.id].allowIframes = allowIframes;
     }
 };

@@ -33,7 +33,13 @@ kpxc.url = null;
 // Add page to Site Preferences with a selected option enabled. Set from the popup.
 kpxc.addToSitePreferences = async function(optionName, addWildcard = false) {
     // Returns a predefined URL for certain sites
-    let site = trimURL(window.top.location.href).toLowerCase();
+    let site;
+    try {
+        site = trimURL(window.top.location.href);
+    } catch (err) {
+        logDebug('Adding to Site Preferences denied from iframe.');
+        return;
+    }
 
     // Check if the site already exists -> update the current settings
     let siteExists = false;
@@ -718,11 +724,12 @@ kpxc.siteIgnored = async function(condition) {
     if (kpxc.settings.sitePreferences) {
         let currentLocation;
         try {
-            currentLocation = window.top.location.href.toLowerCase();
+            currentLocation = window.top.location.href;
         } catch (err) {
             // Cross-domain security error inspecting window.top.location.href.
-            // This catches an error when an iframe is being accessed from another (sub)domain -> use the iframe URL instead.
-            currentLocation = window.self.location.href.toLowerCase();
+            // This catches an error when an iframe is being accessed from another (sub)domain
+            // -> use the iframe URL instead.
+            currentLocation = window.self.location.href;
         }
 
         // Refresh current settings for the site
