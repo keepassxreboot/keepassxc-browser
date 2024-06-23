@@ -196,7 +196,7 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
-        "message": "È stato tagliata per adattarsi alla lunghezza.",
+        "message": "È stata tagliata per adattarsi alla lunghezza.",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongRemember": {
@@ -327,7 +327,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Errore:\nNessuna credenziale trovata per il nome utente dato.",
+        "message": "Errore:\nNessuna credenziale trovata per il nome utente fornito.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
@@ -375,7 +375,7 @@
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
-        "message": "Rileva nuovamente campi di di accesso",
+        "message": "Rileva nuovamente campi di accesso",
         "description": "Popup Redetect login fields button text."
     },
     "popupReloadButton": {
@@ -507,7 +507,7 @@
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "Salvate nuove credenziali con nome utente$1",
+        "message": "Salvate nuove credenziali con nome utente $1",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
@@ -515,7 +515,7 @@
         "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "Esistono già credenziali identiche. No c'è nulla da aggiornare.",
+        "message": "Esistono già credenziali identiche. Non c'è nulla da aggiornare.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
@@ -539,7 +539,7 @@
         "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
     },
     "popupMultiplePasswordFields": {
-        "message": "In questa pagina è stato trovato più di un campo password. Fai clic su uno di essi con il pulsante destro, e scegl uno tra:",
+        "message": "In questa pagina è stato trovato più di un campo password. Fai clic su uno di essi con il pulsante destro, e scegli uno tra:",
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupURL": {
@@ -691,7 +691,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Utile con pagine che usano popup o finestre di dialogo dinamiche. Disabilita la funzione per ridurre il carico della CPU in computer lenti. Quando disabilitato le credenziali possono essere inserite solo usando i tasti rapidi, il menu di scelta rapida o il popup dell'estensione.",
+        "message": "Utile con pagine che usano popup o finestre di dialogo dinamiche. Disabilita la funzione per ridurre il carico della CPU in computer lenti. Quando disabilitato, le credenziali possono essere inserite solo usando i tasti rapidi, il menu di scelta rapida o il popup dell'estensione.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -899,7 +899,7 @@
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Se le credenziali sono state trovate per una pagina ed il tipo di accesso è una richiesta di autenticazione di base HTTP, KeePassXC-Browser cerca di effettuare il login con le prime credenziali date.",
+        "message": "Se le credenziali sono state trovate per una pagina ed il tipo di accesso è una richiesta di autenticazione di base HTTP, KeePassXC-Browser cerca di effettuare il login con le prime credenziali fornite.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -927,7 +927,7 @@
         "description": "Settings page info text of user's KeePassXC version."
     },
     "optionsLatestVersion": {
-        "message": "Versione aggiornata disponibile di KeePassCX: $1",
+        "message": "Versione aggiornata disponibile di KeePassXC: $1",
         "description": "Settings page info text about the latest KeePassXC version."
     },
     "optionsKeePassXCVersionRequired": {
@@ -1103,7 +1103,7 @@
         "description": "Saved custom login fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Via alla pagina e seleziona l'icona di KeePassXC-Browser, quindi seleziona",
+        "message": "Vai alla pagina e clicca l'icona di KeePassXC-Browser, quindi seleziona ",
         "description": "Saved custom login fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
@@ -1135,11 +1135,11 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Per ignorare credenziali aggiunte/modificate per un sito specifico aggiungerle qui di seguito o fare clic sull'icona lampeggiante di KeePassXC-Browser e selezionare",
+        "message": "Per ignorare credenziali aggiunte/modificate per un sito specifico aggiungerle qui di seguito oppure quando si utilizza il banner delle credenziali sulla pagina selezionare <em>Non chiedere nuovamente per questo sito</em>",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Quando si visita questo sito se un sito viene completamente ignorato (è selezionato <em>disabilitare tutte le funzionalità</em>), il plugin non farà nulla.",
+        "message": "Se è un sito è completamente ignorato (è selezionato <em>disabilitare tutte le funzionalità</em>), il plugin non farà nulla quando verrà visitato quel sito.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
