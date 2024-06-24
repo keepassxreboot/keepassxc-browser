@@ -70,8 +70,8 @@ class Autocomplete {
         this.deselectItem();
 
         const itemContainer = e.target.classList.contains('kpxcAutocomplete-item') ? e.target : e.target.parentElement;
-
         itemContainer.classList.add('kpxcAutocomplete-item--active');
+
         const items = this.getAllItems();
         this.index = Array.from(items).indexOf(itemContainer);
     }
@@ -165,9 +165,15 @@ class Autocomplete {
             }
         }
 
+        // Use only two columns if groups are not shown
+        if (this.useCompactMode && !this.showGroup) {
+            this.list.style.gridTemplateColumns = 'repeat(2, auto)';
+        }
+
         this.selectItem();
     }
 
+    // Add parentElement parameter
     generateItem(credential) {
         // Create the DOM element for the list item wrapper.
         const item = kpxcUI.createElement('div', 'kpxcAutocomplete-item', {
@@ -193,18 +199,14 @@ class Autocomplete {
         item.append(itemHeader);
 
         // Create the DOM element for showing the credentials username field.
-        const itemValue = kpxcUI.createElement('div', 'kpxcAutocomplete-item__value', {}, credential.value);
+        const itemClassName = this.showGroup ? 'kpxcAutocomplete-item__value' : 'kpxcAutocomplete-item__value_last';
+        const itemValue = kpxcUI.createElement('div', itemClassName, {}, credential.value);
         item.append(itemValue);
 
         // If compact mode is enabled, append group to the end
-        if (this.useCompactMode) {
-            if (this.showGroup) {
-                const itemGroup = kpxcUI.createElement('div', 'kpxcAutocomplete-item__group', {}, credential.group);
-                item.append(itemGroup);
-            } else {
-                // Use two columns instead of the default three
-                item.style.gridTemplateColumns = '2fr auto';
-            }
+        if (this.useCompactMode && this.showGroup) {
+            const itemGroup = kpxcUI.createElement('div', 'kpxcAutocomplete-item__group', {}, credential.group);
+            item.append(itemGroup);
         }
 
         return item;

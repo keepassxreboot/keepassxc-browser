@@ -21,6 +21,8 @@
     --kpxc-table-hover-color: #f2f2f2;
     --kpxc-table-odd-color: #f2f2f2;
     --kpxc-text-color: #000;
+    --kpxc-lighter-text-color: rgba(0, 0, 0, 0.8);
+    --kpxc-light-text-color: rgba(0, 0, 0, 0.5);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,6 +48,8 @@
         --kpxc-table-hover-color: #474948;
         --kpxc-table-odd-color: #383a39;
         --kpxc-text-color: #cbcfcb;
+        --kpxc-lighter-text-color: rgba(203, 207, 203, 0.8);
+        --kpxc-light-text-color: rgba(203, 207, 203, 0.5);
     }
 }
 
@@ -70,6 +74,8 @@
     --kpxc-table-hover-color: #474948;
     --kpxc-table-odd-color: #383a39;
     --kpxc-text-color: #cbcfcb;
+    --kpxc-lighter-text-color: rgba(203, 207, 203, 0.8);
+    --kpxc-light-text-color: rgba(203, 207, 203, 0.5);
 }
 
 [data-bs-theme='light'] {
@@ -93,4 +99,7 @@
     --kpxc-table-hover-color: #f2f2f2;
     --kpxc-table-odd-color: #f2f2f2;
     --kpxc-text-color: #000;
+    --kpxc-lighter-text-color: rgba(0, 0, 0, 0.8);
+    --kpxc-light-text-color: rgba(0, 0, 0, 0.5);
+}
 }

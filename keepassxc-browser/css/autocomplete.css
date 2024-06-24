@@ -8,7 +8,7 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 14px;
     line-height: 1em;
-    min-width: 20rem;
+    min-width: 16rem;
     overflow: hidden; /* Prevent the content from bleeding over the border radius. */
     padding: 6px;
     position: absolute !important;
@@ -30,7 +30,6 @@
     color: var(--kpxc-text-color);
     cursor: pointer;
     letter-spacing: normal !important;
-    max-width: 28rem;
     padding: 12px;
     text-align: start !important;
     text-rendering: auto !important;
@@ -39,33 +38,62 @@
 }
 
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-items {
+    cursor: pointer;
     display: grid;
+    grid-template-columns: repeat(3, auto);
     max-height: 250px;
+    max-width: 600px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-item {
-    align-items: center;
-    column-gap: 1rem;
-    display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
-    padding: 6px;
+    display: contents;
 }
 
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-item__header {
+    align-self: flex-start;
+    border-radius: 4px 0 0 4px;
     display: grid;
-    grid-row: auto;
+    height: 14px;
+    padding: 6px 24px 6px 6px;
+    pointer-events: auto;
 }
 
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-item__group {
-    justify-self: end;
-    max-width: 100%;
+    align-self: center;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    height: 14px;
+    justify-content: flex-end;
+    padding: 6px 6px 6px 24px;
+    pointer-events: auto;
 }
 
 .kpxcAutocomplete-container--compact .kpxcAutocomplete-item__value {
+    align-self: flex-end;
+    height: 14px;
     justify-self: start;
     margin: 0;
-    max-width: 100%;
+    padding: 6px 0 6px 0;
+    pointer-events: auto;
+    width: 100%;
+}
+
+/* Separate class for value if group is not shown */
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__value_last {
+    align-self: center;
+    border-radius: 0 4px 4px 0;
+    color: var(--kpxc-lighter-text-color);
+    display: flex;
+    font-size: .85em;
+    height: 14px;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 6px 6px 6px 24px;
+    pointer-events: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .kpxcAutocomplete-item:last-child {
@@ -81,11 +109,10 @@
 }
 
 .kpxcAutocomplete-item__group {
+    color: var(--kpxc-light-text-color);
     font-size: .7em;
     font-weight: bold;
     letter-spacing: 0.05em;
-    line-height: .7em;
-    opacity: .5;
     overflow: hidden;
     pointer-events: none;
     text-overflow: ellipsis;
@@ -103,10 +130,9 @@
 }
 
 .kpxcAutocomplete-item__value {
-    font-size: .8em;
-    line-height: 1em;
+    color: var(--kpxc-lighter-text-color);
+    font-size: .85em;
     margin-top: 4px;
-    opacity: .8;
     overflow: hidden;
     pointer-events: none;
     text-overflow: ellipsis;
@@ -114,12 +140,16 @@
 }
 
 .kpxcAutocomplete-item--active {
-    background-color: hsl(134, 61%, 41%) !important;
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+}
+
+.kpxcAutocomplete-item--active * {
+    background-color: #28a745 !important;
     color: #ffffff !important;
 }
 
 .kpxcAutocomplete-container footer {
-
     background-color: #ddd;
     border-top: 1px solid rgba(0, 0, 0, .125) !important;
     color: #000;
@@ -137,12 +167,5 @@
     .kpxcAutocomplete-items {
         background: var(--kpxc-background-color);
         color: var(--kpxc-text-color);
-    }
-
-    .kpxc-pwgen-input {
-        background-color: var(--kpxc-input-background-color) !important;
-        border: var(--kpxc-input-border);
-        border-color: var(--kpxc-input-border-color);
-        color: var(--kpxc-text-color) !important;
     }
 }
