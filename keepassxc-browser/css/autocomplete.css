@@ -151,6 +151,7 @@
 
 .kpxcAutocomplete-container footer {
     background-color: #ddd;
+    border-radius: 0 0 4px 4px;
     border-top: 1px solid rgba(0, 0, 0, .125) !important;
     color: #000;
     font-style: italic;
