@@ -81,7 +81,7 @@
 }
 
 /* Separate class for value if group is not shown */
-.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__value_last {
+.kpxcAutocomplete-container--compact .kpxcAutocomplete-item__value--last {
     align-self: center;
     border-radius: 0 4px 4px 0;
     color: var(--kpxc-lighter-text-color);

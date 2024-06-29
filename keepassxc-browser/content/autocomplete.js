@@ -199,7 +199,7 @@ class Autocomplete {
         item.append(itemHeader);
 
         // Create the DOM element for showing the credentials username field.
-        const itemClassName = this.showGroup ? 'kpxcAutocomplete-item__value' : 'kpxcAutocomplete-item__value_last';
+        const itemClassName = this.showGroup ? 'kpxcAutocomplete-item__value' : 'kpxcAutocomplete-item__value--last';
         const itemValue = kpxcUI.createElement('div', itemClassName, {}, credential.value);
         item.append(itemValue);
 
