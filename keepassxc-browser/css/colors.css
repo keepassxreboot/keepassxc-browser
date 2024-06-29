@@ -1,5 +1,6 @@
 :root,
 :host {
+    --kpxc-autocomplete-footer-color: #ddd;
     --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
     --kpxc-box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -29,6 +30,7 @@
 
     :root,
     :host {
+        --kpxc-autocomplete-footer-color: #2b2a2a;
         --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
         --kpxc-background-color: #3b3b3d;
         --kpxc-card-background-color: #2b2a2a;
@@ -55,6 +57,7 @@
 
 /* Same colors for manual switching */
 [data-bs-theme='dark'] {
+    --kpxc-autocomplete-footer-color: #2b2a2a;
     --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
     --kpxc-background-color: #3b3b3d;
     --kpxc-card-background-color: #2b2a2a;
@@ -79,6 +82,7 @@
 }
 
 [data-bs-theme='light'] {
+    --kpxc-autocomplete-footer-color: #ddd;
     --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
     --kpxc-box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
