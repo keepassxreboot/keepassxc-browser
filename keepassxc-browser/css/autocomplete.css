@@ -152,9 +152,7 @@
 .kpxcAutocomplete-container footer {
     background-color: var(--kpxc-autocomplete-footer-color);
     border-radius: 0 0 4px 4px;
-    border-top: 1px solid rgba(0, 0, 0, .125) !important;
-    color: var(--kpxc-text-color);
-    font-style: italic;
+    color: var(--kpxc-lighter-text-color);
     font-size: max(9px, .8em) !important;
     padding: 5px;
     width: auto;
