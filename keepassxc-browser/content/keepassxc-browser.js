@@ -267,6 +267,8 @@ kpxc.initAutocomplete = function() {
         return;
     }
 
+    const showGroupNameInAutocomplete = kpxc.showGroupNameInAutocomplete();
+
     for (const c of kpxc.combinations) {
         if (c.username) {
             kpxcUserAutocomplete.create(
@@ -274,7 +276,7 @@ kpxc.initAutocomplete = function() {
                 false,
                 kpxc.settings.autoSubmit,
                 kpxc.settings.useCompactMode,
-                kpxc.settings.showGroupNameInAutocomplete,
+                showGroupNameInAutocomplete,
                 kpxc.settings.afterFillSorting,
             );
         } else if (!c.username && c.password) {
@@ -284,7 +286,7 @@ kpxc.initAutocomplete = function() {
                 false,
                 kpxc.settings.autoSubmit,
                 kpxc.settings.useCompactMode,
-                kpxc.settings.showGroupNameInAutocomplete,
+                showGroupNameInAutocomplete,
                 kpxc.settings.afterFillSorting,
             );
         }
@@ -295,7 +297,7 @@ kpxc.initAutocomplete = function() {
                 false,
                 kpxc.settings.autoSubmit,
                 kpxc.settings.useCompactMode,
-                kpxc.settings.showGroupNameInAutocomplete,
+                showGroupNameInAutocomplete,
                 kpxc.settings.afterFillSortingTotp,
             );
         }
@@ -424,8 +426,7 @@ kpxc.initLoginPopup = function() {
             : first.localeCompare(second);
     };
 
-    const showGroupNameInAutocomplete =
-        kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(kpxc.credentials) > 1;
+    const showGroupNameInAutocomplete = kpxc.showGroupNameInAutocomplete();
 
     // Initialize login items
     const loginItems = [];
@@ -461,7 +462,7 @@ kpxc.initLoginPopup = function() {
         popupLoginItems.push({ text: l.text, uuid: l.uuid });
 
         kpxcUserAutocomplete.elements.push({
-            group: l.group,
+            group: showGroupNameInAutocomplete ? l.group : undefined,
             title: l.title,
             label: l.text,
             value: l.login,
@@ -536,8 +537,7 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
         }
     }
 
-    const showGroupNameInAutocomplete =
-        kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(credentials) > 1;
+    const showGroupNameInAutocomplete = kpxc.showGroupNameInAutocomplete();
 
     const credentialsList = [];
     for (const c of credentials) {
@@ -740,6 +740,11 @@ kpxc.setValueWithChange = function(field, value, forced = false) {
     // Some pages will not accept the value change without dispatching events directly to the document
     dispatchLegacyEvent(field, 'input');
     dispatchLegacyEvent(field, 'change');
+};
+
+kpxc.showGroupNameInAutocomplete = function() {
+    return !kpxc.settings.useCompactMode
+        || (kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(kpxc.credentials) > 1);
 };
 
 // Returns true if site is ignored
