@@ -3,6 +3,58 @@
         "message": "KeePassXC-integration för moderna webbläsare",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Lägg till sidinställningar för denna URL.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Tillåter Cross-Origin iframes för den aktuella sidan.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Anslut aktuell aktiv databas till KeePassXC-Browser.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Kopiera felinformation till urklipp.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Stänger grundläggande HTTP-autentisering.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Återanslut aktuell aktiv databas till KeePassXC-Browser.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Återidentifierar alla inmatningsfält på sidan.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Läser in tillägget igen och återansluter till KeePassXC.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Ta bort ansluten databas från KeePassXC-Browser.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Ta bort anpassade inloggningsfält för denna URL.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Ta bort sidinställningar för denna URL.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Återöppna aktuell aktiv databas.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Lägger till identifiering av \"Endast användarnamn\" för aktuell sida",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Ange Användarnamn och Lösenord",
         "description": "Context menu item for filling both username and password."
@@ -120,8 +172,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Åtkomst till samtliga poster nekas.",
-      "description": "Access to all entries denied."
+        "message": "Åtkomst till samtliga poster nekas.",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestering stöds inte.",
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effektiv domän är inte en giltig domän.",
-      "description": "Effective domain is not a valid domain."
+        "message": "Effektiv domän är inte en giltig domän.",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Ursprung och RP-ID matchar inte.",
-      "description": "Origin and RP ID do not match."
+        "message": "Ursprung och RP-ID matchar inte.",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "Inga algoritmer som stöds tillhandahölls.",
-      "description": "No supported algorithms were provided."
+        "message": "Inga algoritmer som stöds tillhandahölls.",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Vänta på att tiduret skall löpa ut.",
@@ -187,10 +239,6 @@
         "message": "Inte ansluten till KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
-    "passwordGeneratorIcon": {
-        "message": "Password generator icon",
-        "description": "Alt attribute text of the password generator icon."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "Fel:\nDet genererade lösenordet är längre än den tillåtna längden!\nDet har kortats ned för att passa längden.\n\nVänligen kom ihåg det nya lösenordet!",
         "description": "A warning text shown in the password generator."
@@ -204,27 +252,27 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Generera lösenord",
+        "message": "Generera lösenord.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
         "message": "Lösenordsgeneratorn stöds inte i denna KeePassCX-version. Du behöver uppgradera KeePassXC till en nyare version."
     },
     "usernameFieldText": {
-        "message": "Ange autentiseringsuppgifter från KeePassXC",
+        "message": "Ange autentiseringsuppgifter från KeePassXC.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "Inga autentiseringsuppgifter att ange.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "Databasen är låst",
+        "message": "Databasen är låst.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC är nerkopplat",
+        "message": "KeePassXC är nerkopplad.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
-    },
-    "usernameFieldIcon": {
-        "message": "Ikon för användarnamnet",
-        "description": "Username field icon text."
     },
     "totp": {
         "message": "TOTP",
@@ -234,29 +282,25 @@
         "message": "Hämta TOTP från KeePassXC",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "Ikon för TOTP-fältet",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
         "message": "Stäng",
-        "description": "Close button text when choosing custom login fields."
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "Hoppa över",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Show more",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
         "message": "Återställ",
-        "description": "Reset button text when choosing custom login fields."
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "Bekräfta",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Inloggningsfält för denna sidan är redan valda och kommer att skrivas över.",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "Ta bort sparad data",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "Strängfält",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "Välj ett användarnamn-fält",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "Välj ett lösenord-fält",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "Välj en TOTP-fält",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "Välj sträng-fält",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Vänligen bekräfta ditt val eller välj fler fält som <em>Strängfält</em>.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "You can also use the numbers to choose the input fields from keyboard.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "Välj anpassad inloggning-fält",
@@ -363,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Välj anpassade inloggningsfält för denna sidan",
+        "message": "Välj anpassade inloggningsfält",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -542,12 +586,8 @@
         "message": "Fler än ett lösenordsfält hittades på denna sidan. Högerklicka på ett av lösenordsfälten och välj en av:",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL: ",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "Användarnamn: ",
+        "message": "Användarnamn:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -558,9 +598,13 @@
         "message": " Uppdatera",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": " Avfärda",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Avbryt",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Tillbaka",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Fråga aldrig för den här sidan",
@@ -587,12 +631,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Egenvalda inloggningsfält",
-        "description": "Saved custom login fields tab text."
+        "message": "Anpassade inloggningsfält",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Förval för sidan",
-        "description": "Site preferences fields tab text."
+        "message": "Sidinställningar",
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "Om",
@@ -607,12 +651,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Egenvalda inloggningsfält",
-        "description": "Custom login fields page header."
+        "message": "Anpassade inloggningsfält",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Förval för sidan",
-        "description": "Site preferences page header."
+        "message": "Sidinställningar",
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "Om",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Ja, ta bort nu",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "Avbryt",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Återställ",
@@ -679,7 +723,7 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Aktivera lösenordsgenerator",
+        "message": "Aktivera ikoner i lösenordsgenerator",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
@@ -687,7 +731,7 @@
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Använd dynamisk identifiering av indatafält.",
+        "message": "Använd dynamisk identifiering av indatafält",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -699,7 +743,7 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Hämta inloggningsuppgifter automatiskt.",
+        "message": "Hämta inloggningsuppgifter automatiskt",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
@@ -711,19 +755,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Fyll automatiskt i single-credential uppgifter.",
+        "message": "Fyll automatiskt i enstaka inloggningsuppgifter.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Fyll automatiskt i enstaka TOTP-poster.",
+        "message": "Fyll automatiskt i enstaka TOTP-poster",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Aktivera autokomplettering av fält för användarnamn.",
+        "message": "Aktivera autokomplettering av användarnamn",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Visa gruppnamnet i autokompletteringslistan när inloggningsuppgifterna är från olika grupper.",
+        "message": "Visa gruppnamnet i autokompletteringslistan när inloggningsuppgifterna är från olika grupper",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -735,19 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Visa notifieringar.",
+        "message": "Visa aviseringar.",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Använd monokrom verktygsfältsikon.",
+        "message": "Använd monokrom verktygsfältsikon",
         "description": "Use monochrome toolbar icon checkbox text."
     },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Spara endast domän.",
+        "message": "Spara endast domän",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Visa en notifikation när nya inloggningsuppgifter har hittats i databasen.",
+        "message": "Visa en banderoll på sidan när nya autentiseringsuppgifter kan sparas i databasen",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -831,7 +879,7 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Använd fördefinierade webbplatser för kompatibilitet.",
+        "message": "Använd fördefinierade webbplatser för kompatibilitet",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
@@ -871,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "När inloggningsuppgifter anges från olika grupper, kommer gruppnamnet att visas.",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -881,6 +929,10 @@
     "optionsUseMonochromeToolbarIconHelpText": {
         "message": "Använd en monokrom ikon med färgade märken i verktygsfältet som anpassar sig till ljust/mörkt webbläsartema.",
         "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Spara enbart domänen istället för hela URL:en när nya inloggningsuppgifter sparas.",
@@ -1012,15 +1064,15 @@
     },
     "optionsColumnPageURL": {
         "message": "Sid-URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "Ignorera",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "Identifiera endast användarnamn",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "Förbättrad identifiering av inmatningsfält",
@@ -1032,23 +1084,23 @@
   },
     "optionsColumnDelete": {
         "message": "Ta bort",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Aktivera alla funktioner",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Inaktivera nya/ändrade autentiseringsuppgifter",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Skicka inte automatiskt",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Inaktivera alla funktioner",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Titel",
@@ -1091,40 +1143,40 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Inga sparade anpassade inloggningsfält hittade.",
+        "message": "Inga sparade anpassade inloggningsfält hittades.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table below.",
-        "description": "Table caption of Custom login fields page."
+        "message": "Du kan hantera sparade, anpassade inloggningsfält med tabellen.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "Om KeePassXC-Browser upptäcker fel inloggningsfält så kan du själv ange korrekta fält.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Gå till sidan och klicka på ikonen för KeePassXC-Browser, välj sedan",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
         "message": "På denna sida kan du hantera sparade, anpassade inloggningsfält.",
-        "description": "Saved custom login fields info text, third part."
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Ta bort anpassade inloggningsfält?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Vill du ta bort sparade, anpassade inloggningsfält?",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Vill du verkligen ta bort det sparade anpassade inloggningsfältet för sidan: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Vill du verkligen ta bort de sparade, anpassade inloggningsfälten på sidan: $1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "KeePassXC-Browser kommer automatiskt att identifiera inloggningsfälten nästa gång du besöker denna sidan.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Inga ignorerade sidor funna.",
-        "description": "Shown when no site preferences are saved."
+        "message": "Inga sidinställningar hittades.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Ta bort sida?",
@@ -1132,19 +1184,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Siter på denna sidan har speciella hanteringsmetoder associerade.",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "För att ignorera nya/ändrade uppgifter för en specifik sida, lägg till dem nedan eller klicka på den blinkande ikonen för KeePassXC-Browser och välj",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "Om en site ignoreras totalt (<em>Avaktivera alla funktioner</em> är vald) så kommer pluginen inte att göra någonting då sidan besöks.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Identifiering med enbart användarnamn låter KeePassXC-Browser fylla i inloggningsuppgifter på siter med separata sidor för användarnamn och lösenord.",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Förbättrad identifiering av inmatningsfält möjliggör mer detaljerad dynamisk identifiering av inmatningsfält. Det kan dock påverka sidans prestanda. Används med försiktighet.",
@@ -1156,22 +1208,22 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Add URL manually",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "URL:en måste börja med antingen  <code>https://</code>, <code>http://</code>, <code>file://</code> eller <code>ftp://</code> och måste vara minst 5 tecken lång.",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Vill du verkligen ta bort den angivna siten från listan: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-Browser kommer att aktivera alla funktioner för denna siten och ta bort identifiering som bygger på enbart användarnamn.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table below.",
+        "message": "Du kan hantera sparade sidinställningar med tabellen.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1215,7 +1267,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Create new issue on GitHub",
+        "message": "Skapa nytt ärende på GitHub.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {

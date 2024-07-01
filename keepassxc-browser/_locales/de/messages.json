@@ -3,6 +3,58 @@
         "message": "KeePassXC-Integration für moderne Webbrowser",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Seiteneinstellungen für diese URL hinzufügen.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Cross-Origin iframes für die aktuelle Seite zulassen.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Aktuell aktive Datenbank mit KeePassXC-Browser verbinden.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Debug-Informationen in die Zwischenablage kopieren.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Beendet die HTTP-Basisauthentifizierung.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Aktuell aktive Datenbank erneut mit KeePassXC-Browser verbinden.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Erkennt alle Eingabefelder auf der Seite neu.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Lädt die Erweiterung neu und stellt die Verbindung zu KeePassXC wieder her.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Verbundene Datenbank aus KeePassXC-Browser entfernen.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Benutzerdefinierte Anmeldefelder für diese URL entfernen.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Seiteneinstellungen für diese URL entfernen.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Aktive Datenbank erneut öffnen.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Fügt der aktuellen Seite eine reine Benutzernamenerkennung hinzu.",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Benutzername und Passwort ausfüllen",
         "description": "Context menu item for filling both username and password."
@@ -28,7 +80,7 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Attribut ausfüllen …",
+        "message": "Attribut ausfüllen…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -120,8 +172,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Zugriff auf alle Einträge verweigert.",
-      "description": "Access to all entries denied."
+        "message": "Zugriff auf alle Einträge verweigert.",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Beglaubigung wird nicht unterstützt.",
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Tatsächliche Domain ist keine gültige Domain.",
-      "description": "Effective domain is not a valid domain."
+        "message": "Tatsächliche Domain ist keine gültige Domain.",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Ursprung und RP-ID stimmen nicht überein.",
-      "description": "Origin and RP ID do not match."
+        "message": "Ursprung und RP-ID stimmen nicht überein.",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "Es wurden keine unterstützten Algorithmen bereitgestellt.",
-      "description": "No supported algorithms were provided."
+        "message": "Es wurden keine unterstützten Algorithmen bereitgestellt.",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Warten, bis der Timer abgelaufen ist.",
@@ -187,10 +239,6 @@
         "message": "Nicht mit KeePassXC verbunden.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
-    "passwordGeneratorIcon": {
-        "message": "Passwortgenerator-Symbol",
-        "description": "Alt attribute text of the password generator icon."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "Fehler:\nDas generierte Passwort ist länger als die zulässige Länge!\nEs wurde auf die Länge abgeschnitten.\n\nBitte merken Sie sich das neue Passwort!",
         "description": "A warning text shown in the password generator."
@@ -204,27 +252,27 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Passwort generieren",
+        "message": "Passwort generieren.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
         "message": "Das Starten des Passwortgenerators wird in dieser KeePassXC-Version nicht unterstützt. Bitte aktualisieren Sie KeePassXC auf eine neuere Version."
     },
     "usernameFieldText": {
-        "message": "Anmeldedaten aus KeePassXC ausfüllen",
+        "message": "Anmeldedaten aus KeePassXC ausfüllen.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "Keine Anmeldedaten zum Ausfüllen.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "Datenbank ist gesperrt",
+        "message": "Datenbank ist gesperrt.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC ist getrennt",
+        "message": "KeePassXC ist getrennt.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
-    },
-    "usernameFieldIcon": {
-        "message": "Symbol für das Benutzername-Feld",
-        "description": "Username field icon text."
     },
     "totp": {
         "message": "TOTP",
@@ -234,29 +282,25 @@
         "message": "TOTP aus KeePassXC ausfüllen",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "Symbol für das TOTP-Feld",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
         "message": "Schließen",
-        "description": "Close button text when choosing custom login fields."
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "Überspringen",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Mehr anzeigen",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
         "message": "Zurücksetzen",
-        "description": "Reset button text when choosing custom login fields."
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "Bestätigen",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Anmeldefelder für diese Seite sind bereits ausgewählt und werden überschrieben.",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "Gespeicherte Daten löschen",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "Zeichenkettenfeld",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "Feld für Benutzernamen auswählen",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "Feld für Passwort auswählen",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "Feld für TOTP auswählen",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "Zeichenkettenfelder auswählen",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Bitte bestätigen Sie Ihre Auswahl oder wählen Sie weitere Felder als <em>Zeichenkettenfelder</em> aus.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "Sie können die Zahlen auch verwenden, um die Eingabefelder über die Tastatur auszuwählen.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "Ein benutzerdefiniertes Anmeldefeld auswählen",
@@ -363,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Benutzerdefinierte Anmeldefelder für diese Seite wählen",
+        "message": "Benutzerdefinierte Anmeldefelder auswählen",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -371,7 +415,7 @@
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": " Wiederverbinden",
+        "message": "Wiederverbinden",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
@@ -427,7 +471,7 @@
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
-        "message": "Status wird überprüft …",
+        "message": "Status wird überprüft…",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
@@ -542,10 +586,6 @@
         "message": "Auf dieser Seite wurde mehr als ein Passwortfeld gefunden. Klicken Sie mit der rechten Maustaste auf eines der Passwortfelder und wählen Sie eines der folgenden aus:",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL: ",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
         "message": "Benutzername: ",
         "description": "A username field name shown on credential update."
@@ -558,9 +598,13 @@
         "message": "Aktualisieren",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "Verwerfen",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Abbrechen",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Zurück",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Für diese Seite nicht wieder fragen",
@@ -588,11 +632,11 @@
     },
     "optionsCustomFieldsTab": {
         "message": "Benutzerdefinierte Anmeldefelder",
-        "description": "Saved custom login fields tab text."
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
         "message": "Seiteneinstellungen",
-        "description": "Site preferences fields tab text."
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "Über",
@@ -608,11 +652,11 @@
     },
     "optionsMenuCustomFields": {
         "message": "Benutzerdefinierte Anmeldefelder",
-        "description": "Custom login fields page header."
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
         "message": "Seiteneinstellungen",
-        "description": "Site preferences page header."
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "Über",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Ja, jetzt entfernen",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "Abbrechen",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Zurücksetzen",
@@ -679,11 +723,11 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Symbole für Passwortgenerator aktivieren.",
+        "message": "Symbole für Passwortgenerator aktivieren",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Symbole für Benutzernamensfelder aktivieren.",
+        "message": "Symbole für Benutzernamensfelder aktivieren",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
@@ -699,11 +743,11 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Anmeldedaten automatisch abrufen.",
+        "message": "Anmeldedaten automatisch abrufen",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Verbindung mit KeePassXC automatisch wiederherstellen.",
+        "message": "Automatisch mit KeePassXC wiederverbinden",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -711,19 +755,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Einträge mit einzelnen Anmeldedaten automatisch ausfüllen.",
+        "message": "Einträge mit einzelnen Anmeldedaten automatisch ausfüllen",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Einzelne TOTP-Einträge automatisch ausfüllen.",
+        "message": "Einzelne TOTP-Einträge automatisch ausfüllen",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Autovervollständigung für Benutzernamensfelder aktivieren.",
+        "message": "Autovervollständigung für Benutzernamensfelder aktivieren",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Den Gruppennamen in der Autovervollständigungsliste anzeigen, wenn Anmeldedaten aus verschiedenen Gruppen kommen.",
+        "message": "Den Gruppennamen in der Autovervollständigungsliste anzeigen, wenn Anmeldedaten aus verschiedenen Gruppen kommen",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -735,19 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Benachrichtigungen anzeigen.",
+        "message": "Benachrichtigungen anzeigen",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Monochromes Symbol in der Symbolleiste verwenden.",
+        "message": "Monochromes Symbol in der Symbolleiste verwenden",
         "description": "Use monochrome toolbar icon checkbox text."
     },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Nur Domain speichern.",
+        "message": "Nur Domain speichern",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Benachrichtigung anzeigen, wenn neue Anmeldedaten in der Datenbank gespeichert werden können.",
+        "message": "Benachrichtigung anzeigen, wenn neue Anmeldedaten in der Datenbank gespeichert werden können",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -759,7 +807,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Ausfüllen von HTTP-Basisauthentifizierungsanmeldedaten erlauben.",
+        "message": "Ausfüllen von HTTP-Basisauthentifizierungsanmeldedaten erlauben",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -831,11 +879,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Verwendung vordefinierter Seiten für mehr Kompatibilität.",
+        "message": "Verwendung vordefinierter Seiten für mehr Kompatibilität",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Fügt bekannte Seiten mit Anmeldeformularen, die nur den Benutzernamen enthalten, zu den Seiteneinstellungen hinzu",
+        "message": "Fügt bekannte Seiten mit Anmeldeformularen, die nur den Benutzernamen enthalten, zu den Seiteneinstellungen hinzu.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -871,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Wenn Anmeldedaten von verschiedenen Gruppen vorhanden sind, wird der Gruppenname angezeigt.",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -881,6 +929,10 @@
     "optionsUseMonochromeToolbarIconHelpText": {
         "message": "Verwenden Sie ein monochromes Symbol mit farbigen Markierungen in der Symbolleiste, das sich dem hellen/dunklen Browserdesign anpasst.",
         "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Beim Speichern neuer Anmeldedaten nur die Domain anstatt der vollständigen URL speichern.",
@@ -899,7 +951,7 @@
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "KeePassXC-Browser versucht sich mit den ersten angegebenen Anmeldedaten anzumelden, wenn Anmeldedaten für eine Seite gefunden werden und der Anmeldetyp eine HTTP-Basisauthentifizierungsanfrage ist.",
+        "message": "KeePassXC-Browser versucht sich mit den ersten angegebenen Anmeldedaten anzumelden, wenn Anmeldedaten für eine Seite gefunden werden und der Anmeldetyp eine HTTP-Basisauthentifizierungsanfrage ist. Wenn mehrere Anmeldedaten vorhanden sind, kann das Popup-Fenster der Erweiterung verwendet werden, um die richtigen auszuwählen. Auch wenn diese Funktion aktiviert ist, ist es immer noch möglich, die HTTP-Basisauthentifizierung-Anmeldung manuell einzugeben.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -987,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
-        "message": "Sie können Ihre Datenbank jederzeit wieder verbinden.",
+        "message": "Sie können Ihre Datenbank jederzeit wiederverbinden.",
         "description": "Confirmation text when removing database from the list, second part."
     },
     "optionsDatabaseIdentifier": {
@@ -1012,15 +1064,15 @@
     },
     "optionsColumnPageURL": {
         "message": "Seiten-URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "Ignorieren",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "Reine Benutzernamenerkennung",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "Verbesserte Erkennung von Eingabefeldern",
@@ -1032,23 +1084,23 @@
   },
     "optionsColumnDelete": {
         "message": "Löschen",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Alle Funktionen aktivieren",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Neue/geänderte Anmeldedaten deaktivieren",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Automatisches Absenden deaktivieren",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Alle Funktionen deaktivieren",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Titel",
@@ -1095,36 +1147,36 @@
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Sie können gespeicherte benutzerdefinierte Anmeldefelder anhand der folgenden Tabelle verwalten.",
-        "description": "Table caption of Custom login fields page."
+        "message": "Sie können gespeicherte benutzerdefinierte Anmeldefelder mithilfe der Tabelle verwalten.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "Wenn KeePassXC-Browser die falschen Anmeldefelder erkennt, können Sie die richtigen Felder selbst angeben.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Gehen Sie auf die Seite, klicken Sie auf das Symbol KeePassXC-Browser und wählen Sie anschließend",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
         "message": "Auf dieser Seite können Sie gespeicherte benutzerdefinierte Anmeldefelder verwalten.",
-        "description": "Saved custom login fields info text, third part."
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
         "message": "Gespeicherte benutzerdefinierte Anmeldefelder entfernen?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
         "message": "Möchten Sie die gespeicherten benutzerdefinierten Anmeldefelder wirklich entfernen auf der Seite: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "KeePassXC-Browser wird die Anmeldefelder beim nächsten Besuch dieser Seite automatisch erkennen.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Keine ignorierten Seiten gefunden.",
-        "description": "Shown when no site preferences are saved."
+        "message": "Keine Seiteneinstellungen gefunden.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Seite entfernen?",
@@ -1132,19 +1184,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Webseiten auf dieser Seite sind mit besonderen Bearbeitungsmethoden verbunden.",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Um neue/geänderte Anmeldedaten auf einer bestimmten Webseite zu ignorieren, fügen Sie sie unten hinzu oder klicken Sie auf das blinkende KeePassXC-Browser-Symbol und wählen Sie <em>Für diese Seite nicht wieder fragen</em>.",
-        "description": "Site preferences info text, second part."
+        "message": "Um neue/geänderte Anmeldedaten für eine bestimmte Webseite zu ignorieren, fügen Sie sie unten hinzu oder wählen Sie bei der Verwendung des Anmeldebanners auf der Seite <em>Für diese Seite nicht wieder fragen</em>.",
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "Wenn eine Webseite vollständig ignoriert wird (<em>Alle Funktionen deaktivieren</em> ist ausgewählt), dann wird das Plugin beim Besuch dieser Webseite nichts tun.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Die reine Benutzernamenerkennung ermöglicht es dem KeePassXC-Browser, Zugangsdaten auf Webseiten mit separaten Seiten für Benutzername und Passwort einzugeben.",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Die verbesserte Erkennung von Eingabefeldern ermöglicht eine detailliertere dynamische Erkennung von Eingabefeldern. Dies kann jedoch die Leistung der Seite beeinträchtigen. Mit Vorsicht verwenden.",
@@ -1156,22 +1208,22 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "URL manuell hinzufügen",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "Die URL muss mit <code>https://</code>, <code>http://</code>, <code>file://</code> oder <code>ftp://</code> beginnen und mindestens 5 Zeichen lang sein.",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Möchten Sie die angegebene Webseite wirklich aus der Liste entfernen: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-Browser aktiviert alle Funktionen dieser Webseite und entfernt die reine Benutzernamenerkennung.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Sie können gespeicherte Seiteneinstellungen anhand der folgenden Tabelle verwalten.",
+        "message": "Sie können gespeicherte Seiteneinstellungen über die Tabelle verwalten.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1215,7 +1267,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Neues Thema auf GitHub erstellen",
+        "message": "Neues Thema auf GitHub erstellen.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {

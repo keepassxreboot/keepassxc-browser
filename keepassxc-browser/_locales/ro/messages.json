@@ -1,7 +1,59 @@
 {
     "extensionDescription": {
-        "message": "KeePassXC integrare pentru browsere web moderne",
+        "message": "Integrare KeePassXC pentru browsere web moderne",
         "description": "Name of the extension."
+    },
+    "addSitePreferenceButtonTitle": {
+        "message": "Adăugați preferințele site-ului pentru acest URL.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Permite iframe Cross-Origin pentru pagina curentă.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Conectați baza de date activă curentă la KeePassXC-Browser.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Copy debug info to clipboard.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Dismisses Basic HTTP Auth.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Reconectați baza de date activă curentă la KeePassXC-Browser.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Redetectează toate câmpurile de introducere a datelor din pagină.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Reîncărcați extensia și reconectați-vă la KeePassXC.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Eliminați baza de date conectată din KeePassXC-Browser.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Eliminați câmpurile personalizate de conectare pentru această adresă URL.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Eliminați preferințele site-ului pentru acest URL.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Redeschideți baza de date activă curentă.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Adăugați detecția numai pentru nume de utilizator la pagina curentă.",
+        "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
         "message": "Completați numele de utilizator și parola",
@@ -16,11 +68,11 @@
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "Afișare pictograme generatorului de parole",
+        "message": "Afișați pictogramele generatorului de parole",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Salvare credențiale",
+        "message": "Salvați credențialele",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -28,11 +80,11 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Inserează câmpul...",
+        "message": "Umpleți atributul...",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "Solicită Auto-Inserare Generală",
+        "message": "Solicitați tipul Auto-Tastare global",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
@@ -104,7 +156,7 @@
         "description": "No logins found."
     },
     "errorMessagePaswordLengthExceeded": {
-        "message": "Filled password is longer than field's allowed max length.",
+        "message": "Parola completată este mai lungă decât lungimea maximă permisă a câmpului.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
@@ -120,31 +172,31 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
-      "description": "Access to all entries denied."
+        "message": "Access to all entries denied.",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestation not supported.",
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credential is excluded.",
+        "message": "Credențialul este exclus.",
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Passkeys request canceled.",
+        "message": "Solicitarea de chei de acces a fost anulată.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
-        "message": "Invalid user verification.",
+        "message": "Verificare invalidă a utilizatorului.",
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Empty public key.",
+        "message": "Cheie publică goală.",
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Invalid URL provided.",
+        "message": "URL-ul furnizat nu este valid.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
-      "description": "Effective domain is not a valid domain."
+        "message": "Effective domain is not a valid domain.",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
-      "description": "Origin and RP ID do not match."
+        "message": "Origin and RP ID do not match.",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
-      "description": "No supported algorithms were provided."
+        "message": "No supported algorithms were provided.",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Wait for timer to expire.",
@@ -180,16 +232,12 @@
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "Contextul nu este sigur.",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Nu este conectat la KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
-    },
-    "passwordGeneratorIcon": {
-        "message": "Pictograma generator de parole",
-        "description": "Alt attribute text of the password generator icon."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Eroare: parola generată este mai lungă decât lungimea permisă!",
@@ -204,27 +252,27 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Generare parolă",
+        "message": "Generare parolă.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "Lansarea generatorului de parole nu este suportată în această versiune KeePassXC. Vă rugăm să actualizați KeePassXC la o versiune mai nouă."
     },
     "usernameFieldText": {
-        "message": "Completați datele de acreditare de la KeePassXC",
+        "message": "Completați credențialele din KeePassXC.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "Nu există credențiale de completat.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "Baza de date este blocată",
+        "message": "Baza de date este blocată.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC e deconnectat",
+        "message": "KeePassXC este deconectat.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
-    },
-    "usernameFieldIcon": {
-        "message": "Pictograma câmpului de utilizator",
-        "description": "Username field icon text."
     },
     "totp": {
         "message": "TOTP",
@@ -234,29 +282,25 @@
         "message": "Completați TOTP de la KeePassXC",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "Pictograma câmpului TOTP",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
-        "message": "Close",
-        "description": "Close button text when choosing custom login fields."
+        "message": "Închideți",
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
-        "message": "Sar peste",
-        "description": "Skip button text when choosing custom login fields."
+        "message": "Omiteți",
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Arată mai mult",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
-        "message": "Reset",
-        "description": "Reset button text when choosing custom login fields."
+        "message": "Resetare",
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
-        "message": "Confirmă",
-        "description": "Confirm button text when choosing custom login fields."
+        "message": "Confirmați",
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Câmpurile de conectare pentru această pagină sunt deja selectate și vor fi suprascrise.",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "Clear saved data",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "String field",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "Choose a username field",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "Choose a password field",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "Choose a TOTP field",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "Choose String Fields",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Confirmați selecția sau alegeți mai multe câmpuri ca și câmpuri de tip șir de caractere.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "De asemenea, puteți utiliza numerele pentru a alege câmpurile de intrare de la tastatură.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "Choose a Custom Login Field",
@@ -363,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Alegeți câmpuri de conectare personalizate",
+        "message": "Choose Custom Login Fields",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -375,7 +419,7 @@
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
-        "message": "Redetectare câmpurilor de conectare",
+        "message": "Redetectarea câmpurilor de conectare",
         "description": "Popup Redetect login fields button text."
     },
     "popupReloadButton": {
@@ -395,7 +439,7 @@
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
-        "message": "KeePassXC-browser a întâlnit o eroare:",
+        "message": "KeePassXC-Browser a întâmpinat o eroare:",
         "description": "A text shown above error message in the popup."
     },
     "popupUpdateAvailable": {
@@ -407,15 +451,15 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "Are you a first time user? Please check our Getting Started Guide.",
+        "message": "Sunteți un utilizator nou? Vă rugăm să consultați Ghidul nostru de inițiere.",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "Getting Started Guide - Setup Browser Integration",
+        "message": "Ghid de inițiere - Configurarea integrării browserului",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
-        "message": "Hide and don't show again.",
+        "message": "Ascunde și nu mai arăta din nou.",
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
@@ -542,12 +586,8 @@
         "message": "Mai mult de un câmp de parolă găsit pe această pagină. Faceți clic dreapta pe una dintre câmpurile de parolă și alegeți una dintre:",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "Url:",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "Utilizator:",
+        "message": "Nume de utilizator:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -558,20 +598,24 @@
         "message": "Actualizare",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "Respinge",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Anulare",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Înapoi",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Nu mai întreba pentru acest site",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
-        "message": "Închide",
+        "message": "Închidere",
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": "Respinge și afișeaza dialogul de autentificare implicit",
+        "message": "Anulare și afișare a dialogului de autentificare implicit",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
@@ -587,12 +631,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Câmpuri de conectare particularizate",
-        "description": "Saved custom login fields tab text."
+        "message": "Custom Login Fields",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Preferințe site",
-        "description": "Site preferences fields tab text."
+        "message": "Preferințele site-ului",
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "Despre",
@@ -607,12 +651,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Câmpuri de conectare particularizate",
-        "description": "Custom login fields page header."
+        "message": "Custom Login Fields",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Preferințe site",
-        "description": "Site preferences page header."
+        "message": "Site Preferences",
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "Despre",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Da, eliminați acum",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "Anulare",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Resetare",
@@ -679,15 +723,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Activați pictogramele generatorului de parolă.",
+        "message": "Activate password generator icons",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Activați pictogramele câmpului de nume utilizator.",
+        "message": "Activate username field icons",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Utilizați detectarea dinamică a câmpului de intrare.",
+        "message": "Use dynamic input field detection",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -695,15 +739,15 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Activați pictogramele câmpului 2FA/OTP.",
+        "message": "Activate 2FA/OTP field icons",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Regăsirea automată a acreditărilor.",
+        "message": "Automatically retrieve credentials",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Reconectarea automata la KeePassXC.",
+        "message": "Automatically reconnect to KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -711,19 +755,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Completarea automata intrărilor cu un singur Credential.",
+        "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries.",
+        "message": "Automatically fill in single TOTP entries",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Activarea completareii automate pentru câmpurile de nume de utilizator.",
+        "message": "Activate autocomplete for username fields",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Afișați numele grupului în lista completă automată atunci când datele de acreditare sunt din diferite grupuri.",
+        "message": "Display the group name in autocomplete list when credentials are from different groups",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -735,19 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Afișarea notificărilor.",
+        "message": "Afișare notificări",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon.",
+        "message": "Use monochrome toolbar icon",
         "description": "Use monochrome toolbar icon checkbox text."
     },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Salvarea numai domeniului.",
+        "message": "Save domain only",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Afișați un banner pe pagină când pot fi salvate date noi în baza de date.",
+        "message": "Show a banner on the page when new credentials can be saved to the database",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -759,7 +807,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials.",
+        "message": "Allow filling HTTP Basic Auth credentials",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -787,7 +835,7 @@
         "description": "Radio button text."
     },
     "optionsRadioNever": {
-        "message": "Niciodată",
+        "message": "niciodată",
         "description": "Radio button text."
     },
     "optionsThemeSelectionHeader": {
@@ -799,7 +847,7 @@
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
-        "message": "Selectați tema culorilor",
+        "message": "Selectați tema de culoare",
         "description": "Theme selection title text."
     },
     "optionsThemeSystem": {
@@ -807,15 +855,15 @@
         "description": "System theme text."
     },
     "optionsThemeDark": {
-        "message": "culoare închisă",
+        "message": "Întunecată",
         "description": "Dark theme text."
     },
     "optionsThemeLight": {
-        "message": "luminos",
+        "message": "Luminoasă",
         "description": "Light theme text."
     },
     "optionsKeyboardShortcutsHeader": {
-        "message": "Comenzi rapide de la tastatură",
+        "message": "Comenzi rapide de tastatură",
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
@@ -831,11 +879,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Folosește site-uri predefinite pentru compatibilitate ",
+        "message": "Use predefined sites for compatibility",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adaugă site-uri comune care au pagini separate pentru itroducerea numelui de utilizator si parola in lista de preferințe",
+        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -855,11 +903,11 @@
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Permiteți KeePassXC-browser să completeze automat acreditările dacă primește doar o singură intrare.",
+        "message": "Permiteți KeePassXC-Browser să completeze automat credențialele dacă primește doar o singură intrare.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
+        "message": "Atenție! Folosirea sistemului de autocompletare nu este sigură. Utilizați-o pe propriul risc. KeePassXC-Browser încearcă să detecteze automat câmpurile de conectare. Cu toate acestea, este posibil ca acestea să fie detectate incorect, completând eventual date sensibile în câmpuri de introducere nesigure.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
@@ -871,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Când datele de acreditare sunt returnate din diferite grupuri, numele grupului va fi afișat.",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -879,15 +927,19 @@
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "message": "Utilizați o pictogramă monocromă cu insigne colorate în bara de instrumente, care se adaptează la tema de navigare deschisă/închisă.",
         "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Când salvați acreditările noi, Salvați numai domeniul în loc de URL-ul complet.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Când salvați noi câmpuri de conectare personalizate, salvați doar domeniul în loc de adresa URL completă.",
+        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1012,15 +1064,15 @@
     },
     "optionsColumnPageURL": {
         "message": "URL Site",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "Dezactivare funcții",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "Detectează doar câmpul de Utilizator",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "Improved Input Field Detection",
@@ -1032,30 +1084,30 @@
   },
     "optionsColumnDelete": {
         "message": "Şterge",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Activează toate funcțiile",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Dezactivează credențiale noi/modificate",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Dezactivează funcția de Auto-Trimite",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Dezactivează toate funcțiile",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Titlul",
         "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
-        "message": "Utilizator",
+        "message": "Nume de utilizator",
         "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
@@ -1091,40 +1143,40 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Nu s-au găsit câmpuri de conectare particularizate salvate.",
+        "message": "No saved Custom Login Fields found.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Puteți administra câmpuri de autentificare customizate salvate folosind tabelul",
-        "description": "Table caption of Custom login fields page."
+        "message": "You can manage saved Custom Login Fields using the table.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "Dacă KeePassXC-browser detectează câmpurile de conectare greșite, aveți posibilitatea să specificați singuri câmpurile corecte.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Du-te la pagina și faceți clic pe pictograma KeePassXC-browser, apoi selectați",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "Pe această pagină puteți gestiona câmpurile de conectare particularizate salvate.",
-        "description": "Saved custom login fields info text, third part."
+        "message": "On this page you can manage saved Custom Login Fields.",
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Eliminați câmpurile de conectare particularizate salvate?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Remove saved Custom Login Fields?",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Chiar doriți să eliminați câmpurile de conectare particularizate salvate pe pagina: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "KeePassXC-browser va detecta automat câmpurile de conectare data viitoare când vizitați această pagină.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Nu sunt preferințe specifice pentru site-uri",
-        "description": "Shown when no site preferences are saved."
+        "message": "No Site Preferences found.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Eliminați site-ul?",
@@ -1132,19 +1184,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Site-urile de pe această pagină au funcții specifice asociate cu ele",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "Pentru a ignora notificările de credențiale noi/modificate pentru un anumit site, adaugă-le in tabelul de mai jos sau când banner-ul de credențiale apare pe site la autentificare selectează <em>Nu mai întreba pentru acest site</em> .",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "Dacă un site este complet ignorat (<em>Dezactivează toate funcțiile</em> este selectat),  plugin-ul nu va fi activ atunci când se vizitează acel site.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Detectarea doar a câmpului de Utilizator permite KeePassXC-Browser să completeze datele de logare unde numele de utilizator si parola sunt introduse pe pagini diferite ale site-ului",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
@@ -1156,22 +1208,22 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Adaugă URL manual",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "URL-ul trebuie sa inceapă cu una din <code>https://</code>, <code>http://</code>, <code>file://</code> sau <code>ftp://</code> si trebuie sa conțină cel puțin 5 caractere",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Chiar doriți să eliminați site-ul specificat din listă: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-Browser va permite toate funcțiile pentru acest site și elimină detectarea doar a câmpului de utilizator.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Puteți gestiona preferințele de site salvate folosind tabelul.",
+        "message": "You can manage saved Site Preferences using the table.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1211,11 +1263,11 @@
         "description": "About page text of licenses."
     },
     "optionsAboutReportBugs": {
-        "message": "Raportează bug-uri",
+        "message": "Raportați erorile",
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Creați un nou issue pe GitHub",
+        "message": "Create new issue on GitHub.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
@@ -1263,11 +1315,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Chei de acces",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable passkeys",
+        "message": "Activați cheile de acces",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {

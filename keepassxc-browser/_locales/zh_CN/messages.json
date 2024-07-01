@@ -3,6 +3,58 @@
         "message": "KeePassXC 与现代 Web 浏览器的集成",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "为此 URL 添加网站设置。",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "当前页面允许跨域 iframe 框架。",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "将当前使用的数据库连接到 KeePassXC-Browser。",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "复制调试信息到剪贴板。",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "取消 Basic HTTP Auth。",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "将当前使用的数据库重新连接到 KeePassXC-Browser。",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "重新检测页面上的所有输入字段。",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "重新加载扩展程序并重新连接 KeePassXC。",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "删除 KeePassXC-Browser 已连接的数据库。",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "为此 URL 删除自定义登录字段。",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "为此 URL 删除网站设置。",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "重新打开当前使用的数据库。",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "为当前页面添加“仅用户名”检测。",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "填充用户名和密码",
         "description": "Context menu item for filling both username and password."
@@ -28,7 +80,7 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "填充属性...",
+        "message": "填充属性…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -120,8 +172,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "访问所有条目被拒绝。",
-      "description": "Access to all entries denied."
+        "message": "访问所有条目被拒绝。",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "未支持密钥认证。",
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective Domain 不是有效的域名。",
-      "description": "Effective domain is not a valid domain."
+        "message": "Effective Domain 不是有效的域名。",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin 与 RP ID 不匹配。",
-      "description": "Origin and RP ID do not match."
+        "message": "Origin 与 RP ID 不匹配。",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "未提供受支持的算法。",
-      "description": "No supported algorithms were provided."
+        "message": "未提供受支持的算法。",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "等待计时器过期。",
@@ -187,10 +239,6 @@
         "message": "未连接到 KeePassXC。",
         "description": "Error notification shown when not connected to KeePassXC"
     },
-    "passwordGeneratorIcon": {
-        "message": "密码生成器图标",
-        "description": "Alt attribute text of the password generator icon."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "错误：生成的密码超过了允许的长度！",
         "description": "A warning text shown in the password generator."
@@ -204,27 +252,27 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "生成密码",
+        "message": "生成密码。",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
         "message": "此版本 KeePassXC 不支持运行密码生成器。请将 KeePassXC 更新到新版本。"
     },
     "usernameFieldText": {
-        "message": "从 KeePassXC 填充凭据",
+        "message": "从 KeePassXC 填充凭据。",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "没有可以填充的凭据。",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "数据库已锁定",
+        "message": "数据库已锁定。",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC 已断开连接",
+        "message": "KeePassXC 已断开连接。",
         "description": "Username field icon hover text when KeePassXC is disconnected."
-    },
-    "usernameFieldIcon": {
-        "message": "用户名字段图标",
-        "description": "Username field icon text."
     },
     "totp": {
         "message": "TOTP",
@@ -234,29 +282,25 @@
         "message": "从 KeePassXC 填充 TOTP",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "TOTP 字段图标",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
         "message": "关闭",
-        "description": "Close button text when choosing custom login fields."
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "跳过",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "显示更多",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
         "message": "重置",
-        "description": "Reset button text when choosing custom login fields."
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "确认",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "此页面的登录字段已被选中，并将会被覆盖。",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "清除已保存的数据",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "字符串字段",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "选择用户名字段",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "选择密码字段",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "选择 TOTP 字段",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "选择字符串字段",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "请确认您的选择，或选择更多字段作为字符串字段。",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "您也可以使用键盘的数字键选择输入字段。",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "选择自定义登录字段",
@@ -542,10 +586,6 @@
         "message": "在此页面中找到多个密码字段。右键点击其中一个密码字段，然后选择一个：",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL：",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
         "message": "用户名：",
         "description": "A username field name shown on credential update."
@@ -558,9 +598,13 @@
         "message": "更新",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "关闭",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "取消",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "返回",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "此网站不再询问",
@@ -588,11 +632,11 @@
     },
     "optionsCustomFieldsTab": {
         "message": "自定义登录字段",
-        "description": "Saved custom login fields tab text."
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
         "message": "网站设置",
-        "description": "Site preferences fields tab text."
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "关于",
@@ -608,11 +652,11 @@
     },
     "optionsMenuCustomFields": {
         "message": "自定义登录字段",
-        "description": "Custom login fields page header."
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
         "message": "网站设置",
-        "description": "Site preferences page header."
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "关于",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "是的，立即删除",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "取消",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "重置",
@@ -687,7 +731,7 @@
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "使用动态输入框检测。",
+        "message": "使用动态输入框检测",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -699,11 +743,11 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "自动检索凭据。",
+        "message": "自动检索凭据",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "自动重新连接 KeePassXC。",
+        "message": "自动重新连接 KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -711,19 +755,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "自动填充单凭据条目。",
+        "message": "自动填充单凭据条目",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "自动填充单 TOTP 条目。",
+        "message": "自动填充单 TOTP 条目",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "激活用户名字段的自动填充功能。",
+        "message": "激活用户名字段的自动填充功能",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "当凭据在不同群组时，在自动填充列表中显示群组名。",
+        "message": "当凭据在不同群组时，在自动填充列表中显示群组名",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -735,19 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "显示通知。",
+        "message": "显示通知",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "使用单色工具栏图标。",
+        "message": "使用单色工具栏图标",
         "description": "Use monochrome toolbar icon checkbox text."
     },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "只保存域名。",
+        "message": "只保存域名",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "在可以保存新凭据到数据库时显示页面横幅。",
+        "message": "在可以保存新凭据到数据库时显示页面横幅",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -759,7 +807,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "允许填充 HTTP Basic 认证凭据。",
+        "message": "允许填充 HTTP Basic 认证凭据",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -831,7 +879,7 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "使用预定义的网站以改善兼容性。",
+        "message": "使用预定义的网站以改善兼容性",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
@@ -871,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "当凭据来自不同群组时，显示群组名称。",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -881,6 +929,10 @@
     "optionsUseMonochromeToolbarIconHelpText": {
         "message": "在工具栏中显示带彩色标记的单色图标，以适应浏览器的明亮/暗黑主题。",
         "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "保存新凭据时，只保存域名而非完整 URL。",
@@ -1012,15 +1064,15 @@
     },
     "optionsColumnPageURL": {
         "message": "页面 URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "忽略",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "“仅用户名”检测",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "改进的输入框检测",
@@ -1032,23 +1084,23 @@
   },
     "optionsColumnDelete": {
         "message": "删除",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "启用所有功能",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "禁用新添加或更新的凭据",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "禁用自动提交",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "禁用所有功能",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "标题",
@@ -1096,35 +1148,35 @@
     },
     "optionsCustomFieldsTableCaption": {
         "message": "您可以使用此表格管理已保存的自定义登录字段。",
-        "description": "Table caption of Custom login fields page."
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "如果 KeePassXC-Browser 检测到错误的登录字段，您可以自己指定正确的字段。",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "前往页面并点击 KeePassXC-Browser 图标，然后选择",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
         "message": "在此页面您可以管理已保存的自定义登录字段。",
-        "description": "Saved custom login fields info text, third part."
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
         "message": "是否删除已保存的自定义登录字段？",
-        "description": "Confirmation text when removing saved custom login fields."
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
         "message": "您确定要删除此页面上保存的自定义登录字段吗：$1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "KeePassXC-Browser 将在您下次访问此页面时自动检测登录字段。",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
         "message": "未找到网站设置。",
-        "description": "Shown when no site preferences are saved."
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "是否删除网站？",
@@ -1132,19 +1184,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "此页面上的网站具有与之关联的特殊处理方法。",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "要在特定网站上忽略新添加或更新的凭据，请在下面添加它们，或在页面的凭据横幅上选择<em>此网站不再询问</em>。",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "如果网站被完全忽略（<em>禁用所有功能</em>被选中），则在访问该网站时插件将不执行任何操作。",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "“仅用户名”检测允许 KeePassXC-Browser 在访问用户名与密码不在同一页面的网站时，仍能填充登录信息。",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "改进的输入框检测允许更详细的动态输入框检测。但可能会影响页面性能。请小心使用。",
@@ -1156,19 +1208,19 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "手动添加 URL",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "网址必须以 <code>https://</code>、<code>http://</code>、<code>file://</code> 或 <code>ftp://</code> 开头，并且必须至少包含 5 个字符。",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "您确定要从列表中删除这些网站吗：$1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-Browser 将在此网站启用所有功能并禁用“仅用户名”检测。",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
         "message": "您可以使用此表格管理已保存的网站设置。",
@@ -1215,7 +1267,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "在 GitHub 上创建新议题",
+        "message": "在 GitHub 上创建新议题。",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
