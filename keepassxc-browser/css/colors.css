@@ -1,8 +1,11 @@
-:root, :host {
+:root,
+:host {
+    --kpxc-autocomplete-footer-color: #f2f2f2;
     --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
+    --kpxc-box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     --kpxc-card-background-color: #fff;
-    --kpxc-card-border-color: rgba(0,0,0,.125);
+    --kpxc-card-border-color: rgba(0, 0, 0, .125);
     --kpxc-card-header-color: #fafafa;
     --kpxc-checkbox-color: #5b5b5d;
     --kpxc-checkbox-background-color: #2b2a2a;
@@ -11,7 +14,7 @@
     --kpxc-input-background-color: #fff;
     --kpxc-input-border: 1px solid #2b4d1a;
     --kpxc-input-border-color: #292a2a;
-    --kpxc-input-main-border-color: rgba(0,0,0,.125);
+    --kpxc-input-main-border-color: rgba(0, 0, 0, .125);
     --kpxc-link-color: #3a8233;
     --kpxc-link-hover-color: #429f14;
     --kpxc-sidebar-background-color: #27272a;
@@ -19,10 +22,15 @@
     --kpxc-table-hover-color: #f2f2f2;
     --kpxc-table-odd-color: #f2f2f2;
     --kpxc-text-color: #000;
+    --kpxc-lighter-text-color: rgba(0, 0, 0, 0.8);
+    --kpxc-light-text-color: rgba(0, 0, 0, 0.5);
 }
 
 @media (prefers-color-scheme: dark) {
-    :root, :host {
+
+    :root,
+    :host {
+        --kpxc-autocomplete-footer-color: #2b2a2a;
         --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
         --kpxc-background-color: #3b3b3d;
         --kpxc-card-background-color: #2b2a2a;
@@ -42,11 +50,14 @@
         --kpxc-table-hover-color: #474948;
         --kpxc-table-odd-color: #383a39;
         --kpxc-text-color: #cbcfcb;
+        --kpxc-lighter-text-color: rgba(203, 207, 203, 0.8);
+        --kpxc-light-text-color: rgba(203, 207, 203, 0.5);
     }
 }
 
 /* Same colors for manual switching */
 [data-bs-theme='dark'] {
+    --kpxc-autocomplete-footer-color: #2b2a2a;
     --kpxc-autocomplete-menu-border: 1px solid #3b3b3d;
     --kpxc-background-color: #3b3b3d;
     --kpxc-card-background-color: #2b2a2a;
@@ -66,13 +77,17 @@
     --kpxc-table-hover-color: #474948;
     --kpxc-table-odd-color: #383a39;
     --kpxc-text-color: #cbcfcb;
+    --kpxc-lighter-text-color: rgba(203, 207, 203, 0.8);
+    --kpxc-light-text-color: rgba(203, 207, 203, 0.5);
 }
 
 [data-bs-theme='light'] {
+    --kpxc-autocomplete-footer-color: #f2f2f2;
     --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
+    --kpxc-box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --kpxc-card-background-color: #fff;
-    --kpxc-card-border-color: rgba(0,0,0,.125);
+    --kpxc-card-border-color: rgba(0, 0, 0, .125);
     --kpxc-card-header-color: #fafafa;
     --kpxc-checkbox-color: #5b5b5d;
     --kpxc-checkbox-background-color: #5b5b5d;
@@ -81,11 +96,14 @@
     --kpxc-input-background-color: #fff;
     --kpxc-input-border: 1px solid #2b4d1a;
     --kpxc-input-border-color: #292a2a;
-    --kpxc-input-main-border-color: rgba(0,0,0,.125);
+    --kpxc-input-main-border-color: rgba(0, 0, 0, .125);
     --kpxc-link-color: #3a8233;
     --kpxc-link-hover-color: #429f14;
     --kpxc-table-border-color: rgb(222, 226, 230);
     --kpxc-table-hover-color: #f2f2f2;
     --kpxc-table-odd-color: #f2f2f2;
     --kpxc-text-color: #000;
+    --kpxc-lighter-text-color: rgba(0, 0, 0, 0.8);
+    --kpxc-light-text-color: rgba(0, 0, 0, 0.5);
+}
 }

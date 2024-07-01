@@ -16,6 +16,8 @@ class Autocomplete {
         this.elements = [];
         this.index = -1;
         this.input = undefined;
+        this.showGroup = true;
+        this.useCompactMode = false;
         this.wrapper = undefined;
         this.shadowRoot = undefined;
         this.container = undefined;
@@ -25,25 +27,28 @@ class Autocomplete {
         this.elements = [];
     }
 
-    async click(e) {
+    async click(e) {}
 
-    }
+    async itemClick(e, input, uuid) {}
 
-    async itemClick(e, input, uuid) {
+    async itemEnter(index, item) {}
 
-    }
-
-    async itemEnter(index, item) {
-
-    }
-
-    async create(input, showListInstantly = false, autoSubmit = false, afterFillSort = SORT_BY_MATCHING_CREDENTIALS_SETTING) {
+    async create(
+        input,
+        showListInstantly = false,
+        autoSubmit = false,
+        useCompactMode = false,
+        showGroup = true,
+        afterFillSort = SORT_BY_MATCHING_CREDENTIALS_SETTING,
+    ) {
         if (input.readOnly) {
             return;
         }
 
         this.autoSubmit = autoSubmit;
         this.afterFillSort = afterFillSort;
+        this.showGroup = showGroup;
+        this.useCompactMode = useCompactMode;
 
         if (!this.autocompleteList.includes(input)) {
             input.addEventListener('click', e => this.click(e));
@@ -63,9 +68,12 @@ class Autocomplete {
             return;
         }
         this.deselectItem();
-        e.target.classList.add('kpxcAutocomplete-active');
+
+        const itemContainer = e.target.classList.contains('kpxcAutocomplete-item') ? e.target : e.target.parentElement;
+        itemContainer.classList.add('kpxcAutocomplete-item--active');
+
         const items = this.getAllItems();
-        this.index = Array.from(items).indexOf(e.target);
+        this.index = Array.from(items).indexOf(itemContainer);
     }
 
     async showList(inputField) {
@@ -89,14 +97,21 @@ class Autocomplete {
             this.wrapper = kpxcUI.createElement('div');
             this.wrapper.style.all = 'unset';
             this.wrapper.style.display = 'none';
-            styleSheet.addEventListener('load', () => this.wrapper.style.display = 'block');
-            this.container = kpxcUI.createElement('div', 'kpxcAutocomplete-container', { 'id': 'kpxcAutocomplete-container' });
+            styleSheet.addEventListener('load', () => (this.wrapper.style.display = 'block'));
+            this.container = kpxcUI.createElement('div', 'kpxcAutocomplete-container', {
+                id: 'kpxcAutocomplete-container',
+            });
+
+            // Apply compact mode class
+            if (kpxc.settings.useCompactMode) {
+                this.container.classList.add('kpxcAutocomplete-container--compact');
+            }
 
             this.shadowRoot = this.wrapper.attachShadow({ mode: 'closed' });
             this.shadowRoot.append(colorStyleSheet);
             this.shadowRoot.append(styleSheet);
 
-            this.list = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { 'id': 'kpxcAutocomplete-list' });
+            this.list = kpxcUI.createElement('div', 'kpxcAutocomplete-items', { id: 'kpxcAutocomplete-list' });
             initColorTheme(this.container);
 
             this.container.append(this.list);
@@ -111,7 +126,7 @@ class Autocomplete {
         }
 
         this.updateList();
-        this.container.style.display = 'block';
+        this.container.classList.add('kpxcAutocomplete-container--visible');
         this.updatePosition();
     }
 
@@ -131,30 +146,70 @@ class Autocomplete {
 
         // Update credentials to menu div
         for (const c of this.elements) {
-            const item = document.createElement('div');
-            item.textContent = c.label;
-            item.setAttribute('uuid', c.uuid);
+            const item = this.generateItem(c);
 
-            const itemInput = kpxcUI.createElement('input', '', { 'type': 'hidden', 'value': c.value });
+            const itemInput = kpxcUI.createElement('input', '', { type: 'hidden', value: c.value });
             item.append(itemInput);
             item.addEventListener('click', e => this.itemClick(e, this.input, c.uuid));
 
             // These events prevent the double hover effect if both keyboard and mouse are used
             item.addEventListener('mousemove', e => this.mouseMove(e));
-
             item.addEventListener('mousedown', e => e.stopPropagation());
             item.addEventListener('mouseup', e => e.stopPropagation());
 
             // If this page has an associated uuid and it matches this credential, then put it on top of the list
-            if (username === c.value
-                || (this.afterFillSort === SORT_BY_RELEVANT_ENTRY && c.uuid === pageUuid)) {
+            if (username === c.value || (this.afterFillSort === SORT_BY_RELEVANT_ENTRY && c.uuid === pageUuid)) {
                 this.list.prepend(item);
             } else {
                 this.list.appendChild(item);
             }
         }
 
+        // Use only two columns if groups are not shown
+        if (this.useCompactMode && !this.showGroup) {
+            this.list.style.gridTemplateColumns = 'repeat(2, auto)';
+        }
+
         this.selectItem();
+    }
+
+    // Add parentElement parameter
+    generateItem(credential) {
+        // Create the DOM element for the list item wrapper.
+        const item = kpxcUI.createElement('div', 'kpxcAutocomplete-item', {
+            title: `${credential.title} | ${credential.value} | ${credential.group}`
+        });
+        item.setAttribute('uuid', credential.uuid);
+
+        // Create the DOM element for the list item header.
+        const itemHeader = document.createElement('div');
+        itemHeader.classList.add('kpxcAutocomplete-item__header');
+
+        // Create the DOM element for showing the group only when the group name is available.
+        if (!this.useCompactMode) {
+            const itemGroup = kpxcUI.createElement('div', 'kpxcAutocomplete-item__group', {}, credential.group);
+            itemHeader.append(itemGroup);
+        }
+
+        // Create the DOM element for showing the credentials name.
+        const itemLabel = kpxcUI.createElement('div', 'kpxcAutocomplete-item__label', {}, credential.title);
+        itemHeader.append(itemLabel);
+
+        // Append the header to the list item.
+        item.append(itemHeader);
+
+        // Create the DOM element for showing the credentials username field.
+        const itemClassName = this.showGroup ? 'kpxcAutocomplete-item__value' : 'kpxcAutocomplete-item__value--last';
+        const itemValue = kpxcUI.createElement('div', itemClassName, {}, credential.value);
+        item.append(itemValue);
+
+        // If compact mode is enabled, append group to the end
+        if (this.useCompactMode && this.showGroup) {
+            const itemGroup = kpxcUI.createElement('div', 'kpxcAutocomplete-item__group', {}, credential.group);
+            item.append(itemGroup);
+        }
+
+        return item;
     }
 
     selectItem() {
@@ -162,14 +217,14 @@ class Autocomplete {
         const items = this.getAllItems();
         const item = items[this.index];
         if (item !== undefined) {
-            item.classList.add('kpxcAutocomplete-active');
+            item.classList.add('kpxcAutocomplete-item--active');
             item.scrollIntoView({ block: 'nearest' });
         }
     }
 
     deselectItem() {
-        const items = this.list.querySelectorAll('div.kpxcAutocomplete-active');
-        items.forEach(item => item.classList.remove('kpxcAutocomplete-active'));
+        const items = this.list.querySelectorAll('div.kpxcAutocomplete-item--active');
+        items.forEach(item => item.classList.remove('kpxcAutocomplete-item--active'));
     }
 
     closeList() {
@@ -178,11 +233,11 @@ class Autocomplete {
             return;
         }
 
-        this.container.style.display = 'none';
+        this.container.classList.remove('kpxcAutocomplete-container--visible');
     }
 
     getAllItems() {
-        return this.list.getElementsByTagName('div');
+        return this.list.getElementsByClassName('kpxcAutocomplete-item');
     }
 
     /**
@@ -191,7 +246,7 @@ class Autocomplete {
      * - ArrowUp selects item above, or the last item (first is active)
      * - Enter or Tab selects the item
      * - Backspace and Delete shows the list if input field is empty. First item is activated
-    */
+     */
     async keyDown(e) {
         if (!e.isTrusted) {
             return;
@@ -211,7 +266,7 @@ class Autocomplete {
             } else {
                 // Activate next item
                 const items = this.getAllItems();
-                this.index = (this.index+1) % items.length;
+                this.index = (this.index + 1) % items.length;
                 this.selectItem();
             }
         } else if (e.key === 'ArrowUp' && this.list) {
@@ -274,23 +329,18 @@ class Autocomplete {
             return;
         }
 
-        const rect = this.input.getBoundingClientRect();
-        this.container.style.minWidth = Pixels(this.input.offsetWidth);
-
         // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
+        const rect = this.input.getBoundingClientRect();
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
-        const menuOffset = (totalHeight + rect.y) > window.self.visualViewport.height ? totalHeight : 0;
-        if (menuOffset > 0) {
-            this.container.classList.add('kpxcAutocomplete-container-on-top');
-        } else {
-            this.container.classList.remove('kpxcAutocomplete-container-on-top');
-        }
+        const menuOffset = totalHeight + rect.y > window.self.visualViewport.height ? totalHeight : 0;
 
         const scrollTop = kpxcUI.getScrollTop();
         const scrollLeft = kpxcUI.getScrollLeft();
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
-            this.container.style.top = Pixels(rect.top - kpxcUI.bodyRect.top + scrollTop + this.input.offsetHeight - menuOffset);
+            this.container.style.top = Pixels(
+                rect.top - kpxcUI.bodyRect.top + scrollTop + this.input.offsetHeight - menuOffset,
+            );
             this.container.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + scrollLeft);
         } else {
             this.container.style.top = Pixels(rect.top + scrollTop + this.input.offsetHeight - menuOffset);
