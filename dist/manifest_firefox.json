@@ -6,6 +6,7 @@
     "author": "KeePassXC Team",
     "icons": {
         "16": "icons/keepassxc.svg",
+        "32": "icons/keepassxc.svg",
         "48": "icons/keepassxc.svg",
         "64": "icons/keepassxc.svg",
         "96": "icons/keepassxc.svg",
