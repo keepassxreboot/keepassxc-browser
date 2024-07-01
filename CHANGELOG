@@ -13,7 +13,7 @@
 - Fix showing number of credentials in the toolbar icon with HTTP Basic Auth [#2155]
 - Passkeys: Rename functions to prevent overrides [#2230]
 - Passkeys: Remove temporary exceptions [#2206]
-- Refactor design of Autocomplete Menu (Thank tinyoverflow) [#2119]
+- Refactor design of Autocomplete Menu (Thank tinyoverflow) [#2119, #2258]
 
 1.9.0.5 (2024-05-12)
 =========================
