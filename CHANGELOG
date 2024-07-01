@@ -1,3 +1,20 @@
+1.9.1 (2024-07-01)
+=========================
+- Add missing icon size for Firefox (Thanks leoheitmannruiz)
+- Change password fill default shortcut for Chrome [#2246]
+- Change Site Preferences to ignore all ports by default [#2207]
+- Fix handling iframe URL's correctly [#2166]
+- Fix showing group name in Credential Banner when updating credentials [#2227]
+- Fix translations, tooltips and button texts [#2197, #2228, #2229, #2240, #2244]
+- Fix showing duplicate notification (Thanks Flamefire) [#2181]
+- Fix monochrome icon with Chrome (Thanks stefansundin) [#2152]
+- Fix XML formatting with Firefox [#2199]
+- Fix filling next field from password generator [#2154]
+- Fix showing number of credentials in the toolbar icon with HTTP Basic Auth [#2155]
+- Passkeys: Rename functions to prevent overrides [#2230]
+- Passkeys: Remove temporary exceptions [#2206]
+- Refactor design of Autocomplete Menu (Thank tinyoverflow) [#2119]
+
 1.9.0.5 (2024-05-12)
 =========================
 -  Remove obsolete hashed scripts from manifest [#2195]

@@ -3,6 +3,58 @@
         "message": "ခေတ်မီ ဝက်ဘ်ဘရောက်ဇာများတွင် KeePassXC ပေါင်းစပ်ထည့်သွင်းခြင်း\n",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Add Site Preferences for this URL.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Allows Cross-Origin iframes for the current page.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Connect current active database to KeePassXC-Browser.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Copy debug info to clipboard.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Dismisses Basic HTTP Auth.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Redetects all input fields on the page.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Remove connected database from KeePassXC-Browser.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Remove Custom Login Fields for this URL.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Remove Site Preferences for this URL.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Reopen current active database.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Adds Username-only Detection to the current page.",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "အသုံးပြုသူအမည်နှင့် စကားဝှက် ဖြည့်ရန်",
         "description": "Context menu item for filling both username and password."
@@ -20,7 +72,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "အထောက်အထားများကို သိမ်းရန်",
+        "message": "Save Credentials",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -28,7 +80,7 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "လက္ခဏာရပ်ကို ဖြည့်ပါ…",
+        "message": "Fill Attribute…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -120,8 +172,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Access to all entries denied.",
-      "description": "Access to all entries denied."
+        "message": "Access to all entries denied.",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestation not supported.",
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
-      "description": "Effective domain is not a valid domain."
+        "message": "Effective domain is not a valid domain.",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
-      "description": "Origin and RP ID do not match."
+        "message": "Origin and RP ID do not match.",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
-      "description": "No supported algorithms were provided."
+        "message": "No supported algorithms were provided.",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Wait for timer to expire.",
@@ -187,10 +239,6 @@
         "message": "KeePassXC နှင့် ချိတ်ဆက်မထားပါ။",
         "description": "Error notification shown when not connected to KeePassXC"
     },
-    "passwordGeneratorIcon": {
-        "message": "စကားဝှက် ထုတ်လုပ်ကိရိယာ အိုင်ကွန်",
-        "description": "Alt attribute text of the password generator icon."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "ပြဿနာ - ထုတ်လုပ်လိုက်သော စကားဝှက်သည် ခွင့်ပြုထားသည့်အရှည်ထက် ပိုနေသည်။",
         "description": "A warning text shown in the password generator."
@@ -204,27 +252,27 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "စကားဝှက် ထုတ်လုပ်ရန်",
+        "message": "Generate password.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
         "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
-        "message": "KeePassXC မှ အထောက်အထားများကို ဖြည့်ပါ",
+        "message": "Fill credentials from KeePassXC.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "No credentials to fill.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "ဒေတာဘေ့စ်ကို လော့ချထားသည်",
+        "message": "Database is locked.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC နှင့် ချိတ်ဆက်မှုဖျက်ထားသည်",
+        "message": "KeePassXC is disconnected.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
-    },
-    "usernameFieldIcon": {
-        "message": "အသုံးပြုသူအမည်ထည့်ရန် အကွက်၏ အိုင်ကွန်",
-        "description": "Username field icon text."
     },
     "totp": {
         "message": "TOTP",
@@ -234,29 +282,25 @@
         "message": "KeePassXC မှ TOTP ကို ဖြည့်ပါ",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "TOTP ဖြည့်ရန်အကွက် အိုင်ကွန်",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
         "message": "Close",
-        "description": "Close button text when choosing custom login fields."
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "ကျော်ရန်",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "ပိုမိုပြသရန်",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
         "message": "Reset",
-        "description": "Reset button text when choosing custom login fields."
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "အတည်ပြုရန်",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "ဤစာမျက်နှာအတွက် လော့ဂ်အင်ဝင်ရောက်ရန် အကွက်များကို ရွေးချယ်ပြီးဖြစ်သောကြောင့် အသစ်ရေးပါမည်။",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "Clear saved data",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "String field",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "Choose a username field",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "Choose a password field",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "Choose a TOTP field",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "Choose String Fields",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "သင့်ရွေးချယ်မှုကို အတည်ပြုပါ သို့မဟုတ် စာကြောင်းဖြည့်ရန် အကွက်များအဖြစ် နောက်ထပ်အကွက်များကို ရွေးပါ။",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "ဖြည့်သွင်းရန် အကွက်များကို ကီးဘုတ်မှ ရွေးရန် ဂဏန်းများကိုလည်း အသုံးပြုနိုင်သည်။",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "Choose a Custom Login Field",
@@ -363,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှု အကွက်များကို ရွေးပါ",
+        "message": "Choose Custom Login Fields",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -542,12 +586,8 @@
         "message": "ဤစာမျက်နှာတွင် စကားဝှက်အကွက်တစ်ခုထက် ပိုတွေ့ထားသည်။ စကားဝှက်အကွက်များမှတစ်ခုပေါ်တွင် ညာဘက်ကလစ်နှိပ်ပြီး အောက်ပါတို့မှ တစ်ခုကို ရွေးပါ -",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL -",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "အသုံးပြုသူအမည် -",
+        "message": "Username:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -558,9 +598,13 @@
         "message": "အပ်ဒိတ်လုပ်ရန်",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "ပယ်ရန်",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Cancel",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Back",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "ဤဝက်ဘ်ဆိုက်အတွက် ထပ်မမေးပါနှင့်",
@@ -587,12 +631,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှု အကွက်များ",
-        "description": "Saved custom login fields tab text."
+        "message": "Custom Login Fields",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "ဝက်ဘ်ဆိုက် ဦးစားပေးမှုများ",
-        "description": "Site preferences fields tab text."
+        "message": "Site Preferences",
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "အကြောင်း",
@@ -607,12 +651,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှု အကွက်များ",
-        "description": "Custom login fields page header."
+        "message": "Custom Login Fields",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "ဝက်ဘ်ဆိုက် ဦးစားပေးမှုများ",
-        "description": "Site preferences page header."
+        "message": "Site Preferences",
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "အကြောင်း",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "ဟုတ်ပါသည်၊ ယခု ဖယ်ရှားပါ",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "ပယ်ဖျက်ရန်",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "ပြန်လည်သတ်မှတ်ရန်",
@@ -679,15 +723,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "စကားဝှက် ထုတ်လုပ်ကိရိယာ အိုင်ကွန်များကို သက်ဝင်လုပ်ဆောင်ပါ။",
+        "message": "Activate password generator icons",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "အသုံးပြုသူအမည်အကွက် အိုင်ကွန်များကို သက်ဝင်လုပ်ဆောင်ပါ။",
+        "message": "Activate username field icons",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "အကြံပြု ဖြည့်သွင်းချက်အကွက် ရှာဖွေမှုကို အသုံးပြုပါ။",
+        "message": "Use dynamic input field detection",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -695,15 +739,15 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "2FA/OTP အကွက်အိုင်ကွန်များကို သက်ဝင်လုပ်ဆောင်ပါ။",
+        "message": "Activate 2FA/OTP field icons",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "အထောက်အထားများကို အလိုအလျောက် ပြန်လည်ရယူပါ။",
+        "message": "Automatically retrieve credentials",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "KeePassXC နှင့် အလိုအလျောက် ပြန်လည်ချိတ်ဆက်ပါ။",
+        "message": "Automatically reconnect to KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -711,19 +755,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "အထောက်အထားတစ်ခုတည်း ဖြည့်သွင်းစရာများကို အလိုအလျောက် ဖြည့်ပါ။",
+        "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries.",
+        "message": "Automatically fill in single TOTP entries",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "အသုံးပြုသူအမည်အကွက်များအား အလိုအလျောက်ဖြည့်ခြင်းကို သက်ဝင်လုပ်ဆောင်ပါ။",
+        "message": "Activate autocomplete for username fields",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "အထောက်အထားများသည် ကွဲပြားသောအုပ်စုများမှ ဖြစ်သည့်အခါ အလိုအလျောက်ဖြည့်ရန် စာရင်းတွင် အုပ်စုအမည်ကို ပြသပါ။",
+        "message": "Display the group name in autocomplete list when credentials are from different groups",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -735,19 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "အသိပေးချက်များကို ပြသပါ။",
+        "message": "Show notifications",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon.",
+        "message": "Use monochrome toolbar icon",
         "description": "Use monochrome toolbar icon checkbox text."
     },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "ဒိုမိန်းကိုသာ သိမ်းပါ။",
+        "message": "Save domain only",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "အထောက်အထားသစ်များကို ဒေတာဘေ့စ်တွင် သိမ်းနိုင်သည့်အခါ စာမျက်နှာတွင် နဖူးစည်းစာတန်း ပြသပါ။",
+        "message": "Show a banner on the page when new credentials can be saved to the database",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -759,7 +807,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials.",
+        "message": "Allow filling HTTP Basic Auth credentials",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -831,11 +879,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "ကိုက်ညီမှုရှိရန် ကြိုတင်သတ်မှတ်ထားသော ဝဘ်ဆိုက်များကို သုံးပါ။",
+        "message": "Use predefined sites for compatibility",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "အသုံးပြုသူအမည် သီးသန့်သုံး လော့ဂ်အင်ဝင်ရန်ဖောင်များ ရှိသည့် သာမန် ဝဘ်ဆိုက်များကို ဝဘ်ဆိုက် ဦးစားပေးမှုများတွင် ထည့်သည်။",
+        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -871,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "အထောက်အထားများကို မတူညီသော အုပ်စုများမှ ပြန်ပေးသည့်အခါ အုပ်စုအမည်ကို ပြသပါမည်။",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -882,12 +930,16 @@
         "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
         "description": "Use monochrome toolbar icon option help text."
     },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
         "message": "အထောက်အထားသစ်များ သိမ်းချိန်တွင် URL အပြည့်အစုံအစား ဒိုမိန်းကိုသာ သိမ်းပါ။",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်သည့် အကွက်သစ်များကို သိမ်းချိန်တွင် URL အပြည့်အစုံအစား ဒိုမိန်းကိုသာ သိမ်းပါ။",
+        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1012,15 +1064,15 @@
     },
     "optionsColumnPageURL": {
         "message": "စာမျက်နှာ URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "လျစ်လျူရှုရန်",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "အသုံးပြုသူအမည် သီးသန့် ရှာတွေ့ခြင်း",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "Improved Input Field Detection",
@@ -1032,23 +1084,23 @@
   },
     "optionsColumnDelete": {
         "message": "ဖျက်ရန်",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "အပြင်အဆင်အားလုံးကို ဖွင့်ရန်",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "အသစ်/ပြုပြင်မွမ်းမံထားသော အထောက်အထားများကို ပယ်ဖျက်ရန်",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "အလိုအလျောက် တင်သွင်းခြင်းကို ပယ်ဖျက်ရန်",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "အပြင်အဆင်အားလုံးကို ပယ်ဖျက်ရန်",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "ခေါင်းစဉ်",
@@ -1091,40 +1143,40 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "သိမ်းထားသော စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များ မတွေ့ပါ။",
+        "message": "No saved Custom Login Fields found.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "သင်သည် သိမ်းထားသော စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များကို ဇယားသုံး၍ စီမံခန့်ခွဲနိုင်သည်။",
-        "description": "Table caption of Custom login fields page."
+        "message": "You can manage saved Custom Login Fields using the table.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "KeePassXC-ဘရောက်ဇာက မှားယွင်းသော လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များကို တွေ့ရှိပါက သင်သည် မှန်ကန်သော အကွက်များကို ကိုယ်တိုင် ခွဲခြားဖော်ပြနိုင်သည်။",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "စာမျက်နှာသို့သွားပြီး KeePassXC-ဘရောက်ဇာ အိုင်ကွန်ကို နှိပ်ပါ၊ ပြီးလျှင် ရွေးချယ်ပါ",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "ဤစာမျက်နှာတွင် သင်သည် သိမ်းထားသော စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များကို စီမံခန့်ခွဲနိုင်သည်။",
-        "description": "Saved custom login fields info text, third part."
+        "message": "On this page you can manage saved Custom Login Fields.",
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "သိမ်းထားသော စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များကို ဖယ်ရှားမလား။",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Remove saved Custom Login Fields?",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "သင်သည် စာမျက်နှာရှိ သိမ်းထားသော စိတ်ကြိုက် လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များကို အမှန်တကယ် ဖယ်ရှားလိုပါသလား - $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "သင် ဤစာမျက်နှာကို နောက်တစ်ကြိမ် ဝင်ကြည့်သည့်အခါ KeePassXC-ဘရောက်ဇာသည် လော့ဂ်အင်ဝင်ရောက်မှုအကွက်များကို အလိုအလျောက် ရှာဖွေပါမည်။",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "ဝက်ဘ်ဆိုက် ဦးစားပေးမှုများ မတွေ့ပါ။",
-        "description": "Shown when no site preferences are saved."
+        "message": "No Site Preferences found.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "ဝက်ဘ်ဆိုက်ကို ဖယ်ရှားမလား။",
@@ -1132,19 +1184,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "ဤစာမျက်နှာရှိ ဝက်ဘ်ဆိုက်များတွင် သက်ဆိုင်ရာ အထူးကိုင်တွယ်နည်းများ ရှိသည်။",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "သီးသန့် ဝက်ဘ်ဆိုက်တစ်ခုရှိ အသစ်/ပြုပြင်မွမ်းမံထားသော အထောက်အထားများကို လျစ်လျူရှုရန် ၎င်းတို့ကို အောက်တွင် ထည့်ပါ။ သို့မဟုတ် စာမျက်နှာပေါ်ရှိ အထောက်အထား နဖူးစည်းစာတန်းကို အသုံးပြုသည့်အခါ <em>ဤဝက်ဘ်ဆိုက်အတွက် ထပ်မမေးပါနှင့်</em> ကို ရွေးပါ။",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "ဝက်ဘ်ဆိုက်တစ်ခုကို လုံးဝ လျစ်လျူရှုထားပါက (<em>အပြင်အဆင်အားလုံးကို ပယ်ဖျက်ရန်</em> ကို ရွေးထားသည်) ထိုဝက်ဘ်ဆိုက်သို့ သင် ဝင်ကြည့်သည့်အခါ ချိတ်ဆက်ပရိုဂရမ်သည် ဘာမှလုပ်မည်မဟုတ်ပါ။",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "အသုံးပြုသူအမည်သီးသန့် ရှာဖွေခြင်းဖြင့် KeePassXC-ဘရောက်ဇာသည် အသုံးပြုသူအမည်နှင့် စကားဝှက်အတွက် သီးခြားစာမျက်နှာများပါသည့် ဝက်ဘ်ဆိုက်များတွင် လော့ဂ်အင်ဝင်ရောက်မှု အသေးစိတ်များကို ဖြည့်နိုင်သည်။",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
@@ -1156,22 +1208,22 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "URL ကို ကိုယ်တိုင်ထည့်ရန်",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "URL သည် <code>https://</code>၊ <code>http://</code> သို့မဟုတ် <code>file://</code> ဖြင့် စတင်ပြီး အနည်းဆုံး စာလုံး ၅ လုံး ရှိရမည်။",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "သင်သည် ဖော်ပြပါ ဝက်ဘ်ဆိုက်ကို စာရင်းမှ အမှန်တကယ် ဖယ်ရှားလိုပါသလား - $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-ဘရောက်ဇာသည် ဤဝက်ဘ်ဆိုက်အတွက် အပြင်အဆင်အားလုံးကို ဖွင့်ပြီး အသုံးပြုသူအမည်သီးသန့် ရှာဖွေမှုကို ဖယ်ရှားပါမည်။",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "သင်သည် သိမ်းထားသော ဝက်ဘ်ဆိုက် ဦးစားပေးမှုများကို ဇယားသုံး၍ စီမံခန့်ခွဲနိုင်သည်။",
+        "message": "You can manage saved Site Preferences using the table.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1215,7 +1267,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "GitHub တွင် ပြဿနာအသစ်တစ်ခု ရေးသားတင်ပြရန်",
+        "message": "Create new issue on GitHub.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {

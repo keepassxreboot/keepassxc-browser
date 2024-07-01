@@ -3,6 +3,58 @@
         "message": "KeePassXC-integrasjon for moderne nettlesere",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Add Site Preferences for this URL.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Allows Cross-Origin iframes for the current page.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Connect current active database to KeePassXC-Browser.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Copy debug info to clipboard.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Dismisses Basic HTTP Auth.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Redetects all input fields on the page.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Remove connected database from KeePassXC-Browser.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Remove Custom Login Fields for this URL.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Remove Site Preferences for this URL.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Reopen current active database.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Adds Username-only Detection to the current page.",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Fyll ut brukernavn og passord",
         "description": "Context menu item for filling both username and password."
@@ -20,7 +72,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Lagre identifikasjon",
+        "message": "Save Credentials",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -28,7 +80,7 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Fyll ut attributt…",
+        "message": "Fill Attribute…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -120,8 +172,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Tilgang til alle oppføringer nektet.",
-      "description": "Access to all entries denied."
+        "message": "Tilgang til alle oppføringer nektet.",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestasjon støttes ikke.",
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Effective domain is not a valid domain.",
-      "description": "Effective domain is not a valid domain."
+        "message": "Effective domain is not a valid domain.",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Origin and RP ID do not match.",
-      "description": "Origin and RP ID do not match."
+        "message": "Origin and RP ID do not match.",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "No supported algorithms were provided.",
-      "description": "No supported algorithms were provided."
+        "message": "No supported algorithms were provided.",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Wait for timer to expire.",
@@ -187,10 +239,6 @@
         "message": "Ikke koblet til KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
-    "passwordGeneratorIcon": {
-        "message": "Ikon for passordgenerator",
-        "description": "Alt attribute text of the password generator icon."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "Feil: Det genererte passordet er lengre enn den tillatte lengden.",
         "description": "A warning text shown in the password generator."
@@ -204,27 +252,27 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Generer passord",
+        "message": "Generate password.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
         "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
-        "message": "Fyll ut identifikasjon fra KeePassXC",
+        "message": "Fill credentials from KeePassXC.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "No credentials to fill.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "Databasen er låst",
+        "message": "Database is locked.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC er frakoblet",
+        "message": "KeePassXC is disconnected.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
-    },
-    "usernameFieldIcon": {
-        "message": "Ikon for brukernavnfelt",
-        "description": "Username field icon text."
     },
     "totp": {
         "message": "TOTP",
@@ -234,29 +282,25 @@
         "message": "Fyll ut TOTP fra KeePassXC",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "Ikon for TOTP-felt",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
         "message": "Lukk",
-        "description": "Close button text when choosing custom login fields."
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "Hopp over",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Vis mer",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
         "message": "Nullstill",
-        "description": "Reset button text when choosing custom login fields."
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "Bekreft",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Påloggingsfelt for denne siden er allerede valgt og vil bli overskrevet.",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "Fjern lagrede data",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "Tekstfelt",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "Velg et brukernavnfelt",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "Velg et passordfelt",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "Velg et TOTP-felt",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "Velg tekstfelt",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Bekreft utvalget, eller velg flere felt som tekstfelt.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "Du kan også bruke tallene til å velge innputtfeltene fra tastatur.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "Velg et egendefinert påloggingsfelt",
@@ -363,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Velg egendefinerte påloggingsfelt",
+        "message": "Choose Custom Login Fields",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -542,12 +586,8 @@
         "message": "Mer enn ett passordfelt funnet på denne siden. Høyreklikk ett av passordfeltene, og velg ett av følgende:",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL: ",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "Brukernavn: ",
+        "message": "Username:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -558,9 +598,13 @@
         "message": "Oppdater",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "Avvis",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Cancel",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Back",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Ikke spør igjen på dette nettstedet",
@@ -587,12 +631,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Egendefinerte påloggingsfelt",
-        "description": "Saved custom login fields tab text."
+        "message": "Custom Login Fields",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Innstillinger for sted",
-        "description": "Site preferences fields tab text."
+        "message": "Site Preferences",
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "Om",
@@ -607,12 +651,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Egendefinerte påloggingsfelt",
-        "description": "Custom login fields page header."
+        "message": "Custom Login Fields",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Innstillinger for nettsted",
-        "description": "Site preferences page header."
+        "message": "Site Preferences",
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "Om",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Ja, fjern nå",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "Avbryt",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Tilbakestill",
@@ -679,15 +723,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Aktiver ikon for passordgenerator",
+        "message": "Activate password generator icons",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Aktiver ikon for brukernavnfelt.",
+        "message": "Activate username field icons",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Bruk dynamisk gjenkjenning av innputtfelt.",
+        "message": "Use dynamic input field detection",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -695,15 +739,15 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Aktiver 2FA/OTP-feltikoner.",
+        "message": "Activate 2FA/OTP field icons",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Hent identifikasjon automatisk.",
+        "message": "Automatically retrieve credentials",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Koble automatisk til KeePassXC på nytt.",
+        "message": "Automatically reconnect to KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -711,19 +755,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Fyll ut oppføringer med enkel identifikasjon automatisk.",
+        "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Fyll automatisk ut enkle TOTP-oppføringer.",
+        "message": "Automatically fill in single TOTP entries",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Aktiver autofullføring for brukernavnfelt.",
+        "message": "Activate autocomplete for username fields",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Vis gruppenavn i autoskrivlisten når identifikasjoner er fra forskjellige grupper.",
+        "message": "Display the group name in autocomplete list when credentials are from different groups",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -735,19 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Vis notater.",
+        "message": "Show notifications",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Bruk monokromt verktøylinjeikon.",
+        "message": "Use monochrome toolbar icon",
         "description": "Use monochrome toolbar icon checkbox text."
     },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Lagre bare domene.",
+        "message": "Save domain only",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Vis et banner på siden når ny identifikasjon kan lagres i databasen.",
+        "message": "Show a banner on the page when new credentials can be saved to the database",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -759,7 +807,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Tillat utfylling av HTTP Basic Auth-identifikasjon.",
+        "message": "Allow filling HTTP Basic Auth credentials",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -831,11 +879,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Bruk forhåndsdefinerte nettsteder for kompatibilitet.",
+        "message": "Use predefined sites for compatibility",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Legger til vanlige nettsteder som har bare brukernavn-pålogging i områdeinnstillingene.",
+        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -871,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Når identifikasjoner blir returnert fra forskjellige grupper, vises gruppenavnet.",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -882,12 +930,16 @@
         "message": "Bruk et monokromt ikon med fargede merker på verktøylinjen som tilpasser seg lyst/mørkt nettlesertema.",
         "description": "Use monochrome toolbar icon option help text."
     },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Ved lagring av ny identifikasjon, lagres bare domenet i stedet for fullstendig URL.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Ved lagring av nye egendefinerte påloggingsfelt, lagres bare domenet i stedet for fullstendig URL.",
+        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1012,15 +1064,15 @@
     },
     "optionsColumnPageURL": {
         "message": "Nettside-URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "Ignorere",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "Bare brukernavn-gjenkjenning",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "Forbedret gjenkjenning av inndatafelt",
@@ -1032,23 +1084,23 @@
   },
     "optionsColumnDelete": {
         "message": "Slette",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Aktiver alle funksjoner",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Deaktiver ny/endret identifikasjon",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Deaktiver automatisk sending",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Deaktiver alle funksjoner",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Tittel",
@@ -1091,40 +1143,40 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Ingen lagrede egendefinerte påloggingsfelt funnet.",
+        "message": "No saved Custom Login Fields found.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Du kan administrere lagrede tilpassede påloggingsfelt ved å bruke tabellen nedenfor.",
-        "description": "Table caption of Custom login fields page."
+        "message": "You can manage saved Custom Login Fields using the table.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "Hvis KeePassXC–Browser oppdager feil påloggingsfelt, kan du spesifisere de riktige feltene selv.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Gå til siden og klikk på KeePassXC–Browser-ikonet, velg deretter ",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "På denne siden kan du administrere lagrede tilpassede påloggingsfelt.",
-        "description": "Saved custom login fields info text, third part."
+        "message": "On this page you can manage saved Custom Login Fields.",
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Fjerne lagrede tilpassede påloggingsfelt?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Remove saved Custom Login Fields?",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Vil du virkelig fjerne de lagrede tilpassede påloggingsfeltene på siden: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "KeePassXC–Browser vil automatisk gjenkjenne påloggingsfeltene neste gang du besøker denne siden.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Ingen områdeinnstillinger funnet.",
-        "description": "Shown when no site preferences are saved."
+        "message": "No Site Preferences found.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Fjerne nettsted?",
@@ -1132,19 +1184,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Nettsteder på denne siden har spesielle behandlingsmetoder knyttet til seg.",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "Hvis du vil ignorere ny/endret identifikasjon på et bestemt område, legger du dem til nedenfor, eller når du bruker identifikasjonsbanneret på siden, velg <em> Ikke spør på nytt for dette området</em>.",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "Hvis et nettsted er fullstendig ignorert (<em>Deaktiver alle funksjoner</em> er valgt), vil utvidelsen ikke gjøre noe når du besøker det nettstedet.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Bare brukernavn-gjenkjenning lar KeePassXC–Browser fylle ut påloggings-identifikasjon på nettsteder med separate sider for brukernavn og passord.",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Forbedret gjenkjenning av inndatafelt gir mer detaljert dynamisk gjenkjenning av inndatafelt. Det kan imidlertid påvirke sideytelsen. Bruk med forsiktighet.",
@@ -1156,22 +1208,22 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Legg til URL manuelt",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "URL'en må starte med enten <code>https://</code>, <code>http://</code>, <code>file://</code>eller <code>ftp://</code> og må være minst fem tegn lang.",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Vil du virkelig fjerne det angitte nettstedet fra listen: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC–Browser vil aktivere alle funksjoner for dette nettstedet og fjerne bare brukernavn-gjenkjenning.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Du kan behandle lagrede områdeinnstillinger ved hjelp av tabellen .",
+        "message": "You can manage saved Site Preferences using the table.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1215,7 +1267,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Opprett ny sak på GitHub",
+        "message": "Create new issue on GitHub.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {

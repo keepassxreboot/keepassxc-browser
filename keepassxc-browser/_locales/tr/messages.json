@@ -3,6 +3,58 @@
         "message": "Modern tarayıcılar için KeePassXC bütünleşmesi",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Bu adresin site ayarlarını ekle",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Sitede başka siteden iFrame bulunmasına izin verir.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Geçerli etkin veri tabanı ile KeePassXC-Browser bağlantısını kurar.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Hata ayıklama bilgilerini panoya kopyalar.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Temel HTTP kimlik doğrulamasını yok sayar.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Geçerli etkin veri tabanı ile KeePassXC-Browser bağlantısını yeniden kurar.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Sayfadaki tüm giriş alanlarını yeniden algılar.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Eklentiyi yeniden yükler ve KeePassXC ile bağlantısını yeniden kurar.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Bağlı veri tabanının KeePassXC-Browser ile bağlantısını kaldırır.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Bu adresin özel oturum açma alanlarını kaldırır.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Bu adresin site ayarlarını kaldırır.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Geçerli etkin veri tabanını yeniden açar.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Geçerli sayfaya yalnızca kullanıcı adı seçeneğini ekler.",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Kullanıcı adı ve parolayı doldur",
         "description": "Context menu item for filling both username and password."
@@ -120,8 +172,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-      "message": "Tüm kayıtlara erişim reddedildi.",
-      "description": "Access to all entries denied."
+        "message": "Tüm kayıtlara erişim reddedildi.",
+        "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Onay desteklenmiyor.",
@@ -152,16 +204,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-      "message": "Etkin etki alanı geçerli bir etki alanı değil.",
-      "description": "Effective domain is not a valid domain."
+        "message": "Etkin etki alanı geçerli bir etki alanı değil.",
+        "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-      "message": "Kaynak ve RP kimliği aynı değil.",
-      "description": "Origin and RP ID do not match."
+        "message": "Kaynak ve RP kimliği aynı değil.",
+        "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-      "message": "Desteklenen bir algoritma belirtilmemiş.",
-      "description": "No supported algorithms were provided."
+        "message": "Desteklenen bir algoritma belirtilmemiş.",
+        "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Zamanlayıcının sona ermesini bekleyin.",
@@ -187,10 +239,6 @@
         "message": "KeePassXC ile bağlantı kurulmamış.",
         "description": "Error notification shown when not connected to KeePassXC"
     },
-    "passwordGeneratorIcon": {
-        "message": "Parola oluşturucu simgesi",
-        "description": "Alt attribute text of the password generator icon."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "Hata: Oluşturulan parola izin verilen boyuttan daha uzun!",
         "description": "A warning text shown in the password generator."
@@ -204,27 +252,27 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Parola oluştur",
+        "message": "Parola oluştur.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
         "message": "Bu KeePassXC sürümünde şifre oluşturucunun başlatılması desteklenmiyor. Lütfen KeePassXC uygulamasının sürümünü güncelleyin."
     },
     "usernameFieldText": {
-        "message": "KeePassXC ile kimlik doğrulama bilgilerini doldur",
+        "message": "KeePassXC ile kimlik doğrulama bilgilerini doldur.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "Doldurulabilecek bir kimlik bilgisi yok.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "Veri tabanı kilitli",
+        "message": "Veri tabanı kilitli.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC bağlantısı kesilmiş",
+        "message": "KeePassXC bağlantısı kesilmiş.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
-    },
-    "usernameFieldIcon": {
-        "message": "Kullanıcı adı alanı simgesi",
-        "description": "Username field icon text."
     },
     "totp": {
         "message": "Tek kullanımlık parola",
@@ -234,29 +282,25 @@
         "message": "KeePassXC ile tek kullanımlık parolayı doldur",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "Tek kullanımlık parola alanı simgesi",
-        "description": "OTP field icon text."
-    },
     "defineClose": {
         "message": "Kapat",
-        "description": "Close button text when choosing custom login fields."
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "Atla",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Ayrıntıları görüntüle",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
         "message": "Sıfırla",
-        "description": "Reset button text when choosing custom login fields."
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "Onayla",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Bu sayfa için oturum açma alanları zaten seçilmiş ve üzerine yazılacak.",
@@ -264,7 +308,7 @@
     },
     "defineClearData": {
         "message": "Kaydedilmiş verileri sil",
-        "description": "Clear save data button text when choosing custom login fields."
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
         "message": "Metin alanı",
@@ -272,27 +316,27 @@
     },
     "defineChooseUsername": {
         "message": "Kullanıcı adı alanını seçin",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
         "message": "Parola alanını seçin",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
         "message": "Tek kullanımlık parola alanını seçin",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
         "message": "Metin alanlarını seçin",
-        "description": "Choose String Fields a selection text when choosing custom login fields."
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Lütfen seçiminizi onaylayın ya da dizge alanları olarak ek alanlar seçin.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "Giriş alanlarını tuş takımıyla seçmek için sayıları kullanabilirsiniz.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
         "message": "Özel oturum açma alanını seçin",
@@ -363,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Bu sayfaya özel oturum açma alanları seçin",
+        "message": "Özel oturum açma alanlarını seçin",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -542,12 +586,8 @@
         "message": "Bu sayfada birden fazla parola alanı bulundu. Parola alanlarından birine sağ tıklayın ve şunlardan birini seçin:",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "Adres: ",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "Kullanıcı adı: ",
+        "message": "Kullanıcı adı:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -558,9 +598,13 @@
         "message": "Güncelle",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "Yok say",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "İptal",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Geri",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Bu site için bir daha sorulmasın",
@@ -588,11 +632,11 @@
     },
     "optionsCustomFieldsTab": {
         "message": "Özel oturum açma alanları",
-        "description": "Saved custom login fields tab text."
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
         "message": "Site ayarları",
-        "description": "Site preferences fields tab text."
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "Hakkında",
@@ -608,11 +652,11 @@
     },
     "optionsMenuCustomFields": {
         "message": "Özel oturum açma alanları",
-        "description": "Custom login fields page header."
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
         "message": "Site ayarları",
-        "description": "Site preferences page header."
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "Hakkında",
@@ -644,11 +688,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Evet, şimdi kaldır",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "İptal",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Sıfırla",
@@ -679,15 +723,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Parola oluşturucu simgeleri kullanılsın.",
+        "message": "Parola oluşturucu simgeleri kullanılsın",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Kullanıcı adı alanı simgeleri kullanılsın.",
+        "message": "Kullanıcı adı alanı simgeleri kullanılsın",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Devingen giriş alanı algılaması kullanılsın.",
+        "message": "Devingen giriş alanı algılaması kullanılsın",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -695,15 +739,15 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "2FA/OTP alan simgeleri kullanılsın.",
+        "message": "2FA/OTP alan simgeleri kullanılsın",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Kimlik bilgileri otomatik olarak alınsın.",
+        "message": "Kimlik doğrulama bilgileri otomatik olarak alınsın",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "KeePassXC bağlantısı otomatik olarak yeniden kurulsun.",
+        "message": "KeePassXC bağlantısı otomatik olarak yeniden kurulsun",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -711,7 +755,7 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Tek kimlik doğrulama bilgisi kayıtları otomatik olarak doldurulsun.",
+        "message": "Tek kimlik doğrulama bilgisi kayıtları otomatik olarak doldurulsun",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -719,11 +763,11 @@
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Kullanıcı adı alanları için otomatik tamamlama kullanılsın.",
+        "message": "Kullanıcı adı alanları için otomatik tamamlama kullanılsın",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Farklı gruplardaki kimlik bilgileri için otomatik tamamlama listesinde grup adı görüntülensin.",
+        "message": "Farklı gruplardaki kimlik bilgileri için otomatik tamamlama listesinde grup adı görüntülensin",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -735,19 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Bildirimler görüntülensin.",
+        "message": "Bildirimler görüntülensin",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
         "message": "Tek renkli araç çubuğu simgesi kullanılsın",
         "description": "Use monochrome toolbar icon checkbox text."
     },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Yalnızca etki alanı kaydedilsin.",
+        "message": "Yalnızca etki alanı kaydedilsin",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Veri tabanına yeni kimlik bilgileri kaydedildiğinde bildirim görüntülensin.",
+        "message": "Veri tabanına yeni kimlik bilgileri kaydedildiğinde bildirim görüntülensin",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -759,7 +807,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "HTTP temel kimlik doğrulama bilgileri yazılabilsin.",
+        "message": "HTTP temel kimlik doğrulama bilgileri yazılabilsin",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -831,7 +879,7 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Uyumluluk için hazır siteleri kullanır.",
+        "message": "Uyumluluk için hazır siteler kullanılsın",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
@@ -871,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Farklı gruplardan kimlik bilgileri bulunduğunda, grup adını görüntüler.",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -881,6 +929,10 @@
     "optionsUseMonochromeToolbarIconHelpText": {
         "message": "Renkleri tarayıcının açık/koyu tarayıcı temasına uyan tek renkli bir simge kullanılır.",
         "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Yeni kimlik doğrulama bilgileri kaydedilirken, tam adres yerine yalnızca etki alanını kaydeder.",
@@ -1012,15 +1064,15 @@
     },
     "optionsColumnPageURL": {
         "message": "Sayfa adresi",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
         "message": "Yok say",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
         "message": "Yalnızca kullanıcı adı algılaması",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
         "message": "Geliştirilmiş giriş alanı algılaması",
@@ -1032,23 +1084,23 @@
   },
     "optionsColumnDelete": {
         "message": "Dil",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Tüm özellikleri aç",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Yeni/değiştirilmiş kimlik doğrulama bilgileri kapatılsın",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Otomatik gönderim yapılmasın",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Tüm özellikleri kapat",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Başlık",
@@ -1096,35 +1148,35 @@
     },
     "optionsCustomFieldsTableCaption": {
         "message": "Kaydedilmiş özel oturum açma alanlarını aşağıdaki tablodan yönetebilirsiniz.",
-        "description": "Table caption of Custom login fields page."
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "KeePassXC-Browser oturum açma alanlarını yanlış algılarsa, doğru alanları belirtebilirsiniz.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "İlgili sayfayı açın ve KeePassXC-Browser simgesine tıkladıktan sonra seçin",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
         "message": "Bu sayfadan kaydedilmiş özel oturum açma alanlarını yönetebilirsiniz.",
-        "description": "Saved custom login fields info text, third part."
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
         "message": "Kaydedilmiş özel oturum açma alanları kaldırılsın mı?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
         "message": "Şu sayfa için kaydedilmiş özel oturum açma alanlarını kaldırmak istediğinize emin misiniz: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "Bu sayfayı bir sonraki ziyaretinizde KeePassXC-Browser oturum açma alanlarını otomatik olarak algılar.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
         "message": "Herhangi bir site ayarı bulunamadı.",
-        "description": "Shown when no site preferences are saved."
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Site kaldırılsın mı?",
@@ -1132,19 +1184,19 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Bu sayfadaki sitelerin, kendileri ile ilişkilendirilmiş özel işlenme yöntemleri vardır.",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "Belirli bir site için yeni/değiştirilmiş kimlik bilgilerini yok saymak istiyorsanız siteyi aşağıya ekleyin ya da sayfayı açtığınızda görüntülenen kimlik doğrulama bilgileri bildiriminden <em>Bu site için bir daha sorulmasın</em> seçeneğini işaretleyin. ",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "Bir site tamamen yok sayılırsa (<em>Tüm özellikleri kapat</em> seçilmişse), bu site ziyaret edildiğinde eklenti tarafından herhangi bir işlem yapılmaz.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Yalnızca kullanıcı adı algılaması, KeePassXC-Browser eklentisinin, kullanıcı adı ve parola için ayrı sayfalar kullanan sitelerde oturum açma bilgilerini doldurabilmesini sağlar.",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
         "message": "Geliştirilmiş giriş alanı algılaması giriş alanlarının daha ayrıntılı bir şekilde devingen olarak algılanmasını sağlar. Ancak sayfa başarımı olumsuz etkilenebilir. Kullanırken dikkatli olun.",
@@ -1156,19 +1208,19 @@
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Adresi el ile ekle",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "Adres <code>https://</code>, <code>http://</code>, <code>file://</code> ya da <code>ftp://</code> ile başlamalı ve en az 5 karakter uzunluğunda olmalıdır.",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Belirtilen siteyi listeden kaldırmak istediğinize emin misiniz: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-Browser bu site için tüm özellikleri açacak ve yalnızca kullanıcı adı algılamasını kaldıracak.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
         "message": "Kaydedilmiş site ayarlarını aşağıdaki tablodan yönetebilirsiniz.",
@@ -1215,7 +1267,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Yeni GitHub konusu aç",
+        "message": "Yeni GitHub konusu aç.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
