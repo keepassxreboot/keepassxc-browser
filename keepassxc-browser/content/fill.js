@@ -146,7 +146,7 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
 
     if (user.totp?.length > 0) {
         // Retrieve a new TOTP value
-        const totp = await sendMessage('get_totp', [ user.uuid, user.totp ]);
+        const totp = await sendMessage('get_totp', [user.uuid, user.totp]);
         if (!totp) {
             kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
             return;
@@ -251,12 +251,12 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
         if (combination.password.maxLength
             && combination.password.maxLength > 0
             && selectedCredentials.password.length > combination.password.maxLength) {
-            kpxcUI.createNotification('error', tr('errorMessagePaswordLengthExceeded'));
+            kpxcUI.createNotification('warning', tr('errorMessagePaswordLengthExceeded'));
         }
 
         // Prevent filling password to plain text input field
         if (passOnly && !passwordFillIsAllowed(combination.password)) {
-            kpxcUI.createNotification('warning', tr('fieldsPasswordFillNotAccepted'));
+            kpxcUI.createNotification('error', tr('fieldsPasswordFillNotAccepted'));
             return;
         }
 
