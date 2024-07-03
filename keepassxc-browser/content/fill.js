@@ -24,10 +24,6 @@ kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
 // Fill requested from the context menu. Active element is used for combination detection
 kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
     const elem = document.activeElement;
-    if (passOnly && !passwordFillIsAllowed(elem)) {
-        kpxcUI.createNotification('warning', tr('fieldsPasswordFillNotAccepted'));
-        return;
-    }
 
     await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
@@ -250,12 +246,18 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
     }
 
     // Fill password
-    if (combination.password) {
+    if (combination.password && combination.password.nodeName === 'INPUT') {
         // Show a notification if password length exceeds the length defined in input
         if (combination.password.maxLength
             && combination.password.maxLength > 0
             && selectedCredentials.password.length > combination.password.maxLength) {
             kpxcUI.createNotification('error', tr('errorMessagePaswordLengthExceeded'));
+        }
+
+        // Prevent filling password to plain text input field
+        if (passOnly && !passwordFillIsAllowed(combination.password)) {
+            kpxcUI.createNotification('warning', tr('fieldsPasswordFillNotAccepted'));
+            return;
         }
 
         kpxc.setValueWithChange(combination.password, selectedCredentials.password);
