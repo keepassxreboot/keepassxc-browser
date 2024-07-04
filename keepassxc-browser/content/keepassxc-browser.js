@@ -405,7 +405,7 @@ kpxc.initLoginPopup = function() {
 
         return {
             title: title,
-            group: credential.group,
+            group: credential.group || '',
             visibleLogin: visibleLogin,
             login: credential.login,
             loginId: loginId,
@@ -416,10 +416,10 @@ kpxc.initLoginPopup = function() {
 
     // Sorting with or without group name included
     const sortLoginItemBy = function(a, b, name, withGroup = false) {
-        const firstGroup = a.group.toLowerCase();
-        const secondGroup = b.group.toLowerCase();
-        const first = a[name].toLowerCase();
-        const second = b[name].toLowerCase();
+        const firstGroup = a.group?.toLowerCase();
+        const secondGroup = b.group?.toLowerCase();
+        const first = a[name]?.toLowerCase();
+        const second = b[name]?.toLowerCase();
 
         return withGroup
             ? firstGroup.localeCompare(secondGroup) || first.localeCompare(second)
