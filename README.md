@@ -32,6 +32,7 @@ KeePassXC-Browser extension requests the following permissions:
 | `clipboardWrite`          | Allows password to be copied from password generator to clipboard |
 | `nativeMessaging`         | Allows communication with KeePassXC application |
 | `notifications`           | To show browser notifications |
+| `offscreen`               | For accessing system theme when setting icon colors (Chrome only) |
 | `storage`                 | For storing extension settings (always stored locally in the browser, they are never synced) |
 | `tabs`                    | To request tab URL's and other info |
 | `webNavigation`           | To show browser notifications on install or update |
