@@ -423,7 +423,7 @@ page.getBaseDomainFromUrl = async function(hostname, url) {
     }
 
     // Remove the top level domain part from the hostname, e.g. https://another.example.co.uk -> https://another.example
-    const finalDomain = hostname.slice(0, hostname.indexOf(tld) - 1);
+    const finalDomain = hostname.slice(0, hostname.lastIndexOf(tld) - 1);
     // Split the URL and select the last part, e.g. https://another.example -> example
     let baseDomain = finalDomain.split('.')?.at(-1);
     // Append the top level domain back to the URL, e.g. example -> example.co.uk
