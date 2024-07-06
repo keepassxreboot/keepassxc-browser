@@ -1,3 +1,8 @@
+1.9.1.1 (2024-07-06)
+=========================
+- Fix credential sorting [#2262]
+- Fix iframe TLD matching [#2265]
+
 1.9.1 (2024-07-01)
 =========================
 - Add missing icon size for Firefox (Thanks leoheitmannruiz)
