@@ -12,11 +12,11 @@
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
-        "message": "Connect current active database to KeePassXC-Browser.",
+        "message": "現在アクティブなデータベースをKeePassXC-Browser に接続する。",
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Copy debug info to clipboard.",
+        "message": "デバッグ情報をクリップボードにコピーする。",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
