@@ -30,6 +30,7 @@
     color: var(--kpxc-text-color);
     cursor: pointer;
     letter-spacing: normal !important;
+    line-height: 1.25em;
     padding: 12px;
     text-align: start !important;
     text-rendering: auto !important;
