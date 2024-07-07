@@ -4,7 +4,6 @@
 const fs = require('@npmcli/fs');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const zaf = require('zip-a-folder');
 
 const DEST = 'keepassxc-browser';
 const DEFAULT = 'manifest_default.json';
@@ -41,6 +40,10 @@ const updateTranslations = async () => {
     console.log(stdout);
 };
 
+const createZipFile = async (fileName, path) => {
+    await exec(`tar -a -cf ${fileName} ${path}/*`);
+};
+
 (async() => {
     const params = process.argv.slice(2);
     if (!params.includes('--skip-translations')) {
@@ -61,7 +64,7 @@ const updateTranslations = async () => {
             await fs.rm(fileName);
         }
 
-        await zaf.zip(DEST, fileName);
+        await createZipFile(fileName, DEST);
         console.log('Done');
     }
 
