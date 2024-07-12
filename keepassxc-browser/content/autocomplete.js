@@ -329,8 +329,13 @@ class Autocomplete {
             return;
         }
 
-        // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
+        // Set container's minimum width to the input field's width
         const rect = this.input.getBoundingClientRect();
+        this.container.style.minWidth = Pixels(this.input.offsetWidth);
+        // Extend the list's max width to input field's width or at least to the maxWidth defined in the CSS file
+        this.list.style.maxWidth = `max(${Pixels(this.input.offsetWidth)}, 600px)`;
+
+        // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
         const menuOffset = totalHeight + rect.y > window.self.visualViewport.height ? totalHeight : 0;
