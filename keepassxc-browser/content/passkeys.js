@@ -69,6 +69,22 @@ const createPublicKeyCredential = function(publicKey) {
 
 // Posts a message to extension's content script and waits for response
 const postMessageToExtension = function(request) {
+    // Extract object from proxy
+    const extractFromProxy = obj => {
+        let newObj = obj;
+        if (typeof obj === "object") {
+            if (obj instanceof Array) {
+                newObj = new Array(...obj);
+            }
+            else if (!(obj instanceof ArrayBuffer)) {
+                newObj = {...obj};
+            }
+            Object.keys(newObj)
+            .forEach(k => newObj[k] = extractFromProxy(newObj[k]));
+        }
+        return newObj;
+    }
+
     return new Promise((resolve, reject) => {
         const ev = document;
 
@@ -85,7 +101,7 @@ const postMessageToExtension = function(request) {
         ev.addEventListener('kpxc-passkeys-response', listener);
 
         // Send the request
-        document.dispatchEvent(new CustomEvent('kpxc-passkeys-request', { detail: request }));
+        document.dispatchEvent(new CustomEvent('kpxc-passkeys-request', { detail: extractFromProxy(request) }));
     });
 };
 
