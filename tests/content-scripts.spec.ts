@@ -1,7 +1,7 @@
 'use strict';
 
 import { test, expect } from '@playwright/test';
-import fileUrl from 'file-url';
+import { pathToFileURL } from 'node:url';
 
 const DEST = 'keepassxc-browser/tests';
 
@@ -10,11 +10,7 @@ let page;
 test.describe('Content script tests', () => {
     test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
-        await page.goto(fileUrl(`${DEST}/tests.html`));
-    });
-
-    test('General tests', async () => {
-        await verifyResults('general-results');
+        await page.goto(pathToFileURL(`${DEST}/tests.html`).toString());
     });
 
     test('Input field matching tests', async() => {

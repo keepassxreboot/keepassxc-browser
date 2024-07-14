@@ -4,12 +4,12 @@
   "description": "KeePassXC-Browser",
   "main": "build.js",
   "devDependencies": {
-    "@playwright/test": "^1.22.0",
+    "@playwright/test": "^1.45.1",
+    "@types/node": "^20.14.10",
     "eslint": "^8.49.0"
   },
   "dependencies": {
-    "@npmcli/fs": "^2.1.0",
-    "file-url": "^4.0.0"
+    "@npmcli/fs": "^2.1.0"
   },
   "scripts": {
     "build": "node build.js",
