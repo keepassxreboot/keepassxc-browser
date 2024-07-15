@@ -16,101 +16,6 @@ function createResult(card, res, text) {
     document.querySelector(card).appendMultiple(icon, span, br);
 }
 
-// General (global.js)
-async function testGeneral() {
-    const testCard = Tests.GENERAL;
-
-    // General
-    kpxcAssert(trimURL('https://test.com/path_to_somwhere?login=username'), 'https://test.com/path_to_somwhere', testCard, 'trimURL()');
-    assertRegex(slashNeededForUrl('https://test.com'), true, testCard, 'slashNeededForUrl()');
-    assertRegex(slashNeededForUrl('https://test.com/'), false, testCard, 'slashNeededForUrl()');
-
-    // URL matching (URL in Site Preferences, page URL, expected result).
-    // Consider using slighly different URL's for the tests cases.
-    const matches = [
-        [ 'https://example.com/*', 'https://example.com/login_page', true ],
-        [ 'https://*.lexample.com/*', 'https://example.com/login_page', false ],
-        [ 'https://example.com/*', 'https://example2.com/login_page', false ],
-        [ 'https://example.com/*', 'https://subdomain.example.com/login_page', false ],
-        [ 'https://example.com', 'https://subdomain.example.com/login_page', false ],
-        [ 'https://*.example.com/*', 'https://example.com/login_page', true ],
-        [ 'https://*.example.com/*', 'https://test.example.com/login_page', true ],
-        [ 'https://test.example.com/*', 'https://subdomain.example.com/login_page', false ],
-        [ 'https://test.example.com/page/*', 'https://test.example.com/page/login_page', true ],
-        [ 'https://test.example.com/page/*', 'https://test.example.com/page/login_page?dontcare=aboutme', true ],
-        [ 'https://test.example.com/page/another_page/*', 'https://test.example.com/page/login', false ],
-        [ 'https://test.example.com/path/another/a/', 'https://test.example.com/path/another/a/', true ],
-        [ 'https://test.example.com/path/another/a/', 'https://test.example.com/path/another/b/', false ],
-        [ 'https://test.example.com/*/another/a/', 'https://test.example.com/path/another/a/', true ],
-        [ 'https://test.example.com/path/*/a/', 'https://test.example.com/path/another/a/', true ],
-        [ 'https://test.example.com/path2/*/a/', 'https://test.example.com/path/another/a/', false ],
-        [ 'https://example.com:8448/', 'https://example.com/', false ],
-        [ 'https://example.com:8448/', 'https://example.com:8448/', true ],
-        [ 'https://example.com:8448/login/page', 'https://example.com/login/page', false ],
-        [ 'https://example.com:8448/*', 'https://example.com:8448/login/page', true ],
-        [ 'https://example.com/$/*', 'https://example.com/$/login_page', true ], // Special character in URL
-        [ 'https://example.com/*/*', 'https://example.com/$/login_page', true ],
-        [ 'https://example.com/*/*', 'https://example.com/login_page', false ],
-        [ 'https://*.com/*', 'https://example.com/$/login_page', true ],
-        [ 'https://*.com/*', 'https://example.org/$/login_page', false ],
-        [ 'https://*.*/*', 'https://example.org/$/login_page', false ],
-        // IP based URL's
-        [ 'https://127.128.129.130:8448/', 'https://127.128.129.130:8448/', true ],
-        [ 'https://127.128.129.*:8448/', 'https://127.128.129.130:8448/', true ],
-        [ 'https://127.128.*/', 'https://127.128.129.130/', true ],
-        [ 'https://127.128.*/', 'https://127.1.129.130/', false ],
-        [ 'https://127.128.129.130/', 'https://127.128.129.130:8448/', false ],
-        [ 'https://127.128.129.*/', 'https://127.128.129.130:8448/', false ],
-        // Invalid URL's
-        [ '', 'https://example.com', false ],
-        [ 'abcdefgetc', 'https://example.com', false ],
-        [ '{TOTP}\\no', 'https://example.com', false ],
-        [ 'https://320.320.320.320', 'https://example.com', false ]
-    ];
-
-    for (const m of matches) {
-        assertRegex(siteMatch(m[0], m[1]), m[2], testCard, `siteMatch() for ${m[1]}`);
-    }
-
-    // TODO: Enable these tests later. Not sure how to tests cookies API which requires to be running in the
-    //       background script.
-    // Top-Level-Domain tests
-    /*const tldUrls = [
-        [ 'another.example.co.uk', 'co.uk' ],
-        [ 'www.example.com', 'com' ],
-        [ 'github.com', 'com' ],
-        [ 'test.net', 'net' ],
-        [ 'so.many.subdomains.co.jp', 'co.jp' ],
-        [ '192.168.0.1', '192.168.0.1' ],
-        [ 'www.nic.ar','ar' ],
-        [ 'no.no.no', 'no' ],
-        [ 'www.blogspot.com.ar', 'blogspot.com.ar' ], // blogspot.com.ar is a TLD
-        [ 'jap.an.ide.kyoto.jp', 'ide.kyoto.jp' ], // ide.kyoto.jp is a TLD
-    ];
-
-    for (const d of tldUrls) {
-        kpxcAssert(page.getTopLevelDomainFromUrl(d[0]), d[1], testCard, 'getTopLevelDomainFromUrl() for ' + d[0]);
-    }
-
-    // Base domain tests
-    const domains = [
-        [ 'another.example.co.uk', 'example.co.uk' ],
-        [ 'www.example.com', 'example.com' ],
-        [ 'test.net', 'test.net' ],
-        [ 'so.many.subdomains.co.jp', 'subdomains.co.jp' ],
-        [ '192.168.0.1', '192.168.0.1' ],
-        [ 'www.nic.ar', 'nic.ar' ],
-        [ 'www.blogspot.com.ar', 'www.blogspot.com.ar' ], // blogspot.com.ar is a TLD
-        [ 'www.arpa', 'www.arpa' ],
-        [ 'jap.an.ide.kyoto.jp', 'an.ide.kyoto.jp' ], // ide.kyoto.jp is a TLD
-        [ 'kobe.jp', 'kobe.jp' ],
-    ];
-
-    for (const d of domains) {
-        kpxcAssert(page.getBaseDomainFromUrl(d[0]), d[1], testCard, 'getBaseDomainFromUrl() for ' + d[0]);
-    }*/
-}
-
 // Input field matching (keepassxc-browser.js)
 async function testInputFields() {
     // Div ID, expected fields, action element ID (a button to be clicked)
@@ -208,7 +113,6 @@ async function testPasswordChange() {
 // Run tests
 (async () => {
     await Promise.all([
-        await testGeneral(),
         await testInputFields(),
         await testSearchFields(),
         await testTotpFields(),

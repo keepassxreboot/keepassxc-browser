@@ -1,7 +1,8 @@
-const { devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
-const config = {
+export default defineConfig({
     testDir: './tests',
+    fullyParallel: true,
     timeout: 30 * 1000,
     expect: {
         timeout: 5000
@@ -19,18 +20,12 @@ const config = {
     projects: [
         {
             name: 'chromium',
-            use: {
-                ...devices['Desktop Chrome'],
-            },
+            use: { ...devices['Desktop Chrome'] },
         },
         {
             name: 'firefox',
-            use: {
-                ...devices['Desktop Firefox'],
-            },
+            use: { ...devices['Desktop Firefox'] },
         },
     ],
-    testMatch: 'content-script-tests.mjs',
-};
-
-module.exports = config;
+    testMatch: '*.spec.ts',
+});
