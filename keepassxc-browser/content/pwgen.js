@@ -83,14 +83,7 @@ PasswordIcon.prototype.createIcon = function(field) {
 
     kpxcUI.setIconPosition(icon, field, this.rtl);
     this.icon = icon;
-
-    const styleSheet = createStylesheet('css/pwgen.css');
-    const wrapper = document.createElement('div');
-
-    this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
-    this.shadowRoot.append(styleSheet);
-    this.shadowRoot.append(icon);
-    document.body.append(wrapper);
+    this.createWrapper('css/pwgen.css');
 };
 
 

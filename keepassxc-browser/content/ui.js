@@ -50,6 +50,27 @@ class Icon {
         }
     }
 
+    // Creates a wrapper div that has the icon in Shadow DOM
+    createWrapper(styleSheetFilename) {
+        const styleSheet = createStylesheet(styleSheetFilename);
+        const wrapper = document.createElement('div');
+        wrapper.style.all = 'unset';
+        wrapper.style.display = 'none';
+
+        // Make sure the wrapper is positioned correctly without CSS styles affecting to it
+        wrapper.style.position = 'absolute';
+        wrapper.style.top = Pixels(0);
+        wrapper.style.left = Pixels(0);
+
+        // Waits for stylesheet to load before displaying the element
+        styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
+
+        this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+        this.shadowRoot.append(styleSheet);
+        this.shadowRoot.append(this.icon);
+        document.body.append(wrapper);
+    }
+
     switchIcon(state, uuid) {
         if (!this.icon) {
             return;
