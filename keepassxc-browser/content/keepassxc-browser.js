@@ -845,7 +845,7 @@ kpxc.updateTOTPList = async function() {
 
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests
 kpxc.enablePasskeys = function() {
-    if (document?.documentElement?.ownerDocument?.contentType?.includes('/xml')) {
+    if (document?.documentElement?.ownerDocument?.contentType !== 'text/html') {
         return;
     }
 
@@ -925,7 +925,7 @@ kpxc.enablePasskeys = function() {
  */
 const initContentScript = async function() {
     try {
-        if (document?.documentElement?.ownerDocument?.contentType?.includes('/xml')) {
+        if (document?.documentElement?.ownerDocument?.contentType !== 'text/html') {
             return;
         }
 
