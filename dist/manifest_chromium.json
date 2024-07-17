@@ -38,6 +38,10 @@
             "matches": [
                 "<all_urls>"
             ],
+            "exclude_matches": [
+                "*://*/*.xml*",
+                "file:///*.xml*"
+            ],
             "js": [
                 "common/browser-polyfill.min.js",
                 "common/global.js",

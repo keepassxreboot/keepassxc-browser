@@ -845,7 +845,7 @@ kpxc.updateTOTPList = async function() {
 
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests
 kpxc.enablePasskeys = function() {
-    if (document?.documentElement?.ownerDocument?.contentType === 'text/xml') {
+    if (document?.documentElement?.ownerDocument?.contentType?.includes('/xml')) {
         return;
     }
 
@@ -925,6 +925,10 @@ kpxc.enablePasskeys = function() {
  */
 const initContentScript = async function() {
     try {
+        if (document?.documentElement?.ownerDocument?.contentType?.includes('/xml')) {
+            return;
+        }
+
         const settings = await sendMessage('load_settings');
         if (!settings) {
             logError('Error: Cannot load extension settings');
