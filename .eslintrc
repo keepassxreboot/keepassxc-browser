@@ -118,6 +118,7 @@
         "IGNORE_NORMAL": true,
         "IGNORE_NOTHING": true,
         "importScripts": true,
+        "IMPROVED_DETECTION_PREDEFINED_SITELIST": true,
         "initColorTheme": true,
         "isEdge": true,
         "isFirefox": true,

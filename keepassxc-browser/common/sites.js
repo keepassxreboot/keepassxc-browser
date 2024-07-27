@@ -34,6 +34,10 @@ const PREDEFINED_SITELIST = [
     'https://*.wordpress.com/log-in/'
 ];
 
+const IMPROVED_DETECTION_PREDEFINED_SITELIST = [
+    'https://secure.chase.com/*'
+];
+
 const googleUrl = 'https://accounts.google.com';
 
 const kpxcSites = {};

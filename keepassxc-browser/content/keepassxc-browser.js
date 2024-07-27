@@ -747,7 +747,7 @@ kpxc.showGroupNameInAutocomplete = function() {
         || (kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(kpxc.credentials) > 1);
 };
 
-// Returns true if site is ignored
+// Returns true if site is ignored, and checks for predefined sites
 kpxc.siteIgnored = async function(condition) {
     if (kpxc.settings.sitePreferences) {
         let currentLocation;
@@ -760,7 +760,6 @@ kpxc.siteIgnored = async function(condition) {
             currentLocation = window.self.location.href;
         }
 
-        // Refresh current settings for the site
         const currentSetting = condition || IGNORE_FULL;
         for (const site of kpxc.settings.sitePreferences) {
             if (siteMatch(site.url, currentLocation) || site.url === currentLocation) {
@@ -768,6 +767,7 @@ kpxc.siteIgnored = async function(condition) {
                     return true;
                 }
 
+                // Refresh current settings for the site
                 kpxc.singleInputEnabledForPage = site.usernameOnly;
                 kpxc.improvedFieldDetectionEnabledForPage = site.improvedFieldDetection;
                 await sendMessage('page_set_allow_iframes', [ site.allowIframes, currentLocation ]);
@@ -776,11 +776,7 @@ kpxc.siteIgnored = async function(condition) {
 
         // Check for predefined sites
         if (kpxc.settings.usePredefinedSites) {
-            for (const url of PREDEFINED_SITELIST) {
-                if (siteMatch(url, currentLocation) || url === currentLocation) {
-                    kpxc.singleInputEnabledForPage = true;
-                }
-            }
+            kpxc.usePredefinedSites(currentLocation);
         }
     }
 
@@ -841,6 +837,23 @@ kpxc.updateTOTPList = async function() {
     }
 
     return [];
+};
+
+// Enable certain settings based on predefined sites list
+kpxc.usePredefinedSites = function(currentLocation) {
+    // Single input field
+    for (const url of PREDEFINED_SITELIST) {
+        if (siteMatch(url, currentLocation) || url === currentLocation) {
+            kpxc.singleInputEnabledForPage = true;
+        }
+    }
+
+    // Improved input field detection
+    for (const url of IMPROVED_DETECTION_PREDEFINED_SITELIST) {
+        if (siteMatch(url, currentLocation) || url === currentLocation) {
+            kpxc.improvedFieldDetectionEnabledForPage = true;
+        }
+    }
 };
 
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests
