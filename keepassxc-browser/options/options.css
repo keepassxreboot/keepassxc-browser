@@ -56,6 +56,7 @@ input[disabled] {
 }
 
 footer {
+    display: none;
     bottom: 1rem;
 }
 
@@ -91,13 +92,33 @@ tbody {
     color: var(--kpxc-text-color);
 }
 
+.table>:not(caption)>*>* {
+    color: var(--kpxc-text-color);
+}
+
 .table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-bg-type: var(--kpxc-table-odd-color);
     background-color: var(--kpxc-table-odd-color);
     color: var(--kpxc-text-color);
 }
 
+.table-striped > tbody > tr:nth-of-type(odd) input[type="checkbox"] {
+    background-color: var(--kpxc-card-background-color) !important;
+    border-color: var(--kpxc-input-main-border-color) !important;
+    color: var(--kpxc-text-color) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) .form-check-input:checked {
+    background-color: var(--kpxc-checkbox-background-color) !important;
+}
+
 .table tbody td {
     vertical-align: middle;
+}
+
+/* Hide the row saying that the table is empty when there are other rows */
+table tbody tr.empty:not(:nth-last-child(2)) {
+  display: none;
 }
 
 #tab-site-preferences td:nth-of-type(2),
@@ -106,6 +127,8 @@ tbody {
 }
 
 #tab-site-preferences td:nth-of-type(3),
+#tab-site-preferences td:nth-of-type(4),
+#tab-site-preferences td:nth-of-type(5),
 table td:last-of-type {
     width: 1px;
 }
@@ -117,6 +140,7 @@ table td:last-of-type {
 .card {
     background-color: var(--kpxc-card-background-color);
     border-color: var(--kpxc-card-border-color);
+    overflow: hidden; /* fix border radius looking fuzzy */
 }
 
 .card-header {
@@ -193,10 +217,18 @@ table td:last-of-type {
     .sidebar {
         height: auto;
     }
+
+    footer {
+        display: block;
+    }
 }
 
 @media (min-width: 1440px) {
     .sidebar {
         width: 240px;
+    }
+
+    footer {
+        display: block;
     }
 }

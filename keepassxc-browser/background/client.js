@@ -23,6 +23,24 @@ const kpErrors = {
     EMPTY_MESSAGE_RECEIVED: 13,
     NO_URL_PROVIDED: 14,
     NO_LOGINS_FOUND: 15,
+    NO_GROUPS_FOUND: 16,
+    CANNOT_CREATE_NEW_GROUP: 17,
+    NO_VALID_UUID_PROVIDED: 18,
+    ACCESS_TO_ALL_ENTRIES_DENIED: 19,
+    PASSKEYS_ATTESTATION_NOT_SUPPORTED: 20,
+    PASSKEYS_CREDENTIAL_IS_EXCLUDED: 21,
+    PASSKEYS_REQUEST_CANCELED: 22,
+    PASSKEYS_INVALID_USER_VERIFICATION: 23,
+    PASSKEYS_EMPTY_PUBLIC_KEY: 24,
+    PASSKEYS_INVALID_URL_PROVIDED: 25,
+    PASSKEYS_ORIGIN_NOT_ALLOWED: 26,
+    PASSKEYS_DOMAIN_IS_NOT_VALID: 27,
+    PASSKEYS_DOMAIN_RPID_MISMATCH: 28,
+    PASSKEYS_NO_SUPPORTED_ALGORITHMS: 29,
+    PASSKEYS_WAIT_FOR_LIFETIMER: 30,
+    PASSKEYS_UNKNOWN_ERROR: 31,
+    PASSKEYS_INVALID_CHALLENGE: 32,
+    PASSKEYS_INVALID_USER_ID: 33,
 
     errorMessages: {
         0: { msg: tr('errorMessageUnknown') },
@@ -40,7 +58,25 @@ const kpErrors = {
         12: { msg: tr('errorMessageIncorrectAction') },
         13: { msg: tr('errorMessageEmptyMessage') },
         14: { msg: tr('errorMessageNoURL') },
-        15: { msg: tr('errorMessageNoLogins') }
+        15: { msg: tr('errorMessageNoLogins') },
+        16: { msg: tr('errorMessageNoGroupsFound') },
+        17: { msg: tr('errorMessageCannotCreateNewGroup') },
+        18: { msg: tr('errorMessageNoValidUuidProvided') },
+        19: { msg: tr('errorMessageAccessToAllEntriesDenied') },
+        20: { msg: tr('errorMessagePasskeysAttestationNotSupported') },
+        21: { msg: tr('errorMessagePasskeysCredentialIsExcluded') },
+        22: { msg: tr('errorMessagePasskeysRequestCanceled') },
+        23: { msg: tr('errorMessagePasskeysInvalidUserVerification') },
+        24: { msg: tr('errorMessagePasskeysEmptyPublicKey') },
+        25: { msg: tr('errorMessagePasskeysInvalidUrlProvided') },
+        26: { msg: tr('errorMessagePasskeysOriginNotAllowed') },
+        27: { msg: tr('errorMessagePasskeysDomainNotValid') },
+        28: { msg: tr('errorMessagePasskeysDomainRpIdMismatch') },
+        29: { msg: tr('errorMessagePasskeysNoSupportedAlgorithms') },
+        30: { msg: tr('errorMessagePasskeysWaitforLifeTimer') },
+        31: { msg: tr('errorMessagePasskeysUnknownError') },
+        32: { msg: tr('errorMessagePasskeysInvalidChallenge') },
+        33: { msg: tr('errorMessagePasskeysInvalidUserId') },
     },
 
     getError(errorCode) {
@@ -51,83 +87,109 @@ const kpErrors = {
 const messageBuffer = {
     buffer: [],
 
-    addMessage(msg) {
-        if (!this.buffer.includes(msg)) {
-            this.buffer.push(msg);
-        }
+    addMessage(message) {
+        this.buffer.push(message);
     },
 
-    matchAndRemove(msg) {
-        for (let i = 0; i < this.buffer.length; ++i) {
-            if (msg.nonce && msg.nonce === keepassClient.incrementedNonce(this.buffer[i].nonce)) {
-                this.buffer.splice(i, 1);
-                return true;
-            }
-        }
+    // Returns corresponding message from the response. If the response is an error,
+    // return the first matching action from the buffer.
+    getMessage(response) {
+        const isError = Boolean(!response.nonce && response.error && response.errorCode);
+        return this.buffer.find(message => {
+            if (keepassClient.incrementedNonce(message.request.nonce) === response.nonce
+                || (isError && message.request?.action === response?.action)) {
+                // Cancel timeout
+                if (message.enableTimeout) {
+                    message.cancelTimeout();
+                }
 
-        return false;
-    }
+                return message;
+            }
+        });
+    },
+
+    removeMessage(message) {
+        const index = this.buffer.indexOf(message);
+        if (index >= 0 && index < this.buffer.length) {
+            this.buffer.splice(index, 1);
+        }
+    },
 };
+
+// Basic class for a message to be sent. The Promise inside the class will be resolved when
+// the response to the message is received.
+class Message {
+    constructor(request, enableTimeout, timeoutValue) {
+        this.enableTimeout = enableTimeout;
+        this.request = request;
+        this.timeout = undefined;
+
+        this.promise = new Promise((resolve, reject) => {
+            this.reject = reject;
+            this.resolve = resolve;
+
+            const messageTimeout = timeoutValue || keepassClient.messageTimeout;
+
+            // Handle timeout
+            if (this.enableTimeout) {
+                this.timeout = setTimeout(() => {
+                    const errorMessage = {
+                        action: request.action,
+                        error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
+                        errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
+                    };
+
+                    keepass.isKeePassXCAvailable = false;
+                    resolve(errorMessage);
+                }, messageTimeout);
+            }
+        });
+    }
+
+    cancelTimeout() {
+        this.enableTimeout = false;
+        clearTimeout(this.timeout);
+    }
+}
 
 //--------------------------------------------------------------------------
 // Messaging
 //--------------------------------------------------------------------------
 
-keepassClient.sendNativeMessage = function(request, enableTimeout = false, timeoutValue) {
-    return new Promise((resolve, reject) => {
-        let timeout;
-        const requestAction = request.action;
-        const ev = keepassClient.nativePort.onMessage;
+keepassClient.sendNativeMessage = async function(request, enableTimeout = false, timeoutValue) {
+    if (!keepassClient.nativePort) {
+        logError('No native messaging port defined.');
+        return;
+    }
 
-        const listener = ((port, action) => {
-            const handler = (msg) => {
-                if (msg && msg.action === action) {
-                    // If the request has a separate requestID, check if it matches when there's no nonce (an error message)
-                    const isNotificationOrError = !msg.nonce && request.requestID === msg.requestID;
+    const message = new Message(request, enableTimeout, timeoutValue);
+    await navigator.locks.request('messageBuffer', async (lock) => {
+        messageBuffer.addMessage(message);
+    });
 
-                    // Only resolve a matching response or a notification (without nonce)
-                    if (isNotificationOrError || messageBuffer.matchAndRemove(msg)) {
-                        port.removeListener(handler);
-                        if (enableTimeout) {
-                            clearTimeout(timeout);
-                        }
+    keepassClient.nativePort.postMessage(request);
 
-                        resolve(msg);
-                        return;
-                    }
-                }
-            };
-            return handler;
-        })(ev, requestAction);
-        ev.addListener(listener);
+    const response = await message.promise;
 
-        const messageTimeout = timeoutValue || keepassClient.messageTimeout;
+    // Remove a timeouted message
+    if (response.error && response?.errorCode === kpErrors.TIMEOUT_OR_NOT_CONNECTED) {
+        messageBuffer.removeMessage(message);
+    }
 
-        // Handle timeouts
-        if (!keepass.isSafari && enableTimeout) {
-            timeout = setTimeout(() => {
-                const errorMessage = {
-                    action: requestAction,
-                    error: kpErrors.getError(kpErrors.TIMEOUT_OR_NOT_CONNECTED),
-                    errorCode: kpErrors.TIMEOUT_OR_NOT_CONNECTED
-                };
-                keepass.isKeePassXCAvailable = false;
-                ev.removeListener(listener.handler);
-                resolve(errorMessage);
-            }, messageTimeout);
+    return response;
+};
+
+keepassClient.handleNativeMessage = async function(response) {
+    // Parse through the message buffer to find the corresponding Promise.
+    await navigator.locks.request('messageBuffer', async (lock) => {
+        const message = messageBuffer.getMessage(response);
+        if (message) {
+            message.resolve(response);
+            messageBuffer.removeMessage(message);
+            return;
         }
 
-        // Store the request to the buffer
-        messageBuffer.addMessage(request);
-
-        // Send the request
-        if (keepass.isSafari) {
-            chrome.runtime.sendNativeMessage(keepass.nativeHostName, { message: JSON.stringify(request) }, function(response) {
-                resolve(JSON.parse(response));
-            });
-        } else if (keepass.nativePort) {
-            keepass.nativePort.postMessage(request);
-        }
+        debugLogMessage('Corresponding request not found in the message buffer for response: ', response);
     });
 };
 
@@ -170,7 +232,7 @@ keepassClient.buildRequest = function(action, encrypted, nonce, clientID, trigge
 keepassClient.sendMessage = async function(kpAction, tab, messageData, nonce, enableTimeout = false, triggerUnlock = false) {
     const request = keepassClient.buildRequest(kpAction, keepassClient.encrypt(messageData, nonce), nonce, keepass.clientID, triggerUnlock);
     if (messageData.requestID) {
-        request["requestID"] = messageData.requestID;
+        request['requestID'] = messageData.requestID;
     }
 
     const response = await keepassClient.sendNativeMessage(request, enableTimeout);
@@ -335,7 +397,7 @@ function onDisconnected() {
     keepass.associated.hash = null;
     keepass.databaseHash = '';
 
-    page.clearCredentials(page.currentTabId, true);
+    page.clearAllLogins();
     keepass.updatePopup('cross');
     keepass.updateDatabaseHashToContent();
     logError(`Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message)}`);
@@ -345,5 +407,9 @@ keepassClient.onNativeMessage = function(response) {
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.updateDatabase();
+        return;
     }
+
+    // Generic response handling
+    keepassClient.handleNativeMessage(response);
 };

@@ -16,49 +16,6 @@ function createResult(card, res, text) {
     document.querySelector(card).appendMultiple(icon, span, br);
 }
 
-// General (global.js)
-async function testGeneral() {
-    const testCard = Tests.GENERAL;
-
-    // General
-    kpxcAssert(trimURL('https://test.com/path_to_somwhere?login=username'), 'https://test.com/path_to_somwhere', testCard, 'trimURL()');
-    assertRegex(slashNeededForUrl('https://test.com'), true, testCard, 'slashNeededForUrl()');
-    assertRegex(slashNeededForUrl('https://test.com/'), false, testCard, 'slashNeededForUrl()');
-
-    // URL matching (URL in Site Preferences, page URL, expected result).
-    // Consider using slighly different URL's for the tests cases.
-    const matches = [
-        [ 'https://example.com/*', 'https://example.com/login_page', true ],
-        [ 'https://example.com/*', 'https://example2.com/login_page', false ],
-        [ 'https://example.com/*', 'https://subdomain.example.com/login_page', false ],
-        [ 'https://*.example.com/*', 'https://example.com/login_page', true ],
-        [ 'https://*.example.com/*', 'https://test.example.com/login_page', true ],
-        [ 'https://test.example.com/*', 'https://subdomain.example.com/login_page', false ],
-        [ 'https://test.example.com/page/*', 'https://test.example.com/page/login_page', true ],
-        [ 'https://test.example.com/page/another_page/*', 'https://test.example.com/page/login', false ],
-        [ 'https://test.example.com/path/another/a/', 'https://test.example.com/path/another/a/', true ],
-        [ 'https://test.example.com/path/another/a/', 'https://test.example.com/path/another/b/', false ],
-    ];
-
-    for (const m of matches) {
-        assertRegex(siteMatch(m[0], m[1]), m[2], testCard, `siteMatch() for ${m[1]}`);
-    }
-
-    // Base domain parsing (window.location.hostname)
-    const domains = [
-        [ 'another.example.co.uk', 'example.co.uk' ],
-        [ 'www.example.com', 'example.com' ],
-        [ 'test.net', 'test.net' ],
-        [ 'so.many.subdomains.co.jp', 'subdomains.co.jp' ],
-        [ 'test.site.example.com.au', 'example.com.au' ],
-        [ '192.168.0.1', '192.168.0.1' ]
-    ];
-
-    for (const d of domains) {
-        kpxcAssert(getTopLevelDomainFromUrl(d[0]), d[1], testCard, 'getBaseDomainFromUrl() for ' + d[0]);
-    }
-}
-
 // Input field matching (keepassxc-browser.js)
 async function testInputFields() {
     // Div ID, expected fields, action element ID (a button to be clicked)
@@ -103,6 +60,7 @@ async function testTotpFields() {
         [ '', { id: '2fa', type: 'text', maxLength: '6' }, 'Generic 2FA field', true ],
         [ '', { id: '2fa', type: 'text', maxLength: '4' }, 'Ignore if field maxLength too small', false ],
         [ '', { id: '2fa', type: 'text', maxLength: '12' }, 'Ignore if field maxLength too long', false ],
+        [ '', { id: '2fa', type: 'text', maxLength: '12', autocomplete: 'one-time-code' }, 'Accept if one-time-code', true ],
         [ '', { id: 'username', type: 'text', }, 'Ignore a generic input field', false ],
         [ '', { type: 'password', }, 'Ignore a password input field', false ],
         [ // Protonmail
@@ -155,7 +113,6 @@ async function testPasswordChange() {
 // Run tests
 (async () => {
     await Promise.all([
-        await testGeneral(),
         await testInputFields(),
         await testSearchFields(),
         await testTotpFields(),

@@ -1,10 +1,12 @@
 'use strict';
 
 const defaultSettings = {
+    afterFillSorting: SORT_BY_MATCHING_CREDENTIALS_SETTING,
+    afterFillSortingTotp: SORT_BY_RELEVANT_ENTRY,
     autoCompleteUsernames: true,
-    showGroupNameInAutocomplete: true,
     autoFillAndSend: false,
     autoFillSingleEntry: false,
+    autoFillSingleTotp: false,
     autoReconnect: false,
     autoRetrieveCredentials: true,
     autoSubmit: false,
@@ -16,20 +18,29 @@ const defaultSettings = {
     defaultGroup: '',
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
+    passkeys: false,
+    passkeysFallback: true,
     redirectAllowance: 1,
     saveDomainOnly: true,
     showGettingStartedGuideAlert: true,
+    showGroupNameInAutocomplete: true,
     showLoginFormIcon: true,
     showLoginNotifications: true,
     showNotifications: true,
     showOTPIcon: true,
+    showTroubleshootingGuideAlert: true,
+    useCompactMode: false,
+    useMonochromeToolbarIcon: false,
     useObserver: true,
     usePredefinedSites: true,
-    usePasswordGeneratorIcons: false
+    usePasswordGeneratorIcons: false,
 };
 
-var page = {};
-page.attributeMenuItemIds = [];
+const AUTO_SUBMIT_TIMEOUT = 5000;
+
+const page = {};
+page.autoSubmitPerformed = false;
+page.attributeMenuItems = [];
 page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
 page.currentRequest = {};
@@ -50,109 +61,13 @@ page.initSettings = async function() {
     try {
         const item = await browser.storage.local.get({ 'settings': {} });
         page.settings = item.settings;
+        page.settings.autoReconnect = false;
 
-        if (!('autoCompleteUsernames' in page.settings)) {
-            page.settings.autoCompleteUsernames = defaultSettings.autoCompleteUsernames;
-        }
-
-        if (!('showGroupNameInAutocomplete' in page.settings)) {
-            page.settings.showGroupNameInAutocomplete = defaultSettings.showGroupNameInAutocomplete;
-        }
-
-        if (!('autoFillAndSend' in page.settings)) {
-            page.settings.autoFillAndSend = defaultSettings.autoFillAndSend;
-        }
-
-        if (!('autoFillSingleEntry' in page.settings)) {
-            page.settings.autoFillSingleEntry = defaultSettings.autoFillSingleEntry;
-        }
-
-        if (!('autoReconnect' in page.settings)) {
-            page.settings.autoReconnect = defaultSettings.autoReconnect;
-        }
-
-        if (!('autoRetrieveCredentials' in page.settings)) {
-            page.settings.autoRetrieveCredentials = defaultSettings.autoRetrieveCredentials;
-        }
-
-        if (!('autoSubmit' in page.settings)) {
-            page.settings.autoSubmit = defaultSettings.autoSubmit;
-        }
-
-        if (!('checkUpdateKeePassXC' in page.settings)) {
-            page.settings.checkUpdateKeePassXC = defaultSettings.checkUpdateKeePassXC;
-        }
-
-        if (!('colorTheme' in page.settings)) {
-            page.settings.colorTheme = defaultSettings.colorTheme;
-        }
-
-        if (!('clearCredentialsTimeout' in page.settings)) {
-            page.settings.clearCredentialsTimeout = defaultSettings.clearCredentialsTimeout;
-        }
-
-        if (!('credentialSorting' in page.settings)) {
-            page.settings.credentialSorting = defaultSettings.credentialSorting;
-        }
-
-        if (!('debugLogging' in page.settings)) {
-            page.settings.debugLogging = defaultSettings.debugLogging;
-        }
-
-        if (!('defaultGroup' in page.settings)) {
-            page.settings.defaultGroup = defaultSettings.defaultGroup;
-        }
-
-        if (!('defaultGroupAlwaysAsk' in page.settings)) {
-            page.settings.defaultGroupAlwaysAsk = defaultSettings.defaultGroupAlwaysAsk;
-        }
-
-        if (!('downloadFaviconAfterSave' in page.settings)) {
-            page.settings.downloadFaviconAfterSave = defaultSettings.downloadFaviconAfterSave;
-        }
-
-        if (!('redirectAllowance' in page.settings)) {
-            page.settings.redirectAllowance = defaultSettings.redirectAllowance;
-        }
-
-        if (!('saveDomainOnly' in page.settings)) {
-            page.settings.saveDomainOnly = defaultSettings.saveDomainOnly;
-        }
-
-        if (!('showGettingStartedGuideAlert' in page.settings)) {
-            page.settings.showGettingStartedGuideAlert = defaultSettings.showGettingStartedGuideAlert;
-        }
-
-        if (!('showLoginFormIcon' in page.settings)) {
-            page.settings.showLoginFormIcon = defaultSettings.showLoginFormIcon;
-        }
-
-        if (!('showLoginNotifications' in page.settings)) {
-            page.settings.showLoginNotifications = defaultSettings.showLoginNotifications;
-        }
-
-        if (!('showNotifications' in page.settings)) {
-            page.settings.showNotifications = defaultSettings.showNotifications;
-        }
-
-        if (!('showOTPIcon' in page.settings)) {
-            page.settings.showOTPIcon = defaultSettings.showOTPIcon;
-        }
-
-        if (!('usePasswordGeneratorIcons' in page.settings)) {
-            page.settings.usePasswordGeneratorIcons = defaultSettings.usePasswordGeneratorIcons;
-        }
-
-        if (!('useObserver' in page.settings)) {
-            page.settings.useObserver = defaultSettings.useObserver;
-        }
-
-        if (!('usePasswordGeneratorIcons' in page.settings)) {
-            page.settings.usePasswordGeneratorIcons = defaultSettings.usePasswordGeneratorIcons;
-        }
-
-        if (!('usePredefinedSites' in page.settings)) {
-            page.settings.usePredefinedSites = defaultSettings.usePredefinedSites;
+        // Set default settings if needed
+        for (const [ key, value ] of Object.entries(defaultSettings)) {
+            if (!Object.hasOwn(page.settings, key)) {
+                page.settings[key] = value;
+            }
         }
 
         await browser.storage.local.set({ 'settings': page.settings });
@@ -171,13 +86,13 @@ page.initOpenedTabs = async function() {
         }
 
         // Set initial tab-ID
-        const currentTabs = await browser.tabs.query({ active: true, currentWindow: true });
-        if (currentTabs.length === 0) {
+        const currentTab = await getCurrentTab();
+        if (!currentTab) {
             return;
         }
 
-        page.currentTabId = currentTabs[0].id;
-        browserAction.showDefault(currentTabs[0]);
+        page.currentTabId = currentTab.id;
+        browserAction.showDefault(currentTab);
     } catch (err) {
         logError('page.initOpenedTabs error: ' + err);
         return Promise.reject();
@@ -241,6 +156,7 @@ page.clearLogins = function(tabId) {
         return;
     }
 
+    page.tabs[tabId].allowIframes = false;
     page.tabs[tabId].credentials = [];
     page.tabs[tabId].loginList = [];
     page.currentRequest = {};
@@ -272,10 +188,11 @@ page.clearSubmittedCredentials = async function() {
 
 page.createTabEntry = function(tabId) {
     page.tabs[tabId] = {
+        allowIframes: false,
         credentials: [],
         errorMessage: null,
         loginList: [],
-        loginId: -1
+        loginId: undefined
     };
 
     page.clearSubmittedCredentials();
@@ -286,17 +203,25 @@ page.createTabEntry = function(tabId) {
 // Page reload or tab switch clears the cache.
 // If the retrieval is forced (from Credential Banner), get new credentials normally.
 page.retrieveCredentials = async function(tab, args = []) {
+    if (!tab?.active) {
+        return [];
+    }
+
     const [ url, submitUrl, force ] = args;
-    if (page.tabs[tab.id] && page.tabs[tab.id].credentials.length > 0 && !force) {
+    if (page.tabs[tab.id]?.credentials.length > 0 && !force) {
         return page.tabs[tab.id].credentials;
     }
 
-    // Ignore duplicate requests
-    if (page.currentRequest.url === url && page.currentRequest.submitUrl === submitUrl && !force) {
+    // Ignore duplicate requests from the same tab
+    if (page.currentRequest.url === url
+        && page.currentRequest.submitUrl === submitUrl
+        && page.currentRequest.tabId === tab.id
+        && !force) {
         return [];
     } else {
         page.currentRequest.url = url;
         page.currentRequest.submitUrl = submitUrl;
+        page.currentRequest.tabId = tab.id;
     }
 
     const credentials = await keepass.retrieveCredentials(tab, args);
@@ -305,14 +230,14 @@ page.retrieveCredentials = async function(tab, args = []) {
 };
 
 page.getLoginId = async function(tab) {
+    const currentTab = page.tabs[tab.id];
+
     // If there's only one credential available and loginId is not set
-    if (page.tabs[tab.id] && page.tabs[tab.id].loginId < 0
-        && page.tabs[tab.id]
-        && page.tabs[tab.id].credentials.length === 1) {
-        return 0; // Index to the first credential
+    if (currentTab && !currentTab.loginId && currentTab.credentials.length === 1) {
+        return currentTab.credentials[0].uuid;
     }
 
-    return page.tabs[tab.id] ? page.tabs[tab.id].loginId : undefined;
+    return currentTab ? currentTab.loginId : undefined;
 };
 
 page.setLoginId = async function(tab, loginId) {
@@ -341,12 +266,43 @@ page.setSubmitted = async function(tab, args = []) {
     page.setSubmittedCredentials(submitted, username, password, url, oldCredentials, tab.id);
 };
 
+page.getAutoSubmitPerformed = async function(tab) {
+    return page.autoSubmitPerformed;
+};
+
+// Set autoSubmitPerformed to false after 5 seconds, preventing possible endless loops
+page.setAutoSubmitPerformed = async function(tab) {
+    if (!page.autoSubmitPerformed) {
+        page.autoSubmitPerformed = true;
+
+        setTimeout(() => {
+            page.autoSubmitPerformed = false;
+        }, AUTO_SUBMIT_TIMEOUT);
+    }
+};
+
+page.getLoginList = async function(tab) {
+    return page.tabs[tab.id] ? page.tabs[tab.id].loginList : [];
+};
+
+page.fillHttpAuth = async function(tab, credentials) {
+    if (page.tabs[tab.id]?.loginList.resolve) {
+        page.tabs[tab.id].loginList.resolve({
+            authCredentials: {
+                username: credentials.login,
+                password: credentials.password
+            }
+        });
+    }
+};
+
 // Update context menu for attribute filling
 page.updateContextMenu = async function(tab, credentials) {
     // Remove any old attribute items
-    while (page.attributeMenuItemIds.length) {
-        browser.contextMenus.remove(page.attributeMenuItemIds.pop());
-    }
+    page.attributeMenuItems.forEach(item => {
+        browser.contextMenus.remove(item?.action);
+    });
+    page.attributeMenuItems = [];
 
     // Set parent item visibility
     browser.contextMenus.update('fill_attribute', { visible: true });
@@ -361,33 +317,129 @@ page.updateContextMenu = async function(tab, credentials) {
             // Show username inside [] if there are KPH attributes inside multiple credentials
             const attributeName = Object.keys(attribute)[0].slice(5);
             const finalName = credentials.length > 1
-                       ? `[${cred.login}] ${attributeName}`
-                       : attributeName;
+                ? `[${cred.login}] ${attributeName}`
+                : attributeName;
 
-            page.attributeMenuItemIds.push(createContextMenuItem({
-                action: 'fill_attribute',
+            const menuItem = {
+                action: `fill_attribute_${finalName}`,
                 args: attribute,
                 parentId: 'fill_attribute',
                 title: finalName
-            }));
+            };
+
+            createContextMenuItem(menuItem);
+            page.attributeMenuItems.push(menuItem);
         }
     }
 };
 
-const createContextMenuItem = function({action, args, ...options}) {
+page.updatePopup = function(tab) {
+    browserAction.showDefault(tab);
+};
+
+page.setAllowIframes = async function(tab, args = []) {
+    const [ allowIframes, site ] = args;
+
+    // Only set when main windows' URL is used
+    if (trimURL(tab?.url) === trimURL(site)) {
+        page.tabs[tab.id].allowIframes = allowIframes;
+    }
+};
+
+page.isIframeAllowed = async function(tab, args = []) {
+    const [ url, hostname ] = args;
+    const baseDomain = await page.getBaseDomainFromUrl(hostname, url);
+
+    // Allow if exception has been set from Site Preferences
+    if (page.tabs[tab.id]?.allowIframes) {
+        return true;
+    }
+
+    // Allow iframe if the base domain is included in iframes' and tab's hostname
+    const tabUrl = new URL(tab?.url);
+    return hostname.endsWith(baseDomain) && tabUrl.hostname?.endsWith(baseDomain);
+};
+
+/**
+ * Gets the top level domain from URL.
+ * @param {string} domain   Current iframe's hostname
+ * @param {string} url      Current iframe's full URL
+ * @returns {string}        TLD e.g. https://another.example.co.uk -> co.uk
+ */
+page.getTopLevelDomainFromUrl = async function(domain, url) {
+    // A simple check for IPv4 address. TLD cannot be numeric, and if hostname is just numbers, it's probably an IPv4.
+    // TODO: Handle IPv6 addresses. Is there some internal API for these?
+    if (!isNaN(Number(domain?.replaceAll('.', '')))) {
+        return domain;
+    }
+
+    // Only loop the amount of different domain parts found
+    const numberOfDomainParts = domain?.split('.')?.length;
+    for (let i = 0; i < numberOfDomainParts; ++i) {
+        // Cut the first part from host
+        const index = domain?.indexOf('.');
+        if (index < 0) {
+            continue;
+        }
+
+        // Check if dummy cookie's domain/TLD matches with public suffix list.
+        // If setting the cookie fails, TLD has been found.
+        try {
+            domain = domain?.substring(index + 1);
+            const reply = await browser.cookies.set({
+                domain: domain,
+                name: 'kpxc',
+                sameSite: 'strict',
+                url: url,
+                value: ''
+            });
+
+            // Delete the temporary cookie immediately
+            if (reply) {
+                await browser.cookies.remove({
+                    name: 'kpxc',
+                    url: url
+                });
+            }
+        } catch (e) {
+            return domain;
+        }
+    }
+
+    return domain;
+};
+
+/**
+ * Gets the base domain of URL or hostname.
+ * Up-to-date list can be found: https://publicsuffix.org/list/public_suffix_list.dat
+ * @param {string} domain   Current iframe's hostname
+ * @param {string} url      Current iframe's full URL
+ * @returns {string}        The base domain, e.g. https://another.example.co.uk -> example.co.uk
+ */
+page.getBaseDomainFromUrl = async function(hostname, url) {
+    const tld = await page.getTopLevelDomainFromUrl(hostname, url);
+    if (tld.length === 0 || tld === hostname) {
+        return hostname;
+    }
+
+    // Remove the top level domain part from the hostname, e.g. https://another.example.co.uk -> https://another.example
+    const finalDomain = hostname.slice(0, hostname.lastIndexOf(tld) - 1);
+    // Split the URL and select the last part, e.g. https://another.example -> example
+    let baseDomain = finalDomain.split('.')?.at(-1);
+    // Append the top level domain back to the URL, e.g. example -> example.co.uk
+    baseDomain = baseDomain + '.' + tld;
+
+    return baseDomain;
+};
+
+const createContextMenuItem = function({ action, args, ...options }) {
     return browser.contextMenus.create({
         contexts: menuContexts,
-        onclick: (info, tab) => {
-            browser.tabs.sendMessage(tab.id, {
-                action: action,
-                args: args
-            }).catch((err) => {
-                logError(err);
-            });
-        },
+        id: action,
         ...options
     });
 };
+
 
 const logDebug = function(message, extra) {
     if (page.settings.debugLogging) {

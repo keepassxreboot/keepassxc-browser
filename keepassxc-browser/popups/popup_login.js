@@ -3,20 +3,20 @@
 (async () => {
     await initColorTheme();
 
-    const global = await browser.runtime.getBackgroundPage();
-    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-    if (tabs.length === 0) {
-        return; // For example: only the background devtools or a popup are opened
+    $('#lock-database-button').show();
+
+    const tab = await getCurrentTab();
+    if (!tab) {
+        return [];
     }
 
-    const tab = tabs[0];
-    const logins = global.page.tabs[tab.id].loginList;
+    const logins = await getLoginData();
     const ll = document.getElementById('login-list');
 
-    for (let i = 0; i < logins.length; i++) {
-        const uuid = logins[i].uuid;
+    for (const [ i, login ] of logins.entries()) {
+        const uuid = login.uuid;
         const a = document.createElement('a');
-        a.textContent = logins[i].text;
+        a.textContent = login.text;
         a.setAttribute('class', 'list-group-item');
         a.setAttribute('id', '' + i);
 
@@ -26,7 +26,7 @@
             }
 
             const id = e.target.id;
-            browser.tabs.sendMessage(tab.id, {
+            browser.tabs.sendMessage(tab?.id, {
                 action: 'fill_user_pass_with_specific_login',
                 id: Number(id),
                 uuid: uuid
@@ -39,7 +39,7 @@
     }
 
     if (logins.length > 1) {
-        document.getElementById('filter-block').style = '';
+        $('#filter-block').show();
         const filter = document.getElementById('login-filter');
         filter.addEventListener('keyup', (e) => {
             if (!e.isTrusted) {
@@ -67,10 +67,11 @@
 
         $('#credentialsList').hide();
         $('#database-not-opened').show();
+        $('#lock-database-button').hide();
         $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
     });
 
-    $('#reopen-database-button').click((e) => {
+    $('#reopen-database-button').addEventListener('click', (e) => {
         browser.runtime.sendMessage({
             action: 'get_status',
             args: [ false, true ] // Set forcePopup to true

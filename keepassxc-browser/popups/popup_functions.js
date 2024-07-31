@@ -11,36 +11,47 @@ function updateAvailableResponse(available) {
 }
 
 async function initSettings() {
-    $('#settings #btn-options').addEventListener('click', () => {
+    $('#settings #options-button').addEventListener('click', () => {
         browser.runtime.openOptionsPage().then(close());
     });
 
-    $('#settings #btn-choose-credential-fields').addEventListener('click', async () => {
-        await browser.windows.getCurrent();
-        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-        const tab = tabs[0];
-        await browser.runtime.getBackgroundPage();
+    const customLoginFieldsButton = document.body.querySelector('#settings #choose-custom-login-fields-button');
+    if (isFirefox()) {
+        customLoginFieldsButton.id = 'choose-custom-login-fields-button-moz';
+    }
 
-        browser.tabs.sendMessage(tab.id, {
+    customLoginFieldsButton.addEventListener('click', async () => {
+        const tab = await getCurrentTab();
+        browser.tabs.sendMessage(tab?.id, {
             action: 'choose_credential_fields'
         });
         close();
     });
 }
 
-
 async function initColorTheme() {
-    const colorTheme = await browser.runtime.sendMessage({
+    let theme = await browser.runtime.sendMessage({
         action: 'get_color_theme'
     });
-
-    if (colorTheme === undefined || colorTheme === 'system') {
-        document.body.removeAttribute('data-color-theme');
-    } else {
-        document.body.setAttribute('data-color-theme', colorTheme);
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+    document.documentElement.setAttribute('data-bs-theme', theme);
 }
 
+async function getLoginData() {
+    const tab = await getCurrentTab();
+    if (!tab) {
+        return [];
+    }
+
+    const logins = await browser.runtime.sendMessage({
+        action: 'get_login_list',
+        args: tab.id
+    });
+
+    return logins;
+}
 
 (async () => {
     if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {

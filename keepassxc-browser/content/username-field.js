@@ -13,7 +13,7 @@ kpxcUsernameIcons.switchIcon = function(state) {
 };
 
 kpxcUsernameIcons.deleteHiddenIcons = function() {
-    kpxcUI.deleteHiddenIcons(kpxcUsernameIcons.icons, 'kpxc-username-field');
+    kpxcUI.deleteHiddenIcons(kpxcUsernameIcons.icons);
 };
 
 kpxcUsernameIcons.isValid = function(field) {
@@ -21,7 +21,7 @@ kpxcUsernameIcons.isValid = function(field) {
         || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
         || field.readOnly
         || kpxcIcons.hasIcon(field)
-        || !kpxcFields.isVisible(field)) {
+        || (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field))) {
         return false;
     }
 
@@ -47,6 +47,12 @@ class UsernameFieldIcon extends Icon {
         this.icon.classList.remove('lock', 'lock-moz', 'unlock', 'unlock-moz', 'disconnected', 'disconnected-moz');
         this.icon.classList.add(getIconClassName(state));
         this.icon.title = getIconText(state);
+
+        if (kpxc.credentials.length === 0 && state === DatabaseState.UNLOCKED) {
+            this.icon.style.filter = 'saturate(0%)';
+        } else {
+            this.icon.style.filter = 'saturate(100%)';
+        }
     }
 }
 
@@ -77,7 +83,6 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-username-icon ' + className,
         {
             'title': getIconText(this.databaseState),
-            'alt': tr('usernameFieldIcon'),
             'size': size,
             'offset': offset,
             'kpxc-pwgen-field-id': field.getAttribute('data-kpxc-id')
@@ -103,6 +108,9 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 
     const styleSheet = createStylesheet('css/username.css');
     const wrapper = document.createElement('div');
+    wrapper.style.all = 'unset';
+    wrapper.style.display = 'none';
+    styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
 
     this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
     this.shadowRoot.append(styleSheet);
@@ -111,20 +119,18 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 };
 
 const iconClicked = async function(field, icon) {
-    if (!kpxcFields.isVisible(field)) {
+    if (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field)) {
         icon.parentNode.removeChild(icon);
-        field.removeAttribute('kpxc-username-field');
         return;
     }
 
-    const connected = await sendMessage('is_connected');
+    // Try to reconnect if KeePassXC for the case we're not currently connected
+    const connected = await kpxc.reconnect();
     if (!connected) {
-        kpxcUI.createNotification('error', tr('errorNotConnected'));
         return;
     }
 
-    const databaseHash = await sendMessage('check_database_hash');
-    if (databaseHash === '') {
+    if (kpxc.databaseState !== DatabaseState.UNLOCKED) {
         // Triggers database unlock
         await sendMessage('page_set_manual_fill', ManualFill.BOTH);
         await sendMessage('get_database_hash', [ false, true ]); // Set triggerUnlock to true
@@ -140,8 +146,9 @@ const getIconClassName = function(state = DatabaseState.UNLOCKED) {
     if (state === DatabaseState.LOCKED) {
         return (isFirefox() ? 'lock-moz' : 'lock');
     } else if (state === DatabaseState.DISCONNECTED) {
-        return (isFirefox() ? 'lock-disconnected' : 'disconnected');
+        return (isFirefox() ? 'disconnected-moz' : 'disconnected');
     }
+
     return (isFirefox() ? 'unlock-moz' : 'unlock');
 };
 
@@ -152,7 +159,7 @@ const getIconText = function(state) {
         return tr('usernameDisconnectedFieldText');
     }
 
-    return tr('usernameFieldText');
+    return kpxc.credentials.length === 0 ? tr('usernameFieldTextNoCredentials') : tr('usernameFieldText');
 };
 
 const fillCredentials = async function(field) {

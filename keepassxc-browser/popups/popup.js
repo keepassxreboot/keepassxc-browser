@@ -1,5 +1,7 @@
 'use strict';
 
+let reloadCount = 0;
+
 HTMLElement.prototype.show = function() {
     this.style.display = 'block';
 };
@@ -17,6 +19,7 @@ function statusResponse(r) {
     $('#configured-not-associated').hide();
     $('#lock-database-button').hide();
     $('#getting-started-guide').hide();
+    $('#database-not-opened').hide();
 
     if (!r.keePassXCAvailable) {
         $('#error-message').textContent = r.error;
@@ -24,6 +27,12 @@ function statusResponse(r) {
 
         if (r.showGettingStartedGuideAlert) {
             $('#getting-started-guide').show();
+        }
+
+        if (r.showTroubleshootingGuideAlert && reloadCount >= 2) {
+            $('#troubleshooting-guide').show();
+        } else {
+            $('#troubleshooting-guide').hide();
         }
     } else if (r.keePassXCAvailable && r.databaseClosed) {
         $('#database-error-message').textContent = r.error;
@@ -36,7 +45,7 @@ function statusResponse(r) {
     } else if (!r.associated) {
         $('#need-reconfigure').show();
         $('#need-reconfigure-message').textContent = r.error;
-    } else if (r.error !== null) {
+    } else if (r.error) {
         $('#error-encountered').show();
         $('#error-message').textContent = r.error;
     } else {
@@ -47,16 +56,22 @@ function statusResponse(r) {
         if (r.usernameFieldDetected) {
             $('#username-field-detected').show();
         }
+
+        if (r.iframeDetected) {
+            $('#iframe-detected').show();
+        }
+
+        reloadCount = 0;
     }
 }
 
 const sendMessageToTab = async function(message) {
-    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-    if (tabs.length === 0) {
+    const tab = await getCurrentTab();
+    if (!tab) {
         return false; // Only the background devtools or a popup are opened
     }
 
-    await browser.tabs.sendMessage(tabs[0].id, {
+    await browser.tabs.sendMessage(tab.id, {
         action: message
     });
 
@@ -87,6 +102,12 @@ const sendMessageToTab = async function(message) {
         statusResponse(await browser.runtime.sendMessage({
             action: 'reconnect'
         }));
+
+        // Shows the Troubleshooting Guide alert every third time Reload button is pressed when popup is open
+        if (reloadCount > 2) {
+            reloadCount = 0;
+        }
+        reloadCount++;
     });
 
     $('#reopen-database-button').addEventListener('click', async () => {
@@ -94,6 +115,7 @@ const sendMessageToTab = async function(message) {
             action: 'get_status',
             args: [ false, true ] // Set forcePopup to true
         }));
+        window.close();
     });
 
     $('#redetect-fields-button').addEventListener('click', async () => {
@@ -119,9 +141,21 @@ const sendMessageToTab = async function(message) {
         $('#username-field-detected').hide();
     });
 
+    $('#allow-iframe-button').addEventListener('click', async () => {
+        await sendMessageToTab('add_allow_iframes_option');
+        await sendMessageToTab('redetect_fields');
+        $('#iframe-detected').hide();
+    });
+
     $('#getting-started-alert-close-button').addEventListener('click', async () => {
         await browser.runtime.sendMessage({
             action: 'hide_getting_started_guide_alert'
+        });
+    });
+
+    $('#troubleshooting-guide-alert-close-button').addEventListener('click', async () => {
+        await browser.runtime.sendMessage({
+            action: 'hide_troubleshooting_guide_alert'
         });
     });
 

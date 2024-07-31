@@ -32,11 +32,11 @@
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "",
-      "description": "Global Auto-Type shortcut text."
+        "message": "Request Global Auto-Type",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "",
+        "message": "HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -44,15 +44,15 @@
         "description": "Unknown error."
     },
     "errorMessageDatabaseNotOpened": {
-        "message": "",
+        "message": "Database not opened.",
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "",
+        "message": "Database hash not received.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "",
+        "message": "Client public key not received.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
@@ -92,7 +92,7 @@
         "description": "Incorrect action."
     },
     "errorMessageEmptyMessage": {
-        "message": "",
+        "message": "Empty message received.",
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
@@ -100,8 +100,88 @@
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
-        "message": "",
+        "message": "No logins found.",
         "description": "No logins found."
+    },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Filled password is longer than field's allowed max length.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
+    },
+    "errorMessageNoGroupsFound": {
+        "message": "No groups found.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Cannot create new group.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "No valid UUID provided.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessageAccessToAllEntriesDenied": {
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Attestation not supported.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Credential is excluded.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Passkeys request canceled.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Invalid user verification.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Empty public key.",
+        "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
     },
     "errorNotConnected": {
         "message": "Ei ole ühendatud KeePassXC-ga.",
@@ -111,40 +191,12 @@
         "message": "Parooligeneraatori ikoon",
         "description": "Alt attribute text of the password generator icon."
     },
-    "passwordGeneratorPlaceholder": {
-        "message": "Genereeritud parool",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Täida ka järgmine parooliväli",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Parooligeneraator",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Genereeri",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Proovi uuesti",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Kopeeri",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Täida parool",
-        "description": "Fill a password in password generator."
-    },
     "passwordGeneratorErrorTooLong": {
         "message": "Tõrge: Genereeritud parool on pikem kui lubatud pikkus!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
-        "message": "",
+        "message": "It has been cut to fit the length.",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongRemember": {
@@ -155,13 +207,8 @@
         "message": "Genereeri parool",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Kas KeePassXC töötab ja on ühendatud?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
         "message": "Täida andmed KeePassXC-st",
@@ -179,6 +226,10 @@
         "message": "Kasutajavälja ikoon",
         "description": "Username field icon text."
     },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
     "totpFieldText": {
         "message": "Täida TOTP KeePassXC-st",
         "description": "OTP field icon hover text."
@@ -187,9 +238,9 @@
         "message": "TOTP välja ikoon",
         "description": "OTP field icon text."
     },
-    "defineDismiss": {
-        "message": "",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Close",
+        "description": "Close button text when choosing custom login fields."
     },
     "defineSkip": {
         "message": "Jäta vahele",
@@ -199,49 +250,53 @@
         "message": "Näita rohkem",
         "description": "More button text when choosing custom login fields."
     },
-    "defineAgain": {
-        "message": "Jälle",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Reset",
+        "description": "Reset button text when choosing custom login fields."
     },
     "defineConfirm": {
         "message": "Kinnita",
         "description": "Confirm button text when choosing custom login fields."
     },
     "defineAlreadySelected": {
-        "message": "",
+        "message": "Login fields for this page are already selected and will be overwritten.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Loobu valikust",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Clear saved data",
+        "description": "Clear save data button text when choosing custom login fields."
     },
     "defineStringField": {
-        "message": "",
+        "message": "String field",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Vali kasutajanime väli",
+        "message": "Choose a username field",
         "description": "Choosing a username field text when choosing custom login fields."
     },
     "defineChoosePassword": {
-        "message": "2. Nüüd vali parooli väli",
+        "message": "Choose a password field",
         "description": "Choosing a password field text when choosing custom login fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Vali TOTP väli",
+        "message": "Choose a TOTP field",
         "description": "Choosing a TOTP field text when choosing custom login fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Kinnita valik",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Choose String Fields",
+        "description": "Choose String Fields a selection text when choosing custom login fields."
     },
     "defineHelpText": {
-        "message": "",
+        "message": "Please confirm your selection or choose more fields as String fields.",
         "description": "Confirm a selection text when choosing custom login fields which contains string fields."
     },
     "defineKeyboardText": {
-        "message": "",
+        "message": "You can also use the numbers to choose the input fields from keyboard.",
         "description": "Help text when choosing custom login fields."
+    },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Choose a Custom Login Field",
+        "description": "Help text for Custom Login Field banner."
     },
     "username": {
         "message": "Kasutajanimi",
@@ -251,12 +306,16 @@
         "message": "Parool",
         "description": "General text for password."
     },
+    "stringFields": {
+        "message": "String Fields",
+        "description": "General text for a String Fields."
+    },
     "credentialsNoUsername": {
         "message": "- puudub kasutajanimi -",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "",
+        "message": "No logins found.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
@@ -287,8 +346,12 @@
         "message": "Tõrge: Ei leia paroolivälja",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Filling password to a plain text field is prevented.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
-        "message": "",
+        "message": "Error: Could not detect changed credentials.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
@@ -327,8 +390,12 @@
         "message": "Lisa ainult kasutajanime valik saidile",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
-        "message": "",
+        "message": "KeePassXC-Browser has encountered an error:",
         "description": "A text shown above error message in the popup."
     },
     "popupUpdateAvailable": {
@@ -338,6 +405,26 @@
     "popupDownloadNewVersion": {
         "message": "Palun laadi alla uusim versioon lehelt keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupGettingStartedText": {
+        "message": "Are you a first time user? Please check our Getting Started Guide.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Getting Started Guide - Setup Browser Integration",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Hide and don't show again.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Troubleshooting Guide",
+        "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
         "message": "Oleku kontrollimine...",
@@ -356,23 +443,27 @@
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "",
+        "message": "KeePassXC-Browser has not yet connected to KeePassXC but has been configured using the identifier: $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "message": "KeePassXC-Browser is connected to KeePassXC and has been configured using the following identifier: $1",
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "",
+        "message": "Only a single username field was detected. Add the URL to Site Preferences with Username-only option enabled?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Kasutajanimi või parool on muutunud! Salvestada?",
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "",
+        "message": "Credentials will be saved in connected database with identifier $1",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
@@ -380,8 +471,8 @@
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "message": "The credentials with the used username are marked bold: $1",
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Vali andmed, mida soovid uuendada.",
@@ -400,7 +491,7 @@
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "",
+        "message": "Credentials not updated. The password has not been changed.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
@@ -421,7 +512,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Andmed kasutajanimega $1 uuendatud.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Identsed andmed on juba olemas. Pole midagi uuendada.",
@@ -468,7 +559,7 @@
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonDismiss": {
-        "message": "",
+        "message": "Dismiss",
         "description": "Dismiss button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
@@ -480,7 +571,7 @@
         "description": "Close button text in popup or in notification."
     },
     "popupButtonDismissHttpAuth": {
-        "message": "",
+        "message": "Dismiss and show the default authentication dialog",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsTitle": {
@@ -584,7 +675,7 @@
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "",
+        "message": "When enabled, the popup shows a group listing.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
@@ -600,7 +691,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "",
+        "message": "Useful with pages that use popups or dynamic dialogs. Disable the feature to reduce CPU load on slower machines. When disabled credentials can be only inserted using keyboard shortcuts, the context menu or the extension popup.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -608,7 +699,7 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "",
+        "message": "Automatically retrieve credentials.",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
@@ -620,35 +711,43 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "",
+        "message": "Automatically fill in single-credential entries.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries.",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "",
+        "message": "Activate autocomplete for username fields.",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "",
+        "message": "Display the group name in autocomplete list when credentials are from different groups.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
-        "message": "",
+        "message": "Auto-submit login forms",
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "",
+        "message": "Automatically submits selected credentials. This is disabled for single entry auto-fill.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
         "message": "Näita teavitusi.",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon.",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
     "optionsSaveDomainOnly": {
         "message": "Salvesta ainult domeen.",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "",
+        "message": "Show a banner on the page when new credentials can be saved to the database.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -656,12 +755,20 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials.",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
+    },
+    "optionsDebugLogging": {
+        "message": "Debug logging",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Enable debug logging. Additional console messages will be visible in both background and content scripts.",
+        "description": "Debug logging help text."
     },
     "optionsRadioText": {
         "message": "Kontrolli KeePassXC uuendusi:",
@@ -688,7 +795,7 @@
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "",
+        "message": "Sort matching credentials by",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
@@ -716,7 +823,7 @@
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
-        "message": "",
+        "message": "Passwords are generated by KeePassXC using your password generation profile.",
         "description": "Password Generator option help text, second part."
     },
     "optionsPredefinedSiteList": {
@@ -728,11 +835,11 @@
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "",
+        "message": "Adds common sites that have username-only login forms to the site preferences.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "",
+        "message": "Adds an icon to username fields for filling credentials with a single mouse click.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
@@ -740,7 +847,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "",
+        "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
@@ -748,24 +855,32 @@
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "",
+        "message": "Let KeePassXC-Browser automatically fill in credentials if it receives only a single entry.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Hoiatus! Automaattäite kasutamine pole turvaline. Kasuta omal vastutusel.",
+        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
     },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
+    },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "",
+        "message": "Show a dropdown list containing available credentials for all username fields on a page.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "",
+        "message": "When credentials are returned from different groups, the group name will be shown.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "",
+        "message": "Show notifications for errors and when user interaction is required.",
         "description": "Show notifications option help text."
+    },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Uute andmete salvestamisel salvesta täieliku URL-i asemel ainult domeen.",
@@ -775,20 +890,28 @@
         "message": "Uute kohandatud sisselogimisväljade salvestamisel salvestage täieliku URL-i asemel ainult domeen.",
         "description": "Save domain only option help text."
     },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Download favicon after save",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Favicon will be automatically downloaded for the new credential.",
+        "description": "Download favicon after save help text."
+    },
     "optionsAutoFillAndSendHelpText": {
-        "message": "",
+        "message": "If credentials are found for a page and the login-type is an HTTP Basic Auth request, KeePassXC-Browser tries to login automatically with the first given credentials. When multiple credentials are present, the extension popup can be used to choose the correct one. Even when this feature is enabled, it is still possible to enter HTTP Basic Auth login manually.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
-        "message": "",
+        "message": "An HTTP Basic Auth dialog looks like this:",
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "",
+        "message": "Clear credentials from non-active tabs after (seconds, 0-3600).",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "",
+        "message": "Credentials are cleared from background tabs after the timeout and permissions for those pages will be asked again.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
@@ -827,11 +950,11 @@
         "message": "Otsetee $1 jaoks on edukalt muudetud.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Otsetee $1 jaoks on lähtestatud.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Tõrge: Otseteed $1 jaoks pole muudetud!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -891,14 +1014,22 @@
         "message": "Lehe URL",
         "description": "Site preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Eiramine",
         "description": "Site preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Ainult kasutajanime tuvastus",
         "description": "Site preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Improved Input Field Detection",
+        "description": "Improved Input Field Detection column text."
+    },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Kustuta",
         "description": "Site preferences list column title."
@@ -912,7 +1043,7 @@
         "description": "Site preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
-        "message": "",
+        "message": "Disable Auto-Submit",
         "description": "Site preferences option selection."
     },
     "optionsSelectionFull": {
@@ -920,20 +1051,44 @@
         "description": "Site preferences option selection."
     },
     "optionsSortByTitle": {
-        "message": "",
-        "desription": "Sort matching credentials by title option selection."
+        "message": "Title",
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
-        "message": "",
-        "desription": "Sort matching credentials by username option selection."
+        "message": "Username",
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
-        "message": "",
-        "desription": "Sort matching credentials by group and title option selection."
+        "message": "Group and title",
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
-        "message": "",
-        "desription": "Sort matching credentials by group and username option selection."
+        "message": "Group and username",
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Sort credentials after fill by",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Sort credentials after fill for TOTP by",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Matching credentials setting",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Relevant credential first",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
         "message": "Salvestatud kohandatud sisselogimisvälju ei leitud.",
@@ -980,23 +1135,31 @@
         "description": "Site preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "",
+        "message": "To ignore new/modified credentials on a specific site, add them below or when using the credential banner on the page select <em>Don't ask again for this site</em>.",
         "description": "Site preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "",
+        "message": "If a site is fully ignored (<em>Disable all features</em> is selected), then the plugin will do nothing when visiting that site.",
         "description": "Site preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "",
+        "message": "Username-only detection allows KeePassXC-Browser to fill in login details on websites with separate pages for username and password.",
         "description": "Site preferences info text, fourth part."
+    },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "URL-i lisamine käsitsi",
         "description": "Label for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "",
+        "message": "The URL must start with either <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> and must be at least 5 characters long.",
         "description": "Help text for adding site manually on Site preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
@@ -1022,6 +1185,10 @@
     "optionsAboutMozilla": {
         "message": "Külasta KeePassXC-Browser-t Mozilla Add-on-de loetelus.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Külasta KeePassXC-Browser-t GirHub-s.",
@@ -1094,6 +1261,26 @@
     "optionsExtensionTitle": {
         "message": "Laiendus",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Enable support for Web Authentication.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Avab uue vahelehe",

@@ -3,8 +3,60 @@
         "message": "KeePassXC 與現代瀏覽器的整合",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "為此 URL 添加網站設定。",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "目前頁面允許跨來源 iframe 框架。",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "將目前使用的資料庫連接到 KeePassXC-Browser。",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "複製除錯訊息至剪貼板。",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "取消基本 HTTP 認證。",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "將目前使用的資料庫重新連接到 KeePassXC-Browser。",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "重新檢測頁面上所有的輸入欄位。",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "重新載入擴充並重新連接 KeePassXC。",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "刪除 KeePassXC-Browser 已連接的資料庫。",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "為此 URL 刪除自定義登入欄位。",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "為此 URL 刪除網站設定。",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "重新打開目前使用的資料庫。",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "為目前頁面添加「僅用戶名稱」選項。",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
-        "message": "填入使用者名稱和密碼",
+        "message": "填入用戶名稱和密碼",
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
@@ -16,20 +68,24 @@
         "description": "Context menu item for filling Time-based One Time Password."
     },
     "contextMenuShowPasswordGeneratorIcons": {
-        "message": "顯示密碼產生器圖示",
+        "message": "顯示密碼生成器圖示",
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
         "message": "儲存憑證",
-        "description": "Save credentials using the extension popup icon."
+        "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "顯示密碼產生器",
+        "message": "顯示密碼生成器",
         "description": "Show password generator text."
     },
-    "rememberCredentialsPopup": {
-        "message": "點選擴展圖示來建立或更改憑證。",
-        "description": "Notification text when saving credentials from the context menu."
+    "contextMenuFillAttribute": {
+        "message": "填入屬性…",
+        "description": "Context menu parent item for filling a custom attribute."
+    },
+    "contextMenuRequestGlobalAutoType": {
+        "message": "請求全域自動輸入",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "偵測到多個 HTTP 身份驗證的憑證。點選擴展圖示來選擇正確的憑證。",
@@ -92,119 +148,214 @@
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
-        "message": "沒有提供 URL。",
+        "message": "未提供網址。",
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
         "message": "找不到登錄資訊。",
         "description": "No logins found."
     },
-    "passwordGeneratorIcon": {
-        "message": "密碼產生器圖示",
-        "description": "Alt attribute text of the password generator icon."
+    "errorMessagePaswordLengthExceeded": {
+        "message": "填入的密碼超出了欄位允許的長度上限。",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
-    "passwordGeneratorPlaceholder": {
-        "message": "產生密碼",
-        "description": "Input field placeholder for generated password."
+    "errorMessageNoGroupsFound": {
+        "message": "找不到群組。",
+        "description": "No groups found."
     },
-    "passwordGeneratorLabel": {
-        "message": "同時填入下一個密碼欄位",
-        "description": "Checkbox text below the password generator input field."
+    "errorMessageCannotCreateNewGroup": {
+        "message": "無法建立新群組。",
+        "description": "Cannot create new group."
     },
-    "passwordGeneratorBits": {
-        "message": "??? 位",
-        "description": "Bits of the generated password."
+    "errorMessageNoValidUuidProvided": {
+        "message": "未提供有效的 UUID。",
+        "description": "No valid UUID provided."
     },
-    "passwordGeneratorTitle": {
-        "message": "密碼產生器",
-        "description": "Password generator dialog title."
+    "errorMessageAccessToAllEntriesDenied": {
+        "message": "存取所有項目被拒絕。",
+        "description": "Access to all entries denied."
     },
-    "passwordGeneratorGenerate": {
-        "message": "產生",
-        "description": "Generate button text in password generator."
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "證明不受支援。",
+        "description": "Attestation not supported."
     },
-    "passwordGeneratorCopy": {
-        "message": "複製",
-        "description": "Copy button text in password generator."
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "憑證被排除。",
+        "description": "Credential is excluded."
     },
-    "passwordGeneratorFillAndCopy": {
-        "message": "填入並複製",
-        "description": "Fill and copy button text in password generator."
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "通行密鑰請求被取消。",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "無效的使用者認證。",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "空的公開金鑰。",
+        "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "提供的網址無效。",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin 為空或不被允許。",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+        "message": "Effective Domain 不是有效的域名。",
+        "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+        "message": "Origin 與 RP ID 不匹配。",
+        "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+        "message": "未提供受支持的演算法。",
+        "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "等待計時器過期。",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "未知的通行密鑰錯誤。",
+        "description": "Unknown passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "挑戰短於所需最小長度。",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id 不匹配所需長度。",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "上下文不安全。",
+        "description": "Context is not secure."
+    },
+    "errorNotConnected": {
+        "message": "未連接至 KeePassXC。",
+        "description": "Error notification shown when not connected to KeePassXC"
     },
     "passwordGeneratorErrorTooLong": {
         "message": "錯誤：\n產生的密碼超出允許的長度！\n已將其截斷已符合長度。\n\n請記住新的密碼！",
         "description": "A warning text shown in the password generator."
     },
+    "passwordGeneratorErrorTooLongCut": {
+        "message": "已截短至符合長度。",
+        "description": "A warning text shown in the password generator."
+    },
+    "passwordGeneratorErrorTooLongRemember": {
+        "message": "請記住新的密碼！",
+        "description": "A warning text shown in the password generator."
+    },
     "passwordGeneratorGenerateText": {
-        "message": "產生密碼",
+        "message": "產生密碼。",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "無法接收產生的密碼。<br />KeePassXC 正在執行嗎？",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "此版本 KeePassXC 不支援運行密碼生成器。請將 KeePassXC 更新到新版本。"
     },
-    "defineDismiss": {
-        "message": "撤銷",
-        "description": "Dismiss button text when choosing custom login fields."
+    "usernameFieldText": {
+        "message": "從 KeePassXC 填入憑證。",
+        "description": "Username field icon hover text."
+    },
+    "usernameFieldTextNoCredentials": {
+        "message": "沒有可以填入的憑證。",
+        "description": "Username field icon hover text when no credentials are."
+    },
+    "usernameLockedFieldText": {
+        "message": "資料庫已鎖定。",
+        "description": "Username field icon hover text when database is locked."
+    },
+    "usernameDisconnectedFieldText": {
+        "message": "KeePassXC 已經斷線。",
+        "description": "Username field icon hover text when KeePassXC is disconnected."
+    },
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
+    },
+    "totpFieldText": {
+        "message": "從 KeePassXC 填入限時單次密碼",
+        "description": "OTP field icon hover text."
+    },
+    "defineClose": {
+        "message": "關閉",
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "略過",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "顯示更多",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
-    "defineAgain": {
-        "message": "重試",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "重置",
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "確認",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "此網頁的登錄欄位已被選擇，所以將會被覆蓋。",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "放棄選擇",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "清除已保存的資料",
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "字串欄位 #",
+        "message": "字串欄位",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. 選擇使用者名稱欄位",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "message": "選擇用戶名稱欄位",
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
-        "message": "2. 現在選擇一個密碼欄位",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "message": "選擇密碼欄位",
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
-    "defineConfirmSelection": {
-        "message": "3. 確認選擇",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseTOTP": {
+        "message": "選擇 TOTP 欄位",
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
+    },
+    "defineChooseStringFields": {
+        "message": "選擇字串欄位",
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "請確認您的選擇，或是選擇更多欄位作為<em>字串欄位</em>。",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
-        "message": "You can also use the numbers to choose the input fields from keyboard.",
-        "description": "Help text when choosing custom login fields."
+        "message": "您也可以使用鍵盤的數字鍵選擇輸入欄位。",
+        "description": "Help text when choosing Custom Login Fields."
+    },
+    "defineChooseCustomLoginFieldText": {
+        "message": "選擇自定義登入欄位",
+        "description": "Help text for Custom Login Field banner."
     },
     "username": {
-        "message": "使用者名稱",
+        "message": "用戶名稱",
         "description": "General text for username."
     },
     "password": {
         "message": "密碼",
         "description": "General text for password."
     },
+    "stringFields": {
+        "message": "字串欄位",
+        "description": "General text for a String Fields."
+    },
     "credentialsNoUsername": {
-        "message": "- 無使用者名稱 -",
+        "message": "- 無用戶名稱 -",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
@@ -215,9 +366,21 @@
         "message": "錯誤：\n在 KeePassXC 中找到多個登錄資訊！\n點選 KeePassXC-Browser 圖示來檢視更多選項。",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
+    "credentialsMultipleFoundSecondLine": {
+        "message": "點擊 KeePassXC-Browser 圖示展開更多選項。",
+        "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
+    },
     "credentialsNoUsernameFound": {
-        "message": "錯誤：\n找不到該使用者名稱的憑證。",
+        "message": "錯誤：\n找不到該用戶名稱的憑證。",
         "description": "Alert message when no credentials are found for the given username."
+    },
+    "credentialsNoTOTPFound": {
+        "message": "找不到限時單次密碼。",
+        "description": "Alert message when no TOTP is found."
+    },
+    "credentialExpired": {
+        "message": "已過期",
+        "description": "If a credential is expired, this is appended to the title label."
     },
     "fieldsFill": {
         "message": "錯誤：\n找不到該填入的欄位。",
@@ -226,6 +389,10 @@
     "fieldsNoPasswordField": {
         "message": "錯誤：\n無法找到密碼欄位。",
         "description": "Message shown when no password fields are found."
+    },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "已阻止向純文字欄位填入密碼。",
+        "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
         "message": "錯誤：\n無法找到修改後的憑證。",
@@ -240,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "為此網頁定義登錄欄位",
+        "message": "選擇自定義登入欄位",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -263,6 +430,14 @@
         "message": "重新開啟資料庫",
         "description": "Popup reopen database button text."
     },
+    "popupUsernameButton": {
+        "message": "將此網站加入「僅用戶名稱」選項",
+        "description": "Button text for adding Username-only option."
+    },
+    "popupAllowIframeButton": {
+        "message": "此網站允許跨來源 iframe 框架",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser 遇到錯誤：",
         "description": "A text shown above error message in the popup."
@@ -274,6 +449,26 @@
     "popupDownloadNewVersion": {
         "message": "請從 keepassxc.org 下載最新版本",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
+    },
+    "popupGettingStartedText": {
+        "message": "您是第一次使用嗎？請閱讀我們的新手上路指南。",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "新手上路指南 - 設置瀏覽器整合",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "隱藏並不再顯示。",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "無法連接至 KeePassXC？也許我們的 Wiki 頁面可以幫忙。",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "疑難排解指南",
+        "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
         "message": "檢查狀態中…",
@@ -297,47 +492,83 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-Browser 已與 KeePassXC 連線，且設定為使用此識別碼：$1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
-    "popupRememberInfoText": {
-        "message": "使用者名稱或是密碼已更改！是否要儲存？",
-        "description": "Popup message when username or password has changed."
+    "popupUsernameFieldDetected": {
+        "message": "偵測到單獨的用戶名稱欄位。將網址加入至網站設定並啟用「僅用戶名稱」選項？",
+        "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
-    "popupRememberSaving": {
+    "popupIframeDetected": {
+        "message": "偵測到跨來源 iframe 框架。將網址加入至網站設定並啟用「允許跨來源 iframe 框架」選項？",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
+    },
+    "rememberInfoText": {
+        "message": "用戶名稱或密碼已被更改！是否儲存？",
+        "description": "Message when username or password has changed."
+    },
+    "rememberSaving": {
         "message": "憑證將會儲存於已連線的資料庫，識別碼為 $1",
-        "description": "A popup message when saving or updating credentials."
+        "description": "A message when saving or updating credentials."
     },
-    "popupRememberNewUsername": {
-        "message": "以下使用者名稱尚未儲存：$1",
-        "description": "A popup message shown when a new username is detected when saving credentials."
+    "rememberNewUsername": {
+        "message": "以下用戶名稱尚未儲存：$1",
+        "description": "A message shown when a new username is detected when saving credentials."
     },
-    "popupRememberUsernameExists": {
-        "message": "該使用者名稱對應的憑證將以粗體標記：$1",
-        "description": "A popup message shown when a existing username is detected when saving credentials."
+    "rememberUsernameExists": {
+        "message": "該用戶名稱對應的憑證將以粗體標記：$1",
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
-    "popupRememberChooseCredentials": {
-        "message": "請選擇您要更新的憑證。",
-        "description": "A popup message shown choosing what credentials user wants to update."
+    "rememberChooseCredentials": {
+        "message": "請選擇要更新的憑證。",
+        "description": "A message shown choosing what credentials user wants to update."
     },
-    "popupRememberChooseGroup": {
-        "message": "Please choose the group you want to add the new credentials.",
-        "description": "A popup message shown choosing what group user wants to use for new credentials."
+    "rememberChooseGroup": {
+        "message": "請選擇要添加新憑證的群組。",
+        "description": "A message shown choosing what group user wants to use for new credentials."
     },
-    "popupRememberErrorDefaultGroupNotFound": {
-        "message": "Error: Specified default group not found. Creating all necessary groups.",
-        "description": "Error message shown when default group set cannot be found."
+    "rememberInfoDefaultGroupNotFound": {
+        "message": "在連接的資料庫內建立了預設群組。",
+        "description": "Info message shown when default group set cannot be found."
     },
-    "popupRememberErrorCreatingNewGroup": {
-        "message": "New group(s) cannot be created.",
+    "rememberErrorCreatingNewGroup": {
+        "message": "無法建立新群組。",
         "description": "Error message shown when new groups cannot be created."
     },
-    "popupRememberErrorPasswordNotChanged": {
-        "message": "Error: Credentials not updated. The password has not been changed.",
+    "rememberErrorPasswordNotChanged": {
+        "message": "憑證未更新。密碼尚未變更。",
         "description": "Error message shown when credential password is not changed."
     },
-    "popupRememberErrorCannotSaveCredentials": {
-        "message": "Error: Credentials cannot be saved or updated.",
+    "rememberErrorCannotSaveCredentials": {
+        "message": "無法儲存或更新憑證。",
         "description": "Error message shown when credentials cannot be saved or updated."
+    },
+    "rememberErrorDatabaseClosed": {
+        "message": "無法儲存或更新憑證至已關閉的資料庫。",
+        "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
+    },
+    "rememberCredentialsNotSaved": {
+        "message": "操作已被取消。憑證未被更新。",
+        "description": "Message shown when saving operation was cancelled."
+    },
+    "rememberCredentialsSaved": {
+        "message": "用戶名稱為 $1 的新憑證已儲存。",
+        "description": "Message shown when new credentials are saved."
+    },
+    "rememberCredentialsUpdated": {
+        "message": "用戶名稱為 $1 的憑證已更新。",
+        "description": "Message shown when new credentials are successfully updated."
+    },
+    "rememberCredentialsExists": {
+        "message": "相同的憑證已經存在。未更新任何項目。",
+        "description": "Message shown when new credentials already found in database."
+    },
+    "rememberEmptyUsername": {
+        "message": "(空)",
+        "description": "Means an empty username."
+    },
+    "rememberNoPassword": {
+        "message": "儲存憑證前請先填寫密碼欄位。",
+        "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
         "message": "選擇您希望在頁面中輸入的登入資訊。",
@@ -355,12 +586,8 @@
         "message": "此頁面包含一個以上的密碼欄位。右鍵點選其中一個密碼欄位，並選擇以下其一：",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL：",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "使用者名稱：",
+        "message": "用戶名稱：",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -371,12 +598,16 @@
         "message": "更新",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "撤銷",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "取消",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "返回",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "永不於此網頁詢問",
+        "message": "此網站不再詢問",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -400,12 +631,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "自定登入欄位",
-        "description": "Saved custom login fields tab text."
+        "message": "自定義登入欄位",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
         "message": "網站設定",
-        "description": "Site preferences fields tab text."
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "關於",
@@ -420,12 +651,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "自定登入欄位",
-        "description": "Custom login fields page header."
+        "message": "自定義登入欄位",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
         "message": "網站設定",
-        "description": "Site preferences page header."
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "關於",
@@ -457,82 +688,142 @@
     },
     "optionsButtonRemoveNow": {
         "message": "是，立即刪除",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "取消",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
-     "optionsButtonReset": {
+    "optionsButtonReset": {
         "message": "重設",
         "description": "Reset button text for keyboard shortcuts."
     },
-    "optionsLabelBlinkTime": {
-        "message": "閃爍時間：",
-        "description": "Blink Time option text."
+    "optionsButtonImport": {
+        "message": "導入配置",
+        "description": "Import settings button text."
     },
-    "optionsLabelRedirectOffset": {
-        "message": "Redirect Offset:",
-        "description": "Redirect Offset option text."
-    },
-    "optionsLabelRedirectAllowance": {
-        "message": "Maximum (Number of) Redirects:",
-        "description": "RMaximum (Number of) Redirects options text."
+    "optionsButtonExport": {
+        "message": "導出配置",
+        "description": "Export settings button text."
     },
     "optionsLabelDefaultGroup": {
-        "message": "Default group for saving new passwords:",
+        "message": "儲存新密碼的預設群組：",
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Separate the group with slashes, for example: Group/ChildGroup.",
+        "message": "使用斜槓分隔群組，例如：Group/ChildGroup。",
         "description": "Default group help text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Always ask where to save new credentials",
+        "message": "始終詢問儲存新憑證的位置",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "When enabled, the popup shows a group listing.",
+        "message": "啟用後，彈出視窗將顯示群組清單。",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "啟用密碼產生器。",
-        "description": "Activate password generator checkbox text."
+        "message": "顯示密碼生成器圖示",
+        "description": "Activate password generator icons checkbox text."
+    },
+    "optionsCheckboxUsernameIcons": {
+        "message": "顯示用戶名稱欄位圖示",
+        "description": "Activate username field icons textbox text."
+    },
+    "optionsUseObserver": {
+        "message": "使用動態輸入框偵測",
+        "description": "Use dynamic input field detection checkbox text."
+    },
+    "optionsUseObserverHelpText": {
+        "message": "此項對使用彈出視窗或動態對話的頁面有用。若電腦較慢，停用此功能可降低 CPU 負載。若功能被停用， 只能使用快捷鍵、右鍵選單或擴展彈出視窗來輸入憑證。",
+        "description": "Use dynamic input field detection help text."
+    },
+    "optionsCheckboxOTPIcons": {
+        "message": "顯示 2FA/OTP 欄位圖示 ",
+        "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "自動獲取憑證。",
+        "message": "自動獲取憑證",
         "description": "Automatically retrieve credentials checkbox text."
     },
+    "optionsCheckboxAutomaticReconnect": {
+        "message": "自動重新連接至 KeePassXC",
+        "description": "Auto-reconnect checkbox text."
+    },
+    "optionsAutomaticReconnectWarning": {
+        "message": "警告！這項功能仍在實驗階段。使用風險請自行承擔。",
+        "description": "Auto-reconnect warning message."
+    },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "自動填入單一憑證條目。",
+        "message": "自動填入單一憑證條目",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "自動填入單一 TOTP 條目",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "啟用使用者名稱欄位的自動完成。",
+        "message": "啟用用戶名稱欄位的自動完成",
         "description": "Activate autocomplete for username fields checkbox text."
     },
+    "optionsCheckboxShowGroupNameInAutocomplete": {
+        "message": "當憑證來自不同群組時，在自動完成清單顯示群組名稱",
+        "description": "Show group name in autocomplete checkbox text."
+    },
+    "optionsCheckboxAutoSubmit": {
+        "message": "自動送出登入表單",
+        "description": "Auto-submit checkbox text."
+    },
+    "optionsAutoSubmitHelpText": {
+        "message": "自動送出選擇的憑證。這項功能在單一條目自動填入時將被停用。",
+        "description": "Auto-submit help text."
+    },
     "optionsCheckboxShowNotifications": {
-        "message": "顯示通知。",
+        "message": "顯示通知",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "使用單色工具列圖示",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
+    "optionsCheckboxUseCompactMode": {
+        "message": "使用緊湊模式",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "只儲存網域。",
+        "message": "只儲存域名",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "當可以儲存新憑證至資料庫時顯示通知。",
+        "message": "當可以儲存新憑證至資料庫時顯示頁面橫幅",
         "description": "Show login notifications checkbox text."
     },
+    "optionsRedirectAllowance": {
+        "message": "允許的重新定向數： $1",
+        "description": "Redirect allowance range input text."
+    },
+    "optionsRedirectAllowanceHelpText": {
+        "message": "橫幅消失前允許的重新定向數。預設值爲 3，最大值爲無限。",
+        "description": "Redirect allowance help text."
+    },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "自定填入 HTTP 基礎身份驗證對話視窗並提交。",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "允許填入 HTTP 基本認證憑證",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
+    },
+    "optionsDebugLogging": {
+        "message": "偵錯日誌",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "啟用偵錯日誌。後台和內容腳本都會顯示額外的主控台訊息。",
+        "description": "Debug logging help text."
     },
     "optionsRadioText": {
         "message": "檢查 KeePassXC 的更新：",
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "每三天",
+        "message": "每 3 天",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -547,72 +838,140 @@
         "message": "永不",
         "description": "Radio button text."
     },
+    "optionsThemeSelectionHeader": {
+        "message": "色彩主題",
+        "description": "Theme selection header text."
+    },
+    "optionsCredentialSortSelectionHeader": {
+        "message": "排序匹配的憑證",
+        "description": "Credential sort option header text."
+    },
+    "optionsThemeSelection": {
+        "message": "選擇色彩主題",
+        "description": "Theme selection title text."
+    },
+    "optionsThemeSystem": {
+        "message": "系統主題",
+        "description": "System theme text."
+    },
+    "optionsThemeDark": {
+        "message": "暗色",
+        "description": "Dark theme text."
+    },
+    "optionsThemeLight": {
+        "message": "亮色",
+        "description": "Light theme text."
+    },
     "optionsKeyboardShortcutsHeader": {
         "message": "快速鍵",
         "description": "Keyboard shortcut header text."
     },
-    "optionsBlinkTimeHelpText": {
-        "message": "Maximum time (ms) the icon should blink after detecting new credentials",
-        "description": "Blink Time option help text."
-    },
-    "optionsRedirectOffsetHelpText": {
-        "message": "Minimum time (ms) the icon should blink before deactivating due to page redirects.",
-        "description": "Redirect Offset option help text."
-    },
-    "optionsRedirectOffsetHelpTextSecond": {
-        "message": "-1 to only use blink time ignoring Maximum Redirects (old behavior)",
-        "description": "Redirect Offset option help text, second part."
-    },
-    "optionsRedirectAllowanceHelpText": {
-        "message": "How many pages should the tab cycle through after the redirect offset before deactivating the icon",
-        "description": "Redirect Allowance option help text."
-    },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Adds a button to password fields for generating a new password.",
+        "message": "在密碼欄位新增一個圖示，用於產生新密碼。",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
-        "message": "Passwords are generated by KeePassXC using your password generation profile.",
+        "message": "KeePassXC 將參考您的密碼生成配置來產生密碼。",
         "description": "Password Generator option help text, second part."
     },
+    "optionsPredefinedSiteList": {
+        "message": "預定義網站",
+        "description": "Predefined site list details button text."
+    },
+    "optionsUsePredefinedSites": {
+        "message": "使用預定義的網站以改善兼容性。",
+        "description": "Use predefined sites checkbox text."
+    },
+    "optionsUsePredefinedSitesHelpText": {
+        "message": "將登入表單只有用戶名稱的常用網站加入網站設定。",
+        "description": "Use predefined sites option help text."
+    },
+    "optionsShowLoginFormIconHelpText": {
+        "message": "在用戶名稱欄位加入圖示，單擊滑鼠即可填入憑證。",
+        "description": "Username field icon option help text."
+    },
+    "optionsShowOTPIconHelpText": {
+        "message": "在辨識為「一次性密碼 / 雙因素驗證」 (OTP/2FA) 的輸入欄位加入圖示。",
+        "description": "OTP field icon option help text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",
+        "message": "KeePassXC-Browser 將在標籤頁激活時立即獲取憑證。 ",
         "description": "Auto-Retrive Credentials option help text."
     },
+    "optionsAutomaticReconnectHelpText": {
+        "message": "當偵測到 KeePassXC 時自動重新連接。",
+        "description": "Auto-reconnect option help text."
+    },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in credentials if it receives only a single entry.",
+        "message": "若 KeePassXC-Browser 只接收到單一項目，將自動填入憑證。",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk.",
+        "message": "警告！使用自動填入並不安全。使用請自擔風險。KeePassXC-Browser 會嘗試自動偵測登錄欄位。然而，自動偵測可能不準確，導致在不安全的輸入欄位內填寫敏感資料。",
         "description": "Auto-Fill Single Entry warning text."
     },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "只接受到一個項目時，KeePassXC-Browser 將自動填入 TOTP 欄位。",
+        "description": "Auto-Fill Single TOTP field option help text."
+    },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Show a dropdown list containing available credentials for all username fields on a page.",
+        "message": "在頁面上所有用戶名稱欄位顯示一個包含可用憑證的下拉式清單。",
         "description": "Autocomplete Usernames option help text."
     },
+    "optionsShowGroupNameInAutocompleteHelpText": {
+        "message": "當憑證從不同群組回傳時，將顯示其群組名稱。只影響緊湊模式。",
+        "description": "Show group name in autocomplete help text."
+    },
     "optionsShowNotificationsHelpText": {
-        "message": "Show notifications for errors and when user interaction is required.",
+        "message": "出錯或需要用戶操作時顯示提醒。",
         "description": "Show notifications option help text."
     },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "使用單色工具列圖示和彩色標記，對應瀏覽器的亮暗色彩主題。",
+        "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "使用緊湊版本的下拉選單來選擇憑證。",
+      "description": "Use compact (legacy) mode help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "When saving new credentials, save only the domain instead of full URL.",
+        "message": "儲存新憑證時，只儲存域名而非完整的網址 (URL)。",
         "description": "Save domain only option help text."
     },
+    "optionsSaveDomainOnlyCustomLoginHelpText": {
+        "message": "保存自定義登入欄位時，只保存域名而非完整 URL。",
+        "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "儲存後下載網站圖標",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "新建憑證後，自動下載網站圖標。",
+        "description": "Download favicon after save help text."
+    },
     "optionsAutoFillAndSendHelpText": {
-        "message": "If credentials are found for a page and the login-type is an HTTP Basic Auth request, KeePassXC-Browser tries to login with the first given credentials.",
+        "message": "如果發現頁面有可用憑證，且登入類型為 HTTP 基本認證請求，KeePassXC-Browser 將嘗試使用第一個獲取的憑證登入。若有多個憑證，您可以在彈出視窗選擇正確的憑證。即使此功能被啟用，您仍然可以手動填寫 HTTP 基本認證登入。",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
-        "message": "An HTTP Basic Auth dialog looks like this:",
+        "message": "HTTP 基本認證對話框的示例：",
         "description": "HTTP Basic Auth image help text."
     },
+    "optionsClearCredentialsTimeout": {
+        "message": "超過一定時間後，從不活躍的分頁清除憑證（以秒計算，0-3600）。",
+        "description": "Clear credentials label text."
+    },
+    "optionsClearCredentialsTimeoutHelpText": {
+        "message": "超過時限以後，憑證將從背景分頁移除；頁面之後將再次請求權限。",
+        "description": "Clear credentials timeout help text."
+    },
     "optionsVersionInfoText": {
-        "message": "KeePassXC-Browser needs KeePassXC to retrieve credentials.",
+        "message": "KeePassXC-Browser 需要 KeePassXC 以檢索憑證。",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
-        "message": "You can download the latest stable version from $1",
+        "message": "可從 $1 下載最新穩定版本",
         "description": "Settings page download link."
     },
     "optionsVersionRunning": {
@@ -622,6 +981,10 @@
     "optionsLatestVersion": {
         "message": "最新可用的 KeePassXC 版本：$1",
         "description": "Settings page info text about the latest KeePassXC version."
+    },
+    "optionsKeePassXCVersionRequired": {
+        "message": "需要 KeePassXC 版本： $1",
+        "description": "KeePassXC version requirement text."
     },
     "optionsDefault": {
         "message": "預設值：$1",
@@ -639,16 +1002,28 @@
         "message": "$1 的快速鍵已成功更改。",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "$1 的快速鍵已重設。",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
-        "message": "Error: Shortcut for $1 has not been changed!",
+    "optionsShortcutsDanger": {
+        "message": "錯誤：$1 的快速鍵未更改！",
         "description": "Error message for changing keyboard shortcuts."
     },
+    "optionsImportExportSettings": {
+        "message": "導入/導出配置",
+        "description": "Settings page header text for import/export."
+    },
+    "optionsImportSettingsDialogTitle": {
+        "message": "從外部檔案匯入設定？",
+        "description": "Import settings confirmation dialog title text."
+    },
+    "optionsImportSettingsDialogText": {
+        "message": "目前設定將會被覆寫。真的要匯入設定檔案？",
+        "description": "Import settings confirmation dialog help text."
+    },
     "optionsConnectedDatabasesText": {
-        "message": "以下的 KeePassXC 資料庫已連結到 KeePassXC-Browser。",
+        "message": "與 KeePassXC-Browser 連線的資料庫。",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
@@ -656,11 +1031,11 @@
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
-        "message": "Remove identifier from database list?",
+        "message": "從資料庫清單移除識別碼？",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list?",
+        "message": "真的要從資料庫清單移除以下的識別碼：$1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -689,102 +1064,170 @@
     },
     "optionsColumnPageURL": {
         "message": "網頁 URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "忽略",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
-        "message": "Username-only Detection",
-        "description": "Site preferences list column title."
+    "optionsColumnUsernameOnly": {
+        "message": "「僅用戶名稱」偵測",
+        "description": "Site Preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "改進的輸入框偵測",
+        "description": "Improved Input Field Detection column text."
+    },
+    "optionsColumnAllowIframes": {
+        "message": "允許跨來源 iframe 框架",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "刪除",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "啟用所有功能",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "Disable new/modified credentials",
-        "description": "Site preferences option selection."
+        "message": "停用新增/修改過的憑證",
+        "description": "Site Preferences option selection."
+    },
+    "optionsSelectionAutoSubmit": {
+        "message": "停用自動送出",
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "停用所有功能",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
+    },
+    "optionsSortByTitle": {
+        "message": "標題",
+        "description": "Sort matching credentials by title option selection."
+    },
+    "optionsSortByUsername": {
+        "message": "用戶名稱",
+        "description": "Sort matching credentials by username option selection."
+    },
+    "optionsSortByGroupAndTitle": {
+        "message": "群組與標題",
+        "description": "Sort matching credentials by group and title option selection."
+    },
+    "optionsSortByGroupAndUsername": {
+        "message": "群組與用戶名稱",
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "對填充後的憑證進行排序",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "選擇「相關憑證優先」選項時，上次登入時填充的憑證會被設置為顯示在自動完成選單的首位。",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "對填充 TOTP 後的憑證進行排序",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "選擇「相關憑證優先」選項時，上次登入時填充的 TOTP 會被設置為顯示在自動完成選單的首位。",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "匹配憑證設定",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "相關憑證優先",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved custom login fields found.",
+        "message": "找不到已保存的自定義登入欄位。",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table below.",
-        "description": "Table caption of Custom login fields page."
+        "message": "您可以使用此表格管理已保存的自定義登入欄位。",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": "If KeePassXC-Browser detects the wrong login fields, you are able to specify the correct fields yourself.",
-        "description": "Saved custom login fields info text, first part."
+        "message": "若 KeePassXC-Browser 偵測的登入欄位有誤，您可以自行指定正確的欄位。",
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Go to the page and click on the KeePassXC-Browser icon, then select ",
-        "description": "Saved custom login fields info text, second part."
+        "message": "前往頁面並點擊 KeePassXC-Browser 圖示，然後選擇",
+        "description": "Saved Custom Login Fields info text, second part."
+    },
+    "optionsCustomFieldsTabHelpTextThird": {
+        "message": "在此頁面您可以管理已保存的自定義登入欄位。",
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remove saved custom login fields?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "移除已儲存的自定義登入欄位？",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Do you really want to remove the saved custom login fields on the page: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "真的要移除頁面上已儲存的自定義登入欄位：$1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
-        "message": "KeePassXC-Browser will automatically detect the login fields next time you visit this page.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "message": "KeePassXC-Browser 將在您下次訪問頁面時自動偵測登入欄位。",
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "No ignored sites found.",
-        "description": "Shown when no ignored sites are saved."
+        "message": "找不到網站設定。",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "移除網站？",
         "description": "Confirmation text when removing ignored sites from the list."
     },
     "optionsSitePreferencesTabHelpTextFirst": {
-        "message": "Sites on this page have special handling methods associated with them.",
-        "description": "Site preferences info text, first part."
+        "message": "此頁面的網站具有與之關聯的特殊處理方法。",
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "To ignore new/modified credentials on a specific site, add them below or click the blinking KeePassXC-Browser icon and select",
-        "description": "Site preferences info text, second part."
+        "message": "若要忽略特定網站上新的或已修改的憑證，可在下面新增；或者在使用憑證橫幅通知時，選擇<em>此網站不再詢問</em>。",
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "If a site is fully ignored (<em>Disable all features</em> is selected), then the plugin will do nothing when visiting that site.",
-        "description": "Site preferences info text, third part."
+        "message": "如果網站被徹底忽略（<em>停用所有功能</em>被選中），則在訪問該網站時，插件將不會有任何動作。",
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Username-only detection allows KeePassXC-Browser to fill in login details on websites with separate pages for username and password.",
-        "description": "Site preferences info text, fourth part."
+        "message": "「僅用戶名稱」偵測允許 KeePassXC-Browser 在訪問用戶名稱與密碼不在同一頁面的網站時，仍可以填寫登入內容。",
+        "description": "Site Preferences info text, fourth part."
+    },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "改進的輸入框偵測允許更詳細的動態輸入框偵測。但可能會影響頁面效能。請小心使用。",
+        "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "允許跨來源 iframe 框架將允許從其他域名的 iframe 框架接受憑證。使用請自擔風險。",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
-        "message": "Add URL manually",
-        "description": "Label for adding site manually on Site preferences tab."
+        "message": "手動新增網址",
+        "description": "Label for adding site manually on Site Preferences tab."
+    },
+    "optionsSitePreferencesManualAddHelp": {
+        "message": "網址必須以 <code>https://</code>, <code>http://</code>, <code>file://</code> 或 <code>ftp://</code> 開頭，且其長度必須至少 5 個字元。",
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
-        "message": "Do you really want to remove the specified site from the list: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "message": "真的要從清單移除網站：$1",
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser 將對此網站啟用所有功能，並移除只針對使用者名稱的偵測。",
-        "description": "Part of confirmation text when removing site preferences."
+        "message": "KeePassXC-Browser 將對此網站啟用所有功能並移除「僅用戶名稱」偵測。",
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table below.",
+        "message": "您可以使用此表格管理已保存的網站設定。",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Option to ignore extension features for the page.",
+        "message": "用於在頁面上忽略擴充功能的選項。",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
@@ -794,6 +1237,10 @@
     "optionsAboutMozilla": {
         "message": "瀏覽 Mozilla 附加元件站上的 KeePassXC-Browser。",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "瀏覽 Edge 附加元件網頁上的 KeePassXC-Browser。",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "瀏覽 GitHub 上的 KeePassXC-Browser。",
@@ -820,31 +1267,87 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "在 GitHub 上建立新 issue",
+        "message": "在 GitHub 上建立新議題。",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
-        "message": "The following debug info can be used",
+        "message": "可以使用以下除錯訊息",
         "description": "Debug info text."
     },
+    "optionsAboutSupporters": {
+        "message": "支援者",
+        "description": "Supporters label text."
+    },
     "optionsErrorInvalidValue": {
-        "message": "Invalid value. Please check the input.",
+        "message": "無效的值。請檢查輸入。",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Invalid URL. Please check the input.",
+        "message": "無效的網址。請檢查輸入。",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
-        "message": "The value already exists in the list.",
+        "message": "此值已存在於清單中。",
         "description": "Error shown when trying to add a duplicate value to the list."
+    },
+    "optionsUserInterfaceTitle": {
+        "message": "使用者介面",
+        "description": "User interface title in settings page"
+    },
+    "optionsFillingCredentialsTitle": {
+        "message": "填入憑證",
+        "description": "Filling credentials title in settings page"
+    },
+    "optionsSavingCredentialsTitle": {
+        "message": "儲存憑證",
+        "description": "Saving credentials title in settings page"
+    },
+    "optionsUpdatesTitle": {
+        "message": "更新",
+        "description": "Updates title in settings page"
+    },
+    "optionsAdvancedSettingsTitle": {
+        "message": "進階設定",
+        "description": "Advanced settings title in settings page"
+    },
+    "optionsExtensionTitle": {
+        "message": "擴充",
+        "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "通行密鑰",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "啟用通行密鑰",
+        "description": "Enabled passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "啟用對網路身份驗證 (WebAuthn) 的支援",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "啟用通行密鑰備案",
+        "description": "Enabled passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "啟用時，如果對 KeePassXC 的請求失敗或被取消，將觸發瀏覽器自身的內置通行密鑰請求。如果停用，則必須與 KeePassXC 建立連接，並將被取消的請求視為失敗。預設為啟用。",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "開新分頁",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "HTTP Basic Authentication dialog",
+        "message": "HTTP 基本認證對話視窗",
         "description": "Options page HTTP Basic Auth dialog text"
+    },
+    "autocompleteSubmitMessage": {
+        "message": "您的選擇將被自動送出",
+        "description": "Message shown at the bottom of autocomplete menu."
+    },
+    "lockDatabase": {
+        "message": "鎖定資料庫",
+        "description": "Lock database button title text."
     }
 }

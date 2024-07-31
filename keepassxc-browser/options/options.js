@@ -1,29 +1,10 @@
 'use strict';
 
+const options = {};
+
 const $ = function(elem) {
     return document.querySelector(elem);
 };
-
-(async() => {
-    try {
-        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
-        options.settings = settings;
-
-        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
-        options.keyRing = keyRing;
-        options.initMenu();
-        options.initGeneralSettings();
-        options.initConnectedDatabases();
-        options.initCustomLoginFields();
-        options.initSitePreferences();
-        options.initAbout();
-        options.initTheme();
-    } catch (err) {
-        console.log('Error loading options page: ' + err);
-    }
-})();
-
-var options = options || {};
 
 options.initMenu = function() {
     const tabs = [].slice.call(document.querySelectorAll('div.tab'));
@@ -31,8 +12,6 @@ options.initMenu = function() {
 
     sideBarLinks.forEach(function(elem) {
         elem.addEventListener('click', function(e) {
-            e.preventDefault();
-
             sideBarLinks.forEach(t => t.parentElement.classList.remove('active'));
             elem.parentElement.classList.add('active');
             tabs.forEach(t => t.hide());
@@ -44,6 +23,10 @@ options.initMenu = function() {
     });
 
     $('div.tab').show();
+
+    if (window.location.hash !== '') {
+        document.querySelector(`a[href='${window.location.hash}']`)?.click();
+    }
 };
 
 options.saveSetting = async function(name) {
@@ -75,7 +58,7 @@ options.saveKeyRing = async function() {
     });
 };
 
-options.initGeneralSettings = function() {
+options.initGeneralSettings = async function() {
     const changeCheckboxValue = async function(e) {
         const name = e.currentTarget.name;
         const isChecked = e.currentTarget.checked;
@@ -91,6 +74,8 @@ options.initGeneralSettings = function() {
         } else if (name === 'autoReconnect') {
             const message = updated.autoReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
             browser.runtime.sendMessage({ action: message });
+        } else if (name === 'useMonochromeToolbarIcon') {
+            browser.runtime.sendMessage({ action: 'update_popup' });
         }
     };
 
@@ -99,11 +84,7 @@ options.initGeneralSettings = function() {
         options.saveSettings();
     };
 
-    if (options.settings['colorTheme'] === undefined) {
-        $('#tab-general-settings select#colorTheme').value = 'system';
-    } else {
-        $('#tab-general-settings select#colorTheme').value = options.settings['colorTheme'];
-    }
+    $('#tab-general-settings select#colorTheme').value = options.settings['colorTheme'];
 
     const generalSettingsCheckboxes = document.querySelectorAll('#tab-general-settings input[type=checkbox]');
     for (const checkbox of generalSettingsCheckboxes) {
@@ -128,6 +109,8 @@ options.initGeneralSettings = function() {
         options.settings['redirectAllowance'] === 11 ? 'Infinite' : String(options.settings['redirectAllowance']));
 
     $('#tab-general-settings select#credentialSorting').value = options.settings['credentialSorting'];
+    $('#tab-general-settings select#afterFillSorting').value = options.settings['afterFillSorting'];
+    $('#tab-general-settings select#afterFillSortingTotp').value = options.settings['afterFillSortingTotp'];
     $('#tab-general-settings input#defaultGroup').value = options.settings['defaultGroup'];
     $('#tab-general-settings input#clearCredentialTimeout').value = options.settings['clearCredentialsTimeout'];
 
@@ -145,11 +128,27 @@ options.initGeneralSettings = function() {
         // The theme is also stored in localStorage to prevent a white flash when the settings are first opened
         localStorage.setItem('colorTheme', options.settings['colorTheme']);
         await options.saveSettings();
-        location.reload();
+        options.updateTheme();
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (options.settings['colorTheme'] === 'system') {
+            options.updateTheme();
+        }
     });
 
     $('#tab-general-settings select#credentialSorting').addEventListener('change', async function(e) {
         options.settings['credentialSorting'] = e.currentTarget.value;
+        await options.saveSettings();
+    });
+
+    $('#tab-general-settings select#afterFillSorting').addEventListener('change', async function(e) {
+        options.settings['afterFillSorting'] = e.currentTarget.value;
+        await options.saveSettings();
+    });
+
+    $('#tab-general-settings select#afterFillSortingTotp').addEventListener('change', async function(e) {
+        options.settings['afterFillSortingTotp'] = e.currentTarget.value;
         await options.saveSettings();
     });
 
@@ -174,7 +173,7 @@ options.initGeneralSettings = function() {
         await options.saveSettings();
     });
 
-    browser.runtime.sendMessage({
+    await browser.runtime.sendMessage({
         action: 'get_keepassxc_versions'
     }).then(options.showKeePassXCVersions);
 
@@ -217,11 +216,15 @@ options.initGeneralSettings = function() {
     });
 
     let temporarySettings;
-    const dialogImportSettingsModal = new bootstrap.Modal($('#dialogImportSettings'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogImportSettingsModal = new bootstrap.Modal('#dialogImportSettings',
+        { keyboard: true, focus: false, backdrop: true });
 
-    $('#importSettingsButton').addEventListener('click', function(e) {
-        var link = document.createElement('input');
+    $('#dialogImportSettings').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
+
+    $('#importSettingsButton').addEventListener('click', function() {
+        const link = document.createElement('input');
         link.setAttribute('type', 'file');
         link.onchange = function(e) {
             const reader = new FileReader();
@@ -245,9 +248,6 @@ options.initGeneralSettings = function() {
                     // Verify the import
                     temporarySettings = contents;
                     dialogImportSettingsModal.show();
-                    $('#dialogImportSettings').addEventListener('shown.bs.modal', function(modalEvent) {
-                        modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-                    });
                 } catch (err) {
                     console.log('Error loading JSON settings file.');
                 }
@@ -303,9 +303,9 @@ options.showKeePassXCVersions = async function(response) {
         response.latest = 'unknown';
     }
 
-    $('#tab-general-settings .kphVersion em.yourVersion').textContent = response.current;
-    $('#tab-general-settings .kphVersion em.latestVersion').textContent = response.latest;
-    $('#tab-about em.versionKPH').textContent = response.current;
+    $('#tab-general-settings .kphVersion span.yourVersion').textContent = response.current;
+    $('#tab-general-settings .kphVersion span.latestVersion').textContent = response.latest;
+    $('#tab-about span.versionKPH').textContent = response.current;
     $('#tab-about span.kpxcVersion').textContent = response.current;
     $('#tab-general-settings button.checkUpdateKeePassXC').disabled = false;
 
@@ -330,6 +330,16 @@ options.showKeePassXCVersions = async function(response) {
     if (!version270Result) {
         $('#tab-general-settings #downloadFaviconAfterSaveFormGroup').hide();
     }
+
+    // Hide certain options with older KeePassXC versions than 2.7.7
+    const version277Result = await browser.runtime.sendMessage({
+        action: 'compare_version',
+        args: [ '2.7.7', response.current ]
+    });
+
+    if (!version277Result) {
+        $('#tab-general-settings #passkeysOptionsCard').hide();
+    }
 };
 
 options.getPartiallyHiddenKey = function(key) {
@@ -337,16 +347,12 @@ options.getPartiallyHiddenKey = function(key) {
 };
 
 options.initConnectedDatabases = function() {
-    const dialogDeleteConnectedDatabaseModal = new bootstrap.Modal($('#dialogDeleteConnectedDatabase'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogDeleteConnectedDatabaseModal = new bootstrap.Modal('#dialogDeleteConnectedDatabase',
+        { keyboard: true, focus: false, backdrop: true });
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-connected-databases table tbody').children.length > 2) {
-            $('#tab-connected-databases table tbody tr.empty').hide();
-        } else {
-            $('#tab-connected-databases table tbody tr.empty').style.display = '';
-        }
-    };
+    $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     $('#dialogDeleteConnectedDatabase .modal-footer button.yes').addEventListener('click', async function(e) {
         dialogDeleteConnectedDatabaseModal.hide();
@@ -363,7 +369,7 @@ options.initConnectedDatabases = function() {
             console.log(err);
         });
 
-        hideEmptyMessageRow();
+        browser.runtime.sendMessage({ action: 'update_popup' });
     });
 
     const removeButtonClicked = function(e) {
@@ -372,12 +378,13 @@ options.initConnectedDatabases = function() {
         const closestTr = this.closest('tr');
         $('#dialogDeleteConnectedDatabase').setAttribute('hash', closestTr.getAttribute('hash'));
         $('#dialogDeleteConnectedDatabase').setAttribute('tr-id', closestTr.getAttribute('id'));
-        $('#dialogDeleteConnectedDatabase .modal-body strong').textContent = closestTr.children[0].textContent;
+
+        const identifier = $('#dialogDeleteConnectedDatabase .modal-body strong');
+        if (identifier) {
+            identifier.textContent = closestTr.children[0].textContent;
+        }
 
         dialogDeleteConnectedDatabaseModal.show();
-        $('#dialogDeleteConnectedDatabase').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-        });
     };
 
     const rowClone = $('#tab-connected-databases table tr.clone').cloneNode(true);
@@ -388,8 +395,12 @@ options.initConnectedDatabases = function() {
         row.setAttribute('hash', hash);
         row.setAttribute('id', 'tr-cd-' + hash);
 
-        const lastUsed = (options.keyRing[hash].lastUsed) ? new Date(options.keyRing[hash].lastUsed).toLocaleString() : 'unknown';
-        const date = (options.keyRing[hash].created) ? new Date(options.keyRing[hash].created).toLocaleDateString() : 'unknown';
+        const lastUsed = options.keyRing[hash].lastUsed
+            ? new Date(options.keyRing[hash].lastUsed).toLocaleString()
+            : 'unknown';
+        const date = options.keyRing[hash].created
+            ? new Date(options.keyRing[hash].created).toLocaleDateString()
+            : 'unknown';
 
         row.children[0].textContent = options.keyRing[hash].id;
         row.children[1].textContent = options.getPartiallyHiddenKey(options.keyRing[hash].key);
@@ -425,21 +436,15 @@ options.initConnectedDatabases = function() {
             }
         }
     });
-
-    hideEmptyMessageRow();
 };
 
 options.initCustomLoginFields = function() {
-    const dialogDeleteCustomLoginFieldsModal = new bootstrap.Modal($('#dialogDeleteCustomLoginFields'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogDeleteCustomLoginFieldsModal = new bootstrap.Modal('#dialogDeleteCustomLoginFields',
+        { keyboard: true, focus: false, backdrop: true });
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-custom-fields table tbody').children.length > 2) {
-            $('#tab-custom-fields table tbody tr.empty').hide();
-        } else {
-            $('#tab-custom-fields table tbody tr.empty').style.display = '';
-        }
-    };
+    $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     const removeButtonClicked = function(e) {
         e.preventDefault();
@@ -450,9 +455,6 @@ options.initCustomLoginFields = function() {
         $('#dialogDeleteCustomLoginFields .modal-body strong').textContent = closestTr.children[0].textContent;
 
         dialogDeleteCustomLoginFieldsModal.show();
-        $('#dialogDeleteCustomLoginFields').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-        });
     };
 
     $('#dialogDeleteCustomLoginFields .modal-footer button.yes').addEventListener('click', function(e) {
@@ -464,8 +466,6 @@ options.initCustomLoginFields = function() {
 
         delete options.settings['defined-custom-fields'][url];
         options.saveSettings();
-
-        hideEmptyMessageRow();
     });
 
     const rowClone = $('#tab-custom-fields table tr.clone').cloneNode(true);
@@ -482,8 +482,6 @@ options.initCustomLoginFields = function() {
         row.children[1].addEventListener('click', removeButtonClicked);
         $('#tab-custom-fields table tbody').append(row);
     }
-
-    hideEmptyMessageRow();
 };
 
 options.initSitePreferences = function() {
@@ -491,8 +489,12 @@ options.initSitePreferences = function() {
         options.settings['sitePreferences'] = [];
     }
 
-    const dialogDeleteSiteModal = new bootstrap.Modal($('#dialogDeleteSite'),
-        { keyboard: true, show: false, backdrop: true });
+    const dialogDeleteSiteModal = new bootstrap.Modal('#dialogDeleteSite',
+        { keyboard: true, focus: false, backdrop: true });
+
+    $('#dialogDeleteSite').addEventListener('shown.bs.modal', function(modalEvent) {
+        modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
+    });
 
     const removeButtonClicked = function(e) {
         e.preventDefault();
@@ -503,9 +505,6 @@ options.initSitePreferences = function() {
         $('#dialogDeleteSite .modal-body strong').textContent = closestTr.children[0].textContent;
 
         dialogDeleteSiteModal.show();
-        $('#dialogDeleteSite').addEventListener('shown.bs.modal', function(modalEvent) {
-            modalEvent.currentTarget.querySelector('.modal-footer .btn-success').focus();
-        });
     };
 
     const checkboxClicked = function() {
@@ -514,7 +513,13 @@ options.initSitePreferences = function() {
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
-                site.usernameOnly = this.checked;
+                if (this.name === 'usernameOnly') {
+                    site.usernameOnly = this.checked;
+                } else if (this.name === 'improvedFieldDetection') {
+                    site.improvedFieldDetection = this.checked;
+                } else if (this.name === 'allowIframes') {
+                    site.allowIframes = this.checked;
+                }
             }
         }
 
@@ -534,15 +539,7 @@ options.initSitePreferences = function() {
         options.saveSettings();
     };
 
-    const hideEmptyMessageRow = function() {
-        if ($('#tab-site-preferences table tbody').children.length > 2) {
-            $('#tab-site-preferences table tbody tr.empty').hide();
-        } else {
-            $('#tab-site-preferences table tbody tr.empty').style.display = '';
-        }
-    };
-
-    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly) {
+    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
         row.setAttribute('id', 'tr-scf' + newIndex);
@@ -551,7 +548,11 @@ options.initSitePreferences = function() {
         row.children[1].children[0].addEventListener('change', selectionChanged);
         row.children[2].children['usernameOnly'].checked = usernameOnly;
         row.children[2].children['usernameOnly'].addEventListener('change', checkboxClicked);
-        row.children[3].addEventListener('click', removeButtonClicked);
+        row.children[3].children['improvedFieldDetection'].checked = improvedFieldDetection;
+        row.children[3].children['improvedFieldDetection'].addEventListener('change', checkboxClicked);
+        row.children[4].children['allowIframes'].checked = allowIframes;
+        row.children[4].children['allowIframes'].addEventListener('change', checkboxClicked);
+        row.children[5].addEventListener('click', removeButtonClicked);
 
         $('#tab-site-preferences table tbody').append(row);
     };
@@ -570,11 +571,6 @@ options.initSitePreferences = function() {
         }
 
         options.saveSettings();
-        hideEmptyMessageRow();
-    });
-
-    $('.was-validated').addEventListener('submit', function(e) {
-        e.preventDefault();
     });
 
     $('#manualUrl').addEventListener('keyup', function(event) {
@@ -616,10 +612,16 @@ options.initSitePreferences = function() {
         const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
         rowClone.classList.remove('clone', 'd-none');
 
-        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false);
+        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false, false);
         $('#tab-site-preferences table tbody tr.empty').hide();
 
-        options.settings['sitePreferences'].push({ url: value, ignore: IGNORE_NOTHING, usernameOnly: false });
+        options.settings['sitePreferences'].push({
+            url: value,
+            ignore: IGNORE_NOTHING,
+            usernameOnly: false,
+            improvedFieldDetection: false,
+            allowIframes: false,
+        });
         options.saveSettings();
         manualUrl.value = '';
     });
@@ -629,12 +631,18 @@ options.initSitePreferences = function() {
     let counter = 1;
     if (options.settings['sitePreferences']) {
         for (const site of options.settings['sitePreferences']) {
-            addNewRow(rowClone, counter, site.url, site.ignore, site.usernameOnly);
+            addNewRow(
+                rowClone,
+                counter,
+                site.url,
+                site.ignore,
+                site.usernameOnly,
+                site.improvedFieldDetection,
+                site.allowIframes,
+            );
             ++counter;
         }
     }
-
-    hideEmptyMessageRow();
 };
 
 options.initAbout = function() {
@@ -644,28 +652,19 @@ options.initAbout = function() {
         platform = 'Win64';
     }
 
-    $('#tab-about em.versionCIP').textContent = version;
+    $('#tab-about span.versionCIP').textContent = version;
     $('#tab-about span.kpxcbrVersion').textContent = version;
     $('#tab-about span.kpxcbrOS').textContent = platform;
     $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
-
-    // Hides keyboard shortcut configure button if Firefox version is < 60 (API is not compatible)
-    if (isFirefox() && Number(navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1, 2)) < 60) {
-        $('#chrome-only').remove();
-    }
 };
 
-options.initTheme = function() {
-    if (options.settings['colorTheme'] === undefined) {
-        document.body.removeAttribute('data-color-theme');
-    } else {
-        document.body.setAttribute('data-color-theme', options.settings['colorTheme']);
+options.updateTheme = function() {
+    let theme = options.settings['colorTheme'];
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    // Sync localStorage setting
-    const localStorageTheme = localStorage.getItem('colorTheme');
-    if (localStorageTheme !== options.settings['colorTheme']) {
-        localStorage.setItem('colorTheme', options.settings['colorTheme']);
-    }
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    browser.runtime.sendMessage({ action: 'update_popup' });
 };
 
 options.createWarning = function(elem, text) {
@@ -706,3 +705,28 @@ const getBrowserId = function() {
 
     return 'Other/Unknown';
 };
+
+(async() => {
+    try {
+        // We eagerly load the theme here to avoid a white flash
+        let theme = localStorage.getItem('colorTheme') || 'system';
+        if (theme === 'system') {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-bs-theme', theme);
+
+        const settings = await browser.runtime.sendMessage({ action: 'load_settings' });
+        options.settings = settings;
+
+        const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
+        options.keyRing = keyRing;
+        options.initMenu();
+        await options.initGeneralSettings();
+        options.initConnectedDatabases();
+        options.initCustomLoginFields();
+        options.initSitePreferences();
+        options.initAbout();
+    } catch (err) {
+        console.log('Error loading options page: ' + err);
+    }
+})();

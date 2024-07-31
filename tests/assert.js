@@ -9,60 +9,54 @@ function kpxcAssert(func, expected, card, testName) {
     createResult(card, false, `Test failed: ${testName}. Result is: ${func}`);
 }
 
-function assertRegex(func, expected, card, testName) {
-    if ((func === null && expected === false)
-        || (func && (func.length > 0) === expected)) {
+function assertRegex(res, expected, card, testName) {
+    if ((res === null && expected === false)
+        || (res && (res.length > 0) === expected)
+        || (res === expected)) {
         createResult(card, true, `Test passed: ${testName}`);
         return;
     }
 
-    createResult(card, false, `Test failed: ${testName}. Result is: ${func}`);
+    createResult(card, false, `Test failed: ${testName}. Result is: ${res}`);
 }
 
 async function assertInputFields(localDiv, expectedFieldCount, actionElementId) {
-    return new Promise(async (resolve) => {
-        const div = document.getElementById(localDiv);
-        div.style.display = 'block';
+    const div = document.getElementById(localDiv);
+    div.style.display = 'block';
 
-        // An user interaction is required before testing
-        if (actionElementId) {
-            const actionElement = div.querySelector(actionElementId);
-            if (actionElement) {
-                actionElement.click();
-            }
+    // An user interaction is required before testing
+    if (actionElementId) {
+        const actionElement = div.querySelector(actionElementId);
+        if (actionElement) {
+            actionElement.click();
         }
+    }
 
-        const inputs = kpxcObserverHelper.getInputs(div);
-        kpxcAssert(inputs.length, expectedFieldCount, Tests.INPUT_FIELDS, `getInputs() for ${localDiv} with ${expectedFieldCount} fields`);
+    const inputs = kpxcObserverHelper.getInputs(div);
+    kpxcAssert(inputs.length, expectedFieldCount, Tests.INPUT_FIELDS, `getInputs() for ${localDiv} with ${expectedFieldCount} fields`);
 
-        div.style.display = 'none';
-        resolve();
-    });
+    div.style.display = 'none';
 }
 
 async function assertPasswordChangeFields(localDiv, expectedNewPassword) {
-    return new Promise(async (resolve) => {
-        const div = document.getElementById(localDiv);
-        div.style.display = 'block';
+    const div = document.getElementById(localDiv);
+    div.style.display = 'block';
 
-        const inputs = kpxcObserverHelper.getInputs(div, true);
-        const newPassword = kpxcForm.getNewPassword(inputs);
-        kpxcAssert(newPassword, expectedNewPassword, Tests.PASSWORD_CHANGE, `New password matches for ${localDiv}`);
+    const inputs = kpxcObserverHelper.getInputs(div, true);
+    const newPassword = kpxcForm.getNewPassword(inputs);
+    kpxcAssert(newPassword, expectedNewPassword, Tests.PASSWORD_CHANGE, `New password matches for ${localDiv}`);
 
-        div.style.display = 'none';
-        resolve();
-    });
+    div.style.display = 'none';
 }
 
 async function assertTOTPField(classStr, properties, testName, expectedResult) {
     const input = kpxcUI.createElement('input', classStr, properties);
     document.body.appendChild(input);
 
-    const isAccepted = kpxcTOTPIcons.isAcceptedTOTPField(input);
     const isValid = kpxcTOTPIcons.isValid(input);
 
     document.body.removeChild(input);
-    kpxcAssert(isAccepted && isValid, expectedResult, Tests.TOTP_FIELDS, testName);
+    kpxcAssert(isValid, expectedResult, Tests.TOTP_FIELDS, testName);
 }
 
 async function assertSearchField(classStr, properties, testName, expectedResult) {

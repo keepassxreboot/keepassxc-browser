@@ -7,6 +7,7 @@
 const kpxcForm = {};
 kpxcForm.formButtonQuery = 'button[type=button], button[type=submit], input[type=button], input[type=submit], button:not([type]), div[role=button]';
 kpxcForm.savedForms = [];
+kpxcForm.submitTriggered = false;
 
 // Returns true if form has been already saved
 kpxcForm.formIdentified = function(form) {
@@ -50,7 +51,7 @@ kpxcForm.getFormSubmitButton = function(form) {
     // If any formaction overriding the default action is set, ignore those buttons.
     const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery)).filter(b => !b.getAttribute('formAction'));
     if (buttons.length > 0) {
-        return buttons[buttons.length - 1];
+        return buttons.at(-1);
     }
 
     // Try to find similar buttons outside the form which are added via 'form' property
@@ -68,7 +69,7 @@ kpxcForm.getFormSubmitButton = function(form) {
 // Retrieve new password from a form with three elements: Current, New, Repeat New
 kpxcForm.getNewPassword = function(passwordInputs = []) {
     if (passwordInputs.length < 2) {
-        logDebug('Error: Not enough input fields to detect possible new password.')
+        logDebug('Error: Not enough input fields to detect possible new password.');
         return '';
     }
 
@@ -116,6 +117,13 @@ kpxcForm.onSubmit = async function(e) {
         return;
     }
 
+    // Prevent multiple simultaneous submits
+    if (kpxcForm.submitTriggered) {
+        return;
+    }
+
+    kpxcForm.submitTriggered = true;
+
     const searchForm = f => {
         if (f.nodeName === 'FORM') {
             return f;
@@ -137,6 +145,7 @@ kpxcForm.onSubmit = async function(e) {
 
     if (!form) {
         logDebug('Error: No form found for submit detection.');
+        kpxcForm.submitTriggered = false;
         return;
     }
 
@@ -149,6 +158,15 @@ kpxcForm.onSubmit = async function(e) {
     } else if (kpxc.credentials.length === 1) {
         // Single entry found for the page, use the username of it instead of an empty one
         usernameValue = kpxc.credentials[0].login;
+    } else {
+        // Multiple entries found for the page, try to find out which one might have been used
+        const pageUuid = await sendMessage('page_get_login_id');
+        if (pageUuid) {
+            const credential = kpxc.credentials.find(c => c.uuid === pageUuid);
+            if (credential) {
+                usernameValue = credential.login;
+            }
+        }
     }
 
     // Check if the form has three password fields -> a possible password change form
@@ -161,6 +179,7 @@ kpxcForm.onSubmit = async function(e) {
 
     // Return if credentials are already found
     if (kpxc.credentials.some(c => c.login === usernameValue && c.password === passwordValue)) {
+        kpxcForm.submitTriggered = false;
         return;
     }
 
@@ -173,6 +192,7 @@ kpxcForm.onSubmit = async function(e) {
 
     // Show the banner if the page does not reload
     kpxc.rememberCredentials(usernameValue, passwordValue);
+    kpxcForm.submitTriggered = false;
 };
 
 // Save form to Object array
