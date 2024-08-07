@@ -105,17 +105,7 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
 
     kpxcUI.setIconPosition(icon, field, this.rtl);
     this.icon = icon;
-
-    const styleSheet = createStylesheet('css/username.css');
-    const wrapper = document.createElement('div');
-    wrapper.style.all = 'unset';
-    wrapper.style.display = 'none';
-    styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
-
-    this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
-    this.shadowRoot.append(styleSheet);
-    this.shadowRoot.append(icon);
-    document.body.append(wrapper);
+    this.createWrapper('css/username.css');
 };
 
 const iconClicked = async function(field, icon) {
