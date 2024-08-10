@@ -1,6 +1,7 @@
 'use strict';
 
 const DEFAULT_SEGMENTED_TOTP_FIELDS = 6;
+const MIN_SEGMENTED_TOTP_FIELDS = 4;
 
 /**
  * @Object kpxcFields
@@ -95,9 +96,28 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
 
     let exceptionFound = false;
 
-    const addTotpFieldsToCombination = function(inputFields, ignoreLength = false) {
-        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden' && e.type !== 'submit');
-        if (totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS || ignoreLength) {
+    // Returns true if all 6 inputs are numeric, tel or text/number with maxLength of 1.
+    // If ignoreFieldCount is true, number of TOTP fields are allowed to differ from the default (6),
+    // but 4 at minimum must exist.
+    const areFieldsSegmentedTotp = function(totpInputs, ignoreFieldCount = false) {
+        return (
+            ((ignoreFieldCount && totpInputs.length >= MIN_SEGMENTED_TOTP_FIELDS) ||
+                totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS) &&
+            totpInputs.every(
+                input =>
+                    (input.inputMode === 'numeric' && input.pattern.includes('0-9')) ||
+                    ((input.type === 'text' || input.type === 'number') && input.maxLength === 1) ||
+                    input.type === 'tel'
+            )
+        );
+    };
+
+    const addTotpFieldsToCombination = function(inputFields, ignoreFieldCount = false) {
+        const totpInputs = Array.from(inputFields).filter(
+            e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden' && e.type !== 'submit',
+        );
+
+        if (areFieldsSegmentedTotp(totpInputs, ignoreFieldCount)) {
             const combination = {
                 form: form,
                 totpInputs: totpInputs,
@@ -144,16 +164,21 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         return false;
     };
 
+    // Returns true of form's className, id or name points to a possible TOTP form
+    const isSegmentedTotpForm = (form) =>
+        acceptedOTPFields.some(
+            field =>
+                (form.className && form.className.includes(field)) ||
+                (form.id && typeof form.id === 'string' && form.id.includes(field)) ||
+                (form.name && typeof form.name === 'string' && form.name.includes(field))
+        );
+
+    // Use the form if it has segmented TOTP fields, otherwise try checking the input fields directly
     const form = inputs.length > 0 ? inputs[0].form : undefined;
-    if (form && (acceptedOTPFields.some(f => (form.className && form.className.includes(f))
-        || (form.id && typeof(form.id) === 'string' && form.id.includes(f))
-        || (form.name && typeof(form.name) === 'string' && form.name.includes(f))
-        || formLengthMatches(form)))) {
+    if (form && (formLengthMatches(form) || isSegmentedTotpForm(form))) {
         // Use the form's elements
         addTotpFieldsToCombination(form.elements, exceptionFound);
-    } else if (inputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS && inputs.every(i => (i.inputMode === 'numeric' && i.pattern.includes('0-9'))
-                || ((i.type === 'text' || i.type === 'number') && i.maxLength === 1)
-                || i.type === 'tel')) {
+    } else if (areFieldsSegmentedTotp(inputs)) {
         // No form is found, but input fields are possibly segmented TOTP fields
         addTotpFieldsToCombination(inputs);
     }
