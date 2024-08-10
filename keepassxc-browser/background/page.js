@@ -317,7 +317,7 @@ page.updateContextMenu = async function(tab, credentials) {
             // Show username inside [] if there are KPH attributes inside multiple credentials
             const attributeName = Object.keys(attribute)[0].slice(5);
             const finalName = credentials.length > 1
-                ? `[${cred.login}] ${attributeName}`
+                ? `[${cred?.login}] ${attributeName} (${cred?.name})`
                 : attributeName;
 
             const menuItem = {
