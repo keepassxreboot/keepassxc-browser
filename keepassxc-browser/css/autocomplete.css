@@ -12,6 +12,7 @@
     overflow: hidden; /* Prevent the content from bleeding over the border radius. */
     padding: 6px;
     position: absolute !important;
+    scrollbar-color: --var(--kpxc-scrollbar-thumb) --var(--kpxc-scrollbar-background);
     z-index: 2147483646;
 }
 
