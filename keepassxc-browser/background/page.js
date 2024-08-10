@@ -321,7 +321,7 @@ page.updateContextMenu = async function(tab, credentials) {
                 : attributeName;
 
             const menuItem = {
-                action: `fill_attribute_${cred?.uuid}`,
+                action: `fill_attribute_${cred?.uuid}_${attributeName}`,
                 args: attribute,
                 parentId: 'fill_attribute',
                 title: finalName
