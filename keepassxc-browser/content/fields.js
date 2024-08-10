@@ -95,9 +95,21 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
 
     let exceptionFound = false;
 
+    // Returns true if all 6 inputs are numeric, tel or text/number with maxLength of 1
+    const allAreSegmentedFields = inputs =>
+        inputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS &&
+        inputs.every(
+            i =>
+                (i.inputMode === 'numeric' && i.pattern.includes('0-9')) ||
+                ((i.type === 'text' || i.type === 'number') && i.maxLength === 1) ||
+                i.type === 'tel',
+        );
+
     const addTotpFieldsToCombination = function(inputFields, ignoreLength = false) {
-        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden' && e.type !== 'submit');
-        if (totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS || ignoreLength) {
+        const totpInputs = Array.from(inputFields).filter(
+            e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden' && e.type !== 'submit',
+        );
+        if (allAreSegmentedFields(totpInputs) || ignoreLength) {
             const combination = {
                 form: form,
                 totpInputs: totpInputs,
@@ -151,9 +163,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         || formLengthMatches(form)))) {
         // Use the form's elements
         addTotpFieldsToCombination(form.elements, exceptionFound);
-    } else if (inputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS && inputs.every(i => (i.inputMode === 'numeric' && i.pattern.includes('0-9'))
-                || ((i.type === 'text' || i.type === 'number') && i.maxLength === 1)
-                || i.type === 'tel')) {
+    } else if (allAreSegmentedFields(inputs)) {
         // No form is found, but input fields are possibly segmented TOTP fields
         addTotpFieldsToCombination(inputs);
     }
