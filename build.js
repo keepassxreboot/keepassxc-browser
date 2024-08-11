@@ -41,7 +41,7 @@ const updateTranslations = async () => {
 };
 
 const createZipFile = async (fileName, path) => {
-    await exec(`tar -a -cf ${fileName} ${path}/*`);
+    await exec(`cd ${path} && tar -a -cf ../${fileName} * && cd ..`);
 };
 
 (async() => {
