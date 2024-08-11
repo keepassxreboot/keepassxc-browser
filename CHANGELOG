@@ -1,3 +1,14 @@
+1.9.2 (2024-08-11)
+=========================
+- Add Improved Input Field Detection to Predefined Sites [#2293]
+- Fix attribute filling with identical usernames [#2304]
+- Fix segmented TOTP field identification [#2305]
+- Fix scrollbar colors with Autocomplete Menu [#2302]
+- Fix breaking page layouts [#2285]
+- Fix Autocomplete Menu issues with the new layout [#2269, #2274, #2279]
+- Fix XML formatting [#2287]
+- Fix plain text password fill prevention [#2259]
+
 1.9.1.1 (2024-07-06)
 =========================
 - Fix credential sorting [#2262]

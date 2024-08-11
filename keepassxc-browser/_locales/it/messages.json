@@ -723,7 +723,7 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Attiva icone generatore password.",
+        "message": "Attiva icone generatore password",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
@@ -743,7 +743,7 @@
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Recupera automaticamente le credenziali.",
+        "message": "Recupera automaticamente le credenziali",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
@@ -771,19 +771,19 @@
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
-        "message": "Invia automaticamente i moduli di accesso",
+        "message": "Auto-invio per le form di login",
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Invia automaticamente le credenziali selezionate. È disabilitata per il riempimento automatico a voce singola.",
+        "message": "Auto-invia le credenziali selezionate. Disabilitato per il riempimento automatico delle voci singole. ",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Visualizza notifiche.",
+        "message": "Visualizza notifiche",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Usa icona della barra degli strumenti monocromatica.",
+        "message": "Usa icona della barra degli strumenti monocromatica",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
@@ -791,11 +791,11 @@
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
-        "message": "Salva solo il dominio.",
+        "message": "Salva solo il dominio",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Visualizza una notifica quando possono essere salvate nuove credenziali nel database.",
+        "message": "Visualizza una notifica quando possono essere salvate nuove credenziali nel database",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -803,7 +803,7 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Il numero massimo di reindirizzamenti consentiti oltre il quale sparisce la notifica. Il valore predefinito è 3. Quello massimo è infinito.",
+        "message": "Quanti reindirizzamenti sono consentiti prima che sparisca il banner. Il valore predefinito è 3. Quello massimo è infinito.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
@@ -879,7 +879,7 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Usa i siti predefiniti per la compatibilità.",
+        "message": "Usa i siti predefiniti per la compatibilità",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
@@ -895,7 +895,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser recupererà immediatamente le credenziali quando una scheda è attivata.",
+        "message": "KeePassXC-Browser recupererà immediatamente le credenziali all'attivazione di una tab.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
@@ -907,7 +907,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Avviso! L'uso del riempimento automatico non è sicuro. Usalo a tuo rischio. KeePassXC-Browser tenta automaticamente di rilevare i campi di accesso. Tuttavia, potrebbero essere rilevati in modo errato, eventualmente riempiendo dati sensibili in campi di inserimento non sicuri.",
+        "message": "Attenzione! L'uso del riempimento automatico non è sicuro. Usalo a tuo rischio. KeePassXC-Browser tenta automaticamente di rilevare i campi di accesso. Tuttavia, potrebbero essere rilevati in modo errato, portando all'inserimento di dati sensibili in campi di input non sicuri. ",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
@@ -923,7 +923,7 @@
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Visualizza notifiche per errori e quando è necessaria l'interazione dell'utente.",
+        "message": "Visualizza notifiche per gli errori e quando è necessaria l'interazione dell'utente.",
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
@@ -951,11 +951,11 @@
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Se le credenziali sono state trovate per una pagina ed il tipo di accesso è una richiesta di autenticazione di base HTTP, KeePassXC-Browser cerca di effettuare il login con le prime credenziali fornite.",
+        "message": "Se esistono delle credenziali salvate e per il login è richiesta una HTTP Basic Auth, KeePassXC-Browser cerca di effettuare il login con le prime credenziali disponibili. Se sono disponibili diverse credenziali, il popup dell'estensione può essere utilizzato per scegliere quella corretta. Anche quando questa funzionalità è abilitata, è sempre possibile inserire le credenziali manualmente nella finestra dell'HTTP Basic Auth.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
-        "message": "Una finestra di autenticazione HTTP Basic ha il seguente aspetto:",
+        "message": "Una finestra HTTP Basic Auth appare in questo modo:",
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
@@ -1023,7 +1023,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
-        "message": "I seguenti database KeePassXC sono collegati a KeePassXC-Browser.",
+        "message": "Database KeePassXC connessi a KeePassXC-Browser.",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
@@ -1051,7 +1051,7 @@
         "description": "Database list column title."
     },
     "optionsDatabaseLastUsed": {
-        "message": "Usato l'ultima volta",
+        "message": "Ultimo utilizzo",
         "description": "Database list column title."
     },
     "optionsDatabaseCreated": {
@@ -1151,11 +1151,11 @@
         "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": " Se KeePassXC-Browser rileva i campo di login sbagliati è possibile specificare quelli corretti.",
+        "message": "Se KeePassXC-Browser rileva i campi di login sbagliati puoi specificare quelli corretti tu stesso.",
         "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Vai alla pagina e seleziona l'icona di KeePassXC-Browser, quindi seleziona",
+        "message": "Vai alla pagina e seleziona l'icona di KeePassXC-Browser, quindi seleziona ",
         "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
@@ -1183,15 +1183,15 @@
         "description": "Confirmation text when removing ignored sites from the list."
     },
     "optionsSitePreferencesTabHelpTextFirst": {
-        "message": "Ai siti in questa pagina sono associati dei metodi speciali per la loro gestione.",
+        "message": "Ai siti presenti in questa pagina sono associati metodi di gestione speciali.",
         "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Per ignorare credenziali aggiunte/modificate per un sito specifico aggiungerle qui di seguito oppure quando si utilizza il banner delle credenziali sulla pagina selezionare <em>Non chiedere nuovamente per questo sito</em>",
+        "message": "Per ignorare credenziali aggiunte/modificate per un sito specifico, aggiungerle qui di seguito oppure, quando si utilizza il banner delle credenziali sulla pagina, selezionare <em>Non chiedere nuovamente per questo sito</em>.",
         "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Se un sito è completamente ignorato (è selezionato <em>disabilitare tutte le funzionalità</em>), il plugin non farà nulla quando verrà visitato quel sito.",
+        "message": "Se un sito è completamente ignorato (è selezionato <em>Disabilita tutte le funzionalità</em>), il plugin non farà nulla quando verrà visitato quel sito.",
         "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
@@ -1331,7 +1331,7 @@
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Se abilitata, una richiesta a KeePassXC non riuscita o annullata attiverà la richiesta del browser di passkey interna. Se disabilitata, è necessaria la connessione a KeePassXC e la richiesta annullata avrà esito negativo. Impostazione predefinita: abilitata.",
+        "message": "Se abilitata, una richiesta a KeePassXC non riuscita o annullata attiverà la richiesta di passkey interna al browser in uso. Se disabilitata, è necessaria la connessione a KeePassXC e la richiesta annullata avrà esito negativo. Impostazione predefinita: abilitata.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

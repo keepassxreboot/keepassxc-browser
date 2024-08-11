@@ -887,7 +887,7 @@
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Добавляет значок в поля логиная для заполнения учётных данных одним щелчком мыши.",
+        "message": "Добавляет значок в поля логина для заполнения учётных данных одним щелчком мыши.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
@@ -951,7 +951,7 @@
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Если на странице есть учётные данные, и тип входа - запрос базовой HTTP-аутентификации, KeePassXC-Browser войти с первыми указанными учётными данными.",
+        "message": "Если для страницы найдены учетные данные, а тип входа - запрос базовой HTTP-аутентификации, KeePassXC-Browser пытается автоматически войти в систему с первыми указанными учетными данными. При наличии нескольких учетных данных можно использовать всплывающее окно расширения для выбора правильной. Даже если эта функция включена, все равно можно ввести данные для входа базовой HTTP-аутентификации вручную.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
@@ -967,7 +967,7 @@
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "Для извлечения учётных данных KeePassXC-Browser требуется KeePassXC.",
+        "message": "Для получения учётных данных KeePassXC-Browser требуется KeePassXC.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
@@ -1023,7 +1023,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
-        "message": "Эти базы данных KeePassXC подключены к KeePassXC-Browser.",
+        "message": "Базы данных, подключенные к KeePassXC-Browser.",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
@@ -1051,7 +1051,7 @@
         "description": "Database list column title."
     },
     "optionsDatabaseLastUsed": {
-        "message": "Последний",
+        "message": "Последнее использование",
         "description": "Database list column title."
     },
     "optionsDatabaseCreated": {
@@ -1067,7 +1067,7 @@
         "description": "Site Preferences list column title."
     },
     "optionsColumnIgnore": {
-        "message": "Пропустить",
+        "message": "Игнорировать",
         "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
@@ -1147,11 +1147,11 @@
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Вы можете управлять сохранёнными пользовательскими полями входа, используя таблицу ниже.",
+        "message": "Вы можете управлять сохранёнными пользовательскими полями входа с помощью таблицы.",
         "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": "Если KeePassXC-Browser обнаруживает неверные поля логина, вы можете сами указать правильные поля.",
+        "message": "Если KeePassXC-Browser обнаруживает неверные поля входа, вы можете сами указать правильные поля.",
         "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
@@ -1187,11 +1187,11 @@
         "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "Для неучитывания новых/изменённых учётных данных на каком-либо сайте добавьте их ниже или щёлкните по мерцающему значку KeePassXC-Browser и выберите ",
+        "message": "Для игнорирования новых/измененных учетных данных на определенном сайте, добавьте их ниже или используя баннер на странице, выберите <em>Не спрашивать для этого сайта</em>.",
         "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Если сайт полностью неучитывается (выбрано <em>Отключить все функции</em>), то при посещении такого сайта расширение ничего не будет делать.",
+        "message": "Если сайт полностью игнорируется (выбрано <em>Отключить все функции</em>), то при посещении такого сайта расширение ничего не будет делать.",
         "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
@@ -1227,7 +1227,7 @@
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Опция для неучитывания деталей расширения для страницы.",
+        "message": "Опция, позволяющая игнорировать функции расширения для данной страницы.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
