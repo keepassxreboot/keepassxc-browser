@@ -72,7 +72,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Save Credentials",
+        "message": "資格情報を保存",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -263,7 +263,7 @@
         "description": "Username field icon hover text."
     },
     "usernameFieldTextNoCredentials": {
-        "message": "No credentials to fill.",
+        "message": "補完できる資格情報がありません。",
         "description": "Username field icon hover text when no credentials are."
     },
     "usernameLockedFieldText": {
@@ -407,7 +407,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Choose Custom Login Fields",
+        "message": "カスタムログインフィールドを選択",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -587,7 +587,7 @@
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupUsername": {
-        "message": "Username:",
+        "message": "ユーザー名:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -599,11 +599,11 @@
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonCancel": {
-        "message": "Cancel",
+        "message": "キャンセル",
         "description": "Cancel button text in popup when updating credentials."
     },
     "popupButtonBack": {
-        "message": "Back",
+        "message": "戻る",
         "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
@@ -631,11 +631,11 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Custom Login Fields",
+        "message": "カスタムログインフィールド",
         "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Site Preferences",
+        "message": "サイト設定",
         "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -651,11 +651,11 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Custom Login Fields",
+        "message": "カスタムログインフィールド",
         "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Site Preferences",
+        "message": "サイト設定",
         "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
@@ -723,15 +723,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Activate password generator icons",
+        "message": "パスワード生成アイコンを有効にする",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Activate username field icons",
+        "message": "ユーザー名フィールドアイコンを有効にする",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Use dynamic input field detection",
+        "message": "入力フィールドの動的検出を使用する",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -739,11 +739,11 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Activate 2FA/OTP field icons",
+        "message": "2FA/OTP フィールドアイコンを有効にする",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Automatically retrieve credentials",
+        "message": "資格情報を自動的に読み込む",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
@@ -755,19 +755,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Automatically fill in single-credential entries",
+        "message": "単一の資格情報エントリーに自動入力する",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries",
+        "message": "単一の TOTP エントリーに自動入力する",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Activate autocomplete for username fields",
+        "message": "ユーザー名フィールドの自動補完を有効にする",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Display the group name in autocomplete list when credentials are from different groups",
+        "message": "異なるグループから資格情報を取得した場合は、自動補完一覧にグループ名を表示する",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -779,23 +779,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Show notifications",
+        "message": "通知を表示する",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon",
+        "message": "モノクロのツールバーアイコンを使用する",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
-        "message": "Use compact mode",
+        "message": "コンパクトモードを使用する",
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
-        "message": "Save domain only",
+        "message": "ドメインのみ保存する",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Show a banner on the page when new credentials can be saved to the database",
+        "message": "新しい資格情報をデータベースに保存できる場合、ページ上にバナーを表示する",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -807,7 +807,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials",
+        "message": "HTTP Basic 認証の資格情報の入力を許可する",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -879,11 +879,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Use predefined sites for compatibility",
+        "message": "互換性のために事前定義されたサイトを使用する",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
+        "message": "ユーザー名のみのログインフォームがあるサイトをサイト設定に追加します。",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -919,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
+        "message": "複数のグループから資格情報を取得した場合はグループ名を表示します。コンパクトモードのみに影響します。",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -931,7 +931,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Use a compact version of the dropdown list to select credentials.",
+      "message": "資格情報を選択するドロップダウンリストでコンパクト版を使用します。",
       "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -939,7 +939,7 @@
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
+        "message": "新しいカスタムログインフィールドを保存する場合、完全な URL の代わりにドメインのみを保存します。",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1143,7 +1143,7 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved Custom Login Fields found.",
+        "message": "保存したカスタムログインフィールドはありません。",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
@@ -1175,7 +1175,7 @@
         "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "No Site Preferences found.",
+        "message": "サイト設定がありません。",
         "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {

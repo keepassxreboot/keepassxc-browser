@@ -787,7 +787,7 @@
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
-        "message": "Use compact mode",
+        "message": "Küçük kip kullanılsın",
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
@@ -919,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
+        "message": "Farklı gruplardan kimlik bilgileri bulunduğunda, grup adını görüntüler. Yalnızca küçük kipi etkiler.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -931,7 +931,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Use a compact version of the dropdown list to select credentials.",
+      "message": "Kimlik doğrulama bilgilerini seçmek için açılan listenin sıkıştırılmış sürümünü kullanır.",
       "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
