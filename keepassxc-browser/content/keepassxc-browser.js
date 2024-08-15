@@ -938,7 +938,9 @@ kpxc.enablePasskeys = function() {
  */
 const initContentScript = async function() {
     try {
-        if (document?.documentElement?.ownerDocument?.contentType !== 'text/html') {
+        if (document?.documentElement?.ownerDocument?.contentType !== 'text/html'
+            && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
+        ) {
             return;
         }
 
