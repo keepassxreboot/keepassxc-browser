@@ -153,7 +153,7 @@ kpxcForm.onSubmit = async function(e) {
         return;
     }
 
-    const [usernameField, passwordField, passwordInputs] = kpxcForm.getCredentialFieldsFromForm(form);
+    const [ usernameField, passwordField, passwordInputs ] = kpxcForm.getCredentialFieldsFromForm(form);
     let usernameValue = '';
     let passwordValue = '';
 
@@ -192,7 +192,7 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     const url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? window.top.location.origin : window.top.location.href);
-    await sendMessage('page_set_submitted', [true, usernameValue, passwordValue, url, kpxc.credentials]);
+    await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, url, kpxc.credentials ]);
 
     // Show the banner if the page does not reload
     kpxc.rememberCredentials(usernameValue, passwordValue);
