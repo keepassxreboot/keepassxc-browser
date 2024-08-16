@@ -73,7 +73,7 @@ kpxcObserverHelper.initObserver = async function() {
                 }
             } else if (mut.type === 'attributes' && (mut.attributeName === 'class' || mut.attributeName === 'style')) {
                 // Only accept targets with forms
-                const forms = mut.target.nodeName === 'FORM' ? mut.target : mut.target.getElementsByTagName('form');
+                const forms = matchesWithNodeName(mut.target.nodeName, 'FORM') ? mut.target : mut.target.getElementsByTagName('form');
                 if (forms.length === 0 && !kpxcSites.exceptionFound(mut.target.classList, mut.target)) {
                     continue;
                 }
@@ -146,7 +146,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         }
     });
 
-    if (target.nodeName === 'INPUT') {
+    if (matchesWithNodeName(target.nodeName, 'INPUT')) {
         inputFields.push(target);
     }
 
@@ -304,7 +304,7 @@ const traverseChildren = function(target, inputFields, depth = 1) {
             continue;
         }
 
-        if (child.nodeName === 'INPUT') {
+        if (matchesWithNodeName(child.nodeName, 'INPUT')) {
             inputFields.push(child);
         }
 

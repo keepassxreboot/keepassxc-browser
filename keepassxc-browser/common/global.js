@@ -56,6 +56,16 @@ const ManualFill = {
     BOTH: 2
 };
 
+// Checks if element's nodeName matches
+const matchesWithNodeName = function(elem, name) {
+    // Don't allow undefined element or 'name'
+    if (!elem || !name) {
+        return false;
+    }
+
+    return elem?.nodeName?.toUpperCase() === name?.toUpperCase();
+};
+
 // Match hostname or path with wildcards
 const matchWithRegex = function(firstUrlPart, secondUrlPart, hostnameUsed = false) {
     if (firstUrlPart === secondUrlPart) {
@@ -149,6 +159,7 @@ const getCurrentTab = async function() {
 // Exports for tests
 if (typeof module === 'object') {
     module.exports = {
+        matchesWithNodeName,
         siteMatch,
         slashNeededForUrl,
         trimURL,

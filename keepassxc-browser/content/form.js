@@ -49,15 +49,17 @@ kpxcForm.getFormSubmitButton = function(form) {
 
     // Try to find another button. Select the last one.
     // If any formaction overriding the default action is set, ignore those buttons.
-    const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery)).filter(b => !b.getAttribute('formAction'));
+    const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery)).filter(
+        b => !b.getAttribute('formAction')
+    );
     if (buttons.length > 0) {
         return buttons.at(-1);
     }
 
     // Try to find similar buttons outside the form which are added via 'form' property
     for (const e of form.elements) {
-        if ((e.nodeName === 'BUTTON' && (e.type === 'button' || e.type === 'submit' || e.type === ''))
-            || (e.nodeName === 'INPUT' && (e.type === 'button' || e.type === 'submit'))) {
+        if ((matchesWithNodeName(e.nodeName, 'BUTTON') && (e.type === 'button' || e.type === 'submit' || e.type === ''))
+            || (matchesWithNodeName(e.nodeName, 'INPUT') && (e.type === 'button' || e.type === 'submit'))) {
             return e;
         }
     }
@@ -125,13 +127,15 @@ kpxcForm.onSubmit = async function(e) {
     kpxcForm.submitTriggered = true;
 
     const searchForm = f => {
-        if (f.nodeName === 'FORM') {
+        if (matchesWithNodeName(f.nodeName, 'FORM')) {
             return f;
         }
     };
 
     // Traverse parents if the form is not found.
-    let form = this.nodeName === 'FORM' ? this : kpxcFields.traverseParents(this, searchForm, searchForm, () => null);
+    let form = matchesWithNodeName(this.nodeName, 'FORM')
+        ? this
+        : kpxcFields.traverseParents(this, searchForm, searchForm, () => null);
 
     // Check for extra forms from sites.js
     if (!form) {
@@ -149,7 +153,7 @@ kpxcForm.onSubmit = async function(e) {
         return;
     }
 
-    const [ usernameField, passwordField, passwordInputs ] = kpxcForm.getCredentialFieldsFromForm(form);
+    const [usernameField, passwordField, passwordInputs] = kpxcForm.getCredentialFieldsFromForm(form);
     let usernameValue = '';
     let passwordValue = '';
 
@@ -188,7 +192,7 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     const url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? window.top.location.origin : window.top.location.href);
-    await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, url, kpxc.credentials ]);
+    await sendMessage('page_set_submitted', [true, usernameValue, passwordValue, url, kpxc.credentials]);
 
     // Show the banner if the page does not reload
     kpxc.rememberCredentials(usernameValue, passwordValue);
@@ -202,7 +206,11 @@ kpxcForm.saveForm = function(form, combination) {
         username: combination.username,
         password: combination.password,
         totp: combination.totp,
-        totpInputs: Array.from(form.elements).filter(e => e.nodeName === 'INPUT' && kpxcTOTPIcons.isValid(e)),
-        passwordInputs: Array.from(form.elements).filter(e => e.nodeName === 'INPUT' && e.type === 'password')
+        totpInputs: Array.from(form.elements).filter(
+            e => matchesWithNodeName(e.nodeName, 'INPUT') && kpxcTOTPIcons.isValid(e),
+        ),
+        passwordInputs: Array.from(form.elements).filter(
+            e => matchesWithNodeName(e.nodeName, 'INPUT') && e.type === 'password',
+        )
     });
 };

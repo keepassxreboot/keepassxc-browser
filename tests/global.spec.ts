@@ -1,9 +1,21 @@
 import { test, expect } from '@playwright/test';
 import {
+    matchesWithNodeName,
     siteMatch,
     slashNeededForUrl,
     trimURL
 } from '../keepassxc-browser/common/global.js';
+
+test('Test matchesWithNodeName()', async ({ page }) => {
+    const elem1 = { nodeName: 'INPUT' };
+    const elem2 = { nodeName: 'input' };
+    expect(matchesWithNodeName(elem1, 'INPUT')).toBe(true);
+    expect(matchesWithNodeName(elem1, 'INPUT')).toBe(true);
+    expect(matchesWithNodeName(elem2, 'INPUT')).toBe(true);
+    expect(matchesWithNodeName(elem1, 'TEXT')).toBe(false);
+    expect(matchesWithNodeName(undefined, 'INPUT')).toBe(false);
+    expect(matchesWithNodeName(undefined, undefined)).toBe(false);
+});
 
 test('Test siteMatch()', async ({ page }) => {
     expect(siteMatch('https://example.com/*', 'https://example.com/login_page')).toBe(true);

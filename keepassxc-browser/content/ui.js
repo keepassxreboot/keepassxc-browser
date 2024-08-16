@@ -133,7 +133,7 @@ kpxcUI.monitorIconPosition = function(iconClass) {
     });
 
     window.addEventListener('transitionend', function(e) {
-        if (e.target?.nodeName === 'INPUT' || e.target?.nodeName === 'TEXTAREA') {
+        if (matchesWithNodeName(e.target?.nodeName, 'INPUT') || matchesWithNodeName(e.target?.nodeName, 'TEXTAREA')) {
             kpxcUI.updateIconPosition(iconClass);
         }
     });

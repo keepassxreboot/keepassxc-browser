@@ -600,7 +600,7 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
     }
 
     const el = document.activeElement;
-    if (el.nodeName !== 'INPUT') {
+    if (!matchesWithNodeName(el.nodeName, 'INPUT')) {
         return;
     }
 
