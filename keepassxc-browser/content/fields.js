@@ -114,7 +114,11 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
 
     const addTotpFieldsToCombination = function(inputFields, ignoreFieldCount = false) {
         const totpInputs = Array.from(inputFields).filter(
-            e => e.nodeName === 'INPUT' && e.type !== 'password' && e.type !== 'hidden' && e.type !== 'submit',
+            (e) =>
+                matchesWithNodeName(e.nodeName, 'INPUT') &&
+                e.type !== 'password' &&
+                e.type !== 'hidden' &&
+                e.type !== 'submit'
         );
 
         if (areFieldsSegmentedTotp(totpInputs, ignoreFieldCount)) {
@@ -149,9 +153,12 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
         }
 
         // 7 inputs with a button as the last one (e.g. PayPal uses this)
-        if (currentForm.length === 7
-            && (currentForm.lastChild.nodeName === 'BUTTON'
-                || (currentForm.lastChild.nodeName === 'INPUT' && currentForm.lastChild.type === 'button'))) {
+        if (
+            currentForm.length === 7 &&
+            (matchesWithNodeName(currentForm.lastChild.nodeName, 'BUTTON') ||
+                (matchesWithNodeName(currentForm.lastChild.nodeName, 'INPUT') &&
+                    currentForm.lastChild.type === 'button'))
+        ) {
             return true;
         }
 

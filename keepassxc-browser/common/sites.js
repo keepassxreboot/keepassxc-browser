@@ -102,7 +102,7 @@ kpxcSites.exceptionFound = function(identifier, field) {
  * @returns {boolean}      True if an Element has a match with the needed indentfifiers and document location
  */
 kpxcSites.totpExceptionFound = function(field) {
-    if (!field || field.nodeName !== 'INPUT') {
+    if (!field || !matchesWithNodeName(field.nodeName, 'INPUT')) {
         return false;
     }
 
@@ -121,7 +121,7 @@ kpxcSites.totpExceptionFound = function(field) {
  * @returns {boolean}       True if an Element has a match with the needed indentfifiers and document location
  */
 kpxcSites.segmentedTotpExceptionFound = function(form) {
-    if (!form || form.nodeName !== 'FORM') {
+    if (!form || !matchesWithNodeName(form.nodeName, 'FORM')) {
         return false;
     }
 

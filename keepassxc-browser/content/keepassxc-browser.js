@@ -600,7 +600,7 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
     }
 
     const el = document.activeElement;
-    if (el.nodeName !== 'INPUT') {
+    if (!matchesWithNodeName(el.nodeName, 'INPUT')) {
         return;
     }
 
@@ -938,7 +938,9 @@ kpxc.enablePasskeys = function() {
  */
 const initContentScript = async function() {
     try {
-        if (document?.documentElement?.ownerDocument?.contentType !== 'text/html') {
+        if (document?.documentElement?.ownerDocument?.contentType !== 'text/html'
+            && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
+        ) {
             return;
         }
 
