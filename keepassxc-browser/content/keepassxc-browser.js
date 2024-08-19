@@ -513,6 +513,19 @@ kpxc.prepareCredentials = async function() {
 
     kpxc.initLoginPopup();
     kpxc.initAutocomplete();
+
+    if (kpxc.settings.autoFillSingleEntry) {
+        const pageUuid = await sendMessage('page_get_login_id');
+        if (pageUuid) {
+            kpxc.credentials.some(c => {
+                if (c.uuid === pageUuid) {
+                    const index = kpxc.combinations.length - 1;
+                    kpxcFill.fillInCredentials(kpxc.combinations[index], c.login, c.uuid);
+                    return true;
+                }
+            });
+        }
+    }
 };
 
 /**
