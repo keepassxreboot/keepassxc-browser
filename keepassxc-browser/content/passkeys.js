@@ -36,8 +36,8 @@ const createAttestationResponse = function(publicKey) {
 
     // Prevent Illegal invocation error
     const responseWithProto = Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
-    responseWithProto.getPublicKey = undefined;
-    responseWithProto.getPublicKeyAlgorithm = undefined;
+    responseWithProto.getPublicKey = () => null;
+    responseWithProto.getPublicKeyAlgorithm = () => publicKey.response.publicKeyAlgorithm;
 
     return responseWithProto;
 };
