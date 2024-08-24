@@ -88,7 +88,7 @@
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Удостоверяване по HTTP с множество съвпадащи регистрации. За да изберете правилната регистрация, щракнете върху иконата на разширението.",
+        "message": "Удостоверяване по HTTP с множество съвпадащи регистрации. За да изберете правилната регистрация, щракнете върху пиктограмата на разширението.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Натиснете иконата на KeePassXC-Browser за повече възможности.",
+        "message": "Натиснете пиктограмата на KeePassXC-Browser за повече възможности.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -735,7 +735,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Полезно за страници, които използват изскачащи прозорци или динамични диалози. Ако е изключено се намаляв натоварването на процесора при по-бавни машини. Когато е изключено регистрации могат да бъдат добавяни само с помощта на клавишни комбинации, контекстуалното меню или изскачащия прозорец на разширението.",
+        "message": "Полезно за страници, които използват изскачащи прозорци или динамични диалози. Ако е изключено се намалява натоварването на процесора на по-бавни машини. Когато е изключено могат да бъдат добавяни регистрации само с помощта на клавишни комбинации, контекстуалното меню или изскачащия прозорец на разширението.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -867,7 +867,7 @@
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Добавя се икона към полето за парола за генериране на нова парола.",
+        "message": "Добавя пиктограма към полето за парола, която създава на нова парола.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
@@ -887,11 +887,11 @@
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Добавя се икона към полето за потребителско име, чрез която с едно действие се попълват регистрации.",
+        "message": "Добавя пиктограма към полето за потребителско име, която с едно действие попълва регистрации.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Добавя се икона към полета, които се разпознават като OTP/2FA.",
+        "message": "Добавя се пиктограма към полета, които са разпознати като OTP/2FA.",
         "description": "OTP field icon option help text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -919,7 +919,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "При регистрации от различни групи името на групата е видимо в списъка. Отнася се само за умаления режим.",
+        "message": "Ако в списъка са налични регистрации от различни групи, тогава името на групата да е видимо. Отнася се само за умален режим.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -927,7 +927,7 @@
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Едноцветна икона с цветни значки в лентата с инструменти, която се адаптира към светла / тъмна тема на четеца.",
+        "message": "Едноцветна пиктограма с цветни значки в лентата с инструменти, която се адаптира към светла / тъмна тема на четеца.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
@@ -943,11 +943,11 @@
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
-        "message": "Изтегляне на иконата на страницата след запазване",
+        "message": "Изтегляне на пиктограмата на страницата след запазване",
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Иконите на страниците ще бъдат изтегляни автоматично при нови регистрации.",
+        "message": "При добавяне на регистрация пиктограмата на страницата ще бъде изтеглена автоматично.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
@@ -959,7 +959,7 @@
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Изчистване на попълнените регистрации за неактивните раздели след (секунди, 0-3600)",
+        "message": "Изчистване на попълнените регистрации от неактивните раздели след (секунди, 0-3600)",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {

@@ -843,7 +843,7 @@
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Упорядочить данные по",
+        "message": "Сортировать учетные данные по",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
@@ -967,11 +967,11 @@
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
-        "message": "Для получения учётных данных KeePassXC-Browser требуется KeePassXC.",
+        "message": "KeePassXC-Browser требуется KeePassXC для получения учётных данных.",
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
-        "message": "Новейшую стабильную версию можно загрузить с $1",
+        "message": "Скачать последнюю стабильную версию можно с $1",
         "description": "Settings page download link."
     },
     "optionsVersionRunning": {
@@ -979,7 +979,7 @@
         "description": "Settings page info text of user's KeePassXC version."
     },
     "optionsLatestVersion": {
-        "message": "Новейшая версия KeePassXC: $1",
+        "message": "Последняя доступная версия KeePassXC: $1",
         "description": "Settings page info text about the latest KeePassXC version."
     },
     "optionsKeePassXCVersionRequired": {
@@ -1119,7 +1119,7 @@
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Упорядочивание учётных данных после заполнения",
+        "message": "Сортировать учетные данные после заполнения",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
@@ -1127,7 +1127,7 @@
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Сортировка учетных данных после заполнения TOTP по",
+        "message": "Сортировать учетные данные после заполнения TOTP",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
