@@ -1,3 +1,8 @@
+1.9.3 (2024-08-24)
+=========================
+- Fix allowing content scripts on XHTML pages [#2314]
+- Fix nodeName check [#2324]
+
 1.9.2 (2024-08-11)
 =========================
 - Add Improved Input Field Detection to Predefined Sites [#2293]
