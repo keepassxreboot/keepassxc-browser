@@ -246,7 +246,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
     }
 
     // Fill password
-    if (combination.password && matchesWithNodeName(combination.password.nodeName, 'INPUT')) {
+    if (combination.password && matchesWithNodeName(combination.password, 'INPUT')) {
         // Show a notification if password length exceeds the length defined in input
         if (combination.password.maxLength
             && combination.password.maxLength > 0

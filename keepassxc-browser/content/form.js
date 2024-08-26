@@ -58,8 +58,8 @@ kpxcForm.getFormSubmitButton = function(form) {
 
     // Try to find similar buttons outside the form which are added via 'form' property
     for (const e of form.elements) {
-        if ((matchesWithNodeName(e.nodeName, 'BUTTON') && (e.type === 'button' || e.type === 'submit' || e.type === ''))
-            || (matchesWithNodeName(e.nodeName, 'INPUT') && (e.type === 'button' || e.type === 'submit'))) {
+        if ((matchesWithNodeName(e, 'BUTTON') && (e.type === 'button' || e.type === 'submit' || e.type === ''))
+            || (matchesWithNodeName(e, 'INPUT') && (e.type === 'button' || e.type === 'submit'))) {
             return e;
         }
     }
@@ -127,13 +127,13 @@ kpxcForm.onSubmit = async function(e) {
     kpxcForm.submitTriggered = true;
 
     const searchForm = f => {
-        if (matchesWithNodeName(f.nodeName, 'FORM')) {
+        if (matchesWithNodeName(f, 'FORM')) {
             return f;
         }
     };
 
     // Traverse parents if the form is not found.
-    let form = matchesWithNodeName(this.nodeName, 'FORM')
+    let form = matchesWithNodeName(this, 'FORM')
         ? this
         : kpxcFields.traverseParents(this, searchForm, searchForm, () => null);
 
@@ -207,10 +207,10 @@ kpxcForm.saveForm = function(form, combination) {
         password: combination.password,
         totp: combination.totp,
         totpInputs: Array.from(form.elements).filter(
-            e => matchesWithNodeName(e.nodeName, 'INPUT') && kpxcTOTPIcons.isValid(e),
+            e => matchesWithNodeName(e, 'INPUT') && kpxcTOTPIcons.isValid(e),
         ),
         passwordInputs: Array.from(form.elements).filter(
-            e => matchesWithNodeName(e.nodeName, 'INPUT') && e.type === 'password',
+            e => matchesWithNodeName(e, 'INPUT') && e.type === 'password',
         )
     });
 };
