@@ -31,15 +31,11 @@ const createAttestationResponse = function(publicKey) {
         attestationObject: kpxcBase64ToArrayBuffer(publicKey.response.attestationObject),
         clientDataJSON: kpxcBase64ToArrayBuffer(publicKey.response.clientDataJSON),
         getAuthenticatorData: () => kpxcBase64ToArrayBuffer(publicKey.response?.authenticatorData),
-        getTransports: () => [ 'internal' ]
+        getTransports: () => [ 'internal' ],
+        getPublicKey: () => null,
+        getPublicKeyAlgorithm: () => publicKey.response.publicKeyAlgorithm,
     };
-
-    // Prevent Illegal invocation error
-    const responseWithProto = Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
-    responseWithProto.getPublicKey = () => null;
-    responseWithProto.getPublicKeyAlgorithm = () => publicKey.response.publicKeyAlgorithm;
-
-    return responseWithProto;
+    return  Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
 };
 
 // Wraps response to AuthenticatorAssertionResponse object
