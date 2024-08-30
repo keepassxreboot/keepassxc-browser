@@ -13,7 +13,6 @@ kpxcBanner.destroy = async function() {
         return;
     }
 
-    kpxcBanner.created = false;
     kpxcBanner.credentials = {};
 
     const dialog = kpxcBanner.shadowSelector('.kpxc-banner-dialog');
@@ -23,11 +22,17 @@ kpxcBanner.destroy = async function() {
 
     await sendMessage('remove_credentials_from_tab_information');
 
-    if (kpxcBanner.wrapper && window.parent.document.body.contains(kpxcBanner.wrapper)) {
-        window.parent.document.body.removeChild(kpxcBanner.wrapper);
-    } else {
-        window.parent.document.body.removeChild(window.parent.document.body.querySelector('#kpxc-banner'));
+    try {
+        if (kpxcBanner.wrapper && window.parent.document.body.contains(kpxcBanner.wrapper)) {
+            window.parent.document.body.removeChild(kpxcBanner.wrapper);
+        } else {
+            window.parent.document.body.removeChild(window.parent.document.body.querySelector('#kpxc-banner'));
+        }
+    } catch(e) {
+        kpxcBanner.wrapper.style.display = 'hidden';
     }
+
+    kpxcBanner.created = false;
 };
 
 kpxcBanner.create = async function(credentials = {}) {
