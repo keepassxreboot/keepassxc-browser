@@ -10,9 +10,11 @@ test('Test matchesWithNodeName()', async ({ page }) => {
     const elem1 = { nodeName: 'INPUT' };
     const elem2 = { nodeName: 'input' };
     expect(matchesWithNodeName(elem1, 'INPUT')).toBe(true);
-    expect(matchesWithNodeName(elem1, 'INPUT')).toBe(true);
+    expect(matchesWithNodeName(elem1, 'input')).toBe(true);
     expect(matchesWithNodeName(elem2, 'INPUT')).toBe(true);
+    expect(matchesWithNodeName(elem2, 'input')).toBe(true);
     expect(matchesWithNodeName(elem1, 'TEXT')).toBe(false);
+    expect(matchesWithNodeName(elem1, 'text')).toBe(false);
     expect(matchesWithNodeName(undefined, 'INPUT')).toBe(false);
     expect(matchesWithNodeName(undefined, undefined)).toBe(false);
 });
