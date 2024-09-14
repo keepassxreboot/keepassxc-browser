@@ -73,10 +73,24 @@
                 "content/pwgen.js",
                 "content/totp-autocomplete.js",
                 "content/totp-field.js",
-                "content/username-field.js",
-                "content/passkeys-utils.js"
+                "content/username-field.js"
             ],
             "run_at": "document_idle",
+            "all_frames": true
+        },
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "exclude_matches": [
+                "*://*/*.xml*",
+                "file:///*.xml*"
+            ],
+            "js": [
+                "content/passkeys-inject.js",
+                "content/passkeys-utils.js"
+            ],
+            "run_at": "document_start",
             "all_frames": true
         }
     ],

@@ -1,9 +1,5 @@
 'use strict';
 
-const PASSKEYS_NO_LOGINS_FOUND = 15;
-const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
-const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
-
 // Contains already called method names
 const _called = {};
 _called.automaticRedetectCompleted = false;
@@ -863,83 +859,6 @@ kpxc.usePredefinedSites = function(currentLocation) {
     }
 };
 
-// Apply a script to the page for intercepting Passkeys (WebAuthn) requests
-kpxc.enablePasskeys = function() {
-    if (document?.documentElement?.ownerDocument?.contentType !== 'text/html') {
-        return;
-    }
-
-    const passkeys = document.createElement('script');
-    passkeys.src = browser.runtime.getURL('content/passkeys.js');
-    document.documentElement.appendChild(passkeys);
-
-    const startTimer = function(timeout) {
-        return setTimeout(() => {
-            throw new DOMException('lifetimeTimer has expired', 'NotAllowedError');
-        }, timeout);
-    };
-
-    const stopTimer = function(lifetimeTimer) {
-        if (lifetimeTimer) {
-            clearTimeout(lifetimeTimer);
-        }
-    };
-
-    const letTimerRunOut = function (errorCode) {
-        return (
-            errorCode === PASSKEYS_WAIT_FOR_LIFETIMER ||
-            errorCode === PASSKEYS_CREDENTIAL_IS_EXCLUDED ||
-            errorCode === PASSKEYS_NO_LOGINS_FOUND
-        );
-    };
-
-    const sendResponse = async function(command, publicKey, callback) {
-        const lifetimeTimer = startTimer(publicKey?.timeout);
-
-        const ret = await sendMessage(command, [ publicKey, window.location.origin ]);
-        if (ret) {
-            let errorMessage;
-            if (ret.response && ret.response.errorCode) {
-                errorMessage = await sendMessage('get_error_message', ret.response.errorCode);
-                kpxcUI.createNotification('error', errorMessage);
-
-                if (kpxc.settings.passkeysFallback) {
-                    kpxcPasskeysUtils.sendPasskeysResponse(undefined, ret.response?.errorCode, errorMessage);
-                } else if (letTimerRunOut(ret?.response?.errorCode)) {
-                    return;
-                }
-            }
-
-            logDebug('Passkey response', ret.response);
-            kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
-            stopTimer(lifetimeTimer);
-        }
-    };
-
-    document.addEventListener('kpxc-passkeys-request', async (ev) => {
-        if (!window.isSecureContext) {
-            kpxcUI.createNotification('error', tr('errorMessagePasskeysContextIsNotSecure'));
-            return;
-        }
-
-        if (ev.detail.action === 'passkeys_create') {
-            const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(
-                ev.detail.publicKey,
-                ev.detail.sameOriginWithAncestors,
-            );
-            logDebug('Passkey request', publicKey);
-            await sendResponse('passkeys_register', publicKey);
-        } else if (ev.detail.action === 'passkeys_get') {
-            const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(
-                ev.detail.publicKey,
-                ev.detail.sameOriginWithAncestors,
-            );
-            logDebug('Passkey request', publicKey);
-            await sendResponse('passkeys_get', publicKey);
-        }
-    });
-};
-
 /**
  * Content script initialization.
  */
@@ -962,10 +881,6 @@ const initContentScript = async function() {
         if (await kpxc.siteIgnored()) {
             logDebug('This site is ignored in Site Preferences.');
             return;
-        }
-
-        if (kpxc.settings.passkeys) {
-            kpxc.enablePasskeys();
         }
 
         await kpxc.updateDatabaseState();
