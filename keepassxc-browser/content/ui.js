@@ -97,6 +97,12 @@ if (document.body) {
     kpxcUI.bodyStyle = getComputedStyle(document.body);
 }
 
+// Whether Chrome engine version is greater than 128
+kpxcUI.browserVerUpon128 = (function () {
+    const version = navigator.userAgent.match(/\s(?:Chrom(?:e|ium)|Firefox)\/(\d+[.0-9]*)|$/i)[1]
+    return parseFloat(version) >= 128;
+})();
+
 // Wrapper for creating elements
 kpxcUI.createElement = function(type, classes, attributes, textContent) {
     const element = document.createElement(type);
@@ -154,8 +160,10 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     const rect = field.getBoundingClientRect();
     const size = Number(icon.getAttribute('size'));
     const offset = kpxcUI.calculateIconOffset(field, size);
-    let left = kpxcUI.getRelativeLeftPosition(rect);
-    let top = kpxcUI.getRelativeTopPosition(rect);
+    const zoom = kpxcUI.bodyStyle.zoom || 1;
+    const uZoom = kpxcUI.browserVerUpon128 ? zoom: 1;
+    let left = kpxcUI.getRelativeLeftPosition(rect) / uZoom;
+    let top = kpxcUI.getRelativeTopPosition(rect) / uZoom;
 
     // Add more space for the icon to show it at the right side of the field if TOTP fields are segmented
     if (segmented) {
@@ -169,11 +177,11 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
         top = iconOffset[1];
     }
 
-    const scrollTop = kpxcUI.getScrollTop();
-    const scrollLeft = kpxcUI.getScrollLeft();
+    const scrollTop = kpxcUI.getScrollTop() / zoom;
+    const scrollLeft = kpxcUI.getScrollLeft() / zoom;
     icon.style.top = Pixels(top + scrollTop + offset + 1);
     icon.style.left = rtl
-        ? Pixels((left + scrollLeft) + offset)
+        ? Pixels(left + scrollLeft + offset)
         : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
 };
 
