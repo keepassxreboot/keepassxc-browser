@@ -504,6 +504,8 @@ kpxcCustomLoginFieldsBanner.selectStringFields = function() {
 kpxcCustomLoginFieldsBanner.markFields = function() {
     let firstInput;
     const inputs = document.querySelectorAll(kpxcCustomLoginFieldsBanner.inputQueryPattern);
+    const zoom = kpxcUI.bodyStyle.zoom || 1;
+    const uZoom = kpxcUI.browserVerUpon128 ? zoom: 1;
 
     for (const i of inputs) {
         if (kpxcCustomLoginFieldsBanner.isFieldSelected(i) || inputFieldIsSelected(i)) {
@@ -519,10 +521,10 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
         field.originalElement = i;
 
         const rect = i.getBoundingClientRect();
-        field.style.top = Pixels(rect.top);
-        field.style.left = Pixels(rect.left);
-        field.style.width = Pixels(rect.width);
-        field.style.height = Pixels(rect.height);
+        field.style.top = Pixels(rect.top / uZoom);
+        field.style.left = Pixels(rect.left / uZoom);
+        field.style.width = Pixels(rect.width / uZoom);
+        field.style.height = Pixels(rect.height / uZoom);
         field.textContent = dataStepToString();
 
         // Change selection theme if needed
@@ -605,11 +607,13 @@ kpxcCustomLoginFieldsBanner.monitorSelectionPosition = function(selection) {
 
 // Set selection input field position dynamically including the scroll position
 kpxcCustomLoginFieldsBanner.setSelectionPosition = function(field) {
+    const zoom = kpxcUI.bodyStyle.zoom || 1;
+    const uZoom = kpxcUI.browserVerUpon128 ? zoom: 1;
     const rect = field.originalElement.getBoundingClientRect();
-    const left = kpxcUI.getRelativeLeftPosition(rect);
-    const top = kpxcUI.getRelativeTopPosition(rect);
-    const scrollTop = kpxcUI.getScrollTop();
-    const scrollLeft = kpxcUI.getScrollLeft();
+    const left = kpxcUI.getRelativeLeftPosition(rect) / uZoom;
+    const top = kpxcUI.getRelativeTopPosition(rect) / uZoom;
+    const scrollTop = kpxcUI.getScrollTop() / zoom;
+    const scrollLeft = kpxcUI.getScrollLeft() / zoom;
 
     field.style.top = Pixels(top + scrollTop);
     field.style.left = Pixels(left + scrollLeft);
