@@ -324,7 +324,7 @@ class Autocomplete {
         }
     }
 
-    updatePosition() {
+   updatePosition() {
         if (!this.container || !this.input) {
             return;
         }
@@ -335,21 +335,26 @@ class Autocomplete {
         // Extend the list's max width to input field's width or at least to the maxWidth defined in the CSS file
         this.list.style.maxWidth = `max(${Pixels(this.input.offsetWidth)}, 600px)`;
 
+        // Get body zoom radio
+	    const zoom = kpxcUI.bodyStyle.zoom || 1;
+	    const uZoom = kpxcUI.browserVerUpon128 ? zoom: 1;
+       
         // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
-        const menuOffset = totalHeight + rect.y > window.self.visualViewport.height ? totalHeight : 0;
+        const menuOffset = (totalHeight + rect.y) / uZoom > window.self.visualViewport.height ? totalHeight/ uZoom : 0;
 
-        const scrollTop = kpxcUI.getScrollTop();
-        const scrollLeft = kpxcUI.getScrollLeft();
+        const scrollTop = kpxcUI.getScrollTop() / zoom;
+        const scrollLeft = kpxcUI.getScrollLeft() / zoom;
+
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
             this.container.style.top = Pixels(
-                rect.top - kpxcUI.bodyRect.top + scrollTop + this.input.offsetHeight - menuOffset,
+                ((rect.top - kpxcUI.bodyRect.top) / uZoom + scrollTop + this.input.offsetHeight - menuOffset)
             );
-            this.container.style.left = Pixels(rect.left - kpxcUI.bodyRect.left + scrollLeft);
+            this.container.style.left = Pixels((rect.left - kpxcUI.bodyRect.left) / uZoom + scrollLeft);
         } else {
-            this.container.style.top = Pixels(rect.top + scrollTop + this.input.offsetHeight - menuOffset);
-            this.container.style.left = Pixels(rect.left + scrollLeft);
+            this.container.style.top = Pixels(rect.top / uZoom + scrollTop + this.input.offsetHeight - menuOffset)
+            this.container.style.left = Pixels(rect.left / uZoom + scrollLeft);
         }
     }
 }
