@@ -945,6 +945,9 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxc.triggerActivatedTab();
         } else if (req.action === 'add_allow_iframes_option') {
             kpxc.addToSitePreferences('allowIframes');
+        } else if (req.action === 'add_new_credential') {
+            const res = await sendMessage('page_add_new_credential', req.args);
+            kpxcBanner.verifyResult(res, req.args.username);
         } else if (req.action === 'add_username_only_option') {
             kpxc.addToSitePreferences('usernameOnly', true);
         } else if (req.action === 'check_database_hash' && 'hash' in req) {

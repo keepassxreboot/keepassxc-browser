@@ -267,6 +267,7 @@ kpxcEvent.messageHandlers = {
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,
+    'page_add_new_credential': page.addNewCredential,
     'page_clear_logins': kpxcEvent.pageClearLogins,
     'page_clear_submitted': page.clearSubmittedCredentials,
     'page_get_autosubmit_performed': page.getAutoSubmitPerformed,

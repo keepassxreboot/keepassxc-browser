@@ -68,6 +68,8 @@
         $('#credentialsList').hide();
         $('#database-not-opened').show();
         $('#lock-database-button').hide();
+        $('#add-credentials').hide();
+        $('#add-credentials-button').hide();
         $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
     });
 

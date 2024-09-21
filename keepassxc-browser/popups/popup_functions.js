@@ -11,11 +11,13 @@ function updateAvailableResponse(available) {
 }
 
 async function initSettings() {
+    const tab = await getCurrentTab();
+
     $('#settings #options-button').addEventListener('click', () => {
         browser.runtime.openOptionsPage().then(close());
     });
 
-    const customLoginFieldsButton = document.body.querySelector('#settings #choose-custom-login-fields-button');
+    const customLoginFieldsButton = $('#settings #choose-custom-login-fields-button');
     if (isFirefox()) {
         customLoginFieldsButton.id = 'choose-custom-login-fields-button-moz';
     }
@@ -26,6 +28,36 @@ async function initSettings() {
             action: 'choose_credential_fields'
         });
         close();
+    });
+
+    $('#settings #add-credentials-button').addEventListener('click', () => {
+        $('#add-credentials-title').value = tab?.title;
+        $('#add-credentials-url').value = tab?.url;
+        if ($('#add-credentials')?.style?.display === 'none') {
+            $('#add-credentials').show();
+        } else {
+            $('#add-credentials').hide();
+        }
+
+        if ($('#credentialsList')?.style?.display !== 'none') {
+            $('#credentialsList')?.hide();
+        } else {
+            $('#credentialsList')?.show();
+        }
+    });
+
+    $('#add-credentials-save-button').addEventListener('click', async (e) => {
+        if (e?.currentTarget?.form?.checkValidity()) {
+            await addNewCredential();
+            close();
+        }
+    });
+
+    $('#add-credentials-cancel-button').addEventListener('click', async () => {
+        $('#add-credentials').hide();
+        if ($('#credentialsList')?.style?.display === 'none') {
+            $('#credentialsList').show();
+        }
     });
 }
 
@@ -51,6 +83,23 @@ async function getLoginData() {
     });
 
     return logins;
+}
+
+async function addNewCredential() {
+    const tab = await getCurrentTab();
+    if (!tab) {
+        return [];
+    }
+
+    browser.tabs.sendMessage(tab?.id, {
+        action: 'add_new_credential', args: {
+            username: $('input#add-credentials-username')?.value,
+            password: $('input#add-credentials-password')?.value,
+            group: $('input#add-credentials-group')?.value,
+            title: $('input#add-credentials-title')?.value,
+            url: $('input#add-credentials-url')?.value,
+        }
+    });
 }
 
 (async () => {

@@ -23,6 +23,9 @@
             <i class="fa fa-cog" aria-hidden="true"></i>
           </button>
           <button id="choose-custom-login-fields-button" class="btn btn-sm btn-warning" data-i18n="[title]popupChooseCredentialsText"></button>
+          <button id="add-credentials-button" class="btn btn-sm btn-warning" data-i18n="[title]popupAddCredentialsText" style="display: none">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </button>
         </div>
         <div class="lock-button-area">
           <button id="lock-database-button" class="btn btn-sm btn-danger" data-i18n="[title]lockDatabase">
@@ -142,6 +145,56 @@
           </button>
         </div>
       </div>
+
+      <div id="add-credentials" style="display: none">
+        <hr>
+        <span data-i18n="popupAddCredentialsText"></span>
+        <form>
+          <div class="content pt-2 pb-2">
+            <div class="pb-2">
+              <input class="form-control form-control-sm" type="text" id="add-credentials-title" data-i18n="[placeholder]popupAddCredentialsTitlePlaceholder" required>
+            </div>
+            <div class="pb-2">
+              <input type="text" class="form-control form-control-sm" id="add-credentials-username" data-i18n="[placeholder]username" required>
+            </div>
+            <div class="pb-2">
+              <input type="password" class="form-control form-control-sm" id="add-credentials-password"data-i18n="[placeholder]password" required>
+              <div class="form-text help-text" id="add-credentials-password-help-text">
+                <span data-i18n="popupAddCredentialsPasswordText"></span>
+              </div>
+            </div>
+            <div class="pb-2">
+              <input type="url" class="form-control form-control-sm" id="add-credentials-url" data-i18n="[placeholder]url" required>
+            </div>
+            <div class="pb-2">
+              <input type="text" class="form-control form-control-sm" id="add-credentials-group" data-i18n="[placeholder]group">
+              <div class="form-text help-text" id="add-credentials-group-help-text">
+                <span data-i18n="popupAddCredentialGroupText"></span>
+              </div>
+            </div>
+            <!-- TODO: Protocol V2
+            <div class="input-group input-group-sm pb-2">
+              <label class="input-group-text" for="add-credentials-database">Database</label>
+              <select class="form-select form-select-sm" id="add-credentials-database">
+                <option value="1">Database 1</option>
+                <option value="2">...</option>
+              </select>
+            </div>
+            -->
+          </div>
+          <div class="content right-align pt-2 pb-2">
+            <button class="btn btn-sm btn-primary me-1" type="submit" id="add-credentials-save-button" data-i18n="[title]optionsButtonSave">
+              <i class="fa fa-save" aria-hidden="true"></i>
+              <span data-i18n="optionsButtonSave"></span>
+            </button>
+            <button class="btn btn-sm btn-danger" type="button" id="add-credentials-cancel-button" data-i18n="[title]optionsButtonCancel">
+              <i class="fa fa-remove" aria-hidden="true"></i>
+              <span data-i18n="optionsButtonCancel"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </body>
 </html>

@@ -1,7 +1,5 @@
 'use strict';
 
-const DEFAULT_BROWSER_GROUP = 'KeePassXC-Browser Passwords';
-
 const kpxcBanner = {};
 kpxcBanner.banner = undefined;
 kpxcBanner.created = false;
@@ -170,64 +168,16 @@ kpxcBanner.create = async function(credentials = {}) {
 };
 
 kpxcBanner.saveNewCredentials = async function(credentials = {}) {
-    const saveToDefaultGroup = async function(creds) {
-        const args = [ creds.username, creds.password, creds.url ];
-        const res = await sendMessage('add_credentials', args);
-        kpxcBanner.verifyResult(res);
-    };
-
     const result = await sendMessage('get_database_groups');
     if (!result || !result.groups) {
         logError('Empty result from get_database_groups');
-        await saveToDefaultGroup(credentials);
         return;
     }
 
     if (!result.defaultGroupAlwaysAsk) {
-        if (result.defaultGroup === '' || result.defaultGroup === DEFAULT_BROWSER_GROUP) {
-            await saveToDefaultGroup(credentials);
-            return;
-        } else {
-            // A specified group is used
-            let gname = '';
-            let guuid = '';
-
-            if (result.defaultGroup.toLowerCase() === 'root') {
-                result.defaultGroup = '/';
-                gname = result.groups[0].name;
-                guuid = result.groups[0].uuid;
-            } else {
-                [ gname, guuid ] = kpxcBanner.getDefaultGroup(result.groups[0].children, result.defaultGroup);
-                if (gname === '' && guuid === '') {
-                    // Create a new group
-                    const newGroup = await sendMessage('create_new_group', [ result.defaultGroup ]);
-                    if (newGroup.name && newGroup.uuid) {
-                        const res = await sendMessage('add_credentials', [
-                            credentials.username,
-                            credentials.password,
-                            credentials.url,
-                            newGroup.name,
-                            newGroup.uuid,
-                        ]);
-                        kpxcBanner.verifyResult(res);
-                    } else {
-                        kpxcUI.createNotification('error', tr('rememberErrorCreatingNewGroup'));
-                    }
-
-                    return;
-                }
-            }
-
-            const res = await sendMessage('add_credentials', [
-                credentials.username,
-                credentials.password,
-                credentials.url,
-                gname,
-                guuid,
-            ]);
-            kpxcBanner.verifyResult(res);
-            return;
-        }
+        const res = await sendMessage('page_add_new_credential', credentials);
+        kpxcBanner.verifyResult(res, credentials.username);
+        return;
     }
 
     const addChildren = function(group, parentElement, depth = 0) {
@@ -366,19 +316,23 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
     }
 };
 
-kpxcBanner.verifyResult = async function(code) {
+kpxcBanner.verifyResult = async function(code, givenUsername) {
+    const username = givenUsername || kpxcBanner.credentials.username;
+
     if (code === 'error') {
         kpxcUI.createNotification('error', tr('rememberErrorCannotSaveCredentials'));
+    } else if (code === 'error_new_group') {
+        kpxcUI.createNotification('error', tr('rememberErrorCreatingNewGroup'));
     } else if (code === 'created') {
         kpxcUI.createNotification(
             'success',
-            tr('rememberCredentialsSaved', kpxcBanner.credentials.username || tr('rememberEmptyUsername')),
+            tr('rememberCredentialsSaved', username || tr('rememberEmptyUsername')),
         );
         await kpxc.retrieveCredentials(true); // Forced reload
     } else if (code === 'updated') {
         kpxcUI.createNotification(
             'success',
-            tr('rememberCredentialsUpdated', kpxcBanner.credentials.username || tr('rememberEmptyUsername')),
+            tr('rememberCredentialsUpdated', username || tr('rememberEmptyUsername')),
         );
         await kpxc.retrieveCredentials(true); // Forced reload
     } else if (code === 'canceled') {
@@ -386,26 +340,8 @@ kpxcBanner.verifyResult = async function(code) {
     } else {
         kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));
     }
+
     kpxcBanner.destroy();
-};
-
-// Traverse the groups and ensure all paths are found
-kpxcBanner.getDefaultGroup = function(groups, defaultGroup) {
-    const getGroup = function(group, splitted, depth = -1) {
-        ++depth;
-        for (const g of group) {
-            if (g.name === splitted[depth]) {
-                if (splitted.length === (depth + 1)) {
-                    return [ g.name, g.uuid ];
-                }
-                return getGroup(g.children, splitted, depth);
-            }
-        }
-        return [ '', '' ];
-    };
-
-    const splitted = defaultGroup.split('/');
-    return getGroup(groups, splitted);
 };
 
 kpxcBanner.createCredentialDialog = async function() {
