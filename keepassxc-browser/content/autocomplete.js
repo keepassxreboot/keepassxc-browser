@@ -140,9 +140,7 @@ class Autocomplete {
         await kpxc.updateTOTPList();
 
         // Clear the login items from div
-        while (this.list.hasChildNodes()) {
-            this.list.removeChild(this.list.lastChild);
-        }
+        removeAllChildren(this.list);
 
         // Update credentials to menu div
         for (const c of this.elements) {

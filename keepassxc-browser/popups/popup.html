@@ -18,6 +18,7 @@
   <body>
     <div class="container">
       <div id="settings" class="settings">
+        <!-- Buttons in the top area -->
         <div class="action-buttons-area">
           <button id="options-button" class="btn btn-sm btn-success" data-i18n="[title]popupSettingsText">
             <i class="fa fa-cog" aria-hidden="true"></i>
@@ -31,6 +32,7 @@
         </div>
       </div>
 
+      <!-- Alerts -->
       <div id="popup-alerts">
         <div id="update-available" class="alert alert-warning">
           <span data-i18n="popupUpdateAvailable"></span>
@@ -41,22 +43,28 @@
         <div id="getting-started-guide" class="alert alert-info alert-dismissible">
           <span data-i18n="popupGettingStartedText"></span>
           <br>
-          <a target="_blank" class="alert-link" href="https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_setup_browser_integration"><span data-i18n="popupGettingStartedLinkText"></span></a>
+          <a target="_blank" class="alert-link" href="https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_setup_browser_integration">
+            <span data-i18n="popupGettingStartedLinkText"></span>
+          </a>
           <button type="button" id="getting-started-alert-close-button" class="btn-close" data-bs-dismiss="alert" data-i18n="[title]popupAlertHide"></button>
         </div>
 
         <div id="troubleshooting-guide" class="alert alert-info alert-dismissible">
           <span data-i18n="popupTroubleshootingText"></span>
           <br>
-          <a target="_blank" class="alert-link" href="https://github.com/keepassxreboot/keepassxc-browser/wiki/Troubleshooting-guide"><span data-i18n="popupTroubleshootingLinkText"></span></a>
+          <a target="_blank" class="alert-link" href="https://github.com/keepassxreboot/keepassxc-browser/wiki/Troubleshooting-guide">
+            <span data-i18n="popupTroubleshootingLinkText"></span>
+          </a>
           <button type="button" id="troubleshooting-guide-alert-close-button" class="btn-close" data-bs-dismiss="alert" data-i18n="[title]popupAlertHide"></button>
         </div>
       </div>
 
+      <!-- Loading -->
       <div id="initial-state">
         <div class="loader"></div> <p data-i18n="popupCheckingStatus"></p>
       </div>
 
+      <!-- Database open but not connected -->
       <div id="not-configured">
         <p data-i18n="popupNotConfigured"></p>
         <div class="right-align">
@@ -67,6 +75,7 @@
         </div>
       </div>
 
+      <!-- Needs reconnect -->
       <div id="need-reconfigure">
         <p data-i18n="popupNeedReconfigure"></p>
         <p id="left-margin">
@@ -85,6 +94,7 @@
         <span data-i18n="popupConfiguredNotAssociated" data-i18n-placeholder="<span class='bg-warning' id='unassociated-identifier'></span>"></span>
       </div>
 
+      <!-- Database open and connected -->
       <div id="configured-and-associated">
         <p data-i18n="popupConfiguredAndAssociated" data-i18n-placeholder="<span class='bg-success' id='associated-identifier'></span>"></p>
         <div class="right-align">
@@ -95,6 +105,7 @@
         </div>
       </div>
 
+      <!-- Error message -->
       <div id="error-encountered">
         <p data-i18n="popupErrorEncountered"></p>
         <p id="left-margin">
@@ -108,6 +119,7 @@
         </div>
       </div>
 
+      <!-- Database not opened message -->
       <div id="database-not-opened">
         <p data-i18n="popupErrorEncountered"></p>
         <p id="left-margin">
@@ -121,6 +133,29 @@
         </div>
       </div>
 
+      <!-- Login list -->
+      <div id="credentials-list" class="credentials" style="display: none">
+        <p data-i18n="popupLoginText"></p>
+        <div id="filter-block">
+          <label for="login-filter" data-i18n="popupFilterText"></label>
+          <input type="text" id="login-filter">
+        </div>
+        <div id="login-list" class="list-group"></div>
+      </div>
+
+      <!-- HTTP Auth login list-->
+      <div id="http-auth-credentials-list" class="credentials" style="display: none">
+        <p data-i18n="popupAuthText"></p>
+        <div id="http-auth-login-list" class="list-group"></div>
+        <p>
+          <button id="btn-dismiss" class="btn btn-sm btn-danger" data-i18n="[title]dismissHttpAuthButtonTitle">
+            <i class="fa fa-remove" aria-hidden="true"></i>
+            <span data-i18n="popupButtonDismissHttpAuth"></span>
+          </button>
+        </p>
+      </div>
+
+      <!-- Username-only field detected message -->
       <div id="username-field-detected">
         <hr>
         <p data-i18n="popupUsernameFieldDetected"></p>
@@ -132,6 +167,7 @@
         </div>
       </div>
 
+      <!-- Iframe detected message -->
       <div id="iframe-detected" style="display: none">
         <hr>
         <p data-i18n="popupIframeDetected"></p>

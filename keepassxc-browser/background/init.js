@@ -82,7 +82,7 @@ const initListeners = async function() {
         }
 
         if (changeInfo.status === 'complete' && tab?.id) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             if (!page.tabs[tab.id]) {
                 page.createTabEntry(tab.id);
             }
