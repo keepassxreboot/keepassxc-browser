@@ -26,6 +26,34 @@ const URL_WILDCARD = '1kpxcwc1';
 const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 
+const AssociatedAction = {
+    NOT_ASSOCIATED: 0,
+    ASSOCIATED: 1,
+    NEW_ASSOCIATION: 2,
+    CANCELED: 3
+};
+
+const ManualFill = {
+    NONE: 0,
+    PASSWORD: 1,
+    BOTH: 2
+};
+
+// Popup icon types
+const PopupIcon = {
+    BANG: 'bang',
+    CROSS: 'cross',
+    LOCKED: 'locked',
+    NORMAL: 'normal'
+};
+
+// Popup states
+const PopupState = {
+    DEFAULT: 'default',
+    HTTP_AUTH: 'http_auth',
+    LOGIN: 'login'
+};
+
 const isFirefox = function() {
     return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
 };
@@ -41,19 +69,6 @@ const showNotification = function(message) {
         'title': 'KeePassXC-Browser',
         'message': message
     });
-};
-
-const AssociatedAction = {
-    NOT_ASSOCIATED: 0,
-    ASSOCIATED: 1,
-    NEW_ASSOCIATION: 2,
-    CANCELED: 3
-};
-
-const ManualFill = {
-    NONE: 0,
-    PASSWORD: 1,
-    BOTH: 2
 };
 
 // Checks if element's nodeName matches
@@ -154,6 +169,12 @@ const getFileAndLine = function() {
 const getCurrentTab = async function() {
     const tabs = await browser.tabs.query({ active: true, currentWindow: true });
     return tabs.length > 0 ? tabs[0] : undefined;
+};
+
+const removeAllChildren = function(elem) {
+    while (elem?.hasChildNodes()) {
+        elem.removeChild(elem.lastChild);
+    }
 };
 
 // Exports for tests

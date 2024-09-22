@@ -21,7 +21,7 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     }
 
     if (!internalPoll) {
-        browserAction.showDefault(tab);
+        browserAction.updatePopup(tab);
     }
 
     const errorMessage = page.tabs[tab.id]?.errorMessage ?? undefined;
@@ -30,7 +30,6 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
 
     return {
         associated: keepass.isAssociated(),
-
         configured: configured,
         databaseClosed: keepass.isDatabaseClosed,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
@@ -38,6 +37,7 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         iframeDetected: iframeDetected,
         identifier: keyId,
         keePassXCAvailable: keepass.isKeePassXCAvailable,
+        popupData: page.popupData,
         showGettingStartedGuideAlert: page.settings.showGettingStartedGuideAlert,
         showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert,
         usernameFieldDetected: usernameFieldDetected
@@ -154,12 +154,12 @@ kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
 
 kpxcEvent.onLoginPopup = async function(tab, logins) {
     const popupData = {
-        iconType: 'normal',
-        popup: 'popup_login'
+        iconType: PopupIcon.NORMAL,
+        popup: PopupState.LOGIN
     };
 
     page.tabs[tab.id].loginList = logins;
-    await browserAction.show(tab, popupData);
+    await browserAction.updatePopupIcon(tab, popupData);
 };
 
 kpxcEvent.initHttpAuth = async function() {
@@ -168,12 +168,12 @@ kpxcEvent.initHttpAuth = async function() {
 
 kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
     const popupData = {
-        iconType: 'normal',
-        popup: 'popup_httpauth'
+        iconType: PopupIcon.NORMAL,
+        popup: PopupState.HTTP_AUTH
     };
 
     page.tabs[tab.id].loginList = data;
-    await browserAction.show(tab, popupData);
+    await browserAction.updatePopupIcon(tab, popupData);
 };
 
 kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {

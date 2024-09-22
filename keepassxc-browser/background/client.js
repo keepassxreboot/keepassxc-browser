@@ -398,7 +398,7 @@ function onDisconnected() {
     keepass.databaseHash = '';
 
     page.clearAllLogins();
-    keepass.updatePopup('cross');
+    keepass.updatePopup(PopupIcon.CROSS);
     keepass.updateDatabaseHashToContent();
     logError(`Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message)}`);
 }
