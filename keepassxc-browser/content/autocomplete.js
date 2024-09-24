@@ -341,7 +341,7 @@ class Autocomplete {
         // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
-        const menuOffset = (totalHeight + rect.y) / zoom > window.self.visualViewport.height ? totalHeight/ zoom : 0;
+        const menuOffset = (totalHeight + rect.y) / zoom > window.self.visualViewport.height ? totalHeight / zoom : 0;
 
         const scrollTop = kpxcUI.getScrollTop() / zoom;
         const scrollLeft = kpxcUI.getScrollLeft() / zoom;
