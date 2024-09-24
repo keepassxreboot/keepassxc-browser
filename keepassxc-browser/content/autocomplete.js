@@ -337,24 +337,23 @@ class Autocomplete {
 
         // Get body zoom radio
 	    const zoom = kpxcUI.bodyStyle.zoom || 1;
-	    const uZoom = kpxcUI.browserVerUpon128 ? zoom: 1;
        
         // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
         const menuRect = this.container.getBoundingClientRect();
         const totalHeight = menuRect.height + rect.height;
-        const menuOffset = (totalHeight + rect.y) / uZoom > window.self.visualViewport.height ? totalHeight/ uZoom : 0;
+        const menuOffset = (totalHeight + rect.y) / zoom > window.self.visualViewport.height ? totalHeight/ zoom : 0;
 
         const scrollTop = kpxcUI.getScrollTop() / zoom;
         const scrollLeft = kpxcUI.getScrollLeft() / zoom;
 
         if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
             this.container.style.top = Pixels(
-                ((rect.top - kpxcUI.bodyRect.top) / uZoom + scrollTop + this.input.offsetHeight - menuOffset)
+                ((rect.top - kpxcUI.bodyRect.top) / zoom + scrollTop + this.input.offsetHeight - menuOffset)
             );
-            this.container.style.left = Pixels((rect.left - kpxcUI.bodyRect.left) / uZoom + scrollLeft);
+            this.container.style.left = Pixels((rect.left - kpxcUI.bodyRect.left) / zoom + scrollLeft);
         } else {
-            this.container.style.top = Pixels(rect.top / uZoom + scrollTop + this.input.offsetHeight - menuOffset)
-            this.container.style.left = Pixels(rect.left / uZoom + scrollLeft);
+            this.container.style.top = Pixels(rect.top / zoom + scrollTop + this.input.offsetHeight - menuOffset)
+            this.container.style.left = Pixels(rect.left / zoom + scrollLeft);
         }
     }
 }
