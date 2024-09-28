@@ -80,7 +80,7 @@
         "vars-on-top": "off"
     },
     "globals": {
-        "_called": "writable",
+        "_called": "readonly",
         "acceptedOTPFields": "readonly",
         "assertInputFields": "readonly",
         "assertPasswordChangeFields": "readonly",
