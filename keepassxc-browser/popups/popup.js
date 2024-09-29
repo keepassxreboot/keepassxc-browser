@@ -19,7 +19,6 @@ function hideAll() {
 }
 
 function handleStatusResponse(response) {
-    console.log('Handling response:', response);
     hideAll();
 
     // Error situations
@@ -211,7 +210,8 @@ const sendMessageToTab = async function(message) {
         // Check if the popup state has been changed or database has been opened/closed
         const currentStatus = await getNewStatus();
         if (previousStatus?.popupData?.popup !== currentStatus?.popupData?.popup
-            || previousStatus?.databaseClosed !== currentStatus?.databaseClosed) {
+            || previousStatus?.databaseClosed !== currentStatus?.databaseClosed
+            || previousStatus?.keePassXCAvailable !== currentStatus?.keePassXCAvailable) {
             previousStatus = currentStatus;
             handleStatusResponse(currentStatus);
         }
