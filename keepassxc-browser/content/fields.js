@@ -105,7 +105,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
                 totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS) &&
             totpInputs.every(
                 input =>
-                    (input.inputMode === 'numeric' && input.pattern.includes('0-9')) ||
+                    ((input.inputMode === 'numeric' || input.inputMode === '') && input.pattern.includes('0-9')) ||
                     ((input.type === 'text' || input.type === 'number') && input.maxLength === 1) ||
                     input.type === 'tel'
             )
