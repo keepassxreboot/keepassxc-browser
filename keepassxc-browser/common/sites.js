@@ -35,7 +35,8 @@ const PREDEFINED_SITELIST = [
 ];
 
 const IMPROVED_DETECTION_PREDEFINED_SITELIST = [
-    'https://secure.chase.com/*'
+    'https://secure.chase.com/*',
+    'https://www.icloud.com/'
 ];
 
 const googleUrl = 'https://accounts.google.com';
@@ -87,7 +88,8 @@ kpxcSites.exceptionFound = function(identifier, field) {
               || document.location.origin.startsWith('https://mail.protonmail.com')
               && identifier === 'mailboxPassword') {
         return true;
-    } else if (document.location.origin === 'https://www.patreon.com' && field?.name === 'current-password') {
+    } else if (document.location.origin === 'https://www.patreon.com' &&
+               (field?.name === 'current-password' || field?.innerHTML?.includes('current-password'))) {
         return true;
     } else if (document.location.origin === 'https://wordpress.com' && identifier?.value === 'login__form-password') {
         return true;
