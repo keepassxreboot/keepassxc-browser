@@ -355,6 +355,17 @@ options.showKeePassXCVersions = async function(response) {
     if (!version277Result) {
         $('#tab-general-settings #passkeysOptionsCard').hide();
     }
+
+    const version2710Result = await browser.runtime.sendMessage({
+        action: 'compare_version',
+        args: [ '2.7.10', response.current ]
+    });
+
+    // Hide passkeys default group option with KeePassXC version < 2.7.10
+    if (!version2710Result) {
+        $('#tab-general-settings #passkeysDefaultGroup').hide();
+    }
+
 };
 
 options.getPartiallyHiddenKey = function(key) {
