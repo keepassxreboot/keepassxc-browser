@@ -16,6 +16,7 @@ const defaultSettings = {
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
     debugLogging: false,
     defaultGroup: '',
+    defaultPasskeyGroup: '',
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
     passkeys: false,

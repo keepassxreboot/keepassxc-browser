@@ -483,6 +483,7 @@ Unencrypted message:
     "action": "passkeys-register",
     "publicKey": PublicKeyCredentialCreationOptions,
     "origin": "tZvLrBzkQ9GxXq9PvKJj4iAnfPT0VZ3Q",
+    "groupName": "<optional, KeePassXC 2.7.10 and newer>",
     "keys: [
         {
             "id": "<saved database identifier received from associate>",
