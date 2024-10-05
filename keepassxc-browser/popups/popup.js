@@ -1,16 +1,10 @@
 'use strict';
 
+const POLLING_INTERVAL = 1000; // ms
+let previousStatus;
 let reloadCount = 0;
 
-HTMLElement.prototype.show = function() {
-    this.style.display = 'block';
-};
-
-HTMLElement.prototype.hide = function() {
-    this.style.display = 'none';
-};
-
-function statusResponse(r) {
+function hideAll() {
     $('#initial-state').hide();
     $('#error-encountered').hide();
     $('#need-reconfigure').hide();
@@ -20,49 +14,79 @@ function statusResponse(r) {
     $('#lock-database-button').hide();
     $('#getting-started-guide').hide();
     $('#database-not-opened').hide();
+    $('#credentials-list').hide();
+    $('#http-auth-credentials-list').hide();
+}
 
-    if (!r.keePassXCAvailable) {
-        $('#error-message').textContent = r.error;
+function handleStatusResponse(response) {
+    hideAll();
+
+    // Error situations
+    if (!response.keePassXCAvailable) {
+        $('#error-message').textContent = response.error;
         $('#error-encountered').show();
 
-        if (r.showGettingStartedGuideAlert) {
+        if (response.showGettingStartedGuideAlert) {
             $('#getting-started-guide').show();
         }
 
-        if (r.showTroubleshootingGuideAlert && reloadCount >= 2) {
+        if (response.showTroubleshootingGuideAlert && reloadCount >= 2) {
             $('#troubleshooting-guide').show();
         } else {
             $('#troubleshooting-guide').hide();
         }
-    } else if (r.keePassXCAvailable && r.databaseClosed) {
-        $('#database-error-message').textContent = r.error;
+        return;
+    } else if (response.keePassXCAvailable && response.databaseClosed) {
+        $('#database-error-message').textContent = response.error;
         $('#database-not-opened').show();
-    } else if (!r.configured) {
+        return;
+    } else if (!response.configured) {
         $('#not-configured').show();
-    } else if (r.encryptionKeyUnrecognized) {
+        return;
+    } else if (response.encryptionKeyUnrecognized) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').textContent = r.error;
-    } else if (!r.associated) {
+        $('#need-reconfigure-message').textContent = response.error;
+        return;
+    } else if (!response.associated) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').textContent = r.error;
-    } else if (r.error) {
+        $('#need-reconfigure-message').textContent = response.error;
+        return;
+    } else if (response.error) {
         $('#error-encountered').show();
-        $('#error-message').textContent = r.error;
-    } else {
-        $('#configured-and-associated').show();
-        $('#associated-identifier').textContent = r.identifier;
-        $('#lock-database-button').show();
-
-        if (r.usernameFieldDetected) {
-            $('#username-field-detected').show();
-        }
-
-        if (r.iframeDetected) {
-            $('#iframe-detected').show();
-        }
-
-        reloadCount = 0;
+        $('#error-message').textContent = response.error;
+        return;
     }
+
+    // Show the popup content based on status
+    if (response?.popupData?.popup === PopupState.LOGIN) {
+        $('#credentials-list').show();
+        $('#configured-and-associated').hide();
+        initializeLoginList();
+    } else if (response?.popupData?.popup === PopupState.HTTP_AUTH) {
+        $('#http-auth-credentials-list').show();
+        $('#configured-and-associated').hide();
+        initializeHttpAuthLoginList();
+    } else {
+        // PopupState.DEFAULT
+        $('#credentials-list').hide();
+        $('#http-auth-credentials-list').hide();
+        $('#configured-and-associated').show();
+        $('#associated-identifier').textContent = response.identifier;
+    }
+
+    $('#lock-database-button').show();
+
+    // Show button for adding Username-Only Detection for the site
+    if (response.usernameFieldDetected) {
+        $('#username-field-detected').show();
+    }
+
+    // Show button for allowing Cross-Origin IFrames for the site
+    if (response.iframeDetected) {
+        $('#iframe-detected').show();
+    }
+
+    reloadCount = 0;
 }
 
 const sendMessageToTab = async function(message) {
@@ -99,7 +123,7 @@ const sendMessageToTab = async function(message) {
     });
 
     $('#reload-status-button').addEventListener('click', async () => {
-        statusResponse(await browser.runtime.sendMessage({
+        handleStatusResponse(await browser.runtime.sendMessage({
             action: 'reconnect'
         }));
 
@@ -111,7 +135,7 @@ const sendMessageToTab = async function(message) {
     });
 
     $('#reopen-database-button').addEventListener('click', async () => {
-        statusResponse(await browser.runtime.sendMessage({
+        handleStatusResponse(await browser.runtime.sendMessage({
             action: 'get_status',
             args: [ false, true ] // Set forcePopup to true
         }));
@@ -124,13 +148,13 @@ const sendMessageToTab = async function(message) {
             return;
         }
 
-        statusResponse(await browser.runtime.sendMessage({
+        handleStatusResponse(await browser.runtime.sendMessage({
             action: 'get_status'
         }));
     });
 
     $('#lock-database-button').addEventListener('click', async () => {
-        statusResponse(await browser.runtime.sendMessage({
+        handleStatusResponse(await browser.runtime.sendMessage({
             action: 'lock_database'
         }));
     });
@@ -159,9 +183,37 @@ const sendMessageToTab = async function(message) {
         });
     });
 
-    statusResponse(await browser.runtime.sendMessage({
-        action: 'get_status'
-    }).catch((err) => {
-        logError('Could not get status: ' + err);
-    }));
+    // For HTTP Basic Auth
+    $('#btn-dismiss').addEventListener('click', async () => {
+        // Return empty credentials
+        browser.runtime.sendMessage({
+            action: 'fill_http_auth',
+            args: { login: '', password: '' }
+        });
+
+        close();
+    });
+
+    async function getNewStatus() {
+        return await browser.runtime.sendMessage({
+            action: 'get_status'
+        }).catch((err) => {
+            logError('Could not get status: ' + err);
+        });
+    }
+
+    // Get status right after popup has been opened
+    handleStatusResponse(await getNewStatus());
+
+    // Poll status
+    setInterval(async () => {
+        // Check if the popup state has been changed or database has been opened/closed
+        const currentStatus = await getNewStatus();
+        if (previousStatus?.popupData?.popup !== currentStatus?.popupData?.popup
+            || previousStatus?.databaseClosed !== currentStatus?.databaseClosed
+            || previousStatus?.keePassXCAvailable !== currentStatus?.keePassXCAvailable) {
+            previousStatus = currentStatus;
+            handleStatusResponse(currentStatus);
+        }
+    }, POLLING_INTERVAL);
 })();

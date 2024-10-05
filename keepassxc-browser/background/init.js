@@ -80,7 +80,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     }
 
     if (changeInfo.status === 'complete') {
-        browserAction.showDefault(tab);
+        browserAction.updatePopup(tab);
         if (!page.tabs[tab.id]) {
             page.createTabEntry(tab.id);
         }
