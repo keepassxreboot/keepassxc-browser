@@ -163,7 +163,7 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     }
 
     // Adjusts the icon offset for certain sites
-    const iconOffset = kpxcSites.iconOffset(left, top, size);
+    const iconOffset = kpxcSites.iconOffset(left, top, size, field?.type);
     if (iconOffset) {
         left = iconOffset[0];
         top = iconOffset[1];
