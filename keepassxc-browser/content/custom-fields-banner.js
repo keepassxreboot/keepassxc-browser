@@ -504,6 +504,7 @@ kpxcCustomLoginFieldsBanner.selectStringFields = function() {
 kpxcCustomLoginFieldsBanner.markFields = function() {
     let firstInput;
     const inputs = document.querySelectorAll(kpxcCustomLoginFieldsBanner.inputQueryPattern);
+    const zoom = kpxcUI.bodyStyle.zoom || 1;
 
     for (const i of inputs) {
         if (kpxcCustomLoginFieldsBanner.isFieldSelected(i) || inputFieldIsSelected(i)) {
@@ -519,10 +520,10 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
         field.originalElement = i;
 
         const rect = i.getBoundingClientRect();
-        field.style.top = Pixels(rect.top);
-        field.style.left = Pixels(rect.left);
-        field.style.width = Pixels(rect.width);
-        field.style.height = Pixels(rect.height);
+        field.style.top = Pixels(rect.top / zoom);
+        field.style.left = Pixels(rect.left / zoom);
+        field.style.width = Pixels(rect.width / zoom);
+        field.style.height = Pixels(rect.height / zoom);
         field.textContent = dataStepToString();
 
         // Change selection theme if needed
@@ -605,11 +606,12 @@ kpxcCustomLoginFieldsBanner.monitorSelectionPosition = function(selection) {
 
 // Set selection input field position dynamically including the scroll position
 kpxcCustomLoginFieldsBanner.setSelectionPosition = function(field) {
+    const zoom = kpxcUI.bodyStyle.zoom || 1;
     const rect = field.originalElement.getBoundingClientRect();
-    const left = kpxcUI.getRelativeLeftPosition(rect);
-    const top = kpxcUI.getRelativeTopPosition(rect);
-    const scrollTop = kpxcUI.getScrollTop();
-    const scrollLeft = kpxcUI.getScrollLeft();
+    const left = kpxcUI.getRelativeLeftPosition(rect) / zoom;
+    const top = kpxcUI.getRelativeTopPosition(rect) / zoom;
+    const scrollTop = kpxcUI.getScrollTop() / zoom;
+    const scrollLeft = kpxcUI.getScrollLeft() / zoom;
 
     field.style.top = Pixels(top + scrollTop);
     field.style.left = Pixels(left + scrollLeft);
