@@ -237,6 +237,58 @@ kpxcUI.isRTL = function(field) {
         f => ({ 'ltr': false, 'rtl': true })[f.getLowerCaseAttribute('dir')]);
 };
 
+kpxcUI.makeBannerDraggable = function(banner) {
+    if (!banner) {
+        return;
+    }
+
+    banner.draggable = true;
+
+    banner.addEventListener('dragstart', (e) => {
+        if (!e.isTrusted) {
+            return;
+        }
+
+        e.dataTransfer.effectAllowed = 'copyMove';
+        document.addEventListener('dragover', preventDefaultDragEnd);
+    });
+
+    banner.addEventListener('dragend', (e) => {
+        if (!e.isTrusted || !e.target) {
+            return;
+        }
+
+        // If dragged to last third of the screen, move banner to bottom.
+        // If dragged to first third of the screen, move banner to top.
+        // If credential/group dialog is open, move it as well.
+        const bannerDialog = e.target.querySelector('.kpxc-banner-dialog');
+        if (e.y > e.view.innerHeight * (2 / 3) && e.target.classList.contains('kpxc-banner-on-top')) {
+            e.target.classList.remove('kpxc-banner-on-top');
+            e.target.classList.add('kpxc-banner-on-bottom');
+
+            if (bannerDialog) {
+                bannerDialog.style.top = '';
+                bannerDialog.style.bottom = Pixels(e.target.offsetHeight);
+                bannerDialog.classList.remove('kpxc-banner-dialog-top');
+                bannerDialog.classList.add('kpxc-banner-dialog-bottom');
+            }
+        } else if (e.y < e.view.innerHeight * (1 / 3) && e.target.classList.contains('kpxc-banner-on-bottom')) {
+            e.target.classList.remove('kpxc-banner-on-bottom');
+            e.target.classList.add('kpxc-banner-on-top');
+
+            if (bannerDialog) {
+                bannerDialog.style.bottom = '';
+                bannerDialog.style.top = Pixels(e.target.offsetHeight);
+                bannerDialog.classList.remove('kpxc-banner-dialog-bottom');
+                bannerDialog.classList.add('kpxc-banner-dialog-top');
+            }
+        }
+
+        document.removeEventListener('dragover', preventDefaultDragEnd);
+        console.log(e.target.querySelector('.kpxc-banner-dialog'));
+    });
+};
+
 /**
 * Detects if the input field appears or disappears -> show/hide the icon
 * - boundingClientRect with slightly (< -10) negative values -> hidden
@@ -358,6 +410,10 @@ const createStylesheet = function(file) {
     stylesheet.setAttribute('rel', 'stylesheet');
     stylesheet.setAttribute('href', browser.runtime.getURL(file));
     return stylesheet;
+};
+
+const preventDefaultDragEnd = function(e) {
+    e?.preventDefault();
 };
 
 const logDebug = function(message, extra) {

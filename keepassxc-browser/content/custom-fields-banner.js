@@ -72,7 +72,7 @@ kpxcCustomLoginFieldsBanner.create = async function() {
         return;
     }
 
-    const banner = kpxcUI.createElement('div', 'kpxc-banner', { 'id': 'container' });
+    const banner = kpxcUI.createElement('div', 'kpxc-banner kpxc-banner-on-top', { 'id': 'container' });
     banner.style.zIndex = '2147483646';
     kpxcCustomLoginFieldsBanner.chooser = kpxcUI.createElement('div', '', { 'id': 'kpxcDefine-fields' });
 
@@ -111,6 +111,7 @@ kpxcCustomLoginFieldsBanner.create = async function() {
     bannerButtons.appendMultiple(resetButton, separator, usernameButton,
         passwordButton, totpButton, stringFieldsButton, secondSeparator, clearDataButton, confirmButton, closeButton);
     banner.appendMultiple(bannerInfo, bannerButtons);
+    kpxcUI.makeBannerDraggable(banner);
 
     const location = kpxc.getDocumentLocation();
     kpxcCustomLoginFieldsBanner.buttons.clearData.style.display
