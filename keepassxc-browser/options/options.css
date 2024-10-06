@@ -2,7 +2,6 @@ body {
     background-color: var(--kpxc-background-color);
     color: var(--kpxc-text-color);
     font-size: 14px;
-    max-width: 1440px;
 }
 
 a {
@@ -123,7 +122,7 @@ table tbody tr.empty:not(:nth-last-child(2)) {
 
 #tab-site-preferences td:nth-of-type(2),
 #tab-site-preferences td:nth-of-type(2) select {
-    width: 200px;
+    min-width: 200px;
 }
 
 #tab-site-preferences td:nth-of-type(3),
@@ -227,8 +226,19 @@ table td:last-of-type {
     .sidebar {
         width: 240px;
     }
+    
+    main {
+      margin-left: 240px !important;
+      min-width: calc(0.8333333333 * 1440px) !important;
+      max-width: calc(100% - 240px) !important;
+      width: unset !important;
+    }
 
     footer {
         display: block;
+    }
+    
+    .form-text, .form-group {
+        max-width: calc(0.8333333333 * 1440px);
     }
 }
