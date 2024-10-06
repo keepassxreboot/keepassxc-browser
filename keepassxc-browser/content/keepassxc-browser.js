@@ -501,14 +501,46 @@ kpxc.prepareCredentials = async function() {
         return;
     }
 
-    if (kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) {
+    if (kpxc.credentials.length === 1) {
+      if (kpxc.settings.autoFillSingleEntry) {
         kpxcFill.fillFromAutofill();
         return;
+      }
+
+      // Check for site preference overrides
+      const sitePreference = kpxc.retrieveSitePreference();
+      if (sitePreference !== null && sitePreference !== undefined) {
+        if (sitePreference.autoFillCredentials === true) {
+          kpxcFill.fillFromAutofill();
+          return;
+        }
+      }
     }
 
     kpxc.initLoginPopup();
     kpxc.initAutocomplete();
 };
+
+kpxc.retrieveSitePreference = function() {
+  // Check for autofill site preferences
+  for (const site of kpxc.settings.sitePreferences) {
+      let currentLocation;
+      try {
+          currentLocation = window.top.location.href;
+      } catch (err) {
+          // Cross-domain security error inspecting window.top.location.href.
+          // This catches an error when an iframe is being accessed from another (sub)domain
+          // -> use the iframe URL instead.
+          currentLocation = window.self.location.href;
+      }
+
+      if (siteMatch(site.url, currentLocation) || site.url === currentLocation) {
+        return site;
+      }
+  }
+
+  return null;
+}
 
 /**
  * Gets the credential list and shows the update banner
