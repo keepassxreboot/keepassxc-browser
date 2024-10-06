@@ -545,6 +545,12 @@ options.initSitePreferences = function() {
                     site.improvedFieldDetection = this.checked;
                 } else if (this.name === 'allowIframes') {
                     site.allowIframes = this.checked;
+                } else if (this.name === 'autoSubmit') {
+                    site.autoSubmit = this.checked;
+                } else if (this.name === 'autoFillCredentials') {
+                    site.autoFillCredentials = this.checked;
+                } else if (this.name === 'autoFillTOTP') {
+                    site.autoFillTOTP = this.checked;
                 }
             }
         }
@@ -565,7 +571,7 @@ options.initSitePreferences = function() {
         options.saveSettings();
     };
 
-    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes) {
+    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes, autoSubmit, autoFillCredentials, autoFillTOTP) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
         row.setAttribute('id', 'tr-scf' + newIndex);
@@ -578,7 +584,13 @@ options.initSitePreferences = function() {
         row.children[3].children['improvedFieldDetection'].addEventListener('change', checkboxClicked);
         row.children[4].children['allowIframes'].checked = allowIframes;
         row.children[4].children['allowIframes'].addEventListener('change', checkboxClicked);
-        row.children[5].addEventListener('click', removeButtonClicked);
+        row.children[5].children['autoSubmit'].checked = autoSubmit;
+        row.children[5].children['autoSubmit'].addEventListener('change', checkboxClicked);
+        row.children[6].children['autoFillCredentials'].checked = autoFillCredentials;
+        row.children[6].children['autoFillCredentials'].addEventListener('change', checkboxClicked);
+        row.children[7].children['autoFillTOTP'].checked = autoFillTOTP;
+        row.children[7].children['autoFillTOTP'].addEventListener('change', checkboxClicked);
+        row.children[8].addEventListener('click', removeButtonClicked);
 
         $('#tab-site-preferences table tbody').append(row);
     };
@@ -638,7 +650,7 @@ options.initSitePreferences = function() {
         const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
         rowClone.classList.remove('clone', 'd-none');
 
-        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false, false);
+        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false, false, false, false, false);
         $('#tab-site-preferences table tbody tr.empty').hide();
 
         options.settings['sitePreferences'].push({
@@ -665,6 +677,9 @@ options.initSitePreferences = function() {
                 site.usernameOnly,
                 site.improvedFieldDetection,
                 site.allowIframes,
+                site.autoSubmit,
+                site.autoFillCredentials,
+                site.autoFillTOTP,
             );
             ++counter;
         }
