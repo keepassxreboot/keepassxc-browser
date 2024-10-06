@@ -316,7 +316,16 @@ kpxcFill.fillInStringFields = function(fields, stringFields) {
 
 // Performs Auto-Submit. If filling single credentials is enabled, a 5 second timeout will be needed for fill
 kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
-    if (!kpxc.settings.autoSubmit) {
+    // Check for site preference overrides
+    const sitePreference = kpxc.retrieveSitePreference();
+    let autoSubmitSitePreference = false;
+    if (sitePreference !== null && sitePreference !== undefined) {
+      if (sitePreference.autoSubmit === true || sitePreference.autoSubmit === false) {
+        autoSubmitSitePreference = sitePreference.autoSubmit;
+      }
+    }
+
+    if (!kpxc.settings.autoSubmit && !autoSubmitSitePreference) {
         return;
     }
 
