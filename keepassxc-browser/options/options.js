@@ -577,7 +577,7 @@ options.initSitePreferences = function() {
         row.setAttribute('id', 'tr-scf' + newIndex);
 
         const details = row.children[0];
-        details.children[0].children[0].textContent = url;
+        details.children[0].children[0].children[0].textContent = url;
         details.querySelector('#ignore').value = ignore;
         details.querySelector('#ignore').addEventListener('change', selectionChanged);
         details.querySelector('#usernameOnly').checked = usernameOnly;

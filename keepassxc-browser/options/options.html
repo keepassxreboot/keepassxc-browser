@@ -742,7 +742,15 @@
                       <li class="clone d-none list-group-item">
                         <details>
                           <summary>
-                            <span></span>
+                            <div class="row justify-content-between">
+                              <div class="col-auto"></div>
+                              <div class="col-auto">
+                                <button id="deleteButton" class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeSitePreferencesButtonTitle">
+                                  <i class="fa fa-remove" aria-hidden="true"></i>
+                                  <span data-i18n="optionsButtonRemove"></span>
+                                </button>
+                              </div>
+                            </div>
                           </summary>
 
                           <div class="m-3">
@@ -800,11 +808,6 @@
                                 <div class="form-text" data-i18n="optionsAutoFillSingleTotpHelpText"></div>
                               </div>
                             </div>
-
-                            <button id="deleteButton" class="btn btn-sm delete btn-danger btn mt-3" data-i18n="[title]removeSitePreferencesButtonTitle">
-                              <i class="fa fa-remove" aria-hidden="true"></i>
-                              <span data-i18n="optionsButtonRemove"></span>
-                            </button>
                           </div>
                         </details>
                       </li>

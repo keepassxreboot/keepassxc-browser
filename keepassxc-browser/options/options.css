@@ -242,3 +242,28 @@ table td:last-of-type {
         max-width: calc(0.8333333333 * 1440px);
     }
 }
+
+
+#sitePreferencesTable > li > details > summary {
+    list-style: none;
+    vertical-align: middle;
+}
+
+#sitePreferencesTable > li > details > summary::-webkit-details-marker {
+    display: none;
+}
+
+#sitePreferencesTable > li > details > summary > div > div:first-child{
+    display: flex;
+    align-items: center;
+}
+
+#sitePreferencesTable > li > details > summary > div > div:first-child::before {
+    content: '►';
+    padding-right: 1rem;
+}
+
+#sitePreferencesTable > li > details[open] > summary > div > div:first-child::before {
+    content: '▼';
+    padding-right: 1rem;
+}
