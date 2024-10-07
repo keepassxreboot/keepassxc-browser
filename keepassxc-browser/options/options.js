@@ -525,17 +525,17 @@ options.initSitePreferences = function() {
     const removeButtonClicked = function(e) {
         e.preventDefault();
 
-        const closestTr = this.closest('tr');
-        $('#dialogDeleteSite').setAttribute('url', closestTr.getAttribute('url'));
-        $('#dialogDeleteSite').setAttribute('tr-id', closestTr.getAttribute('id'));
-        $('#dialogDeleteSite .modal-body strong').textContent = closestTr.children[0].textContent;
+        const closestLi = this.closest('li');
+        $('#dialogDeleteSite').setAttribute('url', closestLi.getAttribute('url'));
+        $('#dialogDeleteSite').setAttribute('tr-id', closestLi.getAttribute('id'));
+        $('#dialogDeleteSite .modal-body strong').textContent = closestLi.children[0].textContent;
 
         dialogDeleteSiteModal.show();
     };
 
     const checkboxClicked = function() {
-        const closestTr = this.closest('tr');
-        const url = closestTr.getAttribute('url');
+        const closestLi = this.closest('li');
+        const url = closestLi.getAttribute('url');
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
@@ -559,8 +559,8 @@ options.initSitePreferences = function() {
     };
 
     const selectionChanged = function() {
-        const closestTr = this.closest('tr');
-        const url = closestTr.getAttribute('url');
+        const closestLi = this.closest('li');
+        const url = closestLi.getAttribute('url');
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
@@ -576,10 +576,10 @@ options.initSitePreferences = function() {
         row.setAttribute('url', url);
         row.setAttribute('id', 'tr-scf' + newIndex);
 
-        const details = row.children[0].children[0];
+        const details = row.children[0];
         details.children[0].children[0].textContent = url;
-        details.children[2].children[0].value = ignore;
-        details.children[2].children[0].addEventListener('change', selectionChanged);
+        details.querySelector('#ignore').value = ignore;
+        details.querySelector('#ignore').addEventListener('change', selectionChanged);
         details.querySelector('#usernameOnly').checked = usernameOnly;
         details.querySelector('#usernameOnly').addEventListener('change', checkboxClicked);
         details.querySelector('#improvedFieldDetection').checked = improvedFieldDetection;
@@ -592,9 +592,9 @@ options.initSitePreferences = function() {
         details.querySelector('#autoFillCredentials').addEventListener('change', checkboxClicked);
         details.querySelector('#autoFillTOTP').checked = autoFillTOTP;
         details.querySelector('#autoFillTOTP').addEventListener('change', checkboxClicked);
-        details.children[8].addEventListener('click', removeButtonClicked);
+        details.querySelector('#deleteButton').addEventListener('click', removeButtonClicked);
 
-        $('#tab-site-preferences table tbody').append(row);
+        $('#tab-site-preferences #sitePreferencesTable').append(row);
     };
 
     $('#dialogDeleteSite .modal-footer button.yes').addEventListener('click', function(e) {
@@ -649,11 +649,13 @@ options.initSitePreferences = function() {
         }
 
         const newIndex = options.settings['sitePreferences'].length + 1;
-        const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
+        const rowClone = $('#tab-site-preferences #sitePreferencesTable li.clone').cloneNode(true);
         rowClone.classList.remove('clone', 'd-none');
 
+
         addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false, false, false, false, false);
-        $('#tab-site-preferences table tbody tr.empty').hide();
+        $('#tab-site-preferences #sitePreferencesTable li.empty').hide();
+
 
         options.settings['sitePreferences'].push({
             url: value,
@@ -666,7 +668,7 @@ options.initSitePreferences = function() {
         manualUrl.value = '';
     });
 
-    const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
+    const rowClone = $('#tab-site-preferences ul li.clone').cloneNode(true);
     rowClone.classList.remove('clone', 'd-none');
     let counter = 1;
     if (options.settings['sitePreferences']) {
@@ -685,6 +687,10 @@ options.initSitePreferences = function() {
             );
             ++counter;
         }
+    }
+
+    if (counter > 1) {
+      $('#tab-site-preferences #sitePreferencesTable li.empty').hide();
     }
 };
 
