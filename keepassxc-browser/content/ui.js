@@ -253,7 +253,7 @@ kpxcUI.makeBannerDraggable = function(banner) {
         document.addEventListener('dragover', preventDefaultDragEnd);
     });
 
-    banner.addEventListener('dragend', (e) => {
+    banner.addEventListener('dragend', async (e) => {
         if (!e.isTrusted || !e.target) {
             return;
         }
@@ -272,6 +272,7 @@ kpxcUI.makeBannerDraggable = function(banner) {
                 bannerDialog.classList.remove('kpxc-banner-dialog-top');
                 bannerDialog.classList.add('kpxc-banner-dialog-bottom');
             }
+            await sendMessage('banner_set_position', BannerPosition.BOTTOM);
         } else if (e.y < e.view.innerHeight * (1 / 3) && e.target.classList.contains('kpxc-banner-on-bottom')) {
             e.target.classList.remove('kpxc-banner-on-bottom');
             e.target.classList.add('kpxc-banner-on-top');
@@ -282,10 +283,10 @@ kpxcUI.makeBannerDraggable = function(banner) {
                 bannerDialog.classList.remove('kpxc-banner-dialog-bottom');
                 bannerDialog.classList.add('kpxc-banner-dialog-top');
             }
+            await sendMessage('banner_set_position', BannerPosition.TOP);
         }
 
         document.removeEventListener('dragover', preventDefaultDragEnd);
-        console.log(e.target.querySelector('.kpxc-banner-dialog'));
     });
 };
 

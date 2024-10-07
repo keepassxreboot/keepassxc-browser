@@ -50,6 +50,11 @@ const AssociatedAction = {
     CANCELED: 3
 };
 
+const BannerPosition = {
+    BOTTOM: 0,
+    TOP: 1
+};
+
 const ManualFill = {
     NONE: 0,
     PASSWORD: 1,

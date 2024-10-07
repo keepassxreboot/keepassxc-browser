@@ -92,6 +92,7 @@
         "AuthenticatorAssertionResponse": "readonly",
         "AuthenticatorAttestationResponse": "readonly",
         "Autocomplete": "readonly",
+        "BannerPosition": "readonly",
         "BLUE_BUTTON": "readonly",
         "bootstrap": "readonly",
         "browser": "readonly",

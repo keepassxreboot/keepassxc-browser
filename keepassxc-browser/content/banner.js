@@ -52,7 +52,10 @@ kpxcBanner.create = async function(credentials = {}) {
     credentials.username = credentials.username.trim();
     kpxcBanner.credentials = credentials;
 
-    const banner = kpxcUI.createElement('div', 'kpxc-banner kpxc-banner-on-top', { 'id': 'kpxc-banner-container' });
+    const bannerPosition = await sendMessage('banner_get_position');
+    const bannerClass =
+        bannerPosition === BannerPosition.TOP ? 'kpxc-banner kpxc-banner-on-top' : 'kpxc-banner kpxc-banner-on-bottom';
+    const banner = kpxcUI.createElement('div', bannerClass, { 'id': 'kpxc-banner-container' });
     initColorTheme(banner);
     banner.style.zIndex = '2147483646';
 
@@ -468,5 +471,4 @@ const setDialogPosition = function(dialog) {
     }
 
     dialog.style.right = Pixels(0);
-}
-
+};
