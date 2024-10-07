@@ -753,7 +753,7 @@
                             </div>
                           </summary>
 
-                          <div class="m-3">
+                          <div class="container m-3">
                             <div class="form-group col-sm-3 mb-3">
                               <label for="ignore" class="form-label" data-i18n="optionsColumnIgnore"></label>
                               <select class="form-select form-select-sm" id="ignore" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
@@ -763,49 +763,53 @@
                                   <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
                               </select>
                             </div>
+                            <div class="row align-items-start">
+                              <div class="col-auto">
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="usernameOnly" data-i18n="optionsColumnUsernameOnly"></label>
+                                    <input class="form-check-input" type="checkbox" id="usernameOnly" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly">
+                                  </div>
+                                </div>
 
-                            <div class="form-group">
-                              <div class="form-check">
-                                <label for="usernameOnly" data-i18n="optionsColumnUsernameOnly"></label>
-                                <input class="form-check-input" type="checkbox" id="usernameOnly" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly">
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="improvedFieldDetection" data-i18n="optionsColumnImprovedInputFieldDetection"></label>
+                                    <input class="form-check-input" type="checkbox" id="improvedFieldDetection" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection">
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="allowIframes" data-i18n="optionsColumnAllowIframes"></label>
+                                    <input class="form-check-input" type="checkbox" id="allowIframes" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes">
+                                  </div>
+                                </div>
                               </div>
-                            </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
+                                    <input class="form-check-input" type="checkbox" id="autoSubmit" name="autoSubmit" value="false" data-i18n="[title]optionsColumnAutoSubmit">
+                                    <div class="form-text" data-i18n="optionsAutoSubmitHelpText"></div>
+                                  </div>
+                                </div>
 
-                            <div class="form-group">
-                              <div class="form-check">
-                                <label for="improvedFieldDetection" data-i18n="optionsColumnImprovedInputFieldDetection"></label>
-                                <input class="form-check-input" type="checkbox" id="improvedFieldDetection" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection">
-                              </div>
-                            </div>
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="autoFillCredentials" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
+                                    <input class="form-check-input" type="checkbox" id="autoFillCredentials" name="autoFillCredentials" value="false" data-i18n="[title]optionsColumnAutoFillCredentials">
+                                    <div class="form-text" data-i18n="optionsAutoFillSingleEntryHelpText"></div>
+                                  </div>
+                                </div>
 
-                            <div class="form-group">
-                              <div class="form-check">
-                                <label for="allowIframes" data-i18n="optionsColumnAllowIframes"></label>
-                                <input class="form-check-input" type="checkbox" id="allowIframes" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes">
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <div class="form-check">
-                                <label for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
-                                <input class="form-check-input" type="checkbox" id="autoSubmit" name="autoSubmit" value="false" data-i18n="[title]optionsColumnAutoSubmit">
-                                <div class="form-text" data-i18n="optionsAutoSubmitHelpText"></div>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <div class="form-check">
-                                <label for="autoFillCredentials" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
-                                <input class="form-check-input" type="checkbox" id="autoFillCredentials" name="autoFillCredentials" value="false" data-i18n="[title]optionsColumnAutoFillCredentials">
-                                <div class="form-text" data-i18n="optionsAutoFillSingleEntryHelpText"></div>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <div class="form-check">
-                                <label for="autoFillTOTP" data-i18n="optionsCheckboxAutoFillSingleTotp"></label>
-                                <input class="form-check-input" type="checkbox" id="autoFillTOTP" name="autoFillTOTP" value="false" data-i18n="[title]optionsColumnAutoFillTOTP">
-                                <div class="form-text" data-i18n="optionsAutoFillSingleTotpHelpText"></div>
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="autoFillTOTP" data-i18n="optionsCheckboxAutoFillSingleTotp"></label>
+                                    <input class="form-check-input" type="checkbox" id="autoFillTOTP" name="autoFillTOTP" value="false" data-i18n="[title]optionsColumnAutoFillTOTP">
+                                    <div class="form-text" data-i18n="optionsAutoFillSingleTotpHelpText"></div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
