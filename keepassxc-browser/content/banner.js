@@ -52,7 +52,10 @@ kpxcBanner.create = async function(credentials = {}) {
     credentials.username = credentials.username.trim();
     kpxcBanner.credentials = credentials;
 
-    const banner = kpxcUI.createElement('div', 'kpxc-banner', { 'id': 'kpxc-banner-container' });
+    const bannerPosition = await sendMessage('banner_get_position');
+    const bannerClass =
+        bannerPosition === BannerPosition.TOP ? 'kpxc-banner kpxc-banner-on-top' : 'kpxc-banner kpxc-banner-on-bottom';
+    const banner = kpxcUI.createElement('div', bannerClass, { 'id': 'kpxc-banner-container' });
     initColorTheme(banner);
     banner.style.zIndex = '2147483646';
 
@@ -113,6 +116,8 @@ kpxcBanner.create = async function(credentials = {}) {
         kpxcBanner.updateCredentials(credentials);
         dismissButton.textContent = tr('popupButtonBack');
     });
+
+    kpxcUI.makeBannerDraggable(banner);
 
     dismissButton.addEventListener('click', function(e) {
         if (!e.isTrusted) {
@@ -411,7 +416,7 @@ kpxcBanner.createCredentialDialog = async function() {
     const connectedDatabase = await sendMessage('get_connected_database');
     const databaseName = connectedDatabase.count > 0 ? connectedDatabase.identifier : '';
 
-    const dialog = kpxcUI.createElement('div', 'kpxc-banner-dialog');
+    const dialog = kpxcUI.createElement('div', 'kpxc-banner-dialog kpxc-banner-dialog-top');
     const databaseText = kpxcUI.createElement('p');
     const spanDatabaseText = kpxcUI.createElement('span', '', {}, tr('rememberSaving'));
     const usernameNew = kpxcUI.createElement('p', 'username-new');
@@ -421,11 +426,9 @@ kpxcBanner.createCredentialDialog = async function() {
     const spanNewUsername = kpxcUI.createElement('span', '', {}, tr('rememberNewUsername'));
     const spanUsernameExists = kpxcUI.createElement('span', '', {}, tr('rememberUsernameExists'));
 
-    // Set dialog position
-    dialog.style.top = Pixels(kpxcBanner.banner.offsetHeight);
-    dialog.style.right = '0';
-
+    setDialogPosition(dialog);
     databaseText.appendChild(spanDatabaseText);
+
     const spanName = kpxcUI.createElement('span', 'strong', {}, databaseName);
     databaseText.append(spanName);
 
@@ -447,10 +450,25 @@ kpxcBanner.createGroupDialog = function() {
     const chooseGroup = kpxcUI.createElement('p', '', {}, tr('rememberChooseGroup'));
     const list = kpxcUI.createElement('ul', 'list-group', { 'id': 'list' });
 
-    // Set dialog position
-    dialog.style.top = Pixels(kpxcBanner.banner.offsetHeight);
-    dialog.style.right = Pixels(0);
-
+    setDialogPosition(dialog);
     dialog.appendMultiple(chooseGroup, list);
     kpxcBanner.banner.appendChild(dialog);
+};
+
+const setDialogPosition = function(dialog) {
+    if (!dialog) {
+        return;
+    }
+
+    if (kpxcBanner.banner.classList.contains('kpxc-banner-on-bottom')) {
+        dialog.style.bottom = Pixels(kpxcBanner.banner.offsetHeight);
+        dialog.classList.remove('kpxc-banner-dialog-top');
+        dialog.classList.add('kpxc-banner-dialog-bottom');
+    } else {
+        dialog.style.top = Pixels(kpxcBanner.banner.offsetHeight);
+        dialog.classList.remove('kpxc-banner-dialog-bottom');
+        dialog.classList.add('kpxc-banner-dialog-top');
+    }
+
+    dialog.style.right = Pixels(0);
 };

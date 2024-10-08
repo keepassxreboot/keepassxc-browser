@@ -2,12 +2,12 @@ div.kpxc-banner {
     animation-duration: 0.2s;
     animation-name: kpxc-slidein;
     background-color: var(--kpxc-background-color);
-    border-bottom: 1px solid #38383d !important;
-    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
     box-sizing: border-box !important;
     color: var(--kpxc-text-color) !important;
+    display: flex !important;
     font-size: 1em !important;
     height: auto !important;
+    justify-content: space-between !important;
     left: 0px !important;
     line-height: 1 !important;
     margin: 0 auto !important;
@@ -16,10 +16,23 @@ div.kpxc-banner {
     overflow-x: hidden !important;
     padding: 4px !important;
     position: fixed !important;
-    top: 0px !important;
     width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
+}
+
+div.kpxc-banner:hover {
+    cursor: grab;
+}
+
+.kpxc-banner-on-bottom {
+    border-bottom: 1px solid #38383d !important;
+    bottom: 0px !important;
+    box-shadow: 0 -4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
+}
+
+.kpxc-banner-on-top {
+    border-top: 1px solid #38383d !important;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
+    top: 0px !important;
 }
 
 @keyframes kpxc-slidein {
@@ -105,8 +118,6 @@ div.kpxc-banner label {
 div.kpxc-banner-dialog {
     background-color: var(--kpxc-background-color);
     border: var(--kpxc-container-border);
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
     color: var(--kpxc-text-color);
     display: block !important;
     margin: 0 auto;
@@ -118,6 +129,16 @@ div.kpxc-banner-dialog {
     position: fixed !important;
     width: 680px;
     z-index: 10000000;
+}
+
+div.kpxc-banner-dialog-bottom {
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -4px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+div.kpxc-banner-dialog-top {
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
 
 div.kpxc-banner-dialog > ul {

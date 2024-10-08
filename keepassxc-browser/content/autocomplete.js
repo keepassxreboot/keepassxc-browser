@@ -324,7 +324,7 @@ class Autocomplete {
         }
     }
 
-   updatePosition() {
+    updatePosition() {
         if (!this.container || !this.input) {
             return;
         }
@@ -336,7 +336,7 @@ class Autocomplete {
         this.list.style.maxWidth = `max(${Pixels(this.input.offsetWidth)}, 600px)`;
 
         // Get body zoom radio
-	    const zoom = kpxcUI.bodyStyle.zoom || 1;
+        const zoom = kpxcUI.bodyStyle.zoom || 1;
        
         // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
         const menuRect = this.container.getBoundingClientRect();
@@ -352,7 +352,7 @@ class Autocomplete {
             );
             this.container.style.left = Pixels((rect.left - kpxcUI.bodyRect.left) / zoom + scrollLeft);
         } else {
-            this.container.style.top = Pixels(rect.top / zoom + scrollTop + this.input.offsetHeight - menuOffset)
+            this.container.style.top = Pixels(rect.top / zoom + scrollTop + this.input.offsetHeight - menuOffset);
             this.container.style.left = Pixels(rect.left / zoom + scrollLeft);
         }
     }

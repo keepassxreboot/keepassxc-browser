@@ -10,6 +10,7 @@ const defaultSettings = {
     autoReconnect: false,
     autoRetrieveCredentials: true,
     autoSubmit: false,
+    bannerPosition: BannerPosition.TOP,
     checkUpdateKeePassXC: CHECK_UPDATE_NEVER,
     clearCredentialsTimeout: 10,
     colorTheme: 'system',
@@ -251,6 +252,15 @@ page.getManualFill = async function(tab) {
 
 page.setManualFill = async function(tab, manualFill) {
     page.manualFill = manualFill;
+};
+
+page.getBannerPosition = async function(tab) {
+    return page.settings.bannerPosition;
+};
+
+page.setBannerPosition = async function(tab, position) {
+    page.settings.bannerPosition = position;
+    await browser.storage.local.set({ 'settings': page.settings });
 };
 
 page.getSubmitted = async function(tab) {

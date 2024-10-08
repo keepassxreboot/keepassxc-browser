@@ -35,7 +35,7 @@ const createAttestationResponse = function(publicKey) {
         getPublicKeyAlgorithm: () => publicKey.response?.publicKeyAlgorithm,
         getTransports: () => [ 'internal' ]
     };
-    return  Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
+    return Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
 };
 
 // Wraps response to AuthenticatorAssertionResponse object
