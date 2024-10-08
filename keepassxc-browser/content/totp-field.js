@@ -106,7 +106,7 @@ class TOTPFieldIcon extends Icon {
 
 // Fill TOTP automatically if option is enabled
 TOTPFieldIcon.prototype.autoFillSingleTotp = async function(field) {
-    if (kpxc.preferencesForPage?.autoFillTOTP || kpxc.settings.autoFillSingleTotp) {
+    if (kpxc.preferencesForPage?.autoFillSingleTotp || kpxc.settings.autoFillSingleTotp) {
         if (kpxc.credentials.length === 0) {
             await kpxc.receiveCredentialsIfNecessary();
         }

@@ -503,7 +503,7 @@ kpxc.prepareCredentials = async function() {
     }
 
     if (kpxc.credentials.length === 1) {
-      if (kpxc.preferencesForPage?.autoFillCredentials || kpxc.settings.autoFillSingleEntry) {
+      if (kpxc.preferencesForPage?.autoFillSingleEntry || kpxc.settings.autoFillSingleEntry) {
         kpxcFill.fillFromAutofill();
         return;
       }

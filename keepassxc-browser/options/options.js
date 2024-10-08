@@ -547,10 +547,10 @@ options.initSitePreferences = function() {
                     site.allowIframes = this.checked;
                 } else if (this.name === 'autoSubmit') {
                     site.autoSubmit = this.checked;
-                } else if (this.name === 'autoFillCredentials') {
-                    site.autoFillCredentials = this.checked;
-                } else if (this.name === 'autoFillTOTP') {
-                    site.autoFillTOTP = this.checked;
+                } else if (this.name === 'autoFillSingleEntry') {
+                    site.autoFillSingleEntry = this.checked;
+                } else if (this.name === 'autoFillSingleTotp') {
+                    site.autoFillSingleTotp = this.checked;
                 }
             }
         }
@@ -571,7 +571,7 @@ options.initSitePreferences = function() {
         options.saveSettings();
     };
 
-    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes, autoSubmit, autoFillCredentials, autoFillTOTP) {
+    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes, autoSubmit, autoFillSingleEntry, autoFillSingleTotp) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
         row.setAttribute('id', 'tr-scf' + newIndex);
@@ -588,10 +588,10 @@ options.initSitePreferences = function() {
         details.querySelector('#allowIframes').addEventListener('change', checkboxClicked);
         details.querySelector('#autoSubmit').checked = autoSubmit;
         details.querySelector('#autoSubmit').addEventListener('change', checkboxClicked);
-        details.querySelector('#autoFillCredentials').checked = autoFillCredentials;
-        details.querySelector('#autoFillCredentials').addEventListener('change', checkboxClicked);
-        details.querySelector('#autoFillTOTP').checked = autoFillTOTP;
-        details.querySelector('#autoFillTOTP').addEventListener('change', checkboxClicked);
+        details.querySelector('#autoFillSingleEntry').checked = autoFillSingleEntry;
+        details.querySelector('#autoFillSingleEntry').addEventListener('change', checkboxClicked);
+        details.querySelector('#autoFillSingleTotp').checked = autoFillSingleTotp;
+        details.querySelector('#autoFillSingleTotp').addEventListener('change', checkboxClicked);
         details.querySelector('#deleteButton').addEventListener('click', removeButtonClicked);
 
         $('#tab-site-preferences #sitePreferencesTable').append(row);
@@ -682,8 +682,8 @@ options.initSitePreferences = function() {
                 site.improvedFieldDetection,
                 site.allowIframes,
                 site.autoSubmit,
-                site.autoFillCredentials,
-                site.autoFillTOTP,
+                site.autoFillSingleEntry,
+                site.autoFillSingleTotp,
             );
             ++counter;
         }
