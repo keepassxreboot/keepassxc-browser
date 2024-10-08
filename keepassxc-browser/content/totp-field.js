@@ -106,17 +106,7 @@ class TOTPFieldIcon extends Icon {
 
 // Fill TOTP automatically if option is enabled
 TOTPFieldIcon.prototype.autoFillSingleTotp = async function(field) {
-    // Check for site preference overrides
-    const sitePreference = kpxc.retrieveSitePreference();
-    let autoFillSingleTotpSitePreference = false;
-    if (sitePreference !== null && sitePreference !== undefined) {
-      if (sitePreference.autoFillTOTP === true || sitePreference.autoFillTOTP === false) {
-        autoFillSingleTotpSitePreference = sitePreference.autoFillTOTP;
-      }
-    }
-
-
-    if (kpxc.settings.autoFillSingleTotp || autoFillSingleTotpSitePreference) {
+    if (kpxc.preferencesForPage?.autoFillTOTP || kpxc.settings.autoFillSingleTotp) {
         if (kpxc.credentials.length === 0) {
             await kpxc.receiveCredentialsIfNecessary();
         }

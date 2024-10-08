@@ -26,6 +26,7 @@ kpxc.detectedFields = 0;
 kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
 kpxc.settings = {};
+kpxc.preferencesForPage = null;
 kpxc.singleInputEnabledForPage = false;
 kpxc.submitUrl = null;
 kpxc.url = null;
@@ -502,18 +503,9 @@ kpxc.prepareCredentials = async function() {
     }
 
     if (kpxc.credentials.length === 1) {
-      if (kpxc.settings.autoFillSingleEntry) {
+      if (kpxc.preferencesForPage?.autoFillCredentials || kpxc.settings.autoFillSingleEntry) {
         kpxcFill.fillFromAutofill();
         return;
-      }
-
-      // Check for site preference overrides
-      const sitePreference = kpxc.retrieveSitePreference();
-      if (sitePreference !== null && sitePreference !== undefined) {
-        if (sitePreference.autoFillCredentials === true) {
-          kpxcFill.fillFromAutofill();
-          return;
-        }
       }
     }
 
@@ -983,6 +975,7 @@ const initContentScript = async function() {
         }
 
         kpxc.settings = settings;
+        kpxc.preferencesForPage = kpxc.retrieveSitePreference();
 
         if (await kpxc.siteIgnored()) {
             logDebug('This site is ignored in Site Preferences.');
