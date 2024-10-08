@@ -739,11 +739,15 @@
                         <span data-i18n="optionsSitePreferencesNotFound"></span>
                       </li>
 
+                      <!-- Template row -->
                       <li class="clone d-none list-group-item">
                         <details>
                           <summary>
                             <div class="row justify-content-between">
+                              <!-- Text field for the URL -->
                               <div class="col-auto pe-0" style="word-break: break-all;"></div>
+
+                              <!-- Delete button -->
                               <div class="col-auto" style="margin-left: auto;">
                                 <button id="deleteButton" class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeSitePreferencesButtonTitle">
                                   <i class="fa fa-remove" aria-hidden="true"></i>
@@ -753,8 +757,10 @@
                             </div>
                           </summary>
 
+                          <!-- Site preference settings -->
                           <div class="container m-3">
                             <div class="row align-items-start gx-5">
+                              <!-- Ignore settings -->
                               <div class="col-auto">
                                 <div class="form-group mb-3">
                                   <label for="ignore" class="form-label" data-i18n="optionsColumnIgnore"></label>
@@ -766,7 +772,10 @@
                                   </select>
                                 </div>
                               </div>
+
+                              <!-- Filling credentials -->
                               <div class="col-auto">
+                                <!-- Username only detection -->
                                 <div class="form-group">
                                   <div class="form-check">
                                     <label for="usernameOnly" data-i18n="optionsColumnUsernameOnly"></label>
@@ -774,6 +783,7 @@
                                   </div>
                                 </div>
 
+                                <!-- Improved input field detection -->
                                 <div class="form-group">
                                   <div class="form-check">
                                     <label for="improvedFieldDetection" data-i18n="optionsColumnImprovedInputFieldDetection"></label>
@@ -781,6 +791,7 @@
                                   </div>
                                 </div>
 
+                                <!-- Allow iFrames -->
                                 <div class="form-group">
                                   <div class="form-check">
                                     <label for="allowIframes" data-i18n="optionsColumnAllowIframes"></label>
@@ -788,7 +799,11 @@
                                   </div>
                                 </div>
                               </div>
+
+                              <!-- Filling credentials -->
                               <div class="col-auto">
+
+                                <!-- Use Auto-Submit -->
                                 <div class="form-group">
                                   <div class="form-check" data-i18n="[title]optionsAutoSubmitHelpText">
                                     <label for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
@@ -796,6 +811,7 @@
                                   </div>
                                 </div>
 
+                                <!-- Automatically fill single-credential entries -->
                                 <div class="form-group">
                                   <div class="form-check" data-i18n="[title]optionsAutoFillSingleEntryHelpText">
                                     <label for="autoFillSingleEntry" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
@@ -803,6 +819,7 @@
                                   </div>
                                 </div>
 
+                                <!-- Automatically fill single-credential TOTP fields -->
                                 <div class="form-group">
                                   <div class="form-check" data-i18n="[title]optionsAutoFillSingleTotpHelpText">
                                     <label for="autoFillSingleTotp" data-i18n="optionsCheckboxAutoFillSingleTotp"></label>
