@@ -528,7 +528,7 @@ options.initSitePreferences = function() {
         const closestLi = this.closest('li');
         $('#dialogDeleteSite').setAttribute('url', closestLi.getAttribute('url'));
         $('#dialogDeleteSite').setAttribute('tr-id', closestLi.getAttribute('id'));
-        $('#dialogDeleteSite .modal-body strong').textContent = closestLi.children[0].textContent;
+        $('#dialogDeleteSite .modal-body strong').textContent = closestLi.children[0].children[0].children[0].children[0].textContent;
 
         dialogDeleteSiteModal.show();
     };
