@@ -169,5 +169,8 @@
             "strict_min_version": "96.0"
         }
     },
+    "storage": {
+      "managed_schema": "managed_storage.json"
+    },
     "default_locale": "en"
 }
