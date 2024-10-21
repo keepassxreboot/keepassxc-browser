@@ -115,7 +115,10 @@ kpxcObserverHelper.initObserver = async function() {
 // Stores mutation style to an cache array
 // If there's a single style mutation, it's safe to calculate it
 kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
-    if (mut.attributeName !== 'style') {
+    // Do not cache elements with animations
+    if (mut?.attributeName !== 'style'
+        || mut?.target?.style?.transform !== ''
+        || mut?.target?.style?.transformStyle !== '') {
         return;
     }
 
