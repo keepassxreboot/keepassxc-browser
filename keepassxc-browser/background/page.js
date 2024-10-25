@@ -62,6 +62,20 @@ page.popupData = {
 page.initSettings = async function() {
     try {
         const item = await browser.storage.local.get({ 'settings': {} });
+
+        // Load managed settings if found when extension is started for the first time
+        if (Object.keys(item.settings).length === 0) {
+            try {
+                const managedSettings = await browser.storage.managed.get('settings');
+                if (managedSettings?.settings) {
+                    console.log('Managed settings found.');
+                    item.settings = managedSettings.settings;
+                }
+            } catch (err) {
+                logError('page.initSettings error: ' + err);
+            }
+        }
+
         page.settings = item.settings;
         page.settings.autoReconnect = false;
 
