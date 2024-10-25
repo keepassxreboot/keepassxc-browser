@@ -331,7 +331,7 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Potwierdź swój wybór lub wybierz więcej pól jako <em>Pola ciągów</em>.",
+        "message": "Potwierdź swój wybór lub wybierz więcej pól jako pola ciągów.",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Wciśnij ikonę KeePassXC-Browser, aby uzyskać więcej opcji.",
+        "message": "Kliknij ikonę KeePassXC-Browser, aby uzyskać więcej opcji.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -475,7 +475,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser nie został skonfigurowany. Wciśnij przycisk podłączenia, aby sparować z KeePassXC.",
+        "message": "KeePassXC-Browser nie został skonfigurowany. Kliknij przycisk podłączenia, aby sparować z KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -483,7 +483,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Wciśnij przycisk ponownego podłączenia, aby ustanowić nowe połączenie.",
+        "message": "Kliknij przycisk ponownego podłączenia, aby ustanowić nowe połączenie.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -519,11 +519,11 @@
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "Wybierz dane uwierzytelniające, które chcesz zaktualizować.",
+        "message": "Wybierz dane uwierzytelniające do zaktualizowania.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Wybierz grupę, do której chcesz dodać nowe dane uwierzytelniające.",
+        "message": "Wybierz grupę do przechowywania nowych danych uwierzytelniających.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -714,6 +714,10 @@
         "message": "Oddziel grupę ukośnikami, na przykład: Grupa/Podgrupa.",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Domyślna grupa do zapisywania nowych kluczy dostępu:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Zawsze pytaj, gdzie zapisać nowe dane uwierzytelniające",
         "description": "Default group checkbox help text."
@@ -823,7 +827,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "co 3 dni",
+        "message": "co trzy dni",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -1035,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Czy na pewno chcesz usunąć następujący identyfikator z listy baz danych: $1",
+        "message": "Czy na pewno chcesz usunąć następujący identyfikator z listy baz danych: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {

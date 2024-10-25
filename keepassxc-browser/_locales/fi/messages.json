@@ -184,7 +184,7 @@
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Passkeys-pyyntö on peruttu.",
+        "message": "Pääsyavainpyyntö on peruttu.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -220,7 +220,7 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Tuntematon passkeys-virhe.",
+        "message": "Tuntematon pääsyavainvirhe.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -714,6 +714,10 @@
         "message": "Erota ryhmät vinoviivalla, esimerkiksi: Ryhmä/AlaRyhmä.",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Oletusryhmä johon uudet pääsyavaimet tallennetaan:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Kysy aina minne uudet tietueet tallennetaan.",
         "description": "Default group checkbox help text."
@@ -787,7 +791,7 @@
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
-        "message": "Use compact mode",
+        "message": "Käytä kompaktia tilaa",
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
@@ -919,7 +923,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
+        "message": "Kun tietueita löytyy eri ryhmistä, näytetään ryhmän nimi. Vaikuttaa vain kompaktissa tilassa.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -931,7 +935,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Use a compact version of the dropdown list to select credentials.",
+      "message": "Käytä kompaktia versiota listasta, kun valitset sivulla tietueita.",
       "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -1035,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Haluatko poistaa seuraavan tunnisteen tietokantalistasta: $1",
+        "message": "Haluatko poistaa seuraavan tunnisteen tietokantalistasta: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1315,11 +1319,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeyt",
+        "message": "Pääsyavaimet",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Ota käyttöön passkeyt",
+        "message": "Ota käyttöön pääsyavaimet",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1331,7 +1335,7 @@
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Kun aktivoitu, epäonnistunut tai peruutettu pyyntö KeePassXC:lle ohjaa selaimen omaan passkeys-pyyntöön. Mikäli asetus on pois päältä, yhteys KeePassXC:hen on vaadittu, ja peruutettu pyyntö epäonnistuu suoraan. Oletus: aktivoitu.",
+        "message": "Kun aktivoitu, epäonnistunut tai peruutettu pyyntö KeePassXC:lle ohjaa selaimen omaan pääsyavainpyyntöön. Mikäli asetus on pois päältä, yhteys KeePassXC:hen on vaadittu, ja peruutettu pyyntö epäonnistuu suoraan. Oletus: aktivoitu.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

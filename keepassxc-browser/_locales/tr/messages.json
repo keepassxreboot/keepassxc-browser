@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Daha fazla seçenek için KeePassXC-Tarayıcı simgesine tıklayın.",
+        "message": "Daha fazla seçenek için KeePassXC-Browser simgesine tıklayın.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Lütfen yeni kimlik doğrulama bilgilerini eklemek istediğiniz kümeyi seçin.",
+        "message": "Lütfen yeni kimlik doğrulama bilgilerini kaydetmek istediğiniz grubu seçin.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -627,7 +627,7 @@
         "description": "General Settings tab text."
     },
     "optionsConnectedDatabasesTab": {
-        "message": "Bağlı veritabanları",
+        "message": "Bağlı veri tabanları",
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
@@ -647,7 +647,7 @@
         "description": "General settings page header."
     },
     "optionsMenuConnectedDatabases": {
-        "message": "Bağlı veritabanları",
+        "message": "Bağlı veri tabanları",
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
@@ -713,6 +713,10 @@
     "optionsDefaultGroupHelpText": {
         "message": "Grupları bölü karakteri ile ayırarak yazın. Örnek: Grup/AltGrup.",
         "description": "Default group help text."
+    },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Yeni geçiş anahtarlarının kaydedileceği varsayılan grup:",
+        "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Her zaman yeni kimlik doğrulama bilgilerinin nereye kaydedileceği sorulur",
@@ -823,7 +827,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "3 günde bir",
+        "message": "üç günde bir",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -1023,7 +1027,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
-        "message": "KeePassXC-Browser ile bağlantısı kurulmuş KeePassXC veritabanları.",
+        "message": "KeePassXC-Browser ile bağlantısı kurulmuş KeePassXC veri tabanları.",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
@@ -1035,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Şu tanımlayıcıyı veritabanları listesinden kaldırmak istediğinize emin misiniz: $1",
+        "message": "Şu tanımlayıcıyı veri tabanları listesinden kaldırmak istediğinize emin misiniz: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {

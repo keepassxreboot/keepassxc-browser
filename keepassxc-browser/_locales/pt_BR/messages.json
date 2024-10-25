@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Pressione o ícone do KeePassXC-Browser para mais opções.",
+        "message": "Clique no ícone KeePassXC-Browser para mais opções.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -475,7 +475,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "O KeePassXC-Browser não foi configurado. Pressione o botão de conexão para conectar com o KeePassXC.",
+        "message": "KeePassXC-Browser não foi configurado. Clique no botão conectar para emparelhar com KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -483,7 +483,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Pressione o botão de reconexão para estabelecer uma nova conexão.",
+        "message": "Clique no botão reconectar para estabelecer uma nova conexão.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Escolha o grupo onde você deseja adicionar as novas credenciais.",
+        "message": "Escolha um grupo para armazenar novas credenciais.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -714,6 +714,10 @@
         "message": "Separe o grupo com barras, por exemplo: Grupo/SubGrupo.",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Grupo padrão para salvar novas chaves de acesso:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Sempre pergunte onde salvar as novas credenciais",
         "description": "Default group checkbox help text."
@@ -823,7 +827,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "a cada 3 dias",
+        "message": "a cada três dias",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -1035,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Deseja realmente remover o seguinte identificador da lista do banco de dados: $1",
+        "message": "Você realmente deseja remover o seguinte identificador da lista do banco de dados: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
