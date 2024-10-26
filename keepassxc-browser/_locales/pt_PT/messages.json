@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Prima o ícone KeePassXC-Browser para mais opções",
+        "message": "Clique no ícone KeePassXC-Browser para mais opções.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -475,7 +475,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser não foi configurado. Prima o botão Conectar para emparelhar com KeePassXC.",
+        "message": "O KeePassXC-Browser não foi configurado. Prima o botão de conectar para emparelhar com KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -483,7 +483,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Prima o botão 'Conectar novamente' para estabelecer uma nova ligação",
+        "message": "Prima o botão de conectar novamente para estabelecer uma nova conexão.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Escolha o grupo para o qual pretende adicionar as novas credenciais",
+        "message": "Escolha o grupo para o qual pretende adicionar as novas credenciais.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -714,6 +714,10 @@
         "message": "Separe os grupos com barra. Por exemplo: Grupo/Subgrupo",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Grupo predefinido para guardar as novas chaves-mestra:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Perguntar sempre para guardar novas credenciais",
         "description": "Default group checkbox help text."
@@ -787,7 +791,7 @@
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
-        "message": "Use compact mode",
+        "message": "Usar modo compacto",
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
@@ -823,7 +827,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "a cada 3 dias",
+        "message": "de três em três dias",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -883,7 +887,7 @@
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
+        "message": "Adiciona sites comuns que têm formulários de início de sessão apenas com o nome de utilizador às preferências do site.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -919,7 +923,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
+        "message": "Quando as credenciais são devolvidas de grupos diferentes, o nome do grupo será apresentado. Afeta apenas o modo compacto.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -931,7 +935,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Use a compact version of the dropdown list to select credentials.",
+      "message": "Usa uma versão compacta da lista pendente para selecionar as credenciais.",
       "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -939,7 +943,7 @@
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
+        "message": "Ao guardar novos campos de início de sessão personalizados, guarda apenas o domínio em vez do URL completo.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1035,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Tem a certeza de que deseja remover o seguinte identificador da lista da base de dados: $1",
+        "message": "Pretende realmente remover o seguinte identificador da lista da base de dados: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1143,11 +1147,11 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved Custom Login Fields found.",
+        "message": "Não foram encontrados campos de início de sessão personalizados guardados.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved Custom Login Fields using the table.",
+        "message": "Pode gerir os campos de início de sessão personalizados guardados utilizando a tabela.",
         "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
@@ -1159,15 +1163,15 @@
         "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "On this page you can manage saved Custom Login Fields.",
+        "message": "Nesta página, pode gerir os campos de início de sessão personalizados guardados.",
         "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remove saved Custom Login Fields?",
+        "message": "Remover campos de início de sessão personalizados guardados?",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "message": "Pretende realmente remover os campos de início de sessão personalizados guardados na página: $1",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
@@ -1175,7 +1179,7 @@
         "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "No Site Preferences found.",
+        "message": "Não foram encontradas preferências do site.",
         "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -1223,7 +1227,7 @@
         "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved Site Preferences using the table.",
+        "message": "Pode gerir as preferências do site guardadas utilizando a tabela.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {

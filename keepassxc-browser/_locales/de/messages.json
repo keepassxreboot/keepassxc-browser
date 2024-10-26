@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Bitte wählen Sie die Gruppe aus, zu der Sie die neuen Anmeldedaten hinzufügen möchten.",
+        "message": "Bitte wählen Sie eine Gruppe aus, in der neue Anmeldedaten gespeichert werden sollen.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -713,6 +713,10 @@
     "optionsDefaultGroupHelpText": {
         "message": "Trennen Sie die Gruppe durch Schrägstriche, zum Beispiel: Gruppe/KinderGruppe.",
         "description": "Default group help text."
+    },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Standardgruppe zum Speichern neuer Passkeys:",
+        "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Immer nachfragen, wo neue Anmeldedaten gespeichert werden sollen",

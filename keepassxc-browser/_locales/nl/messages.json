@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Klik op het pictogram KeePassXC-Browser voor meer opties.",
+        "message": "Klik het KeePassXC-browserpictogram voor meer opties.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -475,7 +475,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser is nog niet ingesteld. Klik op ‘Verbinden’ om te koppelen met KeePassXC.",
+        "message": "KeePassXC-Browser is niet geconfigureerd. Klik op de knop  Verbinden om te koppelen met KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -483,7 +483,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Druk ‘Opnieuw verbinden’ om een nieuwe koppeling te maken.",
+        "message": "Klik op de knop Opnieuw verbinden om een nieuwe verbinding tot stand te brengen.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Kies de groep waaraan de nieuwe inloggegevens moeten worden toegevoegd.",
+        "message": "Kies een groep om nieuwe inloggegevens op te slaan.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -714,6 +714,10 @@
         "message": "Groep en subgroep scheiden met schuine strepen, bijv.: Groep/Subgroep.",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Standaardgroep voor opslag van nieuwe passkeys:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Altijd vragen waar nieuwe inloggegevens moeten worden opgeslagen",
         "description": "Default group checkbox help text."
@@ -823,7 +827,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "elke 3 dagen",
+        "message": "elke drie dagen",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -1035,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Weet je zeker dat je de volgende identificatie van de databaselijst wilt verwijderen: $1",
+        "message": "Wil je dit item echt uit de databaselijst verwijderen?: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {

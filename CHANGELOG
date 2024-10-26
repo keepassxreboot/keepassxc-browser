@@ -1,3 +1,17 @@
+1.9.4 (2024-10-26)
+=========================
+- Add configuration option for passkeys default group [#2346]
+- Add icon offset exception [#2356]
+- Add support for draggable banners [#2359]
+- Add support for managed settings using 3rdparty policy [#2366]
+- Fix exception on Credential Banner [#2326]
+- Fix content positioning with CSS zoom (thanks Xia0xia0Xia0) [#2341]
+- Fix Predefined Sites for some pages [#2351]
+- Fix illegal invocation of getPublicKey and getPublicKeyAlgorithm with passkeys (thanks Keroosha) [#2323]
+- Fix translations [#2361]
+- Fix to ignore animation elements when using dynamic input field detection [#2367]
+- Refactor Improved Input Field Detection to handle Shadow DOM better [#2360]
+
 1.9.3 (2024-08-24)
 =========================
 - Fix allowing content scripts on XHTML pages [#2314]
@@ -38,7 +52,7 @@
 
 1.9.0.5 (2024-05-12)
 =========================
--  Remove obsolete hashed scripts from manifest [#2195]
+- Remove obsolete hashed scripts from manifest [#2195]
 
 1.9.0.4 (2024-05-03)
 =========================
