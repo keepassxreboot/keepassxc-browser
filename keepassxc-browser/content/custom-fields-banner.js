@@ -6,6 +6,8 @@ const STEP_SELECT_PASSWORD = 2;
 const STEP_SELECT_TOTP = 3;
 const STEP_SELECT_STRING_FIELDS = 4;
 
+const CHECKBOX_OVERLAY_SIZE = 20;
+
 const DEFINED_CUSTOM_FIELDS = 'defined-custom-fields';
 const FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field';
 const DARK_FIXED_FIELD_CLASS = 'kpxcDefine-fixed-field-dark';
@@ -17,6 +19,10 @@ const PASSWORD_FIELD_CLASS = 'kpxcDefine-fixed-password-field';
 const TOTP_FIELD_CLASS = 'kpxcDefine-fixed-totp-field';
 const STRING_FIELD_CLASS = 'kpxcDefine-fixed-string-field';
 
+const inputQueryPatternStart = 'input';
+const inputQueryPatternNotCheckbox = ':not([type=checkbox])';
+const inputQueryPattern = ':not([disabled]):not([type=button]):not([type=radio]):not([type=color]):not([type=date]):not([type=datetime-local]):not([type=file]):not([type=hidden]):not([type=image]):not([type=month]):not([type=range]):not([type=reset]):not([type=submit]):not([type=time]):not([type=week]), select, textarea';
+
 const kpxcCustomLoginFieldsBanner = {};
 kpxcCustomLoginFieldsBanner.banner = undefined;
 kpxcCustomLoginFieldsBanner.chooser = undefined;
@@ -24,7 +30,8 @@ kpxcCustomLoginFieldsBanner.created = false;
 kpxcCustomLoginFieldsBanner.dataStep = STEP_NONE;
 kpxcCustomLoginFieldsBanner.infoText = undefined;
 kpxcCustomLoginFieldsBanner.wrapper = undefined;
-kpxcCustomLoginFieldsBanner.inputQueryPattern = 'input:not([type=button]):not([type=checkbox]):not([type=color]):not([type=date]):not([type=datetime-local]):not([type=file]):not([type=hidden]):not([type=image]):not([type=month]):not([type=range]):not([type=reset]):not([type=submit]):not([type=time]):not([type=week]), select, textarea';
+kpxcCustomLoginFieldsBanner.inputQueryPatternNormal = inputQueryPatternStart + inputQueryPatternNotCheckbox + inputQueryPattern;
+kpxcCustomLoginFieldsBanner.inputQueryPatternStringFields = inputQueryPatternStart + inputQueryPattern;
 kpxcCustomLoginFieldsBanner.markedFields = [];
 kpxcCustomLoginFieldsBanner.nonSelectedElementsPattern = `div.${FIXED_FIELD_CLASS}:not(.${USERNAME_FIELD_CLASS}):not(.${PASSWORD_FIELD_CLASS}):not(.${TOTP_FIELD_CLASS}):not(.${STRING_FIELD_CLASS})`;
 
@@ -55,7 +62,8 @@ kpxcCustomLoginFieldsBanner.destroy = async function() {
     kpxcCustomLoginFieldsBanner.created = false;
     kpxcCustomLoginFieldsBanner.close();
 
-    if (kpxcCustomLoginFieldsBanner.wrapper && window.self.document.body.contains(kpxcCustomLoginFieldsBanner.wrapper)) {
+    if (kpxcCustomLoginFieldsBanner.wrapper
+        && window.self.document.body.contains(kpxcCustomLoginFieldsBanner.wrapper)) {
         window.self.document.body.removeChild(kpxcCustomLoginFieldsBanner.wrapper);
     } else {
         window.self.document.body.removeChild(window.parent.document.body.querySelector('#kpxc-banner'));
@@ -507,7 +515,10 @@ kpxcCustomLoginFieldsBanner.selectStringFields = function() {
 
 kpxcCustomLoginFieldsBanner.markFields = function() {
     let firstInput;
-    const inputs = document.querySelectorAll(kpxcCustomLoginFieldsBanner.inputQueryPattern);
+    const inputs = document.querySelectorAll(
+        kpxcCustomLoginFieldsBanner.dataStep === STEP_SELECT_STRING_FIELDS
+            ? kpxcCustomLoginFieldsBanner.inputQueryPatternStringFields
+            : kpxcCustomLoginFieldsBanner.inputQueryPatternNormal);
     const zoom = kpxcUI.bodyStyle.zoom || 1;
 
     for (const i of inputs) {
@@ -528,7 +539,17 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
         field.style.left = Pixels(rect.left / zoom);
         field.style.width = Pixels(rect.width / zoom);
         field.style.height = Pixels(rect.height / zoom);
-        field.textContent = dataStepToString();
+
+        // Don't show the default overlay text on checkboxes. Applied only after selection.
+        if (kpxcCustomLoginFieldsBanner.dataStep !== STEP_SELECT_STRING_FIELDS) {
+            field.textContent = dataStepToString();
+        }
+        
+        // Static size for the checkbox overlay
+        if (i?.getLowerCaseAttribute('type') === 'checkbox') {
+            field.style.width = Pixels(CHECKBOX_OVERLAY_SIZE / zoom);
+            field.style.height = Pixels(CHECKBOX_OVERLAY_SIZE / zoom);
+        }
 
         // Change selection theme if needed
         const isLightTheme = isLightThemeBackground(i);
@@ -619,6 +640,11 @@ kpxcCustomLoginFieldsBanner.setSelectionPosition = function(field) {
 
     field.style.top = Pixels(top + scrollTop);
     field.style.left = Pixels(left + scrollLeft);
+
+    if (field.originalElement?.getLowerCaseAttribute('type') === 'checkbox') {
+        // Position the overlay to the center of checkbox
+        field.style.transform = 'translate(-25%, -25%)';
+    }
 };
 
 kpxcCustomLoginFieldsBanner.getNonSelectedElements = function() {
