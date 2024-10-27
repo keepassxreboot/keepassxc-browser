@@ -698,7 +698,7 @@ kpxc.setPasswordFilled = async function(state) {
     await sendMessage('password_set_filled', state);
 };
 
-// Special handling for settings value to select element
+// Special handling for setting value to select and checkbox elements
 kpxc.setValue = function(field, value, forced = false) {
     if (field.matches('select')) {
         value = value.toLowerCase().trim();
@@ -712,6 +712,8 @@ kpxc.setValue = function(field, value, forced = false) {
         }
 
         return;
+    } else if (field.getLowerCaseAttribute('type') === 'checkbox' && value?.toLowerCase() === 'true') {
+        field.checked = true;
     }
 
     kpxc.setValueWithChange(field, value, forced);
