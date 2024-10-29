@@ -1,10 +1,26 @@
 import { test, expect } from '@playwright/test';
 import {
+    compareVersion,
     matchesWithNodeName,
     siteMatch,
     slashNeededForUrl,
     trimURL
 } from '../keepassxc-browser/common/global.js';
+
+test('Test compareVersion()', async ({ page }) => {
+    // compareVersion(minimum, current)
+    expect(compareVersion('2.7.0', '2.7.0')).toBe(true);
+    expect(compareVersion('2.7.1', '2.7.0')).toBe(false);
+    expect(compareVersion('2.8.0', '2.7.0')).toBe(false);
+    expect(compareVersion('2.7.9', '2.7.9-snapshot')).toBe(true);
+    expect(compareVersion('2.7.9', '2.7.9-beta')).toBe(true);
+    expect(compareVersion('2.7.9-snapshot', '2.7.9')).toBe(false); // Snapshot cannot be the minimum version
+    expect(compareVersion('2.7.9-beta', '2.7.9')).toBe(false); // Beta cannot be the minimum version
+    expect(compareVersion('faulty', '2.7.0')).toBe(false);
+    expect(compareVersion('2.7.0', 'faulty')).toBe(false);
+    expect(compareVersion('2.7.0.0.0.0.0', '2.7.0.0.0.0.0')).toBe(true);
+    expect(compareVersion('2.7.0.0', '2.7.0.1')).toBe(true);
+});
 
 test('Test matchesWithNodeName()', async ({ page }) => {
     const elem1 = { nodeName: 'INPUT' };
