@@ -951,7 +951,7 @@ keepass.compareVersions = function(versions, current, canBeEqual = true) {
         return {};
     }
 
-    let result = {};
+    const result = {};
     for (const version of versions) {
         result[version] = compareVersion(version, current, canBeEqual);
     }

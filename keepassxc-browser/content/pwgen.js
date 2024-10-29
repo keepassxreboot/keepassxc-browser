@@ -151,7 +151,7 @@ const isPasswordGeneratorSupported = async function() {
 
     const result = await browser.runtime.sendMessage({
         action: 'compare_versions',
-        args: [ ['2.7.0'], response.current ]
+        args: [ [ '2.7.0' ], response.current ]
     });
 
     return result['2.7.0'] || false;
