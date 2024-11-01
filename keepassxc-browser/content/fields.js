@@ -20,7 +20,7 @@ kpxcFields.getAllCombinations = async function(inputs) {
             continue;
         }
 
-        if (input.getLowerCaseAttribute('type') === 'password') {
+        if (input.getLowerCaseAttribute('type') === 'password' && !kpxcTOTPIcons.isAcceptedTOTPField(input)) {
             const combination = {
                 username: (!usernameField || usernameField.size < 1) ? null : usernameField,
                 password: input,
