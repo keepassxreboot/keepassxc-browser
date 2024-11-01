@@ -946,7 +946,7 @@ keepass.updateDatabaseHashToContent = async function() {
 };
 
 // Expects an array of versions to compare
-keepass.compareVersions = function(versions, current, canBeEqual = true) {
+keepass.compareMultipleVersions = function(versions, current, canBeEqual = true) {
     if (!Array.isArray(versions)) {
         return {};
     }
