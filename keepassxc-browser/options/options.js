@@ -324,48 +324,40 @@ options.showKeePassXCVersions = async function(response) {
     $('#tab-about span.kpxcVersion').textContent = response.current;
     $('#tab-general-settings button.checkUpdateKeePassXC').disabled = false;
 
-    // Hide/disable certain options with older KeePassXC versions than 2.6.0
-    const version260Result = await browser.runtime.sendMessage({
-        action: 'compare_version',
-        args: [ '2.6.0', response.current ]
+    const versionResults = await browser.runtime.sendMessage({
+        action: 'compare_versions',
+        args: [
+            [
+                '2.6.0',
+                '2.7.0',
+                '2.7.7',
+                '2.7.10'
+            ],
+            response.current
+        ],
     });
 
-    if (version260Result) {
+    // Hide/disable certain options with older KeePassXC versions than 2.6.0
+    if (versionResults['2.6.0']) {
         $('#tab-general-settings #versionRequiredAlert').hide();
     } else {
         $('#tab-general-settings #showGroupNameInAutocomplete').disabled = true;
     }
 
     // Hide certain options with older KeePassXC versions than 2.7.0
-    const version270Result = await browser.runtime.sendMessage({
-        action: 'compare_version',
-        args: [ '2.7.0', response.current ]
-    });
-
-    if (!version270Result) {
+    if (!versionResults['2.7.0']) {
         $('#tab-general-settings #downloadFaviconAfterSaveFormGroup').hide();
     }
 
     // Hide certain options with older KeePassXC versions than 2.7.7
-    const version277Result = await browser.runtime.sendMessage({
-        action: 'compare_version',
-        args: [ '2.7.7', response.current ]
-    });
-
-    if (!version277Result) {
+    if (!versionResults['2.7.7']) {
         $('#tab-general-settings #passkeysOptionsCard').hide();
     }
 
-    const version2710Result = await browser.runtime.sendMessage({
-        action: 'compare_version',
-        args: [ '2.7.10', response.current ]
-    });
-
     // Hide passkeys default group option with KeePassXC version < 2.7.10
-    if (!version2710Result) {
+    if (!versionResults['2.7.10']) {
         $('#tab-general-settings #passkeysDefaultGroup').hide();
     }
-
 };
 
 options.getPartiallyHiddenKey = function(key) {

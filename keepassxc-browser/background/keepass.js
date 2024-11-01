@@ -172,7 +172,7 @@ keepass.generatePassword = async function(tab) {
             return '';
         }
 
-        if (!keepass.compareVersion(keepass.requiredKeePassXC, keepass.currentKeePassXC)) {
+        if (!compareVersion(keepass.requiredKeePassXC, keepass.currentKeePassXC)) {
             return '';
         }
 
@@ -230,7 +230,7 @@ keepass.associate = async function(tab) {
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce, false, true);
         if (response) {
             // Use public key as identification key with older KeePassXC releases
-            const savedKey = keepass.compareVersion('2.3.4', keepass.currentKeePassXC) ? idKey : key;
+            const savedKey = compareVersion('2.3.4', keepass.currentKeePassXC) ? idKey : key;
             keepass.setCryptoKey(response.id, savedKey); // Save the new identification public key as id key for the database
             keepass.associated.value = true;
             keepass.associated.hash = response.hash || 0;
@@ -544,7 +544,7 @@ keepass.createNewGroup = async function(tab, args = []) {
 
 keepass.getTotp = async function(tab, args = []) {
     const [ uuid, oldTotp ] = args;
-    if (!keepass.compareVersion('2.6.1', keepass.currentKeePassXC, true)) {
+    if (!compareVersion('2.6.1', keepass.currentKeePassXC, true)) {
         return oldTotp;
     }
 
@@ -786,7 +786,7 @@ keepass.enableAutomaticReconnect = async function() {
     if (!page.settings.autoReconnect
         || (navigator.platform.toLowerCase().includes('win')
             && keepass.currentKeePassXC
-            && !keepass.compareVersion('2.3.4', keepass.currentKeePassXC))) {
+            && !compareVersion('2.3.4', keepass.currentKeePassXC))) {
         return;
     }
 
@@ -869,7 +869,7 @@ keepass.keePassXCUpdateAvailable = async function() {
             await keepass.checkForNewKeePassXCVersion();
         }
 
-        return keepass.compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version, false);
+        return compareVersion(keepass.currentKeePassXC, keepass.latestKeePassXC.version, false);
     }
 
     return false;
@@ -945,25 +945,18 @@ keepass.updateDatabaseHashToContent = async function() {
     }
 };
 
-keepass.compareVersion = function(minimum, current, canBeEqual = true) {
-    if (!minimum || !current) {
-        return false;
+// Expects an array of versions to compare
+keepass.compareMultipleVersions = function(versions, current, canBeEqual = true) {
+    if (!Array.isArray(versions)) {
+        return {};
     }
 
-    // Handle beta/snapshot builds as stable version
-    const snapshot = '-snapshot';
-    const beta = '-beta';
-    if (current.endsWith(snapshot)) {
-        current = current.slice(0, -snapshot.length);
+    const result = {};
+    for (const version of versions) {
+        result[version] = compareVersion(version, current, canBeEqual);
     }
 
-    if (current.endsWith(beta)) {
-        current = current.slice(0, -beta.length);
-    }
-
-    const min = minimum.split('.', 3).map(s => s.padStart(4, '0')).join('.');
-    const cur = current.split('.', 3).map(s => s.padStart(4, '0')).join('.');
-    return (canBeEqual ? (min <= cur) : (min < cur));
+    return result;
 };
 
 const removeDuplicateEntries = function(arr) {

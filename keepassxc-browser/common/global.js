@@ -61,6 +61,27 @@ const ManualFill = {
     BOTH: 2
 };
 
+const compareVersion = function(minimum, current, canBeEqual = true) {
+    if (!minimum || !current || minimum?.indexOf('.') === -1 || current?.indexOf('.') === -1) {
+        return false;
+    }
+
+    // Handle beta/snapshot builds as stable version
+    const snapshot = '-snapshot';
+    const beta = '-beta';
+    if (current.endsWith(snapshot)) {
+        current = current.slice(0, -snapshot.length);
+    }
+
+    if (current.endsWith(beta)) {
+        current = current.slice(0, -beta.length);
+    }
+
+    const min = minimum.split('.', 3).map(s => s.padStart(4, '0')).join('.');
+    const cur = current.split('.', 3).map(s => s.padStart(4, '0')).join('.');
+    return (canBeEqual ? (min <= cur) : (min < cur));
+};
+
 // Checks if element's nodeName matches
 const matchesWithNodeName = function(elem, name) {
     // Don't allow undefined element or 'name'
@@ -164,6 +185,7 @@ const getCurrentTab = async function() {
 // Exports for tests
 if (typeof module === 'object') {
     module.exports = {
+        compareVersion,
         matchesWithNodeName,
         siteMatch,
         slashNeededForUrl,

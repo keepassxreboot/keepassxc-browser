@@ -102,6 +102,7 @@
         "CHECK_UPDATE_ONE_WEEK": "readonly",
         "CHECK_UPDATE_THREE_DAYS": "readonly",
         "cloneInto": "readonly",
+        "compareVersion": "readonly",
         "createResult": "readonly",
         "createStylesheet": "readonly",
         "DatabaseState": "readonly",
