@@ -1,6 +1,6 @@
 'use strict';
 
-const ignoreRegex = /(bank|coupon|postal|user|zip).*code|comment|author|error/i;
+const ignoreRegex = /(bank|coupon|postal|user|zip).*code|(en|de)code(d|r)*|comment|author|error/i;
 const ignoredTypes = [ 'email', 'password', 'username' ];
 
 const acceptedOTPFields = [
