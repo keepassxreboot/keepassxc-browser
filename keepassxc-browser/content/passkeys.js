@@ -188,6 +188,9 @@ const throwError = function(errorCode, errorMessage) {
             }
 
             return createPublicKeyCredential(response.publicKey);
+        },
+        async store(credential) {
+            return originalCredentials.store(credential);
         }
     };
 
