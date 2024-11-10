@@ -166,7 +166,7 @@ kpxcForm.initForm = function(form, credentialFields) {
 
 // Initialize a "form" where three different password input fields are in a combination
 kpxcForm.initCustomForm = function(combinations) {
-    if (combinations?.length === 3 && combinations?.every(c => !c?.form && !c.username && c.password)) {
+    if (combinations?.length >= 2 && combinations?.every(c => !c?.form && !c.username && c.password)) {
         kpxcForm.savedCustomInputs = [];
         const submitButton = kpxcSites.formSubmitButtonExceptionFound();
         if (submitButton) {
