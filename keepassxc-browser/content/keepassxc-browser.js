@@ -327,14 +327,19 @@ kpxc.initCombinations = async function(inputs = []) {
         const field = c.username || c.password;
         if (field && c.form) {
             // Initialize form-submit for remembering credentials
-            kpxcForm.init(c.form, c);
+            kpxcForm.initForm(c.form, c);
         }
 
         // Don't allow duplicates
-        if (!kpxc.combinations.some(f => f.username === c.username && f.password === c.password && f.totp === c.totp && f.form === c.form)) {
+        if (!kpxc.combinations.some(f =>
+            f.username === c.username && f.password === c.password && f.totp === c.totp && f.form === c.form
+        )) {
             kpxc.combinations.push(c);
         }
     }
+
+    // Identify a custom password change form
+    kpxcForm.initCustomForm(combinations);
 
     // Update the fields in Custom Login Fields banner if it's open
     if (kpxcCustomLoginFieldsBanner.created) {

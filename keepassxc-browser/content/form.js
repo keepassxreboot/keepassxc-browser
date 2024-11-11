@@ -6,8 +6,38 @@
  */
 const kpxcForm = {};
 kpxcForm.formButtonQuery = 'button[type=button], button[type=submit], input[type=button], input[type=submit], button:not([type]), div[role=button]';
+kpxcForm.savedCustomInputs = [];
 kpxcForm.savedForms = [];
 kpxcForm.submitTriggered = false;
+
+// Activate the Credential Banner if existing credentials are not found
+kpxcForm.activateCredentialBanner = async function(usernameValue, passwordInputs, passwordField) {
+    let passwordValue = '';
+    // Check if the form has three password fields -> a possible password change form
+    if (passwordInputs && passwordInputs.length >= 2) {
+        passwordValue = kpxcForm.getNewPassword(passwordInputs);
+    } else if (passwordField) {
+        // Use the combination password field instead
+        passwordValue = passwordField.value;
+    }
+
+    // Return if credentials are already found
+    if (kpxc.credentials.some(c => c.login === usernameValue && c.password === passwordValue)) {
+        kpxcForm.submitTriggered = false;
+        return;
+    }
+
+    if (passwordField) {
+        await kpxc.setPasswordFilled(true);
+    }
+
+    const url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? window.top.location.origin : window.top.location.href);
+    await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, url, kpxc.credentials ]);
+
+    // Show the banner if the page does not reload
+    kpxc.rememberCredentials(usernameValue, passwordValue);
+    kpxcForm.submitTriggered = false;
+};
 
 // Returns true if form has been already saved
 kpxcForm.formIdentified = function(form) {
@@ -94,8 +124,29 @@ kpxcForm.getNewPassword = function(passwordInputs = []) {
     return '';
 };
 
+// Returns the username value from an input field or selected login
+kpxcForm.getUsernameValue = async function(usernameField) {
+    if (usernameField) {
+        return usernameField.value || usernameField.placeholder;
+    } else if (kpxc.credentials.length === 1) {
+        // Single entry found for the page, use the username of it instead of an empty one
+        return kpxc.credentials[0].login;
+    } else {
+        // Multiple entries found for the page, try to find out which one might have been used
+        const pageUuid = await sendMessage('page_get_login_id');
+        if (pageUuid) {
+            const credential = kpxc.credentials.find(c => c.uuid === pageUuid);
+            if (credential) {
+                return credential.login;
+            }
+        }
+    }
+
+    return '';
+};
+
 // Initializes form and attaches the submit button to our own callback
-kpxcForm.init = function(form, credentialFields) {
+kpxcForm.initForm = function(form, credentialFields) {
     if (!form.action || typeof form.action !== 'string') {
         logDebug('Error: Form action is not found.');
         return;
@@ -111,6 +162,30 @@ kpxcForm.init = function(form, credentialFields) {
             submitButton.addEventListener('click', kpxcForm.onSubmit);
         }
     }
+};
+
+// Initialize a "form" where three different password input fields are in a combination
+kpxcForm.initCustomForm = function(combinations) {
+    if (combinations?.length >= 2 && combinations?.every(c => !c?.form && !c.username && c.password)) {
+        kpxcForm.savedCustomInputs = [];
+        const submitButton = kpxcSites.formSubmitButtonExceptionFound();
+        if (submitButton) {
+            kpxcForm.savedCustomInputs = combinations?.map(c => c.password);
+            submitButton.addEventListener('click', kpxcForm.onCustomFormSubmit);
+        }
+    }
+};
+
+// Triggers when a custom form has been identified with a specific form submit button
+kpxcForm.onCustomFormSubmit = async function(e) {
+    if (!e.isTrusted || kpxcForm.savedCustomInputs?.length === 0) {
+        return;
+    }
+
+    kpxcForm.submitTriggered = true;
+
+    const usernameValue = await kpxcForm.getUsernameValue();
+    await kpxcForm.activateCredentialBanner(usernameValue, kpxcForm.savedCustomInputs);
 };
 
 // Triggers when form is submitted. Shows the credential banner
@@ -154,49 +229,8 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     const [ usernameField, passwordField, passwordInputs ] = kpxcForm.getCredentialFieldsFromForm(form);
-    let usernameValue = '';
-    let passwordValue = '';
-
-    if (usernameField) {
-        usernameValue = usernameField.value || usernameField.placeholder;
-    } else if (kpxc.credentials.length === 1) {
-        // Single entry found for the page, use the username of it instead of an empty one
-        usernameValue = kpxc.credentials[0].login;
-    } else {
-        // Multiple entries found for the page, try to find out which one might have been used
-        const pageUuid = await sendMessage('page_get_login_id');
-        if (pageUuid) {
-            const credential = kpxc.credentials.find(c => c.uuid === pageUuid);
-            if (credential) {
-                usernameValue = credential.login;
-            }
-        }
-    }
-
-    // Check if the form has three password fields -> a possible password change form
-    if (passwordInputs && passwordInputs.length >= 2) {
-        passwordValue = kpxcForm.getNewPassword(passwordInputs);
-    } else if (passwordField) {
-        // Use the combination password field instead
-        passwordValue = passwordField.value;
-    }
-
-    // Return if credentials are already found
-    if (kpxc.credentials.some(c => c.login === usernameValue && c.password === passwordValue)) {
-        kpxcForm.submitTriggered = false;
-        return;
-    }
-
-    if (passwordField) {
-        await kpxc.setPasswordFilled(true);
-    }
-
-    const url = trimURL(kpxc.settings.saveDomainOnlyNewCreds ? window.top.location.origin : window.top.location.href);
-    await sendMessage('page_set_submitted', [ true, usernameValue, passwordValue, url, kpxc.credentials ]);
-
-    // Show the banner if the page does not reload
-    kpxc.rememberCredentials(usernameValue, passwordValue);
-    kpxcForm.submitTriggered = false;
+    const usernameValue = await kpxcForm.getUsernameValue(usernameField);
+    await kpxcForm.activateCredentialBanner(usernameValue, passwordInputs, passwordField);
 };
 
 // Save form to Object array

@@ -149,11 +149,11 @@ kpxcSites.expectedTOTPMaxLength = function() {
 
 /**
  * Handles a few exceptions for certain sites where form submit button is not regognized properly.
- * @param {object} form     Form element
+ * @param {object} form     Form element (optional)
  * @returns {object}        Button element
  */
 kpxcSites.formSubmitButtonExceptionFound = function(form) {
-    if (form.action.startsWith(googleUrl)) {
+    if (form?.action?.startsWith(googleUrl)) {
         const findDiv = $('#identifierNext, #passwordNext');
         if (!findDiv) {
             return undefined;
@@ -162,14 +162,14 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
         const buttons = findDiv.getElementsByTagName('button');
         kpxcSites.savedForm = form;
         return buttons.length > 0 ? buttons[0] : undefined;
-    } else if (form.action.startsWith('https://www.ebay.')) {
+    } else if (form?.action?.startsWith('https://www.ebay.')) {
         // For eBay we must return the first button.
         for (const i of form.elements) {
             if (i.type === 'button') {
                 return i;
             }
         }
-    } else if (form.action.includes('signin.aws.amazon.com')) {
+    } else if (form?.action?.includes('signin.aws.amazon.com')) {
         // For Amazon AWS the button is outside the form.
         const button = $('#signin_button');
         if (button) {
@@ -182,14 +182,17 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
             'odc.officeapps.live.com',
             'login.microsoftonline.com',
             'login.microsoftonline.us',
-        ].some(u => form.action.includes(u))) {
+        ].some(u => form?.action?.includes(u))) {
         const buttons = Array.from(form.querySelectorAll(kpxcForm.formButtonQuery));
         if (buttons?.length > 1) {
             return buttons[1];
         }
-    } else if (form.action.startsWith('https://barmerid.id.bconnect.barmer.de')) {
+    } else if (form?.action?.startsWith('https://barmerid.id.bconnect.barmer.de')) {
         const loginButton = $('#btn-login');
         return loginButton?.shadowRoot?.children?.[0];
+    } else if (!form && document.location.href.includes('reddit.com/settings')) {
+        // Reddit change password popup
+        return $('.button[slot=primary-button]');
     }
 
     return undefined;
