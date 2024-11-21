@@ -96,7 +96,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
 
     let exceptionFound = false;
 
-    // Returns true if all 6 inputs are numeric, tel or text/number with maxLength of 1.
+    // Returns true if all 6 inputs are numeric, tel or text/number with maxLength of 1, or maxLength not defined.
     // If ignoreFieldCount is true, number of TOTP fields are allowed to differ from the default (6),
     // but 4 at minimum must exist.
     const areFieldsSegmentedTotp = function(totpInputs, ignoreFieldCount = false) {
@@ -106,7 +106,7 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
             totpInputs.every(
                 input =>
                     ((input.inputMode === 'numeric' || input.inputMode === '') && input.pattern.includes('0-9')) ||
-                    ((input.type === 'text' || input.type === 'number') && input.maxLength === 1) ||
+                    ((input.type === 'text' || input.type === 'number') && (input.maxLength === 1 || input.maxLength === -1)) ||
                     input.type === 'tel'
             )
         );
