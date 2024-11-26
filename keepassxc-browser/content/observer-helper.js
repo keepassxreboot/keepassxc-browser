@@ -18,7 +18,6 @@ kpxcObserverHelper.ignoredNodeNames = [
     'A',
     'HEAD',
     'HTML',
-    'LABEL',
     'LINK',
     'SCRIPT',
     'SPAN',
