@@ -1,3 +1,13 @@
+1.9.5 (2024-11-27)
+=========================
+- Add support for checkboxes with Custom Login Fields [#2372]
+- Add support for custom password change forms [#2383]
+- Refactor compare version functions [#2375]
+- Fix TOTP field ignore regex [#2376]
+- Fix segmented TOTP detection [#2387]
+- Fix Reddit login popup, and allow label element on Observer Helper [#2391]
+- Passkeys: Fix navigator.credentials.store override [#2381]
+
 1.9.4 (2024-10-26)
 =========================
 - Add configuration option for passkeys default group [#2346]
