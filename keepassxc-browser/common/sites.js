@@ -35,6 +35,7 @@ const PREDEFINED_SITELIST = [
 ];
 
 const IMPROVED_DETECTION_PREDEFINED_SITELIST = [
+    'https://www.reddit.com/',
     'https://secure.chase.com/*',
     'https://www.icloud.com/'
 ];
