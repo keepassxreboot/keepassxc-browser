@@ -12,7 +12,7 @@
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
-        "message": "Conectar base de dados ativa a KeePassXC-Browser.",
+        "message": "Ligar a base de dados ativa atual ao KeePassXC-Browser.",
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
@@ -24,7 +24,7 @@
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "Conectar, novamente, base de dados ativa a KeePassXC-Browser.",
+        "message": "Voltar a ligar a base de dados ativa atual ao KeePassXC-Browser.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
@@ -32,11 +32,11 @@
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
-        "message": "Recarregar extensão e conectar com KeePassXC.",
+        "message": "Recarrega a extensão e volta a ligar-se ao KeePassXC.",
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
-        "message": "Cancelar ligação da base de dados de KeePassXC-Browser.",
+        "message": "Remover a base de dados ligada ao KeePassXC-Browser.",
         "description": "Remove button title on Connected Databases tab."
     },
     "removeCustomLoginFieldsButtonTitle": {
@@ -271,7 +271,7 @@
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "O KeePassXC está desconectado.",
+        "message": "O KeePassXC está desligado.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "totp": {
@@ -411,11 +411,11 @@
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
-        "message": "Conectar",
+        "message": "Ligar",
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": "Conectar novamente",
+        "message": "Ligar novamente",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
@@ -463,7 +463,7 @@
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-        "message": "Não foi possível conectar a KeePassXC? Talvez a nossa página Wiki possa ajudar.",
+        "message": "Não consegue ligar-se ao KeePassXC? Talvez a nossa página wiki possa ajudar.",
         "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
@@ -475,23 +475,23 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "O KeePassXC-Browser não foi configurado. Prima o botão de conectar para emparelhar com KeePassXC.",
+        "message": "O KeePassXC-Browser não foi configurado. Clique no botão de ligação para emparelhar com o KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
-        "message": "KeePassXC-Browser foi desconectado de KeePassXC.",
+        "message": "KeePassXC-Browser foi desconectado do KeePassXC.",
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Prima o botão de conectar novamente para estabelecer uma nova conexão.",
+        "message": "Clique no botão de restabelecer a ligação para estabelecer uma nova ligação.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "KeePassXC-Browser ainda não se conectou a KeePassXC, mas foi configurado com o identificador: $1",
+        "message": "KeePassXC-Browser ainda não se conectou ao KeePassXC, mas foi configurado com o identificador: $1",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "KeePassXC-Browser está conectado a KeePassXC e foi configurado com o seguinte identificador: $1",
+        "message": "KeePassXC-Browser está conectado ao KeePassXC e foi configurado com o seguinte identificador: $1",
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
@@ -691,7 +691,7 @@
         "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
-        "message": " Cancelar",
+        "message": "Cancelar",
         "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
@@ -803,7 +803,7 @@
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
-        "message": "Número de reencaminhamentos permitidos:  $1",
+        "message": "Número de reencaminhamentos permitidos: $1",
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
@@ -1339,7 +1339,7 @@
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
-        "message": "Abre um  novo separador",
+        "message": "Abre um novo separador",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
