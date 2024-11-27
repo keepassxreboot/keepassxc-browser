@@ -16,27 +16,27 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Copy debug info to clipboard.",
+        "message": "Salin info debug ke clipboard.",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
-        "message": "Dismisses Basic HTTP Auth.",
+        "message": "Mengabaikan autentikasi HTTP dasar.",
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "message": "Sambungkan kembali database aktif saat ini ke KeePassXC-Browser.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
-        "message": "Redetects all input fields on the page.",
+        "message": "Mendeteksi kembali semua bidang input pada halaman.",
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
-        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "message": "Memuat ulang ekstensi dan sambungkan kembali ke KeePassXC.",
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
-        "message": "Remove connected database from KeePassXC-Browser.",
+        "message": "Hapus database yang terhubung dari KeePassXC-Browser.",
         "description": "Remove button title on Connected Databases tab."
     },
     "removeCustomLoginFieldsButtonTitle": {
@@ -44,15 +44,15 @@
         "description": "Remove button title on Custom Login Fields tab."
     },
     "removeSitePreferencesButtonTitle": {
-        "message": "Remove Site Preferences for this URL.",
+        "message": "Hapus Preferensi Situs untuk URL ini.",
         "description": "Remove button title on Site Preferences tab."
     },
     "reopenDatabaseButtonTitle": {
-        "message": "Reopen current active database.",
+        "message": "Buka kembali database yang aktif saat ini.",
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
-        "message": "Adds Username-only Detection to the current page.",
+        "message": "Menambahkan Deteksi Khusus Nama Pengguna ke halaman saat ini.",
         "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -212,15 +212,15 @@
         "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-        "message": "No supported algorithms were provided.",
+        "message": "Tidak ada algoritma yang didukung yang disediakan.",
         "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "Tunggu hingga waktu kedaluwarsa.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown passkeys error.",
+        "message": "Kesalahan passkeys tidak dikenal.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -228,7 +228,7 @@
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "user.id tidak sesuai dengan panjang yang dibutuhkan.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
@@ -252,18 +252,18 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Generate password.",
+        "message": "Buat kata sandi.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "Pembuat kata sandi tidak didukung dalam versi KeePassXC ini. Silakan perbarui KeePassXC ke versi yang lebih baru."
     },
     "usernameFieldText": {
-        "message": "Fill credentials from KeePassXC.",
+        "message": "Isi kredensial dari KeePassXC.",
         "description": "Username field icon hover text."
     },
     "usernameFieldTextNoCredentials": {
-        "message": "No credentials to fill.",
+        "message": "Tidak ada kredensial yang dapat diisi.",
         "description": "Username field icon hover text when no credentials are."
     },
     "usernameLockedFieldText": {
@@ -715,7 +715,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
-        "message": "Default group for saving new passkeys:",
+        "message": "Grup default untuk menyimpan passkeys baru:",
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {

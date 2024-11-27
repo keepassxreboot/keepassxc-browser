@@ -12,7 +12,7 @@
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
-        "message": "Connect current active database to KeePassXC-Browser.",
+        "message": "להתחבר למסד נתונים פעיל נוכחי מדפדפן־KeePassXC.",
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
@@ -24,7 +24,7 @@
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "message": "להתחבר מחדש למסד נתונים פעיל נוכחי מדפדפן־KeePassXC.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
@@ -52,7 +52,7 @@
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
-        "message": "Adds Username-only Detection to the current page.",
+        "message": "הוספת האפשרות 'שם משתמש בלבד' לעמוד נוכחי.",
         "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -259,7 +259,7 @@
         "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
-        "message": "Fill credentials from KeePassXC.",
+        "message": "מילוי נתוני־אמנה מ־KeePassXC",
         "description": "Username field icon hover text."
     },
     "usernameFieldTextNoCredentials": {
@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "הקשה על סמל דפדפן־KeePassXC לקבלת אפשרויות נוספות.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -483,7 +483,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": "הקשה על לחצן 'חיבור מחדש' ליצירת חיבור חדש.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": "נא לבחור קבוצה להוספת נתוני־האמנה חדשים.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -735,7 +735,7 @@
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Use dynamic input field detection",
+        "message": "להשתמש בזיהוי שדה קלט דינמי.",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -771,7 +771,7 @@
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Display the group name in autocomplete list when credentials are from different groups",
+        "message": "הצגת שם הקבוצה ברשימת־השלמה־אוטומטית כאשר נתוני־האמנה הם מקבוצות שונות.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -787,7 +787,7 @@
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon",
+        "message": "להשתמש בסמל סרגל כלים מונוכרום",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
@@ -799,7 +799,7 @@
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Show a banner on the page when new credentials can be saved to the database",
+        "message": "הצג כרזה בעמוד כאשר ניתן לשמור נתוני־אמנה חדשים במסד הנתונים.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -883,11 +883,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Use predefined sites for compatibility",
+        "message": "להשתמש באתרים מוגדרים מראש לצורך תאימות.",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
+        "message": "הוספת אתרים נפוצים להעדפות האתר, שכוללים טפסי התחברויות עם שם משתמש בלבד.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -943,7 +943,7 @@
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
+        "message": "בעת שמירת שדות להעדפות האתר מותאמים אישית חדשים, לשמור רק את שם המתחם במקום את מען ה־URL המלא.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1039,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": "האם להסיר את המזהה הבא מרשימת מסדי הנתונים: $1",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1147,11 +1147,11 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved Custom Login Fields found.",
+        "message": "לא נמצאו שדות התחברויות מותאמים אישית שמורים.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved Custom Login Fields using the table.",
+        "message": "ניתן לנהל שדות התחברויות מותאמים אישית שנשמרו באמצעות הטבלה.",
         "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
@@ -1163,15 +1163,15 @@
         "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "On this page you can manage saved Custom Login Fields.",
+        "message": "בעמוד זה ניתן לנהל שדות התחברויות מותאמים אישית שנשמרו.",
         "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remove saved Custom Login Fields?",
+        "message": "האם להסיר שדות התחברויות מותאמים אישית שנשמרו?",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "message": "האם להסיר את שדות ההתחברויות המותאמים אישית שנשמרו בעמוד: $1",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
@@ -1227,7 +1227,7 @@
         "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved Site Preferences using the table.",
+        "message": "ניתן לנהל העדפות אתר שמורות באמצעות הטבלה.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {

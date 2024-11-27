@@ -112,7 +112,7 @@
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "無法連線到 KeePassXC。請確認 KeePassXC 的瀏覽器整合功能已啟用。",
+        "message": "無法連接到 KeePassXC。請確認 KeePassXC 的瀏覽器整合功能已啟用。",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -271,7 +271,7 @@
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC 已經斷線。",
+        "message": "KeePassXC 已斷開連接。",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "totp": {
@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "點擊 KeePassXC-Browser 圖示展開更多選項。",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -411,11 +411,11 @@
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
-        "message": "連線",
+        "message": "連接",
         "description": "Popup Connect button text."
     },
     "popupReconnectButton": {
-        "message": "重新連線",
+        "message": "重新連接",
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
@@ -475,15 +475,15 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": "KeePassXC-Browser 尚未設置。點擊連接按鈕與 KeePassXC 配對。",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
-        "message": "KeePassXC-Browser 已與 KeePassXC 斷線。",
+        "message": "KeePassXC-Browser 已與 KeePassXC 斷開連接。",
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": "點擊重新連接按鈕建立新的連接。",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": "請選擇用於儲存新憑證的群組。",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -671,7 +671,7 @@
         "description": "Save button text."
     },
     "optionsButtonConnect": {
-        "message": "連線",
+        "message": "連接",
         "description": "Connect button text."
     },
     "optionsButtonRemove": {
@@ -827,7 +827,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every three days",
+        "message": "每三天",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -1027,11 +1027,11 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsConnectedDatabasesText": {
-        "message": "與 KeePassXC-Browser 連線的資料庫。",
+        "message": "已連接至 KeePassXC-Browser 的資料庫。",
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
-        "message": "找不到已連線的資料庫。",
+        "message": "找不到已連接的資料庫。",
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
@@ -1039,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": "真的要從資料庫清單移除以下的識別碼：$1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {

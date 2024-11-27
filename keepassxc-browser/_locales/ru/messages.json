@@ -184,7 +184,7 @@
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Запрос passkeys отменен.",
+        "message": "Запрос ключей доступа отменен.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -220,7 +220,7 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Неизвестная ошибка passskeys.",
+        "message": "Неизвестная ошибка ключей доступа.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -367,7 +367,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "Нажмите на значок KeePassXC-Browser для получения дополнительных параметров.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -475,7 +475,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": "KeePassXC-Browser не настроен. Нажмите кнопку подключения, чтобы связать его с KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -483,7 +483,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": "Нажмите кнопку повторного подключения, чтобы установить новое соединение.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -523,7 +523,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": "Пожалуйста, выберите группу для хранения новых учётных данных.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -715,7 +715,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
-        "message": "Default group for saving new passkeys:",
+        "message": "Группа по умолчанию для сохранения новых ключей доступа:",
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
@@ -827,7 +827,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every three days",
+        "message": "каждые три дня",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -1039,7 +1039,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": "Вы действительно хотите удалить следующий идентификатор из списка базы данных: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1319,11 +1319,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Ключи доступа",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Включить passkeys",
+        "message": "Включить ключи доступа",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1331,11 +1331,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Включить возврат passkeys",
+        "message": "Включить резервный вариант ключей доступа",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Если эта опция включена, то при неудачном или отмененном запросе к KeePassXC будет срабатывать собственный внутренний запрос passkeys. Если этот параметр отключен, то будет требоваться подключение к KeePassXC, и отмененный запрос не будет выполнен. По умолчанию: включено.",
+        "message": "Если эта опция включена, то при неудачном или отмененном запросе к KeePassXC будет срабатывать собственный внутренний запрос ключей доступа. Если этот параметр отключен, то будет требоваться подключение к KeePassXC, и отмененный запрос не будет выполнен. По умолчанию: включено.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
