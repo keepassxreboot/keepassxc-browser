@@ -35,8 +35,10 @@ const PREDEFINED_SITELIST = [
 ];
 
 const IMPROVED_DETECTION_PREDEFINED_SITELIST = [
-    'https://www.reddit.com/',
+    'https://auth.max.com/',
+    'https://login.qt.io/login',
     'https://secure.chase.com/*',
+    'https://www.reddit.com/',
     'https://www.icloud.com/'
 ];
 
