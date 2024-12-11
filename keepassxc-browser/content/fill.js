@@ -28,7 +28,7 @@ kpxcFill.fillInFromActiveElement = async function(passOnly = false) {
     await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
         logDebug(`Error: Credential list is empty for: ${document.location.origin}`);
-        kpxcUI.createNotification('error', `${tr('credentialsNoLoginsFound')} ${document.location.origin}`);
+        showErrorNotification(`${tr('credentialsNoLoginsFound')} ${document.location.origin}`);
         return;
     }
 
@@ -119,7 +119,7 @@ kpxcFill.fillFromTOTP = async function(target) {
     const credentialList = await kpxc.updateTOTPList();
 
     if (!credentialList || credentialList?.length === 0) {
-        kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
+        showErrorNotification(tr('credentialsNoTOTPFound'), 'warning');
         return;
     }
 
@@ -197,7 +197,7 @@ kpxcFill.fillFromUsernameIcon = async function(combination) {
     await kpxc.receiveCredentialsIfNecessary();
     if (kpxc.credentials.length === 0) {
         logDebug(`Error: Credential list is empty for: ${document.location.origin}`);
-        kpxcUI.createNotification('error', `${tr('credentialsNoLoginsFound')} ${document.location.origin}`);
+        showErrorNotification(`${tr('credentialsNoLoginsFound')} ${document.location.origin}`);
         return;
     } else if (kpxc.credentials.length > 1 && kpxc.settings.autoCompleteUsernames) {
         kpxcUserAutocomplete.showList(combination.username || combination.password);
@@ -351,4 +351,14 @@ const passwordFillIsAllowed = function(elem) {
     }
 
     return elem?.getLowerCaseAttribute('type') === 'password';
+};
+
+// Show a specific error notification if current database is not connected
+const showErrorNotification = async function(errorMessage, notificationType = 'error') {
+    const connectedDatabase = await sendMessage('get_connected_database');
+    if (!connectedDatabase?.identifier) {
+        kpxcUI.createNotification('error', tr('errorCurrentDatabaseNotConnected'));
+    } else {
+        kpxcUI.createNotification(notificationType, errorMessage);
+    }
 };
