@@ -120,8 +120,8 @@
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-        "message": "Access to all entries denied.",
-        "description": "Access to all entries denied."
+      "message": "Access to all entries denied.",
+      "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
         "message": "Attestation not supported.",
@@ -152,16 +152,16 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-        "message": "Effective domain is not a valid domain.",
-        "description": "Effective domain is not a valid domain."
+      "message": "Effective domain is not a valid domain.",
+      "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-        "message": "Origin and RP ID do not match.",
-        "description": "Origin and RP ID do not match."
+      "message": "Origin and RP ID do not match.",
+      "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-        "message": "No supported algorithms were provided.",
-        "description": "No supported algorithms were provided."
+      "message": "No supported algorithms were provided.",
+      "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
         "message": "Wait for timer to expire.",
@@ -714,10 +714,6 @@
         "message": "Automatically fill in single-credential entries.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
-    "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Täida automaatselt asjakohased mandaadikirjed",
-        "description": "Automatically fill-in relevant credential entry checkbox text."
-    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Automatically fill in single TOTP entries.",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -861,10 +857,6 @@
     "optionsAutoFillSingleEntryHelpText": {
         "message": "Let KeePassXC-Browser automatically fill in credentials if it receives only a single entry.",
         "description": "Auto-Fill Single Entry option help text."
-    },
-    "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Las KeePassXC-Browser complete automáticamente las credenciales si recibe una entrada relevante.",
-        "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
@@ -1037,7 +1029,7 @@
     "optionsColumnAllowIframes": {
         "message": "Allow Cross-Origin iframes",
         "description": "Allow iframes column text."
-    },
+  },
     "optionsColumnDelete": {
         "message": "Kustuta",
         "description": "Site preferences list column title."

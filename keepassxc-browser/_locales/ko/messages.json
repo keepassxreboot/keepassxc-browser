@@ -762,10 +762,6 @@
         "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
-    "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "관련 있는 자격 증명 항목 자동 입력",
-        "description": "Automatically fill-in relevant credential entry checkbox text."
-    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Automatically fill in single TOTP entries",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,10 +910,6 @@
         "message": "자격 증명이 하나만 있을 때 KeePassXC-브라우저에서 자동으로 입력합니다.",
         "description": "Auto-Fill Single Entry option help text."
     },
-    "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "관련 있는 자격 증명이 수신되면 KeePassXC-브라우저에서 자동으로 입력하도록 합니다.",
-        "description": "Auto-Fill Relevant Credential option help text."
-    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "경고! 자동 입력은 안전하지 않을 수 있습니다. 주의하여 사용하십시오. KeePassXC-브라우저에서는 로그인 필드 자동 감지를 시도하지만, 필드가 잘못 감지되었을 경우에는 안전하지 않은 입력 필드에 민감한 정보를 입력할 수도 있습니다.",
         "description": "Auto-Fill Single Entry warning text."
@@ -943,8 +935,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-        "message": "Use a compact version of the dropdown list to select credentials.",
-        "description": "Use compact (legacy) mode help text."
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "새 자격 증명을 저장할 때 전체 URL 대신 도메인만 저장합니다.",
@@ -1093,7 +1085,7 @@
     "optionsColumnAllowIframes": {
         "message": "교차 출처 iframe 허용",
         "description": "Allow iframes column text."
-    },
+  },
     "optionsColumnDelete": {
         "message": "삭제",
         "description": "Site Preferences list column title."

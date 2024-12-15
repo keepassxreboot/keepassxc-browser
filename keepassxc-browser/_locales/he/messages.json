@@ -762,10 +762,6 @@
         "message": "מילוי אוטומטי של רשומות עם אישור יחיד.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
-    "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "מילוי אוטומטי של רשומות עם אישור רלוונטי",
-        "description": "Automatically fill-in relevant credential entry checkbox text."
-    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "מילוי אוטומטי של רשומות עם TOTP יחיד.",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,10 +910,6 @@
         "message": "לאפשר לדפדפן־KeePassXC למלא נתוני־אמנה באופן אוטומטי בקבלת רק ערך יחיד.",
         "description": "Auto-Fill Single Entry option help text."
     },
-    "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "לאפשר לדפדפן־KeePassXC למלא נתוני־אמנה באופן אוטומטי אם מתקבל אישור רלוונטי.",
-        "description": "Auto-Fill Relevant Credential option help text."
-    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "אזהרה! השימוש באפשרות מילוי־אוטומטי אינה בטוחה. השימוש על אחריות המשתמש בלבד. KeePassXC-Browser מנסה לזהות באופן אוטומטי שדות התחברות. יחד עם זאת, שדות ההתחברות עלולות להיות מזוהות באופן שגוי, דבר שעשוי אולי לאכלס נתונים רגישים, בשדות קלט לא בטוחים.",
         "description": "Auto-Fill Single Entry warning text."
@@ -943,8 +935,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-        "message": "Use a compact version of the dropdown list to select credentials.",
-        "description": "Use compact (legacy) mode help text."
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "בעת שמירת נתוני־אמנה חדשים, לשמור רק את שם המתחם במקום את מען ה־URL המלא.",
@@ -1093,7 +1085,7 @@
     "optionsColumnAllowIframes": {
         "message": "Allow Cross-Origin iframes",
         "description": "Allow iframes column text."
-    },
+  },
     "optionsColumnDelete": {
         "message": "מחיקה",
         "description": "Site Preferences list column title."

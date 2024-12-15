@@ -762,10 +762,6 @@
         "message": "Compila automaticamente le voci a credenziale singola",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
-    "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Compila automaticamente le voci a credenziale rilevante",
-        "description": "Automatically fill-in relevant credential entry checkbox text."
-    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Compila automaticamente singole voci TOTP",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,10 +910,6 @@
         "message": "Lascia che KeePassXC-Browser compili automaticamente le credenziali se riceve solo una singola voce.",
         "description": "Auto-Fill Single Entry option help text."
     },
-    "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Lascia che KeePassXC-Browser compili automaticamente le credenziali se riceve una credenziale rilevante.",
-        "description": "Auto-Fill Relevant Credential option help text."
-    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Attenzione! L'uso del riempimento automatico non è sicuro. Usalo a tuo rischio. KeePassXC-Browser tenta automaticamente di rilevare i campi di accesso. Tuttavia, potrebbero essere rilevati in modo errato, portando all'inserimento di dati sensibili in campi di input non sicuri. ",
         "description": "Auto-Fill Single Entry warning text."
@@ -943,8 +935,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-        "message": "Utilizza una versione compatta del menù a discesa per scegliere le credenziali.",
-        "description": "Use compact (legacy) mode help text."
+      "message": "Utilizza una versione compatta del menù a discesa per scegliere le credenziali.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Al salvataggio di nuove credenziali salva solo il dominio al posto dell'URL completa.",
@@ -1093,7 +1085,7 @@
     "optionsColumnAllowIframes": {
         "message": "Permetti iframes Cross-Origin",
         "description": "Allow iframes column text."
-    },
+  },
     "optionsColumnDelete": {
         "message": "Elimina",
         "description": "Site Preferences list column title."

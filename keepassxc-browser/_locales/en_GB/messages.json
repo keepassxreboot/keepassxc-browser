@@ -762,10 +762,6 @@
         "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
-    "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
-        "description": "Automatically fill-in relevant credential entry checkbox text."
-    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Automatically fill in single TOTP entries",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,10 +910,6 @@
         "message": "Let KeePassXC-Browser automatically fill in credentials if it receives only a single entry.",
         "description": "Auto-Fill Single Entry option help text."
     },
-    "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in credentials if it receives relevant credential.",
-        "description": "Auto-Fill Relevant Credential option help text."
-    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
@@ -943,8 +935,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-        "message": "Use a compact version of the dropdown list to select credentials.",
-        "description": "Use compact (legacy) mode help text."
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "When saving new credentials, save only the domain instead of full URL.",
@@ -1093,7 +1085,7 @@
     "optionsColumnAllowIframes": {
         "message": "Allow Cross-Origin iframes",
         "description": "Allow iframes column text."
-    },
+  },
     "optionsColumnDelete": {
         "message": "Delete",
         "description": "Site Preferences list column title."

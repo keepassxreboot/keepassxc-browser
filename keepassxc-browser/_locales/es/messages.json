@@ -762,10 +762,6 @@
         "message": "Rellenar apuntes de credenciales únicas automáticamente",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
-    "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Rellenar automáticamente las entradas de credenciales relevantes",
-        "description": "Automatically fill-in relevant credential entry checkbox text."
-    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Rellenar apuntes de TOPT únicas automáticamente",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,10 +910,6 @@
         "message": "Permitir que KeePassXC-Browser complete las credenciales automáticamente si recibe solo una entrada.",
         "description": "Auto-Fill Single Entry option help text."
     },
-    "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Permitir que KeePassXC-Browser complete automáticamente las credenciales si recibe una entrada relevante.",
-        "description": "Auto-Fill Relevant Credential option help text."
-    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Advertencia! Usar el autorellenado no es seguro. Úseló bajo su propio riesgo. KeePassXC-Browser intenta detectar automáticamente los campos de inicio de sesión. Sin embargo, pueden ser detectados incorrectamente,  con la posibilidad de rellenar datos sensibles en capos de entrada inseguros.",
         "description": "Auto-Fill Single Entry warning text."
@@ -943,8 +935,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-        "message": "Mostrar la lista de selección de credenciales de forma compacta.",
-        "description": "Use compact (legacy) mode help text."
+      "message": "Mostrar la lista de selección de credenciales de forma compacta.",
+      "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Al guardar nuevas credenciales, guarde solo el dominio en lugar de la URL completa.",
@@ -1093,7 +1085,7 @@
     "optionsColumnAllowIframes": {
         "message": "Permitir Cross-Origin iframes",
         "description": "Allow iframes column text."
-    },
+  },
     "optionsColumnDelete": {
         "message": "Eliminar",
         "description": "Site Preferences list column title."
