@@ -517,13 +517,11 @@ kpxc.prepareCredentials = async function() {
     if (kpxc.settings.autoFillRelevantCredential) {
         const pageUuid = await sendMessage('page_get_login_id');
         if (pageUuid) {
-            kpxc.credentials.some(c => {
-                if (c.uuid === pageUuid) {
-                    const index = kpxc.combinations.length - 1;
-                    kpxcFill.fillInCredentials(kpxc.combinations[index], c.login, c.uuid);
-                    return true;
-                }
-            });
+            const relevantCredential = kpxc.credentials.find(c => c.uuid === pageUuid);
+            if (relevantCredential) {
+                const index = kpxc.combinations.length - 1;
+                kpxcFill.fillInCredentials(kpxc.combinations[index], relevantCredential.login, relevantCredential.uuid);
+            }
         }
     }
 };
