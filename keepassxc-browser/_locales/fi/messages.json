@@ -762,6 +762,10 @@
         "message": "Täytä yksittäinen tietue automaattisesti",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Täytä automaattisesti sopivat tietueet",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Täytä yksittäiset TOTP-kentät automaattisesti",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -910,6 +914,10 @@
         "message": "Salli KeePassXC-Browserin täyttää kirjautumistiedot automaattisesti, jos se noutaa vain yksittäisen tietueen.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Salli KeePassXC-Browserin täyttää kirjautumistiedot automaattisesti, jos se noutaa sopivan tietueen.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Varoitus! Automaattinen täydennys ei ole turvallinen. Käytä omalla vastuulla. KeePassXC-Browser yrittää automaattisesti tunnistaa kirjautumiskentät. On mahollista, että yksityistä tietoa täydennetään kenttiin jotka eivät ole turvallisia.",
         "description": "Auto-Fill Single Entry warning text."
@@ -935,8 +943,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Käytä kompaktia versiota listasta, kun valitset sivulla tietueita.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Käytä kompaktia versiota listasta, kun valitset sivulla tietueita.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Kun tallennetaan uusia tietueita, tallenna täydellisen URL-osoitteen sijaan vain sivuston verkkotunnus.",
@@ -1085,7 +1093,7 @@
     "optionsColumnAllowIframes": {
         "message": "Salli iframe-upotukset muilta sivustoilta",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Poista",
         "description": "Site Preferences list column title."

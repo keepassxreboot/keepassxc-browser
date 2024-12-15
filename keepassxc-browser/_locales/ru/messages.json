@@ -762,6 +762,10 @@
         "message": "Автозаполнение элементов с единственными учётными данными",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Автоматически заполнять соответствующие записи учётных данных",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Автоматически заполнять одиночные записи TOTP",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -910,6 +914,10 @@
         "message": "Разрешить KeePassXC-Browser автоматически заполнять учётные данные, если он получает только одну запись.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Разрешить KeePassXC-Browser автоматически заполнять учётные данные, если он получает соответствующие учётные данные.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Внимание! Использование автозаполнения небезопасно. Используйте его на своё усмотрение. KeePassXC-Browser автоматически пытается обнаружить поля ввода учётных данных. Однако они могут быть обнаружены неправильно, что может привести к заполнению конфиденциальных данных в небезопасных полях.",
         "description": "Auto-Fill Single Entry warning text."
@@ -935,8 +943,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Компактная версия выпадающего списка для выбора учетных данных.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Компактная версия выпадающего списка для выбора учетных данных.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "При сохранении новых учётных данных сохранять только домен, а не полный URL.",
@@ -1085,7 +1093,7 @@
     "optionsColumnAllowIframes": {
         "message": "Разрешить Cross-Origin iframes",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Удалить",
         "description": "Site Preferences list column title."

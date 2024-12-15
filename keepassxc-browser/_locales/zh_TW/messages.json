@@ -762,6 +762,10 @@
         "message": "自動填入單一憑證條目",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "自動填入相關憑證條目",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "自動填入單一 TOTP 條目",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -909,6 +913,10 @@
     "optionsAutoFillSingleEntryHelpText": {
         "message": "若 KeePassXC-Browser 只接收到單一項目，將自動填入憑證。",
         "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "若 KeePassXC-Browser 接收到多條項目，將自動填入相關憑證。",
+        "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
         "message": "警告！使用自動填入並不安全。使用請自擔風險。KeePassXC-Browser 會嘗試自動偵測登錄欄位。然而，自動偵測可能不準確，導致在不安全的輸入欄位內填寫敏感資料。",

@@ -762,6 +762,10 @@
         "message": "Remplir automatiquement les entrées ne contenant qu'un identifiant",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Remplir automatiquement les entrées d'identifiants pertinentes",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Remplir automatiquement les entrées ne contenant qu'un seul TOTP",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -910,6 +914,10 @@
         "message": "Laisse KeePassXC-Browser remplir les identifiants automatiquement si une seule entrée est retournée.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Laisser KeePassXC-Browser remplir automatiquement les identifiants si une entrée pertinente est reçue.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Attention ! Le remplissage automatique n'est pas recommandé. Vous l'utilisez à vos risques. KeePassXC-Browser tente de détecter automatiquement les champs d'identification. Cependant, la détection peut être erronée et entraîner le remplissage de champs non sûrs avec des données sensibles.",
         "description": "Auto-Fill Single Entry warning text."
@@ -935,8 +943,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Use a compact version of the dropdown list to select credentials.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Use a compact version of the dropdown list to select credentials.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Lorsqu'un nouvel identifiant est ajouté, n'enregistrer que le domaine au lieu de l'URL complète.",
@@ -1085,7 +1093,7 @@
     "optionsColumnAllowIframes": {
         "message": "Autoriser les iframes Cross–Origin",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Supprimer",
         "description": "Site Preferences list column title."

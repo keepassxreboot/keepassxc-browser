@@ -762,6 +762,10 @@
         "message": "Fyll automatiskt i enstaka inloggningsuppgifter.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Fyll automatiskt i relevanta inloggningsuppgifter",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Fyll automatiskt i enstaka TOTP-poster",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -910,6 +914,10 @@
         "message": "Låt KeePassXC-Browser fylla i inloggningsuppgifter automatiskt om den bara tar emot ett inlägg.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Låt KeePassXC-Browser automatiskt fylla i inloggningsuppgifter om den tar emot relevanta autentiseringsuppgifter.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Varning! Användning av auto-skriv är inte säkert. Använd det på egen risk. KeePassXC-Browser försöker automatiskt identifiera inloggningsfält. De kan dock identifieras felaktigt och eventuellt fyllas i med känslig data i osäkra indatafält.",
         "description": "Auto-Fill Single Entry warning text."
@@ -935,8 +943,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Använd en kompakt version av listrutan för att välja inloggningsuppgifter.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Använd en kompakt version av listrutan för att välja inloggningsuppgifter.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Spara enbart domänen istället för hela URL:en när nya inloggningsuppgifter sparas.",
@@ -1085,7 +1093,7 @@
     "optionsColumnAllowIframes": {
         "message": "Tillåt iframes",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Ta bort",
         "description": "Site Preferences list column title."

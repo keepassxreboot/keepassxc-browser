@@ -514,7 +514,7 @@ kpxc.prepareCredentials = async function() {
     kpxc.initLoginPopup();
     kpxc.initAutocomplete();
 
-    if (kpxc.settings.autoFillSingleEntry) {
+    if (kpxc.settings.autoFillRelevantCredential) {
         const pageUuid = await sendMessage('page_get_login_id');
         if (pageUuid) {
             kpxc.credentials.some(c => {

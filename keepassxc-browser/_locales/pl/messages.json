@@ -762,6 +762,10 @@
         "message": "Automatycznie wypełnij pojedyncze wpisy",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatycznie wypełnij odpowiednie wpisy uwierzytelniające",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Automatycznie wypełniaj pojedyncze wpisy TOTP",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -910,6 +914,10 @@
         "message": "Pozwól KeePassXC-Browser automatycznie wypełnić dane uwierzytelniające, jeśli otrzyma tylko jeden wpis.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Pozwól KeePassXC-Browser automatycznie wypełnić dane uwierzytelniające, jeśli otrzyma odpowiednie dane uwierzytelniające.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Ostrzeżenie! Korzystanie z automatycznego wypełniania nie jest bezpieczne. Używaj na własne ryzyko. KeePassXC‑Browser automatycznie próbuje wykryć pola logowania. Mogą jednak zostać nieprawidłowo wykryte, prawdopodobnie wypełniając poufne dane w niebezpiecznych polach wejściowych.",
         "description": "Auto-Fill Single Entry warning text."
@@ -935,8 +943,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Użyj kompaktowej wersji listy rozwijanej, aby wybrać dane uwierzytelniające.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Użyj kompaktowej wersji listy rozwijanej, aby wybrać dane uwierzytelniające.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Zapisując nowe dane uwierzytelniające, zapisz tylko domenę zamiast pełnego adresu URL.",
@@ -1085,7 +1093,7 @@
     "optionsColumnAllowIframes": {
         "message": "Zezwalaj na ramki iframe z różnych źródeł",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Usuwanie",
         "description": "Site Preferences list column title."

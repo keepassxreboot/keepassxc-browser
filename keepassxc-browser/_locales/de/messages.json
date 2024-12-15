@@ -762,6 +762,10 @@
         "message": "Einträge mit einzelnen Anmeldedaten automatisch ausfüllen",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Relevante Anmeldeinformationen automatisch ausfüllen",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Einzelne TOTP-Einträge automatisch ausfüllen",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -910,6 +914,10 @@
         "message": "Anmeldedaten von KeePassXC-Browser automatisch ausfüllen lassen, wenn er nur einen einzigen Eintrag erhält.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Lassen Sie KeePassXC-Browser Anmeldeinformationen automatisch ausfüllen, wenn relevante Anmeldeinformationen empfangen werden.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Warnung! Die Verwendung des automatischen Ausfüllens ist nicht sicher und erfolgt auf eigene Gefahr. KeePassXC-Browser versucht automatisch, Anmeldefelder zu erkennen. Sie können jedoch falsch erkannt werden, wodurch möglicherweise sensible Daten in unsichere Eingabefelder eingetragen werden.",
         "description": "Auto-Fill Single Entry warning text."
@@ -935,8 +943,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Verwenden Sie eine kompakte Version der Drop-down-Liste, um Anmeldedaten auszuwählen.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Verwenden Sie eine kompakte Version der Drop-down-Liste, um Anmeldedaten auszuwählen.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Beim Speichern neuer Anmeldedaten nur die Domain anstatt der vollständigen URL speichern.",
@@ -1085,7 +1093,7 @@
     "optionsColumnAllowIframes": {
         "message": "Cross-Origin iframes zulassen",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Löschen",
         "description": "Site Preferences list column title."

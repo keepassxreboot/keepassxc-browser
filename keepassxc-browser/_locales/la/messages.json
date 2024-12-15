@@ -659,6 +659,10 @@
         "message": "Automatice imple nomina singulorum credentialorum.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatice imple nomina credentialium pertinentium",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
         "message": "Activa autocomplete pro campis nominum usoriorum.",
         "description": "Activate autocomplete for username fields checkbox text."
@@ -798,6 +802,10 @@
     "optionsAutoFillSingleEntryHelpText": {
         "message": "Permitte ipsum KeePassXC-Navigatorem implere litteras credentiales si solum unum nomen recipiat.",
         "description": "Auto-Fill Single Entry option help text."
+    },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Permitte ipsum KeePassXC-Navigatorem implere litteras credentiales si litteras credentiales pertinentes recipiat.",
+        "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
