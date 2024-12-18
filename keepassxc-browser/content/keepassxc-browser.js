@@ -1,8 +1,8 @@
 'use strict';
 
 const PASSKEYS_NO_LOGINS_FOUND = 15;
-const PASSKEYS_WAIT_FOR_LIFETIMER = 21;
-const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 30;
+const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
+const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 
 // Contains already called method names
 const _called = {};
