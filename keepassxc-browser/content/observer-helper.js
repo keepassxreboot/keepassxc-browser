@@ -20,7 +20,6 @@ kpxcObserverHelper.ignoredNodeNames = [
     'HTML',
     'LINK',
     'SCRIPT',
-    'SPAN',
     'VIDEO',
 ];
 
