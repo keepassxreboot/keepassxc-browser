@@ -74,6 +74,8 @@ options.initGeneralSettings = async function() {
         } else if (name === 'autoReconnect') {
             const message = updated.autoReconnect ? 'enable_automatic_reconnect' : 'disable_automatic_reconnect';
             browser.runtime.sendMessage({ action: message });
+        } else if (name === 'passkeys') {
+            $('#passkeysFallback').disabled = !isChecked;
         } else if (name === 'useMonochromeToolbarIcon') {
             browser.runtime.sendMessage({ action: 'update_popup' });
         }
@@ -229,6 +231,8 @@ options.initGeneralSettings = async function() {
         options.settings['defaultPasskeyGroup'] = '';
         await options.saveSettings();
     });
+
+    $('#passkeysFallback').disabled = options.settings['passkeys'] === false;
 
     let temporarySettings;
     const dialogImportSettingsModal = new bootstrap.Modal('#dialogImportSettings',
