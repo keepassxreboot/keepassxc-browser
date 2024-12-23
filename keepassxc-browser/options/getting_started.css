@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    justify-content: center;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.card {
+    width: 100%;
+}
+
+.tab {
+    align-self: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}

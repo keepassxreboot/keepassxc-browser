@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title data-i18n="welcomeText"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../css/colors.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../fonts/fork-awesome.min.css">
+    <link rel="stylesheet" href="options.css">
+    <link rel="stylesheet" href="getting_started.css">
+    <link rel="icon" type="image/png" href="../icons/keepassxc_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../icons/keepassxc_64x64.png" sizes="64x64">
+    <link rel="icon" type="image/png" href="../icons/keepassxc_96x96.png" sizes="96x96">
+    <script src="../common/browser-polyfill.min.js"></script>
+    <script src="../common/global_ui.js"></script>
+    <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="getting_started.js"></script>
+    <script src="../common/translate.js" defer></script>
+  </head>
+  <body class="pt-3 pb-5">
+    <!-- Header -->
+    <div class="tab" id="tab-getting-started">
+      <h2 class="pb-3 mt-0" data-i18n="welcomeText"></h2>
+
+      <!-- Help text-->
+      <div class="card my-4 shadow">
+        <div class="card-header h6 rounded-0">
+          <i class="fa fa-desktop" aria-hidden="true"></i>
+          <span data-i18n="optionsWelcomeTitle"></span>
+        </div>
+        <div class="card-body">
+          <p>
+            <span data-i18n="gettingStartedWelcomeText"></span>
+            <br>
+            <span data-i18n="gettingStartedSecondWelcomeText"></span>
+          </p>
+          <hr class="mt-0">
+          <p><span data-i18n="gettingStartedNewUser"></span></p>
+          <p>
+            <a target="_blank" href="https://keepassxc.org/docs/KeePassXC_GettingStarted#_browser_integration" data-i18n="[title]openNewTab">
+              <span data-i18n="documentationGettingStarted"></span>
+            </a>
+            <br>
+            <a target="_blank" href="https://keepassxc.org/docs/KeePassXC_UserGuide" data-i18n="[title]openNewTab">
+              <span data-i18n="documentationUserGuide"></span>
+            </a>
+            <br>
+            <a target="_blank" href="https://github.com/keepassxreboot/keepassxc-browser/wiki/Troubleshooting-guide" data-i18n="[title]openNewTab">
+              <span data-i18n="documentationTroubleshootingGuide"></span>
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Default settings -->
+      <div class="card my-4 shadow">
+        <div class="card-header h6 rounded-0">
+          <i class="fa fa-television" aria-hidden="true"></i>
+          <span data-i18n="optionsDefaultSettingsTitle"></span>
+        </div>
+        <div class="card-body">
+
+          <!-- Color theme -->
+          <div class="form-group col-sm-3 pb-4">
+            <label for="colorTheme" class="form-label" data-i18n="optionsThemeSelectionHeader"></label>
+            <select class="form-select form-select-sm col-md-3 col-lg-2" id="colorTheme" data-i18n="[title]optionsThemeSelection">
+              <option value="system" data-i18n="optionsThemeSystem"></option>
+              <option value="dark" data-i18n="optionsThemeDark"></option>
+              <option value="light" data-i18n="optionsThemeLight"></option>
+            </select>
+          </div>
+
+          <!-- Default password manager -->
+          <div class="form-group pb-1">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="defaultPasswordManager" id="defaultPasswordManager" value="true" />
+              <label class="form-check-label" for="defaultPasswordManager" data-i18n="optionsDefaultPasswordManager"></label>
+              <div class="form-text" data-i18n="optionsDefaultPasswordManagerHelpText"></div>
+            </div>
+          </div>
+
+          <!-- Enable Passkeys -->
+          <div class="form-group pb-1">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="passkeys" id="passkeys" value="true" />
+              <label class="form-check-label" for="passkeys" data-i18n="optionsPasskeysEnable"></label>
+              <div class="form-text" data-i18n="optionsPasskeysEnableHelpText"></div>
+            </div>
+          </div>
+
+          <!-- Autofill HTTP Auth dialogs -->
+          <div class="form-group pb-1">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="autoFillAndSend" id="autoFillAndSend" value="true">
+              <label class="form-check-label" for="autoFillAndSend" data-i18n="optionsCheckboxAutoFillAndSend"></label>
+              <div class="form-text" data-i18n="optionsAutoFillAndSendHelpText"></div>
+            </div>
+          </div>          
+
+          <!-- Debug logging -->
+          <div class="form-group mt-2 pb-1">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="debugLogging" id="debugLogging" value="false">
+              <label class="form-check-label" for="debugLogging" data-i18n="optionsDebugLogging"></label>
+              <div class="form-text" data-i18n="optionsDebugLoggingHelpText"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

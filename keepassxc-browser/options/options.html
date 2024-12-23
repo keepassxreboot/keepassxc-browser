@@ -351,10 +351,19 @@
                   </div>
 
                   <!-- Number of allowed redirects -->
-                  <div class="form-group w-50">
+                  <div class="form-group w-50 pb-2">
                     <label id="redirectAllowanceLabel" class="font-weight-normal" for="redirectAllowance" data-i18n="optionsRedirectAllowance" data-i18n-placeholder="1"></label>
                     <input type="range" class="form-range" id="redirectAllowance" name="redirectAllowance" min="1" max="11" step="1" value="1">
                     <div class="form-text help-text" data-i18n="optionsRedirectAllowanceHelpText"></div>
+                  </div>
+
+                  <!-- Default password manager -->
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="defaultPasswordManager" id="defaultPasswordManager" value="true" />
+                      <label class="form-check-label" for="defaultPasswordManager" data-i18n="optionsDefaultPasswordManager"></label>
+                      <div class="form-text" data-i18n="optionsDefaultPasswordManagerHelpText"></div>
+                    </div>
                   </div>
                 </div>
               </div>

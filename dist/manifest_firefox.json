@@ -166,6 +166,7 @@
         "cookies",
         "nativeMessaging",
         "notifications",
+        "privacy",
         "storage",
         "tabs",
         "webNavigation",

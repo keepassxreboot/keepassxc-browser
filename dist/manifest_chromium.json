@@ -162,6 +162,7 @@
         "nativeMessaging",
         "notifications",
         "offscreen",
+        "privacy",
         "storage",
         "tabs",
         "webNavigation",
