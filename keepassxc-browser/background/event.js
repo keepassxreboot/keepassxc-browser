@@ -24,13 +24,12 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
         browserAction.showDefault(tab);
     }
 
-    const errorMessage = page.tabs[tab.id]?.errorMessage ?? undefined;
-    const usernameFieldDetected = page.tabs[tab.id]?.usernameFieldDetected ?? false;
-    const iframeDetected = page.tabs[tab.id]?.iframeDetected ?? false;
+    const errorMessage = await page.getTabErrorMessage(tab);
+    const usernameFieldDetected = await page.isUsernameFieldDetected(tab);
+    const iframeDetected = await page.isIframeDetected(tab);
 
     return {
         associated: keepass.isAssociated(),
-
         configured: configured,
         databaseClosed: keepass.isDatabaseClosed,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
@@ -117,8 +116,7 @@ kpxcEvent.lockDatabase = async function(tab) {
 };
 
 kpxcEvent.onGetTabInformation = async function(tab) {
-    const id = tab?.id || page.currentTabId;
-    return page.tabs[id];
+    return await page.getTabInformation(tab);
 };
 
 kpxcEvent.onGetConnectedDatabase = async function() {
@@ -176,8 +174,8 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
     await browserAction.show(tab, popupData);
 };
 
-kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {
-    page.tabs[tab.id].usernameFieldDetected = detected;
+kpxcEvent.onUsernameFieldDetected = async function(tab, args = []) {
+    await page.setUsernameFieldDetected(tab, args[0], args[1]);
 };
 
 kpxcEvent.onIframeDetected = async function(tab, detected) {

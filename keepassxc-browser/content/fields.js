@@ -215,9 +215,9 @@ kpxcFields.getAllPageInputs = async function(previousInputs = []) {
     if (!kpxc.singleInputEnabledForPage
         && ((fields.length === 1 && fields[0].getLowerCaseAttribute('type') !== 'password')
         || (previousInputs.length === 1 && previousInputs[0].getLowerCaseAttribute('type') !== 'password'))) {
-        sendMessage('username_field_detected', true);
+        await sendMessage('username_field_detected', [ true, document.location.href ]);
     } else {
-        sendMessage('username_field_detected', false);
+        await sendMessage('username_field_detected', [ false, document.location.href ]);
     }
 
     await kpxc.initCombinations(inputs);

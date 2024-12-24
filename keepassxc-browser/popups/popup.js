@@ -125,7 +125,8 @@ const sendMessageToTab = async function(message) {
         }
 
         statusResponse(await browser.runtime.sendMessage({
-            action: 'get_status'
+            action: 'get_status',
+            args: [ true ]
         }));
     });
 

@@ -385,6 +385,30 @@ page.isIframeAllowed = async function(tab, args = []) {
     return hostname.endsWith(baseDomain) && tabUrl.hostname?.endsWith(baseDomain);
 };
 
+page.isIframeDetected = async function(tab) {
+    return page.tabs[tab.id]?.iframeDetected ?? false;
+};
+
+page.isUsernameFieldDetected = async function(tab) {
+    return page.tabs[tab.id]?.usernameFieldDetected ?? false;
+};
+
+// Only set if the content script URL matches
+page.setUsernameFieldDetected = async function(tab, detected, url) {
+    if (url === tab?.url) {
+        page.tabs[tab.id].usernameFieldDetected = detected;
+    }
+};
+
+page.getTabErrorMessage = async function(tab) {
+    return page.tabs[tab.id]?.errorMessage ?? undefined;
+};
+
+page.getTabInformation = async function(tab) {
+    const id = tab?.id || page.currentTabId;
+    return page.tabs[id];
+};
+
 /**
  * Gets the top level domain from URL.
  * @param {string} domain   Current iframe's hostname
