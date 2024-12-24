@@ -159,6 +159,7 @@
         "extension_pages": "script-src 'self'"
     },
     "host_permissions": [
+        "<all_urls>",
         "https://*/*",
         "http://*/*"
     ],
