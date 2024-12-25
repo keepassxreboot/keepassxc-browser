@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.9.5",
+    "version": "1.9.6",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {

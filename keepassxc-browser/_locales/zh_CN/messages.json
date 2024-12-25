@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "未连接到 KeePassXC。",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "当前数据库未连接。",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "错误：生成的密码超过了允许的长度！",

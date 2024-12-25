@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "KeePassXC ile bağlantı kurulmamış.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Geçerli veri tabanı ile bağlantı kurulamadı.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Hata: Oluşturulan parola izin verilen boyuttan daha uzun!",

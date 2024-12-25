@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Brak podłączenia do KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Bieżąca baza danych nie jest podłączona.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Błąd: Wygenerowane hasło jest dłuższe niż dozwolona długość!",

@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Nicht mit KeePassXC verbunden.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Aktuelle Datenbank ist nicht verbunden.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Fehler:\nDas generierte Passwort ist länger als die zulässige Länge!\nEs wurde auf die Länge abgeschnitten.\n\nBitte merken Sie sich das neue Passwort!",
@@ -359,11 +363,11 @@
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Fehler:\nKeine Anmeldungen gefunden.",
+        "message": "Keine Anmeldungen gefunden.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsMultipleFound": {
-        "message": "Fehler:\nIn KeePassXC wurde mehr als eine Anmeldung gefunden!\nKlicken Sie auf das KeePassXC-Browser-Symbol für weitere Optionen.",
+        "message": "In KeePassXC wurde mehr als eine Anmeldung gefunden!",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
@@ -371,7 +375,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Fehler:\nKeine Anmeldedaten für den angegebenen Benutzernamen gefunden.",
+        "message": "Keine Anmeldedaten für den angegebenen Benutzernamen gefunden.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {

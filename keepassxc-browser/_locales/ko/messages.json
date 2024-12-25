@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "KeePassXC에 연결되지 않았습니다.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "오류:\n생성된 암호가 입력이 허용된 암호보다 더 깁니다!\n허용된 길이에 맞춰서 암호를 잘랐습니다.\n\n새 암호를 기억하십시오!",

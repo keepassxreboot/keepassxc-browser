@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Ni vzpostavljena povezava s KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Napaka: ustvarjeno geslo je daljše od dovoljene dolžine!",

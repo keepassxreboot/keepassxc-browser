@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Nincs kapcsolat a KeePassXC-vel.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "A jelenlegi adatbázis nincs csatlakoztatva.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Hiba:\nAz előállított jelszó hosszabb mint a megengedett hossz!\nLe lesz vágva a megengedett legnagyobb hossznál.\n\nJegyezze meg az új jelszót!",

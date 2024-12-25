@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Ikke koblet til KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Feil: Det genererte passordet er lengre enn den tillatte lengden.",

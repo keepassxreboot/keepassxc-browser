@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Niet verbonden met KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Huidige database is niet verbonden.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Fout: Het gegenereerde wachtwoord is langer dan is toegestaan!",
