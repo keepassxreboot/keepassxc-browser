@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Neprisijungta prie KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Klaida: sugeneruotas slaptažodis yra ilgesnis nei leistinas ilgis!",

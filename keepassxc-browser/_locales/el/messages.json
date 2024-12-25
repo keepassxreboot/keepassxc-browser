@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Δεν είναι συνδεδεμένο με το KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Σφάλμα: Ο κωδικός πρόσβασης που δημιουργήθηκε είναι μεγαλύτερος από το επιτρεπόμενο μήκος!",

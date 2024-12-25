@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "Няма връзка с KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Текущото хранилище не е свързано.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Грешка: Генерираната парола е по-дълга от разрешената дължина!",

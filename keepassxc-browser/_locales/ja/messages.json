@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "KeePassXC に接続していません。",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "エラー: 許可された長さよりも長いパスワードが生成されました！",
@@ -259,7 +263,7 @@
         "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
-        "message": "KeePassXC から認証情報を反映",
+        "message": "KeePassXC から認証情報を補完します。",
         "description": "Username field icon hover text."
     },
     "usernameFieldTextNoCredentials": {

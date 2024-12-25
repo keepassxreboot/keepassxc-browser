@@ -1,3 +1,12 @@
+1.9.6 (2024-12-25)
+=========================
+- Add all_urls host permission to Chrome manifest file [#2421]
+- Add new Predefined Sites (Qt, Max) [#2398]
+- Add a new notification when trying to fill without a connected database [#2405]
+- Fix disabling passkeys fallback checkbox when the feature is not in use [#2420]
+- Fix input field identification [2411] [#2418]
+- Passkeys: Fix some constant value definitions (thanks a2kolbasov) [#2416]
+
 1.9.5 (2024-11-27)
 =========================
 - Add support for checkboxes with Custom Login Fields [#2372]

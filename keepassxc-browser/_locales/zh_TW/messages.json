@@ -237,7 +237,11 @@
     },
     "errorNotConnected": {
         "message": "未連接至 KeePassXC。",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
+    },
+    "errorCurrentDatabaseNotConnected": {
+        "message": "目前資料庫尚未連接。",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "錯誤：\n產生的密碼超出允許的長度！\n已將其截斷已符合長度。\n\n請記住新的密碼！",
