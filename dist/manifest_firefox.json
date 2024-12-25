@@ -147,7 +147,6 @@
         "content/passkeys.js"
     ],
     "permissions": [
-        "<all_urls>",
         "activeTab",
         "clipboardWrite",
         "contextMenus",
