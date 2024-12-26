@@ -518,9 +518,9 @@ kpxc.prepareCredentials = async function() {
         const pageUuid = await sendMessage('page_get_login_id');
         if (pageUuid) {
             const relevantCredential = kpxc.credentials.find(c => c.uuid === pageUuid);
-            if (relevantCredential) {
-                const index = kpxc.combinations.length - 1;
-                kpxcFill.fillInCredentials(kpxc.combinations[index], relevantCredential.login, relevantCredential.uuid);
+            const combination = kpxc.combinations?.at(-1);
+            if (relevantCredential && combination)
+                kpxcFill.fillInCredentials(combination, relevantCredential.login, relevantCredential.uuid);
             }
         }
     }

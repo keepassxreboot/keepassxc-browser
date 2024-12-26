@@ -919,7 +919,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in credentials if it receives relevant credential.",
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
