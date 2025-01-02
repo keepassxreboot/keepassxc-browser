@@ -252,12 +252,18 @@ page.getLoginId = async function(tab) {
     if (currentTab && !currentTab.loginId && currentTab.credentials.length === 1) {
         return currentTab.credentials[0].uuid;
     }
+    if (currentTab && currentTab.loginId) {
+        return currentTab.loginId;
+    }
 
-    return currentTab ? currentTab.loginId : undefined;
+    const result = await browser.storage.local.get(`loginId_${tab.id}`);
+    return result[`loginId_${tab.id}`];
 };
 
 page.setLoginId = async function(tab, loginId) {
     page.tabs[tab.id].loginId = loginId;
+
+    browser.storage.local.set({ [`loginId_${tab.id}`]: loginId });
 };
 
 page.getManualFill = async function(tab) {
