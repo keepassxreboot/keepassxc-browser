@@ -101,6 +101,16 @@ kpxcSites.exceptionFound = function(identifier, field) {
     return false;
 };
 
+// Forbids using Shadow DOM query with some sites unless a login dialog has been identified
+kpxcSites.isShadowDomQueryAllowed = function(nodeName) {
+    if (document.location.href?.startsWith('https://www.reddit.com')
+        && nodeName !== 'BODY'
+        && !document.querySelector('auth-flow-manager[step-name=login]')) {
+        return false;
+    }
+    return true;
+};
+
 /**
  * Handles a few exceptions for certain sites where 2FA field is not regognized properly.
  * @param {object} field   Input field Element

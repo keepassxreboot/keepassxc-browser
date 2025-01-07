@@ -170,7 +170,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         inputFields.push(target);
     }
 
-    if (kpxc.improvedFieldDetectionEnabledForPage) {
+    if (kpxc.improvedFieldDetectionEnabledForPage && kpxcSites.isShadowDomQueryAllowed(target?.nodeName)) {
         const inputFieldsFromShadowDOM = kpxcObserverHelper.findInputsFromShadowDOM(target);
         if (inputFieldsFromShadowDOM.length > 0) {
             logDebug('Input fields from Shadow DOM found:', inputFieldsFromShadowDOM);
