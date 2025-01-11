@@ -33,7 +33,7 @@
     "background": {
         "service_worker": "background/background_service.js"
     },
-    "content_scripts": [
+   "content_scripts": [
         {
             "matches": [
                 "<all_urls>"
@@ -45,7 +45,6 @@
             "js": [
                 "common/browser-polyfill.min.js",
                 "common/global.js",
-                "common/global_ui.js",
                 "common/sites.js",
                 "content/ui.js",
                 "content/banner.js",
@@ -61,10 +60,24 @@
                 "content/pwgen.js",
                 "content/totp-autocomplete.js",
                 "content/totp-field.js",
-                "content/username-field.js",
-                "content/passkeys-utils.js"
+                "content/username-field.js"
             ],
             "run_at": "document_idle",
+            "all_frames": true
+        },
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "exclude_matches": [
+                "*://*/*.xml*",
+                "file:///*.xml*"
+            ],
+            "js": [
+                "content/passkeys-inject.js",
+                "content/passkeys-utils.js"
+            ],
+            "run_at": "document_start",
             "all_frames": true
         }
     ],
