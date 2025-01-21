@@ -39,6 +39,7 @@ const IMPROVED_DETECTION_PREDEFINED_SITELIST = [
     'https://login.qt.io/login',
     'https://secure.chase.com/*',
     'https://www.reddit.com/',
+    'https://old.reddit.com/login/*',
     'https://www.icloud.com/'
 ];
 
