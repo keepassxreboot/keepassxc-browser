@@ -4,9 +4,11 @@
 <dict>
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>org.keepassxc.KeePassXC</string>
+	</array>
 	<key>com.apple.security.network.client</key>
 	<true/>
-	<key>com.apple.security.application-groups</key>
-	<string>org.keepassxc.KeePassXC</string>
 </dict>
 </plist>

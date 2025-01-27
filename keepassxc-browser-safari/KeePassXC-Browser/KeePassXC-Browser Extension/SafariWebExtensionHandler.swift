@@ -20,144 +20,133 @@ import os.log
 
 let SFExtensionMessageKey = "message"
 let SocketFileName = "org.keepassxc.KeePassXC.BrowserServer"
-var socketFD  : Int32 = -1
+var socketFD : Int32 = -1
 var socketConnected = false
-var maxMessageLength: Int32 = 1024 * 1024;
+var maxMessageLength: Int = 1024 * 1024;
+let backgroundQueue = DispatchQueue(label: "\(Bundle.main.bundleIdentifier!).readSocketQueue", qos: .background)
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
-    func getSocketPath() -> String {
-        let homePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "org.keepassxc.KeePassXC")?.path
-        return homePath! + "/" + SocketFileName;
-    }
+    private var logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: SafariWebExtensionHandler.self)
+    )
     
+    var socketPath: String {
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "org.keepassxc.KeePassXC")!.appending(component: SocketFileName).path(percentEncoded: false)
+    }
+ 
     func closeSocket() {
         if (socketFD != -1) {
-            os_log(.default, "Closing socket")
+            logger.info("Closing socket")
             close(socketFD)
             socketFD = -1
         }
     }
     
     func connectSocket() -> Bool {
-        if (socketFD != -1) {
-            // Reuse socket
-            return true
-        }
+        // Reuse socket
+        guard socketFD == -1 else { return true }
         
-        socketFD = socket(PF_LOCAL, SOCK_STREAM, 0)
-        os_log(.default, "Create socket: %d" , socketFD)
-        if (socketFD == -1) {
-            os_log(.error, "Cannot create socket")
+        socketFD = socket(AF_UNIX, SOCK_STREAM, 0)
+        guard socketFD > 0 else {
+            logger.error("Failed to create socket")
             return false
         }
         
-        var optval: Int = 1; // Use 1 to enable the option, 0 to disable
-        let status = setsockopt(socketFD, SOL_SOCKET,
-            SO_REUSEADDR, &optval, socklen_t(MemoryLayout<Int32>.size))
-        if (status == -1) {
-            os_log(.error, "setsockopt error: %d", errno)
-            return false
-        }
-
-        guard setsockopt(socketFD, SOL_SOCKET, SO_SNDBUF, &maxMessageLength, socklen_t(MemoryLayout<Int32>.size(ofValue: maxMessageLength))) != -1 else {
-            os_log(.error, "setsockopt error")
-            return false
-        }
+        var address = sockaddr_un()
+        address.sun_family = sa_family_t(AF_UNIX)
         
-        let socketPath = getSocketPath()
-        os_log(.default, "Socket path: %s", socketPath)
-       
-        // Check if socket file exists
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: socketPath) {
-            os_log(.default, "Socket file exists")
-        } else {
-            os_log(.default, "Socket file does not exist")
-            return false
-        }
-        
-        var addr = sockaddr_un()
-        addr.sun_family = UInt8(AF_LOCAL)
-        let lengthOfPath = socketPath.utf8.count
-        guard lengthOfPath < MemoryLayout.size(ofValue: addr.sun_path) else {
-            os_log(.error, "Pathname is too long")
-            return false
-        }
-        
-        strlcpy(&addr.sun_path.0, socketPath, MemoryLayout.size(ofValue: addr.sun_path))
-        addr.sun_len = UInt8(MemoryLayout<sa_family_t>.size + MemoryLayout<UInt8>.size + lengthOfPath + 1)
-
-        let sockLen = socklen_t(addr.sun_len)
-        let result = withUnsafePointer(to: &addr) {
-            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
-                connect(socketFD, $0, sockLen)
+        withUnsafeMutableBytes(of: &address.sun_path) { ptr in
+            socketPath.utf8CString.withUnsafeBytes { bytes in
+                ptr.copyBytes(from: bytes)
             }
         }
         
-        if (result == -1) {
-            let strError = String(utf8String: strerror(errno)) ?? "Unknown error"
-            os_log(.error, "Cannot connect socket: %s", strError)
+        let result = withUnsafePointer(to: &address) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                connect(socketFD, $0, socklen_t(MemoryLayout<sockaddr_un>.size))
+            }
+        }
+        
+        if result != 0 {
+            logger.error("Failed to connect to socket: \(errno)")
+            close(socketFD)
+            socketFD = -1
             return false
         }
         
         return true
     }
     
-	func beginRequest(with context: NSExtensionContext) {
-        guard let item = context.inputItems.first as? NSExtensionItem else {
-            os_log(.error, "Invalid amount of arguments for NSExtensionItem")
+    func beginRequest(with context: NSExtensionContext) {
+        guard let serializedRequest = parseRequest(with: context) else {
+            logger.error("Failed to parse request")
+            context.cancelRequest(withError: NSError())
             return
         }
-
-        guard let dict = item.userInfo?[SFExtensionMessageKey] as? Dictionary<String, Any> else {
-            os_log(.error, "Invalid Safari extension message receieved")
-            return
-        }
-
-        guard let message = dict["message"] as? String else {
-            os_log(.error, "Invalid extension message receieved")
-            return
-        }
-        
-        os_log(.default, "JSON string: %{public}s", message)
         
         if (!socketConnected) {
             if (!connectSocket()) {
                 closeSocket()
-                os_log(.error, "Socket not connected")
+                logger.error("Socket not connected")
                 return
             }
             
             socketConnected = true
+            startSocketListener()
         }
 
         // Send message
-        let bytesWritten = write(socketFD, message, message.count)
-        if (bytesWritten == -1) {
-            os_log(.error, "Cannot write to socket %d", errno)
-            return
+        let bytesWritten = serializedRequest.withUnsafeBytes {
+            write(socketFD, $0.baseAddress!, $0.count)
         }
-         
-        os_log(.default, "Written %d bytes", bytesWritten)
+
         
-        // Receive response
-        let receiveBuffer = UnsafeMutablePointer<CChar>.allocate(capacity: Int(maxMessageLength))
-        let bytesRead = read(socketFD, receiveBuffer, Int(maxMessageLength))
-        if (bytesRead > 0) {
-            os_log(.default, "Read %d bytes", bytesRead)
-
-            let responseString = String.init(bytesNoCopy: receiveBuffer, length: bytesRead, encoding: .utf8, freeWhenDone: false)
-
-            os_log(.default, "Response: %{public}s", responseString!)
-            
-            // Send the response to the extension
-            let response = NSExtensionItem()
-            response.userInfo = [ SFExtensionMessageKey: [ responseString ] ]
-            context.completeRequest(returningItems: [response], completionHandler: nil)
+        if bytesWritten <= 0 {
+            logger.error("Cannot write to socket \(errno)")
         } else {
-            os_log(.error, "Error reading from socket %d", errno)
+            logger.debug("Written \(bytesWritten) bytes")
+        }
+        
+        logger.debug("Written \(bytesWritten) bytes")
+        
+        context.completeRequest(returningItems: [])
+    }
+    
+    func parseRequest(with context: NSExtensionContext) -> Data? {
+        guard let item = context.inputItems.first as? NSExtensionItem else {
+            logger.error("Invalid amount of arguments for NSExtensionItem")
+            return nil
         }
 
-        receiveBuffer.deallocate()
+        guard let serializedRequest = try? JSONSerialization.data(withJSONObject: item.userInfo?[SFExtensionMessageKey] as Any) else {
+            logger.error("JSON serialization error")
+            return nil
+        }
+        
+        return serializedRequest
+    }
+    
+    func startSocketListener() {
+        backgroundQueue.async {
+            while socketConnected {
+                var buffer = [UInt8](repeating: 0, count: maxMessageLength)
+                let bytesRead = read(socketFD, &buffer, buffer.count)
+
+                if bytesRead > 0 {
+                    let data = Data(buffer[0..<bytesRead])
+                    self.logger.debug("Received message: \(data)")
+                    
+                    guard let jsonDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                        self.logger.error("Failed to decode message")
+                        return
+                    }
+                    
+                    SFSafariApplication.dispatchMessage(withName: "proxy_message", toExtensionWithIdentifier: "com.keepassxc.KeePassXC-Browser-Extension", userInfo: jsonDict)
+                } else {
+                    self.logger.debug("No message received or connection closed")
+                }
+            }
+        }
     }
 }
