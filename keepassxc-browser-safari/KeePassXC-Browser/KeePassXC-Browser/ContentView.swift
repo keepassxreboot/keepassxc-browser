@@ -24,9 +24,9 @@ struct ContentView: View {
             
             Form {
                 Section {
-                    Toggle("KeePassXC for Safari", isOn: $isEnabled)
+                    Toggle("KeePassXC-Browser for Safari", isOn: $isEnabled)
                 } footer: {
-                    Text("The KeePassXC browser extension for Safari is currently \(isEnabled ? "on" : "off").")
+                    Text("KeePassXC-Browser for Safari is currently \(isEnabled ? "on" : "off").")
                 }
             }
             .formStyle(.grouped)
