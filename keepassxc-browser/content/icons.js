@@ -34,7 +34,7 @@ kpxcIcons.addIcon = async function(field, iconType) {
     }
 };
 
-// Adds all necessary icons to a saved form
+// Adds all icons from a form struct
 kpxcIcons.addIconsFromForm = async function(form) {
     const addUsernameIcons = async function(c) {
         if (kpxc.settings.showLoginFormIcon && await kpxc.passwordFilledWithExceptions(c) === false) {
@@ -93,13 +93,12 @@ kpxcIcons.initIcons = async function(combinations = []) {
         await kpxcIcons.addIconsFromForm(form);
     }
 
-    // Check for other combinations that are not in any form
+    // Check for other combinations that are not in any form,
+    // or there's a form that wasn't present in savedForms (and it's not null)
     for (const c of combinations) {
-        if (c.form) {
-            continue;
+        if (!c.form || (c.form && !kpxcForm.savedForms.some(sf => sf.form === c.form))) {
+            await kpxcIcons.addIconsFromForm(c);
         }
-
-        await kpxcIcons.addIconsFromForm(c);
     }
 };
 
@@ -108,8 +107,10 @@ kpxcIcons.hasIcon = function(field) {
 };
 
 // Sets the icons to corresponding database lock status
-kpxcIcons.switchIcons = function() {
-    kpxcUsernameIcons.switchIcon(kpxc.databaseState);
-    kpxcPasswordIcons.switchIcon(kpxc.databaseState);
-    kpxcTOTPIcons.switchIcon(kpxc.databaseState);
+kpxcIcons.switchIcons = async function() {
+    const uuid = await sendMessage('page_get_login_id');
+
+    kpxcUsernameIcons.switchIcon(kpxc.databaseState, uuid);
+    kpxcPasswordIcons.switchIcon(kpxc.databaseState, uuid);
+    kpxcTOTPIcons.switchIcon(kpxc.databaseState, uuid);
 };

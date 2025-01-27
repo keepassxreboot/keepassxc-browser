@@ -1,0 +1,8 @@
+{
+    "env": {
+        "node": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    }
+}

@@ -22,8 +22,9 @@ TOTPAutocomplete.prototype.itemClick = async function(e, input, uuid) {
     input.focus();
 };
 
-TOTPAutocomplete.prototype.itemEnter = async function(index, elements) {
-    this.fillTotp(index, elements[index].uuid);
+TOTPAutocomplete.prototype.itemEnter = async function(index, item) {
+    const uuid = item?.getAttribute('uuid');
+    this.fillTotp(index, uuid);
 };
 
 TOTPAutocomplete.prototype.fillTotp = async function(index, uuid, currentInput) {

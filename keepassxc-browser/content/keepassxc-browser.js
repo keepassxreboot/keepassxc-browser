@@ -10,7 +10,6 @@ const sendMessage = async function(action, args) {
     return await browser.runtime.sendMessage({ action: action, args: args });
 };
 
-
 /**
  * @Object kpxc
  * The main content script object.
@@ -20,40 +19,55 @@ kpxc.combinations = [];
 kpxc.credentials = [];
 kpxc.databaseState = DatabaseState.DISCONNECTED;
 kpxc.detectedFields = 0;
+kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
 kpxc.settings = {};
 kpxc.singleInputEnabledForPage = false;
 kpxc.submitUrl = null;
 kpxc.url = null;
 
-// Add page to Site Preferences with Username-only detection enabled. Set from the popup
-kpxc.addToSitePreferences = async function() {
+// Add page to Site Preferences with a selected option enabled. Set from the popup.
+kpxc.addToSitePreferences = async function(optionName, addWildcard = false) {
     // Returns a predefined URL for certain sites
-    let site = trimURL(window.top.location.href).toLowerCase();
+    let site;
+    try {
+        site = trimURL(window.top.location.href);
+    } catch (err) {
+        logDebug('Adding to Site Preferences denied from iframe.');
+        return;
+    }
 
     // Check if the site already exists -> update the current settings
     let siteExists = false;
     for (const existingSite of kpxc.settings['sitePreferences']) {
         if (existingSite.url === site) {
             existingSite.ignore = IGNORE_NOTHING;
-            existingSite.usernameOnly = true;
+            existingSite[optionName] = true;
             siteExists = true;
         }
     }
 
     if (!siteExists) {
         // Add wildcard to the URL
-        site = site.slice(0, site.lastIndexOf('/') + 1) + '*';
+        if (addWildcard) {
+            site = site.slice(0, site.lastIndexOf('/') + 1) + '*';
+        }
 
         kpxc.settings['sitePreferences'].push({
             url: site,
             ignore: IGNORE_NOTHING,
-            usernameOnly: true
+            [optionName]: true
         });
     }
 
     await sendMessage('save_settings', kpxc.settings);
-    sendMessage('username_field_detected', false);
+
+    if (optionName === 'allowIframes') {
+        await sendMessage('page_set_allow_iframes', [ true, site ]);
+        await sendMessage('iframe_detected', false);
+    } else if (optionName === 'usernameOnly') {
+        await sendMessage('username_field_detected', false);
+    }
 };
 
 // Clears all from the content and background scripts, including autocomplete
@@ -72,15 +86,21 @@ kpxc.clearAllFromPage = function() {
 };
 
 // Creates a new combination manually from active element
-kpxc.createCombination = async function(activeElement) {
+kpxc.createCombination = async function(activeElement, passOnly) {
     const combination = {
         username: null,
         password: null,
         passwordInputs: [],
-        form: activeElement.form
+        form: null
     };
 
-    if (activeElement.getLowerCaseAttribute('type') === 'password') {
+    if (!activeElement) {
+        return combination;
+    }
+
+    combination.form = activeElement.form;
+
+    if (passOnly || activeElement.getLowerCaseAttribute('type') === 'password') {
         combination.password = activeElement;
     } else {
         combination.username = activeElement;
@@ -96,7 +116,7 @@ kpxc.detectDatabaseChange = async function(response) {
     kpxcIcons.switchIcons();
 
     if (document.visibilityState !== 'hidden') {
-        if (response.hash.new !== '' && response.hash.new !== response.hash.old) {
+        if (response.hash.new !== '') {
             _called.retrieveCredentials = false;
             const settings = await sendMessage('load_settings');
             kpxc.settings = settings;
@@ -108,7 +128,7 @@ kpxc.detectDatabaseChange = async function(response) {
             // If user has requested a manual fill through context menu the actual credential filling
             // is handled here when the opened database has been regognized. It's not a pretty hack.
             const manualFill = await sendMessage('page_get_manual_fill');
-            if (manualFill !== ManualFill.NONE) {
+            if (manualFill !== ManualFill.NONE && kpxc.combinations.length > 0) {
                 await kpxcFill.fillInFromActiveElement(manualFill === ManualFill.PASSWORD);
                 await sendMessage('page_set_manual_fill', ManualFill.NONE);
             }
@@ -119,9 +139,19 @@ kpxc.detectDatabaseChange = async function(response) {
     }
 };
 
+kpxc.entryHasTotp = function(entry) {
+    return entry.totp || (entry.stringFields && entry.stringFields.some(s => s['KPH: {TOTP}']));
+};
+
 // Get location URL by domain or full URL
 kpxc.getDocumentLocation = function() {
     return kpxc.settings.saveDomainOnly ? document.location.origin : document.location.href;
+};
+
+kpxc.getUniqueGroupCount = function(creds) {
+    const groups = creds.map(c => c.group || '');
+    const uniqueGroups = new Set(groups);
+    return uniqueGroups.size;
 };
 
 // Returns the form that includes the inputField
@@ -146,7 +176,7 @@ kpxc.getFormActionUrl = function(combination) {
     }
 
     let action = null;
-    if (combination.form && combination.form.length > 0) {
+    if (combination.form?.length > 0) {
         action = combination.form.action;
     }
 
@@ -233,30 +263,53 @@ kpxc.initAutocomplete = function() {
         return;
     }
 
+    const showGroupNameInAutocomplete = kpxc.showGroupNameInAutocomplete();
+
     for (const c of kpxc.combinations) {
         if (c.username) {
-            kpxcUserAutocomplete.create(c.username, false, kpxc.settings.autoSubmit);
+            kpxcUserAutocomplete.create(
+                c.username,
+                false,
+                kpxc.settings.autoSubmit,
+                kpxc.settings.useCompactMode,
+                showGroupNameInAutocomplete,
+                kpxc.settings.afterFillSorting,
+            );
         } else if (!c.username && c.password) {
             // Single password field
-            kpxcUserAutocomplete.create(c.password, false, kpxc.settings.autoSubmit);
+            kpxcUserAutocomplete.create(
+                c.password,
+                false,
+                kpxc.settings.autoSubmit,
+                kpxc.settings.useCompactMode,
+                showGroupNameInAutocomplete,
+                kpxc.settings.afterFillSorting,
+            );
         }
 
         if (c.totp) {
-            kpxcTOTPAutocomplete.create(c.totp, false, kpxc.settings.autoSubmit);
+            kpxcTOTPAutocomplete.create(
+                c.totp,
+                false,
+                kpxc.settings.autoSubmit,
+                kpxc.settings.useCompactMode,
+                showGroupNameInAutocomplete,
+                kpxc.settings.afterFillSortingTotp,
+            );
         }
     }
 };
 
 // Looks for any username & password combinations from the detected input fields
 kpxc.initCombinations = async function(inputs = []) {
-    if (inputs.length === 0) {
+    const isCustomLoginFieldsUsed = kpxcFields.isCustomLoginFieldsUsed();
+    if (inputs.length === 0 && !isCustomLoginFieldsUsed) {
         return [];
     }
 
-    const isCustomLoginFieldsUsed = kpxcFields.isCustomLoginFieldsUsed();
     const combinations = isCustomLoginFieldsUsed
-                       ? await kpxcFields.useCustomLoginFields()
-                       : await kpxcFields.getAllCombinations(inputs);
+        ? await kpxcFields.useCustomLoginFields()
+        : await kpxcFields.getAllCombinations(inputs);
     if (!combinations || combinations.length === 0) {
         if (isCustomLoginFieldsUsed) {
             kpxcUI.createNotification('warning', tr('optionsCustomFieldsNotFound'));
@@ -270,13 +323,23 @@ kpxc.initCombinations = async function(inputs = []) {
         const field = c.username || c.password;
         if (field && c.form) {
             // Initialize form-submit for remembering credentials
-            kpxcForm.init(c.form, c);
+            kpxcForm.initForm(c.form, c);
         }
 
         // Don't allow duplicates
-        if (!kpxc.combinations.some(f => f.username === c.username && f.password === c.password && f.totp === c.totp && f.form === c.form)) {
+        if (!kpxc.combinations.some(f =>
+            f.username === c.username && f.password === c.password && f.totp === c.totp && f.form === c.form
+        )) {
             kpxc.combinations.push(c);
         }
+    }
+
+    // Identify a custom password change form
+    kpxcForm.initCustomForm(combinations);
+
+    // Update the fields in Custom Login Fields banner if it's open
+    if (kpxcCustomLoginFieldsBanner.created) {
+        kpxcCustomLoginFieldsBanner.updateFieldSelections();
     }
 
     logDebug('Login field combinations identified:', combinations);
@@ -290,7 +353,7 @@ kpxc.initCredentialFields = async function() {
 
     // Search all remaining inputs from the page, ignore the previous input fields
     const pageInputs = await kpxcFields.getAllPageInputs(formInputs);
-    if (formInputs.length === 0 && pageInputs.length === 0) {
+    if (formInputs.length === 0 && pageInputs.length === 0 && !kpxcFields.isCustomLoginFieldsUsed()) {
         // Run 'redetect_credentials' manually if no fields are found after a page load
         setTimeout(async function() {
             if (_called.automaticRedetectCompleted) {
@@ -331,8 +394,8 @@ kpxc.initLoginPopup = function() {
     // Returns a login item with additional information for sorting
     const getLoginItem = function(credential, withGroup, loginId) {
         const title = credential.name.length < MAX_AUTOCOMPLETE_NAME_LEN
-                   ? credential.name
-                   : credential.name.substr(0, MAX_AUTOCOMPLETE_NAME_LEN) + '…';
+            ? credential.name
+            : credential.name.substr(0, MAX_AUTOCOMPLETE_NAME_LEN) + '…';
         const group = (withGroup && credential.group) ? `[${credential.group}] ` : '';
         const visibleLogin = (credential.login.length > 0) ? credential.login : tr('credentialsNoUsername');
         let text = `${group}${title} (${visibleLogin})`;
@@ -343,7 +406,7 @@ kpxc.initLoginPopup = function() {
 
         return {
             title: title,
-            group: group,
+            group: credential.group || '',
             visibleLogin: visibleLogin,
             login: credential.login,
             loginId: loginId,
@@ -354,28 +417,30 @@ kpxc.initLoginPopup = function() {
 
     // Sorting with or without group name included
     const sortLoginItemBy = function(a, b, name, withGroup = false) {
-        const firstGroup = a.group.toLowerCase();
-        const secondGroup = b.group.toLowerCase();
-        const first = a[name].toLowerCase();
-        const second = b[name].toLowerCase();
+        const firstGroup = a.group?.toLowerCase();
+        const secondGroup = b.group?.toLowerCase();
+        const first = a[name]?.toLowerCase();
+        const second = b[name]?.toLowerCase();
 
         return withGroup
             ? firstGroup.localeCompare(secondGroup) || first.localeCompare(second)
             : first.localeCompare(second);
     };
 
-    const getUniqueGroupCount = function(creds) {
-        const groups = creds.map(c => c.group || '');
-        const uniqueGroups = new Set(groups);
-        return uniqueGroups.size;
-    };
-
-    const showGroupNameInAutocomplete = kpxc.settings.showGroupNameInAutocomplete && (getUniqueGroupCount(kpxc.credentials) > 1);
+    const showGroupNameInAutocomplete = kpxc.showGroupNameInAutocomplete();
 
     // Initialize login items
     const loginItems = [];
-    for (let i = 0; i < kpxc.credentials.length; i++) {
-        const loginItem = getLoginItem(kpxc.credentials[i], showGroupNameInAutocomplete, i);
+    for (const [ i, login ] of kpxc.credentials.entries()) {
+        const loginItem = getLoginItem(login, showGroupNameInAutocomplete, i);
+
+        // Ignore a duplicate entry if the password is empty, but there's already a similar entry with a password.
+        // An usual use case with TOTP in a separate database.
+        const similarEntryFound = kpxc.credentials.some(c => c.password !== '' && c.login === loginItem.login);
+        if (login.password === '' && similarEntryFound) {
+            continue;
+        }
+
         loginItems.push(loginItem);
     }
 
@@ -398,6 +463,8 @@ kpxc.initLoginPopup = function() {
         popupLoginItems.push({ text: l.text, uuid: l.uuid });
 
         kpxcUserAutocomplete.elements.push({
+            group: showGroupNameInAutocomplete ? l.group : undefined,
+            title: l.title,
             label: l.text,
             value: l.login,
             uuid: l.uuid,
@@ -471,10 +538,12 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
         }
     }
 
+    const showGroupNameInAutocomplete = kpxc.showGroupNameInAutocomplete();
+
     const credentialsList = [];
     for (const c of credentials) {
         credentialsList.push({
-            login: c.login,
+            login: showGroupNameInAutocomplete ? `[${c.group}] ${c.login}` : c.login,
             name: c.name,
             uuid: c.uuid
         });
@@ -526,22 +595,27 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
 
 // Save credentials triggered fron the context menu
 kpxc.rememberCredentialsFromContextMenu = async function() {
-    const el = document.activeElement;
-    if (el.nodeName !== 'INPUT') {
+    if (kpxc.databaseState === DatabaseState.LOCKED) {
+        kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));
         return;
     }
 
-    const type = el.getAttribute('type');
-    const combination = await kpxcFields.getCombination(el, (type === 'password' ? type : 'username'));
+    const el = document.activeElement;
+    if (!matchesWithNodeName(el, 'INPUT')) {
+        return;
+    }
+
+    const combination = await kpxcFields.getCombination(el);
     if (!combination) {
         logDebug('Error: No combination found.');
         return;
     }
 
-    const usernameValue = combination.username ? combination.username.value : '';
-    const passwordValue = combination.password ? combination.password.value : '';
+    const usernameValue = combination.username?.value ?? '';
+    const passwordValue = combination.password?.value ?? '';
 
-    const result = await kpxc.rememberCredentials(usernameValue, passwordValue, undefined, undefined, kpxc.settings.showLoginNotifications);
+    const result = await kpxc.rememberCredentials(usernameValue, passwordValue, undefined, undefined,
+        kpxc.settings.showLoginNotifications);
     if (result === undefined) {
         kpxcUI.createNotification('error', tr('rememberNoPassword'));
         return;
@@ -555,18 +629,24 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
 // The basic function for retrieving credentials from KeePassXC.
 // Credential Banner can force the retrieval for reloading new/modified credentials.
 kpxc.retrieveCredentials = async function(force = false) {
+    if (!await isIframeAllowed()) {
+        return [];
+    }
+
     kpxc.url = document.location.href;
     kpxc.submitUrl = kpxc.getFormActionUrl(kpxc.combinations[0]);
 
     if (kpxc.settings.autoRetrieveCredentials && kpxc.url && kpxc.submitUrl) {
-        await kpxc.retrieveCredentialsCallback(await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, force ]));
+        await kpxc.retrieveCredentialsCallback(
+            await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, force ]),
+        );
     }
 };
 
 // Handles credentials from 'retrieve_credentials' response
 kpxc.retrieveCredentialsCallback = async function(credentials) {
     _called.retrieveCredentials = true;
-    if (credentials && credentials.length > 0) {
+    if (credentials?.length > 0) {
         kpxc.credentials = credentials;
         await kpxc.prepareCredentials();
     }
@@ -579,7 +659,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 
     // Retrieve submitted credentials if available
     const creds = await sendMessage('page_get_submitted');
-    if (creds && creds.submitted) {
+    if (creds?.submitted) {
         await sendMessage('page_clear_submitted');
         kpxc.rememberCredentials(creds.username, creds.password, creds.url, creds.oldCredentials);
     }
@@ -588,6 +668,10 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 // If credentials are not received, request them again
 kpxc.receiveCredentialsIfNecessary = async function() {
     if (kpxc.credentials.length === 0 && !_called.retrieveCredentials) {
+        if (!await isIframeAllowed()) {
+            return [];
+        }
+
         if (!kpxc.url) {
             kpxc.url = document.location.href;
         }
@@ -599,9 +683,12 @@ kpxc.receiveCredentialsIfNecessary = async function() {
             return [];
         }
 
-        // If the database was locked, this is scope never met. In these cases the response is met at kpxc.detectDatabaseChange
+        // If the database was locked, this is scope never met.
+        // In these cases the response is met at kpxc.detectDatabaseChange
         await sendMessage('page_set_manual_fill', ManualFill.NONE);
         await kpxc.retrieveCredentialsCallback(credentials);
+
+        kpxcIcons.switchIcons();
         return credentials;
     }
 
@@ -612,8 +699,8 @@ kpxc.setPasswordFilled = async function(state) {
     await sendMessage('password_set_filled', state);
 };
 
-// Special handling for settings value to select element
-kpxc.setValue = function(field, value) {
+// Special handling for setting value to select and checkbox elements
+kpxc.setValue = function(field, value, forced = false) {
     if (field.matches('select')) {
         value = value.toLowerCase().trim();
         const options = field.querySelectorAll('option');
@@ -626,31 +713,54 @@ kpxc.setValue = function(field, value) {
         }
 
         return;
+    } else if (field.getLowerCaseAttribute('type') === 'checkbox' && value?.toLowerCase() === 'true') {
+        field.checked = true;
     }
 
-    kpxc.setValueWithChange(field, value);
+    kpxc.setValueWithChange(field, value, forced);
 };
 
 // Sets a new value to input field and triggers necessary events
-kpxc.setValueWithChange = function(field, value) {
+kpxc.setValueWithChange = function(field, value, forced = false) {
+    if (!forced && field.readOnly) {
+        return;
+    }
+
+    const dispatchLegacyEvent = function(elem, eventName) {
+        const legacyEvent = elem.ownerDocument.createEvent('Event');
+        legacyEvent.initEvent(eventName, true, false);
+        elem.dispatchEvent(legacyEvent);
+    };
+
+    field.focus();
+    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new Event('input', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new Event('change', { bubbles: true, cancelable: false }));
     field.value = value;
-    field.dispatchEvent(new Event('input', { bubbles: true }));
-    field.dispatchEvent(new Event('change', { bubbles: true }));
-    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false, key: '', char: '' }));
-    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false, key: '', char: '' }));
-    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false, key: '', char: '' }));
+
+    // Some pages will not accept the value change without dispatching events directly to the document
+    dispatchLegacyEvent(field, 'input');
+    dispatchLegacyEvent(field, 'change');
 };
 
-// Returns true if site is ignored
+kpxc.showGroupNameInAutocomplete = function() {
+    return !kpxc.settings.useCompactMode
+        || (kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(kpxc.credentials) > 1);
+};
+
+// Returns true if site is ignored, and checks for predefined sites
 kpxc.siteIgnored = async function(condition) {
     if (kpxc.settings.sitePreferences) {
         let currentLocation;
         try {
-            currentLocation = window.top.location.href.toLowerCase();
+            currentLocation = window.top.location.href;
         } catch (err) {
             // Cross-domain security error inspecting window.top.location.href.
-            // This catches an error when an iframe is being accessed from another (sub)domain -> use the iframe URL instead.
-            currentLocation = window.self.location.href.toLowerCase();
+            // This catches an error when an iframe is being accessed from another (sub)domain
+            // -> use the iframe URL instead.
+            currentLocation = window.self.location.href;
         }
 
         const currentSetting = condition || IGNORE_FULL;
@@ -660,17 +770,16 @@ kpxc.siteIgnored = async function(condition) {
                     return true;
                 }
 
+                // Refresh current settings for the site
                 kpxc.singleInputEnabledForPage = site.usernameOnly;
+                kpxc.improvedFieldDetectionEnabledForPage = site.improvedFieldDetection;
+                await sendMessage('page_set_allow_iframes', [ site.allowIframes, currentLocation ]);
             }
         }
 
         // Check for predefined sites
         if (kpxc.settings.usePredefinedSites) {
-            for (const url of PREDEFINED_SITELIST) {
-                if (siteMatch(url, currentLocation) || url === currentLocation) {
-                    kpxc.singleInputEnabledForPage = true;
-                }
-            }
+            kpxc.usePredefinedSites(currentLocation);
         }
     }
 
@@ -680,13 +789,14 @@ kpxc.siteIgnored = async function(condition) {
 // Updates database status and icons when tab is activated again
 kpxc.triggerActivatedTab = async function() {
     await kpxc.updateDatabaseState();
-    kpxcIcons.switchIcons();
 
     if (kpxc.databaseState === DatabaseState.UNLOCKED && kpxc.credentials.length === 0) {
         await kpxc.retrieveCredentials();
     } else if (kpxc.credentials.length > 0) {
         kpxc.initLoginPopup();
     }
+
+    kpxcIcons.switchIcons();
 };
 
 // Updates the database state to the content script
@@ -721,7 +831,7 @@ kpxc.updateTOTPList = async function() {
         const password = credentials.password;
 
         // If no username is set, compare with a password
-        const credentialList = kpxc.credentials.filter(c => (c.totp || (c.stringFields && c.stringFields.some(s => s['KPH: {TOTP}'])))
+        const credentialList = kpxc.credentials.filter(c => kpxc.entryHasTotp(c)
             && (c.login === username || (!username && c.password === password)));
 
         // Filter TOTP Autocomplete Menu with matching 2FA credentials
@@ -732,12 +842,34 @@ kpxc.updateTOTPList = async function() {
     return [];
 };
 
+// Enable certain settings based on predefined sites list
+kpxc.usePredefinedSites = function(currentLocation) {
+    // Single input field
+    for (const url of PREDEFINED_SITELIST) {
+        if (siteMatch(url, currentLocation) || url === currentLocation) {
+            kpxc.singleInputEnabledForPage = true;
+        }
+    }
+
+    // Improved input field detection
+    for (const url of IMPROVED_DETECTION_PREDEFINED_SITELIST) {
+        if (siteMatch(url, currentLocation) || url === currentLocation) {
+            kpxc.improvedFieldDetectionEnabledForPage = true;
+        }
+    }
+};
 
 /**
  * Content script initialization.
  */
 const initContentScript = async function() {
     try {
+        if (document?.documentElement?.ownerDocument?.contentType !== 'text/html'
+            && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
+        ) {
+            return;
+        }
+
         const settings = await sendMessage('load_settings');
         if (!settings) {
             logError('Error: Cannot load extension settings');
@@ -776,6 +908,8 @@ const initContentScript = async function() {
 
             kpxc.rememberCredentials(creds.username, creds.password, creds.url, creds.oldCredentials);
         }
+
+        kpxcIcons.switchIcons();
     } catch (err) {
         logError('initContentScript error: ' + err);
     }
@@ -798,30 +932,42 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
 
         if (req.action === 'activated_tab') {
             kpxc.triggerActivatedTab();
+        } else if (req.action === 'add_allow_iframes_option') {
+            kpxc.addToSitePreferences('allowIframes');
         } else if (req.action === 'add_username_only_option') {
-            kpxc.addToSitePreferences();
+            kpxc.addToSitePreferences('usernameOnly', true);
         } else if (req.action === 'check_database_hash' && 'hash' in req) {
             kpxc.detectDatabaseChange(req);
         } else if (req.action === 'choose_credential_fields') {
-            kpxcDefine.init();
+            kpxcCustomLoginFieldsBanner.create();
         } else if (req.action === 'clear_credentials') {
             kpxc.clearAllFromPage();
         } else if (req.action === 'fill_user_pass_with_specific_login') {
+            await kpxc.reconnect();
             kpxcFill.fillFromPopup(req.id, req.uuid);
         } else if (req.action === 'fill_username_password') {
+            await kpxc.reconnect();
             sendMessage('page_set_manual_fill', ManualFill.BOTH);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement();
         } else if (req.action === 'fill_password') {
+            await kpxc.reconnect();
             sendMessage('page_set_manual_fill', ManualFill.PASSWORD);
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillInFromActiveElement(true); // passOnly to true
         } else if (req.action === 'fill_totp') {
+            await kpxc.reconnect();
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillFromTOTP();
         } else if (req.action === 'fill_attribute' && req.args) {
             await kpxc.receiveCredentialsIfNecessary();
             kpxcFill.fillAttributeToActiveElementWith(req.args);
+        } else if (req.action === 'frame_message') {
+            if (req.args?.[0] === 'frame_request_to_frames' && window.self !== window.top) {
+                kpxcCustomLoginFieldsBanner.handleParentWindowMessage(req.args);
+            } else if (req.args?.[0] === 'frame_request_to_parent' && window.self === window.top) {
+                kpxcCustomLoginFieldsBanner.handleTopWindowMessage(req.args);
+            }
         } else if (req.action === 'ignore_site') {
             kpxc.ignoreSite(req.args);
         } else if (req.action === 'redetect_fields') {
@@ -837,9 +983,43 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'retrive_credentials_forced') {
             await kpxc.retrieveCredentials(true);
         } else if (req.action === 'show_password_generator') {
-            kpxcPasswordDialog.trigger();
+            kpxcPasswordGenerator.showPasswordGenerator();
         } else if (req.action === 'request_autotype') {
             sendMessage('request_autotype', [ window.location.hostname ]);
         }
     }
 });
+
+// Automatically reconnect to KeePassXC
+// returns true if connected afterwards
+kpxc.reconnect = async function() {
+    // Try to reconnect if KeePassXC is not currently connected
+    const connected = await sendMessage('is_connected');
+    if (!connected) {
+        const reconnectResponse = await sendMessage('reconnect');
+        if (!reconnectResponse.keePassXCAvailable) {
+            kpxcUI.createNotification('error', tr('errorNotConnected'));
+            return false;
+        }
+    }
+    return true;
+};
+
+const isIframeAllowed = async function() {
+    sendMessage('iframe_detected', false);
+    try {
+        // Check for Cross-domain security error when inspecting window.top.location.href
+        const currentLocation = window.top.location.href;
+        return true;
+    } catch (err) {
+        // Inspect iframe using TLD and the tab's original URL
+        const allowed = await sendMessage('is_iframe_allowed', [ window.location.href, window.location.hostname ]);
+        if (allowed) {
+            return true;
+        }
+
+        logDebug(`Error: Credential request ignored from another domain: ${window.self.location.host}`);
+        sendMessage('iframe_detected', true);
+        return false;
+    }
+};

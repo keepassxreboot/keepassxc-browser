@@ -9,7 +9,7 @@ Some changes merged also from [smorks](https://github.com/smorks)' [KeePassHttp-
 
 This browser extension was first supported in KeePassXC 2.3.0 (release end of 2017). In general it is advised to only use the latest available release.
 
-Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk) or [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/pdffhmdngciaglkoonimfcmckehcpafo) (requires KeePassXC 2.5.3 or newer).
+Get the extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/) or [Chrome/Chromium](https://chromewebstore.google.com/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk) or [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/pdffhmdngciaglkoonimfcmckehcpafo) (requires KeePassXC 2.5.3 or newer).
 
 Please see this [document](https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_setup_browser_integration) for instructions how to configure KeePassXC in order to connect the database correctly.
 
@@ -28,10 +28,12 @@ KeePassXC-Browser extension requests the following permissions:
 | ----- | ----- |
 | `activeTab`               | To get URL of the current tab |
 | `contextMenus`            | To show context menu items |
+| `cookies`                 | To access browser's internal Public Suffix List |
 | `clipboardWrite`          | Allows password to be copied from password generator to clipboard |
 | `nativeMessaging`         | Allows communication with KeePassXC application |
 | `notifications`           | To show browser notifications |
-| `storage`                 | For storing extension settings to localStorage |
+| `offscreen`               | For accessing system theme when setting icon colors (Chrome only) |
+| `storage`                 | For storing extension settings (always stored locally in the browser, they are never synced) |
 | `tabs`                    | To request tab URL's and other info |
 | `webNavigation`           | To show browser notifications on install or update |
 | `webRequest`              | For handling HTTP Basic Auth |
@@ -42,7 +44,7 @@ KeePassXC-Browser extension requests the following permissions:
 
 ## Protocol
 
-The details about the messaging protocol used with the browser extension and KeePassXC can be found [here](keepassxc-protocol.md).
+Check [keepassxc-protocol](keepassxc-protocol.md) for the details about the messaging protocol used between the browser extension and KeePassXC.
 
 ## Translations
 
@@ -51,3 +53,7 @@ Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keep
 ## Development and testing
 
 See [wiki](https://github.com/keepassxreboot/keepassxc-browser/wiki/Loading-the-extension-manually).
+
+## Help!
+
+See our [Troubleshooting Guide](https://github.com/keepassxreboot/keepassxc-browser/wiki/Troubleshooting-guide) for solving problems if previously listed issues and solutions are not working.

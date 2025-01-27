@@ -21,14 +21,14 @@
  * @param {object} tab
  */
 browser.tabs.onCreated.addListener((tab) => {
-    if (tab.id > 0) {
-        if (tab.selected) {
-            page.currentTabId = tab.id;
-            if (!page.tabs[tab.id]) {
-                page.createTabEntry(tab.id);
-            }
-            page.switchTab(tab);
+    if (tab?.id > 0 && tab?.selected) {
+        page.currentTabId = tab.id;
+
+        if (!page.tabs[tab.id]) {
+            page.createTabEntry(tab.id);
         }
+
+        page.switchTab(tab);
     }
 });
 
@@ -37,11 +37,12 @@ browser.tabs.onCreated.addListener((tab) => {
  * @param {integer} tabId
  * @param {object} removeInfo
  */
-browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
-    delete page.tabs[tabId];
+browser.tabs.onRemoved.addListener(async function(tabId, removeInfo) {
     if (page.currentTabId === tabId) {
-        page.currentTabId = -1;
+        const currentTab = await getCurrentTab();
+        page.currentTabId = currentTab ? currentTab.id : -1;
     }
+    delete page.tabs[tabId];
 });
 
 /**
@@ -92,8 +93,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  * @param {object} details
  */
 browser.webNavigation.onCommitted.addListener((details) => {
-    if ((details.transitionQualifiers.length > 0 && details.transitionQualifiers[0] === 'client_redirect')
-        || details.transitionType === 'form_submit') {
+    if (details.transitionQualifiers?.[0] === 'client_redirect' || details.transitionType === 'form_submit') {
         page.redirectCount += 1;
         return;
     }
@@ -130,14 +130,7 @@ for (const item of contextMenuItems) {
         title: item.title,
         contexts: menuContexts,
         visible: item.visible,
-        id: item.id,
-        onclick: (info, tab) => {
-            browser.tabs.sendMessage(tab.id, {
-                action: item.action
-            }).catch((err) => {
-                logError(err);
-            });
-        }
+        id: item.id || item.action
     });
 }
 
@@ -148,9 +141,31 @@ browser.commands.onCommand.addListener(async (command) => {
         || command === 'choose_credential_fields'
         || command === 'retrive_credentials_forced'
         || command === 'reload_extension') {
-        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-        if (tabs.length) {
-            browser.tabs.sendMessage(tabs[0].id, { action: command });
+        const tab = await getCurrentTab();
+        if (tab) {
+            browser.tabs.sendMessage(tab.id, { action: command });
         }
     }
+});
+
+browser.contextMenus.onClicked.addListener(async (item, tab) => {
+    if (item?.menuItemId?.startsWith('fill_attribute')) {
+        const menuItem = page.attributeMenuItems.find(i => i?.action === item?.menuItemId);
+        if (menuItem) {
+            browser.tabs.sendMessage(tab.id, {
+                action: 'fill_attribute',
+                args: menuItem?.args
+            }).catch((err) => {
+                logError(err);
+            });
+        }
+
+        return;
+    }
+
+    browser.tabs.sendMessage(tab.id, {
+        action: item.menuItemId
+    }).catch((err) => {
+        logError(err);
+    });
 });

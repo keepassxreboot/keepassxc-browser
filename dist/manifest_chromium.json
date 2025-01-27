@@ -1,0 +1,183 @@
+{
+    "manifest_version": 3,
+    "name": "KeePassXC-Browser",
+    "version": "1.9.6",
+    "version_name": "1.9.6",
+    "minimum_chrome_version": "93",
+    "description": "__MSG_extensionDescription__",
+    "author": "KeePassXC Team",
+    "icons": {
+        "16": "icons/keepassxc_16x16.png",
+        "48": "icons/keepassxc_48x48.png",
+        "64": "icons/keepassxc_64x64.png",
+        "96": "icons/keepassxc_96x96.png",
+        "128": "icons/keepassxc_128x128.png"
+    },
+    "action": {
+        "default_icon": {
+            "16": "icons/keepassxc_16x16.png",
+            "18": "icons/keepassxc_18x18.png",
+            "19": "icons/keepassxc_19x19.png",
+            "32": "icons/keepassxc_32x32.png",
+            "36": "icons/keepassxc_36x36.png",
+            "38": "icons/keepassxc_38x38.png",
+            "64": "icons/keepassxc_64x64.png"
+        },
+        "default_title": "KeePassXC-Browser",
+        "default_popup": "popups/popup.html"
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab": true
+    },
+    "background": {
+        "service_worker": "background/background_service.js"
+    },
+   "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "exclude_matches": [
+                "*://*/*.xml*",
+                "file:///*.xml*"
+            ],
+            "js": [
+                "common/browser-polyfill.min.js",
+                "common/global.js",
+                "common/sites.js",
+                "content/ui.js",
+                "content/banner.js",
+                "content/autocomplete.js",
+                "content/credential-autocomplete.js",
+                "content/custom-fields-banner.js",
+                "content/fields.js",
+                "content/fill.js",
+                "content/form.js",
+                "content/icons.js",
+                "content/keepassxc-browser.js",
+                "content/observer-helper.js",
+                "content/pwgen.js",
+                "content/totp-autocomplete.js",
+                "content/totp-field.js",
+                "content/username-field.js"
+            ],
+            "run_at": "document_idle",
+            "all_frames": true
+        },
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "exclude_matches": [
+                "*://*/*.xml*",
+                "file:///*.xml*"
+            ],
+            "js": [
+                "content/passkeys-inject.js",
+                "content/passkeys-utils.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true
+        }
+    ],
+    "commands": {
+        "fill_username_password": {
+            "description": "__MSG_contextMenuFillUsernameAndPassword__",
+            "suggested_key": {
+                "default": "Alt+Shift+U",
+                "mac": "MacCtrl+Shift+U"
+            }
+        },
+        "fill_password": {
+            "description": "__MSG_contextMenuFillPassword__",
+            "suggested_key": {
+                "default": "Alt+Shift+P",
+                "mac": "MacCtrl+Shift+P"
+            }
+        },
+        "fill_totp": {
+            "description": "__MSG_contextMenuFillTOTP__",
+            "suggested_key": {
+                "default": "Alt+Shift+O",
+                "mac": "MacCtrl+Shift+O"
+            }
+        },
+        "show_password_generator": {
+            "description": "__MSG_contextMenuShowPasswordGenerator__",
+            "suggested_key": {
+                "default": "Alt+Shift+G",
+                "mac": "MacCtrl+Shift+G"
+            }
+        },
+        "save_credentials": {
+            "description": "__MSG_contextMenuSaveCredentials__"
+        },
+        "redetect_fields": {
+            "description": "__MSG_popupRedetectButton__"
+        },
+        "choose_credential_fields": {
+            "description": "__MSG_popupChooseCredentialsText__"
+        },
+        "retrive_credentials_forced": {
+            "description": "__MSG_popupReopenButton__"
+        },
+        "request_autotype": {
+            "description": "__MSG_contextMenuRequestGlobalAutoType__"
+        },
+        "reload_extension": {
+            "description": "__MSG_popupReloadButton__"
+        }
+    },
+    "web_accessible_resources": [{
+        "resources": [
+            "icons/disconnected.svg",
+            "icons/help.svg",
+            "icons/keepassxc.svg",
+            "icons/key.svg",
+            "icons/locked.svg",
+            "icons/otp.svg",
+            "css/autocomplete.css",
+            "css/banner.css",
+            "css/button.css",
+            "css/colors.css",
+            "css/define.css",
+            "css/notification.css",
+            "css/pwgen.css",
+            "css/username.css",
+            "css/totp.css",
+            "content/passkeys.js"
+        ],
+        "matches": [
+            "https://*/*",
+            "http://*/*"
+        ]
+    }],
+    "permissions": [
+        "activeTab",
+        "clipboardWrite",
+        "contextMenus",
+        "cookies",
+        "nativeMessaging",
+        "notifications",
+        "offscreen",
+        "storage",
+        "tabs",
+        "webNavigation",
+        "webRequest",
+        "webRequestAuthProvider",
+        "webRequestBlocking"
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'"
+    },
+    "host_permissions": [
+        "<all_urls>",
+        "https://*/*",
+        "http://*/*"
+    ],
+    "storage": {
+      "managed_schema": "managed_storage.json"
+    },
+    "default_locale": "en"
+}

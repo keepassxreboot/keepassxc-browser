@@ -1,5 +1,8 @@
 'use strict';
 
+const DEFAULT_SEGMENTED_TOTP_FIELDS = 6;
+const MIN_SEGMENTED_TOTP_FIELDS = 4;
+
 /**
  * @Object kpxcFields
  * Provides methods for input field handling.
@@ -54,12 +57,35 @@ kpxcFields.getAllCombinations = async function(inputs) {
         combinations.push(combination);
     }
 
-    // Check for multiple segmented TOTP fields
-    if (combinations.length === 0) {
-        kpxcFields.getSegmentedTOTPFields(inputs, combinations);
-    }
+    // Check for segmented TOTP fields
+    kpxcFields.handleSegmentedTOTPFields(inputs, combinations);
 
     return combinations;
+};
+
+// If there are multiple combinations, return the first one where input field can be found inside the document.
+// Used with Custom Login Fields where selected input fields might not be visible on the page yet,
+// and there's an extra combination for those. Only used from popup fill.
+kpxcFields.getCombinationFromAllInputs = function() {
+    const inputs = kpxcObserverHelper.getInputs(document.body);
+
+    for (const combination of kpxc.combinations) {
+        for (const value of Object.values(combination)) {
+            if (Array.isArray(value)) {
+                for (const v of value) {
+                    if (inputs.some(i => i === v)) {
+                        return combination;
+                    }
+                }
+            } else {
+                if (inputs.some(i => i === value)) {
+                    return combination;
+                }
+            }
+        }
+    }
+
+    return kpxc.combinations[0];
 };
 
 // Adds segmented TOTP fields to the combination if found
@@ -67,9 +93,35 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
     if (!kpxc.settings.showOTPIcon) {
         return;
     }
-    const addTotpFieldsToCombination = function(inputFields) {
-        const totpInputs = Array.from(inputFields).filter(e => e.nodeName === 'INPUT' && e.type !== 'password');
-        if (totpInputs.length === 6) {
+
+    let exceptionFound = false;
+
+    // Returns true if all 6 inputs are numeric, tel or text/number with maxLength of 1, or maxLength not defined.
+    // If ignoreFieldCount is true, number of TOTP fields are allowed to differ from the default (6),
+    // but 4 at minimum must exist.
+    const areFieldsSegmentedTotp = function(totpInputs, ignoreFieldCount = false) {
+        return (
+            ((ignoreFieldCount && totpInputs.length >= MIN_SEGMENTED_TOTP_FIELDS) ||
+                totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS) &&
+            totpInputs.every(
+                input =>
+                    ((input.inputMode === 'numeric' || input.inputMode === '') && input.pattern.includes('0-9')) ||
+                    ((input.type === 'text' || input.type === 'number') && (input.maxLength === 1 || input.maxLength === -1)) ||
+                    input.type === 'tel'
+            )
+        );
+    };
+
+    const addTotpFieldsToCombination = function(inputFields, ignoreFieldCount = false) {
+        const totpInputs = Array.from(inputFields).filter(
+            (e) =>
+                matchesWithNodeName(e, 'INPUT') &&
+                e.type !== 'password' &&
+                e.type !== 'hidden' &&
+                e.type !== 'submit'
+        );
+
+        if (areFieldsSegmentedTotp(totpInputs, ignoreFieldCount)) {
             const combination = {
                 form: form,
                 totpInputs: totpInputs,
@@ -81,25 +133,59 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
             combinations.push(combination);
 
             // Create an icon to the right side of the segmented fields
-            kpxcTOTPIcons.newIcon(totpInputs[totpInputs.length - 1], kpxc.databaseState, true);
+            kpxcTOTPIcons.newIcon(totpInputs.at(-1), kpxc.databaseState, true);
             kpxcIcons.icons.push({
-                field: totpInputs[totpInputs.length - 1],
+                field: totpInputs.at(-1),
                 iconType: kpxcIcons.iconTypes.TOTP,
                 segmented: true
             });
         }
     };
 
+    const formLengthMatches = function(currentForm) {
+        if (!currentForm) {
+            return false;
+        }
+
+        // Accept 6 inputs directly
+        if (currentForm.length === DEFAULT_SEGMENTED_TOTP_FIELDS) {
+            return true;
+        }
+
+        // 7 inputs with a button as the last one (e.g. PayPal uses this)
+        if (
+            currentForm.length === 7 &&
+            (matchesWithNodeName(currentForm.lastChild, 'BUTTON') ||
+                (matchesWithNodeName(currentForm.lastChild, 'INPUT') &&
+                    currentForm.lastChild.type === 'button'))
+        ) {
+            return true;
+        }
+
+        // Accept any other site-specific exceptions
+        if (kpxcSites.segmentedTotpExceptionFound(currentForm)) {
+            exceptionFound = true;
+            return true;
+        }
+
+        return false;
+    };
+
+    // Returns true of form's className, id or name points to a possible TOTP form
+    const isSegmentedTotpForm = (form) =>
+        acceptedOTPFields.some(
+            field =>
+                (form.className && form.className.includes(field)) ||
+                (form.id && typeof form.id === 'string' && form.id.includes(field)) ||
+                (form.name && typeof form.name === 'string' && form.name.includes(field))
+        );
+
+    // Use the form if it has segmented TOTP fields, otherwise try checking the input fields directly
     const form = inputs.length > 0 ? inputs[0].form : undefined;
-    if (form && (acceptedOTPFields.some(f => (form.className && form.className.includes(f))
-        || (form.id && typeof(form.id) === 'string' && form.id.includes(f))
-        || (form.name && typeof(form.name) === 'string' && form.name.includes(f))
-        || form.length === 6))) {
+    if (form && (formLengthMatches(form) || isSegmentedTotpForm(form))) {
         // Use the form's elements
-        addTotpFieldsToCombination(form.elements);
-    } else if (inputs.length === 6 && inputs.every(i => (i.inputMode === 'numeric' && i.pattern.includes('0-9'))
-                || (i.type === 'text' && i.maxLength === 1)
-                || i.type === 'tel')) {
+        addTotpFieldsToCombination(form.elements, exceptionFound);
+    } else if (areFieldsSegmentedTotp(inputs)) {
         // No form is found, but input fields are possibly segmented TOTP fields
         addTotpFieldsToCombination(inputs);
     }
@@ -141,17 +227,18 @@ kpxcFields.getAllPageInputs = async function(previousInputs = []) {
 /**
  * Returns the combination where input field is used
  * @param {HTMLElement} field Input field
- * @param {String} givenType 'username' or 'password'
+ * @param {String} givenType For example: 'username', 'password', 'totp', 'totpInputs'
  */
 kpxcFields.getCombination = async function(field, givenType) {
-    // If givenType is not set, return the combination that uses the selected field
     for (const combination of kpxc.combinations) {
-        if (!givenType && Object.values(combination).find(c => c === field)) {
-            return combination;
-        } else if (givenType && combination[givenType]) {
-            if (combination[givenType] === field || combination[givenType].includes(field)) {
+        if (givenType) {
+            // Strictly search a given type
+            const c = combination[givenType];
+            if (c && (c === field || (Array.isArray(c) && c.includes(field)))) {
                 return combination;
             }
+        } else if (Object.values(combination).find(c => c === field)) {
+            return combination;
         }
     }
 
@@ -214,7 +301,7 @@ kpxcFields.getIdFromProperties = function(target) {
         return `${target.nodeName} ${target.type} ${target.name} ${target.placeholder}`;
     }
 
-    if (target.classList && target.classList.length > 0) {
+    if (target.classList?.length > 0) {
         return `${target.nodeName} ${target.type} ${target.classList.value} ${target.placeholder}`;
     }
 
@@ -227,11 +314,11 @@ kpxcFields.getIdFromProperties = function(target) {
 
 // Legacy unique ID generation for converting
 kpxcFields.getLegacyId = function(target) {
-    if (target.classList.length > 0) {
+    if (target.classList?.length > 0) {
         return `${target.nodeName} ${target.type} ${target.classList.value} ${target.name} ${target.placeholder}`;
     }
 
-    if (target.id && target.id !== '') {
+    if (target.id && target?.id !== '') {
         return `${target.nodeName} ${target.type} ${kpxcFields.prepareId(target.id)} ${target.name} ${target.placeholder}`;
     }
 
@@ -240,6 +327,28 @@ kpxcFields.getLegacyId = function(target) {
 
 kpxcFields.getElementFromXPathId = function(xpath) {
     return (new XPathEvaluator()).evaluate(xpath, document.documentElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+};
+
+// Checks if inputs or combinations contain segmented TOTP fields
+kpxcFields.handleSegmentedTOTPFields = function(inputs, combinations) {
+    // Check for multiple segmented TOTP fields when there are no inputs, or combination contains the segemented fields
+    const segmentedFields = combinations.filter(c => c.totp);
+    if (combinations.length === 0
+        || segmentedFields.length === DEFAULT_SEGMENTED_TOTP_FIELDS
+        || inputs?.length === DEFAULT_SEGMENTED_TOTP_FIELDS) {
+        kpxcFields.getSegmentedTOTPFields(inputs, combinations);
+    }
+
+    // Remove previously detected segmented TOTP fields from the combination.
+    // This prevents adding icons to each single field when segmented fields are used.
+    if (segmentedFields.length === DEFAULT_SEGMENTED_TOTP_FIELDS) {
+        const firstTotpField = combinations.findIndex(c => c.totp);
+        if (firstTotpField >= 0) {
+            combinations.splice(firstTotpField, DEFAULT_SEGMENTED_TOTP_FIELDS);
+        }
+    }
+
+    return combinations;
 };
 
 // Check for new password via autocomplete attribute
@@ -258,14 +367,13 @@ kpxcFields.isCustomLoginFieldsUsed = function() {
 kpxcFields.isSearchForm = function(form) {
     // Check form action
     const formAction = form.getLowerCaseAttribute('action');
-    if (formAction && (formAction.includes('search') && !formAction.includes('research'))) {
+    if (formAction?.includes('search') && !formAction?.includes('research')) {
         return true;
     }
 
     // Ignore form with search classes
     const formId = form.getLowerCaseAttribute('id');
-    if (form.className && (form.className.includes('search')
-        || (formId && formId.includes('search') && !formId.includes('research')))) {
+    if (form.className?.includes('search') || (formId?.includes('search') && !formId?.includes('research'))) {
         return true;
     }
 
@@ -395,12 +503,6 @@ kpxcFields.useCustomLoginFields = async function() {
     if (totp) {
         totp.setAttribute('kpxc-defined', 'totp');
         kpxcTOTPIcons.newIcon(totp, kpxc.databaseState);
-    }
-
-    // If not all expected fields are identified, return an empty combination
-    if ((creds.username && !username) || (creds.password && !password) || (creds.totp && !totp)
-        || (creds.fields.length !== stringFields.length)) {
-        return [];
     }
 
     const combinations = [];

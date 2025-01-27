@@ -1,5 +1,6 @@
 'use strict';
 
+const MAX_CHILDREN = 50;
 const MAX_INPUTS = 100;
 const MAX_MUTATIONS = 200;
 
@@ -10,7 +11,17 @@ MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
  * MutationObserver handler for dynamically added input fields.
  */
 const kpxcObserverHelper = {};
-kpxcObserverHelper.ignoredNodeNames = [ 'g', 'path', 'svg', 'A', 'HEAD', 'HTML', 'LABEL', 'LINK', 'SCRIPT', 'SPAN', 'VIDEO' ];
+kpxcObserverHelper.ignoredNodeNames = [
+    'g',
+    'path',
+    'svg',
+    'A',
+    'HEAD',
+    'HTML',
+    'LINK',
+    'SCRIPT',
+    'VIDEO',
+];
 
 kpxcObserverHelper.ignoredNodeTypes = [
     Node.ATTRIBUTE_NODE,
@@ -72,8 +83,10 @@ kpxcObserverHelper.initObserver = async function() {
                 }
             } else if (mut.type === 'attributes' && (mut.attributeName === 'class' || mut.attributeName === 'style')) {
                 // Only accept targets with forms
-                const forms = mut.target.nodeName === 'FORM' ? mut.target : mut.target.getElementsByTagName('form');
-                if (forms.length === 0 && !kpxcSites.exceptionFound(mut.target.classList)) {
+                const forms = matchesWithNodeName(mut.target, 'FORM')
+                    ? mut.target
+                    : mut.target.getElementsByTagName('form');
+                if (forms?.length === 0 && !kpxcSites.exceptionFound(mut.target.classList, mut.target)) {
                     continue;
                 }
 
@@ -100,7 +113,10 @@ kpxcObserverHelper.initObserver = async function() {
 // Stores mutation style to an cache array
 // If there's a single style mutation, it's safe to calculate it
 kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
-    if (mut.attributeName !== 'style') {
+    // Do not cache elements with animations
+    if (mut?.attributeName !== 'style'
+        || mut?.target?.style?.transform !== ''
+        || mut?.target?.style?.transformStyle !== '') {
         return;
     }
 
@@ -132,39 +148,56 @@ kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
 
 // Gets input fields from the target
 kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
+    // Basic check for input element
+    const inputAllowed = (elem) => !elem.disabled
+        && elem.getLowerCaseAttribute('type') !== 'hidden'
+        && !kpxcObserverHelper.alreadyIdentified(elem);
+
     // Ignores target element if it's not an element node
     if (kpxcObserverHelper.ignoredNode(target)) {
         return [];
     }
 
     // Filter out any input fields with type 'hidden' right away
-    const inputFields = [];
-    Array.from(target.getElementsByTagName('input')).forEach(e => {
-        if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
-            inputFields.push(e);
+    let inputFields = [];
+    target.childElementCount > 0 && target.querySelectorAll('input')?.forEach((elem) => {
+        if (inputAllowed(elem)) {
+            inputFields.push(elem);
         }
     });
 
-    if (target.nodeName === 'INPUT') {
+    if (matchesWithNodeName(target, 'input')) {
         inputFields.push(target);
     }
 
-    // Append any input fields in Shadow DOM
-    if (target.shadowRoot && typeof target.shadowSelectorAll === 'function') {
-        target.shadowSelectorAll('input').forEach(e => {
-            if (e.type !== 'hidden' && !e.disabled && !kpxcObserverHelper.alreadyIdentified(e)) {
-                inputFields.push(e);
+    if (kpxc.improvedFieldDetectionEnabledForPage && kpxcSites.isShadowDomQueryAllowed(target?.nodeName)) {
+        const inputFieldsFromShadowDOM = kpxcObserverHelper.findInputsFromShadowDOM(target);
+        if (inputFieldsFromShadowDOM.length > 0) {
+            logDebug('Input fields from Shadow DOM found:', inputFieldsFromShadowDOM);
+        }
+
+        for (const inputField of inputFieldsFromShadowDOM) {
+            if (!inputFields.includes(inputField)) {
+                inputFields.push(inputField);
             }
-        });
+        }
     }
+
+    // Append any input fields in Shadow DOM that are directly in the target
+    const targetShadowRoot = getShadowDOM(target);
+    targetShadowRoot?.querySelectorAll('input')?.forEach((input) => {
+        if (inputAllowed(input)) {
+            inputFields.push(input);
+        }
+    });
 
     if (inputFields.length === 0) {
         return [];
     }
 
-    // Do not allow more visible inputs than _maximumInputs (default value: 100) -> return the first 100
+    // Do not allow more visible inputs than MAX_INPUTS (default value: 100) -> return the first 100
     if (inputFields.length > MAX_INPUTS) {
-        return inputFields.slice(0, MAX_INPUTS);
+        inputFields = inputFields.slice(0, MAX_INPUTS);
     }
 
     // Only include input fields that match with kpxcObserverHelper.inputTypes
@@ -188,6 +221,13 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
 // Checks if the input field has already identified at page load
 kpxcObserverHelper.alreadyIdentified = function(target) {
     return kpxc.inputs.some(e => e === target);
+};
+
+kpxcObserverHelper.findInputsFromShadowDOM = function(target) {
+    const inputFields = [];
+    traverseShadowDOM(target, inputFields);
+
+    return inputFields;
 };
 
 // Adds elements to a monitor array. Identifies the input fields.
@@ -218,6 +258,8 @@ kpxcObserverHelper.handleObserverAdd = async function(target) {
 
         kpxc.prepareCredentials();
     }
+
+    kpxcIcons.deleteHiddenIcons();
 };
 
 // Removes monitored elements
@@ -269,4 +311,54 @@ kpxcObserverHelper.ignoredNode = function(target) {
     }
 
     return false;
+};
+
+// Gets Shadow DOM from the element
+const getShadowDOM = function(elem) {
+    if (!elem || kpxcObserverHelper.ignoredNode(elem)) {
+        return;
+    }
+
+    try {
+        return elem.openOrClosedShadowRoot ? elem.openOrClosedShadowRoot : browser.dom.openOrClosedShadowRoot(elem);
+    } catch (e) {
+        return elem.shadowRoot;
+    }
+};
+
+// Filter for TreeWalker
+const treeWalkerFilter = function(node) {
+    return !node ||
+        node?.disabled ||
+        (typeof node?.getAttribute !== 'undefined' && node?.getLowerCaseAttribute('type') === 'hidden')
+        ? NodeFilter.FILTER_REJECT
+        : NodeFilter.FILTER_ACCEPT;
+};
+
+// Traverses all child elements, looking for input fields inside Shadow DOM
+const traverseShadowDOM = function(target, inputFields) {
+    const treeWalker = document?.createTreeWalker(target, NodeFilter.SHOW_ELEMENT, treeWalkerFilter);
+    let currentNode = treeWalker?.currentNode;
+
+    while (currentNode) {
+        if (!kpxcObserverHelper.ignoredNode(currentNode)
+            && matchesWithNodeName(currentNode, 'input')
+            && !kpxcObserverHelper.alreadyIdentified(currentNode)) {
+            inputFields.push(currentNode);
+        }
+
+        const nodeShadowRoot = getShadowDOM(currentNode);
+        if (nodeShadowRoot?.nodeType === Node.DOCUMENT_FRAGMENT_NODE && nodeShadowRoot?.childElementCount > 0) {
+            // Document Fragments need a special handling. It can contain children with Shadow DOM.
+            for (const child of nodeShadowRoot.children) {
+                if (!kpxcObserverHelper.ignoredNode(child)) {
+                    traverseShadowDOM(child, inputFields);
+                }
+            }
+        } else if (nodeShadowRoot) {
+            traverseShadowDOM(nodeShadowRoot, inputFields);
+        }
+
+        currentNode = treeWalker?.nextNode();
+    }
 };

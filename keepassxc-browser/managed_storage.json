@@ -1,0 +1,208 @@
+{
+  "type": "object",
+  "properties": {
+    "settings": {
+      "type": "object",
+      "properties": {
+        "afterFillSorting": {
+          "title": "How to sort credentials after fill. Default: sortByMatchingCredentials",
+          "type": "string"
+        },
+        "afterFillSortingTotp": {
+          "title": "How to sort credentials after fill for TOTP. Default: sortByRelevantEntry",
+          "type": "string"
+        },
+        "autoCompleteUsernames": {
+          "title": "Use Autocomplete Menu to view credentials on web pages. Default: true",
+          "type": "boolean"
+        },
+        "autoFillAndSend": {
+          "title": "Automatically fill HTTP Basic Auth entries. Default: false",
+          "type": "boolean"
+        },
+        "autoFillSingleEntry": {
+          "title": "Automatically fill single credential entries. Default: false",
+          "type": "boolean"
+        },
+        "autoFillSingleTotp": {
+          "title": "Automatically fill single TOTP. Default: false",
+          "type": "boolean"
+        },
+        "autoRetrieveCredentials": {
+          "title": "Automatically retrieve credentials. Default: true",
+          "type": "boolean"
+        },
+        "autoSubmit": {
+          "title": "Automatically submit credentials. Default: false",
+          "type": "boolean"
+        },
+        "bannerPosition": {
+          "title": "Where to position the Credential Banner. Default (top): 1",
+          "type": "integer"
+        },
+        "checkUpdateKeePassXC": {
+          "title": "When to check updates for KeePassXC. Default (never): 0",
+          "type": "integer"
+        },
+        "clearCredentialsTimeout": {
+          "title": "Clear credential info from tabs after timeout. Default (seconds): 10",
+          "type": "integer"
+        },
+        "colorTheme": {
+          "title": "Extension color scheme. Default: system",
+          "type": "string"
+        },
+        "credentialSorting": {
+          "title": "How to sort matching credentials. Default: sortByGroupAndTitle",
+          "type": "string"
+        },
+        "debugLogging": {
+          "title": "Enable debug logging. Default: false",
+          "type": "boolean"
+        },
+        "defaultGroup": {
+          "title": "Default group for storing new credentials. Default: (empty)",
+          "type": "string"
+        },
+        "defaultPasskeyGroup": {
+          "title": "Default group for storing new passkeys. Default: (empty)",
+          "type": "string"
+        },
+        "defaultGroupAlwaysAsk": {
+          "title": "Always ask group when saving new credentials. Default: false",
+          "type": "boolean"
+        },
+        "defined-custom-fields": {
+          "title": "Object key is the page URL.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "fields": {
+                "title": "Custom defined String Fields",
+                "type": "array",
+                "items": {
+                  "title": "Two items with element path and identification.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "password": {
+                "title": "Two items with element path and identification.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "username": {
+                "title": "Two items with element path and identification.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "downloadFaviconAfterSave": {
+          "title": "Downloads favicon in KeePassXC after credential is created. Default: false",
+          "type": "boolean"
+        },
+        "passkeys": {
+          "title": "Enable support for passkeys. Default: false",
+          "type": "boolean"
+        },
+        "passkeysFallback": {
+          "title": "Use passkeys fallback. Default: true",
+          "type": "boolean"
+        },
+        "redirectAllowance": {
+          "title": "How many redirects are allowed after Credential Banner is hidden. Default: 1",
+          "type": "integer"
+        },
+        "saveDomainOnly": {
+          "title": "Saves only the domain for new credentials and/or web page specific settings. Default: true",
+          "type": "boolean"
+        },
+        "showGettingStartedGuideAlert": {
+          "title": "Show getting started guide link on popup. Default: true",
+          "type": "boolean"
+        },
+        "showGroupNameInAutocomplete": {
+          "title": "Show group name in Autocomplete Menu. Default: true",
+          "type": "boolean"
+        },
+        "showLoginFormIcon": {
+          "title": "Show username icons on web pages. Default: true",
+          "type": "boolean"
+        },
+        "showLoginNotifications": {
+          "title": "Show notifications for new logins. Default: true",
+          "type": "boolean"
+        },
+        "showNotifications": {
+          "title": "Show notifications. Default: true",
+          "type": "boolean"
+        },
+        "showOTPIcon": {
+          "title": "Show TOTP icons on web pages. Default: true",
+          "type": "boolean"
+        },
+        "showTroubleshootingGuideAlert": {
+          "title": "Show troubleshooting guide alert on multiple reconnect attempts. Default: true",
+          "type": "boolean"
+        },
+        "sitePreferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "allowIframes": {
+                "title": "Allow cross-origin iframes.",
+                "type": "boolean"
+              },
+              "ignore": {
+                "title": "Settings for what to ignore with the page. Default: ignoreNothing",
+                "type": "string"
+              },
+              "improvedFieldDetection": {
+                "title": "Improved input field detection.",
+                "type": "boolean"
+              },
+              "url": {
+                "title": "Page URL.",
+                "type": "string"
+              },
+              "usernameOnly": {
+                "title": "Username-only detection is used for the site.",
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "useCompactMode": {
+          "title": "Use compact mode with Autocomplete Menu. Default: false",
+          "type": "boolean"
+        },
+        "useMonochromeToolbarIcon": {
+          "title": "Use monochrome icons in the toolbar. Default: false",
+          "type": "boolean"
+        },
+        "useObserver": {
+          "title": "Use dynamic input field detection. Default: true",
+          "type": "boolean"
+        },
+        "usePredefinedSites": {
+          "title": "Use predefined sites for compatibility. Default: true",
+          "type": "boolean"
+        },
+        "usePasswordGeneratorIcons": {
+          "title": "Use password generator icons. Default: false",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -23,16 +23,17 @@ CredentialAutocomplete.prototype.itemClick = async function(e, input, uuid) {
     e.stopPropagation();
 
     const index = Array.prototype.indexOf.call(e.currentTarget.parentElement.childNodes, e.currentTarget);
-    const usernameValue = e.target.getElementsByTagName('input')[0].value;
+    const usernameValue = e.currentTarget.getElementsByTagName('input')[0]?.value;
     await this.fillPassword(usernameValue, index, uuid);
 
     this.closeList();
     input.focus();
 };
 
-CredentialAutocomplete.prototype.itemEnter = async function(index, elements) {
-    const usernameValue = elements[index].value;
-    this.fillPassword(usernameValue, index, elements[index].uuid);
+CredentialAutocomplete.prototype.itemEnter = async function(index, item) {
+    const usernameValue = item?.getElementsByTagName('input')[0].value;
+    const uuid = item?.getAttribute('uuid');
+    this.fillPassword(usernameValue, index, uuid);
 };
 
 CredentialAutocomplete.prototype.fillPassword = async function(value, index, uuid) {

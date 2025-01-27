@@ -3,6 +3,58 @@
         "message": "KeePassXC integration for modern web browsers",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Add Site Preferences for this URL.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Allows Cross-Origin iframes for the current page.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Connect current active database to KeePassXC-Browser.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Copy debug info to clipboard.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Dismisses Basic HTTP Auth.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Redetects all input fields on the page.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Remove connected database from KeePassXC-Browser.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Remove Custom Login Fields for this URL.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Remove Site Preferences for this URL.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Reopen current active database.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Adds Username-only Detection to the current page.",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Fill Username and Password",
         "description": "Context menu item for filling both username and password."
@@ -20,7 +72,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Save credentials",
+        "message": "Save Credentials",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -28,12 +80,12 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Fill attribute…",
+        "message": "Fill Attribute…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-      "message": "Request Global Auto-Type",
-      "description": "Global Auto-Type shortcut text."
+        "message": "Request Global Auto-Type",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "HTTP authentication with multiple credentials detected. Click on the extension icon to choose the correct one.",
@@ -107,41 +159,89 @@
         "message": "Filled password is longer than field's allowed max length.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
+    "errorMessageNoGroupsFound": {
+        "message": "No groups found.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Cannot create new group.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "No valid UUID provided.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessageAccessToAllEntriesDenied": {
+        "message": "Access to all entries denied.",
+        "description": "Access to all entries denied."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Attestation not supported.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Credential is excluded.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Passkeys request canceled.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Invalid user verification.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Empty public key.",
+        "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Invalid URL provided.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Origin is empty or not allowed.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+        "message": "Effective domain is not a valid domain.",
+        "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+        "message": "Origin and RP ID do not match.",
+        "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+        "message": "No supported algorithms were provided.",
+        "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Wait for timer to expire.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Challenge is shorter than required minimum length.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "user.id does not match the required length.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Context is not secure.",
+        "description": "Context is not secure."
+    },
     "errorNotConnected": {
         "message": "Not connected to KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
     },
-    "passwordGeneratorIcon": {
-        "message": "Password generator icon",
-        "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Generated password",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Also fill in the next password-field",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Password Generator",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Generate",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Try again",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Copy",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Fill password",
-        "description": "Fill a password in password generator."
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Error: The generated password is longer than the allowed length!",
@@ -156,96 +256,95 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Generate password",
+        "message": "Generate password.",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Cannot receive generated password.",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Is KeePassXC running and connected?",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
     },
     "usernameFieldText": {
-        "message": "Fill credentials from KeePassXC",
+        "message": "Fill credentials from KeePassXC.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "No credentials to fill.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "Database is locked",
+        "message": "Database is locked.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC is disconnected",
+        "message": "KeePassXC is disconnected.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
-    "usernameFieldIcon": {
-        "message": "Username field icon",
-        "description": "Username field icon text."
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
     },
     "totpFieldText": {
         "message": "Fill TOTP from KeePassXC",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "TOTP field icon",
-        "description": "OTP field icon text."
-    },
-    "defineDismiss": {
-        "message": "Dismiss",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Close",
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "Skip",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Show more",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
-    "defineAgain": {
-        "message": "Again",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Reset",
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "Confirm",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Login fields for this page are already selected and will be overwritten.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Discard selection",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Clear saved data",
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String field #",
+        "message": "String field",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Choose a username field",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "message": "Choose a username field",
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
-        "message": "2. Now choose a password field",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "message": "Choose a password field",
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Choose a TOTP field",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "message": "Choose a TOTP field",
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Confirm selection",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Choose String Fields",
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Please confirm your selection or choose more fields as String fields.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "You can also use the numbers to choose the input fields from keyboard.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
+    },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Choose a Custom Login Field",
+        "description": "Help text for Custom Login Field banner."
     },
     "username": {
         "message": "Username",
@@ -254,6 +353,10 @@
     "password": {
         "message": "Password",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "String Fields",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- no username -",
@@ -268,7 +371,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Press the KeePassXC-Browser icon for more options.",
+        "message": "Click the KeePassXC-Browser icon for more options.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -291,6 +394,10 @@
         "message": "Error: Unable to find a password field.",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Filling password to a plain text field is prevented.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
         "message": "Error: Could not detect changed credentials.",
         "description": "Message shown when trying to save credentials that haven't changed."
@@ -304,7 +411,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Choose custom login fields",
+        "message": "Choose Custom Login Fields",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -331,6 +438,10 @@
         "message": "Add Username-only option for the site",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Allow Cross-Origin iframes for the site",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "KeePassXC-Browser has encountered an error:",
         "description": "A text shown above error message in the popup."
@@ -351,16 +462,24 @@
         "message": "Getting Started Guide - Setup Browser Integration",
         "description": "Popup Getting Started Guide link text."
     },
-    "popupGettingStartedHide": {
-      "message": "Hide and don't show again.",
-      "description": "Getting Started Guide alert close button title."
-  },
+    "popupAlertHide": {
+        "message": "Hide and don't show again.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Cannot connect to KeePassXC? Maybe our wiki page could help.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Troubleshooting Guide",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Checking status...",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Press the connect button to pair with KeePassXC.",
+        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -368,7 +487,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Press the reconnect button to establish a new connection.",
+        "message": "Click the reconnect button to establish a new connection.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -377,11 +496,15 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "KeePassXC-Browser is connected to KeePassXC and has been configured using the following identifier: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Only a single username field was detected. Add the URL to Site Preferences with Username-only option enabled?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Username or password changed! Save it?",
@@ -397,14 +520,14 @@
     },
     "rememberUsernameExists": {
         "message": "The credentials with the used username are marked bold: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Please choose the credentials you want to update.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose the group you want to add the new credentials.",
+        "message": "Please choose a group to store new credentials.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -437,7 +560,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Credentials with username $1 updated.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Identical credentials already exists. Nothing to update.",
@@ -467,12 +590,8 @@
         "message": "More than one password field found on this page. Right-click one of the password fields, and choose one of:",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL: ",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "Username: ",
+        "message": "Username:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -483,9 +602,13 @@
         "message": "Update",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "Dismiss",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Cancel",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Back",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Don't ask again for this site",
@@ -512,12 +635,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Custom login fields",
-        "description": "Saved custom login fields tab text."
+        "message": "Custom Login Fields",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Site preferences",
-        "description": "Site preferences fields tab text."
+        "message": "Site Preferences",
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "About",
@@ -532,12 +655,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Custom login fields",
-        "description": "Custom login fields page header."
+        "message": "Custom Login Fields",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Site preferences",
-        "description": "Site preferences page header."
+        "message": "Site Preferences",
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "About",
@@ -569,11 +692,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Yes, remove now",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "Cancel",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Reset",
@@ -595,6 +718,10 @@
         "message": "Separate the group with slashes, for example: Group/ChildGroup.",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Default group for saving new passkeys:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Always ask where to save new credentials",
         "description": "Default group checkbox help text."
@@ -604,15 +731,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Activate password generator icons.",
+        "message": "Activate password generator icons",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Activate username field icons.",
+        "message": "Activate username field icons",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Use dynamic input field detection.",
+        "message": "Use dynamic input field detection",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -620,15 +747,15 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Activate 2FA/OTP field icons.",
+        "message": "Activate 2FA/OTP field icons",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Automatically retrieve credentials.",
+        "message": "Automatically retrieve credentials",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Automatically reconnect to KeePassXC.",
+        "message": "Automatically reconnect to KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -636,15 +763,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Automatically fill in single-credential entries.",
+        "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Activate autocomplete for username fields.",
+        "message": "Activate autocomplete for username fields",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Display the group name in autocomplete list when credentials are from different groups.",
+        "message": "Display the group name in autocomplete list when credentials are from different groups",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -656,15 +787,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Show notifications.",
+        "message": "Show notifications",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Save domain only.",
+        "message": "Save domain only",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Show a banner on the page when new credentials can be saved to the database.",
+        "message": "Show a banner on the page when new credentials can be saved to the database",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -672,12 +811,12 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "How many redirects are allowed until the banner disappears. Default value is 1. Maximum is infinite.",
+        "message": "How many redirects are allowed until the banner disappears. Default value is 3. Maximum is infinite.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Automatically fill in HTTP Basic Auth dialogs and submit them.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
         "message": "Debug logging",
@@ -692,7 +831,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every 3 days",
+        "message": "every three days",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -748,11 +887,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Use predefined sites for compatibility.",
+        "message": "Use predefined sites for compatibility",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the site preferences.",
+        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -776,27 +915,39 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrently, possibly filling sensitive data to unsafe input fields.",
+        "message": "Warning! Using auto-fill is not safe. Use at your own risk. KeePassXC-Browser automatically tries to detect login fields. However, they may be detected incorrectly, possibly filling sensitive data to unsafe input fields.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Show a dropdown list containing available credentials for all username fields on a page.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown.",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
         "message": "Show notifications for errors and when user interaction is required.",
         "description": "Show notifications option help text."
     },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
         "message": "When saving new credentials, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "When saving new custom login fields, save only the domain instead of full URL.",
+        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -859,11 +1010,11 @@
         "message": "Shortcut for $1 has been successfully changed.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Shortcut for $1 has been reset.",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Error: Shortcut for $1 has not been changed!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -892,7 +1043,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1",
+        "message": "Do you really want to remove the following identifier from the database list: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -921,87 +1072,119 @@
     },
     "optionsColumnPageURL": {
         "message": "Page URL",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Ignore",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Username-only Detection",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Improved Input Field Detection",
+        "description": "Improved Input Field Detection column text."
+    },
+    "optionsColumnAllowIframes": {
+        "message": "Allow Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Delete",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Enable all features",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Disable new/modified credentials",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Disable Auto-Submit",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Disable all features",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Title",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Username",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Group and title",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Group and username",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Sort credentials after fill by",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "When Relevant credential first option is selected, the credential for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Sort credentials after fill for TOTP by",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "When Relevant credential first option is selected, the TOTP for previously filled login is set as first in Autocomplete Menu's listing.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Matching credentials setting",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Relevant credential first",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved custom login fields found.",
+        "message": "No saved Custom Login Fields found.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved custom login fields using the table.",
-        "description": "Table caption of Custom login fields page."
+        "message": "You can manage saved Custom Login Fields using the table.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "If KeePassXC-Browser detects the wrong login fields, you are able to specify the correct fields yourself.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Go to the page and click on the KeePassXC-Browser icon, then select ",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "On this page you can manage saved custom login fields.",
-        "description": "Saved custom login fields info text, third part."
+        "message": "On this page you can manage saved Custom Login Fields.",
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remove saved custom login fields?",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Remove saved Custom Login Fields?",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Do you really want to remove the saved custom login fields on the page: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "KeePassXC-Browser will automatically detect the login fields next time you visit this page.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "No site preferences found.",
-        "description": "Shown when no site preferences are saved."
+        "message": "No Site Preferences found.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Remove site?",
@@ -1009,38 +1192,46 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Sites on this page have special handling methods associated with them.",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "To ignore new/modified credentials on a specific site, add them below or when using the credential banner on the page select <em>Don't ask again for this site</em>.",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "If a site is fully ignored (<em>Disable all features</em> is selected), then the plugin will do nothing when visiting that site.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Username-only detection allows KeePassXC-Browser to fill in login details on websites with separate pages for username and password.",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
+    },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Add URL manually",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "The URL must start with either <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> and must be at least 5 characters long.",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Do you really want to remove the specified site from the list: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "KeePassXC-Browser will enable all features for this site and remove username-only detection.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved site preferences using the table.",
+        "message": "You can manage saved Site Preferences using the table.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1054,6 +1245,10 @@
     "optionsAboutMozilla": {
         "message": "Visit KeePassXC-Browser in the Mozilla Add-ons directory.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Visit KeePassXC-Browser in the Edge Add-ons page.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Visit KeePassXC-Browser on GitHub.",
@@ -1080,7 +1275,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Create new issue on GitHub",
+        "message": "Create new issue on GitHub.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
@@ -1126,6 +1321,26 @@
     "optionsExtensionTitle": {
         "message": "Extension",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Enable support for Web Authentication.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Opens a new tab",

@@ -3,6 +3,58 @@
         "message": "Ενσωμάτωση KeePassXC για σύγχρονα προγράμματα περιήγησης ιστού",
         "description": "Name of the extension."
     },
+    "addSitePreferenceButtonTitle": {
+        "message": "Add Site Preferences for this URL.",
+        "description": "Add button title text on Site Preferences tab."
+    },
+    "allowIframeButtonTitle": {
+        "message": "Allows Cross-Origin iframes for the current page.",
+        "description": "Allow Cross-Origin iframes button title text."
+    },
+    "connectButtonTitle": {
+        "message": "Connect current active database to KeePassXC-Browser.",
+        "description": "Connect button title text."
+    },
+    "copyDebugInfoButtonTitle": {
+        "message": "Copy debug info to clipboard.",
+        "description": "Copy debug info button title text on About tab."
+    },
+    "dismissHttpAuthButtonTitle": {
+        "message": "Dismisses Basic HTTP Auth.",
+        "description": "Dismiss HTTP Auth button title text."
+    },
+    "reconnectButtonTitle": {
+        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "description": "Reconnect button title text."
+    },
+    "redetectButtonTitle": {
+        "message": "Redetects all input fields on the page.",
+        "description": "Redetect login fields button title text."
+    },
+    "reloadButtonTitle": {
+        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "description": "Reload button title text."
+    },
+    "removeConnectedDatabaseButtonTitle": {
+        "message": "Remove connected database from KeePassXC-Browser.",
+        "description": "Remove button title on Connected Databases tab."
+    },
+    "removeCustomLoginFieldsButtonTitle": {
+        "message": "Remove Custom Login Fields for this URL.",
+        "description": "Remove button title on Custom Login Fields tab."
+    },
+    "removeSitePreferencesButtonTitle": {
+        "message": "Remove Site Preferences for this URL.",
+        "description": "Remove button title on Site Preferences tab."
+    },
+    "reopenDatabaseButtonTitle": {
+        "message": "Reopen current active database.",
+        "description": "Reopen database button title text."
+    },
+    "usernameButtonTitle": {
+        "message": "Adds Username-only Detection to the current page.",
+        "description": "Add Username-only detection button title text."
+    },
     "contextMenuFillUsernameAndPassword": {
         "message": "Συμπληρώστε το Όνομα χρήστη και τον Κωδικό πρόσβασης",
         "description": "Context menu item for filling both username and password."
@@ -20,7 +72,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Αποθήκευση διαπιστευτηρίων",
+        "message": "Save Credentials",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -28,8 +80,12 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Συμπλήρωση χαρακτηριστικού…",
+        "message": "Fill Attribute…",
         "description": "Context menu parent item for filling a custom attribute."
+    },
+    "contextMenuRequestGlobalAutoType": {
+        "message": "Αίτημα Καθολικής Αυτόματης-Πληκτρολόγησης",
+        "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
         "message": "Έλεγχος ταυτότητας HTTP με πολλαπλά διαπιστευτήρια. Κάντε κλικ στο εικονίδιο επέκτασης για να επιλέξετε το σωστό.",
@@ -99,41 +155,93 @@
         "message": "Δεν βρέθηκαν συνδέσεις.",
         "description": "No logins found."
     },
+    "errorMessagePaswordLengthExceeded": {
+        "message": "Ο συμπληρωμένος κωδικός πρόσβασης είναι μεγαλύτερος από το μέγιστο επιτρεπόμενο μήκος του πεδίου.",
+        "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
+    },
+    "errorMessageNoGroupsFound": {
+        "message": "Δεν βρέθηκαν ομάδες.",
+        "description": "No groups found."
+    },
+    "errorMessageCannotCreateNewGroup": {
+        "message": "Δεν είναι δυνατή η δημιουργία νέας ομάδας.",
+        "description": "Cannot create new group."
+    },
+    "errorMessageNoValidUuidProvided": {
+        "message": "Δεν παρέχεται έγκυρο UUID.",
+        "description": "No valid UUID provided."
+    },
+    "errorMessageAccessToAllEntriesDenied": {
+        "message": "Απαγορεύεται η πρόσβαση σε όλες τις καταχωρήσεις.",
+        "description": "Access to all entries denied."
+    },
+    "errorMessagePasskeysAttestationNotSupported": {
+        "message": "Η βεβαίωση δεν υποστηρίζεται.",
+        "description": "Attestation not supported."
+    },
+    "errorMessagePasskeysCredentialIsExcluded": {
+        "message": "Τα Διαπιστευτήρια εξαιρούνται.",
+        "description": "Credential is excluded."
+    },
+    "errorMessagePasskeysRequestCanceled": {
+        "message": "Το αίτημα για Passkeys ακυρώθηκε.",
+        "description": "Passkeys request canceled."
+    },
+    "errorMessagePasskeysInvalidUserVerification": {
+        "message": "Μη έγκυρη επαλήθευση χρήστη.",
+        "description": "Invalid user verification."
+    },
+    "errorMessagePasskeysEmptyPublicKey": {
+        "message": "Κενό δημόσιο κλειδί.",
+        "description": "Empty public key."
+    },
+    "errorMessagePasskeysInvalidUrlProvided": {
+        "message": "Παρέχεται μη έγκυρη διεύθυνση URL.",
+        "description": "Invalid URL provided."
+    },
+    "errorMessagePasskeysOriginNotAllowed": {
+        "message": "Η προέλευση είναι κενή ή μη επιτρεπτή.",
+        "description": "Origin is empty or not allowed."
+    },
+    "errorMessagePasskeysDomainNotValid": {
+        "message": "Ο αποτελεσματικός τομέας δεν είναι έγκυρος τομέας.",
+        "description": "Effective domain is not a valid domain."
+    },
+    "errorMessagePasskeysDomainRpIdMismatch": {
+        "message": "Η προέλευση και το RP ID δεν ταιριάζουν.",
+        "description": "Origin and RP ID do not match."
+    },
+    "errorMessagePasskeysNoSupportedAlgorithms": {
+        "message": "Δεν παρέχονται υποστηριζόμενοι αλγόριθμοι.",
+        "description": "No supported algorithms were provided."
+    },
+    "errorMessagePasskeysWaitforLifeTimer": {
+        "message": "Περιμένετε να λήξει ο χρονοδιακόπτης.",
+        "description": "Wait for timer to expire."
+    },
+    "errorMessagePasskeysUnknownError": {
+        "message": "Unknown passkeys error.",
+        "description": "Unknown passkeys error."
+    },
+    "errorMessagePasskeysInvalidChallenge": {
+        "message": "Η πρόκληση είναι μικρότερη από το ελάχιστο απαιτούμενο μήκος.",
+        "description": "Challenge is shorter than required minimum length."
+    },
+    "errorMessagePasskeysInvalidUserId": {
+        "message": "Το user.id δεν αντιστοιχεί στο απαιτούμενο μήκος.",
+        "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysContextIsNotSecure": {
+        "message": "Ο περιβάλλοντος χώρος δεν είναι ασφαλής.",
+        "description": "Context is not secure."
+    },
     "errorNotConnected": {
         "message": "Δεν είναι συνδεδεμένο με το KeePassXC.",
-        "description": "Error notification shown when not connected to KeePassXC"
+        "description": "Error notification shown when not connected to KeePassXC."
     },
-    "passwordGeneratorIcon": {
-        "message": "Εικονίδιο γεννήτριας κωδικών πρόσβασης",
-        "description": "Alt attribute text of the password generator icon."
-    },
-    "passwordGeneratorPlaceholder": {
-        "message": "Δημιουργήθηκε κωδικός πρόσβασης",
-        "description": "Input field placeholder for generated password."
-    },
-    "passwordGeneratorLabel": {
-        "message": "Επίσης, συμπληρώστε το επόμενο πεδίο κωδικού πρόσβασης",
-        "description": "Checkbox text below the password generator input field."
-    },
-    "passwordGeneratorTitle": {
-        "message": "Γεννήτρια Κωδικών Πρόσβασης",
-        "description": "Password generator dialog title."
-    },
-    "passwordGeneratorGenerate": {
-        "message": "Δημιουργία",
-        "description": "Generate button text in password generator."
-    },
-    "passwordGeneratorTryAgain": {
-        "message": "Προσπάθησε ξανά",
-        "description": "Generate button text in password generator when not connected."
-    },
-    "passwordGeneratorCopy": {
-        "message": "Αντιγραφή",
-        "description": "Copy button text in password generator."
-    },
-    "passwordGeneratorFill": {
-        "message": "Συμπληρώστε τον κωδικό πρόσβασης",
-        "description": "Fill a password in password generator."
+    "errorCurrentDatabaseNotConnected": {
+        "message": "Current database is not connected.",
+        "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
         "message": "Σφάλμα: Ο κωδικός πρόσβασης που δημιουργήθηκε είναι μεγαλύτερος από το επιτρεπόμενο μήκος!",
@@ -148,96 +256,95 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Δημιουργία κωδικού πρόσβασης",
+        "message": "Generate password.",
         "description": "Password icon title text."
     },
-    "passwordGeneratorError": {
-        "message": "Λειτουργεί και συνδέεται το KeePassXC;",
-        "description": "Password generator error text when KeePassXC is closed."
-    },
-    "passwordGeneratorErrorIsRunning": {
-        "message": "Το KeePassXC εκτελείται και είναι συνδεδεμένο;",
-        "description": "Password generator error text when KeePassXC is closed."
+    "passwordGeneratorNotSupported": {
+        "message": "Η εκκίνηση της γεννήτριας κωδικών πρόσβασης δεν υποστηρίζεται σε αυτήν την έκδοση του KeePassXC. Παρακαλούμε ενημερώστε το KeePassXC σε μια νεότερη έκδοση."
     },
     "usernameFieldText": {
-        "message": "Συμπληρώστε διαπιστευτήρια από το KeePassXC",
+        "message": "Fill credentials from KeePassXC.",
         "description": "Username field icon hover text."
     },
+    "usernameFieldTextNoCredentials": {
+        "message": "No credentials to fill.",
+        "description": "Username field icon hover text when no credentials are."
+    },
     "usernameLockedFieldText": {
-        "message": "Η βάση δεδομένων είναι κλειδωμένη",
+        "message": "Database is locked.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "Το KeePassXC είναι αποσυνδεδεμένο",
+        "message": "KeePassXC is disconnected.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
-    "usernameFieldIcon": {
-        "message": "Εικονίδιο πεδίου ονόματος χρήστη",
-        "description": "Username field icon text."
+    "totp": {
+        "message": "TOTP",
+        "description": "TOTP text."
     },
     "totpFieldText": {
         "message": "Συμπληρώστε το TOTP από το KeePassXC",
         "description": "OTP field icon hover text."
     },
-    "totpFieldIcon": {
-        "message": "Εικονίδιο πεδίου TOTP",
-        "description": "OTP field icon text."
-    },
-    "defineDismiss": {
-        "message": "Απόρριψη",
-        "description": "Dismiss button text when choosing custom login fields."
+    "defineClose": {
+        "message": "Κλείσιμο",
+        "description": "Close button text when choosing Custom Login Fields."
     },
     "defineSkip": {
         "message": "Παράλειψη",
-        "description": "Skip button text when choosing custom login fields."
+        "description": "Skip button text when choosing Custom Login Fields."
     },
     "defineMore": {
         "message": "Εμφάνιση περισσότερων",
-        "description": "More button text when choosing custom login fields."
+        "description": "More button text when choosing Custom Login Fields."
     },
-    "defineAgain": {
-        "message": "Ξανά",
-        "description": "Again button text when choosing custom login fields."
+    "defineReset": {
+        "message": "Επαναφορά",
+        "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
         "message": "Επιβεβαίωση ",
-        "description": "Confirm button text when choosing custom login fields."
+        "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
         "message": "Τα πεδία σύνδεσης για αυτήν τη σελίδα είναι ήδη επιλεγμένα και θα αντικατασταθούν.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
-    "defineDiscard": {
-        "message": "Απόρριψη επιλογής",
-        "description": "Discard selection button text when choosing custom login fields."
+    "defineClearData": {
+        "message": "Εκκαθάριση αποθηκευμένων δεδομένων",
+        "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "Πεδίο String #",
+        "message": "Πεδίο String",
         "description": "Text for string field."
     },
     "defineChooseUsername": {
-        "message": "1. Επιλέξτε ένα πεδίο ονόματος χρήστη",
-        "description": "Choosing a username field text when choosing custom login fields."
+        "message": "Επιλέξτε ένα πεδίο ονόματος χρήστη",
+        "description": "Choosing a username field text when choosing Custom Login Fields."
     },
     "defineChoosePassword": {
-        "message": "2. Τώρα επιλέξτε ένα πεδίο κωδικού πρόσβασης",
-        "description": "Choosing a password field text when choosing custom login fields."
+        "message": "Επιλέξτε ένα πεδίο κωδικού πρόσβασης",
+        "description": "Choosing a password field text when choosing Custom Login Fields."
     },
     "defineChooseTOTP": {
-        "message": "3. Επιλέξτε ένα πεδίο TOTP",
-        "description": "Choosing a TOTP field text when choosing custom login fields."
+        "message": "Επιλέξτε ένα πεδίο TOTP",
+        "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
-    "defineConfirmSelection": {
-        "message": "4. Επιβεβαίωση επιλογής",
-        "description": "Confirm a selection text when choosing custom login fields."
+    "defineChooseStringFields": {
+        "message": "Επιλέξτε Πεδία Strings",
+        "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
         "message": "Επιβεβαιώστε την επιλογή σας ή επιλέξτε περισσότερα πεδία ως πεδία String.",
-        "description": "Confirm a selection text when choosing custom login fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
         "message": "Μπορείτε επίσης να χρησιμοποιήσετε τους αριθμούς για να επιλέξετε τα πεδία εισαγωγής από το πληκτρολόγιο.",
-        "description": "Help text when choosing custom login fields."
+        "description": "Help text when choosing Custom Login Fields."
+    },
+    "defineChooseCustomLoginFieldText": {
+        "message": "Επιλέξτε ένα Προσαρμοσμένο Πεδίο Σύνδεσης",
+        "description": "Help text for Custom Login Field banner."
     },
     "username": {
         "message": "Όνομα χρήστη",
@@ -246,6 +353,10 @@
     "password": {
         "message": "Κωδικό πρόσβασης",
         "description": "General text for password."
+    },
+    "stringFields": {
+        "message": "Πεδία Strings",
+        "description": "General text for a String Fields."
     },
     "credentialsNoUsername": {
         "message": "- χωρίς όνομα χρήστη -",
@@ -260,7 +371,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Πατήστε το εικονίδιο KeePassXC-Browser για περισσότερες επιλογές.",
+        "message": "Click the KeePassXC-Browser icon for more options.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -283,6 +394,10 @@
         "message": "Σφάλμα: Δεν είναι δυνατή η εύρεση ενός πεδίου κωδικού πρόσβασης.",
         "description": "Message shown when no password fields are found."
     },
+    "fieldsPasswordFillNotAccepted": {
+        "message": "Αποτρέπεται η συμπλήρωση κωδικού πρόσβασης σε πεδίο απλού κειμένου.",
+        "description": "Message shown when password fill to a plain text field is prevented."
+    },
     "rememberNothingChanged": {
         "message": "Σφάλμα: Δεν ήταν δυνατός ο εντοπισμός αλλαγμένων διαπιστευτηρίων.",
         "description": "Message shown when trying to save credentials that haven't changed."
@@ -296,7 +411,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Επιλογή προσαρμοσμένων πεδίων σύνδεσης",
+        "message": "Choose Custom Login Fields",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -323,6 +438,10 @@
         "message": "Προσθήκη επιλογής μόνο Όνομα χρήστη για τον ιστότοπο",
         "description": "Button text for adding Username-only option."
     },
+    "popupAllowIframeButton": {
+        "message": "Να επιτρέπονται τα Cross-Origin iframes για τον ιστότοπο",
+        "description": "Button text for allowing Cross-Origin iframes option."
+    },
     "popupErrorEncountered": {
         "message": "Το KeePassXC-Browser αντιμετώπισε σφάλμα:",
         "description": "A text shown above error message in the popup."
@@ -335,12 +454,32 @@
         "message": "Κατεβάστε την πιο πρόσφατη έκδοση από keepassxc.org",
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
+    "popupGettingStartedText": {
+        "message": "Είστε για πρώτη φορά χρήστης; Παρακαλώ ελέγξτε τον Οδηγό Έναρξης.",
+        "description": "Popup information message about Getting Started Guide."
+    },
+    "popupGettingStartedLinkText": {
+        "message": "Οδηγός Έναρξης - Ρύθμιση Ενσωμάτωσης Προγράμματος περιήγησης",
+        "description": "Popup Getting Started Guide link text."
+    },
+    "popupAlertHide": {
+        "message": "Απόκρυψη και να μην εμφανιστεί ξανά.",
+        "description": "Hide alert close button title."
+    },
+    "popupTroubleshootingText": {
+        "message": "Δεν μπορείτε να συνδεθείτε στο KeePassXC; Ίσως η σελίδα μας στο wiki θα μπορούσε να βοηθήσει.",
+        "description": "Popup information message about Troubleshooting Guide."
+    },
+    "popupTroubleshootingLinkText": {
+        "message": "Οδηγός Επίλυσης προβλημάτων",
+        "description": "Popup Troubleshooting Guide link text."
+    },
     "popupCheckingStatus": {
         "message": "Έλεγχος κατάστασης...",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "Το KeePassXC-Browser δεν έχει ρυθμιστεί. Πατήστε το κουμπί σύνδεσης για σύζευξη με το KeePassXC.",
+        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -348,7 +487,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Πατήστε το κουμπί επανασύνδεσης για να δημιουργήσετε μια νέα σύνδεση.",
+        "message": "Click the reconnect button to establish a new connection.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -357,11 +496,15 @@
     },
     "popupConfiguredAndAssociated": {
         "message": "Το KeePassXC-Browser είναι συνδεδεμένο με KeePassXC και έχει ρυθμιστεί χρησιμοποιώντας το ακόλουθο αναγνωριστικό: $1",
-        "description": "A popuo message when a connection to KeePassXC is succesful."
+        "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
         "message": "Εντοπίστηκε μόνο ένα πεδίο ονόματος χρήστη. Προσθήκη της διεύθυνσης URL στις Προτιμήσεις Ιστότοπου με ενεργοποιημένη την επιλογή Μόνο-Όνομα χρήστη;",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
+    },
+    "popupIframeDetected": {
+        "message": "Εντοπίστηκε ένα Cross-Origin iframe. Θέλετε ν προσθέστε τη διεύθυνση URL στις Προτιμήσεις Ιστότοπου με ενεργοποιημένη την επιλογή Αποδοχή Cross-Origin iframes;",
+        "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
         "message": "Το όνομα χρήστη ή ο κωδικός πρόσβασης άλλαξαν! Αποθήκευση;",
@@ -377,14 +520,14 @@
     },
     "rememberUsernameExists": {
         "message": "Τα διαπιστευτήρια με το όνομα χρήστη που χρησιμοποιείται επισημαίνονται με έντονη γραφή: $1",
-        "description": "A message shown when a existing username is detected when saving credentials."
+        "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
         "message": "Επιλέξτε τα διαπιστευτήρια που θέλετε να ενημερώσετε.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Επιλέξτε την ομάδα που θέλετε να προσθέσετε τα νέα διαπιστευτήρια.",
+        "message": "Please choose a group to store new credentials.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -417,7 +560,7 @@
     },
     "rememberCredentialsUpdated": {
         "message": "Τα διαπιστευτήρια με όνομα χρήστη $1 ενημερώθηκαν.",
-        "description": "Message shown when new credentials are succesfully updated."
+        "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
         "message": "Πανομοιότυπο διαπιστευτήρια υπάρχουν ήδη. Δεν υπάρχει κάτι για ενημέρωση.",
@@ -447,12 +590,8 @@
         "message": "Βρέθηκαν περισσότερα από ένα πεδία κωδικού πρόσβασης σε αυτήν τη σελίδα. Κάντε δεξί κλικ σε ένα από τα πεδία κωδικού πρόσβασης και επιλέξτε ένα από τα εξής:",
         "description": "A popup message shown when web page has multiple password fields."
     },
-    "popupURL": {
-        "message": "URL: ",
-        "description": "URL. Might not need any translation."
-    },
     "popupUsername": {
-        "message": "Όνομα χρήστη: ",
+        "message": "Username:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -463,9 +602,13 @@
         "message": "Ενημέρωση",
         "description": "Update button text in popup when updating credentials."
     },
-    "popupButtonDismiss": {
-        "message": "Απόρριψη",
-        "description": "Dismiss button text in popup when updating credentials."
+    "popupButtonCancel": {
+        "message": "Cancel",
+        "description": "Cancel button text in popup when updating credentials."
+    },
+    "popupButtonBack": {
+        "message": "Back",
+        "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
         "message": "Να μην ξαναγίνει ερώτηση για αυτόν τον ιστότοπο",
@@ -492,12 +635,12 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Προσαρμοσμένα πεδία σύνδεσης",
-        "description": "Saved custom login fields tab text."
+        "message": "Custom Login Fields",
+        "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Προτιμήσεις ιστότοπου",
-        "description": "Site preferences fields tab text."
+        "message": "Site Preferences",
+        "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
         "message": "Σχετικά με",
@@ -512,12 +655,12 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Προσαρμοσμένα πεδία σύνδεσης",
-        "description": "Custom login fields page header."
+        "message": "Custom Login Fields",
+        "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Προτιμήσεις ιστότοπου",
-        "description": "Site preferences page header."
+        "message": "Site Preferences",
+        "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
         "message": "Σχετικά με",
@@ -549,11 +692,11 @@
     },
     "optionsButtonRemoveNow": {
         "message": "Ναι, κατάργηση τώρα",
-        "description": "Confirm button text when removing database key or custom login fields."
+        "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
         "message": "Ακύρωση",
-        "description": "Cancel button text when removing database key or custom login fields."
+        "description": "Cancel button text when removing database key or Custom Login Fields."
     },
     "optionsButtonReset": {
         "message": "Επαναφορά",
@@ -575,6 +718,10 @@
         "message": "Διαχωρίστε την ομάδα με καθέτους, για παράδειγμα: Ομάδα/Θυγατρική Ομάδα.",
         "description": "Default group help text."
     },
+    "optionsLabelDefaultPasskeyGroup": {
+        "message": "Default group for saving new passkeys:",
+        "description": "Default passkey group options text."
+    },
     "optionsLabelDefaultGroupCheckboxText": {
         "message": "Να γίνεται πάντα ερώτηση για το πού να αποθηκεύονται τα νέα διαπιστευτήρια ",
         "description": "Default group checkbox help text."
@@ -584,15 +731,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Ενεργοποίηση εικονιδίων γεννήτριας κωδικών πρόσβασης.",
+        "message": "Activate password generator icons",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Ενεργοποίηση εικονιδίων πεδίου ονόματος χρήστη.",
+        "message": "Activate username field icons",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Χρησιμοποιήστε την δυναμική ανίχνευση πεδίου εισόδου.",
+        "message": "Use dynamic input field detection",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -600,15 +747,15 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Ενεργοποίηση εικονιδίων πεδίου 2FA/OTP.",
+        "message": "Activate 2FA/OTP field icons",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Αυτόματη ανάκτηση διαπιστευτηρίων.",
+        "message": "Automatically retrieve credentials",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Αυτόματη επανασύνδεση στο KeePassXC.",
+        "message": "Automatically reconnect to KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -616,15 +763,19 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Αυτόματη συμπλήρωση καταχωρήσεων με ένα διαπιστευτήριο ",
+        "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillSingleTotp": {
+        "message": "Automatically fill in single TOTP entries",
+        "description": "Automatically fill-in single TOTP entries checkbox text."
+    },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Ενεργοποίηση αυτόματης συμπλήρωσης για πεδία ονόματος χρήστη.",
+        "message": "Activate autocomplete for username fields",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Εμφάνιση του ονόματος ομάδας στη λίστα αυτόματης συμπλήρωσης όταν τα διαπιστευτήρια προέρχονται από διαφορετικές ομάδες.",
+        "message": "Display the group name in autocomplete list when credentials are from different groups",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -636,15 +787,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Εμφάνιση ειδοποιήσεων.",
+        "message": "Show notifications",
         "description": "Show notifications checkbox text."
     },
+    "optionsCheckboxUseMonochromeToolbarIcon": {
+        "message": "Use monochrome toolbar icon",
+        "description": "Use monochrome toolbar icon checkbox text."
+    },
+    "optionsCheckboxUseCompactMode": {
+        "message": "Use compact mode",
+        "description": "Whether the compact mode (legacy dropdown) should be enabled."
+    },
     "optionsSaveDomainOnly": {
-        "message": "Αποθήκευση domain μόνο.",
+        "message": "Save domain only",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Εμφάνιση banner στη σελίδα όταν μπορούν να αποθηκευτούν νέα διαπιστευτήρια στη βάση δεδομένων.",
+        "message": "Show a banner on the page when new credentials can be saved to the database",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -652,19 +811,27 @@
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Πόσες ανακατευθύνσεις επιτρέπονται έως ότου να εξαφανιστεί το banner. Η προεπιλεγμένη τιμή είναι 1. Το μέγιστο είναι άπειρο.",
+        "message": "Πόσες ανακατευθύνσεις επιτρέπονται μέχρι να εξαφανιστεί το banner.  Η προεπιλεγμένη τιμή είναι 3. Η μέγιστη είναι άπειρη.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Συμπληρώστε αυτόματα διαλόγους HTTP Basic Auth και υποβάλετέ τους.",
-        "description": "Auto fill HTTP Basic Auth dialogs and send them checkbox text."
+        "message": "Allow filling HTTP Basic Auth credentials",
+        "description": "Allow filling HTTP Basic Auth credentials checkbox text."
+    },
+    "optionsDebugLogging": {
+        "message": "Καταγραφή εντοπισμού σφαλμάτων",
+        "description": "Debug logging checkbox text."
+    },
+    "optionsDebugLoggingHelpText": {
+        "message": "Ενεργοποίηση καταγραφής εντοπισμού σφαλμάτων. Πρόσθετα μηνύματα κονσόλας θα είναι ορατά τόσο στο παρασκήνιο όσο και σε scripts περιεχομένου.",
+        "description": "Debug logging help text."
     },
     "optionsRadioText": {
         "message": "Ελέγξτε για ενημερώσεις του KeePassXC:",
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "κάθε 3 ημέρες",
+        "message": "every three days",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -720,11 +887,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Χρησιμοποιήστε προκαθορισμένους ιστότοπους για συμβατότητα.",
+        "message": "Use predefined sites for compatibility",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Προσθέτει κοινούς ιστότοπους που έχουν φόρμες σύνδεσης μόνο-ονόματα χρήστη στις προτιμήσεις ιστότοπου.",
+        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -748,28 +915,48 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Προειδοποίηση! Η χρήση αυτόματης συμπλήρωσης δεν είναι ασφαλής. Χρησιμοποιήστε το με δική σας ευθύνη.",
+        "message": "Προειδοποίηση! Η χρήση της αυτόματης συμπλήρωσης δεν είναι ασφαλής. Χρησιμοποιήστε το με δική σας ευθύνη. Το KeePassXC-Browser προσπαθεί αυτόματα να εντοπίσει πεδία σύνδεσης. Ωστόσο, ενδέχεται να εντοπιστούν εσφαλμένα, ενδεχομένως γεμίζοντας ευαίσθητα δεδομένα σε μη ασφαλή πεδία εισαγωγής.",
         "description": "Auto-Fill Single Entry warning text."
+    },
+    "optionsAutoFillSingleTotpHelpText": {
+        "message": "Αφήστε το KeePassXC-Browser να συμπληρώνει αυτόματα τα πεδία TOTP εάν λάβει μόνο μία καταχώρηση.",
+        "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
         "message": "Εμφάνιση μιας αναπτυσσόμενης λίστας που περιέχει διαθέσιμα διαπιστευτήρια για όλα τα πεδία ονόματος χρήστη σε μια σελίδα.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "Όταν επιστρέφονται διαπιστευτήρια από διαφορετικές ομάδες, θα εμφανίζεται το όνομα της ομάδας.",
+        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
         "message": "Εμφάνιση ειδοποιήσεων για σφάλματα και όταν απαιτείται αλληλεπίδραση του χρήστη.",
         "description": "Show notifications option help text."
     },
+    "optionsUseMonochromeToolbarIconHelpText": {
+        "message": "Χρησιμοποιήστε ένα μονόχρωμο εικονίδιο με χρωματιστά σήματα στη γραμμή εργαλείων που προσαρμόζεται στο ανοιχτό/σκοτεινό θέμα του προγράμματος περιήγησης.",
+        "description": "Use monochrome toolbar icon option help text."
+    },
+    "optionsUseCompactModeHelpText": {
+      "message": "Use a compact version of the dropdown list to select credentials.",
+      "description": "Use compact (legacy) mode help text."
+    },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Κατά την αποθήκευση νέων διαπιστευτηρίων, αποθηκεύστε μόνο το domain αντί για την πλήρη διεύθυνση URL.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Κατά την αποθήκευση νέων προσαρμοσμένων πεδίων σύνδεσης, αποθηκεύστε μόνο το domain αντί για την πλήρη διεύθυνση URL.",
+        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
         "description": "Save domain only option help text."
+    },
+    "optionsDownloadFaviconAfterSave": {
+        "message": "Κατεβάστε το favicon μετά την αποθήκευση",
+        "description": "Download favicon after save checkbox label text."
+    },
+    "optionsDownloadFaviconAfterSaveHelpText": {
+        "message": "Το Favicon θα ληφθεί αυτόματα για τα νέα διαπιστευτήρια.",
+        "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
         "message": "Εάν βρεθούν διαπιστευτήρια για μια σελίδα και ο τύπος σύνδεσης είναι αίτημα HTTP Basic Auth, το KeePassXC-Browser προσπαθεί να συνδεθεί αυτόματα με τα πρώτα διαπιστευτήρια. Όταν υπάρχουν πολλά διαπιστευτήρια, το αναδυόμενο παράθυρο επέκτασης μπορεί να χρησιμοποιηθεί για να επιλέξετε το σωστό. Ακόμα και όταν είναι ενεργοποιημένη αυτή η δυνατότητα, μπορείτε να εισαγάγετε χειροκίνητα τη σύνδεση HTTP Basic Auth.",
@@ -823,11 +1010,11 @@
         "message": "Η συντόμευση για $1 έχει αλλάξει με επιτυχία.",
         "description": "Message for successful keyboard shortcut change."
     },
-     "optionsShortcutsInfo": {
+    "optionsShortcutsInfo": {
         "message": "Έγινε επαναφορά της συντόμευσης για $1",
         "description": "Info message for changing keyboard shortcuts."
     },
-     "optionsShortcutsDanger": {
+    "optionsShortcutsDanger": {
         "message": "Σφάλμα: Η συντόμευση για το $1 δεν έχει αλλάξει!",
         "description": "Error message for changing keyboard shortcuts."
     },
@@ -856,7 +1043,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Θέλετε πραγματικά να καταργήσετε το ακόλουθο αναγνωριστικό από τη λίστα βάσεων δεδομένων: $1",
+        "message": "Do you really want to remove the following identifier from the database list: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -885,87 +1072,119 @@
     },
     "optionsColumnPageURL": {
         "message": "Διεύθυνση URL σελίδας",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
-     "optionsColumnIgnore": {
+    "optionsColumnIgnore": {
         "message": "Αγνοήστε",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
-     "optionsColumnUsernameOnly": {
+    "optionsColumnUsernameOnly": {
         "message": "Ανίχνευση μόνο-όνομα χρήστη",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
+    "optionsColumnImprovedInputFieldDetection": {
+        "message": "Βελτιωμένη Ανίχνευση Πεδίου Εισόδου",
+        "description": "Improved Input Field Detection column text."
+    },
+    "optionsColumnAllowIframes": {
+        "message": "Να επιτρέπονται τα Cross-Origin iframes",
+        "description": "Allow iframes column text."
+  },
     "optionsColumnDelete": {
         "message": "Διαγραφή",
-        "description": "Site preferences list column title."
+        "description": "Site Preferences list column title."
     },
     "optionsSelectionNothing": {
         "message": "Ενεργοποίηση όλων των λειτουργιών",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
         "message": "Απενεργοποίηση νέων/τροποποιημένων διαπιστευτηρίων",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
         "message": "Απενεργοποίηση Αυτόματης Υποβολής",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
         "message": "Απενεργοποίηση όλων των λειτουργιών",
-        "description": "Site preferences option selection."
+        "description": "Site Preferences option selection."
     },
     "optionsSortByTitle": {
         "message": "Τίτλος",
-        "desription": "Sort matching credentials by title option selection."
+        "description": "Sort matching credentials by title option selection."
     },
     "optionsSortByUsername": {
         "message": "Όνομα χρήστη",
-        "desription": "Sort matching credentials by username option selection."
+        "description": "Sort matching credentials by username option selection."
     },
     "optionsSortByGroupAndTitle": {
         "message": "Ομάδα και τίτλος",
-        "desription": "Sort matching credentials by group and title option selection."
+        "description": "Sort matching credentials by group and title option selection."
     },
     "optionsSortByGroupAndUsername": {
         "message": "Ομάδα και όνομα χρήστη",
-        "desription": "Sort matching credentials by group and username option selection."
+        "description": "Sort matching credentials by group and username option selection."
+    },
+    "optionsFillSortPriority": {
+        "message": "Ταξινόμηση διαπιστευτηρίων μετά τη συμπλήρωση από",
+        "description": ""
+    },
+    "optionsFillSortPriorityHelpText": {
+        "message": "Όταν έχει επιλεγεί η πρώτη επιλογή Σχετικό διαπιστευτήριο, τα διαπιστευτήρια για τη σύνδεση που συμπληρώθηκαν προηγουμένως ορίζεται ως πρώτη στην καταχώρηση του Μενού Αυτόματης Συμπλήρωσης.",
+        "description": "Help text for Sort credentials after fill."
+    },
+    "optionsFillSortPriorityTotp": {
+        "message": "Ταξινόμηση διαπιστευτηρίων μετά τη συμπλήρωση για TOTP από",
+        "description": ""
+    },
+    "optionsFillSortPriorityTotpHelpText": {
+        "message": "Όταν έχει επιλεγεί η πρώτη επιλογή Σχετικό διαπιστευτήριο, το TOTP για τη σύνδεση που είχε συμπληρωθεί προηγουμένως ορίζεται ως πρώτο στην καταχώριση του Μενού Αυτόματης Συμπλήρωσης.",
+        "description": "Help text for Sort credentials after fill for TOTP."
+    },
+    "optionsFillSortByMatchingCredentials": {
+        "message": "Ρύθμιση αντιστοίχισης διαπιστευτηρίων",
+        "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
+    },
+    "optionsFillSortByRelevantEntry": {
+        "message": "Σχετικό διαπιστευτήριο πρώτα",
+        "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "Δεν βρέθηκαν αποθηκευμένα προσαρμοσμένα πεδία σύνδεσης.",
+        "message": "No saved Custom Login Fields found.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Μπορείτε να διαχειριστείτε αποθηκευμένα προσαρμοσμένα πεδία σύνδεσης χρησιμοποιώντας τον πίνακα.",
-        "description": "Table caption of Custom login fields page."
+        "message": "You can manage saved Custom Login Fields using the table.",
+        "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
         "message": "Εάν το KeePassXC-Browser εντοπίσει λάθος πεδία σύνδεσης, μπορείτε να καθορίσετε μόνοι σας τα σωστά πεδία.",
-        "description": "Saved custom login fields info text, first part."
+        "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
         "message": "Μεταβείτε στη σελίδα και κάντε κλικ στο εικονίδιο KeePassXC-Browser, στη συνέχεια επιλέξτε ",
-        "description": "Saved custom login fields info text, second part."
+        "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "Σε αυτή τη σελίδα μπορείτε να διαχειριστείτε αποθηκευμένα προσαρμοσμένα πεδία σύνδεσης.",
-        "description": "Saved custom login fields info text, third part."
+        "message": "On this page you can manage saved Custom Login Fields.",
+        "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Κατάργηση αποθηκευμένων προσαρμοσμένων πεδίων σύνδεσης;",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Remove saved Custom Login Fields?",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Θέλετε πραγματικά να καταργήσετε τα αποθηκευμένα προσαρμοσμένα πεδία σύνδεσης στη σελίδα: $1",
-        "description": "Confirmation text when removing saved custom login fields."
+        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
         "message": "Το KeePassXC-Browser θα εντοπίσει αυτόματα τα πεδία σύνδεσης την επόμενη φορά που θα επισκεφθείτε αυτήν τη σελίδα.",
-        "description": "Part of confirmation text when removing saved custom login fields."
+        "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Δεν βρέθηκαν προτιμήσεις ιστότοπου.",
-        "description": "Shown when no site preferences are saved."
+        "message": "No Site Preferences found.",
+        "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
         "message": "Κατάργηση ιστότοπου;",
@@ -973,38 +1192,46 @@
     },
     "optionsSitePreferencesTabHelpTextFirst": {
         "message": "Οι ιστότοποι σε αυτήν τη σελίδα έχουν ειδικές μεθόδους χειρισμού που σχετίζονται με αυτές.",
-        "description": "Site preferences info text, first part."
+        "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
         "message": "Για να αγνοήσετε νέα/τροποποιημένα διαπιστευτήρια σε έναν συγκεκριμένο ιστότοπο, προσθέστε τα παρακάτω ή όταν χρησιμοποιείτε το banner διαπιστευτηρίων στη σελίδα επιλέξτε <em>Να μην γίνει ερώτηση ξανά για αυτόν τον ιστότοπο</em>.",
-        "description": "Site preferences info text, second part."
+        "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
         "message": "Εάν ένας ιστότοπος αγνοηθεί πλήρως (έχει επιλεγεί <em>Απενεργοποίηση όλων των λειτουργιών</em>), τότε η προσθήκη δεν θα κάνει τίποτα όταν επισκέπτεστε αυτόν τον ιστότοπο.",
-        "description": "Site preferences info text, third part."
+        "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
         "message": "Η ανίχνευση μόνο-όνομα χρήστη επιτρέπει στο KeePassXC-Browser να συμπληρώνει τα στοιχεία σύνδεσης σε ιστότοπους με ξεχωριστές σελίδες για όνομα χρήστη και κωδικό πρόσβασης.",
-        "description": "Site preferences info text, fourth part."
+        "description": "Site Preferences info text, fourth part."
+    },
+    "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
+        "message": "Η Βελτιωμένη Ανίχνευση Πεδίου Εισόδου επιτρέπει πιο λεπτομερή ανίχνευση δυναμικού πεδίου εισόδου. Ωστόσο, μπορεί να επηρεάσει την απόδοση της σελίδας. Χρησιμοποιήστε με προσοχή.",
+        "description": "Improved Input Field Detection help text."
+    },
+    "optionsSitePreferencesAllowIframesHelpText": {
+        "message": "Επιτρέποντας τα iframes Cross-Origin θα ενεργοποιηθεί η ανάκτηση διαπιστευτηρίων για iframe από άλλο τομέα. Χρησιμοποιήστε το με δική σας ευθύνη.",
+        "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
         "message": "Προσθήκη διεύθυνσης URL χειροκίνητα",
-        "description": "Label for adding site manually on Site preferences tab."
+        "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
         "message": "Η διεύθυνση URL πρέπει να ξεκινά είτε με <code>https://</code>, <code>http://</code>, <code>file://</code>, είτε με <code>ftp://</code> και πρέπει να έχει τουλάχιστον 5 χαρακτήρες.",
-        "description": "Help text for adding site manually on Site preferences tab."
+        "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
         "message": "Θέλετε πραγματικά να καταργήσετε τον καθορισμένο ιστότοπο από τη λίστα: $1",
-        "description": "Confirmation text when removing site from site preferences."
+        "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
         "message": "Το KeePassXC-Browser θα ενεργοποιήσει όλες τις λειτουργίες για αυτόν τον ιστότοπο και θα καταργήσει την ανίχνευση μόνο-όνομα χρήστη.",
-        "description": "Part of confirmation text when removing site preferences."
+        "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Μπορείτε να διαχειριστείτε τις αποθηκευμένες προτιμήσεις ιστότοπου χρησιμοποιώντας τον πίνακα.",
+        "message": "You can manage saved Site Preferences using the table.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1018,6 +1245,10 @@
     "optionsAboutMozilla": {
         "message": "Επισκεφθείτε το KeePassXC-Browser στον κατάλογο Πρόσθετων Mozilla.",
         "description": "About page link to AMO."
+    },
+    "optionsAboutEdge": {
+        "message": "Επισκεφτείτε το KeePassXC-Browser στη σελίδα πρόσθετων Edge.",
+        "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
         "message": "Επισκεφτείτε το KeePassXC-Browser στο GitHub.",
@@ -1044,7 +1275,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Δημιουργία νέου ζητήματος στο GitHub",
+        "message": "Create new issue on GitHub.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
@@ -1090,6 +1321,26 @@
     "optionsExtensionTitle": {
         "message": "Επέκταση",
         "description": "Extension title in settings page"
+    },
+    "optionsPasskeysTitle": {
+        "message": "Passkeys",
+        "description": "Passkeys settings title in settings page."
+    },
+    "optionsPasskeysEnable": {
+        "message": "Enable passkeys",
+        "description": "Enabled passkeys option text."
+    },
+    "optionsPasskeysEnableHelpText": {
+        "message": "Ενεργοποιήστε την υποστήριξη για έλεγχο ταυτότητας Web.",
+        "description": "Passkeys option help text."
+    },
+    "optionsPasskeysEnableFallback": {
+        "message": "Enable passkeys fallback",
+        "description": "Enabled passkeys fallback option text."
+    },
+    "optionsPasskeysEnableFallbackHelpText": {
+        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
         "message": "Ανοίγει μια νέα καρτέλα",

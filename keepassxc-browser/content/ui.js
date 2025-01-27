@@ -7,14 +7,20 @@ const MIN_INPUT_FIELD_OFFSET_WIDTH = 60;
 const MIN_OPACITY = 0.7;
 const MAX_OPACITY = 1;
 
-let notificationWrapper;
-let notificationTimeout;
+const BLUE_BUTTON = 'kpxc-button kpxc-blue-button';
+const GREEN_BUTTON = 'kpxc-button kpxc-green-button';
+const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
+const RED_BUTTON = 'kpxc-button kpxc-red-button';
+const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
 
 const DatabaseState = {
     DISCONNECTED: 0,
     LOCKED: 1,
     UNLOCKED: 2
 };
+
+let notificationWrapper;
+let notificationTimeout;
 
 // jQuery style wrapper for querySelector()
 const $ = function(elem) {
@@ -44,20 +50,40 @@ class Icon {
         }
     }
 
-    switchIcon(state) {
+    // Creates a wrapper div that has the icon in Shadow DOM
+    createWrapper(styleSheetFilename) {
+        const styleSheet = createStylesheet(styleSheetFilename);
+        const wrapper = document.createElement('div');
+        wrapper.style.all = 'unset';
+        wrapper.style.display = 'none';
+
+        // Make sure the wrapper is positioned correctly without CSS styles affecting to it
+        wrapper.style.position = 'absolute';
+        wrapper.style.top = Pixels(0);
+        wrapper.style.left = Pixels(0);
+
+        // Waits for stylesheet to load before displaying the element
+        styleSheet.addEventListener('load', () => wrapper.style.display = 'block');
+
+        this.shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+        this.shadowRoot.append(styleSheet);
+        this.shadowRoot.append(this.icon);
+        document.body.append(wrapper);
+    }
+
+    switchIcon(state, uuid) {
         if (!this.icon) {
             return;
         }
 
         if (state === DatabaseState.UNLOCKED) {
-            this.icon.style.filter = 'saturate(100%)';
+            this.icon.style.filter = kpxc.credentials.length === 0 && !uuid ? 'saturate(0%)' : 'saturate(100%)';
         } else {
             this.icon.style.filter = 'saturate(0%)';
         }
     }
 
-    removeIcon(attr) {
-        this.inputField.removeAttribute(attr);
+    removeIcon() {
         this.shadowRoot.removeChild(this.icon);
         document.body.removeChild(this.shadowRoot.host);
     }
@@ -105,6 +131,12 @@ kpxcUI.monitorIconPosition = function(iconClass) {
     window.addEventListener('scroll', function(e) {
         kpxcUI.updateIconPosition(iconClass);
     });
+
+    window.addEventListener('transitionend', function(e) {
+        if (matchesWithNodeName(e.target, 'INPUT') || matchesWithNodeName(e.target, 'TEXTAREA')) {
+            kpxcUI.updateIconPosition(iconClass);
+        }
+    });
 };
 
 kpxcUI.updateIconPosition = function(iconClass) {
@@ -114,7 +146,7 @@ kpxcUI.updateIconPosition = function(iconClass) {
 };
 
 kpxcUI.calculateIconOffset = function(field, size) {
-    const offset = Math.floor((field.offsetHeight - size) / 3);
+    const offset = Math.floor((field.offsetHeight / 2) - (size / 2) - 1);
     return (offset < 0) ? 0 : offset;
 };
 
@@ -122,8 +154,9 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     const rect = field.getBoundingClientRect();
     const size = Number(icon.getAttribute('size'));
     const offset = kpxcUI.calculateIconOffset(field, size);
-    let left = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
-    let top = kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
+    const zoom = kpxcUI.bodyStyle.zoom || 1;
+    let left = kpxcUI.getRelativeLeftPosition(rect) / zoom;
+    let top = kpxcUI.getRelativeTopPosition(rect) / zoom;
 
     // Add more space for the icon to show it at the right side of the field if TOTP fields are segmented
     if (segmented) {
@@ -131,28 +164,50 @@ kpxcUI.setIconPosition = function(icon, field, rtl = false, segmented = false) {
     }
 
     // Adjusts the icon offset for certain sites
-    const iconOffset = kpxcSites.iconOffset(left, top, size);
+    const iconOffset = kpxcSites.iconOffset(left, top, size, field?.getLowerCaseAttribute('type'));
     if (iconOffset) {
         left = iconOffset[0];
         top = iconOffset[1];
     }
 
-    const scrollTop = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
-    const scrollLeft = document.scrollingElement ? document.scrollingElement.scrollLeft : 0;
+    const scrollTop = kpxcUI.getScrollTop() / zoom;
+    const scrollLeft = kpxcUI.getScrollLeft() / zoom;
     icon.style.top = Pixels(top + scrollTop + offset + 1);
     icon.style.left = rtl
-                    ? Pixels((left + scrollLeft) + offset)
-                    : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
+        ? Pixels(left + scrollLeft + offset)
+        : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
 };
 
-kpxcUI.deleteHiddenIcons = function(iconList, attr) {
+kpxcUI.getScrollTop = function() {
+    return document.defaultView?.scrollY ?? document.scrollingElement?.scrollTop ?? 0;
+};
+
+kpxcUI.getScrollLeft = function() {
+    return document.defaultView?.scrollX ?? document.scrollingElement?.scrollLeft ?? 0;
+};
+
+kpxcUI.getRelativeLeftPosition = function(rect) {
+    return kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.left - kpxcUI.bodyRect.left : rect.left;
+};
+
+kpxcUI.getRelativeTopPosition = function(rect) {
+    return kpxcUI.bodyStyle.position.toLowerCase() === 'relative' ? rect.top - kpxcUI.bodyRect.top : rect.top;
+};
+
+kpxcUI.deleteHiddenIcons = function(iconList) {
     const deletedIcons = [];
     for (const icon of iconList) {
         if (icon.inputField && !kpxcFields.isVisible(icon.inputField)) {
             const index = iconList.indexOf(icon);
-            icon.removeIcon(attr);
+            icon.removeIcon();
             iconList.splice(index, 1);
             deletedIcons.push(icon.inputField);
+
+            // Delete the input field from detected fields so the icon can be detected again
+            const inputFieldIndex = kpxc.inputs.indexOf(icon.inputField);
+            if (inputFieldIndex >= 0) {
+                kpxc.inputs.splice(inputFieldIndex, 1);
+            }
         }
     }
 
@@ -180,6 +235,59 @@ kpxcUI.isRTL = function(field) {
     return kpxcFields.traverseParents(field,
         f => [ 'ltr', 'rtl' ].includes(f.getLowerCaseAttribute('dir')),
         f => ({ 'ltr': false, 'rtl': true })[f.getLowerCaseAttribute('dir')]);
+};
+
+kpxcUI.makeBannerDraggable = function(banner) {
+    if (!banner) {
+        return;
+    }
+
+    banner.draggable = true;
+
+    banner.addEventListener('dragstart', (e) => {
+        if (!e.isTrusted) {
+            return;
+        }
+
+        e.dataTransfer.effectAllowed = 'copyMove';
+        document.addEventListener('dragover', preventDefaultDragEnd);
+    });
+
+    banner.addEventListener('dragend', async (e) => {
+        if (!e.isTrusted || !e.target) {
+            return;
+        }
+
+        // If dragged to last third of the screen, move banner to bottom.
+        // If dragged to first third of the screen, move banner to top.
+        // If credential/group dialog is open, move it as well.
+        const bannerDialog = e.target.querySelector('.kpxc-banner-dialog');
+        if (e.y > e.view.innerHeight * (2 / 3) && e.target.classList.contains('kpxc-banner-on-top')) {
+            e.target.classList.remove('kpxc-banner-on-top');
+            e.target.classList.add('kpxc-banner-on-bottom');
+
+            if (bannerDialog) {
+                bannerDialog.style.top = '';
+                bannerDialog.style.bottom = Pixels(e.target.offsetHeight);
+                bannerDialog.classList.remove('kpxc-banner-dialog-top');
+                bannerDialog.classList.add('kpxc-banner-dialog-bottom');
+            }
+            await sendMessage('banner_set_position', BannerPosition.BOTTOM);
+        } else if (e.y < e.view.innerHeight * (1 / 3) && e.target.classList.contains('kpxc-banner-on-bottom')) {
+            e.target.classList.remove('kpxc-banner-on-bottom');
+            e.target.classList.add('kpxc-banner-on-top');
+
+            if (bannerDialog) {
+                bannerDialog.style.bottom = '';
+                bannerDialog.style.top = Pixels(e.target.offsetHeight);
+                bannerDialog.classList.remove('kpxc-banner-dialog-bottom');
+                bannerDialog.classList.add('kpxc-banner-dialog-top');
+            }
+            await sendMessage('banner_set_position', BannerPosition.TOP);
+        }
+
+        document.removeEventListener('dragover', preventDefaultDragEnd);
+    });
 };
 
 /**
@@ -217,6 +325,29 @@ kpxcUI.createNotification = function(type, message) {
         return;
     }
 
+    // Removes notification from the body element
+    const removeNotification = function() {
+        // Catch cross-domain exception
+        let parentBody;
+        try {
+            parentBody = window.parent.document.body;
+        } catch(e) {
+            parentBody = window.document.body;
+        }
+
+        if (notificationWrapper && parentBody.contains(notificationWrapper)) {
+            parentBody.removeChild(notificationWrapper);
+            notificationWrapper = undefined;
+            return;
+        }
+
+        // Notification is not in the parent
+        if (notificationWrapper && parentBody !== window.document.body && window.document.body.contains(notificationWrapper)) {
+            window.document.body.removeChild(notificationWrapper);
+            notificationWrapper = undefined;
+        }
+    };
+
     logDebug(message);
 
     const notification = kpxcUI.createElement('div', 'kpxc-notification kpxc-notification-' + type, {});
@@ -228,16 +359,16 @@ kpxcUI.createNotification = function(type, message) {
     const msg = kpxcUI.createElement('span', '', {}, message);
 
     notification.addEventListener('click', function() {
-        if (notificationWrapper && window.parent.document.body.contains(notificationWrapper)) {
-            window.parent.document.body.removeChild(notificationWrapper);
-            notificationWrapper = undefined;
-        }
+        removeNotification();
     });
 
     notification.appendMultiple(icon, label, msg);
 
     const styleSheet = createStylesheet('css/notification.css');
     notificationWrapper = notificationWrapper || document.createElement('div');
+    notificationWrapper.style.all = 'unset';
+    notificationWrapper.style.display = 'none';
+    styleSheet.addEventListener('load', () => notificationWrapper.style.display = 'block');
     this.shadowRoot = notificationWrapper.attachShadow({ mode: 'closed' });
     if (!this.shadowRoot) {
         return;
@@ -253,11 +384,14 @@ kpxcUI.createNotification = function(type, message) {
 
     // Destroy the banner after five seconds
     notificationTimeout = setTimeout(() => {
-        if (notificationWrapper && window.parent.document.body.contains(notificationWrapper)) {
-            window.parent.document.body.removeChild(notificationWrapper);
-            notificationWrapper = undefined;
-        }
+        removeNotification();
     }, 5000);
+};
+
+kpxcUI.createButton = function(color, textContent, callback) {
+    const button = kpxcUI.createElement('button', color, {}, textContent);
+    button.addEventListener('click', callback);
+    return button;
 };
 
 const DOMRectToArray = function(domRect) {
@@ -265,13 +399,11 @@ const DOMRectToArray = function(domRect) {
 };
 
 const initColorTheme = function(elem) {
-    const colorTheme = kpxc.settings['colorTheme'];
-
-    if (colorTheme === undefined || colorTheme === 'system') {
-        elem.removeAttribute('data-color-theme');
-    } else {
-        elem.setAttribute('data-color-theme', colorTheme);
+    let theme = kpxc.settings['colorTheme'];
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+    elem.setAttribute('data-bs-theme', theme);
 };
 
 const createStylesheet = function(file) {
@@ -281,38 +413,15 @@ const createStylesheet = function(file) {
     return stylesheet;
 };
 
+const preventDefaultDragEnd = function(e) {
+    e?.preventDefault();
+};
+
 const logDebug = function(message, extra) {
     if (kpxc.settings.debugLogging) {
         debugLogMessage(message, extra);
     }
 };
-
-// Enables dragging
-document.addEventListener('mousemove', function(e) {
-    if (!kpxcUI.mouseDown) {
-        return;
-    }
-
-    if (kpxcPasswordDialog.selected === kpxcPasswordDialog.titleBar) {
-        const xPos = e.clientX - kpxcPasswordDialog.diffX;
-        const yPos = e.clientY - kpxcPasswordDialog.diffY;
-
-        if (kpxcPasswordDialog.selected !== null) {
-            kpxcPasswordDialog.dialog.style.left = Pixels(xPos);
-            kpxcPasswordDialog.dialog.style.top = Pixels(yPos);
-        }
-    }
-
-    if (kpxcDefine.selected === kpxcDefine.dialog) {
-        const xPos = e.clientX - kpxcDefine.diffX;
-        const yPos = e.clientY - kpxcDefine.diffY;
-
-        if (kpxcDefine.selected && kpxcDefine.dialog) {
-            kpxcDefine.dialog.style.left = Pixels(xPos);
-            kpxcDefine.dialog.style.top = Pixels(yPos);
-        }
-    }
-});
 
 document.addEventListener('mousedown', function(e) {
     if (!e.isTrusted) {
@@ -327,8 +436,6 @@ document.addEventListener('mouseup', function(e) {
         return;
     }
 
-    kpxcPasswordDialog.selected = null;
-    kpxcDefine.selected = null;
     kpxcUI.mouseDown = false;
 });
 
