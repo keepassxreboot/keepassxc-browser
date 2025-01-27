@@ -18,13 +18,12 @@
 		632F584D280BED1100BF1247 /* background in Resources */ = {isa = PBXBuildFile; fileRef = 632F5841280BED1100BF1247 /* background */; };
 		632F584E280BED1100BF1247 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 632F5842280BED1100BF1247 /* icons */; };
 		632F584F280BED1100BF1247 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 632F5843280BED1100BF1247 /* manifest.json */; };
-		63A6D8FC25193F3A00BD9198 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6D8FB25193F3A00BD9198 /* AppDelegate.swift */; };
-		63A6D8FF25193F3A00BD9198 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A6D8FD25193F3A00BD9198 /* Main.storyboard */; };
-		63A6D90125193F3A00BD9198 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6D90025193F3A00BD9198 /* ViewController.swift */; };
 		63A6D90325193F3A00BD9198 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A6D90225193F3A00BD9198 /* Assets.xcassets */; };
 		63A6D90A25193F3B00BD9198 /* KeePassXC-Browser Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 63A6D90925193F3B00BD9198 /* KeePassXC-Browser Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		63A6D90F25193F3B00BD9198 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A6D90E25193F3B00BD9198 /* Cocoa.framework */; };
 		63A6D91225193F3B00BD9198 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6D91125193F3B00BD9198 /* SafariWebExtensionHandler.swift */; };
+		96E7F63C2D48428C0072CD34 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7F63B2D48428C0072CD34 /* ContentView.swift */; };
+		96E7F63D2D48428C0072CD34 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7F63A2D48428C0072CD34 /* App.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,9 +64,6 @@
 		632F5843280BED1100BF1247 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = "../../../keepassxc-browser/manifest.json"; sourceTree = "<group>"; };
 		63A6D8F725193F3A00BD9198 /* KeePassXC-Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KeePassXC-Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A6D8FA25193F3A00BD9198 /* KeePassXC_Browser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeePassXC_Browser.entitlements; sourceTree = "<group>"; };
-		63A6D8FB25193F3A00BD9198 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		63A6D8FE25193F3A00BD9198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		63A6D90025193F3A00BD9198 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		63A6D90225193F3A00BD9198 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A6D90425193F3A00BD9198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63A6D90925193F3B00BD9198 /* KeePassXC-Browser Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "KeePassXC-Browser Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +71,8 @@
 		63A6D91125193F3B00BD9198 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		63A6D91325193F3B00BD9198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63A6D91425193F3B00BD9198 /* KeePassXC_Browser_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeePassXC_Browser_Extension.entitlements; sourceTree = "<group>"; };
+		96E7F63A2D48428C0072CD34 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		96E7F63B2D48428C0072CD34 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,9 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				63A6D8FA25193F3A00BD9198 /* KeePassXC_Browser.entitlements */,
-				63A6D8FB25193F3A00BD9198 /* AppDelegate.swift */,
-				63A6D8FD25193F3A00BD9198 /* Main.storyboard */,
-				63A6D90025193F3A00BD9198 /* ViewController.swift */,
+				96E7F63A2D48428C0072CD34 /* App.swift */,
+				96E7F63B2D48428C0072CD34 /* ContentView.swift */,
 				63A6D90225193F3A00BD9198 /* Assets.xcassets */,
 				63A6D90425193F3A00BD9198 /* Info.plist */,
 			);
@@ -216,6 +213,7 @@
 				TargetAttributes = {
 					63A6D8F625193F3A00BD9198 = {
 						CreatedOnToolsVersion = 12.0;
+						LastSwiftMigration = 1620;
 					};
 					63A6D90825193F3B00BD9198 = {
 						CreatedOnToolsVersion = 12.0;
@@ -247,7 +245,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63A6D90325193F3A00BD9198 /* Assets.xcassets in Resources */,
-				63A6D8FF25193F3A00BD9198 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,8 +273,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63A6D90125193F3A00BD9198 /* ViewController.swift in Sources */,
-				63A6D8FC25193F3A00BD9198 /* AppDelegate.swift in Sources */,
+				96E7F63C2D48428C0072CD34 /* ContentView.swift in Sources */,
+				96E7F63D2D48428C0072CD34 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,17 +295,6 @@
 			targetProxy = 63A6D90B25193F3B00BD9198 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		63A6D8FD25193F3A00BD9198 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63A6D8FE25193F3A00BD9198 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		63A6D91525193F3B00BD9198 /* Debug */ = {
@@ -431,14 +417,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "KeePassXC-Browser Extension/KeePassXC_Browser_Extension.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "KeePassXC-Browser Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keepassxc.KeePassXC-Browser-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -451,14 +439,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "KeePassXC-Browser Extension/KeePassXC_Browser_Extension.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "KeePassXC-Browser Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keepassxc.KeePassXC-Browser-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -470,21 +460,24 @@
 		63A6D91C25193F3B00BD9198 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "KeePassXC-Browser/KeePassXC_Browser.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "KeePassXC-Browser/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keepassxc.KeePassXC-Browser";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -492,18 +485,20 @@
 		63A6D91D25193F3B00BD9198 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "KeePassXC-Browser/KeePassXC_Browser.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "KeePassXC-Browser/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keepassxc.KeePassXC-Browser";
 				PRODUCT_NAME = "$(TARGET_NAME)";
