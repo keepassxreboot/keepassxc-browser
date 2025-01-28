@@ -18,7 +18,7 @@
 import SafariServices
 import os.log
 
-let SocketFileName = "org.keepassxc.KeePassXC.BrowserServer"
+let SocketFileName = "KeePassXC.BrowserServer"
 var socketFD : Int32 = -1
 var socketConnected = false
 var maxMessageLength: Int32 = 1024 * 1024;
@@ -31,7 +31,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     )
     
     var socketPath: String {
-        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "org.keepassxc.KeePassXC")!.appending(component: SocketFileName).path(percentEncoded: false)
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "G2S7P7J672.org.keepassxc.keepassxc")!.appending(component: SocketFileName).path(percentEncoded: false)
     }
  
     func closeSocket() {
