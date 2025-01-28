@@ -18,7 +18,6 @@
 import SafariServices
 import os.log
 
-let SFExtensionMessageKey = "message"
 let SocketFileName = "org.keepassxc.KeePassXC.BrowserServer"
 var socketFD : Int32 = -1
 var socketConnected = false

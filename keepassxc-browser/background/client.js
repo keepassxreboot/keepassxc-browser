@@ -407,7 +407,9 @@ function onDisconnected() {
 
 keepassClient.onNativeMessage = function(response) {
     // Due to limitiations on SFSafariApplication.dispatchMessage this is needed
-    if (response?.name === "proxy_message") response = response.userInfo
+    if (response?.name === 'proxy_message') {
+        response = response.userInfo
+    }
         
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
