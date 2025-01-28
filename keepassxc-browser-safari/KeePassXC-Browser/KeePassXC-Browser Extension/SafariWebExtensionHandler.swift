@@ -21,7 +21,7 @@ import os.log
 let SocketFileName = "org.keepassxc.KeePassXC.BrowserServer"
 var socketFD : Int32 = -1
 var socketConnected = false
-var maxMessageLength: Int = 1024 * 1024;
+var maxMessageLength: Int32 = 1024 * 1024;
 let backgroundQueue = DispatchQueue(label: "\(Bundle.main.bundleIdentifier!).readSocketQueue", qos: .background)
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
@@ -46,9 +46,25 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         // Reuse socket
         guard socketFD == -1 else { return true }
         
+        guard FileManager.default.fileExists(atPath: socketPath) else {
+            logger.error("Socket file does not exist")
+            return false
+        }
+        
         socketFD = socket(AF_UNIX, SOCK_STREAM, 0)
         guard socketFD > 0 else {
             logger.error("Failed to create socket")
+            return false
+        }
+        
+        var optval: Int = 1; // Use 1 to enable the option, 0 to disable
+        guard setsockopt(socketFD, SOL_SOCKET, SO_REUSEADDR, &optval, socklen_t(MemoryLayout<Int32>.size)) != -1 else {
+            logger.error("setsockopt error: \(errno)")
+            return false
+        }
+
+        guard setsockopt(socketFD, SOL_SOCKET, SO_SNDBUF, &maxMessageLength, socklen_t(MemoryLayout<Int32>.size(ofValue: maxMessageLength))) != -1 else {
+            logger.error("setsockopt error")
             return false
         }
         
@@ -129,7 +145,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     func startSocketListener() {
         backgroundQueue.async {
             while socketConnected {
-                var buffer = [UInt8](repeating: 0, count: maxMessageLength)
+                var buffer = [UInt8](repeating: 0, count: Int(maxMessageLength))
                 let bytesRead = read(socketFD, &buffer, buffer.count)
 
                 if bytesRead > 0 {
