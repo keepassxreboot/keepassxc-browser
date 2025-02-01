@@ -137,7 +137,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     }
     
     func handleSocketMessage(fileHandle: FileHandle) {
-        let data = Data(fileHandle.availableData)
+        let data = fileHandle.availableData
         
         guard !data.isEmpty else {
             logger.debug("Data from filehandle is empty")
