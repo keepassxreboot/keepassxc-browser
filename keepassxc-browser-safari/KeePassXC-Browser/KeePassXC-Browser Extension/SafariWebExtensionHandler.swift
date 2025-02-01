@@ -19,10 +19,12 @@ import SafariServices
 import os.log
 
 let SocketFileName = "KeePassXC.BrowserServer"
+let webExtensonIdentifier = "com.keepassxc.KeePassXC-Browser-Extension"
+let applicationGroupIdentifier = "G2S7P7J672.org.keepassxc.KeePassXC"
 var socketFD : Int32 = -1
 var socketConnected = false
 var maxMessageLength: Int32 = 1024 * 1024;
-let backgroundQueue = DispatchQueue(label: "\(Bundle.main.bundleIdentifier!).readSocketQueue", qos: .background)
+var fileHandle: FileHandle?
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     private var logger = Logger(
@@ -31,7 +33,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     )
     
     var socketPath: String {
-        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "G2S7P7J672.org.keepassxc.keepassxc")!.appending(component: SocketFileName).path(percentEncoded: false)
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: applicationGroupIdentifier)!.appending(component: SocketFileName).path(percentEncoded: false)
     }
  
     func closeSocket() {
@@ -90,13 +92,24 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             return false
         }
         
+        fileHandle = FileHandle(fileDescriptor: socketFD)
+        fileHandle?.readabilityHandler = handleSocketMessage
+        
         return true
     }
     
     func beginRequest(with context: NSExtensionContext) {
-        guard let serializedRequest = parseRequest(with: context) else {
-            logger.error("Failed to parse request")
-            context.cancelRequest(withError: NSError())
+        let request = context.inputItems.first as? NSExtensionItem
+
+        let message: Any?
+        if #available(iOS 15.0, macOS 11.0, *) {
+            message = request?.userInfo?[SFExtensionMessageKey]
+        } else {
+            message = request?.userInfo?["message"]
+        }
+        
+        guard let message = message as? [String: Any],
+              let data = try? JSONSerialization.data(withJSONObject: message as Any) else {
             return
         }
         
@@ -108,59 +121,44 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             }
             
             socketConnected = true
-            startSocketListener()
-        }
-
-        // Send message
-        let bytesWritten = serializedRequest.withUnsafeBytes {
-            write(socketFD, $0.baseAddress!, $0.count)
-        }
-
-        
-        if bytesWritten <= 0 {
-            logger.error("Cannot write to socket \(errno)")
-        } else {
-            logger.debug("Written \(bytesWritten) bytes")
         }
         
-        logger.debug("Written \(bytesWritten) bytes")
+        guard let fileHandle else {
+            logger.error("No filehandle available for sending web extension message")
+            return
+        }
         
-        context.completeRequest(returningItems: [])
+        do {
+            try fileHandle.write(contentsOf: data)
+            logger.debug("Sent message of \(data.count) bytes")
+        } catch {
+            logger.error("Failed to send message to socket \(error)")
+        }
     }
     
-    func parseRequest(with context: NSExtensionContext) -> Data? {
-        guard let item = context.inputItems.first as? NSExtensionItem else {
-            logger.error("Invalid amount of arguments for NSExtensionItem")
-            return nil
-        }
-
-        guard let serializedRequest = try? JSONSerialization.data(withJSONObject: item.userInfo?[SFExtensionMessageKey] as Any) else {
-            logger.error("JSON serialization error")
-            return nil
+    func handleSocketMessage(fileHandle: FileHandle) {
+        let data = Data(fileHandle.availableData)
+        
+        guard !data.isEmpty else {
+            logger.debug("Data from filehandle is empty")
+            return
         }
         
-        return serializedRequest
-    }
-    
-    func startSocketListener() {
-        backgroundQueue.async {
-            while socketConnected {
-                var buffer = [UInt8](repeating: 0, count: Int(maxMessageLength))
-                let bytesRead = read(socketFD, &buffer, buffer.count)
-
-                if bytesRead > 0 {
-                    let data = Data(buffer[0..<bytesRead])
-                    self.logger.debug("Received message: \(data)")
-                    
-                    guard let jsonDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                        self.logger.error("Failed to decode message")
-                        return
-                    }
-                    
-                    SFSafariApplication.dispatchMessage(withName: "proxy_message", toExtensionWithIdentifier: "com.keepassxc.KeePassXC-Browser-Extension", userInfo: jsonDict)
-                } else {
-                    self.logger.debug("No message received or connection closed")
-                }
+        guard let message = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            logger.error("Could not parse JSON from data")
+            return
+        }
+        
+        SFSafariApplication
+            .dispatchMessage(
+                withName: "proxy_message",
+                toExtensionWithIdentifier: webExtensonIdentifier,
+                userInfo: message
+            ) { error in
+            if let error {
+                self.logger.error("Failed to send message to web extension \(error)")
+            } else {
+                self.logger.error("Sent message of \(data.count) bytes to web extension")
             }
         }
     }
