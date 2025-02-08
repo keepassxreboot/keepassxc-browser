@@ -65,14 +65,25 @@ page.initSettings = async function() {
         const item = await browser.storage.local.get({ 'settings': {} });
 
         // Load managed settings if found
-        try {
-            const managedSettings = await browser.storage.managed.get('settings');
-            if (managedSettings?.settings) {
-                console.log('Managed settings found.');
-                item.settings = managedSettings.settings;
+        if (isFirefox()) {
+            try {
+                const managedSettings = await browser.storage.managed.get('settings');
+                if (managedSettings?.settings) {
+                    debugLogMessage('Managed settings found.');
+                    item.settings = managedSettings.settings;
+                }
+            } catch (err) {
+                logError('page.initSettings error: ' + err);
             }
-        } catch (err) {
-            logError('page.initSettings error: ' + err);
+        } else {
+            chrome.storage.managed.get('settings').then((managedSettings) => {
+                if (managedSettings?.settings) {
+                    debugLogMessage('Managed settings found.');
+                    item.settings = managedSettings.settings;
+                }
+            }).catch((err) => {
+                logError('page.initSettings error: ' + err);
+            });
         }
 
         page.settings = item.settings;
@@ -106,7 +117,7 @@ page.initOpenedTabs = async function() {
             return;
         }
 
-        page.currentTabId = currentTab.id;
+        page.currentTabId = currentTab?.id;
         browserAction.showDefault(currentTab);
     } catch (err) {
         logError('page.initOpenedTabs error: ' + err);
@@ -128,25 +139,27 @@ page.initSitePreferences = async function() {
 
 page.switchTab = async function(tab) {
     // Clears Fill Attribute selection from context menu
-    browser.contextMenus.update('fill_attribute', { visible: false });
+    page.setFillAttributeContextMenuItemVisible(false);
 
     // Clears all logins from other tabs after a timeout
-    if (page.clearCredentialsTimeout) {
+    if (page?.clearCredentialsTimeout) {
         clearTimeout(page.clearCredentialsTimeout);
     }
 
     page.clearCredentialsTimeout = setTimeout(() => {
         for (const pageTabId of Object.keys(page.tabs)) {
-            if (tab.id !== Number(pageTabId)) {
+            if (tab?.id !== Number(pageTabId)) {
                 page.clearCredentials(Number(pageTabId), true);
             }
         }
     }, page.settings.clearCredentialsTimeout * 1000);
 
     browserAction.showDefault(tab);
-    browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
-        logError('Cannot send activated_tab message: ' + e.message);
-    });
+    if (tab?.id) {
+        browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
+            logError('Cannot send activated_tab message: ' + e.message);
+        });
+    }
 };
 
 page.clearCredentials = async function(tabId, complete) {
@@ -166,7 +179,7 @@ page.clearCredentials = async function(tabId, complete) {
     }
 };
 
-page.clearLogins = function(tabId) {
+page.clearLogins = async function(tabId) {
     if (!page.tabs[tabId]) {
         return;
     }
@@ -176,8 +189,7 @@ page.clearLogins = function(tabId) {
     page.tabs[tabId].loginList = [];
     page.currentRequest = {};
     page.passwordFilled = false;
-
-    browser.contextMenus.update('fill_attribute', { visible: false });
+    page.setFillAttributeContextMenuItemVisible(false);
 };
 
 // Clear all logins from all pages and update the content scripts
@@ -201,7 +213,7 @@ page.clearSubmittedCredentials = async function() {
     page.submittedCredentials = {};
 };
 
-page.createTabEntry = function(tabId) {
+page.createTabEntry = async function(tabId) {
     page.tabs[tabId] = {
         allowIframes: false,
         credentials: [],
@@ -211,14 +223,14 @@ page.createTabEntry = function(tabId) {
     };
 
     page.clearSubmittedCredentials();
-    browser.contextMenus.update('fill_attribute', { visible: false });
+    page.setFillAttributeContextMenuItemVisible(false);
 };
 
 // Retrieves the credentials. Returns cached values when found.
 // Page reload or tab switch clears the cache.
 // If the retrieval is forced (from Credential Banner), get new credentials normally.
 page.retrieveCredentials = async function(tab, args = []) {
-    if (!tab?.active) {
+    if (!tab?.active || !tab?.id) {
         return [];
     }
 
@@ -256,7 +268,9 @@ page.getLoginId = async function(tab) {
 };
 
 page.setLoginId = async function(tab, loginId) {
-    page.tabs[tab.id].loginId = loginId;
+    if (tab?.id) {
+        page.tabs[tab.id].loginId = loginId;
+    }
 };
 
 page.getManualFill = async function(tab) {
@@ -278,7 +292,7 @@ page.setBannerPosition = async function(tab, position) {
 
 page.getSubmitted = async function(tab) {
     // Do not return any credentials if the tab ID does not match.
-    if (tab.id !== page.submittedCredentials.tabId) {
+    if (tab?.id !== page.submittedCredentials.tabId) {
         return {};
     }
 
@@ -336,6 +350,15 @@ page.isSiteIgnored = async function(tab, currentLocation) {
     return false;
 };
 
+// Shows or hides the Fill Attribute context menu item
+page.setFillAttributeContextMenuItemVisible = async function(visible) {
+    try {
+        await browser.contextMenus.update('fill_attribute', { visible: visible });
+    } catch (e) {
+        logError(e);
+    }
+};
+
 // Update context menu for attribute filling
 page.updateContextMenu = async function(tab, credentials) {
     // Remove any old attribute items
@@ -345,7 +368,7 @@ page.updateContextMenu = async function(tab, credentials) {
     page.attributeMenuItems = [];
 
     // Set parent item visibility
-    browser.contextMenus.update('fill_attribute', { visible: true });
+    page.setFillAttributeContextMenuItemVisible(true);
 
     // Add any new attribute items
     for (const cred of credentials) {
@@ -381,7 +404,7 @@ page.setAllowIframes = async function(tab, args = []) {
     const [ allowIframes, site ] = args;
 
     // Only set when main windows' URL is used
-    if (trimURL(tab?.url) === trimURL(site)) {
+    if (trimURL(tab?.url) === trimURL(site) && tab?.id) {
         page.tabs[tab.id].allowIframes = allowIframes;
     }
 };

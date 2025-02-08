@@ -929,7 +929,7 @@ keepass.updateDatabase = async function() {
 keepass.updateDatabaseHashToContent = async function() {
     try {
         const tab = await getCurrentTab();
-        if (tab) {
+        if (tab?.id) {
             // Send message to content script
             browser.tabs.sendMessage(tab.id, {
                 action: 'check_database_hash',
