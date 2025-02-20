@@ -24,6 +24,10 @@
           "title": "Automatically fill single credential entries. Default: false",
           "type": "boolean"
         },
+        "autoFillRelevantCredential": {
+          "title": "Automatically fill relevant credential entries. Default: false",
+          "type": "boolean"
+        },
         "autoFillSingleTotp": {
           "title": "Automatically fill single TOTP. Default: false",
           "type": "boolean"

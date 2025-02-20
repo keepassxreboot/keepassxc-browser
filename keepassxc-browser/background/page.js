@@ -6,6 +6,7 @@ const defaultSettings = {
     autoCompleteUsernames: true,
     autoFillAndSend: false,
     autoFillSingleEntry: false,
+    autoFillRelevantCredential: false,
     autoFillSingleTotp: false,
     autoReconnect: false,
     autoRetrieveCredentials: true,
