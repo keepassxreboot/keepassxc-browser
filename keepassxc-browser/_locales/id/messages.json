@@ -766,6 +766,10 @@
         "message": "Automatically fill in single-credential entries",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Automatically fill in single TOTP entries",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,6 +918,10 @@
         "message": "Biarkan KeePassXC-Browser mengisi kredensial secara otomatis ketika hanya menerima satu entri.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Peringatan! Menggunakan pengisian otomatis tidak aman. Gunakan dengan risiko Anda sendiri. KeePassXC-Browser mendeteksi kolom masuk secara otomatis. Tetapi, mereka dapat dideteksi secara salah, kemungkinan dapat mengisi data sensitif ke kolom masukan yang berbahaya.",
         "description": "Auto-Fill Single Entry warning text."
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Use a compact version of the dropdown list to select credentials.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Use a compact version of the dropdown list to select credentials.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Ketika menyimpan kredensial baru, hanya simpan domainnya daripada URL penuhnya.",
@@ -1089,7 +1097,7 @@
     "optionsColumnAllowIframes": {
         "message": "Perbolehkan iframe lintas sumber",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Hapus",
         "description": "Site Preferences list column title."

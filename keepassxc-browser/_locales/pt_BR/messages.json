@@ -240,7 +240,7 @@
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Current database is not connected.",
+        "message": "O banco de dados atual não está conectado.",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
@@ -766,6 +766,10 @@
         "message": "Preencher automaticamente entradas de credencial única",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Preencher automaticamente entradas TOTP únicas",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,6 +918,10 @@
         "message": "Deixe o KeePassXC-Browser preencher automaticamente as credenciais se receber apenas uma única entrada.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Aviso! Usando preenchimento automático não é seguro. Uso por sua própria conta e risco. KeePassXC-Browser automaticamente tentará detectar os campos de login. De qualquer forma, eles podem ser detectados incorretamente, possibilitando preenchimento de dados sensíveis em campos de entrada não seguros.",
         "description": "Auto-Fill Single Entry warning text."
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Usar uma versão compacta da lista suspensa para selecionar credenciais.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Usar uma versão compacta da lista suspensa para selecionar credenciais.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Ao salvar novas credenciais, salve apenas o domínio em vez da URL completa.",
@@ -1089,7 +1097,7 @@
     "optionsColumnAllowIframes": {
         "message": "Permitir Iframes de Origem Cruzada",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Excluir",
         "description": "Site Preferences list column title."

@@ -766,6 +766,10 @@
         "message": "Tek kimlik doğrulama bilgisi kayıtları otomatik olarak doldurulsun",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Tekil tek kullanımlık parola kayıtları otomatik olarak doldurulsun",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,6 +918,10 @@
         "message": "Yalnızca tek bir kayıt alınırsa KeePassXC-Browser otomatik olarak kimlik bilgilerini doldurabilsin.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Uyarı! Otomatik doldurmayı kullanmanın güvenli olmadığını bilerek kullanın. KeePassXC-Browser, oturum açma alanlarını otomatik olarak algılamaya çalışır. Ancak bazen bu alanlar hatalı olarak algılanabilir ve hassas veriler güvenli olmayan alanlara doldurularak görülebilir.",
         "description": "Auto-Fill Single Entry warning text."
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Kimlik doğrulama bilgilerini seçmek için açılan listenin sıkıştırılmış sürümünü kullanır.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Kimlik doğrulama bilgilerini seçmek için açılan listenin sıkıştırılmış sürümünü kullanır.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Yeni kimlik doğrulama bilgileri kaydedilirken, tam adres yerine yalnızca etki alanını kaydeder.",
@@ -1089,7 +1097,7 @@
     "optionsColumnAllowIframes": {
         "message": "Başka siteden iframe bulunabilsin",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Dil",
         "description": "Site Preferences list column title."

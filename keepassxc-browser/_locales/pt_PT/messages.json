@@ -766,6 +766,10 @@
         "message": "Preencher automaticamente as entradas de credenciais únicas",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Preencher automaticamente as entradas TOTP únicas",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,6 +918,10 @@
         "message": "Permitir a KeePassXC-Browser preencher automaticamente as credenciais se receber apenas uma única entrada",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Aviso! O uso de preenchimento automático não é seguro. Use por sua conta e risco. KeePassXC-Browser tenta detetar automaticamente campos de autenticação. Contudo, estes campos podem ser detetados de forma incorreta levando ao preenchimento de dados confidenciais em campos de entrada inseguros.",
         "description": "Auto-Fill Single Entry warning text."
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Usa uma versão compacta da lista pendente para selecionar as credenciais.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Usa uma versão compacta da lista pendente para selecionar as credenciais.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Ao guardar as novas credenciais, guardar apenas o domínio e não o URL",
@@ -1089,7 +1097,7 @@
     "optionsColumnAllowIframes": {
         "message": "Permitir molduras \"Cross-Origin\"",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Eliminar",
         "description": "Site Preferences list column title."

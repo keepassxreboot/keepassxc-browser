@@ -24,7 +24,7 @@
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "Reconecta la base de datos actual activa a KeePassXC-Browser.",
+        "message": "Reconectar la base de datos actual activa a KeePassXC-Browser.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
@@ -48,7 +48,7 @@
         "description": "Remove button title on Site Preferences tab."
     },
     "reopenDatabaseButtonTitle": {
-        "message": "Vuelve a Abrir la base de datos actual activa.",
+        "message": "Reabrir la base de datos activa actual.",
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
@@ -240,11 +240,11 @@
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Current database is not connected.",
+        "message": "La base de datos actual no está conectada.",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Error:\nLa contraseña generada es más larga que la longitud permitida!",
+        "message": "Error: La contraseña generada es más larga que la longitud permitida!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
@@ -335,7 +335,7 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Por favor confirme su selección o elija más campos como <em>Campos de cadena</em>.",
+        "message": "Confirme su selección o elija más campos como Campos de cadena.",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
     },
     "defineKeyboardText": {
@@ -343,7 +343,7 @@
         "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
-        "message": "Campo de presentaciónElija un campo de presentación Personalizado",
+        "message": "Elija un campo de inicio de sesión personalizado",
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
@@ -371,7 +371,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "Haz clic en el icono KeePassXC-Browser para ver más opciones.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -479,7 +479,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": "KeePassXC-Browser no ha sido configurado. Haga clic en el botón de conexión para emparejarse con KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -487,7 +487,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": "Haz clic en el botón de reconexión para establecer una nueva conexión.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -527,7 +527,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": "Elija un grupo para almacenar las nuevas credenciales.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -639,7 +639,7 @@
         "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "preferencias del sitio",
+        "message": "Preferencias del sitio",
         "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -659,7 +659,7 @@
         "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "preferencias del sitio",
+        "message": "Preferencias del sitio",
         "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
@@ -691,7 +691,7 @@
         "description": "Check for updates button text."
     },
     "optionsButtonRemoveNow": {
-        "message": "Sí, retirar ahora",
+        "message": "Sí, eliminar ahora",
         "description": "Confirm button text when removing database key or Custom Login Fields."
     },
     "optionsButtonCancel": {
@@ -715,11 +715,11 @@
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Separe el grupo con barras diagonales, por ejemplo: Grupo/Grupo-Hijo.",
+        "message": "Separe el grupo con barras inclinadas, por ejemplo: Grupo/ChildGroup.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
-        "message": "Default group for saving new passkeys:",
+        "message": "Grupo por defecto para guardar nuevas claves de acceso:",
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
@@ -743,7 +743,7 @@
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Útil con páginas que usan ventanas emergentes o diálogos dinámicos. Deshabilitar la característica para reducir la carga de CPU en máquinas lentas. Cuando se desactivan las credenciales solo pueden ser insertadas usando atajos de teclado, el menú contextual o la extensión emergente.",
+        "message": "Útil con páginas que utilizan ventanas emergentes o diálogos dinámicos. Deshabilite esta función para reducir la carga de la CPU en máquinas lentas. Cuando está desactivada, las credenciales sólo se pueden insertar mediante atajos de teclado, el menú contextual o la ventana emergente de extensión.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
@@ -765,6 +765,10 @@
     "optionsCheckboxAutoFillSingleEntry": {
         "message": "Rellenar apuntes de credenciales únicas automáticamente",
         "description": "Automatically fill-in single credential entry checkbox text."
+    },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Rellenar apuntes de TOPT únicas automáticamente",
@@ -795,7 +799,7 @@
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
-        "message": "Usar Modo Compacto.",
+        "message": "Usar modo compacto.",
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
@@ -831,7 +835,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every three days",
+        "message": "cada tres días",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -914,6 +918,10 @@
         "message": "Permitir que KeePassXC-Browser complete las credenciales automáticamente si recibe solo una entrada.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Advertencia! Usar el autorellenado no es seguro. Úseló bajo su propio riesgo. KeePassXC-Browser intenta detectar automáticamente los campos de inicio de sesión. Sin embargo, pueden ser detectados incorrectamente,  con la posibilidad de rellenar datos sensibles en capos de entrada inseguros.",
         "description": "Auto-Fill Single Entry warning text."
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Mostrar la lista de selección de credenciales de forma compacta.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "Mostrar la lista de selección de credenciales de forma compacta.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Al guardar nuevas credenciales, guarde solo el dominio en lugar de la URL completa.",
@@ -1043,7 +1051,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": "¿Realmente desea eliminar el siguiente identificador de la lista de la base de datos? $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1089,7 +1097,7 @@
     "optionsColumnAllowIframes": {
         "message": "Permitir Cross-Origin iframes",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Eliminar",
         "description": "Site Preferences list column title."
@@ -1327,7 +1335,7 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Habilitar passkeys.",
+        "message": "Habilitar claves de acceso.",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1335,11 +1343,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Habilitar respaldo passkeys.",
+        "message": "Habilitar respaldo de claves de acceso.",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Habilitado, una petición fallida o cancelada a KeePassXC provocará la petición del navegador a los propios passkeys internos. Deshabilitado, la conexión a KeePassXC es requerida y la petición cancelada fallará. Prederterminado: habilitado.",
+        "message": "Si está habilitada, una solicitud fallida o cancelada a KeePassXC activará la solicitud de claves de acceso interna del navegador. Si está deshabilitado, se requiere la conexión a KeePassXC y la solicitud cancelada fallará. Predeterminado: habilitado.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

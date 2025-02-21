@@ -766,6 +766,10 @@
         "message": "Önálló hitelesítésiadat-bejegyzések automatikus kitöltése",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "Önálló TOTP-bejegyzések automatikus kitöltése",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,6 +918,10 @@
         "message": "A KeePassXC-böngésző automatikusan kitölthesse a hitelesítési adatokat, ha csak egy önálló bejegyzést kap.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "Figyelmeztetés! Az automatikus kitöltés használata nem biztonságos! Saját felelősségére használja. A KeePassXC-böngésző megpróbálja automatikusan érzékelni a belépési mezőket. Azonban, lehet, hogy ezek rosszul kerülnek felderítésre és így az érzékeny adatok nem biztonságos bemeneti mezőkbe lesznek feltöltve.",
         "description": "Auto-Fill Single Entry warning text."
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "A legördülő lista kompakt változatának alkalmazása a hitelesítő adatok kiválasztásához.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "A legördülő lista kompakt változatának alkalmazása a hitelesítő adatok kiválasztásához.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "Új hitelesítési adatok mentésekor csak a tartományt mentse el a teljes URL helyett.",
@@ -1089,7 +1097,7 @@
     "optionsColumnAllowIframes": {
         "message": "Cross-Origin iframe-ek engedélyezése",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "Törlés",
         "description": "Site Preferences list column title."
