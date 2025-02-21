@@ -1,3 +1,12 @@
+1.9.7 (2025-02-21)
+=========================
+- Add exceptions to Shadow DOM input query [#2430]
+- Add option to auto-fill related credentials (thanks wolfsilver) [#2409]
+- Change passkeys script to be injected at document start [#2432]
+- Fix old.reddit.com login page [#2440]
+- Fix TOTP field input type check [#2454]
+- Fix loading managed settings [#2455]
+
 1.9.6 (2024-12-25)
 =========================
 - Add all_urls host permission to Chrome manifest file [#2421]

@@ -28,7 +28,7 @@
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
-        "message": "ページのすべての入力欄を再検出します。",
+        "message": "ページのすべての入力フィールドを再検出します。",
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
@@ -52,7 +52,7 @@
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
-        "message": "Adds Username-only Detection to the current page.",
+        "message": "ユーザー名のみ検出オプションを現在のページに追加します。",
         "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -240,7 +240,7 @@
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Current database is not connected.",
+        "message": "現在のデータベースには接続されていません。",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
@@ -260,7 +260,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "このバージョンの KeePassXC はパスワードジェネレーターの起動に対応していません。最新の KeePassXC にアップデートしてください。"
     },
     "usernameFieldText": {
         "message": "KeePassXC から認証情報を補完します。",
@@ -371,7 +371,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "KeePassXC-Browser のアイコンをクリックすると、その他のオプションを確認できます。",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -479,7 +479,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": "KeePassXC-Browser はまだ設定されていません。接続ボタンをクリックして KeePassXC とペアリングしてください。",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -487,7 +487,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": "再接続ボタンをクリックすると新しい接続を確立します。",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -527,7 +527,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": "新しい資格情報を保存するグループを選択してください。",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -766,6 +766,10 @@
         "message": "単一の資格情報エントリーに自動入力する",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "単一の TOTP エントリーに自動入力する",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -831,7 +835,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every three days",
+        "message": "3 日ごと",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -914,6 +918,10 @@
         "message": "エントリーに対する資格情報が単一の場合は、KeePassXC-Browser に自動入力させます。",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "警告！自動入力は安全ではありません。自己責任で使用してください。KeePassXC-Browser が自動的にログインフィールドを検出しますが、検出に失敗して安全ではない入力フィールドに機密データを入力してしまう可能性があります。",
         "description": "Auto-Fill Single Entry warning text."
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "資格情報を選択するドロップダウンリストでコンパクト版を使用します。",
-      "description": "Use compact (legacy) mode help text."
+        "message": "資格情報を選択するドロップダウンリストでコンパクト版を使用します。",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "新しい資格情報を保存する場合、完全な URL の代わりにドメインのみを保存します。",
@@ -1043,7 +1051,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": "本当にデータベースから識別子 $1 を削除しますか？",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1083,13 +1091,13 @@
         "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
-        "message": "Improved Input Field Detection",
+        "message": "高度な入力フィールド検出",
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
         "message": "クロスオリジン iframe を許可する",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "削除",
         "description": "Site Preferences list column title."
@@ -1203,11 +1211,11 @@
         "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "ユーザー名のみを検出することで、KeePassXC-Browser はユーザー名とパスワードが別々のページにあるウェブサイトでのログイン情報の入力を可能にします。",
+        "message": "ユーザー名のみ検出オプションにより、ユーザー名とパスワードが別々のページに分かれているウェブサイトで KeePassXC-Browser がログイン情報を補完できるようになります。",
         "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Improved Input Field Detection allows more detailed dynamic input field detection. However, it might affect the page performance. Use with caution.",
+        "message": "高度な入力フィールド検出オプションにより、さらに詳細な入力フィールドの動的検出ができるようになります。ただし、ページのパフォーマンスに影響を与える可能性があり、使用には注意が必要です。",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
@@ -1227,7 +1235,7 @@
         "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser はユーザー名のみの検出を削除し、このサイトのすべての機能を有効にします。",
+        "message": "KeePassXC-Browser はユーザー名のみ検出オプションを削除し、このサイトですべての機能を有効にします。",
         "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {

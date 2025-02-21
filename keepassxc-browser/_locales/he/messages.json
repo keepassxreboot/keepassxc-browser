@@ -4,7 +4,7 @@
         "description": "Name of the extension."
     },
     "addSitePreferenceButtonTitle": {
-        "message": "הוספת העדפות אתר למען URL זה.",
+        "message": "הוספת העדפות אתר לכתובת URL זו.",
         "description": "Add button title text on Site Preferences tab."
     },
     "allowIframeButtonTitle": {
@@ -12,31 +12,31 @@
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
-        "message": "להתחבר למסד נתונים פעיל נוכחי מדפדפן־KeePassXC.",
+        "message": "חבר את מסד הנתונים הפעיל הנוכחי לתוסף KeePassXC.",
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "העתקת מידע ניפוי תקלים ללוח גזירים.",
+        "message": "העתק מידע ניפוי באגים ללוח.",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
-        "message": "Dismisses Basic HTTP Auth.",
+        "message": "מבטל אימות HTTP בסיסי.",
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "להתחבר מחדש למסד נתונים פעיל נוכחי מדפדפן־KeePassXC.",
+        "message": "חבר מחדש את מסד הנתונים הפעיל הנוכחי לתוסף KeePassXC.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
-        "message": "Redetects all input fields on the page.",
+        "message": "מזהה מחדש את כל שדות הקלט בדף.",
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
-        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "message": "טוען מחדש את התוסף ומתחבר מחדש ל- KeePassXC.",
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
-        "message": "הסרת מסדי נתונים מחוברים מדפדפן־KeePassXC.",
+        "message": "הסרת מסדי נתונים מחוברים מתוסף KeePassXC.",
         "description": "Remove button title on Connected Databases tab."
     },
     "removeCustomLoginFieldsButtonTitle": {
@@ -260,7 +260,7 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "מחולל סיסמאות אינו נתמך בגרסת KeePassXC זו. שקול את עדכון KeePassXC לגרסה חדשה יותר."
     },
     "usernameFieldText": {
         "message": "מילוי נתוני־אמנה מ־KeePassXC",
@@ -766,6 +766,10 @@
         "message": "מילוי אוטומטי של רשומות עם אישור יחיד.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
+    "optionsCheckboxAutoFillRelevantCredential": {
+        "message": "Automatically fill in relevant credential entries",
+        "description": "Automatically fill-in relevant credential entry checkbox text."
+    },
     "optionsCheckboxAutoFillSingleTotp": {
         "message": "מילוי אוטומטי של רשומות עם TOTP יחיד.",
         "description": "Automatically fill-in single TOTP entries checkbox text."
@@ -914,6 +918,10 @@
         "message": "לאפשר לדפדפן־KeePassXC למלא נתוני־אמנה באופן אוטומטי בקבלת רק ערך יחיד.",
         "description": "Auto-Fill Single Entry option help text."
     },
+    "optionsAutoFillRelevantCredentialHelpText": {
+        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "description": "Auto-Fill Relevant Credential option help text."
+    },
     "optionsAutoFillSingleEntryWarning": {
         "message": "אזהרה! השימוש באפשרות מילוי־אוטומטי אינה בטוחה. השימוש על אחריות המשתמש בלבד. KeePassXC-Browser מנסה לזהות באופן אוטומטי שדות התחברות. יחד עם זאת, שדות ההתחברות עלולות להיות מזוהות באופן שגוי, דבר שעשוי אולי לאכלס נתונים רגישים, בשדות קלט לא בטוחים.",
         "description": "Auto-Fill Single Entry warning text."
@@ -927,7 +935,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
+        "message": "כאשר אישורים מוחזרים מקבוצות שונות, שם הקבוצה יוצג. משפיע רק על המצב הקומפקטי.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -939,8 +947,8 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-      "message": "Use a compact version of the dropdown list to select credentials.",
-      "description": "Use compact (legacy) mode help text."
+        "message": "השתמש בגרסה קומפקטית של הרשימה הנפתחת כדי לבחור אישורים.",
+        "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
         "message": "בעת שמירת נתוני־אמנה חדשים, לשמור רק את שם המתחם במקום את מען ה־URL המלא.",
@@ -1089,7 +1097,7 @@
     "optionsColumnAllowIframes": {
         "message": "Allow Cross-Origin iframes",
         "description": "Allow iframes column text."
-  },
+    },
     "optionsColumnDelete": {
         "message": "מחיקה",
         "description": "Site Preferences list column title."
@@ -1339,7 +1347,7 @@
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": "כאשר הגדרה זו מופעלת, בקשה שנכשלה או בוטלה ל- KeePassXC תפעיל את בקשת המפתחות הפנימיים של הדפדפן עצמו. אם מושבת, נדרש חיבור ל- KeePassXC והבקשה שבוטלה תיכשל. ברירת מחדל: מופעלת.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
