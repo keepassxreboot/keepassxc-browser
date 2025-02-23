@@ -10,6 +10,7 @@ const DEFAULT = 'manifest_default.json';
 const BROWSERS = {
     'Firefox': 'manifest_firefox.json',
     'Chromium': 'manifest_chromium.json',
+    'Safari': 'manifest_safari.json'
 };
 
 const getVersion = async () => {

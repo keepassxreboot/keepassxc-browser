@@ -137,7 +137,7 @@ TOTPFieldIcon.prototype.initField = async function(field, segmented) {
 };
 
 TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
-    const className = (isFirefox() ? 'moz' : 'default');
+    const className = (isSafari() ? 'safari' : (isFirefox() ? 'moz' : 'default'));
 
     // Size the icon dynamically, but not greater than 24 or smaller than 14
     const size = Math.max(Math.min(24, field.offsetHeight - 4), 14);

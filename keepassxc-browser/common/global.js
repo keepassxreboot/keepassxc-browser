@@ -34,6 +34,11 @@ const isEdge = function() {
     return navigator.userAgent.indexOf('Edg') !== -1;
 };
 
+const isSafari = function() {
+    return navigator.userAgent.indexOf('Safari') !== -1
+           && (navigator.userAgent.indexOf('Chrome') === -1 || navigator.userAgent.indexOf('Chromium') === -1);
+};
+
 const showNotification = function(message) {
     browser.notifications.create({
         'type': 'basic',

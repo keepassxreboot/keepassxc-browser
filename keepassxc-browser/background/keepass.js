@@ -16,6 +16,7 @@ keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.databaseHash = '';
 keepass.previousDatabaseHash = '';
 keepass.reconnectLoop = null;
+keepass.isSafari = isSafari();
 
 const kpActions = {
     SET_LOGIN: 'set-login',
@@ -340,6 +341,7 @@ keepass.getDatabaseHash = async function(tab, args = []) {
         if (response.message && response.nonce) {
             const res = keepassClient.decrypt(response.message, response.nonce);
             if (!res) {
+                console.log(response)
                 keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
                 return '';
             }
