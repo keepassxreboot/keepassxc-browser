@@ -74,6 +74,11 @@ PasswordIcon.prototype.createIcon = function(field) {
             return;
         }
 
+        if (e.shiftKey) {
+            icon.style.display = 'none';
+            return;
+        }
+
         e.stopPropagation();
         kpxcPasswordGenerator.showPasswordGenerator(field);
     });

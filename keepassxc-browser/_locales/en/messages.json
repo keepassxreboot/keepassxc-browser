@@ -906,6 +906,10 @@
         "message": "Adds an icon to input fields that are recognized as OTP/2FA.",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "You can also hide icons manually when needed with shift+click.",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser will immediately retrieve credentials when a tab is activated.",
         "description": "Auto-Retrive Credentials option help text."
