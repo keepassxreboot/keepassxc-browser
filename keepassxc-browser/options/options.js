@@ -613,7 +613,7 @@ options.initSitePreferences = function() {
             return;
         }
 
-        let value = manualUrl.value.toLowerCase();
+        let value = manualUrl.value;
 
         // Fills the last / char if needed. This ensures the compatibility with Match Patterns
         if (slashNeededForUrl(value)) {
