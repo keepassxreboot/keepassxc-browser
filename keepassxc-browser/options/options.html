@@ -742,45 +742,107 @@
                     <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
                   </div>
 
-                  <div class="table-responsive">
-                    <table class="table table-sm table-striped table-bordered">
+                  <div class="table-responsive mt-3">
+                    <ul id="sitePreferencesTable" class="list-group list-group-flush">
                       <caption data-i18n="optionsSitePreferencesTableCaption"></caption>
-                      <thead>
-                        <tr>
-                          <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnIgnore"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnImprovedInputFieldDetection"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnAllowIframes"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="empty">
-                          <td colspan="5"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
-                        </tr>
-                        <tr class="clone d-none">
-                          <td class="text-nowrap"></td>
-                          <td>
-                            <select class="form-select form-select-sm" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
-                              <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
-                              <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
-                              <option value="ignoreAutoSubmit" data-i18n="optionsSelectionAutoSubmit"></option>
-                              <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
-                            </select>
-                          </td>
-                          <td><input class="form-check-input" type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"></td>
-                          <td><input class="form-check-input" type="checkbox" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection"></td>
-                          <td><input class="form-check-input" type="checkbox" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes"></td>
-                          <td class="text-nowrap">
-                            <button class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeSitePreferencesButtonTitle">
-                              <i class="fa fa-remove" aria-hidden="true"></i>
-                              <span data-i18n="optionsButtonRemove"></span>
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+
+                      <li class="empty list-group-item">
+                        <span data-i18n="optionsSitePreferencesNotFound"></span>
+                      </li>
+
+                      <!-- Template row -->
+                      <li class="clone d-none list-group-item">
+                        <details>
+                          <summary>
+                            <div class="row justify-content-between">
+                              <!-- Text field for the URL -->
+                              <div class="col-auto pe-0" style="word-break: break-all;"></div>
+
+                              <!-- Delete button -->
+                              <div class="col-auto" style="margin-left: auto;">
+                                <button id="deleteButton" class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeSitePreferencesButtonTitle">
+                                  <i class="fa fa-remove" aria-hidden="true"></i>
+                                  <span data-i18n="optionsButtonRemove"></span>
+                                </button>
+                              </div>
+                            </div>
+                          </summary>
+
+                          <!-- Site preference settings -->
+                          <div class="container m-3">
+                            <div class="row align-items-start gx-5">
+                              <!-- Ignore settings -->
+                              <div class="col-auto">
+                                <div class="form-group mb-3">
+                                  <label for="ignore" class="form-label" data-i18n="optionsColumnIgnore"></label>
+                                  <select class="form-select" id="ignore" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
+                                      <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
+                                      <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
+                                      <option value="ignoreAutoSubmit" data-i18n="optionsSelectionAutoSubmit"></option>
+                                      <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <!-- Filling credentials -->
+                              <div class="col-auto">
+                                <!-- Username only detection -->
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="usernameOnly" data-i18n="optionsColumnUsernameOnly"></label>
+                                    <input class="form-check-input" type="checkbox" id="usernameOnly" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly">
+                                  </div>
+                                </div>
+
+                                <!-- Improved input field detection -->
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="improvedFieldDetection" data-i18n="optionsColumnImprovedInputFieldDetection"></label>
+                                    <input class="form-check-input" type="checkbox" id="improvedFieldDetection" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection">
+                                  </div>
+                                </div>
+
+                                <!-- Allow iFrames -->
+                                <div class="form-group">
+                                  <div class="form-check">
+                                    <label for="allowIframes" data-i18n="optionsColumnAllowIframes"></label>
+                                    <input class="form-check-input" type="checkbox" id="allowIframes" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Filling credentials -->
+                              <div class="col-auto">
+
+                                <!-- Use Auto-Submit -->
+                                <div class="form-group">
+                                  <div class="form-check" data-i18n="[title]optionsAutoSubmitHelpText">
+                                    <label for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
+                                    <input class="form-check-input" type="checkbox" id="autoSubmit" name="autoSubmit" value="false" data-i18n="[title]optionsAutoSubmitHelpText">
+                                  </div>
+                                </div>
+
+                                <!-- Automatically fill single-credential entries -->
+                                <div class="form-group">
+                                  <div class="form-check" data-i18n="[title]optionsAutoFillSingleEntryHelpText">
+                                    <label for="autoFillSingleEntry" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
+                                    <input class="form-check-input" type="checkbox" id="autoFillSingleEntry" name="autoFillSingleEntry" value="false" data-i18n="[title]optionsAutoFillSingleEntryHelpText">
+                                  </div>
+                                </div>
+
+                                <!-- Automatically fill single-credential TOTP fields -->
+                                <div class="form-group">
+                                  <div class="form-check" data-i18n="[title]optionsAutoFillSingleTotpHelpText">
+                                    <label for="autoFillSingleTotp" data-i18n="optionsCheckboxAutoFillSingleTotp"></label>
+                                    <input class="form-check-input" type="checkbox" id="autoFillSingleTotp" name="autoFillSingleTotp" value="false" data-i18n="[title]optionsAutoFillSingleTotpHelpText">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                    </ul>
                   </div>
 
                   <div id="dialogDeleteSite" class="modal fade" tabindex="-1" role="dialog">

@@ -521,17 +521,17 @@ options.initSitePreferences = function() {
     const removeButtonClicked = function(e) {
         e.preventDefault();
 
-        const closestTr = this.closest('tr');
-        $('#dialogDeleteSite').setAttribute('url', closestTr.getAttribute('url'));
-        $('#dialogDeleteSite').setAttribute('tr-id', closestTr.getAttribute('id'));
-        $('#dialogDeleteSite .modal-body strong').textContent = closestTr.children[0].textContent;
+        const closestLi = this.closest('li');
+        $('#dialogDeleteSite').setAttribute('url', closestLi.getAttribute('url'));
+        $('#dialogDeleteSite').setAttribute('tr-id', closestLi.getAttribute('id'));
+        $('#dialogDeleteSite .modal-body strong').textContent = closestLi.children[0].children[0].children[0].children[0].textContent;
 
         dialogDeleteSiteModal.show();
     };
 
     const checkboxClicked = function() {
-        const closestTr = this.closest('tr');
-        const url = closestTr.getAttribute('url');
+        const closestLi = this.closest('li');
+        const url = closestLi.getAttribute('url');
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
@@ -541,6 +541,12 @@ options.initSitePreferences = function() {
                     site.improvedFieldDetection = this.checked;
                 } else if (this.name === 'allowIframes') {
                     site.allowIframes = this.checked;
+                } else if (this.name === 'autoSubmit') {
+                    site.autoSubmit = this.checked;
+                } else if (this.name === 'autoFillSingleEntry') {
+                    site.autoFillSingleEntry = this.checked;
+                } else if (this.name === 'autoFillSingleTotp') {
+                    site.autoFillSingleTotp = this.checked;
                 }
             }
         }
@@ -549,8 +555,8 @@ options.initSitePreferences = function() {
     };
 
     const selectionChanged = function() {
-        const closestTr = this.closest('tr');
-        const url = closestTr.getAttribute('url');
+        const closestLi = this.closest('li');
+        const url = closestLi.getAttribute('url');
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
@@ -561,22 +567,30 @@ options.initSitePreferences = function() {
         options.saveSettings();
     };
 
-    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes) {
+    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes, autoSubmit, autoFillSingleEntry, autoFillSingleTotp) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
         row.setAttribute('id', 'tr-scf' + newIndex);
-        row.children[0].textContent = url;
-        row.children[1].children[0].value = ignore;
-        row.children[1].children[0].addEventListener('change', selectionChanged);
-        row.children[2].children['usernameOnly'].checked = usernameOnly;
-        row.children[2].children['usernameOnly'].addEventListener('change', checkboxClicked);
-        row.children[3].children['improvedFieldDetection'].checked = improvedFieldDetection;
-        row.children[3].children['improvedFieldDetection'].addEventListener('change', checkboxClicked);
-        row.children[4].children['allowIframes'].checked = allowIframes;
-        row.children[4].children['allowIframes'].addEventListener('change', checkboxClicked);
-        row.children[5].addEventListener('click', removeButtonClicked);
 
-        $('#tab-site-preferences table tbody').append(row);
+        const details = row.children[0];
+        details.children[0].children[0].children[0].textContent = url;
+        details.querySelector('#ignore').value = ignore;
+        details.querySelector('#ignore').addEventListener('change', selectionChanged);
+        details.querySelector('#usernameOnly').checked = usernameOnly;
+        details.querySelector('#usernameOnly').addEventListener('change', checkboxClicked);
+        details.querySelector('#improvedFieldDetection').checked = improvedFieldDetection;
+        details.querySelector('#improvedFieldDetection').addEventListener('change', checkboxClicked);
+        details.querySelector('#allowIframes').checked = allowIframes;
+        details.querySelector('#allowIframes').addEventListener('change', checkboxClicked);
+        details.querySelector('#autoSubmit').checked = autoSubmit;
+        details.querySelector('#autoSubmit').addEventListener('change', checkboxClicked);
+        details.querySelector('#autoFillSingleEntry').checked = autoFillSingleEntry;
+        details.querySelector('#autoFillSingleEntry').addEventListener('change', checkboxClicked);
+        details.querySelector('#autoFillSingleTotp').checked = autoFillSingleTotp;
+        details.querySelector('#autoFillSingleTotp').addEventListener('change', checkboxClicked);
+        details.querySelector('#deleteButton').addEventListener('click', removeButtonClicked);
+
+        $('#tab-site-preferences #sitePreferencesTable').append(row);
     };
 
     $('#dialogDeleteSite .modal-footer button.yes').addEventListener('click', function(e) {
@@ -631,11 +645,13 @@ options.initSitePreferences = function() {
         }
 
         const newIndex = options.settings['sitePreferences'].length + 1;
-        const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
+        const rowClone = $('#tab-site-preferences #sitePreferencesTable li.clone').cloneNode(true);
         rowClone.classList.remove('clone', 'd-none');
 
-        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false, false);
-        $('#tab-site-preferences table tbody tr.empty').hide();
+
+        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false, false, false, false, false);
+        $('#tab-site-preferences #sitePreferencesTable li.empty').hide();
+
 
         options.settings['sitePreferences'].push({
             url: value,
@@ -648,7 +664,7 @@ options.initSitePreferences = function() {
         manualUrl.value = '';
     });
 
-    const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
+    const rowClone = $('#tab-site-preferences ul li.clone').cloneNode(true);
     rowClone.classList.remove('clone', 'd-none');
     let counter = 1;
     if (options.settings['sitePreferences']) {
@@ -661,9 +677,16 @@ options.initSitePreferences = function() {
                 site.usernameOnly,
                 site.improvedFieldDetection,
                 site.allowIframes,
+                site.autoSubmit,
+                site.autoFillSingleEntry,
+                site.autoFillSingleTotp,
             );
             ++counter;
         }
+    }
+
+    if (counter > 1) {
+      $('#tab-site-preferences #sitePreferencesTable li.empty').hide();
     }
 };
 

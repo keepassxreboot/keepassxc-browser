@@ -22,6 +22,7 @@ kpxc.detectedFields = 0;
 kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
 kpxc.settings = {};
+kpxc.preferencesForPage = null;
 kpxc.singleInputEnabledForPage = false;
 kpxc.submitUrl = null;
 kpxc.url = null;
@@ -502,9 +503,11 @@ kpxc.prepareCredentials = async function() {
         return;
     }
 
-    if (kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) {
+    if (kpxc.credentials.length === 1) {
+      if (kpxc.preferencesForPage?.autoFillSingleEntry || kpxc.settings.autoFillSingleEntry) {
         kpxcFill.fillFromAutofill();
         return;
+      }
     }
 
     kpxc.initLoginPopup();
@@ -521,6 +524,27 @@ kpxc.prepareCredentials = async function() {
         }
     }
 };
+
+kpxc.retrieveSitePreference = function() {
+  // Check for autofill site preferences
+  for (const site of kpxc.settings.sitePreferences) {
+      let currentLocation;
+      try {
+          currentLocation = window.top.location.href;
+      } catch (err) {
+          // Cross-domain security error inspecting window.top.location.href.
+          // This catches an error when an iframe is being accessed from another (sub)domain
+          // -> use the iframe URL instead.
+          currentLocation = window.self.location.href;
+      }
+
+      if (siteMatch(site.url, currentLocation) || site.url === currentLocation) {
+        return site;
+      }
+  }
+
+  return null;
+}
 
 /**
  * Gets the credential list and shows the update banner
@@ -888,6 +912,7 @@ const initContentScript = async function() {
         }
 
         kpxc.settings = settings;
+        kpxc.preferencesForPage = kpxc.retrieveSitePreference();
 
         if (await kpxc.siteIgnored()) {
             logDebug('This site is ignored in Site Preferences.');
