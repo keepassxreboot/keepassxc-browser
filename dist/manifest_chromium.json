@@ -33,7 +33,7 @@
     "background": {
         "service_worker": "background/background_service.js"
     },
-   "content_scripts": [
+    "content_scripts": [
         {
             "matches": [
                 "<all_urls>"
@@ -129,30 +129,32 @@
             "description": "__MSG_popupReloadButton__"
         }
     },
-    "web_accessible_resources": [{
-        "resources": [
-            "icons/disconnected.svg",
-            "icons/help.svg",
-            "icons/keepassxc.svg",
-            "icons/key.svg",
-            "icons/locked.svg",
-            "icons/otp.svg",
-            "css/autocomplete.css",
-            "css/banner.css",
-            "css/button.css",
-            "css/colors.css",
-            "css/define.css",
-            "css/notification.css",
-            "css/pwgen.css",
-            "css/username.css",
-            "css/totp.css",
-            "content/passkeys.js"
-        ],
-        "matches": [
-            "https://*/*",
-            "http://*/*"
-        ]
-    }],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "icons/disconnected.svg",
+                "icons/help.svg",
+                "icons/keepassxc.svg",
+                "icons/key.svg",
+                "icons/locked.svg",
+                "icons/otp.svg",
+                "css/autocomplete.css",
+                "css/banner.css",
+                "css/button.css",
+                "css/colors.css",
+                "css/define.css",
+                "css/notification.css",
+                "css/pwgen.css",
+                "css/username.css",
+                "css/totp.css",
+                "content/passkeys.js"
+            ],
+            "matches": [
+                "https://*/*",
+                "http://*/*"
+            ]
+        }
+    ],
     "permissions": [
         "activeTab",
         "clipboardWrite",
@@ -177,7 +179,7 @@
         "http://*/*"
     ],
     "storage": {
-      "managed_schema": "managed_storage.json"
+        "managed_schema": "managed_storage.json"
     },
     "default_locale": "en"
 }

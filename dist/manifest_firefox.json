@@ -183,7 +183,7 @@
         }
     },
     "storage": {
-      "managed_schema": "managed_storage.json"
+        "managed_schema": "managed_storage.json"
     },
     "default_locale": "en"
 }
