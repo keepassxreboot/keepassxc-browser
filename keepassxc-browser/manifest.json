@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "KeePassXC-Browser",
     "version": "1.9.7",
     "version_name": "1.9.7",
@@ -13,7 +13,7 @@
         "96": "icons/keepassxc_96x96.png",
         "128": "icons/keepassxc_128x128.png"
     },
-    "browser_action": {
+    "action": {
         "default_icon": {
             "16": "icons/keepassxc_16x16.png",
             "18": "icons/keepassxc_18x18.png",
@@ -31,21 +31,7 @@
         "open_in_tab": true
     },
     "background": {
-        "scripts": [
-            "common/browser-polyfill.min.js",
-            "common/global.js",
-            "common/sites.js",
-            "background/nacl.min.js",
-            "background/nacl-util.min.js",
-            "background/client.js",
-            "background/keepass.js",
-            "background/httpauth.js",
-            "background/offscreen.js",
-            "background/browserAction.js",
-            "background/page.js",
-            "background/event.js",
-            "background/init.js"
-        ]
+        "service_worker": "background/background_service.js"
     },
     "content_scripts": [
         {
@@ -106,8 +92,8 @@
         "fill_password": {
             "description": "__MSG_contextMenuFillPassword__",
             "suggested_key": {
-                "default": "Alt+Shift+I",
-                "mac": "MacCtrl+Shift+I"
+                "default": "Alt+Shift+P",
+                "mac": "MacCtrl+Shift+P"
             }
         },
         "fill_totp": {
@@ -144,48 +130,56 @@
         }
     },
     "web_accessible_resources": [
-        "icons/disconnected.svg",
-        "icons/help.svg",
-        "icons/keepassxc.svg",
-        "icons/key.svg",
-        "icons/locked.svg",
-        "icons/otp.svg",
-        "css/autocomplete.css",
-        "css/banner.css",
-        "css/button.css",
-        "css/colors.css",
-        "css/define.css",
-        "css/notification.css",
-        "css/pwgen.css",
-        "css/username.css",
-        "css/totp.css",
-        "content/passkeys.js"
+        {
+            "resources": [
+                "icons/disconnected.svg",
+                "icons/help.svg",
+                "icons/keepassxc.svg",
+                "icons/key.svg",
+                "icons/locked.svg",
+                "icons/otp.svg",
+                "css/autocomplete.css",
+                "css/banner.css",
+                "css/button.css",
+                "css/colors.css",
+                "css/define.css",
+                "css/notification.css",
+                "css/pwgen.css",
+                "css/username.css",
+                "css/totp.css",
+                "content/passkeys.js"
+            ],
+            "matches": [
+                "https://*/*",
+                "http://*/*"
+            ]
+        }
     ],
     "permissions": [
-        "<all_urls>",
         "activeTab",
         "clipboardWrite",
         "contextMenus",
         "cookies",
         "nativeMessaging",
         "notifications",
+        "offscreen",
         "storage",
         "tabs",
         "webNavigation",
         "webRequest",
-        "webRequestBlocking",
-        "https://*/*",
-        "http://*/*",
-        "https://api.github.com/"
+        "webRequestAuthProvider",
+        "webRequestBlocking"
     ],
-    "applications": {
-        "gecko": {
-            "id": "keepassxc-browser@keepassxc.org",
-            "strict_min_version": "96.0"
-        }
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'"
     },
+    "host_permissions": [
+        "<all_urls>",
+        "https://*/*",
+        "http://*/*"
+    ],
     "storage": {
-      "managed_schema": "managed_storage.json"
+        "managed_schema": "managed_storage.json"
     },
     "default_locale": "en"
 }
