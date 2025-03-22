@@ -91,13 +91,15 @@ async function addNewCredential() {
         return [];
     }
 
+    const password = $('input#add-credentials-password')?.value;
     browser.tabs.sendMessage(tab?.id, {
         action: 'add_new_credential', args: {
             username: $('input#add-credentials-username')?.value,
-            password: $('input#add-credentials-password')?.value,
+            password: password,
             group: $('input#add-credentials-group')?.value,
             title: $('input#add-credentials-title')?.value,
             url: $('input#add-credentials-url')?.value,
+            generatePassword: !password || password?.length === 0
         }
     });
 }

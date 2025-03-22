@@ -176,8 +176,14 @@ page.addNewCredential = async function(tab, args) {
     };
 
     const saveToDefaultGroup = async function(creds) {
-        const args = [ creds.username, creds.password, creds.url, creds.group ];
-        const res = await keepass.addCredentials(tab, args);
+        const res = await keepass.addCredentials(tab, [
+            creds.username,
+            creds.password,
+            creds.url,
+            creds.group,
+            undefined,
+            creds?.generatePassword
+        ]);
         return res;
     };
 
@@ -206,6 +212,7 @@ page.addNewCredential = async function(tab, args) {
                 args.url,
                 newGroup.name,
                 newGroup.uuid,
+                args?.generatePassword
             ]);
             return res;
         }
@@ -219,6 +226,7 @@ page.addNewCredential = async function(tab, args) {
         args.url,
         groupName,
         groupUUID,
+        args?.generatePassword
     ]);
     return res;
 };
