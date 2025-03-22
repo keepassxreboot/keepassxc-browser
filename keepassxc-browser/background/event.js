@@ -27,11 +27,12 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
     const errorMessage = page.tabs[tab.id]?.errorMessage ?? undefined;
     const usernameFieldDetected = page.tabs[tab.id]?.usernameFieldDetected ?? false;
     const iframeDetected = page.tabs[tab.id]?.iframeDetected ?? false;
+    const compareResult = keepass.compareMultipleVersions([ '2.7.11' ], keepass.currentKeePassXC);
 
     return {
         associated: keepass.isAssociated(),
-
         configured: configured,
+        compareResult: compareResult,
         databaseClosed: keepass.isDatabaseClosed,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         error: errorMessage,

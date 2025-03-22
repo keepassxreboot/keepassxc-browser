@@ -10,7 +10,7 @@ HTMLElement.prototype.hide = function() {
     this.style.display = 'none';
 };
 
-async function statusResponse(r) {
+async function statusResponse(response) {
     $('#initial-state').hide();
     $('#error-encountered').hide();
     $('#need-reconfigure').hide();
@@ -22,44 +22,47 @@ async function statusResponse(r) {
     $('#database-not-opened').hide();
     $('#add-credentials-button').hide();
 
-    if (!r.keePassXCAvailable) {
-        $('#error-message').textContent = r.error;
+    if (!response?.keePassXCAvailable) {
+        $('#error-message').textContent = response?.error;
         $('#error-encountered').show();
 
-        if (r.showGettingStartedGuideAlert) {
+        if (response?.showGettingStartedGuideAlert) {
             $('#getting-started-guide').show();
         }
 
-        if (r.showTroubleshootingGuideAlert && reloadCount >= 2) {
+        if (response?.showTroubleshootingGuideAlert && reloadCount >= 2) {
             $('#troubleshooting-guide').show();
         } else {
             $('#troubleshooting-guide').hide();
         }
-    } else if (r.keePassXCAvailable && r.databaseClosed) {
-        $('#database-error-message').textContent = r.error;
+    } else if (response?.keePassXCAvailable && response?.databaseClosed) {
+        $('#database-error-message').textContent = response?.error;
         $('#database-not-opened').show();
-    } else if (!r.configured) {
+    } else if (!response?.configured) {
         $('#not-configured').show();
-    } else if (r.encryptionKeyUnrecognized) {
+    } else if (response?.encryptionKeyUnrecognized) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').textContent = r.error;
-    } else if (!r.associated) {
+        $('#need-reconfigure-message').textContent = response?.error;
+    } else if (!response?.associated) {
         $('#need-reconfigure').show();
-        $('#need-reconfigure-message').textContent = r.error;
-    } else if (r.error) {
+        $('#need-reconfigure-message').textContent = response?.error;
+    } else if (response?.error) {
         $('#error-encountered').show();
-        $('#error-message').textContent = r.error;
+        $('#error-message').textContent = response?.error;
     } else {
         $('#configured-and-associated').show();
-        $('#associated-identifier').textContent = r.identifier;
+        $('#associated-identifier').textContent = response?.identifier;
         $('#lock-database-button').show();
-        $('#add-credentials-button').show();
 
-        if (r.usernameFieldDetected) {
+        if (response?.compareResult['2.7.11']) {
+            $('#add-credentials-button').show();
+        }
+
+        if (response?.usernameFieldDetected) {
             $('#username-field-detected').show();
         }
 
-        if (r.iframeDetected) {
+        if (response?.iframeDetected) {
             $('#iframe-detected').show();
         }
 

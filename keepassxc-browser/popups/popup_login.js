@@ -1,5 +1,18 @@
 'use strict';
 
+async function hideAddCredentialsButton() {
+    const keePassVersions = await browser.runtime.sendMessage({
+        action: 'get_keepassxc_versions'
+    });
+    const versionResults = await browser.runtime.sendMessage({
+        action: 'compare_versions',
+        args: [ [ '2.7.11' ], keePassVersions.current ],
+    });
+    if (!versionResults['2.7.11']) {
+        $('#add-credentials-button').hide();
+    }
+}
+
 (async () => {
     await initColorTheme();
 
@@ -9,6 +22,8 @@
     if (!tab) {
         return [];
     }
+
+    await hideAddCredentialsButton();
 
     const logins = await getLoginData();
     const ll = document.getElementById('login-list');

@@ -35,6 +35,7 @@ async function initSettings() {
         $('#add-credentials-url').value = tab?.url;
         if ($('#add-credentials')?.style?.display === 'none') {
             $('#add-credentials').show();
+            $('input#add-credentials-username')?.focus();
         } else {
             $('#add-credentials').hide();
         }
