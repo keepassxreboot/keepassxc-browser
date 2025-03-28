@@ -264,6 +264,7 @@ kpxcEvent.messageHandlers = {
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
     'is_iframe_allowed': page.isIframeAllowed,
+    'is_site_ignored': page.isSiteIgnored,
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,
