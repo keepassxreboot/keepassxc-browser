@@ -1098,6 +1098,10 @@
         "message": "Ignore",
         "description": "Site Preferences list column title."
     },
+    "optionsColumnPreferredUser": {
+        "message": "Preferred username",
+        "description": "Preferred username if there are multiple matches."
+    },
     "optionsColumnUsernameOnly": {
         "message": "Username-only Detection",
         "description": "Site Preferences list column title."

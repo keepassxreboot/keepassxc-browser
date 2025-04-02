@@ -79,6 +79,21 @@ kpxcFill.fillFromCombination = async function(elem, passOnly) {
 
 // Fill requested by Auto-Fill
 kpxcFill.fillFromAutofill = async function() {
+
+    // Fill preferred user if available
+    if (kpxc.credentials.length > 1) {
+        const sitePreference = kpxc.settings.sitePreferences.find(preference => preference.url === document.location.href);
+        if(sitePreference && sitePreference.preferredUser) {
+            const credential = kpxc.credentials.find(credential => credential.login === sitePreference.preferredUser);
+            if(credential) {
+                await sendMessage('page_set_login_id', credential.uuid);
+                const index = kpxc.combinations.length - 1;
+                kpxcFill.fillInCredentials(kpxc.combinations[index], credential.login, credential.uuid);
+                return;
+            }
+        }
+    }
+
     if (kpxc.credentials.length !== 1 || kpxc.combinations.length === 0) {
         logDebug('Error: Credential list is empty or contains more than one entry.');
         return;

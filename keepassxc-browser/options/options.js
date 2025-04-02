@@ -589,7 +589,9 @@ options.initSitePreferences = function() {
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
-                if (this.name === 'usernameOnly') {
+                if (this.name === 'preferredUser') {
+                    site.preferredUser = this.value;
+                } else if (this.name === 'usernameOnly') {
                     site.usernameOnly = this.checked;
                 } else if (this.name === 'improvedFieldDetection') {
                     site.improvedFieldDetection = this.checked;
@@ -615,7 +617,7 @@ options.initSitePreferences = function() {
         options.saveSettings();
     };
 
-    const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes) {
+    const addNewRow = function(rowClone, newIndex, url, ignore, preferredUser, usernameOnly, improvedFieldDetection, allowIframes) {
         const row = rowClone.cloneNode(true);
         row.setAttribute('url', url);
         row.setAttribute('id', 'tr-scf' + newIndex);
@@ -650,13 +652,15 @@ options.initSitePreferences = function() {
         );
         row.children[1].children[0].value = ignore;
         row.children[1].children[0].addEventListener('change', selectionChanged);
-        row.children[2].children['usernameOnly'].checked = usernameOnly;
-        row.children[2].children['usernameOnly'].addEventListener('change', checkboxClicked);
-        row.children[3].children['improvedFieldDetection'].checked = improvedFieldDetection;
-        row.children[3].children['improvedFieldDetection'].addEventListener('change', checkboxClicked);
-        row.children[4].children['allowIframes'].checked = allowIframes;
-        row.children[4].children['allowIframes'].addEventListener('change', checkboxClicked);
-        row.children[5].addEventListener('click', removeButtonClicked);
+        row.children[2].children['preferredUser'].value = preferredUser;
+        row.children[2].children['preferredUser'].addEventListener('input', checkboxClicked);
+        row.children[3].children['usernameOnly'].checked = usernameOnly;
+        row.children[3].children['usernameOnly'].addEventListener('change', checkboxClicked);
+        row.children[4].children['improvedFieldDetection'].checked = improvedFieldDetection;
+        row.children[4].children['improvedFieldDetection'].addEventListener('change', checkboxClicked);
+        row.children[5].children['allowIframes'].checked = allowIframes;
+        row.children[5].children['allowIframes'].addEventListener('change', checkboxClicked);
+        row.children[6].addEventListener('click', removeButtonClicked);
 
         $('#tab-site-preferences table tbody').append(row);
     };
@@ -716,7 +720,7 @@ options.initSitePreferences = function() {
         const rowClone = $('#tab-site-preferences table tr.clone').cloneNode(true);
         rowClone.classList.remove('clone', 'd-none');
 
-        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, false, false, false);
+        addNewRow(rowClone, newIndex, value, IGNORE_NOTHING, undefined, false, false, false);
         $('#tab-site-preferences table tbody tr.empty').hide();
 
         options.settings['sitePreferences'].push({
@@ -740,6 +744,7 @@ options.initSitePreferences = function() {
                 counter,
                 site.url,
                 site.ignore,
+                site.preferredUser,
                 site.usernameOnly,
                 site.improvedFieldDetection,
                 site.allowIframes,
