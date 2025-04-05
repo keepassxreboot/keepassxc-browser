@@ -39,7 +39,6 @@
                 "<all_urls>"
             ],
             "exclude_matches": [
-                "*://*/*.xml*",
                 "file:///*.xml*"
             ],
             "js": [
