@@ -98,7 +98,17 @@ options.initGeneralSettings = async function() {
             $('#defaultGroupButtonReset').disabled = true;
         }
 
+        // Autofill HTTP Auth dialogs is unsupported in Safari Web Extensions.
+        if (checkbox.name === 'autoFillAndSend' && isSafari()) {
+            checkbox.disabled = true;
+        }
+
         checkbox.addEventListener('click', changeCheckboxValue);
+    }
+
+    // Hide the Safari-only alert on non-Safari browsers
+    if (!isSafari()) {
+        $('.safari-only').hide()
     }
 
     $('#tab-general-settings input[type=radio]#checkUpdateThreeDays').value = CHECK_UPDATE_THREE_DAYS;
