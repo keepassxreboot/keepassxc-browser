@@ -109,6 +109,8 @@ options.initGeneralSettings = async function() {
     // Hide the Safari-only alert on non-Safari browsers
     if (!isSafari()) {
         $('.safari-only').hide()
+    } else {
+        $('.hide-safari').hide()
     }
 
     $('#tab-general-settings input[type=radio]#checkUpdateThreeDays').value = CHECK_UPDATE_THREE_DAYS;
