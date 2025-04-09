@@ -96,6 +96,11 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
             return;
         }
 
+        if (e.shiftKey) {
+            icon.style.display = 'none';
+            return;
+        }
+
         e.stopPropagation();
         iconClicked(field, icon);
     });

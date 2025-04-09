@@ -119,6 +119,11 @@
                     </div>
                   </div>
 
+                  <div class="alert alert-secondary mt-3 col-lg-9" role="alert" id="iconAlert">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <span data-i18n="optionsHideIconsAlertText"></span>
+                  </div>
+
                   <!-- Show notifications -->
                   <div class="form-group">
                     <div class="form-check">
@@ -760,7 +765,23 @@
                           <td colspan="5"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
                         </tr>
                         <tr class="clone d-none">
-                          <td class="text-nowrap"></td>
+                          <td class="text-nowrap">
+                            <div class="input-group was-validated" id="manualUrlGroup">
+                              <input class="form-control form-control-sm site-preferences-input" type="url" id="editUrl" aria-label="Edit URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required disabled>
+                              <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesEditUrl" data-i18n="[title]editSitePreferenceButtonTitle">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <span data-i18n="optionsButtonEdit"></span>
+                              </button>
+                              <button class="btn btn-sm btn-danger" type="button" id="sitePreferencesCancelEdit" data-i18n="[title]editSitePreferenceButtonTitle" style="display: none;">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <span data-i18n="optionsButtonCancel"></span>
+                              </button>
+                              <button class="btn btn-sm btn-primary" type="button" id="sitePreferencesSaveEdit" data-i18n="[title]editSitePreferenceButtonTitle" style="display: none;">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <span data-i18n="optionsButtonSave"></span>
+                              </button>
+                            </div>
+                          </td>
                           <td>
                             <select class="form-select form-select-sm" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
                               <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>

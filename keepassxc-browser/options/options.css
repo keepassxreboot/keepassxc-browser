@@ -51,7 +51,7 @@ input:invalid {
     border: 2px solid red;
 }
 
-input[disabled] {
+input:disabled {
     opacity: .3!important;
 }
 
@@ -110,6 +110,18 @@ tbody {
 
 .table-striped > tbody > tr:nth-of-type(odd) .form-check-input:checked {
     background-color: var(--kpxc-checkbox-background-color) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) input[type="url"] {
+    --bs-table-bg-type: var(--kpxc-card-background-color) !important;
+    background-color: var(--kpxc-card-background-color) !important;
+    color: var(--kpxc-text-color) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) input[type="url"] {
+    --bs-table-bg-type: var(--kpxc-table-odd-color) !important;
+    background-color: var(--kpxc-table-odd-color) !important;
+    color: var(--kpxc-text-color) !important;
 }
 
 .table tbody td {
@@ -211,6 +223,29 @@ table td:last-of-type {
 .modal-content {
     background: var(--kpxc-background-color);
     color: var(--kpxc-text-color);
+}
+
+.site-preferences-input {
+    border: 0;
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+.site-preferences-input:disabled {
+    opacity: 1 !important;
+    pointer-events: none;
+}
+
+button#sitePreferencesEditUrl {
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+button#sitePreferencesCancelEdit {
+    border-bottom-left-radius: 4px !important;
+    border-top-left-radius: 4px !important;
 }
 
 @media (min-width: 768px) {

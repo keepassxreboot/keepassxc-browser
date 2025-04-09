@@ -13,6 +13,8 @@
   },
   "scripts": {
     "build": "node build.js",
+    "debug:chromium": "cp dist/manifest_chromium.json keepassxc-browser/manifest.json",
+    "debug:firefox": "cp dist/manifest_firefox.json keepassxc-browser/manifest.json",
     "lint": "npx eslint keepassxc-browser/**/*.js",
     "tests": "npx playwright test"
   },

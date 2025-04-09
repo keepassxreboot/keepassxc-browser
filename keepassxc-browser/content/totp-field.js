@@ -164,6 +164,11 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
             return;
         }
 
+        if (e.shiftKey) {
+            icon.style.display = 'none';
+            return;
+        }
+
         e.stopPropagation();
         await kpxc.receiveCredentialsIfNecessary();
         kpxcFill.fillFromTOTP(field);
