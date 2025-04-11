@@ -207,7 +207,7 @@ options.initGeneralSettings = async function() {
     $('#configureCommands').addEventListener('click', function() {
         const scheme = isEdge() ? 'edge' : 'chrome';
         browser.tabs.create({
-            url: (isFirefox() || isSafari()) ? browser.runtime.getURL('options/shortcuts.html') : `${scheme}://extensions/shortcuts`
+            url: isFirefox() ? browser.runtime.getURL('options/shortcuts.html') : `${scheme}://extensions/shortcuts`
         });
     });
 

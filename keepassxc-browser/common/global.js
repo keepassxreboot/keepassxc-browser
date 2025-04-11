@@ -35,8 +35,7 @@ const isEdge = function() {
 };
 
 const isSafari = function() {
-    return navigator.userAgent.indexOf('Safari') !== -1
-           && (navigator.userAgent.indexOf('Chrome') === -1 || navigator.userAgent.indexOf('Chromium') === -1);
+    return browser.runtime.getURL('').startsWith("safari")
 };
 
 const showNotification = function(message) {
