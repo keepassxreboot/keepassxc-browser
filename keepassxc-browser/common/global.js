@@ -38,7 +38,7 @@ let cachedIsSafari = null;
 
 function isSafari() {
     if (cachedIsSafari === null) {
-        cachedIsSafari = browser.runtime.getURL('').startsWith("safari");
+        cachedIsSafari = browser.runtime.getURL('').startsWith('safari');
     }
     return cachedIsSafari;
 }

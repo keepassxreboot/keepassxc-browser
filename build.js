@@ -73,7 +73,7 @@ const createZipFile = async (fileName, path) => {
             let outputPath = params[params.indexOf('-o') + 1]
 
             if (!outputPath) {
-                console.error("No ouput path specified!");
+                console.error('No ouput path specified!');
                 return;
             }
 

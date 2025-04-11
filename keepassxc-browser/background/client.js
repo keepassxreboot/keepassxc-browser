@@ -180,7 +180,7 @@ keepassClient.sendNativeMessage = async function(request, enableTimeout = false,
 };
 
 keepassClient.handleNativeMessage = async function(response) {
-    if (response?.name === "proxy_message") return // Ignoring KeePassXC App Broadcast Message
+    if (response?.name === 'proxy_message') return // Ignoring KeePassXC App Broadcast Message
     
     // Parse through the message buffer to find the corresponding Promise.
     await navigator.locks.request('messageBuffer', async (lock) => {
