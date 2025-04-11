@@ -8,7 +8,7 @@ httpAuth.pendingCallbacks = [];
 httpAuth.init = function() {
     if (isSafari()) {
         // browser.webRequest is not supported in Safari Web Extensions.
-        logError('httpAuth.init error: Autofill HTTP Auth dialogs is unsupported in Safari');
+        logError('httpAuth.init error: Autofill HTTP Auth dialogs is not supported in Safari');
         return;
     }
 

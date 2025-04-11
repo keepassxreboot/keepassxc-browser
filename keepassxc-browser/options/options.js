@@ -98,19 +98,12 @@ options.initGeneralSettings = async function() {
             $('#defaultGroupButtonReset').disabled = true;
         }
 
-        // Autofill HTTP Auth dialogs is unsupported in Safari Web Extensions.
+        // Autofill HTTP Auth dialogs is not supported in Safari Web Extensions.
         if (checkbox.name === 'autoFillAndSend' && isSafari()) {
             checkbox.disabled = true;
         }
 
         checkbox.addEventListener('click', changeCheckboxValue);
-    }
-
-    // Hide the Safari-only alert on non-Safari browsers
-    if (!isSafari()) {
-        $('.safari-only').hide()
-    } else {
-        $('.hide-safari').hide()
     }
 
     $('#tab-general-settings input[type=radio]#checkUpdateThreeDays').value = CHECK_UPDATE_THREE_DAYS;
@@ -323,6 +316,9 @@ options.initGeneralSettings = async function() {
             siteListing.append(document.createElement('br'));
         }
     }
+
+    // Show and hide Safari specific features
+    options.showHideSafariSelectors()
 };
 
 // Also hides/disables any options with KeePassXC versions that are too old
@@ -798,6 +794,12 @@ options.createWarning = function(elem, text) {
         elem.parentElement.removeChild(banner);
     }, 5000);
 };
+
+options.showHideSafariSelectors = function() {
+    let selector = isSafari() ? '.hide-safari' : '.show-safari'
+
+    document.querySelectorAll(selector).forEach((elem) => elem.hide())
+}
 
 const getBrowserId = function() {
     if (navigator.userAgent.indexOf('Firefox') > -1) {
