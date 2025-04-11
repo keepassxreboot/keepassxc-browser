@@ -34,9 +34,14 @@ const isEdge = function() {
     return navigator.userAgent.indexOf('Edg') !== -1;
 };
 
-const isSafari = function() {
-    return browser.runtime.getURL('').startsWith("safari")
-};
+let cachedIsSafari = null;
+
+function isSafari() {
+    if (cachedIsSafari === null) {
+        cachedIsSafari = browser.runtime.getURL('').startsWith("safari");
+    }
+    return cachedIsSafari;
+}
 
 const showNotification = function(message) {
     browser.notifications.create({
