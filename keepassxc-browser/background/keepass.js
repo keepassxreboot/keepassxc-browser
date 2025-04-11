@@ -341,7 +341,6 @@ keepass.getDatabaseHash = async function(tab, args = []) {
         if (response.message && response.nonce) {
             const res = keepassClient.decrypt(response.message, response.nonce);
             if (!res) {
-                console.log(response)
                 keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
                 return '';
             }
