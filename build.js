@@ -55,7 +55,7 @@ const createZipFile = async (fileName, path) => {
     const version = await getVersion();
 
     for (const browser in BROWSERS) {
-        if (params.includes('--safari-web-extension') && browser != 'Safari') {
+        if (params.includes('--safari-web-extension') && browser !== 'Safari') {
             continue;
         }
 
@@ -69,7 +69,7 @@ const createZipFile = async (fileName, path) => {
             await fs.rm(fileName);
         }
 
-        if (params.includes('--safari-web-extension') && browser == 'Safari' && params.includes('-o')) {
+        if (params.includes('--safari-web-extension') && browser === 'Safari' && params.includes('-o')) {
             let outputPath = params[params.indexOf('-o') + 1]
 
             if (!outputPath) {
