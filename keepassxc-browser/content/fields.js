@@ -46,7 +46,11 @@ kpxcFields.getAllCombinations = async function(inputs) {
         }
     }
 
-    if (kpxc.singleInputEnabledForPage && combinations.length === 0 && usernameField) {
+    // Allow single input if autocomplete="username" is present, or Username-Only Detection is enabled for the page
+    const autoComplete = usernameField?.getLowerCaseAttribute('autocomplete');
+    if (combinations.length === 0 && usernameField &&
+        (kpxc.singleInputEnabledForPage || autoComplete?.includes('username') || autoComplete?.includes('email'))
+    ) {
         const combination = {
             username: usernameField,
             password: null,
