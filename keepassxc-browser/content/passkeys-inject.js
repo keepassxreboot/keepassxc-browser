@@ -99,6 +99,11 @@ const initContent = async () => {
         return;
     }
 
+    if (await chrome.runtime.sendMessage({ action: 'is_site_ignored', args: window.self.location.href })) {
+        console.log('This site is ignored in Site Preferences.');
+        return;
+    }
+
     if (settings.passkeys) {
         kpxcPasskeysUtils.debugLogging = settings?.debugLogging;
         kpxcPasskeysUtils.passkeysFallback = settings?.passkeysFallback;

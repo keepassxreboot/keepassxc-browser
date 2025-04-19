@@ -320,6 +320,22 @@ page.fillHttpAuth = async function(tab, credentials) {
     }
 };
 
+page.isSiteIgnored = async function(tab, currentLocation) {
+    if (!page?.settings?.sitePreferences || !currentLocation) {
+        return false;
+    }
+
+    for (const site of page.settings.sitePreferences) {
+        if (siteMatch(site.url, currentLocation) || site.url === currentLocation) {
+            if (site.ignore === IGNORE_FULL) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+};
+
 // Update context menu for attribute filling
 page.updateContextMenu = async function(tab, credentials) {
     // Remove any old attribute items
