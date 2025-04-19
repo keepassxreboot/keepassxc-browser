@@ -7,6 +7,10 @@
         "message": "Dodaj preferencje witryny do tego adresu URL.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Edytuj adres URL dla ustawień witryn.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Zezwala na ramki iframe z różnych źródeł dla bieżącej strony.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "Dodaj",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Edytuj",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Sprawdź aktualizacje",
         "description": "Check for updates button text."
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "Dodaje ikonę do pól wejściowych, które są rozpoznawane jako OTP/2FA.",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "W razie potrzeby możesz także ukrywać ikony ręcznie za pomocą klawisza Shift i kliknięcia.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser natychmiast odbierze dane uwierzytelniające po aktywowaniu karty.",

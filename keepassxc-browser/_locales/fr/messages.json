@@ -7,6 +7,10 @@
         "message": "Ajouter comme préférences des sites pour cette URL.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Edit URL for this Site Preferences.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Autoriser les iframes Cross-Origin pour la page actuelle.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -240,7 +244,7 @@
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Current database is not connected.",
+        "message": "La base de données actuelle n'est pas connectée.",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
@@ -371,7 +375,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "Cliquez sur l'icône KeePassXC-Browser pour afficher plus d'options.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -479,7 +483,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": "KeePassXC-Browser n'a pas été configuré. Cliquez sur le bouton de connexion pour vous associer à KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -487,7 +491,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": "Cliquez sur le bouton de reconnexion pour établir une nouvelle connexion.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -527,7 +531,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": "Veuillez choisir un groupe pour stocker les nouveaux identifiants.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -686,6 +690,10 @@
         "message": "Ajouter",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Edit",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Vérifier les mises à jour",
         "description": "Check for updates button text."
@@ -719,7 +727,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
-        "message": "Default group for saving new passkeys:",
+        "message": "Groupe par défaut pour l'enregistrement des nouveaux codes d'accès :",
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
@@ -767,7 +775,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "Remplir automatiquement les identifiants des entrées pertinentes",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -799,7 +807,7 @@
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
-        "message": "Use compact mode",
+        "message": "Utiliser le mode compact",
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
@@ -835,7 +843,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every three days",
+        "message": " tous les 3 jours",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -906,6 +914,10 @@
         "message": "Ajoute une icône aux champs de saisie reconnus comme A2F/OTP.",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "Vous pouvez également cacher les icônes manuellement lorsque cela est nécessaire en appuyant sur Maj + clic.",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser récupérera automatiquement les identifiants lorsqu'un onglet est sélectionné.",
         "description": "Auto-Retrive Credentials option help text."
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "Remplir automatiquement les identifiants pertinents si un deuxième remplissage est nécessaire.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -935,7 +947,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
+        "message": "Lorsque des identifiants sont renvoyés par différents groupes, le nom du groupe est affiché. N'affecte que le mode compact.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -947,7 +959,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-        "message": "Use a compact version of the dropdown list to select credentials.",
+        "message": "Utilisez une version compacte de la liste déroulante pour sélectionner les identifiants.",
         "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -1051,7 +1063,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": "Voulez-vous vraiment supprimer l'identifiant suivant de la liste de la base de données :$1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
