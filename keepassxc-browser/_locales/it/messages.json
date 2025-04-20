@@ -7,6 +7,10 @@
         "message": "Aggiungi Preferenze del Sito per questo URL.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Edit URL for this Site Preferences.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Permetti iframes Cross-Origin per la pagina corrente.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "Aggiungi",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Edit",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Controlla aggiornamenti",
         "description": "Check for updates button text."
@@ -767,7 +775,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "Compila automaticamente le voci delle credenziali pertinenti",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -906,6 +914,10 @@
         "message": "Aggiungi un'icona ai campi di input riconosciuti come OTP/2FA.",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "You can also hide icons manually when needed with shift+click.",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser recupererà immediatamente le credenziali all'attivazione di una tab.",
         "description": "Auto-Retrive Credentials option help text."
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "Compila automaticamente le credenziali pertinenti se è necessario un secondo riempimento.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {

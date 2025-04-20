@@ -7,6 +7,10 @@
         "message": "Добавете Предпочитания за сайтове за този адрес.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Промяна на адреса на това предпочитане за страница.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Разрешава рамки с ограничение по Cross-Origin за текущата страница.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "Добавяне",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Променяне",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Проверка за обновяване",
         "description": "Check for updates button text."
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "Добавя се пиктограма към полета, които са разпознати като OTP/2FA.",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "Можете при необходимост ръчно да скриете пиктограмите с щракване на мишката с натиснат Shift.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser ще зареди регистрациите веднага щом разделът стане активен.",

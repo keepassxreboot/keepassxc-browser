@@ -7,6 +7,10 @@
         "message": "為此 URL 添加網站設定。",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "編輯此網站設定的 URL。",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "目前頁面允許跨來源 iframe 框架。",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "新增",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "編輯",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "檢查更新",
         "description": "Check for updates button text."
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "在辨識為「一次性密碼 / 雙因素驗證」 (OTP/2FA) 的輸入欄位加入圖示。",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "如果需要，您也可以通過 Shift+點擊 手動隱藏圖示。",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser 將在標籤頁激活時立即獲取憑證。 ",

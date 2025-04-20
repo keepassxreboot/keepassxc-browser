@@ -7,6 +7,10 @@
         "message": "Add Site Preferences for this URL.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Edit URL for this Site Preferences.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Allows Cross-Origin iframes for the current page.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "추가",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Edit",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "업데이트 확인",
         "description": "Check for updates button text."
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "OTP/2FA 필드로 감지된 입력 필드에 아이콘을 추가합니다.",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "You can also hide icons manually when needed with shift+click.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "탭을 활성화할 때 KeePassXC-브라우저에서 자격 증명을 즉시 가져옵니다.",

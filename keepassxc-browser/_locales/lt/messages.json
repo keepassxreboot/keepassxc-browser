@@ -7,6 +7,10 @@
         "message": "Add Site Preferences for this URL.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Edit URL for this Site Preferences.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Allows Cross-Origin iframes for the current page.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "Pridėti",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Edit",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Tikrinti ar yra atnaujinimų",
         "description": "Check for updates button text."
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "Prideda piktogramą prie įvesties laukų, kurie atpažįstami kaip OTP/2FA.",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "You can also hide icons manually when needed with shift+click.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "\"KeePassXC-Browser\" iškart gaus kredencialus, kai bus suaktyvintas skirtukas.",

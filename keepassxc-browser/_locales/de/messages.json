@@ -7,6 +7,10 @@
         "message": "Seiteneinstellungen für diese URL hinzufügen.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "URL für diese Seiteneinstellungen bearbeiten.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Cross-Origin iframes für die aktuelle Seite zulassen.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": " Hinzufügen",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Bearbeiten",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": " Nach Aktualisierungen suchen",
         "description": "Check for updates button text."
@@ -767,7 +775,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "Einträge mit relevanten Anmeldedaten automatisch ausfüllen",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -906,6 +914,10 @@
         "message": "Fügt Eingabefeldern, die als OTP/2FA erkannt werden, ein Symbol hinzu.",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "Sie können die Symbole bei Bedarf auch manuell mit Umschalt+Klick ausblenden.",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser ruft Anmeldedaten sofort ab, wenn ein Tab aktiviert wird.",
         "description": "Auto-Retrive Credentials option help text."
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "Einträge mit relevanten Anmeldedaten automatisch ausfüllen, wenn ein zweites Ausfüllen erforderlich ist.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {

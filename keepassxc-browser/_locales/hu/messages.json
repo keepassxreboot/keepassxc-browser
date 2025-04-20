@@ -7,6 +7,10 @@
         "message": "Oldalbeállítások hozzáadása ehhez az URL-hez.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Edit URL for this Site Preferences.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Cross-Origin iframe-ek engedélyezése az aktív oldal számára.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "Hozzáadás",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Edit",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Frissítések keresése",
         "description": "Check for updates button text."
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "Egy ikont ad hozzá az OTP/2FA mezőként felismert bemeneti mezőkhöz.",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "You can also hide icons manually when needed with shift+click.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "A KeePassXC-böngésző azonnal le fogja kérni a hitelesítési adatokat, amikor egy lapot aktiválnak.",

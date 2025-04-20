@@ -7,8 +7,12 @@
         "message": "הוספת העדפות אתר לכתובת URL זו.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "עריכת URL עבור העדפות אתר זה.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
-        "message": "Allows Cross-Origin iframes for the current page.",
+        "message": "אפשור iframes של מקור־צולב עבור הדף הנוכחי.",
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
@@ -204,15 +208,15 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-        "message": "Effective domain is not a valid domain.",
+        "message": "תחום בפועל אינו תחום תקין.",
         "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-        "message": "Origin and RP ID do not match.",
+        "message": "מזהים של מקור ו־RP אינם תואמים.",
         "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-        "message": "No supported algorithms were provided.",
+        "message": "לא סופקו אלגוריתמים נתמכים.",
         "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
@@ -224,11 +228,11 @@
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "האתגר קצר יותר מהאורך המזערי הנדרש.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "מזהה.משתמש אינו תואם את האורך הנדרש.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
@@ -240,7 +244,7 @@
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Current database is not connected.",
+        "message": "מסד־נתונים נוכחי אינו מחובר.",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
@@ -395,7 +399,7 @@
         "description": "Message shown when no password fields are found."
     },
     "fieldsPasswordFillNotAccepted": {
-        "message": "Filling password to a plain text field is prevented.",
+        "message": "מילוי סיסמה לשדה מלל פשוט נמנע.",
         "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
@@ -439,7 +443,7 @@
         "description": "Button text for adding Username-only option."
     },
     "popupAllowIframeButton": {
-        "message": "Allow Cross-Origin iframes for the site",
+        "message": "אפשור iframes של מקור־צולב עבור האתר.",
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
@@ -479,7 +483,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": "לא נקבעה תצורת דפדפן־KeePassXC. יש ללחוץ על לחצן החיבור כדי לצמד עם KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -503,7 +507,7 @@
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "popupIframeDetected": {
-        "message": "A Cross-Origin iframe was detected. Add the URL to Site Preferences with Allow Cross-Origin iframes option enabled?",
+        "message": "זוהה iframe של מקור־צולב. האם להוסיף את ה־URL להעדפות אתר עם אפשרות 'אפשור iframes של מקור־צולב' מאופשרת?",
         "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
@@ -686,6 +690,10 @@
         "message": "הוספה",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "עריכה",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "בדיקת זמינות עדכונים",
         "description": "Check for updates button text."
@@ -767,7 +775,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "מילוי אוטומטי של רשומות עם נתוני האמנה רלוונטיים.",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -819,7 +827,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials",
+        "message": "אפשור מילוי נתוני האמנה מסוג אימות בסיסי של HTTP",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -906,6 +914,10 @@
         "message": "הוספת סמל לשדות קלט המזוהים כ־OTP/2FA.",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "באפשרותך להסתיר סמלים באופן ידני בעת הצורך באמצעות shift+לחיצה.",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "דפדפן־KeePassXC יאחזר נתוני־אמנה מיד כאשר כרטיסייה תשופעל.",
         "description": "Auto-Retrive Credentials option help text."
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "מילוי אוטומטי של נתוני האמנה רלוונטיים אם נדרש מילוי שני.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -927,7 +939,7 @@
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
-        "message": "Let KeePassXC-Browser automatically fill in TOTP fields if it receives only a single entry.",
+        "message": "אפשר לדפדפן־KeePassXC למלא אוטומטית שדות TOTP אם הוא מקבל רק רשומה בודדת.",
         "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
@@ -943,7 +955,7 @@
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Use a monochrome icon with colored badges in toolbar that adapts to light/dark browser theme.",
+        "message": "שימוש בסמל מונוכרום עם תגים צבעוניים בסרגל כלים שמסתגל לערכת נושא בהירה/כהה של דפדפן.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
@@ -1095,7 +1107,7 @@
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
-        "message": "Allow Cross-Origin iframes",
+        "message": "אפשור iframes של מקור־צולב",
         "description": "Allow iframes column text."
     },
     "optionsColumnDelete": {
@@ -1219,7 +1231,7 @@
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
-        "message": "Allowing Cross-Origin iframes will enable credential retrieval for iframes from another domain. Use at your own risk.",
+        "message": "אפשור iframes של מקור־צולב יאפשר אחזור נתוני האמנה עבור iframes מתחום אחר. השימוש הוא באחריותך.",
         "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
