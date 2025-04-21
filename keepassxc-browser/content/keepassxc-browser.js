@@ -678,7 +678,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 
 // If credentials are not received, request them again
 kpxc.receiveCredentialsIfNecessary = async function() {
-    if (kpxc.credentials.length === 0 && !_called.retrieveCredentials) {
+    if (kpxc.credentials.length === 0) {
         if (!await isIframeAllowed()) {
             return [];
         }
