@@ -229,7 +229,11 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     const [ usernameField, passwordField, passwordInputs ] = kpxcForm.getCredentialFieldsFromForm(form);
-    const usernameValue = await kpxcForm.getUsernameValue(usernameField);
+    
+    // Use the first text field in the form if only username input is missing
+    const usernameValue = await kpxcForm.getUsernameValue(!usernameField && passwordField
+        ? form?.querySelector('input[type=text]')
+        : usernameField);
     await kpxcForm.activateCredentialBanner(usernameValue, passwordInputs, passwordField);
 };
 
