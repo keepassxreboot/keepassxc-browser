@@ -10,7 +10,7 @@ kpxcForm.savedCustomInputs = [];
 kpxcForm.savedForms = [];
 kpxcForm.submitTriggered = false;
 
-// Activate the Credential Banner if existing credentials are not found
+// Activate the Credential Banner if credentials are found from form submit
 kpxcForm.activateCredentialBanner = async function(usernameValue, passwordInputs, passwordField) {
     let passwordValue = '';
     // Check if the form has three password fields -> a possible password change form
@@ -163,7 +163,7 @@ kpxcForm.initForm = function(form, credentialFields) {
         form.addEventListener('submit', kpxcForm.onSubmit);
 
         const submitButton = kpxcForm.getFormSubmitButton(form);
-        if (submitButton !== undefined) {
+        if (submitButton) {
             submitButton.addEventListener('click', kpxcForm.onSubmit);
         }
     }
@@ -178,6 +178,15 @@ kpxcForm.initCustomForm = function(combinations) {
             kpxcForm.savedCustomInputs = combinations?.map(c => c.password);
             submitButton.addEventListener('click', kpxcForm.onCustomFormSubmit);
         }
+    }
+};
+
+// Identifies a submit button from the page outside any form
+kpxcForm.initSubmitButtonFromPage = function() {
+    let submitButton = kpxcSites.formSubmitButtonExceptionFound();    
+    submitButton ??= $('button[type=submit], button.login');
+    if (submitButton) {
+        submitButton.addEventListener('click', kpxcForm.onSubmit);
     }
 };
 
@@ -227,14 +236,25 @@ kpxcForm.onSubmit = async function(e) {
         form = kpxcForm.savedForms[0].form;
     }
 
-    if (!form) {
+    // Try choosing inputs from the last combination detected.
+    // Needed if initSubmitButtonFromPage() has been used.
+    let usernameField;
+    let passwordField;
+    let passwordInputs = [];
+    if (!form && kpxc.combinations.length > 0) {
+        usernameField = kpxc.combinations.at(-1)?.username;
+        passwordField = kpxc.combinations.at(-1)?.password;
+        passwordInputs = kpxc.combinations.at(-1)?.passwordInputs;
+    } else {
+        [ usernameField, passwordField, passwordInputs ] = kpxcForm.getCredentialFieldsFromForm(form);
+    }
+
+    if (!form && !usernameField && !passwordField) {
         logDebug('Error: No form found for submit detection.');
         kpxcForm.submitTriggered = false;
         return;
     }
 
-    const [ usernameField, passwordField, passwordInputs ] = kpxcForm.getCredentialFieldsFromForm(form);
-    
     // Use the first text field in the form if only username input is missing
     const usernameValue = await kpxcForm.getUsernameValue(!usernameField && passwordField
         ? form?.querySelector('input[type=text]')

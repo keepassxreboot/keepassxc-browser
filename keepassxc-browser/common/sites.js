@@ -212,6 +212,8 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
         return $('.button[slot=primary-button]');
     } else if (form?.action === 'https://auth.openai.com/log-in/password') {
         return form.querySelector('button[class*=_primary_]');
+    } else if (!form && document.location.origin === 'https://www.reddit.com') {
+        return $('button.login');
     }
 
     return undefined;
