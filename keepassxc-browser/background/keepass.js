@@ -851,7 +851,11 @@ keepass.checkDatabaseHash = async function(tab) {
 };
 
 keepass.isAssociated = function() {
-    return (keepass.associated.value && keepass.associated.hash && keepass.associated.hash === keepass.databaseHash);
+    if (!keepass.associated.value || keepass.associated.hash === '') {
+        return false;
+    }
+
+    return keepass.associated.hash === keepass.databaseHash;
 };
 
 keepass.setcurrentKeePassXCVersion = function(version) {

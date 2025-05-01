@@ -993,7 +993,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             sendMessage('reconnect');
         } else if (req.action === 'save_credentials') {
             kpxc.rememberCredentialsFromContextMenu();
-        } else if (req.action === 'retrive_credentials_forced') {
+        } else if (req.action === 'retrieve_credentials_forced') {
             await kpxc.retrieveCredentials(true);
         } else if (req.action === 'show_password_generator') {
             kpxcPasswordGenerator.showPasswordGenerator();

@@ -131,7 +131,7 @@
         "choose_credential_fields": {
             "description": "__MSG_popupChooseCredentialsText__"
         },
-        "retrive_credentials_forced": {
+        "retrieve_credentials_forced": {
             "description": "__MSG_popupReopenButton__"
         },
         "request_autotype": {

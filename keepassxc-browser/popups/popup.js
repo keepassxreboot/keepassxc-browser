@@ -111,7 +111,7 @@ const sendMessageToTab = async function(message) {
         });
 
         // This does not work with Firefox because of https://bugzilla.mozilla.org/show_bug.cgi?id=1665380
-        await sendMessageToTab('retrive_credentials_forced');
+        await sendMessageToTab('retrieve_credentials_forced');
         close();
     });
 
@@ -196,7 +196,8 @@ const sendMessageToTab = async function(message) {
 
     async function getNewStatus() {
         return await browser.runtime.sendMessage({
-            action: 'get_status'
+            action: 'get_status',
+            args: [ true ]
         }).catch((err) => {
             logError('Could not get status: ' + err);
         });
@@ -209,6 +210,7 @@ const sendMessageToTab = async function(message) {
     setInterval(async () => {
         // Check if the popup state has been changed or database has been opened/closed
         const currentStatus = await getNewStatus();
+        console.log(currentStatus);
         if (previousStatus?.popupData?.popup !== currentStatus?.popupData?.popup
             || previousStatus?.databaseClosed !== currentStatus?.databaseClosed
             || previousStatus?.keePassXCAvailable !== currentStatus?.keePassXCAvailable) {
