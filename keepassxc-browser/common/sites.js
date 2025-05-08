@@ -207,6 +207,8 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
     } else if (!form && document.location.href.includes('reddit.com/settings')) {
         // Reddit change password popup
         return $('.button[slot=primary-button]');
+    } else if (form?.action === 'https://auth.openai.com/log-in/password') {
+        return form.querySelector('button[class*=_primary_]');
     }
 
     return undefined;
