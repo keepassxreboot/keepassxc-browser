@@ -26,23 +26,6 @@ const URL_WILDCARD = '1kpxcwc1';
 const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 
-const isFirefox = function() {
-    return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
-};
-
-const isEdge = function() {
-    return navigator.userAgent.indexOf('Edg') !== -1;
-};
-
-const showNotification = function(message) {
-    browser.notifications.create({
-        'type': 'basic',
-        'iconUrl': browser.runtime.getURL('icons/keepassxc_64x64.png'),
-        'title': 'KeePassXC-Browser',
-        'message': message
-    });
-};
-
 const AssociatedAction = {
     NOT_ASSOCIATED: 0,
     ASSOCIATED: 1,
@@ -59,6 +42,38 @@ const ManualFill = {
     NONE: 0,
     PASSWORD: 1,
     BOTH: 2
+};
+
+// Popup icon types
+const PopupIcon = {
+    BANG: 'bang',
+    CROSS: 'cross',
+    LOCKED: 'locked',
+    NORMAL: 'normal'
+};
+
+// Popup states
+const PopupState = {
+    DEFAULT: 'default',
+    HTTP_AUTH: 'http_auth',
+    LOGIN: 'login'
+};
+
+const isFirefox = function() {
+    return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
+};
+
+const isEdge = function() {
+    return navigator.userAgent.indexOf('Edg') !== -1;
+};
+
+const showNotification = function(message) {
+    browser.notifications.create({
+        'type': 'basic',
+        'iconUrl': browser.runtime.getURL('icons/keepassxc_64x64.png'),
+        'title': 'KeePassXC-Browser',
+        'message': message
+    });
 };
 
 const compareVersion = function(minimum, current, canBeEqual = true) {
@@ -180,6 +195,12 @@ const getFileAndLine = function() {
 const getCurrentTab = async function() {
     const tabs = await browser.tabs.query({ active: true, currentWindow: true });
     return tabs?.length > 0 ? tabs[0] : undefined;
+};
+
+const removeAllChildren = function(elem) {
+    while (elem?.hasChildNodes()) {
+        elem.removeChild(elem.lastChild);
+    }
 };
 
 // Exports for tests

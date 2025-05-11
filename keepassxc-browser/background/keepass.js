@@ -55,7 +55,7 @@ keepass.updateCredentials = async function(tab, args = []) {
         const [ entryId, username, password, url, group, groupUuid ] = args;
         const taResponse = await keepass.testAssociation(tab);
         if (!taResponse) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return [];
         }
 
@@ -108,7 +108,7 @@ keepass.retrieveCredentials = async function(tab, args = []) {
         const [ url, submiturl, triggerUnlock = false, httpAuth = false ] = args;
         const taResponse = await keepass.testAssociation(tab, [ false, triggerUnlock ]);
         if (!taResponse) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return [];
         }
 
@@ -145,14 +145,14 @@ keepass.retrieveCredentials = async function(tab, args = []) {
 
             if (entries.length === 0) {
                 // Questionmark-icon is not triggered, so we have to trigger for the normal symbol
-                browserAction.showDefault(tab);
+                browserAction.updatePopup(tab);
             }
 
             logDebug(`Found ${entries.length} entries for url ${url}`);
             return entries;
         }
 
-        browserAction.showDefault(tab);
+        browserAction.updatePopup(tab);
         return [];
     } catch (err) {
         logError(`retrieveCredentials failed: ${err}`);
@@ -168,7 +168,7 @@ keepass.generatePassword = async function(tab) {
     try {
         const taResponse = await keepass.testAssociation(tab);
         if (!taResponse) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return '';
         }
 
@@ -235,7 +235,7 @@ keepass.associate = async function(tab) {
             keepass.associated.value = true;
             keepass.associated.hash = response.hash || 0;
 
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return AssociatedAction.NEW_ASSOCIATION;
         }
 
@@ -468,7 +468,7 @@ keepass.getDatabaseGroups = async function(tab) {
     try {
         const taResponse = await keepass.testAssociation(tab, [ false ]);
         if (!taResponse) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return [];
         }
 
@@ -495,7 +495,7 @@ keepass.getDatabaseGroups = async function(tab) {
             return groups;
         }
 
-        browserAction.showDefault(tab);
+        browserAction.updatePopup(tab);
         return [];
     } catch (err) {
         logError(`getDatabaseGroups failed: ${err}`);
@@ -508,7 +508,7 @@ keepass.createNewGroup = async function(tab, args = []) {
         const [ groupName ] = args;
         const taResponse = await keepass.testAssociation(tab, [ false ]);
         if (!taResponse) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return [];
         }
 
@@ -534,7 +534,7 @@ keepass.createNewGroup = async function(tab, args = []) {
             logError('getDatabaseGroups rejected');
         }
 
-        browserAction.showDefault(tab);
+        browserAction.updatePopup(tab);
         return [];
     } catch (err) {
         logError(`createNewGroup failed: ${err}`);
@@ -602,7 +602,7 @@ keepass.passkeysRegister = async function(tab, args = []) {
     try {
         const taResponse = await keepass.testAssociation(tab, [ false ]);
         if (!taResponse || !keepass.isConnected || args.length < 2) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return [];
         }
 
@@ -623,7 +623,7 @@ keepass.passkeysRegister = async function(tab, args = []) {
             return response;
         }
 
-        browserAction.showDefault(tab);
+        browserAction.updatePopup(tab);
         return [];
     } catch (err) {
         logError(`passkeysRegister failed: ${err}`);
@@ -635,7 +635,7 @@ keepass.passkeysGet = async function(tab, args = []) {
     try {
         const taResponse = await keepass.testAssociation(tab, [ false ]);
         if (!taResponse || !keepass.isConnected || args.length < 2) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             return [];
         }
 
@@ -656,7 +656,7 @@ keepass.passkeysGet = async function(tab, args = []) {
             return response;
         }
 
-        browserAction.showDefault(tab);
+        browserAction.updatePopup(tab);
         return [];
     } catch (err) {
         logError(`passkeysGet failed: ${err}`);
@@ -851,7 +851,11 @@ keepass.checkDatabaseHash = async function(tab) {
 };
 
 keepass.isAssociated = function() {
-    return (keepass.associated.value && keepass.associated.hash && keepass.associated.hash === keepass.databaseHash);
+    if (!keepass.associated.value || keepass.associated.hash === '') {
+        return false;
+    }
+
+    return keepass.associated.hash === keepass.databaseHash;
 };
 
 keepass.setcurrentKeePassXCVersion = function(version) {
@@ -910,7 +914,7 @@ keepass.handleError = function(tab, errorCode, errorMessage = '') {
 
 keepass.updatePopup = function() {
     if (page && page.tabs.length > 0) {
-        browserAction.showDefault();
+        browserAction.updatePopup();
     }
 };
 

@@ -3,7 +3,7 @@
 const browserActionWrapper = browser.action || browser.browserAction;
 const browserAction = {};
 
-browserAction.show = async function(tab, popupData) {
+browserAction.updatePopupIcon = async function(tab, popupData) {
     popupData ??= page.popupData;
     page.popupData = popupData;
 
@@ -12,15 +12,10 @@ browserAction.show = async function(tab, popupData) {
     });
 
     if (popupData.popup && tab?.id) {
-        browserActionWrapper.setPopup({
-            tabId: tab.id,
-            popup: `popups/${popupData.popup}.html`
-        });
-
         let badgeText = '';
-        if (popupData.popup === 'popup_login') {
+        if (popupData.popup === PopupState.LOGIN) {
             badgeText = page.tabs[tab.id]?.loginList?.length;
-        } else if (popupData.popup === 'popup_httpauth') {
+        } else if (popupData.popup === PopupState.HTTP_AUTH) {
             badgeText = page.tabs[tab.id]?.loginList?.logins?.length;
         }
 
@@ -28,10 +23,10 @@ browserAction.show = async function(tab, popupData) {
     }
 };
 
-browserAction.showDefault = async function(tab) {
+browserAction.updatePopup = async function(tab) {
     const popupData = {
-        iconType: 'normal',
-        popup: 'popup'
+        iconType: PopupIcon.NORMAL,
+        popup: PopupState.DEFAULT
     };
 
     const response = await keepass.isConfigured().catch((err) => {
@@ -39,11 +34,11 @@ browserAction.showDefault = async function(tab) {
     });
 
     if (!response && !keepass.isKeePassXCAvailable) {
-        popupData.iconType = 'cross';
+        popupData.iconType = PopupIcon.CROSS;
     } else if (!keepass.isAssociated() && !keepass.isDatabaseClosed) {
-        popupData.iconType = 'bang';
+        popupData.iconType = PopupIcon.BANG;
     } else if (keepass.isKeePassXCAvailable && keepass.isDatabaseClosed) {
-        popupData.iconType = 'locked';
+        popupData.iconType = PopupIcon.LOCKED;
     }
 
     // Get the current tab if no tab given
@@ -52,13 +47,21 @@ browserAction.showDefault = async function(tab) {
         return;
     }
 
+    // Credentials are available
     if (page?.tabs[tab.id]?.loginList.length > 0) {
-        popupData.iconType = 'normal';
-        popupData.popup = 'popup_login';
+        popupData.iconType = PopupIcon.NORMAL;
+        popupData.popup = PopupState.LOGIN;
         browserAction.setBadgeText(tab?.id, page.tabs[tab.id]?.loginList.length);
     }
 
-    await browserAction.show(tab, popupData);
+    // HTTP Basic Auth credentials are available
+    if (page.tabs[tab.id]?.loginList?.logins?.length > 0) {
+        popupData.iconType = PopupIcon.NORMAL;
+        popupData.popup = PopupState.HTTP_AUTH;
+        browserAction.setBadgeText(tab?.id, page.tabs[tab.id]?.loginList?.logins?.length);
+    }
+
+    await browserAction.updatePopupIcon(tab, popupData);
 };
 
 browserAction.setBadgeText = function(tabId, badgeText) {
@@ -73,7 +76,7 @@ browserAction.setBadgeText = function(tabId, badgeText) {
 browserAction.generateIconName = async function(iconType) {
     let name = 'icon_';
     name += (await keepass.keePassXCUpdateAvailable()) ? 'new_' : '';
-    name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
+    name += (!iconType || iconType === PopupIcon.NORMAL) ? PopupIcon.NORMAL : iconType;
 
     let style = 'colored';
     if (page?.settings?.useMonochromeToolbarIcon) {

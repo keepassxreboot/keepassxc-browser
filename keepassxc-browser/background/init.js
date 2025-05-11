@@ -82,7 +82,7 @@ const initListeners = async function() {
         }
 
         if (changeInfo.status === 'complete' && tab?.id) {
-            browserAction.showDefault(tab);
+            browserAction.updatePopup(tab);
             if (!page.tabs[tab.id]) {
                 page.createTabEntry(tab.id);
             }
@@ -115,7 +115,7 @@ const initListeners = async function() {
         if (contextMenuItems.some(e => e.action === command)
             || command === 'redetect_fields'
             || command === 'choose_credential_fields'
-            || command === 'retrive_credentials_forced'
+            || command === 'retrieve_credentials_forced'
             || command === 'reload_extension') {
             const tab = await getCurrentTab();
             if (tab?.id) {

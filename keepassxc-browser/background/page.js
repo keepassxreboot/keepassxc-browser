@@ -56,8 +56,8 @@ page.submittedCredentials = {};
 page.tabs = [];
 
 page.popupData = {
-    iconType: 'normal',
-    popup: 'popup'
+    iconType: PopupIcon.NORMAL,
+    popup: PopupState.DEFAULT
 };
 
 page.initSettings = async function() {
@@ -118,7 +118,7 @@ page.initOpenedTabs = async function() {
         }
 
         page.currentTabId = currentTab?.id;
-        browserAction.showDefault(currentTab);
+        browserAction.updatePopup(currentTab);
     } catch (err) {
         logError('page.initOpenedTabs error: ' + err);
         return Promise.reject();
@@ -154,7 +154,7 @@ page.switchTab = async function(tab) {
         }
     }, page.settings.clearCredentialsTimeout * 1000);
 
-    browserAction.showDefault(tab);
+    browserAction.updatePopup(tab);
     if (tab?.id) {
         browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
             logError('Cannot send activated_tab message: ' + e.message);
@@ -397,7 +397,7 @@ page.updateContextMenu = async function(tab, credentials) {
 };
 
 page.updatePopup = function(tab) {
-    browserAction.showDefault(tab);
+    browserAction.updatePopup(tab);
 };
 
 page.setAllowIframes = async function(tab, args = []) {
