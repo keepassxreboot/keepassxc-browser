@@ -43,6 +43,7 @@ export default defineConfig([globalIgnores(["**/*.min.js"]), {
             CHECK_UPDATE_THREE_DAYS: "readonly",
             cloneInto: "readonly",
             compareVersion: "readonly",
+            ConnectionMethod: "readonly",
             createResult: "readonly",
             createStylesheet: "readonly",
             DatabaseState: "readonly",
