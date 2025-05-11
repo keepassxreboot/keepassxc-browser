@@ -1,5 +1,10 @@
 'use strict';
 
+const ConnectionMethod = {
+    NATIVE_MESSAGING: 'nativemessaging',
+    WEBSOCKET: 'websocket',
+};
+
 const defaultSettings = {
     afterFillSorting: SORT_BY_MATCHING_CREDENTIALS_SETTING,
     afterFillSortingTotp: SORT_BY_RELEVANT_ENTRY,
@@ -15,6 +20,7 @@ const defaultSettings = {
     checkUpdateKeePassXC: CHECK_UPDATE_NEVER,
     clearCredentialsTimeout: 10,
     colorTheme: 'system',
+    connectionMethod: isSafari() ? ConnectionMethod.WEBSOCKET : ConnectionMethod.NATIVE_MESSAGING,
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
     debugLogging: false,
     defaultGroup: '',
@@ -50,6 +56,7 @@ page.clearCredentialsTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
 page.isFirefox = false;
+page.isSafari = false;
 page.manualFill = ManualFill.NONE;
 page.menuContexts = [ 'editable' ];
 page.passwordFilled = false;
@@ -68,6 +75,7 @@ page.initBrowser = async function() {
         navigator.userAgent.indexOf('Firefox') !== -1
         || navigator.userAgent.indexOf('Gecko/') !== -1
         || typeof browser.runtime.getBrowserInfo === 'function';
+    page.isSafari = isSafari();
 };
 
 page.initSettings = async function() {
@@ -75,25 +83,27 @@ page.initSettings = async function() {
         const item = await browser.storage.local.get({ 'settings': {} });
 
         // Load managed settings if found
-        if (page.isFirefox && typeof(browser.storage.managed) === 'object') {
-            try {
-                const managedSettings = await browser.storage.managed.get('settings');
-                if (managedSettings?.settings) {
-                    debugLogMessage('Managed settings found.');
-                    item.settings = managedSettings.settings;
+        if (!page.isSafari) {
+            if (page.isFirefox && typeof(browser.storage.managed) === 'object') {
+                try {
+                    const managedSettings = await browser.storage.managed.get('settings');
+                    if (managedSettings?.settings) {
+                        debugLogMessage('Managed settings found.');
+                        item.settings = managedSettings.settings;
+                    }
+                } catch (err) {
+                    debugLogMessage('page.initSettings: ' + err);
                 }
-            } catch (err) {
-                debugLogMessage('page.initSettings: ' + err);
+            } else if (typeof chrome.storage.managed === 'object') {
+                chrome.storage.managed.get('settings').then((managedSettings) => {
+                    if (managedSettings?.settings) {
+                        debugLogMessage('Managed settings found.');
+                        item.settings = managedSettings.settings;
+                    }
+                }).catch((err) => {
+                    debugLogMessage('page.initSettings: ' + err);
+                });
             }
-        } else if (typeof chrome.storage.managed === 'object') {
-            chrome.storage.managed.get('settings').then((managedSettings) => {
-                if (managedSettings?.settings) {
-                    debugLogMessage('Managed settings found.');
-                    item.settings = managedSettings.settings;
-                }
-            }).catch((err) => {
-                debugLogMessage('page.initSettings: ' + err);
-            });
         }
 
         page.settings = item.settings;

@@ -1,3 +1,4 @@
+.DS_Store
 .idea
 
 *.swp
@@ -11,3 +12,4 @@
 .xz
 node_modules
 test-results
+xcuserdata/
