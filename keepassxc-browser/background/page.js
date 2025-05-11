@@ -1,5 +1,10 @@
 'use strict';
 
+const ConnectionMethod = {
+    NATIVE_MESSAGING: 'nativemessaging',
+    WEBSOCKET: 'websocket',
+};
+
 const defaultSettings = {
     afterFillSorting: SORT_BY_MATCHING_CREDENTIALS_SETTING,
     afterFillSortingTotp: SORT_BY_RELEVANT_ENTRY,
@@ -15,6 +20,7 @@ const defaultSettings = {
     checkUpdateKeePassXC: CHECK_UPDATE_NEVER,
     clearCredentialsTimeout: 10,
     colorTheme: 'system',
+    connectionMethod: ConnectionMethod.NATIVE_MESSAGING,
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
     debugLogging: false,
     defaultGroup: '',
