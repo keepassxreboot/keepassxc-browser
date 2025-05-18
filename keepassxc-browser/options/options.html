@@ -27,7 +27,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse d-none d-md-block" id="sidebar">
-            <h1 class="text-uppercase text-white-50 d-none d-md-flex px-3 pb-4 mt-4 mb-1">KeePassXC-Browser</h1>
+            <h1 class="text-uppercase text-white d-none d-md-flex px-3 pb-4 mt-4 mb-1">KeePassXC-Browser</h1>
             <ul class="nav flex-column mb-2 text-uppercase">
               <li class="active nav-item">
                 <a class="nav-link text-light rounded-sm" href="#general-settings">
@@ -62,7 +62,7 @@
             </ul>
           </div>
           <footer class="px-3 mt-4 mb-1 text-uppercase position-absolute small text-muted">
-            © 2017-2024 - KeePassXC Team
+            © 2017-2025 - KeePassXC Team
           </footer>
         </nav>
 
@@ -92,8 +92,8 @@
                   </div>
 
                   <!-- Activate username icons -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="showLoginFormIcon" id="usernameIconsCheckBox" value="true">
                       <label class="form-check-label" for="usernameIconsCheckBox" data-i18n="optionsCheckboxUsernameIcons"></label>
                       <div id="passwordHelpBlock" class="form-text" data-i18n="optionsShowLoginFormIconHelpText"></div>
@@ -101,8 +101,8 @@
                   </div>
 
                   <!-- Activate password icons -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="usePasswordGeneratorIcons" id="passwordIconsCheckBox" value="true">
                       <label class="form-check-label" for="passwordIconsCheckBox" data-i18n="optionsCheckboxUsePasswordGenerator"></label>
                       <div class="form-text" data-i18n="optionsUsePasswordGeneratorHelpText"></div>
@@ -112,7 +112,7 @@
 
                   <!-- Activate TOTP icons -->
                   <div class="form-group">
-                    <div class="form-check">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="showOTPIcon" id="totpIconsCheckBox" value="true">
                       <label class="form-check-label" for="totpIconsCheckBox" data-i18n="optionsCheckboxOTPIcons"></label>
                       <div class="form-text" data-i18n="optionsShowOTPIconHelpText"></div>
@@ -125,8 +125,8 @@
                   </div>
 
                   <!-- Show notifications -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="showNotifications" id="notificationCheckBox" value="true">
                       <label class="form-check-label" for="notificationCheckBox" data-i18n="optionsCheckboxShowNotifications"></label>
                       <div class="form-text" data-i18n="optionsShowNotificationsHelpText"></div>
@@ -134,8 +134,8 @@
                   </div>
 
                   <!-- Use monochrome toolbar icons -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="useMonochromeToolbarIcon" id="useMonochromeToolbarIconCheckBox" value="true">
                       <label class="form-check-label" for="useMonochromeToolbarIconCheckBox" data-i18n="optionsCheckboxUseMonochromeToolbarIcon"></label>
                       <div class="form-text" data-i18n="optionsUseMonochromeToolbarIconHelpText"></div>
@@ -143,8 +143,8 @@
                   </div>
 
                   <!-- Use compact mode -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="useCompactMode" id="useCompactModeCheckBox" value="true">
                       <label class="form-check-label" for="useCompactModeCheckBox" data-i18n="optionsCheckboxUseCompactMode"></label>
                       <div class="form-text" data-i18n="optionsUseCompactModeHelpText"></div>
@@ -184,8 +184,8 @@
                 <div class="card-body">
 
                   <!-- Automatically retrieve credentials -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoRetrieveCredentials" id="autoRetrieveCredentials" value="true">
                       <label class="form-check-label" for="autoRetrieveCredentials" data-i18n="optionsCheckboxAutoRetrieveCredentials"></label>
                       <div class="form-text" data-i18n="optionsAutoRetrieveCredentialsHelpText"></div>
@@ -193,8 +193,8 @@
                   </div>
 
                   <!-- Use Autocomplete Menu -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoCompleteUsernames" id="autoCompleteUsernames" value="true">
                       <label class="form-check-label" for="autoCompleteUsernames" data-i18n="optionsCheckboxAutoCompleteUsernames"></label>
                       <div class="form-text" data-i18n="optionsAutocompleteUsernamesHelpText"></div>
@@ -202,7 +202,7 @@
                   </div>
 
                   <!-- Sort credentials by -->
-                  <div class="form-group col-sm-3 pb-2">
+                  <div class="form-group col-sm-4 pb-1">
                     <label for="credentialSorting" class="py-2" data-i18n="optionsCredentialSortSelectionHeader"></label>
                     <select class="form-select form-select-sm col-md-2" id="credentialSorting" data-i18n="[title]optionsCredentialSortSelection">
                       <option value="sortByTitle" data-i18n="optionsSortByTitle"></option>
@@ -213,16 +213,20 @@
                   </div>
 
                   <!-- Credential sorting after fill -->
-                  <div class="form-group col-sm-3 pb-2">
+                  <div class="form-group col-sm-4 pb-1">
                     <label for="afterFillSorting" class="py-2" data-i18n="optionsFillSortPriority"></label>
                     <select class="form-select form-select-sm col-md-2" id="afterFillSorting" data-i18n="[title]optionsFillSortPriority">
                       <option value="sortByMatchingCredentials" data-i18n="optionsFillSortByMatchingCredentials"></option>
                       <option value="sortByRelevantEntry" data-i18n="optionsFillSortByRelevantEntry"></option>
                     </select>
                   </div>
-                  <div>
+                  <div class="pb-1">
                     <span class="form-text text-muted" data-i18n="optionsFillSortPriorityHelpText"></span>
-                    <div class="form-check mt-2">
+                  </div>
+
+                  <!-- Automatically fill in relevant credential entries -->
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch mt-2">
                       <input class="form-check-input" type="checkbox" name="autoFillRelevantCredential" id="autoFillRelevantCredential" value="true">
                       <label class="form-check-label" for="autoFillRelevantCredential" data-i18n="optionsCheckboxAutoFillRelevantCredential"></label>
                       <div class="form-text" data-i18n="optionsAutoFillRelevantCredentialHelpText"></div>
@@ -230,20 +234,20 @@
                   </div>
 
                   <!-- Credential sorting after fill for TOTP -->
-                  <div class="form-group col-sm-3 pb-2">
+                  <div class="form-group col-sm-4 pb-1">
                     <label for="afterFillSortingTotp" class="py-2" data-i18n="optionsFillSortPriorityTotp"></label>
                     <select class="form-select form-select-sm col-md-2" id="afterFillSortingTotp" data-i18n="[title]optionsFillSortPriorityTotp">
                       <option value="sortByMatchingCredentials" data-i18n="optionsFillSortByMatchingCredentials"></option>
                       <option value="sortByRelevantEntry" data-i18n="optionsFillSortByRelevantEntry"></option>
                     </select>
                   </div>
-                  <div>
+                  <div class="pb-1">
                     <span class="form-text text-muted" data-i18n="optionsFillSortPriorityTotpHelpText"></span>
                   </div>
 
                   <!-- Use Auto-Submit -->
-                  <div class="form-group py-2">
-                    <div class="form-check">
+                  <div class="form-group py-2 pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoSubmit" id="autoSubmit" value="true">
                       <label class="form-check-label" for="autoSubmit" data-i18n="optionsCheckboxAutoSubmit"></label>
                       <div class="form-text" data-i18n="optionsAutoSubmitHelpText"></div>
@@ -251,8 +255,8 @@
                   </div>
 
                   <!-- Automatically fill single-credential entries -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoFillSingleEntry" id="autoFillSingleEntry" value="true">
                       <label class="form-check-label" for="autoFillSingleEntry" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
                       <div class="form-text" data-i18n="optionsAutoFillSingleEntryHelpText"></div>
@@ -265,8 +269,8 @@
                   </div>
 
                   <!-- Automatically fill single-credential TOTP fields -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoFillSingleTotp" id="autoFillSingleTotp" value="true">
                       <label class="form-check-label" for="autoFillSingleTotp" data-i18n="optionsCheckboxAutoFillSingleTotp"></label>
                       <div class="form-text" data-i18n="optionsAutoFillSingleTotpHelpText"></div>
@@ -274,8 +278,8 @@
                   </div>
 
                   <!-- Autofill HTTP Auth dialogs -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoFillAndSend" id="autoFillAndSend" value="true">
                       <label class="form-check-label" for="autoFillAndSend" data-i18n="optionsCheckboxAutoFillAndSend"></label>
                       <div class="form-text" data-i18n="optionsAutoFillAndSendHelpText"></div>
@@ -295,16 +299,16 @@
                 <div class="card-body">
 
                   <!-- Show Credential Banner -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="showLoginNotifications" id="showLoginNotifications" value="true">
                       <label class="form-check-label" for="showLoginNotifications" data-i18n="optionsCheckboxShowLoginNotifications"></label>
                     </div>
                   </div>
 
                   <!-- Ask where to save credentials -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="defaultGroupAlwaysAsk" id="defaultGroupAlwaysAsk" value="true">
                       <label class="form-check-label" for="defaultGroupAlwaysAsk" data-i18n="optionsLabelDefaultGroupCheckboxText"></label>
                       <div class="form-text" data-i18n="optionsLabelDefaultGroupCheckboxHelpText"></div>
@@ -329,8 +333,8 @@
                   </div>
 
                   <!-- Save domain only -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnlyNewCreds" id="saveDomainOnlyNewCreds" value="true">
                       <label class="form-check-label" for="saveDomainOnlyNewCreds" data-i18n="optionsSaveDomainOnly"></label>
                       <div class="form-text" data-i18n="optionsSaveDomainOnlyHelpText"></div>
@@ -338,8 +342,8 @@
                   </div>
 
                   <!-- Download favicon to entry after save -->
-                  <div class="form-group" id="downloadFaviconAfterSaveFormGroup">
-                    <div class="form-check">
+                  <div class="form-group pb-1" id="downloadFaviconAfterSaveFormGroup">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="downloadFaviconAfterSave" id="downloadFaviconAfterSave" value="true">
                       <label class="form-check-label" for="downloadFaviconAfterSave" data-i18n="optionsDownloadFaviconAfterSave"></label>
                       <div class="form-text" data-i18n="optionsDownloadFaviconAfterSaveHelpText"></div>
@@ -363,8 +367,8 @@
                 </div>
                 <div class="card-body">
                   <!-- Enable Passkeys -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="passkeys" id="passkeys" value="true" />
                       <label class="form-check-label" for="passkeys" data-i18n="optionsPasskeysEnable"></label>
                       <div class="form-text help-text" data-i18n="optionsPasskeysEnableHelpText"></div>
@@ -372,8 +376,8 @@
                   </div>
 
                   <!-- Enable Passkeys fallback -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="passkeysFallback" id="passkeysFallback" value="true" />
                       <label class="form-check-label" for="passkeysFallback" data-i18n="optionsPasskeysEnableFallback"></label>
                       <div class="form-text help-text" data-i18n="optionsPasskeysEnableFallbackHelpText"></div>
@@ -423,7 +427,7 @@
                         <span data-i18n="optionsButtonUpdate"></span>
                       </button>
                     <div class="mt-3">
-                      <div data-i18n="optionsRadioText"></div>
+                      <div class="pb-1" data-i18n="optionsRadioText"></div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="checkUpdateKeePassXC" id="checkUpdateThreeDays">
                         <label class="form-check-label" for="checkUpdateThreeDays"><span data-i18n="optionsRadioThreeDays"></span></label>
@@ -454,8 +458,8 @@
 
                 <!-- Use dynamic input field detection -->
                 <div class="card-body">
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="useObserver" id="useObserver" value="true">
                       <label class="form-check-label" for="useObserver" data-i18n="optionsUseObserver"></label>
                       <div class="form-text" data-i18n="optionsUseObserverHelpText"></div>
@@ -463,8 +467,8 @@
                   </div>
 
                   <!-- Display group name -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="showGroupNameInAutocomplete" id="showGroupNameInAutocomplete" value="true">
                       <label class="form-check-label" for="showGroupNameInAutocomplete" data-i18n="optionsCheckboxShowGroupNameInAutocomplete"></label>
                       <div class="form-text" data-i18n="optionsShowGroupNameInAutocompleteHelpText"></div>
@@ -476,8 +480,8 @@
                   </div>
 
                   <!-- Automatic reconnect -->
-                  <div class="form-group" hidden>
-                    <div class="form-check">
+                  <div class="form-group pb-1" hidden>
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoReconnect" id="autoReconnect" value="true">
                       <label class="form-check-label" for="autoReconnect" data-i18n="optionsCheckboxAutomaticReconnect"></label>
                       <div class="form-text" data-i18n="optionsAutomaticReconnectHelpText"></div>
@@ -489,8 +493,8 @@
                   </div>
 
                   <!-- Save domain only -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="saveDomainOnly" id="saveDomainOnly" value="true">
                       <label class="form-check-label" for="saveDomainOnly" data-i18n="optionsSaveDomainOnly"></label>
                       <div class="form-text" data-i18n="optionsSaveDomainOnlyCustomLoginHelpText"></div>
@@ -498,8 +502,8 @@
                   </div>
 
                   <!-- Use predefined sites -->
-                  <div class="form-group">
-                    <div class="form-check">
+                  <div class="form-group pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="usePredefinedSites" id="usePredefinedSites" value="true">
                       <label class="form-check-label" for="usePredefinedSites" data-i18n="optionsUsePredefinedSites"></label>
                       <div class="form-text" data-i18n="optionsUsePredefinedSitesHelpText"></div>
@@ -510,7 +514,7 @@
                   </div>
 
                   <!-- Clear credential timeout -->
-                  <div class="form-group mt-2">
+                  <div class="form-group mt-2 pb-1">
                     <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
                     <div class="input-group w-25 mt-2">
                       <input class="form-control form-control-sm" type="number" id="clearCredentialTimeout" min="0" max="3600" required>
@@ -519,8 +523,8 @@
                   </div>
 
                   <!-- Debug logging -->
-                  <div class="form-group mt-2">
-                    <div class="form-check">
+                  <div class="form-group mt-2 pb-1">
+                    <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="debugLogging" id="debugLogging" value="false">
                       <label class="form-check-label" for="debugLogging" data-i18n="optionsDebugLogging"></label>
                       <div class="form-text" data-i18n="optionsDebugLoggingHelpText"></div>
@@ -590,7 +594,7 @@
                           <th scope="col"><span data-i18n="optionsDatabaseKey"></span></th>
                           <th scope="col"><span data-i18n="optionsDatabaseLastUsed"></span></th>
                           <th scope="col"><span data-i18n="optionsDatabaseCreated"></span></th>
-                          <th scope="col"><span data-i18n="optionsDatabaseDelete"></span></th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -664,7 +668,7 @@
                       <thead>
                         <tr>
                           <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -674,7 +678,7 @@
                         <tr class="clone d-none">
                           <td></td>
                           <td class="text-nowrap">
-                            <button class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeCustomLoginFieldsButtonTitle">
+                            <button class="btn btn-sm delete btn-danger" data-i18n="[title]removeCustomLoginFieldsButtonTitle">
                               <i class="fa fa-remove" aria-hidden="true"></i>
                               <span data-i18n="optionsButtonRemove"></span>
                             </button>
@@ -730,7 +734,7 @@
                   </div>
                   <hr class="mt-0">
 
-                  <div class="form-group was-validated">
+                  <div class="form-group was-validated pb-3">
                     <label for="manualUrl" data-i18n="optionsSitePreferencesManualAddText"></label>
                     <div class="input-group w-75" id="manualUrlGroup">
                       <input class="form-control form-control-sm" type="url" id="manualUrl" aria-label="Manual URL" pattern="file://.*|ftp://.*|http://.*|https://.*" minlength="5" maxlength="2000" required>
@@ -752,7 +756,7 @@
                           <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
                           <th scope="col"><span data-i18n="optionsColumnImprovedInputFieldDetection"></span></th>
                           <th scope="col"><span data-i18n="optionsColumnAllowIframes"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnDelete"></span></th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -789,7 +793,7 @@
                           <td><input class="form-check-input" type="checkbox" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection"></td>
                           <td><input class="form-check-input" type="checkbox" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes"></td>
                           <td class="text-nowrap">
-                            <button class="btn btn-sm delete btn-danger btn" data-i18n="[title]removeSitePreferencesButtonTitle">
+                            <button class="btn btn-sm delete btn-danger" data-i18n="[title]removeSitePreferencesButtonTitle">
                               <i class="fa fa-remove" aria-hidden="true"></i>
                               <span data-i18n="optionsButtonRemove"></span>
                             </button>
@@ -899,8 +903,9 @@
                     <br>Operating system: <span class="kpxcbrOS"></span>
                     <br>Browser: <span class="kpxcbrBrowser"></span>
                   </p>
-                  <button id="copyVersionToClipboard" class="btn btn btn-sm btn-primary ml-3" data-i18n="[title]copyDebugInfoButtonTitle">
+                  <button id="copyVersionToClipboard" class="btn btn-sm btn-primary ml-3" data-i18n="[title]copyDebugInfoButtonTitle">
                     <i class="fa fa-clipboard"></i>
+                    <span data-i18n="copyDebugInfoButtonTitle"></span>
                   </button>
                 </div>
               </div>
