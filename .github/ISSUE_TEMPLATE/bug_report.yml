@@ -1,0 +1,49 @@
+name: Bug Report
+description: Provide information about a problem you are experiencing.
+type: Bug
+
+body:
+  - type: checkboxes
+    attributes:
+      label: Have you searched for an existing issue?
+      description: |
+        Use the issue search box to see if one already exists for the bug you encountered.
+        Also take a moment to review our pinned issues.
+      options:
+      - label: Yes, I tried searching and reviewed the pinned issues
+        required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Brief Summary
+      description: |
+        Provide an overview of the problem, include any information that may help us triage this issue.
+        Provide screenshots and logs if possible, but do NOT show sensitive data.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_vs_actual
+    attributes:
+      label: Expected Versus Actual Behavior
+      description: Tell us what you expected to happen and what actually happened.
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Provide a simple set of steps to reproduce this bug.
+      placeholder: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+
+  - type: textarea
+    id: debug_info
+    attributes:
+      label: KeePassXC-Browser Debug Information
+      placeholder: "Paste the output of: Extension settings -> About -> Copy debug info to clipboard."
+      render: Text
