@@ -48,7 +48,12 @@ kpxcForm.formIdentified = function(form) {
 kpxcForm.getCredentialFieldsFromForm = function(form) {
     for (const savedForm of kpxcForm.savedForms) {
         if (savedForm.form === form) {
-            return [ savedForm.username, savedForm.password, savedForm.passwordInputs, savedForm.totp ];
+            // If savedForm has no values, query the form instead
+            return [
+                savedForm.username || form?.querySelector('input[type=text]'),
+                savedForm.password || form?.querySelector('input[type=password]'),
+                savedForm.passwordInputs,
+                savedForm.totp ];
         }
     }
 
