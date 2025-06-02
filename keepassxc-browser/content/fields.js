@@ -2,6 +2,7 @@
 
 const DEFAULT_SEGMENTED_TOTP_FIELDS = 6;
 const MIN_SEGMENTED_TOTP_FIELDS = 4;
+const MAX_SEGMENTED_FIELD_LENGTH = 100;
 
 /**
  * @Object kpxcFields
@@ -104,25 +105,27 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
     // If ignoreFieldCount is true, number of TOTP fields are allowed to differ from the default (6),
     // but 4 at minimum must exist.
     const areFieldsSegmentedTotp = function(totpInputs, ignoreFieldCount = false) {
+        const fieldCountMatches = (ignoreFieldCount && totpInputs.length >= MIN_SEGMENTED_TOTP_FIELDS) ||
+            totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS;
+
+        const inputIsNumeric = (input) =>
+            (input.inputMode === 'numeric' || input.inputMode === '') && input.pattern.includes('0-9');
+
+        const inputIsText = (input) => input.offsetWidth < MAX_SEGMENTED_FIELD_LENGTH &&
+            (input.type === 'text' || input.type === 'number') && (input.maxLength === 1 || input.maxLength === -1);
+
         return (
-            ((ignoreFieldCount && totpInputs.length >= MIN_SEGMENTED_TOTP_FIELDS) ||
-                totpInputs.length === DEFAULT_SEGMENTED_TOTP_FIELDS) &&
-            totpInputs.every(
-                input =>
-                    ((input.inputMode === 'numeric' || input.inputMode === '') && input.pattern.includes('0-9')) ||
-                    ((input.type === 'text' || input.type === 'number') && (input.maxLength === 1 || input.maxLength === -1)) ||
-                    input.type === 'tel'
-            )
+            fieldCountMatches &&
+            totpInputs.every(input => inputIsNumeric(input) || inputIsText(input) || input.type === 'tel')
         );
     };
 
     const addTotpFieldsToCombination = function(inputFields, ignoreFieldCount = false) {
         const totpInputs = Array.from(inputFields).filter(
-            (e) =>
-                matchesWithNodeName(e, 'INPUT') &&
-                e.type !== 'password' &&
-                e.type !== 'hidden' &&
-                e.type !== 'submit'
+            (field) =>
+                matchesWithNodeName(field, 'INPUT') &&
+                [ 'hidden', 'password', 'submit' ].includes(field.type) === false &&
+                field.offsetWidth < MAX_SEGMENTED_FIELD_LENGTH
         );
 
         if (areFieldsSegmentedTotp(totpInputs, ignoreFieldCount)) {
