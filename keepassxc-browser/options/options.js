@@ -98,6 +98,11 @@ options.initGeneralSettings = async function() {
             $('#defaultGroupButtonReset').disabled = true;
         }
 
+        // Autofill HTTP Auth dialogs is not supported in Safari Web Extensions.
+        if (checkbox.name === 'autoFillAndSend' && isSafari()) {
+            checkbox.disabled = true;
+        }
+
         checkbox.addEventListener('click', changeCheckboxValue);
     }
 
@@ -323,6 +328,9 @@ options.initGeneralSettings = async function() {
             siteListing.append(document.createElement('br'));
         }
     }
+
+    // Show and hide Safari specific features
+    options.showHideSafariSelectors()
 };
 
 // Also hides/disables any options with KeePassXC versions that are too old
@@ -799,6 +807,12 @@ options.createWarning = function(elem, text) {
     }, 5000);
 };
 
+options.showHideSafariSelectors = function() {
+    let selector = isSafari() ? '.hide-safari' : '.show-safari'
+
+    document.querySelectorAll(selector).forEach((elem) => elem.hide())
+}
+
 const getBrowserId = function() {
     if (navigator.userAgent.indexOf('Firefox') > -1) {
         return 'Mozilla Firefox ' + navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1);
@@ -812,6 +826,12 @@ const getBrowserId = function() {
         startPos = navigator.userAgent.indexOf('/', startPos) + 1;
         const version = navigator.userAgent.substring(startPos, navigator.userAgent.indexOf('Safari'));
         return 'Chrome/Chromium ' + version;
+    } else if (navigator.userAgent.indexOf('Safari') > -1) {
+        let startPos = navigator.userAgent.indexOf('Version');
+
+        startPos = navigator.userAgent.indexOf('/', startPos) + 1;
+        const version = navigator.userAgent.substring(startPos, navigator.userAgent.indexOf('Safari'));
+        return 'Safari ' + version;
     }
 
     return 'Other/Unknown';

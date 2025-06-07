@@ -12,3 +12,8 @@
     background: url('moz-extension://__MSG_@@extension_id__/icons/key.svg') right no-repeat;
     background-size: contain;
 }
+
+.kpxc-pwgen-icon.key-safari {
+    background: url('safari-web-extension://__MSG_@@extension_id__/icons/key.svg') right no-repeat;
+    background-size: contain;
+}

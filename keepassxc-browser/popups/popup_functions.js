@@ -18,6 +18,8 @@ async function initSettings() {
     const customLoginFieldsButton = document.body.querySelector('#settings #choose-custom-login-fields-button');
     if (isFirefox()) {
         customLoginFieldsButton.id = 'choose-custom-login-fields-button-moz';
+    } else if (isSafari()) {
+        customLoginFieldsButton.id = 'choose-custom-login-fields-button-safari';
     }
 
     customLoginFieldsButton.addEventListener('click', async () => {
