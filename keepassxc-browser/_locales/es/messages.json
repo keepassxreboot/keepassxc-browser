@@ -7,6 +7,10 @@
         "message": "Añadir sitio de referencia para esta URL",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Editar URL para las preferencias de este sitio.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Permitir marcos de Orígenes Cruzados para la página actual",
         "description": "Allow Cross-Origin iframes button title text."
@@ -104,7 +108,7 @@
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "Clave pública del cliente no recibida.",
+        "message": "Llave pública del cliente no recibida.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
@@ -128,7 +132,7 @@
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
-        "message": "Intercambio de clave no fue correcto.",
+        "message": "Intercambio de llave no fue correcto.",
         "description": "Key exchange was not successful."
     },
     "errorMessageEncryptionKey": {
@@ -192,7 +196,7 @@
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Clave pública vacía.",
+        "message": "Llave pública vacía.",
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
@@ -686,6 +690,10 @@
         "message": "Añadir",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Edit",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Buscar actualizaciones",
         "description": "Check for updates button text."
@@ -767,7 +775,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "Rellenar automáticamente las entradas de credenciales pertinentes",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -906,6 +914,10 @@
         "message": "Añade un icono a los campos de entrada que son reconocidos como OTP/2FA.",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "También puede ocultar los iconos manualmente cuando necesite con shift+click.",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser recuperará inmediatamente las credenciales cuando se active una pestaña.",
         "description": "Auto-Retrive Credentials option help text."
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "Rellenar automáticamente la credencial correspondiente si se necesita un segundo rellenado.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {

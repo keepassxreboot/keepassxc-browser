@@ -7,6 +7,10 @@
         "message": "为此 URL 添加网站设置。",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "编辑此网站设置的 URL。",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "当前页面允许跨域 iframe 框架。",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "添加",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "编辑",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "检查更新",
         "description": "Check for updates button text."
@@ -767,7 +775,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "自动填充相关的凭据条目",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -906,6 +914,10 @@
         "message": "当识别到 OTP/2FA 字段时添加输入图标。",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "如果需要，您也可以通过 Shift+单击 手动隐藏图标。",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser 将在标签页激活时立即获取凭据。",
         "description": "Auto-Retrive Credentials option help text."
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "如果需要二次填充，自动填充相关的凭据。",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {

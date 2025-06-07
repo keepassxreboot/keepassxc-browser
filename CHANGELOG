@@ -1,3 +1,13 @@
+1.9.8 (2025-04-20)
+=========================
+- Add support for autocomplete=username with single input fields [#2521]
+- Add support for hiding icons manually [#2477]
+- Add support for editing Site Preferences table [#2483]
+- Fix adding non-lowercase URL to Site Preferences [#2482]
+- Fix handling XML URLs in the manifest exclude list [#2506]
+- Fix disabling passkeys script injection when site is ignored [#2500]
+- Fix page objects checks and slow start when loading managed settings [#2510]
+
 1.9.7 (2025-02-21)
 =========================
 - Add exceptions to Shadow DOM input query [#2430]

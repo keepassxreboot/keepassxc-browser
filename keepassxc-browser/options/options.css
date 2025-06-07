@@ -43,6 +43,14 @@ input[type="range"] {
     color: var(--kpxc-text-color) !important;
 }
 
+input[type="range"]::-moz-range-thumb {
+    background-color: green;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background-color: green;
+}
+
 input:active {
     border-color: var(--kpxc-input-active-border-color);
 }
@@ -74,17 +82,12 @@ pre {
     white-space: pre-line;
 }
 
-.table,
-tbody,
-thead,
-tr,
-th,
-td {
-    border-color: var(--kpxc-table-border-color) !important;
-}
-
 .table > caption {
     color: var(--kpxc-text-color);
+}
+
+.table-sm>:not(caption)>*>* {
+    padding: 0.25rem 0.5rem;
 }
 
 .table > thead,
@@ -114,7 +117,7 @@ tbody {
 
 .table-striped > tbody > tr:nth-of-type(even) input[type="url"] {
     --bs-table-bg-type: var(--kpxc-card-background-color) !important;
-    background-color: var(--kpxc-card-background-color) !important;
+    background-color: var(--bs-table-bg) !important;
     color: var(--kpxc-text-color) !important;
 }
 
@@ -169,6 +172,10 @@ table td:last-of-type {
     background-color: var(--kpxc-checkbox-color) !important;
 }
 
+.form-switch > .form-check-input:checked {
+    background-color: green !important;
+}
+
 .help-text {
     margin-left: 1.725em;
 }
@@ -209,6 +216,7 @@ table td:last-of-type {
 
 .active > a {
     border-color: currentColor;
+    border-radius: var(--bs-border-radius-sm);
     color: #a0a0a0 !important;
 }
 
@@ -229,6 +237,7 @@ table td:last-of-type {
     border: 0;
     border-bottom-right-radius: 4px !important;
     border-top-right-radius: 4px !important;
+    padding-left: 0;
 }
 
 .site-preferences-input:disabled {
@@ -246,6 +255,17 @@ button#sitePreferencesEditUrl {
 button#sitePreferencesCancelEdit {
     border-bottom-left-radius: 4px !important;
     border-top-left-radius: 4px !important;
+}
+
+.btn-success {
+    --bs-btn-bg: green !important;
+    --bs-btn-border-color: green !important;
+    --bs-btn-hover-bg: green !important;
+    --bs-btn-hover-border-color: green !important;
+}
+
+.btn-success:hover {
+    filter: brightness(88%) !important;
 }
 
 @media (min-width: 768px) {

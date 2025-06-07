@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Copy debug info to clipboard.",
+        "message": "Copy debug info to clipboard",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {

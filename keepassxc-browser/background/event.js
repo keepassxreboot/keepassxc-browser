@@ -4,7 +4,7 @@ const kpxcEvent = {};
 
 kpxcEvent.onMessage = async function(request, sender) {
     if (request.action in kpxcEvent.messageHandlers) {
-        if (!Object.hasOwn(sender, 'tab') || sender.tab.id < 1) {
+        if (!Object.hasOwn(sender, 'tab') || sender?.tab?.id < 1) {
             sender.tab = {};
             sender.tab.id = page.currentTabId;
         }
@@ -158,8 +158,10 @@ kpxcEvent.onLoginPopup = async function(tab, logins) {
         popup: 'popup_login'
     };
 
-    page.tabs[tab.id].loginList = logins;
-    await browserAction.show(tab, popupData);
+    if (tab?.id) {
+        page.tabs[tab.id].loginList = logins;
+        await browserAction.show(tab, popupData);
+    }
 };
 
 kpxcEvent.initHttpAuth = async function() {
@@ -177,11 +179,15 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
 };
 
 kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {
-    page.tabs[tab.id].usernameFieldDetected = detected;
+    if (tab?.id) {
+        page.tabs[tab.id].usernameFieldDetected = detected;
+    }
 };
 
 kpxcEvent.onIframeDetected = async function(tab, detected) {
-    page.tabs[tab.id].iframeDetected = detected;
+    if (tab?.id) {
+        page.tabs[tab.id].iframeDetected = detected;
+    }
 };
 
 kpxcEvent.passwordGetFilled = async function() {
@@ -201,7 +207,7 @@ kpxcEvent.pageGetRedirectCount = async function() {
 };
 
 kpxcEvent.pageClearLogins = async function(tab, alreadyCalled) {
-    if (!alreadyCalled) {
+    if (!alreadyCalled && tab?.id) {
         page.clearLogins(tab.id);
     }
 };
@@ -230,7 +236,9 @@ kpxcEvent.hideTroubleshootingGuideAlert = async function(tab) {
 
 // Bounce message back to all frames
 kpxcEvent.sendBackToTabs = async function(tab, args = []) {
-    await browser.tabs.sendMessage(tab.id, { action: 'frame_message', args: args });
+    if (tab?.id) {
+        await browser.tabs.sendMessage(tab.id, { action: 'frame_message', args: args });
+    }
 };
 
 // All methods named in this object have to be declared BEFORE this!
@@ -264,6 +272,7 @@ kpxcEvent.messageHandlers = {
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
     'is_iframe_allowed': page.isIframeAllowed,
+    'is_site_ignored': page.isSiteIgnored,
     'load_keyring': kpxcEvent.onLoadKeyRing,
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,

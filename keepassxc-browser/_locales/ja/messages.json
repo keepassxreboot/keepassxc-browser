@@ -7,6 +7,10 @@
         "message": "この URL にサイト設定を追加します。",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Edit URL for this Site Preferences.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "現在のページにクロスオリジン iframe を許可する。",
         "description": "Allow Cross-Origin iframes button title text."
@@ -20,7 +24,7 @@
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
-        "message": "Basic 認証を解除する。",
+        "message": "Dismisses Basic HTTP Auth.",
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
@@ -48,7 +52,7 @@
         "description": "Remove button title on Site Preferences tab."
     },
     "reopenDatabaseButtonTitle": {
-        "message": "現在のアクティブなデータベースを再開する。",
+        "message": "Reopen current active database.",
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
@@ -216,7 +220,7 @@
         "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "タイマーの終了を待つ。",
+        "message": "Wait for timer to expire.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
@@ -224,7 +228,7 @@
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "チャレンジの長さが必要最低限より短い",
+        "message": "Challenge is shorter than required minimum length.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
@@ -495,7 +499,7 @@
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "KeePassXC-Browser は KeePassXC に接続しており、次の識別子を使用する設定になっています: $1",
+        "message": "KeePassXC-Browser は次の識別子を使用して KeePassXC に接続しています: $1",
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
@@ -685,6 +689,10 @@
     "optionsButtonAdd": {
         "message": "追加",
         "description": "Add button text."
+    },
+    "optionsButtonEdit": {
+        "message": "Edit",
+        "description": "Edit button text."
     },
     "optionsButtonUpdate": {
         "message": "更新を確認",
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "OTP/2FA として認識した入力フィールドにアイコンを追加します。",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "You can also hide icons manually when needed with shift+click.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "タブがアクティブになった直後に KeePassXC-Browser が資格情報を読み込みます。",

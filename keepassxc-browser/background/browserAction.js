@@ -11,7 +11,7 @@ browserAction.show = async function(tab, popupData) {
         path: await browserAction.generateIconName(popupData.iconType)
     });
 
-    if (popupData.popup) {
+    if (popupData.popup && tab?.id) {
         browserActionWrapper.setPopup({
             tabId: tab.id,
             popup: `popups/${popupData.popup}.html`
@@ -19,9 +19,9 @@ browserAction.show = async function(tab, popupData) {
 
         let badgeText = '';
         if (popupData.popup === 'popup_login') {
-            badgeText = String(page.tabs[tab.id]?.loginList?.length);
+            badgeText = page.tabs[tab.id]?.loginList?.length;
         } else if (popupData.popup === 'popup_httpauth') {
-            badgeText = String(page.tabs[tab.id]?.loginList?.logins?.length);
+            badgeText = page.tabs[tab.id]?.loginList?.logins?.length;
         }
 
         browserAction.setBadgeText(tab?.id, badgeText);
@@ -52,33 +52,22 @@ browserAction.showDefault = async function(tab) {
         return;
     }
 
-    if (page.tabs[tab.id]?.loginList.length > 0) {
+    if (page?.tabs[tab.id]?.loginList.length > 0) {
         popupData.iconType = 'normal';
         popupData.popup = 'popup_login';
-        browserAction.setBadgeText(tab?.id, String(page.tabs[tab.id]?.loginList.length));
+        browserAction.setBadgeText(tab?.id, page.tabs[tab.id]?.loginList.length);
     }
 
     await browserAction.show(tab, popupData);
 };
 
-browserAction.updateIcon = async function(tab, iconType) {
-    if (!tab) {
-        const tabs = await browser.tabs.query({ 'active': true, 'currentWindow': true });
-        if (tabs.length === 0) {
-            return;
-        }
-
-        tab = tabs[0];
+browserAction.setBadgeText = function(tabId, badgeText) {
+    if (!tabId) {
+        return;
     }
 
-    browserActionWrapper.setIcon({
-        path: browserAction.generateIconName(iconType)
-    });
-};
-
-browserAction.setBadgeText = function(tabId, badgeText) {
     browserActionWrapper.setBadgeBackgroundColor({ color: '#666666' });
-    browserActionWrapper.setBadgeText({ text: badgeText, tabId: tabId });
+    browserActionWrapper.setBadgeText({ text: String(badgeText), tabId: tabId });
 };
 
 browserAction.generateIconName = async function(iconType) {
@@ -87,7 +76,7 @@ browserAction.generateIconName = async function(iconType) {
     name += (!iconType || iconType === 'normal') ? 'normal' : iconType;
 
     let style = 'colored';
-    if (page.settings.useMonochromeToolbarIcon) {
+    if (page?.settings?.useMonochromeToolbarIcon) {
         if (page.settings.colorTheme === 'system') {
             style = await retrieveColorScheme();
         } else {
@@ -103,8 +92,10 @@ browserAction.ignoreSite = async function(url) {
     const tab = await getCurrentTab();
 
     // Send the message to the current tab's content script
-    browser.tabs.sendMessage(tab.id, {
-        action: 'ignore_site',
-        args: [ url ]
-    });
+    if (tab?.id) {
+        browser.tabs.sendMessage(tab.id, {
+            action: 'ignore_site',
+            args: [ url ]
+        });
+    }
 };

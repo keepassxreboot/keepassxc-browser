@@ -7,6 +7,10 @@
         "message": "Websitevoorkeuren toevoegen voor deze URL.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "URL bewerken voor deze Sitevoorkeuren.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Cross-origin iframes toestaan voor deze webpagina.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "Toevoegen",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Bewerken",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Controleren op updates",
         "description": "Check for updates button text."
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "Voegt een pictogram toe aan invoervelden die worden herkend als OTP/2FA",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": "Je kunt pictogrammen wanneer dat nodig is ook handmatig verbergen met shift + klik.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser haalt direct inloggegevens op als een tabblad wordt geactiveerd.",

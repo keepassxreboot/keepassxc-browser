@@ -678,7 +678,7 @@ kpxc.retrieveCredentialsCallback = async function(credentials) {
 
 // If credentials are not received, request them again
 kpxc.receiveCredentialsIfNecessary = async function() {
-    if (kpxc.credentials.length === 0 && !_called.retrieveCredentials) {
+    if (kpxc.credentials.length === 0) {
         if (!await isIframeAllowed()) {
             return [];
         }
@@ -981,6 +981,8 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             }
         } else if (req.action === 'ignore_site') {
             kpxc.ignoreSite(req.args);
+        } else if (req.action === 'is_site_ignored') {
+            return await kpxc.siteIgnored();
         } else if (req.action === 'redetect_fields') {
             const response = await sendMessage('load_settings');
             kpxc.settings = response;

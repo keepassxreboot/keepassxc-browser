@@ -4,55 +4,59 @@
         "description": "Name of the extension."
     },
     "addSitePreferenceButtonTitle": {
-        "message": "Add Site Preferences for this URL.",
+        "message": "Tilføj indstillinger for dette URL.",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Rediger URL for denne hjemmeside.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
-        "message": "Allows Cross-Origin iframes for the current page.",
+        "message": "Tillad Cross-Origin iframes for denne side.",
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
-        "message": "Connect current active database to KeePassXC-Browser.",
+        "message": "Forbind den aktive database til KeePassXC-Browser.",
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Copy debug info to clipboard.",
+        "message": "Kopiér fejlretningsoplysninger til udklipsholder.",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
-        "message": "Dismisses Basic HTTP Auth.",
+        "message": "Afslutter Basic HTTP Auth.",
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "Reconnect current active database to KeePassXC-Browser.",
+        "message": "Tilslut den aktive database til KeePassXC-Browser igen.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
-        "message": "Redetects all input fields on the page.",
+        "message": "Genregistrerer alle inputfelter på siden.",
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
-        "message": "Reloads the extension and reconnects to KeePassXC.",
+        "message": "Genindlæser udvidelsen og opretter forbindelse til KeePassXC.",
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
-        "message": "Remove connected database from KeePassXC-Browser.",
+        "message": "Fjern den forbundne database fra KeePassXC-Browser.",
         "description": "Remove button title on Connected Databases tab."
     },
     "removeCustomLoginFieldsButtonTitle": {
-        "message": "Remove Custom Login Fields for this URL.",
+        "message": "Fjern tilpassede loginfelter for dette URL.",
         "description": "Remove button title on Custom Login Fields tab."
     },
     "removeSitePreferencesButtonTitle": {
-        "message": "Remove Site Preferences for this URL.",
+        "message": "Fjern sideindstillinger for dette URL.",
         "description": "Remove button title on Site Preferences tab."
     },
     "reopenDatabaseButtonTitle": {
-        "message": "Reopen current active database.",
+        "message": "Genåbn den aktive database.",
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
-        "message": "Adds Username-only Detection to the current page.",
+        "message": " Tilføjer detektion kun baseret på brugernavn på den aktuelle side.",
         "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -72,7 +76,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Save Credentials",
+        "message": "Gem loginoplysninger",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -80,7 +84,7 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Fill Attribute…",
+        "message": "Udfyld attribut...",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
@@ -200,39 +204,39 @@
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Origin is empty or not allowed.",
+        "message": "Oprindelse er tom eller ikke tilladt.",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-        "message": "Effective domain is not a valid domain.",
+        "message": " Det effektive domæne er ikke et gyldigt domæne.",
         "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-        "message": "Origin and RP ID do not match.",
+        "message": "Oprindelse og RP-ID stemmer ikke overens.",
         "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-        "message": "No supported algorithms were provided.",
+        "message": " Der blev ikke angivet nogen understøttede algoritmer.",
         "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": " Vent på, at timeren udløber.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Unknown passkeys error.",
+        "message": " Ukendt fejl med adgangsnøgler.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": " Udfordringen er kortere end den krævede minimumslængde.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": " user.id stemmer ikke overens med den krævede længde.",
         "description": "user.id does not match the required length."
     },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "Konteksten er ikke sikker.",
         "description": "Context is not secure."
     },
     "errorNotConnected": {
@@ -240,7 +244,7 @@
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Current database is not connected.",
+        "message": "Den aktuelle database er ikke forbundet.",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
@@ -256,26 +260,26 @@
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorGenerateText": {
-        "message": "Generate password.",
+        "message": "Generer adgangskode.",
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Launching the password generator is not supported in this KeePassXC version. Please update KeePassXC to a newer version."
+        "message": "At starte adgangskodegeneratoren understøttes ikke i denne KeePassXC-version. Opdater KeePassXC til en nyere version."
     },
     "usernameFieldText": {
-        "message": "Fill credentials from KeePassXC.",
+        "message": "Udfyld loginoplysninger fra KeePassXC.",
         "description": "Username field icon hover text."
     },
     "usernameFieldTextNoCredentials": {
-        "message": "No credentials to fill.",
+        "message": "Der er ingen loginoplysninger at udfylde.",
         "description": "Username field icon hover text when no credentials are."
     },
     "usernameLockedFieldText": {
-        "message": "Database is locked.",
+        "message": "Databasen er låst.",
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC is disconnected.",
+        "message": "KeePassXC er ikke forbundet.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "totp": {
@@ -371,7 +375,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "Tryk på KeePassXC-Browser ikonet for flere indstillinger.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -395,7 +399,7 @@
         "description": "Message shown when no password fields are found."
     },
     "fieldsPasswordFillNotAccepted": {
-        "message": "Filling password to a plain text field is prevented.",
+        "message": "Udfyldning af adgangskode på et almindeligt tekstfelt er forhindret.",
         "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
@@ -411,7 +415,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Choose Custom Login Fields",
+        "message": " Vælg brugerdefinerede loginfelter.",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -479,7 +483,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": " KeePassXC-Browser er ikke blevet konfigureret. Klik på forbindelsesknappen for at parre med KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -487,7 +491,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": " Klik på genforbindelsesknappen for at oprette en ny forbindelse.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -527,7 +531,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": " Vælg venligst en gruppe til at opbevare de nye loginoplysninger.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -591,7 +595,7 @@
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupUsername": {
-        "message": "Username:",
+        "message": "Brugernavn:",
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
@@ -603,11 +607,11 @@
         "description": "Update button text in popup when updating credentials."
     },
     "popupButtonCancel": {
-        "message": "Cancel",
+        "message": "Annuller",
         "description": "Cancel button text in popup when updating credentials."
     },
     "popupButtonBack": {
-        "message": "Back",
+        "message": "Tilbage",
         "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
@@ -635,11 +639,11 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Custom Login Fields",
+        "message": "Brugerdefinerede loginfelter",
         "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Site Preferences",
+        "message": "Sideindstillinger",
         "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -655,11 +659,11 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Custom Login Fields",
+        "message": "Brugerdefinerede loginfelter",
         "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Site Preferences",
+        "message": "Sideindstillinger",
         "description": "Site Preferences page header."
     },
     "optionsMenuAbout": {
@@ -685,6 +689,10 @@
     "optionsButtonAdd": {
         "message": "Tilføj",
         "description": "Add button text."
+    },
+    "optionsButtonEdit": {
+        "message": "Rediger",
+        "description": "Edit button text."
     },
     "optionsButtonUpdate": {
         "message": "Søg efter opdateringer",
@@ -719,7 +727,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
-        "message": "Default group for saving new passkeys:",
+        "message": "Standardgruppe til lagring af nye adgangsnøgler:",
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
@@ -731,15 +739,15 @@
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
-        "message": "Activate password generator icons",
+        "message": "Aktiver ikoner for adgangskodegenerering.",
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Activate username field icons",
+        "message": "Aktiver ikoner for brugernavnsfelter.",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Use dynamic input field detection",
+        "message": "Brug dynamisk detektion af inputfelter.",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
@@ -747,15 +755,15 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Activate 2FA/OTP field icons",
+        "message": "Aktiver ikoner for 2FA/OTP-felter.",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Automatically retrieve credentials",
+        "message": "Hent automatisk loginoplysninger.",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Automatically reconnect to KeePassXC",
+        "message": "Genopret automatisk forbindelse til KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -763,23 +771,23 @@
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Automatically fill in single-credential entries",
+        "message": "Udfyld automatisk enkelte loginoplysninger.",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "Udfyld automatisk relevante loginoplysninger.",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Automatically fill in single TOTP entries",
+        "message": "Automatisk udfyld enkelte TOTP-poster",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Activate autocomplete for username fields",
+        "message": "Aktiver autoudfyld for brugernavnsfelter",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Display the group name in autocomplete list when credentials are from different groups",
+        "message": " Vis gruppenavnet i autoudfyldningslisten, når loginoplysningerne stammer fra forskellige grupper.",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -791,23 +799,23 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Show notifications",
+        "message": "Vis notifikationer.",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Use monochrome toolbar icon",
+        "message": "Brug monokromt ikon på værktøjslinjen.",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
-        "message": "Use compact mode",
+        "message": "Brug kompakt tilstand",
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
-        "message": "Save domain only",
+        "message": "Gem kun domænenavnet",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Show a banner on the page when new credentials can be saved to the database",
+        "message": " Vis et banner på siden, når nye loginoplysninger kan gemmes i databasen.",
         "description": "Show login notifications checkbox text."
     },
     "optionsRedirectAllowance": {
@@ -819,7 +827,7 @@
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Allow filling HTTP Basic Auth credentials",
+        "message": "Tillad udfyldning af HTTP Basic Auth-legitimationsoplysninger.",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsDebugLogging": {
@@ -835,7 +843,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every three days",
+        "message": "hver tredje dag",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -891,11 +899,11 @@
         "description": "Predefined site list details button text."
     },
     "optionsUsePredefinedSites": {
-        "message": "Use predefined sites for compatibility",
+        "message": "Brug foruddefinerede sites for kompatibilitet.",
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Adds common sites that have username-only login forms to the Site Preferences.",
+        "message": " Tilføjer almindelige sites, der har loginformularer kun med brugernavn, til siteindstillingerne.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
@@ -905,6 +913,10 @@
     "optionsShowOTPIconHelpText": {
         "message": "Tilføjer et ikon til inputfelter som genkendes som OTP/2FA.",
         "description": "OTP field icon option help text."
+    },
+    "optionsHideIconsAlertText": {
+        "message": " Du kan også skjule ikoner manuelt, når det er nødvendigt, med shift+klik.",
+        "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser indhenter automatisk loginoplysninger når et faneblad aktiveres.",
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": " Udfyld automatisk de relevante loginoplysninger, hvis en anden udfyldning er nødvendig.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -935,7 +947,7 @@
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "When credentials are returned from different groups, the group name will be shown. Only affects the compact mode.",
+        "message": "Når loginoplysninger returneres fra forskellige grupper, vil gruppenavnet blive vist. Dette påvirker kun kompakt tilstand.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
@@ -947,7 +959,7 @@
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
-        "message": "Use a compact version of the dropdown list to select credentials.",
+        "message": " Brug en kompakt version af dropdown-listen til at vælge loginoplysninger.",
         "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
@@ -955,7 +967,7 @@
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "When saving new Custom Login Fields, save only the domain instead of full URL.",
+        "message": "Gem kun domænet i stedet for det fulde URL, når nye brugerdefinerede loginfelter gemmes..",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
@@ -1051,7 +1063,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": " Vil du virkelig fjerne følgende identifier fra databaselisten: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1159,11 +1171,11 @@
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
-        "message": "No saved Custom Login Fields found.",
+        "message": "Ingen gemte brugerdefinerede loginfelter fundet.",
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "You can manage saved Custom Login Fields using the table.",
+        "message": "Du kan administrere gemte brugerdefinerede loginfelter ved at bruge tabellen.",
         "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
@@ -1175,15 +1187,15 @@
         "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "On this page you can manage saved Custom Login Fields.",
+        "message": " På denne side kan du administrere gemte brugerdefinerede loginfelter.",
         "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Remove saved Custom Login Fields?",
+        "message": "Fjerne gemte brugerdefinerede loginfelter?",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Do you really want to remove the saved Custom Login Fields on the page: $1",
+        "message": " Vil du virkelig fjerne de gemte brugerdefinerede loginfelter på siden: $1",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
@@ -1191,7 +1203,7 @@
         "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "No Site Preferences found.",
+        "message": "Ingen siteindstillinger fundet.",
         "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
@@ -1239,7 +1251,7 @@
         "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "You can manage saved Site Preferences using the table.",
+        "message": "Du kan administrere gemte siteindstillinger ved at bruge tabellen.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
@@ -1283,7 +1295,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Create new issue on GitHub.",
+        "message": " Opret nyt issue på GitHub.",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
@@ -1335,7 +1347,7 @@
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Enable passkeys",
+        "message": "Aktiver adgangsnøgler",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1343,11 +1355,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Enable passkeys fallback",
+        "message": " Aktivér adgangsnøgler fallback",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "When enabled, a failed or canceled request to KeePassXC will trigger the browser's own internal passkeys request. If disabled, connection to KeePassXC is required and canceled request will fail. Default: enabled.",
+        "message": " Når det er aktiveret, vil en mislykket eller annulleret anmodning til KeePassXC udløse browserens egen interne passkey-anmodning. Hvis det er deaktiveret, kræves der forbindelse til KeePassXC, og annullerede anmodninger vil mislykkes. Standard: aktiveret.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

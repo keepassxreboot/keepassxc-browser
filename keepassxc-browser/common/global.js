@@ -188,7 +188,7 @@ const getFileAndLine = function() {
 
 const getCurrentTab = async function() {
     const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-    return tabs.length > 0 ? tabs[0] : undefined;
+    return tabs?.length > 0 ? tabs[0] : undefined;
 };
 
 // Exports for tests

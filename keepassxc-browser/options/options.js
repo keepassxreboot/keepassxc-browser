@@ -205,9 +205,21 @@ options.initGeneralSettings = async function() {
     });
 
     $('#configureCommands').addEventListener('click', function() {
+        if (isFirefox()) {
+            if (typeof(browser.commands.openShortcutSettings) === 'function') {
+                browser.commands.openShortcutSettings();
+            } else {
+                // TODO: Remove internal shortcuts page after Firefox ESR has support for openShortcutSettings()
+                browser.tabs.create({
+                    url: browser.runtime.getURL('options/shortcuts.html')
+                });
+            }
+            return;
+        }
+
         const scheme = isEdge() ? 'edge' : 'chrome';
         browser.tabs.create({
-            url: isFirefox() ? browser.runtime.getURL('options/shortcuts.html') : `${scheme}://extensions/shortcuts`
+            url: `${scheme}://extensions/shortcuts`
         });
     });
 

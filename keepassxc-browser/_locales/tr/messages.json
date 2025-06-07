@@ -7,6 +7,10 @@
         "message": "Bu adresin site ayarlarını ekle",
         "description": "Add button title text on Site Preferences tab."
     },
+    "editSitePreferenceButtonTitle": {
+        "message": "Bu site tercihleri için adresi düzenleyin.",
+        "description": "Edit button title text on Site Preferences tab."
+    },
     "allowIframeButtonTitle": {
         "message": "Sitede başka siteden iFrame bulunmasına izin verir.",
         "description": "Allow Cross-Origin iframes button title text."
@@ -686,6 +690,10 @@
         "message": "Ekle",
         "description": "Add button text."
     },
+    "optionsButtonEdit": {
+        "message": "Düzenle",
+        "description": "Edit button text."
+    },
     "optionsButtonUpdate": {
         "message": "Güncelleme denetimi",
         "description": "Check for updates button text."
@@ -767,7 +775,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "İlgili kimlik doğrulama bilgileri otomatik olarak doldurulsun",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -906,6 +914,10 @@
         "message": "OTP/2FA olarak algılanan giriş alanlarına bir simge ekler.",
         "description": "OTP field icon option help text."
     },
+    "optionsHideIconsAlertText": {
+        "message": "Shift+Tıklama ile gerektiğinde simgeleri el ile de gizleyebilirsiniz.",
+        "description": "Hide icons alert text text."
+    },
     "optionsAutoRetrieveCredentialsHelpText": {
         "message": "KeePassXC-Browser, bir sekme etkinleştirildiği anda kimlik doğrulama bilgilerini alır.",
         "description": "Auto-Retrive Credentials option help text."
@@ -919,7 +931,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "İkinci bir doldurma gerekiyorsa iİlgili kimlik doğrulama bilgileri otomatik olarak doldurulur.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
