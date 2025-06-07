@@ -60,9 +60,11 @@ kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
         return false;
     }
 
+    const includeCheck = (f) => id?.includes(f) || (name?.includes(f) || placeholder?.includes(f));
+
     // Checks if the field id, name or placeholder includes some of the acceptedOTPFields but not any from ignoredTypes
-    if ((acceptedOTPFields.some(f => id?.includes(f) || (name?.includes(f) || placeholder?.includes(f))) || acceptedParents.some(s => field.closest(s)))
-        && !ignoredTypes.some(f => id?.includes(f) || (name?.includes(f) || placeholder?.includes(f)))) {
+    if ((acceptedOTPFields.some(f => includeCheck(f)) || acceptedParents.some(s => field.closest(s)))
+        && !ignoredTypes.some(f => includeCheck(f))) {
         return true;
     }
 
