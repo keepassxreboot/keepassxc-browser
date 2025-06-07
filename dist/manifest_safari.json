@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "KeePassXC-Browser",
-    "version": "1.9.7",
-    "version_name": "1.9.7",
+    "version": "1.9.8",
+    "version_name": "1.9.8",
     "minimum_chrome_version": "93",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
@@ -171,7 +171,8 @@
         "notifications",
         "offscreen",
         "storage",
-        "tabs"
+        "tabs",
+        "webNavigation"
     ],
     "content_security_policy": {
         "extension_pages": "script-src 'self'"

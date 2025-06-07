@@ -75,7 +75,7 @@ page.initSettings = async function() {
             } catch (err) {
                 logError('page.initSettings error: ' + err);
             }
-        } else {
+        } else if (!isSafari()) {
             chrome.storage.managed.get('settings').then((managedSettings) => {
                 if (managedSettings?.settings) {
                     debugLogMessage('Managed settings found.');
