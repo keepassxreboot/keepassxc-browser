@@ -321,9 +321,14 @@ kpxc.initCombinations = async function(inputs = []) {
     for (const c of combinations) {
         // If no username field is found, handle the single password field as such
         const field = c.username || c.password;
-        if (field && c.form) {
-            // Initialize form-submit for remembering credentials
-            kpxcForm.initForm(c.form, c);
+        if (field) {
+            if (c.form) {
+                // Initialize form-submit for remembering credentials
+                kpxcForm.initForm(c.form, c);
+            } else {
+                // Try to search a submit button
+                kpxcForm.initSubmitButtonFromPage();
+            }
         }
 
         // Don't allow duplicates
