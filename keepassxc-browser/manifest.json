@@ -59,7 +59,8 @@
                 "content/pwgen.js",
                 "content/totp-autocomplete.js",
                 "content/totp-field.js",
-                "content/username-field.js"
+                "content/username-field.js",
+                "content/theme.js"
             ],
             "run_at": "document_idle",
             "all_frames": true

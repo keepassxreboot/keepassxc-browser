@@ -164,6 +164,10 @@ kpxcEvent.onLoginPopup = async function(tab, logins) {
     }
 };
 
+kpxcEvent.themeChanged = async function () {
+    browserAction.updateIcon();
+};
+
 kpxcEvent.initHttpAuth = async function() {
     httpAuth.init();
 };
@@ -303,5 +307,6 @@ kpxcEvent.messageHandlers = {
     'save_settings': kpxcEvent.onSaveSettings,
     'update_available_keepassxc': kpxcEvent.onUpdateAvailableKeePassXC,
     'update_context_menu': page.updateContextMenu,
-    'update_popup': page.updatePopup
+    'update_popup': page.updatePopup,
+    'theme_changed': kpxcEvent.themeChanged
 };

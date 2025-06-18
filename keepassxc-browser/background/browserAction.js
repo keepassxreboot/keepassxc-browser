@@ -3,13 +3,19 @@
 const browserActionWrapper = browser.action || browser.browserAction;
 const browserAction = {};
 
-browserAction.show = async function(tab, popupData) {
+browserAction.updateIcon = async function(popupData) {
     popupData ??= page.popupData;
-    page.popupData = popupData;
 
     browserActionWrapper.setIcon({
         path: await browserAction.generateIconName(popupData.iconType)
     });
+}
+
+browserAction.show = async function(tab, popupData) {
+    popupData ??= page.popupData;
+    page.popupData = popupData;
+
+    browserAction.updateIcon(popupData);
 
     if (popupData.popup && tab?.id) {
         browserActionWrapper.setPopup({
@@ -83,7 +89,7 @@ browserAction.generateIconName = async function(iconType) {
             style = page.settings.colorTheme;
         }
     }
-    const filetype = (isFirefox() ? 'svg' : 'png');
+    const filetype = ((isFirefox() || isSafari()) ? 'svg' : 'png');
     return `/icons/toolbar/${style}/${name}.${filetype}`;
 };
 

@@ -1,6 +1,12 @@
 'use strict';
 
 async function retrieveColorScheme() {
+    if (isSafari()) {
+        const tab = await getCurrentTab();
+        const theme = tab?.id && await browser.tabs.sendMessage(tab.id, { action: 'get_theme' });
+        return theme ?? 'light';
+    }
+
     if (typeof window !== 'undefined') {
         // Firefox does not support the offscreen API but its background script still has a window (so far)
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -23,9 +29,11 @@ async function retrieveColorScheme() {
         target: 'offscreen',
         action: 'retrieve_color_scheme',
     });
+
     if (!style) {
         // if messaging fails then use "light" icon
         return 'light';
     }
+
     return style;
 }
