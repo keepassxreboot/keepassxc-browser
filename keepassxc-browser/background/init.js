@@ -149,6 +149,15 @@ const initListeners = async function() {
             logError(err);
         });
     });
+
+    // Show getting started page after first install
+    browser.runtime.onInstalled.addListener((details) => {
+        if (details?.reason === 'install') {
+            browser.tabs.create({
+                url: 'options/getting_started.html',
+            });
+        }
+    });
 };
 
 const initContextMenuItems = async function() { 

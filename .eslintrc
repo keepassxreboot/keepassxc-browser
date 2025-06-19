@@ -181,7 +181,8 @@
         "statusResponse": "readonly",
         "Tests": "readonly",
         "tr": "readonly",
-        "trimURL": "readonly"
+        "trimURL": "readonly",
+        "updateDefaultPasswordManager": "readonly"
     },
     "overrides": [
         {

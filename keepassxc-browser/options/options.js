@@ -78,6 +78,8 @@ options.initGeneralSettings = async function() {
             $('#passkeysFallback').disabled = !isChecked;
         } else if (name === 'useMonochromeToolbarIcon') {
             browser.runtime.sendMessage({ action: 'update_popup' });
+        } else if (name === 'defaultPasswordManager') {
+            await updateDefaultPasswordManager();
         }
     };
 
@@ -90,7 +92,13 @@ options.initGeneralSettings = async function() {
 
     const generalSettingsCheckboxes = document.querySelectorAll('#tab-general-settings input[type=checkbox]');
     for (const checkbox of generalSettingsCheckboxes) {
-        checkbox.checked = options.settings[checkbox.name];
+        if (checkbox.name === 'defaultPasswordManager') {
+            const passwordSavingEnabled = await browser.privacy.services.passwordSavingEnabled.get({});
+            checkbox.checked = (passwordSavingEnabled?.levelOfControl === 'controlled_by_this_extension'
+                && !passwordSavingEnabled.value) || false;
+        } else {
+            checkbox.checked = options.settings[checkbox.name];
+        }
 
         if (checkbox.name === 'defaultGroupAlwaysAsk' && checkbox.checked) {
             $('#defaultGroup').disabled = true;
