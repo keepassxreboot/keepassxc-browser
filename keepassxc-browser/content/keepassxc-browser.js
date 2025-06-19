@@ -1003,7 +1003,10 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'show_password_generator') {
             kpxcPasswordGenerator.showPasswordGenerator();
         } else if (req.action === 'request_autotype') {
-            sendMessage('request_autotype', [ window.location.hostname ]);
+            // All frames can perform this. Ignore iframes that are not allowed.
+            if (await isIframeAllowed()) {
+                sendMessage('request_autotype', [ window.location.hostname ]);
+            }
         }
     }
 });
