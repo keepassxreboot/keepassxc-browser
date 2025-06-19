@@ -1004,6 +1004,8 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxcPasswordGenerator.showPasswordGenerator();
         } else if (req.action === 'request_autotype') {
             sendMessage('request_autotype', [ window.location.hostname ]);
+        } else if (req.action === 'get_theme') {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
     }
 });

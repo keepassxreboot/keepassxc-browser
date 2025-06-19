@@ -10,6 +10,7 @@ const DEFAULT = 'manifest_default.json';
 const BROWSERS = {
     'Firefox': 'manifest_firefox.json',
     'Chromium': 'manifest_chromium.json',
+    'Safari': 'manifest_safari.json'
 };
 
 const getVersion = async () => {
@@ -54,6 +55,10 @@ const createZipFile = async (fileName, path) => {
     const version = await getVersion();
 
     for (const browser in BROWSERS) {
+        if (params.includes('--safari-web-extension') && browser !== 'Safari') {
+            continue;
+        }
+
         console.log(`KeePassXC-Browser: Creating extension package for ${browser}`);
 
         const fileName = await getDestinationFilename(BROWSERS[browser], version);
@@ -64,7 +69,19 @@ const createZipFile = async (fileName, path) => {
             await fs.rm(fileName);
         }
 
-        await createZipFile(fileName, DEST);
+        if (params.includes('--safari-web-extension') && browser === 'Safari' && params.includes('-o')) {
+            let outputPath = params[params.indexOf('-o') + 1]
+
+            if (!outputPath) {
+                console.error('No ouput path specified!');
+                return;
+            }
+
+            await fs.cpSync(DEST, outputPath, { recursive: true })
+        } else {
+            await createZipFile(fileName, DEST);
+        }
+
         console.log('Done');
     }
 

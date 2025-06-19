@@ -6,6 +6,10 @@ httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];
 
 httpAuth.init = function() {
+    if (isSafari()) {
+        return;
+    }
+
     let handleReq = httpAuth.handleRequestPromise;
     let reqType = 'blocking';
 

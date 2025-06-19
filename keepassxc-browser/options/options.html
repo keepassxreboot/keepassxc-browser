@@ -125,7 +125,7 @@
                   </div>
 
                   <!-- Show notifications -->
-                  <div class="form-group pb-1">
+                  <div class="form-group pb-1 hide-safari">
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="showNotifications" id="notificationCheckBox" value="true">
                       <label class="form-check-label" for="notificationCheckBox" data-i18n="optionsCheckboxShowNotifications"></label>
@@ -166,12 +166,17 @@
                     <span data-i18n="contextMenuFillTOTP"></span>: <span id="fill_totp-shortcut">error</span><br>
                     <span data-i18n="contextMenuShowPasswordGenerator"></span>: <span id="show_password_generator-shortcut">error</span>
                   </p>
-                  <p>
+                  <p class="hide-safari">
                     <button class="btn btn-sm btn-success" id="configureCommands" type="button" data-i18n="[title]openNewTab">
                       <i class="fa fa-keyboard-o" aria-hidden="true"></i>
                       <span data-i18n="optionsConfigureShortcuts"></span>
                     </button>
                   </p>
+                  
+                  <div class="alert alert-info mt-3 col-lg-9 show-safari" role="alert">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <span data-i18n="optionsUnsupportedKeyboardShortcutsSafari"></span>
+                  </div>
                 </div>
               </div>
 
@@ -285,6 +290,11 @@
                       <div class="form-text" data-i18n="optionsAutoFillAndSendHelpText"></div>
                       <div class="form-text" data-i18n="optionsAutoFillAndSendHelpTextSecond"></div>
                       <img src="/options/http-auth-dialog.png" data-i18n="[alt]httpAuthDialog" class="img-fluid mt-2">
+
+                      <div class="alert alert-info mt-3 col-lg-9 show-safari" role="alert">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span data-i18n="optionsUnsupportedAutofillHTTPAuthDialogsSafari"></span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -404,7 +414,7 @@
               </div>
 
               <!-- Updates -->
-              <div class="card my-4 shadow">
+              <div class="card my-4 shadow hide-safari">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-clock-o" aria-hidden="true"></i>
                   <span data-i18n="optionsUpdatesTitle"></span>
@@ -873,6 +883,7 @@
                     <br><a target="_blank" href="http://lukas-schulze.de" data-i18n="[title]openNewTab">Lukas Schulze</a>
                     <br><a target="_blank" href="https://github.com/stefansundin" data-i18n="[title]openNewTab">Stefan Sundin</a>
                     <br><a target="_blank" href="https://github.com/dynobo" data-i18n="[title]openNewTab">dynobo</a>
+                    <br><a target="_blank" href="https://github.com/sebastianlivoni" data-i18n="[title]openNewTab">Sebastian Livoni</a>
                   </p>
 
                   <details>

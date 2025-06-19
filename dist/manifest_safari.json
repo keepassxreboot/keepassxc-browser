@@ -6,13 +6,6 @@
     "minimum_chrome_version": "93",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
-    "icons": {
-        "16": "icons/keepassxc_16x16.png",
-        "48": "icons/keepassxc_48x48.png",
-        "64": "icons/keepassxc_64x64.png",
-        "96": "icons/keepassxc_96x96.png",
-        "128": "icons/keepassxc_128x128.png"
-    },
     "action": {
         "default_icon": {
             "16": "icons/keepassxc_16x16.png",
@@ -31,7 +24,21 @@
         "open_in_tab": true
     },
     "background": {
-        "service_worker": "background/background_service.js"
+        "scripts": [
+            "common/browser-polyfill.min.js",
+            "common/global.js",
+            "common/sites.js",
+            "background/nacl.min.js",
+            "background/nacl-util.min.js",
+            "background/client.js",
+            "background/keepass.js",
+            "background/httpauth.js",
+            "background/offscreen.js",
+            "background/browserAction.js",
+            "background/page.js",
+            "background/event.js",
+            "background/init.js"
+        ]
     },
     "content_scripts": [
         {
@@ -39,6 +46,7 @@
                 "<all_urls>"
             ],
             "exclude_matches": [
+                "*://*/*.xml*",
                 "file:///*.xml*"
             ],
             "js": [
@@ -165,10 +173,7 @@
         "offscreen",
         "storage",
         "tabs",
-        "webNavigation",
-        "webRequest",
-        "webRequestAuthProvider",
-        "webRequestBlocking"
+        "webNavigation"
     ],
     "content_security_policy": {
         "extension_pages": "script-src 'self'"
