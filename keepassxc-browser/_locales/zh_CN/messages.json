@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "复制调试信息到剪贴板。",
+        "message": "复制调试信息到剪贴板",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -459,11 +459,11 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "您是第一次使用吗？请阅读我们的新手上路指南。",
+        "message": "您是第一次使用吗？请阅读我们的新手指南。",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "新手上路指南 - 设置浏览器集成",
+        "message": "新手指南 - 设置浏览器集成",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
@@ -625,6 +625,14 @@
     "popupButtonDismissHttpAuth": {
         "message": "关闭并显示默认身份验证对话框",
         "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsDefaultSettingsTitle": {
+        "message": "默认设置",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
     },
     "optionsTitle": {
         "message": "设置 | KeePassXC-Browser",
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "在可以保存新凭据到数据库时显示页面横幅",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "设置为默认密码管理器",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "将 KeePassXC-Browser 设置为浏览器的默认密码管理器。",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "允许的重定向次数：$1",
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "锁定数据库",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "欢迎使用 KeePassXC-Browser！",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "我们的新手指南将帮助您快速上手。",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "寻找更全面的文档？我们的用户指南可以提供帮助。",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "需要帮助排查浏览器集成问题？请查阅问题排查指南。",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "欢迎使用 KeePassXC-Browser，这是 KeePassXC 的官方浏览器扩展。",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "请浏览默认设置并检查所有首选选项。",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "新用户？请查看我们的文档链接。",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }

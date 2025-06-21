@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "複製除錯訊息至剪貼板。",
+        "message": "複製除錯訊息至剪貼板",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -36,7 +36,7 @@
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
-        "message": "重新載入擴充並重新連接 KeePassXC。",
+        "message": "重新載入擴展程序並重新連接 KeePassXC。",
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
@@ -459,11 +459,11 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "您是第一次使用嗎？請閱讀我們的新手上路指南。",
+        "message": "您是第一次使用嗎？請閱讀我們的新手指南。",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "新手上路指南 - 設置瀏覽器整合",
+        "message": "新手指南 - 設置瀏覽器整合",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
@@ -625,6 +625,14 @@
     "popupButtonDismissHttpAuth": {
         "message": "撤銷並顯示預設身份驗證彈出視窗",
         "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsDefaultSettingsTitle": {
+        "message": "預設設定",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
     },
     "optionsTitle": {
         "message": "設定 | KeePassXC-Browser",
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "當可以儲存新憑證至資料庫時顯示頁面橫幅",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "設為預設密碼管理員",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "將 KeePassXC-Browser 設定為瀏覽器的預設密碼管理員。",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "允許的重新定向數： $1",
@@ -1255,7 +1271,7 @@
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "用於在頁面上忽略擴充功能的選項。",
+        "message": "用於在頁面上忽略擴展功能的選項。",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
@@ -1339,7 +1355,7 @@
         "description": "Advanced settings title in settings page"
     },
     "optionsExtensionTitle": {
-        "message": "擴充",
+        "message": "擴展",
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "鎖定資料庫",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "歡迎使用 KeePassXC-Browser！",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "我們的新手指南將幫助您快速上手。",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "在尋找更全面的文檔？我們的用戶指南可以提供幫助。",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "需要幫助排查瀏覽器整合問題？請參閱疑難排解指南。",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "歡迎使用 KeePassXC-Browser，這是 KeePassXC 的官方瀏覽器擴展。",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "請閱覽預設設定並檢查所有偏好選項。",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "是新用戶？請參閱我們的文檔連結。",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }

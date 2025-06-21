@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Foutopsporingsinformatie naar klembord kopiëren.",
+        "message": "Foutopsporingsinformatie kopiëren naar klembord",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -626,6 +626,14 @@
         "message": "Sluiten en standaard dialoogvenster voor authenticatie tonen",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
+    "optionsDefaultSettingsTitle": {
+        "message": "Standaardinstellingen",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
+    },
     "optionsTitle": {
         "message": "Instellingen | KeePassXC-Browser",
         "description": "Options page title."
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "Toon een banner op de pagina wanneer nieuwe inloggegevens in de database kunnen worden opgeslagen",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "Instellen als standaard wachtwoordbeheerder",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "Stelt KeePassXC-Browser in als de standaard wachtwoordbeheerder voor de browser.",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "Aantal toegestane omleidingen: $1",
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "Database vergrendelen",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "Welkom bij KeePassXC-Browser!",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "Onze snelstartgids (Getting Started Guide) helpt je snel aan de slag.",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "Op zoek naar meer uitgebreide documentatie? Onze gebruikershandleiding is er om je te helpen.",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "Hulp nodig bij de browserintegratie? Bekijk de handleiding voor probleemoplossing.",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "Welkom bij KeePassXC-Browser, de officiële browserextensie voor KeePassXC.",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "Controleer de standaardinstellingen en selecteer al jouw voorkeursopties.",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "Ben je een nieuwe gebruiker? Gebruik de links naar onze documentatie.",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }
