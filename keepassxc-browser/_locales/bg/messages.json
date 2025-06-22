@@ -626,6 +626,14 @@
         "message": "Отхвърляне и показване на подразбирания диалогов прозорец за удостоверяване",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
+    "optionsDefaultSettingsTitle": {
+        "message": "Подразбирани настройки",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
+    },
     "optionsTitle": {
         "message": "Настройки | KeePassXC-Browser",
         "description": "Options page title."
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "Показване на лента в страницата, когато могат да бъдат запазвани нови регистрации",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "Задаване като подразбирана добавка за пароли",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "Задава KeePassXC-Browser като подразбирана добавка за управление на пароли на мрежовия четец.",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "Брой разрешени пренасочвания: $1",
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "Заключване на хранилището",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "Здравейте от KeePassXC-Browser!",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "Ръководството за първи стъпки ще ви помогне да започнете работа бързо.",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "Търсите по-изчерпателна документация? Ръководството за потребителя ще ви бъде от помощ.",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "Нуждаете се от помощ за отстраняване на неизправности със съчетаването с мрежовия четец? Вижте Ръководството за отстраняване на неизправности.",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "Здравейте от KeePassXC-Browser, официалната добавка за KeePassXC.",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "Разгледайте подразбираните настройки и направете желаните промени.",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "Ако сте нов потребител прочетете документацията.",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }

@@ -1,3 +1,19 @@
+1.9.9 (2025-06-22)
+=========================
+- Add support for opening keyboard shortcuts page with Firefox [#2524]
+- Add submit button exception for OpenAI login page [#2542]
+- Add styling changes to settings pages [#2553]
+- Add Getting Started page when extension is installed for the first time [#2570]
+- Fix retrieving credentials when switching databases in unlock dialog [#2534]
+- Fix username input field detection with Credential Banner [#2525]
+- Fix submit button detection [#2531]
+- Fix browser integration document link (thanks joetor5) [#2548]
+- Fix querying forms when saving them temporarily [#2566]
+- Fix checking input field width with segmeted TOTP fields [#2571]
+- Fix detecting password input on Atlassian login page [#2574]
+- Fix checking managed settings [#2577]
+- Fix Global Auto-Type trigger search parameters [#2585]
+
 1.9.8 (2025-04-20)
 =========================
 - Add support for autocomplete=username with single input fields [#2521]

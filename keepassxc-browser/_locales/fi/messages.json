@@ -8,7 +8,7 @@
         "description": "Add button title text on Site Preferences tab."
     },
     "editSitePreferenceButtonTitle": {
-        "message": "Edit URL for this Site Preferences.",
+        "message": "Muokkaa osoitetta tälle asetukselle.",
         "description": "Edit button title text on Site Preferences tab."
     },
     "allowIframeButtonTitle": {
@@ -626,6 +626,14 @@
         "message": "Poistu ja näytä autentikaation oletusdialogi",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
+    "optionsDefaultSettingsTitle": {
+        "message": "Oletusasetukset",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
+    },
     "optionsTitle": {
         "message": "Asetukset | KeePassXC-Browser ",
         "description": "Options page title."
@@ -691,7 +699,7 @@
         "description": "Add button text."
     },
     "optionsButtonEdit": {
-        "message": "Edit",
+        "message": "Muokkaa",
         "description": "Edit button text."
     },
     "optionsButtonUpdate": {
@@ -818,6 +826,14 @@
         "message": "Näytä ilmoituspalkki kun tietokantaan voidaan tallentaa uusia tietueita",
         "description": "Show login notifications checkbox text."
     },
+    "optionsDefaultPasswordManager": {
+        "message": "Aseta oletussalasanamanageriksi",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "Asettaa KeePassXC-Browserin selaimen oletussalasanamanageriksi.",
+        "description": "Default password manager help text."
+    },
     "optionsRedirectAllowance": {
         "message": "Uudelleenohjauksien sallittu määrä:  $1",
         "description": "Redirect allowance range input text."
@@ -915,7 +931,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsHideIconsAlertText": {
-        "message": "You can also hide icons manually when needed with shift+click.",
+        "message": "Voit myös piilottaa ikonit halutessasi hiiren klikkauksella shift pohjassa.",
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "Lukitse tietokanta",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "Tervetuloa KeePassXC-Browseriin!",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "Aloitusoppaamme auttaa sinua pääsemään alkuun.",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "Etsitkö kattavampaa dokumentaatiota? Vilkaise käyttöohjeemme.",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "Onko selainlaajennuksessa ongelmia? Lue opas virhetilojen selvitykseen.",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "Tervetuloa KeePassXC-Browseriin, viralliseen KeePassXC:n selainlaajennukseen.",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "Ole hyvä ja käy läpi oletusasetukset, ja tarkista ovatko ne sinulle sopivat.",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "Oletko uusi käyttäjä? Tarkista linkit dokumentaatioomme.",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }

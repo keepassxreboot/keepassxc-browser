@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Kopiera felinformation till urklipp.",
+        "message": "Kopiera felinformation till urklipp",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -626,6 +626,14 @@
         "message": "Avfärda och visa den förinställda autentiseringsdialogen",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
+    "optionsDefaultSettingsTitle": {
+        "message": "Standardinställningar",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
+    },
     "optionsTitle": {
         "message": "Inställningar | KeePassXC-Browser",
         "description": "Options page title."
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "Visa en banderoll på sidan när nya autentiseringsuppgifter kan sparas i databasen",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "Ange som ordinarie lösenordshanterare",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "Sätter KeePassXC-Browser som ordinarie lösenordshanterare för webbläsaren.",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "Antal tillåtna omdirigeringar:  $1",
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "Lås databasen",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "Välkommen till KeePassXC-Browser!",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "Vår kom-igång-guide hjälper dig att snabbt komma igång.",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "Söker du mer omfattande dokumentation? Vår användarguide finns där för att hjälpa.",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "Behöver du hjälp med att felsöka webbläsarintegrationen? Kolla felsökningsguiden.",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "Välkommen till KeePassXC-Browser, det officiella webbläsartillägget för KeePassXC.",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "Gå igenom standardinställningarna och kontrollera alla dina önskade alternativ.",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "Är du en ny användare? Kolla in länkarna till vår dokumentation.",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }

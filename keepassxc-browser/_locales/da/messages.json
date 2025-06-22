@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Kopiér fejlretningsoplysninger til udklipsholder.",
+        "message": "Copy debug info to clipboard",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -626,6 +626,14 @@
         "message": "Afvis og vis standard autentifikationsdialogen",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
+    "optionsDefaultSettingsTitle": {
+        "message": "Default settings",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
+    },
     "optionsTitle": {
         "message": "Indstillinger | KeePassXC-Browser",
         "description": "Options page title."
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": " Vis et banner på siden, når nye loginoplysninger kan gemmes i databasen.",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "Set as default password manager",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "Sets KeePassXC-Browser as the default password manager for the browser.",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "Antal tilladte omdirigeringer: $1",
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "Lås database",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "Welcome to KeePassXC-Browser!",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "Our Getting Started Guide will get you up and running quickly.",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "Looking for more comprehensive documentation? Our User Guide is there to help.",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "Need help troubleshooting the browser integration? Check the Troubleshooting Guide.",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC.",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "Please go through the default settings and check all your preferred options.",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "Are you a new user? Check links to our documentation.",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }

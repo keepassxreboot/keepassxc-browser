@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Skopiuj informacje debugowania do schowka.",
+        "message": "Skopiuj informacje debugowania do schowka",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -459,7 +459,7 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "Czy używasz tego programu po raz pierwszy? Zapoznaj się z naszym Przewodnikiem dla początkujących.",
+        "message": "Czy używasz tego programu po raz pierwszy? Zapoznaj się z naszym przewodnikiem dla początkujących.",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
@@ -625,6 +625,14 @@
     "popupButtonDismissHttpAuth": {
         "message": "Odwołaj i pokaż domyślne okno uwierzytelniania",
         "description": "Dismiss button text when in HTTP Authentication popup."
+    },
+    "optionsDefaultSettingsTitle": {
+        "message": "Ustawienia domyślne",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
     },
     "optionsTitle": {
         "message": "Ustawienia | KeePassXC-Browser",
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "Pokaż baner, gdy nowe dane uwierzytelniające mogą zostać zapisane w bazie danych",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "Ustaw jako domyślny menedżer haseł",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "Ustawia KeePassXC-Browser jako domyślny menedżer haseł w przeglądarce.",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "Liczba dozwolonych przekierowań: $1",
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "Zablokuj bazę danych",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "Witaj w KeePassXC-Browser!",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "Dzięki naszemu przewodnikowi dla początkujących szybko rozpoczniesz pracę.",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "Szukasz bardziej kompleksowej dokumentacji? Nasz podręcznik użytkownika istnieje, aby pomóc.",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "Potrzebujesz pomocy w rozwiązywaniu problemów integracji z przeglądarką? Sprawdź przewodnik rozwiązywania problemów.",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "Witaj w KeePassXC-Browser, oficjalnym rozszerzeniu przeglądarki dla KeePassXC.",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "Przejrzyj ustawienia domyślne i wybierz wszystkie preferowane opcje.",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "Czy jesteś nowym użytkownikiem? Sprawdź łącza do naszej dokumentacji.",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }

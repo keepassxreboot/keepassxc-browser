@@ -8,7 +8,7 @@
         "description": "Add button title text on Site Preferences tab."
     },
     "editSitePreferenceButtonTitle": {
-        "message": "Edit URL for this Site Preferences.",
+        "message": "Відредагувати URL-адресу для цих налаштувань сайту.",
         "description": "Edit button title text on Site Preferences tab."
     },
     "allowIframeButtonTitle": {
@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Скопіювати налагоджувальну інформацію в буфер обміну.",
+        "message": "Скопіювати налагоджувальну інформацію до буфера обміну",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -626,6 +626,14 @@
         "message": "Відхилити й показати типовий діалог автентифікації",
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
+    "optionsDefaultSettingsTitle": {
+        "message": "Default settings",
+        "description": "Default settings title for Getting Started page."
+    },
+    "optionsWelcomeTitle": {
+        "message": "KeePassXC-Browser",
+        "description": "Main card title for Getting Started page."
+    },
     "optionsTitle": {
         "message": "Налаштування | KeePassXC-Browser",
         "description": "Options page title."
@@ -691,7 +699,7 @@
         "description": "Add button text."
     },
     "optionsButtonEdit": {
-        "message": "Edit",
+        "message": "Редагувати",
         "description": "Edit button text."
     },
     "optionsButtonUpdate": {
@@ -775,7 +783,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "Автоматичне заповнення відповідних облікових даних",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -817,6 +825,14 @@
     "optionsCheckboxShowLoginNotifications": {
         "message": "Показати банер на сторінці, коли нові облікові дані можна зберегти в базу даних.",
         "description": "Show login notifications checkbox text."
+    },
+    "optionsDefaultPasswordManager": {
+        "message": "Set as default password manager",
+        "description": "Default password manager checkbox text."
+    },
+    "optionsDefaultPasswordManagerHelpText": {
+        "message": "Sets KeePassXC-Browser as the default password manager for the browser.",
+        "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
         "message": "Кількість дозволених перенаправлень: $1",
@@ -915,7 +931,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsHideIconsAlertText": {
-        "message": "You can also hide icons manually when needed with shift+click.",
+        "message": "Ви також можете приховати іконки вручну, коли це необхідно, за допомогою shift+click.",
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -931,7 +947,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "Автоматичне заповнення відповідних облікових даних, якщо потрібне повторне заповнення.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -1377,5 +1393,33 @@
     "lockDatabase": {
         "message": "Заблокувати базу даних",
         "description": "Lock database button title text."
+    },
+    "welcomeText": {
+        "message": "Welcome to KeePassXC-Browser!",
+        "description": "Main title of Getting Started page."
+    },
+    "documentationGettingStarted": {
+        "message": "Our Getting Started Guide will get you up and running quickly.",
+        "description": "Getting Started document text."
+    },
+    "documentationUserGuide": {
+        "message": "Looking for more comprehensive documentation? Our User Guide is there to help.",
+        "description": "User Guide text."
+    },
+    "documentationTroubleshootingGuide": {
+        "message": "Need help troubleshooting the browser integration? Check the Troubleshooting Guide.",
+        "description": "Troubleshooting Guide text."
+    },
+    "gettingStartedWelcomeText": {
+        "message": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC.",
+        "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
+    },
+    "gettingStartedSecondWelcomeText": {
+        "message": "Please go through the default settings and check all your preferred options.",
+        "description": "Please go through the default settings and check all your preferred options."
+    },
+    "gettingStartedNewUser": {
+        "message": "Are you a new user? Check links to our documentation.",
+        "description": "Are you a new user? Check links to our documentation."
     }
 }
