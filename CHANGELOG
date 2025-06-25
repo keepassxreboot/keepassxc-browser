@@ -3,7 +3,7 @@
 - Add support for opening keyboard shortcuts page with Firefox [#2524]
 - Add submit button exception for OpenAI login page [#2542]
 - Add styling changes to settings pages [#2553]
-- Add Getting Started page when extension is installed for the first time [#2570]
+- Add Getting Started page when extension is installed for the first time (new permission needed for privacy API) [#2570]
 - Fix retrieving credentials when switching databases in unlock dialog [#2534]
 - Fix username input field detection with Credential Banner [#2525]
 - Fix submit button detection [#2531]
