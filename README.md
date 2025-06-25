@@ -38,6 +38,7 @@ KeePassXC-Browser extension requests the following permissions:
 | `tabs`                    | To request tab URL's and other info |
 | `webNavigation`           | To show browser notifications on install or update |
 | `webRequest`              | For handling HTTP Basic Auth |
+| `webRequestAuthProvider`  | For handling HTTP Basic Auth for Chromium based browsers |
 | `webRequestBlocking`      | For handling HTTP Basic Auth |
 | `http://*/*`              | To allow using KeePassXC-Browser on all websites |
 | `https://*/*`             | To allow using KeePassXC-Browser on all websites |
