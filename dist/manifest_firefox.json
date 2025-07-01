@@ -166,7 +166,6 @@
         "cookies",
         "nativeMessaging",
         "notifications",
-        "privacy",
         "storage",
         "tabs",
         "webNavigation",
@@ -175,6 +174,9 @@
         "https://*/*",
         "http://*/*",
         "https://api.github.com/"
+    ],
+    "optional_permissions": [
+        "privacy"
     ],
     "applications": {
         "gecko": {

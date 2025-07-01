@@ -64,6 +64,13 @@ options.initGeneralSettings = async function() {
         const isChecked = e.currentTarget.checked;
         options.settings[name] = isChecked;
 
+        // Default password manager setting relies on optional permission, and must be checked before saving options
+        if (name === 'defaultPasswordManager') {
+            const isDefaultPasswordManagerSet = await updateDefaultPasswordManager();
+            options.settings[name] = isDefaultPasswordManagerSet;
+            e.target.checked = isDefaultPasswordManagerSet;
+        }
+
         const updated = await options.saveSettings();
         if (name === 'autoFillAndSend') {
             browser.runtime.sendMessage({ action: 'init_http_auth' });
@@ -78,8 +85,6 @@ options.initGeneralSettings = async function() {
             $('#passkeysFallback').disabled = !isChecked;
         } else if (name === 'useMonochromeToolbarIcon') {
             browser.runtime.sendMessage({ action: 'update_popup' });
-        } else if (name === 'defaultPasswordManager') {
-            await updateDefaultPasswordManager();
         }
     };
 
@@ -92,14 +97,7 @@ options.initGeneralSettings = async function() {
 
     const generalSettingsCheckboxes = document.querySelectorAll('#tab-general-settings input[type=checkbox]');
     for (const checkbox of generalSettingsCheckboxes) {
-        if (checkbox.name === 'defaultPasswordManager') {
-            const passwordSavingEnabled = await browser.privacy.services.passwordSavingEnabled.get({});
-            checkbox.checked = (passwordSavingEnabled?.levelOfControl === 'controlled_by_this_extension'
-                && !passwordSavingEnabled.value) || false;
-        } else {
-            checkbox.checked = options.settings[checkbox.name];
-        }
-
+        checkbox.checked = options.settings[checkbox.name];
         if (checkbox.name === 'defaultGroupAlwaysAsk' && checkbox.checked) {
             $('#defaultGroup').disabled = true;
             $('#defaultGroupButton').disabled = true;

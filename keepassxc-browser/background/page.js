@@ -19,6 +19,7 @@ const defaultSettings = {
     debugLogging: false,
     defaultGroup: '',
     defaultPasskeyGroup: '',
+    defaultPasswordManager: false,
     defaultGroupAlwaysAsk: false,
     downloadFaviconAfterSave: false,
     passkeys: false,
