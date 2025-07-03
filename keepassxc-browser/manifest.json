@@ -162,13 +162,15 @@
         "nativeMessaging",
         "notifications",
         "offscreen",
-        "privacy",
         "storage",
         "tabs",
         "webNavigation",
         "webRequest",
         "webRequestAuthProvider",
         "webRequestBlocking"
+    ],
+    "optional_permissions": [
+        "privacy"
     ],
     "content_security_policy": {
         "extension_pages": "script-src 'self'"

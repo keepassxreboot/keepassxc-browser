@@ -9,11 +9,12 @@ const $ = function(elem) {
 const initPage = async function() {
     const changeCheckboxValue = async function(e) {
         const name = e.currentTarget.name;
-        const isChecked = e.currentTarget.checked;
+        let isChecked = e.currentTarget.checked;
 
         if (name === 'defaultPasswordManager') {
-            await updateDefaultPasswordManager();
-            return;
+            const isDefaultPasswordManagerSet = await updateDefaultPasswordManager();
+            isChecked = isDefaultPasswordManagerSet;
+            e.target.checked = isDefaultPasswordManagerSet;
         }
 
         options.settings[name] = isChecked;
@@ -23,14 +24,7 @@ const initPage = async function() {
     // Switch/checkboxes
     const checkboxes = document.querySelectorAll('#tab-getting-started input[type=checkbox]');
     for (const checkbox of checkboxes) {
-        if (checkbox.name === 'defaultPasswordManager') {
-            const passwordSavingEnabled = await browser.privacy.services.passwordSavingEnabled.get({});
-            checkbox.checked = (passwordSavingEnabled?.levelOfControl === 'controlled_by_this_extension'
-                && !passwordSavingEnabled.value) || false;
-        } else {
-            checkbox.checked = options.settings[checkbox.name];
-        }
-
+        checkbox.checked = options.settings[checkbox.name];
         checkbox.addEventListener('click', changeCheckboxValue);
     }
 
