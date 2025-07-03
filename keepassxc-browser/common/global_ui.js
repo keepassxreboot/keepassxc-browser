@@ -16,13 +16,14 @@ const updateDefaultPasswordManager = async function() {
     }
 
     const passwordSavingEnabled = await browser.privacy.services.passwordSavingEnabled.get({});
-    if ((passwordSavingEnabled?.levelOfControl === 'controlled_by_this_extension'
-        || passwordSavingEnabled?.levelOfControl === 'controllable_by_this_extension')
-    ) {
+    if (passwordSavingEnabled?.levelOfControl === 'controllable_by_this_extension') {
         await browser.privacy.services.passwordSavingEnabled.set({
-            value: !passwordSavingEnabled.value,
+            value: false,
         });
+        return true;
+    } else if (passwordSavingEnabled?.levelOfControl === 'controlled_by_this_extension') {
+        await browser.privacy.services.passwordSavingEnabled.clear({});
     }
 
-    return passwordSavingEnabled.value;
+    return false;
 };
