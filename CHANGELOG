@@ -1,3 +1,7 @@
+1.9.9.1 (2025-07-03)
+=========================
+- Move privacy permission to optional permissions list [#2595]
+
 1.9.9 (2025-06-22)
 =========================
 - Add support for opening keyboard shortcuts page with Firefox [#2524]

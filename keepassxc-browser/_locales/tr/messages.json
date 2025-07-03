@@ -627,7 +627,7 @@
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsDefaultSettingsTitle": {
-        "message": "Default settings",
+        "message": "Varsayılan ayarlar",
         "description": "Default settings title for Getting Started page."
     },
     "optionsWelcomeTitle": {
@@ -827,11 +827,11 @@
         "description": "Show login notifications checkbox text."
     },
     "optionsDefaultPasswordManager": {
-        "message": "Set as default password manager",
+        "message": "Varsayılan parola yöneticisi olarak ayarla",
         "description": "Default password manager checkbox text."
     },
     "optionsDefaultPasswordManagerHelpText": {
-        "message": "Sets KeePassXC-Browser as the default password manager for the browser.",
+        "message": "KeePassXC-Browser eklentisini tarayıcı için varsayılan parola yöneticisi olarak ayarlar.",
         "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
@@ -1395,31 +1395,31 @@
         "description": "Lock database button title text."
     },
     "welcomeText": {
-        "message": "Welcome to KeePassXC-Browser!",
+        "message": "KeePassXC-Browser eklentisine hoş geldiniz!",
         "description": "Main title of Getting Started page."
     },
     "documentationGettingStarted": {
-        "message": "Our Getting Started Guide will get you up and running quickly.",
+        "message": "Başlangıç rehberimiz hızlıca kurup kullanmanızı sağlar.",
         "description": "Getting Started document text."
     },
     "documentationUserGuide": {
-        "message": "Looking for more comprehensive documentation? Our User Guide is there to help.",
+        "message": "Daha kapsamlı belgeler mi arıyorsunuz? Kullanım rehberimiz size yardımcı olur.",
         "description": "User Guide text."
     },
     "documentationTroubleshootingGuide": {
-        "message": "Need help troubleshooting the browser integration? Check the Troubleshooting Guide.",
+        "message": "Tarayıcı bütünleştirmesinde sorun gidermek için yardım mı gerekiyor? Sorun giderme rehberimize bakın.",
         "description": "Troubleshooting Guide text."
     },
     "gettingStartedWelcomeText": {
-        "message": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC.",
+        "message": "KeePassXC-Browser eklentisine hoş geldiniz. KeePassXC için resmi tarayıcı eklentisi.",
         "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
     },
     "gettingStartedSecondWelcomeText": {
-        "message": "Please go through the default settings and check all your preferred options.",
+        "message": "Lütfen varsayılan ayarları gözden geçirin ve kullanmak istediğiniz seçenekleri işaretleyin.",
         "description": "Please go through the default settings and check all your preferred options."
     },
     "gettingStartedNewUser": {
-        "message": "Are you a new user? Check links to our documentation.",
+        "message": "Yeni bir kullanıcı mısınız? Belgelerimizi gözden geçirin.",
         "description": "Are you a new user? Check links to our documentation."
     }
 }
