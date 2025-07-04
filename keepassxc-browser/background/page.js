@@ -41,6 +41,7 @@ const defaultSettings = {
 };
 
 const AUTO_SUBMIT_TIMEOUT = 5000;
+const DEFAULT_BROWSER_GROUP = 'KeePassXC-Browser Passwords';
 
 const page = {};
 page.autoSubmitPerformed = false;
@@ -161,6 +162,87 @@ page.switchTab = async function(tab) {
             logError('Cannot send activated_tab message: ' + e.message);
         });
     }
+};
+
+// Adds a new credential and handles setting/creating the group
+page.addNewCredential = async function(tab, args) {
+    if (!tab || !page.tabs[tab.id]) {
+        return;
+    }
+
+    // Traverse the groups and ensure all paths are found
+    const getDefaultGroup = function(groups, defaultGroup) {
+        const getGroup = function(group, splitted, depth = -1) {
+            ++depth;
+            for (const g of group) {
+                if (g.name === splitted[depth]) {
+                    if (splitted.length === (depth + 1)) {
+                        return [ g.name, g.uuid ];
+                    }
+                    return getGroup(g.children, splitted, depth);
+                }
+            }
+            return [ '', '' ];
+        };
+
+        const splitted = defaultGroup.split('/');
+        return getGroup(groups, splitted);
+    };
+
+    const saveToDefaultGroup = async function(creds) {
+        const res = await keepass.addCredentials(tab, [
+            creds.username,
+            creds.password,
+            creds.url,
+            creds.group,
+            undefined,
+            creds?.generatePassword
+        ]);
+        return res;
+    };
+
+    const result = await keepass.getDatabaseGroups(tab);
+    if (!result || !result.groups) {
+        const res = await saveToDefaultGroup(args);
+        return res;
+    }
+
+    // Group has not been set
+    if (args?.group === ''
+        || (!args?.group && (result.defaultGroup === '' || result.defaultGroup === DEFAULT_BROWSER_GROUP))) {
+        const res = await saveToDefaultGroup(args);
+        return res;
+    }
+
+    // A specified group is used
+    const [ groupName, groupUUID ] = getDefaultGroup(result.groups[0].children, args.group || result.defaultGroup);
+    if (groupName === '' && groupUUID === '') {
+        // Create a new group
+        const newGroup = await keepass.createNewGroup(tab, [ args.group || result.defaultGroup ]);
+        if (newGroup.name && newGroup.uuid) {
+            const res = await keepass.addCredentials(tab, [
+                args.username,
+                args.password,
+                args.url,
+                newGroup.name,
+                newGroup.uuid,
+                args?.generatePassword
+            ]);
+            return res;
+        }
+
+        return 'canceled';
+    }
+
+    const res = await await keepass.addCredentials(tab, [
+        args.username,
+        args.password,
+        args.url,
+        groupName,
+        groupUUID,
+        args?.generatePassword
+    ]);
+    return res;
 };
 
 page.clearCredentials = async function(tabId, complete) {

@@ -130,7 +130,7 @@ code {
     display: none;
 }
 
-#options-button {
+#options-button, #add-credentials-button {
     height: 31px;
     width: 2.5rem;
 }
@@ -204,4 +204,9 @@ code {
     #login-filter {
         color: var(--kpxc-text-color) !important;
     }
+}
+
+/* Add new credentials */
+.help-text {
+    margin-inline-start: 1.725em;
 }

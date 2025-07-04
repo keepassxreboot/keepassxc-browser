@@ -350,6 +350,14 @@
         "message": "Choose a Custom Login Field",
         "description": "Help text for Custom Login Field banner."
     },
+    "url": {
+        "message": "URL",
+        "description": "General text for URL."
+    },
+    "group": {
+        "message": "Group",
+        "description": "General text for group."
+    },
     "username": {
         "message": "Username",
         "description": "General text for username."
@@ -413,6 +421,22 @@
     "popupSettingsText": {
         "message": "Settings",
         "description": "Popup Settings button text."
+    },
+    "popupAddCredentialsText": {
+        "message": "Add a new credential",
+        "description": "Popup add a new credential text."
+    },
+    "popupAddCredentialsPasswordText": {
+        "message": "If empty, KeePassXC generates the password automatically.",
+        "description": "Popup add a new credential password help text."
+    },
+    "popupAddCredentialGroupText": {
+        "message": "Separate the group with slashes. For example: Group/ChildGroup. If empty, the default group is used.",
+        "description": "Popup add a new credential group help text."
+    },
+    "popupAddCredentialsTitlePlaceholder": {
+        "message": "Title",
+        "description": "Title placeholder."
     },
     "popupChooseCredentialsText": {
         "message": "Choose Custom Login Fields",
