@@ -506,10 +506,11 @@ kpxc.prepareCredentials = async function() {
         logDebug('Error: No combination found.');
         return;
     }
-
-    if (kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) {
-        kpxcFill.fillFromAutofill();
-        return;
+    const sitePreference = kpxc.settings.sitePreferences.find(preference => preference.url === document.location.href);
+    if ((kpxc.settings.autoFillSingleEntry && kpxc.credentials.length === 1) || 
+         (sitePreference && sitePreference.preferredUser && kpxc.credentials.find(credential => credential.login === sitePreference.preferredUser))) {
+            kpxcFill.fillFromAutofill();
+            //return;
     }
 
     kpxc.initLoginPopup();
