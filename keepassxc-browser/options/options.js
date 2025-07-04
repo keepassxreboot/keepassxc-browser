@@ -224,6 +224,13 @@ options.initGeneralSettings = async function() {
         });
     });
 
+    // Connection method
+    $('#tab-general-settings select#connectionMethod').value = options.settings['connectionMethod'];
+    $('#tab-general-settings select#connectionMethod').addEventListener('change', async function(e) {
+        options.settings['connectionMethod'] = e.currentTarget.value;
+        await options.saveSettings();
+    });
+
     // Default group
     $('#defaultGroupButton').addEventListener('click', async function() {
         const value = $('#defaultGroup').value;
