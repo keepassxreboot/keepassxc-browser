@@ -50,7 +50,7 @@ Check [keepassxc-protocol](keepassxc-protocol.md) for the details about the mess
 
 ## Translations
 
-Translations are managed on [Transifex](https://www.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
+Translations are managed on [Transifex](https://explore.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
 
 ## Development and testing
 
