@@ -10,6 +10,9 @@
         return [];
     }
 
+    $('#lock-database-button').show();
+    showDropdownButton();
+
     const logins = await getLoginData();
     const ll = document.getElementById('login-list');
 
@@ -61,20 +64,19 @@
     }
 
     $('#lock-database-button').addEventListener('click', (e) => {
-        browser.runtime.sendMessage({
-            action: 'lock_database'
-        });
+        lockDatabase();
+        hideElementsOnDatabaseLock();
+    });
 
-        $('#credentialsList').hide();
-        $('#database-not-opened').show();
-        $('#lock-database-button').hide();
-        $('#database-error-message').textContent = tr('errorMessageDatabaseNotOpened');
+    $('.kpxc-dropdown-item').addEventListener('click', () => {
+        lockDatabase(false);
+        hideElementsOnDatabaseLock();
     });
 
     $('#reopen-database-button').addEventListener('click', (e) => {
         browser.runtime.sendMessage({
             action: 'get_status',
-            args: [ false, true ] // Set forcePopup to true
+            args: [ false, true ] // Set triggerUnlock to true
         });
     });
 })();

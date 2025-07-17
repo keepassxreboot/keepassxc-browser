@@ -28,6 +28,30 @@ const URL_WILDCARD = '1kpxcwc1';
 const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 
+const isFirefox = function() {
+    return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
+};
+
+const isEdge = function() {
+    return navigator.userAgent.indexOf('Edg') !== -1;
+};
+
+const showNotification = function(message) {
+    browser.notifications.create({
+        'type': 'basic',
+        'iconUrl': browser.runtime.getURL('icons/keepassxc_64x64.png'),
+        'title': 'KeePassXC-Browser',
+        'message': message
+    });
+};
+
+const AddCredentials = {
+    CANCELED: 0,
+    CREATED: 1,
+    ERROR: 2,
+    UPDATED: 3
+};
+
 const AssociatedAction = {
     NOT_ASSOCIATED: 0,
     ASSOCIATED: 1,

@@ -159,6 +159,10 @@
         "message": "No logins found.",
         "description": "No logins found."
     },
+    "errorActionTimeout": {
+        "message": "Action timeout.",
+        "description": "Action timeout."
+    },
     "errorMessagePaswordLengthExceeded": {
         "message": "Filled password is longer than field's allowed max length.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
@@ -1433,6 +1437,14 @@
     "lockDatabase": {
         "message": "Lock database",
         "description": "Lock database button title text."
+    },
+     "lockAllDatabases": {
+        "message": "Lock all databases",
+        "description": "Lock all databases button title text."
+    },
+    "noAction": {
+        "message": "No action",
+        "description": "No action text."
     },
     "welcomeText": {
         "message": "Welcome to KeePassXC-Browser!",

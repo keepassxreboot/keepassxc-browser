@@ -47,6 +47,7 @@ const AUTO_SUBMIT_TIMEOUT = 5000;
  * Handles information between background and content scripts. Initializes and updates extension settings.
  */
 const page = {};
+page.autoLockRequested = false;
 page.autoSubmitPerformed = false;
 page.attributeMenuItems = [];
 page.blockedTabs = [];
@@ -191,6 +192,14 @@ page.clearSubmittedCredentials = async function() {
     page.submittedCredentials = {};
 };
 
+page.clearAutoLockRequested = async function() {
+    page.autoLockRequested = false;
+};
+
+page.getAutoLockRequested = async function() {
+    return page.autoLockRequested;
+};
+
 // Retrieves the credentials. Returns cached values when found.
 // Page reload or tab switch clears the cache.
 // If the retrieval is forced (from Credential Banner), get new credentials normally.
@@ -217,8 +226,15 @@ page.retrieveCredentials = async function(tab, args = []) {
         page.currentRequest.tabId = tab.id;
     }
 
-    const credentials = await keepass.retrieveCredentials(tab, args);
+    
+    // TODO: Make keepass.js to handle protocol/protocolClient and legacyProtocol/legacyProcotolClient
+    const credentials = await keepass.getCredentials(tab, args);
     tabs.updateTabValues(tab.id, { credentials: credentials });
+
+    if (credentials.autoLockRequested) {
+        page.autoLockRequested = true;
+    }
+
     return credentials;
 };
 

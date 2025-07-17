@@ -144,23 +144,38 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
         return;
     }
 
+    let totpFound = false;
     if (user.totp?.length > 0) {
+        const protocolV2 = await sendMessage('is_protocol_v2');
+
         // Retrieve a new TOTP value
-        const totp = await sendMessage('get_totp', [ user.uuid, user.totp ]);
+        const totp = await sendMessage('get_totp', (protocolV2 ? [ user.uuid ] : [ user.uuid, user.totp ]));
         if (!totp) {
             kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
             return;
         }
 
-        await kpxcFill.setTOTPValue(el, totp);
+        if (protocolV2) {
+            const result = totp.find(t => t.uuid === uuid);
+            kpxcFill.setTOTPValue(el, result?.totp);
+        } else {
+            kpxcFill.setTOTPValue(el, totp);
+        }
+
+        return;
     } else if (user.stringFields?.length > 0) {
         const stringFields = user.stringFields;
         for (const s of stringFields) {
             const val = s['KPH: {TOTP}'];
             if (val) {
-                await kpxcFill.setTOTPValue(el, val);
+                kpxcFill.setTOTPValue(el, val);
+                totpFound = true;
             }
         }
+    }
+
+    if (!totpFound) {
+        kpxcUI.createNotification('warning', tr('credentialsNoTOTPFound'));
     }
 };
 
@@ -262,7 +277,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
         if (combination.password.maxLength
             && combination.password.maxLength > 0
             && selectedCredentials.password.length > combination.password.maxLength) {
-            kpxcUI.createNotification('warning', tr('errorMessagePaswordLengthExceeded'));
+            kpxcUI.createNotification('warning', tr('errorMessagePasswordLengthExceeded'));
         }
 
         // Prevent filling password to plain text input field
@@ -303,6 +318,12 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
     await sendMessage('page_set_manual_fill', ManualFill.NONE);
 
     await kpxcFill.performAutoSubmit(combination, skipAutoSubmit);
+
+    // Auto-lock database when requested
+    if (await sendMessage('page_get_auto_lock_requested')) {
+        await sendMessage('page_clear_auto_lock_requested');
+        sendMessage('lock_database');
+    }
 };
 
 // Fills StringFields defined in Custom Fields

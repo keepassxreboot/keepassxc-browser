@@ -7,7 +7,6 @@ try {
         '../common/sites.js',
         'nacl.min.js',
         'nacl-util.min.js',
-        'client.js',
         'keepass.js',
         'httpauth.js',
         'offscreen.js',
@@ -15,7 +14,11 @@ try {
         'tabs.js',
         'page.js',
         'event.js',
-        'init.js'
+        'init.js',
+        'protocol.js',
+        'protocolClient.js',
+        'legacyProtocol.js',
+        'legacyProtocolClient.js'
     );
 } catch (e) {
     console.log('Cannot import background scripts: ', e);

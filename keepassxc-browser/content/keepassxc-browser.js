@@ -15,6 +15,7 @@ const sendMessage = async function(action, args) {
  * The main content script object.
  */
 const kpxc = {};
+kpxc.associationStatus = undefined;
 kpxc.combinations = [];
 kpxc.credentials = [];
 kpxc.databaseState = DatabaseState.DISCONNECTED;
@@ -23,8 +24,8 @@ kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
 kpxc.settings = {};
 kpxc.singleInputEnabledForPage = false;
-kpxc.submitUrl = null;
-kpxc.url = null;
+kpxc.submitUrl = undefined;
+kpxc.url = undefined;
 
 // Add page to Site Preferences with a selected option enabled. Set from the popup.
 kpxc.addToSitePreferences = async function(optionName, addWildcard = false) {
@@ -112,6 +113,7 @@ kpxc.createCombination = async function(activeElement, passOnly) {
 
 // Switch credentials if database is changed or closed
 kpxc.detectDatabaseChange = async function(response) {
+    kpxc.associationStatus = response?.associateResult;
     kpxc.databaseState = DatabaseState.LOCKED;
     kpxc.clearAllFromPage();
     kpxcIcons.switchIcons();
@@ -121,7 +123,8 @@ kpxc.detectDatabaseChange = async function(response) {
             _called.retrieveCredentials = false;
             const settings = await sendMessage('load_settings');
             kpxc.settings = settings;
-            kpxc.databaseState = DatabaseState.UNLOCKED;
+            kpxc.databaseState = response?.associateResult?.areAllLocked
+                ? DatabaseState.LOCKED : DatabaseState.UNLOCKED;
 
             await kpxc.initCredentialFields();
             kpxcIcons.switchIcons();
@@ -129,7 +132,7 @@ kpxc.detectDatabaseChange = async function(response) {
             // If user has requested a manual fill through context menu the actual credential filling
             // is handled here when the opened database has been regognized. It's not a pretty hack.
             const manualFill = await sendMessage('page_get_manual_fill');
-            if (manualFill !== ManualFill.NONE && kpxc.combinations.length > 0) {
+            if (manualFill !== ManualFill.NONE) {
                 await kpxcFill.fillInFromActiveElement(manualFill === ManualFill.PASSWORD);
                 await sendMessage('page_set_manual_fill', ManualFill.NONE);
             }
@@ -388,6 +391,16 @@ kpxc.initCredentialFields = async function() {
 
     await kpxcIcons.initIcons(kpxc.combinations);
 
+    // TODO: In optimal case, this should only trigger when a database is opened. How to detect that?
+    // Protocol V2
+    if (kpxc.associationStatus) {
+        if (!kpxc.associationStatus.isCurrentLocked) {
+            await kpxc.retrieveCredentials();
+        }
+        return;
+    }
+
+    // Protocol V1
     if (kpxc.databaseState === DatabaseState.UNLOCKED) {
         await kpxc.retrieveCredentials();
     }
@@ -788,6 +801,8 @@ kpxc.updateDatabaseState = async function() {
 };
 
 // Updates the TOTP Autocomplete Menu
+// TODO: Check this against https://github.com/keepassxreboot/keepassxc-browser/compare/develop...feature/protocol_v2
+// Which one is the correct implementation?
 kpxc.updateTOTPList = async function() {
     let uuid = await sendMessage('page_get_login_id');
     if (uuid === undefined || kpxc.credentials.length === 0) {

@@ -173,7 +173,7 @@ kpxcBanner.create = async function(credentials = {}) {
 kpxcBanner.saveNewCredentials = async function(credentials = {}) {
     const saveToDefaultGroup = async function(creds) {
         const args = [ creds.username, creds.password, creds.url ];
-        const res = await sendMessage('add_credentials', args);
+        const res = await sendMessage('create_credentials', args);
         kpxcBanner.verifyResult(res);
     };
 
@@ -203,7 +203,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                     // Create a new group
                     const newGroup = await sendMessage('create_new_group', [ result.defaultGroup ]);
                     if (newGroup.name && newGroup.uuid) {
-                        const res = await sendMessage('add_credentials', [
+                        const res = await sendMessage('create_credentials', [
                             credentials.username,
                             credentials.password,
                             credentials.url,
@@ -219,7 +219,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                 }
             }
 
-            const res = await sendMessage('add_credentials', [
+            const res = await sendMessage('create_credentials', [
                 credentials.username,
                 credentials.password,
                 credentials.url,
@@ -257,7 +257,7 @@ kpxcBanner.saveNewCredentials = async function(credentials = {}) {
                 return;
             }
 
-            const res = await sendMessage('add_credentials', [
+            const res = await sendMessage('create_credentials', [
                 credentials.username,
                 credentials.password,
                 credentials.url,
@@ -342,7 +342,7 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
                     args: [ url, '', true ] // Sets triggerUnlock to true
                 }).then(async creds => {
                     if (!creds || creds.length !== credentials.list.length) {
-                        kpxcBanner.verifyResult('error');
+                        kpxcBanner.verifyResult(AddCredentials.ERROR);
                         return;
                     }
 
@@ -368,21 +368,21 @@ kpxcBanner.updateCredentials = async function(credentials = {}) {
 };
 
 kpxcBanner.verifyResult = async function(code) {
-    if (code === 'error') {
+    if (code === AddCredentials.ERROR) {
         kpxcUI.createNotification('error', tr('rememberErrorCannotSaveCredentials'));
-    } else if (code === 'created') {
+    } else if (code === AddCredentials.CREATED) {
         kpxcUI.createNotification(
             'success',
             tr('rememberCredentialsSaved', kpxcBanner.credentials.username || tr('rememberEmptyUsername')),
         );
         await kpxc.retrieveCredentials(true); // Forced reload
-    } else if (code === 'updated') {
+    } else if (code === AddCredentials.UPDATED) {
         kpxcUI.createNotification(
             'success',
             tr('rememberCredentialsUpdated', kpxcBanner.credentials.username || tr('rememberEmptyUsername')),
         );
         await kpxc.retrieveCredentials(true); // Forced reload
-    } else if (code === 'canceled') {
+    } else if (code === AddCredentials.CANCELED) {
         kpxcUI.createNotification('warning', tr('rememberCredentialsNotSaved'));
     } else {
         kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));
