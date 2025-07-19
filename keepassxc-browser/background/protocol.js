@@ -93,8 +93,43 @@ protocol.changePublicKeys = async function(tab, enableTimeout = false, connectio
 };
 
 protocol.createCredentials = async function(tab, args = []) {
-    const [ username, password, url, group, groupUuid ] = args;
-    return protocol.updateCredentials(tab, [ null, username, password, url, group, groupUuid ]);
+    if (!keepass.isConnected) {
+        return [];
+    }
+
+    const [ username, password, url ] = args;
+
+    const messageData = {
+        action: kpActions.CREATE_CREDENTIALS,
+        login: username,
+        password: password,
+        submitUrl: url,
+        url: url,
+    };
+
+    if (page.settings.downloadFaviconAfterSave) {
+        messageData.downloadFavicon = true;
+    }
+
+    try {
+        const response = await protocolClient.sendMessage(tab, messageData);
+        if (response) {
+            keepass.updateLastUsed(keepass.databaseHash);
+
+            if (response?.result === true) {
+                //return entryId ? AddCredentials.UPDATED : AddCredentials.CREATED;
+                // TODO: KeePassXC should inform if the credential was updated or created
+                return AddCredentials.CREATED;
+            }
+
+            return AddCredentials.CANCELED;
+        } else {
+            return AddCredentials.ERROR;
+        }
+    } catch (err) {
+        logError(`updateCredentials failed: ${err}`);
+        return [];
+    }
 };
 
 protocol.createNewGroup = async function(tab, args = []) {
@@ -474,11 +509,10 @@ protocol.updateCredentials = async function(tab, args = []) {
         return [];
     }
 
-    const [ entryId, username, password, url, group, groupUuid ] = args;
+    const [ entryId, username, password, url ] = args;
 
     const messageData = {
         action: kpActions.CREATE_CREDENTIALS,
-        keys: protocol.getCurrentKey(),
         login: username,
         password: password,
         submitUrl: url,
@@ -491,11 +525,6 @@ protocol.updateCredentials = async function(tab, args = []) {
 
     if (!entryId && page.settings.downloadFaviconAfterSave) {
         messageData.downloadFavicon = true;
-    }
-
-    if (group && groupUuid) {
-        messageData.group = group;
-        messageData.groupUuid = groupUuid;
     }
 
     try {
