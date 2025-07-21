@@ -26,6 +26,44 @@
         return kpxcStringToArrayBuffer(window.atob(str?.replaceAll('-', '+').replaceAll('_', '/')));
     };
 
+    const kpxcArrayBufferToBase64Url = function (buff) {
+        const str = new Uint8Array(buff).reduce((acc, x) => (acc += String.fromCharCode(x)), "");
+        return window.btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=*$/g, "");
+    };
+
+    const kpxcAuthenticatorAttestationResponseJson = function(response) {
+        const authData = response.getAuthenticatorData();
+        const responsePk = response.getPublicKey();
+
+        let publicKey;
+        if (responsePk === null) {
+            publicKey = null;
+        } else {
+            publicKey = kpxcArrayBufferToBase64Url(responsePk);
+        }
+
+        return {
+            clientDataJSON: kpxcArrayBufferToBase64Url(response.clientDataJSON),
+            authenticatorData: kpxcArrayBufferToBase64Url(authData),
+            transports: response.getTransports(),
+            publicKey,
+            publicKeyAlgorithm: response.getPublicKeyAlgorithm(),
+            attestationObject: kpxcArrayBufferToBase64Url(response.attestationObject),
+        };
+    }
+
+    const kpxcAuthenticatorAssertionResponseJson = function(response) {
+        const userHandle = response.userHandle
+            ? kpxcArrayBufferToBase64Url(response.userHandle)
+            : undefined;
+        return {
+            clientDataJSON: kpxcArrayBufferToBase64Url(response.clientDataJSON),
+            authenticatorData: kpxcArrayBufferToBase64Url(response.authenticatorData),
+            signature: kpxcArrayBufferToBase64Url(response.signature),
+            userHandle,
+        };
+    }
+
     // Wraps response to AuthenticatorAttestationResponse object
     const createAttestationResponse = function(publicKey) {
         const response = {
@@ -34,7 +72,8 @@
             getAuthenticatorData: () => kpxcBase64ToArrayBuffer(publicKey.response?.authenticatorData),
             getPublicKey: () => null,
             getPublicKeyAlgorithm: () => publicKey.response?.publicKeyAlgorithm,
-            getTransports: () => [ 'internal' ]
+            getTransports: () => [ 'internal' ],
+            toJSON: () => kpxcAuthenticatorAttestationResponseJson(response)
         };
         return Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
     };
@@ -45,7 +84,8 @@
             authenticatorData: kpxcBase64ToArrayBuffer(publicKey.response?.authenticatorData),
             clientDataJSON: kpxcBase64ToArrayBuffer(publicKey.response?.clientDataJSON),
             signature: kpxcBase64ToArrayBuffer(publicKey.response?.signature),
-            userHandle: publicKey.response?.userHandle ? kpxcBase64ToArrayBuffer(publicKey.response?.userHandle) : null
+            userHandle: publicKey.response?.userHandle ? kpxcBase64ToArrayBuffer(publicKey.response?.userHandle) : null,
+            toJSON: () => kpxcAuthenticatorAssertionResponseJson(response)
         };
 
         return Object.setPrototypeOf(response, AuthenticatorAssertionResponse.prototype);
