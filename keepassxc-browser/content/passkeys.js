@@ -64,6 +64,30 @@
         };
     }
 
+    const kpxcPublicKeyCredentialJson = function (credential) {
+        const clientExtensionResults = credential.getClientExtensionResults();
+        const type = credential.type;
+        const authenticatorAttachment = credential.authenticatorAttachment;
+        let response;
+
+        if (credential.response instanceof AuthenticatorAttestationResponse) {
+            response = kpxcAuthenticatorAttestationResponseJson(credential.response);
+        }
+
+        if (credential.response instanceof AuthenticatorAssertionResponse) {
+            response = kpxcAuthenticatorAssertionResponseJson(credential.response);
+        }
+
+        return {
+            id: kpxcArrayBufferToBase64Url(credential.rawId),
+            rawId: kpxcArrayBufferToBase64Url(credential.rawId),
+            response,
+            authenticatorAttachment,
+            clientExtensionResults,
+            type,
+        };
+    }
+
     // Wraps response to AuthenticatorAttestationResponse object
     const createAttestationResponse = function(publicKey) {
         const response = {
@@ -72,8 +96,7 @@
             getAuthenticatorData: () => kpxcBase64ToArrayBuffer(publicKey.response?.authenticatorData),
             getPublicKey: () => null,
             getPublicKeyAlgorithm: () => publicKey.response?.publicKeyAlgorithm,
-            getTransports: () => [ 'internal' ],
-            toJSON: () => kpxcAuthenticatorAttestationResponseJson(response)
+            getTransports: () => [ 'internal' ]
         };
         return Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
     };
@@ -84,8 +107,7 @@
             authenticatorData: kpxcBase64ToArrayBuffer(publicKey.response?.authenticatorData),
             clientDataJSON: kpxcBase64ToArrayBuffer(publicKey.response?.clientDataJSON),
             signature: kpxcBase64ToArrayBuffer(publicKey.response?.signature),
-            userHandle: publicKey.response?.userHandle ? kpxcBase64ToArrayBuffer(publicKey.response?.userHandle) : null,
-            toJSON: () => kpxcAuthenticatorAssertionResponseJson(response)
+            userHandle: publicKey.response?.userHandle ? kpxcBase64ToArrayBuffer(publicKey.response?.userHandle) : null
         };
 
         return Object.setPrototypeOf(response, AuthenticatorAssertionResponse.prototype);
@@ -103,7 +125,8 @@
             response: authenticatorResponse,
             type: publicKey.type,
             clientExtensionResults: () => publicKey?.response?.clientExtensionResults || {},
-            getClientExtensionResults: () => publicKey?.response?.clientExtensionResults || {}
+            getClientExtensionResults: () => publicKey?.response?.clientExtensionResults || {},
+            toJSON: () => kpxcPublicKeyCredentialJson(publicKeyCredential)
         };
 
         return Object.setPrototypeOf(publicKeyCredential, PublicKeyCredential.prototype);
