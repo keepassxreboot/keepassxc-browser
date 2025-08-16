@@ -77,9 +77,13 @@ kpxcObserverHelper.initObserver = async function() {
 
             if (mut.type === 'childList') {
                 if (mut.addedNodes.length > 0) {
-                    kpxcObserverHelper.handleObserverAdd(mut.addedNodes[0]);
+                    mut.addedNodes.forEach(function (node) {
+                        kpxcObserverHelper.handleObserverAdd(node);
+                    });
                 } else if (mut.removedNodes.length > 0) {
-                    kpxcObserverHelper.handleObserverRemove(mut.removedNodes[0]);
+                    mut.removedNodes.forEach(function (node) {
+                        kpxcObserverHelper.handleObserverRemove(node);
+                    });
                 }
             } else if (mut.type === 'attributes' && (mut.attributeName === 'class' || mut.attributeName === 'style')) {
                 // Only accept targets with forms
