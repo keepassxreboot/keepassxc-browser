@@ -80,7 +80,8 @@ kpxcObserverHelper.initObserver = async function() {
                     mut.addedNodes.forEach(function (node) {
                         kpxcObserverHelper.handleObserverAdd(node);
                     });
-                } else if (mut.removedNodes.length > 0) {
+                }
+                if (mut.removedNodes.length > 0) {
                     mut.removedNodes.forEach(function (node) {
                         kpxcObserverHelper.handleObserverRemove(node);
                     });
