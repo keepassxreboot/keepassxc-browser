@@ -4,6 +4,7 @@
 const fs = require('@npmcli/fs');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+const AdmZip = require('adm-zip');
 
 const DEST = 'keepassxc-browser';
 const DEFAULT = 'manifest_default.json';
@@ -41,7 +42,9 @@ const updateTranslations = async () => {
 };
 
 const createZipFile = async (fileName, path) => {
-    await exec(`cd ${path} && tar -a -cf ../${fileName} * && cd ..`);
+    const zip = new AdmZip();
+    zip.addLocalFolder(path, './');
+    zip.writeZip(fileName);
 };
 
 (async() => {

@@ -6,6 +6,7 @@
   "devDependencies": {
     "@playwright/test": "^1.45.1",
     "@types/node": "^20.14.10",
+    "adm-zip": "^0.5.16",
     "eslint": "^8.49.0"
   },
   "dependencies": {
