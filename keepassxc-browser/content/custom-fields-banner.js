@@ -159,6 +159,7 @@ kpxcCustomLoginFieldsBanner.create = async function() {
 
     if (!kpxcCustomLoginFieldsBanner.created) {
         window.self.document.body.appendChild(wrapper);
+        kpxcUI.observeWrapper(wrapper);
         kpxcCustomLoginFieldsBanner.created = true;
     }
 

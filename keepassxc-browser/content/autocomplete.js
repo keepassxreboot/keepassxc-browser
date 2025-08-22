@@ -117,6 +117,7 @@ class Autocomplete {
             this.container.append(this.list);
             this.shadowRoot.append(this.container);
             document.body.append(this.wrapper);
+            kpxcUI.observeWrapper(this.wrapper);
 
             // Add a footer message for auto-submit
             if (this.autoSubmit) {

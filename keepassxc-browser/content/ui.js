@@ -69,6 +69,7 @@ class Icon {
         this.shadowRoot.append(styleSheet);
         this.shadowRoot.append(this.icon);
         document.body.append(wrapper);
+        kpxcUI.observeWrapper(wrapper);
     }
 
     switchIcon(state, uuid) {
@@ -394,6 +395,22 @@ kpxcUI.createButton = function(color, textContent, callback) {
     return button;
 };
 
+// Observe and prevent style changes to wrapper div elements
+kpxcUI.createWrapperObserver = function() {
+    kpxcUI.wrapperObserver = new MutationObserver(function(mutations, obs) {
+        for (const mut of mutations) {
+            if (mut.target.style.cssText !== 'all: unset;') {
+                mut.target.removeAttribute('style');
+                mut.target.style.all = 'unset';
+            }
+        }
+    });
+};
+
+kpxcUI.observeWrapper = function(elem) {
+    kpxcUI.wrapperObserver.observe(elem, { attributes: true, attributeFilter: [ 'style' ] });
+};
+
 const DOMRectToArray = function(domRect) {
     return [ domRect.bottom, domRect.height, domRect.left, domRect.right, domRect.top, domRect.width, domRect.x, domRect.y ];
 };
@@ -438,6 +455,8 @@ document.addEventListener('mouseup', function(e) {
 
     kpxcUI.mouseDown = false;
 });
+
+document.addEventListener('DOMContentLoaded', kpxcUI.createWrapperObserver());
 
 HTMLDivElement.prototype.appendMultiple = function(...args) {
     for (const a of args) {

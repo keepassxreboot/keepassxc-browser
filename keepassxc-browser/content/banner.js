@@ -165,6 +165,7 @@ kpxcBanner.create = async function(credentials = {}) {
 
     if (window.self === window.top && !kpxcBanner.created) {
         window.parent.document.body.appendChild(wrapper);
+        kpxcUI.observeWrapper(wrapper);
         kpxcBanner.created = true;
     }
 };
