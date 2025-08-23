@@ -399,7 +399,7 @@ kpxcUI.createButton = function(color, textContent, callback) {
 kpxcUI.createWrapperObserver = function() {
     kpxcUI.wrapperObserver = new MutationObserver(function(mutations, obs) {
         for (const mut of mutations) {
-            if (mut.target.style.cssText !== 'all: unset;') {
+            if (mut?.target && mut.target.style?.cssText !== 'all: unset;') {
                 mut.target.removeAttribute('style');
                 mut.target.style.all = 'unset';
             }
