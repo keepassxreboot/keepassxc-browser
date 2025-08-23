@@ -107,6 +107,7 @@
         "createStylesheet": "readonly",
         "DatabaseState": "readonly",
         "debugLogMessage": "readonly",
+        "elementsOverlap": "readonly",
         "EXTENSION_NAME": "readonly",
         "getCurrentTab": "readonly",
         "getLoginData": "readonly",

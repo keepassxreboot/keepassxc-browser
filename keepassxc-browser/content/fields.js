@@ -430,6 +430,25 @@ kpxcFields.isVisible = function(elem) {
         return false;
     }
 
+    // Check topmost element from three points inside the input
+    const verticalMiddle = rect.top + (rect.height / 2);
+    if (matchesWithNodeName(elem, 'INPUT') && [
+        document.elementFromPoint(rect.left + (rect.width / 4), verticalMiddle), // First third
+        document.elementFromPoint(rect.left + (rect.width / 2), verticalMiddle), // Middle
+        document.elementFromPoint(rect.left + (rect.width / 1.33), verticalMiddle), // Last third
+    ].some((e) => e !== elem)) {
+        return false;
+    }
+
+    // Check for popup overlays
+    const overlays = document.querySelectorAll(':popover-open');
+    for (const overlay of overlays) {
+        const overlayRect = overlay?.getBoundingClientRect();
+        if (overlayRect && elementsOverlap(rect, overlayRect)) {
+            return false;
+        }
+    }
+
     // Check CSS visibility
     const elemStyle = getComputedStyle(elem);
     if (elemStyle.visibility && (elemStyle.visibility === 'hidden' || elemStyle.visibility === 'collapse')

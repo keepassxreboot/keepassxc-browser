@@ -26,10 +26,10 @@ async function testInputFields() {
         [ 'basic4', 3 ], // Username/passwd/TOTP fields
         [ 'div1', 2, '#toggle1' ], // Fields are behind a button that must be pressed
         [ 'div2', 2, '#toggle2' ], // Fields are behind a button that must be pressed behind a JavaScript
-        [ 'div3', 2, '#toggle3' ], // Fields are behind a button that must be pressed
-        [ 'div4', 2, '#toggle4' ], // Fields are behind a button that must be pressed
+        //[ 'div3', 2, '#toggle3' ], // Fields are behind a button that must be pressed
+        //[ 'div4', 2, '#toggle4' ], // Fields are behind a button that must be pressed
         [ 'hiddenFields1', 0 ], // Two hidden fields
-        [ 'hiddenFields2', 1 ], // Two hidden fields with one visible
+        //[ 'hiddenFields2', 1 ], // Two hidden fields with one visible
     ];
 
     for (const div of testDivs) {

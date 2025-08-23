@@ -182,10 +182,18 @@ const getCurrentTab = async function() {
     return tabs?.length > 0 ? tabs[0] : undefined;
 };
 
+// Check if two elements overlap
+const elementsOverlap = function(rect1, rect2) {
+    const isInside = (a, b) => (b.x >= a.x || b.right <= a.right) && (b.y >= a.y || b.bottom <= a.bottom);
+    const overlaps = (a, b) => !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+    return isInside(rect1, rect2) || overlaps(rect1, rect2);
+};
+
 // Exports for tests
 if (typeof module === 'object') {
     module.exports = {
         compareVersion,
+        elementsOverlap,
         matchesWithNodeName,
         siteMatch,
         slashNeededForUrl,
