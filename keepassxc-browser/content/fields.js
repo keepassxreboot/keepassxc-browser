@@ -411,22 +411,8 @@ kpxcFields.isSearchField = function(target) {
     return false;
 };
 
-// Returns true if element is visible on the page
-kpxcFields.isVisible = function(elem) {
-    // Returns true if opacity is not set, otherwise check the limits
-    const isOpacityAllowed = (opacity) => {
-        const opac = Number(opacity);
-        return opacity === '' || (opac >= MIN_OPACITY && opac <= MAX_OPACITY);
-    };
-
-    // Check element position and size
-    const rect = elem.getBoundingClientRect();
-    if (rect.x < 0
-        || rect.y < 0
-        || rect.width < MIN_INPUT_FIELD_WIDTH_PX
-        || rect.x > Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth)
-        || rect.y > Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight)
-        || rect.height < MIN_INPUT_FIELD_WIDTH_PX) {
+kpxcFields.isTopElement = function(elem, rect) {
+    if (!elem || !rect) {
         return false;
     }
 
@@ -447,6 +433,32 @@ kpxcFields.isVisible = function(elem) {
         if (overlayRect && elementsOverlap(rect, overlayRect)) {
             return false;
         }
+    }
+
+    return true;
+};
+
+// Returns true if element is visible on the page
+kpxcFields.isVisible = function(elem) {
+    // Returns true if opacity is not set, otherwise check the limits
+    const isOpacityAllowed = (opacity) => {
+        const opac = Number(opacity);
+        return opacity === '' || (opac >= MIN_OPACITY && opac <= MAX_OPACITY);
+    };
+
+    // Check element position and size
+    const rect = elem.getBoundingClientRect();
+    if (rect.x < 0
+        || rect.y < 0
+        || rect.width < MIN_INPUT_FIELD_WIDTH_PX
+        || rect.x > Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth)
+        || rect.y > Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight)
+        || rect.height < MIN_INPUT_FIELD_WIDTH_PX) {
+        return false;
+    }
+
+    if (!kpxcFields.isTopElement(elem, rect)) {
+        return false;
     }
 
     // Check CSS visibility
@@ -510,7 +522,7 @@ kpxcFields.useCustomLoginFields = async function() {
     // Get all input fields from the page without any extra filters
     const inputFields = [];
     document.body.querySelectorAll('input, select, textarea').forEach(e => {
-        if (e.type !== 'hidden' && !e.disabled) {
+        if (e.type !== 'hidden' && !e.disabled && kpxcFields.isTopElement(e, e?.getBoundingClientRect())) {
             inputFields.push(e);
         }
     });
