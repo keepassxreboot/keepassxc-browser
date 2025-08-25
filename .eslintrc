@@ -161,6 +161,7 @@
         "MIN_TOTP_INPUT_LENGTH": "readonly",
         "module": "readonly",
         "nacl": "readonly",
+        "OBSERVER_OPTIONS": "readonly",
         "ORANGE_BUTTON": "readonly",
         "page": "readonly",
         "Pixels": "readonly",

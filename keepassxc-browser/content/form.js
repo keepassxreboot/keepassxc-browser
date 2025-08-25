@@ -166,6 +166,8 @@ kpxcForm.initForm = function(form, credentialFields) {
         if (submitButton) {
             submitButton.addEventListener('click', kpxcForm.onSubmit);
         }
+
+        kpxcUI.pageObserver.observe(form, OBSERVER_OPTIONS);
     }
 };
 
