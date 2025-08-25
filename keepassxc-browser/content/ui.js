@@ -13,6 +13,8 @@ const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
 const RED_BUTTON = 'kpxc-button kpxc-red-button';
 const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
 
+const OBSERVER_OPTIONS = { attributes: true, attributeFilter: [ 'style' ] };
+
 const DatabaseState = {
     DISCONNECTED: 0,
     LOCKED: 1,
@@ -408,7 +410,22 @@ kpxcUI.createWrapperObserver = function() {
 };
 
 kpxcUI.observeWrapper = function(elem) {
-    kpxcUI.wrapperObserver.observe(elem, { attributes: true, attributeFilter: [ 'style' ] });
+    kpxcUI.wrapperObserver?.observe(elem, OBSERVER_OPTIONS);
+};
+
+// Observer <html> and <body> style changes
+kpxcUI.createPageObserver = function() {
+    kpxcUI.pageObserver = new MutationObserver(function(mutations, obs) {
+        for (const mut of mutations) {
+            const currentStyle = getComputedStyle(mut?.target);
+            if (currentStyle.opacity && currentStyle.opacity < MIN_OPACITY) {
+                kpxc.clearAllFromPage();
+            }
+        }
+    });
+
+    kpxcUI.pageObserver.observe(document.documentElement, OBSERVER_OPTIONS);
+    kpxcUI.pageObserver.observe(document.body, OBSERVER_OPTIONS);
 };
 
 const DOMRectToArray = function(domRect) {
@@ -440,6 +457,11 @@ const logDebug = function(message, extra) {
     }
 };
 
+const initObservers = function() {
+    kpxcUI.createWrapperObserver();
+    kpxcUI.createPageObserver();
+};
+
 document.addEventListener('mousedown', function(e) {
     if (!e.isTrusted) {
         return;
@@ -456,7 +478,11 @@ document.addEventListener('mouseup', function(e) {
     kpxcUI.mouseDown = false;
 });
 
-document.addEventListener('DOMContentLoaded', kpxcUI.createWrapperObserver());
+if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
+    initObservers();
+} else {
+    document.addEventListener('DOMContentLoaded', initObservers);
+}
 
 HTMLDivElement.prototype.appendMultiple = function(...args) {
     for (const a of args) {

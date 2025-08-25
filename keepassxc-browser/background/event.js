@@ -13,14 +13,14 @@ kpxcEvent.onMessage = async function(request, sender) {
     }
 };
 
-kpxcEvent.showStatus = async function(tab, configured, internalPoll) {
+kpxcEvent.showStatus = async function(tab, configured, internalPoll, forceShowDefault = false) {
     let keyId = null;
     if (configured && keepass.databaseHash !== ''
         && Object.hasOwn(keepass.keyRing, keepass.databaseHash)) {
         keyId = keepass.keyRing[keepass.databaseHash].id;
     }
 
-    if (!internalPoll) {
+    if (!internalPoll || forceShowDefault) {
         browserAction.showDefault(tab);
     }
 
@@ -76,7 +76,7 @@ kpxcEvent.onSaveSettings = async function(tab, settings) {
 kpxcEvent.onGetStatus = async function(tab, args = []) {
     // When internalPoll is true the event is triggered from content script in intervals -> don't poll KeePassXC
     try {
-        const [ internalPoll = false, triggerUnlock = false ] = args;
+        const [ internalPoll = false, triggerUnlock = false, forceShowDefault ] = args;
         if (!internalPoll) {
             const response = await keepass.testAssociation(tab, [ true, triggerUnlock ]);
             if (!response) {
@@ -85,7 +85,7 @@ kpxcEvent.onGetStatus = async function(tab, args = []) {
         }
 
         const configured = await keepass.isConfigured();
-        return kpxcEvent.showStatus(tab, configured, internalPoll);
+        return kpxcEvent.showStatus(tab, configured, internalPoll, forceShowDefault);
     } catch (err) {
         logError('No status shown: ' + err);
         return Promise.reject();

@@ -81,8 +81,9 @@ kpxc.clearAllFromPage = function() {
         kpxcUserAutocomplete.closeList();
     }
 
-    // Switch back to default popup
-    sendMessage('get_status', [ true ]); // This is an internal function call
+    // Clear logins from background and switch back to default popup
+    sendMessage('page_clear_logins');
+    sendMessage('get_status', [ true, false, true ]); // This is an internal function call, forceShowDefault
 };
 
 // Creates a new combination manually from active element
@@ -879,7 +880,7 @@ kpxc.usePredefinedSites = function(currentLocation) {
  * Content script initialization.
  */
 const initContentScript = async function() {
-    try {
+    try { 
         if (document?.documentElement?.ownerDocument?.contentType !== 'text/html'
             && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
         ) {
