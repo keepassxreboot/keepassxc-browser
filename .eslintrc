@@ -173,6 +173,7 @@
         "sendMessage": "readonly",
         "showNotification": "readonly",
         "siteMatch": "readonly",
+        "SitePreferences": "readonly",
         "slashNeededForUrl": "readonly",
         "SORT_BY_GROUP_AND_TITLE": "readonly",
         "SORT_BY_GROUP_AND_USERNAME": "readonly",

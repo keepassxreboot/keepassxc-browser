@@ -105,12 +105,6 @@ tbody {
     color: var(--kpxc-text-color);
 }
 
-.table-striped > tbody > tr:nth-of-type(odd) input[type="checkbox"] {
-    background-color: var(--kpxc-card-background-color) !important;
-    border-color: var(--kpxc-input-main-border-color) !important;
-    color: var(--kpxc-text-color) !important;
-}
-
 .table-striped > tbody > tr:nth-of-type(odd) .form-check-input:checked {
     background-color: var(--kpxc-checkbox-background-color) !important;
 }
@@ -136,14 +130,14 @@ table tbody tr.empty:not(:nth-last-child(2)) {
   display: none;
 }
 
-#tab-site-preferences td:nth-of-type(2),
-#tab-site-preferences td:nth-of-type(2) select {
+#tab-site-preferences td:nth-of-type(3),
+#tab-site-preferences td:nth-of-type(3) select {
     width: 200px;
 }
 
+#tab-site-preferences td:nth-of-type(2),
 #tab-site-preferences td:nth-of-type(3),
 #tab-site-preferences td:nth-of-type(4),
-#tab-site-preferences td:nth-of-type(5),
 table td:last-of-type {
     width: 1px;
 }
@@ -231,6 +225,22 @@ table td:last-of-type {
 .modal-content {
     background: var(--kpxc-background-color);
     color: var(--kpxc-text-color);
+}
+
+.settings-dropdown {
+    box-shadow: var(--kpxc-box-shadow-strong);
+    overflow: hidden;
+    position: absolute;
+}
+
+.settings-dropdown-body {
+    background-color: var(--bs-table-bg);
+}
+
+.dropdown-divider {
+    border-top: 1px solid var(--kpxc-table-odd-color);
+    height: 0.5rem;
+    margin-top: 0.3rem;
 }
 
 .site-preferences-input {

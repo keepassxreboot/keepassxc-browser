@@ -61,6 +61,17 @@ const ManualFill = {
     BOTH: 2
 };
 
+const SitePreferences = {
+    ALLOW_IFRAMES: 'allowIframes',
+    IMPROVED_FIELD_DETECTION: 'improvedFieldDetection',
+    USERNAME_ONLY: 'usernameOnly',
+};
+
+// Returns a string with 'px' for CSS styles
+const Pixels = function(value) {
+    return String(value) + 'px';
+};
+
 const compareVersion = function(minimum, current, canBeEqual = true) {
     if (!minimum || !current || minimum?.indexOf('.') === -1 || current?.indexOf('.') === -1) {
         return false;

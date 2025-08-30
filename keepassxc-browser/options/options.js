@@ -1,6 +1,7 @@
 'use strict';
 
 const options = {};
+options.dropdownButton = null;
 
 const $ = function(elem) {
     return document.querySelector(elem);
@@ -536,6 +537,42 @@ options.initSitePreferences = function() {
         modalEvent.currentTarget.querySelector('.modal-footer button.yes').focus();
     });
 
+    const settingsButtonClicked = function(e) {
+        e.preventDefault();
+
+        const closestTr = e.target.closest('tr');
+        const url = closestTr.getAttribute('url');
+        const sitePreferences = options.settings['sitePreferences']?.find((pref) => pref?.url === url);
+        const usernameOnly = sitePreferences.usernameOnly;
+        const improvedFieldDetection = sitePreferences.improvedFieldDetection;
+        const allowIframes =sitePreferences.allowIframes;
+
+        const dropdown = $('.settings-dropdown');
+        if (dropdown?.style?.display !== 'block'
+            || (dropdown?.style?.display === 'block' && e.target !== options.dropdownButton)) {
+            if (options.dropdownButton) {
+                options.dropdownButton.classList.remove('active');
+            }
+
+            // Apply current settings to the dropdown
+            dropdown.querySelector('#usernameOnly').checked = usernameOnly;
+            dropdown.querySelector('#improvedFieldDetection').checked = improvedFieldDetection;
+            dropdown.querySelector('#allowIframes').checked = allowIframes;
+            dropdown.querySelector('#usernameOnly').addEventListener('change', (d) => checkboxClicked(e, d));
+            dropdown.querySelector('#improvedFieldDetection').addEventListener('change', (d) => checkboxClicked(e, d));
+            dropdown.querySelector('#allowIframes').addEventListener('change', (d) => checkboxClicked(e, d));
+
+            dropdown?.show();
+            updateDropdownPosition(e, dropdown);
+            options.dropdownButton = e.target;
+            options.dropdownButton.classList.add('active');
+        } else {
+            dropdown?.hide();
+            options.dropdownButton.classList.remove('active');
+            options.dropdownButton = null;
+        }
+    };
+
     const removeButtonClicked = function(e) {
         e.preventDefault();
 
@@ -601,18 +638,18 @@ options.initSitePreferences = function() {
         }
     };
 
-    const checkboxClicked = function() {
-        const closestTr = this.closest('tr');
+    const checkboxClicked = function(e, option) {
+        const closestTr = e.target.closest('tr');
         const url = closestTr.getAttribute('url');
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
-                if (this.name === 'usernameOnly') {
-                    site.usernameOnly = this.checked;
-                } else if (this.name === 'improvedFieldDetection') {
-                    site.improvedFieldDetection = this.checked;
-                } else if (this.name === 'allowIframes') {
-                    site.allowIframes = this.checked;
+                if (option.target.name === SitePreferences.USERNAME_ONLY) {
+                    site.usernameOnly = option.target.checked;
+                } else if (option.target.name === SitePreferences.IMPROVED_FIELD_DETECTION) {
+                    site.improvedFieldDetection = option.target.checked;
+                } else if (option.target.name === SitePreferences.ALLOW_IFRAMES) {
+                    site.allowIframes = option.target.checked;
                 }
             }
         }
@@ -662,19 +699,23 @@ options.initSitePreferences = function() {
             saveModifiedUrl(e, row, inputField, editButton, cancelButton, saveButton)
         );
 
+        // Page URL
         row.children[0].children[0].children[0].value = url;
         row.children[0].children[0]?.addEventListener('dblclick', (e) => 
             enterEditMode(e, row, inputField, editButton, cancelButton, saveButton)
         );
-        row.children[1].children[0].value = ignore;
-        row.children[1].children[0].addEventListener('change', selectionChanged);
-        row.children[2].children['usernameOnly'].checked = usernameOnly;
-        row.children[2].children['usernameOnly'].addEventListener('change', checkboxClicked);
-        row.children[3].children['improvedFieldDetection'].checked = improvedFieldDetection;
-        row.children[3].children['improvedFieldDetection'].addEventListener('change', checkboxClicked);
-        row.children[4].children['allowIframes'].checked = allowIframes;
-        row.children[4].children['allowIframes'].addEventListener('change', checkboxClicked);
-        row.children[5].addEventListener('click', removeButtonClicked);
+
+        // Settings
+        const settings = row.children[1];
+        settings.querySelector('#settings-button').addEventListener('click', (e) => settingsButtonClicked(e));
+
+        // Ignore
+        const ignoreSelect = row.children[2];
+        ignoreSelect.querySelector('#ignore-select').value = ignore;
+        ignoreSelect.querySelector('#ignore-select').addEventListener('change', selectionChanged);
+
+        // Remove button
+        row.children[3].addEventListener('click', removeButtonClicked);
 
         $('#tab-site-preferences table tbody').append(row);
     };
@@ -738,11 +779,11 @@ options.initSitePreferences = function() {
         $('#tab-site-preferences table tbody tr.empty').hide();
 
         options.settings['sitePreferences'].push({
-            url: value,
-            ignore: IGNORE_NOTHING,
-            usernameOnly: false,
-            improvedFieldDetection: false,
             allowIframes: false,
+            ignore: IGNORE_NOTHING,
+            improvedFieldDetection: false,
+            url: value,
+            usernameOnly: false,
         });
         options.saveSettings();
         manualUrl.value = '';
@@ -822,6 +863,65 @@ const getBrowserId = function() {
 
     return 'Other/Unknown';
 };
+
+// Updates settings dropdown menu position
+const updateDropdownPosition = function(e, dropdown) {
+    if (!dropdown) {
+        dropdown = $('.settings-dropdown');
+    }
+
+    const settingsButton = e?.target ?? options.dropdownButton;
+    const rect = settingsButton?.getClientRects()?.[0];
+    if (!rect) {
+        return;
+    }
+    
+    const zoom = getComputedStyle(document.body).zoom || 1;
+    const scrollTop = document.defaultView.scrollY / zoom;
+    const scrollLeft = document.defaultView?.scrollX / zoom;
+
+    // If dropdown does not fit to the bottom of the screen -> show it at the top of the settings button
+    const dropdownRect = dropdown.getBoundingClientRect();
+    const totalHeight = dropdownRect.height + rect.height;
+    const offset = (totalHeight + rect.y) / zoom > window.self.visualViewport.height ? totalHeight / zoom : 0;
+
+    dropdown.style.left = Pixels(rect.left / zoom + scrollLeft);
+    dropdown.style.top = Pixels(rect.bottom / zoom + scrollTop - offset);
+};
+
+// Hides the settings dropdown when clicked outside of it
+document.addEventListener('mouseup', function(e) {
+    if (!e.isTrusted) {
+        return;
+    }
+
+    const dropdown = $('.settings-dropdown');
+    if (dropdown?.style?.display !== 'block') {
+        return;
+    }
+
+    const rect = dropdown?.getClientRects()?.[0];
+    if (!rect) {
+        return;
+    }
+
+    if ((e.x > rect.right || e.x < rect.x) || (e.y > rect.bottom || e.y < rect.y)
+        && e.target.nodeName !== 'BUTTON') {
+        dropdown?.hide();
+        options.dropdownButton.classList.remove('active');
+        options.dropdownButton = null;
+    }
+});
+
+// Handle dropdown position on window resize
+window.addEventListener('resize', function() {
+    updateDropdownPosition();
+});
+
+// Handle dropdown position on scroll
+window.addEventListener('scroll', function() {
+    updateDropdownPosition();
+});
 
 (async() => {
     try {

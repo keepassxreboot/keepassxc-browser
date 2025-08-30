@@ -761,10 +761,8 @@
                       <thead>
                         <tr>
                           <th scope="col"><span data-i18n="optionsColumnPageURL"></span></th>
+                          <th scope="col"></th>
                           <th scope="col"><span data-i18n="optionsColumnIgnore"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnUsernameOnly"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnImprovedInputFieldDetection"></span></th>
-                          <th scope="col"><span data-i18n="optionsColumnAllowIframes"></span></th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
@@ -791,16 +789,18 @@
                             </div>
                           </td>
                           <td>
-                            <select class="form-select form-select-sm" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
+                            <button type="button" class="btn btn-sm btn-primary" id="settings-button">
+                              Settings
+                            </button>
+                          </td>
+                           <td>
+                            <select class="form-select form-select-sm" id="ignore-select" name="ignore" data-i18n="[title]optionsSitePreferencesSelect">
                               <option value="ignoreNothing" data-i18n="optionsSelectionNothing"></option>
                               <option value="ignoreNormal" data-i18n="optionsSelectionNormal"></option>
                               <option value="ignoreAutoSubmit" data-i18n="optionsSelectionAutoSubmit"></option>
                               <option value="ignoreFull" data-i18n="optionsSelectionFull"></option>
                             </select>
                           </td>
-                          <td><input class="form-check-input" type="checkbox" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly"></td>
-                          <td><input class="form-check-input" type="checkbox" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection"></td>
-                          <td><input class="form-check-input" type="checkbox" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes"></td>
                           <td class="text-nowrap">
                             <button class="btn btn-sm delete btn-danger" data-i18n="[title]removeSitePreferencesButtonTitle">
                               <i class="fa fa-remove" aria-hidden="true"></i>
@@ -836,6 +836,32 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <!-- Settings dropdown -->
+              <div class="card settings-dropdown" style="display: none;"> 
+                <div class="card-body settings-dropdown-body">
+                  <!-- Username only detection -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="usernameOnly" name="usernameOnly" value="false" data-i18n="[title]optionsColumnUsernameOnly">
+                    <label class="form-check-label" for="usernameOnly" data-i18n="optionsColumnUsernameOnly"></label>
+                  </div>
+
+                  <!-- Improved input field detection -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="improvedFieldDetection" name="improvedFieldDetection" value="false" data-i18n="[title]optionsColumnImprovedInputFieldDetection">
+                    <label class="form-check-label" for="improvedFieldDetection" data-i18n="optionsColumnImprovedInputFieldDetection"></label>
+                  </div>
+
+                  <!-- Allow iFrames -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="allowIframes" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes">
+                    <label class="form-check-label" for="allowIframes" data-i18n="optionsColumnAllowIframes"></label>
+                  </div>
+                  
+                  <!-- Add new options below -->
+                  <!--<hr class="dropdown-divider">-->
                 </div>
               </div>
             </div>

@@ -4,6 +4,7 @@
     --kpxc-autocomplete-menu-border: 1px solid #ddd;
     --kpxc-background-color: #fff;
     --kpxc-box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --kpxc-box-shadow-strong: 0 20px 25px -5px rgb(0 0 0 / 0.8), 0 8px 10px -6px rgb(0 0 0 / 0.8);
     --kpxc-card-background-color: #fff;
     --kpxc-card-border-color: rgba(0, 0, 0, .125);
     --kpxc-card-header-color: #fafafa;
@@ -29,7 +30,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
     :root,
     :host {
         --kpxc-autocomplete-footer-color: #2b2a2a;
@@ -113,5 +113,4 @@
     --kpxc-text-color: #000;
     --kpxc-lighter-text-color: rgba(0, 0, 0, 0.8);
     --kpxc-light-text-color: rgba(0, 0, 0, 0.5);
-}
 }

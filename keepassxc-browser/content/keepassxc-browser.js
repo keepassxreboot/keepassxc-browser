@@ -62,10 +62,10 @@ kpxc.addToSitePreferences = async function(optionName, addWildcard = false) {
 
     await sendMessage('save_settings', kpxc.settings);
 
-    if (optionName === 'allowIframes') {
+    if (optionName === SitePreferences.ALLOW_IFRAMES) {
         await sendMessage('page_set_allow_iframes', [ true, site ]);
         await sendMessage('iframe_detected', false);
-    } else if (optionName === 'usernameOnly') {
+    } else if (optionName === SitePreferences.USERNAME_ONLY) {
         await sendMessage('username_field_detected', false);
     }
 };
@@ -950,9 +950,9 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         if (req.action === 'activated_tab') {
             kpxc.triggerActivatedTab();
         } else if (req.action === 'add_allow_iframes_option') {
-            kpxc.addToSitePreferences('allowIframes');
+            kpxc.addToSitePreferences(SitePreferences.ALLOW_IFRAMES);
         } else if (req.action === 'add_username_only_option') {
-            kpxc.addToSitePreferences('usernameOnly', true);
+            kpxc.addToSitePreferences(SitePreferences.USERNAME_ONLY, true);
         } else if (req.action === 'check_database_hash' && 'hash' in req) {
             kpxc.detectDatabaseChange(req);
         } else if (req.action === 'choose_credential_fields') {

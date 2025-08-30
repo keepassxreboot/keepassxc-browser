@@ -29,11 +29,6 @@ const $ = function(elem) {
     return document.querySelector(elem);
 };
 
-// Returns a string with 'px' for CSS styles
-const Pixels = function(value) {
-    return String(value) + 'px';
-};
-
 // Basic icon class
 class Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
