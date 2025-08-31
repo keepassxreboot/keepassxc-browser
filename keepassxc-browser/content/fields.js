@@ -416,13 +416,19 @@ kpxcFields.isTopElement = function(elem, rect) {
         return false;
     }
 
-    // Check topmost element from three points inside the input
-    const verticalMiddle = rect.top + (rect.height / 2);
     const rootNode = elem.getRootNode() ?? document;
+
+    // Returns the topmost element from point x,y. If the input has a label as the top element, allow it.
+    const getTopmostElement = (x) => {
+        const topElement = rootNode.elementFromPoint(x, rect.top + (rect.height / 2));
+        return elem?.labels && elem.labels[0] === topElement ? elem : topElement;
+    };
+
+    // Check topmost element from three points inside the input
     if (matchesWithNodeName(elem, 'INPUT') && [
-        rootNode.elementFromPoint(rect.left + (rect.width / 4), verticalMiddle), // First third
-        rootNode.elementFromPoint(rect.left + (rect.width / 2), verticalMiddle), // Middle
-        rootNode.elementFromPoint(rect.left + (rect.width / 1.33), verticalMiddle), // Last third
+        getTopmostElement(rect.left + (rect.width / 4)), // First third
+        getTopmostElement(rect.left + (rect.width / 2)), // Middle
+        getTopmostElement(rect.left + (rect.width / 1.33)), // Last third
     ].some((e) => e !== elem)) {
         return false;
     }
