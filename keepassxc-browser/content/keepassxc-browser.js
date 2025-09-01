@@ -208,6 +208,8 @@ kpxc.getSite = function(sites) {
 kpxc.identifyFormInputs = async function() {
     const forms = [];
     const documentForms = document.forms; // Cache the value just in case
+    // Used for overlay security detection
+    kpxcFields.discoverOverlays();
 
     for (const form of documentForms) {
         if (!kpxcFields.isVisible(form)) {

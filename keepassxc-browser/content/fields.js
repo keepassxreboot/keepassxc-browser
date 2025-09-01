@@ -411,6 +411,18 @@ kpxcFields.isSearchField = function(target) {
     return false;
 };
 
+// :popover-open selector is supported only with Firefox >= 125 and Chrome >= 114
+kpxcFields.discoverOverlays = function() {
+     try { 
+        kpxcFields.overlays = document.querySelectorAll(':popover-open, [popover]');
+    } catch (e) {
+        // Ignore SyntaxError (e.g., unsupported selector)
+        if (!(e instanceof SyntaxError)) {
+            logError(e);
+        }
+    }
+};
+
 kpxcFields.isTopElement = function(elem, rect) {
     if (!elem || !rect) {
         return false;
@@ -439,19 +451,10 @@ kpxcFields.isTopElement = function(elem, rect) {
     }
 
     // Check for popup overlays
-    try { 
-        // :popover-open selector is supported only with Firefox >= 125 and Chrome >= 114
-        const overlays = document.querySelectorAll(':popover-open, [popover]');
-        for (const overlay of overlays) {
-            const overlayRect = overlay?.getBoundingClientRect();
-            if (overlayRect && elementsOverlap(rect, overlayRect)) {
-                return false;
-            }
-        }
-    } catch (e) {
-        // Ignore SyntaxError (e.g., unsupported selector)
-        if (!(e instanceof SyntaxError)) {
-            logError(e);
+    for (const overlay of kpxcFields.overlays ?? []) {
+        const overlayRect = overlay?.getBoundingClientRect();
+        if (overlayRect && elementsOverlap(rect, overlayRect)) {
+            return false;
         }
     }
 
