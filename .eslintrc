@@ -124,6 +124,7 @@
         "IMPROVED_DETECTION_PREDEFINED_SITELIST": "readonly",
         "initColorTheme": "readonly",
         "isEdge": "readonly",
+        "isElementInside": "readonly",
         "isFirefox": "readonly",
         "keepass": "readonly",
         "keepassClient": "readonly",
