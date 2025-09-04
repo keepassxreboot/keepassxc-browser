@@ -439,7 +439,7 @@ kpxcFields.isTopElement = function(elem, rect) {
     }
 
     // Check for popup overlays
-    const overlays = document.querySelectorAll(':popover-open');
+    const overlays = document.querySelectorAll(':popover-open, [popover]');
     for (const overlay of overlays) {
         const overlayRect = overlay?.getBoundingClientRect();
         if (overlayRect && elementsOverlap(rect, overlayRect)) {
