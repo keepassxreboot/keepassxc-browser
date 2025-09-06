@@ -439,11 +439,19 @@ kpxcFields.isTopElement = function(elem, rect) {
     }
 
     // Check for popup overlays
-    const overlays = document.querySelectorAll(':popover-open, [popover]');
-    for (const overlay of overlays) {
-        const overlayRect = overlay?.getBoundingClientRect();
-        if (overlayRect && elementsOverlap(rect, overlayRect)) {
-            return false;
+    try { 
+        // :popover-open selector is supported only with Firefox >= 125 and Chrome >= 114
+        const overlays = document.querySelectorAll(':popover-open, [popover]');
+        for (const overlay of overlays) {
+            const overlayRect = overlay?.getBoundingClientRect();
+            if (overlayRect && elementsOverlap(rect, overlayRect)) {
+                return false;
+            }
+        }
+    } catch (e) {
+        // Ignore SyntaxError (e.g., unsupported selector)
+        if (!(e instanceof SyntaxError)) {
+            logError(e);
         }
     }
 
