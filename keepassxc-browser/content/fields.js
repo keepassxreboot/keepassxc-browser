@@ -29,7 +29,7 @@ kpxcFields.getAllCombinations = async function(inputs) {
                 form: input.form
             };
 
-            combinations.push(combination);
+            combinations.push(kpxcFields.getExistingCombination(combination));
             usernameField = null;
         } else if (kpxcTOTPIcons.isValid(input)) {
             // Dynamically added TOTP field
@@ -91,6 +91,24 @@ kpxcFields.getCombinationFromAllInputs = function() {
     }
 
     return kpxc.combinations[0];
+};
+
+// Checks if existing combination is found and recognized fields are added to it
+kpxcFields.getExistingCombination = function(combination) {
+    // Lookup existing combinations that use the same form
+    const existingCombination = kpxc.combinations?.find(c => c.form === combination?.form);
+    if (existingCombination) {
+        // Replace values to the existing combination
+        existingCombination.username ??= combination.username;
+        existingCombination.password ??= combination.password;
+        if (existingCombination.passwordInputs?.length === 0) {
+            existingCombination.passwordInputs = combination.passwordInputs;
+        }
+
+        return existingCombination;
+    }
+
+    return combination;
 };
 
 // Adds segmented TOTP fields to the combination if found
