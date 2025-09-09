@@ -72,6 +72,12 @@ kpxcObserverHelper.initObserver = async function() {
                 continue;
             }
 
+            if (kpxcFields.hasOverlay(mut.target)) {
+                kpxcFields.discoverOverlays();
+                kpxcFields.checkExistingFields();
+                continue;
+            }
+
             // Cache style mutations. We only need the last style mutation of the target.
             kpxcObserverHelper.cacheStyle(mut, styleMutations, mutations.length);
 

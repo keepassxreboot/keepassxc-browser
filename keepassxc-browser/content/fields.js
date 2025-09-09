@@ -413,13 +413,33 @@ kpxcFields.isSearchField = function(target) {
 
 // :popover-open selector is supported only with Firefox >= 125 and Chrome >= 114
 kpxcFields.discoverOverlays = function() {
-     try { 
+    try { 
         kpxcFields.overlays = document.querySelectorAll(':popover-open, [popover]');
     } catch (e) {
         // Ignore SyntaxError (e.g., unsupported selector)
         if (!(e instanceof SyntaxError)) {
             logError(e);
         }
+    }
+};
+
+// Checks if element has an overlay
+kpxcFields.hasOverlay = function(elem) {
+    try {
+        return elem?.hasAttribute('popover') || elem?.matches(':popover-open');
+    } catch (e) {
+        // Ignore SyntaxError (e.g., unsupported selector)
+        if (!(e instanceof SyntaxError)) {
+            logError(e);
+        }
+    }
+};
+
+// Check the visibility of existing fields
+kpxcFields.checkExistingFields = function() {
+    if (kpxc.inputs?.some(input => !kpxcFields.isVisible(input))) {
+        kpxc.clearAllFromPage();
+        kpxc.combinations = [];
     }
 };
 

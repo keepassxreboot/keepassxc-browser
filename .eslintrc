@@ -126,6 +126,7 @@
         "isEdge": "readonly",
         "isElementInside": "readonly",
         "isFirefox": "readonly",
+        "isIframeAllowed": "readonly",
         "keepass": "readonly",
         "keepassClient": "readonly",
         "kpActions": "readonly",
