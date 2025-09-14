@@ -46,13 +46,13 @@ browser.storage.local.get({ 'latestKeePassXC': { 'version': '', 'lastChecked': n
 //--------------------------------------------------------------------------
 
 keepass.addCredentials = async function(tab, args = []) {
-    const [ username, password, url, group, groupUuid ] = args;
-    return keepass.updateCredentials(tab, [ null, username, password, url, group, groupUuid ]);
+    const [ username, password, url, group, groupUuid, generatePassword ] = args;
+    return keepass.updateCredentials(tab, [ null, username, password, url, group, groupUuid, generatePassword ]);
 };
 
 keepass.updateCredentials = async function(tab, args = []) {
     try {
-        const [ entryId, username, password, url, group, groupUuid ] = args;
+        const [ entryId, username, password, url, group, groupUuid, generatePassword ] = args;
         const taResponse = await keepass.testAssociation(tab);
         if (!taResponse) {
             browserAction.showDefault(tab);
@@ -69,7 +69,8 @@ keepass.updateCredentials = async function(tab, args = []) {
             login: username,
             password: password,
             url: url,
-            submitUrl: url
+            submitUrl: url,
+            generatePassword: generatePassword
         };
 
         if (entryId) {
