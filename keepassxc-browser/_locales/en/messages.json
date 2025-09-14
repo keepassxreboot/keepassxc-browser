@@ -678,6 +678,10 @@
         "message": "Site Preferences",
         "description": "Site Preferences page header."
     },
+    "optionsSitePreferencesSettings": {
+        "message": "Settings",
+        "description": "Site Preferences settings button text."
+    },
     "optionsMenuAbout": {
         "message": "About",
         "description": "About page header."

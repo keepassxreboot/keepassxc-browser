@@ -545,22 +545,22 @@ options.initSitePreferences = function() {
         const sitePreferences = options.settings['sitePreferences']?.find((pref) => pref?.url === url);
         const usernameOnly = sitePreferences.usernameOnly;
         const improvedFieldDetection = sitePreferences.improvedFieldDetection;
-        const allowIframes =sitePreferences.allowIframes;
+        const allowIframes = sitePreferences.allowIframes;
 
         const dropdown = $('.settings-dropdown');
         if (dropdown?.style?.display !== 'block'
             || (dropdown?.style?.display === 'block' && e.target !== options.dropdownButton)) {
             if (options.dropdownButton) {
                 options.dropdownButton.classList.remove('active');
+                // Update number of enabled settings to the old Settings button
+                const checkboxValues = Array.from(dropdown?.querySelectorAll('input[type=checkbox]')).map(c => c.checked);
+                updateSettingsButtonText(options.dropdownButton, checkboxValues);
             }
 
             // Apply current settings to the dropdown
             dropdown.querySelector('#usernameOnly').checked = usernameOnly;
             dropdown.querySelector('#improvedFieldDetection').checked = improvedFieldDetection;
             dropdown.querySelector('#allowIframes').checked = allowIframes;
-            dropdown.querySelector('#usernameOnly').addEventListener('change', (d) => checkboxClicked(e, d));
-            dropdown.querySelector('#improvedFieldDetection').addEventListener('change', (d) => checkboxClicked(e, d));
-            dropdown.querySelector('#allowIframes').addEventListener('change', (d) => checkboxClicked(e, d));
 
             dropdown?.show();
             updateDropdownPosition(e, dropdown);
@@ -569,6 +569,7 @@ options.initSitePreferences = function() {
         } else {
             dropdown?.hide();
             options.dropdownButton.classList.remove('active');
+            updateSettingsButtonText(options.dropdownButton, [ usernameOnly, improvedFieldDetection, allowIframes ]);
             options.dropdownButton = null;
         }
     };
@@ -638,18 +639,18 @@ options.initSitePreferences = function() {
         }
     };
 
-    const checkboxClicked = function(e, option) {
-        const closestTr = e.target.closest('tr');
+    const checkboxClicked = async function(e) {
+        const closestTr = options?.dropdownButton?.closest('tr');
         const url = closestTr.getAttribute('url');
 
         for (const site of options.settings['sitePreferences']) {
             if (site.url === url) {
-                if (option.target.name === SitePreferences.USERNAME_ONLY) {
-                    site.usernameOnly = option.target.checked;
-                } else if (option.target.name === SitePreferences.IMPROVED_FIELD_DETECTION) {
-                    site.improvedFieldDetection = option.target.checked;
-                } else if (option.target.name === SitePreferences.ALLOW_IFRAMES) {
-                    site.allowIframes = option.target.checked;
+                if (e.target.name === SitePreferences.USERNAME_ONLY) {
+                    site.usernameOnly = e.target.checked;
+                } else if (e.target.name === SitePreferences.IMPROVED_FIELD_DETECTION) {
+                    site.improvedFieldDetection = e.target.checked;
+                } else if (e.target.name === SitePreferences.ALLOW_IFRAMES) {
+                    site.allowIframes = e.target.checked;
                 }
             }
         }
@@ -669,6 +670,11 @@ options.initSitePreferences = function() {
 
         options.saveSettings();
     };
+
+    const dropdown = $('.settings-dropdown');
+    dropdown.querySelector('#usernameOnly').addEventListener('change', checkboxClicked);
+    dropdown.querySelector('#improvedFieldDetection').addEventListener('change',checkboxClicked);
+    dropdown.querySelector('#allowIframes').addEventListener('change', checkboxClicked);
 
     const addNewRow = function(rowClone, newIndex, url, ignore, usernameOnly, improvedFieldDetection, allowIframes) {
         const row = rowClone.cloneNode(true);
@@ -707,6 +713,8 @@ options.initSitePreferences = function() {
 
         // Settings
         const settings = row.children[1];
+        updateSettingsButtonText(settings.querySelector('#settings-button'),
+            [ usernameOnly, improvedFieldDetection, allowIframes ]);
         settings.querySelector('#settings-button').addEventListener('click', (e) => settingsButtonClicked(e));
 
         // Ignore
@@ -864,6 +872,19 @@ const getBrowserId = function() {
     return 'Other/Unknown';
 };
 
+// Update the number of enabled settings to the button text
+const updateSettingsButtonText = function(buttonElement, enabledOptions = []) {
+    const numberOfEnabledOptions = enabledOptions.filter(o => o === true).length;
+    const buttonText = buttonElement.querySelector('span');
+
+    if (numberOfEnabledOptions > 0) {
+        buttonText.textContent =
+            `${browser.i18n.getMessage('optionsSitePreferencesSettings')} (${numberOfEnabledOptions})`;
+    } else {
+        buttonText.textContent = browser.i18n.getMessage('optionsSitePreferencesSettings');
+    }
+};
+
 // Updates settings dropdown menu position
 const updateDropdownPosition = function(e, dropdown) {
     if (!dropdown) {
@@ -908,6 +929,8 @@ document.addEventListener('mouseup', function(e) {
     if ((e.x > rect.right || e.x < rect.x) || (e.y > rect.bottom || e.y < rect.y)
         && e.target.nodeName !== 'BUTTON') {
         dropdown?.hide();
+        const checkboxValues = Array.from(dropdown?.querySelectorAll('input[type=checkbox]')).map(c => c.checked);
+        updateSettingsButtonText(options.dropdownButton, checkboxValues);
         options.dropdownButton.classList.remove('active');
         options.dropdownButton = null;
     }

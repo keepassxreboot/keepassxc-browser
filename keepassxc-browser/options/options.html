@@ -260,7 +260,7 @@
                       <input class="form-check-input" type="checkbox" name="autoFillSingleEntry" id="autoFillSingleEntry" value="true">
                       <label class="form-check-label" for="autoFillSingleEntry" data-i18n="optionsCheckboxAutoFillSingleEntry"></label>
                       <div class="form-text" data-i18n="optionsAutoFillSingleEntryHelpText"></div>
-                    
+
                       <div class="alert alert-warning mt-3 col-lg-9" role="alert">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <span data-i18n="optionsAutoFillSingleEntryWarning"></span>
@@ -768,7 +768,7 @@
                       </thead>
                       <tbody>
                         <tr class="empty">
-                          <td colspan="5"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
+                          <td colspan="4"><span data-i18n="optionsSitePreferencesNotFound"></span></td>
                         </tr>
                         <tr class="clone d-none">
                           <td class="text-nowrap">
@@ -788,9 +788,9 @@
                               </button>
                             </div>
                           </td>
-                          <td>
-                            <button type="button" class="btn btn-sm btn-primary" id="settings-button">
-                              Settings
+                          <td class="text-nowrap">
+                            <button type="button" class="btn btn-sm btn-primary container-fluid" id="settings-button">
+                              <span class="non-clickable" data-i18n="optionsSitePreferencesSettings"></span>
                             </button>
                           </td>
                            <td>
@@ -840,7 +840,7 @@
               </div>
 
               <!-- Settings dropdown -->
-              <div class="card settings-dropdown" style="display: none;"> 
+              <div class="card settings-dropdown" style="display: none;">
                 <div class="card-body settings-dropdown-body">
                   <!-- Username only detection -->
                   <div class="form-check">
@@ -859,7 +859,7 @@
                     <input class="form-check-input" type="checkbox" id="allowIframes" name="allowIframes" value="false" data-i18n="[title]optionsColumnAllowIframes">
                     <label class="form-check-label" for="allowIframes" data-i18n="optionsColumnAllowIframes"></label>
                   </div>
-                  
+
                   <!-- Add new options below -->
                   <!--<hr class="dropdown-divider">-->
                 </div>

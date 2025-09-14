@@ -227,6 +227,10 @@ table td:last-of-type {
     color: var(--kpxc-text-color);
 }
 
+.non-clickable {
+    pointer-events: none;
+}
+
 .settings-dropdown {
     box-shadow: var(--kpxc-box-shadow-strong);
     overflow: hidden;
