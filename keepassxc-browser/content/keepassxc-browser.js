@@ -736,12 +736,20 @@ kpxc.setValue = function(field, value, forced = false) {
         field.checked = true;
     }
 
+    // Make sure the input is not wrapped inside another element (custom INPUT element)
+    if (field?.nodeName !== 'INPUT' && field?.nodeName?.includes('INPUT')) {
+        const childInput = field?.querySelector('input');
+        const fieldsFromShadowDOM = kpxcObserverHelper.findInputsFromShadowDOM(field);
+        field = childInput ?? fieldsFromShadowDOM[0];
+    }
+
+
     kpxc.setValueWithChange(field, value, forced);
 };
 
 // Sets a new value to input field and triggers necessary events
 kpxc.setValueWithChange = function(field, value, forced = false) {
-    if (!forced && field.readOnly) {
+    if (field && field.readOnly && !forced) {
         return;
     }
 

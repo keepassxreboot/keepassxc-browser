@@ -116,9 +116,9 @@ kpxcForm.getNewPassword = function(passwordInputs = []) {
     }
 
     // Choose the last three password fields. The first ones are almost always for something else
-    const current = passwordInputs[passwordInputs.length - 3].value;
-    const newPass = passwordInputs[passwordInputs.length - 2].value;
-    const repeatNew = passwordInputs[passwordInputs.length - 1].value;
+    const current = passwordInputs[passwordInputs.length - 3]?.value;
+    const newPass = passwordInputs[passwordInputs.length - 2]?.value;
+    const repeatNew = passwordInputs[passwordInputs.length - 1]?.value;
 
     if ((newPass === repeatNew && current !== newPass && current !== repeatNew)
         || (current === newPass && repeatNew !== newPass && repeatNew !== current)) {
