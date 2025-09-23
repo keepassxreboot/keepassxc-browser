@@ -749,7 +749,7 @@ kpxc.setValue = function(field, value, forced = false) {
 
 // Sets a new value to input field and triggers necessary events
 kpxc.setValueWithChange = function(field, value, forced = false) {
-    if (field && field.readOnly && !forced) {
+    if (!field || (field?.readOnly && !forced)) {
         return;
     }
 
