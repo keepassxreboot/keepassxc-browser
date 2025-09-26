@@ -826,7 +826,7 @@ options.initAbout = function() {
     $('#tab-about span.versionCIP').textContent = version;
     $('#tab-about span.kpxcbrVersion').textContent = version;
     $('#tab-about span.kpxcbrOS').textContent = platform;
-    $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId();
+    $('#tab-about span.kpxcbrBrowser').textContent = getBrowserId(navigator.userAgent);
 };
 
 options.updateTheme = function() {
@@ -854,21 +854,25 @@ options.createWarning = function(elem, text) {
     }, 5000);
 };
 
-const getBrowserId = function() {
-    if (navigator.userAgent.indexOf('Firefox') > -1) {
-        return 'Mozilla Firefox ' + navigator.userAgent.substr(navigator.userAgent.lastIndexOf('/') + 1);
-    } else if (navigator.userAgent.indexOf('Edg') > -1) {
-        let startPos = navigator.userAgent.indexOf('Edg');
-        startPos = navigator.userAgent.indexOf('/', startPos) + 1;
-        const version = navigator.userAgent.substring(startPos);
-        return 'Microsoft Edge ' + version;
-    } else if (navigator.userAgent.indexOf('Chrome') > -1) {
-        let startPos = navigator.userAgent.indexOf('Chrome');
-        startPos = navigator.userAgent.indexOf('/', startPos) + 1;
-        const version = navigator.userAgent.substring(startPos, navigator.userAgent.indexOf('Safari'));
-        return 'Chrome/Chromium ' + version;
-    }
+const getBrowserId = function(userAgent) {
+    const browserQueries = [
+        { findStr: 'Firefox', name: 'Mozilla Firefox' },
+        { findStr: 'Edg', name: 'Microsoft Edge' },
+        { findStr: 'OPR', name: 'Opera' },
+        { findStr: 'Chrome', name: 'Chrome/Chromium' }
+    ];
 
+    const getVersion = (agent, findStr) => {
+        const match = agent?.match(new RegExp(`(?:${findStr})\/([\\d.]+)`));
+        return match ? match[1] : 'Unknown';
+    };
+
+    for (const query of browserQueries) {
+        if (userAgent?.indexOf(query.findStr) > -1) {
+            return `${query.name} ${getVersion(userAgent, query.findStr)}`;
+        }
+    }
+  
     return 'Other/Unknown';
 };
 
