@@ -864,7 +864,7 @@ const getBrowserId = function(userAgent) {
 
     const getVersion = (agent, findStr) => {
         const match = agent?.match(new RegExp(`(?:${findStr})\/([\\d.]+)`));
-        return match ? match[1] : 'Unknown';
+        return match ? match[1] : 'Unknown version';
     };
 
     for (const query of browserQueries) {
