@@ -60,6 +60,8 @@ async function testTotpFields() {
         [ '', { id: '2fa', type: 'text', maxLength: '6' }, 'Generic 2FA field', true ],
         [ '', { id: '2fa', type: 'text', maxLength: '4' }, 'Ignore if field maxLength too small', false ],
         [ '', { id: '2fa', type: 'text', maxLength: '12' }, 'Ignore if field maxLength too long', false ],
+        [ '', { id: 'promocode', type: 'text', }, 'promocode id is not acceptable', false ],
+        [ '', { id: 'Promotional Code', type: 'text', }, 'Promotional Code id is not acceptable', false ],
         [ '', { id: 'encode', type: 'text', }, 'encode id is not acceptable', false ],
         [ '', { id: 'encodedText', type: 'text', }, 'encodedText is not acceptable', false ],
         [ '', { id: 'decoder', type: 'text', }, 'decoder id is not acceptable', false ],
