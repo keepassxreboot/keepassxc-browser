@@ -9,7 +9,7 @@ httpAuth.init = function() {
     let handleReq = httpAuth.handleRequestPromise;
     let reqType = 'blocking';
 
-    if (!isFirefox()) {
+    if (!page.isFirefox) {
         handleReq = httpAuth.handleRequestCallback;
         reqType = 'asyncBlocking';
     }

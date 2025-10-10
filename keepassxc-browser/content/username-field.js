@@ -147,12 +147,12 @@ const iconClicked = async function(field, icon) {
 
 const getIconClassName = function(state = DatabaseState.UNLOCKED) {
     if (state === DatabaseState.LOCKED) {
-        return (isFirefox() ? 'lock-moz' : 'lock');
+        return kpxc.isFirefox ? 'lock-moz' : 'lock';
     } else if (state === DatabaseState.DISCONNECTED) {
-        return (isFirefox() ? 'disconnected-moz' : 'disconnected');
+        return kpxc.isFirefox ? 'disconnected-moz' : 'disconnected';
     }
 
-    return (isFirefox() ? 'unlock-moz' : 'unlock');
+    return kpxc.isFirefox ? 'unlock-moz' : 'unlock';
 };
 
 const getIconText = function(state) {

@@ -170,10 +170,10 @@ const trimURL = function(url) {
 };
 
 const debugLogMessage = function(message, extra) {
-    console.log(`[Debug ${getFileAndLine()}] ${EXTENSION_NAME} - ${message}`);
+    console.debug(`[Debug ${getFileAndLine()}] ${EXTENSION_NAME} - ${message}`);
 
     if (extra) {
-        console.log(extra);
+        console.debug(extra);
     }
 };
 

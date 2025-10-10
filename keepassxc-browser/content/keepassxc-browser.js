@@ -21,6 +21,7 @@ kpxc.databaseState = DatabaseState.DISCONNECTED;
 kpxc.detectedFields = 0;
 kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
+kpxc.isFirefox;
 kpxc.settings = {};
 kpxc.singleInputEnabledForPage = false;
 kpxc.submitUrl = null;
@@ -904,6 +905,7 @@ const initContentScript = async function() {
         }
 
         kpxc.settings = settings;
+        kpxc.isFirefox = await sendMessage('is_firefox');
 
         if (await kpxc.siteIgnored()) {
             logDebug('This site is ignored in Site Preferences.');

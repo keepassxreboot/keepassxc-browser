@@ -49,7 +49,9 @@ page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
+page.isFirefox = false;
 page.manualFill = ManualFill.NONE;
+page.menuContexts = [ 'editable' ];
 page.passwordFilled = false;
 page.redirectCount = 0;
 page.submitted = false;
@@ -61,12 +63,19 @@ page.popupData = {
     popup: 'popup'
 };
 
+page.initBrowser = async function() {
+    page.isFirefox =
+        navigator.userAgent.indexOf('Firefox') !== -1
+        || navigator.userAgent.indexOf('Gecko/') !== -1
+        || typeof browser.runtime.getBrowserInfo === 'function';
+};
+
 page.initSettings = async function() {
     try {
         const item = await browser.storage.local.get({ 'settings': {} });
 
         // Load managed settings if found
-        if (isFirefox() && typeof(browser.storage.managed) === 'object') {
+        if (page.isFirefox && typeof(browser.storage.managed) === 'object') {
             try {
                 const managedSettings = await browser.storage.managed.get('settings');
                 if (managedSettings?.settings) {
@@ -74,16 +83,16 @@ page.initSettings = async function() {
                     item.settings = managedSettings.settings;
                 }
             } catch (err) {
-                logError('page.initSettings: ' + err);
+                debugLogMessage('page.initSettings: ' + err);
             }
-        } else if (typeof(chrome.storage.managed) === 'object') {
+        } else if (typeof chrome.storage.managed === 'object') {
             chrome.storage.managed.get('settings').then((managedSettings) => {
                 if (managedSettings?.settings) {
                     debugLogMessage('Managed settings found.');
                     item.settings = managedSettings.settings;
                 }
             }).catch((err) => {
-                logError('page.initSettings: ' + err);
+                debugLogMessage('page.initSettings: ' + err);
             });
         }
 

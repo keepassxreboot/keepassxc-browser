@@ -241,6 +241,10 @@ kpxcEvent.sendBackToTabs = async function(tab, args = []) {
     }
 };
 
+kpxcEvent.isFirefox = async function(tab) {
+    return page.isFirefox;
+};
+
 // All methods named in this object have to be declared BEFORE this!
 kpxcEvent.messageHandlers = {
     'add_credentials': keepass.addCredentials,
@@ -271,6 +275,7 @@ kpxcEvent.messageHandlers = {
     'iframe_detected': kpxcEvent.onIframeDetected,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
+    'is_firefox': kpxcEvent.isFirefox,
     'is_iframe_allowed': page.isIframeAllowed,
     'is_site_ignored': page.isSiteIgnored,
     'load_keyring': kpxcEvent.onLoadKeyRing,

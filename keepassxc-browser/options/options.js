@@ -2,6 +2,7 @@
 
 const options = {};
 options.dropdownButton = null;
+options.isFirefox = false;
 
 const $ = function(elem) {
     return document.querySelector(elem);
@@ -207,7 +208,7 @@ options.initGeneralSettings = async function() {
     });
 
     $('#configureCommands').addEventListener('click', function() {
-        if (isFirefox()) {
+        if (options.isFirefox) {
             if (typeof(browser.commands.openShortcutSettings) === 'function') {
                 browser.commands.openShortcutSettings();
             } else {
@@ -982,6 +983,8 @@ window.addEventListener('scroll', function() {
 
         const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
         options.keyRing = keyRing;
+        options.isFirefox = await browser.runtime.sendMessage({ action: 'is_firefox' });
+
         options.initMenu();
         await options.initGeneralSettings();
         options.initConnectedDatabases();

@@ -89,7 +89,7 @@ kpxcCustomLoginFieldsBanner.create = async function() {
     const bannerInfo = kpxcUI.createElement('div', 'banner-info');
     const bannerButtons = kpxcUI.createElement('div', 'banner-buttons');
 
-    const iconClassName = isFirefox() ? 'kpxc-banner-icon-moz' : 'kpxc-banner-icon';
+    const iconClassName = kpxc.isFirefox ? 'kpxc-banner-icon-moz' : 'kpxc-banner-icon';
     const icon = kpxcUI.createElement('span', iconClassName);
     const infoText = kpxcUI.createElement('span', '', {}, tr('defineChooseCustomLoginFieldText'));
     const separator = kpxcUI.createElement('div', 'kpxc-separator');

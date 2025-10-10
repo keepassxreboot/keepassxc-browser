@@ -10,12 +10,6 @@ const contextMenuItems = [
     { title: tr('contextMenuRequestGlobalAutoType'), action: 'request_autotype' }
 ];
 
-const menuContexts = [ 'editable' ];
-    
-if (isFirefox()) {
-    menuContexts.push('password');
-}
-
 const initListeners = async function() {
     /**
      * Generate information structure for created tab and invoke all needed
@@ -161,13 +155,17 @@ const initListeners = async function() {
 };
 
 const initContextMenuItems = async function() { 
+    if (page.isFirefox) {
+        page.menuContexts.push('password');
+    }
+
     // Create context menu items
     await browser.contextMenus.removeAll();
     for (const item of contextMenuItems) {
         try {
             await browser.contextMenus.create({
                 title: item.title,
-                contexts: menuContexts,
+                contexts: page.menuContexts,
                 visible: item.visible,
                 id: item.id || item.action
             });
@@ -180,6 +178,7 @@ const initContextMenuItems = async function() {
 (async () => {
     try {
         await keepass.migrateKeyRing();
+        await page.initBrowser();
         await page.initSettings();
         await page.initSitePreferences();
         await page.initOpenedTabs();

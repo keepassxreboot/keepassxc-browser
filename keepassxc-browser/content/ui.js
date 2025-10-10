@@ -363,7 +363,7 @@ kpxcUI.createNotification = function(type, message) {
     const notification = kpxcUI.createElement('div', 'kpxc-notification kpxc-notification-' + type, {});
     type = type.charAt(0).toUpperCase() + type.slice(1) + '!';
 
-    const className = (isFirefox() ? 'kpxc-banner-icon-moz' : 'kpxc-banner-icon');
+    const className = kpxc.isFirefox ? 'kpxc-banner-icon-moz' : 'kpxc-banner-icon';
     const icon = kpxcUI.createElement('span', className, { 'alt': 'logo' });
     const label = kpxcUI.createElement('span', 'kpxc-label', {}, type);
     const msg = kpxcUI.createElement('span', '', {}, message);
