@@ -154,7 +154,8 @@ const initListeners = async function() {
     });
 };
 
-const initContextMenuItems = async function() { 
+const initContextMenuItems = async function() {
+    page.menuContexts = [ 'editable' ];
     if (page.isFirefox) {
         page.menuContexts.push('password');
     }
