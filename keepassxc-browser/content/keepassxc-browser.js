@@ -719,60 +719,6 @@ kpxc.setPasswordFilled = async function(state) {
     await sendMessage('password_set_filled', state);
 };
 
-// Special handling for setting value to select and checkbox elements
-kpxc.setValue = function(field, value, forced = false) {
-    if (field.matches('select')) {
-        value = value.toLowerCase().trim();
-        const options = field.querySelectorAll('option');
-
-        for (const o of options) {
-            if (o.textContent.toLowerCase().trim() === value) {
-                kpxc.setValueWithChange(field, o.value);
-                return false;
-            }
-        }
-
-        return;
-    } else if (field.getLowerCaseAttribute('type') === 'checkbox' && value?.toLowerCase() === 'true') {
-        field.checked = true;
-    }
-
-    // Make sure the input is not wrapped inside another element (custom INPUT element)
-    if (field?.nodeName !== 'INPUT' && field?.nodeName?.includes('INPUT')) {
-        const childInput = field?.querySelector('input');
-        const fieldsFromShadowDOM = kpxcObserverHelper.findInputsFromShadowDOM(field);
-        field = childInput ?? fieldsFromShadowDOM[0];
-    }
-
-
-    kpxc.setValueWithChange(field, value, forced);
-};
-
-// Sets a new value to input field and triggers necessary events
-kpxc.setValueWithChange = function(field, value, forced = false) {
-    if (!field || (field?.readOnly && !forced)) {
-        return;
-    }
-
-    const dispatchLegacyEvent = function(elem, eventName) {
-        const legacyEvent = elem.ownerDocument.createEvent('Event');
-        legacyEvent.initEvent(eventName, true, false);
-        elem.dispatchEvent(legacyEvent);
-    };
-
-    field.focus();
-    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new Event('input', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new Event('change', { bubbles: true, cancelable: false }));
-    field.value = value;
-
-    // Some pages will not accept the value change without dispatching events directly to the document
-    dispatchLegacyEvent(field, 'input');
-    dispatchLegacyEvent(field, 'change');
-};
-
 kpxc.showGroupNameInAutocomplete = function() {
     return !kpxc.settings.useCompactMode
         || (kpxc.settings.showGroupNameInAutocomplete && kpxc.getUniqueGroupCount(kpxc.credentials) > 1);

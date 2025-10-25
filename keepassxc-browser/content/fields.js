@@ -466,6 +466,28 @@ kpxcFields.checkExistingFields = function() {
     }
 };
 
+// Check for popup overlays
+kpxcFields.isOverlayOnTop = function(rect) {
+    for (const overlay of kpxcFields.overlays ?? []) {
+        if (kpxcSites.overlayExceptionFound(overlay)) {
+            continue;
+        }
+
+        const overlayRect = overlay?.getBoundingClientRect();
+        if (overlayRect && elementsOverlap(rect, overlayRect)) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+/**
+ * Check if element is the topmost element
+ * @param {HTMLElement} elem    Element to be checked
+ * @param {DOMRect} rect        Precalculated DOMRect of the element
+ * @returns {boolean}           True if element is the topmost
+ */
 kpxcFields.isTopElement = function(elem, rect) {
     if (!elem || !rect) {
         return false;
@@ -493,16 +515,9 @@ kpxcFields.isTopElement = function(elem, rect) {
         return false;
     }
 
-    // Check for popup overlays
-    for (const overlay of kpxcFields.overlays ?? []) {
-        if (kpxcSites.overlayExceptionFound(overlay)) {
-            continue;
-        }
-
-        const overlayRect = overlay?.getBoundingClientRect();
-        if (overlayRect && elementsOverlap(rect, overlayRect)) {
-            return false;
-        }
+    // Check if element has an overlay
+    if (kpxcFields.isOverlayOnTop(rect)) {
+        return false;
     }
 
     return true;

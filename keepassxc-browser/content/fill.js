@@ -18,7 +18,7 @@ kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
         return;
     }
 
-    kpxc.setValue(el, value[0]);
+    kpxcFill.setValue(el, value[0]);
 };
 
 // Fill requested from the context menu. Active element is used for combination detection
@@ -178,7 +178,7 @@ kpxcFill.setTOTPValue = function(elem, val) {
         }
     }
 
-    kpxc.setValue(elem, val);
+    kpxcFill.setValue(elem, val);
 };
 
 // Fill TOTP in parts
@@ -188,7 +188,7 @@ kpxcFill.fillSegmentedTotp = function(elem, val, totpInputs) {
     }
 
     for (let i = 0; i < totpInputs.length; ++i) {
-        kpxc.setValue(totpInputs[i], val[i]);
+        kpxcFill.setValue(totpInputs[i], val[i]);
     }
 };
 
@@ -260,7 +260,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
             return;
         }
 
-        kpxc.setValueWithChange(combination.password, selectedCredentials.password);
+        kpxcFill.setValueWithChange(combination.password, selectedCredentials.password);
         await kpxc.setPasswordFilled(true);
     }
 
@@ -268,7 +268,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
     if (combination.username && usernameValue && combination.username !== combination.password &&
         (!combination.username.value || combination.username.value !== usernameValue)) {
         if (!passOnly) {
-            kpxc.setValueWithChange(combination.username, usernameValue);
+            kpxcFill.setValueWithChange(combination.username, usernameValue);
         }
     }
 
@@ -307,7 +307,7 @@ kpxcFill.fillInStringFields = function(fields, stringFields) {
             const currentField = fields[i];
 
             if (currentField && stringFieldValue[0]) {
-                kpxc.setValue(currentField, stringFieldValue[0], true);
+                kpxcFill.setValue(currentField, stringFieldValue[0], true);
                 filledInFields.push(currentField);
             }
         }
@@ -339,6 +339,67 @@ kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
         (combination.username || combination.password).focus();
     }
 };
+
+// Special handling for setting value to select and checkbox elements
+kpxcFill.setValue = function(field, value, forced = false) {
+    if (field.matches('select')) {
+        value = value.toLowerCase().trim();
+        const options = field.querySelectorAll('option');
+
+        for (const o of options) {
+            if (o.textContent.toLowerCase().trim() === value) {
+                kpxcFill.setValueWithChange(field, o.value);
+                return false;
+            }
+        }
+
+        return;
+    } else if (field.getLowerCaseAttribute('type') === 'checkbox' && value?.toLowerCase() === 'true') {
+        field.checked = true;
+    }
+
+    // Make sure the input is not wrapped inside another element (custom INPUT element)
+    if (field?.nodeName !== 'INPUT' && field?.nodeName?.includes('INPUT')) {
+        const childInput = field?.querySelector('input');
+        const fieldsFromShadowDOM = kpxcObserverHelper.findInputsFromShadowDOM(field);
+        field = childInput ?? fieldsFromShadowDOM[0];
+    }
+
+
+    kpxcFill.setValueWithChange(field, value, forced);
+};
+
+// Sets a new value to input field and triggers necessary events
+kpxcFill.setValueWithChange = function(field, value, forced = false) {
+    if (!field || (field?.readOnly && !forced)) {
+        return;
+    }
+
+    // Check for overlays before fill
+    const rect = field.getBoundingClientRect();
+    if (kpxcFields.isOverlayOnTop(rect)) {
+        return;
+    }
+
+    const dispatchLegacyEvent = function(elem, eventName) {
+        const legacyEvent = elem.ownerDocument.createEvent('Event');
+        legacyEvent.initEvent(eventName, true, false);
+        elem.dispatchEvent(legacyEvent);
+    };
+
+    field.focus();
+    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new Event('input', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new Event('change', { bubbles: true, cancelable: false }));
+    field.value = value;
+
+    // Some pages will not accept the value change without dispatching events directly to the document
+    dispatchLegacyEvent(field, 'input');
+    dispatchLegacyEvent(field, 'change');
+};
+
 
 // Check if password fill is done to a plain text field
 const passwordFillIsAllowed = function(elem) {
