@@ -376,6 +376,7 @@ kpxcFill.setValueWithChange = function(field, value, forced = false) {
     }
 
     // Check for overlays before fill
+    kpxcFields.discoverOverlays();
     const rect = field.getBoundingClientRect();
     if (kpxcFields.isOverlayOnTop(rect)) {
         return;
