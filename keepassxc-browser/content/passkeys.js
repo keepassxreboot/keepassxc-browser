@@ -32,6 +32,8 @@
         return window.btoa(str).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
     };
 
+    // Returns the PublicKeyCredential as JSON
+    // See: https://w3c.github.io/webauthn/#dom-publickeycredential-tojson
     const kpxcPublicKeyCredentialJson = function (credential, publicKey) {
         const clientExtensionResults = credential.getClientExtensionResults();
         const type = credential.type;
@@ -45,7 +47,7 @@
                 authenticatorData: publicKey.response.authenticatorData,
                 transports: credential.response.getTransports(),
                 publicKey: responsePublicKey ? kpxcArrayBufferToBase64(responsePublicKey) : null,
-                publicKeyAlgorithm: publicKey.response.publicKeyAlgorithm,
+                publicKeyAlgorithm: credential.response.getPublicKeyAlgorithm(),
                 attestationObject: publicKey.response.attestationObject,
             };
         }
