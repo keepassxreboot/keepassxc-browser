@@ -26,6 +26,49 @@
         return kpxcStringToArrayBuffer(window.atob(str?.replaceAll('-', '+').replaceAll('_', '/')));
     };
 
+    // From ArrayBuffer to URL encoded base64 string
+    const kpxcArrayBufferToBase64 = function(buf) {
+        const str = [ ...new Uint8Array(buf) ].map(c => String.fromCharCode(c)).join('');
+        return window.btoa(str).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
+    };
+
+    const kpxcPublicKeyCredentialJson = function (credential, publicKey) {
+        const clientExtensionResults = credential.getClientExtensionResults();
+        const type = credential.type;
+        const authenticatorAttachment = credential.authenticatorAttachment;
+        let response;
+
+        if (credential.response instanceof AuthenticatorAttestationResponse) {
+            const responsePublicKey = credential.response.getPublicKey();
+            response = {
+                clientDataJSON: publicKey.response.clientDataJSON,
+                authenticatorData: publicKey.response.authenticatorData,
+                transports: credential.response.getTransports(),
+                publicKey: responsePublicKey ? kpxcArrayBufferToBase64(responsePublicKey) : null,
+                publicKeyAlgorithm: publicKey.response.publicKeyAlgorithm,
+                attestationObject: publicKey.response.attestationObject,
+            };
+        }
+
+        if (credential.response instanceof AuthenticatorAssertionResponse) {
+            response = {
+                clientDataJSON: publicKey.response.clientDataJSON,
+                authenticatorData: publicKey.response.authenticatorData,
+                signature: publicKey.response.signature,
+                userHandle: publicKey.response?.userHandle || undefined,
+            };
+        }
+
+        return {
+            id: publicKey.id,
+            rawId: publicKey.id,
+            response,
+            authenticatorAttachment,
+            clientExtensionResults,
+            type,
+        };
+    };
+
     // Wraps response to AuthenticatorAttestationResponse object
     const createAttestationResponse = function(publicKey) {
         const response = {
@@ -63,7 +106,8 @@
             response: authenticatorResponse,
             type: publicKey.type,
             clientExtensionResults: () => publicKey?.response?.clientExtensionResults || {},
-            getClientExtensionResults: () => publicKey?.response?.clientExtensionResults || {}
+            getClientExtensionResults: () => publicKey?.response?.clientExtensionResults || {},
+            toJSON: () => kpxcPublicKeyCredentialJson(publicKeyCredential, publicKey)
         };
 
         return Object.setPrototypeOf(publicKeyCredential, PublicKeyCredential.prototype);
