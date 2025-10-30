@@ -251,8 +251,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
         const formInputs = kpxcObserverHelper.getInputs(combination.form);
         const newPasswordField = formInputs?.find((formInput) =>
             formInput?.getLowerCaseAttribute('type') === 'password');
-        if (newPasswordField && areNamedNodeMapsEqual(combination.password.attributes, newPasswordField.attributes)
-        ) {
+        if (newPasswordField && areNamedNodeMapsEqual(combination.password.attributes, newPasswordField.attributes)) {
             combination.password = newPasswordField;
         }
     }
@@ -446,15 +445,15 @@ const areNamedNodeMapsEqual = function(currentNodeMap, newNodeMap) {
         return false;
     }
 
-    const passwordFieldAttributes = Array.from(currentNodeMap);
-    const newPasswordFieldAttributes = Array.from(newNodeMap);
+    const fieldAttributes = Array.from(currentNodeMap);
+    const newFieldAttributes = Array.from(newNodeMap);
 
-    if (passwordFieldAttributes.length !== newPasswordFieldAttributes.length) {
+    if (fieldAttributes.length !== newFieldAttributes.length) {
         return false;
     }
 
-    for (const attr of passwordFieldAttributes) {
-        const newAttr = newPasswordFieldAttributes.find((newAttr) => newAttr?.name === attr?.name);
+    for (const attr of fieldAttributes) {
+        const newAttr = newFieldAttributes.find((newAttr) => newAttr?.name === attr?.name);
         if (!newAttr || newAttr?.value !== attr?.value) {
             return false;
         }
