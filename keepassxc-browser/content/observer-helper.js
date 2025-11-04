@@ -18,9 +18,17 @@ kpxcObserverHelper.ignoredNodeNames = [
     'A',
     'HEAD',
     'HTML',
+    'IMG',
     'LINK',
     'SCRIPT',
     'VIDEO',
+];
+
+kpxcObserverHelper.ignoredPartialNodeNames = [
+    'FACEPLATE',
+    'REDDIT-PDP',
+    'RENDER-TEMPLATE',
+    'SHREDDIT',
 ];
 
 kpxcObserverHelper.ignoredNodeTypes = [
@@ -312,6 +320,7 @@ kpxcObserverHelper.ignoredNode = function(target) {
     if (!target
         || kpxcObserverHelper.ignoredNodeTypes.some(e => e === target.nodeType)
         || kpxcObserverHelper.ignoredNodeNames.some(e => e === target.nodeName)
+        || kpxcObserverHelper.ignoredPartialNodeNames.some(e => target.nodeName?.includes(e))
         || target.nodeName.startsWith('YTMUSIC')
         || target.nodeName.startsWith('YT-')) {
         return true;
