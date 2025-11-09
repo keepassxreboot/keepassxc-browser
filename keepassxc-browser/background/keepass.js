@@ -805,7 +805,7 @@ keepass.disableAutomaticReconnect = function() {
 };
 
 keepass.reconnect = async function(tab = null, connectionTimeout = -1) {
-    if (connectionTimeout == -1) {
+    if (connectionTimeout === -1) {
         connectionTimeout = page.settings.connectionTimeout * 1000;
     }
 
