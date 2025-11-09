@@ -588,14 +588,14 @@ kpxcFields.traverseParents = function(element, predicate, resultFn = () => true,
 kpxcFields.useCustomLoginFields = async function() {
     const location = kpxc.getDocumentLocation();
     const creds = kpxc.settings['defined-custom-fields'][location];
-    if (!creds.username && !creds.password && !creds.totp && creds.fields.length === 0) {
+    if (!creds.username && !creds.password && !creds.totp && creds.fields.length === 0 && !creds.submitButton) {
         return;
     }
 
-    // Finds the input field based on the stored ID
-    const findInputField = async function(inputFields, idArray) {
+    // Finds the element based on the stored ID
+    const findElement = async function(fields, idArray) {
         if (idArray) {
-            const input = inputFields.find(e => e === kpxcFields.getId(idArray, e));
+            const input = fields.find(e => e === kpxcFields.getId(idArray, e));
             if (input) {
                 return input;
             }
@@ -612,16 +612,24 @@ kpxcFields.useCustomLoginFields = async function() {
         }
     });
 
-    const [ username, password, totp ] = await Promise.all([
-        await findInputField(inputFields, creds.username),
-        await findInputField(inputFields, creds.password),
-        await findInputField(inputFields, creds.totp)
+    const buttons = [];
+    document.body.querySelectorAll('button, input[type=submit]').forEach(e => {
+        if (e.type !== 'hidden' && !e.disabled) {
+            buttons.push(e);
+        }
+    });
+
+    const [ username, password, totp, submitButton ] = await Promise.all([
+        await findElement(inputFields, creds.username),
+        await findElement(inputFields, creds.password),
+        await findElement(inputFields, creds.totp),
+        await findElement(buttons, creds.submitButton),
     ]);
 
     // Handle StringFields
     const stringFields = [];
     for (const sf of creds.fields) {
-        const field = await findInputField(inputFields, sf);
+        const field = await findElement(inputFields, sf);
         if (field) {
             stringFields.push(field);
         }
@@ -639,7 +647,8 @@ kpxcFields.useCustomLoginFields = async function() {
         password: password,
         passwordInputs: [ password ],
         totp: totp,
-        fields: stringFields
+        fields: stringFields,
+        submitButton: submitButton
     });
 
     return combinations;

@@ -340,7 +340,8 @@ kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
     if (!skipAutoSubmit && !autoSubmitIgnoredForSite) {
         await sendMessage('page_set_autosubmit_performed');
 
-        const submitButton = kpxcForm.getFormSubmitButton(combination.form);
+        // Use submit button from Custom Login Fields or detect it from the form
+        const submitButton = combination?.submitButton ?? kpxcForm.getFormSubmitButton(combination.form);
         if (submitButton !== undefined) {
             submitButton.click();
         } else if (combination.form) {
