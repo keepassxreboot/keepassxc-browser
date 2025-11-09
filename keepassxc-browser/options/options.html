@@ -534,10 +534,8 @@
 
                   <!-- Keepass connectiontimeout -->
                   <div class="form-group mt-2 pb-1">
-                    <label for="connectionTimeout" data-i18n="optionsConnectionTimeout"></label>
-                    <div class="input-group w-25 mt-2">
-                      <input class="form-control form-control-sm" type="number" id="connectionTimeout" min="2" max="60" required>
-                    </div>
+                    <label id="connectionTimeoutLabel" class="font-weight-normal" for="connectionTimeout" data-i18n="optionsConnectionTimeout" data-i18n-placeholder="1.5"></label>
+                    <input type="range" class="form-range" id="connectionTimeout" name="connectionTimeout" min="1.5" max="60.0" step="0.5" value="1.5">
                     <div class="form-text" data-i18n="optionsConnectionTimeoutHelpText"></div>
                   </div>
 

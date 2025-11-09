@@ -1023,11 +1023,11 @@
         "description": "Clear credentials timeout help text."
     },
     "optionsConnectionTimeout": {
-        "message": "KeepassXC connection timeout (seconds, 2-60).",
+        "message": "KeepassXC connection timeout: $1 seconds",
         "description": "Connection timeout label text."
     },
     "optionsConnectionTimeoutHelpText": {
-        "message": "When KeePassXC browser extension tries to connect to to keepass, this timeout value is used",
+        "message": "When KeePassXC browser extension tries to connect to to keepass, this timeout value is used. Default value is 1.5. Maximum is 60.0.",
         "description": "Connection timeout label text."
     },
     "optionsVersionInfoText": {

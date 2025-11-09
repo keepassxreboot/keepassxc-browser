@@ -53,7 +53,7 @@
           "type": "integer"
         },
         "connectionTimeout": {
-          "title": "Connection timeout to KeePassXC. Default (seconds): 2",
+          "title": "Connection timeout to KeePassXC. Default (seconds): 1.5",
           "type": "integer"
         },
         "colorTheme": {
