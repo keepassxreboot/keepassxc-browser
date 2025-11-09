@@ -1018,6 +1018,14 @@
         "message": "Anmeldedaten werden nach dem Timeout aus Hintergrund-Tabs entfernt. Für diese Seiten wird erneut um Erlaubnis gebeten.",
         "description": "Clear credentials timeout help text."
     },
+    "optionsConnectionTimeout": {
+        "message": "KeepassXC Zeitlimit für die Verbindung (Sekunden, 2-60).",
+        "description": "Connection timeout label text."
+    },
+    "optionsConnectionTimeoutHelpText": {
+        "message": "Wenn die KeePassXC Browser Erweiterung versucht, sich mit KeePass zu verbinden, wird dieses Zeitlimit verwendet.",
+        "description": "Connection timeout label text."
+    },
     "optionsVersionInfoText": {
         "message": "KeePassXC-Browser benötigt KeePassXC, um Anmeldedaten abzurufen.",
         "description": "Settings page version info text."

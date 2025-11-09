@@ -124,6 +124,7 @@ options.initGeneralSettings = async function() {
     $('#tab-general-settings input#defaultGroup').value = options.settings['defaultGroup'];
     $('#tab-general-settings input#defaultPasskeyGroup').value = options.settings['defaultPasskeyGroup'];
     $('#tab-general-settings input#clearCredentialTimeout').value = options.settings['clearCredentialsTimeout'];
+    $('#tab-general-settings input#connectionTimeout').value = options.settings['connectionTimeout'];
 
     const generalSettingsRadioInputs = document.querySelectorAll('#tab-general-settings input[type=radio]');
     for (const radio of generalSettingsRadioInputs) {
@@ -169,6 +170,15 @@ options.initGeneralSettings = async function() {
         }
 
         options.settings['clearCredentialsTimeout'] = e.target.valueAsNumber;
+        await options.saveSettings();
+    });
+
+    $('#tab-general-settings input#connectionTimeout').addEventListener('change', async function(e) {
+        if (e.target.valueAsNumber < 2 || e.target.valueAsNumber > 60) {
+            return;
+        }
+
+        options.settings['connectionTimeout'] = e.target.valueAsNumber;
         await options.saveSettings();
     });
 
@@ -726,7 +736,7 @@ options.initSitePreferences = function() {
 
         // Page URL
         row.children[0].children[0].children[0].value = url;
-        row.children[0].children[0]?.addEventListener('dblclick', (e) => 
+        row.children[0].children[0]?.addEventListener('dblclick', (e) =>
             enterEditMode(e, row, inputField, editButton, cancelButton, saveButton)
         );
 
@@ -891,7 +901,7 @@ const getBrowserId = function(userAgent) {
             return `${query.name} ${getVersion(userAgent, query.findStr)}`;
         }
     }
-  
+
     return 'Other/Unknown';
 };
 
@@ -919,7 +929,7 @@ const updateDropdownPosition = function(e, dropdown) {
     if (!rect) {
         return;
     }
-    
+
     const zoom = getComputedStyle(document.body).zoom || 1;
     const scrollTop = document.defaultView.scrollY / zoom;
     const scrollLeft = document.defaultView?.scrollX / zoom;

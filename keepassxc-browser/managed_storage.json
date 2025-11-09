@@ -52,6 +52,10 @@
           "title": "Clear credential info from tabs after timeout. Default (seconds): 10",
           "type": "integer"
         },
+        "connectionTimeout": {
+          "title": "Connection timeout to KeePassXC. Default (seconds): 2",
+          "type": "integer"
+        },
         "colorTheme": {
           "title": "Extension color scheme. Default: system",
           "type": "string"

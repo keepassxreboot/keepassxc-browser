@@ -14,6 +14,7 @@ const defaultSettings = {
     bannerPosition: BannerPosition.TOP,
     checkUpdateKeePassXC: CHECK_UPDATE_NEVER,
     clearCredentialsTimeout: 10,
+    connectionTimeout: 2,
     colorTheme: 'system',
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
     debugLogging: false,
@@ -47,6 +48,7 @@ page.autoSubmitPerformed = false;
 page.attributeMenuItems = [];
 page.blockedTabs = [];
 page.clearCredentialsTimeout = null;
+page.connectionTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
 page.isFirefox = false;
