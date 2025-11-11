@@ -49,6 +49,10 @@ Check [keepassxc-protocol](keepassxc-protocol.md) for the details about the mess
 
 Translations are managed on [Transifex](https://explore.transifex.com/keepassxc/keepassxc-browser/) which offers a web interface. Please join an existing language team or request a new one if there is none.
 
+## Contributing
+
+You may directly contribute your own code by submitting a pull request. Please read the [CONTRIBUTING](.github/CONTRIBUTING.md) document for further information.
+
 ## Development and testing
 
 See [wiki](https://github.com/keepassxreboot/keepassxc-browser/wiki/Loading-the-extension-manually).
