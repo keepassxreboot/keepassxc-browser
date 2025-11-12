@@ -8,13 +8,14 @@ const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 const enablePasskeys = async function() {
     const passkeysLogDebug = function(message, extra) {
         if (kpxcPasskeysUtils.debugLogging) {
-            debugLogMessage(message, extra);   
+            debugLogMessage(message, extra);
         }
     };
 
     const passkeys = document.createElement('script');
     passkeys.src = chrome.runtime.getURL('content/passkeys.js');
     document.documentElement.appendChild(passkeys);
+    passkeys.remove();
 
     const startTimer = function(timeout) {
         return setTimeout(() => {
