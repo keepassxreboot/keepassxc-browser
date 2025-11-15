@@ -217,6 +217,8 @@ kpxcSites.formSubmitButtonExceptionFound = function(form) {
         return form.querySelector('button[class*=_primary_]');
     } else if (!form && document.location.origin === 'https://www.reddit.com') {
         return $('button.login');
+    } else if (form?.action === 'https://webapp.dubverse.ai/') {
+        return $('button[class^=chakra]');
     }
 
     return undefined;
