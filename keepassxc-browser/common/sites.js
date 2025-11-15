@@ -103,6 +103,9 @@ kpxcSites.exceptionFound = function(identifier, field) {
     } else if (document.location.origin === 'https://app.fastmail.com'
         && identifier?.contains('u-space-y-5') && field?.id === 'v25') {
         return true;
+    } else if (document.location.origin === 'https://login.dei.gr' &&
+        identifier?.value?.includes('show-reveal-password')) {
+        return true;
     }
 
     return false;
