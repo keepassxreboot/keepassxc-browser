@@ -485,7 +485,7 @@ page.getTopLevelDomainFromUrl = async function(domain, url) {
                     url: url
                 });
             }
-        } catch (e) {
+        } catch (_e) {
             return domain;
         }
     }

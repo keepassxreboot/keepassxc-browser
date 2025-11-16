@@ -287,7 +287,7 @@ options.initGeneralSettings = async function() {
                     // Verify the import
                     temporarySettings = contents;
                     dialogImportSettingsModal.show();
-                } catch (err) {
+                } catch (_err) {
                     console.log('Error loading JSON settings file.');
                 }
             };

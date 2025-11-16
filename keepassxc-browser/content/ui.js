@@ -341,7 +341,7 @@ kpxcUI.createNotification = function(type, message) {
         let parentBody;
         try {
             parentBody = window.parent.document.body;
-        } catch(e) {
+        } catch(_e) {
             parentBody = window.document.body;
         }
 

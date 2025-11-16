@@ -328,7 +328,7 @@ const getShadowDOM = function(elem) {
 
     try {
         return elem.openOrClosedShadowRoot ? elem.openOrClosedShadowRoot : browser.dom.openOrClosedShadowRoot(elem);
-    } catch (e) {
+    } catch (_e) {
         return elem.shadowRoot;
     }
 };
