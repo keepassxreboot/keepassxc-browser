@@ -14,7 +14,7 @@ const defaultSettings = {
     bannerPosition: BannerPosition.TOP,
     checkUpdateKeePassXC: CHECK_UPDATE_NEVER,
     clearCredentialsTimeout: 10,
-    connectionTimeout: 1500,
+    connectionTimeout: CONNECTION_TIMEOUT,
     colorTheme: 'system',
     credentialSorting: SORT_BY_GROUP_AND_TITLE,
     debugLogging: false,

@@ -181,11 +181,7 @@ options.initGeneralSettings = async function() {
     });
 
     $('#tab-general-settings input#connectionTimeout').addEventListener('change', async function(e) {
-        if (e.target.valueAsNumber < 1.5 || e.target.valueAsNumber > 60) {
-            return;
-        }
-
-        options.settings['connectionTimeout'] = e.target.valueAsNumber * 1000;
+        options.settings['connectionTimeout'] = Math.min(60000, Math.max(CONNECTION_TIMEOUT, e.target.valueAsNumber * 1000))
         await options.saveSettings();
     });
 
