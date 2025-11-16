@@ -184,6 +184,7 @@ export default defineConfig([globalIgnores(["**/*.min.js"]), {
         "no-underscore-dangle": "off",
         "no-unused-vars": ["warn", {
             "args": "none",
+            "caughtErrorsIgnorePattern": "^_",
             "varsIgnorePattern": "[A-Z_]+|tr|[$]",
         }],
         "no-use-before-define": "off",
