@@ -95,7 +95,7 @@ kpxcCustomLoginFieldsBanner.create = async function() {
 
     const iconClassName = kpxc.isFirefox ? 'kpxc-banner-icon-moz' : 'kpxc-banner-icon';
     const icon = kpxcUI.createElement('span', iconClassName);
-    const infoText = kpxcUI.createElement('span', '', {}, tr('defineChooseCustomLoginFieldText'));
+    const infoText = kpxcUI.createElement('span', 'banner-info-text', {}, tr('defineChooseCustomLoginFieldText'));
     const separator = kpxcUI.createElement('div', 'kpxc-separator');
     const secondSeparator = kpxcUI.createElement('div', 'kpxc-separator');
 
@@ -594,7 +594,7 @@ kpxcCustomLoginFieldsBanner.markFields = function() {
         if (kpxcCustomLoginFieldsBanner.dataStep !== STEP_SELECT_STRING_FIELDS) {
             field.textContent = dataStepToString();
         }
-        
+
         // Static size for the checkbox overlay
         if (i?.getLowerCaseAttribute('type') === 'checkbox') {
             field.style.width = Pixels(CHECKBOX_OVERLAY_SIZE / zoom);

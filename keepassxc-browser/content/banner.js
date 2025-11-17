@@ -65,7 +65,7 @@ kpxcBanner.create = async function(credentials = {}) {
     const className = kpxc.isFirefox ? 'kpxc-banner-icon-moz' : 'kpxc-banner-icon';
     const icon = kpxcUI.createElement('span', className, { 'alt': 'logo' });
 
-    const infoText = kpxcUI.createElement('span', '', {}, tr('rememberInfoText'));
+    const infoText = kpxcUI.createElement('span', 'banner-info-text', {}, tr('rememberInfoText'));
     const usernameText = kpxcUI.createElement('span', 'small', {}, tr('popupUsername') + ' ');
     const usernameSpan = kpxcUI.createElement('span', 'small info information-username', {}, credentials.username);
 
