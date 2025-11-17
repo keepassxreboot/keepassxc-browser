@@ -13,7 +13,7 @@ div.kpxc-banner {
     margin: 0 auto !important;
     min-height: 2em !important;
     max-height: 4em !important;
-    overflow-x: hidden !important;
+    overflow-x: auto !important;
     padding: 4px !important;
     position: fixed !important;
     width: 100% !important;
@@ -47,6 +47,10 @@ div.kpxc-banner:hover {
 
 div.kpxc-banner .banner-info > span {
     margin: 4px;
+}
+
+div.kpxc-banner .banner-info-text {
+    text-wrap: nowrap;
 }
 
 div.kpxc-banner div.banner-info, div.banner-buttons {
@@ -113,6 +117,7 @@ div.kpxc-banner label {
     font-size: 12px !important;
     font-weight: normal !important;
     margin: 4px !important;
+    text-wrap: nowrap;
 }
 
 div.kpxc-banner-dialog {

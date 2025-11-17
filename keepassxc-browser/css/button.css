@@ -8,6 +8,7 @@
     height: 28px !important;
     margin: .2em !important;
     padding: 1px 7px 2px !important;
+    text-wrap: nowrap;
 }
 
 .kpxc-white-button {
