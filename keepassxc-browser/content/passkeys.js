@@ -140,7 +140,7 @@
     const isSameOriginWithAncestors = function() {
         try {
             return window.self.origin === window.top.origin;
-        } catch (err) {
+        } catch (_err) {
             return false;
         }
     };

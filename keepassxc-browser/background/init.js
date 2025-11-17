@@ -189,7 +189,7 @@ const initContextMenuItems = async function() {
         await keepass.reconnect(null, 5000); // 5 second timeout for the first connect
         await keepass.enableAutomaticReconnect();
         await keepass.updateDatabase();
-    } catch (e) {
+    } catch (_e) {
         logError('init.js failed');
     }
 })();

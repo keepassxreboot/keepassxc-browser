@@ -33,7 +33,7 @@ kpxc.addToSitePreferences = async function(optionName, addWildcard = false) {
     let site;
     try {
         site = trimURL(window.top.location.href);
-    } catch (err) {
+    } catch (_err) {
         logDebug('Adding to Site Preferences denied from iframe.');
         return;
     }
@@ -730,7 +730,7 @@ kpxc.siteIgnored = async function(condition) {
         let currentLocation;
         try {
             currentLocation = window.top.location.href;
-        } catch (err) {
+        } catch (_err) {
             // Cross-domain security error inspecting window.top.location.href.
             // This catches an error when an iframe is being accessed from another (sub)domain
             // -> use the iframe URL instead.
@@ -998,7 +998,7 @@ const isIframeAllowed = async function() {
         // Check for Cross-domain security error when inspecting window.top.location.href
         const currentLocation = window.top.location.href;
         return true;
-    } catch (err) {
+    } catch (_err) {
         // Inspect iframe using TLD and the tab's original URL
         const allowed = await sendMessage('is_iframe_allowed', [ window.location.href, window.location.hostname ]);
         if (allowed) {

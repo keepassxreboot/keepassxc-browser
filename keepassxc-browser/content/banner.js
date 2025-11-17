@@ -28,7 +28,7 @@ kpxcBanner.destroy = async function() {
         } else {
             window.parent.document.body.removeChild(window.parent.document.body.querySelector('#kpxc-banner'));
         }
-    } catch(e) {
+    } catch(_e) {
         kpxcBanner.wrapper.style.display = 'hidden';
     }
 
