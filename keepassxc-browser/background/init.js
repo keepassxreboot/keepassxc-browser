@@ -109,7 +109,7 @@ const initListeners = async function() {
         if (contextMenuItems.some(e => e.action === command)
             || command === 'redetect_fields'
             || command === 'choose_credential_fields'
-            || command === 'retrive_credentials_forced'
+            || command === 'retrieve_credentials_forced'
             || command === 'reopen_database'
             || command === 'reload_extension') {
             const tab = await getCurrentTab();

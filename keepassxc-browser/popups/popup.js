@@ -87,7 +87,7 @@ const sendMessageToTab = async function(message) {
         });
 
         // This does not work with Firefox because of https://bugzilla.mozilla.org/show_bug.cgi?id=1665380
-        await sendMessageToTab('retrive_credentials_forced');
+        await sendMessageToTab('retrieve_credentials_forced');
         close();
     });
 
