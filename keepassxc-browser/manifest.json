@@ -124,6 +124,9 @@
         "request_autotype": {
             "description": "__MSG_contextMenuRequestGlobalAutoType__"
         },
+        "reopen_database": {
+            "description": "__MSG_popupReopenButton__"
+        },
         "reload_extension": {
             "description": "__MSG_popupReloadButton__"
         }
