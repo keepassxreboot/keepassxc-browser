@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "Champ de chaîne de caractères",
+        "message": "Champ de chaînes de caractères",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Bouton d’envoi",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "Choisissez un champ de nom d’utilisateur",
@@ -338,9 +342,13 @@
         "message": "Choisissez des champs de chaînes de caractères",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Choisir le bouton d’envoi",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
         "message": "Confirmez votre choix ou choisissez d’autres champs comme champs de chaînes de caractères.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "Vous pouvez aussi utiliser les chiffres pour choisir les champs d’entrée avec le clavier.",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "Champs de type chaîne",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Bouton d’envoi",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "– aucun nom d’utilisateur –",
@@ -734,6 +746,10 @@
         "message": "Exporter les paramètres",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "Réinitialiser tous les paramètres",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "Groupe par défaut pour l’enregistrement des nouveaux mots de passe :",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "Les paramètres actuels seront remplacés. Voulez-vous importer le fichier de paramètres ?",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "Tous les paramètres seront réinitialisés aux valeurs par défaut. Confirmez-vous ?",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "Bases de données KeePassXC connectées à KeePassXC-Browser.",

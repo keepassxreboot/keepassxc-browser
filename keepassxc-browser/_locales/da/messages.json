@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "Strengfelt",
+        "message": "String Field",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Submit Button",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "Vælg et brugernavnsfelt",
@@ -338,9 +342,13 @@
         "message": "Vælg strengfelter",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Choose submit button",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "Bekræft venligst dine valg eller vælge flere felter as strengfelter.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "Du kan også bruge nummeret til at vælge inputfelterne fra tastaturet.",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "Strengfelter",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Submit Button",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- intet brugernavn -",
@@ -734,6 +746,10 @@
         "message": "Eksportér indstillinger",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "Reset all settings",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "Standardgruppe for gemte nye adgangskoder:",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "De nuværende indstillinger tilsidesættes. Vil du virkelig importere indstillingsfilen?",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "All settings will be reset to defaults. Are you sure?",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "Databaser som er forbundet til KeePassXC-Browser.",

@@ -322,6 +322,10 @@
         "message": "Pole ciągu",
         "description": "Text for string field."
     },
+    "defineSubmitButton": {
+        "message": "Przycisk przesyłania",
+        "description": "Text for Submit Button."
+    },
     "defineChooseUsername": {
         "message": "Wybierz pole nazwy użytkownika",
         "description": "Choosing a username field text when choosing Custom Login Fields."
@@ -338,9 +342,13 @@
         "message": "Wybierz pola ciągów",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Wybierz przycisk przesyłania",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
         "message": "Potwierdź swój wybór lub wybierz więcej pól jako pola ciągów.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "Możesz także użyć liczb, aby wybrać pola wprowadzania z klawiatury.",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "Pola ciągów",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Przycisk przesyłania",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- brak nazwy użytkownika -",
@@ -734,6 +746,10 @@
         "message": "Eksportuj ustawienia",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "Resetuj wszystkie ustawienia",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "Domyślna grupa do zapisywania nowych haseł:",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "Bieżące ustawienia zostaną zastąpione. Czy na pewno chcesz zaimportować plik ustawień?",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "Wszystkie ustawienia zostaną przywrócone do wartości domyślnych. Czy na pewno chcesz to zrobić?",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "Bazy danych podłączone do KeePassXC-Browser.",

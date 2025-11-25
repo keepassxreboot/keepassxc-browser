@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "Поле за низ",
+        "message": "Текстово поле",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Изпращащ бутон",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "Избиране поле за потребителското име",
@@ -338,9 +342,13 @@
         "message": "Избиране на поле за низ",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Избиране на изпращащ бутон",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "Потвърдете избора си или изберете повече полета като полета за низ.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Потвърдете избора си или изберете повече полета като текстови полета.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "Също можете да използвате цифрите, за да избирате полета посредством клавиатурата.",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "Полета за низове",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Изпращащ бутон",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- без потребителско име -",
@@ -734,6 +746,10 @@
         "message": "Изнасяне на настройки",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "Нулиране на настройките",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "Група по подразбиране при добавяне на регистрации:",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "Текущите настройки ще бъдат презаписани. Наистина ли желаете да бъдат внесени настройките от файла?",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "Желаете ли настройките да бъдат нулирани до подразбираните стойности?",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "Хранилища, свързани с KeePassXC-Browser.",

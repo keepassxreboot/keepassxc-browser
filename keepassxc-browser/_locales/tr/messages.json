@@ -1,6 +1,6 @@
 {
     "extensionDescription": {
-        "message": "Modern tarayıcılar için KeePassXC bütünleşmesi",
+        "message": "Modern tarayıcılar için KeePassXC bütünleştirmesi",
         "description": "Name of the extension."
     },
     "addSitePreferenceButtonTitle": {
@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "Metin alanı",
+        "message": "Yazı alanı",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Gönder düğmesi",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "Kullanıcı adı alanını seçin",
@@ -335,12 +339,16 @@
         "description": "Choosing a TOTP field text when choosing Custom Login Fields."
     },
     "defineChooseStringFields": {
-        "message": "Metin alanlarını seçin",
+        "message": "Yazı alanlarını seçin",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Gönder düğmesini seçin",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "Lütfen seçiminizi onaylayın ya da dizge alanları olarak ek alanlar seçin.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Lütfen seçiminizi onaylayın ya da yazı alanları olarak ek alanlar seçin.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "Giriş alanlarını tuş takımıyla seçmek için sayıları kullanabilirsiniz.",
@@ -359,8 +367,12 @@
         "description": "General text for password."
     },
     "stringFields": {
-        "message": "Metin alanları",
+        "message": "Yazı alanları",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Gönder düğmesi",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- kullanıcı adı yok -",
@@ -403,7 +415,7 @@
         "description": "Message shown when no password fields are found."
     },
     "fieldsPasswordFillNotAccepted": {
-        "message": "Parolanın bir düz metin alanına yazılması engellenir.",
+        "message": "Parolanın bir düz yazı alanına yazılması engellenir.",
         "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
@@ -733,6 +745,10 @@
     "optionsButtonExport": {
         "message": "Ayarları dışa aktar",
         "description": "Export settings button text."
+    },
+    "optionsButtonResetSettings": {
+        "message": "Tüm ayarları sıfırla",
+        "description": "Reset all settings button text."
     },
     "optionsLabelDefaultGroup": {
         "message": "Yeni parolaların kaydedileceği varsayılan grup:",
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "Var olan ayarlar değiştirilecek. Ayarlar dosyasını içe aktarmak istediğinize emin misiniz?",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "Tüm ayarları varsayılan değerlerine sıfırlamak istediğinize emin misiniz? ",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "KeePassXC-Browser ile bağlantısı kurulmuş KeePassXC veri tabanları.",
