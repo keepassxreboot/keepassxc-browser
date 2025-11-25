@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "Campo stringa",
+        "message": "String Field",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Submit Button",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "Scegli un campo nome utente",
@@ -338,9 +342,13 @@
         "message": "Scegli campi stringa",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Choose submit button",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "Conferma la selezione o scegli altri campi come campi stringa.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "Puoi anche usare i numeri per scegliere i campi di input dalla tastiera.",
@@ -362,6 +370,10 @@
         "message": "Campi stringa",
         "description": "General text for a String Fields."
     },
+    "submitButton": {
+        "message": "Submit Button",
+        "description": "Custom Submit Button text."
+    },
     "credentialsNoUsername": {
         "message": "- nessun nome utente -",
         "description": "Shown when no username is set in the credentials."
@@ -371,7 +383,7 @@
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsBlockedInIframe": {
-        "message": "Credential fill blocked in untrusted iframe.",
+        "message": "Riempimento delle credenziali bloccato in iframe non attendibile.",
         "description": "Alert message when filling credentials is blocked due to iframe restrictions."
     },
     "credentialsMultipleFound": {
@@ -679,7 +691,7 @@
         "description": "Site Preferences page header."
     },
     "optionsSitePreferencesSettings": {
-        "message": "Settings",
+        "message": "Impostazioni",
         "description": "Site Preferences settings button text."
     },
     "optionsMenuAbout": {
@@ -733,6 +745,10 @@
     "optionsButtonExport": {
         "message": "Esporta impostazioni",
         "description": "Export settings button text."
+    },
+    "optionsButtonResetSettings": {
+        "message": "Ripristina tutte le impostazioni",
+        "description": "Reset all settings button text."
     },
     "optionsLabelDefaultGroup": {
         "message": "Gruppo predefinito salvataggio nuove password:",
@@ -1074,6 +1090,10 @@
         "message": "Le impostazioni attuali verranno sovrascritte. Vuoi veramente importare le impostazioni?",
         "description": "Import settings confirmation dialog help text."
     },
+    "optionsResetSettingsDialogText": {
+        "message": "Tutte le impostazioni verranno ripristinate ai valori predefiniti. Sei sicuro?",
+        "description": "Reset all settings dialog text."
+    },
     "optionsConnectedDatabasesText": {
         "message": "Database KeePassXC connessi a KeePassXC-Browser.",
         "description": "Info text about connected databases."
@@ -1119,7 +1139,7 @@
         "description": "Site Preferences list column title."
     },
     "optionsColumnFeatures": {
-        "message": "Features",
+        "message": "Funzionalità",
         "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
@@ -1151,7 +1171,7 @@
         "description": "Site Preferences option selection."
     },
     "optionsSelectionPasskeys": {
-        "message": "Disable passkeys",
+        "message": "Disabilita passkeys",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {

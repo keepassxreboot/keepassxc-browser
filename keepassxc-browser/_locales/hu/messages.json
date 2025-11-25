@@ -8,7 +8,7 @@
         "description": "Add button title text on Site Preferences tab."
     },
     "editSitePreferenceButtonTitle": {
-        "message": "Edit URL for this Site Preferences.",
+        "message": "URL-cím szerkesztése ezen webhely beállításai számára.",
         "description": "Edit button title text on Site Preferences tab."
     },
     "allowIframeButtonTitle": {
@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Copy debug info to clipboard",
+        "message": "Hibakeresési információk másolása a vágólapra",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "Karakterláncmező",
+        "message": "String Field",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Submit Button",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "Válasszon egy felhasználónév-mezőt",
@@ -338,9 +342,13 @@
         "message": "Válasszon egy karakterláncmezőt",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Choose submit button",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "Erősítse meg a választását vagy válasszon több mezőt <em>karakterlánc mezőkként</em>.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "Használhatja a billentyűzeten lévő számokat is a beviteli mezők kiválasztásához.",
@@ -362,6 +370,10 @@
         "message": "Karakterláncmezők",
         "description": "General text for a String Fields."
     },
+    "submitButton": {
+        "message": "Submit Button",
+        "description": "Custom Submit Button text."
+    },
     "credentialsNoUsername": {
         "message": "– nincs felhasználónév –",
         "description": "Shown when no username is set in the credentials."
@@ -371,7 +383,7 @@
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsBlockedInIframe": {
-        "message": "Credential fill blocked in untrusted iframe.",
+        "message": "A hitelesítő adatok kitöltése blokkolása a nem megbízható iframe-ben.",
         "description": "Alert message when filling credentials is blocked due to iframe restrictions."
     },
     "credentialsMultipleFound": {
@@ -631,11 +643,11 @@
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsDefaultSettingsTitle": {
-        "message": "Default settings",
+        "message": "Alapértelmezett beállítások",
         "description": "Default settings title for Getting Started page."
     },
     "optionsWelcomeTitle": {
-        "message": "KeePassXC-Browser",
+        "message": "KeePassXC-böngésző",
         "description": "Main card title for Getting Started page."
     },
     "optionsTitle": {
@@ -679,7 +691,7 @@
         "description": "Site Preferences page header."
     },
     "optionsSitePreferencesSettings": {
-        "message": "Settings",
+        "message": "Beállítások",
         "description": "Site Preferences settings button text."
     },
     "optionsMenuAbout": {
@@ -707,7 +719,7 @@
         "description": "Add button text."
     },
     "optionsButtonEdit": {
-        "message": "Edit",
+        "message": "Szerkesztés",
         "description": "Edit button text."
     },
     "optionsButtonUpdate": {
@@ -733,6 +745,10 @@
     "optionsButtonExport": {
         "message": "Beállítások exportálása",
         "description": "Export settings button text."
+    },
+    "optionsButtonResetSettings": {
+        "message": "Minden beállítás visszaállítása",
+        "description": "Reset all settings button text."
     },
     "optionsLabelDefaultGroup": {
         "message": "Alapértelmezett csoport az új jelszavak mentéséhez:",
@@ -791,7 +807,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "Releváns hitelesítésiadat-bejegyzések automatikus kitöltése",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -835,11 +851,11 @@
         "description": "Show login notifications checkbox text."
     },
     "optionsDefaultPasswordManager": {
-        "message": "Set as default password manager",
+        "message": "Beállítás alapértelmezett jelszókezelőnek.",
         "description": "Default password manager checkbox text."
     },
     "optionsDefaultPasswordManagerHelpText": {
-        "message": "Sets KeePassXC-Browser as the default password manager for the browser.",
+        "message": "A KeePassXC-böngészőt beállítja alapértelmezett jelszókezelőnek a böngészőben.",
         "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
@@ -939,7 +955,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsHideIconsAlertText": {
-        "message": "You can also hide icons manually when needed with shift+click.",
+        "message": "Szükség esetén az ikonok manuálisan is elrejthetők Shift+kattintással.",
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -955,7 +971,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "Releváns hitelesítésiadat-bejegyzések automatikus kitöltése ha egy második kitöltés is szükséges.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -1074,6 +1090,10 @@
         "message": "A jelenlegi beállítások felül lesznek írva. Biztos, hogy importálja a beállításfájlt?",
         "description": "Import settings confirmation dialog help text."
     },
+    "optionsResetSettingsDialogText": {
+        "message": "Minden beállítás alapértelmezett értékre áll vissza. Valóban ezt szeretné?",
+        "description": "Reset all settings dialog text."
+    },
     "optionsConnectedDatabasesText": {
         "message": "A következő KeePassXC adatbázisok vannak kapcsolódva a KeePassXC-böngészőhöz.",
         "description": "Info text about connected databases."
@@ -1119,7 +1139,7 @@
         "description": "Site Preferences list column title."
     },
     "optionsColumnFeatures": {
-        "message": "Features",
+        "message": "Képességek",
         "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
@@ -1151,7 +1171,7 @@
         "description": "Site Preferences option selection."
     },
     "optionsSelectionPasskeys": {
-        "message": "Disable passkeys",
+        "message": "Jelkulcsok letiltása",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
@@ -1407,31 +1427,31 @@
         "description": "Lock database button title text."
     },
     "welcomeText": {
-        "message": "Welcome to KeePassXC-Browser!",
+        "message": "Üdvözöljük a KeePassXC-böngészőben!",
         "description": "Main title of Getting Started page."
     },
     "documentationGettingStarted": {
-        "message": "Our Getting Started Guide will get you up and running quickly.",
+        "message": "A bevezető útmutatónk segítségével gyorsan elsajátíthatja a használatot.",
         "description": "Getting Started document text."
     },
     "documentationUserGuide": {
-        "message": "Looking for more comprehensive documentation? Our User Guide is there to help.",
+        "message": "Átfogóbb dokumentációra lenne szüksége? A felhasználói útmutatónk segíthet.",
         "description": "User Guide text."
     },
     "documentationTroubleshootingGuide": {
-        "message": "Need help troubleshooting the browser integration? Check the Troubleshooting Guide.",
+        "message": "Segítségre van szüksége a böngésző integrációjának hibaelhárításában? Olvassa el a hibaelhárítási útmutatót.",
         "description": "Troubleshooting Guide text."
     },
     "gettingStartedWelcomeText": {
-        "message": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC.",
+        "message": "Üdvözlet a KeePassXC-böngészőben, a KeePassXC hivatalos böngészőbővítményében.",
         "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
     },
     "gettingStartedSecondWelcomeText": {
-        "message": "Please go through the default settings and check all your preferred options.",
+        "message": "Kérjük, nézze át az alapértelmezett beállításokat és ellenőrizze az összes kívánt opciót.",
         "description": "Please go through the default settings and check all your preferred options."
     },
     "gettingStartedNewUser": {
-        "message": "Are you a new user? Check links to our documentation.",
+        "message": "Új felhasználó? Nézze meg a hivatkozott dokumentációt!",
         "description": "Are you a new user? Check links to our documentation."
     }
 }

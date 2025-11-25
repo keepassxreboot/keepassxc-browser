@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String field",
+        "message": "String Field",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Submit Button",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "Choose a username field",
@@ -338,9 +342,13 @@
         "message": "Choose String Fields",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Choose submit button",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as String fields.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "You can also use the numbers to choose the input fields from keyboard.",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "String Fields",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Submit Button",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- no username -",
@@ -734,6 +746,10 @@
         "message": "Export settings",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "Reset all settings",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "Default group for saving new passwords:",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "Current settings will be overridden. Do you really want to import the settings file?",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "All settings will be reset to defaults. Are you sure?",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "Databases connected to KeePassXC-Browser.",

@@ -319,8 +319,12 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "文字列フィールド",
+        "message": "String Field",
         "description": "Text for string field."
+    },
+    "defineSubmitButton": {
+        "message": "Submit Button",
+        "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
         "message": "ユーザー名フィールドを選択してください",
@@ -338,9 +342,13 @@
         "message": "文字列フィールドを選択してください",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Choose submit button",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "選択したものを確認するか、文字列フィールドとして別のフィールドを追加で選択してください。",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "キーボードの数字キーで入力フィールドを選択できます。",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "文字列フィールド",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Submit Button",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- ユーザー名なし -",
@@ -734,6 +746,10 @@
         "message": "設定をエクスポート",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "Reset all settings",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "新しいパスワードを保存するデフォルトのグループ:",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "現在の設定を上書きします。本当に設定ファイルをインポートしますか？",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "All settings will be reset to defaults. Are you sure?",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "KeePassXC-Browser に接続されているデータベースです。",
