@@ -431,8 +431,12 @@ kpxcUI.createPageObserver = function() {
         }
     });
 
-    kpxcUI.pageObserver.observe(document.documentElement, OBSERVER_OPTIONS);
-    kpxcUI.pageObserver.observe(document.body, OBSERVER_OPTIONS);
+    if (document?.documentElement) {
+        kpxcUI.pageObserver.observe(document.documentElement, OBSERVER_OPTIONS);
+    }
+    if (document?.body) {
+        kpxcUI.pageObserver.observe(document.body, OBSERVER_OPTIONS);
+    }
 };
 
 const DOMRectToArray = function(domRect) {
