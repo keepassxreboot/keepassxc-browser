@@ -330,8 +330,14 @@ kpxcUI.updateFromIntersectionObserver = function(iconClass, entries) {
  * @param {string} type     Notification type: (success, info, warning, error)
  * @param {string} message  The message shown
  */
-kpxcUI.createNotification = function(type, message) {
+kpxcUI.createNotification = async function(type, message) {
     if (!kpxc.settings.showNotifications || !type || !message) {
+        return;
+    }
+
+    // Send the notification to top window from iframe
+    if (window.self !== window.top) {
+        await sendMessage('frame_message', [ 'notification_from_frame', type, message ]);
         return;
     }
 
