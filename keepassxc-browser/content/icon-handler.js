@@ -223,3 +223,16 @@ kpxcIcons.updateIconPosition = function(iconClass) {
         kpxcIcons.setIconPosition(iconClass.icon, iconClass.inputField, iconClass.rtl, iconClass.segmented);
     }
 };
+
+const DOMRectToArray = function (domRect) {
+    return [
+        domRect.bottom,
+        domRect.height,
+        domRect.left,
+        domRect.right,
+        domRect.top,
+        domRect.width,
+        domRect.x,
+        domRect.y,
+    ];
+};

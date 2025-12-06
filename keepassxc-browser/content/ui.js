@@ -265,19 +265,6 @@ kpxcUI.createPageObserver = function() {
     }
 };
 
-const DOMRectToArray = function (domRect) {
-    return [
-        domRect.bottom,
-        domRect.height,
-        domRect.left,
-        domRect.right,
-        domRect.top,
-        domRect.width,
-        domRect.x,
-        domRect.y,
-    ];
-};
-
 const initColorTheme = function(elem) {
     let theme = kpxc.settings['colorTheme'];
     if (theme === 'system') {
