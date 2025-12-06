@@ -10,7 +10,7 @@ kpxcIcons.iconTypes = { USERNAME: 0, PASSWORD: 1, TOTP: 2 };
 
 // Adds an icon to input field
 kpxcIcons.addIcon = async function(field, iconType) {
-    if (!field || iconType < 0 || iconType > 2) {
+    if (!field || !Object.values(kpxcIcons.iconTypes).includes(iconType)) {
         return;
     }
 
