@@ -6,7 +6,11 @@
  */
 const kpxcIcons = {};
 kpxcIcons.icons = [];
-kpxcIcons.iconTypes = { USERNAME: 0, PASSWORD: 1, TOTP: 2 };
+kpxcIcons.iconTypes = {
+    DEFAULT: 0, // Username icon
+    PASSWORD: 1,
+    TOTP: 2
+};
 
 // Adds an icon to input field
 kpxcIcons.addIcon = async function(field, iconType) {
@@ -15,7 +19,7 @@ kpxcIcons.addIcon = async function(field, iconType) {
     }
 
     let iconSet = false;
-    if (iconType === kpxcIcons.iconTypes.USERNAME && kpxcUsernameIcons.isValid(field)) {
+    if (iconType === kpxcIcons.iconTypes.DEFAULT && kpxcUsernameIcons.isValid(field)) {
         kpxcUsernameIcons.newIcon(field, kpxc.databaseState);
         iconSet = true;
     } else if (iconType === kpxcIcons.iconTypes.PASSWORD && kpxcPasswordIcons.isValid(field)) {
@@ -41,14 +45,14 @@ kpxcIcons.addIconsFromForm = async function(form) {
             // Special case where everything else has been hidden, but a single password field is now displayed.
             // For example PayPal and Amazon is handled like this.
             if (c.username && !c.password && c.passwordInputs.length === 1) {
-                kpxcIcons.addIcon(c.passwordInputs[0], kpxcIcons.iconTypes.USERNAME);
+                kpxcIcons.addIcon(c.passwordInputs[0], kpxcIcons.iconTypes.DEFAULT);
             }
 
             if (c.username && !c.username.readOnly) {
-                kpxcIcons.addIcon(c.username, kpxcIcons.iconTypes.USERNAME);
+                kpxcIcons.addIcon(c.username, kpxcIcons.iconTypes.DEFAULT);
             } else if (c.password && (!c.username || (c.username && c.username.readOnly))) {
                 // Single password field
-                kpxcIcons.addIcon(c.password, kpxcIcons.iconTypes.USERNAME);
+                kpxcIcons.addIcon(c.password, kpxcIcons.iconTypes.DEFAULT);
             }
         }
     };
