@@ -24,7 +24,7 @@ const defaultSettings = {
     downloadFaviconAfterSave: false,
     passkeys: false,
     passkeysFallback: true,
-    redirectAllowance: 1,
+    redirectAllowance: 3,
     saveDomainOnly: true,
     showGettingStartedGuideAlert: true,
     showGroupNameInAutocomplete: true,
