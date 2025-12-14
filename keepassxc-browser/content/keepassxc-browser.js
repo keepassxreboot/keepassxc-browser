@@ -21,7 +21,6 @@ kpxc.databaseState = DatabaseState.DISCONNECTED;
 kpxc.detectedFields = 0;
 kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
-kpxc.isFirefox;
 kpxc.settings = {};
 kpxc.singleInputEnabledForPage = false;
 kpxc.submitUrl = null;

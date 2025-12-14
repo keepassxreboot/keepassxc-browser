@@ -6,6 +6,11 @@ httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];
 
 httpAuth.init = function() {
+    if (page.isSafari) {
+        debugLogMessage('HTTP Basic Auth implementation is not supported in Safari.');
+        return;
+    }
+
     let handleReq = httpAuth.handleRequestPromise;
     let reqType = 'blocking';
 
