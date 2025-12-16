@@ -11,10 +11,6 @@ kpxcPasswordIcons.switchIcon = function(state) {
     kpxcPasswordIcons.icons.forEach(u => u.switchIcon(state));
 };
 
-kpxcPasswordIcons.deleteHiddenIcons = function() {
-    kpxcUI.deleteHiddenIcons(kpxcPasswordIcons.icons);
-};
-
 kpxcPasswordIcons.isValid = function(field) {
     if (!field
         || field.readOnly
@@ -34,7 +30,7 @@ class PasswordIcon extends Icon {
         this.nextFieldExists = false;
 
         this.initField(field);
-        kpxcUI.monitorIconPosition(this);
+        kpxcIcons.monitorIconPosition(this);
     }
 }
 
@@ -93,7 +89,7 @@ PasswordIcon.prototype.createIcon = function(field) {
     icon.addEventListener('mousedown', ev => ev.stopPropagation());
     icon.addEventListener('mouseup', ev => ev.stopPropagation());
 
-    kpxcUI.setIconPosition(icon, field, this.rtl);
+    kpxcIcons.setIconPosition(icon, field, this.rtl);
     this.icon = icon;
     this.createWrapper('css/pwgen.css');
     if (kpxcFields.popoverSupported) {

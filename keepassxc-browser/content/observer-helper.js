@@ -266,7 +266,7 @@ kpxcObserverHelper.handleObserverAdd = async function(target) {
         kpxc.prepareCredentials();
     }
 
-    kpxcIcons.deleteHiddenIcons();
+    kpxcIcons.deleteAllHiddenIcons();
 };
 
 // Removes monitored elements
@@ -280,7 +280,7 @@ kpxcObserverHelper.handleObserverRemove = function(target) {
         return;
     }
 
-    kpxcIcons.deleteHiddenIcons();
+    kpxcIcons.deleteAllHiddenIcons();
 };
 
 // Handles CSS transitionend event

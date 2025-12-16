@@ -36,10 +36,6 @@ kpxcTOTPIcons.switchIcon = function(state, uuid) {
     kpxcTOTPIcons.icons.forEach(u => u.switchIcon(state, uuid));
 };
 
-kpxcTOTPIcons.deleteHiddenIcons = function() {
-    kpxcUI.deleteHiddenIcons(kpxcTOTPIcons.icons);
-};
-
 kpxcTOTPIcons.autoCompleteIsOneTimeCode = function(field) {
     if (!field) {
         return false;
@@ -109,7 +105,7 @@ class TOTPFieldIcon extends Icon {
         super(field, databaseState, segmented);
 
         this.initField(field, segmented);
-        kpxcUI.monitorIconPosition(this);
+        kpxcIcons.monitorIconPosition(this);
     }
 }
 
@@ -185,7 +181,7 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
     icon.addEventListener('mousedown', ev => ev.stopPropagation());
     icon.addEventListener('mouseup', ev => ev.stopPropagation());
 
-    kpxcUI.setIconPosition(icon, field, this.rtl, segmented);
+    kpxcIcons.setIconPosition(icon, field, this.rtl, segmented);
     this.icon = icon;
     this.createWrapper('css/totp.css');
     if (kpxcFields.popoverSupported) {
