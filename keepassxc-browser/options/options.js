@@ -991,6 +991,11 @@ window.addEventListener('scroll', function() {
         options.initCustomLoginFields();
         options.initSitePreferences();
         options.initAbout();
+
+        // The form-switch transitions should complete in 150 ms
+        setTimeout(() => {
+            document.body.classList.remove('no-transitions');
+        }, 200);
     } catch (err) {
         console.log('Error loading options page: ' + err);
     }
