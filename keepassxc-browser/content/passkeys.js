@@ -203,8 +203,9 @@
             if (!response.publicKey) {
                 if (!response.fallback) {
                     throwError(response?.errorCode, response?.errorMessage);
+                    return null;
                 }
-                return response.fallback ? originalCredentials.create(options) : null;
+                return originalCredentials.create(options);
             }
 
             return createPublicKeyCredential(response.publicKey);
@@ -228,8 +229,9 @@
             if (!response.publicKey) {
                 if (!response.fallback) {
                     throwError(response?.errorCode, response?.errorMessage);
+                    return null;
                 }
-                return response.fallback ? originalCredentials.get(options) : null;
+                return originalCredentials.get(options);
             }
 
             return createPublicKeyCredential(response.publicKey);
