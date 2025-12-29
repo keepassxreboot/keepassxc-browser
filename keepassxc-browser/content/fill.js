@@ -18,7 +18,7 @@ kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
         return;
     }
 
-    kpxcFill.setValue(el, value[0]);
+    await kpxcFill.setValue(el, value[0]);
 };
 
 // Fill requested from the context menu. Active element is used for combination detection
@@ -152,20 +152,20 @@ kpxcFill.fillTOTPFromUuid = async function(el, uuid) {
             return;
         }
 
-        kpxcFill.setTOTPValue(el, totp);
+        await kpxcFill.setTOTPValue(el, totp);
     } else if (user.stringFields?.length > 0) {
         const stringFields = user.stringFields;
         for (const s of stringFields) {
             const val = s['KPH: {TOTP}'];
             if (val) {
-                kpxcFill.setTOTPValue(el, val);
+                await kpxcFill.setTOTPValue(el, val);
             }
         }
     }
 };
 
 // Set normal or segmented TOTP value
-kpxcFill.setTOTPValue = function(elem, val) {
+kpxcFill.setTOTPValue = async function(elem, val) {
     if (kpxc.credentials.length === 0) {
         logDebug('Error: Credential list is empty.');
         return;
@@ -173,22 +173,22 @@ kpxcFill.setTOTPValue = function(elem, val) {
 
     for (const comb of kpxc.combinations) {
         if (comb.totpInputs?.length > 0) {
-            kpxcFill.fillSegmentedTotp(elem, val, comb.totpInputs);
+            await kpxcFill.fillSegmentedTotp(elem, val, comb.totpInputs);
             return;
         }
     }
 
-    kpxcFill.setValue(elem, val);
+    await kpxcFill.setValue(elem, val);
 };
 
 // Fill TOTP in parts
-kpxcFill.fillSegmentedTotp = function(elem, val, totpInputs) {
+kpxcFill.fillSegmentedTotp = async function(elem, val, totpInputs) {
     if (!totpInputs.includes(elem) || val.length < totpInputs.length) {
         return;
     }
 
     for (let i = 0; i < totpInputs.length; ++i) {
-        kpxcFill.setValue(totpInputs[i], val[i]);
+        await kpxcFill.setValue(totpInputs[i], val[i]);
     }
 };
 
@@ -271,7 +271,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
             return;
         }
 
-        kpxcFill.setValueWithChange(combination.password, selectedCredentials.password);
+        await kpxcFill.setValueWithChange(combination.password, selectedCredentials.password);
         await kpxc.setPasswordFilled(true);
     }
 
@@ -279,20 +279,20 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
     if (combination.username && usernameValue && combination.username !== combination.password &&
         (!combination.username.value || combination.username.value !== usernameValue)) {
         if (!passOnly) {
-            kpxcFill.setValueWithChange(combination.username, usernameValue);
+            await kpxcFill.setValueWithChange(combination.username, usernameValue);
         }
     }
 
     // Fill StringFields
     if (selectedCredentials.stringFields?.length > 0) {
-        kpxcFill.fillInStringFields(combination.fields, selectedCredentials.stringFields);
+        await kpxcFill.fillInStringFields(combination.fields, selectedCredentials.stringFields);
     }
 
     // Fill TOTP
     if (kpxc.settings.autoFillSingleTotp && kpxc.entryHasTotp(selectedCredentials)) {
         const totpCombination = combination?.totp || kpxc.combinations?.find(c => c.totp);
         if (totpCombination?.totp) {
-            kpxcFill.fillTOTPFromUuid(totpCombination.totp, selectedCredentials.uuid);
+            await kpxcFill.fillTOTPFromUuid(totpCombination.totp, selectedCredentials.uuid);
         }
     }
 
@@ -306,7 +306,7 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
 };
 
 // Fills StringFields defined in Custom Fields
-kpxcFill.fillInStringFields = function(fields, stringFields) {
+kpxcFill.fillInStringFields = async function(fields, stringFields) {
     const filledInFields = [];
     if (fields && stringFields && fields?.length > 0 && stringFields?.length > 0) {
         for (let i = 0; i < fields.length; i++) {
@@ -318,7 +318,7 @@ kpxcFill.fillInStringFields = function(fields, stringFields) {
             const currentField = fields[i];
 
             if (currentField && stringFieldValue[0]) {
-                kpxcFill.setValue(currentField, stringFieldValue[0], true);
+                await kpxcFill.setValue(currentField, stringFieldValue[0], true);
                 filledInFields.push(currentField);
             }
         }
@@ -353,14 +353,14 @@ kpxcFill.performAutoSubmit = async function(combination, skipAutoSubmit) {
 };
 
 // Special handling for setting value to select and checkbox elements
-kpxcFill.setValue = function(field, value, forced = false) {
+kpxcFill.setValue = async function(field, value, forced = false) {
     if (field.matches('select')) {
         value = value.toLowerCase().trim();
         const options = field.querySelectorAll('option');
 
         for (const o of options) {
             if (o.textContent.toLowerCase().trim() === value) {
-                kpxcFill.setValueWithChange(field, o.value);
+                await kpxcFill.setValueWithChange(field, o.value);
                 return false;
             }
         }
@@ -378,11 +378,11 @@ kpxcFill.setValue = function(field, value, forced = false) {
     }
 
 
-    kpxcFill.setValueWithChange(field, value, forced);
+    await kpxcFill.setValueWithChange(field, value, forced);
 };
 
 // Sets a new value to input field and triggers necessary events
-kpxcFill.setValueWithChange = function(field, value, forced = false) {
+kpxcFill.setValueWithChange = async function(field, value, forced = false) {
     if (!field || (field?.readOnly && !forced)) {
         return;
     }
@@ -401,12 +401,23 @@ kpxcFill.setValueWithChange = function(field, value, forced = false) {
     };
 
     field.focus();
-    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new Event('input', { bubbles: true, cancelable: false }));
-    field.dispatchEvent(new Event('change', { bubbles: true, cancelable: false }));
+
+    // Use a delay to allow focus events to trigger and to give some
+    // breathing room to frameworks that rely on promises to update their
+    // state, like React. Not doing so can break OTP input, see issue #2215.
+    await Promise.resolve();
+
+    field.dispatchEvent(new FocusEvent('focus', { bubbles: false, cancelable: false }));
+    field.dispatchEvent(new FocusEvent('focusin', { bubbles: true, cancelable: false }));
+
+    // https://w3c.github.io/uievents/#keypress-event-order
+    field.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: false, key: value }));
+    field.dispatchEvent(new InputEvent('beforeinput', { bubbles: true, cancelable: false, inputType: 'insertText', data: value }));
+    field.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true, cancelable: false, key: value }));
     field.value = value;
+    field.dispatchEvent(new Event('input', { bubbles: true, cancelable: false }));
+    field.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, cancelable: false, key: value }));
+    field.dispatchEvent(new Event('change', { bubbles: true, cancelable: false }));
 
     // Some pages will not accept the value change without dispatching events directly to the document
     dispatchLegacyEvent(field, 'input');

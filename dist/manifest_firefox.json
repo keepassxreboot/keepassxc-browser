@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.9.10",
+    "version": "1.9.11",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {
@@ -66,7 +66,8 @@
                 "content/fields.js",
                 "content/fill.js",
                 "content/form.js",
-                "content/icons.js",
+                "content/icon.js",
+                "content/icon-handler.js",
                 "content/keepassxc-browser.js",
                 "content/observer-helper.js",
                 "content/pwgen.js",

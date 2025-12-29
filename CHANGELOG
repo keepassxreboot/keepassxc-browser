@@ -1,3 +1,20 @@
+1.9.11 (2025-11-26)
+=========================
+- Add support for reseting all settings to defaults [#2720]
+- Add support for toJSON() with createPublicKeyCredential (passkeys) [#2734]
+- Add site exception for dei.gr [#2760]
+- Add submit button exception for Dubverse [#2759]
+- Add support for selecting a custom submit button with Custom Login Fields [#2756]
+- Fix check for Firefox browser [#2724, #2725]
+- Fix JavaScript error in console (thanks ygoe) [#2721]
+- Fix overlap check with labels [#2731]
+- Fix checking overlays before fill [#2733]
+- Fix requerying form if password input changed [#2738]
+- Fix incorrect fields variable [#2740]
+- Fix malformed page content with passkeys script injection (thanks a2kolbasov) [#2757]
+- Fix layout issues with banners [#2764]
+- Update Playwright libraries [#2727]
+
 1.9.10 (2025-10-05)
 =========================
 - Add Disable passkeys option to Site Preferences [#2694]

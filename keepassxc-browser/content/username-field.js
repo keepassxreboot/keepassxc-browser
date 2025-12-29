@@ -12,10 +12,6 @@ kpxcUsernameIcons.switchIcon = function(state) {
     kpxcUsernameIcons.icons.forEach(u => u.switchIcon(state));
 };
 
-kpxcUsernameIcons.deleteHiddenIcons = function() {
-    kpxcUI.deleteHiddenIcons(kpxcUsernameIcons.icons);
-};
-
 kpxcUsernameIcons.isValid = function(field) {
     if (!field
         || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
@@ -34,7 +30,7 @@ class UsernameFieldIcon extends Icon {
         super(field, databaseState);
 
         this.initField(field);
-        kpxcUI.monitorIconPosition(this);
+        kpxcIcons.monitorIconPosition(this);
     }
 
     switchIcon(state) {
@@ -113,7 +109,7 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
     icon.addEventListener('mousedown', ev => ev.stopPropagation());
     icon.addEventListener('mouseup', ev => ev.stopPropagation());
 
-    kpxcUI.setIconPosition(icon, field, this.rtl);
+    kpxcIcons.setIconPosition(icon, field, this.rtl);
     this.icon = icon;
     this.createWrapper('css/username.css');
     if (kpxcFields.popoverSupported) {

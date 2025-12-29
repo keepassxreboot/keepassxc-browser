@@ -303,7 +303,7 @@
         "description": "More button text when choosing Custom Login Fields."
     },
     "defineReset": {
-        "message": "重置",
+        "message": "重設",
         "description": "Reset button text when choosing Custom Login Fields."
     },
     "defineConfirm": {
@@ -322,6 +322,10 @@
         "message": "字串欄位",
         "description": "Text for string field."
     },
+    "defineSubmitButton": {
+        "message": "送出按鈕",
+        "description": "Text for Submit Button."
+    },
     "defineChooseUsername": {
         "message": "選擇用戶名稱欄位",
         "description": "Choosing a username field text when choosing Custom Login Fields."
@@ -338,9 +342,13 @@
         "message": "選擇字串欄位",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "選擇送出按鈕",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "請確認您的選擇，或是選擇更多欄位作為<em>字串欄位</em>。",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "請確認您的選擇，或選擇更多欄位作為字串欄位",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "您也可以使用鍵盤的數字鍵選擇輸入欄位。",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "字串欄位",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "送出按鈕",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- 無用戶名稱 -",
@@ -734,6 +746,10 @@
         "message": "導出配置",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "重設所有設定",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "儲存新密碼的預設群組：",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "目前設定將會被覆寫。真的要匯入設定檔案？",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "所有設定都將被重置為預設值。您確定嗎？",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "已連接至 KeePassXC-Browser 的資料庫。",

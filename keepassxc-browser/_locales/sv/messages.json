@@ -322,6 +322,10 @@
         "message": "Strängfält",
         "description": "Text for string field."
     },
+    "defineSubmitButton": {
+        "message": "Skicka-knapp",
+        "description": "Text for Submit Button."
+    },
     "defineChooseUsername": {
         "message": "Välj ett användarnamn-fält",
         "description": "Choosing a username field text when choosing Custom Login Fields."
@@ -338,9 +342,13 @@
         "message": "Välj sträng-fält",
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
+    "defineChooseSubmitButton": {
+        "message": "Välj Skicka-knapp",
+        "description": "Choose submit button selection text when choosing Custom Login Fields."
+    },
     "defineHelpText": {
-        "message": "Vänligen bekräfta ditt val eller välj fler fält som <em>Strängfält</em>.",
-        "description": "Confirm a selection text when choosing Custom Login Fields which contains string fields."
+        "message": "Bekräfta ditt val eller välj fler fält som strängfält.",
+        "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
         "message": "You can also use the numbers to choose the input fields from keyboard.",
@@ -361,6 +369,10 @@
     "stringFields": {
         "message": "Strängfält",
         "description": "General text for a String Fields."
+    },
+    "submitButton": {
+        "message": "Skicka-knapp",
+        "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
         "message": "- inget användarnamn -",
@@ -734,6 +746,10 @@
         "message": "Exportera inställningar",
         "description": "Export settings button text."
     },
+    "optionsButtonResetSettings": {
+        "message": "Återställ alla inställningar",
+        "description": "Reset all settings button text."
+    },
     "optionsLabelDefaultGroup": {
         "message": "Default group for saving new passwords:",
         "description": "Default group options text."
@@ -1073,6 +1089,10 @@
     "optionsImportSettingsDialogText": {
         "message": "Nuvarande inställningar kommer att skrivas över. Vill du verkligen importera inställningsfilen?",
         "description": "Import settings confirmation dialog help text."
+    },
+    "optionsResetSettingsDialogText": {
+        "message": "Alla inställningar kommer att återställas till standardinställning. Är du säker?",
+        "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
         "message": "Följande KeePassXC-databaser är anslutna till KeePassXC-Browser.",

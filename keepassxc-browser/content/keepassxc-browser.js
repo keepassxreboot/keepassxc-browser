@@ -939,9 +939,14 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxcFill.fillAttributeToActiveElementWith(req.args);
         } else if (req.action === 'frame_message') {
             if (req.args?.[0] === 'frame_request_to_frames' && window.self !== window.top) {
+                // Handle message from top window in iframe
                 kpxcCustomLoginFieldsBanner.handleParentWindowMessage(req.args);
             } else if (req.args?.[0] === 'frame_request_to_parent' && window.self === window.top) {
+                // Handle message from iframe in top window
                 kpxcCustomLoginFieldsBanner.handleTopWindowMessage(req.args);
+            } else if (req.args?.[0] === 'notification_from_frame' && window.self === window.top) {
+                // Handle notification from iframe in top window
+                kpxcUI.createNotification(req?.args[1], req?.args[2]);
             }
         } else if (req.action === 'ignore_site') {
             kpxc.ignoreSite(req.args);
