@@ -837,7 +837,7 @@ kpxc.usePredefinedSites = function(currentLocation) {
  * Content script initialization.
  */
 const initContentScript = async function() {
-    try { 
+    try {
         if (document?.documentElement?.ownerDocument?.contentType !== 'text/html'
             && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
         ) {
@@ -960,9 +960,14 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
             kpxc.initCredentialFields();
         } else if (req.action === 'reload_extension') {
             sendMessage('reconnect');
+        } else if (req.action === 'reopen_database') {
+            sendMessage(
+                'get_status',
+                [ false, true ] // Set forcePopup to true
+            );
         } else if (req.action === 'save_credentials') {
             kpxc.rememberCredentialsFromContextMenu();
-        } else if (req.action === 'retrive_credentials_forced') {
+        } else if (req.action === 'retrieve_credentials_forced') {
             await kpxc.retrieveCredentials(true);
         } else if (req.action === 'show_password_generator') {
             kpxcPasswordGenerator.showPasswordGenerator();

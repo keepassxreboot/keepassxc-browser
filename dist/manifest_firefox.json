@@ -132,11 +132,14 @@
         "choose_credential_fields": {
             "description": "__MSG_popupChooseCredentialsText__"
         },
-        "retrive_credentials_forced": {
-            "description": "__MSG_popupReopenButton__"
+        "retrieve_credentials_forced": {
+            "description": "__MSG_credentialsRetrieveButton__"
         },
         "request_autotype": {
             "description": "__MSG_contextMenuRequestGlobalAutoType__"
+        },
+        "reopen_database": {
+            "description": "__MSG_popupReopenButton__"
         },
         "reload_extension": {
             "description": "__MSG_popupReloadButton__"
