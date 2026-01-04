@@ -441,7 +441,7 @@ const passwordFillIsAllowed = function(elem) {
 // Show a specific error notification if current database is not connected
 const showErrorNotification = async function(errorMessage, notificationType = 'error') {
     const connectedDatabase = await sendMessage('get_connected_database');
-    if (!connectedDatabase?.identifier) {
+    if (!connectedDatabase?.identifier && kpxc.databaseState === DatabaseState.UNLOCKED) {
         kpxcUI.createNotification('error', tr('errorCurrentDatabaseNotConnected'));
     } else if (!await isIframeAllowed()) {
         // Special error if we are blocking due to iframe
