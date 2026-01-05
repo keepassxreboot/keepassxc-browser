@@ -82,7 +82,8 @@ pre {
     white-space: pre-line;
 }
 
-.no-transitions * {
+.no-transitions .form-switch .form-check-input,
+.no-transitions .form-check-input {
     transition: none !important;
 }
 
