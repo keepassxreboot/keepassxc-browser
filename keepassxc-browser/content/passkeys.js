@@ -145,6 +145,29 @@
         }
     };
 
+    /**
+     * @returns {Promise<void>}
+     */
+    const waitForFocus = function () {
+        /*
+        Some browsers (Firefox, Safari) reject requests to original `navigator.credentials.create/get` if the page
+        is out of focus (when the user selects a passkey in KeePassXC-desktop).
+
+        `document.visibilityState` is not suitable: if the page is visible, but the focus is on another application
+        (or DevTools), the request will be rejected.
+        */
+        return new Promise((resolve) => {
+            if (document.hasFocus()) {
+                return resolve();
+            }
+            document.addEventListener(
+                'focus',
+                () => resolve(),
+                { capture: true, passive: true, once: true }
+            );
+        });
+    };
+
     // Throws errors to a correct exceptions
     const throwError = function(errorCode, errorMessage) {
         if ((!errorCode && !errorMessage) || errorCode === PASSKEYS_REQUEST_CANCELED) {
@@ -205,6 +228,7 @@
                     throwError(response?.errorCode, response?.errorMessage);
                     return null;
                 }
+                await waitForFocus();
                 return originalCredentials.create(options);
             }
 
@@ -231,6 +255,7 @@
                     throwError(response?.errorCode, response?.errorMessage);
                     return null;
                 }
+                await waitForFocus();
                 return originalCredentials.get(options);
             }
 
