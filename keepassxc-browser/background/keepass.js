@@ -26,7 +26,7 @@ keepass.requiredKeePassXC = '2.6.0';
 keepass.serverPublicKey = '';
 
 const DEFAULT_FETCH_TIMEOUT = 5000; // ms
-const MAX_RELATED_ORIGIN_LABELS = 15;
+const MAX_RELATED_ORIGIN_LABELS = 60;
 
 const kpActions = {
     SET_LOGIN: 'set-login',
@@ -946,7 +946,7 @@ keepass.getPasskeysRelatedOrigins = async function(rpId) {
     }
 
     return [];
-}
+};
 
 keepass.clearErrorMessage = function(tab) {
     if (tab && page.tabs[tab.id]) {
