@@ -40,7 +40,8 @@ class UsernameFieldIcon extends Icon {
             this.observer.disconnect();
         }
 
-        this.icon.classList.remove('lock', 'lock-moz', 'unlock', 'unlock-moz', 'disconnected', 'disconnected-moz');
+        this.icon.classList.remove('lock', 'lock-moz', 'lock-safari', 'unlock', 'unlock-moz', 'unlock-safari',
+            'disconnected', 'disconnected-moz', 'disconnected-safari');
         this.icon.classList.add(getIconClassName(state));
         this.icon.title = getIconText(state);
 
@@ -143,12 +144,12 @@ const iconClicked = async function(field, icon) {
 
 const getIconClassName = function(state = DatabaseState.UNLOCKED) {
     if (state === DatabaseState.LOCKED) {
-        return kpxc.isFirefox ? 'lock-moz' : 'lock';
+        return isSafari() ? 'lock-safari' : kpxc.isFirefox ? 'lock-moz' : 'lock';
     } else if (state === DatabaseState.DISCONNECTED) {
-        return kpxc.isFirefox ? 'disconnected-moz' : 'disconnected';
+        return isSafari() ? 'disconnected-safari' : kpxc.isFirefox ? 'disconnected-moz' : 'disconnected';
     }
 
-    return kpxc.isFirefox ? 'unlock-moz' : 'unlock';
+    return isSafari() ? 'unlock-safari' : kpxc.isFirefox ? 'unlock-moz' : 'unlock';
 };
 
 const getIconText = function(state) {

@@ -1,0 +1,645 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6325CAC52EEC98E200E3BCF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6325CAC42EEC98E200E3BCF2 /* AppDelegate.swift */; };
+		6325CAC92EEC98E200E3BCF2 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAC72EEC98E200E3BCF2 /* Main.html */; };
+		6325CACB2EEC98E200E3BCF2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6325CACA2EEC98E200E3BCF2 /* Icon.png */; };
+		6325CACD2EEC98E200E3BCF2 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 6325CACC2EEC98E200E3BCF2 /* Style.css */; };
+		6325CACF2EEC98E200E3BCF2 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 6325CACE2EEC98E200E3BCF2 /* Script.js */; };
+		6325CAD12EEC98E200E3BCF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6325CAD02EEC98E200E3BCF2 /* ViewController.swift */; };
+		6325CAD42EEC98E200E3BCF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAD22EEC98E200E3BCF2 /* Main.storyboard */; };
+		6325CAD62EEC98E300E3BCF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAD52EEC98E300E3BCF2 /* Assets.xcassets */; };
+		6325CADD2EEC98E300E3BCF2 /* KeePassXC-Browser Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6325CADC2EEC98E300E3BCF2 /* KeePassXC-Browser Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6325CAE22EEC98E300E3BCF2 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6325CAE12EEC98E300E3BCF2 /* SafariWebExtensionHandler.swift */; };
+		6325CAFB2EEC98E300E3BCF2 /* background in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAEE2EEC98E300E3BCF2 /* background */; };
+		6325CAFC2EEC98E300E3BCF2 /* offscreen in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAEF2EEC98E300E3BCF2 /* offscreen */; };
+		6325CAFD2EEC98E300E3BCF2 /* options in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF02EEC98E300E3BCF2 /* options */; };
+		6325CAFE2EEC98E300E3BCF2 /* bootstrap in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF12EEC98E300E3BCF2 /* bootstrap */; };
+		6325CAFF2EEC98E300E3BCF2 /* css in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF22EEC98E300E3BCF2 /* css */; };
+		6325CB002EEC98E300E3BCF2 /* content in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF32EEC98E300E3BCF2 /* content */; };
+		6325CB012EEC98E300E3BCF2 /* managed_storage.json in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF42EEC98E300E3BCF2 /* managed_storage.json */; };
+		6325CB022EEC98E300E3BCF2 /* common in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF52EEC98E300E3BCF2 /* common */; };
+		6325CB032EEC98E300E3BCF2 /* popups in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF62EEC98E300E3BCF2 /* popups */; };
+		6325CB042EEC98E300E3BCF2 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF72EEC98E300E3BCF2 /* icons */; };
+		6325CB052EEC98E300E3BCF2 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF82EEC98E300E3BCF2 /* manifest.json */; };
+		6325CB062EEC98E300E3BCF2 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAF92EEC98E300E3BCF2 /* _locales */; };
+		6325CB072EEC98E300E3BCF2 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 6325CAFA2EEC98E300E3BCF2 /* fonts */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6325CADE2EEC98E300E3BCF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6325CAB92EEC98E200E3BCF2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6325CADB2EEC98E300E3BCF2;
+			remoteInfo = "KeePassXC-Browser Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6325CAE92EEC98E300E3BCF2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6325CADD2EEC98E300E3BCF2 /* KeePassXC-Browser Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6325CAC12EEC98E200E3BCF2 /* KeePassXC-Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KeePassXC-Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6325CAC42EEC98E200E3BCF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6325CAC82EEC98E200E3BCF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		6325CACA2EEC98E200E3BCF2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		6325CACC2EEC98E200E3BCF2 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		6325CACE2EEC98E200E3BCF2 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		6325CAD02EEC98E200E3BCF2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6325CAD32EEC98E200E3BCF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6325CAD52EEC98E300E3BCF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6325CAD72EEC98E300E3BCF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6325CADC2EEC98E300E3BCF2 /* KeePassXC-Browser Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "KeePassXC-Browser Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6325CAE12EEC98E300E3BCF2 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		6325CAE32EEC98E300E3BCF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6325CAEE2EEC98E300E3BCF2 /* background */ = {isa = PBXFileReference; lastKnownFileType = folder; name = background; path = "../../../keepassxc-browser/background"; sourceTree = "<group>"; };
+		6325CAEF2EEC98E300E3BCF2 /* offscreen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = offscreen; path = "../../../keepassxc-browser/offscreen"; sourceTree = "<group>"; };
+		6325CAF02EEC98E300E3BCF2 /* options */ = {isa = PBXFileReference; lastKnownFileType = folder; name = options; path = "../../../keepassxc-browser/options"; sourceTree = "<group>"; };
+		6325CAF12EEC98E300E3BCF2 /* bootstrap */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bootstrap; path = "../../../keepassxc-browser/bootstrap"; sourceTree = "<group>"; };
+		6325CAF22EEC98E300E3BCF2 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; name = css; path = "../../../keepassxc-browser/css"; sourceTree = "<group>"; };
+		6325CAF32EEC98E300E3BCF2 /* content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content; path = "../../../keepassxc-browser/content"; sourceTree = "<group>"; };
+		6325CAF42EEC98E300E3BCF2 /* managed_storage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = managed_storage.json; path = "../../../keepassxc-browser/managed_storage.json"; sourceTree = "<group>"; };
+		6325CAF52EEC98E300E3BCF2 /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; name = common; path = "../../../keepassxc-browser/common"; sourceTree = "<group>"; };
+		6325CAF62EEC98E300E3BCF2 /* popups */ = {isa = PBXFileReference; lastKnownFileType = folder; name = popups; path = "../../../keepassxc-browser/popups"; sourceTree = "<group>"; };
+		6325CAF72EEC98E300E3BCF2 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = "../../../keepassxc-browser/icons"; sourceTree = "<group>"; };
+		6325CAF82EEC98E300E3BCF2 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = "../../../keepassxc-browser/manifest.json"; sourceTree = "<group>"; };
+		6325CAF92EEC98E300E3BCF2 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = "../../../keepassxc-browser/_locales"; sourceTree = "<group>"; };
+		6325CAFA2EEC98E300E3BCF2 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = "../../../keepassxc-browser/fonts"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6325CABE2EEC98E200E3BCF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6325CAD92EEC98E300E3BCF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6325CAB82EEC98E200E3BCF2 = {
+			isa = PBXGroup;
+			children = (
+				6325CAC32EEC98E200E3BCF2 /* KeePassXC-Browser */,
+				6325CAE02EEC98E300E3BCF2 /* KeePassXC-Browser Extension */,
+				6325CAC22EEC98E200E3BCF2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6325CAC22EEC98E200E3BCF2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6325CAC12EEC98E200E3BCF2 /* KeePassXC-Browser.app */,
+				6325CADC2EEC98E300E3BCF2 /* KeePassXC-Browser Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6325CAC32EEC98E200E3BCF2 /* KeePassXC-Browser */ = {
+			isa = PBXGroup;
+			children = (
+				6325CAC42EEC98E200E3BCF2 /* AppDelegate.swift */,
+				6325CAD02EEC98E200E3BCF2 /* ViewController.swift */,
+				6325CAD22EEC98E200E3BCF2 /* Main.storyboard */,
+				6325CAD52EEC98E300E3BCF2 /* Assets.xcassets */,
+				6325CAD72EEC98E300E3BCF2 /* Info.plist */,
+				6325CAC62EEC98E200E3BCF2 /* Resources */,
+			);
+			path = "KeePassXC-Browser";
+			sourceTree = "<group>";
+		};
+		6325CAC62EEC98E200E3BCF2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6325CAC72EEC98E200E3BCF2 /* Main.html */,
+				6325CACA2EEC98E200E3BCF2 /* Icon.png */,
+				6325CACC2EEC98E200E3BCF2 /* Style.css */,
+				6325CACE2EEC98E200E3BCF2 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6325CAE02EEC98E300E3BCF2 /* KeePassXC-Browser Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6325CAED2EEC98E300E3BCF2 /* Resources */,
+				6325CAE12EEC98E300E3BCF2 /* SafariWebExtensionHandler.swift */,
+				6325CAE32EEC98E300E3BCF2 /* Info.plist */,
+			);
+			path = "KeePassXC-Browser Extension";
+			sourceTree = "<group>";
+		};
+		6325CAED2EEC98E300E3BCF2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6325CAEE2EEC98E300E3BCF2 /* background */,
+				6325CAEF2EEC98E300E3BCF2 /* offscreen */,
+				6325CAF02EEC98E300E3BCF2 /* options */,
+				6325CAF12EEC98E300E3BCF2 /* bootstrap */,
+				6325CAF22EEC98E300E3BCF2 /* css */,
+				6325CAF32EEC98E300E3BCF2 /* content */,
+				6325CAF42EEC98E300E3BCF2 /* managed_storage.json */,
+				6325CAF52EEC98E300E3BCF2 /* common */,
+				6325CAF62EEC98E300E3BCF2 /* popups */,
+				6325CAF72EEC98E300E3BCF2 /* icons */,
+				6325CAF82EEC98E300E3BCF2 /* manifest.json */,
+				6325CAF92EEC98E300E3BCF2 /* _locales */,
+				6325CAFA2EEC98E300E3BCF2 /* fonts */,
+			);
+			name = Resources;
+			path = "KeePassXC-Browser Extension";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6325CAC02EEC98E200E3BCF2 /* KeePassXC-Browser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6325CAEA2EEC98E300E3BCF2 /* Build configuration list for PBXNativeTarget "KeePassXC-Browser" */;
+			buildPhases = (
+				6325CABD2EEC98E200E3BCF2 /* Sources */,
+				6325CABE2EEC98E200E3BCF2 /* Frameworks */,
+				6325CABF2EEC98E200E3BCF2 /* Resources */,
+				6325CAE92EEC98E300E3BCF2 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6325CADF2EEC98E300E3BCF2 /* PBXTargetDependency */,
+			);
+			name = "KeePassXC-Browser";
+			packageProductDependencies = (
+			);
+			productName = "KeePassXC-Browser";
+			productReference = 6325CAC12EEC98E200E3BCF2 /* KeePassXC-Browser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6325CADB2EEC98E300E3BCF2 /* KeePassXC-Browser Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6325CAE62EEC98E300E3BCF2 /* Build configuration list for PBXNativeTarget "KeePassXC-Browser Extension" */;
+			buildPhases = (
+				6325CAD82EEC98E300E3BCF2 /* Sources */,
+				6325CAD92EEC98E300E3BCF2 /* Frameworks */,
+				6325CADA2EEC98E300E3BCF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KeePassXC-Browser Extension";
+			packageProductDependencies = (
+			);
+			productName = "KeePassXC-Browser Extension";
+			productReference = 6325CADC2EEC98E300E3BCF2 /* KeePassXC-Browser Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6325CAB92EEC98E200E3BCF2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2610;
+				LastUpgradeCheck = 2610;
+				TargetAttributes = {
+					6325CAC02EEC98E200E3BCF2 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+					6325CADB2EEC98E300E3BCF2 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 6325CABC2EEC98E200E3BCF2 /* Build configuration list for PBXProject "KeePassXC-Browser" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6325CAB82EEC98E200E3BCF2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6325CAC22EEC98E200E3BCF2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6325CAC02EEC98E200E3BCF2 /* KeePassXC-Browser */,
+				6325CADB2EEC98E300E3BCF2 /* KeePassXC-Browser Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6325CABF2EEC98E200E3BCF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6325CACB2EEC98E200E3BCF2 /* Icon.png in Resources */,
+				6325CAD42EEC98E200E3BCF2 /* Main.storyboard in Resources */,
+				6325CACF2EEC98E200E3BCF2 /* Script.js in Resources */,
+				6325CAC92EEC98E200E3BCF2 /* Main.html in Resources */,
+				6325CAD62EEC98E300E3BCF2 /* Assets.xcassets in Resources */,
+				6325CACD2EEC98E200E3BCF2 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6325CADA2EEC98E300E3BCF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6325CB002EEC98E300E3BCF2 /* content in Resources */,
+				6325CB072EEC98E300E3BCF2 /* fonts in Resources */,
+				6325CAFF2EEC98E300E3BCF2 /* css in Resources */,
+				6325CAFD2EEC98E300E3BCF2 /* options in Resources */,
+				6325CB042EEC98E300E3BCF2 /* icons in Resources */,
+				6325CAFC2EEC98E300E3BCF2 /* offscreen in Resources */,
+				6325CB052EEC98E300E3BCF2 /* manifest.json in Resources */,
+				6325CB062EEC98E300E3BCF2 /* _locales in Resources */,
+				6325CAFB2EEC98E300E3BCF2 /* background in Resources */,
+				6325CB032EEC98E300E3BCF2 /* popups in Resources */,
+				6325CB012EEC98E300E3BCF2 /* managed_storage.json in Resources */,
+				6325CAFE2EEC98E300E3BCF2 /* bootstrap in Resources */,
+				6325CB022EEC98E300E3BCF2 /* common in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6325CABD2EEC98E200E3BCF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6325CAD12EEC98E200E3BCF2 /* ViewController.swift in Sources */,
+				6325CAC52EEC98E200E3BCF2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6325CAD82EEC98E300E3BCF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6325CAE22EEC98E300E3BCF2 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6325CADF2EEC98E300E3BCF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6325CADB2EEC98E300E3BCF2 /* KeePassXC-Browser Extension */;
+			targetProxy = 6325CADE2EEC98E300E3BCF2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6325CAC72EEC98E200E3BCF2 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6325CAC82EEC98E200E3BCF2 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		6325CAD22EEC98E200E3BCF2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6325CAD32EEC98E200E3BCF2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6325CAE42EEC98E300E3BCF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6325CAE52EEC98E300E3BCF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		6325CAE72EEC98E300E3BCF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KeePassXC-Browser Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KeePassXC-Browser Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.keepassxc.KeePassXC-Browser.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6325CAE82EEC98E300E3BCF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KeePassXC-Browser Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KeePassXC-Browser Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.keepassxc.KeePassXC-Browser.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6325CAEB2EEC98E300E3BCF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KeePassXC-Browser/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KeePassXC-Browser";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.keepassxc.KeePassXC-Browser";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6325CAEC2EEC98E300E3BCF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KeePassXC-Browser/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KeePassXC-Browser";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.keepassxc.KeePassXC-Browser";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6325CABC2EEC98E200E3BCF2 /* Build configuration list for PBXProject "KeePassXC-Browser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6325CAE42EEC98E300E3BCF2 /* Debug */,
+				6325CAE52EEC98E300E3BCF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6325CAE62EEC98E300E3BCF2 /* Build configuration list for PBXNativeTarget "KeePassXC-Browser Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6325CAE72EEC98E300E3BCF2 /* Debug */,
+				6325CAE82EEC98E300E3BCF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6325CAEA2EEC98E300E3BCF2 /* Build configuration list for PBXNativeTarget "KeePassXC-Browser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6325CAEB2EEC98E300E3BCF2 /* Debug */,
+				6325CAEC2EEC98E300E3BCF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6325CAB92EEC98E200E3BCF2 /* Project object */;
+}

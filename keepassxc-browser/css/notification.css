@@ -43,6 +43,16 @@
     background-size: contain;
 }
 
+.kpxc-notification .kpxc-banner-icon-safari {
+    width: 24px;
+    height: 24px;
+    padding: 10px;
+    margin-right: 4px;
+    overflow: hidden;
+    background: url('safari-web-extension://__MSG_@@extension_id__/icons/keepassxc.svg') right no-repeat;
+    background-size: contain;
+}
+
 .kpxc-notification .kpxc-label {
     font-weight: bold;
 }

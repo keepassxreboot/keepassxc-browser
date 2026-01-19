@@ -805,7 +805,12 @@ keepass.disableAutomaticReconnect = function() {
 };
 
 keepass.reconnect = async function(tab = null, connectionTimeout = 1500) {
-    keepassClient.connectToNative();
+    if (page?.settings?.connectionMethod === ConnectionMethod.WEBSOCKET) {
+        await keepassClient.connectToWebSocket();
+    } else {
+        keepassClient.connectToNative();
+    }
+    
     keepass.generateNewKeyPair();
     const keyChangeResult = await keepass.changePublicKeys(tab, !!connectionTimeout, connectionTimeout).catch(() => false);
 
