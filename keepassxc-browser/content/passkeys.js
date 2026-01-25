@@ -137,14 +137,6 @@
         });
     };
 
-    const isSameOriginWithAncestors = function() {
-        try {
-            return window.self.origin === window.top.origin;
-        } catch (_err) {
-            return false;
-        }
-    };
-
     // Throws errors to a correct exceptions
     const throwError = function(errorCode, errorMessage) {
         if ((!errorCode && !errorMessage) || errorCode === PASSKEYS_REQUEST_CANCELED) {
@@ -193,11 +185,9 @@
                 return null;
             }
 
-            const sameOriginWithAncestors = isSameOriginWithAncestors();
             const response = await postMessageToExtension({
                 action: 'passkeys_create',
                 publicKey: options.publicKey,
-                sameOriginWithAncestors: sameOriginWithAncestors,
             });
 
             if (!response.publicKey) {
@@ -218,11 +208,9 @@
                 return originalCredentials.get(options);
             }
 
-            const sameOriginWithAncestors = isSameOriginWithAncestors();
             const response = await postMessageToExtension({
                 action: 'passkeys_get',
                 publicKey: options.publicKey,
-                sameOriginWithAncestors: sameOriginWithAncestors,
             });
 
             if (!response.publicKey) {
