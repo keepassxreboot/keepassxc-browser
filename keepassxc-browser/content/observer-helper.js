@@ -245,6 +245,30 @@ kpxcObserverHelper.findInputsFromShadowDOM = function(target) {
     return inputFields;
 };
 
+// Detects animations and transitions. Triggers handleObserverAdd() again on animationend/transitionend.
+kpxcObserverHelper.handleTransitions = function(target) {
+    const targetHasAnimations = target?.classList?.toString()?.includes('animate');
+    const targetHasDurations = target?.classList?.toString()?.includes('duration');
+
+    if (targetHasAnimations || targetHasDurations) {
+        const animations = target.getAnimations();
+        const transitionTime = animations[0]?.currentTime ?? 0;
+
+        // Animation found, but transition has not finished
+        if (animations && transitionTime === 0) {
+            target.addEventListener(
+                targetHasAnimations ? 'animationend' : 'transitionend',
+                () => {
+                    kpxcObserverHelper.handleObserverAdd(target);
+                },
+                {
+                    once: true,
+                },
+            );
+        }
+    }
+};
+
 // Adds elements to a monitor array. Identifies the input fields.
 kpxcObserverHelper.handleObserverAdd = async function(target) {
     if (kpxcObserverHelper.ignoredElement(target)) {
@@ -256,6 +280,8 @@ kpxcObserverHelper.handleObserverAdd = async function(target) {
         kpxc.init();
         return;
     }
+
+    kpxcObserverHelper.handleTransitions(target);
 
     const inputs = kpxcObserverHelper.getInputs(target);
     if (inputs.length === 0) {
