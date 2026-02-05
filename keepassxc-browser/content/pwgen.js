@@ -157,13 +157,7 @@ kpxcPasswordGenerator.fill = function(elem, password) {
 
 const isPasswordGeneratorSupported = async function() {
     const response = await browser.runtime.sendMessage({
-        action: 'get_keepassxc_versions'
+        action: 'get_features_list'
     });
-
-    const result = await browser.runtime.sendMessage({
-        action: 'compare_versions',
-        args: [ [ '2.7.0' ], response.current ]
-    });
-
-    return result['2.7.0'] || false;
+    return response?.passwordGenerator;
 };

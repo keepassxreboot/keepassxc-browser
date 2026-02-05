@@ -400,7 +400,7 @@ function onDisconnected() {
     page.clearAllLogins();
     keepass.updatePopup('cross');
     keepass.updateDatabaseHashToContent();
-    logError(`Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError.message)}`);
+    logError(`Failed to connect: ${(browser.runtime.lastError === null ? 'Unknown error' : browser.runtime.lastError?.message)}`);
 }
 
 keepassClient.onNativeMessage = function(response) {

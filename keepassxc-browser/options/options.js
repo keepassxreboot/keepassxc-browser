@@ -366,38 +366,23 @@ options.showKeePassXCVersions = async function(response) {
     $('#tab-about span.kpxcVersion').textContent = response.current;
     $('#tab-general-settings button.checkUpdateKeePassXC').disabled = false;
 
-    const versionResults = await browser.runtime.sendMessage({
-        action: 'compare_versions',
-        args: [
-            [
-                '2.6.0',
-                '2.7.0',
-                '2.7.7',
-                '2.7.10'
-            ],
-            response.current
-        ],
-    });
-
-    // Hide/disable certain options with older KeePassXC versions than 2.6.0
-    if (versionResults['2.6.0']) {
+    const featureList = await browser.runtime.sendMessage({ action: 'get_features_list' });
+    if (featureList?.requiredKeePassXCVersionFound) {
         $('#tab-general-settings #versionRequiredAlert').hide();
     } else {
         $('#tab-general-settings #showGroupNameInAutocomplete').disabled = true;
+        $('#tab-general-settings #minimumVersionAlert').show();
     }
 
-    // Hide certain options with older KeePassXC versions than 2.7.0
-    if (!versionResults['2.7.0']) {
+    if (!featureList?.downloadFaviconAfterSave) {
         $('#tab-general-settings #downloadFaviconAfterSaveFormGroup').hide();
     }
 
-    // Hide certain options with older KeePassXC versions than 2.7.7
-    if (!versionResults['2.7.7']) {
+    if (!featureList?.passkeys) {
         $('#tab-general-settings #passkeysOptionsCard').hide();
     }
 
-    // Hide passkeys default group option with KeePassXC version < 2.7.10
-    if (!versionResults['2.7.10']) {
+    if (!featureList?.passkeysDefaultGroup) {
         $('#tab-general-settings #passkeysDefaultGroup').hide();
     }
 };
@@ -726,7 +711,7 @@ options.initSitePreferences = function() {
 
         // Page URL
         row.children[0].children[0].children[0].value = url;
-        row.children[0].children[0]?.addEventListener('dblclick', (e) => 
+        row.children[0].children[0]?.addEventListener('dblclick', (e) =>
             enterEditMode(e, row, inputField, editButton, cancelButton, saveButton)
         );
 
@@ -891,7 +876,7 @@ const getBrowserId = function(userAgent) {
             return `${query.name} ${getVersion(userAgent, query.findStr)}`;
         }
     }
-  
+
     return 'Other/Unknown';
 };
 
@@ -919,7 +904,7 @@ const updateDropdownPosition = function(e, dropdown) {
     if (!rect) {
         return;
     }
-    
+
     const zoom = getComputedStyle(document.body).zoom || 1;
     const scrollTop = document.defaultView.scrollY / zoom;
     const scrollLeft = document.defaultView?.scrollX / zoom;

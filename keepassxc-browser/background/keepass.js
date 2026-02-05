@@ -2,6 +2,14 @@
 
 const keepass = {};
 keepass.associated = { 'value': false, 'hash': null };
+keepass.featuresList = {
+    downloadFaviconAfterSave: false,
+    newTotp: false,
+    passwordGenerator: false,
+    passkeys: false,
+    passkeysDefaultGroup: false,
+    requiredKeePassXCVersionFound: false,
+};
 keepass.keyPair = { publicKey: null, secretKey: null };
 keepass.serverPublicKey = '';
 keepass.clientID = '';
@@ -10,7 +18,7 @@ keepass.isDatabaseClosed = true;
 keepass.isKeePassXCAvailable = false;
 keepass.isEncryptionKeyUnrecognized = false;
 keepass.currentKeePassXC = '';
-keepass.requiredKeePassXC = '2.3.1';
+keepass.requiredKeePassXC = '2.6.0';
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
 keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.databaseHash = '';
@@ -172,7 +180,7 @@ keepass.generatePassword = async function(tab) {
             return '';
         }
 
-        if (!compareVersion(keepass.requiredKeePassXC, keepass.currentKeePassXC)) {
+        if (!keepass.featuresList.passwordGenerator) {
             return '';
         }
 
@@ -229,9 +237,7 @@ keepass.associate = async function(tab) {
 
         const response = await keepassClient.sendMessage(kpAction, tab, messageData, nonce, false, true);
         if (response) {
-            // Use public key as identification key with older KeePassXC releases
-            const savedKey = compareVersion('2.3.4', keepass.currentKeePassXC) ? idKey : key;
-            keepass.setCryptoKey(response.id, savedKey); // Save the new identification public key as id key for the database
+            keepass.setCryptoKey(response.id, idKey);
             keepass.associated.value = true;
             keepass.associated.hash = response.hash || 0;
 
@@ -412,6 +418,7 @@ keepass.changePublicKeys = async function(tab, enableTimeout = false, connection
     try {
         const response = await keepassClient.sendNativeMessage(request, enableTimeout, connectionTimeout);
         keepass.setcurrentKeePassXCVersion(response.version);
+        keepass.updateFeaturesList(response.version);
 
         if (!keepassClient.verifyKeyResponse(response, key, incrementedNonce)) {
             if (tab && page.tabs[tab.id]) {
@@ -544,7 +551,7 @@ keepass.createNewGroup = async function(tab, args = []) {
 
 keepass.getTotp = async function(tab, args = []) {
     const [ uuid, oldTotp ] = args;
-    if (!compareVersion('2.6.1', keepass.currentKeePassXC, true)) {
+    if (!keepass.featuresList.newTotpSupported) {
         return oldTotp;
     }
 
@@ -783,13 +790,9 @@ keepass.getCryptoKeys = function() {
 
 keepass.enableAutomaticReconnect = async function() {
     // Disable for Windows if KeePassXC is older than 2.3.4
-    if (!page.settings.autoReconnect
-        || (navigator.platform.toLowerCase().includes('win')
-            && keepass.currentKeePassXC
-            && !compareVersion('2.3.4', keepass.currentKeePassXC))) {
+    if (!page.settings.autoReconnect) {
         return;
     }
-
     if (keepass.reconnectLoop === null) {
         keepass.reconnectLoop = setInterval(async () => {
             if (!keepass.isKeePassXCAvailable) {
@@ -943,6 +946,25 @@ keepass.updateDatabaseHashToContent = async function() {
     } catch (err) {
         logError(`updateDatabaseHashToContent failed: ${err}`);
     }
+};
+
+keepass.updateFeaturesList = function (currentVersion) {
+    const versionResults = keepass.compareMultipleVersions([
+        keepass.requiredKeePassXC,
+        '2.6.1',
+        '2.7.0',
+        '2.7.7',
+        '2.7.10'
+    ], currentVersion);
+
+    keepass.featuresList = {
+        downloadFaviconAfterSave: versionResults['2.7.0'],
+        newTotp: versionResults['2.6.1'],
+        passwordGenerator: versionResults['2.7.0'],
+        passkeys: versionResults['2.7.7'],
+        passkeysDefaultGroup: versionResults['2.7.10'],
+        requiredKeePassXCVersionFound: versionResults[keepass.requiredKeePassXC],
+    };
 };
 
 // Expects an array of versions to compare
