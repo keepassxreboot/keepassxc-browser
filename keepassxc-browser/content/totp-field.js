@@ -19,7 +19,8 @@ const acceptedOTPFields = [
     'twofa',
     'two-factor',
     'twofactor',
-    'verification_pin'
+    'verification_pin',
+    'mfaCode'
 ];
 
 const acceptedParents = [
