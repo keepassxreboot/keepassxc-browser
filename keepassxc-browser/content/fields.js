@@ -108,6 +108,14 @@ kpxcFields.getExistingCombination = function(combination) {
             existingCombination.passwordInputs.push(combination.password);
         }
 
+        // Exception for Google. They replace the username input with password input using identical className.
+        // If detected, remove the username from the combination.
+        if (existingCombination?.username?.className?.length > 0
+            && existingCombination?.password?.className?.length > 0
+            && existingCombination?.username?.className === existingCombination?.password?.className) {
+            existingCombination.username = null;
+        }
+
         return existingCombination;
     }
 

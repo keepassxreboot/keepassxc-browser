@@ -106,6 +106,8 @@ kpxcSites.exceptionFound = function(identifier, field) {
     } else if (document.location.origin === 'https://login.dei.gr' &&
         identifier?.value?.includes('show-reveal-password')) {
         return true;
+    } else if (document.location.origin === 'https://accounts.google.com' && field?.id === 'password') {
+        return true;
     }
 
     return false;
