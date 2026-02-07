@@ -71,7 +71,7 @@ kpxcSites.detectUsernameFromPage = function() {
  * @returns {boolean}           True if an Element has a match with the identifier and document location
  */
 kpxcSites.exceptionFound = function(identifier, field) {
-    if (!identifier || identifier.length === 0) {
+    if ((!identifier || identifier.length === 0) && !field) {
         return;
     }
 
@@ -80,7 +80,7 @@ kpxcSites.exceptionFound = function(identifier, field) {
         || (typeof identifier === 'object' && [ 'password', 'form-row', 'show-password' ].every(c => identifier.contains(c))))) {
         return true;
     } else if (document.location.origin.startsWith('https://signin.ebay.')
-               && (identifier === 'null' || identifier.value === 'null' || identifier === 'pass')) {
+               && (identifier === 'null' || identifier?.value === 'null' || identifier === 'pass')) {
         return true;
     } else if (document.location.origin.startsWith('https://www.fidelity.com')) {
         if (typeof identifier === 'string') {
@@ -108,6 +108,9 @@ kpxcSites.exceptionFound = function(identifier, field) {
         return true;
     } else if (document.location.origin === 'https://accounts.google.com' && field?.id === 'password') {
         return true;
+    } else if (document.location.origin === 'https://www.epicgames.com'
+        && ((field?.style?.opacity === '1' && field?.style?.willChange === 'auto') || identifier === 'password')) {
+            return true;
     }
 
     return false;

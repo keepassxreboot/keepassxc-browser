@@ -27,7 +27,7 @@ kpxcForm.activateCredentialBanner = async function(usernameValue, passwordInputs
         return;
     }
 
-    if (passwordField) {
+    if (passwordField && kpxcFields.isVisible(passwordField)) {
         await kpxc.setPasswordFilled(true);
     }
 
