@@ -25,7 +25,6 @@ kpxcObserverHelper.ignoredNodeNames = [
 ];
 
 kpxcObserverHelper.ignoredPartialNodeNames = [
-    'FACEPLATE',
     'REDDIT-PDP',
     'RENDER-TEMPLATE',
     'SHREDDIT',
