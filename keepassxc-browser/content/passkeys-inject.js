@@ -67,8 +67,21 @@ const enablePasskeys = async function() {
         }
     };
 
-    const isSameOriginWithAncestors = function () {
+    /**
+     * @param {'create' | 'get'} action
+     * @returns {boolean}
+     */
+    const isAllowedByPolicy = function (action) {
+        // https://www.w3.org/TR/webauthn-2/#sctn-permissions-policy
+        const policy = document.featurePolicy || document.permissionsPolicy;
+        if (policy) {
+            passkeysLogDebug('Checking Permissions Policy');
+            return policy.allowsFeature(`publickey-credentials-${action}`);
+        }
+
+        // fallback to sameOriginWithAncestors
         try {
+            passkeysLogDebug('Checking sameOriginWithAncestors');
             return window.origin === window.top.origin;
         } catch (_err) {
             return false;
@@ -84,14 +97,14 @@ const enablePasskeys = async function() {
         if (ev.detail.action === 'passkeys_create') {
             const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(
                 ev.detail.publicKey,
-                isSameOriginWithAncestors(),
+                isAllowedByPolicy('create'),
             );
             passkeysLogDebug('Passkey request', publicKey);
             await sendResponse('passkeys_register', publicKey);
         } else if (ev.detail.action === 'passkeys_get') {
             const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(
                 ev.detail.publicKey,
-                isSameOriginWithAncestors(),
+                isAllowedByPolicy('get'),
             );
             passkeysLogDebug('Passkey request', publicKey);
             await sendResponse('passkeys_get', publicKey);
