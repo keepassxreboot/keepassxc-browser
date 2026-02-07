@@ -110,7 +110,31 @@ kpxcSites.exceptionFound = function(identifier, field) {
         return true;
     } else if (document.location.origin === 'https://www.epicgames.com'
         && ((field?.style?.opacity === '1' && field?.style?.willChange === 'auto') || identifier === 'password')) {
-            return true;
+        return true;
+    } else if (document.location.origin === 'https://www.paypal.com' && field?.id === 'splitPassword') {
+        return true;
+    }
+
+    return false;
+};
+
+// Handles exceptions when returning or modifying existing combinations
+kpxcSites.combinationExceptionFound = function(existingCombination) {
+    if (!existingCombination) {
+        return false;
+    }
+
+    // Exception for e.g. Google. They replace the username input with password input using identical className.
+    // If detected, remove the username from the combination.
+    if (existingCombination?.username?.className?.length > 0
+        && existingCombination?.password?.className?.length > 0
+        && existingCombination?.username?.className === existingCombination?.password?.className) {
+        return true;
+    }
+
+    if (document.location.origin === 'https://www.paypal.com'
+        && existingCombination.password?.className?.includes('pin-password')) {
+        return true;
     }
 
     return false;

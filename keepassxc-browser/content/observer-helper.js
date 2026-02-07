@@ -247,8 +247,9 @@ kpxcObserverHelper.findInputsFromShadowDOM = function(target) {
 
 // Detects animations and transitions. Triggers handleObserverAdd() again on animationend/transitionend.
 kpxcObserverHelper.handleTransitions = function(target) {
-    const targetHasAnimations = target?.classList?.toString()?.includes('animate');
-    const targetHasDurations = target?.classList?.toString()?.includes('duration');
+    const classList = target?.classList?.toString();
+    const targetHasAnimations = classList?.includes('animate');
+    const targetHasDurations = classList?.includes('duration') || classList?.includes('transform');
 
     if (targetHasAnimations || targetHasDurations) {
         const animations = target.getAnimations();
