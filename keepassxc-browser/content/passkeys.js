@@ -15,6 +15,9 @@
     const PASSKEYS_UNKNOWN_ERROR = 31;
     const PASSKEYS_INVALID_CHALLENGE = 32;
     const PASSKEYS_INVALID_USER_ID = 33;
+    const PASSKEYS_EVAL_BY_CREDENTIAL_NOT_SUPPORTED = 34;
+    const PASSKEYS_EVAL_BY_CREDENTIAL_NOT_EMPTY = 35;
+    const PASSKEYS_EVAL_BY_CREDENTIAL_NOT_FOUND = 36;
 
     const kpxcStringToArrayBuffer = function(str) {
         const arr = Uint8Array.from(str, c => c.charCodeAt(0));
@@ -82,6 +85,17 @@
             getPublicKeyAlgorithm: () => publicKey.response?.publicKeyAlgorithm,
             getTransports: () => [ 'internal' ]
         };
+
+        const prfResponse = publicKey.response?.clientExtensionResults?.prf;
+        if (prfResponse) {
+            if (prfResponse?.results?.first) {
+                response['clientExtensionResults'] =
+                { prf: { results: { first: kpxcBase64ToArrayBuffer(prfResponse?.results?.first) } } };
+            } else if (prfResponse?.enabled) {
+                response['clientExtensionResults'] = { prf: prfResponse };
+            }
+        }
+
         return Object.setPrototypeOf(response, AuthenticatorAttestationResponse.prototype);
     };
 
@@ -94,6 +108,11 @@
             userHandle: publicKey.response?.userHandle ? kpxcBase64ToArrayBuffer(publicKey.response?.userHandle) : null
         };
 
+        const prfResponse = publicKey.response?.clientExtensionResults?.prf?.results?.first;
+        if (prfResponse) {
+            response['clientExtensionResults'] = { prf: { results: { first: kpxcBase64ToArrayBuffer(prfResponse) } } };
+        }
+
         return Object.setPrototypeOf(response, AuthenticatorAssertionResponse.prototype);
     };
 
@@ -102,14 +121,16 @@
         const authenticatorResponse = publicKey?.response?.attestationObject
             ? createAttestationResponse(publicKey)
             : createAssertionResponse(publicKey);
+        const clientExtensionResults =
+            authenticatorResponse?.clientExtensionResults || publicKey?.response?.clientExtensionResults || {};
         const publicKeyCredential = {
             authenticatorAttachment: publicKey.authenticatorAttachment,
             id: publicKey.id,
             rawId: kpxcBase64ToArrayBuffer(publicKey.id),
             response: authenticatorResponse,
             type: publicKey.type,
-            clientExtensionResults: () => publicKey?.response?.clientExtensionResults || {},
-            getClientExtensionResults: () => publicKey?.response?.clientExtensionResults || {},
+            clientExtensionResults: () => clientExtensionResults,
+            getClientExtensionResults: () => clientExtensionResults,
             toJSON: () => kpxcPublicKeyCredentialJson(publicKeyCredential, publicKey)
         };
 
@@ -179,8 +200,18 @@
             throw new DOMException(errorMessage, DOMException.SECURITY_ERR);
         }
 
-        if (errorCode === PASSKEYS_NO_SUPPORTED_ALGORITHMS) {
+        if (
+            [
+                PASSKEYS_NO_SUPPORTED_ALGORITHMS,
+                PASSKEYS_EVAL_BY_CREDENTIAL_NOT_SUPPORTED,
+                PASSKEYS_EVAL_BY_CREDENTIAL_NOT_EMPTY
+            ].includes(errorCode)
+        ) {
             throw new DOMException(errorMessage, DOMException.NOT_SUPPORTED_ERR);
+        }
+
+        if (errorCode === PASSKEYS_EVAL_BY_CREDENTIAL_NOT_FOUND) {
+            throw new DOMException(errorMessage, DOMException.SYNTAX_ERR);
         }
 
         if ([ PASSKEYS_INVALID_CHALLENGE, PASSKEYS_INVALID_USER_ID ].includes(errorCode)) {
