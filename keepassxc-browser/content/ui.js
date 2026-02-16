@@ -13,6 +13,12 @@ const ORANGE_BUTTON = 'kpxc-button kpxc-orange-button';
 const RED_BUTTON = 'kpxc-button kpxc-red-button';
 const GRAY_BUTTON_CLASS = 'kpxc-gray-button';
 
+const ALLOWED_OBSERVER_NODETYPES = [
+    Node.ELEMENT_NODE,
+    Node.DOCUMENT_NODE,
+    Node.DOCUMENT_FRAGMENT_NODE
+];
+
 const OBSERVER_OPTIONS = { attributes: true, attributeFilter: [ 'style' ] };
 
 const DatabaseState = {
@@ -263,10 +269,10 @@ kpxcUI.createPageObserver = function() {
         }
     });
 
-    if (document?.documentElement) {
+    if (document?.documentElement && ALLOWED_OBSERVER_NODETYPES.includes(document.documentElement.nodeType)) {
         kpxcUI.pageObserver.observe(document.documentElement, OBSERVER_OPTIONS);
     }
-    if (document?.body) {
+    if (document?.body && ALLOWED_OBSERVER_NODETYPES.includes(document.body.nodeType)) {
         kpxcUI.pageObserver.observe(document.body, OBSERVER_OPTIONS);
     }
 };
