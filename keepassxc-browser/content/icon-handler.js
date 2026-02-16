@@ -45,7 +45,13 @@ kpxcIcons.addIconsFromForm = async function(form) {
             // Special case where everything else has been hidden, but a single password field is now displayed.
             // For example PayPal and Amazon is handled like this.
             if (c.username && !c.password && c.passwordInputs.length === 1) {
-                kpxcIcons.addIcon(c.passwordInputs[0], kpxcIcons.iconTypes.DEFAULT);
+                // Use password input directly from form if found (Epicgames)
+                const passwordField = c.form?.querySelector('input[type=password]');
+                if (c.form && passwordField) {
+                    kpxcIcons.addIcon(passwordField, kpxcIcons.iconTypes.DEFAULT);
+                } else {
+                    kpxcIcons.addIcon(c.passwordInputs[0], kpxcIcons.iconTypes.DEFAULT);
+                }
             }
 
             if (c.username && !c.username.readOnly) {
