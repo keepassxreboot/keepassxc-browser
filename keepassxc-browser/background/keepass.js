@@ -10,20 +10,23 @@ keepass.featuresList = {
     passkeysDefaultGroup: false,
     requiredKeePassXCVersionFound: false,
 };
-keepass.keyPair = { publicKey: null, secretKey: null };
-keepass.serverPublicKey = '';
+keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.clientID = '';
+keepass.currentKeePassXC = '';
+keepass.databaseHash = '';
 keepass.isConnected = false;
 keepass.isDatabaseClosed = true;
-keepass.isKeePassXCAvailable = false;
 keepass.isEncryptionKeyUnrecognized = false;
-keepass.currentKeePassXC = '';
-keepass.requiredKeePassXC = '2.6.0';
+keepass.isKeePassXCAvailable = false;
+keepass.keyPair = { publicKey: null, secretKey: null };
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
-keepass.cacheTimeout = 30 * 1000; // Milliseconds
-keepass.databaseHash = '';
 keepass.previousDatabaseHash = '';
 keepass.reconnectLoop = null;
+keepass.requiredKeePassXC = '2.6.0';
+keepass.serverPublicKey = '';
+
+const DEFAULT_FETCH_TIMEOUT = 5000; // ms
+const MAX_RELATED_ORIGIN_LABELS = 60;
 
 const kpActions = {
     SET_LOGIN: 'set-login',
@@ -341,7 +344,13 @@ keepass.getDatabaseHash = async function(tab, args = []) {
     }
 
     try {
-        const request = keepassClient.buildRequest(kpAction, keepassClient.encrypt(messageData, nonce), nonce, keepass.clientID, triggerUnlock);
+        const request = keepassClient.buildRequest(
+            kpAction,
+            keepassClient.encrypt(messageData, nonce),
+            nonce,
+            keepass.clientID,
+            triggerUnlock,
+        );
         const response = await keepassClient.sendNativeMessage(request, enableTimeout);
         if (response.message && response.nonce) {
             const res = keepassClient.decrypt(response.message, response.nonce);
@@ -616,11 +625,14 @@ keepass.passkeysRegister = async function(tab, args = []) {
         const kpAction = kpActions.PASSKEYS_REGISTER;
         const nonce = keepassClient.getNonce();
         const [ publicKey, origin ] = args;
+        const passkeyPublicKey = JSON.parse(JSON.stringify(publicKey));
+        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rp?.id);
 
         const messageData = {
             action: kpAction,
-            publicKey: JSON.parse(JSON.stringify(publicKey)),
+            publicKey: passkeyPublicKey,
             origin: origin,
+            relatedOrigins: relatedOrigins,
             groupName: page?.settings?.defaultPasskeyGroup,
             keys: keepass.getCryptoKeys()
         };
@@ -648,13 +660,15 @@ keepass.passkeysGet = async function(tab, args = []) {
 
         const kpAction = kpActions.PASSKEYS_GET;
         const nonce = keepassClient.getNonce();
-        const publicKey = args[0];
-        const origin = args[1];
+        const [ publicKey, origin ] = args;
+        const passkeyPublicKey = JSON.parse(JSON.stringify(publicKey));
+        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rp?.id);
 
         const messageData = {
             action: kpAction,
-            publicKey: JSON.parse(JSON.stringify(publicKey)),
+            publicKey: passkeyPublicKey,
             origin: origin,
+            relatedOrigins: relatedOrigins,
             keys: keepass.getCryptoKeys()
         };
 
@@ -810,7 +824,9 @@ keepass.disableAutomaticReconnect = function() {
 keepass.reconnect = async function(tab = null, connectionTimeout = 1500) {
     keepassClient.connectToNative();
     keepass.generateNewKeyPair();
-    const keyChangeResult = await keepass.changePublicKeys(tab, !!connectionTimeout, connectionTimeout).catch(() => false);
+    const keyChangeResult = await keepass
+        .changePublicKeys(tab, !!connectionTimeout, connectionTimeout)
+        .catch(() => false);
 
     // Change public keys timeout
     if (!keyChangeResult) {
@@ -866,7 +882,9 @@ keepass.setcurrentKeePassXCVersion = function(version) {
 keepass.keePassXCUpdateAvailable = async function() {
     const checkUpdate = Number(page.settings.checkUpdateKeePassXC);
     if (checkUpdate !== CHECK_UPDATE_NEVER) {
-        const lastChecked = (keepass.latestKeePassXC.lastChecked) ? new Date(keepass.latestKeePassXC.lastChecked) : new Date(1986, 11, 21);
+        const lastChecked = keepass.latestKeePassXC.lastChecked
+            ? new Date(keepass.latestKeePassXC.lastChecked)
+            : new Date(1986, 11, 21);
         const daysSinceLastCheck = Math.floor(((new Date()).getTime() - lastChecked.getTime()) / 86400000);
         if (daysSinceLastCheck >= checkUpdate) {
             await keepass.checkForNewKeePassXCVersion();
@@ -882,7 +900,7 @@ keepass.checkForNewKeePassXCVersion = async function() {
     let version = -1;
 
     try {
-        const response = await fetch(keepass.latestVersionUrl);
+        const response = await fetch(keepass.latestVersionUrl, { signal: AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT) });
         const jsonData = await response.json();
         if (jsonData?.tag_name && jsonData?.prerelease === false) {
             version = jsonData.tag_name;
@@ -892,6 +910,44 @@ keepass.checkForNewKeePassXCVersion = async function() {
         logError(`checkForNewKeePassXCVersion error: ${ex}`);
     }
     keepass.latestKeePassXC.lastChecked = new Date().valueOf();
+};
+
+// Implements retrieval of Related Origin Requests for passkeys
+// https://www.w3.org/TR/webauthn-3/#sctn-related-origins
+keepass.getPasskeysRelatedOrigins = async function(rpId) {
+    if (!rpId) {
+        return [];
+    }
+
+    try {
+        const response = await fetch(`https://${rpId}/.well-known/webauthn`, {
+            signal: AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT),
+        });
+
+        // Basic reply validation, see: https://www.w3.org/TR/webauthn-3/#sctn-validating-relation-origin
+        const isJson = response?.headers?.get('content-type')?.includes('application/json');
+        if (!isJson) {
+            logError('getRelatedOrigins error: Content-Type is not JSON');
+            return [];
+        }
+
+        const jsonData = await response.json();
+        if (!Array.isArray(jsonData?.origins)
+            || jsonData?.origins?.length === 0
+            || jsonData?.origins?.length > MAX_RELATED_ORIGIN_LABELS
+            || !jsonData?.origins?.every((origin) => typeof origin === 'string')) {
+            logError(
+                `getRelatedOrigins error: origins is not a list of strings, or it exceeds the maximum count of ${MAX_RELATED_ORIGIN_LABELS}`,
+            );
+            return [];
+        }
+
+        return jsonData.origins;
+    } catch (ex) {
+        logError(`getRelatedOrigins error: ${ex}`);
+    }
+
+    return [];
 };
 
 keepass.clearErrorMessage = function(tab) {

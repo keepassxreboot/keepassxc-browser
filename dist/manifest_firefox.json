@@ -185,7 +185,7 @@
     "applications": {
         "gecko": {
             "id": "keepassxc-browser@keepassxc.org",
-            "strict_min_version": "96.0"
+            "strict_min_version": "100.0"
         }
     },
     "storage": {
