@@ -858,12 +858,20 @@ options.createWarning = function(elem, text) {
     }, 5000);
 };
 
+options.hideUnsupportedFeatures = function() {
+    if (isSafari()) {
+        $('#tab-general-settings div#keyboardShortcuts').hide();
+        $('#tab-general-settings div#autoFillHttpAuth').hide();
+    }
+};
+
 const getBrowserId = function(userAgent) {
     const browserQueries = [
         { findStr: 'Firefox', name: 'Mozilla Firefox' },
         { findStr: 'Edg', name: 'Microsoft Edge' },
         { findStr: 'OPR', name: 'Opera' },
-        { findStr: 'Chrome', name: 'Chrome/Chromium' }
+        { findStr: 'Chrome', name: 'Chrome/Chromium' },
+        { findStr: 'Version/', name: 'Safari' }
     ];
 
     const getVersion = (agent, findStr) => {
@@ -968,7 +976,7 @@ window.addEventListener('scroll', function() {
 
         const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
         options.keyRing = keyRing;
-        options.isFirefox = await browser.runtime.sendMessage({ action: 'is_firefox' });
+        options.isFirefox = isFirefox();
 
         options.initMenu();
         await options.initGeneralSettings();
@@ -976,6 +984,7 @@ window.addEventListener('scroll', function() {
         options.initCustomLoginFields();
         options.initSitePreferences();
         options.initAbout();
+        options.hideUnsupportedFeatures();
 
         // The form-switch transitions should complete in 150 ms
         setTimeout(() => {

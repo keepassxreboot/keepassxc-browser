@@ -83,7 +83,7 @@ browserAction.generateIconName = async function(iconType) {
             style = page.settings.colorTheme;
         }
     }
-    const filetype = page.isFirefox ? 'svg' : 'png';
+    const filetype = (page.isFirefox || page.isSafari) ? 'svg' : 'png';
     return `/icons/toolbar/${style}/${name}.${filetype}`;
 };
 

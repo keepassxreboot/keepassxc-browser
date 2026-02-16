@@ -241,11 +241,7 @@ kpxcEvent.sendBackToTabs = async function(tab, args = []) {
     }
 };
 
-kpxcEvent.isFirefox = async function(tab) {
-    return page.isFirefox;
-};
-
-kpxcEvent.getFeaturesList = async function (tab) {
+kpxcEvent.getFeaturesList = async function() {
     return keepass.featuresList;
 };
 
@@ -279,7 +275,6 @@ kpxcEvent.messageHandlers = {
     'iframe_detected': kpxcEvent.onIframeDetected,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
-    'is_firefox': kpxcEvent.isFirefox,
     'is_iframe_allowed': page.isIframeAllowed,
     'is_site_ignored': page.isSiteIgnored,
     'load_keyring': kpxcEvent.onLoadKeyRing,

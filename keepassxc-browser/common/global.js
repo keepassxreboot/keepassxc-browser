@@ -28,23 +28,6 @@ const URL_WILDCARD = '1kpxcwc1';
 const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';
 
-const isFirefox = function() {
-    return navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
-};
-
-const isEdge = function() {
-    return navigator.userAgent.indexOf('Edg') !== -1;
-};
-
-const showNotification = function(message) {
-    browser.notifications.create({
-        'type': 'basic',
-        'iconUrl': browser.runtime.getURL('icons/keepassxc_64x64.png'),
-        'title': 'KeePassXC-Browser',
-        'message': message
-    });
-};
-
 const AssociatedAction = {
     NOT_ASSOCIATED: 0,
     ASSOCIATED: 1,
@@ -67,6 +50,36 @@ const SitePreferences = {
     ALLOW_IFRAMES: 'allowIframes',
     IMPROVED_FIELD_DETECTION: 'improvedFieldDetection',
     USERNAME_ONLY: 'usernameOnly',
+};
+
+const isFirefox = function() {
+    return browser.runtime.getURL('')?.startsWith('moz-extension');
+};
+
+const isSafari = function() {
+    return browser.runtime.getURL('')?.startsWith('safari-web-extension');
+};
+
+const isEdge = function() {
+    return navigator.userAgent.indexOf('Edg') !== -1;
+};
+
+const getIconClass = function(className) {
+    if (isFirefox()) {
+        return className + '-moz';
+    } else if (isSafari()) {
+        return className + '-safari';
+    }
+    return className;
+};
+
+const showNotification = function(message) {
+    browser.notifications.create({
+        'type': 'basic',
+        'iconUrl': browser.runtime.getURL('icons/keepassxc_64x64.png'),
+        'title': 'KeePassXC-Browser',
+        'message': message
+    });
 };
 
 // Returns a string with 'px' for CSS styles

@@ -5,12 +5,17 @@
     position: absolute;
 }
 
-.kpxc-totp-icon.default {
+.kpxc-totp-icon {
     background: url('chrome-extension://__MSG_@@extension_id__/icons/otp.svg') right no-repeat;
     background-size: contain;
 }
 
-.kpxc-totp-icon.moz {
+.kpxc-totp-icon-moz {
     background: url('moz-extension://__MSG_@@extension_id__/icons/otp.svg') right no-repeat;
+    background-size: contain;
+}
+
+.kpxc-totp-icon.safari {
+    background: url('safari-web-extension://__MSG_@@extension_id__/icons/otp.svg') right no-repeat;
     background-size: contain;
 }

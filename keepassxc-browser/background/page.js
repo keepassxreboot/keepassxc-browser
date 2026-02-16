@@ -50,6 +50,7 @@ page.clearCredentialsTimeout = null;
 page.currentRequest = {};
 page.currentTabId = -1;
 page.isFirefox = false;
+page.isSafari = false;
 page.manualFill = ManualFill.NONE;
 page.menuContexts = [ 'editable' ];
 page.passwordFilled = false;
@@ -64,10 +65,8 @@ page.popupData = {
 };
 
 page.initBrowser = async function() {
-    page.isFirefox =
-        navigator.userAgent.indexOf('Firefox') !== -1
-        || navigator.userAgent.indexOf('Gecko/') !== -1
-        || typeof browser.runtime.getBrowserInfo === 'function';
+    page.isFirefox = isFirefox();
+    page.isSafari = isSafari();
 };
 
 page.initSettings = async function() {
@@ -85,7 +84,7 @@ page.initSettings = async function() {
             } catch (err) {
                 debugLogMessage('page.initSettings: ' + err);
             }
-        } else if (typeof chrome.storage.managed === 'object') {
+        } else if (!page.isSafari && typeof chrome.storage.managed === 'object') {
             chrome.storage.managed.get('settings').then((managedSettings) => {
                 if (managedSettings?.settings) {
                     debugLogMessage('Managed settings found.');
