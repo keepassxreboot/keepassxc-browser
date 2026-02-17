@@ -361,7 +361,7 @@ kpxc.initCredentialFields = async function() {
 
     // Search all remaining inputs from the page, ignore the previous input fields
     const pageInputs = await kpxcFields.getAllPageInputs(formInputs);
-    if (formInputs.length === 0 && pageInputs.length === 0 && !kpxcFields.isCustomLoginFieldsUsed()) {
+    if (formInputs.length === 0 && pageInputs.length === 0) {
         // Run 'redetect_credentials' manually if no fields are found after a page load
         setTimeout(async function() {
             if (_called.automaticRedetectCompleted) {
@@ -653,7 +653,10 @@ kpxc.retrieveCredentials = async function(force = false) {
     }
 
     kpxc.url = document.location.href;
-    kpxc.submitUrl = kpxc.getFormActionUrl(kpxc.combinations[0]);
+    
+    // Search for first combination that has username or password input set
+    const firstCombination = kpxc.combinations?.find((combination) => combination?.username || combination?.password);
+    kpxc.submitUrl = kpxc.getFormActionUrl(firstCombination);
 
     if (kpxc.settings.autoRetrieveCredentials && kpxc.url && kpxc.submitUrl) {
         await kpxc.retrieveCredentialsCallback(
