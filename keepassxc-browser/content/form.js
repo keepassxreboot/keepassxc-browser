@@ -66,6 +66,8 @@ kpxcForm.getFormSubmitButton = function(form) {
         return;
     }
 
+    const hasPasswordClassOrId = (button) => button
+        && (button?.classList.value?.includes('password') || button?.id?.includes('password'));
     const action = kpxc.submitUrl || form.action;
 
     // Check if the site needs a special handling for retrieving the form submit button
@@ -88,13 +90,19 @@ kpxcForm.getFormSubmitButton = function(form) {
         b => !b.getAttribute('formAction')
     );
     if (buttons.length > 0) {
-        return buttons.at(-1);
+        const lastButton = buttons.at(-1);
+        // Accept button if it has no indication for password
+        if (!hasPasswordClassOrId(lastButton)) {
+            return buttons.at(-1);
+        }
     }
 
     // Try to find similar buttons outside the form which are added via 'form' property
     for (const e of form.elements) {
-        if ((matchesWithNodeName(e, 'BUTTON') && (e.type === 'button' || e.type === 'submit' || e.type === ''))
-            || (matchesWithNodeName(e, 'INPUT') && (e.type === 'button' || e.type === 'submit'))) {
+        const isSubmitButton = matchesWithNodeName(e, 'BUTTON')
+            && (e.type === 'button' || e.type === 'submit' || e.type === '');
+        const isInputButton = matchesWithNodeName(e, 'INPUT') && (e.type === 'button' || e.type === 'submit');
+        if ((isSubmitButton || isInputButton) && !hasPasswordClassOrId(e)) {
             return e;
         }
     }
