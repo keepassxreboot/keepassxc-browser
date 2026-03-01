@@ -104,8 +104,9 @@ kpxcFields.getExistingCombination = function(combination) {
         existingCombination.password ??= combination.password;
         if (existingCombination.passwordInputs?.length === 0) {
             existingCombination.passwordInputs = combination.passwordInputs;
-        } else {
-            existingCombination.passwordInputs.push(combination.password);
+        } else if (combination?.password) {
+            // If password field is found in the current combination, force assign it to the existing combination
+            existingCombination.password = combination.password;
         }
 
         // Remove username field from combination with certain sites (replaced by password input)
