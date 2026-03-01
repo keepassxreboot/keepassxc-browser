@@ -105,6 +105,7 @@ kpxcFields.getExistingCombination = function(combination) {
         if (existingCombination.passwordInputs?.length === 0) {
             existingCombination.passwordInputs = combination.passwordInputs;
         } else if (combination?.password) {
+            // If password field is found in the current combination, force assign it to the existing combination
             existingCombination.password = combination.password;
         }
 
