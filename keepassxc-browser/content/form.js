@@ -67,7 +67,8 @@ kpxcForm.getFormSubmitButton = function(form) {
     }
 
     const hasPasswordClassOrId = (button) => button
-        && (button?.classList.value?.includes('password') || button?.id?.includes('password'));
+        && (button?.classList.value?.toLowerCase()?.includes('password')
+            || button?.id?.toLowerCase()?.includes('password'));
     const action = kpxc.submitUrl || form.action;
 
     // Check if the site needs a special handling for retrieving the form submit button
