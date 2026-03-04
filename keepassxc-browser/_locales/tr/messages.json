@@ -406,6 +406,10 @@
         "message": "Süresi dolmuş",
         "description": "If a credential is expired, this is appended to the title label."
     },
+    "credentialsRetrieveButton": {
+        "message": "Kimlik doğrulama bilgilerini al",
+        "description": "Manual retrieve credentials button text."
+    },
     "fieldsFill": {
         "message": "Hata: Doldurulacak alanlar bulunamadı.",
         "description": "Alert message when no fields are found to fill in."
@@ -1053,6 +1057,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "KeePassXC $1 sürümünü gerektirir",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "Bu eklenti için KeePassXC $1 sürümü gereklidir. Önceki sürümler istenmeyen davranışlara yol açabilir.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Varsayılan: $1",

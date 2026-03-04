@@ -406,6 +406,10 @@
         "message": "已過期",
         "description": "If a credential is expired, this is appended to the title label."
     },
+    "credentialsRetrieveButton": {
+        "message": "檢索憑證",
+        "description": "Manual retrieve credentials button text."
+    },
     "fieldsFill": {
         "message": "錯誤：\n找不到該填入的欄位。",
         "description": "Alert message when no fields are found to fill in."
@@ -1053,6 +1057,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "需要 KeePassXC 版本： $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "此擴展需要 KeePassXC 版本：$1。更早的版本可能導致意外行為。",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "預設值：$1",

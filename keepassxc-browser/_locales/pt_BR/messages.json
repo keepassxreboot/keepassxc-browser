@@ -406,6 +406,10 @@
         "message": "Expirado",
         "description": "If a credential is expired, this is appended to the title label."
     },
+    "credentialsRetrieveButton": {
+        "message": "Recuperar credenciais",
+        "description": "Manual retrieve credentials button text."
+    },
     "fieldsFill": {
         "message": "Erro: Não foi possível encontrar campos para preencher.",
         "description": "Alert message when no fields are found to fill in."
@@ -1053,6 +1057,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Precisa da versão do KeePassXC: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "A extensão requer a versão KeePassXC: $1. Versões anteriores podem causar comportamentos indesejados.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Padrão: $1",

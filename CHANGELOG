@@ -1,3 +1,31 @@
+1.10.0 (2026-03-04)
+=========================
+- Add preliminary support for Safari [#2800]
+- Add 'mfaCode' to accepted 2FA token fields (thanks hostops) [#2804]
+- Add "postcode" to ignored TOTP list (thanks JackDunnCodes) [#2793]
+- Add support for Related Origin Requests with passkeys [#2828]
+- Add support for features list [#2848]
+- Add support for publicKey in passkeys response [#2782]
+- Fix hiding form switch animation when options page loads (thanks stefansundin) [#2807]
+- Fix TOTP field detection with Microsoft sites [#2832]
+- Fix the ability to fake same-orogin with passkeys (thanks a2kolbasov) [#2849]
+- Fix detecting transitions [#2855]
+- Fix Google password input detection [#2861]
+- Fix Epic Games and Paypal password input detection [#2863]
+- Fix using invalid parameters with MutationObserver [#2784]
+- Fix ignoring partial nodeNames [#2745]
+- Fix incorrect error message on keyboard fill [#2814]
+- Fix reopen database shortcut (thanks a2kolbasov) [#2767]
+- Fix showing notifications always on the top window [#2789]
+- Fix missing digits in TOTP fill on some sites (thanks ElementW) [#2794]
+- Fix setting default redirect allowance to 3 (thanks SinnySupernova) [#2797]
+- Fix createObserver() check [#2873]
+- Fix retry on input field detection with Custom Login Fields [#2875]
+- Fix detecting new password input on forms [#2878]
+- Fix form submit to ignore password related buttons [#2882]
+- Refactor icon handling [#2791]
+- Update webextension-polyfill library [#2822]
+
 1.9.11 (2025-11-26)
 =========================
 - Add support for reseting all settings to defaults [#2720]

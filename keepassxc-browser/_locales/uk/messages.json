@@ -188,7 +188,7 @@
         "description": "Credential is excluded."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Запит на Passkeys-ключі скасовано.",
+        "message": "Запит на використання ключів доступу скасовано.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -224,7 +224,7 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Невідома помилка паролів.",
+        "message": "Невідома помилка ключів доступу.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -319,11 +319,11 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String Field",
+        "message": "Поле рядка",
         "description": "Text for string field."
     },
     "defineSubmitButton": {
-        "message": "Submit Button",
+        "message": "Кнопка «Відправити»",
         "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
@@ -343,11 +343,11 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineChooseSubmitButton": {
-        "message": "Choose submit button",
+        "message": "Виберіть кнопку «Відправити»",
         "description": "Choose submit button selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "message": "Підтвердьте свій вибір або виберіть більше полів як рядкові поля.",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
@@ -371,7 +371,7 @@
         "description": "General text for a String Fields."
     },
     "submitButton": {
-        "message": "Submit Button",
+        "message": "Кнопка «Відправити»",
         "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
@@ -383,7 +383,7 @@
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsBlockedInIframe": {
-        "message": "Credential fill blocked in untrusted iframe.",
+        "message": "Заповнення облікових даних заблоковано в ненадійному iframe.",
         "description": "Alert message when filling credentials is blocked due to iframe restrictions."
     },
     "credentialsMultipleFound": {
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "Протерміновано",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "Отримати облікові дані",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "Помилка: Не вдалося знайти поля для заповнення.",
@@ -691,7 +695,7 @@
         "description": "Site Preferences page header."
     },
     "optionsSitePreferencesSettings": {
-        "message": "Settings",
+        "message": "Налаштування",
         "description": "Site Preferences settings button text."
     },
     "optionsMenuAbout": {
@@ -747,7 +751,7 @@
         "description": "Export settings button text."
     },
     "optionsButtonResetSettings": {
-        "message": "Reset all settings",
+        "message": "Скинути всі налаштування",
         "description": "Reset all settings button text."
     },
     "optionsLabelDefaultGroup": {
@@ -1054,6 +1058,10 @@
         "message": "Потребує версію KeePassXC: $1",
         "description": "KeePassXC version requirement text."
     },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "Для розширення потрібна версія KeePassXC: $1. Більш ранні версії можуть спричинити небажану поведінку.",
+        "description": "KeePassXC minimum version requirement text."
+    },
     "optionsDefault": {
         "message": "Типово: $1",
         "description": "Default setting text."
@@ -1091,7 +1099,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsResetSettingsDialogText": {
-        "message": "All settings will be reset to defaults. Are you sure?",
+        "message": "Всі налаштування будуть скинуті. Ви впевнені?",
         "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
@@ -1139,7 +1147,7 @@
         "description": "Site Preferences list column title."
     },
     "optionsColumnFeatures": {
-        "message": "Features",
+        "message": "Особливості",
         "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
@@ -1171,7 +1179,7 @@
         "description": "Site Preferences option selection."
     },
     "optionsSelectionPasskeys": {
-        "message": "Disable passkeys",
+        "message": "Вимкнути ключі доступу",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
@@ -1391,11 +1399,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkey-ключі",
+        "message": "Ключі доступу",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Увімкнути паролі",
+        "message": "Увімкнути ключі доступу",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1403,11 +1411,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Увімкнути резервний варіант паролів",
+        "message": "Увімкнути резервний метод для ключів доступу",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Коли увімкнено, невдала або скасована спроба запиту до KeePassXC викликатиме запит на паролі через внутрішню систему браузера. Якщо вимкнено, для підключення до KeePassXC буде потрібно, і скасований запит зазнає невдачі. За замовчуванням: увімкнено.",
+        "message": "Якщо увімкнено, невдалий або скасований запит до KeePassXC спричинить власний внутрішній запит браузера на ключі доступу. Якщо вимкнено, необхідне підключення до KeePassXC, а скасований запит буде невдалим. За замовчуванням: увімкнено.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {

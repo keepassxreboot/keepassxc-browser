@@ -406,6 +406,10 @@
         "message": "Wygasłe",
         "description": "If a credential is expired, this is appended to the title label."
     },
+    "credentialsRetrieveButton": {
+        "message": "Pobierz dane uwierzytelniające",
+        "description": "Manual retrieve credentials button text."
+    },
     "fieldsFill": {
         "message": "Błąd:\nNie można znaleźć pól do wypełnienia.",
         "description": "Alert message when no fields are found to fill in."
@@ -959,7 +963,7 @@
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser natychmiast odbierze dane uwierzytelniające po aktywowaniu karty.",
+        "message": "KeePassXC-Browser natychmiast pobierze dane uwierzytelniające po aktywowaniu karty.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
@@ -1053,6 +1057,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Wymaga KeePassXC w wersji: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "Rozszerzenie wymaga KeePassXC w wersji $1. Starsze wersje mogą powodować niepożądane zachowania.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Domyślne: $1",
