@@ -406,6 +406,10 @@
         "message": "Verlopen",
         "description": "If a credential is expired, this is appended to the title label."
     },
+    "credentialsRetrieveButton": {
+        "message": "Inloggegevens ophalen",
+        "description": "Manual retrieve credentials button text."
+    },
     "fieldsFill": {
         "message": "Fout: geen invulvelden aangetroffen.",
         "description": "Alert message when no fields are found to fill in."
@@ -1053,6 +1057,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Vereiste KeePassXC-versie: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "De extensie vereist KeePassXC-versie: $1. Eerdere versies kunnen ongewenst gedrag veroorzaken.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Standaard: $1",

@@ -406,6 +406,10 @@
         "message": "Изтекъл",
         "description": "If a credential is expired, this is appended to the title label."
     },
+    "credentialsRetrieveButton": {
+        "message": "Получаване на регистрации",
+        "description": "Manual retrieve credentials button text."
+    },
     "fieldsFill": {
         "message": "Грешка: Не са намерени полета, които да бъдат попълнени.",
         "description": "Alert message when no fields are found to fill in."
@@ -1053,6 +1057,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Изисква KeePassXC издание: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "Разширението изисква KeePassXC издание $1. По-ранни издания могат да доведат до нежелано поведение.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "По подразбиране: $1",

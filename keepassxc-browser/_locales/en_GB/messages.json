@@ -406,6 +406,10 @@
         "message": "Expired",
         "description": "If a credential is expired, this is appended to the title label."
     },
+    "credentialsRetrieveButton": {
+        "message": "Retrieve credentials",
+        "description": "Manual retrieve credentials button text."
+    },
     "fieldsFill": {
         "message": "Error: Cannot find fields to fill in.",
         "description": "Alert message when no fields are found to fill in."
@@ -1053,6 +1057,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Requires KeePassXC version: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "The extension requires KeePassXC version: $1. Earlier versions can cause unwanted behaviour.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Default: $1",
