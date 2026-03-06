@@ -170,8 +170,7 @@
         "tabs",
         "webNavigation",
         "webRequest",
-        "webRequestAuthProvider",
-        "webRequestBlocking"
+        "webRequestAuthProvider"
     ],
     "optional_permissions": [
         "privacy"
