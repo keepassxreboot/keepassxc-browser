@@ -1,3 +1,8 @@
+1.10.0.1 (2026-03-08)
+=========================
+- Remove webRequestBlocking permission from V3 manifests [#2893]
+- Fix dynamic password input detection when replacing username [#2896]
+
 1.10.0 (2026-03-04)
 =========================
 - Add preliminary support for Safari [#2800]
