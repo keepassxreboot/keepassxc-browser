@@ -124,9 +124,10 @@ kpxcSites.combinationExceptionFound = function(existingCombination) {
         return false;
     }
 
-    // Exception for e.g. Google. They replace the username input with password input using identical className.
+    // Exception for Google. They replace the username input with password input using identical className.
     // If detected, remove the username from the combination.
-    if (existingCombination?.username?.className?.length > 0
+    if (document.location.origin === 'https://accounts.google.com'
+        && existingCombination?.username?.className?.length > 0
         && existingCombination?.password?.className?.length > 0
         && existingCombination?.username?.className === existingCombination?.password?.className) {
         return true;
