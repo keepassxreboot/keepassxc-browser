@@ -662,7 +662,7 @@ keepass.passkeysGet = async function(tab, args = []) {
         const nonce = keepassClient.getNonce();
         const [ publicKey, origin ] = args;
         const passkeyPublicKey = JSON.parse(JSON.stringify(publicKey));
-        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rp?.id);
+        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rpId);
 
         const messageData = {
             action: kpAction,
