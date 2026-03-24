@@ -1295,7 +1295,7 @@
         "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "Сетевой адрес должен начинаться с <code>https://</code>, <code>http://</code>, <code>file://</code>, or <code>ftp://</code> и должен содержать не менее 5 символов.",
+        "message": "Сетевой адрес должен начинаться с <code>https://</code>, <code>http://</code>, <code>file://</code>, или <code>ftp://</code> и должен содержать не менее 5 символов.",
         "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
