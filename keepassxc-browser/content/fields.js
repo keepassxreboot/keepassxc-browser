@@ -647,16 +647,11 @@ kpxcFields.useCustomLoginFields = async function() {
         kpxcTOTPIcons.newIcon(totp, kpxc.databaseState);
     }
 
-    // No values found
-    if (!username && !password && !totp && !submitButton && stringFields?.length === 0) {
-        return [];
-    }
-
     const combinations = [];
     combinations.push({
         username: username,
         password: password,
-        passwordInputs: [ password ],
+        passwordInputs: password ? [ password ] : [],
         totp: totp,
         fields: stringFields,
         submitButton: submitButton
