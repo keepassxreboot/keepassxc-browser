@@ -140,7 +140,7 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
     const className = getIconClass('kpxc-totp-icon');
     const size = this.calculateIconSize(field);
 
-    const icon = kpxcUI.createElement('div', 'kpxc ' + className,
+    const icon = kpxcUI.createElement('div', 'kpxc kpxc-totp-icon ' + className,
         {
             'title': tr('totpFieldText'),
             'size': size,
