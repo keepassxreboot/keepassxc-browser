@@ -70,6 +70,10 @@ const initListeners = async function() {
      * @param {object} tab
      */
     browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+        // Could be not tracked yet if discarded from browser startup
+        if (tab?.id && !page.tabs[tab.id]) {
+            page.createTabEntry(tab.id);
+        }
         // If the tab URL has changed (e.g. logged in) clear credentials
         if (changeInfo.url) {
             page.clearLogins(tabId);
@@ -77,9 +81,6 @@ const initListeners = async function() {
 
         if (changeInfo.status === 'complete' && tab?.id) {
             browserAction.showDefault(tab);
-            if (!page.tabs[tab.id]) {
-                page.createTabEntry(tab.id);
-            }
         }
     });
 

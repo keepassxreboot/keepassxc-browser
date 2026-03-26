@@ -115,7 +115,7 @@ page.initSettings = async function() {
 
 page.initOpenedTabs = async function() {
     try {
-        const tabs = await browser.tabs.query({});
+        const tabs = await browser.tabs.query({ discarded: false });
         for (const i of tabs) {
             page.createTabEntry(i.id);
         }
