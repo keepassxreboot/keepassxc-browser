@@ -388,7 +388,18 @@ kpxcFields.handleSegmentedTOTPFields = function(inputs, combinations) {
 // Check for new password via autocomplete attribute
 kpxcFields.isAutocompleteAppropriate = function(field) {
     const autocomplete = field.getLowerCaseAttribute('autocomplete');
-    return autocomplete !== 'new-password';
+    return autocomplete?.toLowerCase() !== 'new-password';
+};
+
+// Check if autocomplete is off
+kpxcFields.isAutocompleteOff = function(field) {
+    // Ignore the check if Custom Login Fields is used
+    if (kpxcFields.isCustomLoginFieldsUsed()) {
+        return false;
+    }
+
+    const autocomplete = field.getLowerCaseAttribute('autocomplete');
+    return autocomplete?.toLowerCase() === 'off';
 };
 
 // Checks if Custom Login Fields are used for the site

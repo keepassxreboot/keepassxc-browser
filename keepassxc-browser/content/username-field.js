@@ -17,7 +17,8 @@ kpxcUsernameIcons.isValid = function(field) {
         || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
         || field.readOnly
         || kpxcIcons.hasIcon(field)
-        || (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field))) {
+        || (!kpxcFields.isCustomLoginFieldsUsed() && !kpxcFields.isVisible(field))
+        || kpxcFields.isAutocompleteOff(field)) {
         return false;
     }
 

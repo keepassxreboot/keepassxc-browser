@@ -79,7 +79,7 @@ kpxcTOTPIcons.isValid = function(field, forced) {
         return true;
     }
 
-    if (!field || !kpxcTOTPIcons.isAcceptedTOTPField(field)) {
+    if (!field || !kpxcTOTPIcons.isAcceptedTOTPField(field) || kpxcFields.isAutocompleteOff(field)) {
         return false;
     }
 

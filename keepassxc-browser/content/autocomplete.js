@@ -41,7 +41,7 @@ class Autocomplete {
         showGroup = true,
         afterFillSort = SORT_BY_MATCHING_CREDENTIALS_SETTING,
     ) {
-        if (input.readOnly) {
+        if (input.readOnly || kpxcFields.isAutocompleteOff(input)) {
             return;
         }
 
