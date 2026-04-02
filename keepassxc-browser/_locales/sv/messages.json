@@ -1059,7 +1059,7 @@
         "description": "KeePassXC version requirement text."
     },
     "optionsMinimumKeePassXCVersionRequired": {
-        "message": "The extension requires KeePassXC version: $1. Earlier versions can cause unwanted behavior.",
+        "message": "Tillägget kräver KeePassXC-version: $1. Tidigare versioner kan orsaka oönskat beteende.",
         "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
@@ -1279,7 +1279,7 @@
         "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Identifiering med enbart användarnamn låter KeePassXC-Browser fylla i inloggningsuppgifter på siter med separata sidor för användarnamn och lösenord.",
+        "message": "Identifiering med enbart användarnamn gör att KeePassXC-Browser kan fylla i inloggningsuppgifter på webbplatser med separata sidor för användarnamn och lösenord.",
         "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
@@ -1311,7 +1311,7 @@
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Option to ignore extension features for the page.",
+        "message": "Alternativ för att ignorera tilläggsfunktioner för sidan.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
@@ -1331,11 +1331,11 @@
         "description": "About page link to GitHub."
     },
     "optionsAboutExtensionVersion": {
-        "message": "KeePassXC-Browser Version: $1",
+        "message": "KeePassXC-Browser version: $1",
         "description": "About page text of extension version."
     },
     "optionsAboutKeePassXCVersion": {
-        "message": "KeePassXC Version: $1",
+        "message": "KeePassXC version: $1",
         "description": "About page text of KeePassXC version."
     },
     "optionsAboutContributors": {
