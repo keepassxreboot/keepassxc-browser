@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "You are trying to register a new entry, but an entry associated with this website already exists.",
-        "description": "You are trying to register a new entry, but an entry associated with this website already exists."
+        "message": "The passkey could not be registered because the request was rejected due to an excluded existing credential. Try using a different account or removing the existing passkey entry.",
+        "description": "The passkey could not be registered because the request was rejected due to an excluded existing credential. Try using a different account or removing the existing passkey entry."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Passkeys request canceled.",
