@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Credential is excluded.",
-        "description": "Credential is excluded."
+        "message": "You are trying to register a new entry, but an entry associated with this website already exists.",
+        "description": "You are trying to register a new entry, but an entry associated with this website already exists."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Passkeys request cancelled.",
