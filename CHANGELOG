@@ -1,3 +1,9 @@
+1.10.1 (2026-04-03)
+=========================
+- Fix regression when returning Custom Login Fields [#2924]
+- Fix TOTP icon border with Firefox [#2928]
+- Fix loading non-discarded tabs only (thanks tanriol) [#2934]
+
 1.10.0.1 (2026-03-08)
 =========================
 - Remove webRequestBlocking permission from V3 manifests [#2893]

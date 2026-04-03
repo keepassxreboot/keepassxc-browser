@@ -319,11 +319,11 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String Field",
+        "message": "Строковое поле",
         "description": "Text for string field."
     },
     "defineSubmitButton": {
-        "message": "Submit Button",
+        "message": "Кнопка подтверждения",
         "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
@@ -343,11 +343,11 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineChooseSubmitButton": {
-        "message": "Choose submit button",
+        "message": "Выберите кнопку подтверждения",
         "description": "Choose submit button selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "message": "Пожалуйста, подтвердите свой выбор или выберите больше строковых полей.",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
@@ -371,7 +371,7 @@
         "description": "General text for a String Fields."
     },
     "submitButton": {
-        "message": "Submit Button",
+        "message": "Кнопка подтверждения",
         "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
@@ -407,7 +407,7 @@
         "description": "If a credential is expired, this is appended to the title label."
     },
     "credentialsRetrieveButton": {
-        "message": "Retrieve credentials",
+        "message": "Извлечь учётные данные",
         "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
@@ -1059,7 +1059,7 @@
         "description": "KeePassXC version requirement text."
     },
     "optionsMinimumKeePassXCVersionRequired": {
-        "message": "The extension requires KeePassXC version: $1. Earlier versions can cause unwanted behavior.",
+        "message": "Для расширения требуется версия KeePassXC: $1. Более ранние версии могут вызывать нежелательное поведение.",
         "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
