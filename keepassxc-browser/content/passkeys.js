@@ -77,7 +77,8 @@
             attestationObject: kpxcBase64ToArrayBuffer(publicKey.response.attestationObject),
             clientDataJSON: kpxcBase64ToArrayBuffer(publicKey.response.clientDataJSON),
             getAuthenticatorData: () => kpxcBase64ToArrayBuffer(publicKey.response?.authenticatorData),
-            getPublicKey: () => publicKey.response?.publicKey ? publicKey.response?.publicKey : null,
+            getPublicKey: () =>
+                publicKey.response?.publicKey ? kpxcBase64ToArrayBuffer(publicKey.response?.publicKey) : null,
             getPublicKeyAlgorithm: () => publicKey.response?.publicKeyAlgorithm,
             getTransports: () => [ 'internal' ]
         };
