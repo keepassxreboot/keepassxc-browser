@@ -114,7 +114,7 @@ options.initGeneralSettings = async function() {
     $('#tab-general-settings input[type=radio]#checkUpdateOneMonth').value = CHECK_UPDATE_ONE_MONTH;
     $('#tab-general-settings input[type=radio]#checkUpdateNever').value = CHECK_UPDATE_NEVER;
 
-    $('#tab-general-settings input[type=range]').value = options.settings['redirectAllowance'];
+    $('#tab-general-settings #redirectAllowance').value = options.settings['redirectAllowance'];
     $('#redirectAllowanceLabel').textContent = tr('optionsRedirectAllowance',
         options.settings['redirectAllowance'] === 11 ? 'Infinite' : String(options.settings['redirectAllowance']));
 
@@ -124,6 +124,9 @@ options.initGeneralSettings = async function() {
     $('#tab-general-settings input#defaultGroup').value = options.settings['defaultGroup'];
     $('#tab-general-settings input#defaultPasskeyGroup').value = options.settings['defaultPasskeyGroup'];
     $('#tab-general-settings input#clearCredentialTimeout').value = options.settings['clearCredentialsTimeout'];
+    const connectionTimeout = (options.settings['connectionTimeout']/1000);
+    $('#tab-general-settings input#connectionTimeout').value = connectionTimeout;
+    $('#connectionTimeoutLabel').textContent = tr('optionsConnectionTimeout', String(connectionTimeout));
 
     const generalSettingsRadioInputs = document.querySelectorAll('#tab-general-settings input[type=radio]');
     for (const radio of generalSettingsRadioInputs) {
@@ -173,7 +176,17 @@ options.initGeneralSettings = async function() {
     });
 
     // Change label text dynamically with the range input
-    $('#tab-general-settings input[type=range]').addEventListener('input', function(e) {
+    $('#tab-general-settings input#connectionTimeout').addEventListener('input', function(e) {
+        $('#connectionTimeoutLabel').textContent = tr('optionsConnectionTimeout', e.target.value);
+    });
+
+    $('#tab-general-settings input#connectionTimeout').addEventListener('change', async function(e) {
+        options.settings['connectionTimeout'] = Math.min(60000, Math.max(CONNECTION_TIMEOUT, e.target.valueAsNumber * 1000))
+        await options.saveSettings();
+    });
+
+    // Change label text dynamically with the range input
+    $('#tab-general-settings input#redirectAllowance').addEventListener('input', function(e) {
         const currentValue = e.target.valueAsNumber === 11 ? 'Infinite' : e.target.value;
         $('#redirectAllowanceLabel').textContent = tr('optionsRedirectAllowance', currentValue);
     });

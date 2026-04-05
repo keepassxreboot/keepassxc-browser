@@ -1038,6 +1038,14 @@
         "message": "Credentials are cleared from background tabs after the timeout and permissions for those pages will be asked again.",
         "description": "Clear credentials timeout help text."
     },
+    "optionsConnectionTimeout": {
+        "message": "KeepassXC connection timeout: $1 seconds",
+        "description": "Connection timeout label text."
+    },
+    "optionsConnectionTimeoutHelpText": {
+        "message": "When KeePassXC browser extension tries to connect to to keepass, this timeout value is used. Default value is 1.5. Maximum is 60.0.",
+        "description": "Connection timeout label text."
+    },
     "optionsVersionInfoText": {
         "message": "KeePassXC-Browser needs KeePassXC to retrieve credentials.",
         "description": "Settings page version info text."

@@ -24,6 +24,9 @@ const CHECK_UPDATE_THREE_DAYS = 3;
 const CHECK_UPDATE_ONE_WEEK = 7;
 const CHECK_UPDATE_ONE_MONTH = 30;
 
+// Default value for connection timeout
+const CONNECTION_TIMEOUT = 1500;
+
 const URL_WILDCARD = '1kpxcwc1';
 const schemeSegment = '(\\*|http|https|ws|wss|ftp)';
 const hostSegment = '(\\*|(?:\\*\\.)?(?:[^/*]+))?';

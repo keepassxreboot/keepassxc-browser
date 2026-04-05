@@ -821,7 +821,12 @@ keepass.disableAutomaticReconnect = function() {
     keepass.reconnectLoop = null;
 };
 
-keepass.reconnect = async function(tab = null, connectionTimeout = 1500) {
+keepass.reconnect = async function(tab = null, connectionTimeout = CONNECTION_TIMEOUT) {
+    if (arguments.length < 2) {
+        connectionTimeout = page.settings.connectionTimeout;
+    }
+
+    connectionTimeout = Math.min(60000, Math.max(CONNECTION_TIMEOUT, connectionTimeout))
     keepassClient.connectToNative();
     keepass.generateNewKeyPair();
     const keyChangeResult = await keepass
