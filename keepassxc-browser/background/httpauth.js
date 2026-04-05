@@ -60,7 +60,7 @@ httpAuth.retrieveCredentials = async function(tabId, url, submitUrl) {
 };
 
 httpAuth.processPendingCallbacks = async function(details, resolve, reject) {
-    if (httpAuth.requests.indexOf(details.requestId) >= 0 || !page.tabs[details.tabId]) {
+    if (httpAuth.requests.indexOf(details.requestId) >= 0 || !tabs.getTabFromId(details.tabId)) {
         reject({ cancel: false });
         return;
     }

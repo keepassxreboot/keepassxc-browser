@@ -41,6 +41,7 @@
             "background/httpauth.js",
             "background/offscreen.js",
             "background/browserAction.js",
+            "background/tabs.js",
             "background/page.js",
             "background/event.js",
             "background/init.js"

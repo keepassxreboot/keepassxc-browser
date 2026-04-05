@@ -128,6 +128,7 @@ export default defineConfig([globalIgnores(["**/*.min.js"]), {
             SORT_BY_TITLE: "readonly",
             SORT_BY_USERNAME: "readonly",
             statusResponse: "readonly",
+            tabs: "readonly",
             Tests: "readonly",
             tr: "readonly",
             trimURL: "readonly",

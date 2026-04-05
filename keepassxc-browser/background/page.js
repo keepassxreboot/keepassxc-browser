@@ -42,13 +42,15 @@ const defaultSettings = {
 
 const AUTO_SUBMIT_TIMEOUT = 5000;
 
+/**
+ * @Object page
+ * Handles information between background and content scripts. Initializes and updates extension settings.
+ */
 const page = {};
 page.autoSubmitPerformed = false;
 page.attributeMenuItems = [];
 page.blockedTabs = [];
-page.clearCredentialsTimeout = null;
 page.currentRequest = {};
-page.currentTabId = -1;
 page.isFirefox = false;
 page.isSafari = false;
 page.manualFill = ManualFill.NONE;
@@ -57,7 +59,6 @@ page.passwordFilled = false;
 page.redirectCount = 0;
 page.submitted = false;
 page.submittedCredentials = {};
-page.tabs = [];
 
 page.popupData = {
     iconType: 'normal',
@@ -113,27 +114,6 @@ page.initSettings = async function() {
     }
 };
 
-page.initOpenedTabs = async function() {
-    try {
-        const tabs = await browser.tabs.query({ discarded: false });
-        for (const i of tabs) {
-            page.createTabEntry(i.id);
-        }
-
-        // Set initial tab-ID
-        const currentTab = await getCurrentTab();
-        if (!currentTab) {
-            return;
-        }
-
-        page.currentTabId = currentTab?.id;
-        browserAction.showDefault(currentTab);
-    } catch (err) {
-        logError('page.initOpenedTabs error: ' + err);
-        return Promise.reject();
-    }
-};
-
 page.initSitePreferences = async function() {
     if (!page.settings) {
         return;
@@ -156,38 +136,13 @@ page.resetAllSettings = async function() {
     await browser.storage.local.set({ 'settings': page.settings });
 };
 
-page.switchTab = async function(tab) {
-    // Clears Fill Attribute selection from context menu
-    page.setFillAttributeContextMenuItemVisible(false);
-
-    // Clears all logins from other tabs after a timeout
-    if (page?.clearCredentialsTimeout) {
-        clearTimeout(page.clearCredentialsTimeout);
-    }
-
-    page.clearCredentialsTimeout = setTimeout(() => {
-        for (const pageTabId of Object.keys(page.tabs)) {
-            if (tab?.id !== Number(pageTabId)) {
-                page.clearCredentials(Number(pageTabId), true);
-            }
-        }
-    }, page.settings.clearCredentialsTimeout * 1000);
-
-    browserAction.showDefault(tab);
-    if (tab?.id) {
-        browser.tabs.sendMessage(tab.id, { action: 'activated_tab' }).catch((e) => {
-            logError('Cannot send activated_tab message: ' + e.message);
-        });
-    }
-};
-
 page.clearCredentials = async function(tabId, complete) {
-    if (!page.tabs[tabId]) {
+    if (!tabs.getTabFromId(tabId)) {
         return;
     }
 
     page.passwordFilled = false;
-    page.tabs[tabId].credentials = [];
+    tabs.updateTabValues(tabId, { credentials: [] });
 
     if (complete) {
         page.clearLogins(tabId);
@@ -199,13 +154,17 @@ page.clearCredentials = async function(tabId, complete) {
 };
 
 page.clearLogins = async function(tabId) {
-    if (!page.tabs[tabId]) {
+    const currentTab = tabs.getTabFromId(tabId);
+    if (!currentTab) {
         return;
     }
 
-    page.tabs[tabId].allowIframes = false;
-    page.tabs[tabId].credentials = [];
-    page.tabs[tabId].loginList = [];
+    tabs.updateTabValues(tabId, {
+        allowIframes: false,
+        credentials: [],
+        loginList: []
+    });
+
     page.currentRequest = {};
     page.passwordFilled = false;
     page.setFillAttributeContextMenuItemVisible(false);
@@ -213,9 +172,9 @@ page.clearLogins = async function(tabId) {
 
 // Clear all logins from all pages and update the content scripts
 page.clearAllLogins = function() {
-    for (const tabId of Object.keys(page.tabs)) {
-        page.clearCredentials(Number(tabId), true);
-    }
+    tabs.tabList.forEach((_tab, key) => {
+        page.clearCredentials(Number(key), true);
+    });
 };
 
 page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials, tabId) {
@@ -232,19 +191,6 @@ page.clearSubmittedCredentials = async function() {
     page.submittedCredentials = {};
 };
 
-page.createTabEntry = async function(tabId) {
-    page.tabs[tabId] = {
-        allowIframes: false,
-        credentials: [],
-        errorMessage: null,
-        loginList: [],
-        loginId: undefined
-    };
-
-    page.clearSubmittedCredentials();
-    page.setFillAttributeContextMenuItemVisible(false);
-};
-
 // Retrieves the credentials. Returns cached values when found.
 // Page reload or tab switch clears the cache.
 // If the retrieval is forced (from Credential Banner), get new credentials normally.
@@ -254,8 +200,9 @@ page.retrieveCredentials = async function(tab, args = []) {
     }
 
     const [ url, submitUrl, force ] = args;
-    if (page.tabs[tab.id]?.credentials.length > 0 && !force) {
-        return page.tabs[tab.id].credentials;
+    const currentTab = tabs.getTabFromId(tab.id);
+    if (currentTab?.credentials?.length > 0 && !force) {
+        return currentTab.credentials;
     }
 
     // Ignore duplicate requests from the same tab
@@ -271,14 +218,13 @@ page.retrieveCredentials = async function(tab, args = []) {
     }
 
     const credentials = await keepass.retrieveCredentials(tab, args);
-    page.tabs[tab.id].credentials = credentials;
+    tabs.updateTabValues(tab.id, { credentials: credentials });
     return credentials;
 };
 
 page.getLoginId = async function(tab, returnSingle = true) {
-    const currentTab = page.tabs[tab.id];
-
     // If there's only one credential available and loginId is not set
+    const currentTab = tabs.getTabFromId(tab.id);
     if (currentTab && returnSingle && !currentTab.loginId && currentTab.credentials.length === 1) {
         return currentTab.credentials[0].uuid;
     }
@@ -287,9 +233,7 @@ page.getLoginId = async function(tab, returnSingle = true) {
 };
 
 page.setLoginId = async function(tab, loginId) {
-    if (tab?.id) {
-        page.tabs[tab.id].loginId = loginId;
-    }
+    tabs.updateTabValues(tab?.id, { loginId: loginId });
 };
 
 page.getManualFill = async function(tab) {
@@ -339,12 +283,13 @@ page.setAutoSubmitPerformed = async function(tab) {
 };
 
 page.getLoginList = async function(tab) {
-    return page.tabs[tab.id] ? page.tabs[tab.id].loginList : [];
+    return tabs.getTabFromId(tab.id)?.loginList ?? [];
 };
 
 page.fillHttpAuth = async function(tab, credentials) {
-    if (page.tabs[tab.id]?.loginList.resolve) {
-        page.tabs[tab.id].loginList.resolve({
+    const currentTab = tabs.getTabFromId(tab.id);
+    if (currentTab && currentTab?.loginList.resolve) {
+        currentTab.loginList.resolve({
             authCredentials: {
                 username: credentials.login,
                 password: credentials.password
@@ -425,7 +370,7 @@ page.setAllowIframes = async function(tab, args = []) {
 
     // Only set when main windows' URL is used
     if (trimURL(tab?.url) === trimURL(site) && tab?.id) {
-        page.tabs[tab.id].allowIframes = allowIframes;
+        tabs.updateTabValues(tab?.id, { allowIframes: allowIframes });
     }
 };
 
@@ -434,7 +379,7 @@ page.isIframeAllowed = async function(tab, args = []) {
     const baseDomain = await page.getBaseDomainFromUrl(hostname, url);
 
     // Allow if exception has been set from Site Preferences
-    if (page.tabs[tab.id]?.allowIframes) {
+    if (tabs.getTabFromId(tab.id)?.allowIframes) {
         return true;
     }
 
