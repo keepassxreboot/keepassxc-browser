@@ -5,10 +5,10 @@
 
     $('#lock-database-button').show();
 
-    const data = await getLoginData();
+    const basicAuthLogins = await getLoginData(true);
     const ll = document.getElementById('login-list');
 
-    for (const [ i, login ] of data.logins.entries()) {
+    for (const [ i, login ] of basicAuthLogins.loginList.entries()) {
         const a = document.createElement('a');
         a.setAttribute('class', 'list-group-item');
         a.textContent = login.login + ' (' + login.name + ')';
@@ -19,7 +19,7 @@
                 return;
             }
 
-            const credentials = data.logins[Number(e.target.id)];
+            const credentials = basicAuthLogins.loginList[Number(e.target.id)];
             browser.runtime.sendMessage({
                 action: 'fill_http_auth',
                 args: credentials

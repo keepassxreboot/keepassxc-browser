@@ -22,7 +22,7 @@ browserAction.show = async function(tab, popupData) {
         if (popupData.popup === 'popup_login') {
             badgeText = currentTab?.loginList.length;
         } else if (popupData.popup === 'popup_httpauth') {
-            badgeText = currentTab?.loginList?.logins?.length;
+            badgeText = currentTab?.basicAuthLogins?.loginList?.length;
         }
 
         browserAction.setBadgeText(tab?.id, badgeText);

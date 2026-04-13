@@ -282,14 +282,18 @@ page.setAutoSubmitPerformed = async function(tab) {
     }
 };
 
-page.getLoginList = async function(tab) {
+// Returns login list for the extension popup
+page.getLoginList = async function(tab, useBasicAuth = false) {
+    if (useBasicAuth) {
+        return tabs.getTabFromId(tab.id)?.basicAuthLogins ?? {};
+    }
     return tabs.getTabFromId(tab.id)?.loginList ?? [];
 };
 
 page.fillHttpAuth = async function(tab, credentials) {
     const currentTab = tabs.getTabFromId(tab.id);
-    if (currentTab && currentTab?.loginList.resolve) {
-        currentTab.loginList.resolve({
+    if (currentTab && currentTab?.basicAuthLogins.resolve) {
+        currentTab.basicAuthLogins.resolve({
             authCredentials: {
                 username: credentials.login,
                 password: credentials.password

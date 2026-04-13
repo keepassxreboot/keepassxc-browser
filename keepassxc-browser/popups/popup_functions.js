@@ -37,7 +37,7 @@ async function initColorTheme() {
     document.documentElement.setAttribute('data-bs-theme', theme);
 }
 
-async function getLoginData() {
+async function getLoginData(useBasicAuth = false) {
     const tab = await getCurrentTab();
     if (!tab) {
         return [];
@@ -45,7 +45,7 @@ async function getLoginData() {
 
     const logins = await browser.runtime.sendMessage({
         action: 'get_login_list',
-        args: tab.id
+        args: useBasicAuth
     });
 
     return logins;

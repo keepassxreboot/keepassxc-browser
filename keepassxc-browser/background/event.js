@@ -175,7 +175,7 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
         popup: 'popup_httpauth'
     };
 
-    tabs.updateTabValues(tab?.id, { loginList: data });
+    tabs.updateTabValues(tab?.id, { basicAuthLogins: data });
     await browserAction.show(tab, popupData);
 };
 

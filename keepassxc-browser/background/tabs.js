@@ -1,5 +1,20 @@
 'use strict';
 
+const TAB_OBJECT = {
+    allowIframes: false,
+    basicAuthLogins: {
+        loginList: [],
+        resolve: undefined, // Function from Promise
+        url: ''
+    },
+    credentials: [],
+    errorMessage: null,
+    iframeDetected: false,
+    loginList: [],
+    loginId: undefined,
+    usernameFieldDetected: false
+};
+
 /**
  * @Object tabs
  * Handles tab object creation, update and delete.
@@ -30,16 +45,7 @@ tabs.createTabEntry = function(tabId) {
         return;
     }
 
-    tabs.tabList.set(tabId, {
-        allowIframes: false,
-        credentials: [],
-        errorMessage: null,
-        iframeDetected: false,
-        loginList: [],
-        loginId: undefined,
-        usernameFieldDetected: false
-    });
-
+    tabs.tabList.set(tabId,TAB_OBJECT);
     page.clearSubmittedCredentials();
     page.setFillAttributeContextMenuItemVisible(false);
 };
