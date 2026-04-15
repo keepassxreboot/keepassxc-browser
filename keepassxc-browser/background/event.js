@@ -6,7 +6,7 @@ kpxcEvent.onMessage = async function(request, sender) {
     if (request.action in kpxcEvent.messageHandlers) {
         if (!Object.hasOwn(sender, 'tab') || sender?.tab?.id < 1) {
             sender.tab = {};
-            sender.tab.id = page.currentTabId;
+            sender.tab.id = tabs.currentTabId;
         }
 
         return await kpxcEvent.messageHandlers[request.action](sender.tab, request.args);
@@ -24,9 +24,10 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll, forceShowDe
         browserAction.showDefault(tab);
     }
 
-    const errorMessage = page.tabs[tab.id]?.errorMessage ?? undefined;
-    const usernameFieldDetected = page.tabs[tab.id]?.usernameFieldDetected ?? false;
-    const iframeDetected = page.tabs[tab.id]?.iframeDetected ?? false;
+    const currentTab = tabs.getTabFromId(tab.id);
+    const errorMessage = currentTab?.errorMessage ?? undefined;
+    const usernameFieldDetected = currentTab?.usernameFieldDetected ?? false;
+    const iframeDetected = currentTab?.iframeDetected ?? false;
 
     return {
         associated: keepass.isAssociated(),
@@ -117,8 +118,8 @@ kpxcEvent.lockDatabase = async function(tab) {
 };
 
 kpxcEvent.onGetTabInformation = async function(tab) {
-    const id = tab?.id || page.currentTabId;
-    return page.tabs[id];
+    const id = tab?.id || tabs.currentTabId;
+    return tabs.getTabFromId(id);
 };
 
 kpxcEvent.onGetConnectedDatabase = async function() {
@@ -147,7 +148,7 @@ kpxcEvent.onUpdateAvailableKeePassXC = async function() {
 };
 
 kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
-    const id = tab?.id || page.currentTabId;
+    const id = tab?.id || tabs.currentTabId;
     page.clearCredentials(id);
     page.clearSubmittedCredentials();
 };
@@ -159,7 +160,7 @@ kpxcEvent.onLoginPopup = async function(tab, logins) {
     };
 
     if (tab?.id) {
-        page.tabs[tab.id].loginList = logins;
+        tabs.updateTabValues(tab?.id, { loginList: logins });
         await browserAction.show(tab, popupData);
     }
 };
@@ -174,20 +175,16 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
         popup: 'popup_httpauth'
     };
 
-    page.tabs[tab.id].loginList = data;
+    tabs.updateTabValues(tab?.id, { basicAuthLogins: data });
     await browserAction.show(tab, popupData);
 };
 
 kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {
-    if (tab?.id) {
-        page.tabs[tab.id].usernameFieldDetected = detected;
-    }
+    tabs.updateTabValues(tab?.id, { usernameFieldDetected: detected });
 };
 
 kpxcEvent.onIframeDetected = async function(tab, detected) {
-    if (tab?.id) {
-        page.tabs[tab.id].iframeDetected = detected;
-    }
+    tabs.updateTabValues(tab?.id, { iframeDetected: detected });
 };
 
 kpxcEvent.passwordGetFilled = async function() {
