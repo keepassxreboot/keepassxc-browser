@@ -507,7 +507,8 @@ kpxcFields.isTopElement = function(elem, rect) {
     const getTopmostElement = (element, x, elementRect) => {
         const topElement = rootNode.elementFromPoint(x, elementRect.top + (elementRect.height / 2));
         return element?.labels &&
-            (element.labels[0] === topElement || element.labels[0].contains(topElement)) &&
+            (element.labels[0] === topElement ||
+                (element.labels[0] instanceof Node && element.labels[0].contains(topElement))) &&
             elementsOverlap(elementRect, topElement.getBoundingClientRect())
             ? element
             : topElement;
