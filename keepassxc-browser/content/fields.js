@@ -506,9 +506,8 @@ kpxcFields.isTopElement = function(elem, rect) {
     // Also allows if the topmost element is a child of the label (e.g., span inside label).
     const getTopmostElement = (element, x, elementRect) => {
         const topElement = rootNode.elementFromPoint(x, elementRect.top + (elementRect.height / 2));
-        return element?.labels &&
-            (element.labels[0] === topElement ||
-                (element.labels[0] instanceof Node && element.labels[0].contains(topElement))) &&
+        return element?.labels instanceof NodeList &&
+            element.labels[0]?.contains(topElement) &&
             elementsOverlap(elementRect, topElement.getBoundingClientRect())
             ? element
             : topElement;
