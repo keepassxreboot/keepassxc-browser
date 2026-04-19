@@ -59,6 +59,8 @@ const initListeners = async function() {
                 browser.tabs.sendMessage(tab.id, {
                     action: 'fill_attribute',
                     args: menuItem?.args
+                }, {
+                    frameId: item.frameId
                 }).catch((err) => {
                     logError(err);
                 });
@@ -69,6 +71,8 @@ const initListeners = async function() {
 
         browser.tabs.sendMessage(tab.id, {
             action: item.menuItemId
+        }, {
+            frameId: item.frameId
         }).catch((err) => {
             logError(err);
         });
