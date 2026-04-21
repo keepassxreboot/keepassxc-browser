@@ -245,16 +245,9 @@ kpxcFill.fillInCredentials = async function(combination, predefinedUsername, uui
         skipAutoSubmit = selectedCredentials.skipAutoSubmit === 'true';
     }
 
-    // Update the password field if form has been updated with a new identical element (Moodle).
-    // If found, replace the new input field to the combination.
-    if (combination?.form && combination?.password && !combination.form.contains(combination.password)) {
-        const formInputs = kpxcObserverHelper.getInputs(combination.form);
-        const newPasswordField = formInputs?.find((formInput) =>
-            formInput?.getLowerCaseAttribute('type') === 'password');
-        if (newPasswordField && areNamedNodeMapsEqual(combination.password.attributes, newPasswordField.attributes)) {
-            combination.password = newPasswordField;
-        }
-    }
+    // Additional checks
+    checkIdenticalPasswordFields(combination);
+    checkReadOnlyUsernameField(combination);
 
     // Fill password
     if (combination.password && matchesWithNodeName(combination.password, 'INPUT')) {
@@ -451,6 +444,27 @@ const showErrorNotification = async function(errorMessage, notificationType = 'e
     }
 };
 
+// Update the password field if form has been updated with a new identical element (Moodle).
+// If found, replace the new input field to the combination.
+const checkIdenticalPasswordFields = function(combination) {
+    if (combination?.form && combination?.password && !combination.form.contains(combination.password)) {
+        const newPasswordField = getPasswordFieldFromForm(combination);
+        if (newPasswordField && areNamedNodeMapsEqual(combination.password.attributes, newPasswordField.attributes)) {
+            combination.password = newPasswordField;
+        }
+    }
+};
+
+// Sometimes username field is changed to readOnly. Look for a password field instead inside the form.
+const checkReadOnlyUsernameField = function(combination) {
+    if (combination?.username && combination?.username?.readOnly && combination?.form && !combination?.password) {
+        const passwordField = getPasswordFieldFromForm(combination);
+        if (kpxcFields.isVisible(passwordField)) {
+            combination.password = passwordField;
+        }
+    }
+};
+
 // Checks if two NamedNodeMaps (attribute lists) are equal
 const areNamedNodeMapsEqual = function(currentNodeMap, newNodeMap) {
     if (!currentNodeMap || !newNodeMap) {
@@ -472,4 +486,13 @@ const areNamedNodeMapsEqual = function(currentNodeMap, newNodeMap) {
     }
 
     return true;
+};
+
+const getPasswordFieldFromForm = function(combination) {
+    if (!combination) {
+        return undefined;
+    }
+
+    const formInputs = kpxcObserverHelper.getInputs(combination.form);
+    return formInputs?.find((formInput) => formInput?.getLowerCaseAttribute('type') === 'password');
 };
