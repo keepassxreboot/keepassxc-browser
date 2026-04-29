@@ -7,8 +7,12 @@ const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests
 const enablePasskeys = async function() {
     const passkeysLogDebug = function(message, extra) {
-        if (kpxcPasskeysUtils.debugLogging && typeof debugLogMessage === 'function') {
-            debugLogMessage(message, extra);
+        if (kpxcPasskeysUtils.debugLogging) {
+            if (typeof debugLogMessage === 'function') {
+                debugLogMessage(message, extra);
+            } else {
+                console.debug(message, extra);
+            }
         }
     };
 
