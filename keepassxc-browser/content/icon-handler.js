@@ -54,10 +54,10 @@ kpxcIcons.addIconsFromForm = async function(form) {
                 }
             }
 
-            if (c.username && !c.username.readOnly) {
+            if (c.username && !c.username.readOnly && kpxcFields.isVisible(c.username)) {
                 kpxcIcons.addIcon(c.username, kpxcIcons.iconTypes.DEFAULT);
-            } else if (c.password && (!c.username || (c.username && c.username.readOnly))) {
-                // Single password field
+            } else if (c.password && (!c.username || c.username.readOnly || !kpxcFields.isVisible(c.username))) {
+                // Single password field, or username field is hidden (e.g. two-step login)
                 kpxcIcons.addIcon(c.password, kpxcIcons.iconTypes.DEFAULT);
             }
         }
