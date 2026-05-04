@@ -8,7 +8,11 @@ const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 const enablePasskeys = async function() {
     const passkeysLogDebug = function(message, extra) {
         if (kpxcPasskeysUtils.debugLogging) {
-            debugLogMessage(message, extra);
+            if (typeof debugLogMessage === 'function') {
+                debugLogMessage(message, extra);
+            } else {
+                console.debug(message, extra);
+            }
         }
     };
 
