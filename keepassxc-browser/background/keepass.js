@@ -560,7 +560,7 @@ keepass.createNewGroup = async function(tab, args = []) {
 
 keepass.getTotp = async function(tab, args = []) {
     const [ uuid, oldTotp ] = args;
-    if (!keepass.featuresList.newTotpSupported) {
+    if (!keepass.featuresList.newTotp) {
         return oldTotp;
     }
 
