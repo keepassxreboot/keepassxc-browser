@@ -336,13 +336,15 @@ keepassProtocol.passkeysGet = async function(tab, args = []) {
 
         const kpAction = kpActions.PASSKEYS_GET;
         const nonce = protocolClient.getNonce();
-        const publicKey = args[0];
-        const origin = args[1];
+        const [ publicKey, origin ] = args;
+        const passkeyPublicKey = JSON.parse(JSON.stringify(publicKey));
+        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rp?.id);
 
         const messageData = {
             action: kpAction,
-            publicKey: JSON.parse(JSON.stringify(publicKey)),
+            publicKey: passkeyPublicKey,
             origin: origin,
+            relatedOrigins: relatedOrigins,
             keys: keepass.getCryptoKeys()
         };
 
@@ -370,11 +372,14 @@ keepassProtocol.passkeysRegister = async function(tab, args = []) {
         const kpAction = kpActions.PASSKEYS_REGISTER;
         const nonce = protocolClient.getNonce();
         const [ publicKey, origin ] = args;
+        const passkeyPublicKey = JSON.parse(JSON.stringify(publicKey));
+        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rp?.id);
 
         const messageData = {
             action: kpAction,
-            publicKey: JSON.parse(JSON.stringify(publicKey)),
+            publicKey: passkeyPublicKey,
             origin: origin,
+            relatedOrigins: relatedOrigins,
             groupName: page?.settings?.defaultPasskeyGroup,
             keys: keepass.getCryptoKeys()
         };
