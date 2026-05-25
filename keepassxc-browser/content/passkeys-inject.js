@@ -73,10 +73,15 @@ const enablePasskeys = async function() {
      */
     const isAllowedByPolicy = function (action) {
         // https://www.w3.org/TR/webauthn-2/#sctn-permissions-policy
+        // https://www.w3.org/TR/webauthn-2/#sctn-iframe-guidance
+        const feature = `publickey-credentials-${action}`;
+
+        // https://www.w3.org/TR/permissions-policy/#the-policy-object
         const policy = document.featurePolicy || document.permissionsPolicy;
-        if (policy) {
+
+        if (policy?.features().includes(feature)) {
             passkeysLogDebug('Checking Permissions Policy');
-            return policy.allowsFeature(`publickey-credentials-${action}`);
+            return policy.allowsFeature(feature);
         }
 
         // fallback to sameOriginWithAncestors
