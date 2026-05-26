@@ -75,9 +75,10 @@ page.initSettings = async function() {
         const item = await browser.storage.local.get({ 'settings': {} });
 
         // Load managed settings if found
-        if (page.isFirefox && typeof(browser.storage.managed) === 'object') {
+        const managedStorage = page.isFirefox ? browser.storage.managed : chrome.storage.managed;
+        if (!page.isSafari && typeof managedStorage === 'object') {
             try {
-                const managedSettings = await browser.storage.managed.get('settings');
+                const managedSettings = await managedStorage.get('settings');
                 if (managedSettings?.settings) {
                     debugLogMessage('Managed settings found.');
                     item.settings = managedSettings.settings;
@@ -85,15 +86,6 @@ page.initSettings = async function() {
             } catch (err) {
                 debugLogMessage('page.initSettings: ' + err);
             }
-        } else if (!page.isSafari && typeof chrome.storage.managed === 'object') {
-            chrome.storage.managed.get('settings').then((managedSettings) => {
-                if (managedSettings?.settings) {
-                    debugLogMessage('Managed settings found.');
-                    item.settings = managedSettings.settings;
-                }
-            }).catch((err) => {
-                debugLogMessage('page.initSettings: ' + err);
-            });
         }
 
         page.settings = item.settings;
