@@ -494,5 +494,7 @@ const getPasswordFieldFromForm = function(combination) {
     }
 
     const formInputs = kpxcObserverHelper.getInputs(combination.form);
-    return formInputs?.find((formInput) => formInput?.getLowerCaseAttribute('type') === 'password');
+    return formInputs?.find(
+        formInput => formInput?.getLowerCaseAttribute('type') === 'password' && !formInput?.readOnly
+    );
 };
