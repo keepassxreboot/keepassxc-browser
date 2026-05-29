@@ -1,6 +1,6 @@
 {
     "extensionDescription": {
-        "message": "Integracja KeePassXC z nowoczesnymi przeglądarkami internetowymi",
+        "message": "Integracja KeePassXC z nowoczesnymi przeglądarkami internetowymi",
         "description": "Name of the extension."
     },
     "addSitePreferenceButtonTitle": {
@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Dane uwierzytelniające są wyłączone.",
-        "description": "Credential is excluded."
+        "message": "Klucz dostępu nie został zarejestrowany z powodu istniejących danych uwierzytelniających. Usuń istniejące dane uwierzytelniające, aby kontynuować.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Żądanie kluczy dostępu zostało anulowane.",

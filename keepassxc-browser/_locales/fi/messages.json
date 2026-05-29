@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Tietue on lisätty poikkeuksiin.",
-        "description": "Credential is excluded."
+        "message": "Pääsyavainta ei rekisteröity, koska se on jo olemassa. Poista vanha avain jatkaaksesi.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Pääsyavainpyyntö on peruttu.",

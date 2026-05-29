@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Referentie is uitgesloten.",
-        "description": "Credential is excluded."
+        "message": "Passkey niet geregistreerd vanwege een bestaande inloggegevens. Verwijder de bestaande inloggegevens om door te gaan.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Passkey-verzoek geannuleerd.",

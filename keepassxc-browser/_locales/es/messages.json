@@ -16,7 +16,7 @@
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
-        "message": "Conectar la base de datos actual activa a KeePassXC-Browser.",
+        "message": "Conectar la base de datos activa actual a KeePassXC-Browser.",
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
@@ -28,7 +28,7 @@
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "Reconectar la base de datos actual activa a KeePassXC-Browser.",
+        "message": "Re‑conectar la base de datos activa actual a KeePassXC-Browser.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
@@ -36,7 +36,7 @@
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
-        "message": "Recarga la extisión y reconecta a KeePassXC.",
+        "message": "Recarga la extensión y re‑conecta a KeePassXC.",
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
@@ -44,7 +44,7 @@
         "description": "Remove button title on Connected Databases tab."
     },
     "removeCustomLoginFieldsButtonTitle": {
-        "message": "Elimina los Campos de Registro Personalizados para esta URL.",
+        "message": "Elimina los Campos de Registro Personalizado para esta URL.",
         "description": "Remove button title on Custom Login Fields tab."
     },
     "removeSitePreferencesButtonTitle": {
@@ -56,7 +56,7 @@
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
-        "message": "Añade la Detección de Solo-Usuario a la página actual.",
+        "message": "Añade la Detección de solo-usuario a la página actual.",
         "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -108,7 +108,7 @@
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "Llave pública del cliente no recibida.",
+        "message": "Clave pública del cliente no recibida.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
@@ -132,7 +132,7 @@
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
-        "message": "Intercambio de llave no fue correcto.",
+        "message": "Intercambio de clave no fue correcto.",
         "description": "Key exchange was not successful."
     },
     "errorMessageEncryptionKey": {
@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Se excluye la credencial.",
-        "description": "Credential is excluded."
+        "message": "Llave de acceso no registrada debido a credencial existente. Retire la credencial existente para continuar.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Solicitud de claves de acceso cancelada.",
@@ -315,7 +315,7 @@
         "description": "A text shown when custom credentials fields are already set for the page."
     },
     "defineClearData": {
-        "message": "Limpiar datos guardados",
+        "message": "Vacía datos guardados",
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
@@ -355,7 +355,7 @@
         "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
-        "message": "Elija un campo de inicio de sesión personalizado",
+        "message": "Elija un campo personalizado de inicio de sesión",
         "description": "Help text for Custom Login Field banner."
     },
     "username": {
@@ -407,7 +407,7 @@
         "description": "If a credential is expired, this is appended to the title label."
     },
     "credentialsRetrieveButton": {
-        "message": "Retrieve credentials",
+        "message": "Obtención de credenciales",
         "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
@@ -1059,7 +1059,7 @@
         "description": "KeePassXC version requirement text."
     },
     "optionsMinimumKeePassXCVersionRequired": {
-        "message": "The extension requires KeePassXC version: $1. Earlier versions can cause unwanted behavior.",
+        "message": "La extensión requiere la versión de KeePassXC: $1. Las versiones anteriores pueden causar comportamiento indeseable.",
         "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {

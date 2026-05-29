@@ -1,3 +1,15 @@
+1.10.2 (2026-05-29)
+=========================
+- Fix wrapping publicKey to ArrayBuffer with passkeys [#2940]
+- Fix "Credential is excluded" error message (thanks goekce) [#2941]
+- Fix input field detection when label contains overlaying elements (thanks tiboroche) [#2948]
+- Fix sending context menu messages to current frame only [#2951]
+- Fix filling credentials with readonly username field [#2954]
+- Fix passkeys debug logging [#2959]
+- Fix use of old TOTP (thanks jknockel) [#2973]
+- Fix managed settings not applied on Chromium (thanks RGBCube) [#2969]
+- Refactor tab handling [#2944]
+
 1.10.1 (2026-04-03)
 =========================
 - Fix regression when returning Custom Login Fields [#2924]

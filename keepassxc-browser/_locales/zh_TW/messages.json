@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "憑證被排除。",
-        "description": "Credential is excluded."
+        "message": "未註冊通行密鑰，因為憑證已存在。移除既有的憑證以繼續。",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "通行密鑰請求被取消。",
