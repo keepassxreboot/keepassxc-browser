@@ -163,8 +163,9 @@ kpxcBanner.create = async function(credentials = {}) {
     this.shadowRoot.append(banner);
     kpxcBanner.wrapper = wrapper;
 
-    if (window.self === window.top && !kpxcBanner.created) {
-        window.parent.document.body.appendChild(wrapper);
+    // Always create the banner to the top document. Useful if we are inside an iframe.
+    if (!kpxcBanner.created) {
+        window.top.document.body.appendChild(wrapper);
         kpxcUI.observeWrapper(wrapper);
         kpxcBanner.created = true;
     }
