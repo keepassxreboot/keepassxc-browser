@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Kimlik doğrulama bilgisi katılmayacak.",
-        "description": "Credential is excluded."
+        "message": "Geçiş anahtarı, bir kimlik doğrulama bilgisi zaten var olduğundan kaydedilemedi. İlerlemek için var olan kimlik doğrulama bilgisini silin. ",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Geçiş anahtarları isteği iptal edildi.",

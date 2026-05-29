@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "L’identifiant est exclus.",
-        "description": "Credential is excluded."
+        "message": "La clé d’accès n’a pas été enregistrée, car un identifiant existe déjà. Supprimez l’identifiant existant afin de poursuivre.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "La demande de clé d’accès a été annulée.",

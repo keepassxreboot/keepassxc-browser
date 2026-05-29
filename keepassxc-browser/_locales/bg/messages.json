@@ -184,11 +184,11 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Данните за удостоверяване са изключени.",
-        "description": "Credential is excluded."
+        "message": "Ключът за достъп не е регистриран поради съществуваща регистрация. За да продължите я премахнете.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Заявката за Passkeys е отказана.",
+        "message": "Заявката за ключ за достъп е отказана.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -224,7 +224,7 @@
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
-        "message": "Неочаквана грешка на Passkeys.",
+        "message": "Неочаквана грешка на ключ за достъп.",
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
@@ -763,7 +763,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
-        "message": "Група по подразбиране при добавяне на Passkeys:",
+        "message": "Група по подразбиране при добавяне на ключ за достъп:",
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
@@ -1179,7 +1179,7 @@
         "description": "Site Preferences option selection."
     },
     "optionsSelectionPasskeys": {
-        "message": "Изключване на Passkeys",
+        "message": "Изключване на ключове за достъп",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
@@ -1399,11 +1399,11 @@
         "description": "Extension title in settings page"
     },
     "optionsPasskeysTitle": {
-        "message": "Passkeys",
+        "message": "Ключове за достъп",
         "description": "Passkeys settings title in settings page."
     },
     "optionsPasskeysEnable": {
-        "message": "Включване на Passkeys",
+        "message": "Включване на ключове за достъп",
         "description": "Enabled passkeys option text."
     },
     "optionsPasskeysEnableHelpText": {
@@ -1411,11 +1411,11 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Резервен вариант на Passkeys",
+        "message": "Резервен вариант на ключ за достъп",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Когато е отметнато, грешна или отказана заявка към KeePassXC ще задейства вградената в четеца заявка за Passkeys. Ако не е отметнато, връзка към KeePassXC е задължителна и отказаната заявка ще води до грешка. По подразбиране: отметнато.",
+        "message": "Когато е отметнато, грешна или отказана заявка към KeePassXC ще задейства вградената в четеца заявка за ключ за достъп. Ако не е отметнато, връзка към KeePassXC е задължителна и отказаната заявка ще води до грешка. По подразбиране: отметнато.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
