@@ -267,9 +267,16 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     // Use the first text field in the form if only username input is missing
-    const usernameValue = await kpxcForm.getUsernameValue(!usernameField && passwordField
+    let usernameValue = await kpxcForm.getUsernameValue(!usernameField && passwordField
         ? form?.querySelector('input[type=text]')
         : usernameField);
+
+    // If the form username differs (input has removed etc.) use the username stored in the submitted object
+    const creds = await sendMessage('page_get_submitted');
+    if (creds?.username && creds.username !== usernameValue) {
+        usernameValue = creds.username;
+    }
+
     await kpxcForm.activateCredentialBanner(usernameValue, passwordInputs, passwordField);
 };
 
