@@ -456,7 +456,7 @@ keepassClient.connectToWebSocket = async function() {
                 keepass.isConnected = true;
                 resolve();
             });
-        } catch (e) {
+        } catch (_e) {
             keepassClient.webSocket = null;
             onDisconnected();
         }
