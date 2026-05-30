@@ -45,7 +45,7 @@ tabs.createTabEntry = function(tabId) {
         return;
     }
 
-    tabs.tabList.set(tabId,TAB_OBJECT);
+    tabs.tabList.set(tabId, structuredClone(TAB_OBJECT));
     page.clearSubmittedCredentials();
     page.setFillAttributeContextMenuItemVisible(false);
 };
