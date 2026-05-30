@@ -1003,5 +1003,6 @@ window.addEventListener('scroll', function() {
         }, 200);
     } catch (err) {
         console.log('Error loading options page: ' + err);
+        $('#main-content').hide();
     }
 })();
