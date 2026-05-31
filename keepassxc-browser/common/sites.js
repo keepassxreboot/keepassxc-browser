@@ -98,7 +98,7 @@ kpxcSites.exceptionFound = function(identifier, field) {
     } else if (document.location.origin === 'https://wordpress.com' && identifier?.value === 'login__form-password') {
         return true;
     } else if (document.location.origin === 'https://id.atlassian.com' &&
-                Array.isArray(identifier) && identifier?.contains('password-field')) {
+        typeof identifier === 'object' && identifier?.value && identifier?.contains('password-field')) {
         return true;
     } else if (document.location.origin === 'https://app.fastmail.com'
         && identifier?.contains('u-space-y-5') && field?.id === 'v25') {

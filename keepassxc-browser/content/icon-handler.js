@@ -103,7 +103,7 @@ kpxcIcons.deleteAllHiddenIcons = function() {
 kpxcIcons.deleteIcons = function(iconList) {
     const deletedIcons = [];
     for (const icon of iconList) {
-        if (icon.inputField && !kpxcFields.isVisible(icon.inputField)) {
+        if (icon.inputField && (!kpxcFields.isVisible(icon.inputField) || icon.inputField?.disabled)) {
             const index = iconList.indexOf(icon);
             icon.removeIcon();
             iconList.splice(index, 1);
