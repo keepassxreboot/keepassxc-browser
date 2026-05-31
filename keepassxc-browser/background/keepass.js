@@ -9,6 +9,7 @@ keepass.featuresList = {
     passkeys: false,
     passkeysDefaultGroup: false,
     requiredKeePassXCVersionFound: false,
+    webSocket: false
 };
 keepass.cacheTimeout = 30 * 1000; // Milliseconds
 keepass.clientID = '';
@@ -822,7 +823,12 @@ keepass.disableAutomaticReconnect = function() {
 };
 
 keepass.reconnect = async function(tab = null, connectionTimeout = 1500) {
-    keepassClient.connectToNative();
+    if (page?.settings?.connectionMethod === ConnectionMethod.WEBSOCKET) {
+        await keepassClient.connectToWebSocket();
+    } else {
+        keepassClient.connectToNative();
+    }
+    
     keepass.generateNewKeyPair();
     const keyChangeResult = await keepass
         .changePublicKeys(tab, !!connectionTimeout, connectionTimeout)
@@ -1016,6 +1022,7 @@ keepass.updateFeaturesList = function (currentVersion) {
         passkeys: versionResults['2.7.7'],
         passkeysDefaultGroup: versionResults['2.7.10'],
         requiredKeePassXCVersionFound: versionResults[keepass.requiredKeePassXC],
+        webSocket: false // TODO: Enable when released in KeePassXC
     };
 };
 

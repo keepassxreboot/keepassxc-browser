@@ -67,7 +67,7 @@
         </nav>
 
         <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 px-4 mt-5 mt-md-0">
-          <div class="content">
+          <div class="content" id="main-content">
 
             <!-- General Settings -->
             <div class="tab" id="tab-general-settings">
@@ -535,6 +535,18 @@
                       <input class="form-control form-control-sm" type="number" id="clearCredentialTimeout" min="0" max="3600" required>
                     </div>
                     <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
+                  </div>
+
+                  <!-- Connection method -->
+                  <div class="form-group col-sm-3 pb-2 py-2" id="connectionMethodOptions">
+                    <label for="connectionMethod" class="form-label" data-i18n="optionsConnectionMethod"></label>
+                    <select class="form-select form-select-sm col-md-3 col-lg-2" id="connectionMethod" data-i18n="[title]optionsConnectionMethodSelection">
+                      <option value="nativemessaging" data-i18n="optionsConnectionMethodNativeMessaging"></option>
+                      <option value="websocket" data-i18n="optionsConnectionMethodWebSocket"></option>
+                    </select>
+                  </div>
+                  <div>
+                    <span class="form-text text-muted" data-i18n="optionsConnectionMethodHelpText"></span>
                   </div>
 
                   <!-- Debug logging -->
