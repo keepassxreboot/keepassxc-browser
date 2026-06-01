@@ -874,6 +874,22 @@
         "message": "允許填入 HTTP 基本認證憑證",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "連接方式",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "如果瀏覽器的原生訊息傳遞被阻擋，您可以切換到直接 WebSocket 連接。必須從 KeePassXC 端啟用該功能才能工作。需要重啟瀏覽器。",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "原生訊息傳遞",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "偵錯日誌",
         "description": "Debug logging checkbox text."

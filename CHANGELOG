@@ -1,3 +1,11 @@
+1.10.3 (2026-06-01)
+=========================
+- Add support for WebSocket connection method (disabled until KeePassXC support) [#2576]
+- Fix creating Credential Banner [#2984]
+- Fix getting submitted username for Credential Banner [#2985]
+- Fix cloning tab objects [#2986]
+- Fix Atlassian login page [#2989]
+
 1.10.2 (2026-05-29)
 =========================
 - Fix wrapping publicKey to ArrayBuffer with passkeys [#2940]

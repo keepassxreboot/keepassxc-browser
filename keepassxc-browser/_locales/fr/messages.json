@@ -874,6 +874,22 @@
         "message": "Autoriser la saisie des identifiants HTTP Auth de base",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Méthode de connexion",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "Si la messagerie native est bloquée dans votre navigateur, vous pouvez passer à une connexion WebSocket directe. Pour que cela fonctionne, elle doit être activée dans KeePassXC. Un redémarrage du navigateur est nécessaire.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Messagerie native",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Journalisation de débogage",
         "description": "Debug logging checkbox text."
