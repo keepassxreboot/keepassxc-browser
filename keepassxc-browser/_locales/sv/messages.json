@@ -874,6 +874,22 @@
         "message": "Tillåt ifyllning av HTTP-autentiseringsuppgifter",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Anslutningsmetod",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "Om inbyggd meddelandefunktion är blockerad i din webbläsare kan du växla till en direkt WebSocket-anslutning. Funktionen måste aktiveras från KeePassXC-sidan för att fungera. Webbläsaren måste startas om.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Inbyggd meddelandefunktion",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Felsökningslogg",
         "description": "Debug logging checkbox text."

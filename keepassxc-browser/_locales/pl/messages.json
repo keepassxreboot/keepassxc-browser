@@ -874,6 +874,22 @@
         "message": "Zezwalaj na wypełnianie danych uwierzytelniających podstawowego uwierzytelniania HTTP",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Metoda połączenia",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "Jeśli komunikacja natywana jest zablokowana w przeglądarce, możesz przełączyć się na bezpośrednie połączenie WebSocket. Aby funkcja działała, musi być włączona po stronie KeePassXC. Wymagane jest ponowne uruchomienie przeglądarki.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Komunikacja natywna",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Rejestrowanie debugowania",
         "description": "Debug logging checkbox text."
