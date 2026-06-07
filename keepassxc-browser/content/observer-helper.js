@@ -20,14 +20,29 @@ kpxcObserverHelper.ignoredNodeNames = [
     'HTML',
     'IMG',
     'LINK',
+    'META',
     'SCRIPT',
+    'TIME',
     'VIDEO',
 ];
 
 kpxcObserverHelper.ignoredPartialNodeNames = [
+    'AC-PUBLISH',
+    'AC-TRACK',
+    'COMMENT-BODY-HEADER',
+    'CUJ-TRACKER',
+    'FACEPLATE-EXPANDABLE',
+    'FACEPLATE-LOADER',
+    'FACEPLATE-PARTIAL',
+    'FACEPLATE-TRACKER',
+    'REDDIT-CHAT',
     'REDDIT-PDP',
     'RENDER-TEMPLATE',
     'SHREDDIT',
+];
+
+kpxcObserverHelper.ignoredClassNames = [
+    'faceplate-internal-input'
 ];
 
 kpxcObserverHelper.ignoredNodeTypes = [
@@ -165,6 +180,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     // Basic check for input element
     const inputAllowed = (elem) => !elem.disabled
         && elem.getLowerCaseAttribute('type') !== 'hidden'
+        && !hasIgnoredClassNames(elem)
         && !kpxcObserverHelper.alreadyIdentified(elem);
 
     // Ignores target element if it's not an element node
@@ -387,7 +403,8 @@ const traverseShadowDOM = function(target, inputFields) {
     while (currentNode) {
         if (!kpxcObserverHelper.ignoredNode(currentNode)
             && matchesWithNodeName(currentNode, 'input')
-            && !kpxcObserverHelper.alreadyIdentified(currentNode)) {
+            && !kpxcObserverHelper.alreadyIdentified(currentNode)
+            && !hasIgnoredClassNames(currentNode)) {
             inputFields.push(currentNode);
         }
 
@@ -406,3 +423,5 @@ const traverseShadowDOM = function(target, inputFields) {
         currentNode = treeWalker?.nextNode();
     }
 };
+
+const hasIgnoredClassNames = (elem) => kpxcObserverHelper.ignoredClassNames.some(e => elem.classList?.contains(e));
