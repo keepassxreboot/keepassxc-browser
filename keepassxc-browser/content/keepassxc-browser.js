@@ -116,27 +116,25 @@ kpxc.detectDatabaseChange = async function(response) {
     kpxc.clearAllFromPage();
     kpxcIcons.switchIcons();
 
-    if (document.visibilityState !== 'hidden') {
-        if (response.hash.new !== '') {
-            _called.retrieveCredentials = false;
-            const settings = await sendMessage('load_settings');
-            kpxc.settings = settings;
-            kpxc.databaseState = DatabaseState.UNLOCKED;
+    if (response.hash.new !== '') {
+        _called.retrieveCredentials = false;
+        const settings = await sendMessage('load_settings');
+        kpxc.settings = settings;
+        kpxc.databaseState = DatabaseState.UNLOCKED;
 
+        if (document.visibilityState !== 'hidden') {
             await kpxc.initCredentialFields();
             kpxcIcons.switchIcons();
 
-            // If user has requested a manual fill through context menu the actual credential filling
-            // is handled here when the opened database has been regognized. It's not a pretty hack.
             const manualFill = await sendMessage('page_get_manual_fill');
             if (manualFill !== ManualFill.NONE && kpxc.combinations.length > 0) {
                 await kpxcFill.fillInFromActiveElement(manualFill === ManualFill.PASSWORD);
                 await sendMessage('page_set_manual_fill', ManualFill.NONE);
             }
-        } else if (!response.connected) {
-            kpxc.databaseState = DatabaseState.DISCONNECTED;
-            kpxcIcons.switchIcons();
         }
+    } else if (!response.connected) {
+        kpxc.databaseState = DatabaseState.DISCONNECTED;
+        kpxcIcons.switchIcons();
     }
 };
 
