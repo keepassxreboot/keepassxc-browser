@@ -123,22 +123,27 @@ const iconClicked = async function(field, icon) {
         return;
     }
 
-    // Try to reconnect if KeePassXC for the case we're not currently connected
     const connected = await kpxc.reconnect();
     if (!connected) {
         return;
     }
 
-    if (kpxc.databaseState !== DatabaseState.UNLOCKED) {
-        // Triggers database unlock
-        await sendMessage('page_set_manual_fill', ManualFill.BOTH);
-        await sendMessage('get_database_hash', [ false, true ]); // Set triggerUnlock to true
-        field.focus();
+    await kpxc.updateDatabaseState();
+
+    if (kpxc.databaseState === DatabaseState.UNLOCKED) {
+        kpxcIcons.switchIcons();
+
+        if (kpxc.credentials.length === 0) {
+            await kpxc.initCredentialFields();
+        }
+
+        fillCredentials(field);
+        return;
     }
 
-    if (icon.className.includes('unlock')) {
-        fillCredentials(field);
-    }
+    await sendMessage('page_set_manual_fill', ManualFill.BOTH);
+    await sendMessage('get_database_hash', [ false, true ]);
+    field.focus();
 };
 
 const getIconClassName = function(state = DatabaseState.UNLOCKED) {
