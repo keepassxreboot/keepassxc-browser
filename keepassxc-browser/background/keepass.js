@@ -989,18 +989,20 @@ keepass.updateDatabase = async function() {
 
 keepass.updateDatabaseHashToContent = async function() {
     try {
-        const tab = await getCurrentTab();
-        if (tab?.id) {
-            // Send message to content script
-            browser.tabs.sendMessage(tab.id, {
-                action: 'check_database_hash',
-                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
-                connected: keepass.isKeePassXCAvailable
-            }).catch((err) => {
-                logError('No content script available for this tab.');
-            });
-            keepass.previousDatabaseHash = keepass.databaseHash;
+        const message = {
+            action: 'check_database_hash',
+            hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
+            connected: keepass.isKeePassXCAvailable
+        };
+
+        const allTabs = await browser.tabs.query({});
+        for (const tab of allTabs) {
+            if (tab?.id) {
+                browser.tabs.sendMessage(tab.id, message).catch(() => {});
+            }
         }
+
+        keepass.previousDatabaseHash = keepass.databaseHash;
     } catch (err) {
         logError(`updateDatabaseHashToContent failed: ${err}`);
     }
