@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Background Script Mock Tests</title>
+    <meta charset="UTF-8">
+    <script src="lib/sinon.js"></script>
+    <script src="mocks/browser-api-mock.js"></script>
+    <script>
+      window.browser = createBrowserMock();
+      window.chrome = { runtime: { id: 'mock-extension-id' } };
+    </script>
+    <script src="../common/browser-polyfill.min.js"></script>
+    <script defer src="../common/global.js"></script>
+    <script defer src="../common/sites.js"></script>
+    <script defer src="../background/nacl.min.js"></script>
+    <script defer src="../background/nacl-util.min.js"></script>
+    <script defer src="../background/client.js"></script>
+    <script defer src="../background/keepass.js"></script>
+    <script defer src="../background/httpauth.js"></script>
+    <script defer src="../background/offscreen.js"></script>
+    <script defer src="../background/browserAction.js"></script>
+    <script defer src="../background/tabs.js"></script>
+    <script defer src="../background/page.js"></script>
+    <script defer src="../background/event.js"></script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Content Script Mock Tests</title>
+    <meta charset="UTF-8">
+    <script src="lib/sinon.js"></script>
+    <script src="mocks/browser-api-mock.js"></script>
+    <script>
+      window.browser = createBrowserMock();
+      window.chrome = { runtime: { id: 'mock-extension-id' } };
+    </script>
+    <script src="../common/browser-polyfill.min.js"></script>
+    <script defer src="../common/global.js"></script>
+    <script defer src="../common/sites.js"></script>
+    <script defer src="../content/ui.js"></script>
+    <script defer src="../content/banner.js"></script>
+    <script defer src="../content/autocomplete.js"></script>
+    <script defer src="../content/credential-autocomplete.js"></script>
+    <script defer src="../content/custom-fields-banner.js"></script>
+    <script defer src="../content/fields.js"></script>
+    <script defer src="../content/fill.js"></script>
+    <script defer src="../content/form.js"></script>
+    <script defer src="../content/icon.js"></script>
+    <script defer src="../content/icon-handler.js"></script>
+    <script defer src="../content/keepassxc-browser.js"></script>
+    <script defer src="../content/observer-helper.js"></script>
+    <script defer src="../content/pwgen.js"></script>
+    <script defer src="../content/totp-autocomplete.js"></script>
+    <script defer src="../content/totp-field.js"></script>
+    <script defer src="../content/username-field.js"></script>
+  </head>
+  <body>
+    <div id="test-container" style="display: none;">
+      <input type="text" id="test-username" name="username" placeholder="username">
+      <input type="password" id="test-password" name="password" placeholder="password">
+    </div>
+  </body>
+</html>
