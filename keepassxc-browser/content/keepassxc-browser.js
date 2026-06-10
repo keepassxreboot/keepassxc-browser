@@ -789,33 +789,39 @@ kpxc.updateDatabaseState = async function() {
 
 // Updates the TOTP Autocomplete Menu
 kpxc.updateTOTPList = async function() {
-    let uuid = await sendMessage('page_get_login_id');
-    if (uuid === undefined || kpxc.credentials.length === 0) {
-        // Credential haven't been selected
-        logDebug('Error: No credentials selected for TOTP.');
+    // Nothing was retrieved for this page at all -> genuinely nothing to offer.
+    if (kpxc.credentials.length === 0) {
+        logDebug('Error: No credentials available for TOTP.');
         return;
     }
 
-    // Use the first credential available if not set
-    if (uuid === '') {
-        uuid = kpxc.credentials[0].uuid;
+    const uuid = await sendMessage('page_get_login_id');
+
+    // A specific entry was used to log in on this page (via KeePassXC): keep the original
+    // behaviour and narrow to entries sharing its username (covers the "same account,
+    // TOTP stored in a separate database" use case, and auto-fills a single match).
+    if (uuid !== undefined && uuid !== '') {
+        const credentials = kpxc.credentials.find(c => c.uuid === uuid);
+        if (credentials) {
+            const username = credentials.login;
+            const password = credentials.password;
+
+            // If no username is set, compare with a password
+            const credentialList = kpxc.credentials.filter(c => kpxc.entryHasTotp(c)
+                && (c.login === username || (!username && c.password === password)));
+
+            // Filter TOTP Autocomplete Menu with matching 2FA credentials
+            kpxcTOTPAutocomplete.elements = kpxcUserAutocomplete.elements.filter(e => credentialList.some(u => u.uuid === e.uuid));
+            return credentialList;
+        }
     }
 
-    const credentials = kpxc.credentials.find(c => c.uuid === uuid);
-    if (credentials) {
-        const username = credentials.login;
-        const password = credentials.password;
-
-        // If no username is set, compare with a password
-        const credentialList = kpxc.credentials.filter(c => kpxc.entryHasTotp(c)
-            && (c.login === username || (!username && c.password === password)));
-
-        // Filter TOTP Autocomplete Menu with matching 2FA credentials
-        kpxcTOTPAutocomplete.elements = kpxcUserAutocomplete.elements.filter(e => credentialList.some(u => u.uuid === e.uuid));
-        return credentialList;
-    }
-
-    return [];
+    // No login was pre-selected for this page (e.g. an SSO flow lands straight on the 2FA
+    // step). Instead of giving up with "No TOTP found", offer EVERY entry that matches
+    // this page and has a TOTP, so fillFromTOTP() shows the picker for more than one match.
+    const credentialList = kpxc.credentials.filter(c => kpxc.entryHasTotp(c));
+    kpxcTOTPAutocomplete.elements = kpxcUserAutocomplete.elements.filter(e => credentialList.some(u => u.uuid === e.uuid));
+    return credentialList;
 };
 
 // Enable certain settings based on predefined sites list
