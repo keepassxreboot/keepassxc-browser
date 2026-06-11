@@ -8,13 +8,14 @@ browserAction.show = async function(tab, popupData) {
     page.popupData = popupData;
 
     browserActionWrapper.setIcon({
-        path: await browserAction.generateIconName(popupData.iconType)
+        path: await browserAction.generateIconName(popupData.iconType),
+        tabId: tab.id
     });
 
     if (popupData.popup && tab?.id) {
         browserActionWrapper.setPopup({
-            tabId: tab.id,
-            popup: `popups/${popupData.popup}.html`
+            popup: `popups/${popupData.popup}.html`,
+            tabId: tab.id
         });
 
         let badgeText = '';
@@ -38,6 +39,11 @@ browserAction.showDefault = async function(tab) {
     const response = await keepass.isConfigured().catch((err) => {
         logError('Cannot show default popup: ' + err);
     });
+
+    // This should not be possible. Database cannot be open without a hash.
+    if (!keepass.isDatabaseClosed && !keepass.associated.hash) {
+        return;
+    }
 
     if (!response && !keepass.isKeePassXCAvailable) {
         popupData.iconType = 'cross';

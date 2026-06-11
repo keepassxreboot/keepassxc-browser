@@ -989,18 +989,25 @@ keepass.updateDatabase = async function() {
 
 keepass.updateDatabaseHashToContent = async function() {
     try {
-        const tab = await getCurrentTab();
-        if (tab?.id) {
-            // Send message to content script
-            browser.tabs.sendMessage(tab.id, {
-                action: 'check_database_hash',
-                hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
-                connected: keepass.isKeePassXCAvailable
-            }).catch((err) => {
-                logError('No content script available for this tab.');
-            });
-            keepass.previousDatabaseHash = keepass.databaseHash;
+        // Get all active tabs from all windows
+        const currentWindowTabs = await browser.tabs.query({ active: true, currentWindow: true, discarded: false });
+        const otherTabs = await browser.tabs.query({ active: true, currentWindow: false, discarded: false });
+        const allTabs = [ ...currentWindowTabs, ...otherTabs ];
+
+        for (const tab of allTabs) {
+            if (tab?.id) {
+                // Send message to content script
+                browser.tabs.sendMessage(tab.id, {
+                    action: 'check_database_hash',
+                    hash: { old: keepass.previousDatabaseHash, new: keepass.databaseHash },
+                    connected: keepass.isKeePassXCAvailable
+                }).catch((err) => {
+                    logError('No content script available for this tab.');
+                });
+            }
         }
+
+        keepass.previousDatabaseHash = keepass.databaseHash;
     } catch (err) {
         logError(`updateDatabaseHashToContent failed: ${err}`);
     }
