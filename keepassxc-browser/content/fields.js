@@ -329,7 +329,7 @@ kpxcFields.getIdFromXPath = function(target) {
     return xpath;
 };
 
-// Generate uniqe ID from properties (new method)
+// Generate unique ID from properties (new method)
 kpxcFields.getIdFromProperties = function(target) {
     if (target.name) {
         return `${target.nodeName} ${target.type} ${target.name} ${target.placeholder}`;
@@ -365,7 +365,7 @@ kpxcFields.getElementFromXPathId = function(xpath) {
 
 // Checks if inputs or combinations contain segmented TOTP fields
 kpxcFields.handleSegmentedTOTPFields = function(inputs, combinations) {
-    // Check for multiple segmented TOTP fields when there are no inputs, or combination contains the segemented fields
+    // Check for multiple segmented TOTP fields when there are no inputs, or combination contains the segmented fields
     const segmentedFields = combinations.filter(c => c.totp);
     if (combinations.length === 0
         || segmentedFields.length === DEFAULT_SEGMENTED_TOTP_FIELDS
@@ -575,7 +575,7 @@ kpxcFields.prepareId = function(id) {
 };
 
 /**
- * Returns the first parent element satifying the {@code predicate} mapped by {@code resultFn} or else {@code defaultVal}.
+ * Returns the first parent element satisfying the {@code predicate} mapped by {@code resultFn} or else {@code defaultVal}.
  * @param {HTMLElement} element     The start element (excluded, starting with the parents)
  * @param {function} predicate      Matcher for the element to find, type (HTMLElement) => boolean
  * @param {function} resultFn       Callback function of type (HTMLElement) => {*} called for the first matching element

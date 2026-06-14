@@ -393,7 +393,7 @@ kpxc.initCredentialFields = async function() {
     }
 };
 
-// Intializes the login lists for popup and Autocomplete Menu
+// Initializes the login lists for popup and Autocomplete Menu
 kpxc.initLoginPopup = function() {
     if (kpxc.credentials.length === 0) {
         return;
@@ -612,7 +612,7 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
     return true;
 };
 
-// Save credentials triggered fron the context menu
+// Save credentials triggered from the context menu
 kpxc.rememberCredentialsFromContextMenu = async function() {
     if (kpxc.databaseState === DatabaseState.LOCKED) {
         kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));
