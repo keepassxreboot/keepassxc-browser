@@ -694,7 +694,7 @@ keepass.migrateKeyRing = function() {
     return new Promise((resolve, reject) => {
         browser.storage.local.get('keyRing').then((item) => {
             const keyring = item.keyRing;
-            // Change dates to numbers, for compatibilty with Chromium based browsers
+            // Change dates to numbers, for compatibility with Chromium based browsers
             if (keyring) {
                 let num = 0;
                 for (const keyHash in keyring) {
