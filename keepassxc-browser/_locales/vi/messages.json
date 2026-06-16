@@ -184,7 +184,7 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Passkey không được chấp nhận do đã có thông tin đăng nhập khác. Vui lòng xóa thông tin đăng nhập hiện có để tiếp tục.",
+        "message": "Passkey chưa được đăng kí do có thông tin đăng nhập bị trùng. Vui lòng xoá thông tin đăng nhập hiện có để tiếp tục",
         "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
@@ -875,11 +875,11 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Cách kết nối",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Nếu native messaging bị chặn trong trình duyệt của bạn, bạn có thể chuyển qua kết nối WebSocket trực tiếp. Tính năng này bắt buộc phải bật từ KeePassXC để hoạt động. Khởi động lại trình duyệt là bắt buộc.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
