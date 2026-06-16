@@ -184,7 +184,7 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Passkey not registered due to an existing credential. Remove the existing credential to continue.",
+        "message": "Passkey không được chấp nhận do đã có thông tin đăng nhập khác. Vui lòng xóa thông tin đăng nhập hiện có để tiếp tục.",
         "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
