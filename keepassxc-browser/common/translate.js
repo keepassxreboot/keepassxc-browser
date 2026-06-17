@@ -8,7 +8,7 @@ for (const item of items) {
         [ attr, key ] = trAttribute(key);
 
         const placeholder = item.getAttribute('data-i18n-placeholder');
-        const translation = placeholder ? browser.i18n.getMessage(key, placeholder) : browser.i18n.getMessage(key);
+        const translation = getTranslation(key, placeholder);
         if (attr) {
             item.setAttribute(attr, translation);
         } else if (item.hasAttribute('href')) {
@@ -31,4 +31,13 @@ function trAttribute(key) {
     }
 
     return [ attr, key ];
+}
+
+function getTranslation(key, placeholder) {
+    const translation = placeholder ? browser.i18n.getMessage(key, placeholder) : browser.i18n.getMessage(key);
+    if (placeholder && !translation.includes(placeholder)) {
+        return '(Error! Missing a placeholder in translation!) ' + placeholder;
+    }
+
+    return translation;
 }
