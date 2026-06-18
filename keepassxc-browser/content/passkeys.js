@@ -153,6 +153,8 @@
         Some browsers (Firefox, Safari) reject requests to original `navigator.credentials.create/get` if the page
         is out of focus (when the user selects a passkey in KeePassXC-desktop).
 
+        See <https://www.w3.org/TR/webauthn-2/#sctn-abortoperation:~:text=The%20visibility,aborted>
+
         `document.visibilityState` is not suitable: if the page is visible, but the focus is on another application
         (or DevTools), the request will be rejected.
         */
