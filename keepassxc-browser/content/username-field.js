@@ -79,7 +79,7 @@ UsernameFieldIcon.prototype.createIcon = function(field) {
             'kpxc-pwgen-field-id': field.getAttribute('data-kpxc-id'),
             'popover': 'manual'
         });
-    
+
     if (kpxcFields.popoverSupported) {
         icon.style.margin = 0;
     } else {
@@ -143,12 +143,12 @@ const iconClicked = async function(field, icon) {
 
 const getIconClassName = function(state = DatabaseState.UNLOCKED) {
     if (state === DatabaseState.LOCKED) {
-        return kpxc.isFirefox ? 'lock-moz' : 'lock';
+        return getIconClass('lock');
     } else if (state === DatabaseState.DISCONNECTED) {
-        return kpxc.isFirefox ? 'disconnected-moz' : 'disconnected';
+        return getIconClass('disconnected');
     }
 
-    return kpxc.isFirefox ? 'unlock-moz' : 'unlock';
+    return getIconClass('unlock');
 };
 
 const getIconText = function(state) {

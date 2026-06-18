@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "KeePassXC-Browser",
-    "version": "1.9.11",
+    "version": "1.10.3",
     "description": "__MSG_extensionDescription__",
     "author": "KeePassXC Team",
     "icons": {
@@ -41,6 +41,7 @@
             "background/httpauth.js",
             "background/offscreen.js",
             "background/browserAction.js",
+            "background/tabs.js",
             "background/page.js",
             "background/event.js",
             "background/init.js"
@@ -185,7 +186,7 @@
     "applications": {
         "gecko": {
             "id": "keepassxc-browser@keepassxc.org",
-            "strict_min_version": "96.0"
+            "strict_min_version": "100.0"
         }
     },
     "storage": {

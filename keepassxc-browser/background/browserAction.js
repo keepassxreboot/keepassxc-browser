@@ -18,10 +18,11 @@ browserAction.show = async function(tab, popupData) {
         });
 
         let badgeText = '';
+        const currentTab = tabs.getTabFromId(tab.id);
         if (popupData.popup === 'popup_login') {
-            badgeText = page.tabs[tab.id]?.loginList?.length;
+            badgeText = currentTab?.loginList.length;
         } else if (popupData.popup === 'popup_httpauth') {
-            badgeText = page.tabs[tab.id]?.loginList?.logins?.length;
+            badgeText = currentTab?.basicAuthLogins?.loginList?.length;
         }
 
         browserAction.setBadgeText(tab?.id, badgeText);
@@ -52,10 +53,11 @@ browserAction.showDefault = async function(tab) {
         return;
     }
 
-    if (page?.tabs[tab.id]?.loginList.length > 0) {
+    const currentTab = tabs.getTabFromId(tab?.id);
+    if (currentTab?.loginList.length > 0) {
         popupData.iconType = 'normal';
         popupData.popup = 'popup_login';
-        browserAction.setBadgeText(tab?.id, page.tabs[tab.id]?.loginList.length);
+        browserAction.setBadgeText(tab?.id, currentTab?.loginList.length);
     }
 
     await browserAction.show(tab, popupData);
@@ -83,7 +85,7 @@ browserAction.generateIconName = async function(iconType) {
             style = page.settings.colorTheme;
         }
     }
-    const filetype = page.isFirefox ? 'svg' : 'png';
+    const filetype = (page.isFirefox || page.isSafari) ? 'svg' : 'png';
     return `/icons/toolbar/${style}/${name}.${filetype}`;
 };
 

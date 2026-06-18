@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "凭据已被排除。",
-        "description": "Credential is excluded."
+        "message": "未注册通行密钥，因为凭据已存在。移除已有的凭据以继续。",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "通行密钥请求被取消。",
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "已过期",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "检索凭据",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "错误：无法找到可填写的字段。",
@@ -870,6 +874,22 @@
         "message": "允许填充 HTTP Basic 认证凭据",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "连接方式",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "如果浏览器中的原生消息传递被阻止，您可以切换到直接 WebSocket 连接。必须从 KeePassXC 端启用该功能才能工作。需要重启浏览器。",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "原生消息传递",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "调试日志",
         "description": "Debug logging checkbox text."
@@ -1053,6 +1073,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "需要 KeePassXC 版本：$1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "该扩展需要 KeePassXC 版本：$1。早期版本可能会导致意外行为。",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "默认值：$1",

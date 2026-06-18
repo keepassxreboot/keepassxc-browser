@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Referentie is uitgesloten.",
-        "description": "Credential is excluded."
+        "message": "Passkey niet geregistreerd vanwege een bestaande inloggegevens. Verwijder de bestaande inloggegevens om door te gaan.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Passkey-verzoek geannuleerd.",
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "Verlopen",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "Inloggegevens ophalen",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "Fout: geen invulvelden aangetroffen.",
@@ -870,6 +874,22 @@
         "message": "Invullen van HTTP Basic Auth-inloggegevens toestaan",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Verbindingsmethode",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "Als native messaging is geblokkeerd in uw browser, kunt u overschakelen naar een directe WebSocket-verbinding. Deze functie moet aan KeePassXC-kant zijn ingeschakeld om te werken. De browser moet opnieuw worden opgestart.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Native messaging",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Logboekregistratie voor foutopsporing",
         "description": "Debug logging checkbox text."
@@ -1053,6 +1073,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Vereiste KeePassXC-versie: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "De extensie vereist KeePassXC-versie: $1. Eerdere versies kunnen ongewenst gedrag veroorzaken.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Standaard: $1",

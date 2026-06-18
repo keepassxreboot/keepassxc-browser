@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "자격 증명이 제외되었습니다.",
-        "description": "Credential is excluded."
+        "message": "Passkey not registered due to an existing credential. Remove the existing credential to continue.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Passkey 요청이 취소되었습니다.",
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "만료됨",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "Retrieve credentials",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "오류:\n입력할 필드를 찾을 수 없습니다.",
@@ -870,6 +874,22 @@
         "message": "Allow filling HTTP Basic Auth credentials",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Connection method",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Native messaging",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Debug logging",
         "description": "Debug logging checkbox text."
@@ -1053,6 +1073,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "필요한 KeePassXC 버전: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "The extension requires KeePassXC version: $1. Earlier versions can cause unwanted behavior.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "기본값: $1",

@@ -56,6 +56,10 @@
           "title": "Extension color scheme. Default: system",
           "type": "string"
         },
+        "connectionMethod": {
+          "title": "Extension connection method. Default: nativemessaging",
+          "type": "string"
+        },
         "credentialSorting": {
           "title": "How to sort matching credentials. Default: sortByGroupAndTitle",
           "type": "string"

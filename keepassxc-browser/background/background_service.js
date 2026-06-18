@@ -12,6 +12,7 @@ try {
         'httpauth.js',
         'offscreen.js',
         'browserAction.js',
+        'tabs.js',
         'page.js',
         'event.js',
         'init.js'

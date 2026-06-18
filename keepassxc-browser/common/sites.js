@@ -71,7 +71,7 @@ kpxcSites.detectUsernameFromPage = function() {
  * @returns {boolean}           True if an Element has a match with the identifier and document location
  */
 kpxcSites.exceptionFound = function(identifier, field) {
-    if (!identifier || identifier.length === 0) {
+    if ((!identifier || identifier.length === 0) && !field) {
         return;
     }
 
@@ -80,7 +80,7 @@ kpxcSites.exceptionFound = function(identifier, field) {
         || (typeof identifier === 'object' && [ 'password', 'form-row', 'show-password' ].every(c => identifier.contains(c))))) {
         return true;
     } else if (document.location.origin.startsWith('https://signin.ebay.')
-               && (identifier === 'null' || identifier.value === 'null' || identifier === 'pass')) {
+               && (identifier === 'null' || identifier?.value === 'null' || identifier === 'pass')) {
         return true;
     } else if (document.location.origin.startsWith('https://www.fidelity.com')) {
         if (typeof identifier === 'string') {
@@ -98,13 +98,43 @@ kpxcSites.exceptionFound = function(identifier, field) {
     } else if (document.location.origin === 'https://wordpress.com' && identifier?.value === 'login__form-password') {
         return true;
     } else if (document.location.origin === 'https://id.atlassian.com' &&
-                Array.isArray(identifier) && identifier?.contains('password-field')) {
+        typeof identifier === 'object' && identifier?.value && identifier?.contains('password-field')) {
         return true;
     } else if (document.location.origin === 'https://app.fastmail.com'
         && identifier?.contains('u-space-y-5') && field?.id === 'v25') {
         return true;
     } else if (document.location.origin === 'https://login.dei.gr' &&
         identifier?.value?.includes('show-reveal-password')) {
+        return true;
+    } else if (document.location.origin === 'https://accounts.google.com' && field?.id === 'password') {
+        return true;
+    } else if (document.location.origin === 'https://www.epicgames.com'
+        && ((field?.style?.opacity === '1' && field?.style?.willChange === 'auto') || identifier === 'password')) {
+        return true;
+    } else if (document.location.origin === 'https://www.paypal.com' && field?.id === 'splitPassword') {
+        return true;
+    }
+
+    return false;
+};
+
+// Handles exceptions when returning or modifying existing combinations
+kpxcSites.combinationExceptionFound = function(existingCombination) {
+    if (!existingCombination) {
+        return false;
+    }
+
+    // Exception for Google. They replace the username input with password input using identical className.
+    // If detected, remove the username from the combination.
+    if (document.location.origin === 'https://accounts.google.com'
+        && existingCombination?.username?.className?.length > 0
+        && existingCombination?.password?.className?.length > 0
+        && existingCombination?.username?.className === existingCombination?.password?.className) {
+        return true;
+    }
+
+    if (document.location.origin === 'https://www.paypal.com'
+        && existingCombination.password?.className?.includes('pin-password')) {
         return true;
     }
 

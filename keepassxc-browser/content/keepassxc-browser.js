@@ -21,7 +21,6 @@ kpxc.databaseState = DatabaseState.DISCONNECTED;
 kpxc.detectedFields = 0;
 kpxc.improvedFieldDetectionEnabledForPage = false;
 kpxc.inputs = [];
-kpxc.isFirefox;
 kpxc.settings = {};
 kpxc.singleInputEnabledForPage = false;
 kpxc.submitUrl = null;
@@ -362,7 +361,7 @@ kpxc.initCredentialFields = async function() {
 
     // Search all remaining inputs from the page, ignore the previous input fields
     const pageInputs = await kpxcFields.getAllPageInputs(formInputs);
-    if (formInputs.length === 0 && pageInputs.length === 0 && !kpxcFields.isCustomLoginFieldsUsed()) {
+    if (formInputs.length === 0 && pageInputs.length === 0) {
         // Run 'redetect_credentials' manually if no fields are found after a page load
         setTimeout(async function() {
             if (_called.automaticRedetectCompleted) {
@@ -394,7 +393,7 @@ kpxc.initCredentialFields = async function() {
     }
 };
 
-// Intializes the login lists for popup and Autocomplete Menu
+// Initializes the login lists for popup and Autocomplete Menu
 kpxc.initLoginPopup = function() {
     if (kpxc.credentials.length === 0) {
         return;
@@ -613,7 +612,7 @@ kpxc.rememberCredentials = async function(usernameValue, passwordValue, urlValue
     return true;
 };
 
-// Save credentials triggered fron the context menu
+// Save credentials triggered from the context menu
 kpxc.rememberCredentialsFromContextMenu = async function() {
     if (kpxc.databaseState === DatabaseState.LOCKED) {
         kpxcUI.createNotification('error', tr('rememberErrorDatabaseClosed'));
@@ -654,7 +653,10 @@ kpxc.retrieveCredentials = async function(force = false) {
     }
 
     kpxc.url = document.location.href;
-    kpxc.submitUrl = kpxc.getFormActionUrl(kpxc.combinations[0]);
+    
+    // Search for first combination that has username or password input set
+    const firstCombination = kpxc.combinations?.find((combination) => combination?.username || combination?.password);
+    kpxc.submitUrl = kpxc.getFormActionUrl(firstCombination);
 
     if (kpxc.settings.autoRetrieveCredentials && kpxc.url && kpxc.submitUrl) {
         await kpxc.retrieveCredentialsCallback(

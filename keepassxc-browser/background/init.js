@@ -12,78 +12,6 @@ const contextMenuItems = [
 
 const initListeners = async function() {
     /**
-     * Generate information structure for created tab and invoke all needed
-     * functions if tab is created in foreground
-     * @param {object} tab
-     */
-    browser.tabs.onCreated.addListener((tab) => {
-        if (tab?.id > 0 && tab?.selected) {
-            page.currentTabId = tab.id;
-
-            if (!page.tabs[tab.id]) {
-                page.createTabEntry(tab.id);
-            }
-
-            page.switchTab(tab);
-        }
-    });
-
-    /**
-     * Remove information structure of closed tab for freeing memory
-     * @param {integer} tabId
-     * @param {object} removeInfo
-     */
-    browser.tabs.onRemoved.addListener(async function(tabId, removeInfo) {
-        if (page.currentTabId === tabId) {
-            const currentTab = await getCurrentTab();
-            page.currentTabId = currentTab ? currentTab.id : -1;
-        }
-        delete page.tabs[tabId];
-    });
-
-    /**
-     * Remove stored credentials on switching tabs.
-     * Invoke functions to retrieve credentials for focused tab
-     * @param {object} activeInfo
-     */
-    browser.tabs.onActivated.addListener(async function(activeInfo) {
-        try {
-            const info = await browser.tabs.get(activeInfo.tabId);
-            if (info && info.id) {
-                page.currentTabId = info.id;
-                if (info.status === 'complete') {
-                    if (!page.tabs[info.id]) {
-                        page.createTabEntry(info.id);
-                    }
-                    page.switchTab(info);
-                }
-            }
-        } catch (err) {
-            logError(err.message);
-        }
-    });
-
-    /**
-     * Update browserAction on every update of the page
-     * @param {integer} tabId
-     * @param {object} changeInfo
-     * @param {object} tab
-     */
-    browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-        // If the tab URL has changed (e.g. logged in) clear credentials
-        if (changeInfo.url) {
-            page.clearLogins(tabId);
-        }
-
-        if (changeInfo.status === 'complete' && tab?.id) {
-            browserAction.showDefault(tab);
-            if (!page.tabs[tab.id]) {
-                page.createTabEntry(tab.id);
-            }
-        }
-    });
-
-    /**
      * Detects page redirects and increases the count. Count is reset after a normal navigation event.
      * Form submit is counted as one.
      * @param {object} details
@@ -102,6 +30,7 @@ const initListeners = async function() {
         page.redirectCount = 0;
     });
 
+    // Main event listener
     browser.runtime.onMessage.addListener(kpxcEvent.onMessage);
 
     // Listen for keyboard shortcuts specified by user
@@ -130,6 +59,8 @@ const initListeners = async function() {
                 browser.tabs.sendMessage(tab.id, {
                     action: 'fill_attribute',
                     args: menuItem?.args
+                }, {
+                    frameId: item.frameId
                 }).catch((err) => {
                     logError(err);
                 });
@@ -140,6 +71,8 @@ const initListeners = async function() {
 
         browser.tabs.sendMessage(tab.id, {
             action: item.menuItemId
+        }, {
+            frameId: item.frameId
         }).catch((err) => {
             logError(err);
         });
@@ -183,14 +116,15 @@ const initContextMenuItems = async function() {
         await page.initBrowser();
         await page.initSettings();
         await page.initSitePreferences();
-        await page.initOpenedTabs();
+        await tabs.initOpenedTabs();
+        await tabs.initListeners();
         await initListeners();
         await initContextMenuItems();
         await httpAuth.init();
         await keepass.reconnect(null, 5000); // 5 second timeout for the first connect
         await keepass.enableAutomaticReconnect();
         await keepass.updateDatabase();
-    } catch (_e) {
-        logError('init.js failed');
+    } catch (e) {
+        logError(`init.js failed: ${e}`);
     }
 })();

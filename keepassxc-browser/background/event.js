@@ -6,7 +6,7 @@ kpxcEvent.onMessage = async function(request, sender) {
     if (request.action in kpxcEvent.messageHandlers) {
         if (!Object.hasOwn(sender, 'tab') || sender?.tab?.id < 1) {
             sender.tab = {};
-            sender.tab.id = page.currentTabId;
+            sender.tab.id = tabs.currentTabId;
         }
 
         return await kpxcEvent.messageHandlers[request.action](sender.tab, request.args);
@@ -24,9 +24,10 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll, forceShowDe
         browserAction.showDefault(tab);
     }
 
-    const errorMessage = page.tabs[tab.id]?.errorMessage ?? undefined;
-    const usernameFieldDetected = page.tabs[tab.id]?.usernameFieldDetected ?? false;
-    const iframeDetected = page.tabs[tab.id]?.iframeDetected ?? false;
+    const currentTab = tabs.getTabFromId(tab.id);
+    const errorMessage = currentTab?.errorMessage ?? undefined;
+    const usernameFieldDetected = currentTab?.usernameFieldDetected ?? false;
+    const iframeDetected = currentTab?.iframeDetected ?? false;
 
     return {
         associated: keepass.isAssociated(),
@@ -117,8 +118,8 @@ kpxcEvent.lockDatabase = async function(tab) {
 };
 
 kpxcEvent.onGetTabInformation = async function(tab) {
-    const id = tab?.id || page.currentTabId;
-    return page.tabs[id];
+    const id = tab?.id || tabs.currentTabId;
+    return tabs.getTabFromId(id);
 };
 
 kpxcEvent.onGetConnectedDatabase = async function() {
@@ -147,7 +148,7 @@ kpxcEvent.onUpdateAvailableKeePassXC = async function() {
 };
 
 kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
-    const id = tab?.id || page.currentTabId;
+    const id = tab?.id || tabs.currentTabId;
     page.clearCredentials(id);
     page.clearSubmittedCredentials();
 };
@@ -159,7 +160,7 @@ kpxcEvent.onLoginPopup = async function(tab, logins) {
     };
 
     if (tab?.id) {
-        page.tabs[tab.id].loginList = logins;
+        tabs.updateTabValues(tab?.id, { loginList: logins });
         await browserAction.show(tab, popupData);
     }
 };
@@ -174,20 +175,16 @@ kpxcEvent.onHTTPAuthPopup = async function(tab, data) {
         popup: 'popup_httpauth'
     };
 
-    page.tabs[tab.id].loginList = data;
+    tabs.updateTabValues(tab?.id, { basicAuthLogins: data });
     await browserAction.show(tab, popupData);
 };
 
 kpxcEvent.onUsernameFieldDetected = async function(tab, detected) {
-    if (tab?.id) {
-        page.tabs[tab.id].usernameFieldDetected = detected;
-    }
+    tabs.updateTabValues(tab?.id, { usernameFieldDetected: detected });
 };
 
 kpxcEvent.onIframeDetected = async function(tab, detected) {
-    if (tab?.id) {
-        page.tabs[tab.id].iframeDetected = detected;
-    }
+    tabs.updateTabValues(tab?.id, { iframeDetected: detected });
 };
 
 kpxcEvent.passwordGetFilled = async function() {
@@ -241,8 +238,8 @@ kpxcEvent.sendBackToTabs = async function(tab, args = []) {
     }
 };
 
-kpxcEvent.isFirefox = async function(tab) {
-    return page.isFirefox;
+kpxcEvent.getFeaturesList = async function() {
+    return keepass.featuresList;
 };
 
 // All methods named in this object have to be declared BEFORE this!
@@ -253,7 +250,6 @@ kpxcEvent.messageHandlers = {
     'banner_set_position': page.setBannerPosition,
     'check_database_hash': keepass.checkDatabaseHash,
     'check_update_keepassxc': kpxcEvent.onCheckUpdateKeePassXC,
-    'compare_versions': kpxcEvent.compareMultipleVersions,
     'create_new_group': keepass.createNewGroup,
     'enable_automatic_reconnect': keepass.enableAutomaticReconnect,
     'disable_automatic_reconnect': keepass.disableAutomaticReconnect,
@@ -265,6 +261,7 @@ kpxcEvent.messageHandlers = {
     'get_database_hash': keepass.getDatabaseHash,
     'get_database_groups': keepass.getDatabaseGroups,
     'get_error_message': keepass.getErrorMessage,
+    'get_features_list': kpxcEvent.getFeaturesList,
     'get_keepassxc_versions': kpxcEvent.onGetKeePassXCVersions,
     'get_login_list': page.getLoginList,
     'get_status': kpxcEvent.onGetStatus,
@@ -275,7 +272,6 @@ kpxcEvent.messageHandlers = {
     'iframe_detected': kpxcEvent.onIframeDetected,
     'init_http_auth': kpxcEvent.initHttpAuth,
     'is_connected': kpxcEvent.getIsKeePassXCAvailable,
-    'is_firefox': kpxcEvent.isFirefox,
     'is_iframe_allowed': page.isIframeAllowed,
     'is_site_ignored': page.isSiteIgnored,
     'load_keyring': kpxcEvent.onLoadKeyRing,

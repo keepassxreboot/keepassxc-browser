@@ -153,6 +153,15 @@ code {
     width: 2.5rem;
 }
 
+#choose-custom-login-fields-button-safari {
+    background-image: url('safari-web-extension://__MSG_@@extension_id__/icons/custom_login_fields.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    height: 31px;
+    width: 2.5rem;
+}
+
 #lock-database-button {
     display: none;
     width: 2.5rem;

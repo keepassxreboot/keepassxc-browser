@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Tietue on lisätty poikkeuksiin.",
-        "description": "Credential is excluded."
+        "message": "Pääsyavainta ei rekisteröity, koska se on jo olemassa. Poista vanha avain jatkaaksesi.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Pääsyavainpyyntö on peruttu.",
@@ -319,11 +319,11 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String Field",
+        "message": "Lisämerkkijonokenttä",
         "description": "Text for string field."
     },
     "defineSubmitButton": {
-        "message": "Submit Button",
+        "message": "Lähetä-nappi",
         "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
@@ -343,11 +343,11 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineChooseSubmitButton": {
-        "message": "Choose submit button",
+        "message": "Valitse lähetä-nappi",
         "description": "Choose submit button selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "message": "Vahvista valintasi tai merkitse lisää kenttiä lisämerkkijonokentiksi.",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
@@ -371,7 +371,7 @@
         "description": "General text for a String Fields."
     },
     "submitButton": {
-        "message": "Submit Button",
+        "message": "Lähetä-nappi",
         "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "Vanhentunut",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "Hae tietueet",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "Virhe:\nTäytön tarvitsemia kenttiä ei löydy.",
@@ -870,6 +874,22 @@
         "message": "Salli HTTP Basic Auth -tietueiden täyttäminen",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Yhteystapa",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "Jos native messaging -rajapinta on estetty selaimessasi, voit käyttää suoraa WebSocket-yhteyttä. Toiminnallisuuden täytyy olla aktivoitu myös KeePassXC:n puolella. Selain täytyy käynnistää uudelleen.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Native messaging",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Virheenkorjausloki",
         "description": "Debug logging checkbox text."
@@ -1053,6 +1073,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Vaatii KeePassXC:n version: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "Tämä selainlaajennus vaatii KeePassXC-version: $1. Aiemmat versiot voivat aiheuttaa epätoivottua käytöstä.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Oletus: $1",

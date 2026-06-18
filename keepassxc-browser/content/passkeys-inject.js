@@ -8,7 +8,11 @@ const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 const enablePasskeys = async function() {
     const passkeysLogDebug = function(message, extra) {
         if (kpxcPasskeysUtils.debugLogging) {
-            debugLogMessage(message, extra);
+            if (typeof debugLogMessage === 'function') {
+                debugLogMessage(message, extra);
+            } else {
+                console.debug(message, extra);
+            }
         }
     };
 
@@ -63,6 +67,14 @@ const enablePasskeys = async function() {
         }
     };
 
+    const isSameOriginWithAncestors = function () {
+        try {
+            return window.origin === window.top.origin;
+        } catch (_err) {
+            return false;
+        }
+    };
+
     document.addEventListener('kpxc-passkeys-request', async (ev) => {
         if (!window.isSecureContext) {
             kpxcUI.createNotification('error', tr('errorMessagePasskeysContextIsNotSecure'));
@@ -72,14 +84,14 @@ const enablePasskeys = async function() {
         if (ev.detail.action === 'passkeys_create') {
             const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(
                 ev.detail.publicKey,
-                ev.detail.sameOriginWithAncestors,
+                isSameOriginWithAncestors(),
             );
             passkeysLogDebug('Passkey request', publicKey);
             await sendResponse('passkeys_register', publicKey);
         } else if (ev.detail.action === 'passkeys_get') {
             const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(
                 ev.detail.publicKey,
-                ev.detail.sameOriginWithAncestors,
+                isSameOriginWithAncestors(),
             );
             passkeysLogDebug('Passkey request', publicKey);
             await sendResponse('passkeys_get', publicKey);

@@ -6,6 +6,11 @@ httpAuth.requests = [];
 httpAuth.pendingCallbacks = [];
 
 httpAuth.init = function() {
+    if (page.isSafari) {
+        debugLogMessage('HTTP Basic Auth implementation is not supported in Safari.');
+        return;
+    }
+
     let handleReq = httpAuth.handleRequestPromise;
     let reqType = 'blocking';
 
@@ -55,7 +60,7 @@ httpAuth.retrieveCredentials = async function(tabId, url, submitUrl) {
 };
 
 httpAuth.processPendingCallbacks = async function(details, resolve, reject) {
-    if (httpAuth.requests.indexOf(details.requestId) >= 0 || !page.tabs[details.tabId]) {
+    if (httpAuth.requests.indexOf(details.requestId) >= 0 || !tabs.getTabFromId(details.tabId)) {
         reject({ cancel: false });
         return;
     }
@@ -90,7 +95,10 @@ httpAuth.loginOrShowCredentials = function(logins, details, resolve, reject) {
             if (page.settings.showNotifications) {
                 showNotification(tr('multipleCredentialsDetected'));
             }
-            kpxcEvent.onHTTPAuthPopup({ 'id': details.tabId }, { 'logins': logins, 'url': details.searchUrl, 'resolve': resolve });
+            kpxcEvent.onHTTPAuthPopup(
+                { id: details.tabId },
+                { loginList: logins, url: details.searchUrl, resolve: resolve },
+            );
         }
     } else {
         logError('No logins found for HTTP Basic Auth.');
