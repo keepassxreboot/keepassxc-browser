@@ -226,6 +226,13 @@ options.initGeneralSettings = async function() {
         });
     });
 
+    // Connection method
+    $('#tab-general-settings select#connectionMethod').value = options.settings['connectionMethod'];
+    $('#tab-general-settings select#connectionMethod').addEventListener('change', async function(e) {
+        options.settings['connectionMethod'] = e.currentTarget.value;
+        await options.saveSettings();
+    });
+
     // Default group
     $('#defaultGroupButton').addEventListener('click', async function() {
         const value = $('#defaultGroup').value;
@@ -366,39 +373,28 @@ options.showKeePassXCVersions = async function(response) {
     $('#tab-about span.kpxcVersion').textContent = response.current;
     $('#tab-general-settings button.checkUpdateKeePassXC').disabled = false;
 
-    const versionResults = await browser.runtime.sendMessage({
-        action: 'compare_versions',
-        args: [
-            [
-                '2.6.0',
-                '2.7.0',
-                '2.7.7',
-                '2.7.10'
-            ],
-            response.current
-        ],
-    });
-
-    // Hide/disable certain options with older KeePassXC versions than 2.6.0
-    if (versionResults['2.6.0']) {
+    const featureList = await browser.runtime.sendMessage({ action: 'get_features_list' });
+    if (featureList?.requiredKeePassXCVersionFound) {
         $('#tab-general-settings #versionRequiredAlert').hide();
     } else {
         $('#tab-general-settings #showGroupNameInAutocomplete').disabled = true;
+        $('#tab-general-settings #minimumVersionAlert').show();
     }
 
-    // Hide certain options with older KeePassXC versions than 2.7.0
-    if (!versionResults['2.7.0']) {
+    if (!featureList?.downloadFaviconAfterSave) {
         $('#tab-general-settings #downloadFaviconAfterSaveFormGroup').hide();
     }
 
-    // Hide certain options with older KeePassXC versions than 2.7.7
-    if (!versionResults['2.7.7']) {
+    if (!featureList?.passkeys) {
         $('#tab-general-settings #passkeysOptionsCard').hide();
     }
 
-    // Hide passkeys default group option with KeePassXC version < 2.7.10
-    if (!versionResults['2.7.10']) {
+    if (!featureList?.passkeysDefaultGroup) {
         $('#tab-general-settings #passkeysDefaultGroup').hide();
+    }
+
+    if (!featureList?.webSocket) {
+        $('#tab-general-settings #connectionMethodOptions').hide();
     }
 };
 
@@ -726,7 +722,7 @@ options.initSitePreferences = function() {
 
         // Page URL
         row.children[0].children[0].children[0].value = url;
-        row.children[0].children[0]?.addEventListener('dblclick', (e) => 
+        row.children[0].children[0]?.addEventListener('dblclick', (e) =>
             enterEditMode(e, row, inputField, editButton, cancelButton, saveButton)
         );
 
@@ -873,12 +869,20 @@ options.createWarning = function(elem, text) {
     }, 5000);
 };
 
+options.hideUnsupportedFeatures = function() {
+    if (isSafari()) {
+        $('#tab-general-settings div#keyboardShortcuts').hide();
+        $('#tab-general-settings div#autoFillHttpAuth').hide();
+    }
+};
+
 const getBrowserId = function(userAgent) {
     const browserQueries = [
         { findStr: 'Firefox', name: 'Mozilla Firefox' },
         { findStr: 'Edg', name: 'Microsoft Edge' },
         { findStr: 'OPR', name: 'Opera' },
-        { findStr: 'Chrome', name: 'Chrome/Chromium' }
+        { findStr: 'Chrome', name: 'Chrome/Chromium' },
+        { findStr: 'Version/', name: 'Safari' }
     ];
 
     const getVersion = (agent, findStr) => {
@@ -891,7 +895,7 @@ const getBrowserId = function(userAgent) {
             return `${query.name} ${getVersion(userAgent, query.findStr)}`;
         }
     }
-  
+
     return 'Other/Unknown';
 };
 
@@ -919,7 +923,7 @@ const updateDropdownPosition = function(e, dropdown) {
     if (!rect) {
         return;
     }
-    
+
     const zoom = getComputedStyle(document.body).zoom || 1;
     const scrollTop = document.defaultView.scrollY / zoom;
     const scrollLeft = document.defaultView?.scrollX / zoom;
@@ -983,7 +987,7 @@ window.addEventListener('scroll', function() {
 
         const keyRing = await browser.runtime.sendMessage({ action: 'load_keyring' });
         options.keyRing = keyRing;
-        options.isFirefox = await browser.runtime.sendMessage({ action: 'is_firefox' });
+        options.isFirefox = isFirefox();
 
         options.initMenu();
         await options.initGeneralSettings();
@@ -991,7 +995,14 @@ window.addEventListener('scroll', function() {
         options.initCustomLoginFields();
         options.initSitePreferences();
         options.initAbout();
+        options.hideUnsupportedFeatures();
+
+        // The form-switch transitions should complete in 150 ms
+        setTimeout(() => {
+            document.body.classList.remove('no-transitions');
+        }, 200);
     } catch (err) {
         console.log('Error loading options page: ' + err);
+        $('#main-content').hide();
     }
 })();

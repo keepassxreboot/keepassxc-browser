@@ -1,6 +1,6 @@
 {
     "extensionDescription": {
-        "message": "Integracja KeePassXC z nowoczesnymi przeglądarkami internetowymi",
+        "message": "Integracja KeePassXC z nowoczesnymi przeglądarkami internetowymi",
         "description": "Name of the extension."
     },
     "addSitePreferenceButtonTitle": {
@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Dane uwierzytelniające są wyłączone.",
-        "description": "Credential is excluded."
+        "message": "Klucz dostępu nie został zarejestrowany z powodu istniejących danych uwierzytelniających. Usuń istniejące dane uwierzytelniające, aby kontynuować.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Żądanie kluczy dostępu zostało anulowane.",
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "Wygasłe",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "Pobierz dane uwierzytelniające",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "Błąd:\nNie można znaleźć pól do wypełnienia.",
@@ -870,6 +874,22 @@
         "message": "Zezwalaj na wypełnianie danych uwierzytelniających podstawowego uwierzytelniania HTTP",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Metoda połączenia",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "Jeśli komunikacja natywana jest zablokowana w przeglądarce, możesz przełączyć się na bezpośrednie połączenie WebSocket. Aby funkcja działała, musi być włączona po stronie KeePassXC. Wymagane jest ponowne uruchomienie przeglądarki.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Komunikacja natywna",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Rejestrowanie debugowania",
         "description": "Debug logging checkbox text."
@@ -959,7 +979,7 @@
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser natychmiast odbierze dane uwierzytelniające po aktywowaniu karty.",
+        "message": "KeePassXC-Browser natychmiast pobierze dane uwierzytelniające po aktywowaniu karty.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
@@ -1053,6 +1073,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Wymaga KeePassXC w wersji: $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "Rozszerzenie wymaga KeePassXC w wersji $1. Starsze wersje mogą powodować niepożądane zachowania.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Domyślne: $1",

@@ -1,3 +1,62 @@
+1.10.3 (2026-06-01)
+=========================
+- Add support for WebSocket connection method (disabled until KeePassXC support) [#2576]
+- Fix creating Credential Banner [#2984]
+- Fix getting submitted username for Credential Banner [#2985]
+- Fix cloning tab objects [#2986]
+- Fix Atlassian login page [#2989]
+
+1.10.2 (2026-05-29)
+=========================
+- Fix wrapping publicKey to ArrayBuffer with passkeys [#2940]
+- Fix "Credential is excluded" error message (thanks goekce) [#2941]
+- Fix input field detection when label contains overlaying elements (thanks tiboroche) [#2948]
+- Fix sending context menu messages to current frame only [#2951]
+- Fix filling credentials with readonly username field [#2954]
+- Fix passkeys debug logging [#2959]
+- Fix use of old TOTP (thanks jknockel) [#2973]
+- Fix managed settings not applied on Chromium (thanks RGBCube) [#2969]
+- Refactor tab handling [#2944]
+
+1.10.1 (2026-04-03)
+=========================
+- Fix regression when returning Custom Login Fields [#2924]
+- Fix TOTP icon border with Firefox [#2928]
+- Fix loading non-discarded tabs only (thanks tanriol) [#2934]
+
+1.10.0.1 (2026-03-08)
+=========================
+- Remove webRequestBlocking permission from V3 manifests [#2893]
+- Fix dynamic password input detection when replacing username [#2896]
+
+1.10.0 (2026-03-04)
+=========================
+- Add preliminary support for Safari [#2800]
+- Add 'mfaCode' to accepted 2FA token fields (thanks hostops) [#2804]
+- Add "postcode" to ignored TOTP list (thanks JackDunnCodes) [#2793]
+- Add support for Related Origin Requests with passkeys [#2828]
+- Add support for features list [#2848]
+- Add support for publicKey in passkeys response [#2782]
+- Fix hiding form switch animation when options page loads (thanks stefansundin) [#2807]
+- Fix TOTP field detection with Microsoft sites [#2832]
+- Fix the ability to fake same-orogin with passkeys (thanks a2kolbasov) [#2849]
+- Fix detecting transitions [#2855]
+- Fix Google password input detection [#2861]
+- Fix Epic Games and Paypal password input detection [#2863]
+- Fix using invalid parameters with MutationObserver [#2784]
+- Fix ignoring partial nodeNames [#2745]
+- Fix incorrect error message on keyboard fill [#2814]
+- Fix reopen database shortcut (thanks a2kolbasov) [#2767]
+- Fix showing notifications always on the top window [#2789]
+- Fix missing digits in TOTP fill on some sites (thanks ElementW) [#2794]
+- Fix setting default redirect allowance to 3 (thanks SinnySupernova) [#2797]
+- Fix createObserver() check [#2873]
+- Fix retry on input field detection with Custom Login Fields [#2875]
+- Fix detecting new password input on forms [#2878]
+- Fix form submit to ignore password related buttons [#2882]
+- Refactor icon handling [#2791]
+- Update webextension-polyfill library [#2822]
+
 1.9.11 (2025-11-26)
 =========================
 - Add support for reseting all settings to defaults [#2720]

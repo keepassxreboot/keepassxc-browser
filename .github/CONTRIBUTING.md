@@ -127,7 +127,7 @@ For classes and enum-like Objects.
 
 For global/const variables and enum-like Object values.
 
-#### Indention
+#### Indentation
 - For **JavaScript files** (*.js): 4 spaces
 - For **HTML files** (*.ui*): 2 spaces
 - For **JSON files** (*.json): 2 spaces

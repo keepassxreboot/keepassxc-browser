@@ -13,12 +13,14 @@ const acceptedOTPFields = [
     'idvpin',
     'mfa',
     'one_time_password',
+    'otc-confirmation-input',
     'otp',
     'token',
     'twofa',
     'two-factor',
     'twofactor',
-    'verification_pin'
+    'verification_pin',
+    'mfaCode'
 ];
 
 const acceptedParents = [
@@ -135,7 +137,7 @@ TOTPFieldIcon.prototype.initField = async function(field, segmented) {
 };
 
 TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
-    const className = kpxc.isFirefox ? 'moz' : 'default';
+    const className = getIconClass('kpxc-totp-icon');
     const size = this.calculateIconSize(field);
 
     const icon = kpxcUI.createElement('div', 'kpxc kpxc-totp-icon ' + className,

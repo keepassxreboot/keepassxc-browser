@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Hitelesítési adat kizárva.",
-        "description": "Credential is excluded."
+        "message": "Passkey not registered due to an existing credential. Remove the existing credential to continue.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "Jelkulcskérelem törölve.",
@@ -319,11 +319,11 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String Field",
+        "message": "Karakterláncmező",
         "description": "Text for string field."
     },
     "defineSubmitButton": {
-        "message": "Submit Button",
+        "message": "Beküldés gomb",
         "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
@@ -343,11 +343,11 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineChooseSubmitButton": {
-        "message": "Choose submit button",
+        "message": "Beküldés gomb kijelölése",
         "description": "Choose submit button selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "message": "Erősítse meg a választását vagy válasszon több mezőt <em>karakterlánc mezőkként</em>.",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
@@ -371,7 +371,7 @@
         "description": "General text for a String Fields."
     },
     "submitButton": {
-        "message": "Submit Button",
+        "message": "Beküldés gomb",
         "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "Lejárt",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "Hitelesítő adatok lekérése",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "Hiba:\nNem találhatók kitöltendő mezők.",
@@ -870,6 +874,22 @@
         "message": "Alap HTTP hitelesítési adatok kitöltésének engedélyezése",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Connection method",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Native messaging",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Hibakeresési naplózás",
         "description": "Debug logging checkbox text."
@@ -1053,6 +1073,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Szükséges KeePassXC verzió:  $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "A kiterjesztéshez a KeePassXC ezen verziója szükséges: $1. A korábbi verziók nem kívánt viselkedést okozhatnak.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Alapértelmezett: $1",

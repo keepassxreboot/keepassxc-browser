@@ -1,11 +1,11 @@
 {
   "name": "keepassxc-browser",
-  "version": "1.9.11",
+  "version": "1.10.3",
   "description": "KeePassXC-Browser",
   "main": "build.js",
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@playwright/test": "^1.56.1",
+    "@playwright/test": "^1.60.0",
     "@types/node": "^20.14.10",
     "eslint": "^9.39.1"
   },

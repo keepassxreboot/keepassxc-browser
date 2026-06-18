@@ -27,7 +27,7 @@ kpxcForm.activateCredentialBanner = async function(usernameValue, passwordInputs
         return;
     }
 
-    if (passwordField) {
+    if (passwordField && kpxcFields.isVisible(passwordField)) {
         await kpxc.setPasswordFilled(true);
     }
 
@@ -66,6 +66,9 @@ kpxcForm.getFormSubmitButton = function(form) {
         return;
     }
 
+    const hasPasswordClassOrId = (button) => button
+        && (button?.classList.value?.toLowerCase()?.includes('password')
+            || button?.id?.toLowerCase()?.includes('password'));
     const action = kpxc.submitUrl || form.action;
 
     // Check if the site needs a special handling for retrieving the form submit button
@@ -88,13 +91,19 @@ kpxcForm.getFormSubmitButton = function(form) {
         b => !b.getAttribute('formAction')
     );
     if (buttons.length > 0) {
-        return buttons.at(-1);
+        const lastButton = buttons.at(-1);
+        // Accept button if it has no indication for password
+        if (!hasPasswordClassOrId(lastButton)) {
+            return buttons.at(-1);
+        }
     }
 
     // Try to find similar buttons outside the form which are added via 'form' property
     for (const e of form.elements) {
-        if ((matchesWithNodeName(e, 'BUTTON') && (e.type === 'button' || e.type === 'submit' || e.type === ''))
-            || (matchesWithNodeName(e, 'INPUT') && (e.type === 'button' || e.type === 'submit'))) {
+        const isSubmitButton = matchesWithNodeName(e, 'BUTTON')
+            && (e.type === 'button' || e.type === 'submit' || e.type === '');
+        const isInputButton = matchesWithNodeName(e, 'INPUT') && (e.type === 'button' || e.type === 'submit');
+        if ((isSubmitButton || isInputButton) && !hasPasswordClassOrId(e)) {
             return e;
         }
     }
@@ -258,9 +267,16 @@ kpxcForm.onSubmit = async function(e) {
     }
 
     // Use the first text field in the form if only username input is missing
-    const usernameValue = await kpxcForm.getUsernameValue(!usernameField && passwordField
+    let usernameValue = await kpxcForm.getUsernameValue(!usernameField && passwordField
         ? form?.querySelector('input[type=text]')
         : usernameField);
+
+    // If the form username differs (input has removed etc.) use the username stored in the submitted object
+    const creds = await sendMessage('page_get_submitted');
+    if (creds?.username && creds.username !== usernameValue) {
+        usernameValue = creds.username;
+    }
+
     await kpxcForm.activateCredentialBanner(usernameValue, passwordInputs, passwordField);
 };
 

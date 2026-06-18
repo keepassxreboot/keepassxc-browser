@@ -62,7 +62,7 @@ kpxcBanner.create = async function(credentials = {}) {
     const bannerInfo = kpxcUI.createElement('div', 'banner-info');
     const bannerButtons = kpxcUI.createElement('div', 'banner-buttons');
 
-    const className = kpxc.isFirefox ? 'kpxc-banner-icon-moz' : 'kpxc-banner-icon';
+    const className = getIconClass('kpxc-banner-icon');
     const icon = kpxcUI.createElement('span', className, { 'alt': 'logo' });
 
     const infoText = kpxcUI.createElement('span', 'banner-info-text', {}, tr('rememberInfoText'));
@@ -163,8 +163,9 @@ kpxcBanner.create = async function(credentials = {}) {
     this.shadowRoot.append(banner);
     kpxcBanner.wrapper = wrapper;
 
-    if (window.self === window.top && !kpxcBanner.created) {
-        window.parent.document.body.appendChild(wrapper);
+    // Always create the banner to the top document. Useful if we are inside an iframe.
+    if (!kpxcBanner.created) {
+        window.top.document.body.appendChild(wrapper);
         kpxcUI.observeWrapper(wrapper);
         kpxcBanner.created = true;
     }

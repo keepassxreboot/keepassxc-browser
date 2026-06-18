@@ -82,6 +82,10 @@ pre {
     white-space: pre-line;
 }
 
+.no-transitions .form-check-input {
+    transition: none !important;
+}
+
 .table > caption {
     color: var(--kpxc-text-color);
 }

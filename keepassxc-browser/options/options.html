@@ -19,7 +19,7 @@
     <script src="options.js"></script>
     <script src="../common/translate.js" defer></script>
   </head>
-  <body class="pt-3 pb-5">
+  <body class="pt-3 pb-5 no-transitions">
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-3 col-lg-2 sidebar">
@@ -67,7 +67,7 @@
         </nav>
 
         <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 px-4 mt-5 mt-md-0">
-          <div class="content">
+          <div class="content" id="main-content">
 
             <!-- General Settings -->
             <div class="tab" id="tab-general-settings">
@@ -80,6 +80,12 @@
                   <span data-i18n="optionsUserInterfaceTitle"></span>
                 </div>
                 <div class="card-body">
+
+                  <!-- Version warning -->
+                  <div class="alert alert-warning mt-3 col-lg-9" role="alert" id="minimumVersionAlert" style="display: none;">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    <span data-i18n="optionsMinimumKeePassXCVersionRequired" data-i18n-placeholder="2.6.0"></span>
+                  </div>
 
                   <!-- Color theme -->
                   <div class="form-group col-sm-3 pb-2">
@@ -154,7 +160,7 @@
               </div>
 
               <!-- Keyboard shortcuts -->
-              <div class="card my-4 shadow">
+              <div class="card my-4 shadow" id="keyboardShortcuts">
                 <div class="card-header h6 rounded-0">
                   <i class="fa fa-keyboard-o" aria-hidden="true"></i>
                   <span data-i18n="optionsKeyboardShortcutsHeader"></span>
@@ -278,7 +284,7 @@
                   </div>
 
                   <!-- Autofill HTTP Auth dialogs -->
-                  <div class="form-group pb-1">
+                  <div class="form-group pb-1" id="autoFillHttpAuth">
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" name="autoFillAndSend" id="autoFillAndSend" value="true">
                       <label class="form-check-label" for="autoFillAndSend" data-i18n="optionsCheckboxAutoFillAndSend"></label>
@@ -529,6 +535,18 @@
                       <input class="form-control form-control-sm" type="number" id="clearCredentialTimeout" min="0" max="3600" required>
                     </div>
                     <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
+                  </div>
+
+                  <!-- Connection method -->
+                  <div class="form-group col-sm-3 pb-2 py-2" id="connectionMethodOptions">
+                    <label for="connectionMethod" class="form-label" data-i18n="optionsConnectionMethod"></label>
+                    <select class="form-select form-select-sm col-md-3 col-lg-2" id="connectionMethod" data-i18n="[title]optionsConnectionMethodSelection">
+                      <option value="nativemessaging" data-i18n="optionsConnectionMethodNativeMessaging"></option>
+                      <option value="websocket" data-i18n="optionsConnectionMethodWebSocket"></option>
+                    </select>
+                  </div>
+                  <div>
+                    <span class="form-text text-muted" data-i18n="optionsConnectionMethodHelpText"></span>
                   </div>
 
                   <!-- Debug logging -->

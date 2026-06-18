@@ -18,9 +18,16 @@ kpxcObserverHelper.ignoredNodeNames = [
     'A',
     'HEAD',
     'HTML',
+    'IMG',
     'LINK',
     'SCRIPT',
     'VIDEO',
+];
+
+kpxcObserverHelper.ignoredPartialNodeNames = [
+    'REDDIT-PDP',
+    'RENDER-TEMPLATE',
+    'SHREDDIT',
 ];
 
 kpxcObserverHelper.ignoredNodeTypes = [
@@ -237,6 +244,31 @@ kpxcObserverHelper.findInputsFromShadowDOM = function(target) {
     return inputFields;
 };
 
+// Detects animations and transitions. Triggers handleObserverAdd() again on animationend/transitionend.
+kpxcObserverHelper.handleTransitions = function(target) {
+    const classList = target?.classList?.toString();
+    const targetHasAnimations = classList?.includes('animate');
+    const targetHasDurations = classList?.includes('duration') || classList?.includes('transform');
+
+    if (targetHasAnimations || targetHasDurations) {
+        const animations = target.getAnimations();
+        const transitionTime = animations[0]?.currentTime ?? 0;
+
+        // Animation found, but transition has not finished
+        if (animations && transitionTime === 0) {
+            target.addEventListener(
+                targetHasAnimations ? 'animationend' : 'transitionend',
+                () => {
+                    kpxcObserverHelper.handleObserverAdd(target);
+                },
+                {
+                    once: true,
+                },
+            );
+        }
+    }
+};
+
 // Adds elements to a monitor array. Identifies the input fields.
 kpxcObserverHelper.handleObserverAdd = async function(target) {
     if (kpxcObserverHelper.ignoredElement(target)) {
@@ -248,6 +280,8 @@ kpxcObserverHelper.handleObserverAdd = async function(target) {
         kpxc.init();
         return;
     }
+
+    kpxcObserverHelper.handleTransitions(target);
 
     const inputs = kpxcObserverHelper.getInputs(target);
     if (inputs.length === 0) {
@@ -312,6 +346,7 @@ kpxcObserverHelper.ignoredNode = function(target) {
     if (!target
         || kpxcObserverHelper.ignoredNodeTypes.some(e => e === target.nodeType)
         || kpxcObserverHelper.ignoredNodeNames.some(e => e === target.nodeName)
+        || kpxcObserverHelper.ignoredPartialNodeNames.some(e => target.nodeName?.includes(e))
         || target.nodeName.startsWith('YTMUSIC')
         || target.nodeName.startsWith('YT-')) {
         return true;

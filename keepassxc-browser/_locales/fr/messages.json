@@ -184,8 +184,8 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "L’identifiant est exclus.",
-        "description": "Credential is excluded."
+        "message": "La clé d’accès n’a pas été enregistrée, car un identifiant existe déjà. Supprimez l’identifiant existant afin de poursuivre.",
+        "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
         "message": "La demande de clé d’accès a été annulée.",
@@ -405,6 +405,10 @@
     "credentialExpired": {
         "message": "est expiré",
         "description": "If a credential is expired, this is appended to the title label."
+    },
+    "credentialsRetrieveButton": {
+        "message": "Obtenir les identifiants.",
+        "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
         "message": "Erreur : Impossible de trouver des champs à remplir.",
@@ -870,6 +874,22 @@
         "message": "Autoriser la saisie des identifiants HTTP Auth de base",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
+    "optionsConnectionMethod": {
+        "message": "Méthode de connexion",
+        "description": "Connection method selection text."
+    },
+    "optionsConnectionMethodHelpText": {
+        "message": "Si la messagerie native est bloquée dans votre navigateur, vous pouvez passer à une connexion WebSocket directe. Pour que cela fonctionne, elle doit être activée dans KeePassXC. Un redémarrage du navigateur est nécessaire.",
+        "description": "Connection method help text."
+    },
+    "optionsConnectionMethodNativeMessaging": {
+        "message": "Messagerie native",
+        "description": "Native messaging option for Connection method."
+    },
+    "optionsConnectionMethodWebSocket": {
+        "message": "WebSocket",
+        "description": "WebSocket option for Connection method."
+    },
     "optionsDebugLogging": {
         "message": "Journalisation de débogage",
         "description": "Debug logging checkbox text."
@@ -1053,6 +1073,10 @@
     "optionsKeePassXCVersionRequired": {
         "message": "Exige KeePassXC version :  $1",
         "description": "KeePassXC version requirement text."
+    },
+    "optionsMinimumKeePassXCVersionRequired": {
+        "message": "L’extension nécessite la version KeePassXC : $1. Les versions antérieures peuvent entraîner des comportements indésirables.",
+        "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
         "message": "Par défaut : $1",
