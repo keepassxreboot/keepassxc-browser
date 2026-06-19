@@ -138,6 +138,31 @@
         });
     };
 
+    /**
+     * @returns {Promise<void>}
+     */
+    const waitForFocus = function () {
+        /*
+        Some browsers (Firefox, Safari) reject requests to original `navigator.credentials.create/get` if the page
+        is out of focus (when the user selects a passkey in KeePassXC-desktop).
+
+        See <https://www.w3.org/TR/webauthn-2/#sctn-abortoperation:~:text=The%20visibility,aborted>
+
+        `document.visibilityState` is not suitable: if the page is visible, but the focus is on another application
+        (or DevTools), the request will be rejected.
+        */
+        return new Promise((resolve) => {
+            if (document.hasFocus()) {
+                return resolve();
+            }
+            document.addEventListener(
+                'focus',
+                () => resolve(),
+                { capture: true, passive: true, once: true }
+            );
+        });
+    };
+
     // Throws errors to a correct exceptions
     const throwError = function(errorCode, errorMessage) {
         if ((!errorCode && !errorMessage) || errorCode === PASSKEYS_REQUEST_CANCELED) {
@@ -194,8 +219,10 @@
             if (!response.publicKey) {
                 if (!response.fallback) {
                     throwError(response?.errorCode, response?.errorMessage);
+                    return null;
                 }
-                return response.fallback ? originalCredentials.create(options) : null;
+                await waitForFocus();
+                return originalCredentials.create(options);
             }
 
             return createPublicKeyCredential(response.publicKey);
@@ -217,8 +244,10 @@
             if (!response.publicKey) {
                 if (!response.fallback) {
                     throwError(response?.errorCode, response?.errorMessage);
+                    return null;
                 }
-                return response.fallback ? originalCredentials.get(options) : null;
+                await waitForFocus();
+                return originalCredentials.get(options);
             }
 
             return createPublicKeyCredential(response.publicKey);
