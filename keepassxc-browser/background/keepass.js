@@ -809,12 +809,68 @@ keepass.enableAutomaticReconnect = async function() {
         return;
     }
     if (keepass.reconnectLoop === null) {
+        let probing = false;
         keepass.reconnectLoop = setInterval(async () => {
-            if (!keepass.isKeePassXCAvailable) {
-                keepass.reconnect();
+            if (probing || keepass.isKeePassXCAvailable) {
+                return;
             }
-        }, 1000);
+            probing = true;
+            try {
+                // Probe transport only -- avoid NaCl keypair generation
+                // when KeePassXC is not running (prevents memory leak, see #1113)
+                const connected = await keepass.probeConnection();
+                if (connected) {
+                    await keepass.reconnect();
+                }
+            } finally {
+                probing = false;
+            }
+        }, 5000);
     }
+};
+
+// Lightweight connection probe that does not generate NaCl keypairs.
+// Returns true if the transport layer (native messaging or WebSocket) is up.
+// Always disconnects after probing -- reconnect() manages its own connection.
+keepass.probeConnection = async function() {
+    if (keepass.isConnected) {
+        return true;
+    }
+
+    if (page?.settings?.connectionMethod === ConnectionMethod.WEBSOCKET) {
+        try {
+            await keepassClient.connectToWebSocket();
+            keepassClient.webSocket?.close();
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    // Native messaging: connectToNative() sets isConnected = true synchronously,
+    // but onDisconnected fires asynchronously if the host is unavailable.
+    // Listen for the disconnect event instead of using a fixed timeout.
+    return new Promise((resolve) => {
+        keepassClient.connectToNative();
+        const port = keepassClient.nativePort;
+        if (!port) {
+            resolve(false);
+            return;
+        }
+        const onDisconnect = () => {
+            resolve(false);
+        };
+        port.onDisconnect.addListener(onDisconnect);
+        setTimeout(() => {
+            port.onDisconnect.removeListener(onDisconnect);
+            if (keepass.isConnected) {
+                port.disconnect();
+                resolve(true);
+            } else {
+                resolve(false);
+            }
+        }, 500);
+    });
 };
 
 keepass.disableAutomaticReconnect = function() {
@@ -828,7 +884,7 @@ keepass.reconnect = async function(tab = null, connectionTimeout = 1500) {
     } else {
         keepassClient.connectToNative();
     }
-    
+
     keepass.generateNewKeyPair();
     const keyChangeResult = await keepass
         .changePublicKeys(tab, !!connectionTimeout, connectionTimeout)

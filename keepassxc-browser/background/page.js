@@ -95,7 +95,6 @@ page.initSettings = async function() {
         }
 
         page.settings = item.settings;
-        page.settings.autoReconnect = false;
 
         // Set default settings if needed
         for (const [ key, value ] of Object.entries(defaultSettings)) {
