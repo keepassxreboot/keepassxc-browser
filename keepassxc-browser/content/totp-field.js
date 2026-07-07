@@ -1,7 +1,7 @@
 'use strict';
 
-const ignoreRegex = /(bank|coupon|post(al)?|user|zip|promo).*code|(en|de)code(d|r)*|comment|author|error/i;
-const ignoredTypes = [ 'email', 'password', 'username' ];
+const ignoreRegex = /(bank|bar|coupon|post(al)?|user|zip|promo).*code|(en|de)code(d|r)*|comment|author|error/i;
+const ignoredTypes = [ 'email', 'username' ];
 const allowedInputTypes = [ 'number', 'password', 'tel', 'text' ];
 
 const acceptedOTPFields = [
@@ -13,8 +13,10 @@ const acceptedOTPFields = [
     'idvpin',
     'mfa',
     'one_time_password',
+    'one-time password',
     'otc-confirmation-input',
     'otp',
+    'otppw',
     'token',
     'twofa',
     'two-factor',
