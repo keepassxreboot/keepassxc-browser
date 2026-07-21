@@ -21,16 +21,26 @@ const enablePasskeys = async function() {
     document.documentElement.appendChild(passkeys);
     passkeys.remove();
 
-    const startTimer = function(timeout) {
-        return setTimeout(() => {
-            throw new DOMException('lifetimeTimer has expired', 'NotAllowedError');
-        }, timeout);
-    };
+    /**
+     * @param {number=} timeout
+     */
+    const startTimer = function (timeout) {
+        let resolve, reject;
+        /** @type {Promise<void>} */
+        let promise = new Promise((_resolve, _reject) => {
+            resolve = _resolve;
+            reject = _reject;
+        });
 
-    const stopTimer = function(lifetimeTimer) {
-        if (lifetimeTimer) {
-            clearTimeout(lifetimeTimer);
-        }
+        let timerId = setTimeout(resolve, timeout);
+
+        return {
+            promise,
+            abort() {
+                clearTimeout(timerId);
+                reject();
+            }
+        };
     };
 
     const letTimerRunOut = function (errorCode) {
@@ -41,29 +51,27 @@ const enablePasskeys = async function() {
         );
     };
 
-    const sendResponse = async function(command, publicKey, callback) {
+    const sendResponse = async function(command, publicKey) {
         const lifetimeTimer = startTimer(publicKey?.timeout);
 
         const ret = await chrome.runtime.sendMessage({ action: command, args: [ publicKey, window.location.origin ] });
         if (ret) {
             let errorMessage;
-            if (ret.response && ret.response.errorCode) {
+            if (ret.response?.errorCode) {
                 errorMessage = await chrome.runtime.sendMessage({
                     action: 'get_error_message',
                     args: ret.response.errorCode,
                 });
                 kpxcUI.createNotification('error', errorMessage);
 
-                if (kpxcPasskeysUtils.passkeysFallback) {
-                    kpxcPasskeysUtils.sendPasskeysResponse(undefined, ret.response?.errorCode, errorMessage);
-                } else if (letTimerRunOut(ret?.response?.errorCode)) {
-                    return;
+                if (!kpxcPasskeysUtils.passkeysFallback && letTimerRunOut(ret.response.errorCode)) {
+                    await lifetimeTimer.promise;
                 }
             }
 
             passkeysLogDebug('Passkey response', ret.response);
             kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
-            stopTimer(lifetimeTimer);
+            lifetimeTimer.abort();
         }
     };
 
