@@ -142,6 +142,9 @@
         "reopen_database": {
             "description": "__MSG_popupReopenButton__"
         },
+        "lock_database": {
+            "description": "__MSG_lockDatabase__"
+        },
         "reload_extension": {
             "description": "__MSG_popupReloadButton__"
         }
