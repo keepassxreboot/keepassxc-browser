@@ -1,6 +1,7 @@
 'use strict';
 
 (async () => {
+    const PASSKEYS_NO_LOGINS_FOUND = 15;
     const PASSKEYS_ATTESTATION_NOT_SUPPORTED = 20;
     const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
     const PASSKEYS_REQUEST_CANCELED = 22;
@@ -163,18 +164,13 @@
         });
     };
 
-    // Throws errors to a correct exceptions
+    /**
+     * Throws errors to a correct exceptions
+     * @param {number} errorCode
+     * @param {string} errorMessage
+     * @returns {never}
+     */
     const throwError = function(errorCode, errorMessage) {
-        if ((!errorCode && !errorMessage) || errorCode === PASSKEYS_REQUEST_CANCELED) {
-            // No error or canceled by user. Stop the timer but throw no exception. Fallback with be called instead.
-            return;
-        }
-
-        if (errorCode === PASSKEYS_WAIT_FOR_LIFETIMER || errorCode === PASSKEYS_CREDENTIAL_IS_EXCLUDED) {
-            // Timer handled in the content script
-            return;
-        }
-
         if ([ PASSKEYS_DOMAIN_RPID_MISMATCH, PASSKEYS_DOMAIN_IS_NOT_VALID ].includes(errorCode)) {
             throw new DOMException(errorMessage, DOMException.SECURITY_ERR);
         }
@@ -189,6 +185,10 @@
 
         if (
             [
+                PASSKEYS_NO_LOGINS_FOUND,
+                PASSKEYS_CREDENTIAL_IS_EXCLUDED,
+                PASSKEYS_REQUEST_CANCELED,
+                PASSKEYS_WAIT_FOR_LIFETIMER,
                 PASSKEYS_ATTESTATION_NOT_SUPPORTED,
                 PASSKEYS_INVALID_URL_PROVIDED,
                 PASSKEYS_INVALID_USER_VERIFICATION,
@@ -219,7 +219,6 @@
             if (!response.publicKey) {
                 if (!response.fallback) {
                     throwError(response?.errorCode, response?.errorMessage);
-                    return null;
                 }
                 await waitForFocus();
                 return originalCredentials.create(options);
@@ -244,7 +243,6 @@
             if (!response.publicKey) {
                 if (!response.fallback) {
                     throwError(response?.errorCode, response?.errorMessage);
-                    return null;
                 }
                 await waitForFocus();
                 return originalCredentials.get(options);
