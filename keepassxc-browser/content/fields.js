@@ -401,8 +401,17 @@ kpxcFields.isCustomLoginFieldsUsed = function() {
 kpxcFields.isSearchForm = function(form) {
     // Check form action
     const formAction = form.getLowerCaseAttribute('action');
-    if (formAction?.includes('search') && !formAction?.includes('research')) {
-        return true;
+    if (formAction) {
+        try {
+            // Match search as a URL path or query token. A substring match is too broad:
+            // Keycloak's /realms/opensearch/... login action was incorrectly rejected.
+            const actionUrl = new URL(formAction, document.location.href);
+            if (/(?:^|[/?&=_-])search(?:$|[/?&=_.-])/.test(actionUrl.pathname + actionUrl.search)) {
+                return true;
+            }
+        } catch (_err) {
+            // Keep evaluating the form's other identifying properties below.
+        }
     }
 
     // Ignore form with search classes

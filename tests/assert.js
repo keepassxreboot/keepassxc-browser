@@ -69,8 +69,8 @@ async function assertSearchField(classStr, properties, testName, expectedResult)
     kpxcAssert(isSearchfield, expectedResult, Tests.SEARCH_FIELDS, testName);
 }
 
-async function assertSearchForm(properties, testName, expectedResult) {
-    const form = kpxcUI.createElement('form', '', { action: 'search' });
+async function assertSearchForm(action, properties, testName, expectedResult) {
+    const form = kpxcUI.createElement('form', '', { action: action });
     const input = kpxcUI.createElement('input', '', properties);
     form.appendChild(input);
     document.body.appendChild(form);

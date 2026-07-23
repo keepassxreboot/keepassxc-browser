@@ -50,7 +50,9 @@ async function testSearchFields() {
         assertSearchField(field[0], field[1], field[2], field[3]);
     }
 
-    assertSearchForm({ id: 'username', type: 'text', }, 'Generic input field under search form', true);
+    assertSearchForm('/search', { id: 'username', type: 'text', }, 'Generic input field under search form', true);
+    assertSearchForm('/realms/opensearch/login-actions/authenticate',
+        { id: 'username', type: 'text', }, 'Input field under an OpenSearch realm login form', false);
 }
 
 // TOTP fields (kpxcTOTPIcons)
