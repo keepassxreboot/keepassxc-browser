@@ -334,6 +334,7 @@ kpxcCustomLoginFieldsBanner.confirm = async function(e) {
     if (!kpxc.settings[DEFINED_CUSTOM_FIELDS]) {
         kpxc.settings[DEFINED_CUSTOM_FIELDS] = {};
     }
+    let fieldsUpdated = false;
 
     // If the new selection is already used in some other field, clear it
     const clearIdenticalField = function(path, location) {
@@ -395,9 +396,13 @@ kpxcCustomLoginFieldsBanner.confirm = async function(e) {
         }
 
         await sendMessage('save_settings', kpxc.settings);
+        fieldsUpdated = true;
     }
 
     kpxcCustomLoginFieldsBanner.destroy();
+    if (fieldsUpdated) {
+        await kpxc.initCredentialFields();
+    }
     sendMessageToFrames(e, 'confirm_button_clicked');
 };
 

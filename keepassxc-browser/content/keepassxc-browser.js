@@ -361,7 +361,10 @@ kpxc.initCredentialFields = async function() {
 
     // Search all remaining inputs from the page, ignore the previous input fields
     const pageInputs = await kpxcFields.getAllPageInputs(formInputs);
-    if (formInputs.length === 0 && pageInputs.length === 0) {
+    // Custom Login Fields can create valid combinations even when the automatic
+    // detector rejects every input (for example, a Keycloak OpenSearch realm).
+    // Do not return before initializing those combinations.
+    if (formInputs.length === 0 && pageInputs.length === 0 && kpxc.combinations.length === 0) {
         // Run 'redetect_credentials' manually if no fields are found after a page load
         setTimeout(async function() {
             if (_called.automaticRedetectCompleted) {
