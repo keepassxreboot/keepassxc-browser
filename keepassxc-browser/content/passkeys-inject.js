@@ -2,6 +2,7 @@
 
 const PASSKEYS_NO_LOGINS_FOUND = 15;
 const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
+const PASSKEYS_REQUEST_CANCELED = 22;
 const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests
@@ -43,12 +44,15 @@ const enablePasskeys = async function() {
         };
     };
 
+    // https://www.w3.org/TR/webauthn-2/#sctn-assertion-privacy
+    // https://www.w3.org/TR/webauthn-2/#sctn-getAssertion:~:text=constructAssertionAlg%20and%20terminate%20this%20algorithm%2E-,Return,details
     const letTimerRunOut = function (errorCode) {
-        return (
-            errorCode === PASSKEYS_WAIT_FOR_LIFETIMER ||
-            errorCode === PASSKEYS_CREDENTIAL_IS_EXCLUDED ||
-            errorCode === PASSKEYS_NO_LOGINS_FOUND
-        );
+        return [
+            PASSKEYS_NO_LOGINS_FOUND,
+            PASSKEYS_CREDENTIAL_IS_EXCLUDED,
+            PASSKEYS_REQUEST_CANCELED,
+            PASSKEYS_WAIT_FOR_LIFETIMER,
+        ].includes(errorCode);
     };
 
     const sendResponse = async function(command, publicKey) {
