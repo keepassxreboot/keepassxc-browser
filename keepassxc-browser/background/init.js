@@ -40,6 +40,7 @@ const initListeners = async function() {
             || command === 'choose_credential_fields'
             || command === 'retrieve_credentials_forced'
             || command === 'reopen_database'
+            || command === 'lock_database'
             || command === 'reload_extension') {
             const tab = await getCurrentTab();
             if (tab?.id) {

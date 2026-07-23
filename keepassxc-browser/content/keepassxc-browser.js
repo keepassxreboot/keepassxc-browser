@@ -653,7 +653,7 @@ kpxc.retrieveCredentials = async function(force = false) {
     }
 
     kpxc.url = document.location.href;
-    
+
     // Search for first combination that has username or password input set
     const firstCombination = kpxc.combinations?.find((combination) => combination?.username || combination?.password);
     kpxc.submitUrl = kpxc.getFormActionUrl(firstCombination);
@@ -967,6 +967,8 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
                 'get_status',
                 [ false, true ] // Set forcePopup to true
             );
+        } else if (req.action === 'lock_database') {
+            await sendMessage('lock_database');
         } else if (req.action === 'save_credentials') {
             kpxc.rememberCredentialsFromContextMenu();
         } else if (req.action === 'retrieve_credentials_forced') {
