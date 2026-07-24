@@ -39,7 +39,7 @@ const enablePasskeys = async function() {
             promise,
             abort() {
                 clearTimeout(timerId);
-                reject();
+                reject('the timer has been aborted');
             }
         };
     };
@@ -60,6 +60,8 @@ const enablePasskeys = async function() {
 
         const ret = await chrome.runtime.sendMessage({ action: command, args: [ publicKey, window.location.origin ] });
         if (ret) {
+            passkeysLogDebug('Passkey response', ret.response);
+
             let errorMessage;
             if (ret.response?.errorCode) {
                 errorMessage = await chrome.runtime.sendMessage({
@@ -73,8 +75,8 @@ const enablePasskeys = async function() {
                 }
             }
 
-            passkeysLogDebug('Passkey response', ret.response);
             kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
+            lifetimeTimer.promise.catch(() => {}); // prevent error in console
             lifetimeTimer.abort();
         }
     };
