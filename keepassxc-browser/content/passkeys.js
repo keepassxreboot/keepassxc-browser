@@ -249,6 +249,9 @@
 
             if (!response.publicKey) {
                 if (!response.fallback) {
+                    if (options?.signal?.aborted === true) {
+                        throw new DOMException(response?.errorMessage, DOMException.ABORT_ERR);
+                    }
                     throwError(response?.errorCode, response?.errorMessage);
                 }
                 await waitForFocus();
@@ -273,6 +276,9 @@
 
             if (!response.publicKey) {
                 if (!response.fallback) {
+                    if (options?.signal?.aborted === true) {
+                        throw new DOMException(response?.errorMessage, DOMException.ABORT_ERR);
+                    }
                     throwError(response?.errorCode, response?.errorMessage);
                 }
                 await waitForFocus();
