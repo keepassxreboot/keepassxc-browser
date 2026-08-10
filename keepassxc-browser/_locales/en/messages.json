@@ -239,6 +239,10 @@
         "message": "Context is not secure.",
         "description": "Context is not secure."
     },
+    "errorMessageCannotUseReferences": {
+        "message": "Username or password cannot contain references.",
+        "description": "Username or password cannot contain references."
+    },
     "errorNotConnected": {
         "message": "Not connected to KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC."

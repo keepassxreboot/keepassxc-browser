@@ -65,6 +65,12 @@ keepass.addCredentials = async function(tab, args = []) {
 keepass.updateCredentials = async function(tab, args = []) {
     try {
         const [ entryId, username, password, url, group, groupUuid ] = args;
+
+        if (containsPlaceholder(username) || containsPlaceholder(password)) {
+            logError('References are not allowed in username or password');
+            return CreationError.REFERENCES;
+        }
+
         const taResponse = await keepass.testAssociation(tab);
         if (!taResponse) {
             browserAction.showDefault(tab);
@@ -102,12 +108,12 @@ keepass.updateCredentials = async function(tab, args = []) {
             // KeePassXC versions lower than 2.5.0 will have an empty parsed.error
             let successMessage = response.error;
             if (response.error === 'success' || response.error === '') {
-                successMessage = entryId ? 'updated' : 'created';
+                successMessage = entryId ? CreationError.UPDATED : CreationError.CREATED;
             }
 
             return successMessage;
         } else {
-            return 'error';
+            return CreationError.GENERAL;
         }
     } catch (err) {
         logError(`updateCredentials failed: ${err}`);
