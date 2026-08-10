@@ -95,7 +95,7 @@ test('Test trimURL()', async ({ page }) => {
 // Check if different popups/overlays partially covers or touches the input field
 test('Test elementsOverlap()', async ({ page }) => {
     const inputRect = { left: 0, top: 5, right: 200, bottom: 28 }
-   
+
     // Fully covered
     expect(elementsOverlap(inputRect, { left: -2, top: 0, right: 220, bottom: 40 })).toBe(true);
 
@@ -144,12 +144,12 @@ test('Test containsPlaceholder()', async ({ page }) => {
     expect(containsPlaceholder('{URL:USERNAME}yes')).toBe(true);
     expect(containsPlaceholder('{URL:USERNAME}yes{REF:A@O:Attribute 1}')).toBe(true);
     expect(containsPlaceholder('{NOTAREALPLACEHOLDER:USERNAME}yes')).toBe(false); // Unknown placeholder
-    expect(containsPlaceholder('{TITLE2}')).toBe(false);
     expect(containsPlaceholder('yes{URL:PORT}')).toBe(true);
     expect(containsPlaceholder('yes{S:KPEX_PASSKEYS_USER_ID}no')).toBe(true);
 
     // Static placeholders
     expect(containsPlaceholder('{TITLE}')).toBe(true);
+    expect(containsPlaceholder('{TITLE2}')).toBe(false);
     expect(containsPlaceholder('{USERNAME}')).toBe(true);
     expect(containsPlaceholder('{PASSWORD}')).toBe(true);
     expect(containsPlaceholder('{URL}')).toBe(true);

@@ -44,6 +44,7 @@ export default defineConfig([globalIgnores(["**/*.min.js"]), {
             cloneInto: "readonly",
             compareVersion: "readonly",
             ConnectionMethod: "readonly",
+            containsPlaceholder: "readonly",
             createResult: "readonly",
             createStylesheet: "readonly",
             CreationError: "readonly",
