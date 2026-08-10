@@ -46,6 +46,7 @@ export default defineConfig([globalIgnores(["**/*.min.js"]), {
             ConnectionMethod: "readonly",
             createResult: "readonly",
             createStylesheet: "readonly",
+            CreationError: "readonly",
             DatabaseState: "readonly",
             debugLogMessage: "readonly",
             DEFINED_CUSTOM_FIELDS: "readonly",

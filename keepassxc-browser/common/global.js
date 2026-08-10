@@ -40,6 +40,14 @@ const BannerPosition = {
     TOP: 1
 };
 
+const CreationError = {
+    CANCELED: 'canceled',
+    CREATED: 'created',
+    GENERAL: 'error',
+    REFERENCES: 'references',
+    UPDATED: 'updated'
+};
+
 const ManualFill = {
     NONE: 0,
     PASSWORD: 1,
