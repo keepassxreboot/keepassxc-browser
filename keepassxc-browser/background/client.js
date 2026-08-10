@@ -44,6 +44,7 @@ const kpErrors = {
     PASSKEYS_UNKNOWN_ERROR: 31,
     PASSKEYS_INVALID_CHALLENGE: 32,
     PASSKEYS_INVALID_USER_ID: 33,
+    CANNOT_USE_REFERENCES: 34,
 
     errorMessages: {
         0: { msg: tr('errorMessageUnknown') },
@@ -80,6 +81,7 @@ const kpErrors = {
         31: { msg: tr('errorMessagePasskeysUnknownError') },
         32: { msg: tr('errorMessagePasskeysInvalidChallenge') },
         33: { msg: tr('errorMessagePasskeysInvalidUserId') },
+        34: { msg: tr('errorMessageCannotUseReferences') },
     },
 
     getError(errorCode) {
