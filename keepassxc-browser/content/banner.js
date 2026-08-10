@@ -372,7 +372,7 @@ kpxcBanner.verifyResult = async function(code) {
     if (code === CreationError.GENERAL) {
         kpxcUI.createNotification('error', tr('rememberErrorCannotSaveCredentials'));
     } else if (code === CreationError.REFERENCES) {
-        kpxcUI.createNotification('error', tr('rememberErrorReferencesUsed'));
+        kpxcUI.createNotification('error', tr('errorMessageCannotUseReferences'));
     } else if (code === CreationError.CREATED) {
         kpxcUI.createNotification(
             'success',

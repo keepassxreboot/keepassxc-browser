@@ -578,10 +578,6 @@
         "message": "Credentials cannot be saved or updated to a closed database.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
-    "rememberErrorReferencesUsed": {
-        "message": "References cannot be saved with username or password.",
-        "description": "Error message shown when references were used when saving credentials."
-    },
     "rememberCredentialsNotSaved": {
         "message": "Operation cancelled. Credentials are not updated.",
         "description": "Message shown when saving operation was cancelled."

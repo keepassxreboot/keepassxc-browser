@@ -28,7 +28,6 @@ keepass.serverPublicKey = '';
 
 const DEFAULT_FETCH_TIMEOUT = 5000; // ms
 const MAX_RELATED_ORIGIN_LABELS = 60;
-const REF_MARKER = '{REF:';
 
 const kpActions = {
     SET_LOGIN: 'set-login',
@@ -67,7 +66,7 @@ keepass.updateCredentials = async function(tab, args = []) {
     try {
         const [ entryId, username, password, url, group, groupUuid ] = args;
 
-        if (username?.includes(REF_MARKER) || password?.includes(REF_MARKER)) {
+        if (containsPlaceholder(username) || containsPlaceholder(password)) {
             logError('References are not allowed in username or password');
             return CreationError.REFERENCES;
         }

@@ -190,6 +190,50 @@ const trimURL = function(url) {
     return url.indexOf('?') !== -1 ? url.split('?')[0] : url;
 };
 
+const DYNAMIC_PLACEHOLDERS = [
+    'DT_',
+    'REF:',
+    'S:',
+    'T-CONV:',
+    'T-REPLACE-RX:',
+    'URL:'
+];
+
+const STATIC_PLACEHOLDERS = [
+    'DB_DIR',
+    'NOTES',
+    'PASSWORD',
+    'TITLE',
+    'TOTP',
+    'USERNAME',
+    'URL'
+];
+
+const containsPlaceholder = function(str) {
+    const placeholderRegex = new RegExp('{(.*?)}');
+
+    const placeholderFound = placeholderRegex.exec(str);
+    if (placeholderFound === null) {
+        return false;
+    }
+
+    let placeholder = placeholderFound[1];
+    if (placeholder.endsWith('\\')) {
+        // Remove escape if placeholder is used with \\{PLACEHOLDER\\}
+        placeholder = placeholder.slice(0, -1);
+    }
+
+    if (STATIC_PLACEHOLDERS.includes(placeholder)) {
+        return true;
+    }
+
+    if (DYNAMIC_PLACEHOLDERS.some((pl) => placeholder.startsWith(pl))) {
+        return true;
+    }
+
+    return false;
+};
+
 const debugLogMessage = function(message, extra) {
     console.debug(`[Debug ${getFileAndLine()}] ${EXTENSION_NAME} - ${message}`);
 
@@ -228,6 +272,7 @@ const elementsOverlap = function(rect1, rect2) {
 // Exports for tests
 if (typeof module === 'object') {
     module.exports = {
+        containsPlaceholder,
         compareVersion,
         elementsOverlap,
         matchesWithNodeName,

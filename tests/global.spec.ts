@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import {
+    containsPlaceholder,
     compareVersion,
     elementsOverlap,
     matchesWithNodeName,
@@ -133,5 +134,27 @@ test('Test elementsOverlap()', async ({ page }) => {
 
     // Overlay is outside the input field
     expect(elementsOverlap(inputRect, { left: 210, top: 0, right: 240, bottom: 40 })).toBe(false);
+});
+
+test('Test containsPlaceholder()', async ({ page }) => {
+    // Dynamic placeholders
+    expect(containsPlaceholder('')).toBe(false);
+    expect(containsPlaceholder('testString{REF:nothing')).toBe(false); // Placeholder is not finished
+    expect(containsPlaceholder('testString{REF:P@T:Other Entry}something')).toBe(true);
+    expect(containsPlaceholder('{URL:USERNAME}yes')).toBe(true);
+    expect(containsPlaceholder('{URL:USERNAME}yes{REF:A@O:Attribute 1}')).toBe(true);
+    expect(containsPlaceholder('{NOTAREALPLACEHOLDER:USERNAME}yes')).toBe(false); // Unknown placeholder
+    expect(containsPlaceholder('{TITLE2}')).toBe(false);
+    expect(containsPlaceholder('yes{URL:PORT}')).toBe(true);
+    expect(containsPlaceholder('yes{S:KPEX_PASSKEYS_USER_ID}no')).toBe(true);
+
+    // Static placeholders
+    expect(containsPlaceholder('{TITLE}')).toBe(true);
+    expect(containsPlaceholder('{USERNAME}')).toBe(true);
+    expect(containsPlaceholder('{PASSWORD}')).toBe(true);
+    expect(containsPlaceholder('{URL}')).toBe(true);
+    expect(containsPlaceholder('{NOTES}')).toBe(true);
+    expect(containsPlaceholder('{TOTP}')).toBe(true);
+    expect(containsPlaceholder('\\{TOTP\\}')).toBe(true);
 });
 
