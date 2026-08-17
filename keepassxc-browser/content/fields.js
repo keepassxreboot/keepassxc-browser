@@ -655,7 +655,8 @@ kpxcFields.useCustomLoginFields = async function() {
         passwordInputs: password ? [ password ] : [],
         totp: totp,
         fields: stringFields,
-        submitButton: submitButton
+        submitButton: submitButton,
+        form: username?.form
     });
 
     return combinations;
