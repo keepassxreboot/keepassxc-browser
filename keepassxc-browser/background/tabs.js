@@ -40,23 +40,24 @@ tabs.clearTimeout = function(tabId) {
 };
 
 // Creates a new tab object to the list
-tabs.createTabEntry = function(tabId) {
+tabs.createTabEntry = async function(tabId) {
     if (!tabId) {
         return;
     }
 
     tabs.tabList.set(tabId, structuredClone(TAB_OBJECT));
-    page.clearSubmittedCredentials();
+    await credentials.clearSubmittedCredentials(tabId);
     page.setFillAttributeContextMenuItemVisible(false);
 };
 
 // Deletes a tab object from the list
-tabs.deleteTabEntry = function(tabId) {
+tabs.deleteTabEntry = async function(tabId) {
     if (!tabId) {
         return;
     }
 
     tabs.tabList.delete(tabId);
+    await credentials.clearSubmittedCredentials(tabId);
 };
 
 // Returns a tab object from tabId
@@ -81,7 +82,7 @@ tabs.initOpenedTabs = async function() {
     try {
         const openedTabs = await browser.tabs.query({ discarded: false });
         for (const i of openedTabs) {
-            tabs.createTabEntry(i.id);
+            await tabs.createTabEntry(i.id);
         }
 
         // Set initial tab ID
@@ -109,7 +110,7 @@ tabs.onActivated = async function(activeInfo) {
         if (info && info.id) {
             if (info.status === 'complete') {
                 if (!tabs.getTabFromId(info.id)) {
-                    tabs.createTabEntry(info.id);
+                    await tabs.createTabEntry(info.id);
                 }
                 tabs.switchTab(info);
             }
@@ -125,12 +126,12 @@ tabs.onActivated = async function(activeInfo) {
  * functions if tab is created in foreground
  * @param {object} tab
  */
-tabs.onCreated = function(tab) {
+tabs.onCreated = async function(tab) {
     if (tab?.id > 0 && tab?.selected) {
         tabs.currentTabId = tab.id;
 
         if (!tabs.getTabFromId(tab.id)) {
-            tabs.createTabEntry(tab.id);
+            await tabs.createTabEntry(tab.id);
         }
 
         tabs.switchTab(tab);
@@ -147,7 +148,7 @@ tabs.onRemoved = async function(tabId, _removeInfo) {
         const currentTab = await getCurrentTab();
         tabs.currentTabId = currentTab ? currentTab.id : -1;
     }
-    tabs.deleteTabEntry(tabId);
+    await tabs.deleteTabEntry(tabId);
     tabs.clearTimeout(tabId);
 };
 
@@ -157,10 +158,10 @@ tabs.onRemoved = async function(tabId, _removeInfo) {
  * @param {object} changeInfo
  * @param {object} tab
  */
-tabs.onUpdated = function(tabId, changeInfo, tab) {
+tabs.onUpdated = async function(tabId, changeInfo, tab) {
     // Could not be tracked yet if discarded at browser startup
     if (tabId && !tabs.getTabFromId(tabId)) {
-        tabs.createTabEntry(tabId);
+        await tabs.createTabEntry(tabId);
     }
     // If the tab URL has changed (e.g. logged in) clear credentials
     if (changeInfo.url) {
