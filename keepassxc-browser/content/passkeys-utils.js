@@ -63,6 +63,11 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
         publicKey.challenge = kpxcArrayBufferToBase64(pkOptions.challenge);
         publicKey.extensions = pkOptions?.extensions;
 
+        const prfSalt = publicKey?.extensions?.prf?.eval?.first;
+        if (prfSalt) {
+            publicKey.extensions.prf.eval.first = kpxcArrayBufferToBase64(prfSalt);
+        }
+
         // Make sure integers are used for "alg". Set to reserved if not found.
         // https://www.iana.org/assignments/cose/cose.xhtml#algorithms
         publicKey.pubKeyCredParams = [];
@@ -112,6 +117,11 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOrigin
         publicKey.rpId = pkOptions?.rpId;
         publicKey.timeout = getTimeout(publicKey?.userVerification, pkOptions?.timeout);
         publicKey.userVerification = pkOptions?.userVerification;
+
+        const prfSalt = publicKey?.extensions?.prf?.eval?.first;
+        if (prfSalt) {
+            publicKey.extensions.prf.eval.first = kpxcArrayBufferToBase64(prfSalt);
+        }
 
         publicKey.allowCredentials = [];
         if (pkOptions.allowCredentials && pkOptions.allowCredentials.length > 0) {
