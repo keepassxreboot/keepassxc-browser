@@ -116,6 +116,9 @@ kpxcSites.exceptionFound = function(identifier, field) {
         return true;
     } else if (document.location.origin === 'https://www.paypal.com' && field?.id === 'splitPassword') {
         return true;
+    } else if (document.location.origin === 'https://app.fastmail.com'
+        && [ 'v-TextInput', 'is-focused', 'v-TextInput--standard' ].every(c => identifier.contains(c))) {
+        return true;
     }
 
     return false;
