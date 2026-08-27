@@ -58,9 +58,13 @@ const enablePasskeys = async function() {
     const sendResponse = async function(command, publicKey) {
         const lifetimeTimer = startTimer(publicKey?.timeout);
 
-        const ret = await chrome.runtime.sendMessage({ action: command, args: [ publicKey, window.location.origin ] });
-        if (ret) {
-            passkeysLogDebug('Passkey response', ret.response);
+        let ret = await chrome.runtime.sendMessage({ action: command, args: [ publicKey, window.location.origin ] });
+        passkeysLogDebug('Passkey response', ret);
+
+        // Any error not related to passkeys (no connection to KPXC, database not opened, unknown error, etc.)
+        if (ret === null) {
+            ret = { response: { errorCode: PASSKEYS_REQUEST_CANCELED } };
+        }
 
             let errorMessage;
             if (ret.response?.errorCode) {
@@ -78,7 +82,6 @@ const enablePasskeys = async function() {
             kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
             lifetimeTimer.promise.catch(() => {}); // prevent error in console
             lifetimeTimer.abort();
-        }
     };
 
     const isSameOriginWithAncestors = function () {
