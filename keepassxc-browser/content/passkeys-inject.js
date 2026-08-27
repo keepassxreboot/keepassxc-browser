@@ -58,7 +58,7 @@ const enablePasskeys = async function() {
     const sendResponse = async function(command, publicKey) {
         const lifetimeTimer = startTimer(publicKey?.timeout);
 
-        let ret = await chrome.runtime.sendMessage({ action: command, args: [ publicKey, window.location.origin ] });
+        let ret = await chrome.runtime.sendMessage({ action: command, args: [publicKey, window.location.origin] });
         passkeysLogDebug('Passkey response', ret);
 
         // Any error not related to passkeys (no connection to KPXC, database not opened, unknown error, etc.)
@@ -66,22 +66,22 @@ const enablePasskeys = async function() {
             ret = { response: { errorCode: PASSKEYS_REQUEST_CANCELED } };
         }
 
-            let errorMessage;
-            if (ret.response?.errorCode) {
-                errorMessage = await chrome.runtime.sendMessage({
-                    action: 'get_error_message',
-                    args: ret.response.errorCode,
-                });
-                kpxcUI.createNotification('error', errorMessage);
+        let errorMessage;
+        if (ret.response?.errorCode) {
+            errorMessage = await chrome.runtime.sendMessage({
+                action: 'get_error_message',
+                args: ret.response.errorCode,
+            });
+            kpxcUI.createNotification('error', errorMessage);
 
-                if (!kpxcPasskeysUtils.passkeysFallback && letTimerRunOut(ret.response.errorCode)) {
-                    await lifetimeTimer.promise;
-                }
+            if (!kpxcPasskeysUtils.passkeysFallback && letTimerRunOut(ret.response.errorCode)) {
+                await lifetimeTimer.promise;
             }
+        }
 
-            kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
-            lifetimeTimer.promise.catch(() => {}); // prevent error in console
-            lifetimeTimer.abort();
+        kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
+        lifetimeTimer.promise.catch(() => { }); // prevent error in console
+        lifetimeTimer.abort();
     };
 
     const isSameOriginWithAncestors = function () {
