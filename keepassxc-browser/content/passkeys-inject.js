@@ -28,12 +28,12 @@ const enablePasskeys = async function() {
     const startTimer = function (timeout) {
         let resolve, reject;
         /** @type {Promise<void>} */
-        let promise = new Promise((_resolve, _reject) => {
+        const promise = new Promise((_resolve, _reject) => {
             resolve = _resolve;
             reject = _reject;
         });
 
-        let timerId = setTimeout(resolve, timeout);
+        const timerId = setTimeout(resolve, timeout);
 
         return {
             promise,
@@ -58,28 +58,26 @@ const enablePasskeys = async function() {
     const sendResponse = async function(command, publicKey) {
         const lifetimeTimer = startTimer(publicKey?.timeout);
 
-        let ret = await chrome.runtime.sendMessage({ action: command, args: [publicKey, window.location.origin] });
+        const ret = await chrome.runtime.sendMessage({ action: command, args: [ publicKey, window.location.origin ] });
         passkeysLogDebug('Passkey response', ret);
 
-        // Any error not related to passkeys (no connection to KPXC, database not opened, unknown error, etc.)
-        if (ret === null) {
-            ret = { response: { errorCode: PASSKEYS_REQUEST_CANCELED } };
-        }
-
+        // `null` - any error not related to passkeys (no connection to KPXC, database not opened, unknown error, etc.)
+        const errorCode = ret === null ? PASSKEYS_REQUEST_CANCELED : ret.response.errorCode;
         let errorMessage;
-        if (ret.response?.errorCode) {
+
+        if (errorCode) {
             errorMessage = await chrome.runtime.sendMessage({
                 action: 'get_error_message',
-                args: ret.response.errorCode,
+                args: errorCode,
             });
             kpxcUI.createNotification('error', errorMessage);
 
-            if (!kpxcPasskeysUtils.passkeysFallback && letTimerRunOut(ret.response.errorCode)) {
+            if (!kpxcPasskeysUtils.passkeysFallback && letTimerRunOut(errorCode)) {
                 await lifetimeTimer.promise;
             }
         }
 
-        kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
+        kpxcPasskeysUtils.sendPasskeysResponse(ret.response, errorCode, errorMessage);
         lifetimeTimer.promise.catch(() => { }); // prevent error in console
         lifetimeTimer.abort();
     };
