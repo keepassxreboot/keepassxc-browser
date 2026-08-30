@@ -79,7 +79,10 @@ const enablePasskeys = async function() {
         // https://www.w3.org/TR/permissions-policy/#the-policy-object
         const policy = document.featurePolicy || document.permissionsPolicy;
 
-        if (policy?.features().includes(feature)) {
+        if (
+            action === 'get' && // remove it since WebAuthn 3
+            policy?.features().includes(feature)
+        ) {
             passkeysLogDebug('Checking Permissions Policy');
             return policy.allowsFeature(feature);
         }
