@@ -626,7 +626,7 @@ keepass.passkeysRegister = async function(tab, args = []) {
         const taResponse = await keepass.testAssociation(tab, [ false ]);
         if (!taResponse || !keepass.isConnected || args.length < 2) {
             browserAction.showDefault(tab);
-            return [];
+            return null;
         }
 
         const kpAction = kpActions.PASSKEYS_REGISTER;
@@ -650,10 +650,10 @@ keepass.passkeysRegister = async function(tab, args = []) {
         }
 
         browserAction.showDefault(tab);
-        return [];
+        return null;
     } catch (err) {
         logError(`passkeysRegister failed: ${err}`);
-        return [];
+        return null;
     }
 };
 
@@ -662,7 +662,7 @@ keepass.passkeysGet = async function(tab, args = []) {
         const taResponse = await keepass.testAssociation(tab, [ false ]);
         if (!taResponse || !keepass.isConnected || args.length < 2) {
             browserAction.showDefault(tab);
-            return [];
+            return null;
         }
 
         const kpAction = kpActions.PASSKEYS_GET;
@@ -685,10 +685,10 @@ keepass.passkeysGet = async function(tab, args = []) {
         }
 
         browserAction.showDefault(tab);
-        return [];
+        return null;
     } catch (err) {
         logError(`passkeysGet failed: ${err}`);
-        return [];
+        return null;
     }
 };
 
@@ -834,7 +834,7 @@ keepass.reconnect = async function(tab = null, connectionTimeout = 1500) {
     } else {
         keepassClient.connectToNative();
     }
-    
+
     keepass.generateNewKeyPair();
     const keyChangeResult = await keepass
         .changePublicKeys(tab, !!connectionTimeout, connectionTimeout)

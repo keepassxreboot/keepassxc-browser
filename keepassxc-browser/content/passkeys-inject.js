@@ -2,6 +2,7 @@
 
 const PASSKEYS_NO_LOGINS_FOUND = 15;
 const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
+const PASSKEYS_REQUEST_CANCELED = 22;
 const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests
@@ -21,50 +22,64 @@ const enablePasskeys = async function() {
     document.documentElement.appendChild(passkeys);
     passkeys.remove();
 
-    const startTimer = function(timeout) {
-        return setTimeout(() => {
-            throw new DOMException('lifetimeTimer has expired', 'NotAllowedError');
-        }, timeout);
+    /**
+     * @param {number=} timeout
+     */
+    const startTimer = function (timeout) {
+        let resolve, reject;
+        /** @type {Promise<void>} */
+        const promise = new Promise((_resolve, _reject) => {
+            resolve = _resolve;
+            reject = _reject;
+        });
+
+        const timerId = setTimeout(resolve, timeout);
+
+        return {
+            promise,
+            abort() {
+                clearTimeout(timerId);
+                reject('the timer has been aborted');
+            }
+        };
     };
 
-    const stopTimer = function(lifetimeTimer) {
-        if (lifetimeTimer) {
-            clearTimeout(lifetimeTimer);
-        }
-    };
-
+    // https://www.w3.org/TR/webauthn-2/#sctn-assertion-privacy
+    // https://www.w3.org/TR/webauthn-2/#sctn-getAssertion:~:text=constructAssertionAlg%20and%20terminate%20this%20algorithm%2E-,Return,details
     const letTimerRunOut = function (errorCode) {
-        return (
-            errorCode === PASSKEYS_WAIT_FOR_LIFETIMER ||
-            errorCode === PASSKEYS_CREDENTIAL_IS_EXCLUDED ||
-            errorCode === PASSKEYS_NO_LOGINS_FOUND
-        );
+        return [
+            PASSKEYS_NO_LOGINS_FOUND,
+            PASSKEYS_CREDENTIAL_IS_EXCLUDED,
+            PASSKEYS_REQUEST_CANCELED,
+            PASSKEYS_WAIT_FOR_LIFETIMER,
+        ].includes(errorCode);
     };
 
-    const sendResponse = async function(command, publicKey, callback) {
+    const sendResponse = async function(command, publicKey) {
         const lifetimeTimer = startTimer(publicKey?.timeout);
 
         const ret = await chrome.runtime.sendMessage({ action: command, args: [ publicKey, window.location.origin ] });
-        if (ret) {
-            let errorMessage;
-            if (ret.response && ret.response.errorCode) {
-                errorMessage = await chrome.runtime.sendMessage({
-                    action: 'get_error_message',
-                    args: ret.response.errorCode,
-                });
-                kpxcUI.createNotification('error', errorMessage);
+        passkeysLogDebug('Passkey response', ret);
 
-                if (kpxcPasskeysUtils.passkeysFallback) {
-                    kpxcPasskeysUtils.sendPasskeysResponse(undefined, ret.response?.errorCode, errorMessage);
-                } else if (letTimerRunOut(ret?.response?.errorCode)) {
-                    return;
-                }
+        // `null` - any error not related to passkeys (no connection to KPXC, database not opened, unknown error, etc.)
+        const errorCode = ret === null ? PASSKEYS_REQUEST_CANCELED : ret.response.errorCode;
+        let errorMessage;
+
+        if (errorCode) {
+            errorMessage = await chrome.runtime.sendMessage({
+                action: 'get_error_message',
+                args: errorCode,
+            });
+            kpxcUI.createNotification('error', errorMessage);
+
+            if (!kpxcPasskeysUtils.passkeysFallback && letTimerRunOut(errorCode)) {
+                await lifetimeTimer.promise;
             }
-
-            passkeysLogDebug('Passkey response', ret.response);
-            kpxcPasskeysUtils.sendPasskeysResponse(ret.response, ret.response?.errorCode, errorMessage);
-            stopTimer(lifetimeTimer);
         }
+
+        kpxcPasskeysUtils.sendPasskeysResponse(ret.response, errorCode, errorMessage);
+        lifetimeTimer.promise.catch(() => { }); // prevent error in console
+        lifetimeTimer.abort();
     };
 
     const isSameOriginWithAncestors = function () {
