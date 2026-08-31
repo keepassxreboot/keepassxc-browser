@@ -62,7 +62,7 @@ const enablePasskeys = async function() {
         passkeysLogDebug('Passkey response', ret);
 
         // `null` - any error not related to passkeys (no connection to KPXC, database not opened, unknown error, etc.)
-        const errorCode = ret === null ? PASSKEYS_REQUEST_CANCELED : ret.response.errorCode;
+        const errorCode = ret === null ? PASSKEYS_REQUEST_CANCELED : ret?.response?.errorCode;
         let errorMessage;
 
         if (errorCode) {
@@ -77,7 +77,7 @@ const enablePasskeys = async function() {
             }
         }
 
-        kpxcPasskeysUtils.sendPasskeysResponse(ret.response, errorCode, errorMessage);
+        kpxcPasskeysUtils.sendPasskeysResponse(ret?.response, errorCode, errorMessage);
         lifetimeTimer.promise.catch(() => { }); // prevent error in console
         lifetimeTimer.abort();
     };
