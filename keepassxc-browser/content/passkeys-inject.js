@@ -82,8 +82,29 @@ const enablePasskeys = async function() {
         lifetimeTimer.abort();
     };
 
-    const isSameOriginWithAncestors = function () {
+    /**
+     * @param {'create' | 'get'} action
+     * @returns {boolean}
+     */
+    const isAllowedByPolicy = function (action) {
+        // https://www.w3.org/TR/webauthn-2/#sctn-permissions-policy
+        // https://www.w3.org/TR/webauthn-2/#sctn-iframe-guidance
+        const feature = `publickey-credentials-${action}`;
+
+        // https://www.w3.org/TR/permissions-policy/#the-policy-object
+        const policy = document.featurePolicy || document.permissionsPolicy;
+
+        if (
+            action === 'get' && // remove it since WebAuthn 3
+            policy?.features().includes(feature)
+        ) {
+            passkeysLogDebug('Checking Permissions Policy');
+            return policy.allowsFeature(feature);
+        }
+
+        // fallback to sameOriginWithAncestors
         try {
+            passkeysLogDebug('Checking sameOriginWithAncestors');
             return window.origin === window.top.origin;
         } catch (_err) {
             return false;
@@ -99,14 +120,14 @@ const enablePasskeys = async function() {
         if (ev.detail.action === 'passkeys_create') {
             const publicKey = kpxcPasskeysUtils.buildCredentialCreationOptions(
                 ev.detail.publicKey,
-                isSameOriginWithAncestors(),
+                isAllowedByPolicy('create'),
             );
             passkeysLogDebug('Passkey request', publicKey);
             await sendResponse('passkeys_register', publicKey);
         } else if (ev.detail.action === 'passkeys_get') {
             const publicKey = kpxcPasskeysUtils.buildCredentialRequestOptions(
                 ev.detail.publicKey,
-                isSameOriginWithAncestors(),
+                isAllowedByPolicy('get'),
             );
             passkeysLogDebug('Passkey request', publicKey);
             await sendResponse('passkeys_get', publicKey);
