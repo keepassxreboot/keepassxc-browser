@@ -179,6 +179,7 @@
 
     const originalCredentials = navigator.credentials;
 
+    /** @type {typeof originalCredentials} */
     const passkeysCredentials = {
         async create(options) {
             if (!options.publicKey) {
@@ -224,6 +225,9 @@
         },
         async store(credential) {
             return originalCredentials.store(credential);
+        },
+        preventSilentAccess() {
+            return originalCredentials.preventSilentAccess();
         }
     };
 
