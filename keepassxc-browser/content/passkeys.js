@@ -139,20 +139,43 @@
     };
 
     // Posts a message to extension's content script and waits for response
-    const postMessageToExtension = function(request) {
+    const postMessageToExtension = function(request, signal) {
         return new Promise((resolve, reject) => {
             const ev = document;
+
+            function abort() {
+                // TODO: Use reject(signal?.reason) with WebAuthn 3
+                reject(new DOMException(signal?.reason?.message || 'AbortError', 'AbortError'));
+            }
 
             const listener = ((messageEvent) => {
                 const handler = (msg) => {
                     if (msg && msg.type === 'kpxc-passkeys-response' && msg.detail) {
                         messageEvent.removeEventListener('kpxc-passkeys-response', listener);
+
+                        if (msg.detail.errorCode === 'abort') {
+                            return abort();
+                        }
                         resolve(msg.detail);
                         return;
                     }
                 };
                 return handler;
             })(ev);
+
+            if (signal instanceof AbortSignal) {
+                if (signal?.aborted) {
+                    return abort();
+                }
+
+                signal.addEventListener('abort', () => {
+                    // Send a request to abort the lifetimer
+                    document.dispatchEvent(new CustomEvent('kpxc-passkeys-request', { detail: {
+                        action: 'abort',
+                    } }));
+                }, { once: true });
+            }
+
             ev.addEventListener('kpxc-passkeys-response', listener);
 
             // Send the request
@@ -238,20 +261,20 @@
 
     const passkeysCredentials = {
         async create(options) {
-            if (!options.publicKey) {
+            if (!options?.publicKey) {
                 return null;
             }
 
+            // Check if request is immediately aborted
+            options?.signal?.throwIfAborted();
+
             const response = await postMessageToExtension({
                 action: 'passkeys_create',
-                publicKey: options.publicKey,
-            });
+                publicKey: options.publicKey
+            }, options?.signal);
 
             if (!response.publicKey) {
                 if (!response.fallback) {
-                    if (options?.signal?.aborted === true) {
-                        throw new DOMException(response?.errorMessage, DOMException.ABORT_ERR);
-                    }
                     throwError(response?.errorCode, response?.errorMessage);
                 }
                 await waitForFocus();
@@ -261,7 +284,7 @@
             return createPublicKeyCredential(response.publicKey);
         },
         async get(options) {
-            if (!options.publicKey || options?.mediation === 'silent') {
+            if (!options?.publicKey || options?.mediation === 'silent') {
                 return null;
             }
 
@@ -269,16 +292,16 @@
                 return originalCredentials.get(options);
             }
 
+            // Check if request is immediately aborted
+            options?.signal?.throwIfAborted();
+
             const response = await postMessageToExtension({
                 action: 'passkeys_get',
-                publicKey: options.publicKey,
-            });
+                publicKey: options.publicKey
+            }, options?.signal);
 
             if (!response.publicKey) {
                 if (!response.fallback) {
-                    if (options?.signal?.aborted === true) {
-                        throw new DOMException(response?.errorMessage, DOMException.ABORT_ERR);
-                    }
                     throwError(response?.errorCode, response?.errorMessage);
                 }
                 await waitForFocus();
