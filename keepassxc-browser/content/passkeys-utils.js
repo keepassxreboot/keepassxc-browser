@@ -1,16 +1,20 @@
+// @ts-check
 'use strict';
 
 const MINIMUM_TIMEOUT = 15000;
 const DEFAULT_TIMEOUT = 30000;
 const DISCOURAGED_TIMEOUT = 120000;
 
+/** @namespace */
+const kpxcPasskeysUtils = {};
+
 // From ArrayBuffer to URL encoded base64 string
-const kpxcArrayBufferToBase64 = function(buf) {
+kpxcPasskeysUtils.kpxcArrayBufferToBase64 = function(buf) {
     const str = [ ...new Uint8Array(buf) ].map(c => String.fromCharCode(c)).join('');
     return window.btoa(str).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
 };
 
-const checkErrors = function(pkOptions, sameOriginWithAncestors) {
+kpxcPasskeysUtils.checkErrors = function(pkOptions, sameOriginWithAncestors) {
     if (!pkOptions) {
         throw new Error('No publicKey configuration options were provided');
     }
@@ -28,7 +32,7 @@ const checkErrors = function(pkOptions, sameOriginWithAncestors) {
     }
 };
 
-const getTimeout = function(userVerification, timeout) {
+kpxcPasskeysUtils.getTimeout = function(userVerification, timeout) {
     if (!timeout || Number(timeout) === 0 || isNaN(Number(timeout))) {
         return userVerification === 'discouraged' ? DISCOURAGED_TIMEOUT : DEFAULT_TIMEOUT;
     }
@@ -41,31 +45,31 @@ const getTimeout = function(userVerification, timeout) {
     return Number(timeout);
 };
 
-const kpxcPasskeysUtils = {};
-
 // Sends response from KeePassXC back to the injected script
 kpxcPasskeysUtils.sendPasskeysResponse = function(publicKey, errorCode, errorMessage) {
     const response = errorCode
         ? { errorCode: errorCode, errorMessage: errorMessage, fallback: kpxcPasskeysUtils?.passkeysFallback }
         : { publicKey: publicKey, fallback: kpxcPasskeysUtils?.passkeysFallback };
-    const details = isFirefox() ? cloneInto(response, document.defaultView) : response;
+
+    // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts/cloneInto
+    const details = typeof cloneInto === 'function' ? cloneInto(response, document.defaultView) : response;
     document.dispatchEvent(new CustomEvent('kpxc-passkeys-response', { detail: details }));
 };
 
 // Create a new object with base64 strings for KeePassXC
 kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOriginWithAncestors) {
     try {
-        checkErrors(pkOptions, sameOriginWithAncestors);
+        kpxcPasskeysUtils.checkErrors(pkOptions, sameOriginWithAncestors);
 
         const publicKey = {};
         publicKey.attestation = pkOptions?.attestation;
         publicKey.authenticatorSelection = pkOptions?.authenticatorSelection;
-        publicKey.challenge = kpxcArrayBufferToBase64(pkOptions.challenge);
+        publicKey.challenge = kpxcPasskeysUtils.kpxcArrayBufferToBase64(pkOptions.challenge);
         publicKey.extensions = pkOptions?.extensions;
 
         const prfSalt = publicKey?.extensions?.prf?.eval?.first;
         if (prfSalt) {
-            publicKey.extensions.prf.eval.first = kpxcArrayBufferToBase64(prfSalt);
+            publicKey.extensions.prf.eval.first = kpxcPasskeysUtils.kpxcArrayBufferToBase64(prfSalt);
         }
 
         // Make sure integers are used for "alg". Set to reserved if not found.
@@ -81,13 +85,13 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
         }
 
         publicKey.rp = pkOptions?.rp;
-        publicKey.timeout = getTimeout(publicKey?.authenticatorSelection?.userVerification, pkOptions?.timeout);
+        publicKey.timeout = kpxcPasskeysUtils.getTimeout(publicKey?.authenticatorSelection?.userVerification, pkOptions?.timeout);
 
         publicKey.excludeCredentials = [];
         if (pkOptions.excludeCredentials && pkOptions.excludeCredentials.length > 0) {
             for (const cred of pkOptions.excludeCredentials) {
                 publicKey.excludeCredentials.push({
-                    id: kpxcArrayBufferToBase64(cred.id),
+                    id: kpxcPasskeysUtils.kpxcArrayBufferToBase64(cred.id),
                     transports: cred.transports,
                     type: cred.type
                 });
@@ -96,7 +100,7 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
 
         publicKey.user = {};
         publicKey.user.displayName = pkOptions.user.displayName;
-        publicKey.user.id = kpxcArrayBufferToBase64(pkOptions.user.id);
+        publicKey.user.id = kpxcPasskeysUtils.kpxcArrayBufferToBase64(pkOptions.user.id);
         publicKey.user.name = pkOptions.user.name;
 
         return publicKey;
@@ -108,19 +112,19 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
 // Create a new object with base64 strings for KeePassXC
 kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOriginWithAncestors) {
     try {
-        checkErrors(pkOptions, sameOriginWithAncestors);
+        kpxcPasskeysUtils.checkErrors(pkOptions, sameOriginWithAncestors);
 
         const publicKey = {};
-        publicKey.challenge = kpxcArrayBufferToBase64(pkOptions.challenge);
+        publicKey.challenge = kpxcPasskeysUtils.kpxcArrayBufferToBase64(pkOptions.challenge);
         publicKey.enterpriseAttestationPossible = false;
         publicKey.extensions = pkOptions?.extensions;
         publicKey.rpId = pkOptions?.rpId;
-        publicKey.timeout = getTimeout(publicKey?.userVerification, pkOptions?.timeout);
+        publicKey.timeout = kpxcPasskeysUtils.getTimeout(publicKey?.userVerification, pkOptions?.timeout);
         publicKey.userVerification = pkOptions?.userVerification;
 
         const prfSalt = publicKey?.extensions?.prf?.eval?.first;
         if (prfSalt) {
-            publicKey.extensions.prf.eval.first = kpxcArrayBufferToBase64(prfSalt);
+            publicKey.extensions.prf.eval.first = kpxcPasskeysUtils.kpxcArrayBufferToBase64(prfSalt);
         }
 
         publicKey.allowCredentials = [];
@@ -134,7 +138,7 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOrigin
                 }
 
                 const arr = {
-                    id: kpxcArrayBufferToBase64(cred.id),
+                    id: kpxcPasskeysUtils.kpxcArrayBufferToBase64(cred.id),
                     transports: [ ...transports, 'internal' ],
                     type: cred.type
                 };

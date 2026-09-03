@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict';
 
 const ConnectionMethod = {
@@ -316,6 +318,47 @@ page.isSiteIgnored = async function(tab, args = []) {
 
     return false;
 };
+
+page.passkeysInjectIntoPage = async function (tab, /** @type {never} */ _args, sender) {
+    const {
+        debugLogging,
+        passkeys,
+        passkeysFallback,
+    }
+        = page.settings || await kpxcEvent.onLoadSettings();
+    const siteIgnored = await page.isSiteIgnored(tab, [sender.url, true]);
+
+    let backgroundInject = passkeys;
+    if (backgroundInject) {
+        try {
+            const targetFrameInfo =
+                (sender.documentId) // since Firefox 153
+                    ? { documentIds: [sender.documentId] }
+                    : { frameIds: [sender.frameId] };
+
+            let results = await browser.scripting.executeScript({
+                files: ['page-context/passkeys.js'],
+                target: {
+                    tabId: tab.id,
+                    ...targetFrameInfo,
+                },
+                injectImmediately: true,
+                world: 'MAIN', // since Firefox 128
+            });
+            debugger;
+        } catch (err) {
+            backgroundInject = false;
+        }
+    }
+
+    return {
+        backgroundInject,
+        debugLogging,
+        passkeys,
+        passkeysFallback,
+        siteIgnored,
+    };
+}
 
 // Shows or hides the Fill Attribute context menu item
 page.setFillAttributeContextMenuItemVisible = async function(visible) {

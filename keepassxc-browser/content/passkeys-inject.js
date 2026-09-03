@@ -1,3 +1,4 @@
+// @ts-check
 'use strict';
 
 const PASSKEYS_NO_LOGINS_FOUND = 15;
@@ -5,8 +6,55 @@ const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
 const PASSKEYS_REQUEST_CANCELED = 22;
 const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 
-// Apply a script to the page for intercepting Passkeys (WebAuthn) requests
-const enablePasskeys = async function() {
+(async function() {
+    if (
+        document?.documentElement?.ownerDocument?.contentType !== 'text/html'
+        && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
+    ) {
+        return;
+    }
+
+    /** @type {Awaited<ReturnType<page.passkeysInjectIntoPage>>} */
+    const kpxcPasskeysSettings = await chrome.runtime.sendMessage({ action: 'passkeys_inject_into_page' });
+
+    if (!kpxcPasskeysSettings.passkeys || kpxcPasskeysSettings.siteIgnored) {
+        return;
+    }
+
+    if (!kpxcPasskeysSettings.backgroundInject) {
+        await (async function injectPageScript() {
+            const src = chrome.runtime.getURL('page-context/passkeys.js');
+            let evalInject = true; // TODO
+
+            if (
+                typeof cloneInto === 'function' // is Firefox
+                && evalInject
+            ) {
+                // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts#using_eval_in_content_scripts
+                try {
+                    window.eval(''); // check CSP before downloading script
+                    const code = await (await fetch(src)).text();
+                    window.eval(code);
+                    return;
+                } catch { } // blocked by CSP
+            }
+
+            const script = document.createElement('script');
+            script.src = src;
+            const id = 'kpxc-id';
+            script.id = id;
+
+            const container = document.createElement('span');
+            container.attachShadow({ mode: 'closed' }).append(script);
+
+            document.documentElement.append(container);
+            console.assert(!Array.from(document.scripts).find(el => el.id === id));
+            console.assert(!document.getElementById(id));
+            container.remove();
+            console.debug('[KPXC] script', script);
+        })();
+    }
+
     const passkeysLogDebug = function(message, extra) {
         if (kpxcPasskeysUtils.debugLogging) {
             if (typeof debugLogMessage === 'function') {
@@ -16,11 +64,6 @@ const enablePasskeys = async function() {
             }
         }
     };
-
-    const passkeys = document.createElement('script');
-    passkeys.src = chrome.runtime.getURL('content/passkeys.js');
-    document.documentElement.appendChild(passkeys);
-    passkeys.remove();
 
     /**
      * @param {number=} timeout
@@ -133,31 +176,4 @@ const enablePasskeys = async function() {
             await sendResponse('passkeys_get', publicKey);
         }
     });
-};
-
-const initContent = async () => {
-    if (document?.documentElement?.ownerDocument?.contentType !== 'text/html'
-        && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
-    ) {
-        return;
-    }
-
-    const settings = await chrome.runtime.sendMessage({ action: 'load_settings' });
-    if (!settings) {
-        console.log('Error: Cannot load extension settings');
-        return;
-    }
-
-    if (await chrome.runtime.sendMessage({ action: 'is_site_ignored', args: [ window.self.location.href, true ] })) {
-        console.log('This site is ignored in Site Preferences.');
-        return;
-    }
-
-    if (settings.passkeys) {
-        kpxcPasskeysUtils.debugLogging = settings?.debugLogging;
-        kpxcPasskeysUtils.passkeysFallback = settings?.passkeysFallback;
-        enablePasskeys();
-    }
-};
-
-initContent();
+})();

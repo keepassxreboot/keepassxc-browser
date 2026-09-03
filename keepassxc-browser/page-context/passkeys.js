@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict';
 
 (async () => {
@@ -305,4 +307,11 @@
     } catch (err) {
         console.log('Cannot override navigator.credentials: ', err);
     }
+
+    console.group('[KPXC] EXECUTED');
+    console.assert(globalThis === window, 'Not at page');
+    console.debug(`top: ${window === window.top}`, window);
+    console.groupEnd();
 })();
+
+//# sourceURL=keepassxc-browser:/passkeys.js
