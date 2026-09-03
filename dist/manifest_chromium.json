@@ -153,7 +153,7 @@
                 "css/pwgen.css",
                 "css/username.css",
                 "css/totp.css",
-                "content/passkeys.js"
+                "page-context/passkeys.js"
             ],
             "matches": [
                 "https://*/*",
@@ -169,6 +169,7 @@
         "nativeMessaging",
         "notifications",
         "offscreen",
+        "scripting",
         "storage",
         "tabs",
         "webNavigation",
