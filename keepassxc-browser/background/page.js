@@ -62,9 +62,6 @@ page.isSafari = false;
 page.manualFill = ManualFill.NONE;
 page.menuContexts = [ 'editable' ];
 page.passwordFilled = false;
-page.redirectCount = 0;
-page.submitted = false;
-page.submittedCredentials = {};
 
 page.popupData = {
     iconType: 'normal',
@@ -175,20 +172,6 @@ page.clearAllLogins = function() {
     });
 };
 
-page.setSubmittedCredentials = function(submitted, username, password, url, oldCredentials, tabId) {
-    page.submittedCredentials.submitted = submitted;
-    page.submittedCredentials.username = username;
-    page.submittedCredentials.password = password;
-    page.submittedCredentials.url = url;
-    page.submittedCredentials.oldCredentials = oldCredentials;
-    page.submittedCredentials.tabId = tabId;
-};
-
-page.clearSubmittedCredentials = async function() {
-    page.submitted = false;
-    page.submittedCredentials = {};
-};
-
 // Retrieves the credentials. Returns cached values when found.
 // Page reload or tab switch clears the cache.
 // If the retrieval is forced (from Credential Banner), get new credentials normally.
@@ -249,20 +232,6 @@ page.getBannerPosition = async function(tab) {
 page.setBannerPosition = async function(tab, position) {
     page.settings.bannerPosition = position;
     await browser.storage.local.set({ 'settings': page.settings });
-};
-
-page.getSubmitted = async function(tab) {
-    // Do not return any credentials if the tab ID does not match.
-    if (tab?.id !== page.submittedCredentials.tabId) {
-        return {};
-    }
-
-    return page.submittedCredentials;
-};
-
-page.setSubmitted = async function(tab, args = []) {
-    const [ submitted, username, password, url, oldCredentials ] = args;
-    page.setSubmittedCredentials(submitted, username, password, url, oldCredentials, tab.id);
 };
 
 page.getAutoSubmitPerformed = async function(tab) {

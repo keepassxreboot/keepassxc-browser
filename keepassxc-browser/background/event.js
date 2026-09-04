@@ -150,7 +150,7 @@ kpxcEvent.onUpdateAvailableKeePassXC = async function() {
 kpxcEvent.onRemoveCredentialsFromTabInformation = async function(tab) {
     const id = tab?.id || tabs.currentTabId;
     page.clearCredentials(id);
-    page.clearSubmittedCredentials();
+    credentials.clearSubmittedCredentials(id);
 };
 
 kpxcEvent.onLoginPopup = async function(tab, logins) {
@@ -199,8 +199,8 @@ kpxcEvent.getColorTheme = async function(tab) {
     return page.settings.colorTheme;
 };
 
-kpxcEvent.pageGetRedirectCount = async function() {
-    return page.redirectCount;
+kpxcEvent.pageGetRedirectCount = async function(tab) {
+    return await credentials.getRedirectCount(tab?.id);
 };
 
 kpxcEvent.pageClearLogins = async function(tab, alreadyCalled) {
@@ -278,17 +278,17 @@ kpxcEvent.messageHandlers = {
     'load_settings': kpxcEvent.onLoadSettings,
     'lock_database': kpxcEvent.lockDatabase,
     'page_clear_logins': kpxcEvent.pageClearLogins,
-    'page_clear_submitted': page.clearSubmittedCredentials,
+    'page_clear_submitted': credentials.clearSubmittedCredentials,
     'page_get_autosubmit_performed': page.getAutoSubmitPerformed,
     'page_get_login_id': page.getLoginId,
     'page_get_manual_fill': page.getManualFill,
     'page_get_redirect_count': kpxcEvent.pageGetRedirectCount,
-    'page_get_submitted': page.getSubmitted,
+    'page_get_submitted': credentials.getSubmittedCredentials,
     'page_set_allow_iframes': page.setAllowIframes,
     'page_set_autosubmit_performed': page.setAutoSubmitPerformed,
     'page_set_login_id': page.setLoginId,
     'page_set_manual_fill': page.setManualFill,
-    'page_set_submitted': page.setSubmitted,
+    'page_set_submitted': credentials.setSubmittedCredentials,
     'passkeys_get': keepass.passkeysGet,
     'passkeys_register': keepass.passkeysRegister,
     'password_get_filled': kpxcEvent.passwordGetFilled,
