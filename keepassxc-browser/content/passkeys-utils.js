@@ -15,12 +15,8 @@ const checkErrors = function(pkOptions, sameOriginWithAncestors) {
         throw new Error('No publicKey configuration options were provided');
     }
 
-    if (pkOptions.signal && pkOptions.signal.aborted) {
-        throw new DOMException('Abort signalled', DOMException.AbortError);
-    }
-
     if (!sameOriginWithAncestors) {
-        throw new DOMException('Cross-origin register or authentication is not allowed.', DOMException.NotAllowedError);
+        throw new DOMException('Cross-origin register or authentication is not allowed.', 'NotAllowedError');
     }
 
     if (pkOptions.challenge.length < 16) {

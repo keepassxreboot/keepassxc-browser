@@ -8,6 +8,7 @@ const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
 const PASSKEYS_REQUEST_CANCELED = 22;
 const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 
+/** @type {Function?} */
 let passkeysLifetimeTimerAbortFunc = null;
 
 // Apply a script to the page for intercepting Passkeys (WebAuthn) requests

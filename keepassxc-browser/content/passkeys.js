@@ -138,7 +138,14 @@
         return Object.setPrototypeOf(publicKeyCredential, PublicKeyCredential.prototype);
     };
 
-    // Posts a message to extension's content script and waits for response
+    /**
+     * Posts a message to extension's content script and waits for response
+     * @async
+     * @param {object} request
+     * @param {AbortSignal=} signal
+     * @returns {Promise<object>}
+     * @throws {unknown} if `AbortSignal`
+     */
     const postMessageToExtension = function(request, signal) {
         return new Promise((resolve, reject) => {
             const ev = document;
@@ -265,9 +272,6 @@
                 return null;
             }
 
-            // Check if request is immediately aborted
-            options?.signal?.throwIfAborted();
-
             const response = await postMessageToExtension({
                 action: 'passkeys_create',
                 publicKey: options.publicKey
@@ -291,9 +295,6 @@
             if (options?.mediation === 'conditional') {
                 return originalCredentials.get(options);
             }
-
-            // Check if request is immediately aborted
-            options?.signal?.throwIfAborted();
 
             const response = await postMessageToExtension({
                 action: 'passkeys_get',
