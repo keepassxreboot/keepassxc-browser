@@ -46,7 +46,6 @@ tabs.createTabEntry = async function(tabId) {
     }
 
     tabs.tabList.set(tabId, structuredClone(TAB_OBJECT));
-    await credentials.clearSubmittedCredentials(tabId);
     page.setFillAttributeContextMenuItemVisible(false);
 };
 
