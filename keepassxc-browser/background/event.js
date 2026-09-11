@@ -9,7 +9,7 @@ kpxcEvent.onMessage = async function(request, sender) {
             sender.tab.id = tabs.currentTabId;
         }
 
-        return await kpxcEvent.messageHandlers[request.action](sender.tab, request.args);
+        return await kpxcEvent.messageHandlers[request.action](sender.tab, request.args, sender);
     }
 };
 
@@ -289,6 +289,7 @@ kpxcEvent.messageHandlers = {
     'page_set_login_id': page.setLoginId,
     'page_set_manual_fill': page.setManualFill,
     'page_set_submitted': page.setSubmitted,
+    'passkeys_inject_into_page': page.passkeysInjectIntoPage,
     'passkeys_get': keepass.passkeysGet,
     'passkeys_register': keepass.passkeysRegister,
     'password_get_filled': kpxcEvent.passwordGetFilled,

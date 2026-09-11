@@ -49,8 +49,8 @@ const defaultSettings = {
 const AUTO_SUBMIT_TIMEOUT = 5000;
 
 /**
- * @Object page
  * Handles information between background and content scripts. Initializes and updates extension settings.
+ * @namespace
  */
 const page = {};
 page.autoSubmitPerformed = false;
@@ -316,6 +316,48 @@ page.isSiteIgnored = async function(tab, args = []) {
 
     return false;
 };
+
+page.passkeysInjectIntoPage = async function (tab, /** @type {never} */ _args, sender) {
+    const {
+        debugLogging,
+        passkeys,
+        passkeysFallback,
+    }
+        = page.settings || await kpxcEvent.onLoadSettings();
+    const siteIgnored = await page.isSiteIgnored(tab, [sender.url, true]);
+
+    /** @type {boolean} */
+    const allowed = passkeys && !siteIgnored;
+    let backgroundInject = allowed;
+
+    if (backgroundInject) {
+        try {
+            const targetFrameInfo =
+                (sender.documentId) // since Firefox 153
+                    ? { documentIds: [sender.documentId] }
+                    : { frameIds: [sender.frameId] };
+
+            await browser.scripting.executeScript({
+                files: ['page-context/passkeys.js'],
+                target: {
+                    tabId: tab.id,
+                    ...targetFrameInfo,
+                },
+                injectImmediately: true,
+                world: 'MAIN', // since Firefox 128
+            });
+        } catch (err) {
+            backgroundInject = false;
+        }
+    }
+
+    return {
+        allowed,
+        backgroundInject,
+        debugLogging,
+        passkeysFallback,
+    };
+}
 
 // Shows or hides the Fill Attribute context menu item
 page.setFillAttributeContextMenuItemVisible = async function(visible) {
