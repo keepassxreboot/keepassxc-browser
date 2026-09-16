@@ -184,7 +184,7 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Passkey not registered due to an existing credential. Remove the existing credential to continue.",
+        "message": "La passkey non è stata registrata a causa di una credenziale già esistente. Rimuovi la credenziale esistente per continuare.",
         "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
@@ -235,9 +235,25 @@
         "message": "user.id non corrisponde alla lunghezza richiesta.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredential non è supportato in fase di registrazione.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential non è vuoto, mentre allowedCredentials lo è.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "L'ID delle credenziali fornito in evalByCredential non è stato trovato.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Contesto non sicuro.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "Il nome utente o la password non possono contenere riferimenti.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "Non connesso a KeePassXC",
@@ -875,15 +891,15 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Metodo di connessione",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Se la messaggistica nativa è bloccata nel tuo browser, puoi passare a una connessione WebSocket diretta. Questa funzionalità deve essere abilitata da KeePassXC per funzionare. È necessario riavviare il browser.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
-        "message": "Native messaging",
+        "message": "Messaggistica nativa",
         "description": "Native messaging option for Connection method."
     },
     "optionsConnectionMethodWebSocket": {
