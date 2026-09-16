@@ -4,59 +4,59 @@
         "description": "Name of the extension."
     },
     "addSitePreferenceButtonTitle": {
-        "message": "Lägg till sidinställningar för denna URL.",
+        "message": "Lägg till webbplatsinställningar för den här URL:en.",
         "description": "Add button title text on Site Preferences tab."
     },
     "editSitePreferenceButtonTitle": {
-        "message": "Redigera URL:en för den här sidans inställningar.",
+        "message": "Redigera URL:en för den här webbplatsinställningen.",
         "description": "Edit button title text on Site Preferences tab."
     },
     "allowIframeButtonTitle": {
-        "message": "Tillåt cross-origin-iframes för den aktuella sidan.",
+        "message": "Tillåt iframes från andra ursprung på den här sidan.",
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
-        "message": "Anslut aktuell aktiv databas till KeePassXC-Browser.",
+        "message": "Anslut den aktiva databasen till KeePassXC-Browser.",
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Kopiera felsökningsinformation till urklipp",
+        "message": "Kopiera felsökningsinformation till urklippet",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
-        "message": "Stänger grundläggande HTTP-autentisering.",
+        "message": "Avfärda grundläggande HTTP-autentisering.",
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
-        "message": "Återanslut aktuell aktiv databas till KeePassXC-Browser.",
+        "message": "Återanslut den aktiva databasen till KeePassXC-Browser.",
         "description": "Reconnect button title text."
     },
     "redetectButtonTitle": {
-        "message": "Återidentifierar alla inmatningsfält på sidan.",
+        "message": "Identifiera alla inmatningsfält på sidan igen.",
         "description": "Redetect login fields button title text."
     },
     "reloadButtonTitle": {
-        "message": "Läser in tillägget igen och återansluter till KeePassXC.",
+        "message": "Ladda om tillägget och återanslut till KeePassXC.",
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
-        "message": "Ta bort ansluten databas från KeePassXC-Browser.",
+        "message": "Ta bort den anslutna databasen från KeePassXC-Browser.",
         "description": "Remove button title on Connected Databases tab."
     },
     "removeCustomLoginFieldsButtonTitle": {
-        "message": "Ta bort anpassade inloggningsfält för denna URL.",
+        "message": "Ta bort anpassade inloggningsfält för den här URL:en.",
         "description": "Remove button title on Custom Login Fields tab."
     },
     "removeSitePreferencesButtonTitle": {
-        "message": "Ta bort sidinställningar för denna URL.",
+        "message": "Ta bort webbplatsinställningar för den här URL:en.",
         "description": "Remove button title on Site Preferences tab."
     },
     "reopenDatabaseButtonTitle": {
-        "message": "Återöppna aktuell aktiv databas.",
+        "message": "Öppna den aktiva databasen igen.",
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
-        "message": "Lägger till identifiering av \"Endast användarnamn\" för aktuell sida",
+        "message": "Lägg till identifiering av ”Endast användarnamn” på den här sidan.",
         "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
@@ -64,7 +64,7 @@
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
-        "message": "Fyll i endast lösenord",
+        "message": "Fyll endast i lösenordet",
         "description": "Context menu item for filling password."
     },
     "contextMenuFillTOTP": {
@@ -76,47 +76,47 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Spara autentiseringsuppgifter",
+        "message": "Spara inloggningsuppgifter",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
-        "message": "Visa lösenordsgenerator",
+        "message": "Visa lösenordsgeneratorn",
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Ange attribut...",
+        "message": "Fyll i attribut…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "Begär systemomfattande autoskrivning",
+        "message": "Begär global autoskriv",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "HTTP-autentisering med multipla användaruppgifter upptäckt. Klicka på tilläggsikonen för att välja den korrekta användaruppgiften.",
+        "message": "Flera inloggningsuppgifter för HTTP-autentisering hittades. Klicka på tilläggsikonen och välj rätt inloggningsuppgift.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
-        "message": "Okänt fel",
+        "message": "Okänt fel.",
         "description": "Unknown error."
     },
     "errorMessageDatabaseNotOpened": {
-        "message": "Databasen är inte öppnad.",
+        "message": "Databasen är inte öppen.",
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "Databashash har inte tagits emot.",
+        "message": "Databasens hashvärde har inte tagits emot.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
-        "message": "Klientens publika nyckel har inte tagits emot.",
+        "message": "Klientens offentliga nyckel har inte tagits emot.",
         "description": "Client public key not received."
     },
     "errorMessageDecrypt": {
-        "message": "Kan inte avkryptera meddelande.",
+        "message": "Det går inte att avkryptera meddelandet.",
         "description": "Cannot decrypt message."
     },
     "errorMessageTimeout": {
-        "message": "Kan inte ansluta till KeePassXC. Kontrollera att webbläsarintegrationen är aktiverad i KeePassXC:s inställningar.",
+        "message": "Det går inte att ansluta till KeePassXC. Kontrollera att webbläsarintegrationen är aktiverad i KeePassXC:s inställningar.",
         "description": "Cannot connect to KeePassXC. Check that browser integration is enabled in KeePassXC settings."
     },
     "errorMessageCanceled": {
@@ -124,19 +124,19 @@
         "description": "Action canceled or denied."
     },
     "errorMessageEncrypt": {
-        "message": "Meddelandekrypteringen misslyckades. Körs KeePassXC?",
+        "message": "Det gick inte att kryptera meddelandet. Körs KeePassXC?",
         "description": "Message encryption failed. Is KeePassXC running?"
     },
     "errorMessageAssociate": {
-        "message": "Associeringen till KeePassXC misslyckades, försök igen.",
+        "message": "Det gick inte att koppla KeePassXC-Browser till KeePassXC. Försök igen.",
         "description": "KeePassXC association failed, try again."
     },
     "errorMessageKeyExchange": {
-        "message": "Nyckelutbytet misslyckades.",
+        "message": "Det gick inte att genomföra nyckelutbytet.",
         "description": "Key exchange was not successful."
     },
     "errorMessageEncryptionKey": {
-        "message": "Krypteringsnyckeln är okänd.",
+        "message": "Krypteringsnyckeln känns inte igen.",
         "description": "Encryption key is not recognized."
     },
     "errorMessageSavedDatabases": {
@@ -148,19 +148,19 @@
         "description": "Incorrect action."
     },
     "errorMessageEmptyMessage": {
-        "message": "Tomt meddelande mottaget.",
+        "message": "Ett tomt meddelande togs emot.",
         "description": "Empty message received."
     },
     "errorMessageNoURL": {
-        "message": "Ingen URL tillhandahållen.",
+        "message": "Ingen URL angavs.",
         "description": "No URL provided."
     },
     "errorMessageNoLogins": {
-        "message": "Inga inloggningar hittade.",
+        "message": "Inga inloggningar hittades.",
         "description": "No logins found."
     },
     "errorMessagePaswordLengthExceeded": {
-        "message": "Angivet lösenord är längre än fältets maxlängd.",
+        "message": "Det angivna lösenordet är längre än fältets maximala längd.",
         "description": "Error notification text shown when filled password is longer than defined maxLength of the input field."
     },
     "errorMessageNoGroupsFound": {
@@ -168,15 +168,15 @@
         "description": "No groups found."
     },
     "errorMessageCannotCreateNewGroup": {
-        "message": "Kan inte skapa ny grupp.",
+        "message": "Det går inte att skapa en ny grupp.",
         "description": "Cannot create new group."
     },
     "errorMessageNoValidUuidProvided": {
-        "message": "Ingen giltig UUID tillhandahållen.",
+        "message": "Ingen giltig UUID angavs.",
         "description": "No valid UUID provided."
     },
     "errorMessageAccessToAllEntriesDenied": {
-        "message": "Åtkomst till samtliga poster nekas.",
+        "message": "Åtkomst till alla poster nekades.",
         "description": "Access to all entries denied."
     },
     "errorMessagePasskeysAttestationNotSupported": {
@@ -184,11 +184,11 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Passnyckeln registrerades inte på grund av en befintlig inloggningsuppgift. Ta bort den befintliga inloggningsuppgiften för att fortsätta.",
+        "message": "Passnyckeln registrerades inte eftersom en autentiseringsuppgift redan finns. Ta bort den befintliga autentiseringsuppgiften för att fortsätta.",
         "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
-        "message": "Begäran om passnycklar annullerad.",
+        "message": "Begäran om passnyckel avbröts.",
         "description": "Passkeys request canceled."
     },
     "errorMessagePasskeysInvalidUserVerification": {
@@ -196,31 +196,31 @@
         "description": "Invalid user verification."
     },
     "errorMessagePasskeysEmptyPublicKey": {
-        "message": "Tom offentlig nyckel.",
+        "message": "Den offentliga nyckeln är tom.",
         "description": "Empty public key."
     },
     "errorMessagePasskeysInvalidUrlProvided": {
-        "message": "Ogiltig URL tillhandahållen.",
+        "message": "En ogiltig URL angavs.",
         "description": "Invalid URL provided."
     },
     "errorMessagePasskeysOriginNotAllowed": {
-        "message": "Ursprung är tomt eller inte tillåtet.",
+        "message": "Ursprunget är tomt eller inte tillåtet.",
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-        "message": "Effektiv domän är inte en giltig domän.",
+        "message": "Den effektiva domänen är inte giltig.",
         "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
-        "message": "Ursprung och RP-ID matchar inte.",
+        "message": "Ursprunget och RP-ID:t matchar inte.",
         "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-        "message": "Inga algoritmer som stöds tillhandahölls.",
+        "message": "Inga stödda algoritmer angavs.",
         "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Vänta tills tidsgränsen löper ut.",
+        "message": "Vänta tills timern har löpt ut.",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
@@ -228,31 +228,47 @@
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Utmaningen är kortare än den minimilängd som krävs.",
+        "message": "Utmaningen är kortare än den minsta tillåtna längden.",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id matchar inte den erforderliga längden.",
+        "message": "Parametern user.id har fel längd.",
         "description": "user.id does not match the required length."
+    },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredential stöds inte vid registrering.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "Parametern evalByCredential är inte tom, men parametern allowedCredentials är tom.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "ID:t för autentiseringsuppgiften som angavs i evalByCredential hittades inte.",
+        "description": "Credential ID provided in evalByCredential not found."
     },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Kontexten är inte säker.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "Användarnamn eller lösenord kan inte innehålla referenser.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "Inte ansluten till KeePassXC.",
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Aktuell databas är inte ansluten.",
+        "message": "Den aktuella databasen är inte ansluten.",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
-        "message": "Fel:\nDet genererade lösenordet är längre än den tillåtna längden!\nDet har kortats ned för att passa längden.\n\nVänligen kom ihåg det nya lösenordet!",
+        "message": "Fel: Det genererade lösenordet är längre än den tillåtna längden!",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongCut": {
-        "message": "Det har kortats ner för att passa tillåten längd",
+        "message": "Lösenordet har kortats ned för att passa den tillåtna längden.",
         "description": "A warning text shown in the password generator."
     },
     "passwordGeneratorErrorTooLongRemember": {
@@ -264,14 +280,14 @@
         "description": "Password icon title text."
     },
     "passwordGeneratorNotSupported": {
-        "message": "Lösenordsgeneratorn stöds inte i den här versionen av KeePassXC. Du behöver uppgradera KeePassXC till en nyare version."
+        "message": "Det går inte att starta lösenordsgeneratorn i den här versionen av KeePassXC. Uppdatera KeePassXC till en nyare version."
     },
     "usernameFieldText": {
-        "message": "Ange autentiseringsuppgifter från KeePassXC.",
+        "message": "Fyll i inloggningsuppgifter från KeePassXC.",
         "description": "Username field icon hover text."
     },
     "usernameFieldTextNoCredentials": {
-        "message": "Inga autentiseringsuppgifter att ange.",
+        "message": "Inga inloggningsuppgifter att fylla i.",
         "description": "Username field icon hover text when no credentials are."
     },
     "usernameLockedFieldText": {
@@ -279,7 +295,7 @@
         "description": "Username field icon hover text when database is locked."
     },
     "usernameDisconnectedFieldText": {
-        "message": "KeePassXC är frånkopplad.",
+        "message": "Anslutningen till KeePassXC har brutits.",
         "description": "Username field icon hover text when KeePassXC is disconnected."
     },
     "totp": {
@@ -287,7 +303,7 @@
         "description": "TOTP text."
     },
     "totpFieldText": {
-        "message": "Hämta TOTP från KeePassXC",
+        "message": "Fyll i TOTP från KeePassXC",
         "description": "OTP field icon hover text."
     },
     "defineClose": {
@@ -311,11 +327,11 @@
         "description": "Confirm button text when choosing Custom Login Fields."
     },
     "defineAlreadySelected": {
-        "message": "Inloggningsfält för den här sidan är redan markerade och kommer att skrivas över.",
+        "message": "Inloggningsfälten för den här sidan är redan valda och kommer att skrivas över.",
         "description": "A text shown when custom credentials fields are already set for the page."
     },
     "defineClearData": {
-        "message": "Ta bort sparad data",
+        "message": "Rensa sparade data",
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
@@ -343,7 +359,7 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineChooseSubmitButton": {
-        "message": "Välj Skicka-knapp",
+        "message": "Välj en skicka-knapp",
         "description": "Choose submit button selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
@@ -351,7 +367,7 @@
         "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
-        "message": "Du kan också använda siffrorna för att välja inmatningsfälten med tangentbordet.",
+        "message": "Du kan också använda siffertangenterna för att välja inmatningsfält.",
         "description": "Help text when choosing Custom Login Fields."
     },
     "defineChooseCustomLoginFieldText": {
@@ -375,27 +391,27 @@
         "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
-        "message": "- inget användarnamn -",
+        "message": "– inget användarnamn –",
         "description": "Shown when no username is set in the credentials."
     },
     "credentialsNoLoginsFound": {
-        "message": "Fel:\nInga inloggningar hittades.",
+        "message": "Inga inloggningar hittades.",
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsBlockedInIframe": {
-        "message": "Ifyllning av inloggningsuppgifter har blockerats av en otillförlitlig iframe.",
+        "message": "Ifyllning av inloggningsuppgifter har blockerats i en otillförlitlig iframe.",
         "description": "Alert message when filling credentials is blocked due to iframe restrictions."
     },
     "credentialsMultipleFound": {
-        "message": "Fel:\nMer än en inloggning hittades i KeePassXC!\nTryck på ikonen för KeePassXC-Browser för fler alternativ.",
+        "message": "Flera inloggningsuppgifter hittades i KeePassXC!",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Tryck på KeePassXC-Browser-ikonen för fler alternativ.",
+        "message": "Klicka på KeePassXC-Browser-ikonen för fler alternativ.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
-        "message": "Fel:\nInga autentiseringsuppgifter funna för angivet användarnamn.",
+        "message": "Inga inloggningsuppgifter hittades för det angivna användarnamnet.",
         "description": "Alert message when no credentials are found for the given username."
     },
     "credentialsNoTOTPFound": {
@@ -403,31 +419,31 @@
         "description": "Alert message when no TOTP is found."
     },
     "credentialExpired": {
-        "message": "Förfallen",
+        "message": "Utgången",
         "description": "If a credential is expired, this is appended to the title label."
     },
     "credentialsRetrieveButton": {
-        "message": "Hämta autentiseringsuppgifter",
+        "message": "Hämta inloggningsuppgifter",
         "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
-        "message": "Fel:\nKan inte hitta fält att fylla i.",
+        "message": "Fel: Det gick inte att hitta några fält att fylla i.",
         "description": "Alert message when no fields are found to fill in."
     },
     "fieldsNoPasswordField": {
-        "message": "Fel:\nKan inte hitta ett lösenordsfält.",
+        "message": "Fel: Det gick inte att hitta något lösenordsfält.",
         "description": "Message shown when no password fields are found."
     },
     "fieldsPasswordFillNotAccepted": {
-        "message": "Det går inte att fylla i lösenord i ett oformaterat textfält.",
+        "message": "Det går inte att fylla i lösenord i ett vanligt textfält.",
         "description": "Message shown when password fill to a plain text field is prevented."
     },
     "rememberNothingChanged": {
-        "message": "Fel:\nKan inte hitta ändrade autentiseringsuppgifter.",
+        "message": "Fel: Det gick inte att hitta några ändrade inloggningsuppgifter.",
         "description": "Message shown when trying to save credentials that haven't changed."
     },
     "popupTitle": {
-        "message": "KeePassXC - Popup",
+        "message": "KeePassXC – popupfönster",
         "description": "Popup window title."
     },
     "popupSettingsText": {
@@ -447,7 +463,7 @@
         "description": "Popup Reconnect button text."
     },
     "popupRedetectButton": {
-        "message": "Återidentifiera inloggningsfälten",
+        "message": "Identifiera inloggningsfälten igen",
         "description": "Popup Redetect login fields button text."
     },
     "popupReloadButton": {
@@ -455,23 +471,23 @@
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": "Återöppna databas",
+        "message": "Öppna databasen igen",
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
-        "message": "Lägg till alternativet Endast användarnamn för denna sida",
+        "message": "Lägg till alternativet ”Endast användarnamn” för den här webbplatsen",
         "description": "Button text for adding Username-only option."
     },
     "popupAllowIframeButton": {
-        "message": "Tillåt iframes från webbplatsen",
+        "message": "Tillåt iframes från andra ursprung på den här webbplatsen",
         "description": "Button text for allowing Cross-Origin iframes option."
     },
     "popupErrorEncountered": {
-        "message": "KeePassXC-Browser har påträffat ett fel:",
+        "message": "Ett fel har inträffat i KeePassXC-Browser:",
         "description": "A text shown above error message in the popup."
     },
     "popupUpdateAvailable": {
-        "message": "Du använder en gammal version av KeePassXC.",
+        "message": "Du använder en inaktuell version av KeePassXC.",
         "description": "Popup warning message about old version of KeePassXC."
     },
     "popupDownloadNewVersion": {
@@ -479,11 +495,11 @@
         "description": "Popup warning message link when KeePassXC version is not up-to-date."
     },
     "popupGettingStartedText": {
-        "message": "Är du en förstagångsanvändare? Kolla in vår kom-igång-guide.",
+        "message": "Är du ny användare? Läs vår guide för att komma igång.",
         "description": "Popup information message about Getting Started Guide."
     },
     "popupGettingStartedLinkText": {
-        "message": "Kom-igång-guide - Ställ in webbläsarintegration",
+        "message": "Guide för att komma igång – konfigurera webbläsarintegrationen",
         "description": "Popup Getting Started Guide link text."
     },
     "popupAlertHide": {
@@ -491,7 +507,7 @@
         "description": "Hide alert close button title."
     },
     "popupTroubleshootingText": {
-        "message": "Kan du inte ansluta till KeePassXC? Vår wiki-sida kanske kan hjälpa till.",
+        "message": "Kan du inte ansluta till KeePassXC? Kanske kan vår wikisida hjälpa dig.",
         "description": "Popup information message about Troubleshooting Guide."
     },
     "popupTroubleshootingLinkText": {
@@ -499,11 +515,11 @@
         "description": "Popup Troubleshooting Guide link text."
     },
     "popupCheckingStatus": {
-        "message": "Kontrollerar status...",
+        "message": "Kontrollerar status…",
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser har inte konfigurerats. Klicka på Anslut för att parkoppla med KeePassXC.",
+        "message": "KeePassXC-Browser har inte konfigurerats. Klicka på Anslut för att parkoppla tillägget med KeePassXC.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -511,43 +527,43 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Tryck på återanslut-knappen för att upprätta en ny anslutning.",
+        "message": "Klicka på Återanslut för att upprätta en ny anslutning.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
-        "message": "KeePassXC-Browser har ännu inte anslutit till KeePassXC men har konfigurerats med identifieraren: $1",
+        "message": "KeePassXC-Browser har konfigurerats med identifieraren $1 men har ännu inte anslutit till KeePassXC.",
         "description": "A popup message shown when KeePassXC is not connected but configured."
     },
     "popupConfiguredAndAssociated": {
-        "message": "KeePassXC-Browser är ansluten till KeePassXC och har konfigurerats med följande identifierare: $1",
+        "message": "KeePassXC-Browser har anslutit till KeePassXC och konfigurerats med följande identifierare: $1",
         "description": "A popup message when a connection to KeePassXC is successful."
     },
     "popupUsernameFieldDetected": {
-        "message": "Endast ett användarnamn har identifierats. Vill du lägga till URL:en i sidinställningarna, med alternativet \"Endast användarnamn\" aktiverat?",
+        "message": "Endast ett användarnamnsfält identifierades. Vill du lägga till URL:en i webbplatsinställningarna med alternativet ”Endast användarnamn” aktiverat?",
         "description": "Text shown when page can be added to Site Preferences with Username-only option enabled."
     },
     "popupIframeDetected": {
-        "message": "En iframe identifierades. Vill du lägga till URL:en i webbplatsinställningarna med alternativet Tillåt iframes aktiverat?",
+        "message": "En iframe från ett annat ursprung identifierades. Vill du lägga till URL:en i webbplatsinställningarna med alternativet ”Tillåt iframes från andra ursprung” aktiverat?",
         "description": "Text shown when page can be added to Site Preferences with Allow Cross-Origin iframes option enabled."
     },
     "rememberInfoText": {
-        "message": "Användarnamnet eller lösenordet har ändrats! Vill du spara det?",
+        "message": "Användarnamnet eller lösenordet har ändrats! Vill du spara ändringen?",
         "description": "Message when username or password has changed."
     },
     "rememberSaving": {
-        "message": "Autentiseringsuppgifterna kommer att sparas i ansluten databas med identifieraren $1",
+        "message": "Inloggningsuppgifterna sparas i den anslutna databasen med identifieraren $1",
         "description": "A message when saving or updating credentials."
     },
     "rememberNewUsername": {
-        "message": "Följande användarnamn har inte sparats: $1",
+        "message": "Följande användarnamn har ännu inte sparats: $1",
         "description": "A message shown when a new username is detected when saving credentials."
     },
     "rememberUsernameExists": {
-        "message": "Autentiseringsuppgifterna med det använda användarnamnet är markerade med fet stil: $1",
+        "message": "Befintliga inloggningsuppgifter med samma användarnamn visas med fetstil: $1",
         "description": "A message shown when an existing username is detected when saving credentials."
     },
     "rememberChooseCredentials": {
-        "message": "Välj vilka autentiseringsuppgifter du vill uppdatera.",
+        "message": "Välj vilka inloggningsuppgifter du vill uppdatera.",
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
@@ -555,51 +571,51 @@
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
-        "message": "Standardgrupp skapad i ansluten databas.",
+        "message": "En standardgrupp skapades i den anslutna databasen.",
         "description": "Info message shown when default group set cannot be found."
     },
     "rememberErrorCreatingNewGroup": {
-        "message": "Det går inte att skapa en ny grupp.",
+        "message": "Det går inte att skapa nya grupper.",
         "description": "Error message shown when new groups cannot be created."
     },
     "rememberErrorPasswordNotChanged": {
-        "message": "Autentiseringsuppgifterna uppdaterades inte. Lösenordet har inte ändrats.",
+        "message": "Inloggningsuppgifterna uppdaterades inte. Lösenordet har inte ändrats.",
         "description": "Error message shown when credential password is not changed."
     },
     "rememberErrorCannotSaveCredentials": {
-        "message": "Autentiseringsuppgifterna kan inte sparas eller uppdateras.",
+        "message": "Det går inte att spara eller uppdatera inloggningsuppgifterna.",
         "description": "Error message shown when credentials cannot be saved or updated."
     },
     "rememberErrorDatabaseClosed": {
-        "message": "Autentiseringsuppgifter kan inte sparas eller uppdateras till en stängd databas.",
+        "message": "Det går inte att spara eller uppdatera inloggningsuppgifter i en stängd databas.",
         "description": "Error message shown when credentials cannot be saved or updated and the database is closed."
     },
     "rememberCredentialsNotSaved": {
-        "message": "Åtgärden avbruten. Autentiseringsuppgifterna har inte uppdaterats.",
+        "message": "Åtgärden avbröts. Inloggningsuppgifterna uppdaterades inte.",
         "description": "Message shown when saving operation was cancelled."
     },
     "rememberCredentialsSaved": {
-        "message": "Nya autentiseringsuppgifter med användarnamnet $1 sparades.",
+        "message": "Nya inloggningsuppgifter med användarnamnet $1 sparades.",
         "description": "Message shown when new credentials are saved."
     },
     "rememberCredentialsUpdated": {
-        "message": "Autentiseringsuppgifter med användarnamnet $1 uppdaterades.",
+        "message": "Inloggningsuppgifterna med användarnamnet $1 uppdaterades.",
         "description": "Message shown when new credentials are successfully updated."
     },
     "rememberCredentialsExists": {
-        "message": "Identiska autentiseringsuppgifter finns redan. Inget att uppdatera.",
+        "message": "Identiska inloggningsuppgifter finns redan. Inget behöver uppdateras.",
         "description": "Message shown when new credentials already found in database."
     },
     "rememberEmptyUsername": {
-        "message": "(tom)",
+        "message": "(tomt)",
         "description": "Means an empty username."
     },
     "rememberNoPassword": {
-        "message": "Fyll i lösenordsfältet innan du sparar autentiseringsuppgifterna.",
+        "message": "Fyll i lösenordsfältet innan du sparar inloggningsuppgifterna.",
         "description": "Message shown when no password is set when saving credentials."
     },
     "popupLoginText": {
-        "message": "Välj inloggningsuppgifterna som du vill ska anges på sidan.",
+        "message": "Välj vilka inloggningsuppgifter som ska fyllas i på sidan.",
         "description": "A popup message shown when one or multiple credentials are present."
     },
     "popupFilterText": {
@@ -607,11 +623,11 @@
         "description": "Text for login credentials quick filter."
     },
     "popupAuthText": {
-        "message": "Välj inloggningsuppgifter som du vill bli inloggad med.",
+        "message": "Välj de inloggningsuppgifter som du vill logga in med.",
         "description": "A popup message shown when doing HTTP Authentication with multiple credentials present."
     },
     "popupMultiplePasswordFields": {
-        "message": "Fler än ett lösenordsfält hittades på denna sida. Högerklicka på ett av lösenordsfälten och välj en av:",
+        "message": "Fler än ett lösenordsfält hittades på den här sidan. Högerklicka på ett av lösenordsfälten och välj något av följande:",
         "description": "A popup message shown when web page has multiple password fields."
     },
     "popupUsername": {
@@ -619,7 +635,7 @@
         "description": "A username field name shown on credential update."
     },
     "popupButtonNew": {
-        "message": "Nytt",
+        "message": "Ny",
         "description": "New button text in popup when updating credentials."
     },
     "popupButtonUpdate": {
@@ -635,7 +651,7 @@
         "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Fråga aldrig igen för den här sidan",
+        "message": "Fråga inte igen om den här webbplatsen",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -671,7 +687,7 @@
         "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Sidinställningar",
+        "message": "Webbplatsinställningar",
         "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -691,7 +707,7 @@
         "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Sidinställningar",
+        "message": "Webbplatsinställningar",
         "description": "Site Preferences page header."
     },
     "optionsSitePreferencesSettings": {
@@ -703,7 +719,7 @@
         "description": "About page header."
     },
     "optionsConfigureShortcuts": {
-        "message": "Konfigurera genvägar",
+        "message": "Konfigurera tangentbordsgenvägar",
         "description": "Keyboard shortcut button and title text."
     },
     "optionsButtonSave": {
@@ -727,7 +743,7 @@
         "description": "Edit button text."
     },
     "optionsButtonUpdate": {
-        "message": "Leta efter uppdateringar",
+        "message": "Sök efter uppdateringar",
         "description": "Check for updates button text."
     },
     "optionsButtonRemoveNow": {
@@ -759,7 +775,7 @@
         "description": "Default group options text."
     },
     "optionsDefaultGroupHelpText": {
-        "message": "Avgränsa grupper med snedstreck, till exempel Grupp/Undergrupp.",
+        "message": "Separera gruppnivåer med snedstreck, till exempel Grupp/Undergrupp.",
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
@@ -767,11 +783,11 @@
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
-        "message": "Fråga alltid var nya autentiseringsuppgifter ska sparas",
+        "message": "Fråga alltid var nya inloggningsuppgifter ska sparas",
         "description": "Default group checkbox help text."
     },
     "optionsLabelDefaultGroupCheckboxHelpText": {
-        "message": "När detta är aktiverat visar popupen en grupplista.",
+        "message": "När alternativet är aktiverat visas en grupplista i popupfönstret.",
         "description": "Default checkbox explanation help text."
     },
     "optionsCheckboxUsePasswordGenerator": {
@@ -779,19 +795,19 @@
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Aktivera ikoner för användarnamn",
+        "message": "Aktivera ikoner i användarnamnsfält",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Använd dynamisk identifiering av indatafält",
+        "message": "Använd dynamisk identifiering av inmatningsfält",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Användbart på sidor som använder popup-rutor eller dynamiska dialoger. Inaktivera funktionen för att reducera CPU-belastningen på långsammare maskiner. Vid inaktivering kan inloggningsuppgifter endast infogas med hjälp av tangentbordsgenvägar, kontextmenyn eller tilläggets popup.",
+        "message": "Användbart på sidor med popupfönster eller dynamiska dialogrutor. Inaktivera funktionen för att minska processorbelastningen på långsammare datorer. När funktionen är inaktiverad kan inloggningsuppgifter endast fyllas i med tangentbordsgenvägar, snabbmenyn eller tilläggets popupfönster.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Aktivera 2FA/OTP-ikoner.",
+        "message": "Aktivera ikoner i fält för tvåfaktorsautentisering och engångslösenord",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
@@ -803,27 +819,27 @@
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
-        "message": "Varning! Denna funktion är experimentell. Används på egen risk.",
+        "message": "Varning! Den här funktionen är experimentell. Använd funktionen på egen risk.",
         "description": "Auto-reconnect warning message."
     },
     "optionsCheckboxAutoFillSingleEntry": {
-        "message": "Fyll automatiskt i enstaka inloggningsuppgifter.",
+        "message": "Fyll automatiskt i när endast en inloggningsuppgift matchar",
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Fyll automatiskt i relevanta inloggningsuppgifter.",
+        "message": "Fyll automatiskt i relevanta inloggningsuppgifter",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
-        "message": "Fyll automatiskt i enstaka TOTP-poster",
+        "message": "Fyll automatiskt i TOTP när endast en post matchar",
         "description": "Automatically fill-in single TOTP entries checkbox text."
     },
     "optionsCheckboxAutoCompleteUsernames": {
-        "message": "Aktivera autokomplettering av användarnamn",
+        "message": "Aktivera autokomplettering i användarnamnsfält",
         "description": "Activate autocomplete for username fields checkbox text."
     },
     "optionsCheckboxShowGroupNameInAutocomplete": {
-        "message": "Visa gruppnamnet i autokompletteringslistan när inloggningsuppgifterna är från olika grupper",
+        "message": "Visa gruppnamnet i autokompletteringslistan om inloggningsuppgifterna kommer från olika grupper",
         "description": "Show group name in autocomplete checkbox text."
     },
     "optionsCheckboxAutoSubmit": {
@@ -831,15 +847,15 @@
         "description": "Auto-submit checkbox text."
     },
     "optionsAutoSubmitHelpText": {
-        "message": "Skickar automatiskt valda autentiseringsuppgifter. Detta är inaktiverat för automatisk ifyllning av enkelpost.",
+        "message": "Skickar automatiskt in formuläret med de valda inloggningsuppgifterna. Funktionen är inaktiverad vid automatisk ifyllning av en enstaka post.",
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Visa aviseringar.",
+        "message": "Visa aviseringar",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Använd monokrom verktygsfältsikon",
+        "message": "Använd en monokrom ikon i verktygsfältet",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
@@ -847,11 +863,11 @@
         "description": "Whether the compact mode (legacy dropdown) should be enabled."
     },
     "optionsSaveDomainOnly": {
-        "message": "Spara endast domän",
+        "message": "Spara endast domänen",
         "description": "Save domain only checkbox text."
     },
     "optionsCheckboxShowLoginNotifications": {
-        "message": "Visa en banderoll på sidan när nya autentiseringsuppgifter kan sparas i databasen",
+        "message": "Visa en banderoll på sidan när nya inloggningsuppgifter kan sparas i databasen",
         "description": "Show login notifications checkbox text."
     },
     "optionsDefaultPasswordManager": {
@@ -859,19 +875,19 @@
         "description": "Default password manager checkbox text."
     },
     "optionsDefaultPasswordManagerHelpText": {
-        "message": "Sätter KeePassXC-Browser som ordinarie lösenordshanterare för webbläsaren.",
+        "message": "Anger KeePassXC-Browser som webbläsarens standardlösenordshanterare.",
         "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
-        "message": "Antal tillåtna omdirigeringar:  $1",
+        "message": "Antal tillåtna omdirigeringar: $1",
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Hur många omdirigeringar som tillåts innan banderollen försvinner. Standardvärdet är 3. Max är oändligt.",
+        "message": "Hur många omdirigeringar som tillåts innan banderollen försvinner. Standardvärdet är 3. Det finns ingen övre gräns.",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
-        "message": "Tillåt ifyllning av HTTP-autentiseringsuppgifter",
+        "message": "Tillåt att inloggningsuppgifter fylls i vid grundläggande HTTP-autentisering",
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
@@ -879,11 +895,11 @@
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "Om inbyggd meddelandefunktion är blockerad i din webbläsare kan du växla till en direkt WebSocket-anslutning. Funktionen måste aktiveras från KeePassXC-sidan för att fungera. Webbläsaren måste startas om.",
+        "message": "Om inbyggd meddelandehantering blockeras i webbläsaren kan du byta till en direkt WebSocket-anslutning. Funktionen måste aktiveras i KeePassXC för att fungera. Webbläsaren måste startas om.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
-        "message": "Inbyggd meddelandefunktion",
+        "message": "Inbyggd meddelandehantering",
         "description": "Native messaging option for Connection method."
     },
     "optionsConnectionMethodWebSocket": {
@@ -891,7 +907,7 @@
         "description": "WebSocket option for Connection method."
     },
     "optionsDebugLogging": {
-        "message": "Felsökningslogg",
+        "message": "Felsökningsloggning",
         "description": "Debug logging checkbox text."
     },
     "optionsDebugLoggingHelpText": {
@@ -899,11 +915,11 @@
         "description": "Debug logging help text."
     },
     "optionsRadioText": {
-        "message": "Leta efter uppdateringar av KeePassXC:",
+        "message": "Sök efter uppdateringar av KeePassXC:",
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "var 3:e dag",
+        "message": "var tredje dag",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -923,7 +939,7 @@
         "description": "Theme selection header text."
     },
     "optionsCredentialSortSelectionHeader": {
-        "message": "Sortera autentiseringsuppgifter efter",
+        "message": "Sortera matchande inloggningsuppgifter efter",
         "description": "Credential sort option header text."
     },
     "optionsThemeSelection": {
@@ -947,11 +963,11 @@
         "description": "Keyboard shortcut header text."
     },
     "optionsUsePasswordGeneratorHelpText": {
-        "message": "Lägger till en knapp i lösenordsfält för generering av ett nytt lösenord.",
+        "message": "Lägger till en ikon i lösenordsfält för att generera ett nytt lösenord.",
         "description": "Password Generator option help text."
     },
     "optionsUsePasswordGeneratorHelpTextSecond": {
-        "message": "Lösenord genereras av KeePassXC och använder din lösenordsgenereringsprofil.",
+        "message": "Lösenorden genereras av KeePassXC enligt din profil för lösenordsgenerering.",
         "description": "Password Generator option help text, second part."
     },
     "optionsPredefinedSiteList": {
@@ -963,59 +979,59 @@
         "description": "Use predefined sites checkbox text."
     },
     "optionsUsePredefinedSitesHelpText": {
-        "message": "Lägger till vanliga webbplatser som har inloggningsformulär med endast användarnamn till webbplatsinställningarna.",
+        "message": "Lägger till vanliga webbplatser med inloggningsformulär som endast innehåller ett användarnamnsfält i webbplatsinställningarna.",
         "description": "Use predefined sites option help text."
     },
     "optionsShowLoginFormIconHelpText": {
-        "message": "Lägger till en ikon i lösenordsfält för ifyllning av autentiseringsuppgifter med ett enkelt musklick.",
+        "message": "Lägger till en ikon i användarnamnsfält så att du kan fylla i inloggningsuppgifter med ett enda musklick.",
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Lägger till en ikon i inmatningsfält som identifieras som OTP/2FA.",
+        "message": "Lägger till en ikon i inmatningsfält som identifieras som fält för engångslösenord eller tvåfaktorsautentisering.",
         "description": "OTP field icon option help text."
     },
     "optionsHideIconsAlertText": {
-        "message": "Du kan också dölja ikoner manuellt vid behov, med shift+vänsterklick.",
+        "message": "Du kan också dölja ikoner manuellt vid behov med Skift+klick.",
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
-        "message": "KeePassXC-Browser kommer omedelbart att hämta inloggningsuppgifter när en flik aktiveras.",
+        "message": "KeePassXC-Browser hämtar omedelbart inloggningsuppgifter när en flik aktiveras.",
         "description": "Auto-Retrive Credentials option help text."
     },
     "optionsAutomaticReconnectHelpText": {
-        "message": "Återansluter automatiskt till KeePassXC när det identifierats.",
+        "message": "Ansluter automatiskt till KeePassXC igen när programmet identifieras.",
         "description": "Auto-reconnect option help text."
     },
     "optionsAutoFillSingleEntryHelpText": {
-        "message": "Låt KeePassXC-Browser fylla i inloggningsuppgifter automatiskt om bara en post matchar.",
+        "message": "Låt KeePassXC-Browser fylla i inloggningsuppgifter automatiskt när endast en post matchar.",
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Fyll automatiskt i relevanta inloggningsuppgifter om en andra inmatning behövs.",
+        "message": "Fyll automatiskt i relevanta inloggningsuppgifter om en andra ifyllning behövs.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
-        "message": "Varning! Automatisk ifyllning är inte säkert. Använd det på egen risk. KeePassXC-Browser försöker automatiskt identifiera inloggningsfält. De kan dock identifieras felaktigt och eventuellt fyllas i med känslig data i osäkra indatafält.",
+        "message": "Varning! Automatisk ifyllning är inte säker. Använd funktionen på egen risk. KeePassXC-Browser försöker automatiskt identifiera inloggningsfält. Fälten kan dock identifieras felaktigt, vilket kan leda till att känsliga uppgifter anges i osäkra inmatningsfält.",
         "description": "Auto-Fill Single Entry warning text."
     },
     "optionsAutoFillSingleTotpHelpText": {
-        "message": "Låt KeePassXC-Browser automatiskt fylla i TOTP-fält om bara en enda post matchar.",
+        "message": "Låt KeePassXC-Browser fylla i TOTP-fält automatiskt när endast en post matchar.",
         "description": "Auto-Fill Single TOTP field option help text."
     },
     "optionsAutocompleteUsernamesHelpText": {
-        "message": "Visa en rullista innehållande tillgängliga inloggningsuppgifter för alla användarnamnsfält på en sida.",
+        "message": "Visa en listruta med tillgängliga inloggningsuppgifter för alla användarnamnsfält på en sida.",
         "description": "Autocomplete Usernames option help text."
     },
     "optionsShowGroupNameInAutocompleteHelpText": {
-        "message": "När inloggningsuppgifter anges från olika grupper, kommer gruppnamnet att visas. Gäller endast kompaktläge.",
+        "message": "När inloggningsuppgifter hämtas från olika grupper visas gruppnamnet. Detta gäller endast kompaktläget.",
         "description": "Show group name in autocomplete help text."
     },
     "optionsShowNotificationsHelpText": {
-        "message": "Visa notifieringar för fel och när användaren behöver interagera.",
+        "message": "Visa aviseringar vid fel och när användaren behöver vidta en åtgärd.",
         "description": "Show notifications option help text."
     },
     "optionsUseMonochromeToolbarIconHelpText": {
-        "message": "Använd en monokrom ikon med färgade märken i verktygsfältet som anpassar sig till ljust/mörkt webbläsartema.",
+        "message": "Använd en monokrom ikon med färgade markeringar i verktygsfältet som anpassar sig till webbläsarens ljusa eller mörka tema.",
         "description": "Use monochrome toolbar icon option help text."
     },
     "optionsUseCompactModeHelpText": {
@@ -1023,35 +1039,35 @@
         "description": "Use compact (legacy) mode help text."
     },
     "optionsSaveDomainOnlyHelpText": {
-        "message": "Spara enbart domänen istället för hela URL:en när nya inloggningsuppgifter sparas.",
+        "message": "Spara endast domänen i stället för hela URL:en när nya inloggningsuppgifter sparas.",
         "description": "Save domain only option help text."
     },
     "optionsSaveDomainOnlyCustomLoginHelpText": {
-        "message": "Spara endast domänen istället för fullständig URL, när nya anpassade inloggningsfält sparas.",
+        "message": "Spara endast domänen i stället för hela URL:en när nya anpassade inloggningsfält sparas.",
         "description": "Save domain only option help text."
     },
     "optionsDownloadFaviconAfterSave": {
-        "message": "Hämta favicon efter att du har sparat",
+        "message": "Hämta favikon efter att uppgifterna har sparats",
         "description": "Download favicon after save checkbox label text."
     },
     "optionsDownloadFaviconAfterSaveHelpText": {
-        "message": "Favikon hämtas automatiskt för den nya inloggningsuppgiften.",
+        "message": "En favikon hämtas automatiskt för den nya inloggningsuppgiften.",
         "description": "Download favicon after save help text."
     },
     "optionsAutoFillAndSendHelpText": {
-        "message": "Om inloggningsuppgifter hittas för en sida och inloggningstypen är en HTTP Basic Auth-begäran så kommer KeePassXC-Browser att försöka logga in med den först angivna inloggningsuppgiften.",
+        "message": "Om inloggningsuppgifter hittas för en sida och inloggningen använder grundläggande HTTP-autentisering försöker KeePassXC-Browser logga in automatiskt med den första uppsättningen inloggningsuppgifter. Om flera uppsättningar finns kan du välja rätt inloggningsuppgifter i tilläggets popupfönster. Även när funktionen är aktiverad kan du ange inloggningsuppgifter för grundläggande HTTP-autentisering manuellt.",
         "description": "Auto-Fill And Send option help text."
     },
     "optionsAutoFillAndSendHelpTextSecond": {
-        "message": "En HTTP Basic Auth dialog ser ut så här:",
+        "message": "En dialogruta för grundläggande HTTP-autentisering ser ut så här:",
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Rensa bort autentiseringsuppgifter från icke aktiva flikar efter (sekunder, 0-3600).",
+        "message": "Rensa inloggningsuppgifter från inaktiva flikar efter följande antal sekunder (0–3 600):",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
-        "message": "Autentiseringsuppgifter tas bort från bakgrundsflikar efter tidsgränsen och behörighet för dessa sidor kommer att efterfrågas igen.",
+        "message": "När tidsgränsen löper ut tas inloggningsuppgifterna bort från bakgrundsflikar, och åtkomst till sidorna begärs på nytt.",
         "description": "Clear credentials timeout help text."
     },
     "optionsVersionInfoText": {
@@ -1063,51 +1079,51 @@
         "description": "Settings page download link."
     },
     "optionsVersionRunning": {
-        "message": "Du använder KeePassXC version: $1 ",
+        "message": "Du använder KeePassXC-version $1",
         "description": "Settings page info text of user's KeePassXC version."
     },
     "optionsLatestVersion": {
-        "message": "Senaste tillgängliga versionen av KeePassXC: $1",
+        "message": "Senaste tillgängliga KeePassXC-version: $1",
         "description": "Settings page info text about the latest KeePassXC version."
     },
     "optionsKeePassXCVersionRequired": {
-        "message": "Kräver KeePassXC version: $1",
+        "message": "KeePassXC-version som krävs: $1",
         "description": "KeePassXC version requirement text."
     },
     "optionsMinimumKeePassXCVersionRequired": {
-        "message": "Tillägget kräver KeePassXC-version: $1. Tidigare versioner kan orsaka oönskat beteende.",
+        "message": "Tillägget kräver KeePassXC-version $1. Tidigare versioner kan orsaka oönskat beteende.",
         "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
-        "message": "Förinställt: $1",
+        "message": "Standard: $1",
         "description": "Default setting text."
     },
     "optionsInfinite": {
-        "message": "Oändlig: $1",
+        "message": "Obegränsat: $1",
         "description": "Infinite setting text."
     },
     "optionsRecommended": {
-        "message": "Rekommenderad: $1",
+        "message": "Rekommenderat: $1",
         "description": "Recommended setting text."
     },
     "optionsShortcutsSuccess": {
-        "message": "Genväg för $1 har ändrats framgångsrikt.",
+        "message": "Tangentbordsgenvägen för $1 har ändrats.",
         "description": "Message for successful keyboard shortcut change."
     },
     "optionsShortcutsInfo": {
-        "message": "Genväg för $1 har återställts.",
+        "message": "Tangentbordsgenvägen för $1 har återställts.",
         "description": "Info message for changing keyboard shortcuts."
     },
     "optionsShortcutsDanger": {
-        "message": "Fel: Genväg för $1 har inte ändrats!",
+        "message": "Fel: Tangentbordsgenvägen för $1 ändrades inte!",
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
-        "message": "Importera/Exportera inställningar",
+        "message": "Importera och exportera inställningar",
         "description": "Settings page header text for import/export."
     },
     "optionsImportSettingsDialogTitle": {
-        "message": "Vill du importera inställningar från extern fil?",
+        "message": "Vill du importera inställningar från en extern fil?",
         "description": "Import settings confirmation dialog title text."
     },
     "optionsImportSettingsDialogText": {
@@ -1115,7 +1131,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsResetSettingsDialogText": {
-        "message": "Alla inställningar kommer att återställas till standardinställning. Är du säker?",
+        "message": "Alla inställningar återställs till standardvärdena. Vill du fortsätta?",
         "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
@@ -1123,15 +1139,15 @@
         "description": "Info text about connected databases."
     },
     "optionsConnectedDatabasesNotFound": {
-        "message": "Inga anslutna databaser funna.",
+        "message": "Inga anslutna databaser hittades.",
         "description": "Shown in the connected databases table when there is no connected databases."
     },
     "optionsDatabasesRemoveIdentifier": {
-        "message": "Ta bort identifierare från databaslistan?",
+        "message": "Ta bort identifieraren från listan över databaser?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Vill du verkligen ta bort följande identifierare från databaslistan: $1?",
+        "message": "Vill du verkligen ta bort identifieraren $1 från listan över databaser?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1159,7 +1175,7 @@
         "description": "Database list column title."
     },
     "optionsColumnPageURL": {
-        "message": "Sid-URL",
+        "message": "Sidans URL",
         "description": "Site Preferences list column title."
     },
     "optionsColumnFeatures": {
@@ -1167,7 +1183,7 @@
         "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
-        "message": "Identifiera endast användarnamn",
+        "message": "Identifiering med enbart användarnamn",
         "description": "Site Preferences list column title."
     },
     "optionsColumnImprovedInputFieldDetection": {
@@ -1175,7 +1191,7 @@
         "description": "Improved Input Field Detection column text."
     },
     "optionsColumnAllowIframes": {
-        "message": "Tillåt iframes",
+        "message": "Tillåt iframes från andra ursprung",
         "description": "Allow iframes column text."
     },
     "optionsColumnDelete": {
@@ -1187,15 +1203,15 @@
         "description": "Site Preferences option selection."
     },
     "optionsSelectionNormal": {
-        "message": "Inaktivera nya/ändrade autentiseringsuppgifter",
+        "message": "Ignorera nya och ändrade inloggningsuppgifter",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionAutoSubmit": {
-        "message": "Skicka inte automatiskt",
+        "message": "Inaktivera automatisk formulärsändning",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionPasskeys": {
-        "message": "Avaktivera passnycklar",
+        "message": "Inaktivera passnycklar",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
@@ -1219,27 +1235,27 @@
         "description": "Sort matching credentials by group and username option selection."
     },
     "optionsFillSortPriority": {
-        "message": "Sortera autentiseringsuppgifter efter ifyllnad, efter",
+        "message": "Sortera inloggningsuppgifter efter ifyllning:",
         "description": ""
     },
     "optionsFillSortPriorityHelpText": {
-        "message": "När alternativet Relevanta autentiseringsuppgifter först har valts, anges autentiseringsuppgifterna för tidigare ifylld inloggning först i listan för automatisk komplettering.",
+        "message": "När alternativet ”Relevant inloggningsuppgift först” är valt placeras uppgifterna för den senast använda inloggningen överst i autokompletteringslistan.",
         "description": "Help text for Sort credentials after fill."
     },
     "optionsFillSortPriorityTotp": {
-        "message": "Sortera autentiseringsuppgifter efter ifyllnad för TOTP, efter",
+        "message": "Sortera inloggningsuppgifter efter TOTP-ifyllning:",
         "description": ""
     },
     "optionsFillSortPriorityTotpHelpText": {
-        "message": "När relevant autentiseringsuppgifters första alternativ är markerat anges TOTP för tidigare ifylld inloggning först i listan för automatisk komplettering.",
+        "message": "När alternativet ”Relevant inloggningsuppgift först” är valt placeras TOTP-koden för den senast använda inloggningen överst i autokompletteringslistan.",
         "description": "Help text for Sort credentials after fill for TOTP."
     },
     "optionsFillSortByMatchingCredentials": {
-        "message": "Matchande inställning för autentiseringsuppgifter",
+        "message": "Använd sorteringen för matchande inloggningsuppgifter",
         "description": "Default option for Sort after fill. Respects the Matching Credentials sorting setting."
     },
     "optionsFillSortByRelevantEntry": {
-        "message": "Relevanta autentiseringsuppgifter först",
+        "message": "Relevant inloggningsuppgift först",
         "description": "Relevant credential first option for Sort after fill."
     },
     "optionsCustomFieldsNotFound": {
@@ -1247,87 +1263,87 @@
         "description": "Shown when no saved custom credentials are saved."
     },
     "optionsCustomFieldsTableCaption": {
-        "message": "Du kan hantera sparade, anpassade inloggningsfält med tabellen.",
+        "message": "Du kan hantera sparade anpassade inloggningsfält i tabellen.",
         "description": "Table caption of Custom Login Fields page."
     },
     "optionsCustomFieldsTabHelpTextFirst": {
-        "message": "Om KeePassXC-Browser upptäcker fel inloggningsfält så kan du själv ange korrekta fält.",
+        "message": "Om KeePassXC-Browser identifierar fel inloggningsfält kan du själv ange de rätta fälten.",
         "description": "Saved Custom Login Fields info text, first part."
     },
     "optionsCustomFieldsTabHelpTextSecond": {
-        "message": "Gå till sidan och klicka på ikonen för KeePassXC-Browser, välj sedan",
+        "message": "Gå till sidan, klicka på ikonen för KeePassXC-Browser och välj sedan ",
         "description": "Saved Custom Login Fields info text, second part."
     },
     "optionsCustomFieldsTabHelpTextThird": {
-        "message": "På denna sida kan du hantera sparade, anpassade inloggningsfält.",
+        "message": "På den här sidan kan du hantera sparade anpassade inloggningsfält.",
         "description": "Saved Custom Login Fields info text, third part."
     },
     "optionsCustomFieldsRemove": {
-        "message": "Vill du ta bort sparade, anpassade inloggningsfält?",
+        "message": "Vill du ta bort sparade anpassade inloggningsfält?",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Vill du verkligen ta bort de sparade, anpassade inloggningsfälten på sidan: $1",
+        "message": "Vill du verkligen ta bort de sparade anpassade inloggningsfälten på sidan $1?",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
-        "message": "KeePassXC-Browser kommer automatiskt att identifiera inloggningsfälten nästa gång du besöker denna sida.",
+        "message": "KeePassXC-Browser identifierar automatiskt inloggningsfälten nästa gång du besöker den här sidan.",
         "description": "Part of confirmation text when removing saved Custom Login Fields."
     },
     "optionsSitePreferencesNotFound": {
-        "message": "Inga sidinställningar hittades.",
+        "message": "Inga webbplatsinställningar hittades.",
         "description": "Shown when no Site Preferences are saved."
     },
     "optionsSitePreferencesRemove": {
-        "message": "Ta bort sida?",
+        "message": "Ta bort webbplatsen?",
         "description": "Confirmation text when removing ignored sites from the list."
     },
     "optionsSitePreferencesTabHelpTextFirst": {
-        "message": "Webbplatser på denna sida har speciella hanteringsmetoder associerade.",
+        "message": "Webbplatserna i den här listan hanteras enligt särskilda regler.",
         "description": "Site Preferences info text, first part."
     },
     "optionsSitePreferencesTabHelpTextSecond": {
-        "message": "För att ignorera nya/ändrade uppgifter för en specifik sida, lägg till dem nedan eller klicka på den blinkande ikonen för KeePassXC-Browser och välj",
+        "message": "Om du vill ignorera nya eller ändrade inloggningsuppgifter på en viss webbplats lägger du till webbplatsen nedan eller markerar alternativet <em>Fråga inte igen för den här webbplatsen</em> i banderollen för inloggningsuppgifter på sidan.",
         "description": "Site Preferences info text, second part."
     },
     "optionsSitePreferencesTabHelpTextThird": {
-        "message": "Om en webbplats ignoreras totalt (<em>Avaktivera alla funktioner</em> är vald) så kommer tillägget inte att göra någonting då webbplatsen besöks.",
+        "message": "Om en webbplats ignoreras helt (<em>Inaktivera alla funktioner</em> är markerat) utför tillägget inga åtgärder när du besöker webbplatsen.",
         "description": "Site Preferences info text, third part."
     },
     "optionsSitePreferencesTabHelpTextFourth": {
-        "message": "Identifiering med enbart användarnamn gör att KeePassXC-Browser kan fylla i inloggningsuppgifter på webbplatser med separata sidor för användarnamn och lösenord.",
+        "message": "Med identifiering av enbart användarnamn kan KeePassXC-Browser fylla i inloggningsuppgifter på webbplatser med separata sidor för användarnamn och lösenord.",
         "description": "Site Preferences info text, fourth part."
     },
     "optionsSitePreferencesImprovedInputFieldDetectionHelpText": {
-        "message": "Förbättrad identifiering av inmatningsfält möjliggör mer detaljerad dynamisk identifiering av inmatningsfält. Det kan dock påverka sidans prestanda. Används med försiktighet.",
+        "message": "Förbättrad identifiering av inmatningsfält möjliggör mer detaljerad dynamisk identifiering. Det kan dock påverka sidans prestanda. Använd funktionen med försiktighet.",
         "description": "Improved Input Field Detection help text."
     },
     "optionsSitePreferencesAllowIframesHelpText": {
-        "message": "Om du tillåter iframes aktiveras hämtning av autentiseringsuppgifter för iframes från en annan domän. Använd på egen risk.",
+        "message": "Om du tillåter iframes från andra ursprung kan inloggningsuppgifter hämtas för iframes från en annan domän. Använd funktionen på egen risk.",
         "description": "Allow Cross-Origin iframes help text."
     },
     "optionsSitePreferencesManualAddText": {
-        "message": "Lägg till URL manuellt",
+        "message": "Lägg till en URL manuellt",
         "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "URL:en måste börja med antingen <code>https://</code>, <code>http://</code>, <code>file://</code> eller <code>ftp://</code> och måste vara minst 5 tecken lång.",
+        "message": "URL:en måste börja med antingen <code>https://</code>, <code>http://</code>, <code>file://</code> eller <code>ftp://</code> och vara minst 5 tecken lång.",
         "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
-        "message": "Vill du verkligen ta bort den angivna webbplatsen från listan: $1",
+        "message": "Vill du verkligen ta bort webbplatsen $1 från listan?",
         "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
-        "message": "KeePassXC-Browser kommer att aktivera alla funktioner för denna webbplats och ta bort identifiering som bygger på enbart användarnamn.",
+        "message": "KeePassXC-Browser aktiverar alla funktioner för den här webbplatsen och tar bort identifiering som bygger på enbart användarnamn.",
         "description": "Part of confirmation text when removing Site Preferences."
     },
     "optionsSitePreferencesTableCaption": {
-        "message": "Du kan hantera sparade sidinställningar med tabellen.",
+        "message": "Du kan hantera sparade webbplatsinställningar i tabellen.",
         "description": "Table caption of Site Preferences page."
     },
     "optionsSitePreferencesSelect": {
-        "message": "Alternativ för att ignorera tilläggsfunktioner för sidan.",
+        "message": "Alternativ för att inaktivera tilläggets funktioner på sidan.",
         "description": "Title text of select element in Site Preferences."
     },
     "optionsAboutChrome": {
@@ -1339,7 +1355,7 @@
         "description": "About page link to AMO."
     },
     "optionsAboutEdge": {
-        "message": "Gå till KeePassXC-Browser på sidan Edge Add-ons.",
+        "message": "Gå till KeePassXC-Browser i Edge Add-ons.",
         "description": "About page link to Edge Add-ons page."
     },
     "optionsAboutGitHub": {
@@ -1347,11 +1363,11 @@
         "description": "About page link to GitHub."
     },
     "optionsAboutExtensionVersion": {
-        "message": "KeePassXC-Browser version: $1",
+        "message": "KeePassXC-Browser-version: $1",
         "description": "About page text of extension version."
     },
     "optionsAboutKeePassXCVersion": {
-        "message": "KeePassXC version: $1",
+        "message": "KeePassXC-version: $1",
         "description": "About page text of KeePassXC version."
     },
     "optionsAboutContributors": {
@@ -1367,7 +1383,7 @@
         "description": "About page text of reporting bugs."
     },
     "optionsAboutCreateNewIssue": {
-        "message": "Skapa nytt ärende på GitHub.",
+        "message": "Skapa ett nytt ärende på GitHub",
         "description": "Link text for creating a new issue."
     },
     "optionsAboutDebugInfo": {
@@ -1379,15 +1395,15 @@
         "description": "Supporters label text."
     },
     "optionsErrorInvalidValue": {
-        "message": "Invalid value. Please check the input.",
+        "message": "Ogiltigt värde. Kontrollera inmatningen.",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Invalid URL. Please check the input.",
+        "message": "Ogiltig URL. Kontrollera inmatningen.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
-        "message": "The value already exists in the list.",
+        "message": "Värdet finns redan i listan.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
     "optionsUserInterfaceTitle": {
@@ -1395,11 +1411,11 @@
         "description": "User interface title in settings page"
     },
     "optionsFillingCredentialsTitle": {
-        "message": "Fyller i autentiseringsuppgifter",
+        "message": "Ifyllning av inloggningsuppgifter",
         "description": "Filling credentials title in settings page"
     },
     "optionsSavingCredentialsTitle": {
-        "message": "Sparar autentiseringsuppgifter",
+        "message": "Spara inloggningsuppgifter",
         "description": "Saving credentials title in settings page"
     },
     "optionsUpdatesTitle": {
@@ -1427,23 +1443,23 @@
         "description": "Passkeys option help text."
     },
     "optionsPasskeysEnableFallback": {
-        "message": "Aktivera reservpassnycklar",
+        "message": "Aktivera reservlösning för passnycklar",
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "När detta är aktiverat kommer en misslyckad eller avbruten begäran till KeePassXC att utlösa webbläsarens egen interna passnyckelbegäran. Om det är inaktiverat krävs anslutning till KeePassXC och en avbruten begäran kommer att misslyckas. Standard: Aktiverat.",
+        "message": "När alternativet är aktiverat utlöser en misslyckad eller avbruten begäran till KeePassXC webbläsarens egen inbyggda begäran om passnyckel. När alternativet är inaktiverat krävs en anslutning till KeePassXC, och en avbruten begäran misslyckas. Standardvärdet är aktiverat.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
-        "message": "Öppnar en ny flik",
+        "message": "Öppna en ny flik",
         "description": "Title attribute text."
     },
     "httpAuthDialog": {
-        "message": "Dialogruta för HTTP Basic Auth",
+        "message": "Dialogruta för grundläggande HTTP-autentisering",
         "description": "Options page HTTP Basic Auth dialog text"
     },
     "autocompleteSubmitMessage": {
-        "message": "Ditt val kommer att skickas automatiskt",
+        "message": "Ditt val skickas automatiskt",
         "description": "Message shown at the bottom of autocomplete menu."
     },
     "lockDatabase": {
@@ -1455,15 +1471,15 @@
         "description": "Main title of Getting Started page."
     },
     "documentationGettingStarted": {
-        "message": "Vår kom-igång-guide hjälper dig att snabbt komma igång.",
+        "message": "Vår introduktionsguide hjälper dig att snabbt komma igång.",
         "description": "Getting Started document text."
     },
     "documentationUserGuide": {
-        "message": "Söker du mer omfattande dokumentation? Vår användarguide finns till hjälp.",
+        "message": "Söker du mer omfattande dokumentation? Läs vår användarguide.",
         "description": "User Guide text."
     },
     "documentationTroubleshootingGuide": {
-        "message": "Behöver du hjälp med att felsöka webbläsarintegrationen? Kolla felsökningsguiden.",
+        "message": "Behöver du hjälp med att felsöka webbläsarintegrationen? Läs felsökningsguiden.",
         "description": "Troubleshooting Guide text."
     },
     "gettingStartedWelcomeText": {
@@ -1471,11 +1487,11 @@
         "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
     },
     "gettingStartedSecondWelcomeText": {
-        "message": "Gå igenom standardinställningarna och markera de alternativ du vill använda",
+        "message": "Gå igenom standardinställningarna och markera de alternativ som du vill använda.",
         "description": "Please go through the default settings and check all your preferred options."
     },
     "gettingStartedNewUser": {
-        "message": "Är du en ny användare? Kolla in länkarna till vår dokumentation.",
+        "message": "Är du ny användare? Ta en titt på länkarna till vår dokumentation.",
         "description": "Are you a new user? Check links to our documentation."
     }
 }

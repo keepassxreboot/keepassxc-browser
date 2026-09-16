@@ -235,9 +235,25 @@
         "message": "user.id 不匹配所需長度。",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "註冊時不支援 evalByCredential。",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential 並非空白，但 allowedCredentials 是。",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "未找到 evalByCredential 中提供的憑證 ID。",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "上下文不安全。",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "用戶名稱或密碼不能包含引用。",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "未連接至 KeePassXC。",

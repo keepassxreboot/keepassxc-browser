@@ -184,7 +184,7 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Passkey not registered due to an existing credential. Remove the existing credential to continue.",
+        "message": "Passkey chưa được đăng kí do có thông tin đăng nhập bị trùng. Vui lòng xoá thông tin đăng nhập hiện có để tiếp tục",
         "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
@@ -235,9 +235,25 @@
         "message": "user.id không khớp với độ dài yêu cầu.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "Không hỗ trợ evalByCredential khi đăng ký.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential không rỗng, nhưng allowedCredentials có.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "Không tìm thấy ID thông tin xác thực được cung cấp trong evalByCredential.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Ngữ cảnh không an toàn.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "Tên người dùng hoặc mật khẩu không được chứa tham chiếu.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "Chưa kết nối với KeePassXC.",
@@ -791,7 +807,7 @@
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Kích hoạt biểu tượng trường OTP",
+        "message": "Kích hoạt biểu tượng trường OTP/2FA",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
@@ -863,11 +879,11 @@
         "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
-        "message": "Cho phép chuyển hướng:",
+        "message": "Số lần cho phép chuyển hướng:$1",
         "description": "Redirect allowance range input text."
     },
     "optionsRedirectAllowanceHelpText": {
-        "message": "Số lần chuyển hướng tối đa được phép trước khi dừng lấy thông tin đăng nhập.",
+        "message": "Số lần chuyển hướng tối đa được phép trước khi dừng lấy thông tin đăng nhập. Mặc định là 3. Tối đa là vô hạn",
         "description": "Redirect allowance help text."
     },
     "optionsCheckboxAutoFillAndSend": {
@@ -875,11 +891,11 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Cách kết nối",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Nếu native messaging bị chặn trong trình duyệt của bạn, bạn có thể chuyển qua kết nối WebSocket trực tiếp. Tính năng này bắt buộc phải bật từ KeePassXC để hoạt động. Bạn cần khởi động lại trình duyệt để thay đổi có hiệu lực.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
@@ -971,7 +987,7 @@
         "description": "Username field icon option help text."
     },
     "optionsShowOTPIconHelpText": {
-        "message": "Hiển thị biểu tượng trên trường OTP để điền TOTP.",
+        "message": "Hiển thị biểu tượng trên trường OTP/2FA để điền TOTP.",
         "description": "OTP field icon option help text."
     },
     "optionsHideIconsAlertText": {
@@ -1047,7 +1063,7 @@
         "description": "HTTP Basic Auth image help text."
     },
     "optionsClearCredentialsTimeout": {
-        "message": "Xóa thông tin đăng nhập sau (giây):",
+        "message": "Xóa thông tin đăng nhập sau (giây, từ 0-3600):",
         "description": "Clear credentials label text."
     },
     "optionsClearCredentialsTimeoutHelpText": {
@@ -1059,47 +1075,47 @@
         "description": "Settings page version info text."
     },
     "optionsVersionDownload": {
-        "message": "Tải xuống",
+        "message": "Bạn có thể tải xuống phiên bản ổn định mới nhất từ $1",
         "description": "Settings page download link."
     },
     "optionsVersionRunning": {
-        "message": "Đang chạy",
+        "message": "Bạn đang chạy KeePassXC phiên bản:$1",
         "description": "Settings page info text of user's KeePassXC version."
     },
     "optionsLatestVersion": {
-        "message": "Phiên bản mới nhất",
+        "message": "Phiên bản mới nhất hiện tại:$1",
         "description": "Settings page info text about the latest KeePassXC version."
     },
     "optionsKeePassXCVersionRequired": {
-        "message": "Yêu cầu KeePassXC phiên bản:",
+        "message": "Yêu cầu KeePassXC phiên bản:$1",
         "description": "KeePassXC version requirement text."
     },
     "optionsMinimumKeePassXCVersionRequired": {
-        "message": "The extension requires KeePassXC version: $1. Earlier versions can cause unwanted behavior.",
+        "message": "Tiện ích cần KeePassXC phiên bản:$1. Phiên bản cũ hơn có thể gây ra hành vi không mong muốn",
         "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
-        "message": "Mặc định",
+        "message": "Mặc định:$1",
         "description": "Default setting text."
     },
     "optionsInfinite": {
-        "message": "Vô hạn",
+        "message": "Vô hạn:$1",
         "description": "Infinite setting text."
     },
     "optionsRecommended": {
-        "message": "Khuyến nghị",
+        "message": "Khuyến nghị:$1",
         "description": "Recommended setting text."
     },
     "optionsShortcutsSuccess": {
-        "message": "Phím tắt đã được cập nhật thành công.",
+        "message": "Phím tắt cho $1 đã được cập nhật thành công.",
         "description": "Message for successful keyboard shortcut change."
     },
     "optionsShortcutsInfo": {
-        "message": "Nhấp vào trường và nhấn tổ hợp phím bạn muốn sử dụng.",
+        "message": "Phím tắt cho $1 đã bị reset",
         "description": "Info message for changing keyboard shortcuts."
     },
     "optionsShortcutsDanger": {
-        "message": "Cảnh báo: Một số tổ hợp phím có thể xung đột với phím tắt của trình duyệt.",
+        "message": "Lỗi: Phím tắt cho $1 chưa được thay đổi!",
         "description": "Error message for changing keyboard shortcuts."
     },
     "optionsImportExportSettings": {
@@ -1131,7 +1147,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Bạn có chắc chắn muốn xóa định danh này không?",
+        "message": "Bạn có chắc chắn muốn xóa định danh này khỏi danh sách cơ sở dữ liệu $1 không?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1267,7 +1283,7 @@
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmation": {
-        "message": "Bạn có chắc chắn muốn xóa trường đăng nhập tùy chỉnh cho URL này không?",
+        "message": "Bạn có chắc chắn muốn xóa trường đăng nhập tùy chỉnh cho URL $1 không?",
         "description": "Confirmation text when removing saved Custom Login Fields."
     },
     "optionsCustomFieldsConfirmationHelpText": {
@@ -1311,11 +1327,11 @@
         "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "Nhập URL của trang web bạn muốn thêm tùy chọn.",
+        "message": "URL bắt buộc phải bắt đầu bằng https://, http://, file://, hoặc ftp:// và phải dài hơn 5 chữ cái trở lên",
         "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
-        "message": "Bạn có chắc chắn muốn xóa tùy chọn trang web cho URL này không?",
+        "message": "Bạn có chắc chắn muốn xóa trang web được chỉ định khỏi danh sách $1 không?",
         "description": "Confirmation text when removing site from Site Preferences."
     },
     "optionsSitePreferencesConfirmationHelpText": {
@@ -1347,11 +1363,11 @@
         "description": "About page link to GitHub."
     },
     "optionsAboutExtensionVersion": {
-        "message": "Phiên bản tiện ích mở rộng:",
+        "message": "Phiên bản KeePassXC-Browser:$1",
         "description": "About page text of extension version."
     },
     "optionsAboutKeePassXCVersion": {
-        "message": "Phiên bản KeePassXC:",
+        "message": "Phiên bản KeePassXC:$1",
         "description": "About page text of KeePassXC version."
     },
     "optionsAboutContributors": {

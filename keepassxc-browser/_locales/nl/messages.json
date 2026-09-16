@@ -235,9 +235,25 @@
         "message": "user.id voldoet niet aan de vereiste lengte.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredential wordt niet ondersteund bij registratie.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential is niet leeg, maar toegestaanCredentials wel.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "Credential ID verstrekt in evalByCredential niet gevonden.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Context is niet veilig.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "Gebruikersnaam of wachtwoord mag geen referenties bevatten.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "Niet verbonden met KeePassXC.",

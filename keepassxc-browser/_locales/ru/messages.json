@@ -235,9 +235,25 @@
         "message": "user.id не соответствует требуемой длине.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredential не поддерживается при регистрации.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "Значение evalByCredential не пустое, но значение allowedCredentials пусто.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "Не найден идентификатор учётных данных, указанный в evalByCredential.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Контекст небезопасен.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "Логин или пароль не могут содержать ссылок.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "Не подключён к KeePassXC.",
@@ -875,11 +891,11 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Метод подключения",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Если в браузере заблокирован native messaging, вы можете перейти на прямое подключение через WebSocket. Функция должна быть включена на стороне KeePassXC. Требуется перезагрузка браузера.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
@@ -975,7 +991,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsHideIconsAlertText": {
-        "message": "При необходимости вы также можете скрыть значки вручную, нажав Shift+клик.",
+        "message": "При необходимости также можно скрыть значки вручную, щёлкнув мышью при нажатой Shift.",
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -1107,7 +1123,7 @@
         "description": "Settings page header text for import/export."
     },
     "optionsImportSettingsDialogTitle": {
-        "message": "Импорт настроек из внешнего файла?",
+        "message": "Импортировать настройки из внешнего файла?",
         "description": "Import settings confirmation dialog title text."
     },
     "optionsImportSettingsDialogText": {
@@ -1115,7 +1131,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsResetSettingsDialogText": {
-        "message": "Все настройки будут сброшены на значения по умолчанию. Вы уверены?",
+        "message": "Все настройки будут сброшены в значения по умолчанию. Вы уверены?",
         "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
@@ -1311,7 +1327,7 @@
         "description": "Label for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesManualAddHelp": {
-        "message": "Сетевой адрес должен начинаться с <code>https://</code>, <code>http://</code>, <code>file://</code> или <code>ftp://</code> и должен содержать не менее 5 символов.",
+        "message": "Сетевой адрес должен начинаться с <code>https://</code>, <code>http://</code>, <code>file://</code> или <code>ftp://</code> и содержать не менее 5 символов.",
         "description": "Help text for adding site manually on Site Preferences tab."
     },
     "optionsSitePreferencesConfirmation": {
@@ -1379,15 +1395,15 @@
         "description": "Supporters label text."
     },
     "optionsErrorInvalidValue": {
-        "message": "Неверное значение. Пожалуйста, проверьте ввод.",
+        "message": "Неверное значение. Проверьте ввод.",
         "description": "Error shown when input field has an incorrect value."
     },
     "optionsErrorInvalidURL": {
-        "message": "Неверный адрес. Пожалуйста, проверьте ввод.",
+        "message": "Неверный адрес. Проверьте ввод.",
         "description": "Error shown when input field has an incorrect URL."
     },
     "optionsErrorValueExists": {
-        "message": "Значение уже существует в списке.",
+        "message": "Значение уже есть в списке.",
         "description": "Error shown when trying to add a duplicate value to the list."
     },
     "optionsUserInterfaceTitle": {
@@ -1431,7 +1447,7 @@
         "description": "Enabled passkeys fallback option text."
     },
     "optionsPasskeysEnableFallbackHelpText": {
-        "message": "Если эта опция включена, то при неудачном или отменённом запросе к KeePassXC будет срабатывать собственный внутренний запрос ключей доступа. Если этот параметр отключен, то будет требоваться подключение к KeePassXC, и отменённый запрос не будет выполнен. По умолчанию: включено.",
+        "message": "Если эта опция включена, то при неудачном или отменённом запросе к KeePassXC будет срабатывать собственный внутренний запрос ключей доступа. Если этот параметр отключён, то будет требоваться подключение к KeePassXC, и отменённый запрос не будет выполнен. По умолчанию: включено.",
         "description": "Passkeys fallback option help text."
     },
     "openNewTab": {
@@ -1451,15 +1467,15 @@
         "description": "Lock database button title text."
     },
     "welcomeText": {
-        "message": "Добро пожаловать в KeePassXC-Browser!",
+        "message": "Вас приветствует KeePassXC-Browser!",
         "description": "Main title of Getting Started page."
     },
     "documentationGettingStarted": {
-        "message": "Наше руководство по началу работы поможет вам быстро приступить к работе.",
+        "message": "Руководство по началу работы поможет вам быстро приступить к работе.",
         "description": "Getting Started document text."
     },
     "documentationUserGuide": {
-        "message": "Ищете более подробную документацию? Наше руководство пользователя вам поможет.",
+        "message": "Ищете более подробную документацию? Вам поможет руководство пользователя.",
         "description": "User Guide text."
     },
     "documentationTroubleshootingGuide": {
@@ -1471,11 +1487,11 @@
         "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
     },
     "gettingStartedSecondWelcomeText": {
-        "message": "Пожалуйста, проверьте настройки по умолчанию и выберите все предпочтительные параметры.",
+        "message": "Проверьте настройки по умолчанию и выберите все предпочтительные параметры.",
         "description": "Please go through the default settings and check all your preferred options."
     },
     "gettingStartedNewUser": {
-        "message": "Вы новый пользователь? Ознакомьтесь с нашей документацией по указанным ссылкам.",
+        "message": "Вы новый пользователь? Ознакомьтесь с документацией по указанным ссылкам.",
         "description": "Are you a new user? Check links to our documentation."
     }
 }
