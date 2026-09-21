@@ -1008,19 +1008,12 @@ const isIframeAllowed = async function() {
         return false;
     }
 
-    try {
-        // Check for Cross-domain security error when inspecting window.top.location.href
-        const currentLocation = window.top.location.href;
+    const allowed = await sendMessage('is_iframe_allowed', [ window.location.href ]);
+    if (allowed) {
         return true;
-    } catch (_err) {
-        // Inspect iframe using TLD and the tab's original URL
-        const allowed = await sendMessage('is_iframe_allowed', [ window.location.href, window.location.hostname ]);
-        if (allowed) {
-            return true;
-        }
-
-        logDebug(`Error: Credential request ignored from another domain: ${window.self.location.host}`);
-        sendMessage('iframe_detected', true);
-        return false;
     }
+
+    logDebug(`Error: Credential request ignored from another domain: ${window.self.location.host}`);
+    sendMessage('iframe_detected', true);
+    return false;
 };

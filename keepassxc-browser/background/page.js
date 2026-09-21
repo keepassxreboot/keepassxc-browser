@@ -346,17 +346,20 @@ page.setAllowIframes = async function(tab, args = []) {
 };
 
 page.isIframeAllowed = async function(tab, args = []) {
-    const [ url, hostname ] = args;
-    const baseDomain = await page.getBaseDomainFromUrl(hostname, url);
-
     // Allow if exception has been set from Site Preferences
-    if (tabs.getTabFromId(tab.id)?.allowIframes) {
+    if (tabs.getTabFromId(tab?.id)?.allowIframes) {
         return true;
     }
 
-    // Allow iframe if the base domain is included in iframes' and tab's hostname
-    const tabUrl = new URL(tab?.url);
-    return hostname.endsWith(baseDomain) && tabUrl.hostname?.endsWith(baseDomain);
+    try {
+        const [ url ] = args;
+        const currentFrameUrl = new URL(url);
+        const tabUrl = new URL(tab?.url);
+        return currentFrameUrl.origin === tabUrl.origin;
+    } catch (e) {
+        logError(e);
+        return false;
+    }
 };
 
 /**
