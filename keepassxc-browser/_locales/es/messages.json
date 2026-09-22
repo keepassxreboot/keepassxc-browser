@@ -235,9 +235,25 @@
         "message": "El user.id no coincide con la longitud requerida.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "La función evalByCredential no está disponible durante el registro.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential no está vacío, pero allowedCredentials sí lo está.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "No se ha encontrado el ID de credencial proporcionado en evalByCredential.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "El contexto no es seguro.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "El nombre de usuario o la contraseña no pueden contener referencias.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "No conectado a KeePassXC.",
@@ -875,15 +891,15 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Método de conexión",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Si la mensajería nativa está bloqueada en su navegador, puede cambiar a una conexión WebSocket directa. Para que funcione, debe habilitar esta función desde KeePassXC. Es necesario reiniciar el navegador.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
-        "message": "Native messaging",
+        "message": "Comunicación nativa",
         "description": "Native messaging option for Connection method."
     },
     "optionsConnectionMethodWebSocket": {

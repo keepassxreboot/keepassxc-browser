@@ -4,15 +4,15 @@
         "description": "Name of the extension."
     },
     "addSitePreferenceButtonTitle": {
-        "message": "Adicionar Preferências de Site para esta URL.",
+        "message": "Adicionar as preferências do site para esta URL.",
         "description": "Add button title text on Site Preferences tab."
     },
     "editSitePreferenceButtonTitle": {
-        "message": "Editar URL nas Preferências Deste Site.",
+        "message": "Editar a URL nas preferências deste site.",
         "description": "Edit button title text on Site Preferences tab."
     },
     "allowIframeButtonTitle": {
-        "message": "Permitir iframes de Origem Cruzada para a página atual.",
+        "message": "Permitir iframes de origem cruzada na página atual.",
         "description": "Allow Cross-Origin iframes button title text."
     },
     "connectButtonTitle": {
@@ -20,11 +20,11 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Copiar informações de depuração para a área de transferência",
+        "message": "Copiar as informações de depuração para a área de transferência",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
-        "message": "Dispensar autenticação HTTP básica.",
+        "message": "Dispensar a autenticação HTTP básica.",
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
@@ -40,27 +40,27 @@
         "description": "Reload button title text."
     },
     "removeConnectedDatabaseButtonTitle": {
-        "message": "Remover o banco de dados conectado do KeePassXC-Browser.",
+        "message": "Remover o banco de dados conectado ao KeePassXC-Browser.",
         "description": "Remove button title on Connected Databases tab."
     },
     "removeCustomLoginFieldsButtonTitle": {
-        "message": "Remover os Campos de Login Personalizados desta URL.",
+        "message": "Remover os campos de login personalizados desta URL.",
         "description": "Remove button title on Custom Login Fields tab."
     },
     "removeSitePreferencesButtonTitle": {
-        "message": "Remover as Preferências do Site para esta URL.",
+        "message": "Remover as preferências do site para esta URL.",
         "description": "Remove button title on Site Preferences tab."
     },
     "reopenDatabaseButtonTitle": {
-        "message": "Reabrir o banco de dados ativo atual.",
+        "message": "Reabrir o banco de dados ativo no momento.",
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
-        "message": "Adicionar Detecção Somente de Nome de Usuário à página atual.",
+        "message": "Adiciona a detecção apenas por nome de usuário à página atual.",
         "description": "Add Username-only detection button title text."
     },
     "contextMenuFillUsernameAndPassword": {
-        "message": "Preencher usuário e senha",
+        "message": "Preencher o usuário e a senha",
         "description": "Context menu item for filling both username and password."
     },
     "contextMenuFillPassword": {
@@ -76,7 +76,7 @@
         "description": "Show password generator icon on every password input field."
     },
     "contextMenuSaveCredentials": {
-        "message": "Salvar Credenciais",
+        "message": "Salvar as credenciais",
         "description": "Save credentials using the credential banner."
     },
     "contextMenuShowPasswordGenerator": {
@@ -84,15 +84,15 @@
         "description": "Show password generator text."
     },
     "contextMenuFillAttribute": {
-        "message": "Preencher Atributo…",
+        "message": "Preencher o atributo…",
         "description": "Context menu parent item for filling a custom attribute."
     },
     "contextMenuRequestGlobalAutoType": {
-        "message": "Solicite a Digitação Automática global",
+        "message": "Solicitar o preenchimento automático global",
         "description": "Global Auto-Type shortcut text."
     },
     "multipleCredentialsDetected": {
-        "message": "Autenticação HTTP com várias credenciais detectadas. Clique no ícone da extensão para escolher o correto.",
+        "message": "Foi detectada uma autenticação HTTP com várias credenciais. Clique no ícone da extensão para escolher a credencial correta.",
         "description": "Notification when HTTP Authentication has multiple credentials detected."
     },
     "errorMessageUnknown": {
@@ -104,7 +104,7 @@
         "description": "Database not opened."
     },
     "errorMessageDatabaseHash": {
-        "message": "Hash do banco de dados não recebido.",
+        "message": "O hash do banco de dados não foi recebido.",
         "description": "Database hash not received."
     },
     "errorMessageClientPublicKey": {
@@ -235,9 +235,25 @@
         "message": "user.id não corresponde ao comprimento necessário.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredential não é suportado no registro.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential não está vazio, mas AllowCredentials está.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "ID da credencial fornecido em evalByCredential não encontrado.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "O contexto não é seguro.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "O nome de usuário ou a senha não podem conter referências.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "Não está conectado ao KeePassXC.",
@@ -435,7 +451,7 @@
         "description": "Popup Settings button text."
     },
     "popupChooseCredentialsText": {
-        "message": "Escolher Campos de Login Personalizados",
+        "message": "Escolher campos de login personalizados",
         "description": "Popup credential choosing button text."
     },
     "popupConnectButton": {
@@ -455,7 +471,7 @@
         "description": "Popup Reload button text."
     },
     "popupReopenButton": {
-        "message": "Reabrir banco de dados",
+        "message": "Reabrir o banco de dados",
         "description": "Popup reopen database button text."
     },
     "popupUsernameButton": {
@@ -635,7 +651,7 @@
         "description": "Back button text in popup when updating credentials."
     },
     "popupButtonIgnore": {
-        "message": "Nunca pergunte nesta página",
+        "message": "Nunca perguntar nesta página",
         "description": "Ignore button text in popup or in notification when updating credentials."
     },
     "popupButtonClose": {
@@ -667,11 +683,11 @@
         "description": "Connected Databases tab text."
     },
     "optionsCustomFieldsTab": {
-        "message": "Campos de Login Personalizados",
+        "message": "Campos de login personalizados",
         "description": "Saved Custom Login Fields tab text."
     },
     "optionsSitePreferencesTab": {
-        "message": "Preferências do Site",
+        "message": "Preferências do site",
         "description": "Site Preferences fields tab text."
     },
     "optionsAboutTab": {
@@ -687,11 +703,11 @@
         "description": "Connected Databases page header."
     },
     "optionsMenuCustomFields": {
-        "message": "Campos de Login Personalizados",
+        "message": "Campos de login personalizados",
         "description": "Custom Login Fields page header."
     },
     "optionsMenuSitePreferences": {
-        "message": "Preferências do Site",
+        "message": "Preferências do site",
         "description": "Site Preferences page header."
     },
     "optionsSitePreferencesSettings": {
@@ -779,27 +795,27 @@
         "description": "Activate password generator icons checkbox text."
     },
     "optionsCheckboxUsernameIcons": {
-        "message": "Ativar ícones de campo de nome de usuário",
+        "message": "Ativar os ícones do campo de nome de usuário",
         "description": "Activate username field icons textbox text."
     },
     "optionsUseObserver": {
-        "message": "Usar detecção dinâmica de campo de entrada",
+        "message": "Usar a detecção dinâmica nos campos de entrada",
         "description": "Use dynamic input field detection checkbox text."
     },
     "optionsUseObserverHelpText": {
-        "message": "Útil para páginas que usam popups ou diálogos dinâmicos. Desative o recurso para desativar uso de CPU em máquinas mais modestas. Quando desativado, as credenciais somente podem ser inseridas usando atalhos do teclado, o menu de contexto ou o popup da extensão.",
+        "message": "É útil para páginas que usam popups ou diálogos dinâmicos. Desative o recurso para desativar uso de CPU em máquinas mais modestas. Quando for desativado, as credenciais somente podem ser inseridas usando atalhos de teclado, menu de contexto ou o popup da extensão.",
         "description": "Use dynamic input field detection help text."
     },
     "optionsCheckboxOTPIcons": {
-        "message": "Ativar ícones de campo 2FA/OTP",
+        "message": "Ativar os ícones dos campos de 2FA/OTP",
         "description": "Activate OTP field icons textbox text."
     },
     "optionsCheckboxAutoRetrieveCredentials": {
-        "message": "Recuperar credenciais automaticamente",
+        "message": "Recuperar as credenciais automaticamente",
         "description": "Automatically retrieve credentials checkbox text."
     },
     "optionsCheckboxAutomaticReconnect": {
-        "message": "Reconectar automaticamente ao KeePassXC",
+        "message": "Conectar-se automaticamente ao KeePassXC",
         "description": "Auto-reconnect checkbox text."
     },
     "optionsAutomaticReconnectWarning": {
@@ -835,11 +851,11 @@
         "description": "Auto-submit help text."
     },
     "optionsCheckboxShowNotifications": {
-        "message": "Mostrar notificações",
+        "message": "Mostrar as notificações",
         "description": "Show notifications checkbox text."
     },
     "optionsCheckboxUseMonochromeToolbarIcon": {
-        "message": "Usar ícone monocromático da barra de ferramentas",
+        "message": "Usar ícone monocromático na barra de ferramentas",
         "description": "Use monochrome toolbar icon checkbox text."
     },
     "optionsCheckboxUseCompactMode": {
@@ -875,15 +891,15 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Método de conexão",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Se as mensagens nativas estiverem bloqueadas em seu navegador, você poderá alternar para uma conexão WebSocket direta. Para funcionar, esse recurso deve estar habilitado no KeePassXC. É necessário reiniciar o navegador.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
-        "message": "Native messaging",
+        "message": "Mensagens nativas",
         "description": "Native messaging option for Connection method."
     },
     "optionsConnectionMethodWebSocket": {

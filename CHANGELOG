@@ -1,3 +1,22 @@
+1.10.4 (2026-09-16)
+=========================
+- Add keyboard shortcut support for lock database (thanks a2kolbasov)
+- Fix issues with Reddit [#2998]
+- Fix updating toolbar icons on every open tab in all windows [#3013]
+- Fix showing an error if translation placeholder is missing [#3017]
+- Fix a few TOTP identification issues [#3033]
+- Fix not to allow placeholders when creating or updating credentials [#3068]
+- Fix offering credential saving with Custom Login Fields [#3073]
+- Fix Apple School page password field identification [#3077]
+- Fix Fastmail login page password field [#3080]
+- Passkeys: Add support for PRF extension [#3048]
+- Passkeys: Add support for cross-origin iframes and permission policy (thanks a2kolbasov) [#2862]
+- Passkeys: Fix waiting for window focus (thanks a2kolbasov) [#2810]
+- Passkeys: Fix handling unhandled callbacks and wrong return types (thanks a2kolbasov) [#3054]
+- Passkeys: Fix null checks for passkey responses [#3083]
+- Passkeys: Use abort signal if available (thanks a2kolbasov) [#3065, #3092]
+- Refactor credential saving [#3074]
+
 1.10.3 (2026-06-01)
 =========================
 - Add support for WebSocket connection method (disabled until KeePassXC support) [#2576]

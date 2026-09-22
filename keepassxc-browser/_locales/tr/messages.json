@@ -235,9 +235,25 @@
         "message": "user.id istenilen uzunluğa uygun değil.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredential kayıt sırasında desteklenmiyor.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential boş değil, ancak allowedCredentials boş.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "evalByCredential ile sağlanan kimlik doğrulama bilgisi kimliği bulunamadı.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Bağlam güvenli değil.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "Kullanıcı adında veya parolada başvurular bulunamaz.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "KeePassXC ile bağlantı kurulmamış.",
@@ -875,15 +891,15 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Bağlantı yöntemi",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Tarayıcınızda yerleşik iletişim engellenmişse, doğrudan bir WebSocket bağlantısına geçebilirsiniz. Özelliğin çalışması için KeePassXC tarafında açılması gerekir. Tarayıcının yeniden başlatılması gerekir.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
-        "message": "Native messaging",
+        "message": "Yerleşik iletişim",
         "description": "Native messaging option for Connection method."
     },
     "optionsConnectionMethodWebSocket": {

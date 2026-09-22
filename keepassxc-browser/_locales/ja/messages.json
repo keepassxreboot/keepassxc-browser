@@ -24,7 +24,7 @@
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
-        "message": "Dismisses Basic HTTP Auth.",
+        "message": "HTTPベーシック認証を無効にします。",
         "description": "Dismiss HTTP Auth button title text."
     },
     "reconnectButtonTitle": {
@@ -52,7 +52,7 @@
         "description": "Remove button title on Site Preferences tab."
     },
     "reopenDatabaseButtonTitle": {
-        "message": "Reopen current active database.",
+        "message": "現在のアクティブ データベースを再開してください。",
         "description": "Reopen database button title text."
     },
     "usernameButtonTitle": {
@@ -184,7 +184,7 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Passkey not registered due to an existing credential. Remove the existing credential to continue.",
+        "message": "既存の認証情報のためにパスキーが登録されていません。既存の認証情報を削除して進めてください。",
         "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
@@ -208,7 +208,7 @@
         "description": "Origin is empty or not allowed."
     },
     "errorMessagePasskeysDomainNotValid": {
-        "message": "Effective domain is not a valid domain.",
+        "message": "指定されたドメインは有効なドメインではありません。",
         "description": "Effective domain is not a valid domain."
     },
     "errorMessagePasskeysDomainRpIdMismatch": {
@@ -216,11 +216,11 @@
         "description": "Origin and RP ID do not match."
     },
     "errorMessagePasskeysNoSupportedAlgorithms": {
-        "message": "No supported algorithms were provided.",
+        "message": "サポートされているアルゴリズムが指定されていません。",
         "description": "No supported algorithms were provided."
     },
     "errorMessagePasskeysWaitforLifeTimer": {
-        "message": "Wait for timer to expire.",
+        "message": "タイマーが切れるまで待ちます。",
         "description": "Wait for timer to expire."
     },
     "errorMessagePasskeysUnknownError": {
@@ -228,16 +228,32 @@
         "description": "Unknown passkeys error."
     },
     "errorMessagePasskeysInvalidChallenge": {
-        "message": "Challenge is shorter than required minimum length.",
+        "message": "チャレンジが、必要な最低文字数に達していません。",
         "description": "Challenge is shorter than required minimum length."
     },
     "errorMessagePasskeysInvalidUserId": {
-        "message": "user.id does not match the required length.",
+        "message": "user.id が必要な長さと一致しません。",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredentialは登録時にサポートされていません。",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredentialは空ではありませんが、allowedCredentialsは空です。",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "evalByCredential で提供された Credential ID が見つかりません。",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
-        "message": "Context is not secure.",
+        "message": "コンテキストは安全ではありません。",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "ユーザー名や パスワード にはリファレンスを含めることはできません。",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "KeePassXC に接続していません。",
@@ -319,11 +335,11 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String Field",
+        "message": "文字フィールド",
         "description": "Text for string field."
     },
     "defineSubmitButton": {
-        "message": "Submit Button",
+        "message": "送信ボタン",
         "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
@@ -343,11 +359,11 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineChooseSubmitButton": {
-        "message": "Choose submit button",
+        "message": "送信ボタンを選択",
         "description": "Choose submit button selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "message": "選択内容を確認するか、文字フィールドとしてさらに項目を選択してください。",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
@@ -371,7 +387,7 @@
         "description": "General text for a String Fields."
     },
     "submitButton": {
-        "message": "Submit Button",
+        "message": "送信ボタン",
         "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
@@ -647,7 +663,7 @@
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsDefaultSettingsTitle": {
-        "message": "Default settings",
+        "message": "デフォルト設定",
         "description": "Default settings title for Getting Started page."
     },
     "optionsWelcomeTitle": {
@@ -695,7 +711,7 @@
         "description": "Site Preferences page header."
     },
     "optionsSitePreferencesSettings": {
-        "message": "Settings",
+        "message": "設定",
         "description": "Site Preferences settings button text."
     },
     "optionsMenuAbout": {
@@ -751,7 +767,7 @@
         "description": "Export settings button text."
     },
     "optionsButtonResetSettings": {
-        "message": "Reset all settings",
+        "message": "すべての設定をリセット",
         "description": "Reset all settings button text."
     },
     "optionsLabelDefaultGroup": {
@@ -875,7 +891,7 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "接続方法",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
@@ -1195,7 +1211,7 @@
         "description": "Site Preferences option selection."
     },
     "optionsSelectionPasskeys": {
-        "message": "Disable passkeys",
+        "message": "パスキーを無効に",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {

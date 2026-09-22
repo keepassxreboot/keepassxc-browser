@@ -235,9 +235,25 @@
         "message": "user.id entspricht nicht der erforderlichen Länge.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "evalByCredential wird bei der Registrierung nicht unterstützt.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential ist nicht leer, allowedCredentials hingegen schon.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "Die in evalByCredential angegebene Berechtigungs-ID wurde nicht gefunden.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Kontext ist nicht sicher.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "Benutzername oder Passwort dürfen keine Verweise enthalten.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "Nicht mit KeePassXC verbunden.",
@@ -875,15 +891,15 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "Verbindungsmethode",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "Falls die native Benachrichtigung in Ihrem Browser blockiert ist, können Sie auf eine direkte WebSocket-Verbindung umstellen. Damit diese Funktion genutzt werden kann, muss sie in KeePassXC aktiviert sein. Ein Neustart des Browsers ist erforderlich.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
-        "message": "Native messaging",
+        "message": "Native Benachrichtigung",
         "description": "Native messaging option for Connection method."
     },
     "optionsConnectionMethodWebSocket": {

@@ -8,7 +8,7 @@
         "description": "Add button title text on Site Preferences tab."
     },
     "editSitePreferenceButtonTitle": {
-        "message": "Edit URL for this Site Preferences.",
+        "message": "이 사이트 환경설정의 URL을 편집합니다.",
         "description": "Edit button title text on Site Preferences tab."
     },
     "allowIframeButtonTitle": {
@@ -20,7 +20,7 @@
         "description": "Connect button title text."
     },
     "copyDebugInfoButtonTitle": {
-        "message": "Copy debug info to clipboard",
+        "message": "디버그 정보를 클립보드에 복사",
         "description": "Copy debug info button title text on About tab."
     },
     "dismissHttpAuthButtonTitle": {
@@ -184,7 +184,7 @@
         "description": "Attestation not supported."
     },
     "errorMessagePasskeysCredentialIsExcluded": {
-        "message": "Passkey not registered due to an existing credential. Remove the existing credential to continue.",
+        "message": "기존 자격 증명 때문에 Passkey가 등록되지 않았습니다. 계속하려면 기존 자격 증명을 제거하세요.",
         "description": "Passkey not registered due to an existing credential. Remove the existing credential to continue."
     },
     "errorMessagePasskeysRequestCanceled": {
@@ -235,16 +235,32 @@
         "message": "user.id does not match the required length.",
         "description": "user.id does not match the required length."
     },
+    "errorMessagePasskeysEvalByCredentialNotSupported": {
+        "message": "등록 시 evalByCredential은 지원되지 않습니다.",
+        "description": "evalByCredential is not supported at registration."
+    },
+    "errorMessagePasskeysEvalByCredentialNotEmpty": {
+        "message": "evalByCredential은 비어 있지 않지만, allowedCredentials은 비어 있습니다.",
+        "description": "evalByCredential is not empty, but allowedCredentials is."
+    },
+    "errorMessagePasskeysEvalByCredentialNotFound": {
+        "message": "evalByCredential에 제공된 자격 증명 ID를 찾을 수 없습니다.",
+        "description": "Credential ID provided in evalByCredential not found."
+    },
     "errorMessagePasskeysContextIsNotSecure": {
         "message": "Context is not secure.",
         "description": "Context is not secure."
+    },
+    "errorMessageCannotUseReferences": {
+        "message": "사용자 이름 또는 비밀번호에는 참조를 포함할 수 없습니다.",
+        "description": "Username or password cannot contain references."
     },
     "errorNotConnected": {
         "message": "KeePassXC에 연결되지 않았습니다.",
         "description": "Error notification shown when not connected to KeePassXC."
     },
     "errorCurrentDatabaseNotConnected": {
-        "message": "Current database is not connected.",
+        "message": "현재 데이터베이스와 연결되어 있지 않습니다.",
         "description": "Error notification shown when current database is not connected during action."
     },
     "passwordGeneratorErrorTooLong": {
@@ -319,11 +335,11 @@
         "description": "Clear save data button text when choosing Custom Login Fields."
     },
     "defineStringField": {
-        "message": "String Field",
+        "message": "문자열 필드",
         "description": "Text for string field."
     },
     "defineSubmitButton": {
-        "message": "Submit Button",
+        "message": "제출 버튼",
         "description": "Text for Submit Button."
     },
     "defineChooseUsername": {
@@ -343,11 +359,11 @@
         "description": "Choose String Fields a selection text when choosing Custom Login Fields."
     },
     "defineChooseSubmitButton": {
-        "message": "Choose submit button",
+        "message": "제출 버튼 선택",
         "description": "Choose submit button selection text when choosing Custom Login Fields."
     },
     "defineHelpText": {
-        "message": "Please confirm your selection or choose more fields as String Fields.",
+        "message": "선택을 확인하시거나 문자열 필드로 더 많은 필드를 선택해 주세요.",
         "description": "Confirm a selection text when choosing Custom Login Fields which contains String Fields."
     },
     "defineKeyboardText": {
@@ -371,7 +387,7 @@
         "description": "General text for a String Fields."
     },
     "submitButton": {
-        "message": "Submit Button",
+        "message": "제출 버튼",
         "description": "Custom Submit Button text."
     },
     "credentialsNoUsername": {
@@ -383,7 +399,7 @@
         "description": "Shown when no credentials are found for the current page."
     },
     "credentialsBlockedInIframe": {
-        "message": "Credential fill blocked in untrusted iframe.",
+        "message": "신뢰할 수 없는 iframe에서 자격 증명 입력이 차단되었습니다.",
         "description": "Alert message when filling credentials is blocked due to iframe restrictions."
     },
     "credentialsMultipleFound": {
@@ -391,7 +407,7 @@
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsMultipleFoundSecondLine": {
-        "message": "Click the KeePassXC-Browser icon for more options.",
+        "message": "자세한 옵션은 KeePassXC-Browser 아이콘을 클릭하세요.",
         "description": "Alert message when trying to fill username and/or password when multiple credentials are found."
     },
     "credentialsNoUsernameFound": {
@@ -407,7 +423,7 @@
         "description": "If a credential is expired, this is appended to the title label."
     },
     "credentialsRetrieveButton": {
-        "message": "Retrieve credentials",
+        "message": "자격 증명 가져오기",
         "description": "Manual retrieve credentials button text."
     },
     "fieldsFill": {
@@ -503,7 +519,7 @@
         "description": "Checking status message in popup."
     },
     "popupNotConfigured": {
-        "message": "KeePassXC-Browser has not been configured. Click the connect button to pair with KeePassXC.",
+        "message": "KeePassXC-Browser가 구성되지 않았습니다. 연결 버튼을 클릭하여 KeePassXC와 페어링하세요.",
         "description": "A popup message shown when the extension has not been connected to KeePassXC."
     },
     "popupNeedReconfigure": {
@@ -511,7 +527,7 @@
         "description": "A popup message shown when the extension has been disconnected from KeePassXC."
     },
     "popupNeedReconfigureMessage": {
-        "message": "Click the reconnect button to establish a new connection.",
+        "message": "새 연결을 설정하려면 다시 연결 버튼을 클릭하세요.",
         "description": "A popup message shown when reconnect is needed."
     },
     "popupConfiguredNotAssociated": {
@@ -551,7 +567,7 @@
         "description": "A message shown choosing what credentials user wants to update."
     },
     "rememberChooseGroup": {
-        "message": "Please choose a group to store new credentials.",
+        "message": "새 자격 증명을 저장할 그룹을 선택해 주세요.",
         "description": "A message shown choosing what group user wants to use for new credentials."
     },
     "rememberInfoDefaultGroupNotFound": {
@@ -647,7 +663,7 @@
         "description": "Dismiss button text when in HTTP Authentication popup."
     },
     "optionsDefaultSettingsTitle": {
-        "message": "Default settings",
+        "message": "기본 설정",
         "description": "Default settings title for Getting Started page."
     },
     "optionsWelcomeTitle": {
@@ -695,7 +711,7 @@
         "description": "Site Preferences page header."
     },
     "optionsSitePreferencesSettings": {
-        "message": "Settings",
+        "message": "설정",
         "description": "Site Preferences settings button text."
     },
     "optionsMenuAbout": {
@@ -723,7 +739,7 @@
         "description": "Add button text."
     },
     "optionsButtonEdit": {
-        "message": "Edit",
+        "message": "편집",
         "description": "Edit button text."
     },
     "optionsButtonUpdate": {
@@ -751,7 +767,7 @@
         "description": "Export settings button text."
     },
     "optionsButtonResetSettings": {
-        "message": "Reset all settings",
+        "message": "모든 설정 초기화",
         "description": "Reset all settings button text."
     },
     "optionsLabelDefaultGroup": {
@@ -763,7 +779,7 @@
         "description": "Default group help text."
     },
     "optionsLabelDefaultPasskeyGroup": {
-        "message": "Default group for saving new passkeys:",
+        "message": "새 passkeys를 저장하는 기본 그룹:",
         "description": "Default passkey group options text."
     },
     "optionsLabelDefaultGroupCheckboxText": {
@@ -811,7 +827,7 @@
         "description": "Automatically fill-in single credential entry checkbox text."
     },
     "optionsCheckboxAutoFillRelevantCredential": {
-        "message": "Automatically fill in relevant credential entries",
+        "message": "관련 자격 증명 항목을 자동으로 채우기",
         "description": "Automatically fill-in relevant credential entry checkbox text."
     },
     "optionsCheckboxAutoFillSingleTotp": {
@@ -855,11 +871,11 @@
         "description": "Show login notifications checkbox text."
     },
     "optionsDefaultPasswordManager": {
-        "message": "Set as default password manager",
+        "message": "기본 비밀번호 관리자로 설정",
         "description": "Default password manager checkbox text."
     },
     "optionsDefaultPasswordManagerHelpText": {
-        "message": "Sets KeePassXC-Browser as the default password manager for the browser.",
+        "message": "브라우저의 기본 비밀번호 관리자로 KeePassXC-Browser를 설정합니다.",
         "description": "Default password manager help text."
     },
     "optionsRedirectAllowance": {
@@ -875,15 +891,15 @@
         "description": "Allow filling HTTP Basic Auth credentials checkbox text."
     },
     "optionsConnectionMethod": {
-        "message": "Connection method",
+        "message": "연결 방식",
         "description": "Connection method selection text."
     },
     "optionsConnectionMethodHelpText": {
-        "message": "If native messaging is blocked in your browser, you can switch to a direct WebSocket sonnection. The feature must be enabled from KeePassXC side to work. Browser restart is required.",
+        "message": "브라우저에서 네이티브 메시징이 차단되어 있다면, 직접 WebSocket 연결로 전환할 수 있습니다. 이 기능은 작동하려면 KeePassXC 측에서 활성화되어 있어야 합니다. 브라우저를 다시 시작해야 합니다.",
         "description": "Connection method help text."
     },
     "optionsConnectionMethodNativeMessaging": {
-        "message": "Native messaging",
+        "message": "네이티브 메시징",
         "description": "Native messaging option for Connection method."
     },
     "optionsConnectionMethodWebSocket": {
@@ -903,7 +919,7 @@
         "description": "Text above radio buttons in the settings page."
     },
     "optionsRadioThreeDays": {
-        "message": "every three days",
+        "message": "3일마다",
         "description": "Radio button text."
     },
     "optionsRadioWeek": {
@@ -975,7 +991,7 @@
         "description": "OTP field icon option help text."
     },
     "optionsHideIconsAlertText": {
-        "message": "You can also hide icons manually when needed with shift+click.",
+        "message": "필요할 때는 shift+click으로 아이콘을 수동으로 숨길 수도 있습니다.",
         "description": "Hide icons alert text text."
     },
     "optionsAutoRetrieveCredentialsHelpText": {
@@ -991,7 +1007,7 @@
         "description": "Auto-Fill Single Entry option help text."
     },
     "optionsAutoFillRelevantCredentialHelpText": {
-        "message": "Automatically fill in the relevant credential if a second fill is needed.",
+        "message": "두 번째 입력이 필요하면 해당 자격 증명을 자동으로 채워 넣습니다.",
         "description": "Auto-Fill Relevant Credential option help text."
     },
     "optionsAutoFillSingleEntryWarning": {
@@ -1075,7 +1091,7 @@
         "description": "KeePassXC version requirement text."
     },
     "optionsMinimumKeePassXCVersionRequired": {
-        "message": "The extension requires KeePassXC version: $1. Earlier versions can cause unwanted behavior.",
+        "message": "확장 기능에는 KeePassXC 버전이 필요합니다: $1. 이전 버전에서는 원치 않는 동작이 발생할 수 있습니다.",
         "description": "KeePassXC minimum version requirement text."
     },
     "optionsDefault": {
@@ -1115,7 +1131,7 @@
         "description": "Import settings confirmation dialog help text."
     },
     "optionsResetSettingsDialogText": {
-        "message": "All settings will be reset to defaults. Are you sure?",
+        "message": "모든 설정이 기본값으로 초기화됩니다. 계속하시겠습니까?",
         "description": "Reset all settings dialog text."
     },
     "optionsConnectedDatabasesText": {
@@ -1131,7 +1147,7 @@
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmFirst": {
-        "message": "Do you really want to remove the following identifier from the database list: $1?",
+        "message": "데이터베이스 목록에서 다음 식별자를 정말 제거하시겠습니까: $1?",
         "description": "Confirmation text when removing database from the list."
     },
     "optionsDatabasesRemoveIdentifierConfirmSecond": {
@@ -1163,7 +1179,7 @@
         "description": "Site Preferences list column title."
     },
     "optionsColumnFeatures": {
-        "message": "Features",
+        "message": "특징",
         "description": "Site Preferences list column title."
     },
     "optionsColumnUsernameOnly": {
@@ -1195,7 +1211,7 @@
         "description": "Site Preferences option selection."
     },
     "optionsSelectionPasskeys": {
-        "message": "Disable passkeys",
+        "message": "패스키 비활성화",
         "description": "Site Preferences option selection."
     },
     "optionsSelectionFull": {
@@ -1451,31 +1467,31 @@
         "description": "Lock database button title text."
     },
     "welcomeText": {
-        "message": "Welcome to KeePassXC-Browser!",
+        "message": "KeePassXC-Browser에 오신 것을 환영합니다!",
         "description": "Main title of Getting Started page."
     },
     "documentationGettingStarted": {
-        "message": "Our Getting Started Guide will get you up and running quickly.",
+        "message": "저희 Getting 시작 가이드를 따라 하시면 빠르게 시작하고 바로 운영을 시작하실 수 있습니다.",
         "description": "Getting Started document text."
     },
     "documentationUserGuide": {
-        "message": "Looking for more comprehensive documentation? Our User Guide is there to help.",
+        "message": "더 포괄적인 문서를 찾고 계신가요? 사용자 안내서는 도움을 드리기 위해 마련되어 있습니다.",
         "description": "User Guide text."
     },
     "documentationTroubleshootingGuide": {
-        "message": "Need help troubleshooting the browser integration? Check the Troubleshooting Guide.",
+        "message": "브라우저 연동 문제 해결에 도움이 필요하신가요? 문제 해결 가이드를 확인하세요.",
         "description": "Troubleshooting Guide text."
     },
     "gettingStartedWelcomeText": {
-        "message": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC.",
+        "message": "KeePassXC의 공식 브라우저 확장 프로그램인 KeePassXC-Browser에 오신 것을 환영합니다.",
         "description": "Welcome to KeePassXC-Browser, the official browser extension for KeePassXC."
     },
     "gettingStartedSecondWelcomeText": {
-        "message": "Please go through the default settings and check all your preferred options.",
+        "message": "기본 설정을 확인하시고 원하시는 모든 옵션을 선택해 주세요.",
         "description": "Please go through the default settings and check all your preferred options."
     },
     "gettingStartedNewUser": {
-        "message": "Are you a new user? Check links to our documentation.",
+        "message": "새 사용자이신가요? 문서 링크를 확인하세요.",
         "description": "Are you a new user? Check links to our documentation."
     }
 }
