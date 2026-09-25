@@ -157,4 +157,3 @@ test('Test containsPlaceholder()', async ({ page }) => {
     expect(containsPlaceholder('{TOTP}')).toBe(true);
     expect(containsPlaceholder('\\{TOTP\\}')).toBe(true);
 });
-
