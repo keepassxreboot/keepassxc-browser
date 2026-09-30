@@ -89,6 +89,9 @@ kpxcObserverHelper.initObserver = async function() {
         }
 
         const styleMutations = [];
+        const addedNodes = new Set();
+        let nodesRemoved = false;
+
         for (const mut of mutations) {
             if (kpxcObserverHelper.ignoredNode(mut.target)) {
                 continue;
@@ -104,12 +107,10 @@ kpxcObserverHelper.initObserver = async function() {
             kpxcObserverHelper.cacheStyle(mut, styleMutations, mutations.length);
 
             if (mut.type === 'childList') {
-                mut.addedNodes.forEach(function (node) {
-                    kpxcObserverHelper.handleObserverAdd(node);
-                });
-                mut.removedNodes.forEach(function (node) {
-                    kpxcObserverHelper.handleObserverRemove(node);
-                });
+                if (mut.addedNodes.length > 0) {
+                    addedNodes.add(mut.target);
+                }
+                nodesRemoved = mut.removedNodes?.length > 0;
             } else if (mut.type === 'attributes' && (mut.attributeName === 'class' || mut.attributeName === 'style')) {
                 // Only accept targets with forms
                 const forms = matchesWithNodeName(mut.target, 'FORM')
@@ -120,17 +121,27 @@ kpxcObserverHelper.initObserver = async function() {
                 }
 
                 // There's an issue here. We cannot know for sure if the class attribute if added or removed.
-                kpxcObserverHelper.handleObserverAdd(mut.target);
+                addedNodes.add(mut.target);
             }
         }
 
-        // Handle cached style mutations
+        // Add cached style mutations to the list
         for (const styleMut of styleMutations) {
             if (styleMut.display !== 'none' && styleMut.display !== '') {
-                kpxcObserverHelper.handleObserverAdd(styleMut.target);
-            } else {
-                kpxcObserverHelper.handleObserverRemove(styleMut.target);
+                addedNodes.add(styleMut.target);
+                continue;
             }
+            nodesRemoved = true;
+        }
+
+        // Handle all nodes that were added, or cached in styleMutations
+        for (const target of addedNodes) {
+            kpxcObserverHelper.handleObserverAdd(target);
+        }
+
+        // Run delete icons check if nodes were added or removed
+        if (addedNodes.length > 0 || nodesRemoved) {
+            kpxcIcons.deleteAllHiddenIcons();
         }
     });
 
@@ -175,11 +186,15 @@ kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
     }
 };
 
+kpxcObserverHelper.inputTypeIsAccepted = function(elem) {
+    return kpxcObserverHelper.inputTypes.includes(elem?.getLowerCaseAttribute('type'));
+};
+
 // Gets input fields from the target
 kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     // Basic check for input element
     const inputAllowed = (elem) => !elem.disabled
-        && elem.getLowerCaseAttribute('type') !== 'hidden'
+        && kpxcObserverHelper.inputTypeIsAccepted(elem)
         && !hasIgnoredClassNames(elem)
         && !kpxcObserverHelper.alreadyIdentified(elem);
 
@@ -188,7 +203,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         return [];
     }
 
-    // Filter out any input fields with type 'hidden' right away
+    // Filter out any input fields with unwanted types right away
     let inputFields = [];
     target.childElementCount > 0 && target.querySelectorAll('input')?.forEach((elem) => {
         if (inputAllowed(elem)) {
@@ -196,6 +211,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         }
     });
 
+    // If target is already an input field
     if (matchesWithNodeName(target, 'input')) {
         inputFields.push(target);
     }
@@ -230,18 +246,14 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         inputFields = inputFields.slice(0, MAX_INPUTS);
     }
 
-    // Only include input fields that match with kpxcObserverHelper.inputTypes
+    // Only include input fields that are visible
     const inputs = [];
     for (const field of inputFields) {
-        if ((!ignoreVisibility && !kpxcFields.isVisible(field))
-            || kpxcFields.isSearchField(field)) {
+        if ((!ignoreVisibility && !kpxcFields.isVisible(field)) || kpxcFields.isSearchField(field)) {
             continue;
         }
 
-        const type = field.getLowerCaseAttribute('type');
-        if (kpxcObserverHelper.inputTypes.includes(type)) {
-            inputs.push(field);
-        }
+        inputs.push(field);
     }
 
     logDebug('Input fields found:', inputs);
@@ -315,22 +327,6 @@ kpxcObserverHelper.handleObserverAdd = async function(target) {
 
         kpxc.prepareCredentials();
     }
-
-    kpxcIcons.deleteAllHiddenIcons();
-};
-
-// Removes monitored elements
-kpxcObserverHelper.handleObserverRemove = function(target) {
-    if (kpxcObserverHelper.ignoredElement(target)) {
-        return;
-    }
-
-    const inputs = kpxcObserverHelper.getInputs(target, true);
-    if (inputs.length === 0) {
-        return;
-    }
-
-    kpxcIcons.deleteAllHiddenIcons();
 };
 
 // Handles CSS transitionend event
@@ -378,7 +374,9 @@ const getShadowDOM = function(elem) {
     }
 
     try {
-        return elem.openOrClosedShadowRoot ? elem.openOrClosedShadowRoot : browser.dom.openOrClosedShadowRoot(elem);
+        return 'openOrClosedShadowRoot' in elem
+            ? elem.openOrClosedShadowRoot
+            : browser.dom.openOrClosedShadowRoot(elem);
     } catch (_e) {
         return elem.shadowRoot;
     }
@@ -403,6 +401,7 @@ const traverseShadowDOM = function(target, inputFields) {
     while (currentNode) {
         if (!kpxcObserverHelper.ignoredNode(currentNode)
             && matchesWithNodeName(currentNode, 'input')
+            && kpxcObserverHelper.inputTypeIsAccepted(currentNode)
             && !kpxcObserverHelper.alreadyIdentified(currentNode)
             && !hasIgnoredClassNames(currentNode)) {
             inputFields.push(currentNode);
