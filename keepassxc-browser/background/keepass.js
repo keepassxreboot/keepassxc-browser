@@ -669,7 +669,7 @@ keepass.passkeysGet = async function(tab, args = []) {
         const nonce = keepassClient.getNonce();
         const [ publicKey, origin ] = args;
         const passkeyPublicKey = JSON.parse(JSON.stringify(publicKey));
-        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rp?.id);
+        const relatedOrigins = await keepass.getPasskeysRelatedOrigins(passkeyPublicKey?.rpId);
 
         const messageData = {
             action: kpAction,
@@ -932,11 +932,30 @@ keepass.getPasskeysRelatedOrigins = async function(rpId) {
     }
 
     try {
+        let hostname;
+        try {
+            hostname = new URL(`https://${rpId}`).hostname;
+        } catch { }
+
+        if (hostname !== rpId) {
+            logError(`getRelatedOrigins error: "${rpId}" is wrong rpId`);
+            return [];
+        }
+
         const response = await fetch(`https://${rpId}/.well-known/webauthn`, {
             signal: AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT),
+            cache: 'no-store',
+            credentials: 'omit',
+            referrerPolicy: 'no-referrer',
         });
 
         // Basic reply validation, see: https://www.w3.org/TR/webauthn-3/#sctn-validating-relation-origin
+
+        if (response.status !== 200) {
+            logError(`getRelatedOrigins error: HTTP status code is ${response.status}`);
+            return [];
+        }
+
         const isJson = response?.headers?.get('content-type')?.includes('application/json');
         if (!isJson) {
             logError('getRelatedOrigins error: Content-Type is not JSON');
