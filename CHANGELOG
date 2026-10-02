@@ -1,6 +1,10 @@
+1.10.4.1 (2026-10-02)
+=========================
+- Add restrictions to cross-origin iframe handling [#3103]
+
 1.10.4 (2026-09-16)
 =========================
-- Add keyboard shortcut support for lock database (thanks a2kolbasov)
+- Add keyboard shortcut support for lock database (thanks a2kolbasov) [#3052]
 - Fix issues with Reddit [#2998]
 - Fix updating toolbar icons on every open tab in all windows [#3013]
 - Fix showing an error if translation placeholder is missing [#3017]

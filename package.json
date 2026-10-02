@@ -1,6 +1,6 @@
 {
   "name": "keepassxc-browser",
-  "version": "1.10.4",
+  "version": "1.10.4.1",
   "description": "KeePassXC-Browser",
   "main": "build.js",
   "devDependencies": {
