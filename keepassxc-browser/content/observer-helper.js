@@ -108,17 +108,10 @@ kpxcObserverHelper.initObserver = async function() {
                 nodesChanged = true;
             }
 
+            // Only allow certain mutation types
             if (mut.type === 'childList') {
                 nodesChanged = mut.addedNodes.length > 0 || mut.removedNodes.length > 0;
             } else if (mut.type === 'attributes' && (mut.attributeName === 'class' || mut.attributeName === 'style')) {
-                // Only accept targets with forms
-                const forms = matchesWithNodeName(mut.target, 'FORM')
-                    ? mut.target
-                    : mut.target.getElementsByTagName('form');
-                if (forms?.length === 0 && !kpxcSites.exceptionFound(mut.target.classList, mut.target)) {
-                    continue;
-                }
-
                 nodesChanged = true;
             }
         }
