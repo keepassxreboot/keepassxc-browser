@@ -3,6 +3,7 @@
 const MAX_CHILDREN = 50;
 const MAX_INPUTS = 100;
 const MAX_MUTATIONS = 200;
+const MUTATION_END_TIMEOUT = 1000; // ms
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
@@ -76,6 +77,8 @@ kpxcObserverHelper.observerConfig = {
     attributeFilter: [ 'style', 'class' ]
 };
 
+kpxcObserverHelper.mutationTimeout = -1;
+
 // Initializes MutationObserver
 kpxcObserverHelper.initObserver = async function() {
     kpxc.observer = new MutationObserver(function(mutations, obs) {
@@ -88,7 +91,7 @@ kpxcObserverHelper.initObserver = async function() {
             mutations = mutations.slice(0, MAX_MUTATIONS);
         }
 
-        const styleMutations = [];
+        let nodesChanged = false;
         for (const mut of mutations) {
             if (kpxcObserverHelper.ignoredNode(mut.target)) {
                 continue;
@@ -101,36 +104,28 @@ kpxcObserverHelper.initObserver = async function() {
             }
 
             // Cache style mutations. We only need the last style mutation of the target.
-            kpxcObserverHelper.cacheStyle(mut, styleMutations, mutations.length);
+            if (kpxcObserverHelper.checkStyleMutations(mut, mutations.length) > 0) {
+                nodesChanged = true;
+            }
 
+            // Only allow certain mutation types
             if (mut.type === 'childList') {
-                mut.addedNodes.forEach(function (node) {
-                    kpxcObserverHelper.handleObserverAdd(node);
-                });
-                mut.removedNodes.forEach(function (node) {
-                    kpxcObserverHelper.handleObserverRemove(node);
-                });
+                nodesChanged = mut.addedNodes.length > 0 || mut.removedNodes.length > 0;
             } else if (mut.type === 'attributes' && (mut.attributeName === 'class' || mut.attributeName === 'style')) {
-                // Only accept targets with forms
-                const forms = matchesWithNodeName(mut.target, 'FORM')
-                    ? mut.target
-                    : mut.target.getElementsByTagName('form');
-                if (forms?.length === 0 && !kpxcSites.exceptionFound(mut.target.classList, mut.target)) {
-                    continue;
-                }
-
-                // There's an issue here. We cannot know for sure if the class attribute if added or removed.
-                kpxcObserverHelper.handleObserverAdd(mut.target);
+                nodesChanged = true;
             }
         }
 
-        // Handle cached style mutations
-        for (const styleMut of styleMutations) {
-            if (styleMut.display !== 'none' && styleMut.display !== '') {
-                kpxcObserverHelper.handleObserverAdd(styleMut.target);
-            } else {
-                kpxcObserverHelper.handleObserverRemove(styleMut.target);
+        if (nodesChanged) {
+            // Clear the old timeout and prevent callback from happening
+            if (kpxcObserverHelper.mutationTimeout) {
+                clearTimeout(kpxcObserverHelper.mutationTimeout);
             }
+            // After all mutations have been ended, parse input fields in the page after a timeout
+            kpxcObserverHelper.mutationTimeout = setTimeout(async () => {
+                await kpxc.initCredentialFields();
+                kpxcIcons.deleteAllHiddenIcons();
+            }, MUTATION_END_TIMEOUT);
         }
     });
 
@@ -139,14 +134,14 @@ kpxcObserverHelper.initObserver = async function() {
     }
 };
 
-// Stores mutation style to an cache array
+// Stores mutation style to an array
 // If there's a single style mutation, it's safe to calculate it
-kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
+kpxcObserverHelper.checkStyleMutations = function(mut, mutationCount) {
     // Do not cache elements with animations
     if (mut?.attributeName !== 'style'
         || mut?.target?.style?.transform !== ''
         || mut?.target?.style?.transformStyle !== '') {
-        return;
+        return [];
     }
 
     // If the target is inside a form we are monitoring, calculate the CSS style for better compatibility.
@@ -156,6 +151,7 @@ kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
         style = getComputedStyle(mut.target);
     }
 
+    const styleMutations = [];
     if (style.display || style.zIndex) {
         if (!styleMutations.some(m => m.target === mut.target)) {
             styleMutations.push({
@@ -173,13 +169,19 @@ kpxcObserverHelper.cacheStyle = function(mut, styleMutations, mutationCount) {
             }
         }
     }
+
+    return styleMutations;
+};
+
+kpxcObserverHelper.inputTypeIsAccepted = function(elem) {
+    return kpxcObserverHelper.inputTypes.includes(elem?.getLowerCaseAttribute('type'));
 };
 
 // Gets input fields from the target
 kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
     // Basic check for input element
     const inputAllowed = (elem) => !elem.disabled
-        && elem.getLowerCaseAttribute('type') !== 'hidden'
+        && kpxcObserverHelper.inputTypeIsAccepted(elem)
         && !hasIgnoredClassNames(elem)
         && !kpxcObserverHelper.alreadyIdentified(elem);
 
@@ -188,7 +190,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         return [];
     }
 
-    // Filter out any input fields with type 'hidden' right away
+    // Filter out any input fields with unwanted types right away
     let inputFields = [];
     target.childElementCount > 0 && target.querySelectorAll('input')?.forEach((elem) => {
         if (inputAllowed(elem)) {
@@ -196,6 +198,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         }
     });
 
+    // If target is already an input field
     if (matchesWithNodeName(target, 'input')) {
         inputFields.push(target);
     }
@@ -230,7 +233,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
         inputFields = inputFields.slice(0, MAX_INPUTS);
     }
 
-    // Only include input fields that match with kpxcObserverHelper.inputTypes
+    // Only include input fields that are visible
     const inputs = [];
     for (const field of inputFields) {
         if ((!ignoreVisibility && !kpxcFields.isVisible(field))
@@ -238,10 +241,7 @@ kpxcObserverHelper.getInputs = function(target, ignoreVisibility = false) {
             continue;
         }
 
-        const type = field.getLowerCaseAttribute('type');
-        if (kpxcObserverHelper.inputTypes.includes(type)) {
-            inputs.push(field);
-        }
+        inputs.push(field);
     }
 
     logDebug('Input fields found:', inputs);
@@ -258,88 +258,6 @@ kpxcObserverHelper.findInputsFromShadowDOM = function(target) {
     traverseShadowDOM(target, inputFields);
 
     return inputFields;
-};
-
-// Detects animations and transitions. Triggers handleObserverAdd() again on animationend/transitionend.
-kpxcObserverHelper.handleTransitions = function(target) {
-    const classList = target?.classList?.toString();
-    const targetHasAnimations = classList?.includes('animate');
-    const targetHasDurations = classList?.includes('duration') || classList?.includes('transform');
-
-    if (targetHasAnimations || targetHasDurations) {
-        const animations = target.getAnimations();
-        const transitionTime = animations[0]?.currentTime ?? 0;
-
-        // Animation found, but transition has not finished
-        if (animations && transitionTime === 0) {
-            target.addEventListener(
-                targetHasAnimations ? 'animationend' : 'transitionend',
-                () => {
-                    kpxcObserverHelper.handleObserverAdd(target);
-                },
-                {
-                    once: true,
-                },
-            );
-        }
-    }
-};
-
-// Adds elements to a monitor array. Identifies the input fields.
-kpxcObserverHelper.handleObserverAdd = async function(target) {
-    if (kpxcObserverHelper.ignoredElement(target)) {
-        return;
-    }
-
-    // Sometimes the settings haven't been loaded before new input fields are detected
-    if (Object.keys(kpxc.settings).length === 0) {
-        kpxc.init();
-        return;
-    }
-
-    kpxcObserverHelper.handleTransitions(target);
-
-    const inputs = kpxcObserverHelper.getInputs(target);
-    if (inputs.length === 0) {
-        return;
-    }
-
-    await kpxc.initCombinations(inputs);
-    await kpxcIcons.initIcons(kpxc.combinations);
-
-    if (kpxc.databaseState === DatabaseState.UNLOCKED) {
-        if (_called.retrieveCredentials === false) {
-            await kpxc.retrieveCredentials();
-            return;
-        }
-
-        kpxc.prepareCredentials();
-    }
-
-    kpxcIcons.deleteAllHiddenIcons();
-};
-
-// Removes monitored elements
-kpxcObserverHelper.handleObserverRemove = function(target) {
-    if (kpxcObserverHelper.ignoredElement(target)) {
-        return;
-    }
-
-    const inputs = kpxcObserverHelper.getInputs(target, true);
-    if (inputs.length === 0) {
-        return;
-    }
-
-    kpxcIcons.deleteAllHiddenIcons();
-};
-
-// Handles CSS transitionend event
-kpxcObserverHelper.handleTransitionEnd = function(e) {
-    if (!e.isTrusted) {
-        return;
-    }
-
-    kpxcObserverHelper.handleObserverAdd(e.currentTarget);
 };
 
 // Returns true if element should be ignored
@@ -378,7 +296,9 @@ const getShadowDOM = function(elem) {
     }
 
     try {
-        return elem.openOrClosedShadowRoot ? elem.openOrClosedShadowRoot : browser.dom.openOrClosedShadowRoot(elem);
+        return 'openOrClosedShadowRoot' in elem
+            ? elem.openOrClosedShadowRoot
+            : browser.dom.openOrClosedShadowRoot(elem);
     } catch (_e) {
         return elem.shadowRoot;
     }
@@ -403,6 +323,7 @@ const traverseShadowDOM = function(target, inputFields) {
     while (currentNode) {
         if (!kpxcObserverHelper.ignoredNode(currentNode)
             && matchesWithNodeName(currentNode, 'input')
+            && kpxcObserverHelper.inputTypeIsAccepted(currentNode)
             && !kpxcObserverHelper.alreadyIdentified(currentNode)
             && !hasIgnoredClassNames(currentNode)) {
             inputFields.push(currentNode);
