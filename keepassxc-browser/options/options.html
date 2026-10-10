@@ -62,7 +62,7 @@
             </ul>
           </div>
           <footer class="px-3 mt-4 mb-1 text-uppercase position-absolute small text-muted">
-            © 2017-2025 - KeePassXC Team
+            © 2017-2026 - KeePassXC Team
           </footer>
         </nav>
 
@@ -531,21 +531,41 @@
                   <!-- Clear credential timeout -->
                   <div class="form-group mt-2 pb-1">
                     <label for="clearCredentialTimeout" data-i18n="optionsClearCredentialsTimeout"></label>
-                    <div class="input-group w-25 mt-2">
+                    <div class="input-group w-25 mt-2 pe-2">
                       <input class="form-control form-control-sm" type="number" id="clearCredentialTimeout" min="0" max="3600" required>
                     </div>
                     <div class="form-text" data-i18n="optionsClearCredentialsTimeoutHelpText"></div>
                   </div>
 
                   <!-- Connection method -->
-                  <div class="form-group col-sm-3 pb-2 py-2" id="connectionMethodOptions">
+                  <div class="row pb-1 py-2">
                     <label for="connectionMethod" class="form-label" data-i18n="optionsConnectionMethod"></label>
-                    <select class="form-select form-select-sm col-md-3 col-lg-2" id="connectionMethod" data-i18n="[title]optionsConnectionMethodSelection">
-                      <option value="nativemessaging" data-i18n="optionsConnectionMethodNativeMessaging"></option>
-                      <option value="websocket" data-i18n="optionsConnectionMethodWebSocket"></option>
-                    </select>
+                    <div class="col col-lg-3 pe-0">
+                      <select class="form-select form-select-sm" id="connectionMethod" data-i18n="[title]optionsConnectionMethodSelection">
+                        <option value="nativemessaging" data-i18n="optionsConnectionMethodNativeMessaging"></option>
+                        <option value="websocket" data-i18n="optionsConnectionMethodWebSocket"></option>
+                      </select>
+                    </div>
+                    <div class="col">
+                      <div>
+                        <button class="btn btn-sm btn-primary" type="button" id="webSocketReconnectButton" data-i18n="[title]optionsButtonReconnect">
+                          <i class="fa fa-repeat" aria-hidden="true"></i>
+                          <span data-i18n="optionsButtonReconnect"></span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div>
+                  <div class="row">
+                    <div id="optionsWebSocketError" class="invalid-feedback" data-i18n="optionsWebSocketError"></div>
+                  </div>
+
+                   <!-- WebSocket port -->
+                  <div class="form-group mt-2 pb-1" id="webSocketPortOption">
+                    <label for="webSocketPort" data-i18n="optionsWebSocketPort"></label>
+                    <div class="input-group w-25 mt-2 pe-2">
+                      <input class="form-control form-control-sm" type="number" id="webSocketPort" min="1" max="65535" required>
+                    </div>
+                    <div id="webSocketPortInvalidFeedback" class="invalid-feedback" data-i18n="optionsIncorrectWebSocketPort"></div>
                     <span class="form-text text-muted" data-i18n="optionsConnectionMethodHelpText"></span>
                   </div>
 
@@ -798,7 +818,7 @@
                         <span data-i18n="optionsButtonAdd"></span>
                       </button>
                     </div>
-                    <span class="invalid-feedback d-block" data-i18n="optionsSitePreferencesManualAddHelp"></span>
+                    <span class="invalid-feedback d-block" id="manualUrlAdd" data-i18n="optionsSitePreferencesManualAddHelp"></span>
                   </div>
 
                   <div class="table-responsive">

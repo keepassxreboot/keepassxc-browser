@@ -726,6 +726,14 @@
         "message": "Save",
         "description": "Save button text."
     },
+    "optionsButtonReconnect": {
+        "message": "Reconnect",
+        "description": "Reconnect button text."
+    },
+    "optionsWebSocketError": {
+        "message": "Cannot connect to WebSocket port.",
+        "description": "Cannot connect to WebSocket port text."
+    },
     "optionsButtonConnect": {
         "message": "Connect",
         "description": "Connect button text."
@@ -1069,6 +1077,14 @@
     "optionsClearCredentialsTimeoutHelpText": {
         "message": "Credentials are cleared from background tabs after the timeout and permissions for those pages will be asked again.",
         "description": "Clear credentials timeout help text."
+    },
+    "optionsWebSocketPort": {
+        "message": "WebSocket port (default: 7580)",
+        "description": "WebSocket port"
+    },
+    "optionsIncorrectWebSocketPort": {
+        "message": "Incorrect WebSocket port.",
+        "description": "Incorrect WebSocket port text."
     },
     "optionsVersionInfoText": {
         "message": "KeePassXC-Browser needs KeePassXC to retrieve credentials.",
