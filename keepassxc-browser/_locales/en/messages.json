@@ -734,6 +734,10 @@
         "message": "Cannot connect to WebSocket port.",
         "description": "Cannot connect to WebSocket port text."
     },
+    "optionsNativeMessagingError": {
+        "message": "Cannot connect to keepassxc-proxy using native messaging.",
+        "description": "Cannot connect to keepassxc-proxy using native messaging text."
+    },
     "optionsButtonConnect": {
         "message": "Connect",
         "description": "Connect button text."

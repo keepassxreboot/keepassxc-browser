@@ -233,7 +233,7 @@ options.initGeneralSettings = async function() {
     }
     $('#tab-general-settings select#connectionMethod').value = connectionMethod;
     $('#tab-general-settings select#connectionMethod').addEventListener('change', async function(e) {
-        $('#optionsWebSocketError').hide();
+        $('#optionsConnectionError').hide();
         options.settings['connectionMethod'] = e.currentTarget.value;
         await options.saveSettings();
 
@@ -260,10 +260,20 @@ options.initGeneralSettings = async function() {
             console.log(err);
         });
 
+        const connectionMethod = options.settings['connectionMethod'];
+        const connectionErrorElement = $('span#optionsConnectionError');
+        connectionErrorElement.hide();
+
         if (!result) {
-            $('#optionsWebSocketError').show();
-        } else {
-            $('#optionsWebSocketError').hide();
+            // Cannot connect to proxy at all
+            connectionErrorElement.textContent = connectionMethod === 'nativemessaging'
+                ? tr('optionsNativeMessagingError')
+                : tr('optionsWebSocketError');
+            connectionErrorElement.show();
+        } else if (result?.keePassXCAvailable === false) {
+            // Connected to proxy, but KeePassXC is not found
+            connectionErrorElement.textContent = tr('errorMessageTimeout');
+            connectionErrorElement.show();
         }
 
         browser.runtime.sendMessage({ action: 'update_popup' });
