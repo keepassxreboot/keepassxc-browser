@@ -227,7 +227,11 @@ options.initGeneralSettings = async function() {
     });
 
     // Connection method
-    $('#tab-general-settings select#connectionMethod').value = options.settings['connectionMethod'];
+    const connectionMethod = options.settings['connectionMethod'];
+    if (connectionMethod === 'nativemessaging') {
+        $('#tab-general-settings #webSocketPortOption').hide();
+    }
+    $('#tab-general-settings select#connectionMethod').value = connectionMethod;
     $('#tab-general-settings select#connectionMethod').addEventListener('change', async function(e) {
         $('#optionsWebSocketError').hide();
         options.settings['connectionMethod'] = e.currentTarget.value;
