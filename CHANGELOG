@@ -1,6 +1,6 @@
 1.10.4.1 (2026-10-02)
 =========================
-- Add restrictions to cross-origin iframe handling [#3103]
+- Add restrictions to cross-origin iframe handling (CVE-PENDING; Credits: NATO Cyber Security Centre (NCSC), Pedro Paniago NCIA/NCSC, @router0mail) [#3103]
 
 1.10.4 (2026-09-16)
 =========================
