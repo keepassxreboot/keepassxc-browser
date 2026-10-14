@@ -44,7 +44,7 @@ kpxcPasskeysUtils.sendPasskeysResponse = function(publicKey, errorCode, errorMes
     const response = errorCode
         ? { errorCode: errorCode, errorMessage: errorMessage, fallback: kpxcPasskeysUtils?.passkeysFallback }
         : { publicKey: publicKey, fallback: kpxcPasskeysUtils?.passkeysFallback };
-    const details = isFirefox() ? cloneInto(response, document.defaultView) : response;
+    const details = typeof cloneInto === 'function' ? cloneInto(response, document.defaultView) : response;
     document.dispatchEvent(new CustomEvent('kpxc-passkeys-response', { detail: details }));
 };
 
