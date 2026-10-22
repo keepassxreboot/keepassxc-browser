@@ -28,6 +28,8 @@ export default defineConfig([globalIgnores(["**/*.min.js"]), {
             assertSearchField: "readonly",
             assertSearchForm: "readonly",
             assertTOTPField: "readonly",
+            assertTOTPWithOneTimeCodeField: "readonly",
+            assertOneTimeCodeSelectedAndIconAdded: "readonly",
             AssociatedAction: "readonly",
             AuthenticatorAssertionResponse: "readonly",
             AuthenticatorAttestationResponse: "readonly",

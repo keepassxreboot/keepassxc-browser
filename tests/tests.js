@@ -69,6 +69,10 @@ async function testTotpFields() {
         [ '', { id: 'decoder', type: 'text', }, 'decoder id is not acceptable', false ],
         [ '', { id: 'code', type: 'text', }, 'code id is accepted', true ],
         [ '', { id: '2fa', type: 'text', maxLength: '12', autocomplete: 'one-time-code' }, 'Accept if one-time-code', true ],
+        [ '', { id: '2fa', type: 'text', value: '123' }, 'Ignore if field already has a value', false ],
+        [ '', { id: '2fa', type: 'text', size: '30' }, 'Ignore if field size is too large', false ],
+        [ '', { id: '2fa', type: 'text', size: '20', maxLength: '6' }, 'Accept large size if maxLength is valid', true ],
+        [ '', { id: '2fa', type: 'text', size: '6' }, 'Accept if field size is small', true ],
         [ '', { id: 'username', type: 'text', }, 'Ignore a generic input field', false ],
         [ '', { type: 'password', }, 'Ignore a password input field', false ],
         [ // Protonmail
@@ -100,6 +104,9 @@ async function testTotpFields() {
     for (const field of totpFields) {
         assertTOTPField(field[0], field[1], field[2], field[3]);
     }
+
+    assertTOTPWithOneTimeCodeField();
+    assertOneTimeCodeSelectedAndIconAdded();
 }
 
 // Password change

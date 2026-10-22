@@ -48,6 +48,20 @@ kpxcTOTPIcons.autoCompleteIsOneTimeCode = function(field) {
     return field.getLowerCaseAttribute('autocomplete') === 'one-time-code';
 };
 
+// Returns true if a field with autocomplete="one-time-code" exists in the same form as the given field
+// (or outside of any form, if the field has none) that field detection will actually pick up.
+// Password fields are handled as passwords in kpxcFields.getAllCombinations(), and the rest must pass
+// the same filters as kpxcObserverHelper.getInputs().
+kpxcTOTPIcons.usableOneTimeCodeFieldExists = function(field) {
+    return Array.from(document.querySelectorAll('input[autocomplete="one-time-code" i]'))
+        .some(f => f.form === field.form
+            && !f.matches(':disabled') && !f.readOnly
+            && f.getLowerCaseAttribute('type') !== 'password'
+            && kpxcObserverHelper.inputTypes.includes(f.getLowerCaseAttribute('type'))
+            && kpxcFields.isVisible(f)
+            && !kpxcFields.isSearchField(f));
+};
+
 // Quick check for a valid TOTP field
 kpxcTOTPIcons.isAcceptedTOTPField = function(field) {
     const id = field.getLowerCaseAttribute('id');
@@ -85,10 +99,17 @@ kpxcTOTPIcons.isValid = function(field, forced) {
         return false;
     }
 
+    // A correctly marked up field is the top candidate. Don't guess other fields in the same form if one exists.
+    if (!forced && kpxcTOTPIcons.usableOneTimeCodeFieldExists(field)) {
+        return false;
+    }
+
     if (!forced) {
         if (ignoredTypes.some(t => t === field.type)
             || field.offsetWidth < MIN_INPUT_FIELD_OFFSET_WIDTH
             || field.size < 2
+            || (field.maxLength < 0 && field.hasAttribute('size') && field.size > kpxcSites.expectedTOTPMaxLength())
+            || field.value !== ''
             || (field.maxLength > 0 && (field.maxLength < MIN_TOTP_INPUT_LENGTH || field.maxLength > kpxcSites.expectedTOTPMaxLength()))
             || ignoredTypes.some(t => t === field.autocomplete)
             || field.id.match(ignoreRegex)
