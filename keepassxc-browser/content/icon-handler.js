@@ -54,7 +54,7 @@ kpxcIcons.addIconsFromForm = async function(form) {
                 }
             }
             const usernameFieldVisible = c.username && kpxcFields.isVisible(c.username);
-            
+
             if (c.username && !c.username.readOnly && usernameFieldVisible) {
                 kpxcIcons.addIcon(c.username, kpxcIcons.iconTypes.DEFAULT);
             } else if (c.password && (!c.username || (c.username && (c.username.readOnly || !usernameFieldVisible)))) {
@@ -195,6 +195,18 @@ kpxcIcons.setIconPosition = function(icon, field, rtl = false, segmented = false
         : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
 };
 
+// Sets TOTP icon visibility
+// Only set the icon visible if hideTOTPIconsWithoutCredentials is not set,
+// or hideTOTPIconsWithoutCredentials is set and there are credentials with TOTP.
+kpxcIcons.setTOTPIconVisibility = function(icon) {
+    if (!kpxc.settings.hideTOTPIconsWithoutCredentials) {
+        icon.style.display = 'block';
+        return;
+    }
+
+    icon.style.display = kpxc.credentials.some(c => kpxc.entryHasTotp(c)) ? 'block' : 'none';
+};
+
 // Sets the icons to corresponding database lock status
 kpxcIcons.switchIcons = async function() {
     const uuid = await sendMessage('page_get_login_id');
@@ -219,7 +231,11 @@ kpxcIcons.updateFromIntersectionObserver = function(iconClass, entries) {
         if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
             iconClass.icon.style.display = 'none';
         } else if (entry.intersectionRatio > 0 && entry.isIntersecting) {
-            iconClass.icon.style.display = 'block';
+            if (iconClass.iconType !== kpxcIcons.iconTypes.TOTP) {
+                iconClass.icon.style.display = 'block';
+            } else {
+                kpxcIcons.setTOTPIconVisibility(iconClass.icon);
+            }
 
             // Wait for possible DOM animations
             setTimeout(() => {

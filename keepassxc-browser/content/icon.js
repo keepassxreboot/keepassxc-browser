@@ -5,9 +5,10 @@ const MAX_ICON_SIZE = 24;
 
 // Basic icon class
 class Icon {
-    constructor(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
+    constructor(field, iconType, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
         this.databaseState = databaseState;
         this.icon = null;
+        this.iconType = iconType;
         this.inputField = null;
         this.rtl = kpxcUI.isRTL(field);
         this.segmented = segmented;
@@ -62,6 +63,10 @@ class Icon {
             this.icon.style.filter = kpxc.credentials.length === 0 && !uuid ? 'saturate(0%)' : 'saturate(100%)';
         } else {
             this.icon.style.filter = 'saturate(0%)';
+        }
+
+        if (this.iconType === kpxcIcons.iconTypes.TOTP) {
+            kpxcIcons.setTOTPIconVisibility(this.icon);
         }
     }
 }
