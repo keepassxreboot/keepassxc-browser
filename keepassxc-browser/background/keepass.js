@@ -27,7 +27,7 @@ keepass.requiredKeePassXC = '2.6.0';
 keepass.serverPublicKey = '';
 
 const DEFAULT_FETCH_TIMEOUT = 5000; // ms
-const MAX_RELATED_ORIGIN_LABELS = 60;
+const MAX_RELATED_ORIGIN_LABELS = 300;
 
 const kpActions = {
     SET_LOGIN: 'set-login',
