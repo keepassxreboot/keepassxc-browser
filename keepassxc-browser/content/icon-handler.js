@@ -195,6 +195,18 @@ kpxcIcons.setIconPosition = function(icon, field, rtl = false, segmented = false
         : Pixels(left + scrollLeft + field.offsetWidth - size - offset);
 };
 
+// Sets TOTP icon visibility
+// Only set the icon visible if hideOTPIconWhenNoCredentials is not set,
+// or hideOTPIconWhenNoCredentials is set and there are credentials with TOTP.
+kpxcIcons.setTOTPIconVisibility = function(icon) {
+    if (!kpxc.settings.hideOTPIconWhenNoCredentials) {
+        icon.style.display = 'block';
+        return;
+    }
+
+    icon.style.display = kpxc.credentials.some(c => kpxc.entryHasTotp(c)) ? 'block' : 'none';
+};
+
 // Sets the icons to corresponding database lock status
 kpxcIcons.switchIcons = async function() {
     const uuid = await sendMessage('page_get_login_id');
@@ -219,7 +231,11 @@ kpxcIcons.updateFromIntersectionObserver = function(iconClass, entries) {
         if ((entry.intersectionRatio === 0 && !entry.isIntersecting) || (rect.some(x => x < -10))) {
             iconClass.icon.style.display = 'none';
         } else if (entry.intersectionRatio > 0 && entry.isIntersecting) {
-            iconClass.icon.style.display = 'block';
+            if (!iconClass.icon.classList.contains('kpxc-totp-icon')) {
+                iconClass.icon.style.display = 'block';
+            } else {
+                kpxcIcons.setTOTPIconVisibility(iconClass.icon);
+            }
 
             // Wait for possible DOM animations
             setTimeout(() => {

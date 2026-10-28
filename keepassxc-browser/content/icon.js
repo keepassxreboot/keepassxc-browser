@@ -63,5 +63,9 @@ class Icon {
         } else {
             this.icon.style.filter = 'saturate(0%)';
         }
+
+        if (this.icon.classList.contains('kpxc-totp-icon')) {
+            kpxcIcons.setTOTPIconVisibility(this.icon);
+        }
     }
 }

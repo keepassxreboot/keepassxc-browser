@@ -157,6 +157,7 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
     icon.style.width = Pixels(size);
     icon.style.height = Pixels(size);
 
+    kpxcIcons.setTOTPIconVisibility(icon);
     if (this.databaseState === DatabaseState.DISCONNECTED || this.databaseState === DatabaseState.LOCKED) {
         icon.style.filter = 'saturate(0%)';
     } else {
