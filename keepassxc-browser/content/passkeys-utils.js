@@ -19,7 +19,7 @@ const checkErrors = function(pkOptions, sameOriginWithAncestors) {
         throw new DOMException('Cross-origin register or authentication is not allowed.', 'NotAllowedError');
     }
 
-    if (pkOptions.challenge.length < 16) {
+    if (pkOptions.challenge.byteLength < 16) {
         throw new TypeError('challenge is shorter than required minimum length.');
     }
 };
