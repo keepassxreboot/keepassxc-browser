@@ -63,67 +63,6 @@ kpxcSites.detectUsernameFromPage = function() {
     return undefined;
 };
 
-/**
- * Handles a few exceptions for certain sites where password form is inside a div
- * or another element that is not detected directly. Triggered by MutationObserver.
- * @param {string} identifier   Usually a classList or element id
- * @param {object} field        The target element
- * @returns {boolean}           True if an Element has a match with the identifier and document location
- */
-kpxcSites.exceptionFound = function(identifier, field) {
-    if ((!identifier || identifier.length === 0) && !field) {
-        return;
-    }
-
-    if (document.location.origin === 'https://idmsa.apple.com'
-        && ((typeof identifier === 'string' && identifier === 'password_text_field')
-        || (typeof identifier === 'object'
-            && ([ 'password', 'form-row', 'show-password' ].every(c => identifier.contains(c))
-                || [ 'password', 'show-password', 'show-placeholder' ].every(c => identifier.contains(c)))
-        ))) {
-        return true;
-    } else if (document.location.origin.startsWith('https://signin.ebay.')
-               && (identifier === 'null' || identifier?.value === 'null' || identifier === 'pass')) {
-        return true;
-    } else if (document.location.origin.startsWith('https://www.fidelity.com')) {
-        if (typeof identifier === 'string') {
-            return identifier.includes('fs-mask-username');
-        }
-
-        return identifier.contains('fs-mask-username');
-    } else if (document.location.origin.startsWith('https://app.protonmail.ch')
-              || document.location.origin.startsWith('https://mail.protonmail.com')
-              && identifier === 'mailboxPassword') {
-        return true;
-    } else if (document.location.origin === 'https://www.patreon.com' &&
-               (field?.name === 'current-password' || field?.innerHTML?.includes('current-password'))) {
-        return true;
-    } else if (document.location.origin === 'https://wordpress.com' && identifier?.value === 'login__form-password') {
-        return true;
-    } else if (document.location.origin === 'https://id.atlassian.com' &&
-        typeof identifier === 'object' && identifier?.value && identifier?.contains('password-field')) {
-        return true;
-    } else if (document.location.origin === 'https://app.fastmail.com'
-        && identifier?.contains('u-space-y-5') && field?.id === 'v25') {
-        return true;
-    } else if (document.location.origin === 'https://login.dei.gr' &&
-        identifier?.value?.includes('show-reveal-password')) {
-        return true;
-    } else if (document.location.origin === 'https://accounts.google.com' && field?.id === 'password') {
-        return true;
-    } else if (document.location.origin === 'https://www.epicgames.com'
-        && ((field?.style?.opacity === '1' && field?.style?.willChange === 'auto') || identifier === 'password')) {
-        return true;
-    } else if (document.location.origin === 'https://www.paypal.com' && field?.id === 'splitPassword') {
-        return true;
-    } else if (document.location.origin === 'https://app.fastmail.com'
-        && [ 'v-TextInput', 'is-focused', 'v-TextInput--standard' ].every(c => identifier.contains(c))) {
-        return true;
-    }
-
-    return false;
-};
-
 // Handles exceptions when returning or modifying existing combinations
 kpxcSites.combinationExceptionFound = function(existingCombination) {
     if (!existingCombination) {
