@@ -20,8 +20,12 @@ function statusResponse(r) {
     $('#lock-database-button').hide();
     $('#getting-started-guide').hide();
     $('#database-not-opened').hide();
+    $('#browser-session').hide();
+    $('#start-browser-session-button').hide();
 
-    if (!r.keePassXCAvailable) {
+    if (r.browserSessionActive) {
+        $('#browser-session').show();
+    } else if (!r.keePassXCAvailable) {
         $('#error-message').textContent = r.error;
         $('#error-encountered').show();
 
@@ -52,6 +56,9 @@ function statusResponse(r) {
         $('#configured-and-associated').show();
         $('#associated-identifier').textContent = r.identifier;
         $('#lock-database-button').show();
+        if (r.browserSessionSupported) {
+            $('#start-browser-session-button').show();
+        }
 
         if (r.usernameFieldDetected) {
             $('#username-field-detected').show();
@@ -133,6 +140,31 @@ const sendMessageToTab = async function(message) {
         statusResponse(await browser.runtime.sendMessage({
             action: 'lock_database'
         }));
+    });
+
+    $('#start-browser-session-button').addEventListener('click', async () => {
+        const started = await browser.runtime.sendMessage({ action: 'start_browser_session' });
+        statusResponse(await browser.runtime.sendMessage({ action: 'get_status' }));
+        if (!started) {
+            $('#browser-session-error').show();
+        }
+    });
+
+    $('#stop-browser-session-button').addEventListener('click', async () => {
+        await browser.runtime.sendMessage({ action: 'stop_browser_session' });
+        statusResponse(await browser.runtime.sendMessage({ action: 'get_status' }));
+    });
+
+    $('#fill-browser-session-button').addEventListener('click', async () => {
+        const tab = await getCurrentTab();
+        const filled = tab && await browser.tabs.sendMessage(tab.id, {
+            action: 'fill_browser_session_login'
+        }, { frameId: 0 }).catch(() => false);
+        if (filled) {
+            window.close();
+        } else {
+            $('#browser-session-fill-error').show();
+        }
     });
 
     $('#username-only-button').addEventListener('click', async () => {

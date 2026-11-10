@@ -3,6 +3,15 @@
 const kpxcEvent = {};
 
 kpxcEvent.onMessage = async function(request, sender) {
+    if (request.action === 'start_browser_session' || request.action === 'stop_browser_session') {
+        if (sender.url !== browser.runtime.getURL('popups/popup.html')) {
+            return false;
+        }
+        return await kpxcEvent.setBrowserSession(sender.tab, request.action === 'start_browser_session');
+    }
+    if (request.action === 'get_browser_session_login') {
+        return await kpxcEvent.getBrowserSessionLogin(sender, request.args);
+    }
     if (request.action in kpxcEvent.messageHandlers) {
         if (!Object.hasOwn(sender, 'tab') || sender?.tab?.id < 1) {
             sender.tab = {};
@@ -34,6 +43,8 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll, forceShowDe
 
         configured: configured,
         databaseClosed: keepass.isDatabaseClosed,
+        browserSessionActive: keepass.browserSessionActive,
+        browserSessionSupported: keepass.browserSessionSupported,
         encryptionKeyUnrecognized: keepass.isEncryptionKeyUnrecognized,
         error: errorMessage,
         iframeDetected: iframeDetected,
@@ -43,6 +54,37 @@ kpxcEvent.showStatus = async function(tab, configured, internalPoll, forceShowDe
         showTroubleshootingGuideAlert: page.settings.showTroubleshootingGuideAlert,
         usernameFieldDetected: usernameFieldDetected
     };
+};
+
+kpxcEvent.setBrowserSession = async function(tab, start) {
+    if (!keepass.isConnected || !keepass.browserSessionSupported) {
+        return false;
+    }
+    if (start && !await keepass.testAssociation(tab, [ true, false ])) {
+        return false;
+    }
+
+    const action = start ? kpActions.START_BROWSER_SESSION : kpActions.STOP_BROWSER_SESSION;
+    const message = { action, keys: start ? keepass.getCryptoKeys() : [] };
+    const response = await keepassClient.sendBrowserSessionMessage(action, tab, message);
+    keepass.browserSessionActive = start && response?.success === 'true';
+    return response?.success === 'true';
+};
+
+kpxcEvent.getBrowserSessionLogin = async function(sender, submitUrl) {
+    if (!keepass.browserSessionActive || !sender.tab?.active || sender.frameId !== 0
+        || !sender.url?.startsWith('https://') || typeof submitUrl !== 'string') {
+        return undefined;
+    }
+
+    const action = kpActions.GET_BROWSER_SESSION_LOGIN;
+    const message = { action, url: sender.url, submitUrl };
+    // These credentials are returned only to the initiating document, outside the normal tab cache.
+    const response = await keepassClient.sendBrowserSessionMessage(action, sender.tab, message);
+    const currentTab = await browser.tabs.get(sender.tab.id).catch(() => undefined);
+    if (keepass.browserSessionActive && currentTab?.active && currentTab.url === sender.url) {
+        return response?.entry;
+    }
 };
 
 kpxcEvent.onLoadSettings = async function() {

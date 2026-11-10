@@ -1,4 +1,22 @@
 {
+    "browserSessionStart": {
+        "message": "Lock database and keep browser autofill"
+    },
+    "browserSessionStartError": {
+        "message": "Browser autofill could not start. At least one website login must already be approved in KeePassXC."
+    },
+    "browserSessionActive": {
+        "message": "The desktop database is locked. Approved website logins are available to this browser for up to 15 minutes."
+    },
+    "browserSessionFill": {
+        "message": "Fill login"
+    },
+    "browserSessionFillError": {
+        "message": "No approved login could be filled on this page."
+    },
+    "browserSessionStop": {
+        "message": "Lock browser"
+    },
     "extensionDescription": {
         "message": "KeePassXC integration for modern web browsers",
         "description": "Name of the extension."

@@ -6,6 +6,30 @@
  */
 const kpxcFill = {};
 
+kpxcFill.fillBrowserSessionLogin = async function() {
+    const combination = kpxcFields.getCombinationFromAllInputs();
+    const field = combination?.password;
+    if (!field?.isConnected || field.type !== 'password') {
+        return false;
+    }
+
+    const url = document.location.href;
+    const submitUrl = field.form?.action || url;
+    const credential = await sendMessage('get_browser_session_login', submitUrl);
+    if (!credential || document.location.href !== url || !field.isConnected
+        || (field.form?.action || url) !== submitUrl || field.type !== 'password') {
+        return false;
+    }
+
+    kpxc.sessionFilledField = field;
+    await kpxcFill.setValueWithChange(field, credential.password);
+    const username = combination.username;
+    if (username?.isConnected && username !== field && credential.login) {
+        await kpxcFill.setValueWithChange(username, credential.login);
+    }
+    return true;
+};
+
 // Fill selected attribute from the context menu
 kpxcFill.fillAttributeToActiveElementWith = async function(attr) {
     const el = document.activeElement;

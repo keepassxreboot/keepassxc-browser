@@ -211,8 +211,8 @@ keepassClient.handleNativeMessage = async function(response) {
     });
 };
 
-keepassClient.handleResponse = function(response, incrementedNonce, tab) {
-    if (response.message && response.nonce) {
+keepassClient.handleResponse = function(response, incrementedNonce, tab, verify = keepassClient.verifyResponse) {
+    if (response?.message && response.nonce) {
         const res = keepassClient.decrypt(response.message, response.nonce);
         if (!res) {
             keepass.handleError(tab, kpErrors.CANNOT_DECRYPT_MESSAGE);
@@ -222,10 +222,10 @@ keepassClient.handleResponse = function(response, incrementedNonce, tab) {
         const message = nacl.util.encodeUTF8(res);
         const parsed = JSON.parse(message);
 
-        if (keepassClient.verifyResponse(parsed, incrementedNonce)) {
+        if (verify(parsed, incrementedNonce)) {
             return parsed;
         }
-    } else if (response.error && response.errorCode) {
+    } else if (response?.error && response.errorCode) {
         keepass.handleError(tab, response.errorCode, response.error);
     }
 
@@ -257,6 +257,14 @@ keepassClient.sendMessage = async function(kpAction, tab, messageData, nonce, en
     const incrementedNonce = keepassClient.incrementedNonce(nonce);
 
     return keepassClient.handleResponse(response, incrementedNonce, tab);
+};
+
+keepassClient.sendBrowserSessionMessage = async function(action, tab, messageData) {
+    const nonce = keepassClient.getNonce();
+    const request = keepassClient.buildRequest(action, keepassClient.encrypt(messageData, nonce), nonce, keepass.clientID);
+    const response = await keepassClient.sendNativeMessage(request, true, 90_000);
+    return keepassClient.handleResponse(response, keepassClient.incrementedNonce(nonce), tab,
+        (message, expectedNonce) => message.success === 'true' && message.nonce === expectedNonce);
 };
 
 //--------------------------------------------------------------------------
@@ -411,6 +419,8 @@ function onDisconnected() {
     keepass.isConnected = false;
     keepass.isDatabaseClosed = true;
     keepass.isKeePassXCAvailable = false;
+    keepass.browserSessionSupported = false;
+    keepass.browserSessionActive = false;
     keepass.associated.value = false;
     keepass.associated.hash = null;
     keepass.databaseHash = '';
@@ -422,6 +432,11 @@ function onDisconnected() {
 }
 
 keepassClient.onNativeMessage = function(response) {
+    if (response.action === kpActions.BROWSER_SESSION_ENDED) {
+        keepass.browserSessionActive = false;
+        return;
+    }
+
     // Handle database lock/unlock status
     if (response.action === kpActions.DATABASE_LOCKED || response.action === kpActions.DATABASE_UNLOCKED) {
         keepass.updateDatabase();

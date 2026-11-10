@@ -922,6 +922,8 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'fill_user_pass_with_specific_login') {
             await kpxc.reconnect();
             kpxcFill.fillFromPopup(req.id, req.uuid);
+        } else if (req.action === 'fill_browser_session_login' && window.self === window.top) {
+            return await kpxcFill.fillBrowserSessionLogin();
         } else if (req.action === 'fill_username_password') {
             await kpxc.reconnect();
             sendMessage('page_set_manual_fill', ManualFill.BOTH);

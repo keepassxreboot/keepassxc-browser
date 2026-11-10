@@ -19,6 +19,8 @@ keepass.isConnected = false;
 keepass.isDatabaseClosed = true;
 keepass.isEncryptionKeyUnrecognized = false;
 keepass.isKeePassXCAvailable = false;
+keepass.browserSessionSupported = false;
+keepass.browserSessionActive = false;
 keepass.keyPair = { publicKey: null, secretKey: null };
 keepass.latestVersionUrl = 'https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest';
 keepass.previousDatabaseHash = '';
@@ -40,6 +42,10 @@ const kpActions = {
     LOCK_DATABASE: 'lock-database',
     DATABASE_LOCKED: 'database-locked',
     DATABASE_UNLOCKED: 'database-unlocked',
+    START_BROWSER_SESSION: 'start-browser-session',
+    GET_BROWSER_SESSION_LOGIN: 'get-browser-session-login',
+    STOP_BROWSER_SESSION: 'stop-browser-session',
+    BROWSER_SESSION_ENDED: 'browser-session-ended',
     GET_DATABASE_GROUPS: 'get-database-groups',
     CREATE_NEW_GROUP: 'create-new-group',
     GET_TOTP: 'get-totp',
@@ -446,6 +452,8 @@ keepass.changePublicKeys = async function(tab, enableTimeout = false, connection
         }
 
         keepass.isKeePassXCAvailable = true;
+        keepass.browserSessionSupported = response.browserSession === true;
+        keepass.browserSessionActive = false;
         console.log(`${EXTENSION_NAME}: Server public key: ${nacl.util.encodeBase64(keepass.serverPublicKey)}`);
         return true;
     } catch (err) {

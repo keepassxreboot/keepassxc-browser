@@ -40,6 +40,16 @@ Currently these messages are implemented:
 - `set-login`: Request for adding or updating credentials to the database.
 - `test-associate`: Request for testing if the client has been associated with KeePassXC.
 
+### Browser autofill sessions
+
+A host advertises this feature with `"browserSession": true` in its `change-public-keys` response.
+The requests below use the usual encrypted envelope and incremented response nonce. They use a separate authorization state from ordinary database access.
+
+- `start-browser-session` takes the usual `keys` list of pairing IDs and keys. The client must first associate with the unlocked active database. After native user confirmation, the host locks the database and retains only the login fields for previously approved websites in memory for up to 15 minutes.
+- `get-browser-session-login` takes the initiating page's `url` and its `submitUrl`. Both must be on the same HTTPS origin as a stored primary entry URL. The response contains one `entry` with `name`, `login`, and `password`. The browser should request it only for an explicit fill and fill the initiating document directly.
+- `stop-browser-session` revokes the session. Only the original connection and key exchange can use or stop it through the protocol.
+- `browser-session-ended` is a host notification to the owning connection. The browser should discard its active-session state on receipt or disconnect.
+
 ### associate
 Unencrypted message:
 ```json
