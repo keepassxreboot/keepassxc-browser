@@ -16,6 +16,7 @@ div.kpxc-banner {
     overflow-x: auto !important;
     padding: 4px !important;
     position: fixed !important;
+    pointer-events: auto !important;
     width: 100% !important;
 }
 

@@ -11,6 +11,7 @@
     display: flex;
     font-weight: bold;
     justify-content: center;
+    pointer-events: auto !important;
     position: absolute;
     z-index: 2147483646;
 }
