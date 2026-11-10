@@ -172,8 +172,10 @@ class Autocomplete {
         }
 
         // Use only two columns if groups are not shown
-        if (this.useCompactMode && !this.showGroup) {
-            this.list.style.gridTemplateColumns = 'repeat(2, auto)';
+        if (this.useCompactMode) {
+            this.list.style.gridTemplateColumns = this.showGroup ? 'repeat(3, auto)' : 'repeat(2, auto)';
+        } else {
+            this.list.style.removeProperty('grid-template-columns');
         }
 
         this.selectItem();
