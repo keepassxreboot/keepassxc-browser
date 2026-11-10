@@ -6,6 +6,7 @@ keepassClient.messageTimeout = 500; // Milliseconds
 keepassClient.nativeHostName = 'org.keepassxc.keepassxc_browser';
 keepassClient.nativePort = null;
 keepassClient.webSocket = null;
+keepassClient.webSocketHeartBeat = -1;
 
 const WEBSOCKET_PORT = 7580;
 
@@ -436,6 +437,10 @@ keepassClient.onNativeMessage = function(response) {
 // WebSocket related
 //--------------------------------------------------------------------------
 
+keepassClient.sendWebSocketHeartBeat = function() {
+    keepassClient.webSocket.send(JSON.stringify({ type: 'ping' }));
+};
+
 keepassClient.connectToWebSocket = async function() {
     return new Promise((resolve, reject) => {
         if (keepassClient.webSocket) {
@@ -445,10 +450,12 @@ keepassClient.connectToWebSocket = async function() {
         console.log(`${EXTENSION_NAME}: Connecting to WebSocket`);
     
         try {
-            keepassClient.webSocket = new WebSocket(`ws://localhost:${WEBSOCKET_PORT}`);
+            const webSocketPort = page?.settings?.webSocketPort || WEBSOCKET_PORT;
+            keepassClient.webSocket = new WebSocket(`ws://localhost:${webSocketPort}`);
             keepassClient.webSocket.addEventListener('close', (event) => {
                 logError('Close WebSocket:', event);
                 onDisconnected();
+                clearInterval(keepassClient.webSocketHeartBeat);
                 reject();
             });
             keepassClient.webSocket.addEventListener('error', (event) => {
@@ -462,6 +469,7 @@ keepassClient.connectToWebSocket = async function() {
             keepassClient.webSocket.addEventListener('open', (event) => {
                 console.log(`${EXTENSION_NAME}: WebSocket connected`);
                 keepass.isConnected = true;
+                keepassClient.webSocketHeartBeat = setInterval(keepassClient.sendWebSocketHeartBeat, 25000);
                 resolve();
             });
         } catch (_e) {

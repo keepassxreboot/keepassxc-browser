@@ -227,10 +227,56 @@ options.initGeneralSettings = async function() {
     });
 
     // Connection method
-    $('#tab-general-settings select#connectionMethod').value = options.settings['connectionMethod'];
+    const connectionMethod = options.settings['connectionMethod'];
+    if (connectionMethod === 'nativemessaging') {
+        $('#tab-general-settings #webSocketPortOption').hide();
+    }
+    $('#tab-general-settings select#connectionMethod').value = connectionMethod;
     $('#tab-general-settings select#connectionMethod').addEventListener('change', async function(e) {
+        $('#optionsConnectionError').hide();
         options.settings['connectionMethod'] = e.currentTarget.value;
         await options.saveSettings();
+
+        if (options.settings['connectionMethod'] === 'nativemessaging') {
+            $('#tab-general-settings #webSocketPortOption').hide();
+        } else {
+            $('#tab-general-settings #webSocketPortOption').show();
+        }
+    });
+    $('#tab-general-settings input#webSocketPort').value = options.settings['webSocketPort'];
+    $('#tab-general-settings input#webSocketPort').addEventListener('change', async function(e) {
+        $('#tab-general-settings #webSocketPortInvalidFeedback').hide();
+        if (e.target.valueAsNumber < 0 || e.target.valueAsNumber > 65535) {
+            $('#tab-general-settings #webSocketPortInvalidFeedback').show();
+            return;
+        }
+
+        options.settings['webSocketPort'] = e.target.valueAsNumber;
+        await options.saveSettings();
+    });
+
+    $('#webSocketReconnectButton').addEventListener('click', async function() {
+        const result = await browser.runtime.sendMessage({ action: 'reconnect' }).catch(err => {
+            console.log(err);
+        });
+
+        const connectionMethod = options.settings['connectionMethod'];
+        const connectionErrorElement = $('span#optionsConnectionError');
+        connectionErrorElement.hide();
+
+        if (!result) {
+            // Cannot connect to proxy at all
+            connectionErrorElement.textContent = connectionMethod === 'nativemessaging'
+                ? tr('optionsNativeMessagingError')
+                : tr('optionsWebSocketError');
+            connectionErrorElement.show();
+        } else if (result?.keePassXCAvailable === false) {
+            // Connected to proxy, but KeePassXC is not found
+            connectionErrorElement.textContent = tr('errorMessageTimeout');
+            connectionErrorElement.show();
+        }
+
+        browser.runtime.sendMessage({ action: 'update_popup' });
     });
 
     // Default group
@@ -391,10 +437,6 @@ options.showKeePassXCVersions = async function(response) {
 
     if (!featureList?.passkeysDefaultGroup) {
         $('#tab-general-settings #passkeysDefaultGroup').hide();
-    }
-
-    if (!featureList?.webSocket) {
-        $('#tab-general-settings #connectionMethodOptions').hide();
     }
 };
 

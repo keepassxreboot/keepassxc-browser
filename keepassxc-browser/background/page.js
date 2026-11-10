@@ -44,6 +44,7 @@ const defaultSettings = {
     useObserver: true,
     usePredefinedSites: true,
     usePasswordGeneratorIcons: false,
+    webSocketPort: 7580
 };
 
 const AUTO_SUBMIT_TIMEOUT = 5000;
