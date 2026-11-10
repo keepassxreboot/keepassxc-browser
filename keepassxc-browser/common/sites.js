@@ -171,6 +171,14 @@ kpxcSites.totpExceptionFound = function(field) {
         && field.autocomplete === 'on' && field.dir === 'auto'
         && field.name === 'text' && field.type === 'text') {
         return true;
+    } else if (
+        [
+            'https://login.live.com',
+            'https://login.microsoftonline.com',
+            'https://outlook.live.com'
+        ].includes(document.location.origin)
+        && field.getAttribute('aria-describedby').includes('validationMessage')) {
+        return true;
     }
 
     return false;
