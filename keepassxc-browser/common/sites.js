@@ -119,6 +119,11 @@ kpxcSites.exceptionFound = function(identifier, field) {
     } else if (document.location.origin === 'https://app.fastmail.com'
         && [ 'v-TextInput', 'is-focused', 'v-TextInput--standard' ].every(c => identifier.contains(c))) {
         return true;
+    } else if (
+        (document.location.origin === 'https://auth.gmx.net'
+            || document.location.origin === 'https://auth.web.de')
+        && field?.nodeName === 'LUX-PASSWORD') {
+        return true;
     }
 
     return false;
