@@ -166,7 +166,7 @@
         "css/pwgen.css",
         "css/username.css",
         "css/totp.css",
-        "content/passkeys.js"
+        "page-context/passkeys.js"
     ],
     "permissions": [
         "activeTab",
@@ -175,6 +175,7 @@
         "cookies",
         "nativeMessaging",
         "notifications",
+        "scripting",
         "storage",
         "tabs",
         "webNavigation",
@@ -187,7 +188,7 @@
     "optional_permissions": [
         "privacy"
     ],
-    "applications": {
+    "browser_specific_settings": {
         "gecko": {
             "id": "keepassxc-browser@keepassxc.org",
             "strict_min_version": "115.0"

@@ -8,11 +8,36 @@ const PASSKEYS_CREDENTIAL_IS_EXCLUDED = 21;
 const PASSKEYS_REQUEST_CANCELED = 22;
 const PASSKEYS_WAIT_FOR_LIFETIMER = 30;
 
+/** @type {Awaited<ReturnType<typeof page.passkeysInjectIntoPage>>} */
+let kpxcPasskeysSettings;
 /** @type {Function?} */
 let passkeysLifetimeTimerAbortFunc = null;
 
-// Apply a script to the page for intercepting Passkeys (WebAuthn) requests
-const enablePasskeys = async function() {
+(async function () {
+    if (
+        document?.documentElement?.ownerDocument?.contentType !== 'text/html'
+        && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
+    ) {
+        return;
+    }
+
+    kpxcPasskeysSettings = await chrome.runtime.sendMessage({ action: 'passkeys_inject_into_page' });
+
+    if (!kpxcPasskeysSettings.allowed) {
+        return;
+    }
+
+    if (!kpxcPasskeysSettings.backgroundInject) {
+        const script = document.createElement('script');
+        script.src = chrome.runtime.getURL('page-context/passkeys.js');
+
+        const container = document.createElement('span');
+        container.attachShadow({ mode: 'closed' }).append(script);
+
+        document.documentElement.append(container);
+        container.remove();
+    }
+
     const passkeysLogDebug = function(message, extra) {
         if (kpxcPasskeysUtils.debugLogging) {
             if (typeof debugLogMessage === 'function') {
@@ -22,11 +47,6 @@ const enablePasskeys = async function() {
             }
         }
     };
-
-    const passkeys = document.createElement('script');
-    passkeys.src = chrome.runtime.getURL('content/passkeys.js');
-    document.documentElement.appendChild(passkeys);
-    passkeys.remove();
 
     /**
      * @param {number=} timeout
@@ -79,7 +99,7 @@ const enablePasskeys = async function() {
             });
             kpxcUI.createNotification('error', errorMessage);
 
-            if (!kpxcPasskeysUtils.passkeysFallback && letTimerRunOut(errorCode)) {
+            if (!kpxcPasskeysSettings.passkeysFallback && letTimerRunOut(errorCode)) {
                 try {
                     await lifetimeTimer.promise;
                 } catch {
@@ -149,31 +169,4 @@ const enablePasskeys = async function() {
             passkeysLifetimeTimerAbortFunc = null;
         }
     });
-};
-
-const initContent = async () => {
-    if (document?.documentElement?.ownerDocument?.contentType !== 'text/html'
-        && document?.documentElement?.ownerDocument?.contentType !== 'application/xhtml+xml'
-    ) {
-        return;
-    }
-
-    const settings = await chrome.runtime.sendMessage({ action: 'load_settings' });
-    if (!settings) {
-        console.log('Error: Cannot load extension settings');
-        return;
-    }
-
-    if (await chrome.runtime.sendMessage({ action: 'is_site_ignored', args: [ window.self.location.href, true ] })) {
-        console.log('This site is ignored in Site Preferences.');
-        return;
-    }
-
-    if (settings.passkeys) {
-        kpxcPasskeysUtils.debugLogging = settings?.debugLogging;
-        kpxcPasskeysUtils.passkeysFallback = settings?.passkeysFallback;
-        enablePasskeys();
-    }
-};
-
-initContent();
+})();
