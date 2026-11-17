@@ -1442,6 +1442,14 @@
         "message": "Enable support for Web Authentication.",
         "description": "Passkeys option help text."
     },
+    "optionsPermissionsPolicyObjectWarning": {
+        "message": "Permissions Policy object API is disabled in your browser. Passkeys will not work on some websites.",
+        "description": "Passkeys sittings warning text. \"Permissions Policy object API\" probably better not to translate (for unambiguous identification)"
+    },
+    "optionsPermissionsPolicyObjectWarningLink": {
+        "message": "Settings change information.",
+        "description": "\"Settings change information\" link to website"
+    },
     "optionsPasskeysEnableFallback": {
         "message": "Enable passkeys fallback",
         "description": "Enabled passkeys fallback option text."
