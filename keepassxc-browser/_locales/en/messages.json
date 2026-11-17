@@ -1444,7 +1444,7 @@
     },
     "optionsPermissionsPolicyObjectWarning": {
         "message": "Permissions Policy object API is disabled in your browser. Passkeys will not work on some websites.",
-        "description": "Passkeys sittings warning text. \"Permissions Policy object API\" probably better not to translate (for unambiguous identification)"
+        "description": "Passkeys settings warning text. \"Permissions Policy object API\" probably better not to translate (for unambiguous identification)"
     },
     "optionsPermissionsPolicyObjectWarningLink": {
         "message": "Settings change information.",
