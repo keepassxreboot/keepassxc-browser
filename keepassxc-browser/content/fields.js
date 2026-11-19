@@ -167,12 +167,15 @@ kpxcFields.getSegmentedTOTPFields = function(inputs, combinations) {
             combinations.push(combination);
 
             // Create an icon to the right side of the segmented fields
-            kpxcTOTPIcons.newIcon(totpInputs.at(-1), kpxc.databaseState, true);
-            kpxcIcons.icons.push({
-                field: totpInputs.at(-1),
-                iconType: kpxcIcons.iconTypes.TOTP,
-                segmented: true
-            });
+            const lastInput = totpInputs.at(-1);
+            if (!kpxcIcons.hasIcon(lastInput)) {
+                kpxcTOTPIcons.newIcon(lastInput, kpxc.databaseState, true);
+                kpxcIcons.icons.push({
+                    field: lastInput,
+                    iconType: kpxcIcons.iconTypes.TOTP,
+                    segmented: true
+                });
+            }
         }
     };
 

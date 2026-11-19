@@ -97,12 +97,17 @@ class Autocomplete {
             this.wrapper = kpxcUI.createElement('div');
             this.wrapper.style.all = 'unset';
             this.wrapper.style.display = 'none';
-            styleSheet.addEventListener('load', () => (this.wrapper.style.display = 'block'));
+            styleSheet.addEventListener('load', () => {
+                this.wrapper.style.display = 'block';
+                this.updatePosition();
+            });
             this.container = kpxcUI.createElement('div', 'kpxcAutocomplete-container', {
                 id: 'kpxcAutocomplete-container',
                 popover: 'manual',
             });
             this.container.style.margin = 0;
+            this.container.style.top = '0px';
+            this.container.style.left = '0px';
 
             // Apply compact mode class
             if (kpxc.settings.useCompactMode) {
@@ -176,7 +181,7 @@ class Autocomplete {
             this.list.style.gridTemplateColumns = 'repeat(2, auto)';
         }
 
-        this.selectItem();
+        this.updatePosition();
     }
 
     // Add parentElement parameter
@@ -224,7 +229,17 @@ class Autocomplete {
         const item = items[this.index];
         if (item !== undefined) {
             item.classList.add('kpxcAutocomplete-item--active');
-            item.scrollIntoView({ block: 'nearest' });
+            // Compact rows use display: contents; measure a rendered cell instead.
+            const target = this.useCompactMode ? item.firstElementChild : item;
+            const rect = target.getBoundingClientRect();
+            const listRect = this.list.getBoundingClientRect();
+            const zoom = Number(kpxcUI.bodyStyle.zoom) || 1;
+            // Keep scrolling inside the list instead of moving the webpage.
+            if (rect.top < listRect.top) {
+                this.list.scrollTop += (rect.top - listRect.top) / zoom;
+            } else if (rect.bottom > listRect.bottom) {
+                this.list.scrollTop += (rect.bottom - listRect.bottom) / zoom;
+            }
         }
     }
 
@@ -344,26 +359,30 @@ class Autocomplete {
         // Extend the list's max width to input field's width or at least to the maxWidth defined in the CSS file
         this.list.style.maxWidth = `max(${Pixels(this.input.offsetWidth)}, 600px)`;
 
-        // Get body zoom radio
-        const zoom = kpxcUI.bodyStyle.zoom || 1;
+        const zoom = Number(kpxcUI.bodyStyle.zoom) || 1;
+        const viewport = window.visualViewport;
+        const viewportTop = (viewport?.offsetTop ?? 0) + 8;
+        const viewportBottom = (viewport?.offsetTop ?? 0) + (viewport?.height ?? window.innerHeight) - 8;
+        const spaceAbove = Math.max(0, rect.top - viewportTop);
+        const spaceBelow = Math.max(0, viewportBottom - rect.bottom);
 
-        // Calculate Y offset if menu does not fit to the bottom of the screen -> show it at the top of the input field
+        // Measure the normal CSS height again so the list can grow after a resize.
+        this.list.style.removeProperty('max-height');
+        const menuHeight = this.container.getBoundingClientRect().height;
+        const listHeight = this.list.getBoundingClientRect().height;
+        const showAbove = menuHeight > spaceBelow && spaceAbove > spaceBelow;
+        const availableHeight = showAbove ? spaceAbove : spaceBelow;
+        // Reserve space for padding, borders and the optional auto-submit footer.
+        this.list.style.maxHeight = Pixels(Math.max(0, Math.floor(
+            Math.min(listHeight, availableHeight - (menuHeight - listHeight)) / zoom
+        )));
+
         const menuRect = this.container.getBoundingClientRect();
-        const totalHeight = menuRect.height + rect.height;
-        const menuOffset = (totalHeight + rect.y) / zoom > window.self.visualViewport.height ? totalHeight / zoom : 0;
-
-        const scrollTop = kpxcUI.getScrollTop() / zoom;
-        const scrollLeft = kpxcUI.getScrollLeft() / zoom;
-
-        if (kpxcUI.bodyStyle.position.toLowerCase() === 'relative') {
-            this.container.style.top = Pixels(
-                ((rect.top - kpxcUI.bodyRect.top) / zoom + scrollTop + this.input.offsetHeight - menuOffset)
-            );
-            this.container.style.left = Pixels((rect.left - kpxcUI.bodyRect.left) / zoom + scrollLeft);
-        } else {
-            this.container.style.top = Pixels(rect.top / zoom + scrollTop + this.input.offsetHeight - menuOffset);
-            this.container.style.left = Pixels(rect.left / zoom + scrollLeft);
-        }
+        const top = showAbove ? rect.top - menuRect.height : rect.bottom;
+        // Adjust measured coordinates to support both popovers and positioned bodies.
+        this.container.style.top = Pixels((parseFloat(this.container.style.top) || 0) + (top - menuRect.top) / zoom);
+        this.container.style.left = Pixels((parseFloat(this.container.style.left) || 0) + (rect.left - menuRect.left) / zoom);
+        this.selectItem();
     }
 }
 
