@@ -178,10 +178,6 @@ table td:last-of-type {
     margin-left: 1.725em;
 }
 
-.invalid-feedback {
-    color: var(--kpxc-link-color);
-}
-
 .invalid-feedback code {
     color: var(--kpxc-link-hover-color) !important;
 }
