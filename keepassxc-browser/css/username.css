@@ -2,6 +2,7 @@
     border: 0;
     cursor: pointer;
     padding: 0 !important;
+    pointer-events: auto !important;
     position: absolute;
 }
 
