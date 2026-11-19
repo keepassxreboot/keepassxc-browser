@@ -57,7 +57,7 @@ kpxcPasskeysUtils.buildCredentialCreationOptions = function(pkOptions, sameOrigi
         publicKey.attestation = pkOptions?.attestation;
         publicKey.authenticatorSelection = pkOptions?.authenticatorSelection;
         publicKey.challenge = kpxcArrayBufferToBase64(pkOptions.challenge);
-        publicKey.extensions = pkOptions?.extensions;
+        publicKey.extensions = structuredClone(pkOptions?.extensions);
 
         const prfSalt = publicKey?.extensions?.prf?.eval?.first;
         if (prfSalt) {
@@ -109,7 +109,7 @@ kpxcPasskeysUtils.buildCredentialRequestOptions = function(pkOptions, sameOrigin
         const publicKey = {};
         publicKey.challenge = kpxcArrayBufferToBase64(pkOptions.challenge);
         publicKey.enterpriseAttestationPossible = false;
-        publicKey.extensions = pkOptions?.extensions;
+        publicKey.extensions = structuredClone(pkOptions?.extensions);
         publicKey.rpId = pkOptions?.rpId;
         publicKey.timeout = getTimeout(publicKey?.userVerification, pkOptions?.timeout);
         publicKey.userVerification = pkOptions?.userVerification;
