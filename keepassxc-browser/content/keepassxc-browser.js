@@ -647,7 +647,7 @@ kpxc.rememberCredentialsFromContextMenu = async function() {
 
 // The basic function for retrieving credentials from KeePassXC.
 // Credential Banner can force the retrieval for reloading new/modified credentials.
-kpxc.retrieveCredentials = async function(force = false) {
+kpxc.retrieveCredentials = async function(notFromCache = false, ignoreAutoRetrieveSetting = false) {
     if (!await isIframeAllowed()) {
         return;
     }
@@ -658,9 +658,9 @@ kpxc.retrieveCredentials = async function(force = false) {
     const firstCombination = kpxc.combinations?.find((combination) => combination?.username || combination?.password);
     kpxc.submitUrl = kpxc.getFormActionUrl(firstCombination);
 
-    if (kpxc.settings.autoRetrieveCredentials && kpxc.url && kpxc.submitUrl) {
+    if ((kpxc.settings.autoRetrieveCredentials || ignoreAutoRetrieveSetting) && kpxc.url && kpxc.submitUrl) {
         await kpxc.retrieveCredentialsCallback(
-            await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, force ]),
+            await sendMessage('retrieve_credentials', [ kpxc.url, kpxc.submitUrl, notFromCache ]),
         );
     }
 };
@@ -972,7 +972,7 @@ browser.runtime.onMessage.addListener(async function(req, sender) {
         } else if (req.action === 'save_credentials') {
             kpxc.rememberCredentialsFromContextMenu();
         } else if (req.action === 'retrieve_credentials_forced') {
-            await kpxc.retrieveCredentials(true);
+            await kpxc.retrieveCredentials(true, true);
         } else if (req.action === 'show_password_generator') {
             kpxcPasswordGenerator.showPasswordGenerator();
         } else if (req.action === 'request_autotype') {
