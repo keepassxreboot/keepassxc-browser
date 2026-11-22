@@ -31,9 +31,10 @@ KeePassXC-Browser extension requests the following permissions:
 | `notifications`           | To show browser notifications |
 | `offscreen`               | For accessing system theme when setting icon colors (Chrome only) |
 | `privacy`                 | For setting the extension as default password manager |
+| `scripting`               | Dynamic code execution on websites (passkeys integration) |
 | `storage`                 | For storing extension settings (always stored locally in the browser, they are never synced) |
 | `tabs`                    | To request tab URL's and other info |
-| `webNavigation`           | To show browser notifications on install or update |
+| `webNavigation`           | Detect page redirects and reload |
 | `webRequest`              | For handling HTTP Basic Auth |
 | `webRequestAuthProvider`  | For handling HTTP Basic Auth for Chromium based browsers |
 | `webRequestBlocking`      | For handling HTTP Basic Auth |
