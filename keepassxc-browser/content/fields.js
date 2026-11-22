@@ -479,6 +479,10 @@ kpxcFields.isOverlayOnTop = function(rect) {
             continue;
         }
 
+        if (getComputedStyle(overlay).visibility != 'visible') {
+            continue;
+        }
+
         const overlayRect = overlay?.getBoundingClientRect();
         if (overlayRect && elementsOverlap(rect, overlayRect)) {
             return true;
