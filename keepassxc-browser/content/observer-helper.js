@@ -140,7 +140,7 @@ kpxcObserverHelper.initObserver = async function() {
         }
 
         // Run delete icons check if nodes were added or removed
-        if (addedNodes.length > 0 || nodesRemoved) {
+        if (addedNodes.size > 0 || nodesRemoved) {
             kpxcIcons.deleteAllHiddenIcons();
         }
     });
