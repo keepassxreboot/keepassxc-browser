@@ -106,7 +106,7 @@ kpxcTOTPIcons.isValid = function(field, forced) {
 
 class TOTPFieldIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED, segmented = false) {
-        super(field, databaseState, segmented);
+        super(field, kpxcIcons.iconTypes.TOTP, databaseState, segmented);
 
         this.initField(field, segmented);
         kpxcIcons.monitorIconPosition(this);
@@ -157,6 +157,7 @@ TOTPFieldIcon.prototype.createIcon = function(field, segmented = false) {
     icon.style.width = Pixels(size);
     icon.style.height = Pixels(size);
 
+    kpxcIcons.setTOTPIconVisibility(icon);
     if (this.databaseState === DatabaseState.DISCONNECTED || this.databaseState === DatabaseState.LOCKED) {
         icon.style.filter = 'saturate(0%)';
     } else {

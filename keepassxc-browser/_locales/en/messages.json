@@ -990,6 +990,14 @@
         "message": "Adds an icon to input fields that are recognized as OTP/2FA.",
         "description": "OTP field icon option help text."
     },
+    "optionsCheckboxHideTOTPIconsWithoutCredentials": {
+        "message": "Hide TOTP icons without credentials",
+        "description": "Hide TOTP icons without credentials checkbox text."
+    },
+    "optionsHideTOTPIconsWithoutCredentialsHelpText": {
+        "message": "If no credentials with TOTP are found, the icon is hidden. Disabling the option will always show the icon.",
+        "description": "Hide TOTP icons without credentials help text."
+    },
     "optionsHideIconsAlertText": {
         "message": "You can also hide icons manually when needed with shift+click.",
         "description": "Hide icons alert text text."

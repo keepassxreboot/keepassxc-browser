@@ -27,7 +27,7 @@ kpxcUsernameIcons.isValid = function(field) {
 
 class UsernameFieldIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED) {
-        super(field, databaseState);
+        super(field, kpxcIcons.iconTypes.DEFAULT, databaseState);
 
         this.initField(field);
         kpxcIcons.monitorIconPosition(this);

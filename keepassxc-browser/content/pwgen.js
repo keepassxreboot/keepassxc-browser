@@ -26,7 +26,7 @@ kpxcPasswordIcons.isValid = function(field) {
 
 class PasswordIcon extends Icon {
     constructor(field, databaseState = DatabaseState.DISCONNECTED) {
-        super(field, databaseState);
+        super(field, kpxcIcons.iconTypes.PASSWORD, databaseState);
         this.nextFieldExists = false;
 
         this.initField(field);
