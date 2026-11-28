@@ -261,6 +261,10 @@ options.initGeneralSettings = async function() {
 
     $('#passkeysFallback').disabled = options.settings['passkeys'] === false;
 
+    $('#permissionsPolicyObjectChecker').hidden =
+        // https://www.w3.org/TR/permissions-policy/#the-policy-object
+        !options.isFirefox || Boolean(document.featurePolicy || document.permissionsPolicy);
+
     let temporarySettings;
     const dialogImportSettingsModal = new bootstrap.Modal('#dialogImportSettings',
         { keyboard: true, focus: false, backdrop: true });
